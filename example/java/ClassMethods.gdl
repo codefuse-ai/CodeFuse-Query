@@ -2,7 +2,7 @@
 use coref::java::*
 
 fn default_java_db() -> JavaDB {
-	return JavaDB::load("coref_java_src.db")
+    return JavaDB::load("coref_java_src.db")
 }
 
 // Find all methods of the class
@@ -16,5 +16,5 @@ fn methods(className : string, methodName : string) -> bool {
 }
 
 fn main() { 
-	output(methods())
+    output(methods())
 }

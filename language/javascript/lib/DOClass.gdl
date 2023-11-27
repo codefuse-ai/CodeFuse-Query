@@ -17,7 +17,7 @@ impl LocationDO {
     @data_constraint
     @inline
     pub fn __all__(db: JavascriptDB) -> *LocationDO {
-    	for (tmp in db.location) {
+        for (tmp in db.location) {
             yield LocationDO {
                 oid : tmp.oid,
                 file_oid : tmp.file_oid,
@@ -27,7 +27,7 @@ impl LocationDO {
                 end_column_number : tmp.end_column_number,
                 text : tmp.text
             }
-    	}
+        }
     }
 
     pub fn getFileOid(self) -> int {
@@ -66,14 +66,14 @@ impl NumberOfLinesDO {
     @data_constraint
     @inline
     pub fn __all__(db: JavascriptDB) -> *NumberOfLinesDO {
-    	for (tmp in db.number_of_lines) {
+        for (tmp in db.number_of_lines) {
             yield NumberOfLinesDO {
                 location_oid : tmp.location_oid,
                 lines : tmp.lines,
                 code_lines : tmp.code_lines,
                 comment_lines : tmp.comment_lines
             }
-    	}
+        }
     }
 
     pub fn getLines(self) -> int {
@@ -101,7 +101,7 @@ impl FileDO {
     @data_constraint
     @inline
     pub fn __all__(db: JavascriptDB) -> *FileDO {
-    	for (tmp in db.file) {
+        for (tmp in db.file) {
             yield FileDO {
                 oid : tmp.oid,
                 name : tmp.name,
@@ -109,7 +109,7 @@ impl FileDO {
                 relative_path : tmp.relative_path,
                 location_oid : tmp.location_oid
             }
-    	}
+        }
     }
 
     pub fn getName(self) -> string {
@@ -140,14 +140,14 @@ impl DirectoryDO {
     @data_constraint
     @inline
     pub fn __all__(db: JavascriptDB) -> *DirectoryDO {
-    	for (tmp in db.directory) {
+        for (tmp in db.directory) {
             yield DirectoryDO {
                 oid : tmp.oid,
                 name : tmp.name,
                 relative_path : tmp.relative_path,
                 location_oid : tmp.location_oid
             }
-    	}
+        }
     }
 
     pub fn getName(self) -> string {
@@ -172,12 +172,12 @@ impl DirectoryHierarchyDO {
     @data_constraint
     @inline
     pub fn __all__(db: JavascriptDB) -> *DirectoryHierarchyDO {
-    	for (tmp in db.directory_hierarchy) {
+        for (tmp in db.directory_hierarchy) {
             yield DirectoryHierarchyDO {
                 parent_oid : tmp.parent_oid,
                 child_oid : tmp.child_oid
             }
-    	}
+        }
     }
 
     pub fn getParentOid(self) -> int {
@@ -195,13 +195,13 @@ impl TopLevelDO {
     @data_constraint
     @inline
     pub fn __all__(db: JavascriptDB) -> *TopLevelDO {
-    	for (tmp in db.top_level) {
+        for (tmp in db.top_level) {
             yield TopLevelDO {
                 oid : tmp.oid,
                 kind : tmp.kind,
                 location_oid : tmp.location_oid
             }
-    	}
+        }
     }
 
     pub fn getKind(self) -> int {
@@ -225,7 +225,7 @@ impl NodeDO {
     @data_constraint
     @inline
     pub fn __all__(db: JavascriptDB) -> *NodeDO {
-    	for (tmp in db.node) {
+        for (tmp in db.node) {
             yield NodeDO {
                 oid : tmp.oid,
                 kind : tmp.kind,
@@ -233,7 +233,7 @@ impl NodeDO {
                 index : tmp.index,
                 location_oid : tmp.location_oid
             }
-    	}
+        }
     }
 
     pub fn getKind(self) -> int {
@@ -262,12 +262,12 @@ impl LiteralDO {
     @data_constraint
     @inline
     pub fn __all__(db: JavascriptDB) -> *LiteralDO {
-    	for (tmp in db.literal) {
+        for (tmp in db.literal) {
             yield LiteralDO {
                 oid : tmp.oid,
                 value : tmp.value
             }
-    	}
+        }
     }
 
     pub fn getValue(self) -> string {
@@ -284,12 +284,12 @@ impl BindingElementPropertyNameDO {
     @data_constraint
     @inline
     pub fn __all__(db: JavascriptDB) -> *BindingElementPropertyNameDO {
-    	for (tmp in db.binding_element_property_name) {
+        for (tmp in db.binding_element_property_name) {
             yield BindingElementPropertyNameDO {
                 oid : tmp.oid,
                 property_name_oid : tmp.property_name_oid
             }
-    	}
+        }
     }
 
     pub fn getPropertyNameOid(self) -> int {
@@ -306,12 +306,12 @@ impl BindingElementNameDO {
     @data_constraint
     @inline
     pub fn __all__(db: JavascriptDB) -> *BindingElementNameDO {
-    	for (tmp in db.binding_element_name) {
+        for (tmp in db.binding_element_name) {
             yield BindingElementNameDO {
                 oid : tmp.oid,
                 name_oid : tmp.name_oid
             }
-    	}
+        }
     }
 
     pub fn getNameOid(self) -> int {
@@ -328,12 +328,12 @@ impl BindingElementInitializerDO {
     @data_constraint
     @inline
     pub fn __all__(db: JavascriptDB) -> *BindingElementInitializerDO {
-    	for (tmp in db.binding_element_initializer) {
+        for (tmp in db.binding_element_initializer) {
             yield BindingElementInitializerDO {
                 oid : tmp.oid,
                 initializer_oid : tmp.initializer_oid
             }
-    	}
+        }
     }
 
     pub fn getInitializerOid(self) -> int {
@@ -351,13 +351,13 @@ impl ClassLikeDeclarationDO {
     @data_constraint
     @inline
     pub fn __all__(db: JavascriptDB) -> *ClassLikeDeclarationDO {
-    	for (tmp in db.class_like_declaration) {
+        for (tmp in db.class_like_declaration) {
             yield ClassLikeDeclarationDO {
                 oid : tmp.oid,
                 kind : tmp.kind,
                 name : tmp.name
             }
-    	}
+        }
     }
 
     pub fn getKind(self) -> int {
@@ -379,13 +379,13 @@ impl FunctionLikeDeclarationDO {
     @data_constraint
     @inline
     pub fn __all__(db: JavascriptDB) -> *FunctionLikeDeclarationDO {
-    	for (tmp in db.function_like_declaration) {
+        for (tmp in db.function_like_declaration) {
             yield FunctionLikeDeclarationDO {
                 oid : tmp.oid,
                 kind : tmp.kind,
                 name : tmp.name
             }
-    	}
+        }
     }
 
     pub fn getKind(self) -> int {
@@ -406,12 +406,12 @@ impl FunctionEnclosingNodeDO {
     @data_constraint
     @inline
     pub fn __all__(db: JavascriptDB) -> *FunctionEnclosingNodeDO {
-    	for (tmp in db.function_enclosing_node) {
+        for (tmp in db.function_enclosing_node) {
             yield FunctionEnclosingNodeDO {
                 node_oid : tmp.node_oid,
                 function_oid : tmp.function_oid
             }
-    	}
+        }
     }
 
     pub fn getFunctionOid(self) -> int {
@@ -428,12 +428,12 @@ impl ModifierDO {
     @data_constraint
     @inline
     pub fn __all__(db: JavascriptDB) -> *ModifierDO {
-    	for (tmp in db.modifier) {
+        for (tmp in db.modifier) {
             yield ModifierDO {
                 oid : tmp.oid,
                 index : tmp.index
             }
-    	}
+        }
     }
 
     pub fn getIndex(self) -> int {
@@ -451,13 +451,13 @@ impl SymbolDO {
     @data_constraint
     @inline
     pub fn __all__(db: JavascriptDB) -> *SymbolDO {
-    	for (tmp in db.symbol_) {
+        for (tmp in db.symbol_) {
             yield SymbolDO {
                 oid : tmp.oid,
                 name : tmp.name,
                 description : tmp.description
             }
-    	}
+        }
     }
 
     pub fn getName(self) -> string {
@@ -478,12 +478,12 @@ impl NodeSymbolDO {
     @data_constraint
     @inline
     pub fn __all__(db: JavascriptDB) -> *NodeSymbolDO {
-    	for (tmp in db.node_symbol) {
+        for (tmp in db.node_symbol) {
             yield NodeSymbolDO {
                 node_oid : tmp.node_oid,
                 symbol_oid : tmp.symbol_oid
             }
-    	}
+        }
     }
 
     pub fn getSymbolOid(self) -> int {
@@ -500,12 +500,12 @@ impl ShorthandAssignmentValueSymbolDO {
     @data_constraint
     @inline
     pub fn __all__(db: JavascriptDB) -> *ShorthandAssignmentValueSymbolDO {
-    	for (tmp in db.shorthand_assignment_value_symbol) {
+        for (tmp in db.shorthand_assignment_value_symbol) {
             yield ShorthandAssignmentValueSymbolDO {
                 node_oid : tmp.node_oid,
                 symbol_oid : tmp.symbol_oid
             }
-    	}
+        }
     }
 
     pub fn getSymbolOid(self) -> int {
@@ -522,12 +522,12 @@ impl CallSiteDO {
     @data_constraint
     @inline
     pub fn __all__(db: JavascriptDB) -> *CallSiteDO {
-    	for (tmp in db.call_site) {
+        for (tmp in db.call_site) {
             yield CallSiteDO {
                 invoke_expression_oid : tmp.invoke_expression_oid,
                 callee_oid : tmp.callee_oid
             }
-    	}
+        }
     }
 
     pub fn getCalleeOid(self) -> int {
@@ -544,12 +544,12 @@ impl CfgEntryNodeDO {
     @data_constraint
     @inline
     pub fn __all__(db: JavascriptDB) -> *CfgEntryNodeDO {
-    	for (tmp in db.cfg_entry_node) {
+        for (tmp in db.cfg_entry_node) {
             yield CfgEntryNodeDO {
                 oid : tmp.oid,
                 ast_node_oid : tmp.ast_node_oid
             }
-    	}
+        }
     }
 
     pub fn getAstNodeOid(self) -> int {
@@ -566,12 +566,12 @@ impl CfgExitNodeDO {
     @data_constraint
     @inline
     pub fn __all__(db: JavascriptDB) -> *CfgExitNodeDO {
-    	for (tmp in db.cfg_exit_node) {
+        for (tmp in db.cfg_exit_node) {
             yield CfgExitNodeDO {
                 oid : tmp.oid,
                 ast_node_oid : tmp.ast_node_oid
             }
-    	}
+        }
     }
 
     pub fn getAstNodeOid(self) -> int {
@@ -589,13 +589,13 @@ impl CommentDO {
     @data_constraint
     @inline
     pub fn __all__(db: JavascriptDB) -> *CommentDO {
-    	for (tmp in db.comment) {
+        for (tmp in db.comment) {
             yield CommentDO {
                 oid : tmp.oid,
                 kind : tmp.kind,
                 location_oid : tmp.location_oid
             }
-    	}
+        }
     }
 
     pub fn getKind(self) -> int {
@@ -618,14 +618,14 @@ impl NodeCommentDO {
     @data_constraint
     @inline
     pub fn __all__(db: JavascriptDB) -> *NodeCommentDO {
-    	for (tmp in db.node_comment) {
+        for (tmp in db.node_comment) {
             yield NodeCommentDO {
                 oid : tmp.oid,
                 node_oid : tmp.node_oid,
                 comment_oid : tmp.comment_oid,
                 type : tmp.type
             }
-    	}
+        }
     }
 
     pub fn getNodeOid(self) -> int {
@@ -651,13 +651,13 @@ impl JsParseErrorDO {
     @data_constraint
     @inline
     pub fn __all__(db: JavascriptDB) -> *JsParseErrorDO {
-    	for (tmp in db.js_parse_error) {
+        for (tmp in db.js_parse_error) {
             yield JsParseErrorDO {
                 oid : tmp.oid,
                 message : tmp.message,
                 line : tmp.line
             }
-    	}
+        }
     }
 
     pub fn getMessage(self) -> string {
@@ -679,13 +679,13 @@ impl MetadataDO {
     @data_constraint
     @inline
     pub fn __all__(db: JavascriptDB) -> *MetadataDO {
-    	for (tmp in db.metadata) {
+        for (tmp in db.metadata) {
             yield MetadataDO {
                 oid : tmp.oid,
                 version : tmp.version,
                 created_time : tmp.created_time
             }
-    	}
+        }
     }
 
     pub fn getVersion(self) -> string {
@@ -708,14 +708,14 @@ impl IgnoredPathDO {
     @data_constraint
     @inline
     pub fn __all__(db: JavascriptDB) -> *IgnoredPathDO {
-    	for (tmp in db.ignored_path) {
+        for (tmp in db.ignored_path) {
             yield IgnoredPathDO {
                 oid : tmp.oid,
                 path_kind : tmp.path_kind,
                 path : tmp.path,
                 ignore_kind : tmp.ignore_kind
             }
-    	}
+        }
     }
 
     pub fn getPathKind(self) -> int {

@@ -2,7 +2,7 @@
 use coref::java::*
 
 fn default_java_db() -> JavaDB {
-	return JavaDB::load("coref_java_src.db")
+    return JavaDB::load("coref_java_src.db")
 }
 
 /**
@@ -19,5 +19,5 @@ fn class_hierarchy(className : string, superClassName : string) -> bool {
 }
 
 fn main() { 
-	output(class_hierarchy())
+    output(class_hierarchy())
 }

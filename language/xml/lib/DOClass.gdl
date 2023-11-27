@@ -12,7 +12,7 @@ schema XmlAttributeDO {
 impl XmlAttributeDO {
     @data_constraint
     fn __all__(db: XmlDB) -> *XmlAttributeDO {
-    	for (tmp in db.xml_attribute) {
+        for (tmp in db.xml_attribute) {
             yield XmlAttributeDO {
                 id : tmp.id,
                 element_id : tmp.element_id,
@@ -21,7 +21,7 @@ impl XmlAttributeDO {
                 index_order : tmp.index_order,
                 location_id : tmp.location_id
             }
-    	}
+        }
     }
     /**
      * @brief gets the element id of the attribute.
@@ -73,7 +73,7 @@ schema XmlCharacterDO {
 impl XmlCharacterDO {
     @data_constraint
     fn __all__(db: XmlDB) -> *XmlCharacterDO {
-    	for (tmp in db.xml_character) {
+        for (tmp in db.xml_character) {
             yield XmlCharacterDO {
                 id : tmp.id,
                 text : tmp.text,
@@ -82,7 +82,7 @@ impl XmlCharacterDO {
                 is_cdata : tmp.is_cdata,
                 location_id : tmp.location_id
             }
-    	}
+        }
     }
     /**
      * @brief gets the text of the element.
@@ -132,14 +132,14 @@ schema XmlCommentDO {
 impl XmlCommentDO {
     @data_constraint
     fn __all__(db: XmlDB) -> *XmlCommentDO {
-    	for (tmp in db.xml_comment) {
+        for (tmp in db.xml_comment) {
             yield XmlCommentDO {
                 id : tmp.id,
                 text : tmp.text,
                 parent_id : tmp.parent_id,
                 location_id : tmp.location_id
             }
-    	}
+        }
     }
     /**
      * @brief gets the text of the comment.
@@ -176,7 +176,7 @@ schema XmlDtdDO {
 impl XmlDtdDO {
     @data_constraint
     fn __all__(db: XmlDB) -> *XmlDtdDO {
-    	for (tmp in db.xml_dtd) {
+        for (tmp in db.xml_dtd) {
             yield XmlDtdDO {
                 id : tmp.id,
                 root : tmp.root,
@@ -184,7 +184,7 @@ impl XmlDtdDO {
                 system_id : tmp.system_id,
                 location_id : tmp.location_id
             }
-    	}
+        }
     }
     /**
      * @brief gets the root of the element.
@@ -225,12 +225,12 @@ schema XmlEncodingDO {
 impl XmlEncodingDO {
     @data_constraint
     fn __all__(db: XmlDB) -> *XmlEncodingDO {
-    	for (tmp in db.xml_encoding) {
+        for (tmp in db.xml_encoding) {
             yield XmlEncodingDO {
                 id : tmp.id,
                 encoding : tmp.encoding
             }
-    	}
+        }
     }
     /**
      * @brief gets the encoding information.
@@ -252,14 +252,14 @@ schema XmlHasNamespaceDO {
 impl XmlHasNamespaceDO {
     @data_constraint
     fn __all__(db: XmlDB) -> *XmlHasNamespaceDO {
-    	for (tmp in db.xml_has_namespace) {
+        for (tmp in db.xml_has_namespace) {
             yield XmlHasNamespaceDO {
                 id : tmp.id,
                 element_id : tmp.element_id,
                 namespace_id : tmp.namespace_id,
                 container_id : tmp.container_id
             }
-    	}
+        }
     }
     /**
      * @brief gets the element id.
@@ -295,14 +295,14 @@ schema XmlNamespaceDO {
 impl XmlNamespaceDO {
     @data_constraint
     fn __all__(db: XmlDB) -> *XmlNamespaceDO {
-    	for (tmp in db.xml_namespace) {
+        for (tmp in db.xml_namespace) {
             yield XmlNamespaceDO {
                 id : tmp.id,
                 prefix_name : tmp.prefix_name,
                 url : tmp.url,
                 location_id : tmp.location_id
             }
-    	}
+        }
     }
     /**
      * @brief gets the prefix name of the element.
@@ -338,14 +338,14 @@ schema XmlElementPrefixDO {
 impl XmlElementPrefixDO {
     @data_constraint
     fn __all__(db: XmlDB) -> *XmlElementPrefixDO {
-    	for (tmp in db.xml_element_prefix) {
+        for (tmp in db.xml_element_prefix) {
             yield XmlElementPrefixDO {
                 name : tmp.name,
                 id : tmp.id,
                 parent_id : tmp.parent_id,
                 location_id : tmp.location_id
             }
-    	}
+        }
     }
     /**
      * @brief gets the name of the element.
@@ -381,14 +381,14 @@ schema XmlElementNameDO {
 impl XmlElementNameDO {
     @data_constraint
     fn __all__(db: XmlDB) -> *XmlElementNameDO {
-    	for (tmp in db.xml_element_name) {
+        for (tmp in db.xml_element_name) {
             yield XmlElementNameDO {
                 name : tmp.name,
                 id : tmp.id,
                 parent_id : tmp.parent_id,
                 location_id : tmp.location_id
             }
-    	}
+        }
     }
     /**
      * @brief gets the name of the element.
@@ -424,14 +424,14 @@ schema XmlElementDO {
 impl XmlElementDO {
     @data_constraint
     fn __all__(db: XmlDB) -> *XmlElementDO {
-    	for (tmp in db.xml_element) {
+        for (tmp in db.xml_element) {
             yield XmlElementDO {
                 id : tmp.id,
                 parent_id : tmp.parent_id,
                 index_order : tmp.index_order,
                 location_id : tmp.location_id
             }
-    	}
+        }
     }
     /**
      * @brief gets the parent id of the element.
@@ -466,13 +466,13 @@ schema XmlFileDO {
 impl XmlFileDO {
     @data_constraint
     fn __all__(db: XmlDB) -> *XmlFileDO {
-    	for (tmp in db.xml_file) {
+        for (tmp in db.xml_file) {
             yield XmlFileDO {
                 id : tmp.id,
                 file_name : tmp.file_name,
                 relative_path : tmp.relative_path
             }
-    	}
+        }
     }
     /**
      * @brief gets the name of the file.
@@ -503,7 +503,7 @@ schema LocationDO {
 impl LocationDO {
     @data_constraint
     fn __all__(db: XmlDB) -> *LocationDO {
-    	for (tmp in db.xml_location) {
+        for (tmp in db.xml_location) {
             yield LocationDO {
                 id : tmp.id,
                 start_line_number : tmp.start_line_number,
@@ -512,7 +512,7 @@ impl LocationDO {
                 end_column_number : tmp.end_column_number,
                 file_id : tmp.file_id
             }
-    	}
+        }
     }
     /**
      * @brief gets the start line number of the location element.
