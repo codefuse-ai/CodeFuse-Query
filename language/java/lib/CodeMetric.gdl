@@ -1,0 +1,243 @@
+/**
+ * @brief This class provides access to metrics information for callables.
+ */
+schema MetricCallable extends Callable {
+
+}
+impl MetricCallable {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *MetricCallable {
+        for (tmp in Callable(db)) {
+            yield MetricCallable {
+                id : tmp.id
+            }
+        }
+    }
+    fn tmp_Expression(self) -> *Expression {
+        for (e in Expression(__all_data__)) {
+            if (self.key_eq(e.getEnclosingCallable())) {
+                yield e
+            }
+        }
+    }
+    fn tmp_Statement(self) -> *Statement {
+        for (e in Statement(__all_data__)) {
+            if (self.key_eq(e.getEnclosingCallable())) {
+                yield e
+            }
+        }
+    }
+    fn countCallable(self) -> *Callable {
+        for(c in Callable(__all_data__)) {
+            if (c in self.getCaller()) {
+                yield c
+            }
+        }
+    }
+    fn countCallee(self) -> *Callable {
+        for(c in Callable(__all_data__)) {
+            if (c in self.getCallee()) {
+                yield c
+            }
+        }
+    }
+    /**
+     * @brief * Gets a callable on which this callable depends. A callable `m` depends on another callable `n` if there exists a call to `n` from within `m`, taking overriding into account.
+     * @return Callable 
+     */
+    pub fn getADependency(self) -> *Callable {
+        for (c in Callable(__all_data__)) {
+            for (auto_tmp1 in self.getCallee()) {
+                if (c = auto_tmp1) {
+                    yield c
+                }
+            }
+        }
+    }
+    /**
+     * @brief  The Halstead vocabulary of a callable is estimated as the number of unique Halstead IDs of all statements and expressions within the callable.
+     * @return int 
+     */
+    pub fn getHalsteadVocabulary(self) -> int {
+        return self.tmp_Expression().len() + 1
+    }
+    /**
+     * @brief The Halstead length of a callable is estimated as the sum of the number of statements and expressions within the callable, plus one for the callable itself.
+     * @return int 
+     */
+    pub fn getHalsteadLength(self) -> int {
+        return self.tmp_Expression().len() + self.tmp_Statement().len() + 1
+    }
+   /**
+    * @brief The afferent coupling of a callable is defined as
+    * the number of callables that depend on this callable.
+    *
+    * This may also be referred to as the "fan-in" or
+    * "incoming dependencies" of a callable.
+    * @return int 
+    */
+    pub fn getAfferentCoupling(self) -> int {
+        return self.countCallable().len()
+    }
+   /**
+    * @brief * The efferent coupling of a callable is defined as
+    * the number of callables on which this callable depends.
+    *
+    * This may also be referred to as the "fan-out" or
+    * "outgoing dependencies" of a callable.
+    * @return int 
+    */
+    pub fn getEfferentCoupling(self) -> int {
+        return self.countCallee().len()
+    }
+   /**
+    * @brief The cyclomatic complexity of a callable is defined as the number
+    * of branching statements (`if`, `while`, `do`, `for`, `switch`, `case`, `catch`)
+    * plus the number of branching expressions (`?`, `&&` and `||`)
+    * plus one.
+    * @return int 
+    */
+    pub fn getCyclomaticComplexity(self) -> int {
+        let (j = tmp_getCyclomaticComplexity_1(self).len()) {
+            let (k = tmp_getCyclomaticComplexity_2(self).len()) {
+                let (l = tmp_getCyclomaticComplexity_3(self).len()) {
+                    let (t = tmp_getCyclomaticComplexity_4(self, __all_data__, __all_data__).sum()) {
+                        let (i = j + k + l + t + 1) {
+                            return i
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn branchingSwitchCase(c : ConstSwitchLabelStatement) -> bool {
+    for (s in Statement(__all_data__)) {
+        if (s in c.getExecutionStatement()) {
+            for (b in BreakStatement(__all_data__)) {
+                if (s.key_eq(b)) {
+                    return true
+                }
+                for (auto_tmp2 in b.getAnAncestor()) {
+                    if (s.key_eq(auto_tmp2)) {
+                        return true
+                    }
+                }
+            }
+            for (r in ReturnStatement(__all_data__)) {
+                if (s.key_eq(r)) {
+                    return true
+                }
+                for (auto_tmp3 in r.getAnAncestor()) {
+                    if (s.key_eq(auto_tmp3)) {
+                        return true
+                    }
+                }
+            }
+            for (t in ThrowStatement(__all_data__)) {
+                if (s.key_eq(t)) {
+                    return true
+                }
+                for (auto_tmp4 in t.getAnAncestor()) {
+                    if (s.key_eq(auto_tmp4)) {
+                        return true
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn branchingStatement(s : Statement) -> bool {
+    for (i in IfStatement(__all_data__)) {
+        if (s.key_eq(i)) {
+            return true
+        }
+    }
+    for (w in WhileStatement(__all_data__)) {
+        if (s.key_eq(w)) {
+            return true
+        }
+    }
+    for (d in DoWhileStatement(__all_data__)) {
+        if (s.key_eq(d)) {
+            return true
+        }
+    }
+    for (f in ForStatement(__all_data__)) {
+        if (s.key_eq(f)) {
+            return true
+        }
+    }
+    for (e in ForeachStatement(__all_data__)) {
+        if (s.key_eq(e)) {
+            return true
+        }
+    }
+    for (sl in ConstSwitchLabelStatement(__all_data__)) {
+        if (branchingSwitchCase(sl)) {
+            if (s.key_eq(sl)) {
+                return true
+            }
+        }
+    }
+}
+pub fn branchingExpression(expr : Expression) -> bool {
+    for (i in ConditionalExpression(__all_data__)) {
+        if (expr.key_eq(i)) {
+            return true
+        }
+    }
+    for (i in AndLogicalExpression(__all_data__)) {
+        if (expr.key_eq(i)) {
+            return true
+        }
+    }
+    for (i in OrLogicalExpression(__all_data__)) {
+        if (expr.key_eq(i)) {
+            return true
+        }
+    }
+}
+pub fn branchingPolyadicExpression(c : ConditionalPolyadicExpression, i : int) -> bool {
+    let (j = c.getSize()) {
+        if (i = j - 1) {
+            return true
+        }
+    }
+}
+fn tmp_getCyclomaticComplexity_1(x: MetricCallable) -> *Statement {
+    for (m in Statement(__all_data__)) {
+        if (branchingStatement(m)) {
+            if (x.key_eq(m.getEnclosingCallable())) {
+                yield m
+            }
+        }
+    }
+}
+
+fn tmp_getCyclomaticComplexity_2(x: MetricCallable) -> *Expression {
+    for (m in Expression(__all_data__)) {
+        if (branchingExpression(m)) {
+            if (x.key_eq(m.getEnclosingCallable())) {
+                yield m
+            }
+        }
+    }
+}
+
+fn tmp_getCyclomaticComplexity_3(x: MetricCallable) -> *CatchClause {
+    for (m in CatchClause(__all_data__)) {
+        if (x.key_eq(m.getTryStatement().getEnclosingCallable())) {
+            yield m
+        }
+    }
+}
+
+fn tmp_getCyclomaticComplexity_4(x: MetricCallable, tmp: int, c: ConditionalPolyadicExpression) -> *int {
+    if (branchingPolyadicExpression(c, tmp)) {
+        if (x.key_eq(c.getEnclosingCallable())) {
+            yield tmp
+        }
+    }
+}

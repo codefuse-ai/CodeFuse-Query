@@ -1,0 +1,466 @@
+/**
+ * @filename: Expression
+ * @brief: Provides classes and predicates for working with JavaScript / TypeScript expressions
+ */
+
+/**
+ * A JSX text.
+ */
+schema JsxText extends Node {
+}
+
+impl JsxText {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *JsxText {
+        for (tmp in Node(db)) {
+            if (isJsxText(tmp)) {
+                yield JsxText {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets the value of this jsx text, as a string.
+     */
+    pub fn getValue(self) -> string {
+        for (literalDO in LiteralDO(__all_data__)) {
+            if (literalDO.key_eq(self)) {
+                let (value = literalDO.getValue()) {
+                    return value
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A JSX element.
+ */
+schema JsxElement extends PrimaryExpression {
+}
+
+impl JsxElement {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *JsxElement {
+        for (tmp in PrimaryExpression(db)) {
+            if (isJsxElement(Node {id: tmp.id})) {
+                yield JsxElement {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A JSX self closing element.
+ */
+schema JsxSelfClosingElement extends PrimaryExpression {
+}
+
+impl JsxSelfClosingElement {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *JsxSelfClosingElement {
+        for (tmp in PrimaryExpression(db)) {
+            if (isJsxSelfClosingElement(Node {id: tmp.id})) {
+                yield JsxSelfClosingElement {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A JSX opening element.
+ */
+schema JsxOpeningElement extends Expression {
+}
+
+impl JsxOpeningElement {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *JsxOpeningElement {
+        for (tmp in Expression(db)) {
+            if (isJsxOpeningElement(Node {id: tmp.id})) {
+                yield JsxOpeningElement {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+
+    pub fn getParent(self) -> JsxElement {
+        for (parent in JsxElement(__all_data__)) {
+            if (parent.id = self.getParentOid()) {
+                return parent
+            }
+        }
+    }
+
+    /**
+     * Gets the callee of this JSX opening element.
+     */
+    pub fn getCallee(self) -> FunctionLikeDeclaration {
+        for (callSite in CallSite(__all_data__)) {
+            if (self.key_eq(callSite)) {
+                let (callee = callSite.getCallee()) {
+                    return callee
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A JSX closing element.
+ */
+schema JsxClosingElement extends Expression {
+}
+
+impl JsxClosingElement {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *JsxClosingElement {
+        for (tmp in Expression(db)) {
+            if (isJsxClosingElement(Node {id: tmp.id})) {
+                yield JsxClosingElement {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+
+    pub fn getParent(self) -> JsxElement {
+        for (parent in JsxElement(__all_data__)) {
+            if (parent.id = self.getParentOid()) {
+                return parent
+            }
+        }
+    }
+}
+
+/**
+ * A JSX fragment.
+ */
+schema JsxFragment extends PrimaryExpression {
+}
+
+impl JsxFragment {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *JsxFragment {
+        for (tmp in PrimaryExpression(db)) {
+            if (isJsxFragment(Node {id: tmp.id})) {
+                yield JsxFragment {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A JSX opening fragment.
+ */
+schema JsxOpeningFragment extends Expression {
+}
+
+impl JsxOpeningFragment {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *JsxOpeningFragment {
+        for (tmp in Expression(db)) {
+            if (isJsxOpeningFragment(Node {id: tmp.id})) {
+                yield JsxOpeningFragment {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+
+    pub fn getParent(self) -> JsxFragment {
+        for (parent in JsxFragment(__all_data__)) {
+            if (parent.id = self.getParentOid()) {
+                return parent
+            }
+        }
+    }
+}
+
+/**
+ * A JSX closing fragment.
+ */
+schema JsxClosingFragment extends Expression {
+}
+
+impl JsxClosingFragment {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *JsxClosingFragment {
+        for (tmp in Expression(db)) {
+            if (isJsxClosingFragment(Node {id: tmp.id})) {
+                yield JsxClosingFragment {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+
+    pub fn getParent(self) -> JsxFragment {
+        for (parent in JsxFragment(__all_data__)) {
+            if (parent.id = self.getParentOid()) {
+                return parent
+            }
+        }
+    }
+}
+
+/**
+ * A JSX attribute.
+ */
+schema JsxAttribute extends Node {
+}
+
+impl JsxAttribute {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *JsxAttribute {
+        for (tmp in Node(db)) {
+            if (isJsxAttribute(tmp)) {
+                yield JsxAttribute {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+
+    pub fn getParent(self) -> JsxAttributes {
+        for (parent in JsxAttributes(__all_data__)) {
+            if (parent.id = self.getParentOid()) {
+                return parent
+            }
+        }
+    }
+
+    pub fn getName(self) -> Identifier {
+        for (name in Identifier(__all_data__)) {
+            if (name.key_eq(self.getChild(0))) {
+                return name
+            }
+        }
+    }
+
+    pub fn getInitializer(self) -> JsxAttributeInitializer {
+        for (initializer in JsxAttributeInitializer(__all_data__)) {
+            if (initializer.key_eq(self.getChild(1))) {
+                return initializer
+            }
+        }
+    }
+}
+
+/**
+ * A JSX attributes.
+ */
+schema JsxAttributes extends PrimaryExpression {
+}
+
+impl JsxAttributes {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *JsxAttributes {
+        for (tmp in PrimaryExpression(db)) {
+            if (isJsxAttributes(Node {id: tmp.id})) {
+                yield JsxAttributes {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A JSX spread attribute.
+ */
+schema JsxSpreadAttribute extends Node {
+}
+
+impl JsxSpreadAttribute {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *JsxSpreadAttribute {
+        for (tmp in Node(db)) {
+            if (isJsxSpreadAttribute(tmp)) {
+                yield JsxSpreadAttribute {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+
+    pub fn getParent(self) -> JsxAttributes {
+        for (parent in JsxAttributes(__all_data__)) {
+            if (parent.id = self.getParentOid()) {
+                return parent
+            }
+        }
+    }
+
+    pub fn getExpression(self) -> Expression {
+        for (expression in Expression(__all_data__)) {
+            if (expression.key_eq(self.getChild(0))) {
+                return expression
+            }
+        }
+    }
+}
+
+/**
+ * A JSX expression.
+ */
+schema JsxExpression extends Expression {
+}
+
+impl JsxExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *JsxExpression {
+        for (tmp in Expression(db)) {
+            if (isJsxExpression(Node {id: tmp.id})) {
+                yield JsxExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A JSX attribute initializer, that is a string literal or JSX expression.
+ */
+schema JsxAttributeInitializer extends Node {
+}
+
+impl JsxAttributeInitializer {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *JsxAttributeInitializer {
+        for (tmp in Node(db)) {
+            if (isStringLiteral(tmp)) {
+                yield JsxAttributeInitializer {
+                    id : tmp.id
+                }
+            }
+            if (isJsxExpression(tmp)) {
+                yield JsxAttributeInitializer {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a JSX element.
+ */
+pub fn isJsxElement(node: Node) -> bool {
+    if (node.getKind() = 277) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a JSX self closing element.
+ */
+pub fn isJsxSelfClosingElement(node: Node) -> bool {
+    if (node.getKind() = 278) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a JSX opening element.
+ */
+pub fn isJsxOpeningElement(node: Node) -> bool {
+    if (node.getKind() = 279) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a JSX closing element.
+ */
+pub fn isJsxClosingElement(node: Node) -> bool {
+    if (node.getKind() = 280) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a JSX fragment.
+ */
+pub fn isJsxFragment(node: Node) -> bool {
+    if (node.getKind() = 281) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a JSX opening fragment.
+ */
+pub fn isJsxOpeningFragment(node: Node) -> bool {
+    if (node.getKind() = 282) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a JSX closing fragment.
+ */
+pub fn isJsxClosingFragment(node: Node) -> bool {
+    if (node.getKind() = 283) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a JSX attribute.
+ */
+pub fn isJsxAttribute(node: Node) -> bool {
+    if (node.getKind() = 284) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a JSX attributes.
+ */
+pub fn isJsxAttributes(node: Node) -> bool {
+    if (node.getKind() = 285) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a JSX spread attribute.
+ */
+pub fn isJsxSpreadAttribute(node: Node) -> bool {
+    if (node.getKind() = 286) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a JSX closing fragment.
+ */
+pub fn isJsxExpression(node: Node) -> bool {
+    if (node.getKind() = 287) {
+        return true
+    }
+}

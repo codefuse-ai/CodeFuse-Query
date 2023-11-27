@@ -1,0 +1,62 @@
+// script
+use coref::javascript::*
+
+/**
+ * print AST
+ *
+ * @param filePath          file path
+ * @param parentId          parent node ID
+ * @param parentKind        parent node kind
+ * @param parentStartLine   parent node start line
+ * @param parentEndLine     parent node end line
+ * @param childId           child node ID
+ * @param childKind         child node kind
+ * @param childStartLine    child node start line
+ * @param childEndLine      child node end line
+ * @param index             child node index
+ */
+fn out(
+    filePath: string,
+    parentId: int,
+    parentKind: string,
+    parentStartLine: int,
+    parentEndLine: int,
+    childId: int,
+    childKind: string,
+    childStartLine: int,
+    childEndLine: int,
+    index: int
+) -> bool {
+    let (db = JavascriptDB::load("coref_javascript_src.db")) {
+        for (parent in Node(db),
+            child in Node(db),
+            parentSyntaxKind in SyntaxKind(),
+            childSyntaxKind in SyntaxKind(),
+            parentLocation in Location(db),
+            childLocation in Location(db),
+            file in File(db)) {
+            if (parent.key_eq(child.getParent()) &&
+                parentId = parent.id &&
+                childId = child.id &&
+                parentSyntaxKind.id = parent.getKind() &&
+                childSyntaxKind.id = child.getKind() &&
+                parentKind = parentSyntaxKind.getName() &&
+                childKind = childSyntaxKind.getName() &&
+                index = child.getIndex() &&
+                parentLocation = parent.getLocation() &&
+                childLocation = parent.getLocation() &&
+                file = parentLocation.getFile() &&
+                filePath = file.getRelativePath() &&
+                parentStartLine = parentLocation.getStartLineNumber() &&
+                parentEndLine = parentLocation.getEndLineNumber() &&
+                childStartLine = childLocation.getStartLineNumber() &&
+                childEndLine = childLocation.getEndLineNumber()) {
+                return true
+            }
+        }
+    }
+}
+
+fn main() {
+    output(out())
+}

@@ -1,0 +1,4759 @@
+/**
+ * @filename: Expression
+ * @brief: Provides classes and predicates for working with JavaScript / TypeScript expressions
+ */
+
+/**
+ * An expression.
+ */
+schema Expression extends Node {
+}
+
+impl Expression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *Expression {
+        for (tmp in Node(db)) {
+            if (isExpression(tmp)) {
+                yield Expression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * An arrow function expression.
+ */
+schema ArrowFunctionExpression extends Expression {
+}
+
+impl ArrowFunctionExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *ArrowFunctionExpression {
+        for (tmp in Expression(db)) {
+            if (isArrowFunction(Node {id: tmp.id})) {
+                yield ArrowFunctionExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A binary expression
+ */
+schema BinaryExpression extends Expression {
+}
+
+impl BinaryExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *BinaryExpression {
+        for (tmp in Expression(db)) {
+            if (isBinaryExpression(Node {id: tmp.id})) {
+                yield BinaryExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+
+    /**
+     * Get the left operand of this binary expression.
+     */
+    pub fn getLeftOperand(self) -> Expression {
+        for (leftOperand in Expression(__all_data__)) {
+            if (leftOperand.key_eq(self.getChild(0))) {
+                return leftOperand
+            }
+        }
+    }
+
+    /**
+     * Get the left operand of this binary expression. An alias of `getLeftOperand`.
+     */
+    pub fn getLeft(self) -> Expression {
+        for (left in Expression(__all_data__)) {
+            if (left.key_eq(self.getChild(0))) {
+                return left
+            }
+        }
+    }
+
+    /**
+     * Get the operator of this binary expression.
+     */
+    pub fn getOperator(self) -> BinaryOperator {
+        for (binaryOperator in BinaryOperator(__all_data__)) {
+            if (binaryOperator.key_eq(self.getChild(1))) {
+                return binaryOperator
+            }
+        }
+    }
+
+    /**
+     * Get the right operand of this binary expression.
+     */
+    pub fn getRightOperand(self) -> Expression {
+        for (rightOperand in Expression(__all_data__)) {
+            if (rightOperand.key_eq(self.getChild(2))) {
+                return rightOperand
+            }
+        }
+    }
+
+    /**
+     * Get the right operand of this binary expression. An alias of `getRightOperand`
+     */
+    pub fn getRight(self) -> Expression {
+        for (right in Expression(__all_data__)) {
+            if (right.key_eq(self.getChild(2))) {
+                return right
+            }
+        }
+    }
+
+    pub fn getAnOperand(self) -> *Expression {
+        for (operand in Expression(__all_data__)) {
+            for (auto_tmp1 in self.getAChild()) {
+                if (operand.key_eq(auto_tmp1)) {
+                    yield operand
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A exponentiation expression using `**`.
+ */
+schema ExponentiationExpression extends BinaryExpression {
+}
+
+impl ExponentiationExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *ExponentiationExpression {
+        for (tmp in BinaryExpression(db)) {
+            if (isExponentiationExpression(Node {id: tmp.id})) {
+                yield ExponentiationExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A multiplicative expression using `*`, `/` or `%`.
+ */
+schema MultiplicativeExpression extends BinaryExpression {
+}
+
+impl MultiplicativeExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *MultiplicativeExpression {
+        for (tmp in BinaryExpression(db)) {
+            if (isMultiplicativeExpression(Node {id: tmp.id})) {
+                yield MultiplicativeExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A multiplication expression using `*`.
+ */
+schema MultiplicationExpression extends MultiplicativeExpression {
+}
+
+impl MultiplicationExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *MultiplicationExpression {
+        for (tmp in MultiplicativeExpression(db)) {
+            if (isMultiplicationExpression(Node {id: tmp.id})) {
+                yield MultiplicationExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A division expression using `/`.
+ */
+schema DivisionExpression extends MultiplicativeExpression {
+}
+
+impl DivisionExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *DivisionExpression {
+        for (tmp in MultiplicativeExpression(db)) {
+            if (isDivisionExpression(Node {id: tmp.id})) {
+                yield DivisionExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A remainder expression using `%`.
+ */
+schema RemainderExpression extends MultiplicativeExpression {
+}
+
+impl RemainderExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *RemainderExpression {
+        for (tmp in MultiplicativeExpression(db)) {
+            if (isRemainderExpression(Node {id: tmp.id})) {
+                yield RemainderExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * An additive expression using `+` or `-`.
+ */
+schema AdditiveExpression extends BinaryExpression {
+}
+
+impl AdditiveExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *AdditiveExpression {
+        for (tmp in BinaryExpression(db)) {
+            if (isAdditiveExpression(Node {id: tmp.id})) {
+                yield AdditiveExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * An addition expression using `+`.
+ */
+schema AdditionExpression extends AdditiveExpression {
+}
+
+impl AdditionExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *AdditionExpression {
+        for (tmp in AdditiveExpression(db)) {
+            if (isAdditionExpression(Node {id: tmp.id})) {
+                yield AdditionExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A subtraction expression using `-`.
+ */
+schema SubtractionExpression extends AdditiveExpression {
+}
+
+impl SubtractionExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *SubtractionExpression {
+        for (tmp in AdditiveExpression(db)) {
+            if (isSubtractionExpression(Node {id: tmp.id})) {
+                yield SubtractionExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A shift expression using `<<`, `>>` or `>>>`.
+ */
+schema ShiftExpression extends BinaryExpression {
+}
+
+impl ShiftExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *ShiftExpression {
+        for (tmp in BinaryExpression(db)) {
+            if (isShiftExpression(Node {id: tmp.id})) {
+                yield ShiftExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A left-shift expression using `<<`.
+ */
+schema LeftShiftExpression extends ShiftExpression {
+}
+
+impl LeftShiftExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *LeftShiftExpression {
+        for (tmp in ShiftExpression(db)) {
+            if (isLeftShiftExpression(Node {id: tmp.id})) {
+                yield LeftShiftExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A signed right-shift expression using `>>`.
+ */
+schema RightShiftExpression extends ShiftExpression {
+}
+
+impl RightShiftExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *RightShiftExpression {
+        for (tmp in ShiftExpression(db)) {
+            if (isRightShiftExpression(Node {id: tmp.id})) {
+                yield RightShiftExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A unsigned right-shift expression using `>>>`.
+ */
+schema UnsignedRightShiftExpression extends ShiftExpression {
+}
+
+impl UnsignedRightShiftExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *UnsignedRightShiftExpression {
+        for (tmp in ShiftExpression(db)) {
+            if (isUnsignedRightShiftExpression(Node {id: tmp.id})) {
+                yield UnsignedRightShiftExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A relational expression using `<`, `<=`, `>`, `>=`, `instanceof` or `in`.
+ */
+schema RelationalExpression extends BinaryExpression {
+}
+
+impl RelationalExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *RelationalExpression {
+        for (tmp in BinaryExpression(db)) {
+            if (isRelationalExpression(Node {id: tmp.id})) {
+                yield RelationalExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A less-than expression using `<`.
+ */
+schema LessThanExpression extends RelationalExpression {
+}
+
+impl LessThanExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *LessThanExpression {
+        for (tmp in RelationalExpression(db)) {
+            if (isLessThanExpression(Node {id: tmp.id})) {
+                yield LessThanExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A less-than-or-equal expression using `<=`.
+ */
+schema LessThanEqualsExpression extends RelationalExpression {
+}
+
+impl LessThanEqualsExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *LessThanEqualsExpression {
+        for (tmp in RelationalExpression(db)) {
+            if (isLessThanEqualsExpression(Node {id: tmp.id})) {
+                yield LessThanEqualsExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A greater-than expression using `>`.
+ */
+schema GreaterThanExpression extends RelationalExpression {
+}
+
+impl GreaterThanExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *GreaterThanExpression {
+        for (tmp in RelationalExpression(db)) {
+            if (isGreaterThanExpression(Node {id: tmp.id})) {
+                yield GreaterThanExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A greater-than-or-equal expression using `>=`.
+ */
+schema GreaterThanEqualsExpression extends RelationalExpression {
+}
+
+impl GreaterThanEqualsExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *GreaterThanEqualsExpression {
+        for (tmp in RelationalExpression(db)) {
+            if (isGreaterThanEqualsExpression(Node {id: tmp.id})) {
+                yield GreaterThanEqualsExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * An `instanceof` expression.
+ */
+schema InstanceOfExpression extends RelationalExpression {
+}
+
+impl InstanceOfExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *InstanceOfExpression {
+        for (tmp in RelationalExpression(db)) {
+            if (isInstanceOfExpression(Node {id: tmp.id})) {
+                yield InstanceOfExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * An `in` expression.
+ */
+schema InExpression extends RelationalExpression {
+}
+
+impl InExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *InExpression {
+        for (tmp in RelationalExpression(db)) {
+            if (isInExpression(Node {id: tmp.id})) {
+                yield InExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * An equality test expression using `==`, `!=`, `===` or `!==`.
+ */
+schema EqualityTestExpression extends BinaryExpression {
+}
+
+impl EqualityTestExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *EqualityTestExpression {
+        for (tmp in BinaryExpression(db)) {
+            if (isEqualityTestExpression(Node {id: tmp.id})) {
+                yield EqualityTestExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * An equality expression using `==`.
+ */
+schema EqualityExpression extends EqualityTestExpression {
+}
+
+impl EqualityExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *EqualityExpression {
+        for (tmp in EqualityTestExpression(db)) {
+            if (isEqualityExpression(Node {id: tmp.id})) {
+                yield EqualityExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * An inequality expression using `!=`.
+ */
+schema InequalityExpression extends EqualityTestExpression {
+}
+
+impl InequalityExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *InequalityExpression {
+        for (tmp in EqualityTestExpression(db)) {
+            if (isInequalityExpression(Node {id: tmp.id})) {
+                yield InequalityExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A strict equality expression using `===`.
+ */
+schema StrictEqualityExpression extends EqualityTestExpression {
+}
+
+impl StrictEqualityExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *StrictEqualityExpression {
+        for (tmp in EqualityTestExpression(db)) {
+            if (isStrictEqualityExpression(Node {id: tmp.id})) {
+                yield StrictEqualityExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A strict inequality expression using `!==`.
+ */
+schema StrictInequalityExpression extends EqualityTestExpression {
+}
+
+impl StrictInequalityExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *StrictInequalityExpression {
+        for (tmp in EqualityTestExpression(db)) {
+            if (isStrictInequalityExpression(Node {id: tmp.id})) {
+                yield StrictInequalityExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A strict equality test expression using `===` or `!==`.
+ */
+schema StrictEqualityTestExpression extends EqualityTestExpression {
+}
+
+impl StrictEqualityTestExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *StrictEqualityTestExpression {
+        for (tmp in EqualityTestExpression(db)) {
+            if (isStrictEqualityTestExpression(Node {id: tmp.id})) {
+                yield StrictEqualityTestExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A non-strict equality test expression using `==` or `!=`.
+ */
+schema NonStrictEqualityTestExpression extends EqualityTestExpression {
+}
+
+impl NonStrictEqualityTestExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *NonStrictEqualityTestExpression {
+        for (tmp in EqualityTestExpression(db)) {
+            if (isNonStrictEqualityTestExpression(Node {id: tmp.id})) {
+                yield NonStrictEqualityTestExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A binary bitwise expression using `&`, `|` or `^`.
+ */
+schema BinaryBitwiseExpression extends BinaryExpression {
+}
+
+impl BinaryBitwiseExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *BinaryBitwiseExpression {
+        for (tmp in BinaryExpression(db)) {
+            if (isBinaryBitwiseExpression(Node {id: tmp.id})) {
+                yield BinaryBitwiseExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A bitwise AND expression using `&`.
+ */
+schema BitwiseAndExpression extends BinaryBitwiseExpression {
+}
+
+impl BitwiseAndExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *BitwiseAndExpression {
+        for (tmp in BinaryBitwiseExpression(db)) {
+            if (isBitwiseAndExpression(Node {id: tmp.id})) {
+                yield BitwiseAndExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A bitwise OR expression using `|`.
+ */
+schema BitwiseOrExpression extends BinaryBitwiseExpression {
+}
+
+impl BitwiseOrExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *BitwiseOrExpression {
+        for (tmp in BinaryBitwiseExpression(db)) {
+            if (isBitwiseOrExpression(Node {id: tmp.id})) {
+                yield BitwiseOrExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A bitwise XOR expression using `^`.
+ */
+schema BitwiseXorExpression extends BinaryBitwiseExpression {
+}
+
+impl BitwiseXorExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *BitwiseXorExpression {
+        for (tmp in BinaryBitwiseExpression(db)) {
+            if (isBitwiseXorExpression(Node {id: tmp.id})) {
+                yield BitwiseXorExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+schema BinaryLogicalExpression extends BinaryExpression {
+}
+
+impl BinaryLogicalExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *BinaryLogicalExpression {
+        for (tmp in BinaryExpression(db)) {
+            if (isBinaryLogicalExpression(Node {id: tmp.id})) {
+                yield BinaryLogicalExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A logical AND expression using `&&`.
+ */
+schema LogicalAndExpression extends BinaryLogicalExpression {
+}
+
+impl LogicalAndExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *LogicalAndExpression {
+        for (tmp in BinaryLogicalExpression(db)) {
+            if (isLogicalAndExpression(Node {id: tmp.id})) {
+                yield LogicalAndExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A logical OR expression using `||`.
+ */
+schema LogicalOrExpression extends BinaryLogicalExpression {
+}
+
+impl LogicalOrExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *LogicalOrExpression {
+        for (tmp in BinaryLogicalExpression(db)) {
+            if (isLogicalOrExpression(Node {id: tmp.id})) {
+                yield LogicalOrExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A nullish coalescing expression using `??`.
+ */
+schema NullishCoalescingExpression extends BinaryLogicalExpression {
+}
+
+impl NullishCoalescingExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *NullishCoalescingExpression {
+        for (tmp in BinaryLogicalExpression(db)) {
+            if (isNullishCoalescingExpression(Node {id: tmp.id})) {
+                yield NullishCoalescingExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * An assignment expression, either compound or simple.
+ */
+schema AssignmentExpression extends BinaryExpression {
+}
+
+impl AssignmentExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *AssignmentExpression {
+        for (tmp in BinaryExpression(db)) {
+            if (isAssignmentExpression(Node {id: tmp.id})) {
+                yield AssignmentExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A simple assignment expression using `=`.
+ */
+schema SimpleAssignmentExpression extends AssignmentExpression {
+}
+
+impl SimpleAssignmentExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *SimpleAssignmentExpression {
+        for (tmp in AssignmentExpression(db)) {
+            if (isSimpleAssignmentExpression(Node {id: tmp.id})) {
+                yield SimpleAssignmentExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A compound assignment expression using
+ * `+=`, `-=`, `**=`, `*=`, `/=`, `%=`, `&=`, `|=`, `^=`, `<<=`, `>>=`, `>>>=`,
+ * `&&=`, `||=` or `??=`.
+ */
+schema CompoundAssignmentExpression extends AssignmentExpression {
+}
+
+impl CompoundAssignmentExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *CompoundAssignmentExpression {
+        for (tmp in AssignmentExpression(db)) {
+            if (isCompoundAssignmentExpression(Node {id: tmp.id})) {
+                yield CompoundAssignmentExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * An addition assignment expression using `+=`.
+ */
+schema AdditionAssignmentExpression extends CompoundAssignmentExpression {
+}
+
+impl AdditionAssignmentExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *AdditionAssignmentExpression {
+        for (tmp in CompoundAssignmentExpression(db)) {
+            if (isAdditionAssignmentExpression(Node {id: tmp.id})) {
+                yield AdditionAssignmentExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A subtraction assignment expression using `-=`.
+ */
+schema SubtractionAssignmentExpression extends CompoundAssignmentExpression {
+}
+
+impl SubtractionAssignmentExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *SubtractionAssignmentExpression {
+        for (tmp in CompoundAssignmentExpression(db)) {
+            if (isSubtractionAssignmentExpression(Node {id: tmp.id})) {
+                yield SubtractionAssignmentExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * An exponentiation assignment expression using `**=`.
+ */
+schema ExponentiationAssignmentExpression extends CompoundAssignmentExpression {
+}
+
+impl ExponentiationAssignmentExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *ExponentiationAssignmentExpression {
+        for (tmp in CompoundAssignmentExpression(db)) {
+            if (isExponentiationAssignmentExpression(Node {id: tmp.id})) {
+                yield ExponentiationAssignmentExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A multiplication assignment expression using `*=`.
+ */
+schema MultiplicationAssignmentExpression extends CompoundAssignmentExpression {
+}
+
+impl MultiplicationAssignmentExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *MultiplicationAssignmentExpression {
+        for (tmp in CompoundAssignmentExpression(db)) {
+            if (isMultiplicationAssignmentExpression(Node {id: tmp.id})) {
+                yield MultiplicationAssignmentExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A division assignment expression using `/=`.
+ */
+schema DivisionAssignmentExpression extends CompoundAssignmentExpression {
+}
+
+impl DivisionAssignmentExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *DivisionAssignmentExpression {
+        for (tmp in CompoundAssignmentExpression(db)) {
+            if (isDivisionAssignmentExpression(Node {id: tmp.id})) {
+                yield DivisionAssignmentExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A remainder assignment expression using `%=`.
+ */
+schema RemainderAssignmentExpression extends CompoundAssignmentExpression {
+}
+
+impl RemainderAssignmentExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *RemainderAssignmentExpression {
+        for (tmp in CompoundAssignmentExpression(db)) {
+            if (isRemainderAssignmentExpression(Node {id: tmp.id})) {
+                yield RemainderAssignmentExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A bitwise AND assignment expression using `&=`.
+ */
+schema BitwiseAndAssignmentExpression extends CompoundAssignmentExpression {
+}
+
+impl BitwiseAndAssignmentExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *BitwiseAndAssignmentExpression {
+        for (tmp in CompoundAssignmentExpression(db)) {
+            if (isBitwiseAndAssignmentExpression(Node {id: tmp.id})) {
+                yield BitwiseAndAssignmentExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A bitwise OR assignment expression using `|=`.
+ */
+schema BitwiseOrAssignmentExpression extends CompoundAssignmentExpression {
+}
+
+impl BitwiseOrAssignmentExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *BitwiseOrAssignmentExpression {
+        for (tmp in CompoundAssignmentExpression(db)) {
+            if (isBitwiseOrAssignmentExpression(Node {id: tmp.id})) {
+                yield BitwiseOrAssignmentExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A bitwise XOR assignment expression using `^=`.
+ */
+schema BitwiseXorAssignmentExpression extends CompoundAssignmentExpression {
+}
+
+impl BitwiseXorAssignmentExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *BitwiseXorAssignmentExpression {
+        for (tmp in CompoundAssignmentExpression(db)) {
+            if (isBitwiseXorAssignmentExpression(Node {id: tmp.id})) {
+                yield BitwiseXorAssignmentExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A left shift assignment expression using `<<=`.
+ */
+schema LeftShiftAssignmentExpression extends CompoundAssignmentExpression {
+}
+
+impl LeftShiftAssignmentExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *LeftShiftAssignmentExpression {
+        for (tmp in CompoundAssignmentExpression(db)) {
+            if (isLeftShiftAssignmentExpression(Node {id: tmp.id})) {
+                yield LeftShiftAssignmentExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A right shift assignment expression using `>>=`.
+ */
+schema RightShiftAssignmentExpression extends CompoundAssignmentExpression {
+}
+
+impl RightShiftAssignmentExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *RightShiftAssignmentExpression {
+        for (tmp in CompoundAssignmentExpression(db)) {
+            if (isRightShiftAssignmentExpression(Node {id: tmp.id})) {
+                yield RightShiftAssignmentExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * An unsigned right shift assignment expression using `>>>=`.
+ */
+schema UnsignedRightShiftAssignmentExpression extends CompoundAssignmentExpression {
+}
+
+impl UnsignedRightShiftAssignmentExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *UnsignedRightShiftAssignmentExpression {
+        for (tmp in CompoundAssignmentExpression(db)) {
+            if (isUnsignedRightShiftAssignmentExpression(Node {id: tmp.id})) {
+                yield UnsignedRightShiftAssignmentExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A logical AND assignment expression using `&&=`.
+ */
+schema LogicalAndAssignmentExpression extends CompoundAssignmentExpression {
+}
+
+impl LogicalAndAssignmentExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *LogicalAndAssignmentExpression {
+        for (tmp in CompoundAssignmentExpression(db)) {
+            if (isLogicalAndAssignmentExpression(Node {id: tmp.id})) {
+                yield LogicalAndAssignmentExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A logical OR assignment expression using `||=`.
+ */
+schema LogicalOrAssignmentExpression extends CompoundAssignmentExpression {
+}
+
+impl LogicalOrAssignmentExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *LogicalOrAssignmentExpression {
+        for (tmp in CompoundAssignmentExpression(db)) {
+            if (isLogicalOrAssignmentExpression(Node {id: tmp.id})) {
+                yield LogicalOrAssignmentExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A nullish assignment expression using `??=`.
+ */
+schema NullishAssignmentExpression extends CompoundAssignmentExpression {
+}
+
+impl NullishAssignmentExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *NullishAssignmentExpression {
+        for (tmp in CompoundAssignmentExpression(db)) {
+            if (isNullishAssignmentExpression(Node {id: tmp.id})) {
+                yield NullishAssignmentExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A comma expression using `,`.
+ */
+schema CommaExpression extends BinaryExpression {
+}
+
+impl CommaExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *CommaExpression {
+        for (tmp in BinaryExpression(db)) {
+            if (isCommaExpression(Node {id: tmp.id})) {
+                yield CommaExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A conditional expression.
+ */
+schema ConditionalExpression extends Expression {
+}
+
+impl ConditionalExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *ConditionalExpression {
+        for (tmp in Expression(db)) {
+            if (isConditionalExpression(Node {id: tmp.id})) {
+                yield ConditionalExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+
+    pub fn getCondition(self) -> Expression {
+        for (condition in Expression(__all_data__)) {
+            if (condition.key_eq(self.getChild(0))) {
+                return condition
+            }
+        }
+    }
+
+    pub fn getThen(self) -> Expression {
+        for (thenExpression in Expression(__all_data__)) {
+            if (thenExpression.key_eq(self.getChild(2))) {
+                return thenExpression
+            }
+        }
+    }
+
+    pub fn getElse(self) -> Expression {
+        for (elseExpression in Expression(__all_data__)) {
+            if (elseExpression.key_eq(self.getChild(4))) {
+                return elseExpression
+            }
+        }
+    }
+
+    pub fn getABranch(self) -> *Expression {
+        yield self.getThen()
+        yield self.getElse()
+    }
+}
+
+/**
+ * A yield expression.
+ */
+schema YieldExpression extends Expression {
+}
+
+impl YieldExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *YieldExpression {
+        for (tmp in Expression(db)) {
+            if (isYieldExpression(Node {id: tmp.id})) {
+                yield YieldExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+
+    pub fn isDelegating(self) -> bool {
+        for (asteriskToken in AsteriskToken(__all_data__)) {
+            if (asteriskToken.key_eq(self.getChild(0))) {
+                return true
+            }
+        }
+    }
+
+    pub fn getExpression(self) -> Expression {
+        for (expression in Expression(__all_data__)) {
+            if (self.isDelegating()) {
+                if (expression.key_eq(self.getChild(1))) {
+                    return expression
+                }
+            }
+            if (!self.isDelegating()) {
+                if (expression.key_eq(self.getChild(0))) {
+                    return expression
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A spread element.
+ */
+schema SpreadElement extends Expression {
+}
+
+impl SpreadElement {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *SpreadElement {
+        for (tmp in Expression(db)) {
+            if (isSpreadElement(Node {id: tmp.id})) {
+                yield SpreadElement {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+
+    pub fn getExpression(self) -> Expression {
+        for (expression in Expression(__all_data__)) {
+            if (expression.key_eq(self.getChild(0))) {
+                return expression
+            }
+        }
+    }
+}
+
+/**
+ * An omitted expression.
+ */
+schema OmittedExpression extends Expression {
+}
+
+impl OmittedExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *OmittedExpression {
+        for (tmp in Expression(db)) {
+            if (isOmittedExpression(Node {id: tmp.id})) {
+                yield OmittedExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * An `as` expression.
+ */
+schema AsExpression extends Expression {
+}
+
+impl AsExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *AsExpression {
+        for (tmp in Expression(db)) {
+            if (isAsExpression(Node {id: tmp.id})) {
+                yield AsExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+
+    pub fn getExpression(self) -> Expression {
+        for (expression in Expression(__all_data__)) {
+            if (expression.key_eq(self.getChild(0))) {
+                return expression
+            }
+        }
+    }
+
+    pub fn getType(self) -> TypeNode {
+        for (typeNode in TypeNode(__all_data__)) {
+            if (typeNode.key_eq(self.getChild(1))) {
+                return typeNode
+            }
+        }
+    }
+}
+
+/**
+ * A synthetic expression.
+ */
+schema SyntheticExpression extends Expression {
+}
+
+impl SyntheticExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *SyntheticExpression {
+        for (tmp in Expression(db)) {
+            if (isSyntheticExpression(Node {id: tmp.id})) {
+                yield SyntheticExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A comma list expression. This node will not be
+ * Will not appear in the AST.
+ */
+schema CommaListExpression extends Expression {
+}
+
+impl CommaListExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *CommaListExpression {
+        for (tmp in Expression(db)) {
+            if (isCommaListExpression(Node {id: tmp.id})) {
+                yield CommaListExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+
+    /**
+     * Get a child expression of the CommaListExpression.
+     */
+    pub fn getAExpression(self) -> *Expression {
+        for (expression in Expression(__all_data__)) {
+            for (auto_tmp1 in self.getAChild()) {
+                if (expression.key_eq(auto_tmp1)) {
+                    yield expression
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets the `i`th child expression of CommaListExpression.
+     */
+    pub fn getExpression(self, i: int) -> Expression {
+        for (expression in Expression(__all_data__)) {
+            if (expression.key_eq(self.getChild(i))) {
+                return expression
+            }
+        }
+    }
+
+    /**
+     * Get the count of the child expressions.
+     */
+    pub fn getExpressionCount(self) -> int {
+        return self.getAExpression().len()
+    }
+}
+
+/**
+ * An unary expression.
+ */
+schema UnaryExpression extends Expression {
+}
+
+impl UnaryExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *UnaryExpression {
+        for (tmp in Expression(db)) {
+            if (isUnaryExpression(Node {id: tmp.id})) {
+                yield UnaryExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+
+    pub fn getExpression(self) -> Expression {
+        for (expression in Expression(__all_data__)) {
+            if (expression.key_eq(self.getChild(0))) {
+                return expression
+            }
+        }
+    }
+}
+
+/**
+ * A type assertion expression.
+ */
+schema TypeAssertionExpression extends UnaryExpression {
+}
+
+impl TypeAssertionExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *TypeAssertionExpression {
+        for (tmp in UnaryExpression(db)) {
+            if (isTypeAssertionExpression(Node {id: tmp.id})) {
+                yield TypeAssertionExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+
+    pub fn getType(self) -> TypeNode {
+        for (typeNode in TypeNode(__all_data__)) {
+            if (typeNode.key_eq(self.getChild(0))) {
+                return typeNode
+            }
+        }
+    }
+
+    pub fn getExpression(self) -> UnaryExpression {
+        for (expression in UnaryExpression(__all_data__)) {
+            if (expression.key_eq(self.getChild(1))) {
+                return expression
+            }
+        }
+    }
+}
+
+/**
+ * A `delete` expression.
+ */
+schema DeleteExpression extends UnaryExpression {
+}
+
+impl DeleteExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *DeleteExpression {
+        for (tmp in UnaryExpression(db)) {
+            if (isDeleteExpression(Node {id: tmp.id})) {
+                yield DeleteExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+
+    pub fn getExpression(self) -> UnaryExpression {
+        for (expression in UnaryExpression(__all_data__)) {
+            if (expression.key_eq(self.getChild(0))) {
+                return expression
+            }
+        }
+    }
+}
+
+/**
+ * A `typeof` expression.
+ */
+schema TypeOfExpression extends UnaryExpression {
+}
+
+impl TypeOfExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *TypeOfExpression {
+        for (tmp in UnaryExpression(db)) {
+            if (isTypeOfExpression(Node {id: tmp.id})) {
+                yield TypeOfExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+
+    pub fn getExpression(self) -> UnaryExpression {
+        for (expression in UnaryExpression(__all_data__)) {
+            if (expression.key_eq(self.getChild(0))) {
+                return expression
+            }
+        }
+    }
+}
+
+/**
+ * A `void` expression.
+ */
+schema VoidExpression extends UnaryExpression {
+}
+
+impl VoidExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *VoidExpression {
+        for (tmp in UnaryExpression(db)) {
+            if (isVoidExpression(Node {id: tmp.id})) {
+                yield VoidExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+
+    pub fn getExpression(self) -> UnaryExpression {
+        for (expression in UnaryExpression(__all_data__)) {
+            if (expression.key_eq(self.getChild(0))) {
+                return expression
+            }
+        }
+    }
+}
+
+/**
+ * An `await` expression.
+ */
+schema AwaitExpression extends UnaryExpression {
+}
+
+impl AwaitExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *AwaitExpression {
+        for (tmp in UnaryExpression(db)) {
+            if (isAwaitExpression(Node {id: tmp.id})) {
+                yield AwaitExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+
+    pub fn getExpression(self) -> UnaryExpression {
+        for (expression in UnaryExpression(__all_data__)) {
+            if (expression.key_eq(self.getChild(0))) {
+                return expression
+            }
+        }
+    }
+}
+
+/**
+ * An update expression.
+ */
+schema UpdateExpression extends UnaryExpression {
+}
+
+impl UpdateExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *UpdateExpression {
+        for (tmp in UnaryExpression(db)) {
+            if (isUpdateExpression(Node {id: tmp.id})) {
+                yield UpdateExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A left-hand-side expression.
+ */
+schema LeftHandSideExpression extends UpdateExpression {
+}
+
+impl LeftHandSideExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *LeftHandSideExpression {
+        for (tmp in UpdateExpression(db)) {
+            if (isLeftHandSideExpression(Node {id: tmp.id})) {
+                yield LeftHandSideExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A prefix unary expression.
+ */
+schema PrefixUnaryExpression extends UpdateExpression {
+}
+
+impl PrefixUnaryExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *PrefixUnaryExpression {
+        for (tmp in UpdateExpression(db)) {
+            if (isPrefixUnaryExpression(Node {id: tmp.id})) {
+                yield PrefixUnaryExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+
+    pub fn getOperator(self) -> PrefixUnaryOperator {
+        for (prefixUnaryOperator in PrefixUnaryOperator(__all_data__)) {
+            if (prefixUnaryOperator.key_eq(self.getChild(0))) {
+                return prefixUnaryOperator
+            }
+        }
+    }
+
+    pub fn getOperand(self) -> UnaryExpression {
+        for (operand in UnaryExpression(__all_data__)) {
+            if (operand.key_eq(self.getChild(1))) {
+                return operand
+            }
+        }
+    }
+}
+
+/**
+ * A prefix increment expression using `++`.
+ */
+schema PrefixIncrementExpression extends PrefixUnaryExpression {
+}
+
+impl PrefixIncrementExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *PrefixIncrementExpression {
+        for (tmp in PrefixUnaryExpression(db)) {
+            if (isPrefixIncrementExpression(Node {id: tmp.id})) {
+                yield PrefixIncrementExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A prefix decrement expression using `--`.
+ */
+schema PrefixDecrementExpression extends PrefixUnaryExpression {
+}
+
+impl PrefixDecrementExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *PrefixDecrementExpression {
+        for (tmp in PrefixUnaryExpression(db)) {
+            if (isPrefixDecrementExpression(Node {id: tmp.id})) {
+                yield PrefixDecrementExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * An unary plus expression using `+`.
+ */
+schema UnaryPlusExpression extends PrefixUnaryExpression {
+}
+
+impl UnaryPlusExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *UnaryPlusExpression {
+        for (tmp in PrefixUnaryExpression(db)) {
+            if (isUnaryPlusExpression(Node {id: tmp.id})) {
+                yield UnaryPlusExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * An unary minus (also known as negation) expression using `-`.
+ */
+schema UnaryMinusExpression extends PrefixUnaryExpression {
+}
+
+impl UnaryMinusExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *UnaryMinusExpression {
+        for (tmp in PrefixUnaryExpression(db)) {
+            if (isUnaryMinusExpression(Node {id: tmp.id})) {
+                yield UnaryMinusExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A bitwise NOT expression using `~`.
+ */
+schema BitwiseNotExpression extends PrefixUnaryExpression {
+}
+
+impl BitwiseNotExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *BitwiseNotExpression {
+        for (tmp in PrefixUnaryExpression(db)) {
+            if (isBitwiseNotExpression(Node {id: tmp.id})) {
+                yield BitwiseNotExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A logical NOT expression using `!`.
+ */
+schema LogicalNotExpression extends PrefixUnaryExpression {
+}
+
+impl LogicalNotExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *LogicalNotExpression {
+        for (tmp in PrefixUnaryExpression(db)) {
+            if (isLogicalNotExpression(Node {id: tmp.id})) {
+                yield LogicalNotExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A postfix unary expression.
+ */
+schema PostfixUnaryExpression extends UpdateExpression {
+}
+
+impl PostfixUnaryExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *PostfixUnaryExpression {
+        for (tmp in UpdateExpression(db)) {
+            if (isPostfixUnaryExpression(Node {id: tmp.id})) {
+                yield PostfixUnaryExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+
+    pub fn getOperand(self) -> LeftHandSideExpression {
+        for (operand in LeftHandSideExpression(__all_data__)) {
+            if (operand.key_eq(self.getChild(0))) {
+                return operand
+            }
+        }
+    }
+
+    pub fn getOperator(self) -> PostfixUnaryOperator {
+        for (postfixUnaryOperator in PostfixUnaryOperator(__all_data__)) {
+            if (postfixUnaryOperator.key_eq(self.getChild(1))) {
+                return postfixUnaryOperator
+            }
+        }
+    }
+}
+
+/**
+ * A postfix increment expression using `++`.
+ */
+schema PostfixIncrementExpression extends PostfixUnaryExpression {
+}
+
+impl PostfixIncrementExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *PostfixIncrementExpression {
+        for (tmp in PostfixUnaryExpression(db)) {
+            if (isPostfixIncrementExpression(Node {id: tmp.id})) {
+                yield PostfixIncrementExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A postfix decrement expression using `--`.
+ */
+schema PostfixDecrementExpression extends PostfixUnaryExpression {
+}
+
+impl PostfixDecrementExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *PostfixDecrementExpression {
+        for (tmp in PostfixUnaryExpression(db)) {
+            if (isPostfixDecrementExpression(Node {id: tmp.id})) {
+                yield PostfixDecrementExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * An increment expression using `++`.
+ */
+schema IncrementExpression extends UpdateExpression {
+}
+
+impl IncrementExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *IncrementExpression {
+        for (tmp in UpdateExpression(db)) {
+            if (isIncrementExpression(Node {id: tmp.id})) {
+                yield IncrementExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A decrement expression using `--`.
+ */
+schema DecrementExpression extends UpdateExpression {
+}
+
+impl DecrementExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *DecrementExpression {
+        for (tmp in UpdateExpression(db)) {
+            if (isDecrementExpression(Node {id: tmp.id})) {
+                yield DecrementExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A call expression.
+ */
+schema CallExpression extends LeftHandSideExpression {
+}
+
+impl CallExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *CallExpression {
+        for (tmp in LeftHandSideExpression(db)) {
+            if (isCallExpression(Node {id: tmp.id})) {
+                yield CallExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+
+    pub fn getExpression(self) -> LeftHandSideExpression {
+        for (expression in LeftHandSideExpression(__all_data__)) {
+            if (expression.key_eq(self.getChild(0))) {
+                return expression
+            }
+        }
+    }
+
+    /**
+     * Gets the `?.` token of this call expression.
+     */
+    pub fn getQuestionDotToken(self) -> QuestionDotToken {
+        for (questionDotToken in QuestionDotToken(__all_data__)) {
+            if (questionDotToken.key_eq(self.getChild(1))) {
+                return questionDotToken
+            }
+        }
+    }
+
+    /**
+     * Determines whether this call expression is optional chaining, which means it has a `?.` token.
+     */
+    pub fn isOptionalChaining(self) -> bool {
+        for (questionDotToken in QuestionDotToken(__all_data__)) {
+            if (questionDotToken = self.getQuestionDotToken()) {
+                return true
+            }
+        }
+    }
+
+    /**
+     * Gets a type argument of this call expression.
+     */
+    pub fn getATypeArgument(self) -> *TypeNode {
+        for (typeArgument in TypeNode(__all_data__)) {
+            for (auto_tmp1 in self.getAChild()) {
+                if (typeArgument.key_eq(auto_tmp1)) {
+                    yield typeArgument
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets the `i`th type argument of this call expression.
+     */
+    pub fn getTypeArgument(self, i: int) -> TypeNode {
+        for (childIndex in int::__undetermined_all__()) {
+            for (typeArgument in TypeNode(__all_data__)) {
+                if (typeArgument.key_eq(self.getChild(childIndex))) {
+                    if (i = childIndex - 1) {
+                        return typeArgument
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets an argument of this call expression.
+     */
+    pub fn getAnArgument(self) -> *Expression {
+        let (typeArgumentCount = self.getTypeArgumentCount()) {
+            for (child in Node(__all_data__)) {
+                if (child in self.getAChild()) {
+                    let (index = child.getIndex()) {
+                        // Exclude the expression, the `?.` token and the type arguments of this new expression
+                        if (self.isOptionalChaining()) {
+                            if (index > typeArgumentCount + 1) {
+                                yield child.to<Expression>()
+                            }
+                        }
+                        if (!self.isOptionalChaining()) {
+                            if (index > typeArgumentCount) {
+                                yield child.to<Expression>()
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets the `i`th argument of this call expression.
+     * index from 0
+     */
+    pub fn getArgument(self, i: int) -> Expression {
+        for (childIndex in int::__undetermined_all__()) {
+            for (argument in Expression(__all_data__)) {
+                if (argument.key_eq(self.getChild(childIndex))) {
+                    if (childIndex != 0) {
+                        let (typeArgumentCount = self.getTypeArgumentCount()) {
+                            if (i >= 0) {
+                                // Subtract the number of nodes before the arguments from the index.
+                                if (self.isOptionalChaining()) {
+                                    if (i = childIndex - typeArgumentCount - 2) {
+                                        return argument
+                                    }
+                                }
+                                if (!self.isOptionalChaining()) {
+                                    if (i = childIndex - typeArgumentCount - 1) {
+                                        return argument
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets the callee of this call expression.
+     */
+    pub fn getCallee(self) -> FunctionLikeDeclaration {
+        for (callSite in CallSite(__all_data__)) {
+            if (self.key_eq(callSite)) {
+                let (callee = callSite.getCallee()) {
+                    return callee
+                }
+            }
+        }
+    }
+
+    /**
+     * Determine whether this CallExpression has a callee.
+     */
+    pub fn hasCallee(self) -> bool {
+        for (callee in FunctionLikeDeclaration(__all_data__)) {
+            if (callee = self.getCallee()) {
+                return true
+            }
+        }
+    }
+
+    /**
+     * Gets the count of the arguments.
+     */
+    pub fn getArgumentCount(self) -> int {
+        return self.getAnArgument().len()
+    }
+
+    /**
+     * Gets the count of the type arguments.
+     */
+    pub fn getTypeArgumentCount(self) -> int {
+        return self.getATypeArgument().len()
+    }
+}
+
+/**
+ * A non-null expression using `!`.
+ */
+schema NonNullExpression extends LeftHandSideExpression {
+}
+
+impl NonNullExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *NonNullExpression {
+        for (tmp in LeftHandSideExpression(db)) {
+            if (isNonNullExpression(Node {id: tmp.id})) {
+                yield NonNullExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+
+    pub fn getExpression(self) -> Expression {
+        for (expression in Expression(__all_data__)) {
+            if (expression.key_eq(self.getChild(0))) {
+                return expression
+            }
+        }
+    }
+}
+
+/**
+ * A partially emitted expression.
+ * Will not appear in the AST.
+ */
+schema PartiallyEmittedExpression extends LeftHandSideExpression {
+}
+
+impl PartiallyEmittedExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *PartiallyEmittedExpression {
+        for (tmp in LeftHandSideExpression(db)) {
+            if (isPartiallyEmittedExpression(Node {id: tmp.id})) {
+                yield PartiallyEmittedExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+
+    pub fn getExpression(self) -> Expression {
+        for (expression in Expression(__all_data__)) {
+            if (expression.key_eq(self.getChild(0))) {
+                return expression
+            }
+        }
+    }
+}
+
+/**
+ * A synthetic reference expression.
+ * Will not appear in the AST.
+ */
+schema SyntheticReferenceExpression extends LeftHandSideExpression {
+}
+
+impl SyntheticReferenceExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *SyntheticReferenceExpression {
+        for (tmp in LeftHandSideExpression(db)) {
+            if (isSyntheticReferenceExpression(Node {id: tmp.id})) {
+                yield SyntheticReferenceExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A member expression.
+ */
+schema MemberExpression extends LeftHandSideExpression {
+}
+
+impl MemberExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *MemberExpression {
+        for (tmp in LeftHandSideExpression(db)) {
+            if (isMemberExpression(Node {id: tmp.id})) {
+                yield MemberExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A member name.
+ */
+schema MemberName extends Node {
+}
+
+impl MemberName {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *MemberName {
+        for (tmp in Node(db)) {
+            if (isMemberName(tmp)) {
+                yield MemberName {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets the name of this MemberName.
+     */
+    pub fn getName(self) -> string {
+        return self.getText()
+    }
+}
+
+/**
+ * An access expression.
+ *
+ * Examples:
+ * ```
+ * o.p
+ * o['p']
+ * ```
+ */
+schema AccessExpression extends MemberExpression {
+}
+
+impl AccessExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *AccessExpression {
+        for (tmp in MemberExpression(db)) {
+            if (isAccessExpression(Node {id: tmp.id})) {
+                yield AccessExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets the expression on which the property is accessed.
+     */
+    pub fn getExpression(self) -> LeftHandSideExpression {
+        for (expression in LeftHandSideExpression(__all_data__)) {
+            if (expression.key_eq(self.getChild(0))) {
+                return expression
+            }
+        }
+    }
+
+    /**
+     * Determines whether this access expression is optional chaining.
+     */
+    pub fn isOptionalChaining(self) -> bool {
+        for (questionDotToken in QuestionDotToken(__all_data__)) {
+            if (questionDotToken.key_eq(self.getChild(1))) {
+                return true
+            }
+        }
+    }
+
+    /**
+     * Gets the property expression of this AccessExpression.
+     */
+    pub fn getPropertyExpression(self) -> Expression {
+        for (propertyExpression in Expression(__all_data__)) {
+            if (self.isOptionalChaining()) {
+                if (propertyExpression.key_eq(self.getChild(2))) {
+                    return propertyExpression
+                }
+            }
+            if (!self.isOptionalChaining()) {
+                if (propertyExpression.key_eq(self.getChild(1))) {
+                    return propertyExpression
+                }
+            }
+        }
+    }
+
+    pub fn getPropertyName(self) -> string {
+        // For PropertyAccessExpression
+        for (property in MemberName(__all_data__)) {
+            if (property.key_eq(self.getPropertyExpression())) {
+                let (propertyName = property.getName()) {
+                    return propertyName
+                }
+            }
+        }
+        // For ElementAccessExpression
+        for (literalExpression in LiteralExpression(__all_data__)) {
+            if (literalExpression.key_eq(self.getPropertyExpression())) {
+                let (propertyName = literalExpression.getValue()) {
+                    return propertyName
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets the callee (GetAccessorDeclaration or SetAccessorDeclaration) of this access expression.
+     */
+    pub fn getCallee(self) -> FunctionLikeDeclaration {
+        for (callSite in CallSite(__all_data__)) {
+            if (self.key_eq(callSite)) {
+                let (callee = callSite.getCallee()) {
+                    return callee
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A property access expression.
+ *
+ * Example:
+ * ```
+ * o.p
+ * ```
+ */
+schema PropertyAccessExpression extends AccessExpression {
+}
+
+impl PropertyAccessExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *PropertyAccessExpression {
+        for (tmp in AccessExpression(db)) {
+            if (isPropertyAccessExpression(Node {id: tmp.id})) {
+                yield PropertyAccessExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+
+    pub fn getProperty(self) -> MemberName {
+        for (memberName in MemberName(__all_data__),
+            accessExpression in AccessExpression(__all_data__)) {
+            if (accessExpression.key_eq(self)) {
+                if (memberName.key_eq(accessExpression.getPropertyExpression())) {
+                    return memberName
+                }
+            }
+        }
+    }
+
+    pub fn getPropertyName(self) -> string {
+        return self.getProperty().getName()
+    }
+}
+
+/**
+ * An element access expression.
+ *
+ * Example:
+ * ```
+ * o['p']
+ * ```
+ */
+schema ElementAccessExpression extends AccessExpression {
+}
+
+impl ElementAccessExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *ElementAccessExpression {
+        for (tmp in AccessExpression(db)) {
+            if (isElementAccessExpression(Node {id: tmp.id})) {
+                yield ElementAccessExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+
+    pub fn getArgumentExpression(self) -> Expression {
+        for (accessExpression in AccessExpression(__all_data__)) {
+            if (accessExpression.key_eq(self)) {
+                let (argumentExpression = accessExpression.getPropertyExpression()) {
+                    return argumentExpression
+                }
+            }
+        }
+    }
+
+    pub fn getPropertyName(self) -> string {
+        for (literalExpression in LiteralExpression(__all_data__)) {
+            if (literalExpression.key_eq(self.getArgumentExpression())) {
+                let (propertyName = literalExpression.getValue()) {
+                    return propertyName
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A tagged template expression.
+ */
+schema TaggedTemplateExpression extends MemberExpression {
+}
+
+impl TaggedTemplateExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *TaggedTemplateExpression {
+        for (tmp in MemberExpression(db)) {
+            if (isTaggedTemplateExpression(Node {id: tmp.id})) {
+                yield TaggedTemplateExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+
+    pub fn getTag(self) -> LeftHandSideExpression {
+        for (tag in LeftHandSideExpression(__all_data__)) {
+            if (tag.key_eq(self.getChild(0))) {
+                return tag
+            }
+        }
+    }
+
+    /**
+     * Gets the callee of this tagged template expression.
+     */
+    pub fn getCallee(self) -> FunctionLikeDeclaration {
+        for (callSite in CallSite(__all_data__)) {
+            if (self.key_eq(callSite)) {
+                let (callee = callSite.getCallee()) {
+                    return callee
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A primary expression.
+ */
+schema PrimaryExpression extends MemberExpression {
+}
+
+impl PrimaryExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *PrimaryExpression {
+        for (tmp in MemberExpression(db)) {
+            if (isPrimaryExpression(Node {id: tmp.id})) {
+                yield PrimaryExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * An identifier.
+ */
+schema Identifier extends PrimaryExpression {
+}
+
+impl Identifier {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *Identifier {
+        for (tmp in PrimaryExpression(db)) {
+            if (isIdentifier(Node {id: tmp.id})) {
+                yield Identifier {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+
+    pub fn getName(self) -> string {
+        return self.getText()
+    }
+}
+
+/**
+ * A private identifier.
+ */
+schema PrivateIdentifier extends PrimaryExpression {
+}
+
+impl PrivateIdentifier {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *PrivateIdentifier {
+        for (tmp in PrimaryExpression(db)) {
+            if (isPrivateIdentifier(Node {id: tmp.id})) {
+                yield PrivateIdentifier {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+
+    pub fn getName(self) -> string {
+        return self.getText()
+    }
+}
+
+/**
+ * A this expression.
+ */
+schema ThisExpression extends PrimaryExpression {
+}
+
+impl ThisExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *ThisExpression {
+        for (tmp in PrimaryExpression(db)) {
+            if (isThisExpression(Node {id: tmp.id})) {
+                yield ThisExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A super expression.
+ */
+schema SuperExpression extends PrimaryExpression {
+}
+
+impl SuperExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *SuperExpression {
+        for (tmp in PrimaryExpression(db)) {
+            if (isSuperExpression(Node {id: tmp.id})) {
+                yield SuperExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * An import expression.
+ */
+schema ImportExpression extends PrimaryExpression {
+}
+
+impl ImportExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *ImportExpression {
+        for (tmp in PrimaryExpression(db)) {
+            if (isImportExpression(Node {id: tmp.id})) {
+                yield ImportExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * An array literal expression.
+ */
+schema ArrayLiteralExpression extends PrimaryExpression {
+}
+
+impl ArrayLiteralExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *ArrayLiteralExpression {
+        for (tmp in PrimaryExpression(db)) {
+            if (isArrayLiteralExpression(Node {id: tmp.id})) {
+                yield ArrayLiteralExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+
+    pub fn getAElement(self) -> *Expression {
+        for (element in Expression(__all_data__)) {
+            for (auto_tmp1 in self.getAChild()) {
+                if (element.key_eq(auto_tmp1)) {
+                    yield element
+                }
+            }
+        }
+    }
+
+    pub fn getElement(self, i: int) -> Expression {
+        for (element in Expression(__all_data__)) {
+            if (element.key_eq(self.getChild(i))) {
+                return element
+            }
+        }
+    }
+}
+
+/**
+ * A new expression.
+ */
+schema NewExpression extends PrimaryExpression {
+}
+
+impl NewExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *NewExpression {
+        for (tmp in PrimaryExpression(db)) {
+            if (isNewExpression(Node {id: tmp.id})) {
+                yield NewExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+
+    pub fn getExpression(self) -> LeftHandSideExpression {
+        for (expression in LeftHandSideExpression(__all_data__)) {
+            if (expression.key_eq(self.getChild(0))) {
+                return expression
+            }
+        }
+    }
+
+    /**
+     * Gets a type argument of this new expression.
+     */
+    pub fn getATypeArgument(self) -> *TypeNode {
+        for (typeArgument in TypeNode(__all_data__)) {
+            for (auto_tmp1 in self.getAChild()) {
+                if (typeArgument.key_eq(auto_tmp1)) {
+                    yield typeArgument
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets the `i`th type argument of this new expression.
+     */
+    pub fn getTypeArgument(self, i: int) -> TypeNode {
+        for (childIndex in int::__undetermined_all__()) {
+            for (typeArgument in TypeNode(__all_data__)) {
+                if (typeArgument.key_eq(self.getChild(childIndex))) {
+                    if (i = childIndex - 1) {
+                        return typeArgument
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets an argument of this new expression.
+     */
+    pub fn getAnArgument(self) -> *Expression {
+        for (child in Node(__all_data__)) {
+            if (child in self.getAChild()) {
+                let (index = child.getIndex()) {
+                    let (typeArgumentCount = self.getTypeArgumentCount()) {
+                        // Exclude the expression and the type arguments of this new expression
+                        if (index > typeArgumentCount) {
+                            yield child.to<Expression>()
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets the `i`th argument of this new expression.
+     * index starts from 0
+     */
+    pub fn getArgument(self, i: int) -> Expression {
+        for (childIndex in int::__undetermined_all__()) {
+            for (argument in Expression(__all_data__)) {
+                if (argument.key_eq(self.getChild(childIndex))) {
+                    if (childIndex != 0) {
+                        let (typeArgumentCount = self.getTypeArgumentCount()) {
+                            // Subtract the number of nodes before the arguments from the index.
+                            if (i = childIndex - typeArgumentCount - 1) {
+                                return argument
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets the callee of this new expression.
+     */
+    pub fn getCallee(self) -> FunctionLikeDeclaration {
+        for (callSite in CallSite(__all_data__)) {
+            if (self.key_eq(callSite)) {
+                let (callee = callSite.getCallee()) {
+                    return callee
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets the count of the type arguments.
+     */
+    pub fn getTypeArgumentCount(self) -> int {
+        return self.getATypeArgument().len()
+    }
+
+    /**
+     * Gets the count of the arguments.
+     */
+    pub fn getArgumentCount(self) -> int {
+        return self.getAnArgument().len()
+    }
+}
+
+/**
+ * A parenthesized expression.
+ */
+schema ParenthesizedExpression extends PrimaryExpression {
+}
+
+impl ParenthesizedExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *ParenthesizedExpression {
+        for (tmp in PrimaryExpression(db)) {
+            if (isParenthesizedExpression(Node {id: tmp.id})) {
+                yield ParenthesizedExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+
+    pub fn getExpression(self) -> Expression {
+        for (expression in Expression(__all_data__)) {
+            if (expression.key_eq(self.getChild(0))) {
+                return expression
+            }
+        }
+    }
+}
+
+/**
+ * A function expression.
+ */
+schema FunctionExpression extends PrimaryExpression {
+}
+
+impl FunctionExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *FunctionExpression {
+        for (tmp in PrimaryExpression(db)) {
+            if (isFunctionExpression(Node {id: tmp.id})) {
+                yield FunctionExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+
+    pub fn getName(self) -> Identifier {
+        for (name in Identifier(__all_data__)) {
+            for (auto_tmp1 in self.getAChild()) {
+                if (name.key_eq(auto_tmp1)) {
+                    return name
+                }
+            }
+        }
+    }
+
+    pub fn getAParameter(self) -> *Parameter {
+        for (parameter in Parameter(__all_data__)) {
+            for (auto_tmp1 in self.getAChild()) {
+                if (parameter.key_eq(auto_tmp1)) {
+                    yield parameter
+                }
+            }
+        }
+    }
+
+    pub fn getBody(self) -> BlockStatement {
+        for (body in BlockStatement(__all_data__)) {
+            for (auto_tmp1 in self.getAChild()) {
+                if (body.key_eq(auto_tmp1)) {
+                    return body
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A template expression.
+ */
+schema TemplateExpression extends PrimaryExpression {
+}
+
+impl TemplateExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *TemplateExpression {
+        for (tmp in PrimaryExpression(db)) {
+            if (isTemplateExpression(Node {id: tmp.id})) {
+                yield TemplateExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+
+    pub fn getHead(self) -> TemplateHead {
+        for (head in TemplateHead(__all_data__)) {
+            if (head.key_eq(self.getChild(0))) {
+                return head
+            }
+        }
+    }
+
+    pub fn getATemplateSpan(self) -> *TemplateSpan {
+        for (templateSpan in TemplateSpan(__all_data__)) {
+            for (auto_tmp1 in self.getAChild()) {
+                if (templateSpan.key_eq(auto_tmp1)) {
+                    yield templateSpan
+                }
+            }
+        }
+    }
+
+    pub fn getTemplateSpan(self, i: int) -> TemplateSpan {
+        for (childIndex in int::__undetermined_all__()) {
+            for (templateSpan in TemplateSpan(__all_data__)) {
+                if (templateSpan.key_eq(self.getChild(childIndex))) {
+                    if (i = childIndex - 1) {
+                        return templateSpan
+                    }
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A class expression.
+ */
+schema ClassExpression extends PrimaryExpression {
+}
+
+impl ClassExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *ClassExpression {
+        for (tmp in PrimaryExpression(db)) {
+            if (isClassExpression(Node {id: tmp.id})) {
+                yield ClassExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A meta property.
+ */
+schema MetaProperty extends PrimaryExpression {
+}
+
+impl MetaProperty {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *MetaProperty {
+        for (tmp in PrimaryExpression(db)) {
+            if (isMetaProperty(Node {id: tmp.id})) {
+                yield MetaProperty {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+
+    pub fn getKeywordToken(self) -> KeywordToken {
+        for (keywordToken in KeywordToken(__all_data__)) {
+            if (keywordToken.key_eq(self.getChild(0))) {
+                return keywordToken
+            }
+        }
+    }
+
+    pub fn getName(self) -> Identifier {
+        for (name in Identifier(__all_data__)) {
+            if (name.key_eq(self.getChild(1))) {
+                return name
+            }
+        }
+    }
+}
+
+/**
+ * A literal expression.
+ */
+schema LiteralExpression extends PrimaryExpression {
+}
+
+impl LiteralExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *LiteralExpression {
+        for (tmp in PrimaryExpression(db)) {
+            if (isLiteralExpression(Node {id: tmp.id})) {
+                yield LiteralExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets the value of this literal, as a string.
+     */
+    pub fn getValue(self) -> string {
+        for (literalDO in LiteralDO(__all_data__)) {
+            if (literalDO.key_eq(self)) {
+                let (value = literalDO.getValue()) {
+                    return value
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A null literal.
+ */
+schema NullLiteral extends PrimaryExpression {
+}
+
+impl NullLiteral {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *NullLiteral {
+        for (tmp in PrimaryExpression(db)) {
+            if (isNullLiteral(Node {id: tmp.id})) {
+                yield NullLiteral {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A true literal.
+ */
+schema TrueLiteral extends PrimaryExpression {
+}
+
+impl TrueLiteral {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *TrueLiteral {
+        for (tmp in PrimaryExpression(db)) {
+            if (isTrueKeyword(Node {id: tmp.id})) {
+                yield TrueLiteral {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A false literal.
+ */
+schema FalseLiteral extends PrimaryExpression {
+}
+
+impl FalseLiteral {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *FalseLiteral {
+        for (tmp in PrimaryExpression(db)) {
+            if (isFalseKeyword(Node {id: tmp.id})) {
+                yield FalseLiteral {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A boolean literal.
+ */
+schema BooleanLiteral extends PrimaryExpression {
+}
+
+impl BooleanLiteral {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *BooleanLiteral {
+        for (tmp in PrimaryExpression(db)) {
+            if (isBooleanLiteral(Node {id: tmp.id})) {
+                yield BooleanLiteral {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A numeric literal.
+ */
+schema NumericLiteral extends LiteralExpression {
+}
+
+impl NumericLiteral {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *NumericLiteral {
+        for (tmp in LiteralExpression(db)) {
+            if (isNumericLiteral(Node {id: tmp.id})) {
+                yield NumericLiteral {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A big-int literal.
+ */
+schema BigIntLiteral extends LiteralExpression {
+}
+
+impl BigIntLiteral {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *BigIntLiteral {
+        for (tmp in LiteralExpression(db)) {
+            if (isBigIntLiteral(Node {id: tmp.id})) {
+                yield BigIntLiteral {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A string literal.
+ */
+schema StringLiteral extends LiteralExpression {
+}
+
+impl StringLiteral {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *StringLiteral {
+        for (tmp in LiteralExpression(db)) {
+            if (isStringLiteral(Node {id: tmp.id})) {
+                yield StringLiteral {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+
+    pub fn getString(self) -> string {
+        return self.getValue()
+    }
+}
+
+/**
+ * A regular expression literal.
+ */
+schema RegularExpressionLiteral extends LiteralExpression {
+}
+
+impl RegularExpressionLiteral {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *RegularExpressionLiteral {
+        for (tmp in LiteralExpression(db)) {
+            if (isRegularExpressionLiteral(Node {id: tmp.id})) {
+                yield RegularExpressionLiteral {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A no-substitution template literal.
+ */
+schema NoSubstitutionTemplateLiteral extends LiteralExpression {
+}
+
+impl NoSubstitutionTemplateLiteral {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *NoSubstitutionTemplateLiteral {
+        for (tmp in LiteralExpression(db)) {
+            if (isNoSubstitutionTemplateLiteral(Node {id: tmp.id})) {
+                yield NoSubstitutionTemplateLiteral {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A decorator applied to a class, method, accessor, property or parameter.
+ */
+schema Decorator extends Node {
+}
+
+impl Decorator {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *Decorator {
+        for (tmp in Node(db)) {
+            if (isDecorator(tmp)) {
+                yield Decorator {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets the expression.
+     */
+    pub fn getExpression(self) -> LeftHandSideExpression {
+        for (expression in LeftHandSideExpression(__all_data__)) {
+            if (expression.key_eq(self.getChild(0))) {
+                return expression
+            }
+        }
+    }
+
+    /**
+     * Gets the callee of this decorator.
+     */
+    pub fn getCallee(self) -> FunctionLikeDeclaration {
+        for (callSite in CallSite(__all_data__)) {
+            if (self.key_eq(callSite)) {
+                let (callee = callSite.getCallee()) {
+                    return callee
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A call-like expression.
+ */
+schema CallLikeExpression extends Expression {
+}
+
+impl CallLikeExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *CallLikeExpression {
+        for (tmp in Expression(db)) {
+            if (isCallLikeExpression(Node {id: tmp.id})) {
+                yield CallLikeExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets the callee of this call-like expression.
+     */
+    pub fn getCallee(self) -> FunctionLikeDeclaration {
+        for (callSite in CallSite(__all_data__)) {
+            if (self.key_eq(callSite)) {
+                let (callee = callSite.getCallee()) {
+                    return callee
+                }
+            }
+        }
+    }
+
+    /**
+     * Determine whether this CallLikeExpression has a callee.
+     */
+    pub fn hasCallee(self) -> bool {
+        for (callee in FunctionLikeDeclaration(__all_data__)) {
+            if (callee = self.getCallee()) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * A CallLikeExpression or AccessExpression that may invoke a FunctionLikeDeclaration.
+ */
+schema MayInvokeExpression extends Expression {
+}
+
+impl MayInvokeExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *MayInvokeExpression {
+        for (tmp in Expression(db)) {
+            if (isMayInvokeExpression(Node {id: tmp.id})) {
+                yield MayInvokeExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets the callee of this MayInvokeExpression.
+     */
+    pub fn getCallee(self) -> FunctionLikeDeclaration {
+        for (callSite in CallSite(__all_data__)) {
+            if (self.key_eq(callSite)) {
+                let (callee = callSite.getCallee()) {
+                    return callee
+                }
+            }
+        }
+    }
+
+    /**
+     * Determine whether this MayInvokeExpression has a callee.
+     */
+    pub fn hasCallee(self) -> bool {
+        for (callee in FunctionLikeDeclaration(__all_data__)) {
+            if (callee = self.getCallee()) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is an array literal expression.
+ */
+pub fn isArrayLiteralExpression(node: Node) -> bool {
+    if (node.getKind() = 203) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is an object literal expression.
+ */
+pub fn isObjectLiteralExpression(node: Node) -> bool {
+    if (node.getKind() = 204) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a property access expression.
+ */
+pub fn isPropertyAccessExpression(node: Node) -> bool {
+    if (node.getKind() = 205) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is an element access expression.
+ */
+pub fn isElementAccessExpression(node: Node) -> bool {
+    if (node.getKind() = 206) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a call expression.
+ */
+pub fn isCallExpression(node: Node) -> bool {
+    if (node.getKind() = 207) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a new expression.
+ */
+pub fn isNewExpression(node: Node) -> bool {
+    if (node.getKind() = 208) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a tagged template expression.
+ */
+pub fn isTaggedTemplateExpression(node: Node) -> bool {
+    if (node.getKind() = 209) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a type assertion expression.
+ */
+pub fn isTypeAssertionExpression(node: Node) -> bool {
+    if (node.getKind() = 210) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a parenthesized expression.
+ */
+pub fn isParenthesizedExpression(node: Node) -> bool {
+    if (node.getKind() = 211) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a function expression
+ */
+pub fn isFunctionExpression(node: Node) -> bool {
+    if (node.getKind() = 212) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is an arrow function
+ */
+pub fn isArrowFunction(node: Node) -> bool {
+    if (node.getKind() = 213) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a `delete` expression.
+ */
+pub fn isDeleteExpression(node: Node) -> bool {
+    if (node.getKind() = 214) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a `typeof` expression.
+ */
+pub fn isTypeOfExpression(node: Node) -> bool {
+    if (node.getKind() = 215) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a `void` expression.
+ */
+pub fn isVoidExpression(node: Node) -> bool {
+    if (node.getKind() = 216) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is an `await` expression.
+ */
+pub fn isAwaitExpression(node: Node) -> bool {
+    if (node.getKind() = 217) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a prefix unary expression.
+ */
+pub fn isPrefixUnaryExpression(node: Node) -> bool {
+    if (node.getKind() = 218) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a postfix unary expression.
+ */
+pub fn isPostfixUnaryExpression(node: Node) -> bool {
+    if (node.getKind() = 219) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a binary expression
+ */
+pub fn isBinaryExpression(node: Node) -> bool {
+    if (node.getKind() = 220) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a conditional expression.
+ */
+pub fn isConditionalExpression(node: Node) -> bool {
+    if (node.getKind() = 221) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a template expression.
+ */
+pub fn isTemplateExpression(node: Node) -> bool {
+    if (node.getKind() = 222) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a yield expression.
+ */
+pub fn isYieldExpression(node: Node) -> bool {
+    if (node.getKind() = 223) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a spread element.
+ */
+pub fn isSpreadElement(node: Node) -> bool {
+    if (node.getKind() = 224) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a class expression.
+ */
+pub fn isClassExpression(node: Node) -> bool {
+    if (node.getKind() = 225) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is an omitted expression.
+ */
+pub fn isOmittedExpression(node: Node) -> bool {
+    if (node.getKind() = 226) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is an `as` expression.
+ */
+pub fn isAsExpression(node: Node) -> bool {
+    if (node.getKind() = 228) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a non-null expression.
+ */
+pub fn isNonNullExpression(node: Node) -> bool {
+    if (node.getKind() = 229) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a meta property.
+ */
+pub fn isMetaProperty(node: Node) -> bool {
+    if (node.getKind() = 230) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a synthetic expression.
+ */
+pub fn isSyntheticExpression(node: Node) -> bool {
+    if (node.getKind() = 231) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a partially emitted expression.
+ */
+pub fn isPartiallyEmittedExpression(node: Node) -> bool {
+    if (node.getKind() = 348) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a comma list expression.
+ */
+pub fn isCommaListExpression(node: Node) -> bool {
+    if (node.getKind() = 349) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a synthetic reference expression.
+ */
+pub fn isSyntheticReferenceExpression(node: Node) -> bool {
+    if (node.getKind() = 352) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a null literal.
+ */
+pub fn isNullLiteral(node: Node) -> bool {
+    if (isNullKeyword(node)) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a boolean literal.
+ */
+pub fn isBooleanLiteral(node: Node) -> bool {
+    if (isTrueKeyword(node)) {
+        return true
+    }
+    if (isFalseKeyword(node)) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a literal expression.
+ */
+pub fn isLiteralExpression(node: Node) -> bool {
+    if (isNumericLiteral(node)) {
+        return true
+    }
+    if (isBigIntLiteral(node)) {
+        return true
+    }
+    if (isStringLiteral(node)) {
+        return true
+    }
+    if (isRegularExpressionLiteral(node)) {
+        return true
+    }
+    if (isNoSubstitutionTemplateLiteral(node)) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a `this` expression.
+ */
+pub fn isThisExpression(node: Node) -> bool {
+    if (isThisKeyword(node)) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a `super` expression.
+ */
+pub fn isSuperExpression(node: Node) -> bool {
+    if (isSuperKeyword(node)) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is an `import` expression.
+ */
+pub fn isImportExpression(node: Node) -> bool {
+    if (isImportKeyword(node)) {
+        let (parent = node.getParent()) {
+            if (isCallExpression(parent)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a primary expression.
+ */
+pub fn isPrimaryExpression(node: Node) -> bool {
+    if (isLiteralExpression(node)) {
+        return true
+    }
+    if (isNullLiteral(node)) {
+        return true
+    }
+    if (isBooleanLiteral(node)) {
+        return true
+    }
+    if (isIdentifier(node)) {
+        return true
+    }
+    if (isPrivateIdentifier(node)) {
+        return true
+    }
+    if (isThisExpression(node)) {
+        return true
+    }
+    if (isSuperExpression(node)) {
+        return true
+    }
+    if (isImportExpression(node)) {
+        return true
+    }
+    if (isArrayLiteralExpression(node)) {
+        return true
+    }
+    if (isObjectLiteralExpression(node)) {
+        return true
+    }
+    if (isJsxAttributes(node)) {
+        return true
+    }
+    if (isNewExpression(node)) {
+        return true
+    }
+    if (isParenthesizedExpression(node)) {
+        return true
+    }
+    if (isFunctionExpression(node)) {
+        return true
+    }
+    if (isTemplateExpression(node)) {
+        return true
+    }
+    if (isClassExpression(node)) {
+        return true
+    }
+    if (isMetaProperty(node)) {
+        return true
+    }
+    if (isJsxElement(node)) {
+        return true
+    }
+    if (isJsxSelfClosingElement(node)) {
+        return true
+    }
+    if (isJsxFragment(node)) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a member expression.
+ */
+pub fn isMemberExpression(node: Node) -> bool {
+    if (isPrimaryExpression(node)) {
+        return true
+    }
+    if (isPropertyAccessExpression(node)) {
+        return true
+    }
+    if (isElementAccessExpression(node)) {
+        return true
+    }
+    if (isTaggedTemplateExpression(node)) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a left-hand-side expression.
+ */
+pub fn isLeftHandSideExpression(node: Node) -> bool {
+    if (isMemberExpression(node)) {
+        return true
+    }
+    if (isPartiallyEmittedExpression(node)) {
+        return true
+    }
+    if (isCallExpression(node)) {
+        return true
+    }
+    if (isNonNullExpression(node)) {
+        return true
+    }
+    if (isSyntheticReferenceExpression(node)) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is an update expression.
+ */
+pub fn isUpdateExpression(node: Node) -> bool {
+    if (isLeftHandSideExpression(node)) {
+        return true
+    }
+    if (isPrefixUnaryExpression(node)) {
+        return true
+    }
+    if (isPostfixUnaryExpression(node)) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is an unary expression.
+ */
+pub fn isUnaryExpression(node: Node) -> bool {
+    if (isUpdateExpression(node)) {
+        return true
+    }
+    if (isTypeAssertionExpression(node)) {
+        return true
+    }
+    if (isDeleteExpression(node)) {
+        return true
+    }
+    if (isTypeOfExpression(node)) {
+        return true
+    }
+    if (isVoidExpression(node)) {
+        return true
+    }
+    if (isAwaitExpression(node)) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is an expression.
+ */
+pub fn isExpression(node: Node) -> bool {
+    if (isUnaryExpression(node)) {
+        return true
+    }
+    if (isArrowFunction(node)) {
+        return true
+    }
+    if (isBinaryExpression(node)) {
+        return true
+    }
+    if (isConditionalExpression(node)) {
+        return true
+    }
+    if (isYieldExpression(node)) {
+        return true
+    }
+    if (isSpreadElement(node)) {
+        return true
+    }
+    if (isOmittedExpression(node)) {
+        return true
+    }
+    if (isAsExpression(node)) {
+        return true
+    }
+    if (isSyntheticExpression(node)) {
+        return true
+    }
+    if (isCommaListExpression(node)) {
+        return true
+    }
+    if (isJsxOpeningElement(node)) {
+        return true
+    }
+    if (isJsxClosingElement(node)) {
+        return true
+    }
+    if (isJsxOpeningFragment(node)) {
+        return true
+    }
+    if (isJsxClosingFragment(node)) {
+        return true
+    }
+    if (isJsxExpression(node)) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a exponentiation expression using `**`.
+ */
+pub fn isExponentiationExpression(node: Node) -> bool {
+    for (binaryExpression in BinaryExpression(__all_data__),
+        asteriskAsteriskToken in AsteriskAsteriskToken(__all_data__)) {
+        if (binaryExpression.key_eq(node)) {
+            if (binaryExpression.getOperator().key_eq(asteriskAsteriskToken)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a multiplicative expression using `*`, `/` or `%`.
+ */
+pub fn isMultiplicativeExpression(node: Node) -> bool {
+    for (binaryExpression in BinaryExpression(__all_data__),
+        multiplicativeOperator in MultiplicativeOperator(__all_data__)) {
+        if (binaryExpression.key_eq(node)) {
+            if (binaryExpression.getOperator().key_eq(multiplicativeOperator)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a multiplication expression using `*`.
+ */
+pub fn isMultiplicationExpression(node: Node) -> bool {
+    for (binaryExpression in BinaryExpression(__all_data__),
+        asteriskToken in AsteriskToken(__all_data__)) {
+        if (binaryExpression.key_eq(node)) {
+            if (binaryExpression.getOperator().key_eq(asteriskToken)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a division expression using `/`.
+ */
+pub fn isDivisionExpression(node: Node) -> bool {
+    for (binaryExpression in BinaryExpression(__all_data__),
+        slashToken in SlashToken(__all_data__)) {
+        if (binaryExpression.key_eq(node)) {
+            if (binaryExpression.getOperator().key_eq(slashToken)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a remainder expression using `%`.
+ */
+pub fn isRemainderExpression(node: Node) -> bool {
+    for (binaryExpression in BinaryExpression(__all_data__),
+        percentToken in PercentToken(__all_data__)) {
+        if (binaryExpression.key_eq(node)) {
+            if (binaryExpression.getOperator().key_eq(percentToken)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is an additive expression using `+` or `-`.
+ */
+pub fn isAdditiveExpression(node: Node) -> bool {
+    for (binaryExpression in BinaryExpression(__all_data__),
+        additiveOperator in AdditiveOperator(__all_data__)) {
+        if (binaryExpression.key_eq(node)) {
+            if (binaryExpression.getOperator().key_eq(additiveOperator)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is an addition expression using `+`.
+ */
+pub fn isAdditionExpression(node: Node) -> bool {
+    for (binaryExpression in BinaryExpression(__all_data__),
+        plusToken in PlusToken(__all_data__)) {
+        if (binaryExpression.key_eq(node)) {
+            if (binaryExpression.getOperator().key_eq(plusToken)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a subtraction expression using `-`.
+ */
+pub fn isSubtractionExpression(node: Node) -> bool {
+    for (binaryExpression in BinaryExpression(__all_data__),
+        minusToken in MinusToken(__all_data__)) {
+        if (binaryExpression.key_eq(node)) {
+            if (binaryExpression.getOperator().key_eq(minusToken)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a shift expression using `<<`, `>>` or `>>>`.
+ */
+pub fn isShiftExpression(node: Node) -> bool {
+    for (binaryExpression in BinaryExpression(__all_data__),
+        shiftOperator in ShiftOperator(__all_data__)) {
+        if (binaryExpression.key_eq(node)) {
+            if (binaryExpression.getOperator().key_eq(shiftOperator)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a left-shift expression using `<<`.
+ */
+pub fn isLeftShiftExpression(node: Node) -> bool {
+    for (binaryExpression in BinaryExpression(__all_data__),
+        lessThanLessThanEqualsToken in LessThanLessThanEqualsToken(__all_data__)) {
+        if (binaryExpression.key_eq(node)) {
+            if (binaryExpression.getOperator().key_eq(lessThanLessThanEqualsToken)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a signed right-shift expression using `>>`.
+ */
+pub fn isRightShiftExpression(node: Node) -> bool {
+    for (binaryExpression in BinaryExpression(__all_data__),
+        greaterThanGreaterThanToken in GreaterThanGreaterThanToken(__all_data__)) {
+        if (binaryExpression.key_eq(node)) {
+            if (binaryExpression.getOperator().key_eq(greaterThanGreaterThanToken)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a unsigned right-shift expression using `>>>`.
+ */
+pub fn isUnsignedRightShiftExpression(node: Node) -> bool {
+    for (binaryExpression in BinaryExpression(__all_data__),
+        greaterThanGreaterThanGreaterThanToken in GreaterThanGreaterThanGreaterThanToken(__all_data__)) {
+        if (binaryExpression.key_eq(node)) {
+            if (binaryExpression.getOperator().key_eq(greaterThanGreaterThanGreaterThanToken)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a relational expression using `<`, `<=`, `>`, `>=`, `instanceof` or `in`.
+ */
+pub fn isRelationalExpression(node: Node) -> bool {
+    for (binaryExpression in BinaryExpression(__all_data__),
+        relationalOperator in RelationalOperator(__all_data__)) {
+        if (binaryExpression.key_eq(node)) {
+            if (binaryExpression.getOperator().key_eq(relationalOperator)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a less-than expression using `<`.
+ */
+pub fn isLessThanExpression(node: Node) -> bool {
+    for (binaryExpression in BinaryExpression(__all_data__),
+        lessThanToken in LessThanToken(__all_data__)) {
+        if (binaryExpression.key_eq(node)) {
+            if (binaryExpression.getOperator().key_eq(lessThanToken)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a less-than-or-equal expression using `<=`.
+ */
+pub fn isLessThanEqualsExpression(node: Node) -> bool {
+    for (binaryExpression in BinaryExpression(__all_data__),
+        lessThanEqualsToken in LessThanEqualsToken(__all_data__)) {
+        if (binaryExpression.key_eq(node)) {
+            if (binaryExpression.getOperator().key_eq(lessThanEqualsToken)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a greater-than expression using `>`.
+ */
+pub fn isGreaterThanExpression(node: Node) -> bool {
+    for (binaryExpression in BinaryExpression(__all_data__),
+        greaterThanToken in GreaterThanToken(__all_data__)) {
+        if (binaryExpression.key_eq(node)) {
+            if (binaryExpression.getOperator().key_eq(greaterThanToken)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a greater-than-or-equal expression using `>=`.
+ */
+pub fn isGreaterThanEqualsExpression(node: Node) -> bool {
+    for (binaryExpression in BinaryExpression(__all_data__),
+        greaterThanEqualsToken in GreaterThanEqualsToken(__all_data__)) {
+        if (binaryExpression.key_eq(node)) {
+            if (binaryExpression.getOperator().key_eq(greaterThanEqualsToken)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is an `instanceof` expression.
+ */
+pub fn isInstanceOfExpression(node: Node) -> bool {
+    for (binaryExpression in BinaryExpression(__all_data__),
+        instanceOfKeyword in InstanceOfKeyword(__all_data__)) {
+        if (binaryExpression.key_eq(node)) {
+            if (binaryExpression.getOperator().key_eq(instanceOfKeyword)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is an `in` expression.
+ */
+pub fn isInExpression(node: Node) -> bool {
+    for (binaryExpression in BinaryExpression(__all_data__),
+        inKeyword in InKeyword(__all_data__)) {
+        if (binaryExpression.key_eq(node)) {
+            if (binaryExpression.getOperator().key_eq(inKeyword)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is an equality test expression using `==`, `!=`,
+ * `===` or `!==`.
+ */
+pub fn isEqualityTestExpression(node: Node) -> bool {
+    for (binaryExpression in BinaryExpression(__all_data__),
+        equalityOperator in EqualityOperator(__all_data__)) {
+        if (binaryExpression.key_eq(node)) {
+            if (binaryExpression.getOperator().key_eq(equalityOperator)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is an equality expression using `==`.
+ */
+pub fn isEqualityExpression(node: Node) -> bool {
+    for (binaryExpression in BinaryExpression(__all_data__),
+        equalsEqualsToken in EqualsEqualsToken(__all_data__)) {
+        if (binaryExpression.key_eq(node)) {
+            if (binaryExpression.getOperator().key_eq(equalsEqualsToken)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is an inequality expression using `!=`.
+ */
+pub fn isInequalityExpression(node: Node) -> bool {
+    for (binaryExpression in BinaryExpression(__all_data__),
+        exclamationEqualsToken in ExclamationEqualsToken(__all_data__)) {
+        if (binaryExpression.key_eq(node)) {
+            if (binaryExpression.getOperator().key_eq(exclamationEqualsToken)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a strict equality expression using `===`.
+ */
+pub fn isStrictEqualityExpression(node: Node) -> bool {
+    for (binaryExpression in BinaryExpression(__all_data__),
+        equalsEqualsEqualsToken in EqualsEqualsEqualsToken(__all_data__)) {
+        if (binaryExpression.key_eq(node)) {
+            if (binaryExpression.getOperator().key_eq(equalsEqualsEqualsToken)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a strict inequality expression using `!==`.
+ */
+pub fn isStrictInequalityExpression(node: Node) -> bool {
+    for (binaryExpression in BinaryExpression(__all_data__),
+        exclamationEqualsEqualsToken in ExclamationEqualsEqualsToken(__all_data__)) {
+        if (binaryExpression.key_eq(node)) {
+            if (binaryExpression.getOperator().key_eq(exclamationEqualsEqualsToken)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a strict equality test expression using
+ * `===` or `!==`.
+ */
+pub fn isStrictEqualityTestExpression(node: Node) -> bool {
+    if (isStrictEqualityExpression(node)) {
+        return true
+    }
+    if (isStrictInequalityExpression(node)) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a non-strict equality test expression using
+ * `==` or `!=`.
+ */
+pub fn isNonStrictEqualityTestExpression(node: Node) -> bool {
+    if (isEqualityExpression(node)) {
+        return true
+    }
+    if (isInequalityExpression(node)) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a binary bitwise expression using
+ * `&`, `|` or `^`.
+ */
+pub fn isBinaryBitwiseExpression(node: Node) -> bool {
+    for (binaryExpression in BinaryExpression(__all_data__),
+        binaryBitwiseOperator in BinaryBitwiseOperator(__all_data__)) {
+        if (binaryExpression.key_eq(node)) {
+            if (binaryExpression.getOperator().key_eq(binaryBitwiseOperator)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a bitwise AND expression using `&`.
+ */
+pub fn isBitwiseAndExpression(node: Node) -> bool {
+    for (binaryExpression in BinaryExpression(__all_data__),
+        ampersandToken in AmpersandToken(__all_data__)) {
+        if (binaryExpression.key_eq(node)) {
+            if (binaryExpression.getOperator().key_eq(ampersandToken)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a bitwise OR expression using `|`.
+ */
+pub fn isBitwiseOrExpression(node: Node) -> bool {
+    for (binaryExpression in BinaryExpression(__all_data__),
+        barToken in BarToken(__all_data__)) {
+        if (binaryExpression.key_eq(node)) {
+            if (binaryExpression.getOperator().key_eq(barToken)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a bitwise XOR expression using `^`.
+ */
+pub fn isBitwiseXorExpression(node: Node) -> bool {
+    for (binaryExpression in BinaryExpression(__all_data__),
+        caretToken in CaretToken(__all_data__)) {
+        if (binaryExpression.key_eq(node)) {
+            if (binaryExpression.getOperator().key_eq(caretToken)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a binary logical expression using
+ * `&&`, `||` or `??`.
+ */
+pub fn isBinaryLogicalExpression(node: Node) -> bool {
+    for (binaryExpression in BinaryExpression(__all_data__),
+        binaryLogicalOperator in BinaryLogicalOperator(__all_data__)) {
+        if (binaryExpression.key_eq(node)) {
+            if (binaryExpression.getOperator().key_eq(binaryLogicalOperator)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a logical AND expression using `&&`.
+ */
+pub fn isLogicalAndExpression(node: Node) -> bool {
+    for (binaryExpression in BinaryExpression(__all_data__),
+        ampersandAmpersandToken in AmpersandAmpersandToken(__all_data__)) {
+        if (binaryExpression.key_eq(node)) {
+            if (binaryExpression.getOperator().key_eq(ampersandAmpersandToken)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a logical OR expression using `||`.
+ */
+pub fn isLogicalOrExpression(node: Node) -> bool {
+    for (binaryExpression in BinaryExpression(__all_data__),
+        barBarToken in BarBarToken(__all_data__)) {
+        if (binaryExpression.key_eq(node)) {
+            if (binaryExpression.getOperator().key_eq(barBarToken)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a nullish coalescing expression using `??`.
+ */
+pub fn isNullishCoalescingExpression(node: Node) -> bool {
+    for (binaryExpression in BinaryExpression(__all_data__),
+        questionQuestionToken in QuestionQuestionToken(__all_data__)) {
+        if (binaryExpression.key_eq(node)) {
+            if (binaryExpression.getOperator().key_eq(questionQuestionToken)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is an assignment expression, either compound or simple.
+ */
+pub fn isAssignmentExpression(node: Node) -> bool {
+    for (binaryExpression in BinaryExpression(__all_data__),
+        assignmentOperator in AssignmentOperator(__all_data__)) {
+        if (binaryExpression.key_eq(node)) {
+            if (binaryExpression.getOperator().key_eq(assignmentOperator)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a simple assignment expression using `=`.
+ */
+pub fn isSimpleAssignmentExpression(node: Node) -> bool {
+    for (binaryExpression in BinaryExpression(__all_data__),
+        equalsToken in EqualsToken(__all_data__)) {
+        if (binaryExpression.key_eq(node)) {
+            if (binaryExpression.getOperator().key_eq(equalsToken)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a compound assignment expression using
+ * `+=`, `-=`, `**=`, `*=`, `/=`, `%=`, `&=`, `|=`, `^=`, `<<=`, `>>=`, `>>>=`,
+ * `&&=`, `||=` or `??=`.
+ */
+pub fn isCompoundAssignmentExpression(node: Node) -> bool {
+    for (binaryExpression in BinaryExpression(__all_data__),
+        compoundAssignmentOperator in CompoundAssignmentOperator(__all_data__)) {
+        if (binaryExpression.key_eq(node)) {
+            if (binaryExpression.getOperator().key_eq(compoundAssignmentOperator)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is an addition assignment expression using `+=`.
+ */
+pub fn isAdditionAssignmentExpression(node: Node) -> bool {
+    for (binaryExpression in BinaryExpression(__all_data__),
+        plusEqualsToken in PlusEqualsToken(__all_data__)) {
+        if (binaryExpression.key_eq(node)) {
+            if (binaryExpression.getOperator().key_eq(plusEqualsToken)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a subtraction assignment expression using `-=`.
+ */
+pub fn isSubtractionAssignmentExpression(node: Node) -> bool {
+    for (binaryExpression in BinaryExpression(__all_data__),
+        minusEqualsToken in MinusEqualsToken(__all_data__)) {
+        if (binaryExpression.key_eq(node)) {
+            if (binaryExpression.getOperator().key_eq(minusEqualsToken)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is an exponentiation assignment expression using `**=`.
+ */
+pub fn isExponentiationAssignmentExpression(node: Node) -> bool {
+    for (binaryExpression in BinaryExpression(__all_data__),
+        asteriskAsteriskEqualsToken in AsteriskAsteriskEqualsToken(__all_data__)) {
+        if (binaryExpression.key_eq(node)) {
+            if (binaryExpression.getOperator().key_eq(asteriskAsteriskEqualsToken)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a multiplication assignment expression using `*=`.
+ */
+pub fn isMultiplicationAssignmentExpression(node: Node) -> bool {
+    for (binaryExpression in BinaryExpression(__all_data__),
+        asteriskEqualsToken in AsteriskEqualsToken(__all_data__)) {
+        if (binaryExpression.key_eq(node)) {
+            if (binaryExpression.getOperator().key_eq(asteriskEqualsToken)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a division assignment expression using `/=`.
+ */
+pub fn isDivisionAssignmentExpression(node: Node) -> bool {
+    for (binaryExpression in BinaryExpression(__all_data__),
+        slashEqualsToken in SlashEqualsToken(__all_data__)) {
+        if (binaryExpression.key_eq(node)) {
+            if (binaryExpression.getOperator().key_eq(slashEqualsToken)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a remainder assignment expression using `%=`.
+ */
+pub fn isRemainderAssignmentExpression(node: Node) -> bool {
+    for (binaryExpression in BinaryExpression(__all_data__),
+        percentEqualsToken in PercentEqualsToken(__all_data__)) {
+        if (binaryExpression.key_eq(node)) {
+            if (binaryExpression.getOperator().key_eq(percentEqualsToken)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a bitwise AND assignment expression using `&=`.
+ */
+pub fn isBitwiseAndAssignmentExpression(node: Node) -> bool {
+    for (binaryExpression in BinaryExpression(__all_data__),
+        ampersandEqualsToken in AmpersandEqualsToken(__all_data__)) {
+        if (binaryExpression.key_eq(node)) {
+            if (binaryExpression.getOperator().key_eq(ampersandEqualsToken)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a bitwise OR assignment expression using `|=`.
+ */
+pub fn isBitwiseOrAssignmentExpression(node: Node) -> bool {
+    for (binaryExpression in BinaryExpression(__all_data__),
+        barEqualsToken in BarEqualsToken(__all_data__)) {
+        if (binaryExpression.key_eq(node)) {
+            if (binaryExpression.getOperator().key_eq(barEqualsToken)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a bitwise XOR assignment expression using `^=`.
+ */
+pub fn isBitwiseXorAssignmentExpression(node: Node) -> bool {
+    for (binaryExpression in BinaryExpression(__all_data__),
+        caretEqualsToken in CaretEqualsToken(__all_data__)) {
+        if (binaryExpression.key_eq(node)) {
+            if (binaryExpression.getOperator().key_eq(caretEqualsToken)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a left shift assignment expression using `<<=`.
+ */
+pub fn isLeftShiftAssignmentExpression(node: Node) -> bool {
+    for (binaryExpression in BinaryExpression(__all_data__),
+        lessThanLessThanEqualsToken in LessThanLessThanEqualsToken(__all_data__)) {
+        if (binaryExpression.key_eq(node)) {
+            if (binaryExpression.getOperator().key_eq(lessThanLessThanEqualsToken)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a right shift assignment expression using `>>=`.
+ */
+pub fn isRightShiftAssignmentExpression(node: Node) -> bool {
+    for (binaryExpression in BinaryExpression(__all_data__),
+        greaterThanGreaterThanEqualsToken in GreaterThanGreaterThanEqualsToken(__all_data__)) {
+        if (binaryExpression.key_eq(node)) {
+            if (binaryExpression.getOperator().key_eq(greaterThanGreaterThanEqualsToken)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is an unsigned right shift assignment expression using `>>>=`.
+ */
+pub fn isUnsignedRightShiftAssignmentExpression(node: Node) -> bool {
+    for (binaryExpression in BinaryExpression(__all_data__),
+        greaterThanGreaterThanGreaterThanEqualsToken in GreaterThanGreaterThanGreaterThanEqualsToken(__all_data__)) {
+        if (binaryExpression.key_eq(node)) {
+            if (binaryExpression.getOperator().key_eq(greaterThanGreaterThanGreaterThanEqualsToken)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a logical AND assignment expression using `&&=`.
+ */
+pub fn isLogicalAndAssignmentExpression(node: Node) -> bool {
+    for (binaryExpression in BinaryExpression(__all_data__),
+        ampersandAmpersandEqualsToken in AmpersandAmpersandEqualsToken(__all_data__)) {
+        if (binaryExpression.key_eq(node)) {
+            if (binaryExpression.getOperator().key_eq(ampersandAmpersandEqualsToken)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a logical OR assignment expression using `||=`.
+ */
+pub fn isLogicalOrAssignmentExpression(node: Node) -> bool {
+    for (binaryExpression in BinaryExpression(__all_data__),
+        barBarEqualsToken in BarBarEqualsToken(__all_data__)) {
+        if (binaryExpression.key_eq(node)) {
+            if (binaryExpression.getOperator().key_eq(barBarEqualsToken)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a nullish assignment expression using `??=`.
+ */
+pub fn isNullishAssignmentExpression(node: Node) -> bool {
+    for (binaryExpression in BinaryExpression(__all_data__),
+        questionQuestionEqualsToken in QuestionQuestionEqualsToken(__all_data__)) {
+        if (binaryExpression.key_eq(node)) {
+            if (binaryExpression.getOperator().key_eq(questionQuestionEqualsToken)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a comma expression using `,`.
+ */
+pub fn isCommaExpression(node: Node) -> bool {
+    for (binaryExpression in BinaryExpression(__all_data__),
+        commaToken in CommaToken(__all_data__)) {
+        if (binaryExpression.key_eq(node)) {
+            if (binaryExpression.getOperator().key_eq(commaToken)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a prefix increment expression using `++`.
+ */
+pub fn isPrefixIncrementExpression(node: Node) -> bool {
+    for (prefixUnaryExpression in PrefixUnaryExpression(__all_data__),
+        plusPlusToken in PlusPlusToken(__all_data__)) {
+        if (prefixUnaryExpression.key_eq(node)) {
+            if (prefixUnaryExpression.getOperator().key_eq(plusPlusToken)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a prefix decrement expression using `--`.
+ */
+pub fn isPrefixDecrementExpression(node: Node) -> bool {
+    for (prefixUnaryExpression in PrefixUnaryExpression(__all_data__),
+        minusMinusToken in MinusMinusToken(__all_data__)) {
+        if (prefixUnaryExpression.key_eq(node)) {
+            if (prefixUnaryExpression.getOperator().key_eq(minusMinusToken)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is an unary plus expression using `+`.
+ */
+pub fn isUnaryPlusExpression(node: Node) -> bool {
+    for (prefixUnaryExpression in PrefixUnaryExpression(__all_data__),
+        plusToken in PlusToken(__all_data__)) {
+        if (prefixUnaryExpression.key_eq(node)) {
+            if (prefixUnaryExpression.getOperator().key_eq(plusToken)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is an unary minus (also known as negation) expression using `-`.
+ */
+pub fn isUnaryMinusExpression(node: Node) -> bool {
+    for (prefixUnaryExpression in PrefixUnaryExpression(__all_data__),
+        minusToken in MinusToken(__all_data__)) {
+        if (prefixUnaryExpression.key_eq(node)) {
+            if (prefixUnaryExpression.getOperator().key_eq(minusToken)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a bitwise NOT expression using `~`.
+ */
+pub fn isBitwiseNotExpression(node: Node) -> bool {
+    for (prefixUnaryExpression in PrefixUnaryExpression(__all_data__),
+        tildeToken in TildeToken(__all_data__)) {
+        if (prefixUnaryExpression.key_eq(node)) {
+            if (prefixUnaryExpression.getOperator().key_eq(tildeToken)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a logical NOT expression using `!`.
+ */
+pub fn isLogicalNotExpression(node: Node) -> bool {
+    for (prefixUnaryExpression in PrefixUnaryExpression(__all_data__),
+        exclamationToken in ExclamationToken(__all_data__)) {
+        if (prefixUnaryExpression.key_eq(node)) {
+            if (prefixUnaryExpression.getOperator().key_eq(exclamationToken)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a postfix increment expression using `++`.
+ */
+pub fn isPostfixIncrementExpression(node: Node) -> bool {
+    for (postfixUnaryExpression in PostfixUnaryExpression(__all_data__),
+        plusPlusToken in PlusPlusToken(__all_data__)) {
+        if (postfixUnaryExpression.key_eq(node)) {
+            if (postfixUnaryExpression.getOperator().key_eq(plusPlusToken)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a postfix decrement expression using `--`.
+ */
+pub fn isPostfixDecrementExpression(node: Node) -> bool {
+    for (postfixUnaryExpression in PostfixUnaryExpression(__all_data__),
+        minusMinusToken in MinusMinusToken(__all_data__)) {
+        if (postfixUnaryExpression.key_eq(node)) {
+            if (postfixUnaryExpression.getOperator().key_eq(minusMinusToken)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is an increment expression using `++`.
+ */
+pub fn isIncrementExpression(node: Node) -> bool {
+    if (isPrefixIncrementExpression(node)) {
+        return true
+    }
+    if (isPostfixIncrementExpression(node)) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a decrement expression using `--`.
+ */
+pub fn isDecrementExpression(node: Node) -> bool {
+    if (isPrefixDecrementExpression(node)) {
+        return true
+    }
+    if (isPostfixDecrementExpression(node)) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a member name.
+ */
+pub fn isMemberName(node: Node) -> bool {
+    if (isIdentifier(node)) {
+        return true
+    }
+    if (isPrivateIdentifier(node)) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is an access expression.
+ */
+pub fn isAccessExpression(node: Node) -> bool {
+    if (isPropertyAccessExpression(node)) {
+        return true
+    }
+    if (isElementAccessExpression(node)) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a decorator.
+ */
+pub fn isDecorator(node: Node) -> bool {
+    if (node.getKind() = 164) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a call-like expression.
+ */
+pub fn isCallLikeExpression(node: Node) -> bool {
+    if (isCallExpression(node)) {
+        return true
+    }
+    if (isNewExpression(node)) {
+        return true
+    }
+    if (isTaggedTemplateExpression(node)) {
+        return true
+    }
+    if (isDecorator(node)) {
+        return true
+    }
+    if (isJsxOpeningElement(node)) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a CallLikeExpression or AccessExpression that may invoke a FunctionLikeDeclaration.
+ */
+pub fn isMayInvokeExpression(node: Node) -> bool {
+    if (isCallLikeExpression(node)) {
+        return true
+    }
+    if (isAccessExpression(node)) {
+        return true
+    }
+}

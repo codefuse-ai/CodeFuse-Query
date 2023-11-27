@@ -1,0 +1,253 @@
+schema Completion {
+    @primary id: int,
+    name: string
+}
+
+impl Completion {
+    @data_constraint
+    @inline
+    pub fn __all__() -> *Completion {
+        yield Completion {id: 1001, name: "NormalCompletion"}
+        yield Completion {id: 1101, name: "ReturnCompletion"}
+        // BooleanCompletion
+        yield Completion {id: 1201, name: "BooleanCompletion"}
+        yield Completion {id: 1202, name: "TrueBooleanCompletion"}
+        yield Completion {id: 1203, name: "FalseBooleanCompletion"}
+        // end BooleanCompletion
+        yield Completion {id: 1301, name: "BreakCompletion"}
+        yield Completion {id: 1401, name: "YieldCompletion"}
+        yield Completion {id: 1501, name: "ContinueCompletion"}
+        yield Completion {id: 1601, name: "ThrowCompletion"}
+    }
+
+    pub fn getValue(self) -> int {
+        return self.id
+    }
+
+    pub fn getName(self) -> string {
+        return self.name
+    }
+}
+
+schema NormalCompletion extends Completion {
+}
+
+impl NormalCompletion {
+    @data_constraint
+    pub fn __all__() -> *NormalCompletion {
+        for (c in Completion()) {
+            if (isNormalCompletion(c)) {
+                yield NormalCompletion {id : c.id, name : c.name}
+            }
+        }
+    }
+}
+
+schema ReturnCompletion extends Completion {
+}
+
+impl ReturnCompletion {
+    @data_constraint
+    pub fn __all__() -> *ReturnCompletion {
+        for (c in Completion()) {
+            if (isReturnCompletion(c)) {
+                yield ReturnCompletion {id : c.id, name : c.name}
+            }
+        }
+    }
+}
+
+schema BooleanCompletion extends Completion {
+}
+
+impl BooleanCompletion {
+    @data_constraint
+    pub fn __all__() -> *BooleanCompletion {
+        yield BooleanCompletion {id: 1201, name: "BooleanCompletion"}
+        yield BooleanCompletion {id: 1202, name: "TrueBooleanCompletion"}
+        yield BooleanCompletion {id: 1203, name: "FalseBooleanCompletion"}
+    }
+
+    pub fn isTrue(self) -> bool {
+        if (self.id = 1202) {
+            return true
+        }
+    }
+
+    pub fn isFalse(self) -> bool {
+        if (self.id = 1203) {
+            return true
+        }
+    }
+
+    pub fn getValue(self) -> *int {
+        if (self.isTrue()) {
+            yield 1
+        }
+        if (self.isFalse()) {
+            yield 0
+        }
+        if (self.name = "BooleanCompletion") {
+            yield 0
+            yield 1
+        }
+    }
+
+    pub fn getValueName(self) -> string {
+        if (self.isTrue()) {
+            return "true"
+        }
+        if (!self.isTrue()) {
+            return "false"
+        }
+    }
+}
+
+schema TrueBooleanCompletion extends BooleanCompletion {
+}
+
+impl TrueBooleanCompletion {
+    @data_constraint
+    pub fn __all__() -> *TrueBooleanCompletion {
+        yield TrueBooleanCompletion {id: 1202, name: "TrueBooleanCompletion"}
+    }
+}
+
+schema FalseBooleanCompletion extends BooleanCompletion {
+}
+
+impl FalseBooleanCompletion {
+    @data_constraint
+    pub fn __all__() -> *FalseBooleanCompletion {
+        yield FalseBooleanCompletion {id: 1203, name: "FalseBooleanCompletion"}
+    }
+}
+
+schema BreakCompletion extends Completion {
+}
+
+impl BreakCompletion {
+    @data_constraint
+    pub fn __all__() -> *BreakCompletion {
+        for (c in Completion()) {
+            if (isBreakCompletion(c)) {
+                yield BreakCompletion {id : c.id, name : c.name}
+            }
+        }
+    }
+}
+
+// FIXME: YieldCompletion should carry a NormalCompletion
+// or a BooleanCompletion, but we don't have convenient
+// representation for now
+schema YieldCompletion extends Completion {
+}
+
+impl YieldCompletion {
+    @data_constraint
+    pub fn __all__() -> *YieldCompletion {
+        for (c in Completion()) {
+            if (isYieldCompletion(c)) {
+                yield YieldCompletion {id : c.id, name : c.name}
+            }
+        }
+    }
+}
+
+schema ContinueCompletion extends Completion {
+}
+
+impl ContinueCompletion {
+    @data_constraint
+    pub fn __all__() -> *ContinueCompletion {
+        for (c in Completion()) {
+            if (isContinueCompletion(c)) {
+                yield ContinueCompletion {id : c.id, name : c.name}
+            }
+        }
+    }
+}
+
+schema ThrowCompletion extends Completion {
+}
+
+impl ThrowCompletion {
+    @data_constraint
+    pub fn __all__() -> *ThrowCompletion {
+        for (c in Completion()) {
+            if (isThrowCompletion(c)) {
+                yield ThrowCompletion {id : c.id, name : c.name}
+            }
+        }
+    }
+}
+
+pub fn isNormalCompletion(c: Completion) -> bool {
+    if(c.name = "NormalCompletion") {
+        return true
+    }
+}
+
+pub fn isReturnCompletion(c: Completion) -> bool {
+    if (c.name = "ReturnCompletion") {
+        return true
+    }
+}
+
+pub fn isBooleanCompletion(c: Completion) -> bool {
+    if (c.name = "BooleanCompletion" || isTrueBooleanCompletion(c) || isFalseBooleanCompletion(c)) {
+        return true
+    }
+}
+
+pub fn isTrueBooleanCompletion(c: Completion) -> bool {
+    if (c.name = "TrueBooleanCompletion") {
+        return true
+    }
+}
+
+pub fn isFalseBooleanCompletion(c: Completion) -> bool {
+    if (c.name = "FalseBooleanCompletion") {
+        return true
+    }
+}
+
+pub fn isBreakCompletion(c: Completion) -> bool {
+    if (c.name = "BreakCompletion") {
+        return true
+    }
+}
+
+pub fn isYieldCompletion(c: Completion) -> bool {
+    if (c.name = "YieldCompletion") {
+        return true
+    }
+}
+
+pub fn isContinueCompletion(c: Completion) -> bool {
+    if (c.name = "ContinueCompletion") {
+        return true
+    }
+}
+
+pub fn isThrowCompletion(c: Completion) -> bool {
+    if(c.name = "YieldCompletion") {
+        return true
+    }
+}
+
+pub fn completion(id: int, name: string) -> bool {
+    [
+        {1001, "NormalCompletion"},
+        {1101, "ReturnCompletion"},
+        // BooleanCompletion
+        {1201, "BooleanCompletion"},
+        {1202, "TrueBooleanCompletion"},
+        {1203, "FalseBooleanCompletion"},
+        // end BooleanCompletion
+        {1301, "BreakCompletion"},
+        {1401, "YieldCompletion"},
+        {1501, "ContinueCompletion"},
+        {1601, "ThrowCompletion"},
+    ]
+}

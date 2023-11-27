@@ -1,0 +1,123 @@
+// script
+use coref::xml::*
+
+schema DependencyElement extends XmlElement {}
+
+impl DependencyElement {
+    @data_constraint
+    pub fn __all__(db: XmlDB) -> *DependencyElement {
+        for(e in XmlElement(db)) {
+            if (e.getElementName() = "dependency") {
+                yield DependencyElement {
+                    id: e.id,
+                    location_id: e.location_id,
+                    parent_id: e.parent_id,
+                    index_order: e.index_order
+                }
+            }
+        }
+    }
+}
+
+schema GroupElement extends XmlElement {}
+
+impl GroupElement {
+    @data_constraint
+    pub fn __all__(db: XmlDB) -> *GroupElement {
+        for(e in XmlElement(db)) {
+            if (e.getElementName() = "groupId") {
+                yield GroupElement {
+                    id: e.id,
+                    location_id: e.location_id,
+                    parent_id: e.parent_id,
+                    index_order: e.index_order
+                }
+            }
+        }
+    }
+}
+
+schema VersionElement extends XmlElement {}
+
+impl VersionElement {
+    @data_constraint
+    pub fn __all__(db: XmlDB) -> *VersionElement {
+        for(e in XmlElement(db)) {
+            if (e.getElementName() = "version") {
+                yield VersionElement {
+                    id: e.id,
+                    location_id: e.location_id,
+                    parent_id: e.parent_id,
+                    index_order: e.index_order
+                }
+            }
+        }
+    }
+}
+
+schema ArtifactElement extends XmlElement {}
+
+impl ArtifactElement {
+    @data_constraint
+    pub fn __all__(db: XmlDB) -> *ArtifactElement {
+        for(e in XmlElement(db)) {
+            if (e.getElementName() = "artifactId") {
+                yield ArtifactElement {
+                    id: e.id,
+                    location_id: e.location_id,
+                    parent_id: e.parent_id,
+                    index_order: e.index_order
+                }
+            }
+        }
+    }
+}
+
+schema PomFile extends XmlFile {}
+
+impl PomFile {
+    @data_constraint
+    pub fn __all__(db: XmlDB) -> *PomFile {
+        for(f in XmlFile(db)) {
+            if (f.getFileName() = "pom.xml") {
+                yield PomFile {
+                    id: f.id,
+                    file_name: f.file_name,
+                    relative_path: f.relative_path
+                }
+            }
+        }
+    }
+}
+
+// output relative path of the file, referenced jar name and version
+fn out(fileName: string, m1: string, m2: string, m3: string) -> bool {
+    let (db = XmlDB::load("coref_xml_src.db")) {
+        for (f in PomFile(db),
+            e1 in GroupElement(db),
+            e2 in VersionElement(db),
+            e3 in ArtifactElement(db),
+            c1 in XmlCharacter(db),
+            c2 in XmlCharacter(db),
+            c3 in XmlCharacter(db),
+            p in DependencyElement(db)) {
+            if (f.key_eq(p.getLocation().getFile()) &&
+                fileName = f.getRelativePath() &&
+                p.key_eq(e1.getParent()) &&
+                e1.key_eq(c1.getBelongedElement()) &&
+                m1 = c1.getText() &&
+                p.key_eq(e2.getParent()) &&
+                e2.key_eq(c2.getBelongedElement()) &&
+                m2 = c2.getText() &&
+                p.key_eq(e3.getParent()) &&
+                e3.key_eq(c3.getBelongedElement()) &&
+                m3 = c3.getText()) {
+                return true
+            }
+        }
+    }
+}
+
+fn main() {
+    output(out())
+}

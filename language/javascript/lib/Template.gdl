@@ -1,0 +1,168 @@
+/**
+ * @filename: Template
+ * @brief: Provides util classes and predicates for JavaScript / TypeScript templates.
+ */
+
+/**
+ * A template literal-like node, which is a no-substitution template literal, template head, template middle or template tail.
+ */
+schema TemplateLiteralLikeNode extends Node {
+}
+
+impl TemplateLiteralLikeNode {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *TemplateLiteralLikeNode {
+        for (tmp in Node(db)) {
+            if (isTemplateLiteralLikeNode(tmp)) {
+                yield TemplateLiteralLikeNode {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets the value of this literal-like node, as a string.
+     */
+    pub fn getValue(self) -> string {
+        for (literalDO in LiteralDO(__all_data__)) {
+            if (literalDO.key_eq(self)) {
+                let (value = literalDO.getValue()) {
+                    return value
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A template head.
+ */
+schema TemplateHead extends TemplateLiteralLikeNode {
+}
+
+impl TemplateHead {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *TemplateHead {
+        for (tmp in TemplateLiteralLikeNode(db)) {
+            if (isTemplateHead(Node {id: tmp.id})) {
+                yield TemplateHead {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A template middle.
+ */
+schema TemplateMiddle extends TemplateLiteralLikeNode {
+}
+
+impl TemplateMiddle {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *TemplateMiddle {
+        for (tmp in TemplateLiteralLikeNode(db)) {
+            if (isTemplateMiddle(Node {id: tmp.id})) {
+                yield TemplateMiddle {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A template tail.
+ */
+schema TemplateTail extends TemplateLiteralLikeNode {
+}
+
+impl TemplateTail {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *TemplateTail {
+        for (tmp in TemplateLiteralLikeNode(db)) {
+            if (isTemplateTail(Node {id: tmp.id})) {
+                yield TemplateTail {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A template span.
+ */
+schema TemplateSpan extends Node {
+}
+
+impl TemplateSpan {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *TemplateSpan {
+        for (tmp in Node(db)) {
+            if (isTemplateSpan(tmp)) {
+                yield TemplateSpan {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+
+    pub fn getParent(self) -> TemplateExpression {
+        for (parent in TemplateExpression(__all_data__)) {
+            if (parent.id = self.getParentOid()) {
+                return parent
+            }
+        }
+    }
+
+    pub fn getExpression(self) -> Expression {
+        for (expression in Expression(__all_data__)) {
+            if (expression.key_eq(self.getChild(0))) {
+                return expression
+            }
+        }
+    }
+
+    pub fn getLiteral(self) -> Token {
+        for (literal in Token(__all_data__)) {
+            if (literal.key_eq(self.getChild(1))) {
+                return literal
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a template literal-like node, which is a no-substitution template literal, template head, template middle or template tail.
+ */
+pub fn isTemplateLiteralLikeNode(node: Node) -> bool {
+    if (isNoSubstitutionTemplateLiteral(node)) {
+        return true
+    }
+    if (isTemplateHead(node)) {
+        return true
+    }
+    if (isTemplateMiddle(node)) {
+        return true
+    }
+    if (isTemplateTail(node)) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a template span.
+ */
+pub fn isTemplateSpan(node: Node) -> bool {
+    if (node.getKind() = 232) {
+        return true
+    }
+}

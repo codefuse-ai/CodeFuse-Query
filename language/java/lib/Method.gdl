@@ -1,0 +1,388 @@
+/**
+ * @brief A java method.
+ */
+schema Method extends MethodDO {
+    
+}
+impl Method {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *Method {
+        for (tmp in MethodDO(db)) {
+            yield Method {
+                element_hash_id : tmp.element_hash_id,
+                name : tmp.name,
+                signature : tmp.signature,
+                type_hash_id : tmp.type_hash_id,
+                parent_hash_id : tmp.parent_hash_id,
+                location_hash_id : tmp.location_hash_id,
+                definition_body : tmp.definition_body
+            }
+        }
+    }
+    /**
+     * @brief gets the class contains the Method
+     * @return Class 
+     */
+    pub fn getBelongedClass(self) -> Class {
+        for (tmp in Class(__all_data__)) {
+            if (tmp.element_hash_id = self.getParentHashId()) {
+                return tmp
+            }
+        }
+    }
+    /**
+     * @brief gets the modifier of the Method
+     * @return Modifier 
+     */
+    pub fn getModifier(self) -> *Modifier {
+        for (mo in Modifier(__all_data__),
+            list in ModifierList(__all_data__)) {
+            if (mo.getModifierList() = list) {
+                if (list.getMethodParent() = self) {
+                    yield mo
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the location for the element.
+     * @return Location
+     */
+    pub fn getLocation(self) -> Location {
+        for (loc in Location(__all_data__)) {
+            if (loc.element_hash_id = self.getLocationHashId()) {
+                return loc
+            }
+        }
+    }
+    /**
+     * @brief gets the size information for the element.
+     * @return NumberOfLines
+     */
+    pub fn getSize(self) -> NumberOfLines {
+        for (n in NumberOfLines(__all_data__)) {
+            if (n.element_hash_id = self.getLocationHashId()) {
+                return n
+            }
+        }
+    }
+    /**
+     * @brief gets the annotation of the method, if any.
+     * @return Annotation 
+     */
+    pub fn getAnnotation(self) -> *Annotation {
+        for (relation in AnnotatedRelation(__all_data__)) {
+            if (self.element_hash_id = relation.getAnnotatedItemHashId()) {
+                yield Annotation(__all_data__).find(relation)
+            }
+        }
+    }
+    /**
+     * @brief gets the parameter of the method, if any.
+     * @return Parameter 
+     */
+    pub fn getParameter(self) -> *Parameter {
+        for (param in Parameter(__all_data__)) {
+            if (self.element_hash_id = param.getParentHashId()) {
+                yield param
+            }
+        }
+    }
+    /**
+     * @brief gets a method access expression that calls the method.
+     * @return MethodAccessExpression 
+     */
+    pub fn getAnAccess(self) -> *MethodAccessExpression {
+        for (cc in CallableBinding(__all_data__)) {
+            if (self.key_eq(cc.getCallee())) {
+                yield MethodAccessExpression(__all_data__).find(cc)
+            }
+        }
+    }
+    /**
+     * @brief gets the parent of the method.
+     * @return ClassOrInterface 
+     */
+    pub fn getParent(self) -> ClassOrInterface {
+        for (c in ClassOrInterface(__all_data__)) {
+            if (c.id = self.getParentHashId()) {
+                return c
+            }
+        }
+    }
+    /**
+     * @brief gets an ancestor of the element.
+     * @return ElementParent 
+     */
+    pub fn getAnAncestor(self) -> *ElementParent {
+        for (tmp in ElementParent(__all_data__)) {
+            if (tmp.key_eq(self)) {
+                yield tmp.getAnAncestor()
+            }
+        }
+    }
+    /**
+     * @brief gets the body of the method.
+     * @return CodeBlock 
+     */
+    pub fn getBody(self) -> CodeBlock {
+        for (body in CodeBlock(__all_data__)) {
+            if (self.key_eq(body.getParent())) {
+                return body
+            }
+        }
+    }
+    /**
+     * @description gets the Throw list of the method, if any.
+     * @return ReferenceList
+     */
+    pub fn getThrowsList(self) -> ReferenceList {
+        for (r in ReferenceList(__all_data__)) {
+            if (self.key_eq(r.getParent())) {
+                if (r.getRole() = "THROWS_LIST") {
+                    return r
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the type for the element.
+     * @return Type
+     */
+    pub fn getType(self) -> Type {
+        for (type in Type(__all_data__)) {
+            if (type.id = self.getTypeHashId()) {
+                return type
+            }
+        }
+    }
+    /**
+     * @brief gets the return type element for the method.
+     * @return TypeElement
+     */
+    pub fn getReturnTypeElement(self) -> TypeElement {
+        for (t in TypeElement(__all_data__)) {
+            if (self.key_eq(t.getParent())) {
+                return t
+            }
+        }
+    }
+    /**
+     * @brief gets the polymorphism methods of the method, if any.
+     * @return Method 
+     */
+    pub fn getPolyMethod(self) -> *Method {
+        for (m in Method(__all_data__)) {
+            if (matchedMethod(self, m)) {
+                for (auto_tmp1 in m.getBelongedClass().getAnAscentantClassOrInterface()) {
+                    if (auto_tmp1 = self.getParent()) {
+                        yield m
+                    }
+                }
+            }
+        }
+    }
+}
+/**
+ * @brief An Exception represents an element listed in the `throws` clause of a method of constructor.
+ *
+ * For example, `E` is an exception thrown by method `m` in
+ * `void m() throws E;`, whereas `T` is an exception _type_ in
+ * `class T extends Exception { }`.
+ */
+schema Exception extends ExceptionDO {
+
+}
+impl Exception {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *Exception {
+        for (tmp in ExceptionDO(db)) {
+            yield Exception {
+                element_hash_id : tmp.element_hash_id,
+                type_hash_id : tmp.type_hash_id,
+                callable_hash_id : tmp.callable_hash_id,
+                name : tmp.name
+            }
+        }
+    }
+    /**
+     * @brief gets the type for the element.
+     * @return Type
+     */
+    pub fn getType(self) -> ReferenceType {
+        for (type in ReferenceType(__all_data__)) {
+            if (type.oid = self.getTypeHashId()) {
+                return type
+            }
+        }
+    }
+    /**
+     * @brief gets the method of the exception element.
+     * @return Method 
+     */
+    pub fn getCallable(self) -> Method {
+        for (m in Method(__all_data__)) {
+            if (m.element_hash_id = self.getCallableHashId()) {
+                return m
+            }
+        }
+    }
+    /**
+     * @brief gets the Class of the exception element.
+     * @return Class 
+     */
+    pub fn getClass(self) -> Class {
+        for (m in Class(__all_data__)) {
+            if (m.element_hash_id = self.getCallableHashId()) {
+                return m
+            }
+        }
+    }
+}
+/**
+ * @brief A super expression.
+ */
+schema SuperExpression extends Expression {
+
+}
+impl SuperExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *SuperExpression {
+        for (tmp in Expression(db)) {
+            for (s in SuperExpressionDO(db)) {
+                if (tmp.key_eq(s)) {
+                    yield SuperExpression {
+                        element_hash_id : tmp.element_hash_id,
+                        name : tmp.name,
+                        parent_hash_id : tmp.parent_hash_id,
+                        index_order : tmp.index_order,
+                        location_hash_id : tmp.location_hash_id,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+}
+/**
+ * @brief A super expression.
+ */
+schema SuperExpressionWithQualifier extends SuperExpression {
+
+}
+impl SuperExpressionWithQualifier {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *SuperExpressionWithQualifier {
+        for (tmp in SuperExpression(db)) {
+            for (s in SuperExpressionWithQualifierDO(db)) {
+                if (tmp.key_eq(s)) {
+                    yield SuperExpressionWithQualifier {
+                        element_hash_id : tmp.element_hash_id,
+                        name : tmp.name,
+                        parent_hash_id : tmp.parent_hash_id,
+                        index_order : tmp.index_order,
+                        location_hash_id : tmp.location_hash_id,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the Qualifier of the expression, if any.
+     * @return ReferenceElement 
+     */
+    pub fn getQualifier(self) -> ReferenceElement {
+        for (c in ReferenceElement(__all_data__)) {
+            for (s in SuperExpressionWithQualifierDO(__all_data__)) {
+                if (self.key_eq(s)) {
+                    if (c.element_hash_id = s.getQualifierHashId()) {
+                        return c
+                    }
+                }
+            }
+        }
+    }
+}
+schema NpMethod extends NpMethodDO {
+
+}
+impl NpMethod {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *NpMethod {
+        for (tmp in NpMethodDO(db)) {
+            for (m in NpMethodDO(db)) {
+                if (tmp = m) {
+                    yield NpMethod {
+                        element_hash_id : tmp.element_hash_id,
+                        name : tmp.name,
+                        signature : tmp.signature,
+                        type_hash_id : tmp.type_hash_id,
+                        parent_hash_id : tmp.parent_hash_id
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the type for this element.
+     * @return Type
+     */
+    pub fn getType(self) -> ReferenceType {
+        for (type in ReferenceType(__all_data__)) {
+            if (type.oid = self.getTypeHashId()) {
+                return type
+            }
+        }
+    }
+    /**
+     * @brief gets the parent of this element.
+     * @return ElementParent
+     */
+    pub fn getParent(self) -> ElementParent {
+        for (c in ElementParent(__all_data__)) {
+            if (c.id = self.getParentHashId()) {
+                return c
+            }
+        }
+    }
+}
+fn getMethodNameWithParam(method: Method, name: string) -> bool {
+    let(temp1 = method.getSignature(), callable = Callable(__all_data__).find(method)) {
+        if (isAnonymousMethod(callable)) {
+            let (temp2 = "null", j = temp2.len() + 1, i = temp1.len() - j) {
+                if (name = temp1.substr(j, i)) {
+                    return true
+                }
+            }
+        }
+        if (!isAnonymousMethod(callable)) {
+            let (temp2 = method.getParent().getQualifiedName(), j = temp2.len() + 1, i = temp1.len() - j) {
+                if (name = temp1.substr(j, i)) {
+                    return true
+                }
+            }
+        }
+    }
+}
+fn matchedMethod(m: Method, n: Method) -> bool {
+    if (m.getName() = n.getName()) {
+        let (i = m.getParameter().len(), j = n.getParameter().len()) {
+            if (i = j) {
+                if (i = 0 && j = 0) {
+                    return true
+                }
+                if (i > 0 && j > 0) {
+                    for(temp1 in string::__undetermined_all__()) {
+                        return getMethodNameWithParam(m, temp1) && getMethodNameWithParam(n, temp1)
+                    }
+                }
+            }
+        }
+    }
+}

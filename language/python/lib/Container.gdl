@@ -1,0 +1,229 @@
+/**
+ * @brief The root of the extracted project.
+ */
+schema Program extends ProgramDO {
+    
+}
+impl Program {
+    @data_constraint
+    @inline
+    fn __all__(db: PythonDB) -> *Program {
+        for (tmp in ProgramDO(db)) {
+            yield Program {
+                program_oid : tmp.program_oid,
+                absolute_prefix_path : tmp.absolute_prefix_path
+            }
+        }
+    }
+}
+/**
+ * @brief A python file.
+ */
+schema File extends FileDO {
+    
+}
+impl File {
+    @data_constraint
+    @inline
+    fn __all__(db: PythonDB) -> *File {
+        for (tmp in FileDO(db)) {
+            yield File {
+                element_oid : tmp.element_oid,
+                relative_path : tmp.relative_path,
+                extension : tmp.extension,
+                name : tmp.name,
+                number_of_lines_oid : tmp.number_of_lines_oid
+            }
+        }
+    }
+    /**
+     * @brief gets the folder which contains the file, if any.
+     * @return Folder 
+     */
+    pub fn getBelongedFolder(self) -> Folder {
+        for (f in Folder(__all_data__),
+            container in ContainerParent(__all_data__)) {
+            if (self.key_eq(container)) {
+                if (f.element_oid = container.getParentOid()) {
+                    return f
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the size information for the element.
+     * @return NumberOfLines
+     */
+    pub fn getSize(self) -> NumberOfLines {
+        for (n in NumberOfLines(__all_data__)) {
+            if (n.element_oid = self.getNumberOfLinesOid()) {
+                return n
+            }
+        }
+    }
+}
+/**
+ * @brief A folder.
+ */
+schema Folder extends FolderDO {
+    
+}
+impl Folder {
+    @data_constraint
+    @inline
+    fn __all__(db: PythonDB) -> *Folder {
+        for (tmp in FolderDO(db)) {
+            yield Folder {
+                element_oid : tmp.element_oid,
+                qualified_name : tmp.qualified_name,
+                name : tmp.name,
+                parent_oid : tmp.parent_oid
+            }
+        }
+    }
+    /**
+     * @brief gets all files in the folder.
+     * @return File 
+     */
+    pub fn getAllContainingFiles(self) -> *File {
+        for (f in File(__all_data__),
+            container in ContainerParent(__all_data__)) {
+            if (f.key_eq(container)) {
+                if (self.element_oid = container.getParentOid()) {
+                    yield f
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the folder which contains the folder, if any.
+     * @return Folder 
+     */
+    pub fn getParent(self) -> Folder {
+        for (f in Folder(__all_data__)) {
+            if (f.element_oid = self.getParentOid()) {
+                return f
+            }
+        }
+    }
+}
+/**
+ * @brief Describe a file belonged to a certain folder.
+ */
+schema ContainerParent extends ContainerParentDO {
+    
+}
+impl ContainerParent {
+    @data_constraint
+    @inline
+    fn __all__(db: PythonDB) -> *ContainerParent {
+        for (tmp in ContainerParentDO(db)) {
+            yield ContainerParent {
+                child_oid : tmp.child_oid,
+                parent_oid : tmp.parent_oid
+            }
+        }
+    }
+    /**
+     * @brief gets the folder which contains the file, if any.
+     * @return Folder 
+     */
+    pub fn getBelongedFolder(self) -> Folder {
+        for (f in Folder(__all_data__)) {
+            if (f.element_oid = self.getParentOid()) {
+                return f
+            }
+        }
+    }
+}
+/**
+ * @brief A Module refer to a file containing Python statements and definitions.
+ */
+schema Module extends ModuleDO {
+    
+}
+impl Module {
+    @data_constraint
+    @inline
+    fn __all__(db: PythonDB) -> *Module {
+        for (tmp in ModuleDO(db)) {
+            yield Module {
+                element_oid : tmp.element_oid,
+                name : tmp.name,
+                file_oid : tmp.file_oid,
+                location_oid : tmp.location_oid
+            }
+        }
+    }
+    /**
+     * @brief gets the file which contains the module.
+     * @return File 
+     */
+    pub fn getParent(self) -> File {
+        for (f in File(__all_data__)) {
+            if (f.element_oid = self.getFileOid()) {
+                return f
+            }
+        }
+    }
+    /**
+     * @brief gets the size information for the element.
+     * @return NumberOfLines
+     */
+    pub fn getNumberOfLines(self) -> NumberOfLines {
+        for (n in NumberOfLines(__all_data__)) {
+            if (n.key_eq(self.getParent())) {
+                return n
+            }
+        }
+    }
+    /**
+     * @brief gets the location for the element.
+     * @return Location
+     */
+    pub fn getLocation(self) -> Location {
+        for (loc in Location(__all_data__)) {
+            if (loc.element_oid = self.getLocationOid()) {
+                return loc
+            }
+        }
+    }
+}
+/**
+ * @brief A modified python file.
+ */
+schema Modified2To3File extends Modified2To3FileDO {
+    
+}
+impl Modified2To3File {
+    @data_constraint
+    @inline
+    fn __all__(db: PythonDB) -> *Modified2To3File {
+        for (tmp in Modified2To3FileDO(db)) {
+            yield Modified2To3File {
+                element_oid : tmp.element_oid,
+                relative_path : tmp.relative_path
+            }
+        }
+    }
+}
+/**
+ * @brief A parsed error file.
+ */
+schema ParseErrorFile extends ParseErrorFileDO {
+    
+}
+impl ParseErrorFile {
+    @data_constraint
+    @inline
+    fn __all__(db: PythonDB) -> *ParseErrorFile {
+        for (tmp in ParseErrorFileDO(db)) {
+            yield ParseErrorFile {
+                element_oid : tmp.element_oid,
+                relative_path : tmp.relative_path,
+                error_message : tmp.error_message,
+                error_text : tmp.error_text
+            }
+        }
+    }
+}

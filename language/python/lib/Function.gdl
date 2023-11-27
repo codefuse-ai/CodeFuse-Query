@@ -1,0 +1,147 @@
+/**
+ * @brief A function, a normal function def statement or an async function def statement. 
+ */
+schema Function extends Statement {
+    
+}
+impl Function {
+    @data_constraint
+    @inline
+    fn __all__(db: PythonDB) -> *Function {
+        for (tmp in Statement(db)) {
+            for (f in FunctionDefStatement(db)) {
+                if (tmp.key_eq(f)) {
+                    yield Function {
+                        element_oid : tmp.element_oid,
+                        type : tmp.type,
+                        element_index : tmp.element_index,
+                        parent_oid : tmp.parent_oid,
+                        location_oid : tmp.location_oid,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+            for (f in AsyncFunctionDefStatement(db)) {
+                if (tmp.key_eq(f)) {
+                    yield Function {
+                        element_oid : tmp.element_oid,
+                        type : tmp.type,
+                        element_index : tmp.element_index,
+                        parent_oid : tmp.parent_oid,
+                        location_oid : tmp.location_oid,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the name of the function.
+     * @return string 
+     */
+    pub fn getName(self) -> string {
+        for (name in string::__undetermined_all__()) {
+            for (f in FunctionDefStatement(__all_data__)) {
+                if (self.key_eq(f)) {
+                    if (name = f.getName()) {
+                        return name
+                    }
+                }
+            }
+            for (f in AsyncFunctionDefStatement(__all_data__)) {
+                if (self.key_eq(f)) {
+                    if (name = f.getName()) {
+                        return name
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the qualified name of the function.
+     * @return string 
+     */
+    pub fn getQualifiedName(self) -> string {
+        for (s in Scope(__all_data__)) {
+            if (s = self.getEnclosingScope()) {
+                let (postfix = self.getName()) {
+                    for (m in Module(__all_data__)) {
+                        if (m.key_eq(s)) {
+                            let (name = postfix) {
+                                return name
+                            }
+                        }
+                    }
+                    for (suffix in string::__undetermined_all__()) {
+                        for (c in Class(__all_data__)) {
+                            if (c.key_eq(s)) {
+                                if (suffix = c.getQualifiedName()) {
+                                    let (name = suffix + "." + postfix) {
+                                        return name
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    for (suffix in string::__undetermined_all__()) {
+                        for (c in Function(__all_data__)) {
+                            if (c.key_eq(s)) {
+                                if (suffix = c.getQualifiedName()) {
+                                    let (name = suffix + "." + postfix) {
+                                        return name
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the arguments of the function.
+     * @return Arguments 
+     */
+    pub fn getArguments(self) -> Arguments {
+        for (a in Arguments(__all_data__)) {
+            if (self.key_eq(a.getParent())) {
+                return a
+            }
+        }
+    }
+    /**
+     * @brief gets the arg by index of the function.
+     * @return Arg 
+     */
+    pub fn getArgumentByIndex(self, i: int) -> Arg {
+        for (a in Arg(__all_data__)) {
+            if (a = self.getArguments().getArgByIndex(i)) {
+                return a
+            }
+        }
+    }
+}
+/**
+ * @brief A init function.
+ */
+schema InitFunction extends Function {
+    
+}
+impl InitFunction {
+    @data_constraint
+    @inline
+    fn __all__(db: PythonDB) -> *InitFunction {
+        for (tmp in Function(db)) {
+            if (tmp.getName() = "__init__") {
+                yield InitFunction {
+                    element_oid : tmp.element_oid,
+                    type : tmp.type,
+                    element_index : tmp.element_index,
+                    parent_oid : tmp.parent_oid,
+                    location_oid : tmp.location_oid,
+                    printable_text : tmp.printable_text
+                }
+            }
+        }
+    }
+}

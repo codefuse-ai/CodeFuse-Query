@@ -1,0 +1,654 @@
+/**
+ * @brief A super class for all statements.
+ */
+schema Statement extends StatementDO {
+    
+}
+impl Statement {
+    @data_constraint
+    @inline
+    fn __all__(db: PythonDB) -> *Statement {
+        for (tmp in StatementDO(db)) {
+            yield Statement {
+                element_oid : tmp.element_oid,
+                type : tmp.type,
+                element_index : tmp.element_index,
+                parent_oid : tmp.parent_oid,
+                location_oid : tmp.location_oid,
+                printable_text : tmp.printable_text
+            }
+        }
+    }
+    /**
+     * @brief gets the location for the element.
+     * @return Location
+     */
+    pub fn getLocation(self) -> Location {
+        for (loc in Location(__all_data__)) {
+            if (loc.element_oid = self.getLocationOid()) {
+                return loc
+            }
+        }
+    }
+    /**
+     * @brief gets the size information for the element.
+     * @return NumberOfLines
+     */
+    pub fn getSize(self) -> NumberOfLines {
+        for (n in NumberOfLines(__all_data__)) {
+            if (n.element_oid = self.getLocationOid()) {
+                return n
+            }
+        }
+    }
+    /**
+     * @brief gets the parent element of the statement
+     * @return CombineElement 
+     */
+    pub fn getParent(self) -> CombineElement {
+        for (parent in CombineElement(__all_data__)) {
+            if (parent.id = self.getParentOid()) {
+                return parent
+            }
+        }
+    }
+    /**
+     * @brief gets an ancestor of the element.
+     * @return CombineElement 
+     */
+    pub fn getAnAncestor(self) -> *CombineElement {
+        for (temp in CombineElement(__all_data__)) {
+            if (self.key_eq(temp)) {
+                yield temp.getAnAncestor()
+            }
+        }
+    }
+    /**
+     * @brief gets the immediately enclosing scope (module, function or class) whose body contains this statement.
+     * @return Scope 
+     */
+    pub fn getEnclosingScope(self) -> Scope {
+        for (s in Scope(__all_data__),
+            m in ScopeEnclosignStatement(__all_data__)) {
+            if (self.key_eq(m)) {
+                if (s = m.getEnclosingScope()) {
+                    return s
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets a child of this statement.
+     * @return Statement 
+     */
+    pub fn getAChild(self) -> *Statement {
+        for (child in Statement(__all_data__)) {
+            if (self.key_eq(child.getParent())) {
+                yield child
+            }
+        }
+    }
+    /**
+     * @brief gets the statement containing this statement.
+     * @return Statement 
+     */
+    pub fn getEnclosingStatement(self) -> Statement {
+        for (stmt in Statement(__all_data__)) {
+            if (stmt.element_oid = self.getParentOid()) {
+                return stmt
+            }
+        }
+    }
+}
+/**
+ * @brief A function definition.
+ */
+schema FunctionDefStatement extends Statement {
+    
+}
+impl FunctionDefStatement {
+    @data_constraint
+    @inline
+    fn __all__(db: PythonDB) -> *FunctionDefStatement {
+        for (tmp in Statement(db)) {
+            for (f in FunctionDefStatementDO(db)) {
+                if (tmp.key_eq(f)) {
+                    yield FunctionDefStatement {
+                        element_oid : tmp.element_oid,
+                        type : tmp.type,
+                        element_index : tmp.element_index,
+                        parent_oid : tmp.parent_oid,
+                        location_oid : tmp.location_oid,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the name of the function.
+     * @return string 
+     */
+    pub fn getName(self) -> string {
+        for (name in string::__undetermined_all__()) {
+            for (f in FunctionDefStatementDO(__all_data__)) {
+                if (self.key_eq(f)) {
+                    if (name = f.getName()) {
+                        return name
+                    }
+                }
+            }
+        }
+    }
+}
+/**
+ * @brief An async function definition.
+ */
+schema AsyncFunctionDefStatement extends Statement {
+    
+}
+impl AsyncFunctionDefStatement {
+    @data_constraint
+    @inline
+    fn __all__(db: PythonDB) -> *AsyncFunctionDefStatement {
+        for (tmp in Statement(db)) {
+            for (f in AsyncFunctionDefStatementDO(db)) {
+                if (tmp.key_eq(f)) {
+                    yield AsyncFunctionDefStatement {
+                        element_oid : tmp.element_oid,
+                        type : tmp.type,
+                        element_index : tmp.element_index,
+                        parent_oid : tmp.parent_oid,
+                        location_oid : tmp.location_oid,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the name of the function.
+     * @return string 
+     */
+    pub fn getName(self) -> string {
+        for (name in string::__undetermined_all__()) {
+            for (f in AsyncFunctionDefStatementDO(__all_data__)) {
+                if (self.key_eq(f)) {
+                    if (name = f.getName()) {
+                        return name
+                    }
+                }
+            }
+        }
+    }
+}
+/**
+ * @brief A class definition.
+ */
+schema ClassDefStatement extends Statement {
+    
+}
+impl ClassDefStatement {
+    @data_constraint
+    @inline
+    fn __all__(db: PythonDB) -> *ClassDefStatement {
+        for (tmp in Statement(db)) {
+            for (f in ClassDefStatementDO(db)) {
+                if (tmp.key_eq(f)) {
+                    yield ClassDefStatement {
+                        element_oid : tmp.element_oid,
+                        type : tmp.type,
+                        element_index : tmp.element_index,
+                        parent_oid : tmp.parent_oid,
+                        location_oid : tmp.location_oid,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the name of the class.
+     * @return string 
+     */
+    pub fn getName(self) -> string {
+        for (name in string::__undetermined_all__()) {
+            for (c in ClassDefStatementDO(__all_data__)) {
+                if (self.key_eq(c)) {
+                    if (name = c.getName()) {
+                        return name
+                    }
+                }
+            }
+        }
+    }
+}
+/**
+ * @brief A for loop statement.
+ */
+schema ForStatement extends Statement {
+    
+}
+impl ForStatement {
+    @data_constraint
+    @inline
+    fn __all__(db: PythonDB) -> *ForStatement {
+        for (tmp in Statement(db)) {
+            for (f in ForStatementDO(db)) {
+                if (tmp.key_eq(f)) {
+                    yield ForStatement {
+                        element_oid : tmp.element_oid,
+                        type : tmp.type,
+                        element_index : tmp.element_index,
+                        parent_oid : tmp.parent_oid,
+                        location_oid : tmp.location_oid,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+}
+/**
+ * @brief An if statement.
+ */
+schema IfStatement extends Statement {
+    
+}
+impl IfStatement {
+    @data_constraint
+    @inline
+    fn __all__(db: PythonDB) -> *IfStatement {
+        for (tmp in Statement(db)) {
+            for (f in IfStatementDO(db)) {
+                if (tmp.key_eq(f)) {
+                    yield IfStatement {
+                        element_oid : tmp.element_oid,
+                        type : tmp.type,
+                        element_index : tmp.element_index,
+                        parent_oid : tmp.parent_oid,
+                        location_oid : tmp.location_oid,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+}
+/**
+ * @brief A while loop statement.
+ */
+schema WhileStatement extends Statement {
+    
+}
+impl WhileStatement {
+    @data_constraint
+    @inline
+    fn __all__(db: PythonDB) -> *WhileStatement {
+        for (tmp in Statement(db)) {
+            for (f in WhileStatementDO(db)) {
+                if (tmp.key_eq(f)) {
+                    yield WhileStatement {
+                        element_oid : tmp.element_oid,
+                        type : tmp.type,
+                        element_index : tmp.element_index,
+                        parent_oid : tmp.parent_oid,
+                        location_oid : tmp.location_oid,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+}
+/**
+ * @brief A try statement.
+ */
+schema TryStatement extends Statement {
+    
+}
+impl TryStatement {
+    @data_constraint
+    @inline
+    fn __all__(db: PythonDB) -> *TryStatement {
+        for (tmp in Statement(db)) {
+            for (f in TryStatementDO(db)) {
+                if (tmp.key_eq(f)) {
+                    yield TryStatement {
+                        element_oid : tmp.element_oid,
+                        type : tmp.type,
+                        element_index : tmp.element_index,
+                        parent_oid : tmp.parent_oid,
+                        location_oid : tmp.location_oid,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+}
+/**
+ * @brief A single except clause.
+ */
+schema ExceptHandler extends ExceptHandlerDO {
+    
+}
+impl ExceptHandler {
+    @data_constraint
+    @inline
+    fn __all__(db: PythonDB) -> *ExceptHandler {
+        for (tmp in ExceptHandlerDO(db)) {
+            yield ExceptHandler {
+                element_oid : tmp.element_oid,
+                element_index : tmp.element_index,
+                parent_oid : tmp.parent_oid,
+                location_oid : tmp.location_oid,
+                printable_text : tmp.printable_text
+            }
+        }
+    }
+    /**
+     * @brief gets the try statement of the except clause
+     * @return TryStatement 
+     */
+    pub fn getTryStatement(self) -> TryStatement {
+        for (t in TryStatement(__all_data__)) {
+            if (t.element_oid = self.getParentOid()) {
+                return t
+            }
+        }
+    }
+    /**
+     * @brief gets the parent element of the element
+     * @return CombineElement 
+     */
+    pub fn getParent(self) -> CombineElement {
+        for (parent in CombineElement(__all_data__)) {
+            if (parent.id = self.getParentOid()) {
+                return parent
+            }
+        }
+    }
+    /**
+     * @brief gets an ancestor of the element.
+     * @return CombineElement 
+     */
+    pub fn getAnAncestor(self) -> *CombineElement {
+        for (temp in CombineElement(__all_data__)) {
+            if (self.key_eq(temp)) {
+                yield temp.getAnAncestor()
+            }
+        }
+    }
+}
+/**
+ * @brief A match statement.
+ */
+schema MatchStatement extends Statement {
+    
+}
+impl MatchStatement {
+    @data_constraint
+    @inline
+    fn __all__(db: PythonDB) -> *MatchStatement {
+        for (tmp in Statement(db)) {
+            for (s in MatchStatementDO(db)) {
+                if (tmp.key_eq(s)) {
+                    yield MatchStatement {
+                        element_oid : tmp.element_oid,
+                        type : tmp.type,
+                        element_index : tmp.element_index,
+                        parent_oid : tmp.parent_oid,
+                        location_oid : tmp.location_oid,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets a case pattern in the statement.
+     * @return MatchCase 
+     */
+    pub fn getMatchCase(self) -> MatchCase {
+        for (m in MatchCase(__all_data__)) {
+            if (self = m.getMatchStatement()) {
+                return m
+            }
+        }
+    }
+}
+/**
+ * @brief A single case pattern in a match statement.
+ */
+schema MatchCase extends MatchCaseDO {
+    
+}
+impl MatchCase {
+    @data_constraint
+    @inline
+    fn __all__(db: PythonDB) -> *MatchCase {
+        for (tmp in MatchCaseDO(db)) {
+            yield MatchCase {
+                element_oid : tmp.element_oid,
+                pattern_oid : tmp.pattern_oid,
+                element_index : tmp.element_index,
+                parent_oid : tmp.parent_oid,
+                location_oid : tmp.location_oid,
+                printable_text : tmp.printable_text,
+                is_default : tmp.is_default
+            }
+        }
+    }
+    /**
+     * @brief gets the match statement for the case.
+     * @return MatchStatement 
+     */
+    pub fn getMatchStatement(self) -> MatchStatement {
+        for (s in MatchStatement(__all_data__)) {
+            if (s.element_oid = self.getParentOid()) {
+                return s
+            }
+        }
+    }
+    /**
+     * @brief gets the default case pattern.
+     * @return int 
+     */
+    pub fn isDefault(self) -> int {
+        for (i in int::__undetermined_all__()) {
+            if (i = self.getIsDefault()) {
+                return i
+            }
+        }
+    }
+    /**
+     * @brief gets the parent element of the element
+     * @return CombineElement 
+     */
+    pub fn getParent(self) -> CombineElement {
+        for (parent in CombineElement(__all_data__)) {
+            if (parent.id = self.getParentOid()) {
+                return parent
+            }
+        }
+    }
+    /**
+     * @brief gets an ancestor of the element.
+     * @return CombineElement 
+     */
+    pub fn getAnAncestor(self) -> *CombineElement {
+        for (temp in CombineElement(__all_data__)) {
+            if (self.key_eq(temp)) {
+                yield temp.getAnAncestor()
+            }
+        }
+    }
+}
+/**
+ * @brief A break statement.
+ */
+schema BreakStatement extends Statement {
+    
+}
+impl BreakStatement {
+    @data_constraint
+    @inline
+    fn __all__(db: PythonDB) -> *BreakStatement {
+        for (tmp in Statement(db)) {
+            for (s in BreakStatementDO(db)) {
+                if (tmp.key_eq(s)) {
+                    yield BreakStatement {
+                        element_oid : tmp.element_oid,
+                        type : tmp.type,
+                        element_index : tmp.element_index,
+                        parent_oid : tmp.parent_oid,
+                        location_oid : tmp.location_oid,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+}
+/**
+ * @brief A return statement.
+ */
+schema ReturnStatement extends Statement {
+    
+}
+impl ReturnStatement {
+    @data_constraint
+    @inline
+    fn __all__(db: PythonDB) -> *ReturnStatement {
+        for (tmp in Statement(db)) {
+            for (s in ReturnStatementDO(db)) {
+                if (tmp.key_eq(s)) {
+                    yield ReturnStatement {
+                        element_oid : tmp.element_oid,
+                        type : tmp.type,
+                        element_index : tmp.element_index,
+                        parent_oid : tmp.parent_oid,
+                        location_oid : tmp.location_oid,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+}
+/**
+ * @brief An import statement.
+ */
+schema ImportStatement extends Statement {
+    
+}
+impl ImportStatement {
+    @data_constraint
+    @inline
+    fn __all__(db: PythonDB) -> *ImportStatement {
+        for (tmp in Statement(db)) {
+            for (i in ImportStatementDO(db)) {
+                if (tmp.key_eq(i)) {
+                    yield ImportStatement {
+                        element_oid : tmp.element_oid,
+                        type : tmp.type,
+                        element_index : tmp.element_index,
+                        parent_oid : tmp.parent_oid,
+                        location_oid : tmp.location_oid,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the name element of the element.
+     * @return CombineElement 
+     */
+    pub fn getName(self) -> CombineElement {
+        for (c in CombineElement(__all_data__)) {
+            if (self.key_eq(c.getParent())) {
+                return c
+            }
+        }
+    }
+}
+/**
+ * @brief An import from statement.
+ */
+schema ImportFromStatement extends Statement {
+    
+}
+impl ImportFromStatement {
+    @data_constraint
+    @inline
+    fn __all__(db: PythonDB) -> *ImportFromStatement {
+        for (tmp in Statement(db)) {
+            for (i in ImportFromStatementDO(db)) {
+                if (tmp.key_eq(i)) {
+                    yield ImportFromStatement {
+                        element_oid : tmp.element_oid,
+                        type : tmp.type,
+                        element_index : tmp.element_index,
+                        parent_oid : tmp.parent_oid,
+                        location_oid : tmp.location_oid,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the module name of the import.
+     * @return string 
+     */
+    pub fn getModuleName(self) -> string {
+        for (name in string::__undetermined_all__()) {
+            for (i in ImportFromStatementDO(__all_data__)) {
+                if (self.key_eq(i)) {
+                    if (name = i.getModule()) {
+                        return name
+                    }
+                }
+            }
+        }
+    }
+}
+/**
+ * @brief A with statement.
+ */
+schema WithStatement extends Statement {
+    
+}
+impl WithStatement {
+    @data_constraint
+    @inline
+    fn __all__(db: PythonDB) -> *WithStatement {
+        for (tmp in Statement(db)) {
+            for (w in WithStatementDO(db)) {
+                if (tmp.key_eq(w)) {
+                    yield WithStatement {
+                        element_oid : tmp.element_oid,
+                        type : tmp.type,
+                        element_index : tmp.element_index,
+                        parent_oid : tmp.parent_oid,
+                        location_oid : tmp.location_oid,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the with item of the with statement.
+     * @return WithItem 
+     */
+    pub fn getWithItem(self) -> WithItem {
+        for (i in WithItem(__all_data__)) {
+            if (self.key_eq(i.getParent())) {
+                return i
+            }
+        }
+    }
+}

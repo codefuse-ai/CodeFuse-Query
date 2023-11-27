@@ -1,0 +1,314 @@
+/**
+ * @brief a comment.
+ */
+schema Comment extends CommentDO {
+
+}
+impl Comment {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *Comment {
+        for (tmp in CommentDO(db)) {
+            yield Comment {
+                element_hash_id : tmp.element_hash_id,
+                text : tmp.text,
+                parent_hash_id : tmp.parent_hash_id,
+                location_hash_id : tmp.location_hash_id,
+                comment_type : tmp.comment_type
+            }
+        }
+    }
+    /**
+     * @brief gets the ast element parent of the element.
+     * @return ElementParent 
+     */
+    pub fn getParent(self) -> ElementParent {
+        for (c in ElementParent(__all_data__)) {
+            if (c.id = self.getParentHashId()) {
+                return c
+            }
+        }
+    }
+    /**
+     * @brief gets an ancestor of the element.
+     * @return ElementParent 
+     */
+    pub fn getAnAncestor(self) -> *ElementParent {
+        for (tmp in ElementParent(__all_data__)) {
+            if (tmp.key_eq(self)) {
+                yield tmp.getAnAncestor()
+            }
+        }
+    }
+    /**
+     * @brief gets the location for the element.
+     * @return Location
+     */
+    pub fn getLocation(self) -> Location {
+        for (loc in Location(__all_data__)) {
+            if (loc.element_hash_id = self.getLocationHashId()) {
+                return loc
+            }
+        }
+    }
+}
+/**
+ * @brief A java doc comment.
+ */
+schema JavadocComment extends JavadocCommentDO {
+
+}
+impl JavadocComment {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *JavadocComment {
+        for (tmp in JavadocCommentDO(db)) {
+            yield JavadocComment {
+                element_hash_id : tmp.element_hash_id,
+                documentable_hash_id : tmp.documentable_hash_id,
+                text : tmp.text,
+                location_hash_id : tmp.location_hash_id,
+                parent_hash_id : tmp.parent_hash_id
+            }
+        }
+    }
+    /**
+     * @brief gets the documentable element id of the java doc comment, maybe a callable, field, enumconstant, class or interface.
+     * @return ElementParent 
+     */
+    pub fn getDocumentableElement(self) -> ElementParent {
+        for (c in ElementParent(__all_data__)) {
+            if (c.id = self.getDocumentableHashId()) {
+                return c
+            }
+        }
+    }
+    /**
+     * @brief gets the location for the element.
+     * @return Location
+     */
+    pub fn getLocation(self) -> Location {
+        for (loc in Location(__all_data__)) {
+            if (loc.element_hash_id = self.getLocationHashId()) {
+                return loc
+            }
+        }
+    }
+    /**
+     * @brief gets the parent of the element.
+     * @return ElementParent 
+     */
+    pub fn getParent(self) -> ElementParent {
+        for (c in ElementParent(__all_data__)) {
+            if (c.id = self.getParentHashId()) {
+                return c
+            }
+        }
+    }
+    /**
+     * @brief gets an ancestor of the element.
+     * @return ElementParent 
+     */
+    pub fn getAnAncestor(self) -> *ElementParent {
+        for (tmp in ElementParent(__all_data__)) {
+            if (tmp.key_eq(self)) {
+                yield tmp.getAnAncestor()
+            }
+        }
+    }
+}
+/**
+ * @brief A javadoc tag, either an inline tag or a block tag.
+ */
+schema JavadocTag extends JavadocTagDO {
+
+}
+impl JavadocTag {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *JavadocTag {
+        for (tmp in JavadocTagDO(db)) {
+            yield JavadocTag {
+                element_hash_id : tmp.element_hash_id,
+                name : tmp.name,
+                value : tmp.value,
+                containing_comment_hash_id : tmp.containing_comment_hash_id,
+                index_order : tmp.index_order,
+                location_hash_id : tmp.location_hash_id
+            }
+        }
+    }
+    /**
+     * @brief gets the location for the element.
+     * @return Location
+     */
+    pub fn getLocation(self) -> Location {
+        for (loc in Location(__all_data__)) {
+            if (loc.element_hash_id = self.getLocationHashId()) {
+                return loc
+            }
+        }
+    }
+    /**
+     * @brief gets the doc comment in which the tag is contained.
+     * @return JavadocComment 
+     */
+    pub fn getComment(self) -> JavadocComment {
+        for (comment in JavadocComment(__all_data__)) {
+            if (comment.element_hash_id = self.getContainingCommentHashId()) {
+                return comment
+            }
+        }
+    }
+    /**
+     * @brief gets the documented element.
+     * @return ExpressionParent 
+     */
+    pub fn getDocumentableElement(self) -> ExpressionParent {
+        let (comment = self.getComment()) {
+            let (element = comment.getDocumentableElement()) {
+                return ExpressionParent(__all_data__).find(element)
+            }
+        }
+    }
+    /**
+     * @brief gets an ancestor of the element.
+     * @return ElementParent 
+     */
+    pub fn getAnAncestor(self) -> *ElementParent {
+        for (tmp in ElementParent(__all_data__)) {
+            if (tmp.key_eq(self)) {
+                yield tmp.getAnAncestor()
+            }
+        }
+    }
+}
+/**
+ * @brief A javadoc tag value element.
+ */
+schema JavadocTagValue extends JavadocTagValueDO {
+
+}
+impl JavadocTagValue {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *JavadocTagValue {
+        for (tmp in JavadocTagValueDO(db)) {
+            yield JavadocTagValue {
+                element_hash_id : tmp.element_hash_id,
+                value : tmp.value,
+                parent_hash_id : tmp.parent_hash_id,
+                location_hash_id : tmp.location_hash_id
+            }
+        }
+    }
+    /**
+     * @brief gets the location for the element.
+     * @return Location
+     */
+    pub fn getLocation(self) -> Location {
+        for (loc in Location(__all_data__)) {
+            if (loc.element_hash_id = self.getLocationHashId()) {
+                return loc
+            }
+        }
+    }
+    /**
+     * @brief gets the doc tag in which the element is contained.
+     * @return JavadocTag 
+     */
+    pub fn getJavaDocTag(self) -> JavadocTag {
+        for (tag in JavadocTag(__all_data__)) {
+            if (tag.element_hash_id = self.getParentHashId()) {
+                return tag
+            }
+        }
+    }
+    /**
+     * @brief gets an ancestor of the element.
+     * @return ElementParent 
+     */
+    pub fn getAnAncestor(self) -> *ElementParent {
+        for (tmp in ElementParent(__all_data__)) {
+            if (tmp.key_eq(self)) {
+                yield tmp.getAnAncestor()
+            }
+        }
+    }
+}
+/**
+ * @brief A javadoc data token element.
+ */
+schema JavadocDataToken extends JavadocDataTokenDO {
+
+}
+impl JavadocDataToken {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *JavadocDataToken {
+        for (tmp in JavadocDataTokenDO(db)) {
+            yield JavadocDataToken {
+                element_hash_id : tmp.element_hash_id,
+                value : tmp.value,
+                parent_hash_id : tmp.parent_hash_id,
+                index_order : tmp.index_order,
+                location_hash_id : tmp.location_hash_id
+            }
+        }
+    }
+    /**
+     * @brief gets the location for the element.
+     * @return Location
+     */
+    pub fn getLocation(self) -> Location {
+        for (loc in Location(__all_data__)) {
+            if (loc.element_hash_id = self.getLocationHashId()) {
+                return loc
+            }
+        }
+    }
+    /**
+     * @brief gets the doc tag in which the element is contained, if any.
+     * @return JavadocTag 
+     */
+    pub fn getJavaDocTag(self) -> JavadocTag {
+        for (tag in JavadocTag(__all_data__)) {
+            if (tag.element_hash_id = self.getParentHashId()) {
+                return tag
+            }
+        }
+    }
+    /**
+     * @brief gets the doc comment in which the element is contained, if any.
+     * @return JavadocComment 
+     */
+    pub fn getComment(self) -> JavadocComment {
+        for (comment in JavadocComment(__all_data__)) {
+            if (comment.element_hash_id = self.getParentHashId()) {
+                return comment
+            }
+        }
+    }
+    /**
+     * @brief gets the parent of the element.
+     * @return ElementParent 
+     */
+    pub fn getParent(self) -> ElementParent {
+        for (c in ElementParent(__all_data__)) {
+            if (c.id = self.getParentHashId()) {
+                return c
+            }
+        }
+    }
+    /**
+     * @brief gets an ancestor of the element.
+     * @return ElementParent 
+     */
+    pub fn getAnAncestor(self) -> *ElementParent {
+        for (tmp in ElementParent(__all_data__)) {
+            if (tmp.key_eq(self)) {
+                yield tmp.getAnAncestor()
+            }
+        }
+    }
+}

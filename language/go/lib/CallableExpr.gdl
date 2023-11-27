@@ -1,0 +1,100 @@
+schema CallableExpr extends Expr {
+
+}
+impl CallableExpr {
+    @data_constraint
+    @inline
+    fn __all__(db: GoDB) -> *CallableExpr {
+        for (e in Expr(db)) {
+            if (e.isCallorconversionExpr()) {
+                yield CallableExpr {
+                    id : e.id
+                }
+            }
+            if (e.isSelectorExpr()) {
+                yield CallableExpr {
+                    id : e.id
+                }
+            }
+        }
+    }
+    pub fn getCallee(self) -> *Node {
+        for (e in Expr(__all_data__)) {
+            if (e.getIdx() = 0 || e.isSelectorExpr()) { // find for Call expr and get its associated Callee
+                if (e.getParentNode().key_eq(self)) {
+                    yield Node{id: e.id}
+                }
+            }
+        }
+    }
+    pub fn getCalleeGlobalSignature(self) -> *string {
+        let (pkg = self.getBelongsFile().getBelongsPkg()) {
+            let (a1 = pkg.getPath()) {
+                let (a2 = pkg.getName()) {
+                    let (s1 = a1 + "." + a2) {
+                        for (auto_tmp1 in self.getCalleeSignature()) {
+                            let (s2 = auto_tmp1) {
+                                let (s = s1 + "|" + s2) {
+                                    yield s
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    // For callExpr's parameter
+    pub fn getAParameter(self) -> *Node {
+        for (e in Expr(__all_data__)) {
+            let (idx = e.getIdx()) {
+                if (idx > 0) {
+                    if (e.getParentNode().key_eq(self)) {
+                        yield Node{id: e.id}
+                    }
+                }
+            }
+        }
+    }
+    pub fn getCalleeFuncName(self) -> *string {
+        for (tmp in self.getCallee()) {
+            for (callee in Expr(__all_data__)) {
+                if (callee.key_eq(tmp)) {
+                    if (!callee.isSelectorExpr()) {
+                        yield callee.print()
+                    }
+                    if(callee.isSelectorExpr()) {
+                        for (sl in SelectorExpr(__all_data__)) {
+                            if (sl.key_eq(callee)) {
+                                yield sl.getSelector().print()
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    pub fn getCalleeSignature(self) -> *string {
+        for (tmp in self.getCallee()) {
+            for (callee in Expr(__all_data__)) {
+                if (callee.key_eq(tmp)) {
+                    if (!callee.isSelectorExpr()) {
+                        yield callee.getSignature()
+                    }
+                    if (callee.isSelectorExpr()) {
+                        for (sl in SelectorExpr(__all_data__)) {
+                            if (sl.key_eq(callee)) {
+                                let (e1 = Expr{id: sl.getBase().id},
+                                    e2 = Expr{id: sl.getSelector().id}){
+                                    for (se1 in e1.getSignature(), se2 in e2.getSignature()) {
+                                        yield "(" + se1 + ") " + se2
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

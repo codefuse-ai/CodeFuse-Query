@@ -1,0 +1,395 @@
+/**
+ * @filename: DataFlowGraph
+ * @brief: Provides classes and predicates for working with a data flow graph based JavaScript / TypeScript program representation.
+ */
+
+schema DataFlowNode extends Node {
+}
+
+impl DataFlowNode {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *DataFlowNode {
+        for (tmp in Node(db)) {
+            if (isDataFlowNode(tmp)) {
+                yield DataFlowNode {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+
+    pub fn getAPredecessor(self) -> *DataFlowNode {
+        for (predecessor in DataFlowNode(__all_data__)) {
+            if (localFlowEdge(predecessor, self)) {
+                yield predecessor
+            }
+        }
+    }
+
+    pub fn getASuccessor(self) -> *DataFlowNode {
+        for (successor in DataFlowNode(__all_data__)) {
+            if (localFlowEdge(self, successor)) {
+                yield successor
+            }
+        }
+    }
+}
+
+pub fn isDataFlowNode(node: Node) -> bool {
+    if (isExpression(node)) {
+        return true
+    }
+    if (isVariableDeclaration(node)) {
+        return true
+    }
+    if (isBindingPattern(node)) {
+        return true
+    }
+    if (isFunctionLikeDeclaration(node)) {
+        return true
+    }
+    if (isParameter(node)) {
+        return true
+    }
+    if (isClassLikeDeclaration(node)) {
+        return true
+    }
+    if (isClassElement(node)) {
+        return true
+    }
+    if (isObjectLiteralElement(node)) {
+        return true
+    }
+    if (isModuleDeclaration(node)) {
+        return true
+    }
+    if (isEnumDeclaration(node)) {
+        return true
+    }
+    if (isEnumMember(node)) {
+        return true
+    }
+}
+
+pub fn lvalueFlowEdge(predecessor: DataFlowNode, successor: DataFlowNode) -> bool {
+    for (def in VarDef(__all_data__)) {
+        if (predecessor.key_eq(def.getSource())) {
+            for (auto_tmp1 in def.getATarget()) {
+                if (successor.key_eq(auto_tmp1)) {
+                    return true
+                }
+            }
+        }
+    }
+    for (bindingPattern in BindingPattern(__all_data__)) {
+        if (predecessor.key_eq(bindingPattern)) {
+            for (auto_tmp2 in bindingPattern.getAnElement()) {
+                if (successor.key_eq(auto_tmp2)) {
+                    return true
+                }
+            }
+        }
+    }
+    for (bindingElement in BindingElement(__all_data__)) {
+        if (predecessor.key_eq(bindingElement)) {
+            if (successor.key_eq(bindingElement.getNameNode())) {
+                return true
+            }
+        }
+    }
+    for (index in int::__undetermined_all__()) {
+        // TODO: Process all MayInvokeExpressions
+        for (callExpression in CallExpression(__all_data__)) {
+            if (predecessor.key_eq(callExpression.getArgument(index))) {
+                for (function in FunctionLikeDeclaration(__all_data__)) {
+                    if (function = callExpression.getCallee()) {
+                        if (successor.key_eq(function.getParameter(index))) {
+                            return true
+                        }
+                    }
+                }
+                // fallback if the CallExpression doesn't have a callee
+                if (!callExpression.hasCallee()) {
+                    if (successor.key_eq(callExpression)) {
+                        return true
+                    }
+                }
+            }
+        }
+    }
+    for (parameter in Parameter(__all_data__)) {
+        if (predecessor.key_eq(parameter)) {
+            if (successor.key_eq(parameter.getNameNode())) {
+                return true
+            }
+        }
+    }
+}
+
+pub fn immediateFlowEdge(predecessor: DataFlowNode, successor: DataFlowNode) -> bool {
+    for (varUse in VarUse(__all_data__)) {
+        if (successor.key_eq(varUse)) {
+            for (auto_tmp1 in varUse.getDefinedByLValue()) {
+                if (predecessor.key_eq(auto_tmp1)) {
+                    return true
+                }
+            }
+        }
+    }
+    for (parenthesizedExpression in ParenthesizedExpression(__all_data__)) {
+        if (successor.key_eq(parenthesizedExpression)) {
+            if (predecessor.key_eq(parenthesizedExpression.getExpression())) {
+                return true
+            }
+        }
+    }
+    for (commaExpression in CommaExpression(__all_data__)) {
+        if (successor.key_eq(commaExpression)) {
+            if (predecessor.key_eq(commaExpression.getRight())) {
+                return true
+            }
+        }
+    }
+    for (simpleAssignmentExpression in SimpleAssignmentExpression(__all_data__)) {
+        if (successor.key_eq(simpleAssignmentExpression)) {
+            if (predecessor.key_eq(simpleAssignmentExpression.getRight())) {
+                return true
+            }
+        }
+    }
+    for (typeAssertionExpression in TypeAssertionExpression(__all_data__)) {
+        if (successor.key_eq(typeAssertionExpression)) {
+            if (predecessor.key_eq(typeAssertionExpression.getExpression())) {
+                return true
+            }
+        }
+    }
+    for (asExpression in AsExpression(__all_data__)) {
+        if (successor.key_eq(asExpression)) {
+            if (predecessor.key_eq(asExpression.getExpression())) {
+                return true
+            }
+        }
+    }
+    for (unaryExpression in UnaryExpression(__all_data__)) {
+        if (successor.key_eq(unaryExpression)) {
+            let (tmp = unaryExpression.to<Node>()) {
+                if (isUpdateExpression(tmp)) {
+                    if (predecessor.key_eq(unaryExpression.getExpression())) {
+                        return true
+                    }
+                }
+                if (isTypeAssertionExpression(tmp)) {
+                    if (predecessor.key_eq(unaryExpression.getExpression())) {
+                        return true
+                    }
+                }
+                if (isAwaitExpression(tmp)) {
+                    if (predecessor.key_eq(unaryExpression.getExpression())) {
+                        return true
+                    }
+                }
+            }
+        }
+    }
+    for (nonNullExpression in NonNullExpression(__all_data__)) {
+        if (predecessor.key_eq(nonNullExpression.getExpression())) {
+            if (successor.key_eq(nonNullExpression)) {
+                return true
+            }
+        }
+    }
+    // TODO: ExpressionWithTypeArguments
+    for (compoundAssignmentExpression in CompoundAssignmentExpression(__all_data__)) {
+        if (successor.key_eq(compoundAssignmentExpression)) {
+            let (tmp = compoundAssignmentExpression.to<Node>()) {
+                if (isLogicalAndAssignmentExpression(tmp)) {
+                    for (auto_tmp2 in compoundAssignmentExpression.getAnOperand()) {
+                        if (predecessor.key_eq(auto_tmp2)) {
+                            return true
+                        }
+                    }
+                }
+                if (isLogicalOrAssignmentExpression(tmp)) {
+                    for (auto_tmp2 in compoundAssignmentExpression.getAnOperand()) {
+                        if (predecessor.key_eq(auto_tmp2)) {
+                            return true
+                        }
+                    }
+                }
+                if (isNullishAssignmentExpression(tmp)) {
+                    for (auto_tmp2 in compoundAssignmentExpression.getAnOperand()) {
+                        if (predecessor.key_eq(auto_tmp2)) {
+                            return true
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+pub fn indirectFlowEdge(predecessor: DataFlowNode, successor: DataFlowNode) -> bool {
+    for (unaryExpression in UnaryExpression(__all_data__)) {
+        if (successor.key_eq(unaryExpression)) {
+            if (isTypeOfExpression(Node(__all_data__).find(unaryExpression))) {
+                if (predecessor.key_eq(unaryExpression.getExpression())) {
+                    return true
+                }
+            }
+        }
+    }
+    for (binaryExpression in BinaryExpression(__all_data__)) {
+        if (successor.key_eq(binaryExpression)) {
+            let (tmp = binaryExpression.to<Node>()) {
+                if (isExponentiationExpression(tmp)) {
+                    for (auto_tmp1 in binaryExpression.getAnOperand()) {
+                        if (predecessor.key_eq(auto_tmp1)) {
+                            return true
+                        }
+                    }
+                }
+                if (isMultiplicativeExpression(tmp)) {
+                    for (auto_tmp1 in binaryExpression.getAnOperand()) {
+                        if (predecessor.key_eq(auto_tmp1)) {
+                            return true
+                        }
+                    }
+                }
+                if (isAdditiveExpression(tmp)) {
+                    for (auto_tmp1 in binaryExpression.getAnOperand()) {
+                        if (predecessor.key_eq(auto_tmp1)) {
+                            return true
+                        }
+                    }
+                }
+                if (isShiftExpression(tmp)) {
+                    for (auto_tmp1 in binaryExpression.getAnOperand()) {
+                        if (predecessor.key_eq(auto_tmp1)) {
+                            return true
+                        }
+                    }
+                }
+                if (isRelationalExpression(tmp)) {
+                    for (auto_tmp1 in binaryExpression.getAnOperand()) {
+                        if (predecessor.key_eq(auto_tmp1)) {
+                            return true
+                        }
+                    }
+                }
+                if (isEqualityTestExpression(tmp)) {
+                    for (auto_tmp1 in binaryExpression.getAnOperand()) {
+                        if (predecessor.key_eq(auto_tmp1)) {
+                            return true
+                        }
+                    }
+                }
+                if (isBinaryBitwiseExpression(tmp)) {
+                    for (auto_tmp1 in binaryExpression.getAnOperand()) {
+                        if (predecessor.key_eq(auto_tmp1)) {
+                            return true
+                        }
+                    }
+                }
+                if (isCompoundAssignmentExpression(tmp)) {
+                    for (auto_tmp1 in binaryExpression.getAnOperand()) {
+                        if (predecessor.key_eq(auto_tmp1)) {
+                            return true
+                        }
+                    }
+                }
+            }
+        }
+    }
+    for (objectLiteralExpression in ObjectLiteralExpression(__all_data__),
+        varDef in VarDef(__all_data__)) {
+        if (varDef.getSource().key_eq(objectLiteralExpression)) {
+            for (accessExpression in AccessExpression(__all_data__)) {
+                if (successor.key_eq(accessExpression)) {
+                    for (auto_tmp1 in varDef.getAUse()) {
+                        if (accessExpression.key_eq(auto_tmp1)) {
+                            let (propertyName = accessExpression.getPropertyName()) {
+                                let (objectLiteralElement = objectLiteralExpression.getPropertyByName(propertyName)) {
+                                    for (propertyAssignment in PropertyAssignment(__all_data__)) {
+                                        if (propertyAssignment.key_eq(objectLiteralElement)) {
+                                            if (predecessor.key_eq(propertyAssignment.getInitializer())) {
+                                                return true
+                                            }
+                                        }
+                                    }
+                                    for (shorthandPropertyAssignment in ShorthandPropertyAssignment(__all_data__)) {
+                                        if (shorthandPropertyAssignment.key_eq(objectLiteralElement)) {
+                                            if (predecessor.key_eq(shorthandPropertyAssignment.getIdentifier())) {
+                                                return true
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+pub fn localFlowEdge(predecessor: DataFlowNode, successor: DataFlowNode) -> bool {
+    /**
+     * @todo the edges from the default values in BindingPatterns
+     */
+    if (lvalueFlowEdge(predecessor, successor)) {
+        return true
+    }
+    if (immediateFlowEdge(predecessor, successor)) {
+        return true
+    }
+    for (binaryLogicalExpression in BinaryLogicalExpression(__all_data__)) {
+        if (successor.key_eq(binaryLogicalExpression)) {
+            for (auto_tmp1 in binaryLogicalExpression.getAnOperand()) {
+                if (predecessor.key_eq(auto_tmp1)) {
+                    return true
+                }
+            }
+        }
+    }
+    for (conditionalExpression in ConditionalExpression(__all_data__)) {
+        if (successor.key_eq(conditionalExpression)) {
+            for (auto_tmp2 in conditionalExpression.getABranch()) {
+                if (predecessor.key_eq(auto_tmp2)) {
+                    return true
+                }
+            }
+        }
+    }
+    for (function in FunctionLikeDeclaration(__all_data__)) {
+        for (auto_tmp3 in function.getAReturnedExpression()) {
+            if (predecessor.key_eq(auto_tmp3)) {
+                for (auto_tmp4 in function.getACallSite()) {
+                    if (successor.key_eq(auto_tmp4)) {
+                        return true
+                    }
+                }
+            }
+        }
+    }
+    if (indirectFlowEdge(predecessor, successor)) {
+        return true
+    }
+}
+
+pub fn flowTo(source: Node, sink: Node) -> bool {
+    if (source = sink) {
+        return true
+    }
+    let (begin = source.to<DataFlowNode>()) {
+        for (middle in Node(__all_data__)) {
+            if (localFlowEdge(begin, DataFlowNode(__all_data__).find(middle))) {
+                if (flowTo(middle, sink)) {
+                    return true
+                }
+            }
+        }
+    }
+}

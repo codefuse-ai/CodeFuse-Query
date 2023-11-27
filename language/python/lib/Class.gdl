@@ -1,0 +1,255 @@
+/**
+ * @brief A python class, which is a class def statement.
+ */
+schema Class extends ClassDefStatement {
+    
+}
+impl Class {
+    @data_constraint
+    @inline
+    fn __all__(db: PythonDB) -> *Class {
+        for (tmp in ClassDefStatement(db)) {
+            yield Class {
+                element_oid : tmp.element_oid,
+                type : tmp.type,
+                element_index : tmp.element_index,
+                parent_oid : tmp.parent_oid,
+                location_oid : tmp.location_oid,
+                printable_text : tmp.printable_text
+            }
+        }
+    }
+    /**
+     * @brief gets the qualified name of the class.
+     * @return string
+     */
+    pub fn getQualifiedName(self) -> string {
+        for (s in Scope(__all_data__)) {
+            if (s = self.getEnclosingScope()) {
+                let (postfix = self.getName()) {
+                    for (m in Module(__all_data__)) {
+                        if (m.key_eq(s)) {
+                            let (name = postfix) {
+                                return name
+                            }
+                        }
+                    }
+                    for (c in Class(__all_data__)) {
+                        if (c.key_eq(s)) {
+                            let (suffix = c.getQualifiedName()) {
+                                let (name = suffix + "." + postfix) {
+                                    return name
+                                }
+                            }
+                        }
+                    }
+                    for (c in Function(__all_data__)) {
+                        if (c.key_eq(s)) {
+                            let (suffix = c.getQualifiedName()) {
+                                let (name = suffix + "." + postfix) {
+                                    return name
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the function defined in the class, if any.
+     * @return Function
+     */
+    pub fn getAFunction(self) -> *Function {
+        for (f in Function(__all_data__)) {
+            if (self.key_eq(f.getParent())) {
+                yield f
+            }
+        }
+    }
+    /**
+     * @brief gets the init function for the class, if any.
+     * @return Function
+     */
+    pub fn getInitFunction(self) -> InitFunction {
+        for (f in InitFunction(__all_data__)) {
+            for (auto_tmp1 in self.getAFunction()) {
+                if (f.key_eq(auto_tmp1)) {
+                    return f
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the decorator of the class, if any.
+     * @return Decorator
+     */
+    pub fn getDecorator(self) -> *Decorator {
+        for (d in Decorator(__all_data__)) {
+            if (self.key_eq(d.getDecoratedElement())) {
+                yield d
+            }
+        }
+    }
+    /**
+     * @brief gets the base expression of the class, if any.
+     * @return Expression
+     */
+    pub fn getBase(self) -> *Expression {
+        for (r in ClassHierarchy(__all_data__)) {
+            if (self = r.getClass()) {
+                yield r.getBasedClass()
+            }
+        }
+    }
+    /**
+     * @brief gets the base name of the class, if any.
+     * @return string
+     */
+    pub fn getBaseName(self) -> *string {
+        for (e in self.getBase()) {
+            yield e.getPrintableText()
+        }
+    }
+    /**
+     * @brief gets the inherited class of the class, if any.
+     * @return Class
+     */
+    pub fn getInheritedClass(self) -> Class {
+        for (a in Class(__all_data__)) {
+            for (auto_tmp1 in self.getBaseName()) {
+                if (getInternalInheritance(self, auto_tmp1, a)) {
+                    return a
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets an ancestor inherited class of the class, if any.
+     * @return Class
+     */
+    pub fn getAnAncestorInheritedClass(self) -> *Class {
+        let (s = self.getInheritedClass()) {
+            yield s
+        }
+        for (auto_tmp1 in self.getAnAncestorInheritedClass()) {
+            yield auto_tmp1.getInheritedClass()
+        }
+    }
+}
+/**
+ * @brief ClassHierarchy relation.
+ */
+schema ClassHierarchy extends ClassHierarchyDO {
+    
+}
+impl ClassHierarchy {
+    @data_constraint
+    @inline
+    fn __all__(db: PythonDB) -> *ClassHierarchy {
+        for (tmp in ClassHierarchyDO(db)) {
+            yield ClassHierarchy {
+                base_oid : tmp.base_oid,
+                class_oid : tmp.class_oid
+            }
+        }
+    }
+    /**
+     * @brief gets the based class in the inherited relation.
+     * @return Expression
+     */
+    pub fn getBasedClass(self) -> Expression {
+        for (e in Expression(__all_data__)) {
+            if (self.key_eq(e)) {
+                return e
+            }
+        }
+    }
+    /**
+     * @brief gets the class in the inherited relation.
+     * @return Class
+     */
+    pub fn getClass(self) -> Class {
+        for (c in Class(__all_data__)) {
+            if (c.element_oid = self.getClassOid()) {
+                return c
+            }
+        }
+    }
+}
+pub fn getInheritanceFromImport(cc : Class, n : string, a : Class) -> bool {
+    for (c in Alias(__all_data__),
+        i in ImportFromStatement(__all_data__),
+        o in Module(__all_data__)) {
+        if (cc.getEnclosingScope() = i.getEnclosingScope()) {
+            for (auto_tmp1 in cc.getBase()) {
+                if (n = auto_tmp1.getPrintableText()) {
+                    if (i.key_eq(c.getParent())) {
+                        if (c.getName() = n) {
+                            if (n = a.getName()) {
+                                if (o.key_eq(a.getEnclosingScope())) {
+                                    let (m = i.getModuleName()) {
+                                        let (l = o.getName()) {
+                                            if (m.contains(l)) {
+                                                let (j = o.getParent().getRelativePath()) {
+                                                    let (k = ".*" + m + ".py") {
+                                                        if (j.matches(k)) {
+                                                            return true
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        if (c.getAsname() = n) {
+                            if (n = a.getName()) {
+                                if (o.key_eq(a.getEnclosingScope())) {
+                                    let (m = i.getModuleName()) {
+                                        let (l = o.getName()) {
+                                            if (m.contains(l)) {
+                                                let (j = o.getParent().getRelativePath()) {
+                                                    let (k = ".*" + m + ".py") {
+                                                        if (j.matches(k)) {
+                                                            return true
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn getInheritanceInTheSameModule(c : Class, n : string, a : Class) -> bool {
+    if (a.getName() = n) {
+        for (auto_tmp1 in c.getBase()) {
+            if (n = auto_tmp1.getPrintableText()) {
+                if (c.getEnclosingScope() = a.getEnclosingScope()) {
+                    return true
+                }
+                for (auto_tmp2 in c.getAnAncestor()) {
+                    if (a.key_eq(auto_tmp2)) {
+                        return true
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn getInternalInheritance(c : Class, n : string, a : Class) -> bool {
+    if (getInheritanceFromImport(c, n, a)) {
+        return true
+    }
+    if (getInheritanceInTheSameModule(c, n, a)) {
+        return true
+    }
+}

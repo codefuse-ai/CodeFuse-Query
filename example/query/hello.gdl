@@ -1,0 +1,8 @@
+// script
+fn hello(greeting: string) -> bool {
+    return greeting = "hello world!"
+}
+
+fn main() {
+    output(hello())
+}

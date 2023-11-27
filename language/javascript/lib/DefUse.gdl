@@ -1,0 +1,706 @@
+/**
+ * @filename: DefUse
+ * @brief: Provides classes and predicates for working with def-use relation representation.
+ */
+
+schema VarRef extends BindingName {
+}
+
+impl VarRef {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *VarRef {
+        for (tmp in BindingName(db)) {
+            yield VarRef {
+                id : tmp.id
+            }
+        }
+    }
+}
+
+/**
+ * An expression can be referenced, including:
+ * 1. VarRef: `i++`
+ * 2. AccessExpression: `o.p` / `o['p']`
+ */
+schema RefExpr extends Node {
+}
+
+impl RefExpr {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *RefExpr {
+        for (tmp in Node(db)) {
+            for (varRef in VarRef(db)) {
+                if (tmp.key_eq(varRef)) {
+                    yield RefExpr {
+                        id : tmp.id
+                    }
+                }
+            }
+            if (isAccessExpression(tmp)) {
+                yield RefExpr {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+
+    /**
+     * Get the name of this RefExpr.
+     */
+    pub fn getRefName(self) -> string {
+        for (varRef in VarRef(__all_data__)) {
+            if (self.key_eq(varRef)) {
+                let (name = varRef.getName()) {
+                    return name
+                }
+            }
+        }
+        for (accessExpression in AccessExpression(__all_data__)) {
+            if (self.key_eq(accessExpression)) {
+                let (leftHandSideExpression = accessExpression.getExpression()) {
+                    let (leftHandName = leftHandSideExpression.getText()) {
+                        let (rightHandName = accessExpression.getPropertyName()) {
+                            let (name = leftHandName + "." + rightHandName) {
+                                return name
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Determine whether this RefExpr has symbol.
+     */
+    pub fn hasSymbol(self) -> bool {
+        for (symbol in Symbol(__all_data__)) {
+            if (symbol = self.getSymbol()) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * A RefExpr that is written to.
+ * 1. x = 1; x is LValue
+ * 2. o.p = 1; o.p is LValue
+ */
+schema LValue extends RefExpr {
+}
+
+impl LValue {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *LValue {
+        for (tmp in RefExpr(db)) {
+            if (isLValue(tmp)) {
+                yield LValue {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+
+    /**
+     * Get the defination node in cfg.
+     */
+    pub fn getDefNode(self) -> ControlFlowNode {
+        for (def in ControlFlowNode(__all_data__)) {
+            if (defLValue(def, RefExpr(__all_data__).find(self))) {
+                return def
+            }
+        }
+    }
+
+    /**
+     * Get the source of the expression that is written to this LValue.
+     */
+    pub fn getRhs(self) -> Expression {
+        for (rhs in Expression(__all_data__)) {
+            if (defnWithRhs(__all_data__, Expression(__all_data__).find(self), rhs)) {
+                return rhs
+            }
+        }
+    }
+}
+
+/**
+ * A RefExpr that is read form.
+ * 1. x = y; y is RValue
+ * 2. x = o.p; o.p is RValue
+ */
+schema RValue extends RefExpr {
+}
+
+impl RValue {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *RValue {
+        for (tmp in RefExpr(db)) {
+            if (isRValue(tmp)) {
+                yield RValue {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A ControlFlowNode that uses a single RefExpr.
+ */
+schema VarUse extends ControlFlowNode {
+}
+
+impl VarUse {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *VarUse {
+        for (controlFlowNode in ControlFlowNode(db)) {
+            if (isRValue(controlFlowNode.to<RefExpr>())) {
+                yield VarUse {
+                    id : controlFlowNode.id
+                }
+            }
+        }
+    }
+
+    /**
+     * Determine whether there exists a neareast LValue that defines current use node in same BB.
+     */
+    pub fn existNearestLocalDefinedLValue(self) -> bool {
+        if (self.nearestLocalDefinedLValue().to_set().len() != 0) {
+            return true
+        }
+    }
+
+    /**
+     * Gets the LValue nodes that can define this use node.
+     */
+    pub fn getDefinedByLValue(self) -> *LValue {
+        if (self.existNearestLocalDefinedLValue()) {
+            yield self.nearestLocalDefinedLValue()
+        }
+        if (!self.existNearestLocalDefinedLValue()) {
+            let (bb = self.getBasicBlock()) {
+                let (lvalue = defLiveAtBBEntry(bb)) {
+                    if (isSameRefExpr(lvalue.to<RefExpr>(), self.to<RefExpr>())) {
+                        yield lvalue
+                    }
+                }
+            }
+        }
+    }
+
+    pub fn getDefinedByLValueRecursive(self) -> *LValue {
+        yield self.getDefinedByLValue()
+        for (tmpLValue in self.getDefinedByLValue()) {
+            for (rhs in Expression(__all_data__)) {
+                if (defnWithRhs(__all_data__, Expression {id: tmpLValue.id}, rhs)) {
+                    yield VarUse{id: rhs.id}.getDefinedByLValueRecursive()
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets VarDef site.
+     */
+    pub fn getADef(self) -> *ControlFlowNode {
+        for (lvalue in self.getDefinedByLValue()) {
+            for (def in VarDef(__all_data__)) {
+                if (lvalue in def.getATarget()) {
+                    yield def.to<ControlFlowNode>()
+                }
+            }
+        }
+    }
+
+    pub fn getADefRecursive(self) -> *ControlFlowNode {
+        for (lvalue in self.getDefinedByLValueRecursive()) {
+            for (def in VarDef(__all_data__)) {
+                if (lvalue in def.getATarget()) {
+                    yield def.to<ControlFlowNode>()
+                }
+            }
+        }
+    }
+
+    fn getLocalDefinedLValueIndexBefore(self) -> *int {
+        let (bb = self.getBasicBlock()) {
+            for (index in int::__undetermined_all__()) {
+                if (self.key_eq(bb.getNode(index))) {
+                    for (i in int::__undetermined_all__()) {
+                        for (lvalue in LValue(__all_data__)) {
+                            if (i < index && defAtBB(bb, lvalue, i)) {
+                                if (isSameRefExpr(self.to<RefExpr>(), lvalue.to<RefExpr>())) {
+                                    yield i
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets the neareast LValue that defines current use node in same BB.
+     */
+    pub fn nearestLocalDefinedLValue(self) -> LValue {
+        let (bb = self.getBasicBlock()) {
+            let (neaerestLValueIndex = self.getLocalDefinedLValueIndexBefore().max()) {
+                return bb.getNode(neaerestLValueIndex).to<LValue>()
+            }
+        }
+    }
+}
+
+/**
+ * A ControlFlowNode that defines some RefExpr nodes, this node is a site.
+ * Including:
+ * 1. variable defination: let x = 1;
+ * 2. assignment expression: x = 1, x+= 1;
+ * 3. for like statement: for (x in ...);
+ * 4. parameter: function foo(p);
+ * 5. function with name: function foo();
+ */
+schema VarDef extends ControlFlowNode {
+}
+
+impl VarDef {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *VarDef {
+        for (tmp in ControlFlowNode(db)) {
+            if (defn(tmp, __all_data__)) {
+                yield VarDef {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets the target of VarDef, maybe the type of target is LValue?
+     */
+    pub fn getATarget(self) -> *LValue {
+        for (refExpr in RefExpr(__all_data__), cfn in ControlFlowNode(__all_data__)) {
+            if (self.key_eq(cfn) && defLValue(cfn, refExpr)) {
+                yield refExpr.to<LValue>()
+            }
+        }
+    }
+
+    /**
+     * Get the data source of this variable definition.
+     */
+    pub fn getSource(self) -> Expression {
+        for (source in Expression(__all_data__)) {
+            if (defnWithRhs(self.to<ControlFlowNode>(), __all_data__, source)) {
+                return source
+            }
+        }
+    }
+
+    /**
+     * Gets the RValue that are defined by this node.
+     */
+    pub fn getAUse(self) -> *VarUse {
+        for (use1 in VarUse(__all_data__)) {
+            for (def in use1.getADef()) {
+                if (def.key_eq(self)) {
+                    yield use1
+                }
+            }
+        }
+    }
+}
+
+pub fn defnWithRhs(def: ControlFlowNode, lhs: Expression, rhs: Expression) -> bool {
+    for (assignmentExpression in AssignmentExpression(__all_data__)) {
+        if (def.key_eq(assignmentExpression)) {
+            if (lhs = assignmentExpression.getLeftOperand()) {
+                if (rhs = assignmentExpression.getRightOperand()) {
+                    return true
+                }
+            }
+        }
+    }
+    for (variableDeclaration in VariableDeclaration(__all_data__)) {
+        if (def.key_eq(variableDeclaration)) {
+            if (lhs.key_eq(variableDeclaration.getNameNode())) {
+                if (rhs = variableDeclaration.getInitializer()) {
+                    return true
+                }
+            }
+        }
+    }
+    for (parameter in Parameter(__all_data__)) {
+        if (def.key_eq(parameter)) {
+            if (lhs.key_eq(parameter.getNameNode())) {
+                if (rhs = parameter.getInitializer()) {
+                    return true
+                }
+            }
+        }
+    }
+    for (enumDeclaration in EnumDeclaration(__all_data__)) {
+        if (def.key_eq(lhs)) {
+            if (lhs.key_eq(enumDeclaration.getIdentifier())) {
+                if (rhs.key_eq(enumDeclaration)) {
+                    return true
+                }
+            }
+        }
+    }
+    for (enumMember in EnumMember(__all_data__)) {
+        if (def.key_eq(enumMember.getName())) {
+            if (lhs.key_eq(def)) {
+                if (rhs = enumMember.getInitializer()) {
+                    return true
+                }
+            }
+        }
+    }
+    for (functionLikeDeclaration in FunctionLikeDeclaration(__all_data__)) {
+        if (def.key_eq(functionLikeDeclaration.getNameNode())) {
+            if (lhs.key_eq(def)) {
+                if (rhs.key_eq(functionLikeDeclaration)) {
+                    return true
+                }
+            }
+        }
+    }
+}
+
+pub fn defn(def: ControlFlowNode, lhs: Expression) -> bool {
+    if (defnWithRhs(def, lhs, __all_data__)) {
+        return true
+    }
+    for (variableDeclaration in VariableDeclaration(__all_data__)) {
+        if (def.key_eq(variableDeclaration)) {
+            if (lhs.key_eq(variableDeclaration.getNameNode())) {
+                if (!variableDeclaration.hasInitializer()) {
+                    return true
+                }
+            }
+        }
+    }
+    for (parameter in Parameter(__all_data__)) {
+        if (def.key_eq(parameter)) {
+            if (lhs.key_eq(parameter.getNameNode())) {
+                if (!parameter.hasInitializer()) {
+                    return true
+                }
+            }
+        }
+    }
+    for (compoundAssignmentExpression in CompoundAssignmentExpression(__all_data__)) {
+        if (def.key_eq(compoundAssignmentExpression)) {
+            if (lhs = compoundAssignmentExpression.getLeftOperand()) {
+                return true
+            }
+        }
+    }
+    for (incrementExpression in IncrementExpression(__all_data__)) {
+        if (def.key_eq(incrementExpression)) {
+            if (lhs = incrementExpression.getExpression()) {
+                return true
+            }
+        }
+    }
+    for (decrementExpression in DecrementExpression(__all_data__)) {
+        if (def.key_eq(decrementExpression)) {
+            if (lhs = decrementExpression.getExpression()) {
+                return true
+            }
+        }
+    }
+    for (enumMember in EnumMember(__all_data__)) {
+        if (def.key_eq(enumMember.getName())) {
+            if (lhs.key_eq(def)) {
+                if (!enumMember.hasInitializer()) {
+                    return true
+                }
+            }
+        }
+    }
+    // if expression exists in forInitializer, it is a left expression.
+    for (forInitializer in ForInitializer(__all_data__)) {
+        if (def.key_eq(forInitializer)) {
+            if (isExpression(forInitializer.to<Node>())) {
+                if (lhs.key_eq(forInitializer)) {
+                    return true
+                }
+            }
+        }
+    }
+}
+
+/**
+ * The relation of definitions and lvalues
+ */
+pub fn defLValue(def: ControlFlowNode, lValue: RefExpr) -> bool {
+    if (defn(def, Expression(__all_data__).find(lValue))) {
+        return true
+    }
+    // including ObjectBindingPattern and ArrayBindingPattern
+    for (bindingPattern in BindingPattern(__all_data__)) {
+        if (defLValue(def, RefExpr(__all_data__).find(bindingPattern))) {
+            for (bindingElement in BindingElement(__all_data__)) {
+                for (auto_tmp1 in bindingPattern.getAnElement()) {
+                    if (bindingElement.key_eq(auto_tmp1)) {
+                        if (lValue.key_eq(bindingElement.getNameNode())) {
+                            return true
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+pub fn isLValue(refExpr: RefExpr) -> bool {
+    return defLValue(__all_data__, refExpr)
+}
+
+/**
+ * Determine a PropertyName expr exists in a PropertyAssignment expr.
+ */
+pub fn isPropertyNameInPropertyAssignment(propertyName: PropertyName) -> bool {
+    for (propertyAssignment in PropertyAssignment(__all_data__)) {
+        if (propertyName = propertyAssignment.getPropertyName()) {
+            return true
+        }
+    }
+}
+
+pub fn isPropertyExpressionInAccessExpression(propertyExpression: Expression) -> bool {
+    for (accessExpression in AccessExpression(__all_data__)) {
+        if (propertyExpression = accessExpression.getPropertyExpression()) {
+            return true
+        }
+    }
+}
+
+pub fn isRValue(refExpr: RefExpr) -> bool {
+    for (aRefExpr in RefExpr(__all_data__)) {
+        if (refExpr = aRefExpr) {
+            if (!isRefExprIsVariableDeclaration(refExpr) &&
+                !isLValue(refExpr) &&
+                !isRefExprIsPropertyNameInPropertyAssignment(refExpr) &&
+                !isRefExprIsPropertyExpressionInAccessExpression(refExpr)) {
+                return true
+            }
+        }
+    }
+    // CompoundAssignmentExpression's left operand are both LValue and RValue
+    for (compoundAssignmentExpression in CompoundAssignmentExpression(__all_data__)) {
+        if (refExpr.key_eq(compoundAssignmentExpression.getLeftOperand())) {
+            return true
+        }
+    }
+    // the expression belongs to IncrementExpression and DecrementExpression is both LValue and RValue
+    for (incrementExpression in IncrementExpression(__all_data__)) {
+        if (refExpr.key_eq(incrementExpression.getExpression())) {
+            return true
+        }
+    }
+    for (decrementExpression in DecrementExpression(__all_data__)) {
+        if (refExpr.key_eq(decrementExpression.getExpression())) {
+            return true
+        }
+    }
+    // TODO: namespace identifier
+}
+
+/**
+ * Gets the lvalue defined in bb, with bb index
+ */
+pub fn defAtBB(bb: BasicBlock, lvalue: LValue, index: int) -> bool {
+    for (cfn in ControlFlowNode(__all_data__)) {
+        if (cfn = bb.getNode(index)) {
+            if (cfn.key_eq(lvalue)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Gets the VarUse used in bb, with bb index
+ */
+pub fn useAtBB(bb: BasicBlock, varUse: VarUse, index: int) -> bool {
+    for (cfn in ControlFlowNode(__all_data__)) {
+        if (cfn.key_eq(varUse)) {
+            if (cfn = bb.getNode(index)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Get the corresponding symbol of a RefExpr.
+ * It also gets the value symbol of a ShorthandPropertyAssignment or the name node (Identifier) of it.
+ */
+pub fn getSymbol(refExpr: RefExpr) -> Symbol {
+    let (symbol = refExpr.getSymbol()) {
+        return symbol
+    }
+    for (shorthandPropertyAssignment in ShorthandPropertyAssignment(__all_data__)) {
+        if (shorthandPropertyAssignment.key_eq(refExpr)) {
+            let (symbol = shorthandPropertyAssignment.getValueSymbol()) {
+                return symbol
+            }
+        }
+        if (shorthandPropertyAssignment.getNameNode().key_eq(refExpr)) {
+            let (symbol = shorthandPropertyAssignment.getValueSymbol()) {
+                return symbol
+            }
+        }
+    }
+}
+
+/**
+ * Determine whether 2 RefExpr with same "symbol".
+ * Actually we want to determine 2 written locations have alias.
+ * Current we depend on symbol information calculated by tsc, should
+ * improve this predicated if needed.
+ */
+pub fn isSameRefExpr(refExpr1: RefExpr, refExpr2: RefExpr) -> bool {
+    if (refExpr1 = refExpr2) {
+        return true
+    }
+    let (symbol = getSymbol(refExpr1)) {
+        if (symbol = getSymbol(refExpr2)) {
+            if (refExpr1 != refExpr2) {
+                return true
+            }
+        }
+    }
+    // FIXME: ref name query is very very slow, need to fix it later
+    // we should find 2 ref exprs located at same compilation unit
+    let (fld = refExpr1.getEnclosingFunction()) {
+        if (fld = refExpr2.getEnclosingFunction()) {
+            if (!refExpr1.hasSymbol()) {
+                let (symbolName = refExpr1.getRefName()) {
+                    if (symbolName = refExpr2.getRefName()) {
+                        if (refExpr1 != refExpr2) {
+                            return true
+                        }
+                    }
+                }
+            }
+            if (refExpr1.hasSymbol()) {
+                if (!refExpr2.hasSymbol()) {
+                    let (symbolName = refExpr1.getRefName()) {
+                        if (symbolName = refExpr2.getRefName()) {
+                            if (refExpr1 != refExpr2) {
+                                return true
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+/**
+ * Gets the killers in BB that kill the given lvalue, with BB index.
+ */
+pub fn killedByBBWithKiller(bb: BasicBlock, lvalue: LValue, killer: LValue, index: int) -> bool {
+    if (defAtBB(bb, killer, index)) {
+        for (lvalueCFN in ControlFlowNode(__all_data__),
+            killerCFN in ControlFlowNode(__all_data__)) {
+            if (killer.key_eq(killerCFN)) {
+                if (lvalue.key_eq(lvalueCFN)) {
+                    if (nodeInSameCFG(killerCFN, lvalueCFN)) {
+                        if (lvalue != killer) {
+                            // lvalue and killer are in same bb, lvalue index should be less than killer index
+                            for (lvalueIndex in int::__undetermined_all__()) {
+                                if (defAtBB(bb, lvalue, lvalueIndex)) {
+                                    if (lvalue != killer) {
+                                        if (lvalueIndex < index) {
+                                            if (isSameRefExpr(RefExpr(__all_data__).find(lvalue), RefExpr(__all_data__).find(killer))) {
+                                                return true
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            // lvalue and killer are in different bb
+                            if (lvalueCFN.key_eq(lvalue)) {
+                                let (lvalueBB = lvalueCFN.getBasicBlock()) {
+                                    if (lvalueBB != bb) {
+                                        if (isSameRefExpr(RefExpr(__all_data__).find(lvalue), RefExpr(__all_data__).find(killer))) {
+                                            return true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+/**
+ * Determine whether the lvalue is killed by bb.
+ */
+pub fn killedByBB(bb: BasicBlock, lvalue: LValue) -> bool {
+    if (killedByBBWithKiller(bb, lvalue, __all_data__, __all_data__)) {
+        return true
+    }
+}
+
+/**
+ * Gets the LValue nodes live at the entry of BB.
+ */
+pub fn defLiveAtBBEntry(bb: BasicBlock) -> LValue {
+    for (lvalue in LValue(__all_data__)) {
+        for (predecessor in bb.getABBPredecessor()) {
+            if (lvalue = defLiveAtBBExit(predecessor)) {
+                return lvalue
+            }
+        }
+    }
+}
+
+/**
+ * Gets the LValue nodes live at the exit of BB.
+ */
+pub fn defLiveAtBBExit(bb: BasicBlock) -> LValue {
+    for (lvalue in LValue(__all_data__)) {
+        if (defAtBB(bb, lvalue, __all_data__)) {
+            if (!killedByBB(bb, lvalue)) {
+                return lvalue
+            }
+        }
+        if (lvalue = defLiveAtBBEntry(bb)) {
+            if (!killedByBB(bb, lvalue)) {
+                return lvalue
+            }
+        }
+    }
+}
+
+fn isRefExprIsVariableDeclaration(refExpr: RefExpr) -> bool {
+    return isVariableDeclaration(refExpr.to<Node>())
+}
+
+fn isRefExprIsPropertyNameInPropertyAssignment(refExpr: RefExpr) -> bool {
+    return isPropertyNameInPropertyAssignment(refExpr.to<PropertyName>())
+}
+
+fn isRefExprIsPropertyExpressionInAccessExpression(refExpr: RefExpr) -> bool {
+    return isPropertyExpressionInAccessExpression(refExpr.to<Expression>())
+}

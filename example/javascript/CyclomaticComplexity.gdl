@@ -1,0 +1,34 @@
+// script
+use coref::javascript::*
+
+fn default_db() -> JavascriptDB {
+    return JavascriptDB::load("coref_javascript_src.db")
+}
+
+/**
+ * Output the cyclomatic complexity of each function
+ *
+ * @param filePath      file path
+ * @param functionName  function name
+ * @param complexity    cyclomatic complexity
+ * @param startLine     function start line
+ * @param endLine       function end line
+ */
+fn out(filePath: string, functionName: string, complexity: int, startLine: int, endLine: int) -> bool {
+    let (db = default_db()) {
+        for (func in FunctionLikeDeclaration(db), file in File(db)) {
+            if (complexity = func.getCyclomaticComplexity() &&
+                functionName = func.getName() &&
+                file = func.getLocation().getFile() &&
+                filePath = file.getRelativePath() &&
+                startLine = func.getLocation().getStartLineNumber() &&
+                endLine = func.getLocation().getEndLineNumber()) {
+                return true
+            }
+        }
+    }
+}
+
+fn main() {
+    output(out())
+}

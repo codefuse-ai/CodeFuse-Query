@@ -1,0 +1,55 @@
+/**
+ * @filename: LOCATION
+ * @brief: LOCATION provides classes and predicates for working with Js locations
+ */
+
+/**
+ * The location information of a locatable.
+ */
+schema Location extends LocationDO {
+}
+
+impl Location {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *Location {
+        for (tmp in LocationDO(db)) {
+            yield Location {
+                oid : tmp.oid,
+                file_oid : tmp.file_oid,
+                start_line_number : tmp.start_line_number,
+                start_column_number : tmp.start_column_number,
+                end_line_number : tmp.end_line_number,
+                end_column_number : tmp.end_column_number,
+                text : tmp.text
+            }
+        }
+    }
+
+    /**
+     * Gets the file of this location
+     * @return File 
+     */
+    pub fn getFile(self) -> File {
+        for (file in File(__all_data__)) {
+            if (file.oid = self.getFileOid()) {
+                return file
+            }
+        }
+    }
+
+    /**
+     * Gets the file relative path of this location
+     */
+    pub fn getRelativePath(self) -> string {
+        for (relativePath in string::__undetermined_all__()) {
+            for (file in File(__all_data__)) {
+                if (file = self.getFile()) {
+                    if (relativePath = file.getRelativePath()) {
+                        return relativePath
+                    }
+                }
+            }
+        }
+    }
+}

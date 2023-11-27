@@ -1,0 +1,340 @@
+/**
+ * @brief A parameter of a method, foreach statement or catch block.
+ */
+schema Parameter extends ParameterDO {
+
+}
+impl Parameter {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *Parameter {
+        for (tmp in ParameterDO(db)) {
+            yield Parameter {
+                element_hash_id : tmp.element_hash_id,
+                name : tmp.name,
+                index_order : tmp.index_order,
+                parent_hash_id : tmp.parent_hash_id,
+                location_hash_id : tmp.location_hash_id,
+                printable_text : tmp.printable_text,
+                type_hash_id : tmp.type_hash_id
+            }
+        }
+    }
+    /**
+     * @brief gets the identifier of the parameter. 
+     * @return Identifier 
+     */
+    pub fn getIdentifier(self) -> Identifier {
+        for (ident in Identifier(__all_data__)) {
+            if (self.key_eq(ident.getParent())) {
+                return ident
+            }
+        }
+    }
+    /**
+     * @brief gets the type for the element.
+     * @return Type
+     */
+    pub fn getType(self) -> Type {
+        for (type in Type(__all_data__)) {
+            if (type.id = self.getTypeHashId()) {
+                return type
+            }
+        }
+    }
+    /**
+     * @brief gets the type element for the element.
+     * @return TypeElement
+     */
+    pub fn getTypeElement(self) -> TypeElement {
+        for (type in TypeElement(__all_data__)) {
+            if (self.element_hash_id = type.getParentHashId()) {
+                return type
+            }
+        }
+    }
+    /**
+     * @brief gets the parent of the element, which can be a for each statement, lambda expression, a callable, or a catch clause section.
+     * @return ExpressionParent 
+     */
+    pub fn getParent(self) -> ElementParent {
+        for (c in ElementParent(__all_data__)) {
+            if (c.id = self.getParentHashId()) {
+                return c
+            }
+        }
+    }
+    /**
+     * @brief gets an ancestor of the element.
+     * @return ElementParent 
+     */
+    pub fn getAnAncestor(self) -> *ElementParent {
+        for (tmp in ElementParent(__all_data__)) {
+            if (tmp.key_eq(self)) {
+                yield tmp.getAnAncestor()
+            }
+        }
+    }
+    /**
+     * @brief gets the name of the parameter
+     * @return string 
+     */
+    pub fn getTypeName(self) -> string {
+        for (type in Type(__all_data__)) {
+            let (name = type.getName()) {
+                if (type.id = self.getTypeHashId()) {
+                    return name
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the annotation of the class, if any.
+     * @return Annotation 
+     */
+    pub fn getAnnotation(self) -> Annotation {
+        for (anno in Annotation(__all_data__),
+            relation in AnnotatedRelation(__all_data__)) {
+            if (self.element_hash_id = relation.getAnnotatedItemHashId()) {
+                if (anno.key_eq(relation)) {
+                    return anno
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the location for the element.
+     * @return Location
+     */
+    pub fn getLocation(self) -> Location {
+        for (loc in Location(__all_data__)) {
+            if (loc.element_hash_id = self.getLocationHashId()) {
+                return loc
+            }
+        }
+    }
+}
+/**
+ * @brief A type parameter of a generic class, interface, method or constructor.
+ */
+schema TypeParameter extends TypeParameterDO {
+
+}
+impl TypeParameter {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *TypeParameter {
+        for (tmp in TypeParameterDO(db)) {
+            yield TypeParameter {
+                element_hash_id : tmp.element_hash_id,
+                printable_text : tmp.printable_text,
+                owner_hash_id : tmp.owner_hash_id,
+                index_order : tmp.index_order,
+                extends_list_hash_id : tmp.extends_list_hash_id,
+                parent_hash_id : tmp.parent_hash_id,
+                location_hash_id : tmp.location_hash_id
+            }
+        }
+    }
+    /**
+     * @brief gets the location for the element.
+     * @return Location
+     */
+    pub fn getLocation(self) -> Location {
+        for (loc in Location(__all_data__)) {
+            if (loc.element_hash_id = self.getLocationHashId()) {
+                return loc
+            }
+        }
+    }
+    /**
+     * @brief gets the parent of the element.
+     * @return ExpressionParent 
+     */
+    pub fn getParent(self) -> ElementParent {
+        for (c in ElementParent(__all_data__)) {
+            if (c.id = self.getParentHashId()) {
+                return c
+            }
+        }
+    }
+    /**
+     * @brief gets an ancestor of the element.
+     * @return ElementParent 
+     */
+    pub fn getAnAncestor(self) -> *ElementParent {
+        for (tmp in ElementParent(__all_data__)) {
+            if (tmp.key_eq(self)) {
+                yield tmp.getAnAncestor()
+            }
+        }
+    }
+    /**
+     * @brief gets the element which is parameterized by the type parameter.
+     * @return ExpressionParent 
+     */
+    pub fn getOwner(self) -> ElementParent {
+        for (c in ElementParent(__all_data__)) {
+            if (c.id = self.getParentHashId()) {
+                return c
+            }
+        }
+    }
+    /**
+     * @brief gets the extends list id (reference list)of the type parameter.
+     * @return ExpressionParent 
+     */
+    pub fn getExtendsList(self) -> ReferenceList {
+        for (parent in ReferenceList(__all_data__)) {
+            if (parent.element_hash_id = self.getExtendsListHashId()) {
+                return parent
+            }
+        }
+    }
+}
+/**
+ * @brief A variable is a field (or an enum constant), a local variable or a parameter.
+ */
+schema Variable {
+    @primary id: int
+}
+impl Variable {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *Variable {
+        for (l in LocalVariable(db)) {
+            yield Variable {id : l.element_hash_id}
+        }
+        for (f in Field(db)) {
+            yield Variable {id : f.element_hash_id}
+        }
+        for (e in EnumConstant(db)) {
+            yield Variable {id : e.element_hash_id}
+        }
+        for (p in Parameter(db)) {
+            yield Variable {id : p.element_hash_id}
+        }
+    }
+    /**
+     * @brief gets the name of the element.
+     * @return string 
+     */
+    pub fn getName(self) -> string {
+        for (l in LocalVariable(__all_data__)) {
+            if (self.key_eq(l)) {
+                let (s = l.getName()) {
+                    return s
+                }
+            }
+        }
+        for (f in Field(__all_data__)) {
+            if (self.key_eq(f)) {
+                let (s = f.getName()) {
+                    return s
+                }
+            }
+        }
+        for (e in EnumConstant(__all_data__)) {
+            if (self.key_eq(e)) {
+                let (s = e.getName()) {
+                    return s
+                }
+            }
+        }
+        for (p in Parameter(__all_data__)) {
+            if (self.key_eq(p)) {
+                let (s = p.getName()) {
+                    return s
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the type of the element.
+     * @return Type 
+     */
+    pub fn getType(self) -> Type {
+        for (l in LocalVariable(__all_data__)) {
+            if (self.key_eq(l)) {
+                return l.getType()
+            }
+        }
+        for (f in Field(__all_data__)) {
+            if (self.key_eq(f)) {
+                return f.getType()
+            }
+        }
+        for (e in EnumConstant(__all_data__)) {
+            if (self.key_eq(e)) {
+                return e.getType()
+            }
+        }
+        for (p in Parameter(__all_data__)) {
+            if (self.key_eq(p)) {
+                return p.getType()
+            }
+        }
+    }
+    /**
+     * @brief gets the location of the element.
+     * @return Location 
+     */
+    pub fn getLocation(self) -> Location {
+        for (l in LocalVariable(__all_data__)) {
+            if (self.key_eq(l)) {
+                return l.getLocation()
+            }
+        }
+        for (f in Field(__all_data__)) {
+            if (self.key_eq(f)) {
+                return f.getLocation()
+            }
+        }
+        for (e in EnumConstant(__all_data__)) {
+            if (self.key_eq(e)) {
+                return e.getLocation()
+            }
+        }
+        for (p in Parameter(__all_data__)) {
+            if (self.key_eq(p)) {
+                return p.getLocation()
+            }
+        }
+    }
+    /**
+     * @brief gets the directly usage of the element.
+     * @return ReferenceExpression 
+     */
+    pub fn getDirectUsage(self) -> *ReferenceExpression {
+        for (r in ReferenceExpression(__all_data__)) {
+            for (l in LocalVariable(__all_data__)) {
+                if (self.key_eq(l)) {
+                    if (l.key_eq(r.getDefinition())) {
+                        yield r
+                    }
+                }
+            }
+            for (f in Field(__all_data__)) {
+                if (self.key_eq(f)) {
+                    if (f.key_eq(r.getDefinition())) {
+                        yield r
+                    }
+                }
+            }
+            for (e in EnumConstant(__all_data__)) {
+                if (self.key_eq(e)) {
+                    if (e.key_eq(r.getDefinition())) {
+                        yield r
+                    }
+                }
+            }
+            for (p in Parameter(__all_data__)) {
+                if (self.key_eq(p)) {
+                    if (p.key_eq(r.getDefinition())) {
+                        yield r
+                    }
+                }
+            }
+        }
+    }
+}

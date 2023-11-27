@@ -1,0 +1,633 @@
+/**
+ * @filename: Function
+ * @brief: Provides classes and predicates for working with JavaScript / TypeScript functions
+ */
+
+/**
+ * A FunctionLike. It includes FunctionLikeDeclaration, FunctionType and Signature
+ */
+schema FunctionLike extends Node {
+}
+
+impl FunctionLike {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *FunctionLike {
+        for (tmp in Node(db)) {
+            if (isFunctionLike(tmp)) {
+                yield FunctionLike {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A call site, which is an invoke expression with the corresponding callee.
+ * 
+ * Currently, Only direct invokes are recorded.
+ */
+schema CallSite extends CallSiteDO {
+}
+
+impl CallSite {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *CallSite {
+        for (tmp in CallSiteDO(db)) {
+            yield CallSite {
+                invoke_expression_oid : tmp.invoke_expression_oid,
+                callee_oid : tmp.callee_oid
+            }
+        }
+    }
+    pub fn getCallee(self) -> FunctionLikeDeclaration {
+        for (callee in FunctionLikeDeclaration(__all_data__)) {
+            if (callee.id = self.getCalleeOid()) {
+                return callee
+            }
+        }
+    }
+}
+
+/**
+ * A function-like declaration, including:
+ *  - MethodDeclaration,
+ *  - Constructor,
+ *  - GetAccessor,
+ *  - SetAccessor,
+ *  - FunctionExpression,
+ *  - ArrowFunction,
+ *  - FunctionDeclaration,
+ */
+schema FunctionLikeDeclaration extends FunctionLike {
+}
+
+impl FunctionLikeDeclaration {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *FunctionLikeDeclaration {
+        for (tmp in FunctionLike(db)) {
+            if (isFunctionLikeDeclaration(Node {id: tmp.id})) {
+                yield FunctionLikeDeclaration {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+
+    fn getAllTypeParameterIndex(self) -> *int {
+        for (childIndex in int::__undetermined_all__()) {
+            let (child = self.getChild(childIndex)) {
+                let (tmp = TypeParameter(__all_data__).find(child)) {
+                    yield childIndex
+                }
+            }
+        }
+    }
+
+    fn getAllParameterIndex(self) -> *int {
+        for (childIndex in int::__undetermined_all__()) {
+            let (child = self.getChild(childIndex)) {
+                let (tmp = Parameter(__all_data__).find(child)) {
+                    yield childIndex
+                }
+            }
+        }
+    }
+
+    fn getAllControlNode(self) -> *Node {
+        for (node in Node(__all_data__)) {
+            if (node.getEnclosingFunction() = self && isControlNode(node)) {
+                yield node
+            }
+        }
+    }
+
+    /**
+     * Gets a decorator of this FunctionLikeDeclaration.
+     */
+    pub fn getADecorator(self) -> *Decorator {
+        for (decorator in Decorator(__all_data__)) {
+            for (auto_tmp1 in self.getAChild()) {
+                if (decorator.key_eq(auto_tmp1)) {
+                    yield decorator
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets the `i`th decorator of this FunctionLikeDeclaration.
+     */
+    pub fn getDecorator(self, i: int) -> Decorator {
+        for (decorator in Decorator(__all_data__)) {
+            if (decorator.key_eq(self.getChild(i))) {
+                return decorator
+            }
+        }
+    }
+
+    /**
+     * Gets a modifier of this FunctionLikeDeclaration.
+     */
+    pub fn getAModifier(self) -> *Modifier {
+        for (modifier in Modifier(__all_data__)) {
+            for (auto_tmp1 in self.getAChild()) {
+                if (modifier.key_eq(auto_tmp1)) {
+                    yield modifier
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets the `i`th modifier of this FunctionLikeDeclaration.
+     */
+    pub fn getModifier(self, i: int) -> Modifier {
+        for (childIndex in int::__undetermined_all__()) {
+            for (modifier in Modifier(__all_data__)) {
+                let (decoratorCount = self.getDecoratorCount()) {
+                    if (modifier.key_eq(self.getChild(childIndex))) {
+                        if (i = childIndex - decoratorCount) {
+                            return modifier
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Determines whether this FunctionLikeDeclaration is a generator.
+     */
+    pub fn isGenerator(self) -> bool {
+        for (asteriskToken in AsteriskToken(__all_data__)) {
+            let (modifierCount = self.getModifierCount()) {
+                let (tmp = self.getChild(modifierCount)) {
+                    if (asteriskToken.key_eq(tmp)) {
+                        return true
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets the name node, which is a PropertyName.
+     */
+    pub fn getNameNode(self) -> PropertyName {
+        for (nameNode in PropertyName(__all_data__)) {
+            for (auto_tmp1 in self.getAChild()) {
+                if (nameNode.key_eq(auto_tmp1)) {
+                    return nameNode
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets the name of this function-like declaration
+     */
+    pub fn getName(self) -> string {
+        for (functionLikeDeclarationDO in FunctionLikeDeclarationDO(__all_data__)) {
+            if (functionLikeDeclarationDO.key_eq(self)) {
+                let (name = functionLikeDeclarationDO.getName()) {
+                    return name
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets a type parameter.
+     */
+    pub fn getATypeParameter(self) -> *TypeParameter {
+        for (typeParameter in TypeParameter(__all_data__)) {
+            for (auto_tmp1 in self.getAChild()) {
+                if (typeParameter.key_eq(auto_tmp1)) {
+                    yield typeParameter
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets the `i`th type parameter.
+     */
+    pub fn getTypeParameter(self, i: int) -> TypeParameter {
+        for (index in int::__undetermined_all__()) {
+            for (typeParameter in TypeParameter(__all_data__)) {
+                if (typeParameter.key_eq(self.getChild(index))) {
+                    let (firstIndex = self.getTypeParameterFirstIndex()) {
+                        if (i = index - firstIndex) {
+                            return typeParameter
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets a parameter.
+     */
+    pub fn getAParameter(self) -> *Parameter {
+        for (parameter in Parameter(__all_data__)) {
+            for (auto_tmp1 in self.getAChild()) {
+                if (parameter.key_eq(auto_tmp1)) {
+                    yield parameter
+                }
+            }
+        }
+    }
+
+    /**
+     * Determine this FunctionLikeDeclaration contains any parameter.
+     */
+    pub fn hasParameter(self) -> bool {
+        for (parameter in Parameter(__all_data__)) {
+            for (auto_tmp1 in self.getAParameter()) {
+                if (parameter = auto_tmp1) {
+                    return true
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets the `i`th parameter.
+     */
+    pub fn getParameter(self, i: int) -> Parameter {
+        for (index in int::__undetermined_all__()) {
+            for (parameter in Parameter(__all_data__)) {
+                if (parameter.key_eq(self.getChild(index))) {
+                    let (firstIndex = self.getParameterFirstIndex()) {
+                        if (i = index - firstIndex) {
+                            return parameter
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets the type node.
+     */
+    pub fn getTypeNode(self) -> TypeNode {
+        for (typeNode in TypeNode(__all_data__)) {
+            for (auto_tmp1 in self.getAChild()) {
+                if (typeNode.key_eq(auto_tmp1)) {
+                    return typeNode
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets the body of this function-like declaration
+     */
+    pub fn getBody(self) -> BlockStatement {
+        for (body in BlockStatement(__all_data__)) {
+            if (self.key_eq(body.getParent())) {
+                return body
+            }
+        }
+    }
+
+    /**
+     * Gets a call site of this function-like declaration
+     */
+    pub fn getACallSite(self) -> *MayInvokeExpression {
+        for (callSite in MayInvokeExpression(__all_data__)) {
+            if (self = callSite.getCallee()) {
+                yield callSite
+            }
+        }
+    }
+
+    pub fn getAReturnStatement(self) -> *ReturnStatement {
+        for (returnStatement in ReturnStatement(__all_data__)) {
+            if (returnStatement.getEnclosingFunction() = self) {
+                yield returnStatement
+            }
+        }
+    }
+
+    pub fn getAReturnedExpression(self) -> *Expression {
+        // TODO: the body of an ArrowFunction is the returned expression if it is an expression
+        for (returnStatement in self.getAReturnStatement()) {
+            yield returnStatement.getExpression()
+        }
+    }
+
+    /**
+     * Gets the count of parameters.
+     */
+    pub fn getParameterCount(self) -> int {
+        return self.getAParameter().len()
+    }
+
+    /**
+     * Gets the count of type parameters.
+     */
+    pub fn getTypeParameterCount(self) -> int {
+        return self.getATypeParameter().len()
+    }
+
+    pub fn getTypeParameterFirstIndex(self) -> int {
+        return self.getAllTypeParameterIndex().min()
+    }
+
+    pub fn getParameterFirstIndex(self) -> int {
+        return self.getAllParameterIndex().min()
+    }
+    /**
+     * Gets the number of decorators of this FunctionLikeDeclaration.
+     */
+    pub fn getDecoratorCount(self) -> int {
+        return self.getADecorator().len()
+    }
+
+    /**
+     * Gets the number of modifiers of this FunctionLikeDeclaration.
+     */
+    pub fn getModifierCount(self) -> int {
+        return self.getAModifier().len()
+    }
+
+    /**
+     * Gets the cyclomatic complexity of this function-like declaration
+     */
+    pub fn getCyclomaticComplexity(self) -> int {
+        return self.getAllControlNode().len() + 1
+    }
+}
+
+/**
+ * A FunctionDeclaration.
+ */
+schema FunctionDeclaration extends FunctionLikeDeclaration {
+}
+
+impl FunctionDeclaration {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *FunctionDeclaration {
+        for (tmp in FunctionLikeDeclaration(db)) {
+            if (isFunctionDeclaration(Node {id: tmp.id})) {
+                yield FunctionDeclaration {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A MethodDeclaration.
+ */
+schema MethodDeclaration extends FunctionLikeDeclaration {
+}
+
+impl MethodDeclaration {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *MethodDeclaration {
+        for (tmp in FunctionLikeDeclaration(db)) {
+            if (isMethodDeclaration(Node {id: tmp.id})) {
+                yield MethodDeclaration {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+
+    pub fn getName(self) -> string {
+        return self.getNameNode().getName()
+    }
+}
+
+/**
+ * A ConstructorDeclaration.
+ */
+schema ConstructorDeclaration extends FunctionLikeDeclaration {
+}
+
+impl ConstructorDeclaration {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *ConstructorDeclaration {
+        for (tmp in FunctionLikeDeclaration(db)) {
+            if (isConstructor(Node {id: tmp.id})) {
+                yield ConstructorDeclaration {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A `get` accessor.
+ */
+schema GetAccessor extends FunctionLikeDeclaration {
+}
+
+impl GetAccessor {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *GetAccessor {
+        for (tmp in FunctionLikeDeclaration(db)) {
+            if (isGetAccessor(Node {id: tmp.id})) {
+                yield GetAccessor {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A `set` Accessor.
+ */
+schema SetAccessor extends FunctionLikeDeclaration {
+}
+
+impl SetAccessor {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *SetAccessor {
+        for (tmp in FunctionLikeDeclaration(db)) {
+            if (isSetAccessor(Node {id: tmp.id})) {
+                yield SetAccessor {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A function expression.
+ */
+schema FunctionExpressionDeclaration extends FunctionLikeDeclaration {
+}
+
+impl FunctionExpressionDeclaration {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *FunctionExpressionDeclaration {
+        for (tmp in FunctionLikeDeclaration(db)) {
+            if (isFunctionExpression(Node {id: tmp.id})) {
+                yield FunctionExpressionDeclaration {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A ArrowFunction.
+ */
+schema ArrowFunction extends FunctionLikeDeclaration {
+}
+
+impl ArrowFunction {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *ArrowFunction {
+        for (tmp in FunctionLikeDeclaration(db)) {
+            if (isArrowFunction(Node {id: tmp.id})) {
+                yield ArrowFunction {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a MethodDeclaration
+ */
+pub fn isMethodDeclaration(node: Node) -> bool {
+    if (node.getKind() = 168) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a Constructor
+ */
+pub fn isConstructor(node: Node) -> bool {
+    if (node.getKind() = 170) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a `get` accessor
+ */
+pub fn isGetAccessor(node: Node) -> bool {
+    if (node.getKind() = 171) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a `set` accessor
+ */
+pub fn isSetAccessor(node: Node) -> bool {
+    if (node.getKind() = 172) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a function-like declaration, including:
+ *  - MethodDeclaration,
+ *  - Constructor,
+ *  - GetAccessor,
+ *  - SetAccessor,
+ *  - FunctionExpression,
+ *  - ArrowFunction,
+ *  - FunctionDeclaration,
+ */
+pub fn isFunctionLikeDeclaration(node: Node) -> bool {
+    let (kind = node.getKind()) {
+        if (isFunctionLikeDeclarationKind(kind)) {
+            return true
+        }
+    }
+}
+
+/**
+ * Determines whether a node kind is a FunctionLike kind
+ */
+pub fn isFunctionLikeKind(kind: int) -> bool {
+    if (isFunctionLikeDeclarationKind(kind)) {
+        return true
+    }
+    if (isFunctionTypeOrSignatureKind(kind)) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a FunctionLike
+ */
+pub fn isFunctionLike(node: Node) -> bool {
+    let (kind = node.getKind()) {
+        if (isFunctionLikeKind(kind)) {
+            return true
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a FunctionBlock
+ */
+pub fn isFunctionBlock(node: Node) -> bool {
+    // Block
+    if (node.getKind() = 234) {
+        let (parent = node.getParent()) {
+            if (isFunctionLike(parent)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node kind is a FunctionTypeOrSignature kind
+ */
+pub fn isFunctionTypeOrSignatureKind(kind: int) -> bool {
+    [
+        {167},  // MethodSignature
+        {173},  // CallSignature
+        {174},  // ConstructSignature
+        {175},  // IndexSignature
+        {178},  // FunctionType
+        {179},  // ConstructorType
+        {315},  // JSDocFunctionType
+        {321},  // JSDocSignature
+    ]
+}
+
+/**
+ * Determines whether a node kind is a FunctionLikeDeclaration kind
+ */
+pub fn isFunctionLikeDeclarationKind(kind: int) -> bool {
+    [
+        {168},  // MethodDeclaration
+        {170},  // Constructor
+        {171},  // GetAccessor
+        {172},  // SetAccessor
+        {212},  // FunctionExpression
+        {213},  // ArrowFunction
+        {255},  // FunctionDeclaration
+    ]
+}

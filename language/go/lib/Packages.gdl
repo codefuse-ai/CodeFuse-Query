@@ -1,0 +1,17 @@
+schema Pkg extends PkgDO {
+
+}
+impl Pkg {
+    @data_constraint
+    @inline
+    fn __all__(db: GoDB) -> *Pkg {
+        for (tmp in PkgDO(db)) {
+            yield Pkg {
+                oid : tmp.oid,
+                path : tmp.path,
+                name : tmp.name,
+                scope : tmp.scope
+            }
+        }
+    }
+}

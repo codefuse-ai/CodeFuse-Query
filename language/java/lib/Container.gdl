@@ -1,0 +1,689 @@
+/**
+ * @brief The root of the extracted project.
+ */
+schema Program extends ProgramDO {
+
+}
+impl Program {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *Program {
+        for (tmp in ProgramDO(db)) {
+            yield Program {
+                program_hash_id : tmp.program_hash_id,
+                absolute_prefix_path : tmp.absolute_prefix_path
+            }
+        }
+    }
+}
+/**
+ * @brief A java file.
+ */
+schema File extends FileDO {
+
+}
+impl File {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *File {
+        for (tmp in FileDO(db)) {
+            yield File {
+                element_hash_id : tmp.element_hash_id,
+                qualified_name : tmp.qualified_name,
+                extension : tmp.extension,
+                name : tmp.name,
+                number_of_lines_hash_id : tmp.number_of_lines_hash_id
+            }
+        }
+    }
+    /**
+     * @brief gets the folder which contains the file, if any.
+     * @return Folder 
+     */
+    pub fn getBelongedFolder(self) -> Folder {
+        for (f in Folder(__all_data__),
+            container in ContainerParent(__all_data__)) {
+            if (self.key_eq(container)) {
+                if (f.element_hash_id = container.getParentHashId()) {
+                    return f
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the size information for the element.
+     * @return NumberOfLines
+     */
+    pub fn getSize(self) -> NumberOfLines {
+        for (n in NumberOfLines(__all_data__)) {
+            if (n.element_hash_id = self.getNumberOfLinesHashId()) {
+                return n
+            }
+        }
+    }
+    /**
+     * @brief gets the package of the file.
+     * @return Package 
+     */
+    pub fn getPackage(self) -> Package {
+        for (c in Cupackage(__all_data__)) {
+            if (self.key_eq(c)) {
+                return c.getPackage()
+            }
+        }
+    }
+}
+/**
+ * @brief A folder.
+ */
+schema Folder extends FolderDO {
+
+}
+impl Folder {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *Folder {
+        for (tmp in FolderDO(db)) {
+            yield Folder {
+                element_hash_id : tmp.element_hash_id,
+                qualified_name : tmp.qualified_name,
+                name : tmp.name,
+                parent_hash_id : tmp.parent_hash_id
+            }
+        }
+    }
+    /**
+     * @brief gets all files in the folder.
+     * @return File 
+     */
+    pub fn getAllContainingFiles(self) -> *File {
+        for (container in ContainerParent(__all_data__)) {
+            let (f = File(__all_data__).find(container)) {
+                if (self.element_hash_id = container.getParentHashId()) {
+                    yield f
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the folder which contains the element.
+     * @return Folder
+     */
+    pub fn getParent(self) -> Folder {
+        for (f in Folder(__all_data__)) {
+            if (f.element_hash_id = self.getParentHashId()) {
+                return f
+            }
+        }
+    }
+    /**
+     * @brief gets an ancestor of the element.
+     * @return ElementParent 
+     */
+    pub fn getAnAncestor(self) -> *ElementParent {
+        for (tmp in ElementParent(__all_data__)) {
+            if (tmp.key_eq(self)) {
+                yield tmp.getAnAncestor()
+            }
+        }
+    }
+}
+/**
+ * @brief Describe a file belonged to a certain folder.
+ */
+schema ContainerParent extends ContainerParentDO {
+
+}
+impl ContainerParent {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *ContainerParent {
+        for (tmp in ContainerParentDO(db)) {
+            yield ContainerParent {
+                child_hash_id : tmp.child_hash_id,
+                parent_hash_id : tmp.parent_hash_id
+            }
+        }
+    }
+    /**
+     * @brief gets the folder which contains the file, if any.
+     * @return Folder 
+     */
+    pub fn getBelongedFolder(self) -> Folder {
+        for (f in Folder(__all_data__)) {
+            if (f.element_hash_id = self.getParentHashId()) {
+                return f
+            }
+        }
+    }
+}
+/**
+ * @brief An import statement.
+ */
+schema Import extends ImportDO {
+
+}
+impl Import {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *Import {
+        for (tmp in ImportDO(db)) {
+            yield Import {
+                element_hash_id : tmp.element_hash_id,
+                reference_hash_id : tmp.reference_hash_id,
+                name : tmp.name,
+                parent_hash_id : tmp.parent_hash_id,
+                location_hash_id : tmp.location_hash_id,
+                is_foreign_import : tmp.is_foreign_import
+            }
+        }
+    }
+    /**
+     * @brief gets the reference element of the statement
+     * @return ReferenceElement 
+     */
+    pub fn getReferenceElement(self) -> ReferenceElement {
+        for (r in ReferenceElement(__all_data__)) {
+            if (r.element_hash_id = self.getReferenceHashId()) {
+                return r
+            }
+        }
+    }
+    /**
+     * @brief gets the target name of the statement.
+     * @return string 
+     */
+    pub fn getTargetName(self) -> string {
+        for (i in Identifier(__all_data__)) {
+            if (i.getParentHashId() = self.getReferenceElement().element_hash_id) {
+                return i.getName()
+            }
+        }
+    }
+    /**
+     * @brief description
+     * @return string 
+     */
+    pub fn getIdentifier(self) -> Identifier {
+        for (ident in Identifier(__all_data__)) {
+            if (ident.getParent().id = self.getReferenceHashId()) {
+                return ident
+            }
+        }
+    }
+    /**
+     * @brief gets the location for the element.
+     * @return Location
+     */
+    pub fn getContainingFile(self) -> File {
+        for (f in File(__all_data__)) {
+            if (f.element_hash_id = self.getParentHashId()) {
+                return f
+            }
+        }
+    }
+    /**
+     * @brief gets the location for the element.
+     * @return Location
+     */
+    pub fn getLocation(self) -> Location {
+        for (loc in Location(__all_data__)) {
+            if (loc.element_hash_id = self.getLocationHashId()) {
+                return loc
+            }
+        }
+    }
+    /**
+     * @brief gets the name of the import statement.
+     * @return string 
+     */
+    pub fn getName(self) -> string {
+        let (temp = self.getPrintableText(), i = temp.len(), temp1 = temp.substr(7, i - 8)) {
+            if (temp1.matches(".*\\.\\*$")) {
+                return temp.substr(7, i - 10)
+            }
+            if (!temp1.matches(".*\\.\\*$")) {
+                return temp1
+            }
+        }
+    }
+}
+/**
+ * @brief A package may be used to abstract over all of its members, regardless of which compilation unit they are defined in.
+ */
+schema Package {
+    @primary id: int,
+    qualified_name: string
+}
+impl Package {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *Package {
+    	for (ps in db.package_statement) {
+    		yield Package {
+    		    id: ps.package_hash_id,
+    		    qualified_name: ps.qualified_name
+    		}
+    	}
+    }
+    /**
+     * @brief gets the name of the package.
+     * @return string 
+     */
+    fn getPackageName(self) -> string {
+        return self.qualified_name
+    }
+}
+/**
+ * @brief A compilation unit and its declared package, a .java file.
+ */
+schema Cupackage extends CupackageDO {
+
+}
+impl Cupackage {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *Cupackage {
+        for (tmp in CupackageDO(db)) {
+            yield Cupackage {
+                file_hash_id : tmp.file_hash_id,
+                package_hash_id : tmp.package_hash_id
+            }
+        }
+    }
+    /**
+     * @brief gets the compilation unit.
+     * @return File 
+     */
+    pub fn getCompilationUnit(self) -> File {
+        for (f in File(__all_data__)) {
+            if (f.key_eq(self)) {
+                return f
+            }
+        }
+    }
+    /**
+     * @brief gets the package of the element.
+     * @return Package 
+     */
+    pub fn getPackage(self) -> Package {
+        for (p in Package(__all_data__)) {
+            if (p.id = self.getPackageHashId()) {
+                return p
+            }
+        }
+    }
+}
+/**
+ * Represents the list of type arguments specified on a Java reference.
+ *
+ */
+schema ReferenceParameterList {
+    @primary id: int
+}
+impl ReferenceParameterList {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *ReferenceParameterList {
+        for (r in ReferenceParameterListDO(db)) {
+            yield ReferenceParameterList {id : r.list_hash_id}
+        }
+        for (r in EmptyReferenceParameterListDO(db)) {
+            yield ReferenceParameterList {id : r.list_hash_id}
+        }
+    }
+    /**
+     * @brief gets the type element for the element, if any.
+     * @return TypeElement
+     */
+    pub fn getTypeElement(self) -> *TypeElement {
+        for (p in TypeElement(__all_data__)) {
+            for (r in ReferenceParameterListDO(__all_data__)) {
+                if (self.key_eq(r)) {
+                    if (p.element_hash_id = r.getTypeElementHashId()) {
+                        yield p
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the printable text for the element.
+     * @return string
+     */
+    pub fn getPrintableText(self) -> string {
+        for (r in ReferenceParameterListDO(__all_data__)) {
+            if (self.key_eq(r)) {
+                return r.getPrintableText()
+            }
+        }
+        for (r in EmptyReferenceParameterListDO(__all_data__)) {
+            if (self.key_eq(r)) {
+                return r.getPrintableText()
+            }
+        }
+    }
+    /**
+     * @brief gets the location for the element.
+     * @return Location
+     */
+    pub fn getLocation(self) -> Location {
+        for (loc in Location(__all_data__)) {
+            for (r in ReferenceParameterListDO(__all_data__)) {
+                if (self.key_eq(r)) {
+                    if (loc.element_hash_id = r.getLocationHashId()) {
+                        return loc
+                    }
+                }
+            }
+            for (r in EmptyReferenceParameterListDO(__all_data__)) {
+                if (self.key_eq(r)) {
+                    if (loc.element_hash_id = r.getLocationHashId()) {
+                        return loc
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the parent of the element.
+     * @return ElementParent 
+     */
+    pub fn getParent(self) -> ElementParent {
+        for (r in ReferenceParameterListDO(__all_data__)) {
+            if (self.key_eq(r)) {
+                for (tmp in ElementParent(__all_data__)) {
+                    if (tmp.id = r.getParentHashId()) {
+                        return tmp
+                    }
+                }
+            }
+        }
+        for (r in EmptyReferenceParameterListDO(__all_data__)) {
+            if (self.key_eq(r)) {
+                for (tmp in ElementParent(__all_data__)) {
+                    if (tmp.id = r.getParentHashId()) {
+                        return tmp
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets an ancestor of the element.
+     * @return ElementParent 
+     */
+    pub fn getAnAncestor(self) -> *ElementParent {
+        for (tmp in ElementParent(__all_data__)) {
+            if (tmp.key_eq(self)) {
+                yield tmp.getAnAncestor()
+            }
+        }
+    }
+}
+/**
+ * @brief Represents a Java import static statement.
+ */
+schema ImportStaticStatement extends ImportStaticStatementDO {
+
+}
+impl ImportStaticStatement {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *ImportStaticStatement {
+        for (tmp in ImportStaticStatementDO(db)) {
+            yield ImportStaticStatement {
+                element_hash_id : tmp.element_hash_id,
+                reference_hash_id : tmp.reference_hash_id,
+                name : tmp.name,
+                parent_hash_id : tmp.parent_hash_id,
+                location_hash_id : tmp.location_hash_id
+            }
+        }
+    }
+    /**
+     * @brief gets the name of the import static statement.
+     * @return string 
+     */
+    pub fn getName(self) -> string {
+        let (temp = self.getPrintableText()) {
+            let (i = temp.len()) {
+                let (name = temp.substr(14, i - 15)) {
+                    return name
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the reference id of the element.
+     * @return ImportStaticReferenceElement
+     */
+    pub fn getReference(self) -> ImportStaticReferenceElement {
+        for (loc in ImportStaticReferenceElement(__all_data__)) {
+            if (loc.element_hash_id = self.getReferenceHashId()) {
+                return loc
+            }
+        }
+    }
+    /**
+     * @brief gets the location for the element.
+     * @return Location
+     */
+    pub fn getLocation(self) -> Location {
+        for (loc in Location(__all_data__)) {
+            if (loc.element_hash_id = self.getLocationHashId()) {
+                return loc
+            }
+        }
+    }
+    /**
+     * @brief gets the parent of the element.
+     * @return File 
+     */
+    pub fn getParent(self) -> File {
+        for (parent in File(__all_data__)) {
+            if (parent.element_hash_id = self.getParentHashId()) {
+                return parent
+            }
+        }
+    }
+    /**
+     * @brief gets an ancestor of the element.
+     * @return ElementParent 
+     */
+    pub fn getAnAncestor(self) -> *ElementParent {
+        for (tmp in ElementParent(__all_data__)) {
+            if (tmp.key_eq(self)) {
+                yield tmp.getAnAncestor()
+            }
+        }
+    }
+}
+/**
+ * @brief Represents a reference to the member imported by a Java import static statement.
+ */
+schema ImportStaticReferenceElement extends ImportStaticReferenceElementDO {
+
+}
+impl ImportStaticReferenceElement {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *ImportStaticReferenceElement {
+        for (tmp in ImportStaticReferenceElementDO(db)) {
+            yield ImportStaticReferenceElement {
+                element_hash_id : tmp.element_hash_id,
+                printable_text : tmp.printable_text,
+                parent_hash_id : tmp.parent_hash_id,
+                location_hash_id : tmp.location_hash_id
+            }
+        }
+    }
+    /**
+     * @brief gets the location for the element.
+     * @return Location
+     */
+    pub fn getLocation(self) -> Location {
+        for (loc in Location(__all_data__)) {
+            if (loc.element_hash_id = self.getLocationHashId()) {
+                return loc
+            }
+        }
+    }
+    /**
+     * @brief gets the parent of the element.
+     * @return ImportStaticStatement 
+     */
+    pub fn getParent(self) -> ImportStaticStatement {
+        for (parent in ImportStaticStatement(__all_data__)) {
+            if (parent.element_hash_id = self.getParentHashId()) {
+                return parent
+            }
+        }
+    }
+    /**
+     * @brief gets an ancestor of the element.
+     * @return ElementParent 
+     */
+    pub fn getAnAncestor(self) -> *ElementParent {
+        for (tmp in ElementParent(__all_data__)) {
+            if (tmp.key_eq(self)) {
+                yield tmp.getAnAncestor()
+            }
+        }
+    }
+}
+/**
+ * @brief Represents a resource list of try-with-resources statement (automatic resource management) introduced in JDK 7.
+ */
+schema ResourceList extends ResourceListDO {
+
+}
+impl ResourceList {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *ResourceList {
+        for (tmp in ResourceListDO(db)) {
+            yield ResourceList {
+                element_hash_id : tmp.element_hash_id,
+                printable_text : tmp.printable_text,
+                parent_hash_id : tmp.parent_hash_id,
+                location_hash_id : tmp.location_hash_id
+            }
+        }
+    }
+    /**
+     * @brief gets the location for the element.
+     * @return Location
+     */
+    pub fn getLocation(self) -> Location {
+        for (loc in Location(__all_data__)) {
+            if (loc.element_hash_id = self.getLocationHashId()) {
+                return loc
+            }
+        }
+    }
+    /**
+     * @brief gets the parent of the element.
+     * @return ElementParent 
+     */
+    pub fn getParent(self) -> ElementParent {
+        for (c in ElementParent(__all_data__)) {
+            if (c.id = self.getParentHashId()) {
+                return c
+            }
+        }
+    }
+    /**
+     * @brief gets an ancestor of the element.
+     * @return ElementParent 
+     */
+    pub fn getAnAncestor(self) -> *ElementParent {
+        for (tmp in ElementParent(__all_data__)) {
+            if (tmp.key_eq(self)) {
+                yield tmp.getAnAncestor()
+            }
+        }
+    }
+    /**
+     * @brief get i-th LocalVariable of the element
+     * @return LocalVariable 
+     */
+    pub fn getIthLocalVariable(self, index : int) -> LocalVariable {
+        for (localVariable in LocalVariable(__all_data__)) {
+            if (self.key_eq(localVariable.getParent())) {
+                if (index = localVariable.getIndex()) {
+                    return localVariable
+                }
+            }
+        }
+    }
+    /**
+     * @brief get i-th LocalVariable of the element
+     * @return LocalVariable 
+     */
+    pub fn getLocalVariable(self) -> LocalVariable {
+        for (localVariable in LocalVariable(__all_data__)) {
+            if (self.key_eq(localVariable.getParent())) {
+                return localVariable
+            }
+        }
+    }
+}
+/**
+ * @brief Represents a non-physical project, suck as a jar from dependencies.
+ */
+schema NpProject extends NpProjectDO {
+
+}
+impl NpProject {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *NpProject {
+        for (tmp in NpProjectDO(db)) {
+            for (np in NpProjectDO(db)) {
+                if (tmp = np) {
+                    yield NpProject {
+                        element_hash_id : tmp.element_hash_id,
+                        extension : tmp.extension,
+                        name : tmp.name
+                    }
+                }
+            }
+        }
+    }
+}
+/**
+ * @brief Represents a non-physical file, suck as an class file in NpProject.
+ */
+schema NpFile extends NpFileDO {
+
+}
+impl NpFile {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *NpFile {
+        for (tmp in NpFileDO(db)) {
+            for (nf in NpFileDO(db)) {
+                if (tmp = nf) {
+                    yield NpFile {
+                        element_hash_id : tmp.element_hash_id,
+                        qualified_name : tmp.qualified_name,
+                        name : tmp.name,
+                        project_hash_id : tmp.project_hash_id
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the np_project of this file.
+     * @return ElementParent
+     */
+    pub fn getNpProject(self) -> NpProject {
+        for (project in NpProject(__all_data__)) {
+            if (project.element_hash_id = self.getProjectHashId()) {
+                return project
+            }
+        }
+    }
+}

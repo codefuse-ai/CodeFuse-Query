@@ -1,0 +1,162 @@
+/**
+ * @brief a comment.
+ */
+schema Comment extends CommentDO {
+    
+}
+impl Comment {
+    @data_constraint
+    @inline
+    fn __all__(db: PythonDB) -> *Comment {
+        for (tmp in CommentDO(db)) {
+            yield Comment {
+                element_oid : tmp.element_oid,
+                text : tmp.text,
+                parent_oid : tmp.parent_oid,
+                location_oid : tmp.location_oid
+            }
+        }
+    }
+    /**
+     * @brief gets the location for the element.
+     * @return Location
+     */
+    pub fn getLocation(self) -> Location {
+        for (loc in Location(__all_data__)) {
+            if (loc.element_oid = self.getLocationOid()) {
+                return loc
+            }
+        }
+    }
+    /**
+     * @brief gets the documented element of the comment.
+     * @return CombineElement
+     */
+    pub fn getDocumentedBelowElement(self) -> *CombineElement {
+        for (e in CombineElement(__all_data__),
+            f in File(__all_data__)) {
+            if (f.element_oid = self.getParentOid()) {
+                if (f = e.getLocation().getFile()) {
+                    let (line = self.getLocation().getEndLineNumber()) {
+                        if (line + 1 = e.getLocation().getStartLineNumber()) {
+                            if (!isCommentElement(e)) {
+                                yield e
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the parent element of the element
+     * @return CombineElement 
+     */
+    pub fn getParent(self) -> CombineElement {
+        for (e in CombineElement(__all_data__)) {
+            if (e.id = self.getParentOid()) {
+                return e
+            }
+        }
+    }
+    /**
+     * @brief gets an ancestor of the element.
+     * @return CombineElement 
+     */
+    pub fn getAnAncestor(self) -> *CombineElement {
+        for (temp in CombineElement(__all_data__)) {
+            if (self.key_eq(temp)) {
+                yield temp.getAnAncestor()
+            }
+        }
+    }
+    /**
+     * @brief gets the documented class or function of the comment.
+     * @return CombineElement
+     */
+    pub fn getDocumentedClassOrFunctionElement(self) -> CombineElement {
+        for (h in CombineElement(__all_data__)) {
+            for (e in Function(__all_data__)) {
+                if (self.getParent().key_eq(e.getLocation().getFile())) {
+                    let (line = self.getLocation().getEndLineNumber()) {
+                        if (line + 1 = e.getLocation().getStartLineNumber()) {
+                            if (h.key_eq(e)) {
+                                return h
+                            }
+                        }
+                    }
+                }
+            }
+            for (e in Class(__all_data__)) {
+                if (self.getParent().key_eq(e.getLocation().getFile())) {
+                    let (line = self.getLocation().getEndLineNumber()) {
+                        if (line + 1 = e.getLocation().getStartLineNumber()) {
+                            if (h.key_eq(e)) {
+                                return h
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+/**
+ * @brief A docstring comment.
+ */
+schema DocstringComment extends DocstringCommentDO {
+    
+}
+impl DocstringComment {
+    @data_constraint
+    @inline
+    fn __all__(db: PythonDB) -> *DocstringComment {
+        for (tmp in DocstringCommentDO(db)) {
+            yield DocstringComment {
+                element_oid : tmp.element_oid,
+                text : tmp.text,
+                documented_element_oid : tmp.documented_element_oid
+            }
+        }
+    }
+    /**
+     * @brief gets the documentable element id of the docstring comment, maybe a callable, field, enumconstant, class or interface.
+     * @return CombineElement 
+     */
+    pub fn getDocumentableElement(self) -> CombineElement {
+        for (element in CombineElement(__all_data__)) {
+            if (element.id = self.getDocumentedElementOid()) {
+                return element
+            }
+        }
+    }
+    /**
+     * @brief gets the parent element of the element
+     * @return CombineElement 
+     */
+    pub fn getParent(self) -> CombineElement {
+        for (e in CombineElement(__all_data__)) {
+            if (e.id = self.getDocumentedElementOid()) {
+                return e
+            }
+        }
+    }
+    /**
+     * @brief gets an ancestor of the element.
+     * @return CombineElement 
+     */
+    pub fn getAnAncestor(self) -> *CombineElement {
+        for (temp in CombineElement(__all_data__)) {
+            if (self.key_eq(temp)) {
+                yield temp.getAnAncestor()
+            }
+        }
+    }
+}
+pub fn isCommentElement(e : CombineElement) -> bool {
+    for (m in Comment(__all_data__)) {
+        if (e.key_eq(m)) {
+            return true
+        }
+    }
+}

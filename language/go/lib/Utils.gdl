@@ -1,0 +1,27 @@
+schema RuntimeInfo extends RuntimeInfoDO {
+
+}
+impl RuntimeInfo {
+    @data_constraint
+    @inline
+    fn __all__(db: GoDB) -> *RuntimeInfo {
+        for (tmp in RuntimeInfoDO(db)) {
+            yield RuntimeInfo {
+                oid : tmp.oid,
+                build_version : tmp.build_version,
+                extractor_info : tmp.extractor_info,
+                go_os : tmp.go_os,
+                go_arch : tmp.go_arch
+            }
+        }
+    }
+}
+pub fn getSignatureByName(name : string) -> string {
+    for (f in Function(__all_data__)) {
+        let (func = f.getName()) {
+            if (name = func) {
+                return f.getFunctionFullSignature()
+            }
+        }
+    }
+}

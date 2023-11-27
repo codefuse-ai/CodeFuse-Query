@@ -1,0 +1,270 @@
+ /**
+ * @brief An array creation expression.
+ * For example, an expression such as `new String[2][3]` or
+ * `new String[][] { { "a", "b", "c" } , { "d", "e", "f" } }`.
+ *
+ * In both examples, `String` is the type name. In the first
+ * example, `2` and `3` are the 0th and 1st dimensions,
+ * respectively. In the second example,
+ * `{ { "a", "b", "c" } , { "d", "e", "f" } }` is the initializer.
+ */
+schema ArrayCreationExpression extends Expression {
+
+}
+impl ArrayCreationExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *ArrayCreationExpression {
+        for (tmp in Expression(db)) {
+            for (ace in ArrayCreationExpressionDO(db)) {
+                if (tmp.key_eq(ace)) {
+                    yield ArrayCreationExpression {
+                        element_hash_id : tmp.element_hash_id,
+                        name : tmp.name,
+                        parent_hash_id : tmp.parent_hash_id,
+                        index_order : tmp.index_order,
+                        location_hash_id : tmp.location_hash_id,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets a dimension of the array creation expression.
+     * @return Expression 
+     */
+    pub fn getADimension(self) -> *Expression {
+        for (e in Expression(__all_data__),
+            ace in ArrayCreationExpressionDO(__all_data__)) {
+            if (self.key_eq(ace)) {
+                if (e.getParent().key_eq(ace)) {
+                    if (ace.getNumberOfArrayDimension() > 0) {
+                        yield e
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the dimension of the array creation expression.
+     * @return Expression 
+     */
+    pub fn getDimension(self, idx : int) -> Expression {
+        for (auto_tmp1 in self.getADimension()) {
+            if (idx = auto_tmp1.getIndex()) {
+                return auto_tmp1
+            }
+        }
+    }
+    /**
+     * @brief counts the number of the array dimension of the array creation expression, 0 means it is an empty array.
+     * @return int 
+     */
+    pub fn countArrayDimension(self) -> int {
+       for (ace in ArrayCreationExpressionDO(__all_data__)) {
+            if (self.key_eq(ace)) {
+                return ace.getNumberOfArrayDimension()
+            }
+        }
+    }
+    /**
+     * @brief gets the initializer of the array creation expression.
+     * @return ArrayInitializer
+     */
+    pub fn getAnInitializer(self) -> *ArrayInitializer {
+        for (initExp in ArrayInitializerExpression(__all_data__),
+            init in ArrayInitializer(__all_data__),
+            ace in ArrayCreationExpressionDO(__all_data__)) {
+            if (self.key_eq(ace)) {
+                if (ace.key_eq(initExp.getParent())) {
+                    if (initExp.key_eq(init.getParent())) {
+                        yield init
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the initializer expression of the array creation expression.
+     * @return ArrayInitializerExpression
+     */
+    pub fn getInitializerExpression(self) -> ArrayInitializerExpression {
+        for (initExp in ArrayInitializerExpression(__all_data__),
+            ace in ArrayCreationExpressionDO(__all_data__)) {
+            if (self.key_eq(ace)) {
+                if (ace.key_eq(initExp.getParent())) {
+                    return initExp
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the type for the element.
+     * @return Type
+     */
+    pub fn getType(self) -> Type {
+        for (type in Type(__all_data__),
+            ace in ArrayCreationExpressionDO(__all_data__)) {
+            if (self.key_eq(ace)) {
+                if (type.id = ace.getTypeHashId()) {
+                    return type
+                }
+            }
+        }
+    }
+}
+/**
+ * @brief An array initializer expression.
+ */
+schema ArrayInitializerExpression extends Expression {
+
+}
+impl ArrayInitializerExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *ArrayInitializerExpression {
+        for (tmp in Expression(db)) {
+            for (e in ArrayInitializerExpressionDO(db)) {
+                if (tmp.key_eq(e)) {
+                    yield ArrayInitializerExpression {
+                        element_hash_id : tmp.element_hash_id,
+                        name : tmp.name,
+                        parent_hash_id : tmp.parent_hash_id,
+                        index_order : tmp.index_order,
+                        location_hash_id : tmp.location_hash_id,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the initializer of the expression, if any.
+     * @return ArrayInitializer 
+     */
+    pub fn getAnInitializer(self) -> *ArrayInitializer {
+        for (init in ArrayInitializer(__all_data__),
+            e in ArrayInitializerExpressionDO(__all_data__)) {
+            if (self.key_eq(e)) {
+                if (e.key_eq(init.getParent())) {
+                    yield init
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the ith initializer of the expression.
+     * @return ArrayInitializer 
+     */
+    pub fn getInitializer(self, idx : int) -> ArrayInitializer {
+        for (init in ArrayInitializer(__all_data__),
+            e in ArrayInitializerExpressionDO(__all_data__)) {
+            if (self.key_eq(e)) {
+                if (e.key_eq(init.getParent())) {
+                    if (idx = init.getIndex()) {
+                        return init
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the type for the element.
+     * @return Type
+     */
+    pub fn getType(self) -> Type {
+        for (type in Type(__all_data__),
+            e in ArrayInitializerExpressionDO(__all_data__)) {
+            if (self.key_eq(e)) {
+                if (type.id = e.getTypeHashId()) {
+                    return type
+                }
+            }
+        }
+    }
+}
+/**
+ * @brief An array access expression.
+ */
+schema ArrayAccessExpression extends Expression {
+
+}
+impl ArrayAccessExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *ArrayAccessExpression {
+        for (tmp in Expression(db)) {
+            for (aae in ArrayAccessExpressionDO(db)) {
+                if (tmp.key_eq(aae)) {
+                    yield ArrayAccessExpression {
+                        element_hash_id : tmp.element_hash_id,
+                        name : tmp.name,
+                        parent_hash_id : tmp.parent_hash_id,
+                        index_order : tmp.index_order,
+                        location_hash_id : tmp.location_hash_id,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the array that is accessed in the array access
+     * @return Expression 
+     */
+    pub fn getArrayExpression(self) -> Expression {
+        for (arr in Expression(__all_data__),
+            aae in ArrayAccessExpressionDO(__all_data__)) {
+            if (self.key_eq(aae)) {
+                if (arr.element_hash_id = aae.getArrayExpressionHashId()) {
+                    return arr
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the index expression of the array access expression.
+     * @return Expression 
+     */
+    pub fn getIndexExpression(self) -> Expression {
+        for (idx in Expression(__all_data__),
+            aae in ArrayAccessExpressionDO(__all_data__)) {
+            if (self.key_eq(aae)) {
+                if (idx.element_hash_id = aae.getIndexExpressionHashId()) {
+                    return idx
+                }
+            }
+        }
+    }
+}
+/**
+ * 
+ * @brief DO class: An array.
+ */
+schema Array extends ArrayDO {
+
+}
+impl Array {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *Array {
+        for (tmp in ArrayDO(db)) {
+            yield Array {
+                element_hash_id : tmp.element_hash_id,
+                name : tmp.name
+            }
+        }
+    }
+    /**
+     * @brief gets the type for the element.
+     * @return TypeElement
+     */
+    pub fn getTypeElement(self) -> TypeElement {
+        for (type in TypeElement(__all_data__)) {
+            if (self.key_eq(type.getParent())) {
+                return type
+            }
+        }
+    }
+}

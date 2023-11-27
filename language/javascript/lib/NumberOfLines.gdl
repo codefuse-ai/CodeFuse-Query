@@ -1,0 +1,25 @@
+/**
+ * @filename: Statement
+ * @brief: Provides classes and predicates for working with the number of JavaScript / TypeScript lines.
+ */
+
+/**
+ * A number-of-lines object for a location, including the number of lines, lines of code and lines of comments.
+ */
+schema NumberOfLines extends NumberOfLinesDO {
+}
+
+impl NumberOfLines {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *NumberOfLines {
+        for (tmp in NumberOfLinesDO(db)) {
+            yield NumberOfLines {
+                location_oid : tmp.location_oid,
+                lines : tmp.lines,
+                code_lines : tmp.code_lines,
+                comment_lines : tmp.comment_lines
+            }
+        }
+    }
+}

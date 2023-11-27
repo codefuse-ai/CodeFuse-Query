@@ -1,0 +1,34 @@
+/**
+ * @filename: Statement
+ * @brief: Provides util classes and predicates for JavaScript / TypeScript
+ */
+
+/**
+ * Determines whether a node is a control Node
+ */
+pub fn isControlNode(node: Node) -> bool {
+    if (isIterationStatement(node)) {
+        return true
+    }
+    if (isIfStatement(node)) {
+        return true
+    }
+    if (isCaseClause(node)) {
+        return true
+    }
+    if (isDefaultClause(node)) {
+        return true
+    }
+    if (isCatchClause(node)) {
+        return true
+    }
+    if (isConditionalExpression(node)) {
+        return true
+    }
+    if (isLogicalAndExpression(node)) {
+        return true
+    }
+    if (isLogicalOrExpression(node)) {
+        return true
+    }
+}

@@ -1,0 +1,2420 @@
+/**
+ * @filename: ControlFlowGraph
+ * @brief: Provides classes and predicates for working with a CFG-based JavaScript / TypeScript program representation.
+ */
+
+/**
+ * A control flow entry node.
+ */
+schema CfgEntryNode extends CfgEntryNodeDO {
+}
+
+impl CfgEntryNode {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *CfgEntryNode {
+        for (tmp in CfgEntryNodeDO(db)) {
+            for (cfgEntryNodeDO in CfgEntryNodeDO(db)) {
+                if (tmp = cfgEntryNodeDO) {
+                    yield CfgEntryNode {
+                        oid : tmp.oid,
+                        ast_node_oid : tmp.ast_node_oid
+                    }
+                }
+            }
+        }
+    }
+
+    pub fn getAstNode(self) -> Node {
+        for (node in Node(__all_data__)) {
+            if (node.id = self.getAstNodeOid()) {
+                return node
+            }
+        }
+    }
+}
+
+/**
+ * A control flow exit node.
+ */
+schema CfgExitNode extends CfgExitNodeDO {
+}
+
+impl CfgExitNode {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *CfgExitNode {
+        for (tmp in CfgExitNodeDO(db)) {
+            yield CfgExitNode {
+                oid : tmp.oid,
+                ast_node_oid : tmp.ast_node_oid
+            }
+        }
+    }
+
+    pub fn getAstNode(self) -> Node {
+        for (node in Node(__all_data__)) {
+            if (node.id = self.getAstNodeOid()) {
+                return node
+            }
+        }
+    }
+}
+
+/**
+ * A synthetic control flow node, which is an entry or exit node.
+ */
+schema SyntheticCfgNode {
+    @primary id: int
+}
+
+impl SyntheticCfgNode {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *SyntheticCfgNode {
+        for (cfgEntryNode in CfgEntryNode(db)) {
+            yield SyntheticCfgNode {id : cfgEntryNode.oid}
+        }
+        for (cfgExitNode in CfgExitNode(db)) {
+            yield SyntheticCfgNode {id : cfgExitNode.oid}
+        }
+    }
+
+    pub fn getAstNode(self) -> Node {
+        for (cfgEntryNode in CfgEntryNode(__all_data__)) {
+            if (cfgEntryNode.key_eq(self)) {
+                let (node = cfgEntryNode.getAstNode()) {
+                    return node
+                }
+            }
+        }
+        for (cfgExitNode in CfgExitNode(__all_data__)) {
+            if (cfgExitNode.key_eq(self)) {
+                let (node = cfgExitNode.getAstNode()) {
+                    return node
+                }
+            }
+        }
+    }
+}
+
+/*
+ * This class represent control flow node, all ast nodes are
+ * control flow nodes.
+ */
+schema ControlFlowNode {
+    @primary id: int
+}
+
+impl ControlFlowNode {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *ControlFlowNode {
+        for (node in Node(db)) {
+            yield ControlFlowNode {id : node.id}
+        }
+        for (syntheticCfgNode in SyntheticCfgNode(db)) {
+            yield ControlFlowNode {id : syntheticCfgNode.id}
+        }
+    }
+
+    pub fn isSyntheticNode(self) -> bool {
+        for (syntheticCfgNode in SyntheticCfgNode(__all_data__)) {
+            if (self.key_eq(syntheticCfgNode)) {
+                return true
+            }
+        }
+    }
+
+    pub fn isEntryNode(self) -> bool {
+        for (cfgEntryNode in CfgEntryNode(__all_data__)) {
+            if (self.key_eq(cfgEntryNode)) {
+                return true
+            }
+        }
+    }
+
+    pub fn isExitNode(self) -> bool {
+        for (cfgExitNode in CfgExitNode(__all_data__)) {
+            if (self.key_eq(cfgExitNode)) {
+                return true
+            }
+        }
+    }
+
+    pub fn isAstNode(self) -> bool {
+        for (node in Node(__all_data__)) {
+            if (self.key_eq(node)) {
+                return true
+            }
+        }
+    }
+
+    /**
+     * Get the enclosing function of node.
+     * CfgEntryNode or CfgExitNode return belongs to function.
+     */
+    pub fn getEnclosingFunction(self) -> FunctionLikeDeclaration {
+        for (enclosingFunction in FunctionLikeDeclaration(__all_data__),
+            astNode in Node(__all_data__)) {
+            if (astNode.key_eq(self)) {
+                if (isFunctionLikeDeclaration(astNode)) {
+                    if (enclosingFunction.key_eq(astNode)) {
+                        return enclosingFunction
+                    }
+                }
+                if (!isFunctionLikeDeclaration(astNode)) {
+                    if (enclosingFunction = astNode.getEnclosingFunction()) {
+                        return enclosingFunction
+                    }
+                }
+            }
+            for (syntheticCfgNode in SyntheticCfgNode(__all_data__)) {
+                if (syntheticCfgNode.key_eq(self)) {
+                    if (astNode = syntheticCfgNode.getAstNode()) {
+                        if (isFunctionLikeDeclaration(astNode)) {
+                            if (enclosingFunction.key_eq(astNode)) {
+                                return enclosingFunction
+                            }
+                        }
+                        if (!isFunctionLikeDeclaration(astNode)) {
+                            if (enclosingFunction = astNode.getEnclosingFunction()) {
+                                return enclosingFunction
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Get the location of this control flow node.
+     */
+    pub fn getLocation(self) -> Location {
+        let (astNode = Node {id: self.id}) {
+            if (astNode.key_eq(self)) {
+                let (location = astNode.getLocation()) {
+                    return location
+                }
+            }
+        }
+        for (syntheticCfgNode in SyntheticCfgNode(__all_data__)) {
+            if (syntheticCfgNode.key_eq(self)) {
+                let (astNode = syntheticCfgNode.getAstNode()) {
+                    let (location = astNode.getLocation()) {
+                        return location
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Get the file of this control flow node.
+     */
+    pub fn getFile(self) -> File {
+        let (location = self.getLocation()) {
+            return location.getFile()
+        }
+    }
+
+    /**
+     * Get the relative path of this control flow node.
+     */
+    pub fn getRelativePath(self) -> string {
+        let (file = self.getFile()) {
+            return file.getRelativePath()
+        }
+    }
+
+    /**
+     * Get the text of this control flow node.
+     */
+    pub fn getText(self) -> string {
+        for (astNode in Node(__all_data__)) {
+            if (astNode.key_eq(self)) {
+                return astNode.getText()
+            }
+        }
+        for (syntheticCfgNode in SyntheticCfgNode(__all_data__)) {
+            if (syntheticCfgNode.key_eq(self)) {
+                let (astNode = syntheticCfgNode.getAstNode()) {
+                    return astNode.getText()
+                }
+            }
+        }
+    }
+
+    /**
+     * Get the kind name of node.
+     * If node is ast node, just return ast node kind name; otherwise
+     * return node name as CfgEntryNode or CfgExitNode.
+     */
+    pub fn getKindName(self) -> string {
+        for (astNode in Node(__all_data__)) {
+            if (astNode.key_eq(self)) {
+                let (kindId = astNode.getKind()) {
+                    for (kindName in string::__undetermined_all__()) {
+                        if (syntaxKind(kindId, kindName)) {
+                            return kindName
+                        }
+                    }
+                }
+            }
+        }
+        for (entryNode in CfgEntryNode(__all_data__)) {
+            if (entryNode.key_eq(self)) {
+                return "CfgEntryNode"
+            }
+        }
+        for (exitNode in CfgExitNode(__all_data__)) {
+            if (exitNode.key_eq(self)) {
+                return "CfgExitNode"
+            }
+        }
+    }
+
+    /**
+     * Get an immediate successor of this node.
+     */
+    pub fn getASuccessor(self) -> *ControlFlowNode {
+        yield succ(self, __all_data__)
+    }
+
+    /**
+     * Gets the successor of this node, and query successors recursively
+     */
+    pub fn getASuccessorRecursive(self) -> *ControlFlowNode {
+        yield self.getASuccessor()
+        for (tmpCFN in ControlFlowNode(__all_data__)) {
+            if (tmpCFN in self.getASuccessor()) {
+                yield tmpCFN.getASuccessorRecursive()
+            }
+        }
+    }
+
+    /**
+     * Get an immediate predecessor of this node.
+     */
+    pub fn getAPredecessor(self) -> *ControlFlowNode {
+        for (predecessor in ControlFlowNode(__all_data__)) {
+            if (self in predecessor.getASuccessor()) {
+                yield predecessor
+            }
+        }
+    }
+
+    /**
+     * Get an immediate successor of this node with the given
+     * type of Completion.
+     */
+    pub fn getASuccessorWithCompletion(self, c: Completion) -> *ControlFlowNode {
+        for (successor in succ(self, c)) {
+            yield successor
+        }
+    }
+
+    /**
+     * Get the basic block that contains this node.
+     */
+    pub fn getBasicBlock(self) -> BasicBlock {
+        for (basicBlock in BasicBlock(__all_data__)) {
+            if (self in basicBlock.getANode()) {
+                return basicBlock
+            }
+        }
+    }
+
+    /**
+     * Get the count of immediate successor nodes.
+     */
+    pub fn getSuccessorCount(self) -> int {
+        return self.getASuccessor().len()
+    }
+
+    /**
+     * Get the count of immediate predecessor nodes/
+     */
+    pub fn getPredecessorCount(self) -> int {
+        return self.getAPredecessor().len()
+    }
+}
+
+/**
+ * Most of Expression and part of Statement nodes are post order nodes,
+ * the visit order of PostOrderNode is that:
+ * 1. visit it's child, ordered by child index
+ * 2. visit node itself
+ *
+ * PostOrderNode consist of AST nodes with the following properties:
+ * 1. the visit order of node's immediate children is sequential
+ * 2. the control flow edge label between node's immdediate children
+ *    only contain NormalCompletion
+ *
+ * This is a convenient way to model a node, if the node can be treat as
+ * PostOrderNode; the necessory control flow information including first,
+ * last and successor are generated automatically.
+ */
+schema PostOrderNode extends ControlFlowNode {
+}
+
+impl PostOrderNode {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *PostOrderNode {
+        for (tmp in ControlFlowNode(db)) {
+            if (isPostOrderNode(tmp)) {
+                yield PostOrderNode {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+
+    pub fn getAllChild(self) -> *ControlFlowNode {
+        for (i in int::__undetermined_all__()) {
+            yield self.getChildNode(i)
+        }
+    }
+
+    /**
+     * Gets child node with index, start from 0.
+     */
+    pub fn getChildNode(self, index: int) -> ControlFlowNode {
+        for (cn in ControlFlowNode(__all_data__)) {
+            for (objectLiteralExpression in ObjectLiteralExpression(__all_data__)) {
+                if (objectLiteralExpression.key_eq(self)) {
+                    if (cn.key_eq(objectLiteralExpression.getProperty(index))) {
+                        return cn
+                    }
+                }
+            }
+            for (propertyAssignment in PropertyAssignment(__all_data__)) {
+                if (propertyAssignment.key_eq(self)) {
+                    if (cn.key_eq(propertyAssignment.getPropertyName())) {
+                        if (index = 0) {
+                            return cn
+                        }
+                    }
+                    if (cn.key_eq(propertyAssignment.getInitializer())) {
+                        if (index = 1) {
+                            return cn
+                        }
+                    }
+                }
+            }
+            for (computedPropertyName in ComputedPropertyName(__all_data__)) {
+                if (computedPropertyName.key_eq(self)) {
+                    if (cn.key_eq(computedPropertyName.getExpression())) {
+                        if (index = 0) {
+                            return cn
+                        }
+                    }
+                }
+            }
+            for (shorthandPropertyAssignment in ShorthandPropertyAssignment(__all_data__)) {
+                if (shorthandPropertyAssignment.key_eq(self)) {
+                    if (cn.key_eq(shorthandPropertyAssignment.getNameNode())) {
+                        if (index = 0) {
+                            return cn
+                        }
+                    }
+                }
+            }
+            for (spreadAssignment in SpreadAssignment(__all_data__)) {
+                if (spreadAssignment.key_eq(self)) {
+                    if (cn.key_eq(spreadAssignment.getExpression())) {
+                        if (index = 0) {
+                            return cn
+                        }
+                    }
+                }
+            }
+            for (parameter in Parameter(__all_data__)) {
+                if (parameter.key_eq(self)) {
+                    if (parameter.hasInitializer()) {
+                        if (cn.key_eq(parameter.getInitializer())) {
+                            if (index = 0) {
+                                return cn
+                            }
+                        }
+                        if (cn.key_eq(parameter.getNameNode())) {
+                            if (index = 1) {
+                                return cn
+                            }
+                        }
+                    }
+                    if (!parameter.hasInitializer()) {
+                        if (cn.key_eq(parameter.getNameNode())) {
+                            if (index = 0) {
+                                return cn
+                            }
+                        }
+                    }
+                }
+            }
+            // UnaryExpression's sub class
+            for (tae in TypeAssertionExpression(__all_data__)) {
+                if (self.key_eq(tae)) {
+                    if (index = 0) {
+                        if (cn.key_eq(tae.getExpression())) {
+                            return cn
+                        }
+                    }
+                }
+            }
+            for (de in DeleteExpression(__all_data__)) {
+                if (self.key_eq(de)) {
+                    if (index = 0) {
+                        if (cn.key_eq(de.getExpression())) {
+                            return cn
+                        }
+                    }
+                }
+            }
+            for (toe in TypeOfExpression(__all_data__)) {
+                if (self.key_eq(toe)) {
+                    if (index = 0) {
+                        if (cn.key_eq(toe.getExpression())) {
+                            return cn
+                        }
+                    }
+                }
+            }
+            for (ve in VoidExpression(__all_data__)) {
+                if (self.key_eq(ve)) {
+                    if (index = 0) {
+                        if (cn.key_eq(ve.getExpression())) {
+                            return cn
+                        }
+                    }
+                }
+            }
+            for (awaitExpr in AwaitExpression(__all_data__)) {
+                if (self.key_eq(awaitExpr)) {
+                    if (index = 0) {
+                        if (cn.key_eq(awaitExpr.getExpression())) {
+                            return cn
+                        }
+                    }
+                }
+            }
+            for (prefixUE in PrefixUnaryExpression(__all_data__)) {
+                if (self.key_eq(prefixUE)) {
+                    if (index = 0) {
+                        if (cn.key_eq(prefixUE.getOperand())) {
+                            return cn
+                        }
+                    }
+                }
+            }
+            for (postfixUE in PostfixUnaryExpression(__all_data__)) {
+                if (self.key_eq(postfixUE)) {
+                    if (index = 0) {
+                        if (cn.key_eq(postfixUE.getOperand())) {
+                            return cn
+                        }
+                    }
+                }
+            }
+            for (nne in NonNullExpression(__all_data__)) {
+                if (self.key_eq(nne)) {
+                    if (index = 0) {
+                        if (cn.key_eq(nne.getExpression())) {
+                            return cn
+                        }
+                    }
+                }
+            }
+            for (ce in CallExpression(__all_data__)) {
+                if (self.key_eq(ce)) {
+                    if (index = 0) {
+                        if (cn.key_eq(ce.getExpression())) {
+                            return cn
+                        }
+                    }
+                    for (argIndex in int::__undetermined_all__()) {
+                        if (cn.key_eq(ce.getArgument(argIndex))) {
+                            if (index = argIndex + 1) {
+                                return cn
+                            }
+                        }
+                    }
+                }
+            }
+            for (ae in AccessExpression(__all_data__)) {
+                if (self.key_eq(ae)) {
+                    if (index = 0) {
+                        if (cn.key_eq(ae.getExpression())) {
+                            return cn
+                        }
+                    }
+                    if (index = 1) {
+                        if (cn.key_eq(ae.getPropertyExpression())) {
+                            return cn
+                        }
+                    }
+                }
+            }
+            for (ale in ArrayLiteralExpression(__all_data__)) {
+                if (self.key_eq(ale)) {
+                    if (cn.key_eq(ale.getElement(index))) {
+                        return cn
+                    }
+                }
+            }
+            for (ne in NewExpression(__all_data__)) {
+                if (self.key_eq(ne)) {
+                    if (index = 0) {
+                        if (cn.key_eq(ne.getExpression())) {
+                            return cn
+                        }
+                    }
+                    for (argIndex in int::__undetermined_all__()) {
+                        if (cn.key_eq(ne.getArgument(argIndex))) {
+                            if (index = argIndex + 1) {
+                                return cn
+                            }
+                        }
+                    }
+                }
+            }
+            for (parenthesizedExpression in ParenthesizedExpression(__all_data__)) {
+                if (self.key_eq(parenthesizedExpression)) {
+                    if (index = 0) {
+                        if (cn.key_eq(parenthesizedExpression.getExpression())) {
+                            return cn
+                        }
+                    }
+                }
+            }
+            // BinaryExpression's sub class
+            for (be in BinaryExpression(__all_data__)) {
+                if (self.key_eq(be)) {
+                    let (tmp = Node(__all_data__).find(be)) {
+                        // node is assignment expr, visit right hand side first.
+                        if (isAssignmentExpression(tmp)) {
+                            if (index = 0) {
+                                if (cn.key_eq(be.getRightOperand())) {
+                                    return cn
+                                }
+                            }
+                            if (index = 1) {
+                                if (cn.key_eq(be.getLeftOperand())) {
+                                    return cn
+                                }
+                            }
+                        }
+                        if (!isAssignmentExpression(tmp)) {
+                            if (index = 0) {
+                                if (cn.key_eq(be.getLeftOperand())) {
+                                    return cn
+                                }
+                            }
+                            if (index = 1) {
+                                if (cn.key_eq(be.getRightOperand())) {
+                                    return cn
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            for (vdl in VariableDeclarationList(__all_data__)) {
+                if (self.key_eq(vdl)) {
+                    let (vd = vdl.getVariableDeclaration(index)) {
+                        if (cn.key_eq(vd)) {
+                            return cn
+                        }
+                    }
+                }
+            }
+            for (variableDeclaration in VariableDeclaration(__all_data__)) {
+                if (variableDeclaration.key_eq(self)) {
+                    if (variableDeclaration.hasInitializer()) {
+                        if (cn.key_eq(variableDeclaration.getInitializer())) {
+                            if (index = 0) {
+                                return cn
+                            }
+                        }
+                        if (cn.key_eq(variableDeclaration.getNameNode())) {
+                            if (index = 1) {
+                                return cn
+                            }
+                        }
+                    }
+                    if (!variableDeclaration.hasInitializer()) {
+                        if (cn.key_eq(variableDeclaration.getNameNode())) {
+                            if (index = 0) {
+                                return cn
+                            }
+                        }
+                    }
+                }
+            }
+            for (objectBindingPattern in ObjectBindingPattern(__all_data__)) {
+                if (objectBindingPattern.key_eq(self)) {
+                    if (cn.key_eq(objectBindingPattern.getElement(index))) {
+                        return cn
+                    }
+                }
+            }
+            for (arrayBindingPattern in ArrayBindingPattern(__all_data__)) {
+                if (arrayBindingPattern.key_eq(self)) {
+                    if (cn.key_eq(arrayBindingPattern.getElement(index))) {
+                        return cn
+                    }
+                }
+            }
+            for (bindingElement in BindingElement(__all_data__)) {
+                if (bindingElement.key_eq(self)) {
+                    if (bindingElement.hasInitializer()) {
+                        if (cn.key_eq(bindingElement.getInitializer())) {
+                            if (index = 0) {
+                                return cn
+                            }
+                        }
+                        if (cn.key_eq(bindingElement.getNameNode())) {
+                            if (index = 1) {
+                                return cn
+                            }
+                        }
+                    }
+                    if (!bindingElement.hasInitializer()) {
+                        if (cn.key_eq(bindingElement.getNameNode())) {
+                            if (index = 0) {
+                                return cn
+                            }
+                        }
+                    }
+                }
+            }
+            for (rs in ReturnStatement(__all_data__)) {
+                if (self.key_eq(rs)) {
+                    if (cn.key_eq(rs.getExpression())) {
+                        if (index = 0) {
+                            return cn
+                        }
+                    }
+                }
+            }
+            for (ye in YieldExpression(__all_data__)) {
+                if (self.key_eq(ye)) {
+                    if (cn.key_eq(ye.getExpression())) {
+                        if (index = 0) {
+                            return cn
+                        }
+                    }
+                }
+            }
+            for (ae in AsExpression(__all_data__)) {
+                if (self.key_eq(ae)) {
+                    if (cn.key_eq(ae.getExpression())) {
+                        if (index = 0) {
+                            return cn
+                        }
+                    }
+                }
+            }
+            for (se in SpreadElement(__all_data__)) {
+                if (self.key_eq(se)) {
+                    if (cn.key_eq(se.getExpression())) {
+                        if (index = 0) {
+                            return cn
+                        }
+                    }
+                }
+            }
+            for (throwStatement in ThrowStatement(__all_data__)) {
+                if (self.key_eq(throwStatement)) {
+                    if (cn.key_eq(throwStatement.getExpression())) {
+                        if (index = 0) {
+                            return cn
+                        }
+                    }
+                }
+            }
+            for (templateExpression in TemplateExpression(__all_data__),
+                templateHead in TemplateHead(__all_data__)) {
+                if (self.key_eq(templateExpression)) {
+                    if (templateHead = templateExpression.getHead()) {
+                        if (cn.key_eq(templateHead)) {
+                            if (index = 0) {
+                                return cn
+                            }
+                        }
+                    }
+                }
+            }
+            for (spanIndex in int::__undetermined_all__()) {
+                for (templateExpression in TemplateExpression(__all_data__),
+                    templateSpan in TemplateSpan(__all_data__)) {
+                    if (self.key_eq(templateExpression)) {
+                        if (templateSpan = templateExpression.getTemplateSpan(spanIndex)) {
+                            if (cn.key_eq(templateSpan)) {
+                                if (index = spanIndex + 1) {
+                                    return cn
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            for (templateSpan in TemplateSpan(__all_data__),
+                expression in Expression(__all_data__)) {
+                if (self.key_eq(templateSpan)) {
+                    if (expression = templateSpan.getExpression()) {
+                        if (cn.key_eq(expression)) {
+                            if (index = 0) {
+                                return cn
+                            }
+                        }
+                    }
+                }
+            }
+            for (templateSpan in TemplateSpan(__all_data__),
+                token in Token(__all_data__)) {
+                if (self.key_eq(templateSpan)) {
+                    if (token = templateSpan.getLiteral()) {
+                        if (cn.key_eq(token)) {
+                            if (index = 1) {
+                                return cn
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets the first child of this node.
+     */
+    pub fn firstChild(self) -> ControlFlowNode {
+        return self.getChildNode(0)
+    }
+
+    /**
+     * Hold whether this node is leaf node.
+     */
+    pub fn isLeafNode(self) -> bool {
+        let (cc = self.getChildCount()) {
+            if (cc = 0) {
+                return true
+            }
+        }
+    }
+
+    /**
+     * Holds whether this node can finish with a normalCompletion.
+     */
+    pub fn mayCompleteNormally(self) -> bool {
+        let (node = self.to<Node>()) {
+            if (!isReturnStatement(node) && !isThrowStatement(node)) {
+                return true
+            }
+        }
+    }
+
+    /**
+     * Gets the count of the children.
+     */
+    pub fn getChildCount(self) -> int {
+        return self.getAllChild().len()
+    }
+}
+
+/**
+ * a node that occur in a context in which their value affect control flow.
+ */
+pub fn inBooleanContext(n: ControlFlowNode) -> bool {
+    for (ble in BinaryLogicalExpression(__all_data__)) {
+        if (n.key_eq(ble.getLeftOperand())) {
+            return true
+        }
+    }
+    for (ble in BinaryLogicalExpression(__all_data__)) {
+        let (ro = ble.getRightOperand()) {
+            if (n.key_eq(ro)) {
+                if (inBooleanContext(ControlFlowNode(__all_data__).find(ble))) {
+                    return true
+                }
+            }
+        }
+    }
+    for (ete in EqualityTestExpression(__all_data__)) {
+        if (n.key_eq(ete.getLeftOperand())) {
+            return true
+        }
+    }
+    for (ete in EqualityTestExpression(__all_data__)) {
+        let (ro = ete.getRightOperand()) {
+            if (n.key_eq(ro)) {
+                if (inBooleanContext(ControlFlowNode(__all_data__).find(ete))) {
+                    return true
+                }
+            }
+        }
+    }
+    for (ce in ConditionalExpression(__all_data__)) {
+        if (n.key_eq(ce.getCondition())) {
+            return true
+        }
+    }
+    for (ce in ConditionalExpression(__all_data__)) {
+        let (thenOrElseExpr = ce.getThen()) {
+            if (n.key_eq(thenOrElseExpr)) {
+                if (inBooleanContext(ControlFlowNode(__all_data__).find(ce))) {
+                    return true
+                }
+            }
+        }
+        let (thenOrElseExpr = ce.getElse()) {
+            if (n.key_eq(thenOrElseExpr)) {
+                if (inBooleanContext(ControlFlowNode(__all_data__).find(ce))) {
+                    return true
+                }
+            }
+        }
+    }
+    for (ifStmt in IfStatement(__all_data__)) {
+        if (n.key_eq(ifStmt.getCondition())) {
+            return true
+        }
+    }
+    for (forStmt in ForStatement(__all_data__)) {
+        if (n.key_eq(forStmt.getCondition())) {
+            return true
+        }
+    }
+    for (dws in DoWhileStatement(__all_data__)) {
+        if (n.key_eq(dws.getCondition())) {
+            return true
+        }
+    }
+    for (ws in WhileStatement(__all_data__)) {
+        if (n.key_eq(ws.getCondition())) {
+            return true
+        }
+    }
+}
+
+/**
+ * Determine whether a control flow node throws
+ * an exception.
+ */
+pub fn mayThrow(cfn: ControlFlowNode) -> bool {
+    for (throwStatement in ThrowStatement(__all_data__)) {
+        if (cfn.key_eq(throwStatement)) {
+            return true
+        }
+    }
+}
+
+/**
+ * Determine whether a control flow node is a post order node.
+ */
+pub fn isPostOrderNode(controlFlowNode: ControlFlowNode) -> bool {
+    let (node = Node(__all_data__).find(controlFlowNode)) {
+        // Unary expressions
+        if (isTypeAssertionExpression(node)) {
+            return true
+        }
+        if (isDeleteExpression(node)) {
+            return true
+        }
+        if (isTypeOfExpression(node)) {
+            return true
+        }
+        if (isVoidExpression(node)) {
+            return true
+        }
+        if (isAwaitExpression(node)) {
+            return true
+        }
+        if (isPrefixUnaryExpression(node)) {
+            return true
+        }
+        if (isPostfixUnaryExpression(node)) {
+            return true
+        }
+        if (isNonNullExpression(node)) {
+            return true
+        }
+        if (isCallLikeExpression(node)) {
+            return true
+        }
+        if (isAccessExpression(node)) {
+            return true
+        }
+        if (isIdentifier(node)) {
+            return true
+        }
+        if (isPrivateIdentifier(node)) {
+            return true
+        }
+        if (isThisExpression(node)) {
+            return true
+        }
+        if (isSuperExpression(node)) {
+            return true
+        }
+        if (isArrayLiteralExpression(node)) {
+            return true
+        }
+        if (isParenthesizedExpression(node)) {
+            return true
+        }
+        if (isLiteralExpression(node)) {
+            return true
+        }
+        if (isBooleanLiteral(node)) {
+            return true
+        }
+        if (isTemplateExpression(node)) {
+            return true
+        }
+        // End of unary expressions
+        if (isTemplateSpan(node)) {
+            return true
+        }
+        if (isToken(node)) {
+            return true
+        }
+        // Binary expressions
+        if (isBinaryExpression(node)) {
+            if (!isBinaryLogicalExpression(node)) {
+                return true
+            }
+        }
+        // empty BlockStatement is PostOrderNode
+        for (bs in BlockStatement(__all_data__)) {
+            if (bs.key_eq(node)) {
+                if (bs.getStatementCount() = 0) {
+                    return true
+                }
+            }
+        }
+        if (isVariableDeclarationList(node)) {
+            return true
+        }
+        if (isVariableDeclaration(node)) {
+            return true
+        }
+        if (isReturnStatement(node)) {
+            return true
+        }
+        if (isYieldExpression(node)) {
+            return true
+        }
+        if (isAsExpression(node)) {
+            return true
+        }
+        if (isSpreadElement(node)) {
+            return true
+        }
+        if (isAssignmentExpression(node)) {
+            return true
+        }
+        if (isOmittedExpression(node)) {
+            return true
+        }
+        // including ObjectBindingPattern and ArrayBindingPattern
+        if (isBindingPattern(node)) {
+            return true
+        }
+        // including BindingElement and OmittedExpression
+        if (isArrayBindingElement(node)) {
+            return true
+        }
+        if (isEnumMember(node)) {
+            return true
+        }
+        if (isEmptyStatement(node)) {
+            return true
+        }
+        if (isDebuggerStatement(node)) {
+            return true
+        }
+        if (isThrowStatement(node)) {
+            return true
+        }
+        if (isDeclarationStatement(node)) {
+            return true
+        }
+        // There is no control flow relation between FunctionExpression
+        // and it's body; the cfg from it's body is another cfg, don't
+        // have relation with current cfg;
+        // just treat FunctionExpression as a node without children.
+        // Same with ClassExpression, ObjectLiteralExpression.
+        if (isFunctionExpression(node)) {
+            return true
+        }
+        if (isArrowFunction(node)) {
+            return true
+        }
+        if (isClassExpression(node)) {
+            return true
+        }
+        if (isObjectLiteralExpression(node)) {
+            return true
+        }
+        if (isObjectLiteralElement(node)) {
+            return true
+        }
+        if (isComputedPropertyName(node)) {
+            return true
+        }
+        if (isParameter(node)) {
+            return true
+        }
+    }
+}
+
+/**
+ * If the body of loop finishes with completion,
+ * the loop will continue executing.
+ */
+pub fn continues(c: Completion, loop: IterationStatement) -> bool {
+    if (isNormalCompletion(c)) {
+        for (tmp in IterationStatement(__all_data__)) {
+            if (tmp = loop) {
+                return true
+            }
+        }
+    }
+    // only consider continue completions if there actually is a `continue`
+    // somewhere inside this loop; we don't particularly care whether that
+    // `continue` could actually target this loop, we just want to restrict
+    // the size of the predicate
+    for (continueStmt in ContinueStatement(__all_data__)) {
+        for (auto_tmp1 in continueStmt.getAnAncestor()) {
+            if (auto_tmp1.key_eq(loop)) {
+                if (isContinueCompletion(c)) {
+                    return true
+                }
+            }
+        }
+    }
+}
+
+/**
+ * Get the node that should be visited first,
+ * selected from the node and it's descendants.
+ * Every control flow node must have and only have 1 first node.
+ */
+pub fn first(n: ControlFlowNode) -> ControlFlowNode {
+    // n is Statement, if the Statement is not PostOrderNode, visit itself first
+    for (s in Statement(__all_data__)) {
+        if (n.key_eq(s)) {
+            if (!isPostOrderNode(n)) {
+                return n
+            }
+        }
+    }
+    // n is PostOrderNode, the node has children, visit first child
+    for (pon in PostOrderNode(__all_data__)) {
+        if (n.key_eq(pon)) {
+            let (fcn = pon.firstChild()) {
+                let (f = first(fcn)) {
+                    return f
+                }
+            }
+        }
+    }
+    // n is PostOrderNode, the node is leaf node, visit the node
+    for (pon in PostOrderNode(__all_data__)) {
+        if (n.key_eq(pon)) {
+            if (pon.isLeafNode()) {
+                return n
+            }
+        }
+    }
+    // the first node of ConditionalExpression is itself
+    for (ce in ConditionalExpression(__all_data__)) {
+        if (n.key_eq(ce)) {
+            return n
+        }
+    }
+    // the first node of BinaryLogicalExpression is itself
+    for (ble in BinaryLogicalExpression(__all_data__)) {
+        if (n.key_eq(ble)) {
+            return n
+        }
+    }
+}
+
+/**
+ * Get the node that should be visited last,
+ * selected from the node and it's descendants.
+ * Every control flow node must have at least 1 last node.
+ */
+pub fn last(n: ControlFlowNode, ln: ControlFlowNode, c: Completion) -> bool {
+    // if the node is in boolean context,
+    // the completion should be BooleanCompletion
+    for (nc in NormalCompletion()) {
+        if (last(n, ln, nc.to<Completion>())) {
+            if (inBooleanContext(n)) {
+                if (isBooleanCompletion(c)) {
+                    return true
+                }
+            }
+        }
+    }
+    // the last of top-level is the last node of the last statement of the top-level
+    for (topLevel in TopLevel(__all_data__)) {
+        if (n.key_eq(topLevel)) {
+            let (statementCount = topLevel.getStatementCount()) {
+                let (lastStatement = topLevel.getStatement(statementCount - 1)) {
+                    if (last(ControlFlowNode {id: lastStatement.id}, ln, c)) {
+                        return true
+                    }
+                }
+            }
+        }
+    }
+    // the last of BlockStatement is the last node of the statement that
+    // is the last statement of the BlockStatement body
+    for (bs in BlockStatement(__all_data__)) {
+        if (n.key_eq(bs)) {
+            let (sc = bs.getStatementCount()) {
+                let (lastStmt = bs.getStatement(sc - 1)) {
+                    if (last(ControlFlowNode {id: lastStmt.id}, ln, c)) {
+                        return true
+                    }
+                }
+            }
+        }
+    }
+    // any child Statement in BlockStatement, it is the last node of
+    // BlockStatement if it's last node is not NormalCompletion
+    if (!isNormalCompletion(c)) {
+        for (bs in BlockStatement(__all_data__)) {
+            if (n.key_eq(bs)) {
+                for (childStmt in Statement(__all_data__)) {
+                    if (childStmt in bs.getAStatement()) {
+                        if (last(ControlFlowNode {id: childStmt.id}, ln, c)) {
+                            return true
+                        }
+                    }
+                }
+            }
+        }
+    }
+    // the last of IfStatement is the last of the then block and
+    // the last of the else block
+    for (ifStmt in IfStatement(__all_data__)) {
+        if (n.key_eq(ifStmt)) {
+            let (thenNode = ifStmt.getThen()) {
+                if (last(ControlFlowNode {id: thenNode.id}, ln, c)) {
+                    return true
+                }
+            }
+            let (elseNode = ifStmt.getElse()) {
+                if (last(ControlFlowNode {id: elseNode.id}, ln, c)) {
+                    return true
+                }
+            }
+        }
+    }
+    // if the IfStatement don't have else block,
+    // the last node of condition is the last node of IfStatement, completion is NormalCompletion
+    if (isNormalCompletion(c)) {
+        for (ifStmt in IfStatement(__all_data__)) {
+            if (n.key_eq(ifStmt)) {
+                if (!ifStmt.hasElse()) {
+                    let (cond = ifStmt.getCondition()) {
+                        for (fbc in FalseBooleanCompletion()) {
+                            if (last(ControlFlowNode {id: cond.id}, ln, fbc.to<Completion>())) {
+                                return true
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    for (loop in IterationStatement(__all_data__)) {
+        if (n.key_eq(loop)) {
+            // 1. The last node is the last node of condition expression,
+            // when a loop statement terminate normally if its condition is false.
+            if (isNormalCompletion(c)) {
+                let (condition = loop.getCondition()) {
+                    for (falseCompletion in FalseBooleanCompletion()) {
+                        if (falseCompletion in FalseBooleanCompletion()) {
+                            if (last(ControlFlowNode {id: condition.id}, ln, falseCompletion.to<Completion>())) {
+                                return true
+                            }
+                        }
+                    }
+                }
+            }
+            // 2. The last node is the iterated expression in an enhanced-for statement,
+            // when an enhanced-for statement iterate over immediately after the iterated expression.
+            if (isNormalCompletion(c)) {
+                let (enhancedForStmt = loop.to<EnhancedForStatement>()) {
+                    let (iteratedExpr = enhancedForStmt.getExpression()) {
+                        if (last(ControlFlowNode {id: iteratedExpr.id}, ln, c)) {
+                            return true
+                        }
+                    }
+                }
+            }
+            // 3. The last node is the last node of the body...
+            let (body = loop.getBody()) {
+                for (bodyCompletion in Completion()) {
+                    if (last(body.to<ControlFlowNode>(), ln, bodyCompletion)) {
+                        if (isNormalCompletion(c)) {
+                            // ... when in an iteration of a enhanced-for statement, the loop would continue after the last node in the body.
+                            let (enhancedForStmt = loop.to<EnhancedForStatement>()) {
+                                if (continues(bodyCompletion, loop)) {
+                                    return true
+                                }
+                            }
+                        }
+                        // ... or the loop ends after the last node in the body.
+                        // if the completion is a break completion, the entire loop will complete normally.
+                        if (isNormalCompletion(c)) {
+                            if (isBreakCompletion(bodyCompletion)) {
+                                return true
+                            }
+                        }
+                        // ... or if it is some other completion that does not continue the loop,
+                        // the loop should keep the body completion
+                        if (!isBreakCompletion(bodyCompletion)) {
+                            if (!continues(bodyCompletion, loop)) {
+                                if (c = bodyCompletion) {
+                                    return true
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    if (isBreakCompletion(c)) {
+        for (breakStatement in BreakStatement(__all_data__)) {
+            if (n.key_eq(breakStatement)) {
+                if (ln = n) {
+                    return true
+                }
+            }
+        }
+    }
+    if (isContinueCompletion(c)) {
+        if (ln = n) {
+            for (continueStatement in ContinueStatement(__all_data__)) {
+                if (n.key_eq(continueStatement)) {
+                    return true
+                }
+            }
+        }
+    }
+    // the last of ExpressionStatement is the last of the expression
+    // of the ExpressionStatement
+    for (es in ExpressionStatement(__all_data__)) {
+        if (n.key_eq(es)) {
+            let (e = es.getExpression()) {
+                if (last(ControlFlowNode {id: e.id}, ln, c)) {
+                    return true
+                }
+            }
+        }
+    }
+    // the last of the PostOrderNode is the node itself
+    if (isNormalCompletion(c)) {
+        for (pon in PostOrderNode(__all_data__)) {
+            if (n.key_eq(pon)) {
+                if (pon.mayCompleteNormally()) {
+                    if (ln = n) {
+                        return true
+                    }
+                }
+            }
+        }
+    }
+    // the last of the ReturnStatement is the stmt itself
+    // completion is ReturnCompletion
+    if (isReturnCompletion(c)) {
+        for (rs in ReturnStatement(__all_data__)) {
+            if (n.key_eq(rs)) {
+                if (ln = n) {
+                    return true
+                }
+            }
+        }
+    }
+    // the last node of ConditionalExpression is the last node of
+    // it's then or the last node of it's else
+    for (ce in ConditionalExpression(__all_data__)) {
+        if (n.key_eq(ce)) {
+            let (thenExpr = ce.getThen()) {
+                if (last(ControlFlowNode {id: thenExpr.id}, ln, c)) {
+                    return true
+                }
+            }
+            let (elseExpr = ce.getElse()) {
+                if (last(ControlFlowNode {id: elseExpr.id}, ln, c)) {
+                    return true
+                }
+            }
+        }
+    }
+    // the last node of VariableStatement is VariableDeclarationList
+    // because VariableDeclarationList is post order node
+    if (isNormalCompletion(c)) {
+        for (vs in VariableStatement(__all_data__)) {
+            if (n.key_eq(vs)) {
+                let (vdl = vs.getVariableDeclarationList()) {
+                    if (ln.key_eq(vdl)) {
+                        return true
+                    }
+                }
+            }
+        }
+    }
+    // LogicalAndExpression (&&) contains control flow info,
+    // related with short-circuit evaluation.
+    // the last node of LogicalAndExpression are the last of it's
+    // left operand with false boolean completion and
+    // the last of it's right operand
+    for (lae in LogicalAndExpression(__all_data__)) {
+        if (n.key_eq(lae)) {
+            if (isFalseBooleanCompletion(c)) {
+                let (leftOperand = lae.getLeftOperand()) {
+                    if (last(ControlFlowNode {id: leftOperand.id}, ln, c)) {
+                        return true
+                    }
+                }
+            }
+            let (rightOperand = lae.getRightOperand()) {
+                if (last(ControlFlowNode {id: rightOperand.id}, ln, c)) {
+                    return true
+                }
+            }
+        }
+    }
+    // LogicalOrExpression (||) contains control flow info,
+    // related with short-circuit evaluation.
+    // the last node of LogicalOrExpression are the last of it's
+    // left operand with true boolean completion and
+    // the last of it's right operand
+    for (loe in LogicalOrExpression(__all_data__)) {
+        if (n.key_eq(loe)) {
+            if (isTrueBooleanCompletion(c)) {
+                let (leftOperand = loe.getLeftOperand()) {
+                    if (last(ControlFlowNode {id: leftOperand.id}, ln, c)) {
+                        return true
+                    }
+                }
+            }
+            let (rightOperand = loe.getRightOperand()) {
+                if (last(ControlFlowNode {id: rightOperand.id}, ln, c)) {
+                    return true
+                }
+            }
+        }
+    }
+    // NullishCoalescingExpression (??) contains control flow info,
+    // same with LogicalOrExpression.
+    for (nce in NullishCoalescingExpression(__all_data__)) {
+        if (n.key_eq(nce)) {
+            if (isTrueBooleanCompletion(c)) {
+                let (leftOperand = nce.getLeftOperand()) {
+                    if (last(ControlFlowNode {id: leftOperand.id}, ln, c)) {
+                        return true
+                    }
+                }
+            }
+            let (rightOperand = nce.getRightOperand()) {
+                if (last(ControlFlowNode {id: rightOperand.id}, ln, c)) {
+                    return true
+                }
+            }
+        }
+    }
+    // the last node of WithStatement is the last of the statement
+    // belongs to the WithStatement.
+    for (withStatement in WithStatement(__all_data__)) {
+        if (n.key_eq(withStatement)) {
+            let (statement = withStatement.getStatement()) {
+                if (last(ControlFlowNode {id: statement.id}, ln, c)) {
+                    return true
+                }
+            }
+        }
+    }
+    // if node may throw a exception, then create control flow edge
+    // and set the Completion to ThrowCompletion
+    // maybe we can distinct the throw statement with the may throw
+    // call statement, this can be discussed later
+    if (mayThrow(n)) {
+        if (ln = n) {
+            if (isThrowCompletion(c)) {
+                return true
+            }
+        }
+    }
+    // the last node of SwitchStatement is the last node of CaseBlock
+    for (switchStatement in SwitchStatement(__all_data__)) {
+        if (n.key_eq(switchStatement)) {
+            let (caseBlock = switchStatement.getCaseBlock()) {
+                if (last(ControlFlowNode {id: caseBlock.id}, ln, c)) {
+                    return true
+                }
+            }
+        }
+    }
+    let (caseBlock = n.to<CaseBlock>()) {
+        // empty CaseBlock, the last node is itself
+        if (ln = n) {
+            if (isNormalCompletion(c)) {
+                if (caseBlock.getChildCount() = 0) {
+                    return true
+                }
+            }
+        }
+        for (statement in Statement(__all_data__)) {
+            if (statement in caseBlock.getACaseOrDefault()) {
+                // if any last nodes of body belongs to CaseClause or DefaultClause
+                // with BreakCompletion, those last nodes are last node of
+                // CaseBlock with NormalCompletion
+                for (breakCompletion in BreakCompletion()) {
+                    if (breakCompletion in BreakCompletion()) {
+                        if (last(ControlFlowNode {id: statement.id}, ln, Completion().find(breakCompletion))) {
+                            if (isNormalCompletion(c)) {
+                                return true
+                            }
+                        }
+                    }
+                }
+                // if any last nodes of body belongs to CaseClause or DefaultClause
+                // with the Completion that is neither NormalCompletion nor BreakCompletion,
+                // those last nodes are last node of CaseBlock and with the same Completion
+                if (!isNormalCompletion(c) && !isBreakCompletion(c)) {
+                    if (last(ControlFlowNode {id: statement.id}, ln, c)) {
+                        return true
+                    }
+                }
+            }
+        }
+        // if CaseBlock have DefaultClause, the last node of DefaultClause with
+        // NormalCompletion, is the last node of CaseBlock
+        if (caseBlock.haveDefaultClause()) {
+            let (defaultClause = caseBlock.getDefaultClause()) {
+                if (isNormalCompletion(c)) {
+                    if (last(ControlFlowNode {id: defaultClause.id}, ln, c)) {
+                        return true
+                    }
+                }
+            }
+        }
+        // if CaseBlock don't have DefaultClause, the last node of the last CaseClause
+        //  with NormalCompletion, is the last node of CaseBlock
+        if (!caseBlock.haveDefaultClause()) {
+            let (caseClauseCount = caseBlock.getCaseClauseCount()) {
+                let (caseClause = caseBlock.getCaseClause(caseClauseCount - 1)) {
+                    if (isNormalCompletion(c)) {
+                        if (last(caseClause.to<ControlFlowNode>(), ln, c)) {
+                            return true
+                        }
+                    }
+                }
+            }
+        }
+    }
+    for (caseClause in CaseClause(__all_data__)) {
+        if (n.key_eq(caseClause)) {
+            let (statementCount = caseClause.getStatementCount()) {
+                // if CaseClause don't contains any Statement,
+                // the last node CaseClause is the last node of it's
+                // expression
+                if (statementCount = 0) {
+                    let (expression = caseClause.getExpression()) {
+                        if (last(ControlFlowNode {id: expression.id}, ln, c)) {
+                            return true
+                        }
+                    }
+                }
+                if (statementCount != 0) {
+                    // any Statement belongs to CaseClause with Completion is
+                    // is not NormalCompletion, it's last node is the last node
+                    // of CaseClause
+                    for (statement in Statement(__all_data__)) {
+                        if (statement in caseClause.getAStatement()) {
+                            if (last(ControlFlowNode {id: statement.id}, ln, c)) {
+                                if (!isNormalCompletion(c)) {
+                                    return true
+                                }
+                            }
+                        }
+                    }
+                    // the last node of the last statement belongs to CaseClause
+                    // with NormalCompletion, is the last node of CaseClause
+                    let (lastIndex = statementCount - 1) {
+                        let (lastStatement = caseClause.getStatement(lastIndex)) {
+                            if (last(lastStatement.to<ControlFlowNode>(), ln, c)) {
+                                if (isNormalCompletion(c)) {
+                                    return true
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    // same with CaseClause
+    for (defaultClause in DefaultClause(__all_data__)) {
+        if (n.key_eq(defaultClause)) {
+            let (statementCount = defaultClause.getStatementCount()) {
+                // if DefaultClause don't contains any Statement,
+                // it's last node is itself
+                if (statementCount = 0) {
+                    if (ln = n) {
+                        if (isNormalCompletion(c)) {
+                            return true
+                        }
+                    }
+                }
+                if (statementCount != 0) {
+                    for (statement in Statement(__all_data__)) {
+                        if (statement in defaultClause.getAStatement()) {
+                            if (last(ControlFlowNode {id: statement.id}, ln, c)) {
+                                if (!isNormalCompletion(c)) {
+                                    return true
+                                }
+                            }
+                        }
+                    }
+                    let (lastIndex = statementCount - 1) {
+                        let (lastStatement = defaultClause.getStatement(lastIndex)) {
+                            if (last(ControlFlowNode {id: lastStatement.id}, ln, c)) {
+                                if (isNormalCompletion(c)) {
+                                    return true
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    // n is TryStatement, if there is finally block, the last nodes
+    // are finally block's last nodes; otherwise the last nodes are
+    // try block's last nodes and catch clause's last nodes.
+    for (tryStatement in TryStatement(__all_data__)) {
+        if (n.key_eq(tryStatement)) {
+            if (tryStatement.haveFinallyBlock()) {
+                let (finallyBlockStatement = tryStatement.getFinallyBlock()) {
+                    if (last(ControlFlowNode {id: finallyBlockStatement.id}, ln, c)) {
+                        return true
+                    }
+                }
+            }
+            if (!tryStatement.haveFinallyBlock()) {
+                let (blockStatement = tryStatement.getTryBlock()) {
+                    if (last(ControlFlowNode {id: blockStatement.id}, ln, c)) {
+                        return true
+                    }
+                }
+                let (catchClause = tryStatement.getCatchClause()) {
+                    if (last(ControlFlowNode {id: catchClause.id}, ln, c)) {
+                        return true
+                    }
+                }
+            }
+        }
+    }
+    for (catchClause in CatchClause(__all_data__)) {
+        if (n.key_eq(catchClause)) {
+            let (blockStatement = catchClause.getBlock()) {
+                if (last(ControlFlowNode {id: blockStatement.id}, ln, c)) {
+                    return true
+                }
+            }
+        }
+    }
+}
+
+/**
+ * Hold if two control flow nodes are in same CFG.
+ */
+pub fn nodeInSameCFG(cfn1: ControlFlowNode, cfn2: ControlFlowNode) -> bool {
+    if (cfn1 = cfn2) {
+        return true
+    }
+    if (cfn1 != cfn2) {
+        for (bb1 in BasicBlock(__all_data__),
+            bb2 in BasicBlock(__all_data__)) {
+            if (bbInSameCFG(bb1, bb2)) {
+                if (bb1 = cfn1.getBasicBlock() &&
+                    bb2 = cfn2.getBasicBlock()) {
+                    return true
+                }
+            }
+        }
+    }
+}
+
+@inline
+fn iterationStatementSucc(n: ControlFlowNode, c: Completion) -> *ControlFlowNode {
+    for (loop in IterationStatement(__all_data__)) {
+        if (isWhileStatement(Node(__all_data__).find(loop))) {
+            let (condition = loop.getCondition()) {
+                let (body = loop.getBody()) {
+                    // Control goes from the condition via a true-completion to the body...
+                    if (last(ControlFlowNode(__all_data__).find(condition), n, c)) {
+                        if (isTrueBooleanCompletion(c)) {
+                            yield first(ControlFlowNode(__all_data__).find(body))
+                        }
+                    }
+                    // ...or through the back edge from the body back to the condition.
+                    if (last(ControlFlowNode(__all_data__).find(body), n, c)) {
+                        if (continues(c, loop)) {
+                            yield first(ControlFlowNode(__all_data__).find(condition))
+                        }
+                    }
+                }
+            }
+        }
+        if (isDoWhileStatement(Node(__all_data__).find(loop))) {
+            let (condition = loop.getCondition()) {
+                let (body = loop.getBody()) {
+                    if (last(ControlFlowNode(__all_data__).find(condition), n, c)) {
+                        if (isTrueBooleanCompletion(c)) {
+                            yield first(ControlFlowNode(__all_data__).find(body))
+                        }
+                    }
+                    if (last(ControlFlowNode(__all_data__).find(body), n, c)) {
+                        if (continues(c, loop)) {
+                            yield first(ControlFlowNode(__all_data__).find(condition))
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@inline
+fn forStatementSucc(n: ControlFlowNode, c: Completion) -> *ControlFlowNode {
+    // `for` statements
+    // The `iterationEntry` is the entry node of each iteration.
+    for (forStmt in ForStatement(__all_data__)) {
+        let (condition = forStmt.getCondition()) {
+            // The `iterationEntry` is the first of condition
+            let (iterationEntry = first(ControlFlowNode(__all_data__).find(condition))) {
+                if (n.key_eq(forStmt)) {
+                    // The successor of `for` statement is the first node of initializer
+                    let (initializer = forStmt.getInitializer()) {
+                        if (isNormalCompletion(c)) {
+                            yield first(ControlFlowNode(__all_data__).find(initializer))
+                        }
+                    }
+                }
+                // The successor of `for` statement is the iterationEntry if there is no initializer.
+                if (n.key_eq(forStmt)) {
+                    if (!forStmt.hasInitializer()) {
+                        if (isNormalCompletion(c)) {
+                            yield iterationEntry
+                        }
+                    }
+                }
+                // The successor of the last of initializer is the iterationEntry.
+                let (initializer = forStmt.getInitializer()) {
+                    if (last(ControlFlowNode(__all_data__).find(initializer), n, c)) {
+                        if (isNormalCompletion(c)) {
+                            yield iterationEntry
+                        }
+                    }
+                }
+                // The true successor of the last of condition is the first of body.
+                let (body = forStmt.getBody()) {
+                    if (last(ControlFlowNode(__all_data__).find(condition), n, c)) {
+                        if (isTrueBooleanCompletion(c)) {
+                            yield first(ControlFlowNode(__all_data__).find(body))
+                        }
+                    }
+                }
+                // The successor of the last of incrementor is the iterationEntry.
+                let (incrementor = forStmt.getIncrementor()) {
+                    if (last(ControlFlowNode(__all_data__).find(incrementor), n, c)) {
+                        if (isNormalCompletion(c)) {
+                            yield iterationEntry
+                        }
+                    }
+                }
+                // The back edge of the loop. The successor of the last of body is the first of incrementor
+                // or the first of condition if there is no incrementor.
+                let (body = forStmt.getBody()) {
+                    if (last(ControlFlowNode(__all_data__).find(body), n, c)) {
+                        if (continues(c, IterationStatement(__all_data__).find(forStmt))) {
+                            let (incrementor = forStmt.getIncrementor()) {
+                                yield first(ControlFlowNode(__all_data__).find(incrementor))
+                            }
+                            if (!forStmt.hasIncrementor()) {
+                                yield iterationEntry
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        if (!forStmt.hasCondition()) {
+            let (body = forStmt.getBody()) {
+                // The `iterationEntry` is the first of body if there is no condition.
+                let (iterationEntry = first(ControlFlowNode(__all_data__).find(body))) {
+                    if (n.key_eq(forStmt)) {
+                        if (isNormalCompletion(c)) {
+                            let (initializer = forStmt.getInitializer()) {
+                                yield first(ControlFlowNode(__all_data__).find(initializer))
+                            }
+                        }
+                    }
+                    if (n.key_eq(forStmt)) {
+                        if (isNormalCompletion(c)) {
+                            if (!forStmt.hasInitializer()) {
+                                yield iterationEntry
+                            }
+                        }
+                    }
+                    let (initializer = forStmt.getInitializer()) {
+                        if (isNormalCompletion(c)) {
+                            if (last(ControlFlowNode(__all_data__).find(initializer), n, c)) {
+                                yield iterationEntry
+                            }
+                        }
+                    }
+                    let (condition = forStmt.getCondition()) {
+                        if (isTrueBooleanCompletion(c)) {
+                            if (last(ControlFlowNode(__all_data__).find(condition), n, c)) {
+                                yield first(ControlFlowNode(__all_data__).find(body))
+                            }
+                        }
+                    }
+                    let (incrementor = forStmt.getIncrementor()) {
+                        if (isNormalCompletion(c)) {
+                            if (last(ControlFlowNode(__all_data__).find(incrementor), n, c)) {
+                                yield iterationEntry
+                            }
+                        }
+                    }
+                    if (body = forStmt.getBody()) {
+                        if (last(ControlFlowNode(__all_data__).find(body), n, c)) {
+                            if (continues(c, IterationStatement(__all_data__).find(forStmt))) {
+                                let (incrementor = forStmt.getIncrementor()) {
+                                    yield first(ControlFlowNode(__all_data__).find(incrementor))
+                                }
+                                if (!forStmt.hasIncrementor()) {
+                                    yield iterationEntry
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@inline
+fn enhancedForStatementSucc(n: ControlFlowNode, c: Completion) -> *ControlFlowNode {
+    // Enhanced `for` statements
+    // The successor of enhanced-for statement is the first of the iterated expression.
+    for (enhancedForStmt in EnhancedForStatement(__all_data__)) {
+        if (n.key_eq(enhancedForStmt)) {
+            if (isNormalCompletion(c)) {
+                let (expr = enhancedForStmt.getExpression()) {
+                    yield first(ControlFlowNode(__all_data__).find(expr))
+                }
+            }
+        }
+        // The successor of the last of expression is the first of initializer.
+        let (initializer = enhancedForStmt.getInitializer()) {
+            let (expr = enhancedForStmt.getExpression()) {
+                if (isNormalCompletion(c)) {
+                    if (last(ControlFlowNode(__all_data__).find(expr), n, c)) {
+                        yield first(ControlFlowNode(__all_data__).find(initializer))
+                    }
+                }
+            }
+        }
+        // The successor of the last of initializer is the first of body.
+        let (initializer = enhancedForStmt.getInitializer()) {
+            let (body = enhancedForStmt.getBody()) {
+                if (isNormalCompletion(c)) {
+                    if (last(ControlFlowNode(__all_data__).find(initializer), n, c)) {
+                        yield first(ControlFlowNode(__all_data__).find(body))
+                    }
+                }
+            }
+        }
+        // The back edge of the loop. The successor of the last of body is the first of initializer.
+        let (initializer = enhancedForStmt.getInitializer()) {
+            let (body = enhancedForStmt.getBody()) {
+                if (last(ControlFlowNode(__all_data__).find(body), n, c)) {
+                    if (continues(c, IterationStatement(__all_data__).find(enhancedForStmt))) {
+                        yield first(ControlFlowNode(__all_data__).find(initializer))
+                    }
+                }
+            }
+        }
+    }
+}
+
+@inline
+fn caseBlockSucc(n: ControlFlowNode, c: Completion) -> *ControlFlowNode {
+    if (isNormalCompletion(c)) {
+        // n is CaseBlock, successors are all of it's CaseClause's first node and
+        // it's DefaultClause's first node
+        for (caseBlock in CaseBlock(__all_data__)) {
+            if (n.key_eq(caseBlock)) {
+                for (caseOrDefaultStmt in caseBlock.getACaseOrDefault()) {
+                    yield first(ControlFlowNode(__all_data__).find(caseOrDefaultStmt))
+                }
+            }
+            // n is a the last node of one of CaseClause, successor is the
+            // first node of the next CaseClause
+            for (index in int::__undetermined_all__()) {
+                let (caseClause = caseBlock.getCaseClause(index)) {
+                    if (last(ControlFlowNode(__all_data__).find(caseClause), n, c)) {
+                        let (nextClause = caseBlock.getCaseClause(index + 1)) {
+                            yield first(ControlFlowNode(__all_data__).find(nextClause))
+                        }
+                    }
+                }
+            }
+            // n is the last node of last CaseClause, successor is the
+            // first node of DefaultClause
+            let (caseClauseCount = caseBlock.getCaseClauseCount()) {
+                let (index = caseClauseCount - 1) {
+                    let (caseClause = caseBlock.getCaseClause(index)) {
+                        if (last(ControlFlowNode(__all_data__).find(caseClause), n, c)) {
+                            let (defaultClause = caseBlock.getDefaultClause()) {
+                                yield first(ControlFlowNode(__all_data__).find(defaultClause))
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@inline
+fn caseClauseSucc(n: ControlFlowNode, c: Completion) -> *ControlFlowNode {
+    if (isNormalCompletion(c)) {
+        for (caseClause in CaseClause(__all_data__)) {
+            // n is CaseClause, successor is the first node of Expression
+            // belongs to the CaseClause.
+            if (n.key_eq(caseClause)) {
+                let (expression = caseClause.getExpression()) {
+                    yield first(ControlFlowNode(__all_data__).find(expression))
+                }
+            }
+            // n is the last node of Expression belongs to CaseClause, successor
+            // is the first node of the first Statement belongs to CaseClause
+            let (expression = caseClause.getExpression()) {
+                if (last(ControlFlowNode(__all_data__).find(expression), n, c)) {
+                    let (statement = caseClause.getStatement(0)) {
+                        yield first(ControlFlowNode(__all_data__).find(statement))
+                    }
+                }
+            }
+            // n is the last node of statement belongs to CaseClause, successor
+            // is the first node of the next statement.
+            for (index in int::__undetermined_all__()) {
+                let (statement = caseClause.getStatement(index)) {
+                    if (last(ControlFlowNode(__all_data__).find(statement), n, c)) {
+                        let (nextIndex = index + 1) {
+                            let (nextStatement = caseClause.getStatement(nextIndex)) {
+                                yield first(ControlFlowNode(__all_data__).find(nextStatement))
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@inline
+fn tryStatementSucc(n: ControlFlowNode, c: Completion) -> *ControlFlowNode {
+    // TODO: we just model sequential try-catch-finally control flow for now,
+    // need to model exception handling runtime behavior later.
+    for (tryStatement in TryStatement(__all_data__)) {
+        // n is TryStatement, successor is CatchClause of TryStatement
+        if (n.key_eq(tryStatement)) {
+            if (isNormalCompletion(c)) {
+                let (tryBlockStatement = tryStatement.getTryBlock()) {
+                    yield first(tryBlockStatement.to<ControlFlowNode>())
+                }
+            }
+        }
+        // n is the last node of try block, successors are first node of
+        // CatchClause and finally block
+        let (tryBlockStatement = tryStatement.getTryBlock()) {
+            if (last(tryBlockStatement.to<ControlFlowNode>(), n, c)) {
+                let (catchClause = tryStatement.getCatchClause()) {
+                    yield first(catchClause.to<ControlFlowNode>())
+                }
+                let (finallyBlockStatement = tryStatement.getFinallyBlock()) {
+                    yield first(finallyBlockStatement.to<ControlFlowNode>())
+                }
+            }
+        }
+    }
+}
+
+@inline
+fn defaultClauseSucc(n: ControlFlowNode, c: Completion) -> *ControlFlowNode {
+    // same with CaseClause
+    if (isNormalCompletion(c)) {
+        for (defaultClause in DefaultClause(__all_data__)) {
+            if (n.key_eq(defaultClause)) {
+                let (statement = defaultClause.getStatement(0)) {
+                    yield first(ControlFlowNode(__all_data__).find(statement))
+                }
+            }
+            for (index in int::__undetermined_all__()) {
+                let (statement = defaultClause.getStatement(index)) {
+                    if (last(ControlFlowNode(__all_data__).find(statement), n, c)) {
+                        let (nextIndex = index + 1) {
+                            let (nextStatement = defaultClause.getStatement(nextIndex)) {
+                                yield first(ControlFlowNode(__all_data__).find(nextStatement))
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@inline
+fn catchClauseSucc(n: ControlFlowNode, c: Completion) -> *ControlFlowNode {
+    // n is CatchClause, successor is the first node of VariableDeclaration
+    // if there exists, VariableDeclaration in CatchClause, otherwise successor
+    // is the first node of catch block.
+    for (catchClause in CatchClause(__all_data__)) {
+        if (n.key_eq(catchClause)) {
+            if (isNormalCompletion(c)) {
+                if (catchClause.haveVariableDeclaration()) {
+                    let (variableDeclaration = catchClause.getVariableDeclaration()) {
+                        yield first(variableDeclaration.to<ControlFlowNode>())
+                    }
+                }
+                if (!catchClause.haveVariableDeclaration()) {
+                    let (blockStatement = catchClause.getBlock()) {
+                        yield first(blockStatement.to<ControlFlowNode>())
+                    }
+                }
+            }
+        }
+        // n is the last node of VariableDeclaration belongs to CatchClause,
+        // successor is catch block.
+        let (variableDeclaration = catchClause.getVariableDeclaration()) {
+            if (last(variableDeclaration.to<ControlFlowNode>(), n, c)) {
+                if (isNormalCompletion(c)) {
+                    let (blockStatement = catchClause.getBlock()) {
+                        yield first(blockStatement.to<ControlFlowNode>())
+                    }
+                }
+            }
+        }
+        // n is the last node of catch block, successor is the first node of finally block
+        // belongs to the same TryStatement.
+        for (tryStatement in TryStatement(__all_data__)) {
+            let (catchBlockStatement = catchClause.getBlock()) {
+                if (last(catchBlockStatement.to<ControlFlowNode>(), n, c)) {
+                    if (catchClause = tryStatement.getCatchClause()) {
+                        let (finallyBlock = tryStatement.getFinallyBlock()) {
+                            yield first(finallyBlock.to<ControlFlowNode>())
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+/**
+ * Gets the control flow successor node of a control flow node,
+ * and with the Completion information.
+ */
+pub fn succ(n: ControlFlowNode, c: Completion) -> *ControlFlowNode {
+    if (isNormalCompletion(c)) {
+        // n is top-level entry node, succ is the first of the top-level's 0th statement
+        for (entryNode in CfgEntryNode(__all_data__),
+            topLevel in TopLevel(__all_data__)) {
+            if (n.key_eq(entryNode)) {
+                if (topLevel.key_eq(entryNode.getAstNode())) {
+                    let (firstStatement = topLevel.getStatement(0)) {
+                        yield first(firstStatement.to<ControlFlowNode>())
+                    }
+                }
+            }
+        }
+    }
+    if (isNormalCompletion(c)) {
+        for (i in int::__undetermined_all__()) {
+            // n is the last of the top-level's i th statement,
+            // succ is the first of the top-level's i+1 th statement
+            for (topLevel in TopLevel(__all_data__)) {
+                let (statement = topLevel.getStatement(i)) {
+                    if (last(ControlFlowNode(__all_data__).find(statement), n, c)) {
+                        let (nextStatement = topLevel.getStatement(i + 1)) {
+                            yield first(nextStatement.to<ControlFlowNode>())
+                        }
+                    }
+                }
+            }
+        }
+    }
+    for (exitNode in CfgExitNode(__all_data__)) {
+        for (topLevel in TopLevel(__all_data__)) {
+            if (exitNode.getAstNode().key_eq(topLevel)) {
+                if (last(ControlFlowNode(__all_data__).find(topLevel), n, c)) {
+                    yield ControlFlowNode(__all_data__).find(exitNode)
+                }
+            }
+        }
+    }
+    if (isNormalCompletion(c)) {
+        for (entryNode in CfgEntryNode(__all_data__),
+            enclosingFunction in FunctionLikeDeclaration(__all_data__)) {
+            if (n.key_eq(entryNode)) {
+                if (enclosingFunction.key_eq(entryNode.getAstNode())) {
+                    for (parameter in Parameter(__all_data__)) {
+                        if (parameter = enclosingFunction.getParameter(0)) {
+                            yield first(ControlFlowNode(__all_data__).find(parameter))
+                        }
+                    }
+                    // TODO: body may be an Expression in an ArrowFunction
+                    for (body in BlockStatement(__all_data__)) {
+                        if (!enclosingFunction.hasParameter()) {
+                            if (body = enclosingFunction.getBody()) {
+                                yield first(ControlFlowNode(__all_data__).find(body))
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    for (exitNode in CfgExitNode(__all_data__)) {
+        let (enclosingFunction = n.getEnclosingFunction()) {
+            if (exitNode.getAstNode().key_eq(enclosingFunction)) {
+                let (body = enclosingFunction.getBody()) {
+                    if (last(ControlFlowNode(__all_data__).find(body), n, c)) {
+                        yield ControlFlowNode(__all_data__).find(exitNode)
+                    }
+                }
+            }
+        }
+    }
+
+    if (isNormalCompletion(c)) {
+        for (index in int::__undetermined_all__()) {
+            for (parameter in Parameter(__all_data__),
+                enclosingFunction in FunctionLikeDeclaration(__all_data__)) {
+                if (n.key_eq(parameter)) {
+                    if (parameter = enclosingFunction.getParameter(index)) {
+                        let (parameterCount = enclosingFunction.getParameterCount()) {
+                            if (index = parameterCount - 1) {
+                                let (bodyStmt = enclosingFunction.getBody()) {
+                                    yield ControlFlowNode(__all_data__).find(bodyStmt)
+                                }
+                            }
+                            if (index != parameterCount - 1) {
+                                let (nextParameter = enclosingFunction.getParameter(index + 1)) {
+                                    yield first(ControlFlowNode(__all_data__).find(nextParameter))
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    // the successor of ConditionalExpression is the first node of it's condition
+    if (isNormalCompletion(c)) {
+        for (ce in ConditionalExpression(__all_data__)) {
+            if (n.key_eq(ce)) {
+                let (cond = ce.getCondition()) {
+                    yield first(ControlFlowNode(__all_data__).find(cond))
+                }
+            }
+        }
+    }
+    // n is the last node of the ConditionalExpression's condition, it have 2 successors
+    // one is the first node of the ConditionalExpression's then block, completion is TrueBooleanCompletion
+    // another is the first node of the ConditionalExpression's else block, completion is FalseBooleanCompletion
+    if (isTrueBooleanCompletion(c)) {
+        for (ce in ConditionalExpression(__all_data__)) {
+            let (cond = ce.getCondition()) {
+                if (last(ControlFlowNode(__all_data__).find(cond), n, c)) {
+                    let (thenBlock = ce.getThen()) {
+                        yield first(ControlFlowNode(__all_data__).find(thenBlock))
+                    }
+                }
+            }
+        }
+    }
+    if (isFalseBooleanCompletion(c)) {
+        for (ce in ConditionalExpression(__all_data__)) {
+            let (cond = ce.getCondition()) {
+                if (last(ControlFlowNode(__all_data__).find(cond), n, c)) {
+                    let (elseBlock = ce.getElse()) {
+                        yield first(ControlFlowNode(__all_data__).find(elseBlock))
+                    }
+                }
+            }
+        }
+    }
+
+    if (isNormalCompletion(c)) {
+        for (lae in LogicalAndExpression(__all_data__)) {
+            if (n.key_eq(lae)) {
+                let (leftOperand = lae.getLeftOperand()) {
+                    yield first(ControlFlowNode(__all_data__).find(leftOperand))
+                }
+            }
+        }
+    }
+    // n is BinaryLogicalExpression, it's successor is the first of the
+    // BinaryLogicalExpression's left operand
+    if (isTrueBooleanCompletion(c)) {
+        for (lae in LogicalAndExpression(__all_data__)) {
+            if (n.key_eq(lae)) {
+                let (leftOperand = lae.getLeftOperand()) {
+                    let (rightOperand = lae.getRightOperand()) {
+                        if (last(ControlFlowNode(__all_data__).find(leftOperand), n, c)) {
+                            yield first(ControlFlowNode(__all_data__).find(rightOperand))
+                        }
+                    }
+                }
+            }
+        }
+    }
+    if (isNormalCompletion(c)) {
+        for (loe in LogicalOrExpression(__all_data__)) {
+            if (n.key_eq(loe)) {
+                let (leftOperand = loe.getLeftOperand()) {
+                    yield first(ControlFlowNode(__all_data__).find(leftOperand))
+                }
+            }
+        }
+    }
+    if (isFalseBooleanCompletion(c)) {
+        for (lae in LogicalOrExpression(__all_data__)) {
+            let (leftOperand = lae.getLeftOperand()) {
+                if (last(ControlFlowNode(__all_data__).find(leftOperand), n, c)) {
+                    let (rightOperand = lae.getRightOperand()) {
+                        yield first(ControlFlowNode(__all_data__).find(rightOperand))
+                    }
+                }
+            }
+        }
+    }
+    if (isNormalCompletion(c)) {
+        for (nce in NullishCoalescingExpression(__all_data__)) {
+            if (n.key_eq(nce)) {
+                let (leftOperand = nce.getLeftOperand()) {
+                    yield first(ControlFlowNode(__all_data__).find(leftOperand))
+                }
+            }
+        }
+    }
+    // IfStatement's succ is the first of the if cond
+    if (isNormalCompletion(c)) {
+        for (ifStmt in IfStatement(__all_data__)) {
+            if (ifStmt.key_eq(n)) {
+                let (cond = ifStmt.getCondition()) {
+                    let(s = first(ControlFlowNode(__all_data__).find(cond))) {
+                        yield s
+                    }
+                }
+            }
+        }
+    }
+    // n is the last of the if cond, succ is the first of then and the first of else
+    if (isTrueBooleanCompletion(c)) {
+        for (ifStmt in IfStatement(__all_data__)) {
+            let (cond = ifStmt.getCondition()) {
+                if (last(ControlFlowNode(__all_data__).find(cond), n, c)) {
+                    let (thenStmt = ifStmt.getThen()) {
+                        yield first(ControlFlowNode(__all_data__).find(thenStmt))
+                    }
+                }
+            }
+        }
+    }
+    if (isFalseBooleanCompletion(c)) {
+        for (ifStmt in IfStatement(__all_data__)) {
+            let (cond = ifStmt.getCondition()) {
+                if (last(ControlFlowNode(__all_data__).find(cond), n, c)) {
+                    let (elseStmt = ifStmt.getElse()) {
+                        yield first(ControlFlowNode(__all_data__).find(elseStmt))
+                    }
+                }
+            }
+        }
+    }
+    // `while` and `do`-`while` statements
+    // A `while` loop start at the condition...
+    if (isNormalCompletion(c)) {
+        for (whileStmt in WhileStatement(__all_data__)) {
+            if (n.key_eq(whileStmt)) {
+                let (condition = whileStmt.getCondition()) {
+                    let(s = first(ControlFlowNode(__all_data__).find(condition))) {
+                        yield s
+                    }
+                }
+            }
+        }
+    }
+    // ...and a `do`-`while` loop starts at the body.
+    if (isNormalCompletion(c)) {
+        for (doWhileStmt in DoWhileStatement(__all_data__)) {
+            if (n.key_eq(doWhileStmt)) {
+                let (body = doWhileStmt.getBody()) {
+                    let (s = first(ControlFlowNode(__all_data__).find(body))) {
+                        yield s
+                    }
+                }
+            }
+        }
+    }
+    yield iterationStatementSucc(n, c)
+    // End of `while` and `do`-`while` statements
+    yield forStatementSucc(n, c)
+    yield enhancedForStatementSucc(n, c)
+    // n is BlockStatement, succ is the first of the BlockStatement's 0 th child
+    for (bs in BlockStatement(__all_data__)) {
+        if (n.key_eq(bs)) {
+            if (isNormalCompletion(c)) {
+                let (fs = bs.getStatement(0)) {
+                    yield first(ControlFlowNode(__all_data__).find(fs))
+                }
+            }
+        }
+    }
+    // n is the last of the BlockStatement's i th child,
+    // succ is the first of the BlockStatement's i+1 th child
+    for (i in int::__undetermined_all__()) {
+        for (bs in BlockStatement(__all_data__)) {
+            let (iStmt = bs.getStatement(i)) {
+                if (isNormalCompletion(c)) {
+                    if (last(ControlFlowNode(__all_data__).find(iStmt), n, c)) {
+                        let (nextStmt = bs.getStatement(i + 1)) {
+                            yield first(ControlFlowNode(__all_data__).find(nextStmt))
+                        }
+                    }
+                }
+            }
+        }
+    }
+    // n is ExpressionStatement, succ is the first of the expression of ExpressionStatement
+    if (isNormalCompletion(c)) {
+        for (es in ExpressionStatement(__all_data__)) {
+            if (n.key_eq(es)) {
+                let (tmpNode = es.getExpression()) {
+                    yield first(ControlFlowNode(__all_data__).find(tmpNode))
+                }
+            }
+        }
+    }
+    // n is the last of the PostOrderNode's i th child, succ is the first of the
+    // PostOrderNode's i+1 th child
+    if (isNormalCompletion(c)) {
+        for (index in int::__undetermined_all__()) {
+            for (pon in PostOrderNode(__all_data__)) {
+                let (cn = pon.getChildNode(index)) {
+                    if (last(cn, n, c)) {
+                        let (nextCN = pon.getChildNode(index + 1)) {
+                            yield first(nextCN)
+                        }
+                    }
+                }
+            }
+        }
+    }
+    // n is the last node of the last PostOrderNode's child, succ is the PostOrderNode
+    if (isNormalCompletion(c)) {
+        for (childCount in int::__undetermined_all__()) {
+            for (pon in PostOrderNode(__all_data__)) {
+                if (childCount = pon.getChildCount()) {
+                    let (lastChild = pon.getChildNode(childCount - 1)) {
+                        if (last(lastChild, n, c)) {
+                            yield ControlFlowNode(__all_data__).find(pon)
+                        }
+                    }
+                }
+            }
+        }
+    }
+    // VariableStatement just have one child, it's a VariableDeclarationList,
+    // the successor of the VariableStatement is the first node of it's VariableDeclarationList
+    // the implementation of the VariableStatement is different from SomeQL
+    // treat the VariableDeclarationList as PostOrderNode is more easier
+    if (isNormalCompletion(c)) {
+        for (vs in VariableStatement(__all_data__)) {
+            if (n.key_eq(vs)) {
+                let (vdl = vs.getVariableDeclarationList()) {
+                    yield first(ControlFlowNode(__all_data__).find(vdl))
+                }
+            }
+        }
+    }
+    // n is a WithStatement, successor is the first of the expression belongs to WithStatement.
+    if (isNormalCompletion(c)) {
+        for (withStatement in WithStatement(__all_data__)) {
+            if (n.key_eq(withStatement)) {
+                let (expression = withStatement.getExpression()) {
+                    yield first(ControlFlowNode(__all_data__).find(expression))
+                }
+            }
+        }
+    }
+    // n is the last of the expression belongs to WithStatement, successor is the first
+    // of the statement belongs to WithStatement.
+    if (isNormalCompletion(c)) {
+        for (withStatement in WithStatement(__all_data__)) {
+            let (expression = withStatement.getExpression()) {
+                if (last(ControlFlowNode(__all_data__).find(expression), n, __all_data__)) {
+                    let (statement = withStatement.getStatement()) {
+                        yield first(ControlFlowNode(__all_data__).find(statement))
+                    }
+                }
+            }
+        }
+    }
+    if (isNormalCompletion(c)) {
+        for (switchStatement in SwitchStatement(__all_data__)) {
+            // n is a SwitchStatement, successor is the expression of SwitchStatement
+            if (n.key_eq(switchStatement)) {
+                let (expression = switchStatement.getExpression()) {
+                    yield first(ControlFlowNode(__all_data__).find(expression))
+                }
+            }
+            // n is the last of expression belongs to SwitchStatement,
+            // successor is the first of CaseBlock
+            let (expression = switchStatement.getExpression()) {
+                if (last(ControlFlowNode(__all_data__).find(expression), n, c)) {
+                    let (caseBlock = switchStatement.getCaseBlock()) {
+                        yield first(ControlFlowNode(__all_data__).find(caseBlock))
+                    }
+                }
+            }
+        }
+    }
+    yield caseBlockSucc(n, c)
+    yield caseClauseSucc(n, c)
+    yield defaultClauseSucc(n, c)
+    yield tryStatementSucc(n, c)
+    yield catchClauseSucc(n, c)
+}

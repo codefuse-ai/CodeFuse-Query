@@ -1,0 +1,358 @@
+schema Statement extends Node {
+
+}
+impl Statement {
+    @data_constraint
+    @inline
+    fn __all__(db: GoDB) -> *Statement {
+        for (tmp in Node(db)) {
+            for (s in StmtDO(db)) {
+                if (tmp.key_eq(s)) {
+                    yield Statement {
+                        id : tmp.id
+                    }
+                }
+            }
+        }
+    }
+    pub fn getKind(self) -> int {
+        for (s in StmtDO(__all_data__)) {
+            if (s.key_eq(self)) {
+                return s.getKind()
+            }
+        }
+    }
+    pub fn getIdx(self) -> int {
+        for (s in StmtDO(__all_data__)) {
+            if (s.key_eq(self)) {
+                return s.getIdx()
+            }
+        }
+    }
+    pub fn getBelongsFunction(self) -> Function {
+        for (f in Function(__all_data__)) {
+            if (f.key_eq(self.getParentNode())) {
+                return f
+            }
+        }
+        for (s in Statement(__all_data__)) {
+            if (s.key_eq(self.getParentNode())) {
+                let (f = s.getBelongsFunction()) {
+                    return f
+                }
+            }
+        }
+    }
+
+    pub fn getType(self) -> string {
+        if (self.isBadStmt()) {
+            return "BadStmt"
+        }
+        if (self.isDeclStmt()) {
+            return "DeclStmt"
+        }
+        if (self.isEmptyStmt()) {
+            return "EmptyStmt"
+        }
+        if (self.isLabeledStmt()) {
+            return "LabeledStmt"
+        }
+        if (self.isExprStmt()) {
+            return "ExprStmt"
+        }
+        if (self.isSendStmt()) {
+            return "SendStmt"
+        }
+        if (self.isIncStmt()) {
+            return "IncStmt"
+        }
+        if (self.isDecStmt()) {
+            return "DecStmt"
+        }
+        if (self.isGoStmt()) {
+            return "GoStmt"
+        }
+        if (self.isDeferStmt()) {
+            return "DeferStmt"
+        }
+        if (self.isReturnStmt()) {
+            return "ReturnStmt"
+        }
+        if (self.isBreakStmt()) {
+            return "BreakStmt"
+        }
+        if (self.isContinueStmt()) {
+            return "ContinueStmt"
+        }
+        if (self.isGotoStmt()) {
+            return "GotoStmt"
+        }
+        if (self.isFallthroughStmt()) {
+            return "FallthroughStmt"
+        }
+        if (self.isBlockStmt()) {
+            return "BlockStmt"
+        }
+        if (self.isIfStmt()) {
+            return "IfStmt"
+        }
+        if (self.isCaseClause()) {
+            return "CaseClause"
+        }
+        if (self.isExprswitchStmt()) {
+            return "ExprswitchStmt"
+        }
+        if (self.isTypeswitchStmt()) {
+            return "TypeswitchStmt"
+        }
+        if (self.isCommClause()) {
+            return "CommClause"
+        }
+        if (self.isSelectStmt()) {
+            return "SelectStmt"
+        }
+        if (self.isForStmt()) {
+            return "ForStmt"
+        }
+        if (self.isRangeStmt()) {
+            return "RangeStmt"
+        }
+        if (self.isAssignStmt()) {
+            return "AssignStmt"
+        }
+        if (self.isDefineStmt()) {
+            return "DefineStmt"
+        }
+        if (self.isAddassignStmt()) {
+            return "AddassignStmt"
+        }
+        if (self.isSubassignStmt()) {
+            return "SubassignStmt"
+        }
+        if (self.isMulassignStmt()) {
+            return "MulassignStmt"
+        }
+        if (self.isQuoassignStmt()) {
+            return "QuoassignStmt"
+        }
+        if (self.isRemassignStmt()) {
+            return "RemassignStmt"
+        }
+        if (self.isAndassignStmt()) {
+            return "AndassignStmt"
+        }
+        if (self.isOrassignStmt()) {
+            return "OrassignStmt"
+        }
+        if (self.isXorassignStmt()) {
+            return "XorassignStmt"
+        }
+        if (self.isShlassignStmt()) {
+            return "ShlassignStmt"
+        }
+        if (self.isShrassignStmt()) {
+            return "ShrassignStmt"
+        }
+        if (self.isAndnotassignStmt()) {
+            return "AndnotassignStmt"
+        }
+    }
+
+    pub fn isControlStmt(self) -> bool {
+        if (self.isIfStmt()) {
+            return true
+        }
+        if (self.isForStmt()) {
+            return true
+        }
+        if (self.isCaseClause()) {
+            return true
+        }
+    }
+
+    pub fn isBadStmt(self) -> bool {
+        if (self.getKind() = 0) {
+            return true
+        }
+    }
+    pub fn isDeclStmt(self) -> bool {
+        if (self.getKind() = 1) {
+            return true
+        }
+    }
+    pub fn isEmptyStmt(self) -> bool {
+        if (self.getKind() = 2) {
+            return true
+        }
+    }
+    pub fn isLabeledStmt(self) -> bool {
+        if (self.getKind() = 3) {
+            return true
+        }
+    }
+    pub fn isExprStmt(self) -> bool {
+        if (self.getKind() = 4) {
+            return true
+        }
+    }
+    pub fn isSendStmt(self) -> bool {
+        if (self.getKind() = 5) {
+            return true
+        }
+    }
+    pub fn isIncStmt(self) -> bool {
+        if (self.getKind() = 6) {
+            return true
+        }
+    }
+    pub fn isDecStmt(self) -> bool {
+        if (self.getKind() = 7) {
+            return true
+        }
+    }
+    pub fn isGoStmt(self) -> bool {
+        if (self.getKind() = 8) {
+            return true
+        }
+    }
+    pub fn isDeferStmt(self) -> bool {
+        if (self.getKind() = 9) {
+            return true
+        }
+    }
+    pub fn isReturnStmt(self) -> bool {
+        if (self.getKind() = 10) {
+            return true
+        }
+    }
+    pub fn isBreakStmt(self) -> bool {
+        if (self.getKind() = 11) {
+            return true
+        }
+    }
+    pub fn isContinueStmt(self) -> bool {
+        if (self.getKind() = 12) {
+            return true
+        }
+    }
+    pub fn isGotoStmt(self) -> bool {
+        if (self.getKind() = 13) {
+            return true
+        }
+    }
+    pub fn isFallthroughStmt(self) -> bool {
+        if (self.getKind() = 14) {
+            return true
+        }
+    }
+    pub fn isBlockStmt(self) -> bool {
+        if (self.getKind() = 15) {
+            return true
+        }
+    }
+    pub fn isIfStmt(self) -> bool {
+        if (self.getKind() = 16) {
+            return true
+        }
+    }
+    pub fn isCaseClause(self) -> bool {
+        if (self.getKind() = 17) {
+            return true
+        }
+    }
+    pub fn isExprswitchStmt(self) -> bool {
+        if (self.getKind() = 18) {
+            return true
+        }
+    }
+    pub fn isTypeswitchStmt(self) -> bool {
+        if (self.getKind() = 19) {
+            return true
+        }
+    }
+    pub fn isCommClause(self) -> bool {
+        if (self.getKind() = 20) {
+            return true
+        }
+    }
+    pub fn isSelectStmt(self) -> bool {
+        if (self.getKind() = 21) {
+            return true
+        }
+    }
+    pub fn isForStmt(self) -> bool {
+        if (self.getKind() = 22) {
+            return true
+        }
+    }
+    pub fn isRangeStmt(self) -> bool {
+        if (self.getKind() = 23) {
+            return true
+        }
+    }
+    pub fn isAssignStmt(self) -> bool {
+        if (self.getKind() = 24) {
+            return true
+        }
+    }
+    pub fn isDefineStmt(self) -> bool {
+        if (self.getKind() = 25) {
+            return true
+        }
+    }
+    pub fn isAddassignStmt(self) -> bool {
+        if (self.getKind() = 26) {
+            return true
+        }
+    }
+    pub fn isSubassignStmt(self) -> bool {
+        if (self.getKind() = 27) {
+            return true
+        }
+    }
+    pub fn isMulassignStmt(self) -> bool {
+        if (self.getKind() = 28) {
+            return true
+        }
+    }
+    pub fn isQuoassignStmt(self) -> bool {
+        if (self.getKind() = 29) {
+            return true
+        }
+    }
+    pub fn isRemassignStmt(self) -> bool {
+        if (self.getKind() = 30) {
+            return true
+        }
+    }
+    pub fn isAndassignStmt(self) -> bool {
+        if (self.getKind() = 31) {
+            return true
+        }
+    }
+    pub fn isOrassignStmt(self) -> bool {
+        if (self.getKind() = 32) {
+            return true
+        }
+    }
+    pub fn isXorassignStmt(self) -> bool {
+        if (self.getKind() = 33) {
+            return true
+        }
+    }
+    pub fn isShlassignStmt(self) -> bool {
+        if (self.getKind() = 34) {
+            return true
+        }
+    }
+    pub fn isShrassignStmt(self) -> bool {
+        if (self.getKind() = 35) {
+            return true
+        }
+    }
+    pub fn isAndnotassignStmt(self) -> bool {
+        if (self.getKind() = 36) {
+            return true
+        }
+    }
+}

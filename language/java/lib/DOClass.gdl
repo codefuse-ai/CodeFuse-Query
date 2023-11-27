@@ -1,0 +1,5340 @@
+/**
+ * @brief DO class: Describe an annotated relation.
+ */
+schema AnnotatedRelationDO {
+    @primary annotation_hash_id: int,
+    annotated_item_hash_id: int
+}
+impl AnnotatedRelationDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *AnnotatedRelationDO {
+    	for (tmp in db.annotated_relation) {
+            yield AnnotatedRelationDO {
+                annotation_hash_id : tmp.annotation_hash_id,
+                annotated_item_hash_id : tmp.annotated_item_hash_id
+            }
+    	}
+    }
+    /**
+     * @brief gets the annotated item hash id of this element.
+     * @return int
+     */
+    pub fn getAnnotatedItemHashId(self) -> int {
+        return self.annotated_item_hash_id
+    }
+}
+/**
+ * @brief DO class: An argument with name that applies to an annotation.
+ */
+schema AnnotationAccessArgumentWithNameDO {
+    @primary element_hash_id: int,
+    annotation_access_hash_id: int,
+    type_hash_id: int,
+    argument_value_hash_id: int,
+    location_hash_id: int,
+    index_order: int,
+    printable_text: string
+}
+impl AnnotationAccessArgumentWithNameDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *AnnotationAccessArgumentWithNameDO {
+    	for (tmp in db.annotation_access_argument_with_name) {
+            yield AnnotationAccessArgumentWithNameDO {
+                element_hash_id : tmp.element_hash_id,
+                annotation_access_hash_id : tmp.annotation_access_hash_id,
+                type_hash_id : tmp.type_hash_id,
+                argument_value_hash_id : tmp.argument_value_hash_id,
+                location_hash_id : tmp.location_hash_id,
+                index_order : tmp.index_order,
+                printable_text : tmp.printable_text
+            }
+    	}
+    }
+    /**
+     * @brief gets the annotation access hash id of this element.
+     * @return int
+     */
+    pub fn getAnnotationAccessHashId(self) -> int {
+        return self.annotation_access_hash_id
+    }
+    /**
+     * @brief gets the type hash id of this element.
+     * @return int
+     */
+    pub fn getTypeHashId(self) -> int {
+        return self.type_hash_id
+    }
+    /**
+     * @brief gets the argument value hash id of this element.
+     * @return int
+     */
+    pub fn getArgumentValueHashId(self) -> int {
+        return self.argument_value_hash_id
+    }
+    /**
+     * @brief gets the location hash id of this element.
+     * @return int
+     */
+    pub fn getLocationHashId(self) -> int {
+        return self.location_hash_id
+    }
+    /**
+     * @brief gets the index order of this element.
+     * @return int
+     */
+    pub fn getIndex(self) -> int {
+        return self.index_order
+    }
+    /**
+     * @brief gets a printed representation of this element, including its structure where applicable.
+     * @return string.
+     */
+    pub fn getPrintableText(self) -> string {
+        return self.printable_text
+    }
+}
+/**
+ * @brief DO class: An annotation access argument without name.
+ */
+schema AnnotationAccessArgumentWithoutNameDO {
+    @primary element_hash_id: int,
+    annotation_access_hash_id: int,
+    argument_value_hash_id: int,
+    location_hash_id: int,
+    index_order: int,
+    printable_text: string
+}
+impl AnnotationAccessArgumentWithoutNameDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *AnnotationAccessArgumentWithoutNameDO {
+    	for (tmp in db.annotation_access_argument_without_name) {
+            yield AnnotationAccessArgumentWithoutNameDO {
+                element_hash_id : tmp.element_hash_id,
+                annotation_access_hash_id : tmp.annotation_access_hash_id,
+                argument_value_hash_id : tmp.argument_value_hash_id,
+                location_hash_id : tmp.location_hash_id,
+                index_order : tmp.index_order,
+                printable_text : tmp.printable_text
+            }
+    	}
+    }
+    /**
+     * @brief gets the annotation access hash id of this element.
+     * @return int
+     */
+    pub fn getAnnotationAccessHashId(self) -> int {
+        return self.annotation_access_hash_id
+    }
+    /**
+     * @brief gets the argument value hash id of this element.
+     * @return int
+     */
+    pub fn getArgumentValueHashId(self) -> int {
+        return self.argument_value_hash_id
+    }
+    /**
+     * @brief gets the location hash id of this element.
+     * @return int
+     */
+    pub fn getLocationHashId(self) -> int {
+        return self.location_hash_id
+    }
+    /**
+     * @brief gets the index order of this element.
+     * @return int
+     */
+    pub fn getIndex(self) -> int {
+        return self.index_order
+    }
+    /**
+     * @brief gets a printed representation of this element, including its structure where applicable.
+     * @return string.
+     */
+    pub fn getPrintableText(self) -> string {
+        return self.printable_text
+    }
+}
+/**
+ * @brief DO class: An annotation array initializer.
+ */
+schema AnnotationArrayInitializerDO {
+    @primary element_hash_id: int,
+    printable_text: string,
+    parent_hash_id: int,
+    location_hash_id: int
+}
+impl AnnotationArrayInitializerDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *AnnotationArrayInitializerDO {
+    	for (tmp in db.annotation_array_initializer) {
+            yield AnnotationArrayInitializerDO {
+                element_hash_id : tmp.element_hash_id,
+                printable_text : tmp.printable_text,
+                parent_hash_id : tmp.parent_hash_id,
+                location_hash_id : tmp.location_hash_id
+            }
+    	}
+    }
+    /**
+     * @brief gets a printed representation of this element, including its structure where applicable.
+     * @return string.
+     */
+    pub fn getPrintableText(self) -> string {
+        return self.printable_text
+    }
+    /**
+     * @brief gets the parent hash id of this element.
+     * @return int
+     */
+    pub fn getParentHashId(self) -> int {
+        return self.parent_hash_id
+    }
+    /**
+     * @brief gets the location hash id of this element.
+     * @return int
+     */
+    pub fn getLocationHashId(self) -> int {
+        return self.location_hash_id
+    }
+}
+/**
+ * @brief DO class: An annotation can not resolved.
+ */
+schema AnnotationCanNotResolvedDO {
+    @primary element_hash_id: int,
+    name: string,
+    location_hash_id: int,
+    printable_text: string,
+    parent_hash_id: int
+}
+impl AnnotationCanNotResolvedDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *AnnotationCanNotResolvedDO {
+    	for (tmp in db.annotation_can_not_resolved) {
+            yield AnnotationCanNotResolvedDO {
+                element_hash_id : tmp.element_hash_id,
+                name : tmp.name,
+                location_hash_id : tmp.location_hash_id,
+                printable_text : tmp.printable_text,
+                parent_hash_id : tmp.parent_hash_id
+            }
+    	}
+    }
+    /**
+     * @brief gets the name of this element.
+     * @return string
+     */
+    pub fn getName(self) -> string {
+        return self.name
+    }
+    /**
+     * @brief gets the location hash id of this element.
+     * @return int
+     */
+    pub fn getLocationHashId(self) -> int {
+        return self.location_hash_id
+    }
+    /**
+     * @brief gets a printed representation of this element, including its structure where applicable.
+     * @return string.
+     */
+    pub fn getPrintableText(self) -> string {
+        return self.printable_text
+    }
+    /**
+     * @brief gets the parent hash id of this element.
+     * @return int
+     */
+    pub fn getParentHashId(self) -> int {
+        return self.parent_hash_id
+    }
+}
+/**
+ * @brief DO class: An annotation can resolved.
+ */
+schema AnnotationCanResolvedDO {
+    @primary element_hash_id: int,
+    name: string,
+    annotation_declaration_hash_id: int,
+    location_hash_id: int,
+    printable_text: string,
+    parent_hash_id: int
+}
+impl AnnotationCanResolvedDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *AnnotationCanResolvedDO {
+    	for (tmp in db.annotation_can_resolved) {
+            yield AnnotationCanResolvedDO {
+                element_hash_id : tmp.element_hash_id,
+                name : tmp.name,
+                annotation_declaration_hash_id : tmp.annotation_declaration_hash_id,
+                location_hash_id : tmp.location_hash_id,
+                printable_text : tmp.printable_text,
+                parent_hash_id : tmp.parent_hash_id
+            }
+    	}
+    }
+    /**
+     * @brief gets the name of this element.
+     * @return string
+     */
+    pub fn getName(self) -> string {
+        return self.name
+    }
+    /**
+     * @brief gets the annotation declaration hash id of this element.
+     * @return int
+     */
+    pub fn getAnnotationDeclarationHashId(self) -> int {
+        return self.annotation_declaration_hash_id
+    }
+    /**
+     * @brief gets the location hash id of this element.
+     * @return int
+     */
+    pub fn getLocationHashId(self) -> int {
+        return self.location_hash_id
+    }
+    /**
+     * @brief gets a printed representation of this element, including its structure where applicable.
+     * @return string.
+     */
+    pub fn getPrintableText(self) -> string {
+        return self.printable_text
+    }
+    /**
+     * @brief gets the parent hash id of this element.
+     * @return int
+     */
+    pub fn getParentHashId(self) -> int {
+        return self.parent_hash_id
+    }
+}
+/**
+ * @brief DO class: An annotation declaration.
+ */
+schema AnnotationDeclarationDO {
+    @primary element_hash_id: int,
+    qualified_name: string
+}
+impl AnnotationDeclarationDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *AnnotationDeclarationDO {
+    	for (tmp in db.annotation_declaration) {
+            yield AnnotationDeclarationDO {
+                element_hash_id : tmp.element_hash_id,
+                qualified_name : tmp.qualified_name
+            }
+    	}
+    }
+    /**
+     * @brief gets the qualified name of this element.
+     * @return string
+     */
+    pub fn getQualifiedName(self) -> string {
+        return self.qualified_name
+    }
+}
+/**
+ * @brief DO class: An annotation declaration parameter.
+ */
+schema AnnotationDeclarationParameterDO {
+    @primary element_hash_id: int,
+    annotation_declaration_hash_id: int,
+    type_hash_id: int,
+    parameter_value_hash_id: int,
+    location_hash_id: int,
+    printable_text: string
+}
+impl AnnotationDeclarationParameterDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *AnnotationDeclarationParameterDO {
+    	for (tmp in db.annotation_declaration_parameter) {
+            yield AnnotationDeclarationParameterDO {
+                element_hash_id : tmp.element_hash_id,
+                annotation_declaration_hash_id : tmp.annotation_declaration_hash_id,
+                type_hash_id : tmp.type_hash_id,
+                parameter_value_hash_id : tmp.parameter_value_hash_id,
+                location_hash_id : tmp.location_hash_id,
+                printable_text : tmp.printable_text
+            }
+    	}
+    }
+    /**
+     * @brief gets the annotation declaration hash id of this element.
+     * @return int
+     */
+    pub fn getAnnotationDeclarationHashId(self) -> int {
+        return self.annotation_declaration_hash_id
+    }
+    /**
+     * @brief gets the type hash id of this element.
+     * @return int
+     */
+    pub fn getTypeHashId(self) -> int {
+        return self.type_hash_id
+    }
+    /**
+     * @brief gets the parameter value hash id of this element.
+     * @return int
+     */
+    pub fn getParameterValueHashId(self) -> int {
+        return self.parameter_value_hash_id
+    }
+    /**
+     * @brief gets the location hash id of this element.
+     * @return int
+     */
+    pub fn getLocationHashId(self) -> int {
+        return self.location_hash_id
+    }
+    /**
+     * @brief gets a printed representation of this element, including its structure where applicable.
+     * @return string.
+     */
+    pub fn getPrintableText(self) -> string {
+        return self.printable_text
+    }
+}
+/**
+ * @brief DO class: Default value for an annotation parameter, if any.
+ */
+schema AnnotationDeclarationParameterDefaultValueDO {
+    @primary element_hash_id: int,
+    default_value: string
+}
+impl AnnotationDeclarationParameterDefaultValueDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *AnnotationDeclarationParameterDefaultValueDO {
+    	for (tmp in db.annotation_declaration_parameter_default_value) {
+            yield AnnotationDeclarationParameterDefaultValueDO {
+                element_hash_id : tmp.element_hash_id,
+                default_value : tmp.default_value
+            }
+    	}
+    }
+    /**
+     * @brief gets the default value of this element.
+     * @return string
+     */
+    pub fn getDefaultValue(self) -> string {
+        return self.default_value
+    }
+}
+/**
+ * @brief DO class: An anonymous class.
+ */
+schema AnonymousClassDO {
+    @primary element_hash_id: int,
+    base_class_reference_hash_id: int,
+    base_class_type_hash_id: int,
+    location_hash_id: int,
+    parent_hash_id: int
+}
+impl AnonymousClassDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *AnonymousClassDO {
+    	for (tmp in db.anonymous_class) {
+            yield AnonymousClassDO {
+                element_hash_id : tmp.element_hash_id,
+                base_class_reference_hash_id : tmp.base_class_reference_hash_id,
+                base_class_type_hash_id : tmp.base_class_type_hash_id,
+                location_hash_id : tmp.location_hash_id,
+                parent_hash_id : tmp.parent_hash_id
+            }
+    	}
+    }
+    /**
+     * @brief gets the reference element id specifying the base class for the anonymous class.
+     * @return int
+     */
+    pub fn getBaseClassReferenceHashId(self) -> int {
+        return self.base_class_reference_hash_id
+    }
+    /**
+     * @brief gets the base class type hash id of this element.
+     * @return int
+     */
+    pub fn getBaseClassTypeHashId(self) -> int {
+        return self.base_class_type_hash_id
+    }
+    /**
+     * @brief gets the location hash id of this element.
+     * @return int
+     */
+    pub fn getLocationHashId(self) -> int {
+        return self.location_hash_id
+    }
+    /**
+     * @brief gets the parent hash id of this element.
+     * @return int
+     */
+    pub fn getParentHashId(self) -> int {
+        return self.parent_hash_id
+    }
+}
+/**
+ * @brief DO class: An array.
+ */
+schema ArrayDO {
+    @primary element_hash_id: int,
+    name: string
+}
+impl ArrayDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *ArrayDO {
+    	for (tmp in db.array) {
+            yield ArrayDO {
+                element_hash_id : tmp.element_hash_id,
+                name : tmp.name
+            }
+    	}
+    }
+    /**
+     * @brief gets the name of this element.
+     * @return string
+     */
+    pub fn getName(self) -> string {
+        return self.name
+    }
+}
+/**
+ * @brief DO class: An array access expression.
+ */
+schema ArrayAccessExpressionDO {
+    @primary element_hash_id: int,
+    index_expression_hash_id: int,
+    array_expression_hash_id: int
+}
+impl ArrayAccessExpressionDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *ArrayAccessExpressionDO {
+    	for (tmp in db.array_access_expression) {
+            yield ArrayAccessExpressionDO {
+                element_hash_id : tmp.element_hash_id,
+                index_expression_hash_id : tmp.index_expression_hash_id,
+                array_expression_hash_id : tmp.array_expression_hash_id
+            }
+    	}
+    }
+    /**
+     * @brief gets the index expression hash id of this element.
+     * @return int
+     */
+    pub fn getIndexExpressionHashId(self) -> int {
+        return self.index_expression_hash_id
+    }
+    /**
+     * @brief gets the array expression hash id of this element.
+     * @return int
+     */
+    pub fn getArrayExpressionHashId(self) -> int {
+        return self.array_expression_hash_id
+    }
+}
+ /**
+  * 
+  * @brief DO class: An array creation expression.
+  * For example, an expression such as `new String[2][3]` or
+  * `new String[][] { { "a", "b", "c" } , { "d", "e", "f" } }`.
+  *
+  * In both examples, `String` is the type name. In the first
+  * example, `2` and `3` are the 0th and 1st dimensions,
+  * respectively. In the second example,
+  * `{ { "a", "b", "c" } , { "d", "e", "f" } }` is the initializer.
+  */
+schema ArrayCreationExpressionDO {
+    @primary element_hash_id: int,
+    number_of_array_dimension: int,
+    type_hash_id: int
+}
+impl ArrayCreationExpressionDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *ArrayCreationExpressionDO {
+    	for (tmp in db.array_creation_expression) {
+            yield ArrayCreationExpressionDO {
+                element_hash_id : tmp.element_hash_id,
+                number_of_array_dimension : tmp.number_of_array_dimension,
+                type_hash_id : tmp.type_hash_id
+            }
+    	}
+    }
+    /**
+     * @brief gets the number of array dimension of this element.
+     * @return int
+     */
+    pub fn getNumberOfArrayDimension(self) -> int {
+        return self.number_of_array_dimension
+    }
+    /**
+     * @brief gets the type hash id of this element.
+     * @return int
+     */
+    pub fn getTypeHashId(self) -> int {
+        return self.type_hash_id
+    }
+}
+/**
+ * @brief DO class: An array initializer expression.
+ */
+schema ArrayInitializerExpressionDO {
+    @primary element_hash_id: int,
+    type_hash_id: int
+}
+impl ArrayInitializerExpressionDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *ArrayInitializerExpressionDO {
+    	for (tmp in db.array_initializer_expression) {
+            yield ArrayInitializerExpressionDO {
+                element_hash_id : tmp.element_hash_id,
+                type_hash_id : tmp.type_hash_id
+            }
+    	}
+    }
+    /**
+     * @brief gets the type hash id of this element.
+     * @return int
+     */
+    pub fn getTypeHashId(self) -> int {
+        return self.type_hash_id
+    }
+}
+/**
+ * @brief DO class: An assert statement.
+ */
+schema AssertStatementDO {
+    @primary element_hash_id: int,
+    assert_condition_hash_id: int,
+    assert_description_hash_id: int
+}
+impl AssertStatementDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *AssertStatementDO {
+    	for (tmp in db.assert_statement) {
+            yield AssertStatementDO {
+                element_hash_id : tmp.element_hash_id,
+                assert_condition_hash_id : tmp.assert_condition_hash_id,
+                assert_description_hash_id : tmp.assert_description_hash_id
+            }
+    	}
+    }
+    /**
+     * @brief gets the assert condition hash id of this element.
+     * @return int
+     */
+    pub fn getAssertConditionHashId(self) -> int {
+        return self.assert_condition_hash_id
+    }
+    /**
+     * @brief gets the assert description hash id of this element.
+     * @return int
+     */
+    pub fn getAssertDescriptionHashId(self) -> int {
+        return self.assert_description_hash_id
+    }
+}
+/**
+ * @brief DO class: An assignment expression.
+ */
+schema AssignmentExpressionDO {
+    @primary element_hash_id: int,
+    lhs_hash_id: int,
+    rhs_hash_id: int,
+    opcode: string
+}
+impl AssignmentExpressionDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *AssignmentExpressionDO {
+    	for (tmp in db.assignment_expression) {
+            yield AssignmentExpressionDO {
+                element_hash_id : tmp.element_hash_id,
+                lhs_hash_id : tmp.lhs_hash_id,
+                rhs_hash_id : tmp.rhs_hash_id,
+                opcode : tmp.opcode
+            }
+    	}
+    }
+    /**
+     * @brief gets the expression id on the left side of the assignment.
+     * @return int
+     */
+    pub fn getLhsHashId(self) -> int {
+        return self.lhs_hash_id
+    }
+    /**
+     * @brief gets the expression id on the right side of the assignment.
+     * @return int
+     */
+    pub fn getRhsHashId(self) -> int {
+        return self.rhs_hash_id
+    }
+    /**
+     * @brief gets the operation token of the assignment.
+     * @return string
+     */
+    pub fn getOpcode(self) -> string {
+        return self.opcode
+    }
+}
+/**
+ * @brief DO class: A binary expression.
+ */
+schema BinaryExpressionDO {
+    @primary element_hash_id: int,
+    lhs_hash_id: int,
+    rhs_hash_id: int,
+    opcode: string
+}
+impl BinaryExpressionDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *BinaryExpressionDO {
+    	for (tmp in db.binary_expression) {
+            yield BinaryExpressionDO {
+                element_hash_id : tmp.element_hash_id,
+                lhs_hash_id : tmp.lhs_hash_id,
+                rhs_hash_id : tmp.rhs_hash_id,
+                opcode : tmp.opcode
+            }
+    	}
+    }
+    /**
+     * @brief gets the lhs hash id of this element.
+     * @return int
+     */
+    pub fn getLhsHashId(self) -> int {
+        return self.lhs_hash_id
+    }
+    /**
+     * @brief gets the rhs hash id of this element.
+     * @return int
+     */
+    pub fn getRhsHashId(self) -> int {
+        return self.rhs_hash_id
+    }
+    /**
+     * @brief gets the opcode of this element.
+     * @return string
+     */
+    pub fn getOpcode(self) -> string {
+        return self.opcode
+    }
+}
+/**
+ * @brief DO class: A block statement (sequence of statements surrounded with curly braces).
+ */
+schema BlockStatementDO {
+    @primary element_hash_id: int,
+    code_block_hash_id: int
+}
+impl BlockStatementDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *BlockStatementDO {
+    	for (tmp in db.block_statement) {
+            yield BlockStatementDO {
+                element_hash_id : tmp.element_hash_id,
+                code_block_hash_id : tmp.code_block_hash_id
+            }
+    	}
+    }
+    /**
+     * @brief gets the code block hash id of this element.
+     * @return int
+     */
+    pub fn getCodeBlockHashId(self) -> int {
+        return self.code_block_hash_id
+    }
+}
+/**
+ * @brief DO class: A boolean literal.
+ */
+schema BooleanLiteralDO {
+    @primary element_hash_id: int,
+    value: string
+}
+impl BooleanLiteralDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *BooleanLiteralDO {
+    	for (tmp in db.boolean_literal) {
+            yield BooleanLiteralDO {
+                element_hash_id : tmp.element_hash_id,
+                value : tmp.value
+            }
+    	}
+    }
+    /**
+     * @brief gets the value of this element.
+     * @return string
+     */
+    pub fn getValue(self) -> string {
+        return self.value
+    }
+}
+/**
+ * @brief DO class: A break statement.
+ */
+schema BreakStatementDO {
+    @primary element_hash_id: int,
+    exited_statement_hash_id: int
+}
+impl BreakStatementDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *BreakStatementDO {
+    	for (tmp in db.break_statement) {
+            yield BreakStatementDO {
+                element_hash_id : tmp.element_hash_id,
+                exited_statement_hash_id : tmp.exited_statement_hash_id
+            }
+    	}
+    }
+    /**
+     * @brief gets the exited statement hash id of this element.
+     * @return int
+     */
+    pub fn getExitedStatementHashId(self) -> int {
+        return self.exited_statement_hash_id
+    }
+}
+/**
+ * @brief DO class: A callable binding relation between caller and callee.
+ */
+schema CallableBindingDO {
+    @primary caller_hash_id: int,
+    callee_hash_id: int
+}
+impl CallableBindingDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *CallableBindingDO {
+    	for (tmp in db.callable_binding) {
+            yield CallableBindingDO {
+                caller_hash_id : tmp.caller_hash_id,
+                callee_hash_id : tmp.callee_hash_id
+            }
+    	}
+    }
+    /**
+     * @brief gets the target callable id of this call.
+     * @return int 
+     */
+    pub fn getCalleeHashId(self) -> int {
+        return self.callee_hash_id
+    }
+}
+/**
+ * @brief DO class: Describe a expression enclosed by a certain callable.
+ */
+schema CallableEnclosingExpressionDO {
+    @primary expression_hash_id: int,
+    callable_hash_id: int
+}
+impl CallableEnclosingExpressionDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *CallableEnclosingExpressionDO {
+    	for (tmp in db.callable_enclosing_expression) {
+            yield CallableEnclosingExpressionDO {
+                expression_hash_id : tmp.expression_hash_id,
+                callable_hash_id : tmp.callable_hash_id
+            }
+    	}
+    }
+    /**
+     * @brief gets the callable hash id of this element.
+     * @return int
+     */
+    pub fn getCallableHashId(self) -> int {
+        return self.callable_hash_id
+    }
+}
+/**
+ * @brief DO class: Describe a statement enclosed by a certain callable.
+ */
+schema CallableEnclosingStatementDO {
+    @primary statement_hash_id: int,
+    callable_hash_id: int
+}
+impl CallableEnclosingStatementDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *CallableEnclosingStatementDO {
+    	for (tmp in db.callable_enclosing_statement) {
+            yield CallableEnclosingStatementDO {
+                statement_hash_id : tmp.statement_hash_id,
+                callable_hash_id : tmp.callable_hash_id
+            }
+    	}
+    }
+    /**
+     * @brief gets the callable hash id of this element.
+     * @return int
+     */
+    pub fn getCallableHashId(self) -> int {
+        return self.callable_hash_id
+    }
+}
+/**
+ * @brief DO class: A catch section.
+ */
+schema CatchSectionDO {
+    @primary element_hash_id: int,
+    printable_text: string,
+    parameter_hash_id: int,
+    type_hash_id: int,
+    location_hash_id: int,
+    try_statement_hash_id: int,
+    index_order: int
+}
+impl CatchSectionDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *CatchSectionDO {
+    	for (tmp in db.catch_section) {
+            yield CatchSectionDO {
+                element_hash_id : tmp.element_hash_id,
+                printable_text : tmp.printable_text,
+                parameter_hash_id : tmp.parameter_hash_id,
+                type_hash_id : tmp.type_hash_id,
+                location_hash_id : tmp.location_hash_id,
+                try_statement_hash_id : tmp.try_statement_hash_id,
+                index_order : tmp.index_order
+            }
+    	}
+    }
+    /**
+     * @brief gets a printed representation of this element, including its structure where applicable.
+     * @return string.
+     */
+    pub fn getPrintableText(self) -> string {
+        return self.printable_text
+    }
+    /**
+     * @brief gets the parameter hash id of this element.
+     * @return int
+     */
+    pub fn getParameterHashId(self) -> int {
+        return self.parameter_hash_id
+    }
+    /**
+     * @brief gets the type hash id of this element.
+     * @return int
+     */
+    pub fn getTypeHashId(self) -> int {
+        return self.type_hash_id
+    }
+    /**
+     * @brief gets the location hash id of this element.
+     * @return int
+     */
+    pub fn getLocationHashId(self) -> int {
+        return self.location_hash_id
+    }
+    /**
+     * @brief gets the try statement hash id of this element.
+     * @return int
+     */
+    pub fn getTryStatementHashId(self) -> int {
+        return self.try_statement_hash_id
+    }
+    /**
+     * @brief gets the index order of this element.
+     * @return int
+     */
+    pub fn getIndex(self) -> int {
+        return self.index_order
+    }
+}
+/**
+ * @brief DO class: A character literal.
+ */
+schema CharacterLiteralDO {
+    @primary element_hash_id: int,
+    value: string
+}
+impl CharacterLiteralDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *CharacterLiteralDO {
+    	for (tmp in db.character_literal) {
+            yield CharacterLiteralDO {
+                element_hash_id : tmp.element_hash_id,
+                value : tmp.value
+            }
+    	}
+    }
+    /**
+     * @brief gets the value of this element.
+     * @return string
+     */
+    pub fn getValue(self) -> string {
+        return self.value
+    }
+}
+/**
+ * @brief DO class: A class.
+ */
+schema ClassDO {
+    @primary element_hash_id: int,
+    qualified_name: string,
+    identifier_hash_id: int,
+    location_hash_id: int,
+    parent_hash_id: int
+}
+impl ClassDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *ClassDO {
+    	for (tmp in db.class) {
+            yield ClassDO {
+                element_hash_id : tmp.element_hash_id,
+                qualified_name : tmp.qualified_name,
+                identifier_hash_id : tmp.identifier_hash_id,
+                location_hash_id : tmp.location_hash_id,
+                parent_hash_id : tmp.parent_hash_id
+            }
+    	}
+    }
+    /**
+     * @brief gets the qualified name of this element.
+     * @return string
+     */
+    pub fn getQualifiedName(self) -> string {
+        return self.qualified_name
+    }
+    /**
+     * @brief gets the identifier hash id of this element.
+     * @return int
+     */
+    pub fn getIdentifierHashId(self) -> int {
+        return self.identifier_hash_id
+    }
+    /**
+     * @brief gets the location hash id of this element.
+     * @return int
+     */
+    pub fn getLocationHashId(self) -> int {
+        return self.location_hash_id
+    }
+    /**
+     * @brief gets the parent hash id of this element.
+     * @return int
+     */
+    pub fn getParentHashId(self) -> int {
+        return self.parent_hash_id
+    }
+}
+/**
+ * @brief DO class: Represents the class hierarchy of all classes.
+ */
+schema ClassHierarchyDO {
+    @primary child_hash_id: int,
+    parent_hash_id: int
+}
+impl ClassHierarchyDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *ClassHierarchyDO {
+    	for (tmp in db.class_hierarchy) {
+            yield ClassHierarchyDO {
+                child_hash_id : tmp.child_hash_id,
+                parent_hash_id : tmp.parent_hash_id
+            }
+    	}
+    }
+    /**
+     * @brief gets the parent hash id of this element.
+     * @return int
+     */
+    pub fn getParentHashId(self) -> int {
+        return self.parent_hash_id
+    }
+}
+/**
+ * @brief DO class: A class implement list.
+ */
+schema ClassImplementListDO {
+    @primary element_hash_id: int,
+    implemented_element_hash_id: int
+}
+impl ClassImplementListDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *ClassImplementListDO {
+    	for (tmp in db.class_implement_list) {
+            yield ClassImplementListDO {
+                element_hash_id : tmp.element_hash_id,
+                implemented_element_hash_id : tmp.implemented_element_hash_id
+            }
+    	}
+    }
+    /**
+     * @brief gets the implemented element hash id of this element.
+     * @return int
+     */
+    pub fn getImplementedElementHashId(self) -> int {
+        return self.implemented_element_hash_id
+    }
+}
+/**
+ * @brief DO class: A java class initializer block.
+ */
+schema ClassInitializerDO {
+    @primary element_hash_id: int,
+    printable_text: string,
+    parent_hash_id: int,
+    location_hash_id: int
+}
+impl ClassInitializerDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *ClassInitializerDO {
+    	for (tmp in db.class_initializer) {
+            yield ClassInitializerDO {
+                element_hash_id : tmp.element_hash_id,
+                printable_text : tmp.printable_text,
+                parent_hash_id : tmp.parent_hash_id,
+                location_hash_id : tmp.location_hash_id
+            }
+    	}
+    }
+    /**
+     * @brief gets a printed representation of this element, including its structure where applicable.
+     * @return string.
+     */
+    pub fn getPrintableText(self) -> string {
+        return self.printable_text
+    }
+    /**
+     * @brief gets the parent hash id of this element.
+     * @return int
+     */
+    pub fn getParentHashId(self) -> int {
+        return self.parent_hash_id
+    }
+    /**
+     * @brief gets the location hash id of this element.
+     * @return int
+     */
+    pub fn getLocationHashId(self) -> int {
+        return self.location_hash_id
+    }
+}
+/**
+ * @brief DO class: A code block.
+ */
+schema CodeBlockDO {
+    @primary element_hash_id: int,
+    number_of_statement: int,
+    parent_hash_id: int,
+    is_empty: int,
+    location_hash_id: int,
+    printable_text: string
+}
+impl CodeBlockDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *CodeBlockDO {
+    	for (tmp in db.code_block) {
+            yield CodeBlockDO {
+                element_hash_id : tmp.element_hash_id,
+                number_of_statement : tmp.number_of_statement,
+                parent_hash_id : tmp.parent_hash_id,
+                is_empty : tmp.is_empty,
+                location_hash_id : tmp.location_hash_id,
+                printable_text : tmp.printable_text
+            }
+    	}
+    }
+    /**
+     * @brief gets the number of statement of this element.
+     * @return int
+     */
+    pub fn getNumberOfStatement(self) -> int {
+        return self.number_of_statement
+    }
+    /**
+     * @brief gets the parent hash id of this element.
+     * @return int
+     */
+    pub fn getParentHashId(self) -> int {
+        return self.parent_hash_id
+    }
+    /**
+     * @brief gets the is empty of this element.
+     * @return int
+     */
+    pub fn getIsEmpty(self) -> int {
+        return self.is_empty
+    }
+    /**
+     * @brief gets the location hash id of this element.
+     * @return int
+     */
+    pub fn getLocationHashId(self) -> int {
+        return self.location_hash_id
+    }
+    /**
+     * @brief gets a printed representation of this element, including its structure where applicable.
+     * @return string.
+     */
+    pub fn getPrintableText(self) -> string {
+        return self.printable_text
+    }
+}
+/**
+ * @brief DO class: A comment.
+ */
+schema CommentDO {
+    @primary element_hash_id: int,
+    text: string,
+    parent_hash_id: int,
+    location_hash_id: int,
+    comment_type: string
+}
+impl CommentDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *CommentDO {
+    	for (tmp in db.comment) {
+            yield CommentDO {
+                element_hash_id : tmp.element_hash_id,
+                text : tmp.text,
+                parent_hash_id : tmp.parent_hash_id,
+                location_hash_id : tmp.location_hash_id,
+                comment_type : tmp.comment_type
+            }
+    	}
+    }
+    /**
+     * @brief gets the text of this element.
+     * @return string
+     */
+    pub fn getText(self) -> string {
+        return self.text
+    }
+    /**
+     * @brief gets the parent hash id of this element.
+     * @return int
+     */
+    pub fn getParentHashId(self) -> int {
+        return self.parent_hash_id
+    }
+    /**
+     * @brief gets the location hash id of this element.
+     * @return int
+     */
+    pub fn getLocationHashId(self) -> int {
+        return self.location_hash_id
+    }
+    /**
+     * @brief gets the comment type of this element.
+     * @return string
+     */
+    pub fn getCommentType(self) -> string {
+        return self.comment_type
+    }
+}
+/**
+ * @brief DO class: A conditional expression.
+ */
+schema ConditionalExpressionDO {
+    @primary element_hash_id: int,
+    condition_expression_hash_id: int,
+    then_part_hash_id: int,
+    else_part_hash_id: int
+}
+impl ConditionalExpressionDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *ConditionalExpressionDO {
+    	for (tmp in db.conditional_expression) {
+            yield ConditionalExpressionDO {
+                element_hash_id : tmp.element_hash_id,
+                condition_expression_hash_id : tmp.condition_expression_hash_id,
+                then_part_hash_id : tmp.then_part_hash_id,
+                else_part_hash_id : tmp.else_part_hash_id
+            }
+    	}
+    }
+    /**
+     * @brief gets the condition expression hash id of this element.
+     * @return int
+     */
+    pub fn getConditionExpressionHashId(self) -> int {
+        return self.condition_expression_hash_id
+    }
+    /**
+     * @brief gets the expression id which is the result used when the condition is true.
+     * @return int
+     */
+    pub fn getThenPartHashId(self) -> int {
+        return self.then_part_hash_id
+    }
+    /**
+     * @brief gets the expression id which is the result used when the condition is false.
+     * @return int
+     */
+    pub fn getElsePartHashId(self) -> int {
+        return self.else_part_hash_id
+    }
+}
+/**
+ * @brief DO class: A constructor.
+ */
+schema ConstructorDO {
+    @primary element_hash_id: int,
+    name: string,
+    signature: string,
+    parent_hash_id: int,
+    location_hash_id: int,
+    definition_body: string
+}
+impl ConstructorDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *ConstructorDO {
+    	for (tmp in db.constructor) {
+            yield ConstructorDO {
+                element_hash_id : tmp.element_hash_id,
+                name : tmp.name,
+                signature : tmp.signature,
+                parent_hash_id : tmp.parent_hash_id,
+                location_hash_id : tmp.location_hash_id,
+                definition_body : tmp.definition_body
+            }
+    	}
+    }
+    /**
+     * @brief gets the name of this element.
+     * @return string
+     */
+    pub fn getName(self) -> string {
+        return self.name
+    }
+    /**
+     * @brief gets the signature of this element.
+     * @return string
+     */
+    pub fn getSignature(self) -> string {
+        return self.signature
+    }
+    /**
+     * @brief gets the parent hash id of this element.
+     * @return int
+     */
+    pub fn getParentHashId(self) -> int {
+        return self.parent_hash_id
+    }
+    /**
+     * @brief gets the location hash id of this element.
+     * @return int
+     */
+    pub fn getLocationHashId(self) -> int {
+        return self.location_hash_id
+    }
+    pub fn getDefinitionBody(self) -> string {
+        return self.definition_body
+    }
+}
+/**
+ * @brief DO class: A constructor invocation.
+ */
+schema ConstructorInvocationDO {
+    @primary element_hash_id: int,
+    class_reference_hash_id: int
+}
+impl ConstructorInvocationDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *ConstructorInvocationDO {
+    	for (tmp in db.constructor_invocation) {
+            yield ConstructorInvocationDO {
+                element_hash_id : tmp.element_hash_id,
+                class_reference_hash_id : tmp.class_reference_hash_id
+            }
+    	}
+    }
+    /**
+     * @brief gets the class reference hash id of this element.
+     * @return int
+     */
+    pub fn getClassReferenceHashId(self) -> int {
+        return self.class_reference_hash_id
+    }
+}
+/**
+ * @brief DO class: Describe a file belonged to a certain folder.
+ */
+schema ContainerParentDO {
+    @primary child_hash_id: int,
+    parent_hash_id: int
+}
+impl ContainerParentDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *ContainerParentDO {
+    	for (tmp in db.container_parent) {
+            yield ContainerParentDO {
+                child_hash_id : tmp.child_hash_id,
+                parent_hash_id : tmp.parent_hash_id
+            }
+    	}
+    }
+    /**
+     * @brief gets the parent hash id of this element.
+     * @return int
+     */
+    pub fn getParentHashId(self) -> int {
+        return self.parent_hash_id
+    }
+}
+/**
+ * @brief DO class: A continue statement.
+ */
+schema ContinueStatementDO {
+    @primary element_hash_id: int,
+    continued_statement_hash_id: int
+}
+impl ContinueStatementDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *ContinueStatementDO {
+    	for (tmp in db.continue_statement) {
+            yield ContinueStatementDO {
+                element_hash_id : tmp.element_hash_id,
+                continued_statement_hash_id : tmp.continued_statement_hash_id
+            }
+    	}
+    }
+    /**
+     * @brief gets the continued statement hash id of this element.
+     * @return int
+     */
+    pub fn getContinuedStatementHashId(self) -> int {
+        return self.continued_statement_hash_id
+    }
+}
+/**
+ * @brief DO class: A compilation unit and its declared package.
+ */
+schema CupackageDO {
+    @primary file_hash_id: int,
+    package_hash_id: int
+}
+impl CupackageDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *CupackageDO {
+    	for (tmp in db.cupackage) {
+            yield CupackageDO {
+                file_hash_id : tmp.file_hash_id,
+                package_hash_id : tmp.package_hash_id
+            }
+    	}
+    }
+    /**
+     * @brief gets the package hash id of this element.
+     * @return int
+     */
+    pub fn getPackageHashId(self) -> int {
+        return self.package_hash_id
+    }
+}
+/**
+ * @brief DO class: A declaration element.
+ */
+schema DeclarationElementDO {
+    @primary element_hash_id: int,
+    index_order: int,
+    declaration_statement_hash_id: int
+}
+impl DeclarationElementDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *DeclarationElementDO {
+    	for (tmp in db.declaration_element) {
+            yield DeclarationElementDO {
+                element_hash_id : tmp.element_hash_id,
+                index_order : tmp.index_order,
+                declaration_statement_hash_id : tmp.declaration_statement_hash_id
+            }
+    	}
+    }
+    /**
+     * @brief gets the index order of this element.
+     * @return int
+     */
+    pub fn getIndex(self) -> int {
+        return self.index_order
+    }
+    /**
+     * @brief gets the declaration statement hash id of this element.
+     * @return int
+     */
+    pub fn getDeclarationStatementHashId(self) -> int {
+        return self.declaration_statement_hash_id
+    }
+}
+/**
+ * @brief DO class: A do while statement.
+ */
+schema DoWhileStatementDO {
+    @primary element_hash_id: int,
+    keyword: string,
+    condition_hash_id: int,
+    body_declaration_hash_id: int
+}
+impl DoWhileStatementDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *DoWhileStatementDO {
+    	for (tmp in db.do_while_statement) {
+            yield DoWhileStatementDO {
+                element_hash_id : tmp.element_hash_id,
+                keyword : tmp.keyword,
+                condition_hash_id : tmp.condition_hash_id,
+                body_declaration_hash_id : tmp.body_declaration_hash_id
+            }
+    	}
+    }
+    /**
+     * @brief gets the keyword of this element.
+     * @return string
+     */
+    pub fn getKeyword(self) -> string {
+        return self.keyword
+    }
+    /**
+     * @brief gets the condition hash id of this element.
+     * @return int
+     */
+    pub fn getConditionHashId(self) -> int {
+        return self.condition_hash_id
+    }
+    /**
+     * @brief gets the body declaration hash id of this element.
+     * @return int
+     */
+    pub fn getBodyDeclarationHashId(self) -> int {
+        return self.body_declaration_hash_id
+    }
+}
+/**
+ * @brief DO class: A double literal. For example, "1.5".
+ */
+schema DoubleLiteralDO {
+    @primary element_hash_id: int,
+    value: string
+}
+impl DoubleLiteralDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *DoubleLiteralDO {
+    	for (tmp in db.double_literal) {
+            yield DoubleLiteralDO {
+                element_hash_id : tmp.element_hash_id,
+                value : tmp.value
+            }
+    	}
+    }
+    /**
+     * @brief gets the value of this element.
+     * @return string
+     */
+    pub fn getValue(self) -> string {
+        return self.value
+    }
+}
+/**
+ * @brief DO class: An element.
+ */
+schema ElementDO {
+    @primary element_hash_id: int,
+    type: string,
+    parent_id: int,
+    parent_type: string
+}
+impl ElementDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *ElementDO {
+    	for (tmp in db.element) {
+            yield ElementDO {
+                element_hash_id : tmp.element_hash_id,
+                type : tmp.type,
+                parent_id : tmp.parent_id,
+                parent_type : tmp.parent_type
+            }
+    	}
+    }
+    /**
+     * @brief gets the type of this element.
+     * @return string
+     */
+    pub fn getType(self) -> string {
+        return self.type
+    }
+    /**
+     * @brief gets the parent id of this element.
+     * @return int
+     */
+    pub fn getParentId(self) -> int {
+        return self.parent_id
+    }
+    /**
+     * @brief gets the parent type of this element.
+     * @return string
+     */
+    pub fn getParentType(self) -> string {
+        return self.parent_type
+    }
+}
+/**
+ * @brief DO class: An empty reference parameter list, like "<>".
+ */
+schema EmptyReferenceParameterListDO {
+    @primary list_hash_id: int,
+    parent_hash_id: int,
+    printable_text: string,
+    location_hash_id: int
+}
+impl EmptyReferenceParameterListDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *EmptyReferenceParameterListDO {
+    	for (tmp in db.empty_reference_parameter_list) {
+            yield EmptyReferenceParameterListDO {
+                list_hash_id : tmp.list_hash_id,
+                parent_hash_id : tmp.parent_hash_id,
+                printable_text : tmp.printable_text,
+                location_hash_id : tmp.location_hash_id
+            }
+    	}
+    }
+    /**
+     * @brief gets the parent hash id of this element.
+     * @return int
+     */
+    pub fn getParentHashId(self) -> int {
+        return self.parent_hash_id
+    }
+    /**
+     * @brief gets a printed representation of this element, including its structure where applicable.
+     * @return string.
+     */
+    pub fn getPrintableText(self) -> string {
+        return self.printable_text
+    }
+    /**
+     * @brief gets the location hash id of this element.
+     * @return int
+     */
+    pub fn getLocationHashId(self) -> int {
+        return self.location_hash_id
+    }
+}
+/**
+ * @brief DO class: An empty statement.
+ */
+schema EmptyStatementDO {
+    @primary element_hash_id: int
+}
+impl EmptyStatementDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *EmptyStatementDO {
+    	for (tmp in db.empty_statement) {
+            yield EmptyStatementDO {
+                element_hash_id : tmp.element_hash_id
+            }
+    	}
+    }
+}
+/**
+ * @brief DO class: An enum constant.
+ */
+schema EnumConstantDO {
+    @primary element_hash_id: int,
+    name: string,
+    parent_hash_id: int,
+    location_hash_id: int,
+    printable_text: string
+}
+impl EnumConstantDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *EnumConstantDO {
+    	for (tmp in db.enum_constant) {
+            yield EnumConstantDO {
+                element_hash_id : tmp.element_hash_id,
+                name : tmp.name,
+                parent_hash_id : tmp.parent_hash_id,
+                location_hash_id : tmp.location_hash_id,
+                printable_text : tmp.printable_text
+            }
+    	}
+    }
+    /**
+     * @brief gets the name of this element.
+     * @return string
+     */
+    pub fn getName(self) -> string {
+        return self.name
+    }
+    /**
+     * @brief gets the parent hash id of this element.
+     * @return int
+     */
+    pub fn getParentHashId(self) -> int {
+        return self.parent_hash_id
+    }
+    /**
+     * @brief gets the location hash id of this element.
+     * @return int
+     */
+    pub fn getLocationHashId(self) -> int {
+        return self.location_hash_id
+    }
+    /**
+     * @brief gets a printed representation of this element, including its structure where applicable.
+     * @return string.
+     */
+    pub fn getPrintableText(self) -> string {
+        return self.printable_text
+    }
+}
+/**
+ * @brief DO class: An exception.
+ */
+schema ExceptionDO {
+    @primary element_hash_id: int,
+    type_hash_id: int,
+    callable_hash_id: int,
+    name: string
+}
+impl ExceptionDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *ExceptionDO {
+    	for (tmp in db.exception) {
+            yield ExceptionDO {
+                element_hash_id : tmp.element_hash_id,
+                type_hash_id : tmp.type_hash_id,
+                callable_hash_id : tmp.callable_hash_id,
+                name : tmp.name
+            }
+    	}
+    }
+    /**
+     * @brief gets the type hash id of this element.
+     * @return int
+     */
+    pub fn getTypeHashId(self) -> int {
+        return self.type_hash_id
+    }
+    /**
+     * @brief gets the callable hash id of this element.
+     * @return int
+     */
+    pub fn getCallableHashId(self) -> int {
+        return self.callable_hash_id
+    }
+    /**
+     * @brief gets the name of this element.
+     * @return string
+     */
+    pub fn getName(self) -> string {
+        return self.name
+    }
+}
+/**
+ * @brief DO class: A common super-class that represents all kinds of expressions.
+ */
+schema ExpressionDO {
+    @primary element_hash_id: int,
+    name: string,
+    parent_hash_id: int,
+    index_order: int,
+    location_hash_id: int,
+    printable_text: string
+}
+impl ExpressionDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *ExpressionDO {
+    	for (tmp in db.expression) {
+            yield ExpressionDO {
+                element_hash_id : tmp.element_hash_id,
+                name : tmp.name,
+                parent_hash_id : tmp.parent_hash_id,
+                index_order : tmp.index_order,
+                location_hash_id : tmp.location_hash_id,
+                printable_text : tmp.printable_text
+            }
+    	}
+    }
+    /**
+     * @brief gets the type of this element.
+     * @return string
+     */
+    pub fn getType(self) -> string {
+        return self.name
+    }
+    /**
+     * @brief gets the parent hash id of this element.
+     * @return int
+     */
+    pub fn getParentHashId(self) -> int {
+        return self.parent_hash_id
+    }
+    /**
+     * @brief gets the index order of this element.
+     * @return int
+     */
+    pub fn getIndex(self) -> int {
+        return self.index_order
+    }
+    /**
+     * @brief gets the location hash id of this element.
+     * @return int
+     */
+    pub fn getLocationHashId(self) -> int {
+        return self.location_hash_id
+    }
+    /**
+     * @brief gets a printed representation of this element, including its structure where applicable.
+     * @return string.
+     */
+    pub fn getPrintableText(self) -> string {
+        return self.printable_text
+    }
+}
+ /**
+ * @brief DO class:  A list of expression separated by commas.
+ */
+schema ExpressionListDO {
+    @primary element_hash_id: int,
+    parent_hash_id: int,
+    location_hash_id: int,
+    printable_text: string,
+    size: int
+}
+impl ExpressionListDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *ExpressionListDO {
+    	for (tmp in db.expression_list) {
+            yield ExpressionListDO {
+                element_hash_id : tmp.element_hash_id,
+                parent_hash_id : tmp.parent_hash_id,
+                location_hash_id : tmp.location_hash_id,
+                printable_text : tmp.printable_text,
+                size : tmp.size
+            }
+    	}
+    }
+    /**
+     * @brief gets the parent hash id of this element.
+     * @return int
+     */
+    pub fn getParentHashId(self) -> int {
+        return self.parent_hash_id
+    }
+    /**
+     * @brief gets the location hash id of this element.
+     * @return int
+     */
+    pub fn getLocationHashId(self) -> int {
+        return self.location_hash_id
+    }
+    /**
+     * @brief gets a printed representation of this element, including its structure where applicable.
+     * @return string.
+     */
+    pub fn getPrintableText(self) -> string {
+        return self.printable_text
+    }
+    pub fn getSize(self) -> int {
+        return self.size
+    }
+}
+/**
+ * @brief DO class: Reference relation between expression list to its contained expression.
+ */
+schema ExpressionListExpressionRelationDO {
+    expression_list_hash_id: int,
+    @primary expression_hash_id: int,
+    position: int
+}
+impl ExpressionListExpressionRelationDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *ExpressionListExpressionRelationDO {
+    	for (tmp in db.expression_list_expression_relation) {
+            yield ExpressionListExpressionRelationDO {
+                expression_list_hash_id : tmp.expression_list_hash_id,
+                expression_hash_id : tmp.expression_hash_id,
+                position : tmp.position
+            }
+    	}
+    }
+    /**
+     * @brief gets the expression hash id of this element.
+     * @return int
+     */
+    pub fn getExpressionHashId(self) -> int {
+        return self.expression_hash_id
+    }
+    /**
+     * @brief gets the expression list hash id of this element.
+     * @return int
+     */
+    pub fn getExpressionListHashId(self) -> int {
+        return self.expression_list_hash_id
+    }
+    pub fn getPosition(self) -> int {
+        return self.position
+    }
+}
+/**
+ * @brief DO class: An expression statement.
+ */
+schema ExpressionStatementDO {
+    @primary element_hash_id: int,
+    expression_hash_id: int
+}
+impl ExpressionStatementDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *ExpressionStatementDO {
+    	for (tmp in db.expression_statement) {
+            yield ExpressionStatementDO {
+                element_hash_id : tmp.element_hash_id,
+                expression_hash_id : tmp.expression_hash_id
+            }
+    	}
+    }
+    /**
+     * @brief gets the expression hash id of this element.
+     * @return int
+     */
+    pub fn getExpressionHashId(self) -> int {
+        return self.expression_hash_id
+    }
+}
+/**
+ * @brief DO class: A field.
+ */
+schema FieldDO {
+    @primary element_hash_id: int,
+    name: string,
+    parent_hash_id: int,
+    printable_text: string,
+    location_hash_id: int
+}
+impl FieldDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *FieldDO {
+    	for (tmp in db.field) {
+            yield FieldDO {
+                element_hash_id : tmp.element_hash_id,
+                name : tmp.name,
+                parent_hash_id : tmp.parent_hash_id,
+                printable_text : tmp.printable_text,
+                location_hash_id : tmp.location_hash_id
+            }
+    	}
+    }
+    /**
+     * @brief gets the name of this element.
+     * @return string
+     */
+    pub fn getName(self) -> string {
+        return self.name
+    }
+    /**
+     * @brief gets the parent hash id of this element.
+     * @return int
+     */
+    pub fn getParentHashId(self) -> int {
+        return self.parent_hash_id
+    }
+    /**
+     * @brief gets a printed representation of this element, including its structure where applicable.
+     * @return string.
+     */
+    pub fn getPrintableText(self) -> string {
+        return self.printable_text
+    }
+    /**
+     * @brief gets the location hash id of this element.
+     * @return int
+     */
+    pub fn getLocationHashId(self) -> int {
+        return self.location_hash_id
+    }
+}
+/**
+ * @brief DO class: A file.
+ */
+schema FileDO {
+    @primary element_hash_id: int,
+    qualified_name: string,
+    extension: string,
+    name: string,
+    number_of_lines_hash_id: int
+}
+impl FileDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *FileDO {
+    	for (tmp in db.file) {
+            yield FileDO {
+                element_hash_id : tmp.element_hash_id,
+                qualified_name : tmp.qualified_name,
+                extension : tmp.extension,
+                name : tmp.name,
+                number_of_lines_hash_id : tmp.number_of_lines_hash_id
+            }
+    	}
+    }
+    /**
+     * @brief gets the relative path  of this element.
+     * @return string
+     */
+    pub fn getRelativePath(self) -> string {
+        return self.qualified_name
+    }
+    /**
+     * @brief gets the extension of this element.
+     * @return string
+     */
+    pub fn getExtension(self) -> string {
+        return self.extension
+    }
+    /**
+     * @brief gets the name of this element.
+     * @return string
+     */
+    pub fn getName(self) -> string {
+        return self.name
+    }
+    /**
+     * @brief gets the number of lines hash id of this element.
+     * @return int
+     */
+    pub fn getNumberOfLinesHashId(self) -> int {
+        return self.number_of_lines_hash_id
+    }
+}
+/**
+ * @brief DO class: A file's md5sum value.
+ */
+schema FileMd5SumDO {
+    @primary file_hash_id: int,
+    value: string
+}
+impl FileMd5SumDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *FileMd5SumDO {
+    	for (tmp in db.file_md5_sum) {
+            yield FileMd5SumDO {
+                file_hash_id : tmp.file_hash_id,
+                value : tmp.value
+            }
+    	}
+    }
+    /**
+     * @brief gets the value of this element.
+     * @return string
+     */
+    pub fn getValue(self) -> string {
+        return self.value
+    }
+}
+/**
+ * @brief DO class: A file's sha256 value.
+ */
+schema FileSha256SumDO {
+    @primary file_hash_id: int,
+    value: string
+}
+impl FileSha256SumDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *FileSha256SumDO {
+    	for (tmp in db.file_sha256_sum) {
+            yield FileSha256SumDO {
+                file_hash_id : tmp.file_hash_id,
+                value : tmp.value
+            }
+    	}
+    }
+    /**
+     * @brief gets the value of this element.
+     * @return string
+     */
+    pub fn getValue(self) -> string {
+        return self.value
+    }
+}
+/**
+ * @brief DO class: A floating point literal, for example, "1.5f".
+ */
+schema FloatingPointLiteralDO {
+    @primary element_hash_id: int,
+    value: string
+}
+impl FloatingPointLiteralDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *FloatingPointLiteralDO {
+    	for (tmp in db.floating_point_literal) {
+            yield FloatingPointLiteralDO {
+                element_hash_id : tmp.element_hash_id,
+                value : tmp.value
+            }
+    	}
+    }
+    /**
+     * @brief gets the value of this element.
+     * @return string
+     */
+    pub fn getValue(self) -> string {
+        return self.value
+    }
+}
+/**
+ * @brief DO class: A folder.
+ */
+schema FolderDO {
+    @primary element_hash_id: int,
+    qualified_name: string,
+    name: string,
+    parent_hash_id: int
+}
+impl FolderDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *FolderDO {
+    	for (tmp in db.folder) {
+            yield FolderDO {
+                element_hash_id : tmp.element_hash_id,
+                qualified_name : tmp.qualified_name,
+                name : tmp.name,
+                parent_hash_id : tmp.parent_hash_id
+            }
+    	}
+    }
+    /**
+     * @brief gets the qualified name of this element.
+     * @return string
+     */
+    pub fn getRelativePath(self) -> string {
+        return self.qualified_name
+    }
+    /**
+     * @brief gets the name of this element.
+     * @return string
+     */
+    pub fn getName(self) -> string {
+        return self.name
+    }
+    /**
+     * @brief gets the parent hash id of this element.
+     * @return int
+     */
+    pub fn getParentHashId(self) -> int {
+        return self.parent_hash_id
+    }
+}
+/**
+ * @brief DO class: A for statement.
+ */
+schema ForStatementDO {
+    @primary element_hash_id: int,
+    initialization_hash_id: int,
+    condition_hash_id: int,
+    update_hash_id: int,
+    body_hash_id: int
+}
+impl ForStatementDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *ForStatementDO {
+    	for (tmp in db.for_statement) {
+            yield ForStatementDO {
+                element_hash_id : tmp.element_hash_id,
+                initialization_hash_id : tmp.initialization_hash_id,
+                condition_hash_id : tmp.condition_hash_id,
+                update_hash_id : tmp.update_hash_id,
+                body_hash_id : tmp.body_hash_id
+            }
+    	}
+    }
+    /**
+     * @brief gets the initialization hash id of this element.
+     * @return int
+     */
+    pub fn getInitializationHashId(self) -> int {
+        return self.initialization_hash_id
+    }
+    /**
+     * @brief gets the condition hash id of this element.
+     * @return int
+     */
+    pub fn getConditionHashId(self) -> int {
+        return self.condition_hash_id
+    }
+    /**
+     * @brief gets the update hash id of this element.
+     * @return int
+     */
+    pub fn getUpdateHashId(self) -> int {
+        return self.update_hash_id
+    }
+    /**
+     * @brief gets the body hash id of this element.
+     * @return int
+     */
+    pub fn getBodyHashId(self) -> int {
+        return self.body_hash_id
+    }
+}
+/**
+ * @brief DO class: A foreach statement.
+ */
+schema ForeachStatementDO {
+    @primary element_hash_id: int,
+    iterated_value_hash_id: int,
+    iteration_parameter_hash_id: int,
+    body_hash_id: int
+}
+impl ForeachStatementDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *ForeachStatementDO {
+    	for (tmp in db.foreach_statement) {
+            yield ForeachStatementDO {
+                element_hash_id : tmp.element_hash_id,
+                iterated_value_hash_id : tmp.iterated_value_hash_id,
+                iteration_parameter_hash_id : tmp.iteration_parameter_hash_id,
+                body_hash_id : tmp.body_hash_id
+            }
+    	}
+    }
+    /**
+     * @brief gets the iterated value hash id of this element.
+     * @return int
+     */
+    pub fn getIteratedValueHashId(self) -> int {
+        return self.iterated_value_hash_id
+    }
+    /**
+     * @brief gets the iteration parameter hash id of this element.
+     * @return int
+     */
+    pub fn getIterationParameterHashId(self) -> int {
+        return self.iteration_parameter_hash_id
+    }
+    /**
+     * @brief gets the body hash id of this element.
+     * @return int
+     */
+    pub fn getBodyHashId(self) -> int {
+        return self.body_hash_id
+    }
+}
+/**
+ * @brief DO class: An identifier.
+ */
+schema IdentifierDO {
+    @primary element_hash_id: int,
+    location_hash_id: int,
+    name: string,
+    parent_hash_id: int
+}
+impl IdentifierDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *IdentifierDO {
+    	for (tmp in db.identifier) {
+            yield IdentifierDO {
+                element_hash_id : tmp.element_hash_id,
+                location_hash_id : tmp.location_hash_id,
+                name : tmp.name,
+                parent_hash_id : tmp.parent_hash_id
+            }
+    	}
+    }
+    /**
+     * @brief gets the location hash id of this element.
+     * @return int
+     */
+    pub fn getLocationHashId(self) -> int {
+        return self.location_hash_id
+    }
+    /**
+     * @brief gets the name of this element.
+     * @return string
+     */
+    pub fn getName(self) -> string {
+        return self.name
+    }
+    /**
+     * @brief gets the parent hash id of this element.
+     * @return int
+     */
+    pub fn getParentHashId(self) -> int {
+        return self.parent_hash_id
+    }
+}
+/**
+ * @brief DO class: An if statement with else.
+ */
+schema IfStatementWithElseDO {
+    @primary element_hash_id: int,
+    condition_hash_id: int,
+    consequent_hash_id: int,
+    alternate_hash_id: int
+}
+impl IfStatementWithElseDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *IfStatementWithElseDO {
+    	for (tmp in db.if_statement_with_else) {
+            yield IfStatementWithElseDO {
+                element_hash_id : tmp.element_hash_id,
+                condition_hash_id : tmp.condition_hash_id,
+                consequent_hash_id : tmp.consequent_hash_id,
+                alternate_hash_id : tmp.alternate_hash_id
+            }
+    	}
+    }
+    /**
+     * @brief gets the condition hash id of this element.
+     * @return int
+     */
+    pub fn getConditionHashId(self) -> int {
+        return self.condition_hash_id
+    }
+    /**
+     * @brief gets the consequent hash id of this element.
+     * @return int
+     */
+    pub fn getConsequentHashId(self) -> int {
+        return self.consequent_hash_id
+    }
+    /**
+     * @brief gets the alternate hash id of this element.
+     * @return int
+     */
+    pub fn getAlternateHashId(self) -> int {
+        return self.alternate_hash_id
+    }
+}
+/**
+ * @brief DO class: An if statement without else.
+ */
+schema IfStatementWithoutElseDO {
+    @primary element_hash_id: int,
+    condition_hash_id: int,
+    consequent_hash_id: int
+}
+impl IfStatementWithoutElseDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *IfStatementWithoutElseDO {
+    	for (tmp in db.if_statement_without_else) {
+            yield IfStatementWithoutElseDO {
+                element_hash_id : tmp.element_hash_id,
+                condition_hash_id : tmp.condition_hash_id,
+                consequent_hash_id : tmp.consequent_hash_id
+            }
+    	}
+    }
+    /**
+     * @brief gets the condition hash id of this element.
+     * @return int
+     */
+    pub fn getConditionHashId(self) -> int {
+        return self.condition_hash_id
+    }
+    /**
+     * @brief gets the consequent hash id of this element.
+     * @return int
+     */
+    pub fn getConsequentHashId(self) -> int {
+        return self.consequent_hash_id
+    }
+}
+/**
+ * @brief DO class: An import.
+ */
+schema ImportDO {
+    @primary element_hash_id: int,
+    reference_hash_id: int,
+    name: string,
+    parent_hash_id: int,
+    location_hash_id: int,
+    is_foreign_import: int
+}
+impl ImportDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *ImportDO {
+    	for (tmp in db.import) {
+            yield ImportDO {
+                element_hash_id : tmp.element_hash_id,
+                reference_hash_id : tmp.reference_hash_id,
+                name : tmp.name,
+                parent_hash_id : tmp.parent_hash_id,
+                location_hash_id : tmp.location_hash_id,
+                is_foreign_import : tmp.is_foreign_import
+            }
+    	}
+    }
+    /**
+     * @brief gets the reference hash id of this element.
+     * @return int
+     */
+    pub fn getReferenceHashId(self) -> int {
+        return self.reference_hash_id
+    }
+    /**
+     * @brief gets the printable text of this element.
+     * @return string
+     */
+    pub fn getPrintableText(self) -> string {
+        return self.name
+    }
+    /**
+     * @brief gets the parent hash id of this element.
+     * @return int
+     */
+    pub fn getParentHashId(self) -> int {
+        return self.parent_hash_id
+    }
+    /**
+     * @brief gets the location hash id of this element.
+     * @return int
+     */
+    pub fn getLocationHashId(self) -> int {
+        return self.location_hash_id
+    }
+    /**
+     * @brief gets the is foreign import of this element.
+     * @return int
+     */
+    pub fn getIsForeignImport(self) -> int {
+        return self.is_foreign_import
+    }
+}
+/**
+ * @brief DO class: An import static reference element.
+ */
+schema ImportStaticReferenceElementDO {
+    @primary element_hash_id: int,
+    printable_text: string,
+    parent_hash_id: int,
+    location_hash_id: int
+}
+impl ImportStaticReferenceElementDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *ImportStaticReferenceElementDO {
+    	for (tmp in db.import_static_reference_element) {
+            yield ImportStaticReferenceElementDO {
+                element_hash_id : tmp.element_hash_id,
+                printable_text : tmp.printable_text,
+                parent_hash_id : tmp.parent_hash_id,
+                location_hash_id : tmp.location_hash_id
+            }
+    	}
+    }
+    /**
+     * @brief gets a printed representation of this element, including its structure where applicable.
+     * @return string.
+     */
+    pub fn getPrintableText(self) -> string {
+        return self.printable_text
+    }
+    /**
+     * @brief gets the parent hash id of this element.
+     * @return int
+     */
+    pub fn getParentHashId(self) -> int {
+        return self.parent_hash_id
+    }
+    /**
+     * @brief gets the location hash id of this element.
+     * @return int
+     */
+    pub fn getLocationHashId(self) -> int {
+        return self.location_hash_id
+    }
+}
+/**
+ * @brief DO class: An import static statement.
+ */
+schema ImportStaticStatementDO {
+    @primary element_hash_id: int,
+    reference_hash_id: int,
+    name: string,
+    parent_hash_id: int,
+    location_hash_id: int
+}
+impl ImportStaticStatementDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *ImportStaticStatementDO {
+    	for (tmp in db.import_static_statement) {
+            yield ImportStaticStatementDO {
+                element_hash_id : tmp.element_hash_id,
+                reference_hash_id : tmp.reference_hash_id,
+                name : tmp.name,
+                parent_hash_id : tmp.parent_hash_id,
+                location_hash_id : tmp.location_hash_id
+            }
+    	}
+    }
+    /**
+     * @brief gets the reference hash id of this element.
+     * @return int
+     */
+    pub fn getReferenceHashId(self) -> int {
+        return self.reference_hash_id
+    }
+    /**
+     * @brief gets the name of this element.
+     * @return string
+     */
+    pub fn getPrintableText(self) -> string {
+        return self.name
+    }
+    /**
+     * @brief gets the parent hash id of this element.
+     * @return int
+     */
+    pub fn getParentHashId(self) -> int {
+        return self.parent_hash_id
+    }
+    /**
+     * @brief gets the location hash id of this element.
+     * @return int
+     */
+    pub fn getLocationHashId(self) -> int {
+        return self.location_hash_id
+    }
+}
+/**
+ * @brief DO class: An instanceof expression.
+ */
+schema InstanceofExpressionDO {
+    @primary element_hash_id: int,
+    operand_hash_id: int,
+    check_type_hash_id: int,
+    pattern_hash_id: int
+}
+impl InstanceofExpressionDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *InstanceofExpressionDO {
+    	for (tmp in db.instanceof_expression) {
+            yield InstanceofExpressionDO {
+                element_hash_id : tmp.element_hash_id,
+                operand_hash_id : tmp.operand_hash_id,
+                check_type_hash_id : tmp.check_type_hash_id,
+                pattern_hash_id : tmp.pattern_hash_id
+            }
+    	}
+    }
+    /**
+     * @brief gets the operand hash id of this element.
+     * @return int
+     */
+    pub fn getOperandHashId(self) -> int {
+        return self.operand_hash_id
+    }
+    /**
+     * @brief gets the check type hash id of this element.
+     * @return int
+     */
+    pub fn getCheckTypeHashId(self) -> int {
+        return self.check_type_hash_id
+    }
+    /**
+     * @brief gets the pattern hash id of this element.
+     * @return int
+     */
+    pub fn getPatternHashId(self) -> int {
+        return self.pattern_hash_id
+    }
+}
+/**
+ * @brief DO class: An integer literal, for example, "4".
+ */
+schema IntegerLiteralDO {
+    @primary element_hash_id: int,
+    value: string
+}
+impl IntegerLiteralDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *IntegerLiteralDO {
+    	for (tmp in db.integer_literal) {
+            yield IntegerLiteralDO {
+                element_hash_id : tmp.element_hash_id,
+                value : tmp.value
+            }
+    	}
+    }
+    /**
+     * @brief gets the value of this element.
+     * @return string
+     */
+    pub fn getValue(self) -> string {
+        return self.value
+    }
+}
+/**
+ * @brief DO class: An interface.
+ */
+schema InterfaceDO {
+    @primary element_hash_id: int,
+    qualified_name: string,
+    identifier_hash_id: int,
+    location_hash_id: int,
+    parent_hash_id: int
+}
+impl InterfaceDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *InterfaceDO {
+    	for (tmp in db.interface) {
+            yield InterfaceDO {
+                element_hash_id : tmp.element_hash_id,
+                qualified_name : tmp.qualified_name,
+                identifier_hash_id : tmp.identifier_hash_id,
+                location_hash_id : tmp.location_hash_id,
+                parent_hash_id : tmp.parent_hash_id
+            }
+    	}
+    }
+    /**
+     * @brief gets the qualified name of this element.
+     * @return string
+     */
+    pub fn getQualifiedName(self) -> string {
+        return self.qualified_name
+    }
+    /**
+     * @brief gets the identifier hash id of this element.
+     * @return int
+     */
+    pub fn getIdentifierHashId(self) -> int {
+        return self.identifier_hash_id
+    }
+    /**
+     * @brief gets the location hash id of this element.
+     * @return int
+     */
+    pub fn getLocationHashId(self) -> int {
+        return self.location_hash_id
+    }
+    /**
+     * @brief gets the parent hash id of this element.
+     * @return int
+     */
+    pub fn getParentHashId(self) -> int {
+        return self.parent_hash_id
+    }
+}
+/**
+ * @brief DO class: A javadoc comment.
+ */
+schema JavadocCommentDO {
+    @primary element_hash_id: int,
+    documentable_hash_id: int,
+    text: string,
+    location_hash_id: int,
+    parent_hash_id: int
+}
+impl JavadocCommentDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *JavadocCommentDO {
+    	for (tmp in db.javadoc_comment) {
+            yield JavadocCommentDO {
+                element_hash_id : tmp.element_hash_id,
+                documentable_hash_id : tmp.documentable_hash_id,
+                text : tmp.text,
+                location_hash_id : tmp.location_hash_id,
+                parent_hash_id : tmp.parent_hash_id
+            }
+    	}
+    }
+    /**
+     * @brief gets the documentable hash id of this element.
+     * @return int
+     */
+    pub fn getDocumentableHashId(self) -> int {
+        return self.documentable_hash_id
+    }
+    /**
+     * @brief gets the text of this element.
+     * @return string
+     */
+    pub fn getText(self) -> string {
+        return self.text
+    }
+    /**
+     * @brief gets the location hash id of this element.
+     * @return int
+     */
+    pub fn getLocationHashId(self) -> int {
+        return self.location_hash_id
+    }
+    /**
+     * @brief gets the parent hash id of this element.
+     * @return int
+     */
+    pub fn getParentHashId(self) -> int {
+        return self.parent_hash_id
+    }
+}
+/**
+ * @brief DO class: A javadoc tag.
+ */
+schema JavadocTagDO {
+    @primary element_hash_id: int,
+    name: string,
+    value: string,
+    containing_comment_hash_id: int,
+    index_order: int,
+    location_hash_id: int
+}
+impl JavadocTagDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *JavadocTagDO {
+    	for (tmp in db.javadoc_tag) {
+            yield JavadocTagDO {
+                element_hash_id : tmp.element_hash_id,
+                name : tmp.name,
+                value : tmp.value,
+                containing_comment_hash_id : tmp.containing_comment_hash_id,
+                index_order : tmp.index_order,
+                location_hash_id : tmp.location_hash_id
+            }
+    	}
+    }
+    /**
+     * @brief gets the name of this element.
+     * @return string
+     */
+    pub fn getName(self) -> string {
+        return self.name
+    }
+    /**
+     * @brief gets the value of this element.
+     * @return string
+     */
+    pub fn getValue(self) -> string {
+        return self.value
+    }
+    /**
+     * @brief gets the containing comment hash id of this element.
+     * @return int
+     */
+    pub fn getContainingCommentHashId(self) -> int {
+        return self.containing_comment_hash_id
+    }
+    /**
+     * @brief gets the index order of this element.
+     * @return int
+     */
+    pub fn getIndex(self) -> int {
+        return self.index_order
+    }
+    /**
+     * @brief gets the location hash id of this element.
+     * @return int
+     */
+    pub fn getLocationHashId(self) -> int {
+        return self.location_hash_id
+    }
+}
+/**
+ * @brief DO class: A javadoc tag value element.
+ */
+schema JavadocTagValueDO {
+    @primary element_hash_id: int,
+    value: string,
+    parent_hash_id: int,
+    location_hash_id: int
+}
+impl JavadocTagValueDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *JavadocTagValueDO {
+    	for (tmp in db.javadoc_tag_value) {
+            yield JavadocTagValueDO {
+                element_hash_id : tmp.element_hash_id,
+                value : tmp.value,
+                parent_hash_id : tmp.parent_hash_id,
+                location_hash_id : tmp.location_hash_id
+            }
+    	}
+    }
+    /**
+     * @brief gets the value of this element.
+     * @return string
+     */
+    pub fn getValue(self) -> string {
+        return self.value
+    }
+    /**
+     * @brief gets the containing comment hash id of this element.
+     * @return int
+     */
+    pub fn getParentHashId(self) -> int {
+        return self.parent_hash_id
+    }
+    /**
+     * @brief gets the location hash id of this element.
+     * @return int
+     */
+    pub fn getLocationHashId(self) -> int {
+        return self.location_hash_id
+    }
+}
+/**
+ * @brief DO class: A javadoc data token.
+ */
+schema JavadocDataTokenDO {
+    @primary element_hash_id: int,
+    value: string,
+    parent_hash_id: int,
+    index_order: int,
+    location_hash_id: int
+}
+impl JavadocDataTokenDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *JavadocDataTokenDO {
+    	for (tmp in db.javadoc_data_token) {
+            yield JavadocDataTokenDO {
+                element_hash_id : tmp.element_hash_id,
+                value : tmp.value,
+                parent_hash_id : tmp.parent_hash_id,
+                index_order : tmp.index_order,
+                location_hash_id : tmp.location_hash_id
+            }
+    	}
+    }
+    /**
+     * @brief gets the value of this element.
+     * @return string
+     */
+    pub fn getValue(self) -> string {
+        return self.value
+    }
+    /**
+     * @brief gets the parent hash id of this element.
+     * @return int
+     */
+    pub fn getParentHashId(self) -> int {
+        return self.parent_hash_id
+    }
+    /**
+     * @brief gets the index order of this element.
+     * @return int
+     */
+    pub fn getIndex(self) -> int {
+        return self.index_order
+    }
+    /**
+     * @brief gets the location hash id of this element.
+     * @return int
+     */
+    pub fn getLocationHashId(self) -> int {
+        return self.location_hash_id
+    }
+}
+/**
+ * @brief DO class: A labeled statement.
+ */
+schema LabeledStatementDO {
+    @primary element_hash_id: int,
+    labeled_hash_identifier_hash_id: int,
+    statement_hash_id: int
+}
+impl LabeledStatementDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *LabeledStatementDO {
+    	for (tmp in db.labeled_statement) {
+            yield LabeledStatementDO {
+                element_hash_id : tmp.element_hash_id,
+                labeled_hash_identifier_hash_id : tmp.labeled_hash_identifier_hash_id,
+                statement_hash_id : tmp.statement_hash_id
+            }
+    	}
+    }
+    /**
+     * @brief gets the labeled hash identifier hash id of this element.
+     * @return int
+     */
+    pub fn getLabeledHashIdentifierHashId(self) -> int {
+        return self.labeled_hash_identifier_hash_id
+    }
+    /**
+     * @brief gets the statement hash id of this element.
+     * @return int
+     */
+    pub fn getStatementHashId(self) -> int {
+        return self.statement_hash_id
+    }
+}
+/**
+ * @brief DO class: A lambda expression.
+ */
+schema LambdaExpressionDO {
+    @primary element_hash_id: int,
+    parameter_list_hash_id: int,
+    body_hash_id: int,
+    is_void_compatible: int,
+    is_value_compatible: int
+}
+impl LambdaExpressionDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *LambdaExpressionDO {
+    	for (tmp in db.lambda_expression) {
+            yield LambdaExpressionDO {
+                element_hash_id : tmp.element_hash_id,
+                parameter_list_hash_id : tmp.parameter_list_hash_id,
+                body_hash_id : tmp.body_hash_id,
+                is_void_compatible : tmp.is_void_compatible,
+                is_value_compatible : tmp.is_value_compatible
+            }
+    	}
+    }
+    /**
+     * @brief gets the parameter list hash id of this element.
+     * @return int
+     */
+    pub fn getParameterListHashId(self) -> int {
+        return self.parameter_list_hash_id
+    }
+    /**
+     * @brief gets the body hash id of this element.
+     * @return int
+     */
+    pub fn getBodyHashId(self) -> int {
+        return self.body_hash_id
+    }
+    /**
+     * @brief gets the is void compatible of this element.
+     * @return int
+     */
+    pub fn getIsVoidCompatible(self) -> int {
+        return self.is_void_compatible
+    }
+    /**
+     * @brief gets the is value compatible of this element.
+     * @return int
+     */
+    pub fn getIsValueCompatible(self) -> int {
+        return self.is_value_compatible
+    }
+}
+/**
+ * @brief DO class: A local class.
+ */
+schema LocalClassDO {
+    @primary element_hash_id: int,
+    name: string,
+    printable_text: string,
+    location_hash_id: int,
+    parent_hash_id: int
+}
+impl LocalClassDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *LocalClassDO {
+    	for (tmp in db.local_class) {
+            yield LocalClassDO {
+                element_hash_id : tmp.element_hash_id,
+                name : tmp.name,
+                printable_text : tmp.printable_text,
+                location_hash_id : tmp.location_hash_id,
+                parent_hash_id : tmp.parent_hash_id
+            }
+    	}
+    }
+    /**
+     * @brief gets the name of this element.
+     * @return string
+     */
+    pub fn getName(self) -> string {
+        return self.name
+    }
+    /**
+     * @brief gets a printed representation of this element, including its structure where applicable.
+     * @return string.
+     */
+    pub fn getPrintableText(self) -> string {
+        return self.printable_text
+    }
+    /**
+     * @brief gets the location hash id of this element.
+     * @return int
+     */
+    pub fn getLocationHashId(self) -> int {
+        return self.location_hash_id
+    }
+    /**
+     * @brief gets the parent hash id of this element.
+     * @return int
+     */
+    pub fn getParentHashId(self) -> int {
+        return self.parent_hash_id
+    }
+}
+/**
+ * @brief DO class: A local variable.
+ */
+schema LocalVariableDO {
+    @primary element_hash_id: int,
+    parent_hash_id: int,
+    location_hash_id: int,
+    printable_text: string,
+    name: string,
+    index_order: int
+}
+impl LocalVariableDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *LocalVariableDO {
+    	for (tmp in db.local_variable) {
+            yield LocalVariableDO {
+                element_hash_id : tmp.element_hash_id,
+                parent_hash_id : tmp.parent_hash_id,
+                location_hash_id : tmp.location_hash_id,
+                printable_text : tmp.printable_text,
+                name : tmp.name,
+                index_order : tmp.index_order
+            }
+    	}
+    }
+    /**
+     * @brief gets the parent hash id of this element.
+     * @return int
+     */
+    pub fn getParentHashId(self) -> int {
+        return self.parent_hash_id
+    }
+    /**
+     * @brief gets the location hash id of this element.
+     * @return int
+     */
+    pub fn getLocationHashId(self) -> int {
+        return self.location_hash_id
+    }
+    /**
+     * @brief gets a printed representation of this element, including its structure where applicable.
+     * @return string.
+     */
+    pub fn getPrintableText(self) -> string {
+        return self.printable_text
+    }
+    /**
+     * @brief gets the name of this element.
+     * @return string
+     */
+    pub fn getName(self) -> string {
+        return self.name
+    }
+    /**
+     * @brief gets the index order of this element.
+     * @return int
+     */
+    pub fn getIndex(self) -> int {
+        return self.index_order
+    }
+}
+/**
+ * @brief DO class: The location information of a locatable elements.
+ */
+schema LocationDO {
+    @primary element_hash_id: int,
+    file_hash_id: int,
+    start_line_number: int,
+    start_column_number: int,
+    end_line_number: int,
+    end_column_number: int
+}
+impl LocationDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *LocationDO {
+    	for (tmp in db.location) {
+            yield LocationDO {
+                element_hash_id : tmp.element_hash_id,
+                file_hash_id : tmp.file_hash_id,
+                start_line_number : tmp.start_line_number,
+                start_column_number : tmp.start_column_number,
+                end_line_number : tmp.end_line_number,
+                end_column_number : tmp.end_column_number
+            }
+    	}
+    }
+    /**
+     * @brief gets the file hash id of this element.
+     * @return int
+     */
+    pub fn getFileHashId(self) -> int {
+        return self.file_hash_id
+    }
+    /**
+     * @brief gets the start line number of this element.
+     * @return int
+     */
+    pub fn getStartLineNumber(self) -> int {
+        return self.start_line_number
+    }
+    /**
+     * @brief gets the start column number of this element.
+     * @return int
+     */
+    pub fn getStartColumnNumber(self) -> int {
+        return self.start_column_number
+    }
+    /**
+     * @brief gets the end line number of this element.
+     * @return int
+     */
+    pub fn getEndLineNumber(self) -> int {
+        return self.end_line_number
+    }
+    /**
+     * @brief gets the end column number of this element.
+     * @return int
+     */
+    pub fn getEndColumnNumber(self) -> int {
+        return self.end_column_number
+    }
+}
+/**
+ * @brief DO class: A long literal, for example, "15l".
+ */
+schema LongLiteralDO {
+    @primary element_hash_id: int,
+    value: string
+}
+impl LongLiteralDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *LongLiteralDO {
+    	for (tmp in db.long_literal) {
+            yield LongLiteralDO {
+                element_hash_id : tmp.element_hash_id,
+                value : tmp.value
+            }
+    	}
+    }
+    /**
+     * @brief gets the value of this element.
+     * @return string
+     */
+    pub fn getValue(self) -> string {
+        return self.value
+    }
+}
+/**
+ * @brief DO class: A metainfo.
+ */
+schema MetainfoDO {
+    @primary oid: int,
+    kind: string,
+    value: string,
+    program_hash_id: int
+}
+impl MetainfoDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *MetainfoDO {
+    	for (tmp in db.metainfo) {
+            yield MetainfoDO {
+                oid : tmp.oid,
+                kind : tmp.kind,
+                value : tmp.value,
+                program_hash_id : tmp.program_hash_id
+            }
+    	}
+    }
+    /**
+     * @brief gets the kind of this element.
+     * @return string
+     */
+    pub fn getKind(self) -> string {
+        return self.kind
+    }
+    /**
+     * @brief gets the value of this element.
+     * @return string
+     */
+    pub fn getValue(self) -> string {
+        return self.value
+    }
+    /**
+     * @brief gets the program hash id of this element.
+     * @return int
+     */
+    pub fn getProgramHashId(self) -> int {
+        return self.program_hash_id
+    }
+}
+/**
+ * @brief DO class: A method.
+ */
+schema MethodDO {
+    @primary element_hash_id: int,
+    name: string,
+    signature: string,
+    type_hash_id: int,
+    parent_hash_id: int,
+    location_hash_id: int,
+    definition_body: string
+}
+impl MethodDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *MethodDO {
+    	for (tmp in db.method) {
+            yield MethodDO {
+                element_hash_id : tmp.element_hash_id,
+                name : tmp.name,
+                signature : tmp.signature,
+                type_hash_id : tmp.type_hash_id,
+                parent_hash_id : tmp.parent_hash_id,
+                location_hash_id : tmp.location_hash_id,
+                definition_body : tmp.definition_body
+            }
+    	}
+    }
+    /**
+     * @brief gets the name of this element.
+     * @return string
+     */
+    pub fn getName(self) -> string {
+        return self.name
+    }
+    /**
+     * @brief gets the signature of this element.
+     * @return string
+     */
+    pub fn getSignature(self) -> string {
+        return self.signature
+    }
+    /**
+     * @brief gets the type hash id of this element.
+     * @return int
+     */
+    pub fn getTypeHashId(self) -> int {
+        return self.type_hash_id
+    }
+    /**
+     * @brief gets the parent hash id of this element.
+     * @return int
+     */
+    pub fn getParentHashId(self) -> int {
+        return self.parent_hash_id
+    }
+    /**
+     * @brief gets the location hash id of this element.
+     * @return int
+     */
+    pub fn getLocationHashId(self) -> int {
+        return self.location_hash_id
+    }
+    pub fn getDefinitionBody(self) -> string {
+        return self.definition_body
+    }
+}
+/**
+ * @brief DO class: A method access expression with type.
+ */
+schema MethodAccessExpressionWithTypeDO {
+    @primary element_hash_id: int,
+    type_hash_id: int,
+    referen_method_hash_id: int,
+    argument_list_hash_id: int
+}
+impl MethodAccessExpressionWithTypeDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *MethodAccessExpressionWithTypeDO {
+    	for (tmp in db.method_access_expression_with_type) {
+            yield MethodAccessExpressionWithTypeDO {
+                element_hash_id : tmp.element_hash_id,
+                type_hash_id : tmp.type_hash_id,
+                referen_method_hash_id : tmp.referen_method_hash_id,
+                argument_list_hash_id : tmp.argument_list_hash_id
+            }
+    	}
+    }
+    /**
+     * @brief gets the type hash id of this element.
+     * @return int
+     */
+    pub fn getTypeHashId(self) -> int {
+        return self.type_hash_id
+    }
+    /**
+     * @brief gets the referen method hash id of this element.
+     * @return int
+     */
+    pub fn getReferenMethodHashId(self) -> int {
+        return self.referen_method_hash_id
+    }
+    /**
+     * @brief gets the argument list hash id of this element.
+     * @return int
+     */
+    pub fn getArgumentListHashId(self) -> int {
+        return self.argument_list_hash_id
+    }
+}
+/**
+ * @brief DO class: A method access expression without type.
+ */
+schema MethodAccessExpressionWithoutTypeDO {
+    @primary element_hash_id: int,
+    referen_method_hash_id: int,
+    argument_list_hash_id: int
+}
+impl MethodAccessExpressionWithoutTypeDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *MethodAccessExpressionWithoutTypeDO {
+    	for (tmp in db.method_access_expression_without_type) {
+            yield MethodAccessExpressionWithoutTypeDO {
+                element_hash_id : tmp.element_hash_id,
+                referen_method_hash_id : tmp.referen_method_hash_id,
+                argument_list_hash_id : tmp.argument_list_hash_id
+            }
+    	}
+    }
+    /**
+     * @brief gets the referen method hash id of this element.
+     * @return int
+     */
+    pub fn getReferenMethodHashId(self) -> int {
+        return self.referen_method_hash_id
+    }
+    /**
+     * @brief gets the argument list hash id of this element.
+     * @return int
+     */
+    pub fn getArgumentListHashId(self) -> int {
+        return self.argument_list_hash_id
+    }
+}
+/**
+ * @brief DO class: A method reference expression.
+ */
+schema MethodReferenceExpressionDO {
+    @primary element_hash_id: int,
+    is_constructor: int
+}
+impl MethodReferenceExpressionDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *MethodReferenceExpressionDO {
+    	for (tmp in db.method_reference_expression) {
+            yield MethodReferenceExpressionDO {
+                element_hash_id : tmp.element_hash_id,
+                is_constructor : tmp.is_constructor
+            }
+    	}
+    }
+    /**
+     * @brief gets the is constructor of this element.
+     * @return int
+     */
+    pub fn isConstructor(self) -> int {
+        return self.is_constructor
+    }
+}
+/**
+ * @brief DO class: A modifier.
+ */
+schema ModifierDO {
+    @primary element_hash_id: int,
+    name: string,
+    parent_hash_id: int,
+    location_hash_id: int
+}
+impl ModifierDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *ModifierDO {
+    	for (tmp in db.modifier) {
+            yield ModifierDO {
+                element_hash_id : tmp.element_hash_id,
+                name : tmp.name,
+                parent_hash_id : tmp.parent_hash_id,
+                location_hash_id : tmp.location_hash_id
+            }
+    	}
+    }
+    /**
+     * @brief gets the name of this element.
+     * @return string
+     */
+    pub fn getName(self) -> string {
+        return self.name
+    }
+    /**
+     * @brief gets the parent hash id of this element.
+     * @return int
+     */
+    pub fn getParentHashId(self) -> int {
+        return self.parent_hash_id
+    }
+    /**
+     * @brief gets the location hash id of this element.
+     * @return int
+     */
+    pub fn getLocationHashId(self) -> int {
+        return self.location_hash_id
+    }
+}
+/**
+ * @brief DO class: A list of modifiers and annotations on a java element (class, method, field and so on).
+ */
+schema ModifierListDO {
+    @primary element_hash_id: int,
+    parent_hash_id: int,
+    location_hash_id: int
+}
+impl ModifierListDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *ModifierListDO {
+    	for (tmp in db.modifier_list) {
+            yield ModifierListDO {
+                element_hash_id : tmp.element_hash_id,
+                parent_hash_id : tmp.parent_hash_id,
+                location_hash_id : tmp.location_hash_id
+            }
+    	}
+    }
+    /**
+     * @brief gets the parent hash id of this element.
+     * @return int
+     */
+    pub fn getParentHashId(self) -> int {
+        return self.parent_hash_id
+    }
+    /**
+     * @brief gets the location hash id of this element.
+     * @return int
+     */
+    pub fn getLocationHashId(self) -> int {
+        return self.location_hash_id
+    }
+}
+/**
+ * @brief DO class: A module.
+ */
+schema ModuleDO {
+    @primary element_hash_id: int,
+    name: string
+}
+impl ModuleDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *ModuleDO {
+    	for (tmp in db.module) {
+            yield ModuleDO {
+                element_hash_id : tmp.element_hash_id,
+                name : tmp.name
+            }
+    	}
+    }
+    /**
+     * @brief gets the name of this element.
+     * @return string
+     */
+    pub fn getName(self) -> string {
+        return self.name
+    }
+}
+/**
+ * @brief DO class: Name and value for a named expression or statement, like break statement, labeled statement.
+ */
+schema NameStringDO {
+    @primary parent_hash_id: int,
+    name_element_hash_id: int,
+    value_element_hash_id: int
+}
+impl NameStringDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *NameStringDO {
+    	for (tmp in db.name_string) {
+            yield NameStringDO {
+                parent_hash_id : tmp.parent_hash_id,
+                name_element_hash_id : tmp.name_element_hash_id,
+                value_element_hash_id : tmp.value_element_hash_id
+            }
+    	}
+    }
+    /**
+     * @brief gets the name element hash id of this element.
+     * @return int
+     */
+    pub fn getNameElementHashId(self) -> int {
+        return self.name_element_hash_id
+    }
+    /**
+     * @brief gets the value element hash id of this element.
+     * @return int
+     */
+    pub fn getValueElementHashId(self) -> int {
+        return self.value_element_hash_id
+    }
+}
+/**
+ * @brief DO class: A new expression.
+ */
+schema NewExpressionDO {
+    @primary element_hash_id: int,
+    reference_hash_id: int,
+    type_hash_id: int
+}
+impl NewExpressionDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *NewExpressionDO {
+    	for (tmp in db.new_expression) {
+            yield NewExpressionDO {
+                element_hash_id : tmp.element_hash_id,
+                reference_hash_id : tmp.reference_hash_id,
+                type_hash_id : tmp.type_hash_id
+            }
+    	}
+    }
+    /**
+     * @brief gets the reference hash id of this element.
+     * @return int
+     */
+    pub fn getReferenceHashId(self) -> int {
+        return self.reference_hash_id
+    }
+    /**
+     * @brief gets the type hash id of this element.
+     * @return int
+     */
+    pub fn getTypeHashId(self) -> int {
+        return self.type_hash_id
+    }
+}
+/**
+ * @brief DO class: A null literal, written "null".
+ */
+schema NullLiteralDO {
+    @primary element_hash_id: int,
+    value: string
+}
+impl NullLiteralDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *NullLiteralDO {
+    	for (tmp in db.null_literal) {
+            yield NullLiteralDO {
+                element_hash_id : tmp.element_hash_id,
+                value : tmp.value
+            }
+    	}
+    }
+    /**
+     * @brief gets the value of this element.
+     * @return string
+     */
+    pub fn getValue(self) -> string {
+        return self.value
+    }
+}
+/**
+ * @brief DO class: A number of lines.
+ */
+schema NumberOfLinesDO {
+    @primary element_hash_id: int,
+    number_of_total_lines: int,
+    number_of_valid_lines: int,
+    number_of_comment_lines: int
+}
+impl NumberOfLinesDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *NumberOfLinesDO {
+    	for (tmp in db.number_of_lines) {
+            yield NumberOfLinesDO {
+                element_hash_id : tmp.element_hash_id,
+                number_of_total_lines : tmp.number_of_total_lines,
+                number_of_valid_lines : tmp.number_of_valid_lines,
+                number_of_comment_lines : tmp.number_of_comment_lines
+            }
+    	}
+    }
+    /**
+     * @brief gets the number of total lines of this element.
+     * @return int
+     */
+    pub fn getNumberOfLines(self) -> int {
+        return self.number_of_total_lines
+    }
+    /**
+     * @brief gets the number of valid lines of this element.
+     * @return int
+     */
+    pub fn getNumberOfLinesOfCode(self) -> int {
+        return self.number_of_valid_lines
+    }
+    /**
+     * @brief gets the number of comment lines of this element.
+     * @return int
+     */
+    pub fn getNumberOfCommentLines(self) -> int {
+        return self.number_of_comment_lines
+    }
+}
+/**
+ * @brief DO class: A package statement.
+ */
+schema PackageStatementDO {
+    @primary element_hash_id: int,
+    qualified_name: string,
+    location_hash_id: int,
+    package_hash_id: int,
+    parent_hash_id: int
+}
+impl PackageStatementDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *PackageStatementDO {
+    	for (tmp in db.package_statement) {
+            yield PackageStatementDO {
+                element_hash_id : tmp.element_hash_id,
+                qualified_name : tmp.qualified_name,
+                location_hash_id : tmp.location_hash_id,
+                package_hash_id : tmp.package_hash_id,
+                parent_hash_id : tmp.parent_hash_id
+            }
+    	}
+    }
+    /**
+     * @brief gets the qualified name of this element.
+     * @return string
+     */
+    pub fn getQualifiedName(self) -> string {
+        return self.qualified_name
+    }
+    /**
+     * @brief gets the location hash id of this element.
+     * @return int
+     */
+    pub fn getLocationHashId(self) -> int {
+        return self.location_hash_id
+    }
+    /**
+     * @brief gets the package hash id of this element.
+     * @return int
+     */
+    pub fn getPackageHashId(self) -> int {
+        return self.package_hash_id
+    }
+    /**
+     * @brief gets the parent hash id of this element.
+     * @return int
+     */
+    pub fn getParentHashId(self) -> int {
+        return self.parent_hash_id
+    }
+}
+/**
+ * @brief DO class: A parameter of a method, foreach statement or catch block.
+ */
+schema ParameterDO {
+    @primary element_hash_id: int,
+    name: string,
+    index_order: int,
+    parent_hash_id: int,
+    location_hash_id: int,
+    printable_text: string,
+    type_hash_id: int
+}
+impl ParameterDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *ParameterDO {
+    	for (tmp in db.parameter) {
+            yield ParameterDO {
+                element_hash_id : tmp.element_hash_id,
+                name : tmp.name,
+                index_order : tmp.index_order,
+                parent_hash_id : tmp.parent_hash_id,
+                location_hash_id : tmp.location_hash_id,
+                printable_text : tmp.printable_text,
+                type_hash_id : tmp.type_hash_id
+            }
+    	}
+    }
+    /**
+     * @brief gets the name of this element.
+     * @return string
+     */
+    pub fn getName(self) -> string {
+        return self.name
+    }
+    /**
+     * @brief gets the index order of this element.
+     * @return int
+     */
+    pub fn getIndex(self) -> int {
+        return self.index_order
+    }
+    /**
+     * @brief gets the parent hash id of this element.
+     * @return int
+     */
+    pub fn getParentHashId(self) -> int {
+        return self.parent_hash_id
+    }
+    /**
+     * @brief gets the location hash id of this element.
+     * @return int
+     */
+    pub fn getLocationHashId(self) -> int {
+        return self.location_hash_id
+    }
+    /**
+     * @brief gets a printed representation of this element, including its structure where applicable.
+     * @return string.
+     */
+    pub fn getPrintableText(self) -> string {
+        return self.printable_text
+    }
+    /**
+     * @brief gets the type hash id of this element.
+     * @return int
+     */
+    pub fn getTypeHashId(self) -> int {
+        return self.type_hash_id
+    }
+}
+/**
+ * @brief DO class: A parent.
+ */
+schema ParentDO {
+    @primary parent_hash_id: int,
+    parent_type: string
+}
+impl ParentDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *ParentDO {
+    	for (tmp in db.parent) {
+            yield ParentDO {
+                parent_hash_id : tmp.parent_hash_id,
+                parent_type : tmp.parent_type
+            }
+    	}
+    }
+    /**
+     * @brief gets the parent type of this element.
+     * @return string
+     */
+    pub fn getParentType(self) -> string {
+        return self.parent_type
+    }
+}
+/**
+ * @brief DO class: A polyadic expression.
+ */
+schema PolyadicExpressionDO {
+    @primary element_hash_id: int,
+    size: int,
+    opcode: string
+}
+impl PolyadicExpressionDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *PolyadicExpressionDO {
+    	for (tmp in db.polyadic_expression) {
+            yield PolyadicExpressionDO {
+                element_hash_id : tmp.element_hash_id,
+                size : tmp.size,
+                opcode : tmp.opcode
+            }
+    	}
+    }
+    /**
+     * @brief gets the size of this element.
+     * @return int
+     */
+    pub fn getSize(self) -> int {
+        return self.size
+    }
+    /**
+     * @brief gets the opcode of this element.
+     * @return string
+     */
+    pub fn getOpcode(self) -> string {
+        return self.opcode
+    }
+}
+/**
+ * @brief DO class: A primitive type, includes "boolean", "byte", "short", "char", "int", "long", "float" and "double".
+ */
+schema PrimitiveDO {
+    @primary oid: int,
+    name: string
+}
+impl PrimitiveDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *PrimitiveDO {
+    	for (tmp in db.primitive) {
+            yield PrimitiveDO {
+                oid : tmp.oid,
+                name : tmp.name
+            }
+    	}
+    }
+    /**
+     * @brief gets the name of this element.
+     * @return string
+     */
+    pub fn getName(self) -> string {
+        return self.name
+    }
+}
+/**
+ * @brief DO class: The root of the extracted project.
+ */
+schema ProgramDO {
+    @primary program_hash_id: int,
+    absolute_prefix_path: string
+}
+impl ProgramDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *ProgramDO {
+    	for (tmp in db.program) {
+            yield ProgramDO {
+                program_hash_id : tmp.program_hash_id,
+                absolute_prefix_path : tmp.absolute_prefix_path
+            }
+    	}
+    }
+    /**
+     * @brief gets the absolute prefix path of this element.
+     * @return string
+     */
+    pub fn getAbsolutePrefixPath(self) -> string {
+        return self.absolute_prefix_path
+    }
+}
+/**
+ * @brief DO class: A reference in code (either an identifier or a sequence of identifiers separated by periods, optionally with generic type arguments)
+ */
+schema ReferenceElementDO {
+    @primary element_hash_id: int,
+    printable_text: string,
+    parent_hash_id: int,
+    location_hash_id: int
+}
+impl ReferenceElementDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *ReferenceElementDO {
+    	for (tmp in db.reference_element) {
+            yield ReferenceElementDO {
+                element_hash_id : tmp.element_hash_id,
+                printable_text : tmp.printable_text,
+                parent_hash_id : tmp.parent_hash_id,
+                location_hash_id : tmp.location_hash_id
+            }
+    	}
+    }
+    /**
+     * @brief gets a printed representation of this element, including its structure where applicable.
+     * @return string.
+     */
+    pub fn getPrintableText(self) -> string {
+        return self.printable_text
+    }
+    /**
+     * @brief gets the parent hash id of this element.
+     * @return int
+     */
+    pub fn getParentHashId(self) -> int {
+        return self.parent_hash_id
+    }
+    /**
+     * @brief gets the location hash id of this element.
+     * @return int
+     */
+    pub fn getLocationHashId(self) -> int {
+        return self.location_hash_id
+    }
+}
+/**
+ * @brief DO class: A reference expression.
+ */
+schema ReferenceExpressionDO {
+    @primary element_hash_id: int
+}
+impl ReferenceExpressionDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *ReferenceExpressionDO {
+    	for (tmp in db.reference_expression) {
+            yield ReferenceExpressionDO {
+                element_hash_id : tmp.element_hash_id
+            }
+    	}
+    }
+}
+/**
+ * @brief DO class: A reference list.
+ */
+schema ReferenceListDO {
+    @primary element_hash_id: int,
+    location_hash_id: int,
+    parent_hash_id: int,
+    printable_text: string,
+    role: string
+}
+impl ReferenceListDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *ReferenceListDO {
+    	for (tmp in db.reference_list) {
+            yield ReferenceListDO {
+                element_hash_id : tmp.element_hash_id,
+                location_hash_id : tmp.location_hash_id,
+                parent_hash_id : tmp.parent_hash_id,
+                printable_text : tmp.printable_text,
+                role : tmp.role
+            }
+    	}
+    }
+    /**
+     * @brief gets the location hash id of this element.
+     * @return int
+     */
+    pub fn getLocationHashId(self) -> int {
+        return self.location_hash_id
+    }
+    /**
+     * @brief gets the parent hash id of this element.
+     * @return int
+     */
+    pub fn getParentHashId(self) -> int {
+        return self.parent_hash_id
+    }
+    /**
+     * @brief gets a printed representation of this element, including its structure where applicable.
+     * @return string.
+     */
+    pub fn getPrintableText(self) -> string {
+        return self.printable_text
+    }
+    /**
+     * @brief gets the role of this element.
+     * @return string
+     */
+    pub fn getRole(self) -> string {
+        return self.role
+    }
+}
+/**
+ * @brief DO class: A reference parameter list.
+ */
+schema ReferenceParameterListDO {
+    type_element_hash_id: int,
+    @primary list_hash_id: int,
+    index_order: int,
+    parent_hash_id: int,
+    printable_text: string,
+    location_hash_id: int
+}
+impl ReferenceParameterListDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *ReferenceParameterListDO {
+    	for (tmp in db.reference_parameter_list) {
+            yield ReferenceParameterListDO {
+                type_element_hash_id : tmp.type_element_hash_id,
+                list_hash_id : tmp.list_hash_id,
+                index_order : tmp.index_order,
+                parent_hash_id : tmp.parent_hash_id,
+                printable_text : tmp.printable_text,
+                location_hash_id : tmp.location_hash_id
+            }
+    	}
+    }
+    /**
+     * @brief gets the type element of the list.
+     * @return int 
+     */
+    pub fn getTypeElementHashId(self) -> int {
+        return self.type_element_hash_id
+    }
+    /**
+     * @brief gets the list hash id of this element.
+     * @return int
+     */
+    pub fn getListHashId(self) -> int {
+        return self.list_hash_id
+    }
+    /**
+     * @brief gets the index order of this element.
+     * @return int
+     */
+    pub fn getIndex(self) -> int {
+        return self.index_order
+    }
+    /**
+     * @brief gets the parent hash id of this element.
+     * @return int
+     */
+    pub fn getParentHashId(self) -> int {
+        return self.parent_hash_id
+    }
+    /**
+     * @brief gets a printed representation of this element, including its structure where applicable.
+     * @return string.
+     */
+    pub fn getPrintableText(self) -> string {
+        return self.printable_text
+    }
+    /**
+     * @brief gets the location hash id of this element.
+     * @return int
+     */
+    pub fn getLocationHashId(self) -> int {
+        return self.location_hash_id
+    }
+}
+/**
+ * @brief DO class: Reference relation between reference element to its resolved element.
+ */
+schema ReferenceRelationDO {
+    @primary reference_element_hash_id: int,
+    definition_element_hash_id: int
+}
+impl ReferenceRelationDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *ReferenceRelationDO {
+    	for (tmp in db.reference_relation) {
+            yield ReferenceRelationDO {
+                reference_element_hash_id : tmp.reference_element_hash_id,
+                definition_element_hash_id : tmp.definition_element_hash_id
+            }
+    	}
+    }
+    /**
+     * @brief gets the definition element hash id of this element.
+     * @return int
+     */
+    pub fn getDefinitionElementHashId(self) -> int {
+        return self.definition_element_hash_id
+    }
+    /**
+     * @brief gets the reference element id.
+     * @return int 
+     */
+    pub fn getSourceId(self) -> int {
+        return self.reference_element_hash_id
+    }
+}
+/**
+ * @brief DO class: A reference type.
+ */
+schema ReferenceTypeDO {
+    @primary oid: int,
+    name: string,
+    qualified_name: string
+}
+impl ReferenceTypeDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *ReferenceTypeDO {
+    	for (tmp in db.reference_type) {
+            yield ReferenceTypeDO {
+                oid : tmp.oid,
+                name : tmp.name,
+                qualified_name : tmp.qualified_name
+            }
+    	}
+    }
+    /**
+     * @brief gets the name of this element.
+     * @return string
+     */
+    pub fn getName(self) -> string {
+        return self.name
+    }
+    /**
+     * @brief gets the qualified name of this element.
+     * @return string
+     */
+    pub fn getQualifiedName(self) -> string {
+        return self.qualified_name
+    }
+}
+/**
+ * @brief DO class: A resource list.
+ */
+schema ResourceListDO {
+    @primary element_hash_id: int,
+    printable_text: string,
+    parent_hash_id: int,
+    location_hash_id: int
+}
+impl ResourceListDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *ResourceListDO {
+    	for (tmp in db.resource_list) {
+            yield ResourceListDO {
+                element_hash_id : tmp.element_hash_id,
+                printable_text : tmp.printable_text,
+                parent_hash_id : tmp.parent_hash_id,
+                location_hash_id : tmp.location_hash_id
+            }
+    	}
+    }
+    /**
+     * @brief gets a printed representation of this element, including its structure where applicable.
+     * @return string.
+     */
+    pub fn getPrintableText(self) -> string {
+        return self.printable_text
+    }
+    /**
+     * @brief gets the parent hash id of this element.
+     * @return int
+     */
+    pub fn getParentHashId(self) -> int {
+        return self.parent_hash_id
+    }
+    /**
+     * @brief gets the location hash id of this element.
+     * @return int
+     */
+    pub fn getLocationHashId(self) -> int {
+        return self.location_hash_id
+    }
+}
+/**
+ * @brief DO class: A return statement.
+ */
+schema ReturnStatementDO {
+    @primary element_hash_id: int,
+    return_expression_hash_id: int
+}
+impl ReturnStatementDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *ReturnStatementDO {
+    	for (tmp in db.return_statement) {
+            yield ReturnStatementDO {
+                element_hash_id : tmp.element_hash_id,
+                return_expression_hash_id : tmp.return_expression_hash_id
+            }
+    	}
+    }
+    /**
+     * @brief gets the return expression hash id of this element.
+     * @return int
+     */
+    pub fn getReturnExpressionHashId(self) -> int {
+        return self.return_expression_hash_id
+    }
+}
+/**
+ * @brief DO class: A statement.
+ */
+schema StatementDO {
+    @primary element_hash_id: int,
+    parent_hash_id: int,
+    index_order: int,
+    location_hash_id: int,
+    printable_text: string,
+    type: string
+}
+impl StatementDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *StatementDO {
+    	for (tmp in db.statement) {
+            yield StatementDO {
+                element_hash_id : tmp.element_hash_id,
+                parent_hash_id : tmp.parent_hash_id,
+                index_order : tmp.index_order,
+                location_hash_id : tmp.location_hash_id,
+                printable_text : tmp.printable_text,
+                type : tmp.type
+            }
+    	}
+    }
+    /**
+     * @brief gets the parent hash id of this element.
+     * @return int
+     */
+    pub fn getParentHashId(self) -> int {
+        return self.parent_hash_id
+    }
+    /**
+     * @brief gets the index order of this element.
+     * @return int
+     */
+    pub fn getIndex(self) -> int {
+        return self.index_order
+    }
+    /**
+     * @brief gets the location hash id of this element.
+     * @return int
+     */
+    pub fn getLocationHashId(self) -> int {
+        return self.location_hash_id
+    }
+    /**
+     * @brief gets a printed representation of this element, including its structure where applicable.
+     * @return string.
+     */
+    pub fn getPrintableText(self) -> string {
+        return self.printable_text
+    }
+    /**
+     * @brief gets the type of this element.
+     * @return string
+     */
+    pub fn getType(self) -> string {
+        return self.type
+    }
+}
+/**
+ * @brief DO class: Describe an expression enclosed by a certain statement.
+ */
+schema StatementEnclosingExpressionDO {
+    @primary expression_hash_id: int,
+    statement_hash_id: int
+}
+impl StatementEnclosingExpressionDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *StatementEnclosingExpressionDO {
+    	for (tmp in db.statement_enclosing_expression) {
+            yield StatementEnclosingExpressionDO {
+                expression_hash_id : tmp.expression_hash_id,
+                statement_hash_id : tmp.statement_hash_id
+            }
+    	}
+    }
+    /**
+     * @brief gets the statement hash id of this element.
+     * @return int
+     */
+    pub fn getStatementHashId(self) -> int {
+        return self.statement_hash_id
+    }
+}
+/**
+ * @brief DO class: A string literal, for example "abc".
+ */
+schema StringLiteralDO {
+    @primary element_hash_id: int,
+    value: string
+}
+impl StringLiteralDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *StringLiteralDO {
+    	for (tmp in db.string_literal) {
+            yield StringLiteralDO {
+                element_hash_id : tmp.element_hash_id,
+                value : tmp.value
+            }
+    	}
+    }
+    /**
+     * @brief gets the value of this element.
+     * @return string
+     */
+    pub fn getValue(self) -> string {
+        return self.value
+    }
+}
+/**
+ * @brief DO class: An expression allows access to super-class members of an enclosing instance. For example, "A.super.x".
+ */
+schema SuperAccessExpressionDO {
+    @primary element_hash_id: int
+}
+impl SuperAccessExpressionDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *SuperAccessExpressionDO {
+    	for (tmp in db.super_access_expression) {
+            yield SuperAccessExpressionDO {
+                element_hash_id : tmp.element_hash_id
+            }
+    	}
+    }
+}
+/**
+ * @brief DO class: An explicit `super(...)` constructor invocation statement.
+ */
+schema SuperConstructorInvocationDO {
+    @primary element_hash_id: int
+}
+impl SuperConstructorInvocationDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *SuperConstructorInvocationDO {
+    	for (tmp in db.super_constructor_invocation) {
+            yield SuperConstructorInvocationDO {
+                element_hash_id : tmp.element_hash_id
+            }
+    	}
+    }
+}
+/**
+ * @brief DO class: A super expression.
+ */
+schema SuperExpressionDO {
+    @primary element_hash_id: int
+}
+impl SuperExpressionDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *SuperExpressionDO {
+    	for (tmp in db.super_expression) {
+            yield SuperExpressionDO {
+                element_hash_id : tmp.element_hash_id
+            }
+    	}
+    }
+}
+/**
+ * @brief DO class: A super expression with qualifier.
+ */
+schema SuperExpressionWithQualifierDO {
+    @primary element_hash_id: int,
+    qualifier_hash_id: int
+}
+impl SuperExpressionWithQualifierDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *SuperExpressionWithQualifierDO {
+    	for (tmp in db.super_expression_with_qualifier) {
+            yield SuperExpressionWithQualifierDO {
+                element_hash_id : tmp.element_hash_id,
+                qualifier_hash_id : tmp.qualifier_hash_id
+            }
+    	}
+    }
+    /**
+     * @brief gets the qualifier hash id of this element.
+     * @return int
+     */
+    pub fn getQualifierHashId(self) -> int {
+        return self.qualifier_hash_id
+    }
+}
+/**
+ * @brief DO class: A switch label statement.
+ */
+schema SwitchLabelStatementDO {
+    @primary element_hash_id: int,
+    case_value_hash_id: int,
+    enclosing_switch_block_hash_id: int,
+    get_next_switch_case: int
+}
+impl SwitchLabelStatementDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *SwitchLabelStatementDO {
+    	for (tmp in db.switch_label_statement) {
+            yield SwitchLabelStatementDO {
+                element_hash_id : tmp.element_hash_id,
+                case_value_hash_id : tmp.case_value_hash_id,
+                enclosing_switch_block_hash_id : tmp.enclosing_switch_block_hash_id,
+                get_next_switch_case : tmp.get_next_switch_case
+            }
+    	}
+    }
+    /**
+     * @brief gets the case value hash id of this element.
+     * @return int
+     */
+    pub fn getCaseValueHashId(self) -> int {
+        return self.case_value_hash_id
+    }
+    /**
+     * @brief gets the enclosing switch block hash id of this element.
+     * @return int
+     */
+    pub fn getEnclosingSwitchBlockHashId(self) -> int {
+        return self.enclosing_switch_block_hash_id
+    }
+    /**
+     * @brief gets the next switch case id of the element, 0 means it's the last case.
+     * @return int
+     */
+    pub fn getNext(self) -> int {
+        return self.get_next_switch_case
+    }
+}
+/**
+ * @brief DO class: A switch statement.
+ */
+schema SwitchStatementDO {
+    @primary element_hash_id: int,
+    discriminant_hash_id: int,
+    body_declaration_hash_id: int
+}
+impl SwitchStatementDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *SwitchStatementDO {
+    	for (tmp in db.switch_statement) {
+            yield SwitchStatementDO {
+                element_hash_id : tmp.element_hash_id,
+                discriminant_hash_id : tmp.discriminant_hash_id,
+                body_declaration_hash_id : tmp.body_declaration_hash_id
+            }
+    	}
+    }
+    /**
+     * @brief gets the discriminant hash id of this element.
+     * @return int
+     */
+    pub fn getDiscriminantHashId(self) -> int {
+        return self.discriminant_hash_id
+    }
+    /**
+     * @brief gets the body declaration hash id of this element.
+     * @return int
+     */
+    pub fn getBodyDeclarationHashId(self) -> int {
+        return self.body_declaration_hash_id
+    }
+}
+/**
+ * @brief DO class: A synchronized statement.
+ */
+schema SynchronizedStatementDO {
+    @primary element_hash_id: int,
+    lock_expression_hash_id: int,
+    body_declaration_hash_id: int
+}
+impl SynchronizedStatementDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *SynchronizedStatementDO {
+    	for (tmp in db.synchronized_statement) {
+            yield SynchronizedStatementDO {
+                element_hash_id : tmp.element_hash_id,
+                lock_expression_hash_id : tmp.lock_expression_hash_id,
+                body_declaration_hash_id : tmp.body_declaration_hash_id
+            }
+    	}
+    }
+    /**
+     * @brief gets the lock expression hash id of this element.
+     * @return int
+     */
+    pub fn getLockExpressionHashId(self) -> int {
+        return self.lock_expression_hash_id
+    }
+    /**
+     * @brief gets the body declaration hash id of this element.
+     * @return int
+     */
+    pub fn getBodyDeclarationHashId(self) -> int {
+        return self.body_declaration_hash_id
+    }
+}
+ /**
+ * @brief DO class:  A use of the keyword `this`, which may be qualified.
+ *
+ * Such an expression allows access to an enclosing instance.
+ * For example, `A.this` refers to the enclosing instance
+ * of type `A`.
+ */
+schema ThisAccessExpressionDO {
+    @primary element_hash_id: int
+}
+impl ThisAccessExpressionDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *ThisAccessExpressionDO {
+    	for (tmp in db.this_access_expression) {
+            yield ThisAccessExpressionDO {
+                element_hash_id : tmp.element_hash_id
+            }
+    	}
+    }
+}
+/**
+ * @brief DO class: A this expression with qualifier.
+ */
+schema ThisExpressionWithQualifierDO {
+    @primary element_hash_id: int,
+    qualifier_hash_id: int
+}
+impl ThisExpressionWithQualifierDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *ThisExpressionWithQualifierDO {
+    	for (tmp in db.this_expression_with_qualifier) {
+            yield ThisExpressionWithQualifierDO {
+                element_hash_id : tmp.element_hash_id,
+                qualifier_hash_id : tmp.qualifier_hash_id
+            }
+    	}
+    }
+    /**
+     * @brief gets the qualifier hash id of this element.
+     * @return int
+     */
+    pub fn getQualifierHashId(self) -> int {
+        return self.qualifier_hash_id
+    }
+}
+/**
+ * @brief DO class: A throw statement.
+ */
+schema ThrowStatementDO {
+    @primary element_hash_id: int,
+    exception_hash_id: int,
+    block_hash_id: int
+}
+impl ThrowStatementDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *ThrowStatementDO {
+    	for (tmp in db.throw_statement) {
+            yield ThrowStatementDO {
+                element_hash_id : tmp.element_hash_id,
+                exception_hash_id : tmp.exception_hash_id,
+                block_hash_id : tmp.block_hash_id
+            }
+    	}
+    }
+    /**
+     * @brief gets the exception hash id of this element.
+     * @return int
+     */
+    pub fn getExceptionHashId(self) -> int {
+        return self.exception_hash_id
+    }
+    /**
+     * @brief gets the block hash id of this element.
+     * @return int
+     */
+    pub fn getBlockHashId(self) -> int {
+        return self.block_hash_id
+    }
+}
+/**
+ * @brief DO class: A single token in a Java file (the lowest-level element in the Java Ast tree).
+ */
+schema TokenDO {
+    @primary element_hash_id: int,
+    value: string,
+    location_hash_id: int,
+    parent_hash_id: int
+}
+impl TokenDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *TokenDO {
+    	for (tmp in db.token) {
+            yield TokenDO {
+                element_hash_id : tmp.element_hash_id,
+                value : tmp.value,
+                location_hash_id : tmp.location_hash_id,
+                parent_hash_id : tmp.parent_hash_id
+            }
+    	}
+    }
+    /**
+     * @brief gets the value of this element.
+     * @return string
+     */
+    pub fn getValue(self) -> string {
+        return self.value
+    }
+    /**
+     * @brief gets the location hash id of this element.
+     * @return int
+     */
+    pub fn getLocationHashId(self) -> int {
+        return self.location_hash_id
+    }
+    /**
+     * @brief gets the parent hash id of this element.
+     * @return int
+     */
+    pub fn getParentHashId(self) -> int {
+        return self.parent_hash_id
+    }
+}
+/**
+ * @brief DO class: A try statement with finally.
+ */
+schema TryStatementWithFinallyDO {
+    @primary element_hash_id: int,
+    try_block_hash_id: int,
+    finally_block_hash_id: int
+}
+impl TryStatementWithFinallyDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *TryStatementWithFinallyDO {
+    	for (tmp in db.try_statement_with_finally) {
+            yield TryStatementWithFinallyDO {
+                element_hash_id : tmp.element_hash_id,
+                try_block_hash_id : tmp.try_block_hash_id,
+                finally_block_hash_id : tmp.finally_block_hash_id
+            }
+    	}
+    }
+    /**
+     * @brief gets the try block hash id of this element.
+     * @return int
+     */
+    pub fn getTryBlockHashId(self) -> int {
+        return self.try_block_hash_id
+    }
+    /**
+     * @brief gets the finally block hash id of this element.
+     * @return int
+     */
+    pub fn getFinallyBlockHashId(self) -> int {
+        return self.finally_block_hash_id
+    }
+}
+/**
+ * @brief DO class: A try statement without finally.
+ */
+schema TryStatementWithoutFinallyDO {
+    @primary element_hash_id: int,
+    try_block_hash_id: int
+}
+impl TryStatementWithoutFinallyDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *TryStatementWithoutFinallyDO {
+    	for (tmp in db.try_statement_without_finally) {
+            yield TryStatementWithoutFinallyDO {
+                element_hash_id : tmp.element_hash_id,
+                try_block_hash_id : tmp.try_block_hash_id
+            }
+    	}
+    }
+    /**
+     * @brief gets the try block hash id of this element.
+     * @return int
+     */
+    pub fn getTryBlockHashId(self) -> int {
+        return self.try_block_hash_id
+    }
+}
+/**
+ * @brief DO class: A type cast expression.
+ */
+schema TypeCastExpressionDO {
+    @primary element_hash_id: int,
+    cast_expression_hash_id: int
+}
+impl TypeCastExpressionDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *TypeCastExpressionDO {
+    	for (tmp in db.type_cast_expression) {
+            yield TypeCastExpressionDO {
+                element_hash_id : tmp.element_hash_id,
+                cast_expression_hash_id : tmp.cast_expression_hash_id
+            }
+    	}
+    }
+    /**
+     * @brief gets the cast expression hash id of this element.
+     * @return int
+     */
+    pub fn getCastExpressionHashId(self) -> int {
+        return self.cast_expression_hash_id
+    }
+}
+/**
+ * @brief DO class: An occurrence of a type in source code, for example, as a return type of the method or the type of a method parameter.
+ */
+schema TypeElementDO {
+    @primary element_hash_id: int,
+    reference_type_hash_id: int,
+    printable_text: string,
+    parent_hash_id: int,
+    location_hash_id: int
+}
+impl TypeElementDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *TypeElementDO {
+    	for (tmp in db.type_element) {
+            yield TypeElementDO {
+                element_hash_id : tmp.element_hash_id,
+                reference_type_hash_id : tmp.reference_type_hash_id,
+                printable_text : tmp.printable_text,
+                parent_hash_id : tmp.parent_hash_id,
+                location_hash_id : tmp.location_hash_id
+            }
+    	}
+    }
+    /**
+     * @brief gets the reference type hash id of this element.
+     * @return int
+     */
+    pub fn getReferenceTypeHashId(self) -> int {
+        return self.reference_type_hash_id
+    }
+    /**
+     * @brief gets a printed representation of this element, including its structure where applicable.
+     * @return string.
+     */
+    pub fn getPrintableText(self) -> string {
+        return self.printable_text
+    }
+    /**
+     * @brief gets the parent hash id of this element.
+     * @return int
+     */
+    pub fn getParentHashId(self) -> int {
+        return self.parent_hash_id
+    }
+    /**
+     * @brief gets the location hash id of this element.
+     * @return int
+     */
+    pub fn getLocationHashId(self) -> int {
+        return self.location_hash_id
+    }
+}
+/**
+ * @brief DO class: A type literal, for example, "String.class".
+ */
+schema TypeLiteralDO {
+    @primary element_hash_id: int,
+    type_element_hash_id: int,
+    type_hash_id: int
+}
+impl TypeLiteralDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *TypeLiteralDO {
+    	for (tmp in db.type_literal) {
+            yield TypeLiteralDO {
+                element_hash_id : tmp.element_hash_id,
+                type_element_hash_id : tmp.type_element_hash_id,
+                type_hash_id : tmp.type_hash_id
+            }
+    	}
+    }
+    /**
+     * @brief gets the type element hash id of this element.
+     * @return int
+     */
+    pub fn getTypeElementHashId(self) -> int {
+        return self.type_element_hash_id
+    }
+    /**
+     * @brief gets the type hash id of this element.
+     * @return int
+     */
+    pub fn getTypeHashId(self) -> int {
+        return self.type_hash_id
+    }
+}
+/**
+ * @brief DO class: A type parameter of a generic class, interface, method or constructor.
+ */
+schema TypeParameterDO {
+    @primary element_hash_id: int,
+    printable_text: string,
+    owner_hash_id: int,
+    index_order: int,
+    extends_list_hash_id: int,
+    parent_hash_id: int,
+    location_hash_id: int
+}
+impl TypeParameterDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *TypeParameterDO {
+    	for (tmp in db.type_parameter) {
+            yield TypeParameterDO {
+                element_hash_id : tmp.element_hash_id,
+                printable_text : tmp.printable_text,
+                owner_hash_id : tmp.owner_hash_id,
+                index_order : tmp.index_order,
+                extends_list_hash_id : tmp.extends_list_hash_id,
+                parent_hash_id : tmp.parent_hash_id,
+                location_hash_id : tmp.location_hash_id
+            }
+    	}
+    }
+    /**
+     * @brief gets a printed representation of this element, including its structure where applicable.
+     * @return string.
+     */
+    pub fn getPrintableText(self) -> string {
+        return self.printable_text
+    }
+    /**
+     * @brief gets the owner hash id of this element.
+     * @return int
+     */
+    pub fn getOwnerHashId(self) -> int {
+        return self.owner_hash_id
+    }
+    /**
+     * @brief gets the index order of this element.
+     * @return int
+     */
+    pub fn getIndex(self) -> int {
+        return self.index_order
+    }
+    /**
+     * @brief gets the extends list hash id of this element.
+     * @return int
+     */
+    pub fn getExtendsListHashId(self) -> int {
+        return self.extends_list_hash_id
+    }
+    /**
+     * @brief gets the parent hash id of this element.
+     * @return int
+     */
+    pub fn getParentHashId(self) -> int {
+        return self.parent_hash_id
+    }
+    /**
+     * @brief gets the location hash id of this element.
+     * @return int
+     */
+    pub fn getLocationHashId(self) -> int {
+        return self.location_hash_id
+    }
+}
+/**
+ * @brief DO class: An unary expression.
+ */
+schema UnaryExpressionDO {
+    @primary element_hash_id: int,
+    operand_hash_id: int,
+    opcode: string,
+    is_postfix: int
+}
+impl UnaryExpressionDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *UnaryExpressionDO {
+    	for (tmp in db.unary_expression) {
+            yield UnaryExpressionDO {
+                element_hash_id : tmp.element_hash_id,
+                operand_hash_id : tmp.operand_hash_id,
+                opcode : tmp.opcode,
+                is_postfix : tmp.is_postfix
+            }
+    	}
+    }
+    /**
+     * @brief gets the operand hash id of this element.
+     * @return int
+     */
+    pub fn getOperandHashId(self) -> int {
+        return self.operand_hash_id
+    }
+    /**
+     * @brief gets the opcode of this element.
+     * @return string
+     */
+    pub fn getOpcode(self) -> string {
+        return self.opcode
+    }
+    /**
+     * @brief examine the expression is postfix or prefix, 1 means postfix expression.
+     * @return int
+     */
+    pub fn getIsPostfix(self) -> int {
+        return self.is_postfix
+    }
+}
+/**
+ * @brief DO class: A while statement.
+ */
+schema WhileStatementDO {
+    @primary element_hash_id: int,
+    condition_hash_id: int,
+    body_declaration_hash_id: int
+}
+impl WhileStatementDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *WhileStatementDO {
+    	for (tmp in db.while_statement) {
+            yield WhileStatementDO {
+                element_hash_id : tmp.element_hash_id,
+                condition_hash_id : tmp.condition_hash_id,
+                body_declaration_hash_id : tmp.body_declaration_hash_id
+            }
+    	}
+    }
+    /**
+     * @brief gets the expression id representing the condition of the loop.
+     * The condition is checked after every loop iteration, and
+     * iteration stops when condition evaluates to false.
+     * @return int
+     */
+    pub fn getConditionHashId(self) -> int {
+        return self.condition_hash_id
+    }
+    /**
+     * @brief gets the body declaration hash id of this element.
+     * @return int
+     */
+    pub fn getBodyDeclarationHashId(self) -> int {
+        return self.body_declaration_hash_id
+    }
+}
+/**
+ * @brief DO class: A yield statement.
+ */
+schema YieldStatementDO {
+    @primary element_hash_id: int,
+    expression_hash_id: int,
+    enclosing_expression_hash_id: int
+}
+impl YieldStatementDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *YieldStatementDO {
+    	for (tmp in db.yield_statement) {
+            yield YieldStatementDO {
+                element_hash_id : tmp.element_hash_id,
+                expression_hash_id : tmp.expression_hash_id,
+                enclosing_expression_hash_id : tmp.enclosing_expression_hash_id
+            }
+    	}
+    }
+    /**
+     * @brief gets the expression hash id of this element.
+     * @return int
+     */
+    pub fn getExpressionHashId(self) -> int {
+        return self.expression_hash_id
+    }
+    /**
+     * @brief gets the enclosing expression hash id of this element.
+     * @return int
+     */
+    pub fn getEnclosingExpressionHashId(self) -> int {
+        return self.enclosing_expression_hash_id
+    }
+}
+/**
+ * @brief DO class: non-physical project.
+ */
+schema NpProjectDO {
+    @primary element_hash_id: int,
+    extension: string,
+    name: string
+}
+impl NpProjectDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *NpProjectDO {
+    	for (tmp in db.np_project) {
+            yield NpProjectDO {
+                element_hash_id : tmp.element_hash_id,
+                extension : tmp.extension,
+                name : tmp.name
+            }
+    	}
+    }
+    /**
+     * @brief gets the extension of this element.
+     * @return string
+     */
+    pub fn getExtension(self) -> string {
+        return self.extension
+    }
+    /**
+     * @brief gets the name of this element.
+     * @return string
+     */
+    pub fn getName(self) -> string {
+        return self.name
+    }
+}
+/**
+ * @brief DO class: non-physical file.
+ */
+schema NpFileDO {
+    @primary element_hash_id: int,
+    qualified_name: string,
+    name: string,
+    project_hash_id: int
+}
+impl NpFileDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *NpFileDO {
+    	for (tmp in db.np_file) {
+            yield NpFileDO {
+                element_hash_id : tmp.element_hash_id,
+                qualified_name : tmp.qualified_name,
+                name : tmp.name,
+                project_hash_id : tmp.project_hash_id
+            }
+    	}
+    }
+    /**
+     * @brief gets the qualified name of this element.
+     * @return string
+     */
+    pub fn getQualifiedName(self) -> string {
+        return self.qualified_name
+    }
+    /**
+     * @brief gets the name of this element.
+     * @return string
+     */
+    pub fn getName(self) -> string {
+        return self.name
+    }
+    /**
+     * @brief gets the project hash id of this element.
+     * @return int
+     */
+    pub fn getProjectHashId(self) -> int {
+        return self.project_hash_id
+    }
+}
+/**
+ * @brief DO class: non-physical class.
+ */
+schema NpClassDO {
+    @primary element_hash_id: int,
+    name: string,
+    qualified_name: string,
+    parent_hash_id: int
+}
+impl NpClassDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *NpClassDO {
+    	for (tmp in db.np_class) {
+            yield NpClassDO {
+                element_hash_id : tmp.element_hash_id,
+                name : tmp.name,
+                qualified_name : tmp.qualified_name,
+                parent_hash_id : tmp.parent_hash_id
+            }
+    	}
+    }
+    /**
+     * @brief gets the name of this element.
+     * @return string
+     */
+    pub fn getName(self) -> string {
+        return self.name
+    }
+    /**
+     * @brief gets the qualified name of this element.
+     * @return string
+     */
+    pub fn getQualifiedName(self) -> string {
+        return self.qualified_name
+    }
+    /**
+     * @brief gets the parent hash id of this element.
+     * @return int
+     */
+    pub fn getParentHashId(self) -> int {
+        return self.parent_hash_id
+    }
+}
+/**
+ * @brief DO class: non-physical interface.
+ */
+schema NpInterfaceDO {
+    @primary element_hash_id: int,
+    name: string,
+    qualified_name: string,
+    parent_hash_id: int
+}
+impl NpInterfaceDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *NpInterfaceDO {
+    	for (tmp in db.np_interface) {
+            yield NpInterfaceDO {
+                element_hash_id : tmp.element_hash_id,
+                name : tmp.name,
+                qualified_name : tmp.qualified_name,
+                parent_hash_id : tmp.parent_hash_id
+            }
+    	}
+    }
+    /**
+     * @brief gets the name of this element.
+     * @return string
+     */
+    pub fn getName(self) -> string {
+        return self.name
+    }
+    /**
+     * @brief gets the qualified name of this element.
+     * @return string
+     */
+    pub fn getQualifiedName(self) -> string {
+        return self.qualified_name
+    }
+    /**
+     * @brief gets the parent hash id of this element.
+     * @return int
+     */
+    pub fn getParentHashId(self) -> int {
+        return self.parent_hash_id
+    }
+}
+/**
+ * @brief DO class: non-physical method.
+ */
+schema NpMethodDO {
+    @primary element_hash_id: int,
+    name: string,
+    signature: string,
+    type_hash_id: int,
+    parent_hash_id: int
+}
+impl NpMethodDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *NpMethodDO {
+    	for (tmp in db.np_method) {
+            yield NpMethodDO {
+                element_hash_id : tmp.element_hash_id,
+                name : tmp.name,
+                signature : tmp.signature,
+                type_hash_id : tmp.type_hash_id,
+                parent_hash_id : tmp.parent_hash_id
+            }
+    	}
+    }
+    /**
+     * @brief gets the name of this element.
+     * @return string
+     */
+    pub fn getName(self) -> string {
+        return self.name
+    }
+    /**
+     * @brief gets the signature of this element.
+     * @return string
+     */
+    pub fn getSignature(self) -> string {
+        return self.signature
+    }
+    /**
+     * @brief gets the return type hash id of this element.
+     * @return int
+     */
+    pub fn getTypeHashId(self) -> int {
+        return self.type_hash_id
+    }
+    /**
+     * @brief gets the parent hash id of this element.
+     * @return int
+     */
+    pub fn getParentHashId(self) -> int {
+        return self.parent_hash_id
+    }
+}
+database JavaDB {
+    annotated_relation: *AnnotatedRelationDO,
+    annotation_access_argument_with_name: *AnnotationAccessArgumentWithNameDO,
+    annotation_access_argument_without_name: *AnnotationAccessArgumentWithoutNameDO,
+    annotation_array_initializer: *AnnotationArrayInitializerDO,
+    annotation_can_not_resolved: *AnnotationCanNotResolvedDO,
+    annotation_can_resolved: *AnnotationCanResolvedDO,
+    annotation_declaration: *AnnotationDeclarationDO,
+    annotation_declaration_parameter: *AnnotationDeclarationParameterDO,
+    annotation_declaration_parameter_default_value: *AnnotationDeclarationParameterDefaultValueDO,
+    anonymous_class: *AnonymousClassDO,
+    array: *ArrayDO,
+    array_access_expression: *ArrayAccessExpressionDO,
+    array_creation_expression: *ArrayCreationExpressionDO,
+    array_initializer_expression: *ArrayInitializerExpressionDO,
+    assert_statement: *AssertStatementDO,
+    assignment_expression: *AssignmentExpressionDO,
+    binary_expression: *BinaryExpressionDO,
+    block_statement: *BlockStatementDO,
+    boolean_literal: *BooleanLiteralDO,
+    break_statement: *BreakStatementDO,
+    callable_binding: *CallableBindingDO,
+    callable_enclosing_expression: *CallableEnclosingExpressionDO,
+    callable_enclosing_statement: *CallableEnclosingStatementDO,
+    catch_section: *CatchSectionDO,
+    character_literal: *CharacterLiteralDO,
+    class: *ClassDO,
+    class_hierarchy: *ClassHierarchyDO,
+    class_implement_list: *ClassImplementListDO,
+    class_initializer: *ClassInitializerDO,
+    code_block: *CodeBlockDO,
+    comment: *CommentDO,
+    conditional_expression: *ConditionalExpressionDO,
+    constructor: *ConstructorDO,
+    constructor_invocation: *ConstructorInvocationDO,
+    container_parent: *ContainerParentDO,
+    continue_statement: *ContinueStatementDO,
+    cupackage: *CupackageDO,
+    declaration_element: *DeclarationElementDO,
+    do_while_statement: *DoWhileStatementDO,
+    double_literal: *DoubleLiteralDO,
+    element: *ElementDO,
+    empty_reference_parameter_list: *EmptyReferenceParameterListDO,
+    empty_statement: *EmptyStatementDO,
+    enum_constant: *EnumConstantDO,
+    exception: *ExceptionDO,
+    expression: *ExpressionDO,
+    expression_list: *ExpressionListDO,
+    expression_list_expression_relation: *ExpressionListExpressionRelationDO,
+    expression_statement: *ExpressionStatementDO,
+    field: *FieldDO,
+    file: *FileDO,
+    file_md5_sum: *FileMd5SumDO,
+    file_sha256_sum: *FileSha256SumDO,
+    floating_point_literal: *FloatingPointLiteralDO,
+    folder: *FolderDO,
+    for_statement: *ForStatementDO,
+    foreach_statement: *ForeachStatementDO,
+    identifier: *IdentifierDO,
+    if_statement_with_else: *IfStatementWithElseDO,
+    if_statement_without_else: *IfStatementWithoutElseDO,
+    import: *ImportDO,
+    import_static_reference_element: *ImportStaticReferenceElementDO,
+    import_static_statement: *ImportStaticStatementDO,
+    instanceof_expression: *InstanceofExpressionDO,
+    integer_literal: *IntegerLiteralDO,
+    interface: *InterfaceDO,
+    javadoc_comment: *JavadocCommentDO,
+    javadoc_tag: *JavadocTagDO,
+    javadoc_tag_value: *JavadocTagValueDO,
+    javadoc_data_token: *JavadocDataTokenDO,
+    labeled_statement: *LabeledStatementDO,
+    lambda_expression: *LambdaExpressionDO,
+    local_class: *LocalClassDO,
+    local_variable: *LocalVariableDO,
+    location: *LocationDO,
+    long_literal: *LongLiteralDO,
+    metainfo: *MetainfoDO,
+    method: *MethodDO,
+    method_access_expression_with_type: *MethodAccessExpressionWithTypeDO,
+    method_access_expression_without_type: *MethodAccessExpressionWithoutTypeDO,
+    method_reference_expression: *MethodReferenceExpressionDO,
+    modifier: *ModifierDO,
+    modifier_list: *ModifierListDO,
+    module: *ModuleDO,
+    name_string: *NameStringDO,
+    new_expression: *NewExpressionDO,
+    null_literal: *NullLiteralDO,
+    number_of_lines: *NumberOfLinesDO,
+    package_statement: *PackageStatementDO,
+    parameter: *ParameterDO,
+    parent: *ParentDO,
+    polyadic_expression: *PolyadicExpressionDO,
+    primitive: *PrimitiveDO,
+    program: *ProgramDO,
+    reference_element: *ReferenceElementDO,
+    reference_expression: *ReferenceExpressionDO,
+    reference_list: *ReferenceListDO,
+    reference_parameter_list: *ReferenceParameterListDO,
+    reference_relation: *ReferenceRelationDO,
+    reference_type: *ReferenceTypeDO,
+    resource_list: *ResourceListDO,
+    return_statement: *ReturnStatementDO,
+    statement: *StatementDO,
+    statement_enclosing_expression: *StatementEnclosingExpressionDO,
+    string_literal: *StringLiteralDO,
+    super_access_expression: *SuperAccessExpressionDO,
+    super_constructor_invocation: *SuperConstructorInvocationDO,
+    super_expression: *SuperExpressionDO,
+    super_expression_with_qualifier: *SuperExpressionWithQualifierDO,
+    switch_label_statement: *SwitchLabelStatementDO,
+    switch_statement: *SwitchStatementDO,
+    synchronized_statement: *SynchronizedStatementDO,
+    this_access_expression: *ThisAccessExpressionDO,
+    this_expression_with_qualifier: *ThisExpressionWithQualifierDO,
+    throw_statement: *ThrowStatementDO,
+    token: *TokenDO,
+    try_statement_with_finally: *TryStatementWithFinallyDO,
+    try_statement_without_finally: *TryStatementWithoutFinallyDO,
+    type_cast_expression: *TypeCastExpressionDO,
+    type_element: *TypeElementDO,
+    type_literal: *TypeLiteralDO,
+    type_parameter: *TypeParameterDO,
+    unary_expression: *UnaryExpressionDO,
+    while_statement: *WhileStatementDO,
+    yield_statement: *YieldStatementDO,
+    np_method: *NpMethodDO,
+    np_class: *NpClassDO,
+    np_interface: *NpInterfaceDO,
+    np_file: *NpFileDO,
+    np_project: *NpProjectDO,
+}

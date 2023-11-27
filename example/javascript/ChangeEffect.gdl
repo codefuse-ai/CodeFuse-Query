@@ -1,0 +1,76 @@
+// script
+use coref::javascript::*
+
+fn default_db() -> JavascriptDB {
+    return JavascriptDB::load("coref_javascript_src.db")
+}
+
+fn getACallerFunction(function: FunctionLikeDeclaration, callerFunction: FunctionLikeDeclaration) -> bool {
+    for (mayInvokeExpression in MayInvokeExpression(default_db())) {
+        if (mayInvokeExpression in function.getACallSite() &&
+            callerFunction = mayInvokeExpression.getEnclosingFunction()) {
+            return true
+        }
+    }
+}
+
+fn getAnEffectedFunction(function: FunctionLikeDeclaration, effectedFunction: FunctionLikeDeclaration) -> bool {
+    if (getACallerFunction(function, effectedFunction)) {
+        return true
+    }
+    for (callerFunction in FunctionLikeDeclaration(default_db())) {
+        if (getACallerFunction(function, callerFunction) &&
+            getAnEffectedFunction(callerFunction, effectedFunction)) {
+            return true
+        }
+    }
+}
+
+/**
+ * Query the effected functions according to the changed lines.
+ *
+ * @param function              the changed function id
+ * @param signature             the changed function signature
+ * @param functionPath          the changed function file path
+ * @param startLine             the changed function start line
+ * @param endLine               the changed function end line
+ * @param effectedFunction      the effected function id
+ * @param effectedSignature     the effected function signature
+ * @param effectedFunctionPath  the effected function file path
+ * @param effectedStartLine     the effected function start line
+ * @param effectedEndLine       the effected function end line
+ */
+fn out(
+    function: FunctionLikeDeclaration,
+    signature: string,
+    functionPath: string,
+    startLine: int,
+    endLine: int,
+    effectedFunction: FunctionLikeDeclaration,
+    effectedSignature: string,
+    effectedFunctionPath: string,
+    effectedStartLine: int,
+    effectedEndLine: int
+) -> bool {
+    if (getAnEffectedFunction(function, effectedFunction)) {
+        let (symbol = function.getSymbol(),
+            effectedSymbol = effectedFunction.getSymbol(),
+            location = function.getLocation(),
+            effectedLocation = effectedFunction.getLocation()) {
+            if (signature = symbol.getDescription() &&
+                effectedSignature = effectedSymbol.getDescription() &&
+                functionPath = location.getRelativePath() &&
+                startLine = location.getStartLineNumber() &&
+                endLine = location.getEndLineNumber() &&
+                effectedFunctionPath = effectedLocation.getRelativePath() &&
+                effectedStartLine = effectedLocation.getStartLineNumber() &&
+                effectedEndLine = effectedLocation.getEndLineNumber()) {
+                return true
+            }
+        }
+    }
+}
+
+fn main() {
+    output(out())
+}

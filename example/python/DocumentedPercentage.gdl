@@ -1,0 +1,80 @@
+// script
+use coref::python::*
+
+schema PublicVisitedElement extends CombineElement {}
+
+impl PublicVisitedElement {
+    @data_constraint
+    pub fn __all__(db: PythonDB) -> *PublicVisitedElement {
+        for (tmp in Class(db)) {
+            yield PublicVisitedElement {id: tmp.element_oid}
+        }
+        for (tmp in Function(db)) {
+            yield PublicVisitedElement {id: tmp.element_oid}
+        }
+    }
+}
+
+fn default_db() -> PythonDB {
+    return PythonDB::load("coref_python_src.db")
+}
+
+
+// count number of total public element
+fn countTotalPublicElement() -> int {
+    return PublicVisitedElement(default_db()).len()
+}
+
+// get public elements with Docstring comment
+fn withDocstringCommentElement() -> *PublicVisitedElement {
+    let (db = default_db()) {
+        for (e in PublicVisitedElement(db), j in DocstringComment(db)) {
+            if (e.key_eq(j.getDocumentableElement())) {
+                yield e
+            }
+        }
+    }
+}
+
+// count number of public elements with Docstring comment
+fn countTotalPublicDocumentedElement() -> int {
+    return withDocstringCommentElement().len()
+}
+
+fn withPublicDocumentedBelowElement() -> *PublicVisitedElement {
+    let (db = default_db()) {
+        for (e in PublicVisitedElement(db), j in Comment(db)) {
+            if (e.key_eq(j.getDocumentedClassOrFunctionElement())) {
+                yield e
+            }
+        }
+    }
+}
+
+// count number of public element with single line comment
+fn countTotalPublicDocumentedBelowElement() -> int {
+    return withPublicDocumentedBelowElement().len()
+}
+
+
+// calculate documented percentage
+fn getDocumentedPercentage(documentedPercentage: int) -> bool {
+    let (i = countTotalPublicElement(),
+        j = countTotalPublicDocumentedElement(),
+        k = countTotalPublicDocumentedBelowElement()) {
+        if (i = 0) {
+            if (documentedPercentage = -1) {
+                return true
+            }
+        }
+        if (i != 0) {
+            if (documentedPercentage = (j + k) * 1000 / i) {
+                return true
+            }
+        }
+    }
+}
+
+fn main() {
+    output(getDocumentedPercentage())
+}

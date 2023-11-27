@@ -1,0 +1,649 @@
+schema Expr extends Node {
+
+}
+impl Expr {
+    @data_constraint
+    @inline
+    fn __all__(db: GoDB) -> *Expr {
+        for (e in ExprDO(db)) {
+            yield Expr {
+                id : e.oid
+            }
+        }
+    }
+    pub fn getIdx(self) -> int {
+        for (e in ExprDO(__all_data__)) {
+            if (e.key_eq(self)) {
+                return e.getIdx()
+            }
+        }
+    }
+    pub fn getBasicLitValue(self) -> string {
+        if (self.isBasicLitExpr()) {
+            for (l in Literal(__all_data__)) {
+                if (l.getExpr() = self.id) {
+                    return l.getValue()
+                }
+            }
+        }
+    }
+    pub fn getDebugInfo(self) -> string {
+        for (e in ExprDO(__all_data__)) {
+            if (e.key_eq(self)) {
+                return e.getDebugInfo()
+            }
+        }
+    }
+    pub fn getSignature(self) -> *string {
+        for (tp in Type(__all_data__)) {
+            for (auto_tmp1 in tp.getFormatString()) {
+                for (auto_tmp2 in tp.getExpr()) {
+                    if (auto_tmp2 = self) {
+                        yield auto_tmp1
+                    }
+                }
+            }
+        }
+    }
+    pub fn getKind(self) -> int {
+        for (e in ExprDO(__all_data__)) {
+            if (e.key_eq(self)) {
+                return e.getKind()
+            }
+        }
+    }
+    pub fn getAChildByIdx(self, idx : int) -> *Node {
+        for (e in Expr(__all_data__)) {
+            if (e.getParentNode().key_eq(self)) {
+                if (idx = e.getIdx()) {
+                    yield Node(__all_data__).find(e)
+                }
+            }
+        }
+    }
+    pub fn getBelongsStmt(self) -> Statement {
+        for (s in Statement(__all_data__)) {
+            if (s.key_eq(self.getParentNode())) {
+                return s
+            }
+            for (n in Node(__all_data__),
+                e in Expr(__all_data__)) {
+                if (n = self.getParentNode()) {
+                    if (e.key_eq(n)) {
+                        if (s = e.getBelongsStmt()) {
+                            return s
+                        }
+                    }
+                }
+            }
+        }
+    }
+    // Check if the expression is a control expression.
+    // Any of ['||', '&&']
+    pub fn isControlExpr(self) -> bool {
+        for (e in Expr(__all_data__)) {
+            if (e = self) {
+                if (e.isLorExpr()) {
+                    return true
+                }
+                if (e.isLandExpr()) {
+                    return true
+                }
+            }
+        }
+    }
+    // Check if the expression is a binary expression.
+    // Any of ['||', '&&', '==', '!=', '<', '<=', '>', '+', '-', '|', '^', '*', '/', '%', '<<', '>>', '&', '&^' ]
+    pub fn isBinaryExpr(self) -> bool {
+        if (self.isLorExpr()) {
+            return true
+        }
+        if (self.isLandExpr()) {
+            return true
+        }
+        if (self.isEqlExpr()) {
+            return true
+        }
+        if (self.isNeqExpr()) {
+            return true
+        }
+        if (self.isLssExpr()) {
+            return true
+        }
+        if (self.isLeqExpr()) {
+            return true
+        }
+        if (self.isGtrExpr()) {
+            return true
+        }
+        if (self.isAddExpr()) {
+            return true
+        }
+        if (self.isSubExpr()) {
+            return true
+        }
+        if (self.isOrExpr()) {
+            return true
+        }
+        if (self.isXorExpr()) {
+            return true
+        }
+        if (self.isMulExpr()) {
+            return true
+        }
+        if (self.isQuoExpr()) {
+            return true
+        }
+        if (self.isRemExpr()) {
+            return true
+        }
+        if (self.isShlExpr()) {
+            return true
+        }
+        if (self.isShrExpr()) {
+            return true
+        }
+        if (self.isAndExpr()) {
+            return true
+        }
+        if (self.isAndnotExpr()) {
+            return true
+        }
+    }
+    // Check if the given expression is a unary expression.
+    // Any of ['+','-','!','^','*','&','->' ]
+    pub fn isUnaryExpr(self) -> bool {
+        if (self.isPlusExpr()) {
+            return true
+        }
+        if (self.isMinusExpr()) {
+            return true
+        }
+        if (self.isNotExpr()) {
+            return true
+        }
+        if (self.isComplementExpr()) {
+            return true
+        }
+        if (self.isDerefExpr()) {
+            return true
+        }
+        if (self.isAddressExpr()) {
+            return true
+        }
+        if (self.isArrowExpr()) {
+            return true
+        }
+    }
+    pub fn isBasicLitExpr(self) -> bool {
+        if (self.isIntLit()) {
+            return true
+        }
+        if (self.isFloatLit()) {
+            return true
+        }
+        if (self.isImagLit()) {
+            return true
+        }
+        if (self.isCharLit()) {
+            return true
+        }
+        if (self.isStringLit()) {
+            return true
+        }
+    }
+    pub fn getExprTypeName(self) -> *string {
+        for (to in TypeOfDO(__all_data__),
+            t in Type(__all_data__)) {
+            if (to.getExpr() = self.id) {
+                if (t.oid = to.getTp()) {
+                    yield t.getFormatString()
+                }
+            }
+        }
+    }
+
+    pub fn getType(self) -> string {
+        if (self.isBadExpr()) {
+            return "BadExpr"
+        }
+        if (self.isIdent()) {
+            return "Ident"
+        }
+        if (self.isEllipsis()) {
+            return "Ellipsis"
+        }
+        if (self.isIntLit()) {
+            return "IntLit"
+        }
+        if (self.isFloatLit()) {
+            return "FloatLit"
+        }
+        if (self.isImagLit()) {
+            return "ImagLit"
+        }
+        if (self.isCharLit()) {
+            return "CharLit"
+        }
+        if (self.isStringLit()) {
+            return "StringLit"
+        }
+        if (self.isFuncLit()) {
+            return "FuncLit"
+        }
+        if (self.isCompositeLit()) {
+            return "CompositeLit"
+        }
+        if (self.isParenExpr()) {
+            return "ParenExpr"
+        }
+        if (self.isSelectorExpr()) {
+            return "SelectorExpr"
+        }
+        if (self.isIndexExpr()) {
+            return "IndexExpr"
+        }
+        if (self.isGenericfunctioninstantiationExpr()) {
+            return "GenericfunctioninstantiationExpr"
+        }
+        if (self.isGenerictypeinstantiationExpr()) {
+            return "GenerictypeinstantiationExpr"
+        }
+        if (self.isSliceExpr()) {
+            return "SliceExpr"
+        }
+        if (self.isTypeassertExpr()) {
+            return "TypeassertExpr"
+        }
+        if (self.isCallorconversionExpr()) {
+            return "CallorconversionExpr"
+        }
+        if (self.isStarExpr()) {
+            return "StarExpr"
+        }
+        if (self.isKeyvalueExpr()) {
+            return"KeyvalueExpr"
+        }
+        if (self.isArraytypeExpr()) {
+            return"ArraytypeExpr"
+        }
+        if (self.isStructtypeExpr()) {
+            return "StructtypeExpr"
+        }
+        if (self.isFunctypeExpr()) {
+            return "FunctypeExpr"
+        }
+        if (self.isInterfacetypeExpr()) {
+            return "InterfacetypeExpr"
+        }
+        if (self.isMaptypeExpr()) {
+            return "MaptypeExpr"
+        }
+        if (self.isTypesetliteralExpr()) {
+            return "TypesetliteralExpr"
+        }
+        if (self.isPlusExpr()) {
+            return "PlusExpr"
+        }
+        if (self.isMinusExpr()) {
+            return "MinusExpr"
+        }
+        if (self.isNotExpr()) {
+            return "NotExpr"
+        }
+        if (self.isComplementExpr()) {
+            return "ComplementExpr"
+        }
+        if (self.isDerefExpr()) {
+            return "DerefExpr"
+        }
+        if (self.isAddressExpr()) {
+            return "AddressExpr"
+        }
+        if (self.isArrowExpr()) {
+            return "ArrowExpr"
+        }
+        if (self.isLorExpr()) {
+            return "LorExpr"
+        }
+        if (self.isLandExpr()) {
+            return "LandExpr"
+        }
+        if (self.isEqlExpr()) {
+            return "EqlExpr"
+        }
+        if (self.isNeqExpr()) {
+            return "NeqExpr"
+        }
+        if (self.isLssExpr()) {
+            return "LssExpr"
+        }
+        if (self.isLeqExpr()) {
+            return "LeqExpr"
+        }
+        if (self.isGtrExpr()) {
+            return "GtrExpr"
+        }
+        if (self.isGeqExpr()) {
+            return "GeqExpr"
+        }
+        if (self.isAddExpr()) {
+            return "AddExpr"
+        }
+        if (self.isSubExpr()) {
+            return "SubExpr"
+        }
+        if (self.isOrExpr()) {
+            return "OrExpr"
+        }
+        if (self.isXorExpr()) {
+            return "XorExpr"
+        }
+        if (self.isMulExpr()) {
+            return "MulExpr"
+        }
+        if (self.isQuoExpr()) {
+            return "QuoExpr"
+        }
+        if (self.isRemExpr()) {
+            return "RemExpr"
+        }
+        if (self.isShlExpr()) {
+            return "ShlExpr"
+        }
+        if (self.isShrExpr()) {
+            return "ShrExpr"
+        }
+        if (self.isAndExpr()) {
+            return "AndExpr"
+        }
+        if (self.isAndnotExpr()) {
+            return "AndnotExpr"
+        }
+        if (self.isSendchantypeExpr()) {
+            return "SendchantypeExpr"
+        }
+        if (self.isRecvchantypeExpr()) {
+            return "RecvchantypeExpr"
+        }
+        if (self.isSendrcvchantypeExpr()) {
+            return "SendrcvchantypeExpr"
+        }
+    }
+
+    pub fn isBadExpr(self) -> bool {
+        if (self.getKind() = 0) {
+            return true
+        }
+    }
+    pub fn isIdent(self) -> bool {
+        if (self.getKind() = 1) {
+            return true
+        }
+    }
+    pub fn isEllipsis(self) -> bool {
+        if (self.getKind() = 2) {
+            return true
+        }
+    }
+    pub fn isIntLit(self) -> bool {
+        if (self.getKind() = 3) {
+            return true
+        }
+    }
+    pub fn isFloatLit(self) -> bool {
+       if (self.getKind() = 4) {
+            return true
+        }
+    }
+    pub fn isImagLit(self) -> bool {
+        if (self.getKind() = 5) {
+            return true
+        }
+    }
+    pub fn isCharLit(self) -> bool {
+        if (self.getKind() = 6) {
+            return true
+        }
+    }
+    pub fn isStringLit(self) -> bool {
+        if (self.getKind() = 7) {
+            return true
+        }
+    }
+    pub fn isFuncLit(self) -> bool {
+        if (self.getKind() = 8) {
+            return true
+        }
+    }
+    pub fn isCompositeLit(self) -> bool {
+        if (self.getKind() = 9) {
+            return true
+        }
+    }
+    pub fn isParenExpr(self) -> bool {
+        if (self.getKind() = 10) {
+            return true
+        }
+    }
+    pub fn isSelectorExpr(self) -> bool {
+        if (self.getKind() = 11) {
+            return true
+        }
+    }
+    pub fn isIndexExpr(self) -> bool {
+        if (self.getKind() = 12) {
+            return true
+        }
+    }
+    pub fn isGenericfunctioninstantiationExpr(self) -> bool {
+        if (self.getKind() = 13) {
+            return true
+        }
+    }
+    pub fn isGenerictypeinstantiationExpr(self) -> bool {
+        if (self.getKind() = 14) {
+            return true
+        }
+    }
+    pub fn isSliceExpr(self) -> bool {
+        if (self.getKind() = 15) {
+            return true
+        }
+    }
+    pub fn isTypeassertExpr(self) -> bool {
+        if (self.getKind() = 16) {
+            return true
+        }
+    }
+    pub fn isCallorconversionExpr(self) -> bool {
+        if (self.getKind() = 17) {
+            return true
+        }
+    }
+    pub fn isStarExpr(self) -> bool {
+        if (self.getKind() = 18) {
+            return true
+        }
+    }
+    pub fn isKeyvalueExpr(self) -> bool {
+        if (self.getKind() = 19) {
+            return true
+        }
+    }
+    pub fn isArraytypeExpr(self) -> bool {
+        if (self.getKind() = 20) {
+            return true
+        }
+    }
+    pub fn isStructtypeExpr(self) -> bool {
+        if (self.getKind() = 21) {
+            return true
+        }
+    }
+    pub fn isFunctypeExpr(self) -> bool {
+        if (self.getKind() = 22) {
+            return true
+        }
+    }
+    pub fn isInterfacetypeExpr(self) -> bool {
+        if (self.getKind() = 23) {
+            return true
+        }
+    }
+    pub fn isMaptypeExpr(self) -> bool {
+        if (self.getKind() = 24) {
+            return true
+        }
+    }
+    pub fn isTypesetliteralExpr(self) -> bool {
+        if (self.getKind() = 25) {
+            return true
+        }
+    }
+    pub fn isPlusExpr(self) -> bool {
+        if (self.getKind() = 26) {
+            return true
+        }
+    }
+    pub fn isMinusExpr(self) -> bool {
+        if (self.getKind() = 27) {
+            return true
+        }
+    }
+    pub fn isNotExpr(self) -> bool {
+        if (self.getKind() = 28) {
+            return true
+        }
+    }
+    pub fn isComplementExpr(self) -> bool {
+        if (self.getKind() = 29) {
+            return true
+        }
+    }
+    pub fn isDerefExpr(self) -> bool {
+        if (self.getKind() = 30) {
+            return true
+        }
+    }
+    pub fn isAddressExpr(self) -> bool {
+        if (self.getKind() = 31) {
+            return true
+        }
+    }
+    pub fn isArrowExpr(self) -> bool {
+        if (self.getKind() = 32) {
+            return true
+        }
+    }
+    pub fn isLorExpr(self) -> bool {
+        if (self.getKind() = 33) {
+            return true
+        }
+    }
+    pub fn isLandExpr(self) -> bool {
+        if (self.getKind() = 34) {
+            return true
+        }
+    }
+    pub fn isEqlExpr(self) -> bool {
+        if (self.getKind() = 35) {
+            return true
+        }
+    }
+    pub fn isNeqExpr(self) -> bool {
+        if (self.getKind() = 36) {
+            return true
+        }
+    }
+    pub fn isLssExpr(self) -> bool {
+        if (self.getKind() = 37) {
+            return true
+        }
+    }
+    pub fn isLeqExpr(self) -> bool {
+        if (self.getKind() = 38) {
+            return true
+        }
+    }
+    pub fn isGtrExpr(self) -> bool {
+        if (self.getKind() = 39) {
+            return true
+        }
+    }
+    pub fn isGeqExpr(self) -> bool {
+        if (self.getKind() = 40) {
+            return true
+        }
+    }
+    pub fn isAddExpr(self) -> bool {
+        if (self.getKind() = 41) {
+            return true
+        }
+    }
+    pub fn isSubExpr(self) -> bool {
+        if (self.getKind() = 42) {
+            return true
+        }
+    }
+    pub fn isOrExpr(self) -> bool {
+        if (self.getKind() = 43) {
+            return true
+        }
+    }
+    pub fn isXorExpr(self) -> bool {
+        if (self.getKind() = 44) {
+            return true
+        }
+    }
+    pub fn isMulExpr(self) -> bool {
+        if (self.getKind() = 45) {
+            return true
+        }
+    }
+    pub fn isQuoExpr(self) -> bool {
+        if (self.getKind() = 46) {
+            return true
+        }
+    }
+    pub fn isRemExpr(self) -> bool {
+        if (self.getKind() = 47) {
+            return true
+        }
+    }
+    pub fn isShlExpr(self) -> bool {
+        if (self.getKind() = 48) {
+            return true
+        }
+    }
+    pub fn isShrExpr(self) -> bool {
+        if (self.getKind() = 49) {
+            return true
+        }
+    }
+    pub fn isAndExpr(self) -> bool {
+        if (self.getKind() = 50) {
+            return true
+        }
+    }
+    pub fn isAndnotExpr(self) -> bool {
+        if (self.getKind() = 51) {
+            return true
+        }
+    }
+    pub fn isSendchantypeExpr(self) -> bool {
+        if (self.getKind() = 52) {
+            return true
+        }
+    }
+    pub fn isRecvchantypeExpr(self) -> bool {
+        if (self.getKind() = 53) {
+            return true
+        }
+    }
+    pub fn isSendrcvchantypeExpr(self) -> bool {
+        if (self.getKind() = 54) {
+            return true
+        }
+    }
+}

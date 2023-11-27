@@ -1,0 +1,56 @@
+/**
+ * @brief An alias.
+ */
+schema Alias extends AliasDO {
+    
+}
+impl Alias {
+    @data_constraint
+    @inline
+    fn __all__(db: PythonDB) -> *Alias {
+        for (tmp in AliasDO(db)) {
+            yield Alias {
+                element_oid : tmp.element_oid,
+                name : tmp.name,
+                asname : tmp.asname,
+                element_index : tmp.element_index,
+                parent_oid : tmp.parent_oid,
+                location_oid : tmp.location_oid,
+                printable_text : tmp.printable_text
+            }
+        }
+    }
+    /**
+     * @brief gets the parent element of the element
+     * @return CombineElement 
+     */
+    pub fn getParent(self) -> CombineElement {
+        for (parent in CombineElement(__all_data__)) {
+            if (parent.id = self.getParentOid()) {
+                return parent
+            }
+        }
+    }
+    /**
+     * @brief gets an ancestor of the element.
+     * @return CombineElement 
+     */
+    pub fn getAnAncestor(self) -> *CombineElement {
+        for (temp in CombineElement(__all_data__)) {
+            if (self.key_eq(temp)) {
+                yield temp.getAnAncestor()
+            }
+        }
+    }
+    /**
+     * @brief gets the location for the element.
+     * @return Location
+     */
+    pub fn getLocation(self) -> Location {
+        for (loc in Location(__all_data__)) {
+            if (loc.element_oid = self.getLocationOid()) {
+                return loc
+            }
+        }
+    }
+}

@@ -1,0 +1,259 @@
+schema Type extends TypeDO {
+
+}
+impl Type {
+    @data_constraint
+    @inline
+    fn __all__(db: GoDB) -> *Type {
+        for (tmp in TypeDO(db)) {
+            yield Type {
+                oid : tmp.oid,
+                kind : tmp.kind,
+                format_string : tmp.format_string,
+                raw_string : tmp.raw_string
+            }
+        }
+    }
+    pub fn getExpr(self) -> *Expr {
+        for (s in Expr(__all_data__),
+            t in TypeDO(__all_data__),
+            to in TypeOfDO(__all_data__)) {
+            if (t.key_eq(self)) {
+                if (t.oid = to.getTp()) {
+                    if (s.id = to.getExpr()) {
+                        yield s
+                    }
+                }
+            }
+        }
+    }
+    pub fn getName(self) -> string {
+        for (tn in TypeName(__all_data__)) {
+            if (tn.key_eq(self)) {
+                return tn.getName()
+            }
+        }
+    }
+    pub fn getFormatString(self) -> *string {
+        for (t in TypeDO(__all_data__)) {
+            if (t.key_eq(self)) {
+                yield t.getFormatString()
+            }
+        }
+    }
+    pub fn getRawString(self) -> *string {
+        for (t in TypeDO(__all_data__)) {
+            if (t.key_eq(self)) {
+                yield t.getRawString()
+            }
+        }
+    }
+    pub fn getKind(self) -> int {
+        for (t in TypeDO(__all_data__)) {
+            if (t.key_eq(self)) {
+                return t.getKind()
+            }
+        }
+    }
+
+    pub fn isInvalidType(self) -> bool {
+        if (self.getKind() = 0) {
+            return true
+        }
+    }
+    pub fn isBoolexprType(self) -> bool {
+        if (self.getKind() = 1) {
+            return true
+        }
+    }
+    pub fn isIntType(self) -> bool {
+        if (self.getKind() = 2) {
+            return true
+        }
+    }
+    pub fn isInt8Type(self) -> bool {
+        if (self.getKind() = 3) {
+            return true
+        }
+    }
+    pub fn isInt16Type(self) -> bool {
+        if (self.getKind() = 4) {
+            return true
+        }
+    }
+    pub fn isInt32Type(self) -> bool {
+        if (self.getKind() = 5) {
+            return true
+        }
+    }
+    pub fn isInt64Type(self) -> bool {
+        if (self.getKind() = 6) {
+            return true
+        }
+    }
+    pub fn isUintType(self) -> bool {
+        if (self.getKind() = 7) {
+            return true
+        }
+    }
+    pub fn isUint8Type(self) -> bool {
+        if (self.getKind() = 8) {
+            return true
+        }
+    }
+    pub fn isUint16Type(self) -> bool {
+        if (self.getKind() = 9) {
+            return true
+        }
+    }
+    pub fn isUint32Type(self) -> bool {
+        if (self.getKind() = 10) {
+            return true
+        }
+    }
+    pub fn isUint64Type(self) -> bool {
+        if (self.getKind() = 11) {
+            return true
+        }
+    }
+    pub fn isUintptrType(self) -> bool {
+        if (self.getKind() = 12) {
+            return true
+        }
+    }
+    pub fn isFloat32Type(self) -> bool {
+        if (self.getKind() = 13) {
+            return true
+        }
+    }
+    pub fn isFloat64Type(self) -> bool {
+        if (self.getKind() = 14) {
+            return true
+        }
+    }
+    pub fn isComplex64Type(self) -> bool {
+        if (self.getKind() = 15) {
+            return true
+        }
+    }
+    pub fn isComplex128Type(self) -> bool {
+        if (self.getKind() = 16) {
+            return true
+        }
+    }
+    pub fn isStringexprType(self) -> bool {
+        if (self.getKind() = 17) {
+            return true
+        }
+    }
+    pub fn isUnsafepointerType(self) -> bool {
+        if (self.getKind() = 18) {
+            return true
+        }
+    }
+    pub fn isBoolLiteraltype(self) -> bool {
+        if (self.getKind() = 19) {
+            return true
+        }
+    }
+    pub fn isIntLiteraltype(self) -> bool {
+        if (self.getKind() = 20) {
+            return true
+        }
+    }
+    pub fn isRuneLiteraltype(self) -> bool {
+        if (self.getKind() = 21) {
+            return true
+        }
+    }
+    pub fn isFloatLiteraltype(self) -> bool {
+        if (self.getKind() = 22) {
+            return true
+        }
+    }
+    pub fn isComplexLiteraltype(self) -> bool {
+        if (self.getKind() = 23) {
+            return true
+        }
+    }
+    pub fn isStringLiteraltype(self) -> bool {
+        if (self.getKind() = 24) {
+            return true
+        }
+    }
+    pub fn isNilLiteraltype(self) -> bool {
+        if (self.getKind() = 25) {
+            return true
+        }
+    }
+    pub fn isTypeParamtype(self) -> bool {
+        if (self.getKind() = 26) {
+            return true
+        }
+    }
+    pub fn isArrayType(self) -> bool {
+        if (self.getKind() = 27) {
+            return true
+        }
+    }
+    pub fn isSliceType(self) -> bool {
+        if (self.getKind() = 28) {
+            return true
+        }
+    }
+    pub fn isStructType(self) -> bool {
+        if (self.getKind() = 29) {
+            return true
+        }
+    }
+    pub fn isPointerType(self) -> bool {
+        if (self.getKind() = 30) {
+            return true
+        }
+    }
+    pub fn isInterfaceType(self) -> bool {
+        if (self.getKind() = 31) {
+            return true
+        }
+    }
+    pub fn isTupleType(self) -> bool {
+        if (self.getKind() = 32) {
+            return true
+        }
+    }
+    pub fn isSignatureType(self) -> bool {
+        if (self.getKind() = 33) {
+            return true
+        }
+    }
+    pub fn isMapType(self) -> bool {
+        if (self.getKind() = 34) {
+            return true
+        }
+    }
+    pub fn isSendchanType(self) -> bool {
+        if (self.getKind() = 35) {
+            return true
+        }
+    }
+    pub fn isRecvchanType(self) -> bool {
+        if (self.getKind() = 36) {
+            return true
+        }
+    }
+    pub fn isSendrcvchanType(self) -> bool {
+        if (self.getKind() = 37) {
+            return true
+        }
+    }
+    pub fn isNamedType(self) -> bool {
+        if (self.getKind() = 38) {
+            return true
+        }
+    }
+    pub fn isTypesetLiteraltype(self) -> bool {
+        if (self.getKind() = 39) {
+            return true
+        }
+    }
+}

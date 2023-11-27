@@ -1,0 +1,420 @@
+schema Node {
+    @primary id: int
+}
+impl Node {
+    @data_constraint
+    @inline
+    fn __all__(db: GoDB) -> *Node {
+        for (d in DeclDO(db)) {
+            yield Node {id : d.oid}
+        }
+        for (e in ExprDO(db)) {
+            yield Node {id : e.oid}
+        }
+        for (s in StmtDO(db)) {
+            yield Node {id : s.oid}
+        }
+        for (c in CommentGroupDO(db)) {
+            yield Node {id : c.oid}
+        }
+        for (c in FileDO(db)) {
+            yield Node {id : c.oid}
+        }
+        for (c in CommentDO(db)) {
+            yield Node {id : c.oid}
+        }
+        for (c in DocCommentDO(db)) {
+            yield Node {id : c.oid}
+        }
+        for (c in FieldsDO(db)) {
+            yield Node {id : c.oid}
+        }
+        for (c in SpecDO(db)) {
+            yield Node {id : c.oid}
+        }
+    }
+    fn tmp_countAssociatedComment_getAssociateObj(self) -> *DocCommentDO {
+        for (tmp in DocCommentDO(__all_data__)) {
+            if (tmp.getAssociateObj() = self.id) {
+                yield tmp
+            }
+        }
+    }
+    pub fn getBelongsFile(self) -> File {
+        for (f in File(__all_data__)) {
+            if (f.key_eq(self)) { // root node
+                return f
+            }
+            if (f.key_eq(self.getParentNode())) {
+                return f
+            }
+        }
+        return self.getParentNode().getBelongsFile()
+    }
+    pub fn isRootNode(self) -> bool {
+        for (f in FileDO(__all_data__)) {
+            if (self.key_eq(f)) {
+                return true
+            }
+        }
+    }
+    pub fn getBelongsFunction(self) -> Function {
+        for (f in Function(__all_data__)) {
+            if (f.key_eq(self.getParentNode())) {
+                return f
+            }
+            let (n = self.getParentNode()) {
+                if (f = n.getBelongsFunction()) {
+                    return f
+                }
+            }
+        }
+    }
+    pub fn getType(self) -> string {
+        for (st in Statement(__all_data__)) {
+            if (self.key_eq(st)) {
+                return st.getType()
+            }
+        }
+        for (st in Decl(__all_data__)) {
+            if (self.key_eq(st)) {
+                return st.getType()
+            }
+        }
+        for (st in Expr(__all_data__)) {
+            if (self.key_eq(st)) {
+                return st.getType()
+            }
+        }
+        for (e in CommentGroupDO(__all_data__)) {
+            if (self.key_eq(e)) {
+                return "CommentGroup"
+            }
+        }
+        for (e in FileDO(__all_data__)) {
+            if (self.key_eq(e)) {
+                return "File"
+            }
+        }
+        for (c in CommentDO(__all_data__)) {
+            if (self.key_eq(c)) {
+                return "Comment"
+            }
+        }
+        for (c in DocCommentDO(__all_data__)) {
+            if (self.key_eq(c)) {
+                return "DocComment"
+            }
+        }
+        for (f in Fields(__all_data__)) {
+            if (self.key_eq(f)) {
+                return f.getType()
+            }
+        }
+        for (st in Spec(__all_data__)) {
+            if (self.key_eq(st)) {
+                return st.getType()
+            }
+        }
+    }
+
+    pub fn getParentNode(self) -> Node {
+        for (parent in Node(__all_data__)) {
+            for (e in DeclDO(__all_data__)) {
+                if (self.key_eq(e)) {
+                    if (parent.id = e.getParentId()) {
+                        return parent
+                    }
+                }
+            }
+            for (var in ExprDO(__all_data__)) {
+                if (self.key_eq(var)) {
+                    if (parent.id = var.getParentId()) {
+                        return parent
+                    }
+                }
+            }
+            for (m in StmtDO(__all_data__)) {
+                if (self.key_eq(m)) {
+                    if (parent.id = m.getParentId()) {
+                        return parent
+                    }
+                }
+            }
+            for (c in CommentGroupDO(__all_data__)) {
+                if (self.key_eq(c)) {
+                    if (parent.id = c.getParent()) {
+                        return parent
+                    }
+                }
+            }
+            // for (f in FileDO(__all_data__)) {
+            //     if (self.key_eq(f)) {
+            //         // 此处为一个假设
+            //         if (parent.id = -1) {
+            //             return parent
+            //         }
+            //     }
+            // }
+            for (c in CommentDO(__all_data__)) {
+                if (self.key_eq(c)) {
+                    if (parent.id = c.getParent()) {
+                        return parent
+                    }
+                }
+            }
+            for (c in DocCommentDO(__all_data__)) {
+                if (self.key_eq(c)) {
+                    for (cg in CommentGroupDO(__all_data__)) {
+                        if (cg.oid = c.getAssociateObj()) {
+                            if (parent.id = cg.oid) {
+                                return parent
+                            }
+                        }
+                    }
+                }
+            }
+            for (c in FieldsDO(__all_data__)) {
+                if (self.key_eq(c)) {
+                    if (parent.id = c.getParentId()) {
+                        return parent
+                    }
+                }
+            }
+            for (c in SpecDO(__all_data__)) {
+                if (self.key_eq(c)) {
+                    if (parent.id = c.getParentId()) {
+                        return parent
+                    }
+                }
+            }
+        }
+    }
+    pub fn getAnAncestor(self) -> *Node {
+        yield self.getParentNode()
+        for (auto_tmp1 in self.getAnAncestor()) {
+            yield auto_tmp1.getParentNode()
+        }
+    }
+    pub fn getAnAncestorForIndex(self, index : int) -> Node {
+        let (ancestor = self.getParentNode()) {
+            if (index = 1) {
+                return ancestor
+            }
+        }
+        for (indexTemp in int::__undetermined_all__()) {
+            let (temp = self.getParentNode()) {
+                let (ancestor = temp.getAnAncestorForIndex(indexTemp)) {
+                    if (index = indexTemp + 1) {
+                        return ancestor
+                    }
+                }
+            }
+        }
+    }
+    pub fn hasLocation(self) -> bool {
+        let (loc = self.getLocation()) {
+            let (sl = loc.getStartLineNumber(),
+                el = loc.getEndLineNumber()) {
+                if (el > 0 && sl > 0) {
+                    return true
+                }
+            }
+        }
+    }
+    pub fn getLocation(self) -> Location {
+        for (loc in Location(__all_data__),
+            has in HasLocationDO(__all_data__)) {
+            if (self.id = has.getLocationObj()) {
+                if (loc.oid = has.getLocationId()) {
+                    return loc
+                }
+            }
+        }
+    }
+    pub fn getAchildNode(self) -> *Node {
+        for (c in Node(__all_data__)) {
+            if (self = c.getParentNode()) {
+                yield c
+            }
+        }
+    }
+    pub fn getAssociatedCommentString(self) -> string {
+        for (dc in DocComment(__all_data__)) {
+            if (self = dc.getAssociateObj()) {
+                let (cmt = dc.getCommentGroup().getText()) {
+                    return cmt
+                }
+            }
+        }
+    }
+    pub fn getDepthFromRoot(self) -> int {
+        for (f in FileDO(__all_data__)) {
+            if (f.key_eq(self.getBelongsFile())) {
+                if (f.key_eq(self)) {
+                    return 0
+                }
+                if (f.key_eq(self.getParentNode())) {
+                    return 1
+                }
+                for (dpTemp in int::__undetermined_all__()) {
+                    let (temp = self.getParentNode()) {
+                        if (dpTemp = temp.getDepthFromRoot()) {
+                            return dpTemp + 1
+                        }
+                    }
+                }
+            }
+        }
+    }
+    pub fn getTextSize(self) -> int {
+        let (loc = self.getLocation()) {
+            let (so = loc.getTokenStartOffset(),
+                eo = loc.getTokenEndOffset()) {
+                return eo - so
+            }
+        }
+    }
+    pub fn getTextStartOffset(self) -> int {
+        return self.getLocation().getTokenStartOffset()
+    }
+    pub fn getChildCount(self) -> int {
+        let (tmp = self.getAchildNode().len()) {
+            return tmp
+        }
+    }
+    pub fn countAssociatedComment(self) -> int {
+        let (tmp = self.tmp_countAssociatedComment_getAssociateObj().len()) {
+            return tmp
+        }
+    }
+
+    // getText Extract the text associated with a specific node in a file
+    pub fn getText(self) -> string {
+        for (fd in FileData(__all_data__)) {
+            if (fd.getFile() = self.getBelongsFile()) {
+                let (so = self.getTextStartOffset()) {
+                    let (len = self.getTextSize()) {
+                        let (content = fd.getContent()) {
+                            if (self.isRootNode()) {
+                                return content
+                            }
+                            if (!self.isRootNode()) {
+                                return content.substr(so, len)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    pub fn print(self) -> *string {
+        for (s in StmtDO(__all_data__)) {
+            if (self.key_eq(s)) {
+                yield s.getDebugInfo()
+            }
+        }
+        for (e in Expr(__all_data__)) {
+            if (self.key_eq(e)) {
+                if (e.isIdent() || e.isBasicLitExpr()) {
+                    for (l in LiteralDO(__all_data__)) {
+                        if (l.getExpr() = e.id) {
+                            yield l.getValue()
+                        }
+                    }
+                }
+                if (e.isSelectorExpr()) {
+                    for (sl in SelectorExpr(__all_data__)) {
+                        if (e.key_eq(sl)) {
+                            for (s1 in sl.getBase().print(),
+                                s2 in sl.getSelector().print()) {
+                                yield s1 + "." + s2
+                            }
+                        }
+                    }
+                }
+                if (!(e.isIdent() || e.isBasicLitExpr() || e.isSelectorExpr())) {
+                    yield e.getDebugInfo()
+                }
+            }
+        }
+        for (d in DeclDO(__all_data__)) {
+            if (self.key_eq(d)) {
+                for (ex in ExprDO(__all_data__)) {
+                    if (ex.getParentId() = self.id) {
+                        if (ex.getKind() = 1) {
+                            for (l in LiteralDO(__all_data__)) {
+                                if (l.getExpr() = ex.oid) {
+                                    yield l.getValue()
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        for (e in CommentGroupDO(__all_data__)) {
+            if (self.key_eq(e)) {
+                yield "@CommentGroup"
+            }
+        }
+        for (e in FileDO(__all_data__)) {
+            if (self.key_eq(e)) {
+                yield e.getName()
+            }
+        }
+        for (c in CommentDO(__all_data__)) {
+            if (self.key_eq(c)) {
+                yield c.getDebugInfo()
+            }
+        }
+        for (c in DocCommentDO(__all_data__)) {
+            if (self.key_eq(c)) {
+                yield "@DocComment"
+            }
+        }
+        for (fd in Fields(__all_data__)) {
+            if (self.key_eq(fd)) {
+                let (cnt1 = fd.getFieldName().len(),
+                    cnt2 = fd.getFieldType().len()) {
+                    if (cnt1 > 0) {
+                        for (t1 in fd.getFieldName()) {
+                            if (cnt2 > 0) {
+                                for (t2 in fd.getFieldType()) {
+                                    yield t1 + "[" + t2 + "]"
+                                }
+                            }
+                            if (cnt2 <= 0) {
+                                yield t1
+                            }
+                        }
+                    }
+                    if (cnt1 <= 0) {
+                        if (cnt2 > 0) {
+                            for (t2 in fd.getFieldType()) {
+                                yield "[" + t2 + "]"
+                            }
+                        }
+                        if (cnt2 <= 0) {
+                            yield ""
+                        }
+                    }
+
+                }
+            }
+        }
+        for (c in SpecDO(__all_data__)) {
+            if (self.key_eq(c)) {
+                for (e in ExprDO(__all_data__),
+                    l in LiteralDO(__all_data__)) {
+                    if (e.getParentId() = self.id) {
+                        if (l.getExpr() = e.oid) {
+                            yield l.getValue()
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

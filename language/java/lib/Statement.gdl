@@ -1,0 +1,2220 @@
+/**
+ * @brief A super class for all statements.
+ */
+schema Statement extends StatementDO {
+
+}
+impl Statement {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *Statement {
+        for (tmp in StatementDO(db)) {
+            yield Statement {
+                element_hash_id : tmp.element_hash_id,
+                parent_hash_id : tmp.parent_hash_id,
+                index_order : tmp.index_order,
+                location_hash_id : tmp.location_hash_id,
+                printable_text : tmp.printable_text,
+                type : tmp.type
+            }
+        }
+    }
+     /**
+      * @brief gets the location for the element.
+      * @return Location
+      */
+    pub fn getLocation(self) -> Location {
+        for (loc in Location(__all_data__)) {
+            if (loc.element_hash_id = self.getLocationHashId()) {
+                return loc
+            }
+        }
+    }
+    /**
+     * @brief gets the size information for the element.
+     * @return NumberOfLines
+     */
+    pub fn getSize(self) -> NumberOfLines {
+        for (n in NumberOfLines(__all_data__)) {
+            if (n.element_hash_id = self.getLocationHashId()) {
+                return n
+            }
+        }
+    }
+    /**
+     * @brief gets the parent element of the statement
+     * @return StatementParent 
+     */
+    pub fn getParent(self) -> ElementParent {
+        for (c in ElementParent(__all_data__)) {
+            if (c.id = self.getParentHashId()) {
+                return c
+            }
+        }
+    }
+    /**
+     * @brief gets an ancestor of the element.
+     * @return ElementParent 
+     */
+    pub fn getAnAncestor(self) -> *ElementParent {
+        for (tmp in ElementParent(__all_data__)) {
+            if (tmp.key_eq(self)) {
+                yield tmp.getAnAncestor()
+            }
+        }
+    }
+    /**
+     * @brief gets the immediately enclosing callable (method or constructor) whose body contains this statement.
+     * @return Callable 
+     */
+    pub fn getEnclosingCallable(self) -> Callable {
+        for (c in CallableEnclosingStatement(__all_data__)) {
+            if (self.key_eq(c)) {
+                return c.getEnclosingCallable()
+            }
+        }
+    }
+    /**
+     * @brief gets a child of this statement.
+     * @return Statement 
+     */
+    pub fn getAChild(self) -> *Statement {
+        for (child in Statement(__all_data__)) {
+            if (self.key_eq(child.getParent())) {
+                yield child
+            }
+        }
+    }
+    /**
+     * @brief gets the statement containing this statement.
+     * @return Statement 
+     */
+    pub fn getEnclosingStatement(self) -> Statement {
+        for (stmt in Statement(__all_data__)) {
+            if (stmt.element_hash_id = self.getParentHashId()) {
+                return stmt
+            }
+        }
+    }
+    /**
+     * @brief gets the transitive statement containing this statement.
+     * @return Statement 
+     */
+    pub fn getAEnclosingStatement(self) -> *Statement {
+        for (stmt in Statement(__all_data__),
+            temp in Statement(__all_data__)) {
+            if (stmt = self.getEnclosingStatement()) {
+                yield stmt
+            }
+            for (auto_tmp1 in self.getAEnclosingStatement()) {
+                if (temp = auto_tmp1) {
+                    for (auto_tmp2 in temp.getAEnclosingStatement()) {
+                        if (stmt = auto_tmp2) {
+                            yield stmt
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+/**
+ * @brief A callable enclosing statement relation class.
+ */
+schema CallableEnclosingStatement extends CallableEnclosingStatementDO {
+
+}
+impl CallableEnclosingStatement {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *CallableEnclosingStatement {
+        for (tmp in CallableEnclosingStatementDO(db)) {
+            yield CallableEnclosingStatement {
+                statement_hash_id : tmp.statement_hash_id,
+                callable_hash_id : tmp.callable_hash_id
+            }
+        }
+    }
+    /**
+     * @brief gets the enclosing callable of a statement, if any.
+     * @return Callable
+     */
+    pub fn getEnclosingCallable(self) -> Callable {
+        for (c in Callable(__all_data__)) {
+            if (c.id = self.getCallableHashId()) {
+                return c
+            }
+        }
+    }
+}
+/**
+ * @brief A block statement (sequence of statements surrounded with curly braces).
+ */
+schema BlockStatement extends Statement {
+
+}
+impl BlockStatement {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *BlockStatement {
+        for (tmp in Statement(db)) {
+            for (bs in BlockStatementDO(db)) {
+                if (tmp.key_eq(bs)) {
+                    yield BlockStatement {
+                        element_hash_id : tmp.element_hash_id,
+                        parent_hash_id : tmp.parent_hash_id,
+                        index_order : tmp.index_order,
+                        location_hash_id : tmp.location_hash_id,
+                        printable_text : tmp.printable_text,
+                        type : tmp.type
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets a statement that is an immediate child of the block.
+     * @return Statement 
+     */
+    pub fn getAStatement(self) -> *Statement {
+        for (s in Statement(__all_data__)) {
+            if (self.getCodeBlock().element_hash_id = s.getParentHashId()) {
+                yield s
+            }
+        }
+    }
+    /**
+     * @brief gets a statement that is an immediate child of the block.
+     * @return Statement 
+     */
+    pub fn getStatement(self, idx : int) -> Statement {
+        for (s in Statement(__all_data__)) {
+            if (self.getCodeBlock().element_hash_id = s.getParentHashId()) {
+                if (s.getIndex() = idx) {
+                    return s
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the number of immediate child statements in this block.
+     * @return int 
+     */
+    pub fn getNumberOfStatement(self) -> int {
+        return self.getCodeBlock().getNumberOfStatement()
+    }
+    /**
+     * @brief description
+     * @return Statement 
+     */
+    pub fn getLastStatement(self) -> Statement {
+        for (s in Statement(__all_data__)) {
+            let (num = self.getNumberOfStatement()) {
+                if (s = self.getStatement(num - 1)) {
+                    return s
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the code block of the block statement.
+     * @return CodeBlock 
+     */
+    pub fn getCodeBlock(self) -> CodeBlock {
+        for (cb in CodeBlock(__all_data__),
+            bs in BlockStatementDO(__all_data__)) {
+            if (self.key_eq(bs)) {
+                if (cb.element_hash_id = bs.getCodeBlockHashId()) {
+                    return cb
+                }
+            }
+        }
+    }
+}
+/**
+ * @brief A code block, usually surrounded by curly braces.
+ */
+schema CodeBlock extends CodeBlockDO {
+
+}
+impl CodeBlock {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *CodeBlock {
+        for (tmp in CodeBlockDO(db)) {
+            yield CodeBlock {
+                element_hash_id : tmp.element_hash_id,
+                number_of_statement : tmp.number_of_statement,
+                parent_hash_id : tmp.parent_hash_id,
+                is_empty : tmp.is_empty,
+                location_hash_id : tmp.location_hash_id,
+                printable_text : tmp.printable_text
+            }
+        }
+    }
+    /**
+     * @brief gets the parent code block of the try statement
+     * @return CodeBlock 
+     */
+    pub fn getParent(self) -> ElementParent {
+        for (c in ElementParent(__all_data__)) {
+            if (c.id = self.getParentHashId()) {
+                return c
+            }
+        }
+    }
+    /**
+     * @brief gets the immediate child statement of this code block that occurs at the specified (zero-based) position.
+     * @return Statement 
+     */
+    pub fn getAStatement(self) -> *Statement {
+        for (stmt in Statement(__all_data__)) {
+            if (self.key_eq(stmt.getParent())) {
+                yield stmt
+            }
+        }
+    }
+    /**
+     * @brief gets the i-th child statement of this code block that occurs at the specified (zero-based) position.
+     * @return Statement 
+     */
+    pub fn getStatement(self, idx : int) -> Statement {
+        for (stmt in Statement(__all_data__)) {
+            if (self.key_eq(stmt.getParent())) {
+                if (stmt.getIndex() = idx) {
+                    return stmt
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets an ancestor of the element.
+     * @return ElementParent 
+     */
+    pub fn getAnAncestor(self) -> *ElementParent {
+        for (tmp in ElementParent(__all_data__)) {
+            if (tmp.key_eq(self)) {
+                yield tmp.getAnAncestor()
+            }
+        }
+    }
+    /**
+     * @brief gets the location for the element.
+     * @return Location
+     */
+    pub fn getLocation(self) -> Location {
+        for (loc in Location(__all_data__)) {
+            if (loc.element_hash_id = self.getLocationHashId()) {
+                return loc
+            }
+        }
+    }
+}
+/**
+ * @brief An assert statement.
+ */
+schema AssertStatement extends Statement {
+
+}
+impl AssertStatement {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *AssertStatement {
+        for (tmp in Statement(db)) {
+            for (s in AssertStatementDO(db)) {
+                if (tmp.key_eq(s)) {
+                    yield AssertStatement {
+                        element_hash_id : tmp.element_hash_id,
+                        parent_hash_id : tmp.parent_hash_id,
+                        index_order : tmp.index_order,
+                        location_hash_id : tmp.location_hash_id,
+                        printable_text : tmp.printable_text,
+                        type : tmp.type
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the boolean expression of the assert statement.
+     * @return Expression 
+     */
+    pub fn getCondition(self) -> Expression {
+        for (e in Expression(__all_data__),
+            s in AssertStatementDO(__all_data__)) {
+            if (self.key_eq(s)) {
+                if (e.element_hash_id = s.getAssertConditionHashId()) {
+                    return e
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the description expression of the assert statement.
+     * @return Expression 
+     */
+    pub fn getAssertDescription(self) -> Expression {
+        for (e in Expression(__all_data__),
+            s in AssertStatementDO(__all_data__)) {
+            if (self.key_eq(s)) {
+                if (e.element_hash_id = s.getAssertDescriptionHashId()) {
+                    return e
+                }
+            }
+        }
+    }
+}
+/**
+ * @brief A package statement.
+ */
+schema PackageStatement extends PackageStatementDO {
+
+}
+impl PackageStatement {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *PackageStatement {
+        for (tmp in PackageStatementDO(db)) {
+            yield PackageStatement {
+                element_hash_id : tmp.element_hash_id,
+                qualified_name : tmp.qualified_name,
+                location_hash_id : tmp.location_hash_id,
+                package_hash_id : tmp.package_hash_id,
+                parent_hash_id : tmp.parent_hash_id
+            }
+        }
+    }
+    /**
+     * @brief gets the resolved package for the project.
+     * @return Package 
+     */
+    pub fn getPackage(self) -> Package {
+        for (package1 in Package(__all_data__)) {
+            if (package1.id = self.getPackageHashId()) {
+                return package1
+            }
+        }
+    }
+    /**
+     * @brief gets the location for the element.
+     * @return Location
+     */
+    pub fn getLocation(self) -> Location {
+        for (loc in Location(__all_data__)) {
+            if (loc.element_hash_id = self.getLocationHashId()) {
+                return loc
+            }
+        }
+    }
+    /**
+     * @brief gets the declaration statement of the element
+     * @return Statement 
+     */
+    pub fn getParent(self) -> ElementParent {
+        for (c in ElementParent(__all_data__)) {
+            if (c.id = self.getParentHashId()) {
+                return c
+            }
+        }
+    }
+    /**
+     * @brief gets an ancestor of the element.
+     * @return ElementParent 
+     */
+    pub fn getAnAncestor(self) -> *ElementParent {
+        for (tmp in ElementParent(__all_data__)) {
+            if (tmp.key_eq(self)) {
+                yield tmp.getAnAncestor()
+            }
+        }
+    }
+    /**
+     * @brief gets the containing file for the element.
+     * @return File
+     */
+    pub fn getContainingFile(self) -> File {
+        for (f in File(__all_data__)) {
+            if (f.element_hash_id = self.getParentHashId()) {
+                return f
+            }
+        }
+    }
+}
+/**
+ * @brief A local class declaration statement.
+ */
+schema LocalClass extends LocalClassDO {
+
+}
+impl LocalClass {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *LocalClass {
+        for (tmp in LocalClassDO(db)) {
+            yield LocalClass {
+                element_hash_id : tmp.element_hash_id,
+                name : tmp.name,
+                printable_text : tmp.printable_text,
+                location_hash_id : tmp.location_hash_id,
+                parent_hash_id : tmp.parent_hash_id
+            }
+        }
+    }
+    /**
+     * @brief gets the location for the element.
+     * @return Location
+     */
+    pub fn getLocation(self) -> Location {
+        for (loc in Location(__all_data__)) {
+            if (loc.element_hash_id = self.getLocationHashId()) {
+                return loc
+            }
+        }
+    }
+    /**
+     * @brief gets the declaration statement of the element
+     * @return Statement 
+     */
+    pub fn getParent(self) -> ElementParent {
+        for (c in ElementParent(__all_data__)) {
+            if (c.id = self.getParentHashId()) {
+                return c
+            }
+        }
+    }
+    /**
+     * @brief gets an ancestor of the element.
+     * @return ElementParent 
+     */
+    pub fn getAnAncestor(self) -> *ElementParent {
+        for (tmp in ElementParent(__all_data__)) {
+            if (tmp.key_eq(self)) {
+                yield tmp.getAnAncestor()
+            }
+        }
+    }
+}
+/**
+ * @brief A empty statement.
+ */
+schema EmptyStatement extends Statement {
+
+}
+impl EmptyStatement {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *EmptyStatement {
+        for (tmp in Statement(db)) {
+            for (s in EmptyStatementDO(db)) {
+                if (tmp.key_eq(s)) {
+                    yield EmptyStatement {
+                        element_hash_id : tmp.element_hash_id,
+                        parent_hash_id : tmp.parent_hash_id,
+                        index_order : tmp.index_order,
+                        location_hash_id : tmp.location_hash_id,
+                        printable_text : tmp.printable_text,
+                        type : tmp.type
+                    }
+                }
+            }
+        }
+    }
+}
+/**
+ * @brief A return statement.
+ */
+schema ReturnStatement extends Statement {
+
+}
+impl ReturnStatement {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *ReturnStatement {
+        for (tmp in Statement(db)) {
+            for (ret in ReturnStatementDO(db)) {
+                if (tmp.key_eq(ret)) {
+                    yield ReturnStatement {
+                        element_hash_id : tmp.element_hash_id,
+                        parent_hash_id : tmp.parent_hash_id,
+                        index_order : tmp.index_order,
+                        location_hash_id : tmp.location_hash_id,
+                        printable_text : tmp.printable_text,
+                        type : tmp.type
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the return result of the statement.
+     * @return Expression 
+     */
+    pub fn getResult(self) -> Expression {
+        for (expr in Expression(__all_data__),
+            ret in ReturnStatementDO(__all_data__)) {
+            if (self.key_eq(ret)) {
+                if (expr.element_hash_id = ret.getReturnExpressionHashId()) {
+                    return expr
+                }
+            }
+        }
+    }
+}
+/**
+ * @brief A declaration statement DO class.
+ */
+schema DeclarationStatementDO {
+    @primary id: int
+}
+impl DeclarationStatementDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *DeclarationStatementDO {
+    	for (tmp: DeclarationElementDO in db.declaration_element) {
+    		yield DeclarationStatementDO { id: tmp.declaration_statement_hash_id }
+    	}
+    }
+}
+/**
+ * @brief A declaration statement.
+ */
+schema DeclarationStatement extends Statement {
+
+}
+impl DeclarationStatement {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *DeclarationStatement {
+        for (tmp in Statement(db)) {
+            for (dsr in DeclarationStatementDO(db)) {
+                if (tmp.key_eq(dsr)) {
+                    yield DeclarationStatement {
+                        element_hash_id : tmp.element_hash_id,
+                        parent_hash_id : tmp.parent_hash_id,
+                        index_order : tmp.index_order,
+                        location_hash_id : tmp.location_hash_id,
+                        printable_text : tmp.printable_text,
+                        type : tmp.type
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the declared element of the statement.
+     * @return DeclaredElement 
+     */
+    pub fn getDeclaredElement(self) -> *DeclaredElement {
+        for (element in DeclaredElement(__all_data__),
+            dsr in DeclarationStatementDO(__all_data__)) {
+            if (self.key_eq(dsr)) {
+                if (dsr.key_eq(element.getParent())) {
+                    yield element
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the i-th declared element of the statement.
+     * @return DeclaredElement 
+     */
+    pub fn getIthDeclaredElement(self, idx : int) -> DeclaredElement {
+        for (element in DeclaredElement(__all_data__),
+            dsr in DeclarationStatementDO(__all_data__)) {
+            if (self.key_eq(dsr)) {
+                if (dsr.key_eq(element.getParent())) {
+                    if (idx = element.getIndex()) {
+                        return element
+                    }
+                }
+            }
+        }
+    }
+}
+/**
+ * @brief A declared element in a declaration statement.
+ */
+schema DeclaredElement extends DeclarationElementDO {
+
+}
+impl DeclaredElement {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *DeclaredElement {
+        for (tmp in DeclarationElementDO(db)) {
+            yield DeclaredElement {
+                element_hash_id : tmp.element_hash_id,
+                index_order : tmp.index_order,
+                declaration_statement_hash_id : tmp.declaration_statement_hash_id
+            }
+        }
+    }
+    /**
+     * @brief gets the declaration statement of the element
+     * @return Statement 
+     */
+    pub fn getParent(self) -> ElementParent {
+        for (c in ElementParent(__all_data__)) {
+            if (c.id = self.getDeclarationStatementHashId()) {
+                return c
+            }
+        }
+    }
+    /**
+     * @brief gets an ancestor of the element.
+     * @return ElementParent 
+     */
+    pub fn getAnAncestor(self) -> *ElementParent {
+        for (tmp in ElementParent(__all_data__)) {
+            if (tmp.key_eq(self)) {
+                yield tmp.getAnAncestor()
+            }
+        }
+    }
+    /**
+     * @brief gets the declaration statement of the element
+     * @return Statement 
+     */
+    pub fn getStatement(self) -> Statement {
+        for (parent in Statement(__all_data__)) {
+            if (parent.element_hash_id = self.getDeclarationStatementHashId()) {
+                return parent
+            }
+        }
+    }
+}
+/**
+ * @brief A throw statement.
+ */
+schema ThrowStatement extends Statement {
+
+}
+impl ThrowStatement {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *ThrowStatement {
+        for (tmp in Statement(db)) {
+            for (ths in ThrowStatementDO(db)) {
+                if (tmp.key_eq(ths)) {
+                    yield ThrowStatement {
+                        element_hash_id : tmp.element_hash_id,
+                        parent_hash_id : tmp.parent_hash_id,
+                        index_order : tmp.index_order,
+                        location_hash_id : tmp.location_hash_id,
+                        printable_text : tmp.printable_text,
+                        type : tmp.type
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief description
+     * @return Expression 
+     */
+    pub fn getResult(self) -> ElementParent {
+        for (expr in ElementParent(__all_data__),
+            ths in ThrowStatementDO(__all_data__)) {
+            if (expr.id = ths.getExceptionHashId()) {
+                if (self.key_eq(ths)) {
+                    return expr
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the body of the throwStatement.
+     * @return CodeBlock 
+     */
+    pub fn getBlock(self) -> CodeBlock {
+        for (cb in CodeBlock(__all_data__),
+            ths in ThrowStatementDO(__all_data__)) {
+            if (self.key_eq(ths)) {
+                if (cb.element_hash_id = ths.getBlockHashId()) {
+                    return cb
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the body of the throwStatement.
+     * @return Expression 
+     */
+    pub fn getException(self) -> Expression {
+        for (cb in Expression(__all_data__),
+            ths in ThrowStatementDO(__all_data__)) {
+            if (self.key_eq(ths)) {
+                if (cb.element_hash_id = ths.getExceptionHashId()) {
+                    return cb
+                }
+            }
+        }
+    }
+}
+/**
+ * @brief A statement with an attached label.
+ */
+schema LabeledStatement extends Statement {
+
+}
+impl LabeledStatement {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *LabeledStatement {
+        for (tmp in Statement(db)) {
+            for (ls in LabeledStatementDO(db)) {
+                if (tmp.key_eq(ls)) {
+                    yield LabeledStatement {
+                        element_hash_id : tmp.element_hash_id,
+                        parent_hash_id : tmp.parent_hash_id,
+                        index_order : tmp.index_order,
+                        location_hash_id : tmp.location_hash_id,
+                        printable_text : tmp.printable_text,
+                        type : tmp.type
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the identifier of the element's label.
+     * @return Identifier 
+     */
+    pub fn getStatementLabel(self) -> Identifier {
+        for (ident in Identifier(__all_data__),
+            ls in LabeledStatementDO(__all_data__)) {
+            if (self.key_eq(ls)) {
+                if (ident.element_hash_id = ls.getLabeledHashIdentifierHashId()) {
+                    return ident
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the label name of the statement.
+     * @return string 
+     */
+    pub fn getLabel(self) -> string {
+        return self.getStatementLabel().getName()
+    }
+    /**
+     * @brief gets the labeled statement.
+     * @return Statement 
+     */
+    pub fn getStatement(self) -> Statement {
+        for (stmt in Statement(__all_data__),
+            ls in LabeledStatementDO(__all_data__)) {
+            if (self.key_eq(ls)) {
+                if (stmt.element_hash_id = ls.getStatementHashId()) {
+                    return stmt
+                }
+            }
+        }
+    }
+}
+/**
+ * @brief A continue statement.
+ */
+schema ContinueStatement extends Statement {
+
+}
+impl ContinueStatement {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *ContinueStatement {
+        for (tmp in Statement(db)) {
+            for (cs in ContinueStatementDO(db)) {
+                if (tmp.key_eq(cs)) {
+                    yield ContinueStatement {
+                        element_hash_id : tmp.element_hash_id,
+                        parent_hash_id : tmp.parent_hash_id,
+                        index_order : tmp.index_order,
+                        location_hash_id : tmp.location_hash_id,
+                        printable_text : tmp.printable_text,
+                        type : tmp.type
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the continued statement.
+     * @return Statement 
+     */
+    pub fn getStatement(self) -> Statement {
+        for (stmt in Statement(__all_data__),
+            cs in ContinueStatementDO(__all_data__)) {
+            if (self.key_eq(cs)) {
+                if (stmt.element_hash_id = cs.getContinuedStatementHashId()) {
+                    return stmt
+                }
+            }
+        }
+    }
+}
+/**
+ * @brief A yield statement.
+ */
+schema YieldStatement extends Statement {
+
+}
+impl YieldStatement {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *YieldStatement {
+        for (tmp in Statement(db)) {
+            for (ys in YieldStatementDO(db)) {
+                if (tmp.key_eq(ys)) {
+                    yield YieldStatement {
+                        element_hash_id : tmp.element_hash_id,
+                        parent_hash_id : tmp.parent_hash_id,
+                        index_order : tmp.index_order,
+                        location_hash_id : tmp.location_hash_id,
+                        printable_text : tmp.printable_text,
+                        type : tmp.type
+                    }
+                }
+            }
+        }
+    }
+}
+/**
+ * @brief An expression statement.
+ */
+schema ExpressionStatement extends Statement {
+
+}
+impl ExpressionStatement {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *ExpressionStatement {
+        for (tmp in Statement(db)) {
+            for (es in ExpressionStatementDO(db)) {
+                if (tmp.key_eq(es)) {
+                    yield ExpressionStatement {
+                        element_hash_id : tmp.element_hash_id,
+                        parent_hash_id : tmp.parent_hash_id,
+                        index_order : tmp.index_order,
+                        location_hash_id : tmp.location_hash_id,
+                        printable_text : tmp.printable_text,
+                        type : tmp.type
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the Expression in statement.
+     * @return Expression
+     */
+    pub fn getExpression(self) -> Expression {
+        for (e in Expression(__all_data__)) {
+            if (self.key_eq(e.getParent())) {
+                return e
+            }
+        }
+    }
+}
+/**
+ * @brief A jump statement.
+ */
+schema JumpStatement extends Statement {
+
+}
+impl JumpStatement {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *JumpStatement {
+        for (tmp in Statement(db)) {
+            for (bStmt in BreakStatement(db)) {
+                if (tmp.key_eq(bStmt)) {
+                    yield JumpStatement {
+                        element_hash_id : tmp.element_hash_id,
+                        parent_hash_id : tmp.parent_hash_id,
+                        index_order : tmp.index_order,
+                        location_hash_id : tmp.location_hash_id,
+                        printable_text : tmp.printable_text,
+                        type : tmp.type
+                    }
+                }
+            }
+            for (cStmt in ContinueStatement(db)) {
+                if (tmp.key_eq(cStmt)) {
+                    yield JumpStatement {
+                        element_hash_id : tmp.element_hash_id,
+                        parent_hash_id : tmp.parent_hash_id,
+                        index_order : tmp.index_order,
+                        location_hash_id : tmp.location_hash_id,
+                        printable_text : tmp.printable_text,
+                        type : tmp.type
+                    }
+                }
+            }
+            for (yStmt in YieldStatement(db)) {
+                if (tmp.key_eq(yStmt)) {
+                    yield JumpStatement {
+                        element_hash_id : tmp.element_hash_id,
+                        parent_hash_id : tmp.parent_hash_id,
+                        index_order : tmp.index_order,
+                        location_hash_id : tmp.location_hash_id,
+                        printable_text : tmp.printable_text,
+                        type : tmp.type
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the labeled statement that the break or continue statement refers to.
+     * @return LabeledStatement 
+     */
+    pub fn getTargetLabel(self) -> LabeledStatement {
+        for (ns in NameString(__all_data__),
+            stmt in LabeledStatement(__all_data__)) {
+            if (stmt.getStatement() = ns.getValue()) {
+                if (ns.key_eq(self)) {
+                    return stmt
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the statement of the labeled statement.
+     * @return Statement 
+     */
+    pub fn getLabelTarget(self) -> Statement {
+        for (stmt in Statement(__all_data__)) {
+            if (stmt = self.getTargetLabel().getStatement()) {
+                return stmt
+            }
+        }
+    }
+    pub fn getEnclosingTarget(self) -> Statement {
+        for (enclosing in Statement(__all_data__),
+            stmt in Statement(__all_data__)) {
+            if (self.key_eq(stmt)) {
+                for (auto_tmp1 in stmt.getAEnclosingStatement()) {
+                    if (auto_tmp1 = enclosing) {
+                        for (ls in LoopStatement(__all_data__)) {
+                            if (enclosing.key_eq(ls)) {
+                                return enclosing
+                            }
+                        }
+                        for (bs in BreakStatement(__all_data__)) {
+                            if (enclosing.key_eq(bs)) {
+                                return enclosing
+                            }
+                        }
+                        for (ss in SwitchStatement(__all_data__)) {
+                            if (enclosing.key_eq(ss)) {
+                                return enclosing
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief description
+     * @return StatementParent 
+     */
+    pub fn getTarget(self) -> StatementParent {
+        for (parent in StatementParent(__all_data__)) {
+            if (parent.key_eq(self.getLabelTarget())) {
+                return parent
+            }
+            if (parent.key_eq(self.getEnclosingTarget())) {
+                return parent
+            }
+        }
+    }
+}
+/**
+ * @brief Name and value for a named expression or statement, like break statement, labeled statement.
+ */
+schema NameString extends NameStringDO {
+
+}
+impl NameString {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *NameString {
+        for (tmp in NameStringDO(db)) {
+            yield NameString {
+                parent_hash_id : tmp.parent_hash_id,
+                name_element_hash_id : tmp.name_element_hash_id,
+                value_element_hash_id : tmp.value_element_hash_id
+            }
+        }
+    }
+    /**
+     * @brief get the referenced statement.
+     * @return Statement 
+     */
+    pub fn getValue(self) -> Statement {
+        for (stmt in Statement(__all_data__)) {
+            if (stmt.element_hash_id = self.getValueElementHashId()) {
+                return stmt
+            }
+        }
+    }
+    /**
+     * @brief get the identifier of the element.
+     * @return Identifier 
+     */
+    pub fn getName(self) -> Identifier {
+        for (ident in Identifier(__all_data__)) {
+            if (ident.element_hash_id = self.getNameElementHashId()) {
+                return ident
+            }
+        }
+    }
+}
+schema TryStatementDO {
+    @primary id: int
+}
+impl TryStatementDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *TryStatementDO {
+        for (t in TryStatementWithFinallyDO(db)) {
+            yield TryStatementDO {id : t.element_hash_id}
+        }
+        for (t in TryStatementWithoutFinallyDO(db)) {
+            yield TryStatementDO {id : t.element_hash_id}
+        }
+    }
+    pub fn getTryBlockHashId(self) -> int {
+        for (t in TryStatementWithFinallyDO(__all_data__)) {
+            if (self.key_eq(t)) {
+                let (id = t.getTryBlockHashId()) {
+                    return id
+                }
+            }
+        }
+        for (t in TryStatementWithoutFinallyDO(__all_data__)) {
+            if (self.key_eq(t)) {
+                let (id = t.getTryBlockHashId()) {
+                    return id
+                }
+            }
+        }
+    }
+    pub fn getFinallyBlockHashId(self) -> int {
+        for (t in TryStatementWithFinallyDO(__all_data__)) {
+            if (self.key_eq(t)) {
+                return t.getFinallyBlockHashId()
+            }
+        }
+    }
+}
+/**
+ * @brief A try ... catch ... finally statement
+ */
+schema TryStatement extends Statement {
+
+}
+impl TryStatement {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *TryStatement {
+        for (tmp in Statement(db)) {
+            for (ts in TryStatementDO(db)) {
+                if (tmp.key_eq(ts)) {
+                    yield TryStatement {
+                        element_hash_id : tmp.element_hash_id,
+                        parent_hash_id : tmp.parent_hash_id,
+                        index_order : tmp.index_order,
+                        location_hash_id : tmp.location_hash_id,
+                        printable_text : tmp.printable_text,
+                        type : tmp.type
+                    }
+                }
+            }
+        }
+    }
+    fn tmp_getCatchClauseIndexLess(self, catchBlock: CatchClause) -> *CatchClause {
+        for (tmp in CatchClause(__all_data__)) {
+            if (self = tmp.getTryStatement()) {
+                if (tmp.getIndex() < catchBlock.getIndex()) {
+                    yield tmp
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the try block of the try statement.
+     * @return Statement 
+     */
+    pub fn getTryBlock(self) -> CodeBlock {
+        for (tryBlock in CodeBlock(__all_data__),
+            ts in TryStatementDO(__all_data__)) {
+            if (self.key_eq(ts)) {
+                if (tryBlock.element_hash_id = ts.getTryBlockHashId()) {
+                    return tryBlock
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the catch clause of the try statement.
+     * @return CatchClauseStatement 
+     */
+    pub fn getCatchBlock(self) -> *CatchClause {
+        for (catchBlock in CatchClause(__all_data__)) {
+            if (self = catchBlock.getTryStatement()) {
+                yield catchBlock
+            }
+        }
+    }
+    /**
+     * @brief gets the finally block of the try statement
+     * @return CodeBlock 
+     */
+    pub fn getFinallyBlock(self) -> CodeBlock {
+        for (codeBlock in CodeBlock(__all_data__),
+            ts in TryStatementDO(__all_data__)) {
+            if (codeBlock.element_hash_id = ts.getFinallyBlockHashId()) {
+                if (self.key_eq(ts)) {
+                    return codeBlock
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the ResourceList of the try statement
+     * @return ResourceList 
+     */
+    pub fn getResourceList(self) -> ResourceList {
+        for (resourceList in ResourceList(__all_data__)) {
+            if (self.key_eq(resourceList.getParent())) {
+                return resourceList
+            }
+        }
+    }
+    /**
+     * @brief gets the i-th catch clause of the try statement.
+     * @return CatchClauseStatement 
+     */
+    pub fn getIthCatchBlock(self, index: int) -> CatchClause {
+        for (catchBlock in CatchClause(__all_data__)) {
+            if (self = catchBlock.getTryStatement()) {
+                if (self.tmp_getCatchClauseIndexLess(catchBlock).len() = index) {
+                    return catchBlock
+                }
+            }
+        }
+    }
+}
+/**
+ * @brief A single catch section of a try ... catch statement.
+ */
+schema CatchClause extends CatchSectionDO {
+
+}
+impl CatchClause {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *CatchClause {
+        for (tmp in CatchSectionDO(db)) {
+            yield CatchClause {
+                element_hash_id : tmp.element_hash_id,
+                printable_text : tmp.printable_text,
+                parameter_hash_id : tmp.parameter_hash_id,
+                type_hash_id : tmp.type_hash_id,
+                location_hash_id : tmp.location_hash_id,
+                try_statement_hash_id : tmp.try_statement_hash_id,
+                index_order : tmp.index_order
+            }
+        }
+    }
+    /**
+     * @brief gets the parameter of this catch clause.
+     * @return Parameter 
+     */
+    pub fn getParameter(self) -> Parameter {
+        for (param in Parameter(__all_data__)) {
+            if (param.element_hash_id = self.getParameterHashId()) {
+                return param
+            }
+        }
+    }
+    /**
+     * @brief gets the ast element parent of the element.
+     * @return ElementParent 
+     */
+    pub fn getParent(self) -> ElementParent {
+        for (c in ElementParent(__all_data__)) {
+            if (c.id = self.getTryStatementHashId()) {
+                return c
+            }
+        }
+    }
+    /**
+     * @brief gets an ancestor of the element.
+     * @return ElementParent 
+     */
+    pub fn getAnAncestor(self) -> *ElementParent {
+        for (tmp in ElementParent(__all_data__)) {
+            if (tmp.key_eq(self)) {
+                yield tmp.getAnAncestor()
+            }
+        }
+    }
+    /**
+     * @brief gets the location for the element.
+     * @return Location
+     */
+    pub fn getLocation(self) -> Location {
+        for (loc in Location(__all_data__)) {
+            if (loc.element_hash_id = self.getLocationHashId()) {
+                return loc
+            }
+        }
+    }
+    /**
+     * @brief gets the type for the element.
+     * @return Type
+     */
+    pub fn getType(self) -> Type {
+        for (type in Type(__all_data__)) {
+            if (type.id = self.getTypeHashId()) {
+                return type
+            }
+        }
+    }
+    /**
+     * @brief gets the block of this catch clause
+     * @return CodeBlock 
+     */
+    pub fn getBlock(self) -> CodeBlock {
+        for (block in CodeBlock(__all_data__)) {
+            if (self.key_eq(block.getParent())) {
+                return block
+            }
+        }
+    }
+    /**
+     * @brief get the try statement in which this catch clause occurs.
+     * @return TryStatement 
+     */
+    pub fn getTryStatement(self) -> TryStatement {
+        for (tryStmt in TryStatement(__all_data__)) {
+            if (tryStmt.element_hash_id = self.getTryStatementHashId()) {
+                return tryStmt
+            }
+        }
+    }
+}
+/**
+ * @brief A break statement.
+ */
+schema BreakStatement extends Statement {
+
+}
+impl BreakStatement {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *BreakStatement {
+        for (tmp in Statement(db)) {
+            for (bs in BreakStatementDO(db)) {
+                if (tmp.key_eq(bs)) {
+                    yield BreakStatement {
+                        element_hash_id : tmp.element_hash_id,
+                        parent_hash_id : tmp.parent_hash_id,
+                        index_order : tmp.index_order,
+                        location_hash_id : tmp.location_hash_id,
+                        printable_text : tmp.printable_text,
+                        type : tmp.type
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the exited statement of the break statement, if any.
+     * @return Statement 
+     */
+    pub fn getExitedStatement(self) -> Statement {
+        for (stmt in Statement(__all_data__),
+            bs in BreakStatementDO(__all_data__)) {
+            if (self.key_eq(bs)) {
+                if (stmt.element_hash_id = bs.getExitedStatementHashId()) {
+                    return stmt
+                }
+            }
+        }
+    }
+}
+/**
+ * @brief A conditional statement, including if, for, foreach, while and do-while statements.
+ */
+schema ConditionalStatement extends Statement {
+
+}
+impl ConditionalStatement {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *ConditionalStatement {
+        for (tmp in Statement(db)) {
+            for (ifs in IfStatement(db)) {
+                if (tmp.key_eq(ifs)) {
+                    yield ConditionalStatement {
+                        element_hash_id : tmp.element_hash_id,
+                        parent_hash_id : tmp.parent_hash_id,
+                        index_order : tmp.index_order,
+                        location_hash_id : tmp.location_hash_id,
+                        printable_text : tmp.printable_text,
+                        type : tmp.type
+                    }
+                }
+            }
+            for (fs in ForStatement(db)) {
+                if (tmp.key_eq(fs)) {
+                    yield ConditionalStatement {
+                        element_hash_id : tmp.element_hash_id,
+                        parent_hash_id : tmp.parent_hash_id,
+                        index_order : tmp.index_order,
+                        location_hash_id : tmp.location_hash_id,
+                        printable_text : tmp.printable_text,
+                        type : tmp.type
+                    }
+                }
+            }
+            for (ws in WhileStatement(db)) {
+                if (tmp.key_eq(ws)) {
+                    yield ConditionalStatement {
+                        element_hash_id : tmp.element_hash_id,
+                        parent_hash_id : tmp.parent_hash_id,
+                        index_order : tmp.index_order,
+                        location_hash_id : tmp.location_hash_id,
+                        printable_text : tmp.printable_text,
+                        type : tmp.type
+                    }
+                }
+            }
+            for (dws in DoWhileStatement(db)) {
+                if (tmp.key_eq(dws)) {
+                    yield ConditionalStatement {
+                        element_hash_id : tmp.element_hash_id,
+                        parent_hash_id : tmp.parent_hash_id,
+                        index_order : tmp.index_order,
+                        location_hash_id : tmp.location_hash_id,
+                        printable_text : tmp.printable_text,
+                        type : tmp.type
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the boolean condition of the conditional statement.
+     * @return Expression 
+     */
+    pub fn getCondition(self) -> Expression {
+        for (e in Expression(__all_data__)) {
+            for (ifs in IfStatement(__all_data__)) {
+                if (self.key_eq(ifs)) {
+                    if (e = ifs.getCondition()) {
+                        return e
+                    }
+                }
+            }
+            for (fs in ForStatement(__all_data__)) {
+                if (self.key_eq(fs)) {
+                    if (e = fs.getCondition()) {
+                        return e
+                    }
+                }
+            }
+            for (ws in WhileStatement(__all_data__)) {
+                if (self.key_eq(ws)) {
+                    if (e = ws.getCondition()) {
+                        return e
+                    }
+                }
+            }
+            for (dws in DoWhileStatement(__all_data__)) {
+                if (self.key_eq(dws)) {
+                    if (e = dws.getCondition()) {
+                        return e
+                    }
+                }
+            }
+        }
+    }
+}
+schema IfStatementDO {
+    @primary id: int
+}
+impl IfStatementDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *IfStatementDO {
+        for (i in IfStatementWithElseDO(db)) {
+            yield IfStatementDO {id : i.element_hash_id}
+        }
+        for (i in IfStatementWithoutElseDO(db)) {
+            yield IfStatementDO {id : i.element_hash_id}
+        }
+    }
+    pub fn getConditionHashId(self) -> int {
+        for (i in IfStatementWithElseDO(__all_data__)) {
+            if (self.key_eq(i)) {
+                return i.getConditionHashId()
+            }
+        }
+        for (i in IfStatementWithoutElseDO(__all_data__)) {
+            if (self.key_eq(i)) {
+                return i.getConditionHashId()
+            }
+        }
+    }
+    pub fn getConsequentHashId(self) -> int {
+        for (i in IfStatementWithElseDO(__all_data__)) {
+            if (self.key_eq(i)) {
+                return i.getConsequentHashId()
+            }
+        }
+        for (i in IfStatementWithoutElseDO(__all_data__)) {
+            if (self.key_eq(i)) {
+                return i.getConsequentHashId()
+            }
+        }
+    }
+    pub fn getAlternateHashId(self) -> int {
+        for (i in IfStatementWithElseDO(__all_data__)) {
+            if (self.key_eq(i)) {
+                return i.getAlternateHashId()   
+            }
+        }
+    }
+}
+/**
+ * @brief A if statement.
+ */
+schema IfStatement extends Statement {
+
+}
+impl IfStatement {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *IfStatement {
+        for (tmp in Statement(db)) {
+            for (ifs in IfStatementDO(db)) {
+                if (tmp.key_eq(ifs)) {
+                    yield IfStatement {
+                        element_hash_id : tmp.element_hash_id,
+                        parent_hash_id : tmp.parent_hash_id,
+                        index_order : tmp.index_order,
+                        location_hash_id : tmp.location_hash_id,
+                        printable_text : tmp.printable_text,
+                        type : tmp.type
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the boolean condition of this if statement.
+     * @return Expression 
+     */
+    pub fn getCondition(self) -> Expression {
+        for (expr in Expression(__all_data__),
+            ifs in IfStatementDO(__all_data__)) {
+            if (self.key_eq(ifs)) {
+                if (expr.element_hash_id = ifs.getConditionHashId()) {
+                    return expr
+                }
+            }
+        }
+    }
+    /**
+     * @brief get the statement that is executed whenever the condition of this branch evaluates to true.
+     * @return Statement 
+     */
+    pub fn getConsequent(self) -> Statement {
+        for (consequent in Statement(__all_data__),
+            ifs in IfStatementDO(__all_data__)) {
+            if (self.key_eq(ifs)) {
+                if (consequent.element_hash_id = ifs.getConsequentHashId()) {
+                    return consequent
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the else branch of this if statement.
+     * @return Statement 
+     */
+    pub fn getAlternate(self) -> Statement {
+        for (alternate in Statement(__all_data__),
+            ifs in IfStatementDO(__all_data__)) {
+            if (self.key_eq(ifs)) {
+                if (alternate.element_hash_id = ifs.getAlternateHashId()) {
+                    return alternate
+                }
+            }
+        }
+    }
+}
+/**
+ * @brief A basic for statement.
+ */
+schema ForStatement extends Statement {
+
+}
+impl ForStatement {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *ForStatement {
+        for (tmp in Statement(db)) {
+            for (fs in ForStatementDO(db)) {
+                if (tmp.key_eq(fs)) {
+                    yield ForStatement {
+                        element_hash_id : tmp.element_hash_id,
+                        parent_hash_id : tmp.parent_hash_id,
+                        index_order : tmp.index_order,
+                        location_hash_id : tmp.location_hash_id,
+                        printable_text : tmp.printable_text,
+                        type : tmp.type
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the initializer statement of the for loop, this maybe an assignment statement or a local variable declaration statement.
+     * @return Statement 
+     */
+    pub fn getInitialization(self) -> Statement {
+        for (init in Statement(__all_data__),
+            fs in ForStatementDO(__all_data__)) {
+            if (self.key_eq(fs)) {
+                if (init.element_hash_id = fs.getInitializationHashId()) {
+                    return init
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the boolean condition of this for loop.
+     * @return Expression 
+     */
+    pub fn getCondition(self) -> Expression {
+        for (cond in Expression(__all_data__),
+            fs in ForStatementDO(__all_data__)) {
+            if (self.key_eq(fs)) {
+                if (cond.element_hash_id = fs.getConditionHashId()) {
+                    return cond
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the update statement of this for loop.
+     * @return Statement 
+     */
+    pub fn getUpdate(self) -> Statement {
+        for (update in Statement(__all_data__),
+            fs in ForStatementDO(__all_data__)) {
+            if (self.key_eq(fs)) {
+                if (update.element_hash_id = fs.getUpdateHashId()) {
+                    return update
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the body of this for loop, usually a block statement.
+     * @return Statement 
+     */
+    pub fn getBody(self) -> Statement {
+        for (body in Statement(__all_data__),
+            fs in ForStatementDO(__all_data__)) {
+            if (self.key_eq(fs)) {
+                if (body.element_hash_id = fs.getBodyHashId()) {
+                    return body
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the statement that is executed whenever the condition of this branch statement evaluates to true.
+     * @return Statement 
+     */
+    pub fn getTrueSuccessor(self) -> Statement {
+        return self.getBody()
+    }
+}
+/**
+ * @brief A foreach statement.
+ */
+schema ForeachStatement extends Statement {
+
+}
+impl ForeachStatement {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *ForeachStatement {
+        for (tmp in Statement(db)) {
+            for (fs in ForeachStatementDO(db)) {
+                if (tmp.key_eq(fs)) {
+                    yield ForeachStatement {
+                        element_hash_id : tmp.element_hash_id,
+                        parent_hash_id : tmp.parent_hash_id,
+                        index_order : tmp.index_order,
+                        location_hash_id : tmp.location_hash_id,
+                        printable_text : tmp.printable_text,
+                        type : tmp.type
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the expression over which the foreach loop iterates.
+     * @return Expression 
+     */
+    pub fn getIteratedValue(self) -> Expression {
+        for (literalValue in Expression(__all_data__),
+            fs in ForeachStatementDO(__all_data__)) {
+            if (self.key_eq(fs)) {
+                if (literalValue.element_hash_id = fs.getIteratedValueHashId()) {
+                    return literalValue
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the iteration parameter of this foreach loop.
+     * @return Parameter 
+     */
+    pub fn getIterationParameter(self) -> Parameter {
+        for (param in Parameter(__all_data__),
+            fs in ForeachStatementDO(__all_data__)) {
+            if (self.key_eq(fs)) {
+                if (param.element_hash_id = fs.getIterationParameterHashId()) {
+                    return param
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the body of this for loop.
+     * @return Statement 
+     */
+    pub fn getBody(self) -> Statement {
+        for (body in Statement(__all_data__),
+            fs in ForeachStatementDO(__all_data__)) {
+            if (self.key_eq(fs)) {
+                if (body.element_hash_id = fs.getBodyHashId()) {
+                    return body
+                }
+            }
+        }
+    }
+}
+/**
+ * @brief A while statement.
+ */
+schema WhileStatement extends Statement {
+
+}
+impl WhileStatement {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *WhileStatement {
+        for (tmp in Statement(db)) {
+            for (ws in WhileStatementDO(db)) {
+                if (tmp.key_eq(ws)) {
+                    yield WhileStatement {
+                        element_hash_id : tmp.element_hash_id,
+                        parent_hash_id : tmp.parent_hash_id,
+                        index_order : tmp.index_order,
+                        location_hash_id : tmp.location_hash_id,
+                        printable_text : tmp.printable_text,
+                        type : tmp.type
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the boolean condition of this while loop.
+     * @return Expression 
+     */
+    pub fn getCondition(self) -> Expression {
+        for (cond in Expression(__all_data__),
+            ws in WhileStatementDO(__all_data__)) {
+            if (self.key_eq(ws)) {
+                if (cond.element_hash_id = ws.getConditionHashId()) {
+                    return cond
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the body of this while loop.
+     * @return Statement 
+     */
+    pub fn getBody(self) -> Statement {
+        for (body in Statement(__all_data__),
+            ws in WhileStatementDO(__all_data__)) {
+            if (self.key_eq(ws)) {
+                if (body.element_hash_id = ws.getBodyDeclarationHashId()) {
+                    return body
+                }
+            }
+        }
+    }
+}
+/**
+ * @brief A do-while statement.
+ */
+schema DoWhileStatement extends Statement {
+
+}
+impl DoWhileStatement {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *DoWhileStatement {
+        for (tmp in Statement(db)) {
+            for (dw in DoWhileStatementDO(db)) {
+                if (tmp.key_eq(dw)) {
+                    yield DoWhileStatement {
+                        element_hash_id : tmp.element_hash_id,
+                        parent_hash_id : tmp.parent_hash_id,
+                        index_order : tmp.index_order,
+                        location_hash_id : tmp.location_hash_id,
+                        printable_text : tmp.printable_text,
+                        type : tmp.type
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the boolean condition of this do-while loop.
+     * @return Expression 
+     */
+    pub fn getCondition(self) -> Expression {
+        for (cond in Expression(__all_data__),
+            dw in DoWhileStatementDO(__all_data__)) {
+            if (self.key_eq(dw)) {
+                if (cond.element_hash_id = dw.getConditionHashId()) {
+                    return cond
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the body of this while loop.
+     * @return Statement 
+     */
+    pub fn getBody(self) -> Statement {
+        for (body in Statement(__all_data__),
+            ws in DoWhileStatementDO(__all_data__)) {
+            if (self.key_eq(ws)) {
+                if (body.element_hash_id = ws.getBodyDeclarationHashId()) {
+                    return body
+                }
+            }
+        }
+    }
+}
+/**
+ * @brief A loop statement.
+ */
+schema LoopStatement extends Statement {
+
+}
+impl LoopStatement {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *LoopStatement {
+        for (tmp in Statement(db)) {
+            for (fs in ForStatement(db)) {
+                if (tmp.key_eq(fs)) {
+                    yield LoopStatement {
+                        element_hash_id : tmp.element_hash_id,
+                        parent_hash_id : tmp.parent_hash_id,
+                        index_order : tmp.index_order,
+                        location_hash_id : tmp.location_hash_id,
+                        printable_text : tmp.printable_text,
+                        type : tmp.type
+                    }
+                }
+            }
+            for (fs in ForeachStatement(db)) {
+                if (tmp.key_eq(fs)) {
+                    yield LoopStatement {
+                        element_hash_id : tmp.element_hash_id,
+                        parent_hash_id : tmp.parent_hash_id,
+                        index_order : tmp.index_order,
+                        location_hash_id : tmp.location_hash_id,
+                        printable_text : tmp.printable_text,
+                        type : tmp.type
+                    }
+                }
+            }
+            for (fs in WhileStatement(db)) {
+                if (tmp.key_eq(fs)) {
+                    yield LoopStatement {
+                        element_hash_id : tmp.element_hash_id,
+                        parent_hash_id : tmp.parent_hash_id,
+                        index_order : tmp.index_order,
+                        location_hash_id : tmp.location_hash_id,
+                        printable_text : tmp.printable_text,
+                        type : tmp.type
+                    }
+                }
+            }
+            for (fs in DoWhileStatement(db)) {
+                if (tmp.key_eq(fs)) {
+                    yield LoopStatement {
+                        element_hash_id : tmp.element_hash_id,
+                        parent_hash_id : tmp.parent_hash_id,
+                        index_order : tmp.index_order,
+                        location_hash_id : tmp.location_hash_id,
+                        printable_text : tmp.printable_text,
+                        type : tmp.type
+                    }
+                }
+            }
+        }
+    }
+}
+/**
+ * @brief A switch statement.
+ */
+schema SwitchStatement extends Statement {
+
+}
+impl SwitchStatement {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *SwitchStatement {
+        for (tmp in Statement(db)) {
+            for (ss in SwitchStatementDO(db)) {
+                if (tmp.key_eq(ss)) {
+                    yield SwitchStatement {
+                        element_hash_id : tmp.element_hash_id,
+                        parent_hash_id : tmp.parent_hash_id,
+                        index_order : tmp.index_order,
+                        location_hash_id : tmp.location_hash_id,
+                        printable_text : tmp.printable_text,
+                        type : tmp.type
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets an immediate child statement of this switch statement.
+     * @return Statement 
+     */
+    pub fn getAStmt(self) -> Statement {
+        for (stmt in Statement(__all_data__)) {
+            if (self.key_eq(stmt.getParent())) {
+                return stmt
+            }
+        }
+    }
+    /**
+     * @brief gets the i-th child statement of this switch statement.
+     * @return Statement 
+     */
+    pub fn getIthStmt(self, idx : int) -> Statement {
+        for (stmt in Statement(__all_data__)) {
+            if (self.key_eq(stmt.getParent())) {
+                if (stmt.getIndex() = idx) {
+                    return stmt
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets switch Block
+     * @return codeBlock
+     */
+    pub fn getCodeBlock(self) -> CodeBlock {
+        for (cb in CodeBlock(__all_data__)) {
+            if (self.key_eq(cb.getParent())) {
+                return cb
+            }
+        }
+    }
+    /**
+     * @brief gets the i-th child statement of this switch statement.
+     * @return Statement 
+     */
+    pub fn getDefaultStmt(self) -> DefaultSwitchLabelStatement {
+        for (stmt in DefaultSwitchLabelStatement(__all_data__)){
+            if (self.key_eq(stmt.getParent())) {
+                return stmt
+            }
+        }
+    }
+    /**
+     * @brief gets the expression of this switch statement.
+     * @return Expression 
+     */
+    pub fn getExpr(self) -> Expression {
+        for (expr in Expression(__all_data__)) {
+            if (self.key_eq(expr.getParent())) {
+                return expr
+            }
+        }
+    }
+    /**
+     * @brief gets a case of this switch statement, which maybe either a normal or a default.
+     * @return SwitchLabelStatement 
+     */
+    pub fn getACase(self) -> *SwitchLabelStatement {
+        for (stmt in SwitchLabelStatement(__all_data__)) {
+            if (self = stmt.getEnclosingSwitchBlock()) {
+                yield stmt
+            }
+        }
+    }
+}
+/**
+ * @brief A single switch label or labeled rule in a switch statement.
+ */
+schema SwitchLabelStatement extends Statement {
+
+}
+impl SwitchLabelStatement {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *SwitchLabelStatement {
+        for (tmp in Statement(db)) {
+            for (sl in SwitchLabelStatementDO(db)) {
+                if (tmp.key_eq(sl)) {
+                    yield SwitchLabelStatement {
+                        element_hash_id : tmp.element_hash_id,
+                        parent_hash_id : tmp.parent_hash_id,
+                        index_order : tmp.index_order,
+                        location_hash_id : tmp.location_hash_id,
+                        printable_text : tmp.printable_text,
+                        type : tmp.type
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the enclosing switch statement of this case.
+     * @return SwitchStatement 
+     */
+    pub fn getEnclosingSwitchBlock(self) -> SwitchStatement {
+        for (stmt in SwitchStatement(__all_data__),
+            sl in SwitchLabelStatementDO(__all_data__)) {
+            if (self.key_eq(sl)) {
+                if (stmt.element_hash_id = sl.getEnclosingSwitchBlockHashId()) {
+                    return stmt
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the expression of the surrounding switch that this case is compared against.
+     * @return ExpressionListElement 
+     */
+    pub fn getSelector(self) -> ExpressionListElement {
+        for (selector in ExpressionListElement(__all_data__),
+            sl in SwitchLabelStatementDO(__all_data__)) {
+            if (self.key_eq(sl)) {
+                if (selector.getParent().id = sl.getCaseValueHashId()) {
+                    let (i = sl.getCaseValueHashId()) {
+                        if (i > 0) {
+                            return selector
+                        }
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief get the default label statement.
+     * @return SwitchLabelStatement
+     */
+    pub fn getDefault(self) -> SwitchLabelStatement {
+        for (stmt in SwitchLabelStatement(__all_data__),
+            sl in SwitchLabelStatementDO(__all_data__)) {
+            if (self.key_eq(sl)) {
+                if (stmt.key_eq(sl)) {
+                    if (sl.getCaseValueHashId() = -1) {
+                        return stmt
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief the element represents a default section or not, 1 means true.
+     * @return int 
+     */
+    pub fn isDefaultValue(self) -> int {
+        for (sl in SwitchLabelStatementDO(__all_data__)) {
+            if (self.key_eq(sl)) {
+                return sl.getCaseValueHashId()
+            }
+        }
+    }
+    /**
+     * @brief the element represents a default section or not, 1 means true.
+     * @return int 
+     */
+    pub fn getNext(self) -> int {
+        for (sl in SwitchLabelStatementDO(__all_data__)) {
+            let (i = sl.getNext()) {
+                if (self.key_eq(sl)) {
+                    return i
+                }
+            }
+        }
+    }
+    pub fn getNextSwitchCaseStatement(self) -> SwitchLabelStatement {
+        for (s in SwitchLabelStatement(__all_data__)) {
+            if (s.element_hash_id = self.getNext()) {
+                return s
+            }
+        }
+    }
+    pub fn getStatement(self, index : int) -> Statement {
+        for (statement in self.getExecutionStatement()) {
+            let (tmp1 = statement.getIndex() - self.getIndex()) {
+                if (tmp1 - 1 = index) {
+                    return statement
+                }
+            }
+        }
+    }
+    pub fn getExecutionStatement(self) -> *Statement {
+        for (s in Statement(__all_data__)) {
+            if (s.getParentHashId() = self.getParentHashId()) {
+                let (i = s.getIndex(),
+                    j = self.getIndex(),
+                    tmp = self.getNext()) {
+                    if (tmp = 0) {
+                        if (i > j) {
+                            yield s
+                        }
+                    }
+                    if (tmp != 0) {
+                        let (l = self.getNextSwitchCaseStatement()) {
+                            let (k = l.getIndex()) {
+                                if (i > j && i < k) {
+                                    yield s
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+schema DefaultSwitchLabelStatement extends SwitchLabelStatement {
+
+}
+impl DefaultSwitchLabelStatement {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *DefaultSwitchLabelStatement {
+        for (tmp in SwitchLabelStatement(db)) {
+            if (tmp.isDefaultValue() = -1) {
+                yield DefaultSwitchLabelStatement {
+                    element_hash_id : tmp.element_hash_id,
+                    parent_hash_id : tmp.parent_hash_id,
+                    index_order : tmp.index_order,
+                    location_hash_id : tmp.location_hash_id,
+                    printable_text : tmp.printable_text,
+                    type : tmp.type
+                }
+            }
+        }
+    }
+}
+schema ConstSwitchLabelStatement extends SwitchLabelStatement {
+
+}
+impl ConstSwitchLabelStatement {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *ConstSwitchLabelStatement {
+        for (tmp in SwitchLabelStatement(db)) {
+            for (ss in SwitchLabelStatement(db)) {
+                if (tmp = ss) {
+                    if (ss.isDefaultValue() != -1) {
+                        yield ConstSwitchLabelStatement {
+                            element_hash_id : tmp.element_hash_id,
+                            parent_hash_id : tmp.parent_hash_id,
+                            index_order : tmp.index_order,
+                            location_hash_id : tmp.location_hash_id,
+                            printable_text : tmp.printable_text,
+                            type : tmp.type
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+/**
+ * @brief A synchronized statement.
+ */
+schema SynchronizedStatement extends Statement {
+
+}
+impl SynchronizedStatement {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *SynchronizedStatement {
+        for (tmp in Statement(db)) {
+            for (ss in SynchronizedStatementDO(db)) {
+                if (tmp.key_eq(ss)) {
+                    yield SynchronizedStatement {
+                        element_hash_id : tmp.element_hash_id,
+                        parent_hash_id : tmp.parent_hash_id,
+                        index_order : tmp.index_order,
+                        location_hash_id : tmp.location_hash_id,
+                        printable_text : tmp.printable_text,
+                        type : tmp.type
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the body of this synchronized statement
+     * @return Statement 
+     */
+    pub fn getBody(self) -> Statement {
+        for (body in Statement(__all_data__),
+            ss in SynchronizedStatementDO(__all_data__)) {
+            if (self.key_eq(ss)) {
+                if (body.element_hash_id = ss.getBodyDeclarationHashId()) {
+                    return body
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the expression on which the statement synchronizes.
+     * @return Expression 
+     */
+    pub fn getLockExpression(self) -> Expression {
+        for (expr in Expression(__all_data__),
+            ss in SynchronizedStatementDO(__all_data__)) {
+            if (self.key_eq(ss)) {
+                if (expr.element_hash_id = ss.getLockExpressionHashId()) {
+                    return expr
+                }
+            }
+        }
+    }
+}

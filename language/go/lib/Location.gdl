@@ -1,0 +1,20 @@
+schema Location extends LocationDO {
+
+}
+impl Location {
+    @data_constraint
+    @inline
+    fn __all__(db: GoDB) -> *Location {
+        for (tmp in LocationDO(db)) {
+            yield Location {
+                oid : tmp.oid,
+                start_line_number : tmp.start_line_number,
+                start_column_number : tmp.start_column_number,
+                end_line_number : tmp.end_line_number,
+                end_column_number : tmp.end_column_number,
+                token_start_offset : tmp.token_start_offset,
+                token_end_offset : tmp.token_end_offset
+            }
+        }
+    }
+}

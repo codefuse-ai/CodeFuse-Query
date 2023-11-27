@@ -1,0 +1,74 @@
+schema Comment extends Node {
+
+}
+impl Comment {
+    @data_constraint
+    @inline
+    fn __all__(db: GoDB) -> *Comment {
+        for (tmp in Node(db)) {
+            for (c in CommentDO(db)) {
+                if (tmp.key_eq(c)) {
+                    yield Comment {
+                        id : tmp.id
+                    }
+                }
+            }
+        }
+    }
+}
+schema CommentGroup extends Node {
+
+}
+impl CommentGroup {
+    @data_constraint
+    @inline
+    fn __all__(db: GoDB) -> *CommentGroup {
+        for (tmp in Node(db)) {
+            for (c in CommentGroupDO(db)) {
+                if (tmp.key_eq(c)) {
+                    yield CommentGroup {
+                        id : tmp.id
+                    }
+                }
+            }
+        }
+    }
+}
+schema DocComment extends Node {
+
+}
+impl DocComment {
+    @data_constraint
+    @inline
+    fn __all__(db: GoDB) -> *DocComment {
+        for (tmp in Node(db)) {
+            for (d in DocCommentDO(db)) {
+                if (tmp.key_eq(d)) {
+                    yield DocComment {
+                        id : tmp.id
+                    }
+                }
+            }
+        }
+    }
+    pub fn getAssociateObj(self) -> Node {
+        for (n in Node(__all_data__),
+            d in DocCommentDO(__all_data__)) {
+            if (d.key_eq(self)) {
+                if (n.id = d.getAssociateObj()) {
+                    return n
+                }
+            }
+        }
+    }
+    pub fn getCommentGroup(self) -> Node {
+        for (n in Node(__all_data__),
+            d in DocCommentDO(__all_data__)) {
+            if (d.key_eq(self)) {
+                if (n.id = d.getCommentGroupId()) {
+                    return n
+                }
+            }
+        }
+    }
+}

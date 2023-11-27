@@ -1,0 +1,177 @@
+/**
+ * @brief A java type, either a reference type or a primitive type.
+ */
+schema Type {
+    @primary id: int
+}
+impl Type {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *Type {
+        for (r in ReferenceType(db)) {
+            yield Type {id : r.oid}
+        }
+        for (p in Primitive(db)) {
+            yield Type {id : p.oid}
+        }
+        for (c in Class(db)) {
+            yield Type {id : c.element_hash_id}
+        }
+    }
+    /**
+     * @brief gets the name of the type.
+     * @return string 
+     */
+    pub fn getName(self) -> string {
+        for (r in ReferenceType(__all_data__)) {
+            if (self.key_eq(r)) {
+                let (name = r.getName()) {
+                    return name
+                }
+            }
+        }
+        for (p in Primitive(__all_data__)) {
+            if (self.key_eq(p)) {
+                let (name = p.getName()) {
+                    return name
+                }
+            }
+        }
+        for (c in Class(__all_data__)) {
+            if (self.key_eq(c)) {
+                let (name = c.getName()) {
+                    return name
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the name of the type.
+     * @return string 
+     */
+    pub fn getQualifiedName(self) -> string {
+        for (r in ReferenceType(__all_data__)) {
+            if (self.key_eq(r)) {
+                let (name = r.getQualifiedName()) {
+                    return name
+                }
+            }
+        }
+        for (p in Primitive(__all_data__)) {
+            if (self.key_eq(p)) {
+                let (name = p.getName()) {
+                    return name
+                }
+            }
+        }
+        for (c in Class(__all_data__)) {
+            if (self.key_eq(c)) {
+                let (name = c.getQualifiedName()) {
+                    return name
+                }
+            }
+        }
+    }
+}
+/**
+ * @brief A java reference type.
+ */
+schema ReferenceType extends ReferenceTypeDO {
+
+}
+impl ReferenceType {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *ReferenceType {
+        for (tmp in ReferenceTypeDO(db)) {
+            yield ReferenceType {
+                oid : tmp.oid,
+                name : tmp.name,
+                qualified_name : tmp.qualified_name
+            }
+        }
+    }
+}
+/**
+ * @brief An occurrence of a type in source code, for example, as a return type of the method or the type of a method parameter.
+ */
+schema TypeElement extends TypeElementDO {
+
+}
+impl TypeElement {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *TypeElement {
+        for (tmp in TypeElementDO(db)) {
+            yield TypeElement {
+                element_hash_id : tmp.element_hash_id,
+                reference_type_hash_id : tmp.reference_type_hash_id,
+                printable_text : tmp.printable_text,
+                parent_hash_id : tmp.parent_hash_id,
+                location_hash_id : tmp.location_hash_id
+            }
+        }
+    }
+    /**
+     * @brief gets the type for the element.
+     * @return Type
+     */
+    pub fn getType(self) -> Type {
+        for (type in Type(__all_data__)) {
+            if (type.id = self.getReferenceTypeHashId()) {
+                return type
+            }
+        }
+    }
+    /**
+     * @brief gets the ast element parent of the element.
+     * @return ElementParent 
+     */
+    pub fn getParent(self) -> ElementParent {
+        for (c in ElementParent(__all_data__)) {
+            if (c.id = self.getParentHashId()) {
+                return c
+            }
+        }
+    }
+    /**
+     * @brief gets an ancestor of the element.
+     * @return ElementParent 
+     */
+    pub fn getAnAncestor(self) -> *ElementParent {
+        for (tmp in ElementParent(__all_data__)) {
+            if (tmp.key_eq(self)) {
+                yield tmp.getAnAncestor()
+            }
+        }
+    }
+    /**
+     * @brief gets the location for the element.
+     * @return Location 
+     */
+    pub fn getLocation(self) -> Location {
+        for (loc in Location(__all_data__)) {
+            if (loc.element_hash_id = self.getLocationHashId()) {
+                return loc
+            }
+        }
+    }
+}
+/**
+ * @brief A primitive type, includes "boolean", "byte", "short", "char", "int", "long", "float", "double" and "null".
+ */
+schema Primitive extends PrimitiveDO {
+
+}
+impl Primitive {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *Primitive {
+        for (tmp in PrimitiveDO(db)) {
+            yield Primitive {
+                oid : tmp.oid,
+                name : tmp.name
+            }
+        }
+    }
+}

@@ -1,0 +1,922 @@
+/**
+ * @filename: Declaration
+ * @brief: Provides classes and predicates for working with JavaScript / TypeScript declarations.
+ */
+
+/**
+ * A type parameter.
+ */
+schema TypeParameter extends Node {
+}
+
+impl TypeParameter {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *TypeParameter {
+        for (tmp in Node(db)) {
+            if (isTypeParameter(tmp)) {
+                yield TypeParameter {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A parameter declaration.
+ */
+schema Parameter extends Node {
+}
+
+impl Parameter {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *Parameter {
+        for (tmp in Node(db)) {
+            if (isParameter(tmp)) {
+                yield Parameter {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets the `...` token of this parameter declaration.
+     */
+    pub fn getDotDotDotToken(self) -> DotDotDotToken {
+        for (dotDotDotToken in DotDotDotToken(__all_data__)) {
+            for (auto_tmp1 in self.getAChild()) {
+                if (dotDotDotToken.key_eq(auto_tmp1)) {
+                    return dotDotDotToken
+                }
+            }
+        }
+    }
+
+    /**
+     * Determines whether this parameter declaration is a rest parameter.
+     */
+    pub fn isRestParameter(self) -> bool {
+        for (dotDotDotToken in DotDotDotToken(__all_data__)) {
+            if (dotDotDotToken = self.getDotDotDotToken()) {
+                return true
+            }
+        }
+    }
+
+    /**
+     * Gets the name of this parameter declaration.
+     */
+    pub fn getNameNode(self) -> BindingName {
+        for (bindingName in BindingName(__all_data__)) {
+            if (self.isRestParameter()) {
+                if (bindingName.key_eq(self.getChild(1))) {
+                    return bindingName
+                }
+            }
+            if (!self.isRestParameter()) {
+                if (bindingName.key_eq(self.getChild(0))) {
+                    return bindingName
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets the `?` token of this parameter declaration.
+     */
+    pub fn getQuestionToken(self) -> QuestionToken {
+        for (questionToken in QuestionToken(__all_data__)) {
+            for (auto_tmp1 in self.getAChild()) {
+                if (questionToken.key_eq(auto_tmp1)) {
+                    return questionToken
+                }
+            }
+        }
+    }
+
+    /**
+     * Determines whether this parameter declaration is an optional parameter, which means it has a `?` token.
+     */
+    pub fn isOptionalParameter(self) -> bool {
+        for (questionToken in QuestionToken(__all_data__)) {
+            if (questionToken = self.getQuestionToken()) {
+                return true
+            }
+        }
+    }
+
+    /**
+     * Gets the type node of this parameter.
+     */
+    pub fn getType(self) -> TypeNode {
+        for (typeNode in TypeNode(__all_data__)) {
+            for (auto_tmp1 in self.getAChild()) {
+                if (typeNode.key_eq(auto_tmp1)) {
+                    return typeNode
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets the initializer expression of this parameter.
+     */
+    pub fn getInitializer(self) -> Expression {
+        for (expression in Expression(__all_data__)) {
+            if (!self.isRestParameter()) {
+                if (expression.key_eq(self.getLastChild())) {
+                    let (index = expression.getIndex()) {
+                        if (index > 0) {
+                            return expression
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Determines whether this parameter has the initializer.
+     */
+    pub fn hasInitializer(self) -> bool {
+        for (expression in Expression(__all_data__)) {
+            if (expression = self.getInitializer()) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * A variable declaration
+ */
+schema VariableDeclaration extends Node {
+}
+
+impl VariableDeclaration {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *VariableDeclaration {
+        for (tmp in Node(db)) {
+            if (isVariableDeclaration(tmp)) {
+                yield VariableDeclaration {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+
+    fn getAllBindingNameIndex(self) -> *int {
+        for (childIndex in int::range(0, self.getChildCount())) {
+            let (child = self.getChild(childIndex)) {
+                let (tmp = BindingName(__all_data__).find(child)) {
+                    yield childIndex
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets a decorator.
+     */
+    pub fn getADecorator(self) -> *Decorator {
+        for (decorator in Decorator(__all_data__)) {
+            for (auto_tmp1 in self.getAChild()) {
+                if (decorator.key_eq(auto_tmp1)) {
+                    yield decorator
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets the `i`th decorator.
+     */
+    pub fn getDecorator(self, i: int) -> Decorator {
+        for (decorator in Decorator(__all_data__)) {
+            if (decorator.key_eq(self.getChild(i))) {
+                return decorator
+            }
+        }
+    }
+
+    /**
+     * Gets a modifier.
+     */
+    pub fn getAModifier(self) -> *Modifier {
+        for (modifier in Modifier(__all_data__)) {
+            for (auto_tmp1 in self.getAChild()) {
+                if (modifier.key_eq(auto_tmp1)) {
+                    yield modifier
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets the `i`th modifier.
+     */
+    pub fn getModifier(self, i: int) -> Modifier {
+        for (childIndex in int::__undetermined_all__()) {
+            for (modifier in Modifier(__all_data__)) {
+                let (decoratorCount = self.getDecoratorCount()) {
+                    if (modifier.key_eq(self.getChild(childIndex))) {
+                        if (i = childIndex - decoratorCount) {
+                            return modifier
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets the declared variable name
+     */
+    pub fn getNameNode(self) -> BindingName {
+        for (name in BindingName(__all_data__)) {
+            let (index = self.getNameNodeIndex()) {
+                if (name.key_eq(self.getChild(index))) {
+                    return name
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets the `!` token of this variable declaration. (Optional)
+     */
+    pub fn getExclamationToken(self) -> ExclamationToken {
+        for (exclamationToken in ExclamationToken(__all_data__)) {
+            for (auto_tmp1 in self.getAChild()) {
+                if (exclamationToken.key_eq(auto_tmp1)) {
+                    return exclamationToken
+                }
+            }
+        }
+    }
+
+    /**
+     * Determines whether this variable declaration has the definite assignment assertion.
+     */
+    pub fn hasDefiniteAssignmentAssertion(self) -> bool {
+        for (exclamationToken in ExclamationToken(__all_data__)) {
+            if (exclamationToken = self.getExclamationToken()) {
+                return true
+            }
+        }
+    }
+
+    /**
+     * Gets the type node of the variable declaration. (Optional)
+     */
+    pub fn getTypeNode(self) -> TypeNode {
+        for (typeNode in TypeNode(__all_data__)) {
+            for (auto_tmp1 in self.getAChild()) {
+                if (typeNode.key_eq(auto_tmp1)) {
+                    return typeNode
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets the initialization expression. (Optional)
+     */
+    pub fn getInitializer(self) -> Expression {
+        for (expression in Expression(__all_data__)) {
+            if (expression.key_eq(self.getLastChild())) {
+                let (index = expression.getIndex()) {
+                    let (nameNodeIndex = self.getNameNodeIndex()) {
+                        if (index > nameNodeIndex) {
+                            return expression
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Determines whether this variable declaration has the initializer.
+     */
+    pub fn hasInitializer(self) -> bool {
+        for (expression in Expression(__all_data__)) {
+            if (expression = self.getInitializer()) {
+                return true
+            }
+        }
+    }
+
+    /**
+     * Gets the number of decorators.
+     */
+    pub fn getDecoratorCount(self) -> int {
+        return self.getADecorator().len()
+    }
+
+    /**
+     * Get the index of name node.
+     */
+    pub fn getNameNodeIndex(self) -> int {
+        return self.getAllBindingNameIndex().min();
+    }
+
+    /**
+     * Gets the number of modifiers.
+     */
+    pub fn getModifierCount(self) -> int {
+        return self.getAModifier().len()
+    }
+}
+
+/**
+ * A variable declaration list
+ */
+schema VariableDeclarationList extends Node {
+}
+
+impl VariableDeclarationList {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *VariableDeclarationList {
+        for (tmp in Node(db)) {
+            if (isVariableDeclarationList(tmp)) {
+                yield VariableDeclarationList {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+
+    /**
+     * get a variable declaration
+     */
+    pub fn getAVariableDeclaration(self) -> *VariableDeclaration {
+        for (vd in VariableDeclaration(__all_data__)) {
+            for (auto_tmp1 in self.getAChild()) {
+                if (vd.key_eq(auto_tmp1)) {
+                    yield vd
+                }
+            }
+        }
+    }
+
+    /**
+     * get the variable declaration with given
+     */
+    pub fn getVariableDeclaration(self, i: int) -> VariableDeclaration {
+        for (childIndex in int::__undetermined_all__()) {
+            for (vd in VariableDeclaration(__all_data__)) {
+                if (vd.key_eq(self.getChild(childIndex))) {
+                    if (i = childIndex) {
+                        return vd
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * get the count of the variable declarations
+     */
+    pub fn getVariableDeclarationCount(self) -> int {
+        return self.getAVariableDeclaration().len()
+    }
+}
+
+/**
+ * A binding element.
+ */
+schema BindingElement extends Node {
+}
+
+impl BindingElement {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *BindingElement {
+        for (tmp in Node(db)) {
+            if (isBindingElement(tmp)) {
+                yield BindingElement {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+
+    pub fn getParent(self) -> BindingPattern {
+        for (parent in BindingPattern(__all_data__)) {
+            if (parent.id = self.getParentOid()) {
+                return parent
+            }
+        }
+    }
+
+    /**
+     * Gets the `...` token.
+     */
+    pub fn getDotDotDotToken(self) -> DotDotDotToken {
+        for (dotDotDotToken in DotDotDotToken(__all_data__)) {
+            for (auto_tmp1 in self.getAChild()) {
+                if (dotDotDotToken.key_eq(auto_tmp1)) {
+                    return dotDotDotToken
+                }
+            }
+        }
+    }
+
+    /**
+     * Whether this binding element is a rest element.
+     */
+    pub fn isRest(self) -> bool {
+        for (dotDotDotToken in DotDotDotToken(__all_data__)) {
+            for (auto_tmp1 in self.getAChild()) {
+                if (dotDotDotToken.key_eq(auto_tmp1)) {
+                    return true
+                }
+            }
+        }
+    }
+
+    /**
+     * Get the bound property name node (only in object binding pattern).
+     */
+    pub fn getPropertyName(self) -> PropertyName {
+        for (bindingElementPropertyName in BindingElementPropertyNameDO(__all_data__),
+            propertyName in PropertyName(__all_data__)) {
+            if (bindingElementPropertyName.key_eq(self)) {
+                if (propertyName.id = bindingElementPropertyName.getPropertyNameOid()) {
+                    return propertyName
+                }
+            }
+        }
+    }
+
+    pub fn hasPropertyName(self) -> bool {
+        for (bindingElementPropertyName in BindingElementPropertyNameDO(__all_data__)) {
+            if (bindingElementPropertyName.key_eq(self)) {
+                return true
+            }
+        }
+    }
+
+    pub fn getPropertyNameString(self) -> string {
+        if (self.hasPropertyName()) {
+            for (propertyName in PropertyName(__all_data__)) {
+                if (propertyName = self.getPropertyName()) {
+                    let (name = propertyName.getName()) {
+                        return name
+                    }
+                }
+            }
+        }
+        if (!self.hasPropertyName()) {
+            for (bindingName in BindingName(__all_data__)) {
+                if (bindingName = self.getNameNode()) {
+                    let (name = bindingName.getName()) {
+                        return name
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Get the name node.
+     */
+    pub fn getNameNode(self) -> BindingName {
+        for (bindingElementName in BindingElementNameDO(__all_data__),
+            bindingName in BindingName(__all_data__)) {
+            if (bindingElementName.key_eq(self)) {
+                if (bindingName.id = bindingElementName.getNameOid()) {
+                    return bindingName
+                }
+            }
+        }
+    }
+
+    /**
+     * Get the initialization expression.
+     */
+    pub fn getInitializer(self) -> Expression {
+        for (bindingElementInitializer in BindingElementInitializerDO(__all_data__),
+            expression in Expression(__all_data__)) {
+            if (bindingElementInitializer.key_eq(self)) {
+                if (expression.id = bindingElementInitializer.getInitializerOid()) {
+                    return expression
+                }
+            }
+        }
+    }
+
+    /**
+     * Determines whether this BindingElement has the initializer.
+     */
+    pub fn hasInitializer(self) -> bool {
+        for (expression in Expression(__all_data__)) {
+            if (expression = self.getInitializer()) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * An array binding element.
+ */
+schema ArrayBindingElement extends Node {
+}
+
+impl ArrayBindingElement {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *ArrayBindingElement {
+        for (tmp in Node(db)) {
+            if (isArrayBindingElement(tmp)) {
+                yield ArrayBindingElement {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A binding pattern.
+ */
+schema BindingPattern extends Node {
+}
+
+impl BindingPattern {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *BindingPattern {
+        for (tmp in Node(db)) {
+            if (isBindingPattern(tmp)) {
+                yield BindingPattern {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+
+    pub fn getAnElement(self) -> *ArrayBindingElement {
+        for (element in ArrayBindingElement(__all_data__)) {
+            for (auto_tmp1 in self.getAChild()) {
+                if (element.key_eq(auto_tmp1)) {
+                    yield element
+                }
+            }
+        }
+    }
+
+    pub fn getElement(self, i: int) -> ArrayBindingElement {
+        for (element in ArrayBindingElement(__all_data__)) {
+            if (element.key_eq(self.getChild(i))) {
+                return element
+            }
+        }
+    }
+}
+
+/**
+ * A binding name.
+ */
+schema BindingName extends Node {
+}
+
+impl BindingName {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *BindingName {
+        for (tmp in Node(db)) {
+            if (isBindingName(tmp)) {
+                yield BindingName {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+
+    pub fn getName(self) -> string {
+        for (identifier in Identifier(__all_data__)) {
+            if (self.key_eq(identifier)) {
+                let (name = identifier.getName()) {
+                    return name
+                }
+            }
+        }
+    }
+}
+
+/**
+ * An object binding pattern.
+ */
+schema ObjectBindingPattern extends BindingPattern {
+}
+
+impl ObjectBindingPattern {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *ObjectBindingPattern {
+        for (tmp in BindingPattern(db)) {
+            if (isObjectBindingPattern(Node {id: tmp.id})) {
+                yield ObjectBindingPattern {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+
+    /**
+     * @todo: Delete this predicates with typos
+     */
+    pub fn getAElement(self) -> *BindingElement {
+        for (element in BindingElement(__all_data__)) {
+            for (auto_tmp1 in self.getAChild()) {
+                if (element.key_eq(auto_tmp1)) {
+                    yield element
+                }
+            }
+        }
+    }
+
+    pub fn getAnElement(self) -> *BindingElement {
+        for (element in BindingElement(__all_data__)) {
+            for (auto_tmp1 in self.getAChild()) {
+                if (element.key_eq(auto_tmp1)) {
+                    yield element
+                }
+            }
+        }
+    }
+
+    pub fn getElement(self, i: int) -> BindingElement {
+        for (element in BindingElement(__all_data__)) {
+            if (element.key_eq(self.getChild(i))) {
+                return element
+            }
+        }
+    }
+
+    pub fn getElementByPropertyName(self, name: string) -> BindingElement {
+        for (element in self.getAnElement()) {
+            if (element.getPropertyNameString() = name) {
+                return element
+            }
+        }
+    }
+
+    pub fn getRestBindingElement(self) -> BindingElement {
+        for (element in self.getAnElement()) {
+            if (element.isRest()) {
+                return element
+            }
+        }
+    }
+}
+
+/**
+ * An array binding pattern.
+ */
+schema ArrayBindingPattern extends BindingPattern {
+}
+
+impl ArrayBindingPattern {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *ArrayBindingPattern {
+        for (tmp in BindingPattern(db)) {
+            if (isArrayBindingPattern(Node {id: tmp.id})) {
+                yield ArrayBindingPattern {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+
+    /**
+     * @todo: Delete this predicate with typos
+     */
+    pub fn getAElement(self) -> *ArrayBindingElement {
+        for (element in ArrayBindingElement(__all_data__)) {
+            for (auto_tmp1 in self.getAChild()) {
+                if (element.key_eq(auto_tmp1)) {
+                    yield element
+                }
+            }
+        }
+    }
+
+    pub fn getAnElement(self) -> *ArrayBindingElement {
+        for (element in ArrayBindingElement(__all_data__)) {
+            for (auto_tmp1 in self.getAChild()) {
+                if (element.key_eq(auto_tmp1)) {
+                    yield element
+                }
+            }
+        }
+    }
+
+    pub fn getElement(self, i: int) -> ArrayBindingElement {
+        for (element in ArrayBindingElement(__all_data__)) {
+            if (element.key_eq(self.getChild(i))) {
+                return element
+            }
+        }
+    }
+}
+
+/**
+ * An enum member.
+ */
+schema EnumMember extends Node {
+}
+
+impl EnumMember {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *EnumMember {
+        for (tmp in Node(db)) {
+            if (isEnumMember(tmp)) {
+                yield EnumMember {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+
+    pub fn getParent(self) -> EnumDeclaration {
+        for (parent in EnumDeclaration(__all_data__)) {
+            if (parent.id = self.getParentOid()) {
+                return parent
+            }
+        }
+    }
+
+    /**
+     * Gets the name of the current EnumMember.
+     */
+    pub fn getName(self) -> PropertyName {
+        for (name in PropertyName(__all_data__)) {
+            if (name.key_eq(self.getChild(0))) {
+                return name
+            }
+        }
+    }
+
+    /**
+     * Gets the initializer of the current EnumMember.
+     */
+    pub fn getInitializer(self) -> Expression {
+        for (initializer in Expression(__all_data__)) {
+            if (initializer.key_eq(self.getChild(1))) {
+                return initializer
+            }
+        }
+    }
+
+    /**
+     * Determine whether this EnumMember has an initializer.
+     */
+    pub fn hasInitializer(self) -> bool {
+        for (initializer in Expression(__all_data__)) {
+            if (initializer = self.getInitializer()) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a type parameter.
+ */
+pub fn isTypeParameter(node: Node) -> bool {
+    if (node.getKind() = 162) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node kind is a parameter.
+ */
+pub fn isParameter(node: Node) -> bool {
+    if (node.getKind() = 163) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a variable declaration
+ */
+pub fn isVariableDeclaration(node: Node) -> bool {
+    let (kind = node.getKind()) {
+        if (isVariableDeclarationKind(kind)) {
+            return true
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a variable declaration list
+ */
+pub fn isVariableDeclarationList(node: Node) -> bool {
+    let (kind = node.getKind()) {
+        if (isVariableDeclarationListKind(kind)) {
+            return true
+        }
+    }
+}
+
+/**
+ * Determines whether a node is an object binding pattern.
+ */
+pub fn isObjectBindingPattern(node: Node) -> bool {
+    if (node.getKind() = 200) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is an array binding pattern.
+ */
+pub fn isArrayBindingPattern(node: Node) -> bool {
+    if (node.getKind() = 201) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a binding element.
+ */
+pub fn isBindingElement(node: Node) -> bool {
+    if (node.getKind() = 202) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is an array binding element.
+ */
+pub fn isArrayBindingElement(node: Node) -> bool {
+    if (isBindingElement(node)) {
+        return true
+    }
+    if (isOmittedExpression(node)) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a binding pattern.
+ */
+pub fn isBindingPattern(node: Node) -> bool {
+    if (isObjectBindingPattern(node)) {
+        return true
+    }
+    if (isArrayBindingPattern(node)) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a binding name.
+ */
+pub fn isBindingName(node: Node) -> bool {
+    if (isIdentifier(node)) {
+        return true
+    }
+    if (isBindingPattern(node)) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is an enum member.
+ */
+pub fn isEnumMember(node: Node) -> bool {
+    if (node.getKind() = 297) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node kind is a variable declaration list kind
+ */
+pub fn isVariableDeclarationListKind(kind: int) -> bool {
+    [
+        {254},  // VariableDeclarationList
+    ]
+}
+
+/**
+ * Determines whether a node kind is a variable declaration kind
+ */
+pub fn isVariableDeclarationKind(kind: int) -> bool {
+    [
+        {253},  // VariableDeclaration
+    ]
+}

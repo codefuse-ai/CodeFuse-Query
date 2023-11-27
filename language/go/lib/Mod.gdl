@@ -1,0 +1,29 @@
+schema Mod extends ModFileDO {
+
+}
+impl Mod {
+    @data_constraint
+    @inline
+    fn __all__(db: GoDB) -> *Mod {
+        for (tmp in ModFileDO(db)) {
+            yield Mod {
+                oid : tmp.oid,
+                path : tmp.path,
+                name : tmp.name,
+                go_version : tmp.go_version
+            }
+        }
+    }
+    pub fn getARequire(self) -> string {
+        for (mr in ModRequireDO(__all_data__)) {
+            if (mr.getModId() = self.oid) {
+                return mr.getRequire()
+            }
+        }
+    }
+    pub fn getModDepsCount(self) -> int {
+        let (tmp = self.getARequire().len()) {
+            return tmp
+        }
+    }
+}

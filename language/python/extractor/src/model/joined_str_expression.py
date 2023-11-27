@@ -1,0 +1,13 @@
+# coding: utf-8
+from sqlalchemy import Column, Integer
+from sqlalchemy.ext.declarative import declarative_base
+
+Base = declarative_base()
+metadata = Base.metadata
+
+
+class JoinedStrExpression(Base):
+    __tablename__ = "joined_str_expression"
+
+    element_oid = Column(Integer, primary_key=True)
+    size = Column(Integer, nullable=False)

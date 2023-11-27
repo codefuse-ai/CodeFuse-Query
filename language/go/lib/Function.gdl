@@ -1,0 +1,275 @@
+schema Function extends Node {
+
+}
+impl Function {
+    @data_constraint
+    @inline
+    fn __all__(db: GoDB) -> *Function {
+        for (tmp in Node(db)) {
+            for (d in Decl(db)) {
+                if (d.key_eq(tmp)) {
+                    if (d.isFuncDecl()) {
+                        yield Function {
+                            id : tmp.id
+                        }
+                    }
+                }
+            }
+        }
+    }
+    fn getIsMethodFunctionSet(self) -> *Function {
+        for(func in Function(__all_data__)) {
+            if (self = func && func.isMethod()) {
+                yield func
+            }
+        }
+    }
+    fn getMethodReceiverNameSet(self) -> *Method {
+        for (fs in Method(__all_data__)) {
+            if (self.key_eq(fs)) {
+                let (s1 = fs.getMethodReceiverName()) {
+                    yield fs
+                }
+            }
+        }
+    }
+    fn getMethodReceiverTypeSet(self) -> *Method {
+        for (fs in Method(__all_data__)) {
+            if (self.key_eq(fs)) {
+                let (s1 = fs.getMethodReceiverType()) {
+                    yield fs
+                }
+            }
+        }
+    }
+    fn getControlStatementSet(self) -> *Statement {
+        for (s in Statement(__all_data__)) {
+            if (s.isControlStmt() && s.getBelongsFunction() = self) {
+                yield s
+            }
+        }
+    }
+    fn getControlExpressionSet(self) -> *Expr {
+        for (e in Expr(__all_data__)) {
+            if (e.isControlExpr() && e.getBelongsFunction() = self) {
+                yield e
+            }
+        }
+    }
+    pub fn getParamsField(self) -> *string {
+        for (e in Expr(__all_data__),
+            f in Fields(__all_data__)) {
+            if (self.key_eq(e.getParentNode())) {
+                if (e.key_eq(f.getParentNode())) {
+                    if (f.isFuncParamsFields()) {
+                        for (auto_tmp1 in f.makeFieldStringForFunctionSignature()) {
+                            yield auto_tmp1
+                        }
+                    }
+                }
+            }
+        }
+    }
+    pub fn getResultsField(self) -> *string {
+        for (e in Expr(__all_data__),
+            f in Fields(__all_data__)) {
+            if (self.key_eq(e.getParentNode())) {
+                if (e.key_eq(f.getParentNode())) {
+                    if (f.isFuncResultsFields()) {
+                        for (auto_tmp1 in f.makeFieldStringForFunctionSignature()) {
+                            yield auto_tmp1
+                        }
+                    }
+                }
+            }
+        }
+    }
+    pub fn getName(self) -> string {
+        for (e in Expr(__all_data__),
+            l in LiteralDO(__all_data__)) {
+            if (e.getParentNode().key_eq(self)) {
+                if (l.getExpr() = e.id) {
+                    if (e.isIdent()) {
+                        return l.getValue()
+                    }
+                }
+            }
+        }
+    }
+    pub fn getFunctionSignature(self) -> string {
+        for (e in Expr(__all_data__),
+            to in TypeOfDO(__all_data__),
+            t in Type(__all_data__)) {
+            if (self.key_eq(e.getParentNode())) {
+                if (to.getExpr() = e.id) {
+                    if (t.oid = to.getTp()) {
+                        if (t.isSignatureType()) {
+                            for (auto_tmp1 in t.getFormatString()) {
+                                return auto_tmp1
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    pub fn isCommented(self) -> bool {
+        if (self.countAssociatedComment() > 0) {
+            return true
+        }
+    }
+    pub fn getAssociatedComment(self) -> string {
+        for (dc in DocComment(__all_data__)) {
+            if (self.key_eq(dc.getAssociateObj())) {
+                let (cmt = dc.getCommentGroup().getText()) {
+                    return cmt
+                }
+            }
+        }
+    }
+    pub fn getCommentCnt(self) -> int {
+        return self.countAssociatedComment()
+    }
+    pub fn isPublicFunction(self) -> bool {
+        if (self.getName().matches("^[A-Z].*")) {
+            return true
+        }
+    }
+    pub fn isMethod(self) -> bool {
+        for (f in Fields(__all_data__)) {
+            if (self.key_eq(f.getParentNode())) {
+                if (f.isFuncDeclRecvFields()) {
+                    return true
+                }
+            }
+        }
+    }
+    pub fn getAParameter(self) -> *Node {
+        for (f in Fields(__all_data__),
+            tp in Expr(__all_data__)) {
+            if (tp.getParentNode().key_eq(self)) {
+                if (f.getParentNode().key_eq(tp)) {
+                    if (f.isFuncParamsFields()) {
+                        yield Node{id: f.id}
+                    }
+                }
+            }
+        }
+    }
+    pub fn getAResult(self) -> *Node {
+        for (f in Fields(__all_data__),
+            tp in Expr(__all_data__)) {
+            if (tp.getParentNode().key_eq(self)) {
+                if (f.getParentNode().key_eq(tp)) {
+                    if (f.isFuncResultsFields()) {
+                        yield Node{id: f.id}
+                    }
+                }
+            }
+        }
+    }
+    pub fn getGlobalSignature(self) -> string {
+        let (pkg = self.getBelongsFile().getBelongsPkg()) {
+            let (a1 = pkg.getPath()) {
+                let (a2 = pkg.getName()) {
+                    let (s1 = a1 + "." + a2) {
+                        let (s2 = self.getFunctionTypeSignature()) {
+                            let (s = s1 + "|" + s2) {
+                                return s
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    pub fn getFunctionFullSignature(self) -> string {
+        for (e in Expr(__all_data__), to in TypeOfDO(__all_data__), t in Type(__all_data__)) {
+            if (self.key_eq(e.getParentNode()) && to.getExpr() = e.id && t.oid = to.getTp() && t.isSignatureType()) {
+                let (cnt = self.getIsMethodFunctionSet().len()) {
+                    if (cnt > 0) {
+                        for(func in Function(__all_data__)) {
+                            if (self = func) {
+                                let (s1 = func.getFunctionReceiverInfo()) {
+                                    for (ss in t.getRawString()) {
+                                        return s1 + ss
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    if (cnt <= 0) {
+                        for (ss in t.getRawString()) {
+                            return ss
+                        }
+                    }
+                }
+            }
+        }
+    }
+    pub fn getFunctionReceiverInfo(self) -> string {
+        for (m in Method(__all_data__)) {
+            if (self.key_eq(m)) {
+                let (cnt1 = self.getMethodReceiverNameSet().len(), cnt2 = self.getMethodReceiverTypeSet().len()) {
+                    if (cnt1 > 0) {
+                        let (t1 = m.getMethodReceiverName()) {
+                            if (cnt2 > 0) {
+                                return "(" + t1 + " " + m.getMethodReceiverType() + ")"
+                            }
+                            if (cnt2 <= 0) {
+                                return "(" + t1 + ")"
+                            }
+                        }
+                    }
+                    if (cnt1 <= 0) {
+                        if (cnt2 > 0) {
+                            return "(" + m.getMethodReceiverType() + ")"
+                        }
+                        if (cnt2 <= 0) {
+                            return "nill"
+                        }
+                    }
+                }
+            }
+        }
+    }
+    pub fn getFunctionReceiverType(self) -> string {
+        for (m in Method(__all_data__)) {
+            if (self.key_eq(m)) {
+                let (cnt2 = self.getMethodReceiverTypeSet().len()) {
+                    if (cnt2 > 0) {
+                        return "(" + m.getMethodReceiverType() + ")"
+                    }
+                    if (cnt2 <= 0) {
+                        return "nill"
+                    }
+                }
+            }
+        }
+    }
+
+    pub fn getCyclomaticComplexity(self) -> int {
+        let (ctrlStmt = self.getControlStatementSet().len(),
+            ctrlExpr = self.getControlExpressionSet().len()) {
+            return ctrlStmt + ctrlExpr + 1
+        }
+    }
+    pub fn getFunctionTypeSignature(self) -> string {
+        for (e in Expr(__all_data__), to in TypeOfDO(__all_data__), t in Type(__all_data__)) {
+            if (self.key_eq(e.getParentNode()) && to.getExpr() = e.id && t.oid = to.getTp() && t.isSignatureType()) {
+                let (cnt = self.getIsMethodFunctionSet().len()) {
+                    if (cnt > 0) {
+                        for (ss in t.getFormatString()) {
+                            return self.getFunctionReceiverType() + " " + ss
+                        }
+                    }
+                    if (cnt <= 0) {
+                        for (ss in t.getFormatString()) {
+                            return ss
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

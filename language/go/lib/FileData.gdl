@@ -1,0 +1,24 @@
+schema FileData extends FileDataDO {
+
+}
+impl FileData {
+    @data_constraint
+    @inline
+    fn __all__(db: GoDB) -> *FileData {
+        for (tmp in FileDataDO(db)) {
+            yield FileData {
+                oid : tmp.oid,
+                file_id : tmp.file_id,
+                type : tmp.type,
+                content : tmp.content
+            }
+        }
+    }
+    pub fn getFile(self) -> File {
+        for (f in File(__all_data__)) {
+            if (self.getFileId() = f.id) {
+                return f
+            }
+        }
+    }
+}

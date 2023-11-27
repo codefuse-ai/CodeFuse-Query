@@ -1,0 +1,41 @@
+schema DefineStmt extends Statement {
+
+}
+impl DefineStmt {
+    @data_constraint
+    @inline
+    fn __all__(db: GoDB) -> *DefineStmt {
+        for (s in Statement(db)) {
+            if (s.isDefineStmt()) {
+                yield DefineStmt {
+                    id : s.id
+                }
+            }
+        }
+    }
+    pub fn getAVarible(self) -> *Node {
+        for (e in Expr(__all_data__)) {
+            if (e.getParentNode().key_eq(self)) {
+                if (e.getIdx() < 0) {
+                    yield Node(__all_data__).find(e)
+                }
+            }
+        }
+    }
+    pub fn getVaribleName(self) -> *string {
+        for (var in self.getAVarible()) {
+            for (tmp in var.print()) {
+                yield tmp
+            }
+        }
+    }
+    pub fn getASource(self) -> *Expr {
+        for (e in Expr(__all_data__)) {
+            if (e.getIdx() > 0) {
+                if (e.getParentNode().key_eq(self)) {
+                    yield e
+                }
+            }
+        }
+    }
+}

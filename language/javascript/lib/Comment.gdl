@@ -1,0 +1,38 @@
+/**
+ * @filename: DOCUMENTATION
+ * @date: 2022/01/27
+ * @brief: DOCUMENTATION provides classes and predicates for working with Js comments
+ */
+
+/**
+ * A Comment.
+ */
+schema Comment extends CommentDO {
+}
+
+impl Comment {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *Comment {
+        for (tmp in CommentDO(db)) {
+            yield Comment {
+                oid : tmp.oid,
+                kind : tmp.kind,
+                location_oid : tmp.location_oid
+            }
+        }
+    }
+
+    /**
+     * Gets the location of the Comment.
+     *
+     * @return Location
+     */
+    pub fn getLocation(self) -> Location {
+        for (loc in Location(__all_data__)) {
+            if (loc.oid = self.getLocationOid()) {
+                return loc
+            }
+        }
+    }
+}

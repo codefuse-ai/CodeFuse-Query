@@ -1,0 +1,431 @@
+/**
+ * @filename: NODE
+ * @brief: NODE provides classes and predicates for working with JavaScript / TypeScript AST nodes.
+ */
+
+/**
+ * A JavaScript / TypeScript ast node.
+ */
+schema Node {
+    @primary id: int
+}
+
+impl Node {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *Node {
+        for (nodeDO in NodeDO(db)) {
+            yield Node {id : nodeDO.oid}
+        }
+        for (topLevelDO in TopLevelDO(db)) {
+            yield Node {id : topLevelDO.oid}
+        }
+    }
+
+    /**
+     * Get the syntax kind of this node
+     */
+    pub fn getKind(self) -> int {
+        for (nodeDO in NodeDO(__all_data__)) {
+            if (nodeDO.key_eq(self)) {
+                return nodeDO.getKind()
+            }
+        }
+        // Set kind to 303 (SyntaxKind.SourceFile in TypeScript)
+        // for all TopLevels currently
+        for (topLevelDO in TopLevelDO(__all_data__)) {
+            if (topLevelDO.key_eq(self)) {
+                return 303
+            }
+        }
+    }
+
+    /**
+     * Gets the parent oid of this node.
+     */
+    pub fn getParentOid(self) -> int {
+        for (nodeDO in NodeDO(__all_data__)) {
+            if (nodeDO.key_eq(self)) {
+                return nodeDO.getParentOid()
+            }
+        }
+    }
+
+    /**
+     * Gets the parent node of this node.
+     */
+    pub fn getParent(self) -> Node {
+        let (parent = Node {id: self.getParentOid()}) {
+            return parent
+        }
+    }
+
+    pub fn getIndex(self) -> int {
+        for (nodeDO in NodeDO(__all_data__)) {
+            if (nodeDO.key_eq(self)) {
+                return nodeDO.getIndex()
+            }
+        }
+    }
+
+    /**
+     * Gets the location of this node.
+     */
+    pub fn getLocation(self) -> Location {
+        for (nodeDO in NodeDO(__all_data__)) {
+            if (nodeDO.key_eq(self)) {
+                for (location in Location(__all_data__)) {
+                    if (location.oid = nodeDO.getLocationOid()) {
+                        return location
+                    }
+                }
+            }
+        }
+        for (topLevelDO in TopLevelDO(__all_data__)) {
+            if (topLevelDO.key_eq(self)) {
+                for (location in Location(__all_data__)) {
+                    if (location.oid = topLevelDO.getLocationOid()) {
+                        return location
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets the file of this node.
+     */
+    pub fn getFile(self) -> File {
+        let (location = self.getLocation()) {
+            return location.getFile()
+        }
+    }
+
+    /**
+     * Gets the relative path of this node.
+     */
+    pub fn getRelativePath(self) -> string {
+        let (file = self.getFile()) {
+            return file.getRelativePath()
+        }
+    }
+
+    pub fn getStartLineNumber(self) -> int {
+        let (location = self.getLocation()) {
+            return location.getStartLineNumber()
+        }
+    }
+
+    pub fn getStartColumnNumber(self) -> int {
+        let (location = self.getLocation()) {
+            return location.getStartColumnNumber()
+        }
+    }
+
+    pub fn getEndLineNumber(self) -> int {
+        let (location = self.getLocation()) {
+            return location.getEndLineNumber()
+        }
+    }
+
+    pub fn getEndColumnNumber(self) -> int {
+        let (location = self.getLocation()) {
+            return location.getEndColumnNumber()
+        }
+    }
+
+    /**
+     * Gets a child node of this node.
+     */
+    pub fn getAChild(self) -> *Node {
+        for (child in Node(__all_data__)) {
+            if (child.getParent() = self) {
+                yield child
+            }
+        }
+    }
+
+    /**
+     * Gets the `i`th child of this node.
+     */
+    pub fn getChild(self, i: int) -> Node {
+        for (child in Node(__all_data__)) {
+            if (child.getParent() = self) {
+                if (child.getIndex() = i) {
+                    return child
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets the number of child nodes.
+     */
+    pub fn getChildCount(self) -> int {
+        return self.getAChild().len()
+    }
+
+    /**
+     * Gets the last child of this node parent.
+     */
+    pub fn getLastChild(self) -> Node {
+        let (childCount = self.getChildCount()) {
+            return self.getChild(childCount - 1)
+        }
+    }
+
+    /**
+     * Gets an ancestor of this node. 
+     */
+    pub fn getAnAncestor(self) -> *Node {
+        let (ancestor = self.getParent()) {
+            yield ancestor
+        }
+        let (parent = self.getParent()) {
+            for (ancestor in parent.getAnAncestor()) {
+                yield ancestor
+            }
+        }
+    }
+
+    /**
+     * Gets the root top-level of this node. 
+     */
+    pub fn getRoot(self) -> TopLevelDO {
+        for (ancestor in self.getAnAncestor()) {
+            for (root in TopLevelDO(__all_data__)) {
+                if (root.key_eq(ancestor)) {
+                    return root
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets an ancestor of this node by the level of the hierarchy.
+     *
+     * @param level: the number of levels to go up in the hierarchy.
+     */
+    pub fn getAnAncestorByLevel(self, level: int) -> Node {
+        let (ancestor = self.getParent()) {
+            if (level = 1) {
+                return ancestor
+            }
+        }
+        let (parent = self.getParent()) {
+            for (parentLevel in int::__undetermined_all__()) {
+                let (ancestor = parent.getAnAncestorByLevel(parentLevel)) {
+                    if (level = parentLevel + 1) {
+                        return ancestor
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets a descendant of this node. 
+     */
+    pub fn getADescendant(self) -> *Node {
+        for (descendant in self.getAChild()) {
+            yield descendant
+        }
+        for (child in self.getAChild()) {
+            for (descendant in child.getADescendant()) {
+                yield descendant
+            }
+        }
+    }
+
+    /**
+     * Gets a descendant of this node by the level of the hierarchy.
+     *
+     * @param level: the number of levels to go up in the hierarchy.
+     */
+    pub fn getADescendantByLevel(self, level: int) -> *Node {
+        if (level = 1) {
+            yield self.getAChild()
+        }
+        for (child in self.getAChild()) {
+            for (childLevel in int::__undetermined_all__()) {
+                for (descendant in child.getADescendantByLevel(childLevel)) {
+                    if (level = childLevel + 1) {
+                        yield descendant
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets the enclosing function of it
+     */
+    pub fn getEnclosingFunction(self) -> FunctionLikeDeclaration {
+        for (function in FunctionLikeDeclaration(__all_data__),
+            functionEnclosingNode in FunctionEnclosingNodeDO(__all_data__)) {
+            if (functionEnclosingNode.getFunctionOid() = function.id) {
+                if (functionEnclosingNode.key_eq(self)) {
+                    return function
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets an ancestor enclosing function of it
+     */
+    pub fn getAnAncestorEnclosingFunction(self) -> *FunctionLikeDeclaration {
+        for (anEnclosingFunction in FunctionLikeDeclaration(__all_data__),
+            anEnclosingNode in FunctionEnclosingNodeDO(__all_data__)) {
+            if (anEnclosingNode.getFunctionOid() = anEnclosingFunction.id) {
+                if (anEnclosingNode.key_eq(self)) {
+                    yield anEnclosingFunction
+                }
+            }
+            for (enclosingFunction in FunctionLikeDeclaration(__all_data__),
+                enclosingNode in FunctionEnclosingNodeDO(__all_data__)) {
+                if (enclosingNode.getFunctionOid() = enclosingFunction.id) {
+                    if (enclosingNode.key_eq(self)) {
+                        for (auto_tmp1 in enclosingFunction.getAnAncestorEnclosingFunction()) {
+                            if (anEnclosingFunction = auto_tmp1) {
+                                yield anEnclosingFunction
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets the leading comments of it
+     */
+    pub fn getALeadingComment(self) -> *Comment {
+        for (comment in Comment(__all_data__),
+            nodeComment in NodeCommentDO(__all_data__)) {
+            if (nodeComment.getNodeOid() = self.id) {
+                if (nodeComment.getCommentOid() = comment.oid) {
+                    // Leading
+                    if (nodeComment.getType() = 0) {
+                        yield comment
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets the trailing comments of it
+     */
+    pub fn getATrailingComment(self) -> *Comment {
+        for (comment in Comment(__all_data__),
+            nodeComment in NodeCommentDO(__all_data__)) {
+            if (nodeComment.getNodeOid() = self.id) {
+                if (nodeComment.getCommentOid() = comment.oid) {
+                    // Trailing
+                    if (nodeComment.getType() = 1) {
+                        yield comment
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets the comments related to it
+     */
+    pub fn getAComment(self) -> *Comment {
+        for (comment in Comment(__all_data__),
+            nodeComment in NodeCommentDO(__all_data__)) {
+            if (nodeComment.getNodeOid() = self.id) {
+                if (nodeComment.getCommentOid() = comment.oid) {
+                    yield comment
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets the text of this node.
+     */
+    pub fn getText(self) -> string {
+        for (text in string::__undetermined_all__()) {
+            for (location in Location(__all_data__)) {
+                if (location = self.getLocation()) {
+                    if (text = location.getText()) {
+                        return text
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets the symbol associated with this node.
+     */
+    pub fn getSymbol(self) -> Symbol {
+        for (symbol in Symbol(__all_data__),
+            nodeSymbol in NodeSymbolDO(__all_data__)) {
+            if (nodeSymbol.key_eq(self)) {
+                if (symbol.oid = nodeSymbol.getSymbolOid()) {
+                    return symbol
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets a decorator.
+     */
+    pub fn getADecorator(self) -> *Decorator {
+        for (decorator in Decorator(__all_data__)) {
+            for (auto_tmp1 in self.getAChild()) {
+                if (decorator.key_eq(auto_tmp1)) {
+                    yield decorator
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets the `i`th decorator.
+     */
+    pub fn getDecorator(self, i: int) -> Decorator {
+        for (decorator in Decorator(__all_data__)) {
+            if (decorator.key_eq(self.getChild(i))) {
+                return decorator
+            }
+        }
+    }
+
+    /**
+     * Gets a modifier.
+     */
+    pub fn getAModifier(self) -> *Modifier {
+        for (modifier in Modifier(__all_data__)) {
+            for (auto_tmp1 in self.getAChild()) {
+                if (modifier.key_eq(auto_tmp1)) {
+                    yield modifier
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets the `i`th modifier.
+     */
+    pub fn getModifier(self, i: int) -> Modifier {
+        for (modifier in Modifier(__all_data__),
+            modifierDO in ModifierDO(__all_data__)) {
+            for (auto_tmp1 in self.getAChild()) {
+                if (modifier.key_eq(auto_tmp1)) {
+                    if (modifierDO.key_eq(modifier)) {
+                        if (modifierDO.getIndex() = i) {
+                            return modifier
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

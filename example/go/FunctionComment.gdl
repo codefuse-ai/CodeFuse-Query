@@ -1,0 +1,28 @@
+// script
+use coref::go::*
+
+fn default_db() -> GoDB {
+    return GoDB::load("coref_go_src.db")
+}
+
+// Define a predicate called 'out' with parameters fileName, funcName, funcComment, and signature
+fn out(fileName: string, funcName: string, funcComment: string, signature: string) -> bool {
+    // Check if there exists a Function object 'func'
+    for(func in Function(default_db())) {
+        if (
+            // Get the name of the file the function belongs to and assign it to the variable 'fileName'
+            fileName = func.getBelongsFile().getName() &&
+            // Get the name of the function and assign it to the variable 'funcName'
+            funcName = func.getName() &&
+            // Get the associated comment string for the function and assign it to the variable 'funcComment'
+            funcComment = func.getAssociatedCommentString() &&
+            // Get the function type signature and assign it to the variable 'signature'
+            signature = func.getFunctionTypeSignature()) {
+            return true
+        }
+    }
+}
+
+fn main() {
+    output(out())
+}

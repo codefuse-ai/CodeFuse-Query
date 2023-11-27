@@ -1,0 +1,761 @@
+/**
+ * @filename: DOCLASS
+ * @brief: DOCLASS provides classes and predicates for working with basic model of JavaScript / TypeScript code database.
+ */
+
+schema LocationDO {
+    @primary oid: int,
+    file_oid: int,
+    start_line_number: int,
+    start_column_number: int,
+    end_line_number: int,
+    end_column_number: int,
+    text: string
+}
+
+impl LocationDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: JavascriptDB) -> *LocationDO {
+        for (tmp in db.location) {
+            yield LocationDO {
+                oid : tmp.oid,
+                file_oid : tmp.file_oid,
+                start_line_number : tmp.start_line_number,
+                start_column_number : tmp.start_column_number,
+                end_line_number : tmp.end_line_number,
+                end_column_number : tmp.end_column_number,
+                text : tmp.text
+            }
+        }
+    }
+
+    pub fn getFileOid(self) -> int {
+        return self.file_oid
+    }
+
+    pub fn getStartLineNumber(self) -> int {
+        return self.start_line_number
+    }
+
+    pub fn getStartColumnNumber(self) -> int {
+        return self.start_column_number
+    }
+
+    pub fn getEndLineNumber(self) -> int {
+        return self.end_line_number
+    }
+
+    pub fn getEndColumnNumber(self) -> int {
+        return self.end_column_number
+    }
+
+    pub fn getText(self) -> string {
+        return self.text
+    }
+}
+
+schema NumberOfLinesDO {
+    @primary location_oid: int,
+    lines: int,
+    code_lines: int,
+    comment_lines: int
+}
+
+impl NumberOfLinesDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: JavascriptDB) -> *NumberOfLinesDO {
+        for (tmp in db.number_of_lines) {
+            yield NumberOfLinesDO {
+                location_oid : tmp.location_oid,
+                lines : tmp.lines,
+                code_lines : tmp.code_lines,
+                comment_lines : tmp.comment_lines
+            }
+        }
+    }
+
+    pub fn getLines(self) -> int {
+        return self.lines
+    }
+
+    pub fn getCodeLines(self) -> int {
+        return self.code_lines
+    }
+
+    pub fn getCommentLines(self) -> int {
+        return self.comment_lines
+    }
+}
+
+schema FileDO {
+    @primary oid: int,
+    name: string,
+    extension: string,
+    relative_path: string,
+    location_oid: int
+}
+
+impl FileDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: JavascriptDB) -> *FileDO {
+        for (tmp in db.file) {
+            yield FileDO {
+                oid : tmp.oid,
+                name : tmp.name,
+                extension : tmp.extension,
+                relative_path : tmp.relative_path,
+                location_oid : tmp.location_oid
+            }
+        }
+    }
+
+    pub fn getName(self) -> string {
+        return self.name
+    }
+
+    pub fn getExtension(self) -> string {
+        return self.extension
+    }
+
+    pub fn getRelativePath(self) -> string {
+        return self.relative_path
+    }
+
+    pub fn getLocationOid(self) -> int {
+        return self.location_oid
+    }
+}
+
+schema DirectoryDO {
+    @primary oid: int,
+    name: string,
+    relative_path: string,
+    location_oid: int
+}
+
+impl DirectoryDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: JavascriptDB) -> *DirectoryDO {
+        for (tmp in db.directory) {
+            yield DirectoryDO {
+                oid : tmp.oid,
+                name : tmp.name,
+                relative_path : tmp.relative_path,
+                location_oid : tmp.location_oid
+            }
+        }
+    }
+
+    pub fn getName(self) -> string {
+        return self.name
+    }
+
+    pub fn getRelativePath(self) -> string {
+        return self.relative_path
+    }
+
+    pub fn getLocationOid(self) -> int {
+        return self.location_oid
+    }
+}
+
+schema DirectoryHierarchyDO {
+    parent_oid: int,
+    @primary child_oid: int
+}
+
+impl DirectoryHierarchyDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: JavascriptDB) -> *DirectoryHierarchyDO {
+        for (tmp in db.directory_hierarchy) {
+            yield DirectoryHierarchyDO {
+                parent_oid : tmp.parent_oid,
+                child_oid : tmp.child_oid
+            }
+        }
+    }
+
+    pub fn getParentOid(self) -> int {
+        return self.parent_oid
+    }
+}
+
+schema TopLevelDO {
+    @primary oid: int,
+    kind: int,
+    location_oid: int
+}
+
+impl TopLevelDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: JavascriptDB) -> *TopLevelDO {
+        for (tmp in db.top_level) {
+            yield TopLevelDO {
+                oid : tmp.oid,
+                kind : tmp.kind,
+                location_oid : tmp.location_oid
+            }
+        }
+    }
+
+    pub fn getKind(self) -> int {
+        return self.kind
+    }
+
+    pub fn getLocationOid(self) -> int {
+        return self.location_oid
+    }
+}
+
+schema NodeDO {
+    @primary oid: int,
+    kind: int,
+    parent_oid: int,
+    index: int,
+    location_oid: int
+}
+
+impl NodeDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: JavascriptDB) -> *NodeDO {
+        for (tmp in db.node) {
+            yield NodeDO {
+                oid : tmp.oid,
+                kind : tmp.kind,
+                parent_oid : tmp.parent_oid,
+                index : tmp.index,
+                location_oid : tmp.location_oid
+            }
+        }
+    }
+
+    pub fn getKind(self) -> int {
+        return self.kind
+    }
+
+    pub fn getParentOid(self) -> int {
+        return self.parent_oid
+    }
+
+    pub fn getIndex(self) -> int {
+        return self.index
+    }
+
+    pub fn getLocationOid(self) -> int {
+        return self.location_oid
+    }
+}
+
+schema LiteralDO {
+    @primary oid: int,
+    value: string
+}
+
+impl LiteralDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: JavascriptDB) -> *LiteralDO {
+        for (tmp in db.literal) {
+            yield LiteralDO {
+                oid : tmp.oid,
+                value : tmp.value
+            }
+        }
+    }
+
+    pub fn getValue(self) -> string {
+        return self.value
+    }
+}
+
+schema BindingElementPropertyNameDO {
+    @primary oid: int,
+    property_name_oid: int
+}
+
+impl BindingElementPropertyNameDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: JavascriptDB) -> *BindingElementPropertyNameDO {
+        for (tmp in db.binding_element_property_name) {
+            yield BindingElementPropertyNameDO {
+                oid : tmp.oid,
+                property_name_oid : tmp.property_name_oid
+            }
+        }
+    }
+
+    pub fn getPropertyNameOid(self) -> int {
+        return self.property_name_oid
+    }
+}
+
+schema BindingElementNameDO {
+    @primary oid: int,
+    name_oid: int
+}
+
+impl BindingElementNameDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: JavascriptDB) -> *BindingElementNameDO {
+        for (tmp in db.binding_element_name) {
+            yield BindingElementNameDO {
+                oid : tmp.oid,
+                name_oid : tmp.name_oid
+            }
+        }
+    }
+
+    pub fn getNameOid(self) -> int {
+        return self.name_oid
+    }
+}
+
+schema BindingElementInitializerDO {
+    @primary oid: int,
+    initializer_oid: int
+}
+
+impl BindingElementInitializerDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: JavascriptDB) -> *BindingElementInitializerDO {
+        for (tmp in db.binding_element_initializer) {
+            yield BindingElementInitializerDO {
+                oid : tmp.oid,
+                initializer_oid : tmp.initializer_oid
+            }
+        }
+    }
+
+    pub fn getInitializerOid(self) -> int {
+        return self.initializer_oid
+    }
+}
+
+schema ClassLikeDeclarationDO {
+    @primary oid: int,
+    kind: int,
+    name: string
+}
+
+impl ClassLikeDeclarationDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: JavascriptDB) -> *ClassLikeDeclarationDO {
+        for (tmp in db.class_like_declaration) {
+            yield ClassLikeDeclarationDO {
+                oid : tmp.oid,
+                kind : tmp.kind,
+                name : tmp.name
+            }
+        }
+    }
+
+    pub fn getKind(self) -> int {
+        return self.kind
+    }
+
+    pub fn getName(self) -> string {
+        return self.name
+    }
+}
+
+schema FunctionLikeDeclarationDO {
+    @primary oid: int,
+    kind: int,
+    name: string
+}
+
+impl FunctionLikeDeclarationDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: JavascriptDB) -> *FunctionLikeDeclarationDO {
+        for (tmp in db.function_like_declaration) {
+            yield FunctionLikeDeclarationDO {
+                oid : tmp.oid,
+                kind : tmp.kind,
+                name : tmp.name
+            }
+        }
+    }
+
+    pub fn getKind(self) -> int {
+        return self.kind
+    }
+
+    pub fn getName(self) -> string {
+        return self.name
+    }
+}
+
+schema FunctionEnclosingNodeDO {
+    @primary node_oid: int,
+    function_oid: int
+}
+
+impl FunctionEnclosingNodeDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: JavascriptDB) -> *FunctionEnclosingNodeDO {
+        for (tmp in db.function_enclosing_node) {
+            yield FunctionEnclosingNodeDO {
+                node_oid : tmp.node_oid,
+                function_oid : tmp.function_oid
+            }
+        }
+    }
+
+    pub fn getFunctionOid(self) -> int {
+        return self.function_oid
+    }
+}
+
+schema ModifierDO {
+    @primary oid: int,
+    index: int
+}
+
+impl ModifierDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: JavascriptDB) -> *ModifierDO {
+        for (tmp in db.modifier) {
+            yield ModifierDO {
+                oid : tmp.oid,
+                index : tmp.index
+            }
+        }
+    }
+
+    pub fn getIndex(self) -> int {
+        return self.index
+    }
+}
+
+schema SymbolDO {
+    @primary oid: int,
+    name: string,
+    description: string
+}
+
+impl SymbolDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: JavascriptDB) -> *SymbolDO {
+        for (tmp in db.symbol_) {
+            yield SymbolDO {
+                oid : tmp.oid,
+                name : tmp.name,
+                description : tmp.description
+            }
+        }
+    }
+
+    pub fn getName(self) -> string {
+        return self.name
+    }
+
+    pub fn getDescription(self) -> string {
+        return self.description
+    }
+}
+
+schema NodeSymbolDO {
+    @primary node_oid: int,
+    symbol_oid: int
+}
+
+impl NodeSymbolDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: JavascriptDB) -> *NodeSymbolDO {
+        for (tmp in db.node_symbol) {
+            yield NodeSymbolDO {
+                node_oid : tmp.node_oid,
+                symbol_oid : tmp.symbol_oid
+            }
+        }
+    }
+
+    pub fn getSymbolOid(self) -> int {
+        return self.symbol_oid
+    }
+}
+
+schema ShorthandAssignmentValueSymbolDO {
+    @primary node_oid: int,
+    symbol_oid: int
+}
+
+impl ShorthandAssignmentValueSymbolDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: JavascriptDB) -> *ShorthandAssignmentValueSymbolDO {
+        for (tmp in db.shorthand_assignment_value_symbol) {
+            yield ShorthandAssignmentValueSymbolDO {
+                node_oid : tmp.node_oid,
+                symbol_oid : tmp.symbol_oid
+            }
+        }
+    }
+
+    pub fn getSymbolOid(self) -> int {
+        return self.symbol_oid
+    }
+}
+
+schema CallSiteDO {
+    @primary invoke_expression_oid: int,
+    callee_oid: int
+}
+
+impl CallSiteDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: JavascriptDB) -> *CallSiteDO {
+        for (tmp in db.call_site) {
+            yield CallSiteDO {
+                invoke_expression_oid : tmp.invoke_expression_oid,
+                callee_oid : tmp.callee_oid
+            }
+        }
+    }
+
+    pub fn getCalleeOid(self) -> int {
+        return self.callee_oid
+    }
+}
+
+schema CfgEntryNodeDO {
+    @primary oid: int,
+    ast_node_oid: int
+}
+
+impl CfgEntryNodeDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: JavascriptDB) -> *CfgEntryNodeDO {
+        for (tmp in db.cfg_entry_node) {
+            yield CfgEntryNodeDO {
+                oid : tmp.oid,
+                ast_node_oid : tmp.ast_node_oid
+            }
+        }
+    }
+
+    pub fn getAstNodeOid(self) -> int {
+        return self.ast_node_oid
+    }
+}
+
+schema CfgExitNodeDO {
+    @primary oid: int,
+    ast_node_oid: int
+}
+
+impl CfgExitNodeDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: JavascriptDB) -> *CfgExitNodeDO {
+        for (tmp in db.cfg_exit_node) {
+            yield CfgExitNodeDO {
+                oid : tmp.oid,
+                ast_node_oid : tmp.ast_node_oid
+            }
+        }
+    }
+
+    pub fn getAstNodeOid(self) -> int {
+        return self.ast_node_oid
+    }
+}
+
+schema CommentDO {
+    @primary oid: int,
+    kind: int,
+    location_oid: int
+}
+
+impl CommentDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: JavascriptDB) -> *CommentDO {
+        for (tmp in db.comment) {
+            yield CommentDO {
+                oid : tmp.oid,
+                kind : tmp.kind,
+                location_oid : tmp.location_oid
+            }
+        }
+    }
+
+    pub fn getKind(self) -> int {
+        return self.kind
+    }
+
+    pub fn getLocationOid(self) -> int {
+        return self.location_oid
+    }
+}
+
+schema NodeCommentDO {
+    @primary oid: int,
+    node_oid: int,
+    comment_oid: int,
+    type: int
+}
+
+impl NodeCommentDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: JavascriptDB) -> *NodeCommentDO {
+        for (tmp in db.node_comment) {
+            yield NodeCommentDO {
+                oid : tmp.oid,
+                node_oid : tmp.node_oid,
+                comment_oid : tmp.comment_oid,
+                type : tmp.type
+            }
+        }
+    }
+
+    pub fn getNodeOid(self) -> int {
+        return self.node_oid
+    }
+
+    pub fn getCommentOid(self) -> int {
+        return self.comment_oid
+    }
+
+    pub fn getType(self) -> int {
+        return self.type
+    }
+}
+
+schema JsParseErrorDO {
+    @primary oid: int,
+    message: string,
+    line: string
+}
+
+impl JsParseErrorDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: JavascriptDB) -> *JsParseErrorDO {
+        for (tmp in db.js_parse_error) {
+            yield JsParseErrorDO {
+                oid : tmp.oid,
+                message : tmp.message,
+                line : tmp.line
+            }
+        }
+    }
+
+    pub fn getMessage(self) -> string {
+        return self.message
+    }
+
+    pub fn getLine(self) -> string {
+        return self.line
+    }
+}
+
+schema MetadataDO {
+    @primary oid: int,
+    version: string,
+    created_time: string
+}
+
+impl MetadataDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: JavascriptDB) -> *MetadataDO {
+        for (tmp in db.metadata) {
+            yield MetadataDO {
+                oid : tmp.oid,
+                version : tmp.version,
+                created_time : tmp.created_time
+            }
+        }
+    }
+
+    pub fn getVersion(self) -> string {
+        return self.version
+    }
+
+    pub fn getCreatedTime(self) -> string {
+        return self.created_time
+    }
+}
+
+schema IgnoredPathDO {
+    @primary oid: int,
+    path_kind: int,
+    path: string,
+    ignore_kind: int
+}
+
+impl IgnoredPathDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: JavascriptDB) -> *IgnoredPathDO {
+        for (tmp in db.ignored_path) {
+            yield IgnoredPathDO {
+                oid : tmp.oid,
+                path_kind : tmp.path_kind,
+                path : tmp.path,
+                ignore_kind : tmp.ignore_kind
+            }
+        }
+    }
+
+    pub fn getPathKind(self) -> int {
+        return self.path_kind
+    }
+
+    pub fn getPath(self) -> string {
+        return self.path
+    }
+
+    pub fn getIgnoreKind(self) -> int {
+        return self.ignore_kind
+    }
+}
+
+database JavascriptDB {
+    location: *LocationDO,
+    number_of_lines: *NumberOfLinesDO,
+    file: *FileDO,
+    directory: *DirectoryDO,
+    directory_hierarchy: *DirectoryHierarchyDO,
+    top_level: *TopLevelDO,
+    node: *NodeDO,
+    literal: *LiteralDO,
+    binding_element_property_name: *BindingElementPropertyNameDO,
+    binding_element_name: *BindingElementNameDO,
+    binding_element_initializer: *BindingElementInitializerDO,
+    class_like_declaration: *ClassLikeDeclarationDO,
+    function_like_declaration: *FunctionLikeDeclarationDO,
+    function_enclosing_node: *FunctionEnclosingNodeDO,
+    modifier: *ModifierDO,
+    symbol_: *SymbolDO,
+    node_symbol: *NodeSymbolDO,
+    shorthand_assignment_value_symbol: *ShorthandAssignmentValueSymbolDO,
+    call_site: *CallSiteDO,
+    cfg_entry_node: *CfgEntryNodeDO,
+    cfg_exit_node: *CfgExitNodeDO,
+    comment: *CommentDO,
+    node_comment: *NodeCommentDO,
+    js_parse_error: *JsParseErrorDO,
+    metadata: *MetadataDO,
+    ignored_path: *IgnoredPathDO,
+}

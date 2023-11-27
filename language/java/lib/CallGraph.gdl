@@ -1,0 +1,1017 @@
+/**
+ * @brief: callGraph provides classes and predicates for working with Java call relations
+ */
+schema CallExpression extends Expression {
+
+}
+impl CallExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *CallExpression {
+        for (tmp in Expression(db)) {
+            for (m in MethodAccessExpression(db)) {
+                if (tmp.key_eq(m)) {
+                    yield CallExpression {
+                        element_hash_id : tmp.element_hash_id,
+                        name : tmp.name,
+                        parent_hash_id : tmp.parent_hash_id,
+                        index_order : tmp.index_order,
+                        location_hash_id : tmp.location_hash_id,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+            for (m in MethodReferenceExpression(db)) {
+                if (tmp.key_eq(m)) {
+                    yield CallExpression {
+                        element_hash_id : tmp.element_hash_id,
+                        name : tmp.name,
+                        parent_hash_id : tmp.parent_hash_id,
+                        index_order : tmp.index_order,
+                        location_hash_id : tmp.location_hash_id,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+    pub fn getMethod(self) -> Method {
+        for (e in MethodAccessExpression(__all_data__)) {
+            if (self.key_eq(e)) {
+                return e.getMethod()
+            }
+        }
+        for (e in MethodReferenceExpression(__all_data__)) {
+            if (self.key_eq(e)) {
+                return e.getMethod()
+            }
+        }
+    }
+    pub fn getMethodName(self) -> string {
+        for (i in Identifier(__all_data__)) {
+            for (e in MethodAccessExpression(__all_data__)) {
+                if (self.key_eq(e)) {
+                    if (e.getReference().key_eq(i.getParent())) {
+                        let (m = i.getName()) {
+                            return m
+                        }
+                    }
+                }
+            }
+            for (e in MethodReferenceExpression(__all_data__)) {
+                if (self.key_eq(e)) {
+                    if (e.key_eq(i.getParent())) {
+                        let (m = i.getName()) {
+                            return m
+                        }
+                    }
+                }
+            }
+        }
+    }
+    pub fn getCallSite(self) -> ReferenceExpression {
+        for (m in MethodAccessExpression(__all_data__)) {
+            if (self.key_eq(m)) {
+                return m.getCallSite()
+            }
+        }
+        for (m in MethodReferenceExpression(__all_data__)) {
+            if (self.key_eq(m)) {
+                return m.getReference()
+            }
+        }
+    }
+    pub fn getReference(self) -> ReferenceExpression {
+        for (m in MethodAccessExpression(__all_data__)) {
+            if (self.key_eq(m)) {
+                return m.getReference()
+            }
+        }
+        for (m in MethodReferenceExpression(__all_data__)) {
+            if (self.key_eq(m)) {
+                return m.getReference()
+            }
+        }
+    }
+    pub fn getCallSiteDefinition(self) -> ClassOrInterface {
+        for (c in ClassOrInterface(__all_data__),
+            r in ReferenceExpression(__all_data__)) {
+            if (r = self.getCallSite()) {
+                return ClassOrInterface(__all_data__).find(r.getDefinition())
+                for (v in Variable(__all_data__)) {
+                    if (v.key_eq(r.getDefinition())) {
+                        if (v.getType().getQualifiedName() = c.getQualifiedName()) {
+                            return c
+                        }
+                    }
+                }
+            }
+        }
+    }
+    pub fn getLombokField(self) -> LombokField {
+        for (f in LombokField(__all_data__)) {
+            if (self.getCallSiteDefinition() = f.getParent()) {
+                for (auto_tmp1 in f.getLombokMethodName()) {
+                    if (auto_tmp1 = self.getMethodName()) {
+                        return f
+                    }
+                }
+            }
+        }
+    }
+    pub fn getArguments(self) -> *Expression {
+        for (e in Expression(__all_data__),
+            m in MethodAccessExpression(__all_data__),
+            l in ExpressionListExpressionRelation(__all_data__)) {
+            if (self.key_eq(m)) {
+                if (m.getExpressionList() = l.getExpressionList()) {
+                    if (e = l.getExpression()) {
+                        yield e
+                    }
+                    for (auto_tmp1 in e.getAnAncestor()) {
+                        if (l.getExpression().key_eq(auto_tmp1)) {
+                            yield e
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+schema LombokField extends Field {
+
+}
+impl LombokField {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *LombokField {
+        for (tmp in Field(db)) {
+            for (a in Annotation(db)) {
+                for (auto_tmp2 in tmp.getAnnotation()) {
+                    if (a = auto_tmp2) {
+                        if (a.getName() = "Data") {
+                            yield LombokField {
+                                element_hash_id : tmp.element_hash_id,
+                                name : tmp.name,
+                                parent_hash_id : tmp.parent_hash_id,
+                                printable_text : tmp.printable_text,
+                                location_hash_id : tmp.location_hash_id
+                            }
+                        }
+                        if (a.getName() = "Getter") {
+                            yield LombokField {
+                                element_hash_id : tmp.element_hash_id,
+                                name : tmp.name,
+                                parent_hash_id : tmp.parent_hash_id,
+                                printable_text : tmp.printable_text,
+                                location_hash_id : tmp.location_hash_id
+                            }
+                        }
+                        if (a.getName() = "Setter") {
+                            yield LombokField {
+                                element_hash_id : tmp.element_hash_id,
+                                name : tmp.name,
+                                parent_hash_id : tmp.parent_hash_id,
+                                printable_text : tmp.printable_text,
+                                location_hash_id : tmp.location_hash_id
+                            }
+                        }
+                    }
+                }
+                for (c in ClassOrInterface(db)) {
+                    if (c = tmp.getParent()) {
+                        for (auto_tmp3 in c.getAnnotation()) {
+                            if (a = auto_tmp3) {
+                                if (a.getName() = "Data") {
+                                    yield LombokField {
+                                        element_hash_id : tmp.element_hash_id,
+                                        name : tmp.name,
+                                        parent_hash_id : tmp.parent_hash_id,
+                                        printable_text : tmp.printable_text,
+                                        location_hash_id : tmp.location_hash_id
+                                    }
+                                }
+                                if (a.getName() = "Getter") {
+                                    yield LombokField {
+                                        element_hash_id : tmp.element_hash_id,
+                                        name : tmp.name,
+                                        parent_hash_id : tmp.parent_hash_id,
+                                        printable_text : tmp.printable_text,
+                                        location_hash_id : tmp.location_hash_id
+                                    }
+                                }
+                                if (a.getName() = "Setter") {
+                                    yield LombokField {
+                                        element_hash_id : tmp.element_hash_id,
+                                        name : tmp.name,
+                                        parent_hash_id : tmp.parent_hash_id,
+                                        printable_text : tmp.printable_text,
+                                        location_hash_id : tmp.location_hash_id
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    pub fn getLombokMethodName(self) -> *string {
+        for (j in string::__undetermined_all__()) {
+            let (temp = self.getName()) {
+                let (i = temp.len()) {
+                    let (l = temp.substr(0, 1)) {
+                        let (p = temp.substr(1, i)) {
+                            if (lowerToUpper(l, j)) {
+                                let (name = "set" + j + p) {
+                                    yield name
+                                }
+                                let (name = "get" + j + p) {
+                                    yield name
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+/**
+ * @brief A callable binding relation between caller and callee.
+ */
+schema CallableBinding extends CallableBindingDO {
+
+}
+impl CallableBinding {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *CallableBinding {
+        for (tmp in CallableBindingDO(db)) {
+            yield CallableBinding {
+                caller_hash_id : tmp.caller_hash_id,
+                callee_hash_id : tmp.callee_hash_id
+            }
+        }
+    }
+    /**
+     * @brief gets the caller expression.
+     * @return CallExpression 
+     */
+    pub fn getCaller(self) -> CallExpression {
+        return CallExpression(__all_data__).find(self)
+    }
+    /**
+     * @brief gets the callee of the method access expression.
+     * @return Method 
+     */
+    pub fn getCallee(self) -> Callable {
+        for (callee in Callable(__all_data__)) {
+            if (self.getCalleeHashId() = callee.id) {
+                return callee
+            }
+        }
+    }
+}
+/**
+ * @brief A list of expression separated by commas.
+ */
+schema ExpressionList extends ExpressionListDO {
+
+}
+impl ExpressionList {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *ExpressionList {
+        for (tmp in ExpressionListDO(db)) {
+            yield ExpressionList {
+                element_hash_id : tmp.element_hash_id,
+                parent_hash_id : tmp.parent_hash_id,
+                location_hash_id : tmp.location_hash_id,
+                printable_text : tmp.printable_text,
+                size : tmp.size
+            }
+        }
+    }
+    /**
+     * @brief gets the location for the element.
+     * @return Location
+     */
+    pub fn getLocation(self) -> Location {
+        for (loc in Location(__all_data__)) {
+            if (loc.element_hash_id = self.getLocationHashId()) {
+                return loc
+            }
+        }
+    }
+    /**
+     * @brief gets the ast element parent of the element.
+     * @return ElementParent 
+     */
+    pub fn getParent(self) -> ElementParent {
+        for (c in ElementParent(__all_data__)) {
+            if (c.id = self.getParentHashId()) {
+                return c
+            }
+        }
+    }
+    pub fn getSubExpression(self, position : int) -> Expression {
+        for (eler in ExpressionListExpressionRelation(__all_data__)) {
+            if (self = eler.getExpressionList()) {
+                if (position = eler.getPosition()) {
+                    return eler.getExpression()
+                }
+            }
+        }
+    }
+    pub fn getContainedExpression(self) -> Expression {
+        for (eler in ExpressionListExpressionRelation(__all_data__)) {
+            if (self = eler.getExpressionList()) {
+                return eler.getExpression()
+            }
+        }
+    }
+}
+/**
+ * @brief Reference relation between expression list to its contained expression.
+ */
+schema ExpressionListExpressionRelation extends ExpressionListExpressionRelationDO {
+
+}
+impl ExpressionListExpressionRelation {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *ExpressionListExpressionRelation {
+        for (tmp in ExpressionListExpressionRelationDO(db)) {
+            yield ExpressionListExpressionRelation {
+                expression_list_hash_id : tmp.expression_list_hash_id,
+                expression_hash_id : tmp.expression_hash_id,
+                position : tmp.position
+            }
+        }
+    }
+    pub fn getExpressionList(self) -> ExpressionList {
+        for (expressionList in ExpressionList(__all_data__)) {
+            if (expressionList.element_hash_id = self.getExpressionListHashId()) {
+                return expressionList
+            }
+        }
+    }
+    pub fn getExpression(self) -> Expression {
+        return Expression(__all_data__).find(self)
+    }
+}
+/**
+ * @brief A callable element, either a method or a constructor.
+ */
+schema Callable {
+    @primary id: int
+}
+impl Callable {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *Callable {
+        for (m in Method(db)) {
+            yield Callable {id : m.element_hash_id}
+        }
+        for (c in Constructor(db)) {
+            yield Callable {id : c.element_hash_id}
+        }
+        for (nm in NpMethod(db)) {
+            yield Callable {id : nm.element_hash_id}
+        }
+    }
+    fn tmp_getCaller_judge(tmp1: Callable, tmp2: Callable) -> bool {
+        if (tmp1 = tmp2) {
+            return true
+        }
+        if (tmp2 in tmp1.getPolyCallable()) {
+            return true
+        }
+    }
+    fn tmp_getCallee_judge(self, tmp: Callable) -> bool {
+        if (self = tmp) {
+            return true
+        }
+        if (tmp in self.getPolyCallable()) {
+            return true
+        }
+    }
+    /**
+     * @brief gets the type for the element.
+     * @return Type
+     */
+    pub fn getReturnType(self) -> Type {
+        for (t in Type(__all_data__)) {
+            for (m in Method(__all_data__)) {
+                if (self.key_eq(m)) {
+                    if (t = m.getType()) {
+                        return t
+                    }
+                }
+            }
+            for (c in Constructor(__all_data__)) {
+                if (self.key_eq(c)) {
+                    if (t.id = 10) {
+                        return t
+                    }
+                }
+            }
+            for (nm in NpMethod(__all_data__)) {
+                if (self.key_eq(nm)) {
+                    if (t.key_eq(nm.getType())) {
+                        return t
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the parameter of the method, if any.
+     * @return Parameter 
+     */
+    pub fn getParameter(self) -> *Parameter {
+        for (param in Parameter(__all_data__)) {
+            if (self.id = param.getParentHashId()) {
+                yield param
+            }
+        }
+    }
+    /**
+     * @brief gets the polymorphism methods of the method, if any.
+     * @return Method 
+     */
+    pub fn getPolyCallable(self) -> *Callable {
+        for (m in Method(__all_data__)) {
+            if (m.element_hash_id = self.id) {
+                for (tmp in m.getPolyMethod()) {
+                    yield Callable{id: tmp.element_hash_id}
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the parent of the Callable element.
+     * @return Interface 
+     */
+    pub fn getBelongedInterface(self) -> Interface {
+        for (m in Method(__all_data__)) {
+            if (self.key_eq(m)) {
+                return Interface(__all_data__).find(m.getParent())
+            }
+        }
+        for (c in Constructor(__all_data__)) {
+            if (self.key_eq(c)) {
+                return Interface(__all_data__).find(c.getParent())
+            }
+        }
+    }
+    /**
+     * @brief gets the parent of the Callable element.
+     * @return ClassOrInterface 
+     */
+    pub fn getBelongedClass(self) -> ClassOrInterface {
+        for (m in Method(__all_data__)) {
+            if (self.key_eq(m)) {
+                return m.getParent()
+            }
+        }
+        for (c in Constructor(__all_data__)) {
+            if (self.key_eq(c)) {
+                return c.getParent()
+            }
+        }
+        for (nm in NpMethod(__all_data__)) {
+            if (self.key_eq(nm)) {
+                return ClassOrInterface(__all_data__).find(nm.getParent())
+            }
+        }
+    }
+    /**
+     * @brief gets the annotation of the Callable element.
+     * @return Annotation 
+     */
+    pub fn getAnnotation(self) -> *Annotation {
+        for (c in Method(__all_data__)) {
+            if (self.key_eq(c)) {
+                yield c.getAnnotation()
+            }
+        }
+        for (c in Constructor(__all_data__)) {
+            if (self.key_eq(c)) {
+                yield c.getAnnotation()
+            }
+        }
+    }
+    /**
+     * @brief gets the modifier of the callable.
+     * @return Modifier 
+     */
+    pub fn getModifier(self) -> *Modifier {
+        for (m in Modifier(__all_data__),
+            list in ModifierList(__all_data__)) {
+            if (list.getParent().key_eq(self)) {
+                if (m.getModifierList() = list) {
+                    yield m
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the body of the method.
+     * @return CodeBlock 
+     */
+    pub fn getBody(self) -> CodeBlock {
+        for (body in CodeBlock(__all_data__)) {
+            for (m in Method(__all_data__)) {
+                if (self.key_eq(m)) {
+                    if (m.key_eq(body.getParent())) {
+                        return body
+                    }
+                }
+            }
+            for (c in Constructor(__all_data__)) {
+                if (self.key_eq(c)) {
+                    if (c.key_eq(body.getParent())) {
+                        return body
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the name of the callable
+     * @return string 
+     */
+    pub fn getName(self) -> string {
+        for (m in Method(__all_data__)) {
+            if (self.key_eq(m)) {
+                let (name = m.getName()) {
+                    return name
+                }
+            }
+        }
+        for (c in Constructor(__all_data__)) {
+            if (self.key_eq(c)) {
+                let (name = c.getName()) {
+                    return name
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the name of the callable
+     * @return string 
+     */
+    pub fn getType(self) -> Type {
+        for (t in Type(__all_data__)) {
+            for (m in Method(__all_data__)) {
+                if (self.key_eq(m)) {
+                    if (t = m.getType()) {
+                        return t
+                    }
+                }
+            }
+            for (c in Constructor(__all_data__)) {
+                if (self.key_eq(c)) {
+                    if (t.id = 10) {
+                        return t
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets an ancestor of the element.
+     * @return ElementParent 
+     */
+    pub fn getAnAncestor(self) -> *ElementParent {
+        for (tmp in ElementParent(__all_data__)) {
+            if (tmp.key_eq(self)) {
+                yield tmp.getAnAncestor()
+            }
+        }
+    }
+    /**
+     * @brief gets the location for the element.
+     * @return Location
+     */
+    pub fn getLocation(self) -> Location {
+        for (m in Method(__all_data__)) {
+            if (self.key_eq(m)) {
+                return m.getLocation()
+            }
+        }
+        for (c in Constructor(__all_data__)) {
+            if (self.key_eq(c)) {
+                return c.getLocation()
+            }
+        }
+    }
+    /**
+     * @brief gets the size for the element.
+     * @return NumberOfLines
+     */
+    pub fn getSize(self) -> NumberOfLines {
+        for (m in Method(__all_data__)) {
+            if (self.key_eq(m)) {
+                return m.getSize()
+            }
+        }
+        for (c in Constructor(__all_data__)) {
+            if (self.key_eq(c)) {
+                return c.getSize()
+            }
+        }
+    }
+    /**
+     * @brief gets the name of the callable
+     * @return string 
+     */
+    pub fn getSignature(self) -> string {
+        for (m in Method(__all_data__)) {
+            if (self.key_eq(m)) {
+                let (name = m.getSignature()) {
+                    return name
+                }
+            }
+        }
+        for (c in Constructor(__all_data__)) {
+            if (self.key_eq(c)) {
+                let (name = c.getSignature()) {
+                    return name
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the caller of the callable
+     * @return Callable 
+     */
+    pub fn getCaller(self) -> *Callable {
+        for (c in Callable(__all_data__),
+            poly in Callable(__all_data__)) {
+            if (Callable::tmp_getCaller_judge(poly, c)) {
+                for (n in MethodAccessExpression(__all_data__)) {
+                    if (c = n.getEnclosingCallable()) {
+                        if (self.key_eq(n.getMethod())) {
+                            yield poly
+                        }
+                        for (tmp in self.getPolyCallable()) {
+                            if (tmp.key_eq(n.getMethod())) {
+                                yield poly
+                            }
+                        }
+                        for (tmp in Method(__all_data__)) {
+                            if (self.key_eq(tmp)) {
+                                if (output4(n, tmp)) {
+                                    yield poly
+                                }
+                            }
+                        }
+                        for (tmp in n.getMethod().getPolyMethod()) {
+                            if (self.key_eq(tmp)) {
+                                yield poly
+                            }
+                        }
+                    }
+                }
+                for (m in MethodReferenceExpression(__all_data__)) {
+                    if (c = m.getEnclosingCallable()) {
+                        if (self.key_eq(m.getMethod())) {
+                            yield poly
+                        }
+                        for (tmp in self.getPolyCallable()) {
+                            if (tmp.key_eq(m.getMethod())) {
+                                yield poly
+                            }
+                        }
+                        for (tmp in m.getMethod().getPolyMethod()) {
+                            if (self.key_eq(tmp)) {
+                                yield poly
+                            }
+                        }
+                    }
+                }
+                for (sci in SuperConstructorInvocation(__all_data__)) {
+                    if (self.key_eq(sci.getConstructor()) &&
+                        c = sci.getEnclosingCallable()) {
+                        yield poly
+                    }
+                }
+                for (ci in ConstructorInvocation(__all_data__)) {
+                    if (self.key_eq(ci.getConstructor()) &&
+                        c = ci.getEnclosingCallable()) {
+                        yield poly
+                    }
+                }
+                for (sae in SuperAccessExpression(__all_data__)) {
+                    if (self.key_eq(sae.getMethod()) &&
+                        c = sae.getEnclosingCallable()) {
+                        yield poly
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets an ancestor caller of the callable, if any
+     * @return Callable 
+     */
+    pub fn getAnAncestorCaller(self) -> *Callable{
+        yield self.getCaller()
+        for (tmp in self.getAnAncestorCaller()) {
+            yield tmp.getCaller()
+        }
+    }
+    /**
+     * @brief gets the callee of the callable
+     * @return Callable 
+     */
+    pub fn getCallee(self) -> *Callable {
+        for (c in Callable(__all_data__),
+            poly in Callable(__all_data__)) {
+            if (self.tmp_getCallee_judge(poly)) {
+                for (n in MethodAccessExpression(__all_data__)) {
+                    if (poly = n.getEnclosingCallable()) {
+                        if (c.key_eq(n.getMethod())) {
+                            yield c
+                        }
+                        for (tmp in n.getMethod().getPolyMethod()) {
+                            if (c.key_eq(tmp)) {
+                                yield c
+                            }
+                        }
+                        for (tmp in c.getPolyCallable()) {
+                            if (n.getMethod().key_eq(tmp)) {
+                                yield c
+                            }
+                        }
+                        for (tmp in Method(__all_data__)) {
+                            if (tmp.element_hash_id = c.id) {
+                                if (output3(n, tmp)) {
+                                    yield c
+                                }
+                            }
+                        }
+                    }
+                }
+                for (m in MethodReferenceExpression(__all_data__)) {
+                    if (poly = m.getEnclosingCallable()) {
+                        if (c.key_eq(m.getMethod())) {
+                            yield c
+                        }
+                        for (tmp in m.getMethod().getPolyMethod()) {
+                            if (c.key_eq(tmp)) {
+                                yield c
+                            }
+                        }
+                        for (tmp in c.getPolyCallable()) {
+                            if (m.getMethod().key_eq(tmp)) {
+                                yield c
+                            }
+                        }
+                    }
+                }
+                for (sci in SuperConstructorInvocation(__all_data__)) {
+                    if (poly = sci.getEnclosingCallable() &&
+                        c.key_eq(sci.getConstructor())) {
+                        yield c
+                    }
+                }
+                for (ci in ConstructorInvocation(__all_data__)) {
+                    if (poly = ci.getEnclosingCallable() &&
+                        c.key_eq(ci.getConstructor())) {
+                        yield c
+                    }
+                }
+                for (sae in SuperAccessExpression(__all_data__)) {
+                    if (poly = sae.getEnclosingCallable() &&
+                        c.key_eq(sae.getMethod())) {
+                        yield c
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets an ancestor callee of the callable, if any
+     * @return Callable 
+     */
+    pub fn getAnAncestorCallee(self) -> *Callable {
+        yield self.getCallee()
+        for (auto_tmp2 in self.getAnAncestorCallee()) {
+            yield auto_tmp2.getCallee()
+        }
+    }
+    /**
+     * @brief gets the anonymous method enclosed by it.
+     * @return AnonymousMethod 
+     */
+    pub fn getEnclosedAnonymousMethod(self) -> *AnonymousMethod {
+        for (m in AnonymousMethod(__all_data__)) {
+            if (self = m.getNonAnonymousEnclosingCallable()) {
+                yield m
+            }
+        }
+    }
+    /**
+     * @brief gets the extra callee from enclosed anonymous method.
+     * @return callee 
+     */
+    pub fn getCalleeFromAnonymousMethod(self) -> *Callable {
+        for (a in AnonymousMethod(__all_data__)) {
+            for (auto_tmp1 in self.getEnclosedAnonymousMethod()) {
+                if (a = auto_tmp1) {
+                    yield a.getCallee()
+                }
+            }
+        }
+    }
+}
+/**
+ * @brief Describe an expression enclosed by a certain callable.
+ */
+schema CallableEnclosingExpression extends CallableEnclosingExpressionDO {
+
+}
+impl CallableEnclosingExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *CallableEnclosingExpression {
+        for (tmp in CallableEnclosingExpressionDO(db)) {
+            yield CallableEnclosingExpression {
+                expression_hash_id : tmp.expression_hash_id,
+                callable_hash_id : tmp.callable_hash_id
+            }
+        }
+    }
+    /**
+     * @brief gets the expression in the callable.
+     * @return Expression 
+     */
+    pub fn getExpression(self) -> Expression {
+        return Expression(__all_data__).find(self)
+    }
+    /**
+     * @brief gets the callable of the expression.
+     * @return Callable 
+     */
+    pub fn getCallable(self) -> Callable {
+        for (cc in Callable(__all_data__)) {
+            if (cc.id = self.getCallableHashId()) {
+                return cc
+            }
+        }
+    }
+}
+/**
+ * @brief A reference in code (either an identifier or a sequence of identifiers separated by periods, optionally with generic type arguments)
+ */
+schema ReferenceElement extends ReferenceElementDO {
+
+}
+impl ReferenceElement {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *ReferenceElement {
+        for (tmp in ReferenceElementDO(db)) {
+            yield ReferenceElement {
+                element_hash_id : tmp.element_hash_id,
+                printable_text : tmp.printable_text,
+                parent_hash_id : tmp.parent_hash_id,
+                location_hash_id : tmp.location_hash_id
+            }
+        }
+    }
+    /**
+     * @brief gets an ancestor of the element.
+     * @return ElementParent 
+     */
+    pub fn getAnAncestor(self) -> *ElementParent {
+        for (tmp in ElementParent(__all_data__)) {
+            if (tmp.key_eq(self)) {
+                yield tmp.getAnAncestor()
+            }
+        }
+    }
+    /**
+     * @brief gets the ast element parent of the element.
+     * @return ElementParent 
+     */
+    pub fn getParent(self) -> ElementParent {
+        for (tmp in ElementParent(__all_data__)) {
+            if (tmp.id = self.getParentHashId()) {
+                return tmp
+            }
+        }
+    }
+    /**
+     * @brief gets the definition of the reference element, usually Class or Interface.
+     * @return ElementParent 
+     */
+    pub fn getDefinition(self) -> ElementParent {
+        return ReferenceRelation(__all_data__).find(self).getDestination()
+    }
+    /**
+     * @brief gets the location for the element.
+     * @return Location
+     */
+    pub fn getLocation(self) -> Location {
+        for (loc in Location(__all_data__)) {
+            if (loc.element_hash_id = self.getLocationHashId()) {
+                return loc
+            }
+        }
+    }
+}
+/**
+ * @brief An anonymous method, parent is an anonymous class.
+ */
+schema AnonymousMethod extends Callable {
+
+}
+impl AnonymousMethod {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *AnonymousMethod {
+        for (tmp in Callable(db)) {
+            for (c in AnonymousClass(db)) {
+                if (c.key_eq(tmp.getBelongedClass())) {
+                    yield AnonymousMethod {
+                        id : tmp.id
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the enclosing callable of the element, if any, the enclosing callable may be an anonymousMethod as well.
+     * @return Callable. 
+     */
+    pub fn getEnclosingCallable(self) -> Callable {
+        for (e in Expression(__all_data__)) {
+            if (e.key_eq(self.getBelongedClass().getParent())) {
+                return e.getEnclosingCallable()
+            }
+        }
+    }
+    /**
+     * @brief gets the non anonymous enclosing callable of the element.
+     * @return Callable. 
+     */
+    pub fn getNonAnonymousEnclosingCallable(self) -> Callable {
+        for(c in Callable(__all_data__), temp in Callable(__all_data__)) {
+            if (temp = self.getEnclosingCallable()) {
+                if (isAnonymousMethod(temp)) {
+                    let (m = AnonymousMethod {id: temp.id}) {
+                        if (c = m.getEnclosingCallable()) {
+                            return c
+                        }
+                    }
+                }
+                if (!isAnonymousMethod(temp)) {
+                    return temp
+                }
+            }
+        }
+    }
+}
+pub fn isDirectCall(e : CallExpression) -> bool {
+    for (s in ExpressionStatement(__all_data__)) {
+        if (s.key_eq(e.getParent())) {
+            return true
+        }
+    }
+}
+pub fn output4(m : MethodAccessExpression, mm : Method) -> bool {
+    return output3(m, mm)
+}
+pub fn isAnonymousMethod(c : Callable) -> bool {
+    for (m in AnonymousMethod(__all_data__)) {
+        if (m.key_eq(c)) {
+            return true
+        }
+    }
+}
+pub fn output3(m: MethodAccessExpression, tmp: Method) -> bool {
+    let (temp3 = tmp_deal_txt(m.getPrintableText())) { 
+        if (tmp.getName() = temp3.get_regex_match_result(".*\\.+(\\w+).*", 1)) {
+            let (c = tmp.getBelongedClass()) {
+                if (c.getQualifiedName() = temp3.get_regex_match_result("(\\w+)\\.+.*", 1)) {
+                    return true
+                }    
+            }
+        }
+    }
+}
+
+@inline
+fn tmp_deal_txt(tmp: string) -> string {
+    if (tmp.len() > 1000) {
+        return tmp.substr(0, 1000)
+    }
+    if (tmp.len() <= 1000) {
+        return tmp
+    }
+}

@@ -1,0 +1,1754 @@
+/**
+ * @brief A java class.
+ */
+schema Class extends ClassDO {
+
+}
+impl Class {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *Class {
+        for (tmp in ClassDO(db)) {
+            yield Class {
+                element_hash_id : tmp.element_hash_id,
+                qualified_name : tmp.qualified_name,
+                identifier_hash_id : tmp.identifier_hash_id,
+                location_hash_id : tmp.location_hash_id,
+                parent_hash_id : tmp.parent_hash_id
+            }
+        }
+    }
+    /**
+     * @brief gets the parent of the method.
+     * @return ElementParent 
+     */
+    pub fn getParent(self) -> ElementParent {
+        for (c in ElementParent(__all_data__)) {
+            if (c.id = self.getParentHashId()) {
+                return c
+            }
+        }
+    }
+    /**
+     * @brief gets the identifier of the class name.
+     * @return Identifier 
+     */
+    pub fn getIdentifier(self) -> Identifier {
+        for (ident in Identifier(__all_data__)) {
+            if (ident.element_hash_id = self.getIdentifierHashId()) {
+                return ident
+            }
+        }
+    }
+    /**
+     * @brief gets the name of the class.
+     * @return string 
+     */
+    pub fn getName(self) -> string {
+        for (ident in Identifier(__all_data__)) {
+            let (name = ident.getName()) {
+                if (ident = self.getIdentifier()) {
+                    return name
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets an ancestor of the element.
+     * @return ElementParent 
+     */
+    pub fn getAnAncestor(self) -> *ElementParent {
+        for (tmp in ElementParent(__all_data__)) {
+            if (tmp.key_eq(self)) {
+                yield tmp.getAnAncestor()
+            }
+        }
+    }
+    /**
+     * @brief gets the modifier of the Class
+     * @return Modifier 
+     */
+    pub fn getModifier(self) -> *Modifier {
+        for (mo in Modifier(__all_data__)) {
+            let (list = mo.getModifierList()) {
+                if (list.getClassParent() = self) {
+                    yield mo
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the annotation of the class, if any.
+     * @return Annotation 
+     */
+    pub fn getAnnotation(self) -> *Annotation {
+        for (relation in AnnotatedRelation(__all_data__)) {
+            if (self.element_hash_id = relation.getAnnotatedItemHashId()) {
+                yield Annotation(__all_data__).find(relation)
+            }
+        }
+    }
+    /**
+     * @brief gets the location for the element.
+     * @return Location
+     */
+    pub fn getLocation(self) -> Location {
+        for (loc in Location(__all_data__)) {
+            if (loc.element_hash_id = self.getLocationHashId()) {
+                return loc
+            }
+        }
+    }
+    /**
+     * @brief gets the super class of the element.
+     * @return Class 
+     */
+    pub fn getSuperClass(self) -> Class {
+        for (CH in ClassHierarchy(__all_data__)) {
+            if (self.key_eq(CH)) {
+                return CH.getSuperClass()
+            }
+        }
+    }
+    /**
+     * @brief gets the implemented interface of the class element.
+     * @return Interface 
+     */
+    pub fn getImplementsInterface(self) -> *Interface {
+        for (CH in ClassHierarchy(__all_data__)) {
+            if (self.key_eq(CH)) {
+                yield CH.getInterface()
+            }
+        }
+    }
+    /**
+     * @brief gets the super class or implemented interface of the class element.
+     * @return ClassOrInterface 
+     */
+    pub fn getSuperOrImplementsType(self) -> *ClassOrInterface {
+        let (c = ClassOrInterface(__all_data__).find(self.getSuperClass())) {
+            yield c
+        }
+        for (auto_tmp1 in self.getImplementsInterface()) {
+            let (c = ClassOrInterface(__all_data__).find(auto_tmp1)) {
+                yield c
+            }
+        }
+    }
+    /**
+     * @brief gets any ascentant class or interface of the class element.
+     * @return ClassOrInterface 
+     */
+    pub fn getAnAscentantClassOrInterface(self) -> *ClassOrInterface {
+        for (c in ClassOrInterface(__all_data__)) {
+            for (auto_tmp1 in self.getSuperOrImplementsType()) {
+                if (c = auto_tmp1) {
+                    yield c
+                }
+            }
+            for (auto_tmp2 in self.getAnAscentantClassOrInterface()) {
+                for (auto_tmp3 in auto_tmp2.getSuperOrImplementsType()) {
+                    if (c = auto_tmp3) {
+                        yield c
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets all ancestor classes of the element.
+     * @return Class
+     */
+    pub fn getAnAncestorClass(self) -> *Class {
+        yield self.getSuperClass()
+        for (auto_tmp1 in self.getAnAncestorClass()) {
+            yield auto_tmp1.getSuperClass()
+        }
+    }
+    /**
+     * @brief gets all fields of the class.
+     * @return Field 
+     */
+    pub fn getAllFields(self) -> *Field {
+        for (f in Field(__all_data__)) {
+            if (self = f.getBelongedClass()) {
+                yield f
+            }
+        }
+    }
+    /**
+     * @brief gets all methods of the class element.
+     * @return Method 
+     */
+    pub fn getAllMethods(self) -> *Method {
+        for (m in Method(__all_data__)) {
+            if (self = m.getBelongedClass()) {
+                yield m
+            }
+        }
+    }
+    /**
+     * @brief gets the containing file of the class element.
+     * @return File 
+     */
+    pub fn getContainingFile(self) -> File {
+        return self.getLocation().getFile()
+    }
+    /**
+     * @brief gets the package of the class element.
+     * @return Package 
+     */
+    pub fn getPackage(self) -> Package {
+        for (c in Cupackage(__all_data__)) {
+            if (c.getCompilationUnit() = self.getContainingFile()) {
+                return c.getPackage()
+            }
+        }
+    }
+    /**
+     * @brief gets the size information of the class element.
+     * @return NumberOfLines 
+     */
+    pub fn getSize(self) -> NumberOfLines {
+        for (n in NumberOfLines(__all_data__)) {
+            if (n.element_hash_id = self.getLocationHashId()) {
+                return n
+            }
+        }
+    }
+}
+/**
+ * @brief A class implement list.
+ */
+schema ClassImplementList extends ClassImplementListDO {
+
+}
+impl ClassImplementList {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *ClassImplementList {
+        for (tmp in ClassImplementListDO(db)) {
+            yield ClassImplementList {
+                element_hash_id : tmp.element_hash_id,
+                implemented_element_hash_id : tmp.implemented_element_hash_id
+            }
+        }
+    }
+    /**
+     * @brief gets the interface type from the implement list
+     * @return Interface 
+     */
+    pub fn getInterface(self) -> *Type {
+        for (i in Type(__all_data__)) {
+            if (i.id = self.getImplementedElementHashId()) {
+                yield i
+            }
+        }
+    }
+}
+/**
+ * @brief A constructor.
+ */
+schema Constructor extends ConstructorDO {
+
+}
+impl Constructor {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *Constructor {
+        for (tmp in ConstructorDO(db)) {
+            yield Constructor {
+                element_hash_id : tmp.element_hash_id,
+                name : tmp.name,
+                signature : tmp.signature,
+                parent_hash_id : tmp.parent_hash_id,
+                location_hash_id : tmp.location_hash_id,
+                definition_body : tmp.definition_body
+            }
+        }
+    }
+    /**
+     * @brief gets the modifier of the constructor
+     * @return Modifier 
+     */
+    pub fn getModifier(self) -> Modifier {
+        for (mo in Modifier(__all_data__),
+            list in ModifierList(__all_data__)) {
+            if (mo.getModifierList() = list) {
+                if (list.getConstructorParent() = self) {
+                    return mo
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the body of the constructor.
+     * @return CodeBlock 
+     */
+    pub fn getBody(self) -> CodeBlock {
+        for (body in CodeBlock(__all_data__)) {
+            if (self.key_eq(body.getParent())) {
+                return body
+            }
+        }
+    }
+    /**
+     * @brief gets the parameter of the constructor.
+     * @return Parameter 
+     */
+    pub fn getParameter(self) -> *Parameter {
+        for (p in Parameter(__all_data__)) {
+            if (self.element_hash_id = p.getParentHashId()) {
+                yield p
+            }
+        }
+    }
+    /**
+     * @brief gets the matched field of the constructor for a given parameter index.
+     * @return Field 
+     */
+    pub fn getMatchedFieldByIndex(self, i : int) -> Field {
+        for (f in Field(__all_data__)) {
+            if (self.getParent() = f.getParent()) {
+                for (r1 in ReferenceExpression(__all_data__),
+                    r2 in ReferenceExpression(__all_data__)) {
+                    for (auto_tmp1 in self.getParameter()) {
+                        if (auto_tmp1.key_eq(r1.getDefinition())) {
+                            if (r1.getEnclosingStatement() = r2.getEnclosingStatement()) {
+                                if (f.key_eq(r2.getDefinition())) {
+                                    if (i = auto_tmp1.getIndex()) {
+                                        return f
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the parent of the constructor.
+     * @return ClassOrInterface 
+     */
+    pub fn getParent(self) -> ClassOrInterface {
+        for (c in ClassOrInterface(__all_data__)) {
+            if (c.id = self.getParentHashId()) {
+                return c
+            }
+        }
+    }
+    /**
+     * @brief gets the return type of the constructor, which should be null.
+     * @return Type 
+     */
+    pub fn getType(self) -> Type {
+        for (c in Type(__all_data__),
+            m in ConstructorDO(__all_data__)) {
+            if (self.key_eq(m)) {
+                if (c.id = 10) {
+                    return c
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets an ancestor of the element.
+     * @return ElementParent 
+     */
+    pub fn getAnAncestor(self) -> *ElementParent {
+        for (tmp in ElementParent(__all_data__)) {
+            if (tmp.key_eq(self)) {
+                yield tmp.getAnAncestor()
+            }
+        }
+    }
+    /**
+     * @brief gets the annotation of the class, if any.
+     * @return Annotation 
+     */
+    pub fn getAnnotation(self) -> Annotation {
+        for (anno in Annotation(__all_data__),
+            relation in AnnotatedRelation(__all_data__)) {
+            if (self.element_hash_id = relation.getAnnotatedItemHashId()) {
+                if (anno.key_eq(relation)) {
+                    return anno
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the location for the element.
+     * @return Location
+     */
+    pub fn getLocation(self) -> Location {
+        for (loc in Location(__all_data__)) {
+            if (loc.element_hash_id = self.getLocationHashId()) {
+                return loc
+            }
+        }
+    }
+    /**
+     * @brief gets the size information for the element.
+     * @return NumberOfLines
+     */
+    pub fn getSize(self) -> NumberOfLines {
+        for (n in NumberOfLines(__all_data__)) {
+            if (n.element_hash_id = self.getLocationHashId()) {
+                return n
+            }
+        }
+    }
+}
+/**
+ * @brief Represents the class hierarchy of all classes.
+ */
+schema ClassHierarchy extends ClassHierarchyDO {
+
+}
+impl ClassHierarchy {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *ClassHierarchy {
+        for (tmp in ClassHierarchyDO(db)) {
+            yield ClassHierarchy {
+                child_hash_id : tmp.child_hash_id,
+                parent_hash_id : tmp.parent_hash_id
+            }
+        }
+    }
+    /**
+     * @brief gets the superclass of the class.
+     * @return Class 
+     */
+    pub fn getSuperClass(self) -> Class {
+        for (s in Class(__all_data__)) {
+            if (s.element_hash_id = self.getParentHashId()) {
+                return s
+            }
+        }
+    }
+    /**
+     * @brief gets the implements interface of the class.
+     * @return Interface 
+     */
+    pub fn getInterface(self) -> *Interface {
+        for (s in Interface(__all_data__)) {
+            if (s.element_hash_id = self.getParentHashId()) {
+                yield s
+            }
+        }
+    }
+}
+/**
+ * @brief A class field.
+ */
+schema Field extends FieldDO {
+
+}
+impl Field {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *Field {
+        for (tmp in FieldDO(db)) {
+            yield Field {
+                element_hash_id : tmp.element_hash_id,
+                name : tmp.name,
+                parent_hash_id : tmp.parent_hash_id,
+                printable_text : tmp.printable_text,
+                location_hash_id : tmp.location_hash_id
+            }
+        }
+    }
+    /**
+     * @brief gets the contained class of the field.
+     * @return Class 
+     */
+    pub fn getBelongedClass(self) -> Class {
+        for (s in Class(__all_data__)) {
+            if (s.element_hash_id = self.getParentHashId()) {
+                return s
+            }
+        }
+    }
+    /**
+     * @brief gets the type for the element.
+     * @return Type
+     */
+    pub fn getType(self) -> Type {
+        for (type in Type(__all_data__),
+            t in TypeElement(__all_data__)) {
+            if (t = self.getTypeElement()) {
+                if (type = t.getType()) {
+                    return type
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the type element for the element.
+     * @return TypeElement
+     */
+    pub fn getTypeElement(self) -> TypeElement {
+        for (type in TypeElement(__all_data__)) {
+            if (self.key_eq(type.getParent())) {
+                return type
+            }
+        }
+    }
+    /**
+     * @brief gets the annotation of the field, if any.
+     * @return Annotation 
+     */
+    pub fn getAnnotation(self) -> *Annotation {
+        for (anno in Annotation(__all_data__),
+            relation in AnnotatedRelation(__all_data__)) {
+            if (self.element_hash_id = relation.getAnnotatedItemHashId()) {
+                if (anno.key_eq(relation)) {
+                    yield anno
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the location of the element.
+     * @return Location 
+     */
+    pub fn getLocation(self) -> Location {
+        for (loc in Location(__all_data__)) {
+            if (loc.element_hash_id = self.getLocationHashId()) {
+                return loc
+            }
+        }
+    }
+    /**
+     * @brief gets the modifier of the constructor
+     * @return Modifier 
+     */
+    pub fn getModifier(self) -> *Modifier {
+        for (mo in Modifier(__all_data__),
+            list in ModifierList(__all_data__)) {
+            if (list.getFieldParent() = self) {
+                if (mo.getModifierList() = list) {
+                    yield mo
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the parent of the constructor.
+     * @return ClassOrInterface 
+     */
+    pub fn getParent(self) -> ClassOrInterface {
+        for (c in ClassOrInterface(__all_data__)) {
+            if (c.id = self.getParentHashId()) {
+                return c
+            }
+        }
+    }
+    /**
+     * @brief gets an ancestor of the element.
+     * @return ElementParent 
+     */
+    pub fn getAnAncestor(self) -> *ElementParent {
+        for (tmp in ElementParent(__all_data__)) {
+            if (tmp.key_eq(self)) {
+                yield tmp.getAnAncestor()
+            }
+        }
+    }
+    /**
+     * @brief gets the identifier of the element.
+     * @return Identifier 
+     */
+    pub fn getIdentifier(self) -> Identifier {
+        for (ident in Identifier(__all_data__)) {
+            if (self.key_eq(ident.getParent())) {
+                return ident
+            }
+        }
+    }
+    /**
+     * @brief gets the default value of the element, if any.
+     * @return string 
+     */
+    pub fn getDefaultValue(self) -> string {
+        let (f = self) {
+            if (hasDefaultValue(f)) {
+                for (l in Literal(__all_data__)) {
+                    if (self.key_eq(l.getParent())) {
+                        return l.getValue()
+                    }
+                }
+            }
+            if (!hasDefaultValue(f)) {
+                return ""
+            }
+        }
+    }
+}
+/**
+ * @brief An interface.
+ */
+schema Interface extends InterfaceDO {
+
+}
+impl Interface {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *Interface {
+        for (tmp in InterfaceDO(db)) {
+            yield Interface {
+                element_hash_id : tmp.element_hash_id,
+                qualified_name : tmp.qualified_name,
+                identifier_hash_id : tmp.identifier_hash_id,
+                location_hash_id : tmp.location_hash_id,
+                parent_hash_id : tmp.parent_hash_id
+            }
+        }
+    }
+    /**
+     * @brief gets the identifier of the element.
+     * @return Identifier 
+     */
+    pub fn getIdentifier(self) -> Identifier {
+        for (i in Identifier(__all_data__)) {
+            if (i.element_hash_id = self.getIdentifierHashId()) {
+                return i
+            }
+        }
+    }
+    /**
+     * @brief gets the name of the interface.
+     * @return string 
+     */
+    pub fn getName(self) -> string {
+        for (ident in Identifier(__all_data__)) {
+            let (name = ident.getName()) {
+                if (ident = self.getIdentifier()) {
+                    return name
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the location for the element.
+     * @return Location
+     */
+    pub fn getLocation(self) -> Location {
+        for (loc in Location(__all_data__)) {
+            if (loc.element_hash_id = self.getLocationHashId()) {
+                return loc
+            }
+        }
+    }
+    /**
+     * @brief gets the parent of the method.
+     * @return ClassOrInterface 
+     */
+    pub fn getParent(self) -> ElementParent {
+        for (c in ElementParent(__all_data__)) {
+            if (c.id = self.getParentHashId()) {
+                return c
+            }
+        }
+    }
+    /**
+     * @brief gets an ancestor of the element.
+     * @return ElementParent 
+     */
+    pub fn getAnAncestor(self) -> *ElementParent {
+        for (tmp in ElementParent(__all_data__)) {
+            if (tmp.key_eq(self)) {
+                yield tmp.getAnAncestor()
+            }
+        }
+    }
+    /**
+     * @brief gets the annotation of the class, if any.
+     * @return Annotation 
+     */
+    pub fn getAnnotation(self) -> *Annotation {
+        for (relation in AnnotatedRelation(__all_data__)) {
+            if (self.element_hash_id = relation.getAnnotatedItemHashId()) {
+                yield Annotation(__all_data__).find(relation)
+            }
+        }
+    }
+    /**
+     * @brief gets the extends interface of the element.
+     * @return Interface
+     */
+    pub fn getSuperInterface(self) -> *Interface {
+        for (CH in ClassHierarchy(__all_data__)) {
+            if (self.key_eq(CH)) {
+                yield CH.getInterface()
+            }
+        }
+    }
+    /**
+     * @brief gets all ancestor classes of the element.
+     * @return Interface
+     */
+    pub fn getAnAncestorInterface(self) -> *Interface {
+        yield self.getSuperInterface()
+        for (auto_tmp2 in self.getAnAncestorInterface()) {
+            yield auto_tmp2.getSuperInterface()
+        }
+    }
+    /**
+     * @brief gets all fields of the class.
+     * @return Field 
+     */
+    pub fn getField(self) -> *Field {
+        for (f in Field(__all_data__)) {
+            if (self.key_eq(f.getParent())) {
+                yield f
+            }
+        }
+    }
+    /**
+     * @brief gets all methods of the class element.
+     * @return Method 
+     */
+    pub fn getMethod(self) -> *Method {
+        for (m in Method(__all_data__)) {
+            if (self.key_eq(m.getParent())) {
+                yield m
+            }
+        }
+    }
+}
+/**
+ * @brief A class or an interface or an anonymous class.
+ */
+schema ClassOrInterface {
+    @primary id: int
+}
+impl ClassOrInterface {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *ClassOrInterface {
+        for (c in Class(db)) {
+            yield ClassOrInterface {id : c.element_hash_id}
+        }
+        for (i in Interface(db)) {
+            yield ClassOrInterface {id : i.element_hash_id}
+        }
+        for (a in AnonymousClass(db)) {
+            yield ClassOrInterface {id : a.element_hash_id}
+        }
+        for (nc in NpClass(db)) {
+            yield ClassOrInterface {id : nc.element_hash_id}
+        }
+        for (ni in NpInterface(db)) {
+            yield ClassOrInterface {id : ni.element_hash_id}
+        }
+    }
+    fn countExtends(self) -> *ReferenceList {
+        for(l in ReferenceList(__all_data__)) {
+            if (self.key_eq(l.getParent()) && l.getRole() = "EXTENDS_LIST") {
+                yield l
+            }
+        }
+    }
+    fn countImplements(self) -> *ReferenceList {
+        for(l in ReferenceList(__all_data__)) {
+            if (self.key_eq(l.getParent()) && l.getRole() = "IMPLEMENTS_LIST") {
+                yield l
+            }
+        }
+    }
+    /**
+     * @brief gets the name of the element.
+     * @return string
+     */
+    pub fn getName(self) -> string {
+        for (c in Class(__all_data__)) {
+            if (self.key_eq(c)) {
+                let (s = c.getName()) {
+                    return s
+                }
+            }
+        }
+        for (i in Interface(__all_data__)) {
+            if (self.key_eq(i)) {
+                let (s = i.getName()) {
+                    return s
+                }
+            }
+        }
+        for (a in AnonymousClass(__all_data__)) {
+            if (self.key_eq(a)) {
+                let (s = "AnonymousClass:NULL") {
+                    return s
+                }
+            }
+        }
+        for (nc in NpClass(__all_data__)) {
+            if (self.key_eq(nc)) {
+                let (s = nc.getName()) {
+                    return s
+                }
+            }
+        }
+        for (ni in NpInterface(__all_data__)) {
+            if (self.key_eq(ni)) {
+                let (s = ni.getName()) {
+                    return s
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the qualified name of the element.
+     * @return string
+     */
+    pub fn getQualifiedName(self) -> string {
+        for (c in Class(__all_data__)) {
+            if (self.key_eq(c)) {
+                let (s = c.getQualifiedName()) {
+                    return s
+                }
+            }
+        }
+        for (i in Interface(__all_data__)) {
+            if (self.key_eq(i)) {
+                let (s = i.getQualifiedName()) {
+                    return s
+                }
+            }
+        }
+        for (a in AnonymousClass(__all_data__)) {
+            if (self.key_eq(a)) {
+                let (s = "AnonymousClass:NULL") {
+                    return s
+                }
+            }
+        }
+        for (nc in NpClass(__all_data__)) {
+            if (self.key_eq(nc)) {
+                let (s = nc.getQualifiedName()) {
+                    return s
+                }
+            }
+        }
+        for (ni in NpInterface(__all_data__)) {
+            if (self.key_eq(ni)) {
+                let (s = ni.getQualifiedName()) {
+                    return s
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the parent of the method.
+     * @return ClassOrInterface 
+     */
+    pub fn getParent(self) -> ElementParent {
+        for (c in Class(__all_data__)) {
+            if (self.key_eq(c)) {
+                return c.getParent()
+            }
+        }
+        for (i in Interface(__all_data__)) {
+            if (self.key_eq(i)) {
+                return i.getParent()
+            }
+        }
+        for (a in AnonymousClass(__all_data__)) {
+            if (self.key_eq(a)) {
+                for (tmp in ElementParent(__all_data__)) {
+                    if (tmp.key_eq(a.getParent())) {
+                        return tmp
+                    }
+                }
+            }
+        }
+        for (nc in NpClass(__all_data__)) {
+            if (self.key_eq(nc)) {
+                return nc.getParent()
+            }
+        }
+        for (ni in NpInterface(__all_data__)) {
+            if (self.key_eq(ni)) {
+                return ni.getParent()
+            }
+        }
+    }
+    /**
+     * @brief gets an ancestor of the element.
+     * @return ElementParent 
+     */
+    pub fn getAnAncestor(self) -> *ElementParent {
+        for (tmp in ElementParent(__all_data__)) {
+            if (tmp.key_eq(self)) {
+                yield tmp.getAnAncestor()
+            }
+        }
+    }
+    /**
+     * @brief gets the type of the class, which can be class, interface or enum.
+     * @return string 
+     */
+    pub fn getClassType(self) -> string {
+        for (m in Modifier(__all_data__)) {
+            if (self.key_eq(m.getParent())) {
+                return m.getName()
+            }
+        }
+    }
+    /**
+     * @brief gets the super class or implemented interface of the class element.
+     * @return ClassOrInterface 
+     */
+    pub fn getSuperOrImplementsType(self) -> *ClassOrInterface {
+        for (coi in ClassOrInterface(__all_data__)) {
+            for (c in Class(__all_data__)) {
+                if (self.key_eq(c)) {
+                    if (coi.key_eq(c.getSuperClass())) {
+                        yield coi
+                    }
+                    for (auto_tmp1 in c.getImplementsInterface()) {
+                        if (coi.key_eq(auto_tmp1)) {
+                            yield coi
+                        }
+                    }
+                }
+            }
+            for (i in Interface(__all_data__)) {
+                if (self.key_eq(i)) {
+                    for (auto_tmp2 in i.getSuperInterface()) {
+                        if (coi.key_eq(auto_tmp2)) {
+                            yield coi
+                        }
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets any ascentant class or interface of the class element.
+     * @return ClassOrInterface 
+     */
+    pub fn getAnAscentantClassOrInterface(self) -> *ClassOrInterface {
+        yield self.getSuperOrImplementsType()
+        for (auto_tmp in self.getAnAscentantClassOrInterface()) {
+            yield auto_tmp.getSuperOrImplementsType()
+        }
+    }
+    /**
+     * @brief gets the location info of the element.
+     * @return Location 
+     */
+    pub fn getLocation(self) -> Location {
+        for (c in Class(__all_data__)) {
+            if (self.key_eq(c)) {
+                return c.getLocation()
+            }
+        }
+        for (i in Interface(__all_data__)) {
+            if (self.key_eq(i)) {
+                return i.getLocation()
+            }
+        }
+        for (a in AnonymousClass(__all_data__)) {
+            if (self.key_eq(a)) {
+                return a.getLocation()
+            }
+        }
+    }
+    /**
+     * @brief gets the package info of the element.
+     * @return string 
+     */
+    pub fn getPackageInfo(self) -> string {
+        for (f in File(__all_data__),
+            c in Cupackage(__all_data__)) {
+            if (f = self.getLocation().getFile()) {
+                if (f = c.getCompilationUnit()) {
+                    return c.getPackage().getPackageName()
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the import info of the element.
+     * @return string 
+     */
+    pub fn getImportlist(self) -> *string {
+        for (f in File(__all_data__)) {
+            if (f = self.getLocation().getFile()) {
+                for (im in Import(__all_data__)) {
+                    if (f = im.getContainingFile()) {
+                        yield im.getPrintableText()
+                    }
+                }
+                for (is in ImportStaticStatement(__all_data__)) {
+                    if (f = is.getParent()) {
+                        yield is.getPrintableText()
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the annotation info of the element.
+     * @return Annotation 
+     */
+    pub fn getAnnotation(self) -> *Annotation {
+        for (c in Class(__all_data__)) {
+            if (self.key_eq(c)) {
+                yield c.getAnnotation()
+            }
+        }
+        for (c in Interface(__all_data__)) {
+            if (self.key_eq(c)) {
+                yield c.getAnnotation()
+            }
+        }
+    }
+    /**
+     * @brief gets the modifier info of the element.
+     * @return Modifier 
+     */
+    pub fn getModifier(self) -> *Modifier {
+        for (m in Modifier(__all_data__),
+            list in ModifierList(__all_data__)) {
+            if (list.getParent().key_eq(self)) {
+                if (m.getModifierList() = list) {
+                    yield m
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the extends info of the element.
+     * @return string 
+     */
+    pub fn getExtendsList(self) -> *string {
+        let (i = self.countExtends().len()) {
+            if (i > 0) {
+                for(l in ReferenceList(__all_data__)) {
+                    if (self.key_eq(l.getParent()) && l.getRole() = "EXTENDS_LIST") {
+                        yield l.getPrintableText()
+                    }
+                }
+            }
+            if (i <= 0) {
+                yield "null"
+            }
+        }
+    }
+    /**
+     * @brief gets the implements info of the element.
+     * @return string 
+     */
+    pub fn getImplementsList(self) -> *string {
+        let (i = self.countImplements().len()) {
+            if (i > 0) {
+                for(l in ReferenceList(__all_data__)) {
+                    if (self.key_eq(l.getParent()) && l.getRole() = "IMPLEMENTS_LIST") {
+                        yield l.getPrintableText()
+                    }
+                }
+            }
+            if (i <= 0) {
+                yield "null"
+            }
+        }
+    }
+}
+/**
+ * @brief Reference relation between reference element to its resolved element.
+ */
+schema ReferenceRelation extends ReferenceRelationDO {
+
+}
+impl ReferenceRelation {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *ReferenceRelation {
+        for (tmp in ReferenceRelationDO(db)) {
+            yield ReferenceRelation {
+                reference_element_hash_id : tmp.reference_element_hash_id,
+                definition_element_hash_id : tmp.definition_element_hash_id
+            }
+        }
+    }
+    /**
+     * @brief get the reference expression or reference element or import static reference element which references some definitions.
+     * @return Expression 
+     */
+    pub fn getSource(self) -> ElementParent {
+        for (r in ReferenceExpression(__all_data__)) {
+            if (r.element_hash_id = self.getSourceId()) {
+                for (tmp in ElementParent(__all_data__)) {
+                    if (tmp.key_eq(r)) {
+                        return tmp
+                    }
+                }
+            }
+        }
+        for (r in ReferenceElement(__all_data__)) {
+            if (r.element_hash_id = self.getSourceId()) {
+                for (tmp in ElementParent(__all_data__)) {
+                    if (tmp.key_eq(r)) {
+                        return tmp
+                    }
+                }
+            }
+        }
+        for (r in ImportStaticReferenceElement(__all_data__)) {
+            if (r.element_hash_id = self.getSourceId()) {
+                for (tmp in ElementParent(__all_data__)) {
+                    if (tmp.key_eq(r)) {
+                        return tmp
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief get the destination of this reference relation. 
+     * @return ExpressionParent 
+     */
+    pub fn getDestination(self) -> ElementParent {
+        for (e in ElementParent(__all_data__)) {
+            if (e.id = self.getDefinitionElementHashId()) {
+                return e
+            }
+        }
+    }
+}
+/**
+ * @brief A local variable.
+ */
+schema LocalVariable extends LocalVariableDO {
+
+}
+impl LocalVariable {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *LocalVariable {
+        for (tmp in LocalVariableDO(db)) {
+            yield LocalVariable {
+                element_hash_id : tmp.element_hash_id,
+                parent_hash_id : tmp.parent_hash_id,
+                location_hash_id : tmp.location_hash_id,
+                printable_text : tmp.printable_text,
+                name : tmp.name,
+                index_order : tmp.index_order
+            }
+        }
+    }
+    /**
+     * @brief gets the reference expression of the local variable.
+     * @return Expression 
+     */
+    pub fn getReferenced(self) -> Expression {
+        for (rr in ReferenceRelation(__all_data__)) {
+            if (rr.key_eq(self)) {
+                return Expression(__all_data__).find(rr.getSource())
+            }
+        }
+    }
+    /**
+     * @brief gets the expression of the local variable.
+     * @return Expression 
+     */
+    pub fn getExpression(self) -> Expression {
+        for (e in Expression(__all_data__)) {
+            if (self.key_eq(e.getParent())) {
+                return e
+            }
+        }
+    }
+    /**
+     * @brief gets the parent of the element.
+     * @return ElementParent 
+     */
+    pub fn getParent(self) -> ElementParent {
+        for (c in ElementParent(__all_data__)) {
+            if (c.id = self.getParentHashId()) {
+                return c
+            }
+        }
+    }
+    /**
+     * @brief gets an ancestor of the element.
+     * @return ElementParent 
+     */
+    pub fn getAnAncestor(self) -> *ElementParent {
+        for (tmp in ElementParent(__all_data__)) {
+            if (tmp.key_eq(self)) {
+                yield tmp.getAnAncestor()
+            }
+        }
+    }
+    /**
+     * @brief gets the type for the element.
+     * @return Type
+     */
+    pub fn getType(self) -> Type {
+        for (t in TypeElement(__all_data__)) {
+            if (t = self.getTypeElement()) {
+                return t.getType()
+            }
+        }
+    }
+    /**
+     * @brief gets the type element for the element.
+     * @return TypeElement
+     */
+    pub fn getTypeElement(self) -> TypeElement {
+        for (type in TypeElement(__all_data__)) {
+            if (self.key_eq(type.getParent())) {
+                return type
+            }
+        }
+    }
+    /**
+     * @brief gets the identifier of the local variable.
+     * @return Identifier 
+     */
+    pub fn getIdentifier(self) -> Identifier {
+        for (ident in Identifier(__all_data__)) {
+            if (self.key_eq(ident.getParent())) {
+                return ident
+            }
+        }
+    }
+    /**
+     * @brief gets the location of the local variable.
+     * @return Location 
+     */
+    pub fn getLocation(self) -> Location {
+        for (loc in Location(__all_data__)) {
+            if (loc.element_hash_id = self.getLocationHashId()) {
+                return loc
+            }
+        }
+    }
+    /**
+     * @brief gets the annotation of the class, if any.
+     * @return Annotation 
+     */
+    pub fn getAnnotation(self) -> Annotation {
+        for (anno in Annotation(__all_data__),
+            relation in AnnotatedRelation(__all_data__)) {
+            if (self.element_hash_id = relation.getAnnotatedItemHashId()) {
+                if (anno.key_eq(relation)) {
+                    return anno
+                }
+            }
+        }
+    }
+}
+/**
+ * @brief An anonymous class
+ */
+schema AnonymousClass extends AnonymousClassDO {
+
+}
+impl AnonymousClass {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *AnonymousClass {
+        for (tmp in AnonymousClassDO(db)) {
+            yield AnonymousClass {
+                element_hash_id : tmp.element_hash_id,
+                base_class_reference_hash_id : tmp.base_class_reference_hash_id,
+                base_class_type_hash_id : tmp.base_class_type_hash_id,
+                location_hash_id : tmp.location_hash_id,
+                parent_hash_id : tmp.parent_hash_id
+            }
+        }
+    }
+    /**
+     * @brief gets the ast element parent of the element.
+     * @return Expression 
+     */
+    pub fn getParent(self) -> Expression {
+        for (parent in Expression(__all_data__)) {
+            if (parent.element_hash_id = self.getParentHashId()) {
+                return parent
+            }
+        }
+    }
+    /**
+     * @brief gets an ancestor of the element.
+     * @return ElementParent 
+     */
+    pub fn getAnAncestor(self) -> *ElementParent {
+        for (tmp in ElementParent(__all_data__)) {
+            if (tmp.key_eq(self)) {
+                yield tmp.getAnAncestor()
+            }
+        }
+    }
+    /**
+     * @brief gets the location for the element.
+     * @return Location
+     */
+    pub fn getLocation(self) -> Location {
+        for (loc in Location(__all_data__)) {
+            if (loc.element_hash_id = self.getLocationHashId()) {
+                return loc
+            }
+        }
+    }
+    /**
+     * @brief gets the type for the base class of the anonymous class.
+     * @return ReferenceType 
+     */
+    pub fn getBaseClassType(self) -> ReferenceType {
+        for (type in ReferenceType(__all_data__)) {
+            if (type.oid = self.getBaseClassTypeHashId()) {
+                return type
+            }
+        }
+    }
+    /**
+     * @brief gets the reference element specifying the base class for the anonymous class.
+     * @return ReferenceElement 
+     */
+    pub fn getBaseClassReference(self) -> ReferenceElement {
+        for (reference in ReferenceElement(__all_data__)) {
+            if (reference.element_hash_id = self.getBaseClassReferenceHashId()) {
+                return reference
+            }
+        }
+    }
+    /**
+     * @brief gets the enclosing callable of the element, if any.
+     * @return Callable 
+     */
+    pub fn getEnclosingCallable(self) -> *Callable {
+        for (auto_tmp1 in self.getAnAncestor()) {
+            yield Callable(__all_data__).find(auto_tmp1)
+        }
+    }
+}
+/**
+ * @brief An enum constant, also a class field.
+ */
+schema EnumConstant extends EnumConstantDO {
+
+}
+impl EnumConstant {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *EnumConstant {
+        for (tmp in EnumConstantDO(db)) {
+            yield EnumConstant {
+                element_hash_id : tmp.element_hash_id,
+                name : tmp.name,
+                parent_hash_id : tmp.parent_hash_id,
+                location_hash_id : tmp.location_hash_id,
+                printable_text : tmp.printable_text
+            }
+        }
+    }
+    /**
+     * @brief gets the class body attached to the enum constant declaration.
+     * @return AnonymousClass 
+     */
+    pub fn getInitializer(self) -> AnonymousClass {
+        for (c in AnonymousClass(__all_data__),
+            e in EnumConstantDO(__all_data__)) {
+            if (self.key_eq(e)) {
+                if (e.key_eq(c.getParent())) {
+                    return c
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the ast element parent of the element.
+     * @return ElementParent 
+     */
+    pub fn getParent(self) -> Class {
+        for (parent in Class(__all_data__)) {
+            if (parent.element_hash_id = self.getParentHashId()) {
+                return parent
+            }
+        }
+    }
+    /**
+     * @brief gets an ancestor of the element.
+     * @return ElementParent 
+     */
+    pub fn getAnAncestor(self) -> *ElementParent {
+        for (tmp in ElementParent(__all_data__)) {
+            if (tmp.key_eq(self)) {
+                yield tmp.getAnAncestor()
+            }
+        }
+    }
+    /**
+     * @brief gets the location for the element.
+     * @return Location
+     */
+    pub fn getLocation(self) -> Location {
+        for (loc in Location(__all_data__)) {
+            if (loc.element_hash_id = self.getLocationHashId()) {
+                return loc
+            }
+        }
+    }
+    /**
+     * @brief gets the type of the element.
+     * @return Type 
+     */
+    pub fn getType(self) -> Type {
+        for (t in Type(__all_data__)) {
+            if (t.key_eq(self.getParent())) {
+                return t
+            }
+        }
+    }
+    /**
+     * @brief gets the value list of the element.
+     * @return ExpressionList 
+     */
+    pub fn getValueList(self) -> ExpressionList {
+        for (e in ExpressionList(__all_data__)) {
+            if (self.element_hash_id = e.getParentHashId()) {
+                return e
+            }
+        }
+    }
+    /**
+     * @brief gets the value of the element by a given index.
+     * @return Expression 
+     */
+    pub fn getValueByIndex(self, i: int) -> Expression {
+        let (l = self.getValueList()) {
+            return l.getSubExpression(i)
+        }
+    }
+    /**
+     * @brief gets the corresponding field of the element by a given index, if any.
+     * @return Field 
+     */
+    pub fn getMatchedFieldByIndex(self, i: int) -> Field {
+        for (c in Constructor(__all_data__)) {
+            if (c.getParent().key_eq(self.getParent())) {
+                return c.getMatchedFieldByIndex(i)
+            }
+        }
+    }
+    /**
+     * @brief gets the corresponding enum value of the element by a given field, if any.
+     * @return Expression 
+     */
+    pub fn getValueByField(self, f: Field) -> Expression {
+        for (i in int::__undetermined_all__()) {
+            if (f = self.getMatchedFieldByIndex(i)) {
+                return self.getValueByIndex(i)
+            }
+        }
+    }
+    /**
+     * @brief gets the default value of the element.
+     * @return string 
+     */
+    pub fn getDefaultValue(self) -> string {
+        let (f = self) {
+            if (hasEnumDefaultValue(f)) {
+                for(l in Literal(__all_data__), t in ExpressionList(__all_data__)) {
+                    if (self.key_eq(t.getParent())) {
+                        if (t.key_eq(l.getParent())) {
+                            return l.getValue()
+                        }
+                    }
+                }
+            }
+            if (!hasEnumDefaultValue(f)) {
+                return ""
+            }
+        }
+    }
+}
+/**
+ * @brief A java class initializer block.
+ */
+schema ClassInitializer extends ClassInitializerDO {
+
+}
+impl ClassInitializer {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *ClassInitializer {
+        for (tmp in ClassInitializerDO(db)) {
+            yield ClassInitializer {
+                element_hash_id : tmp.element_hash_id,
+                printable_text : tmp.printable_text,
+                parent_hash_id : tmp.parent_hash_id,
+                location_hash_id : tmp.location_hash_id
+            }
+        }
+    }
+    /**
+     * @brief gets the ast element parent of the element.
+     * @return ElementParent 
+     */
+    pub fn getParent(self) -> ElementParent {
+        for (c in ElementParent(__all_data__)) {
+            if (c.id = self.getParentHashId()) {
+                return c
+            }
+        }
+    }
+    /**
+     * @brief gets an ancestor of the element.
+     * @return ElementParent 
+     */
+    pub fn getAnAncestor(self) -> *ElementParent {
+        for (tmp in ElementParent(__all_data__)) {
+            if (tmp.key_eq(self)) {
+                yield tmp.getAnAncestor()
+            }
+        }
+    }
+    /**
+     * @brief gets the location for the element.
+     * @return Location
+     */
+    pub fn getLocation(self) -> Location {
+        for (loc in Location(__all_data__)) {
+            if (loc.element_hash_id = self.getLocationHashId()) {
+                return loc
+            }
+        }
+    }
+}
+/**
+ * @brief A java abstract class with a keyword 'abstract'.
+ */
+schema AbstractClass extends Class {
+
+}
+impl AbstractClass {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *AbstractClass {
+        for (tmp in Class(db)) {
+            for (m in Modifier(db)) {
+                for (auto_tmp1 in tmp.getModifier()) {
+                    if (m = auto_tmp1) {
+                        if (m.getName() = "abstract") {
+                            yield AbstractClass {
+                                element_hash_id : tmp.element_hash_id,
+                                qualified_name : tmp.qualified_name,
+                                identifier_hash_id : tmp.identifier_hash_id,
+                                location_hash_id : tmp.location_hash_id,
+                                parent_hash_id : tmp.parent_hash_id
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+/**
+ * @brief A java enum class with a keyword 'enum'.
+ */
+schema EnumClass extends Class {
+
+}
+impl EnumClass {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *EnumClass {
+        for (tmp in Class(db)) {
+            for (m in Modifier(db)) {
+                if (tmp.key_eq(m.getParent())) {
+                    if (m.getName() = "enum") {
+                        yield EnumClass {
+                            element_hash_id : tmp.element_hash_id,
+                            qualified_name : tmp.qualified_name,
+                            identifier_hash_id : tmp.identifier_hash_id,
+                            location_hash_id : tmp.location_hash_id,
+                            parent_hash_id : tmp.parent_hash_id
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+/**
+ * @brief A nested class is a member of its enclosing class. Nested classes are divided into two categories: non-static and static. Non-static nested classes are called inner classes. Nested classes that are declared static are called static nested classes.
+ */
+schema NestedClass extends Class {
+
+}
+impl NestedClass {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *NestedClass {
+        for (tmp in Class(db)) {
+            for (c in Class(db)) {
+                if (c.key_eq(tmp.getParent())) {
+                    yield NestedClass {
+                        element_hash_id : tmp.element_hash_id,
+                        qualified_name : tmp.qualified_name,
+                        identifier_hash_id : tmp.identifier_hash_id,
+                        location_hash_id : tmp.location_hash_id,
+                        parent_hash_id : tmp.parent_hash_id
+                    }
+                }
+            }
+        }
+    }
+}
+/**
+ * @brief Nested classes that are declared static are called static nested classes.
+ */
+schema StaticNestedClass extends NestedClass {
+
+}
+impl StaticNestedClass {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *StaticNestedClass {
+        for (tmp in NestedClass(db)) {
+            for (m in Modifier(db)) {
+                for (auto_tmp2 in tmp.getModifier()) {
+                    if (m = auto_tmp2) {
+                        if (m.getName() = "static") {
+                            yield StaticNestedClass {
+                                element_hash_id : tmp.element_hash_id,
+                                qualified_name : tmp.qualified_name,
+                                identifier_hash_id : tmp.identifier_hash_id,
+                                location_hash_id : tmp.location_hash_id,
+                                parent_hash_id : tmp.parent_hash_id
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+/**
+ * @brief Non-static nested classes are called inner classes.
+ */
+schema InnerClass extends NestedClass {
+
+}
+impl InnerClass {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *InnerClass {
+        for (tmp in NestedClass(db)) {
+            for (c in NestedClass(db)) {
+                if (tmp = c) {
+                    if (!isStaticClass(c)) {
+                        yield InnerClass {
+                            element_hash_id : tmp.element_hash_id,
+                            qualified_name : tmp.qualified_name,
+                            identifier_hash_id : tmp.identifier_hash_id,
+                            location_hash_id : tmp.location_hash_id,
+                            parent_hash_id : tmp.parent_hash_id
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+/**
+ * @brief Represents a non-physical class.
+ */
+schema NpClass extends NpClassDO {
+
+}
+impl NpClass {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *NpClass {
+        for (tmp in NpClassDO(db)) {
+            for (c in NpClassDO(db)) {
+                if (tmp = c) {
+                    yield NpClass {
+                        element_hash_id : tmp.element_hash_id,
+                        name : tmp.name,
+                        qualified_name : tmp.qualified_name,
+                        parent_hash_id : tmp.parent_hash_id
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the parent of this element.
+     * @return ElementParent
+     */
+    pub fn getParent(self) -> ElementParent {
+        for (c in ElementParent(__all_data__)) {
+            if (c.id = self.getParentHashId()) {
+                return c
+            }
+        }
+    }
+}
+/**
+ * @brief Represents a non-physical interface.
+ */
+schema NpInterface extends NpInterfaceDO {
+
+}
+impl NpInterface {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *NpInterface {
+        for (tmp in NpInterfaceDO(db)) {
+            for (i in NpInterfaceDO(db)) {
+                if (tmp = i) {
+                    yield NpInterface {
+                        element_hash_id : tmp.element_hash_id,
+                        name : tmp.name,
+                        qualified_name : tmp.qualified_name,
+                        parent_hash_id : tmp.parent_hash_id
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the parent of this element.
+     * @return ElementParent
+     */
+    pub fn getParent(self) -> ElementParent {
+        for (c in ElementParent(__all_data__)) {
+            if (c.id = self.getParentHashId()) {
+                return c
+            }
+        }
+    }
+}
+pub fn hasDefaultValue(f : Field) -> bool {
+    for (l in Literal(__all_data__)) {
+        if (f.key_eq(l.getParent())) {
+            return true
+        }
+    }
+}
+pub fn hasEnumDefaultValue(f : EnumConstant) -> bool {
+    for (l in ExpressionList(__all_data__)) {
+        if (f.key_eq(l.getParent())) {
+            return true
+        }
+    }
+}
+pub fn isStaticClass(c : NestedClass) -> bool {
+    for (s in StaticNestedClass(__all_data__)) {
+        if (c.key_eq(s)) {
+            return true
+        }
+    }
+}

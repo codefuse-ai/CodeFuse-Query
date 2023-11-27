@@ -1,0 +1,55 @@
+/**
+ * @brief Regular slicing (on the form lower:upper or lower:upper:step). Can occur only inside the slice field of Subscript, either directly or as an element of Tuple.
+ */
+schema Slice extends SliceDO {
+    
+}
+impl Slice {
+    @data_constraint
+    @inline
+    fn __all__(db: PythonDB) -> *Slice {
+        for (tmp in SliceDO(db)) {
+            yield Slice {
+                element_oid : tmp.element_oid,
+                element_index : tmp.element_index,
+                parent_oid : tmp.parent_oid,
+                location_oid : tmp.location_oid,
+                printable_text : tmp.printable_text,
+                has_step : tmp.has_step
+            }
+        }
+    }
+    /**
+     * @brief gets the parent element of the element
+     * @return CombineElement 
+     */
+    pub fn getParent(self) -> CombineElement {
+        for (parent in CombineElement(__all_data__)) {
+            if (parent.id = self.getParentOid()) {
+                return parent
+            }
+        }
+    }
+    /**
+     * @brief gets an ancestor of the element.
+     * @return CombineElement 
+     */
+    pub fn getAnAncestor(self) -> *CombineElement {
+        for (temp in CombineElement(__all_data__)) {
+            if (self.key_eq(temp)) {
+                yield temp.getAnAncestor()
+            }
+        }
+    }
+    /**
+     * @brief gets the location for the element.
+     * @return Location
+     */
+    pub fn getLocation(self) -> Location {
+        for (loc in Location(__all_data__)) {
+            if (loc.element_oid = self.getLocationOid()) {
+                return loc
+            }
+        }
+    }
+}
