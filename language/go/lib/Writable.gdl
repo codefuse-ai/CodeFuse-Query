@@ -1,0 +1,227 @@
+schema IncDecStmt extends Statement {
+
+}
+impl IncDecStmt {
+    @data_constraint
+    @inline
+    fn __all__(db: GoDB) -> *IncDecStmt {
+        for (s in Statement(db)) {
+            if (s.isIncStmt()) {
+                yield IncDecStmt {
+                    id : s.id
+                }
+            }
+            if (s.isDecStmt()) {
+                yield IncDecStmt {
+                    id : s.id
+                }
+            }
+        }
+    }
+}
+schema AssignmentStmt extends Statement {
+
+}
+impl AssignmentStmt {
+    @data_constraint
+    @inline
+    fn __all__(db: GoDB) -> *AssignmentStmt {
+        for (s in Statement(db)) {
+            if (s.isAssignStmt()) {
+                yield AssignmentStmt {
+                    id : s.id
+                }
+            }
+            if (s.isDefineStmt()) {
+                yield AssignmentStmt {
+                    id : s.id
+                }
+            }
+            if (s.isAddassignStmt()) {
+                yield AssignmentStmt {
+                    id : s.id
+                }
+            }
+            if (s.isSubassignStmt()) {
+                yield AssignmentStmt {
+                    id : s.id
+                }
+            }
+            if (s.isMulassignStmt()) {
+                yield AssignmentStmt {
+                    id : s.id
+                }
+            }
+            if (s.isQuoassignStmt()) {
+                yield AssignmentStmt {
+                    id : s.id
+                }
+            }
+            if (s.isRemassignStmt()) {
+                yield AssignmentStmt {
+                    id : s.id
+                }
+            }
+            if (s.isMulassignStmt()) {
+                yield AssignmentStmt {
+                    id : s.id
+                }
+            }
+            if (s.isAndassignStmt()) {
+                yield AssignmentStmt {
+                    id : s.id
+                }
+            }
+            if (s.isOrassignStmt()) {
+                yield AssignmentStmt {
+                    id : s.id
+                }
+            }
+            if (s.isXorassignStmt()) {
+                yield AssignmentStmt {
+                    id : s.id
+                }
+            }
+            if (s.isShlassignStmt()) {
+                yield AssignmentStmt {
+                    id : s.id
+                }
+            }
+            if (s.isShrassignStmt()) {
+                yield AssignmentStmt {
+                    id : s.id
+                }
+            }
+            if (s.isAndnotassignStmt()) {
+                yield AssignmentStmt {
+                    id : s.id
+                }
+            }
+        }
+    }
+    pub fn getALhs(self) -> *Expr {
+        for (e in Expr(__all_data__)) {
+            let (idx = e.getIdx()) {
+                if (idx < 0) {
+                    if (e.getParentNode().key_eq(self)) {
+                        yield e
+                    }
+                }
+            }
+        }
+    }
+    pub fn getARhs(self) -> *Expr {
+        for (e in Expr(__all_data__)) {
+            let (idx = e.getIdx()) {
+                if (idx > 0) {
+                    if (e.getParentNode().key_eq(self)) {
+                        yield e
+                    }
+                }
+            }
+        }
+    }
+}
+schema Writable extends Node {
+
+}
+impl Writable {
+    @data_constraint
+    @inline
+    fn __all__(db: GoDB) -> *Writable {
+        for (n in Node(db)) {
+            for (s in IncDecStmt(db)) {
+                if (s.key_eq(n)) {
+                    yield Writable {
+                        id : n.id
+                    }
+                }
+            }
+            for (s in AssignmentStmt(db)) {
+                if (s.key_eq(n)) {
+                    yield Writable {
+                        id : s.id
+                    }
+                }
+            }
+        }
+    }
+    pub fn getAWrite(self) -> *Node {
+        for (e in Expr(__all_data__)) {
+            if (e.getParentNode().key_eq(self)) {
+                yield Node{id: e.id}
+            }
+        }
+    }
+    pub fn getAWriteDist(self) -> *Node {
+        for (e in Expr(__all_data__)) {
+            if (e.getIdx() < 0) {
+                if (e.getParentNode().key_eq(self)) {
+                    yield Node{id: e.id}
+                }
+            }
+        }
+    }
+    pub fn getAWriteSource(self) -> *Node {
+        for (e in Expr(__all_data__)) {
+            if (e.getIdx() > 0) {
+                if (e.getParentNode().key_eq(self)) {
+                    yield Node{id: e.id}
+                }
+            }
+        }
+    }
+}
+schema WritesField {
+    @primary id: int
+}
+impl WritesField {
+    @data_constraint
+    @inline
+    fn __all__(db: GoDB) -> *WritesField {
+        for (e in Expr(db)) {
+            if (e.isSelectorExpr()) {
+                yield WritesField {id : e.id}
+            }
+        }
+    }
+    pub fn getBelongsWritable(self) -> Writable {
+        for (w in Writable(__all_data__)) {
+            for (auto_tmp1 in w.getAWrite()) {
+                if (self.key_eq(auto_tmp1)) {
+                    return w
+                }
+            }
+        }
+    }
+
+    pub fn getBaseName(self) -> string {
+        for (e in Expr(__all_data__), l in LiteralDO(__all_data__)) { // selectorExpr
+            if (self.key_eq(e.getParentNode()) && e.getIdx() = 0) { // getX
+                let (kind = e.getKind()) {
+                    if (kind = 1 && l.getExpr() = e.id) {
+                        return l.getValue()
+                    }
+                    if (kind != 1) {  // Ident
+                        return e.getDebugInfo()
+                    }
+                }
+            }
+        }
+    }
+
+    pub fn getFieldName(self) -> string {
+        for (e in Expr(__all_data__), l in Literal(__all_data__)) { // selectorExpr
+            if (e.getParentNode().key_eq(self) && e.getIdx() = 1) { // getSel
+                let (kind = e.getKind()) {
+                    if (kind = 1 && e.id = l.getExpr()) {
+                        return l.getValue()
+                    }
+                    if (kind != 1) { // Ident
+                        return e.getDebugInfo()
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,444 @@
+/**
+ * @filename: ObjectLiteral
+ * @brief: Provides classes and predicates for working with JavaScript / TypeScript object literals.
+ */
+
+/**
+ * An object literal expression.
+ */
+schema ObjectLiteralExpression extends PrimaryExpression {
+}
+
+impl ObjectLiteralExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *ObjectLiteralExpression {
+        for (tmp in PrimaryExpression(db)) {
+            if (isObjectLiteralExpression(Node {id: tmp.id})) {
+                yield ObjectLiteralExpression {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+
+    /**
+     * Get a property, which is an ObjectLiteralElement.
+     */
+    pub fn getAProperty(self) -> *ObjectLiteralElement {
+        for (objectLiteralElement in ObjectLiteralElement(__all_data__)) {
+            for (auto_tmp1 in self.getAChild()) {
+                if (objectLiteralElement.key_eq(auto_tmp1)) {
+                    yield objectLiteralElement
+                }
+            }
+        }
+    }
+
+    /**
+     * Get the `i`th property.
+     */
+    pub fn getProperty(self, i: int) -> ObjectLiteralElement {
+        for (objectLiteralElement in ObjectLiteralElement(__all_data__)) {
+            if (objectLiteralElement.key_eq(self.getChild(i))) {
+                return objectLiteralElement
+            }
+        }
+    }
+
+    /**
+     * Get the property of this ObjectLiteralExpression by name.
+     */
+    pub fn getPropertyByName(self, name: string) -> ObjectLiteralElement {
+        for (objectLiteralElement in ObjectLiteralElement(__all_data__)) {
+            if (objectLiteralElement.getParent().key_eq(self)) {
+                if (objectLiteralElement.getName() = name) {
+                    return objectLiteralElement
+                }
+            }
+        }
+    }
+
+    /**
+     * Determine whether this ObjectLiteralExpression has a property with the specified name.
+     */
+    pub fn hasProperty(self, name: string) -> bool {
+        for (objectLiteralElement in ObjectLiteralElement(__all_data__)) {
+            if (objectLiteralElement = self.getPropertyByName(name)) {
+                return true
+            }
+        }
+    }
+
+    /**
+     * Get the PropertyAssignment of this ObjectLiteralExpression by name.
+     */
+    pub fn getPropertyAssignmentByName(self, name: string) -> PropertyAssignment {
+        for (propertyAssignment in PropertyAssignment(__all_data__)) {
+            if (propertyAssignment.getParent() = self) {
+                if (propertyAssignment.getName() = name) {
+                    return propertyAssignment
+                }
+            }
+        }
+    }
+}
+
+/**
+ * An object literal element.
+ */
+schema ObjectLiteralElement extends Node {
+}
+
+impl ObjectLiteralElement {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *ObjectLiteralElement {
+        for (tmp in Node(db)) {
+            if (isObjectLiteralElement(tmp)) {
+                yield ObjectLiteralElement {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets the name of this ObjectLiteralElement.
+     *
+     * A SpreadAssignment doesn't have a name.
+     * TODO: add handling for Accessors.
+     */
+    pub fn getName(self) -> string {
+        for (propertyAssignment in PropertyAssignment(__all_data__)) {
+            if (propertyAssignment.key_eq(self)) {
+                let (name = propertyAssignment.getName()) {
+                    return name
+                }
+            }
+        }
+        for (shorthandPropertyAssignment in ShorthandPropertyAssignment(__all_data__)) {
+            if (shorthandPropertyAssignment.key_eq(self)) {
+                let (name = shorthandPropertyAssignment.getName()) {
+                    return name
+                }
+            }
+        }
+        for (methodDeclaration in MethodDeclaration(__all_data__)) {
+            if (methodDeclaration.key_eq(self)) {
+                let (name = methodDeclaration.getName()) {
+                    return name
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A computed property name.
+ */
+schema ComputedPropertyName extends Node {
+}
+
+impl ComputedPropertyName {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *ComputedPropertyName {
+        for (tmp in Node(db)) {
+            if (isComputedPropertyName(tmp)) {
+                yield ComputedPropertyName {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+    pub fn getExpression(self) -> Expression {
+        for (expression in Expression(__all_data__)) {
+            if (expression.key_eq(self.getChild(0))) {
+                return expression
+            }
+        }
+    }
+}
+
+/**
+ * A property name.
+ */
+schema PropertyName extends Node {
+}
+
+impl PropertyName {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *PropertyName {
+        for (tmp in Node(db)) {
+            if (isPropertyName(tmp)) {
+                yield PropertyName {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets the name of this PropertyName.
+     *
+     * If this PropertyName is a ComputedPropertyName, it doesn't have a name
+     */
+    pub fn getName(self) -> string {
+        if (isIdentifier(Node {id: self.id})) {
+            let (name = self.getText()) {
+                return name
+            }
+        }
+        if (isPrivateIdentifier(Node {id: self.id})) {
+            let (name = self.getText()) {
+                return name
+            }
+        }
+        // StringLiteral or NumericLiteral
+        for (literalExpression in LiteralExpression(__all_data__)) {
+            if (literalExpression.key_eq(self)) {
+                let (name = literalExpression.getValue()) {
+                    return name
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A property assignment.
+ *
+ * TODO: handle decorators and modifiers
+ */
+schema PropertyAssignment extends ObjectLiteralElement {
+}
+
+impl PropertyAssignment {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *PropertyAssignment {
+        for (tmp in ObjectLiteralElement(db)) {
+            if (isPropertyAssignment(Node {id: tmp.id})) {
+                yield PropertyAssignment {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+
+    pub fn getParent(self) -> ObjectLiteralExpression {
+        for (parent in ObjectLiteralExpression(__all_data__)) {
+            if (parent.id = self.getParentOid()) {
+                return parent
+            }
+        }
+    }
+
+    pub fn getPropertyName(self) -> PropertyName {
+        for (propertyName in PropertyName(__all_data__)) {
+            if (propertyName.key_eq(self.getChild(0))) {
+                return propertyName
+            }
+        }
+    }
+
+    pub fn getNameNode(self) -> PropertyName {
+        for (nameNode in PropertyName(__all_data__)) {
+            if (nameNode.key_eq(self.getChild(0))) {
+                return nameNode
+            }
+        }
+    }
+
+    pub fn getName(self) -> string {
+        return self.getPropertyName().getName()
+    }
+
+    pub fn getInitializer(self) -> Expression {
+        for (initializer in Expression(__all_data__)) {
+            if (initializer.key_eq(self.getChild(1))) {
+                return initializer
+            }
+        }
+    }
+}
+
+/**
+ * A shorthand property assignment.
+ *
+ * TODO: handle decorators and modifiers
+ */
+schema ShorthandPropertyAssignment extends ObjectLiteralElement {
+}
+
+impl ShorthandPropertyAssignment {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *ShorthandPropertyAssignment {
+        for (tmp in ObjectLiteralElement(db)) {
+            if (isShorthandPropertyAssignment(Node {id: tmp.id})) {
+                yield ShorthandPropertyAssignment {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+
+    pub fn getParent(self) -> ObjectLiteralExpression {
+        for (parent in ObjectLiteralExpression(__all_data__)) {
+            if (parent.id = self.getParentOid()) {
+                return parent
+            }
+        }
+    }
+
+    pub fn getIdentifier(self) -> Identifier {
+        for (identifier in Identifier(__all_data__)) {
+            if (identifier.key_eq(self.getChild(0))) {
+                return identifier
+            }
+        }
+    }
+
+    pub fn getNameNode(self) -> Identifier {
+        for (identifier in Identifier(__all_data__)) {
+            if (identifier.key_eq(self.getChild(0))) {
+                return identifier
+            }
+        }
+    }
+
+    pub fn getName(self) -> string {
+        return self.getIdentifier().getName()
+    }
+
+    /**
+     * Gets the value symbol associated with this shorthand property assignment.
+     */
+    pub fn getValueSymbol(self) -> Symbol {
+        for (symbol in Symbol(__all_data__),
+            shorthandAssignmentValueSymbolDO in ShorthandAssignmentValueSymbolDO(__all_data__)) {
+            if (shorthandAssignmentValueSymbolDO.key_eq(self)) {
+                if (symbol.oid = shorthandAssignmentValueSymbolDO.getSymbolOid()) {
+                    return symbol
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A spread assignment.
+ */
+schema SpreadAssignment extends ObjectLiteralElement {
+}
+
+impl SpreadAssignment {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *SpreadAssignment {
+        for (tmp in ObjectLiteralElement(db)) {
+            if (isSpreadAssignment(Node {id: tmp.id})) {
+                yield SpreadAssignment {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+
+    pub fn getParent(self) -> ObjectLiteralExpression {
+        for (parent in ObjectLiteralExpression(__all_data__)) {
+            if (parent.id = self.getParentOid()) {
+                return parent
+            }
+        }
+    }
+
+    pub fn getExpression(self) -> Expression {
+        for (expression in Expression(__all_data__)) {
+            if (expression.key_eq(self.getChild(0))) {
+                return expression
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a property assignment.
+ */
+pub fn isPropertyAssignment(node: Node) -> bool {
+    if (node.getKind() = 294) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a shorthand property assignment.
+ */
+pub fn isShorthandPropertyAssignment(node: Node) -> bool {
+    if (node.getKind() = 295) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a spread assignment.
+ */
+pub fn isSpreadAssignment(node: Node) -> bool {
+    if (node.getKind() = 296) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is an object literal element.
+ */
+pub fn isObjectLiteralElement(node: Node) -> bool {
+    if (isPropertyAssignment(node)) {
+        return true
+    }
+    if (isShorthandPropertyAssignment(node)) {
+        return true
+    }
+    if (isSpreadAssignment(node)) {
+        return true
+    }
+    if (isMethodDeclaration(node)) {
+        return true
+    }
+    if (isAccessor(node)) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a computed property name.
+ */
+pub fn isComputedPropertyName(node: Node) -> bool {
+    if (node.getKind() = 161) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a property name.
+ */
+pub fn isPropertyName(node: Node) -> bool {
+    if (isIdentifier(node)) {
+        return true
+    }
+    if (isStringLiteral(node)) {
+        return true
+    }
+    if (isNumericLiteral(node)) {
+        return true
+    }
+    if (isComputedPropertyName(node)) {
+        return true
+    }
+    if (isPrivateIdentifier(node)) {
+        return true
+    }
+}

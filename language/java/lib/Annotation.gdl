@@ -1,0 +1,729 @@
+/**
+ * @brief Describe an annotated relation.
+ */
+schema AnnotatedRelation extends AnnotatedRelationDO {
+
+}
+impl AnnotatedRelation {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *AnnotatedRelation {
+        for (tmp in AnnotatedRelationDO(db)) {
+            yield AnnotatedRelation {
+                annotation_hash_id : tmp.annotation_hash_id,
+                annotated_item_hash_id : tmp.annotated_item_hash_id
+            }
+        }
+    }
+    /**
+     * @brief gets the Annotation of the annotated relation.
+     * @return Annotation 
+     */
+    pub fn getAnnotation(self) -> Annotation {
+        for (anno in Annotation(__all_data__)) {
+            if (anno.key_eq(self)) {
+                return anno
+            }
+        }
+    }
+    /**
+     * @brief gets the annotated element, like class, method, field and so on.
+     * @return ExpressionParent 
+     */
+    pub fn getAnnotatedElement(self) -> ExpressionParent {
+        for (element in ExpressionParent(__all_data__)) {
+            if (element.id = self.getAnnotatedItemHashId()) {
+                return element
+            }
+        }
+    }
+}
+schema AnnotationDo {
+    @primary id: int
+}
+impl AnnotationDo {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *AnnotationDo {
+        for (a in AnnotationCanResolvedDO(db)) {
+            yield AnnotationDo {id : a.element_hash_id}
+        }
+        for (a in AnnotationCanNotResolvedDO(db)) {
+            yield AnnotationDo {id : a.element_hash_id}
+        }
+    }
+    /**
+     * @brief gets the name for the element.
+     * @return string
+     */
+    pub fn getName(self) -> string {
+        let (name = self.getAnnotationDeclaration().getQualifiedName()) {
+            return name
+        }
+        for (a in AnnotationCanNotResolvedDO(__all_data__)) {
+            if (self.key_eq(a)) {
+                let (name = a.getName()) {
+                    return name
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the name for the element.
+     * @return string
+     */
+    pub fn getPrintableText(self) -> string {
+        for (a in AnnotationCanResolvedDO(__all_data__)) {
+            if (self.key_eq(a)) {
+                let (name = a.getPrintableText()) {
+                    return name
+                }
+            }
+        }
+        for (a in AnnotationCanNotResolvedDO(__all_data__)) {
+            if (self.key_eq(a)) {
+                let (name = a.getPrintableText()) {
+                    return name
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the location for the element.
+     * @return Location
+     */
+    pub fn getLocation(self) -> Location {
+        for (loc in Location(__all_data__)) {
+            for (a in AnnotationCanResolvedDO(__all_data__)) {
+                if (self.key_eq(a)) {
+                    if (loc.element_hash_id = a.getLocationHashId()) {
+                        return loc
+                    }
+                }
+            }
+            for (a in AnnotationCanNotResolvedDO(__all_data__)) {
+                if (self.key_eq(a)) {
+                    if (loc.element_hash_id = a.getLocationHashId()) {
+                        return loc
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the parent id of the element.
+     * @return int 
+     */
+    pub fn getParentHashId(self) -> int {
+        for (a in AnnotationCanResolvedDO(__all_data__)) {
+            if (self.key_eq(a)) {
+                let (parent = a.getParentHashId()) {
+                    return parent
+                }
+            }
+        }
+        for (a in AnnotationCanNotResolvedDO(__all_data__)) {
+            if (self.key_eq(a)) {
+                let (parent = a.getParentHashId()) {
+                    return parent
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the parent of the element.
+     * @return ElementParent 
+     */
+    pub fn getParent(self) -> ElementParent {
+        for (c in ElementParent(__all_data__)) {
+            if (c.id = self.getParentHashId()) {
+                return c
+            }
+        }
+    }
+    /**
+     * @brief gets an ancestor of the element.
+     * @return ElementParent 
+     */
+    pub fn getAnAncestor(self) -> *ElementParent {
+        for (tmp in ElementParent(__all_data__)) {
+            if (tmp.key_eq(self)) {
+                yield tmp.getAnAncestor()
+            }
+        }
+    }
+    /**
+     * @brief gets the declaration of the element, if any.
+     * @return AnnotationDeclaration 
+     */
+    pub fn getAnnotationDeclaration(self) -> AnnotationDeclaration {
+        for (decl in AnnotationDeclaration(__all_data__)) {
+            for (a in AnnotationCanResolvedDO(__all_data__)) {
+                if (self.key_eq(a)) {
+                    if (decl.element_hash_id = a.getAnnotationDeclarationHashId()) {
+                        return decl
+                    }
+                }
+            }
+        }
+    }
+}
+/**
+ * @brief An access annotation. 
+ */
+schema Annotation extends AnnotationDo {
+
+}
+impl Annotation {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *Annotation {
+        for (tmp in AnnotationDo(db)) {
+            yield Annotation {
+                id : tmp.id
+            }
+        }
+    }
+    /**
+     * @brief gets the annotated class of the annotation.
+     * @return Class 
+     */
+    pub fn getAnnotatedClass(self) -> Class {
+        for (c in Class(__all_data__),
+            relation in AnnotatedRelation(__all_data__)) {
+            if (self.key_eq(relation)) {
+                if (c.element_hash_id = relation.getAnnotatedItemHashId()) {
+                    return c
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the annotated method of the annotation.
+     * @return Method 
+     */
+    pub fn getAnnotatedMethod(self) -> Method {
+        for (m in Method(__all_data__),
+            relation in AnnotatedRelation(__all_data__)) {
+            if (self.key_eq(relation)) {
+                if (m.element_hash_id = relation.getAnnotatedItemHashId()) {
+                    return m
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets an argument of the annotation, if any.
+     * @return AnnotationAccessArgument 
+     */
+    pub fn getAnnotationArgument(self) -> *AnnotationAccessArgument {
+        for (arg in AnnotationAccessArgument(__all_data__)) {
+            if (self = arg.getAnnotation()) {
+                yield arg
+            }
+        }
+    }
+}
+/**
+ * @brief An access annotation argument class, with name or without name. 
+ */
+schema AnnotationAccessArgumentDO {
+    @primary id: int
+}
+impl AnnotationAccessArgumentDO {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *AnnotationAccessArgumentDO {
+        for (a in AnnotationAccessArgumentWithNameDO(db)) {
+            yield AnnotationAccessArgumentDO {id : a.element_hash_id}
+        }
+        for (a in AnnotationAccessArgumentWithoutNameDO(db)) {
+            yield AnnotationAccessArgumentDO {id : a.element_hash_id}
+        }
+    }
+    /**
+     * @brief gets the printable text for the element.
+     * @return string
+     */
+    pub fn getPrintableText(self) -> string {
+        for (a in AnnotationAccessArgumentWithNameDO(__all_data__)) {
+            if (self.key_eq(a)) {
+                let (name = a.getPrintableText()) {
+                    return name
+                }
+            }
+        }
+        for (a in AnnotationAccessArgumentWithoutNameDO(__all_data__)) {
+            if (self.key_eq(a)) {
+                let (name = a.getPrintableText()) {
+                    return name
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the printable text for the element.
+     * @return int
+     */
+    pub fn getArgumentValueHashId(self) -> int {
+        for (a in AnnotationAccessArgumentWithNameDO(__all_data__)) {
+            if (self.key_eq(a)) {
+                let (name = a.getArgumentValueHashId()) {
+                    return name
+                }
+            }
+        }
+        for (a in AnnotationAccessArgumentWithoutNameDO(__all_data__)) {
+            if (self.key_eq(a)) {
+                let (name = a.getArgumentValueHashId()) {
+                    return name
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the annotation for the element.
+     * @return Annotation
+     */
+    pub fn getAnnotation(self) -> Annotation {
+        for (anno in Annotation(__all_data__)) {
+            for (a in AnnotationAccessArgumentWithNameDO(__all_data__)) {
+                if (self.key_eq(a)) {
+                    if (anno.id = a.getAnnotationAccessHashId()) {
+                        return anno
+                    }
+                }
+            }
+            for (a in AnnotationAccessArgumentWithoutNameDO(__all_data__)) {
+                if (self.key_eq(a)) {
+                    if (anno.id = a.getAnnotationAccessHashId()) {
+                        return anno
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the location for the element.
+     * @return Location
+     */
+    pub fn getLocation(self) -> Location {
+        for (loc in Location(__all_data__)) {
+            for (a in AnnotationAccessArgumentWithNameDO(__all_data__)) {
+                if (self.key_eq(a)) {
+                    if (loc.element_hash_id = a.getLocationHashId()) {
+                        return loc
+                    }
+                }
+            }
+            for (a in AnnotationAccessArgumentWithoutNameDO(__all_data__)) {
+                if (self.key_eq(a)) {
+                    if (loc.element_hash_id = a.getLocationHashId()) {
+                        return loc
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the type for the element.
+     * @return int
+     */
+    pub fn getType(self) -> int {
+        for (a in AnnotationAccessArgumentWithNameDO(__all_data__)) {
+            if (self.key_eq(a)) {
+                let (type = a.getTypeHashId()) {
+                    return type
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the parent of the element.
+     * @return ElementParent 
+     */
+    pub fn getParent(self) -> ElementParent {
+        for (a in AnnotationAccessArgumentWithNameDO(__all_data__)) {
+            if (self.key_eq(a)) {
+                let (tmp = ElementParent{id: a.getAnnotationAccessHashId()}) {
+                    return tmp
+                }
+            }
+        }
+        for (a in AnnotationAccessArgumentWithoutNameDO(__all_data__)) {
+            if (self.key_eq(a)) {
+                let (tmp = ElementParent{id: a.getAnnotationAccessHashId()}) {
+                    return tmp
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets an ancestor of the element.
+     * @return ElementParent 
+     */
+    pub fn getAnAncestor(self) -> *ElementParent {
+        for (tmp in ElementParent(__all_data__)) {
+            if (tmp.key_eq(self)) {
+                yield tmp.getAnAncestor()
+            }
+        }
+    }
+}
+/**
+ * @brief An argument that applies to an annotation.
+ */
+schema AnnotationAccessArgument extends AnnotationAccessArgumentDO {
+
+}
+impl AnnotationAccessArgument {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *AnnotationAccessArgument {
+        for (tmp in AnnotationAccessArgumentDO(db)) {
+            yield AnnotationAccessArgument {
+                id : tmp.id
+            }
+        }
+    }
+    /**
+     * @brief gets the annotated class of the annotation argument.
+     * @return Class 
+     */
+    pub fn getAnnotatedClass(self) -> Class {
+        for (c in Class(__all_data__),
+            relation in AnnotatedRelation(__all_data__)) {
+            if (self.key_eq(relation)) {
+                if (c.element_hash_id = relation.getAnnotatedItemHashId()) {
+                    return c
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets an ancestor of the element.
+     * @return ElementParent 
+     */
+    pub fn getAnAncestor(self) -> *ElementParent {
+        for (tmp in ElementParent(__all_data__)) {
+            if (tmp.key_eq(self)) {
+                yield tmp.getAnAncestor()
+            }
+        }
+    }
+    /**
+     * @brief gets the annotated method of the annotation argument.
+     * @return Method 
+     */
+    pub fn getAnnotatedMethod(self) -> Method {
+        for (m in Method(__all_data__),
+            relation in AnnotatedRelation(__all_data__)) {
+            if (self.key_eq(relation)) {
+                if (m.element_hash_id = relation.getAnnotatedItemHashId()) {
+                    return m
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the argument value, for example, a string literal, an identifier, an array initializer or a type literal.
+     * @return string 
+     */
+    pub fn getAnnotationArgumentValue(self) -> string {
+        return self.getAnnotationArgumentValue1()
+        return self.getAnnotationArgumentValue2()
+        return self.getAnnotationArgumentValue3()
+        return self.getAnnotationArgumentValue4()
+    }
+    /**
+     * @brief gets the argument value as an annotation.
+     * @return Annotation 
+     */
+    pub fn getArgumentAnnotation(self) -> Annotation {
+        for (anno in Annotation(__all_data__),
+            a in AnnotationArrayInitializer(__all_data__)) {
+            if (anno.getParent().key_eq(a)) {
+                if (a.element_hash_id = self.getArgumentValueHashId()) {
+                    return anno
+                }
+            }
+        }
+    }
+    pub fn getAnnotationArgumentValue4(self) -> string {
+        for (l in TypeLiteral(__all_data__),
+            a in ReferenceType(__all_data__)) {
+            let (argumentValue = a.getQualifiedName()) {
+                if (self.getArgumentValueHashId() = l.element_hash_id) {
+                    if (a.key_eq(l.getType())) {
+                        return argumentValue
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the argument name, the default name is value.
+     * @return string 
+     */
+    pub fn getAnnotationArgumentName(self) -> string {
+        for (ii in Identifier(__all_data__)) {
+            if (ii.element_hash_id = self.getType()) {
+                return ii.getName()
+            }
+        }
+        for (b in AnnotationAccessArgumentWithoutNameDO(__all_data__)) {
+            if (self.key_eq(b)) {
+                return "value"
+            }
+        }
+    }
+    fn getAnnotationArgumentValue1(self) -> string {
+        for (sLiteral in StringLiteral(__all_data__)) {
+            if (sLiteral.element_hash_id = self.getArgumentValueHashId()) {
+                return sLiteral.getValue()
+            }
+        }
+    }
+    fn getAnnotationArgumentValue2(self) -> string {
+        for (ident in Identifier(__all_data__)) {
+            if (ident.getParentHashId() = self.getArgumentValueHashId()) {
+                return ident.getName()
+            }
+        }
+    }
+    fn getAnnotationArgumentValue3(self) -> string {
+        let (a = self.getArgumentValueHashId()) {
+            if (isArrayInitializer(a)) {
+                for (anno in AnnotationArrayInitializer(__all_data__)) {
+                    if (a = anno.element_hash_id) {
+                        return anno.getPrintableText()
+                    }
+                }
+            }
+            if (!isArrayInitializer(a)) {
+                for (anno in Annotation(__all_data__)) {
+                    if (a = anno.getParentHashId()) {
+                        return anno.getPrintableText()
+                    }
+                }
+                for (anno in Expression(__all_data__)) {
+                    if (a = anno.getParentHashId()) {
+                        return anno.getPrintableText()
+                    }
+                }
+            }
+        }
+    }
+}
+/**
+ * @brief Represents an array used as a value of an annotation element. For example: @Endorsers({"Children", "Unscrupulous dentists"})
+ */
+schema AnnotationArrayInitializer extends AnnotationArrayInitializerDO {
+
+}
+impl AnnotationArrayInitializer {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *AnnotationArrayInitializer {
+        for (tmp in AnnotationArrayInitializerDO(db)) {
+            yield AnnotationArrayInitializer {
+                element_hash_id : tmp.element_hash_id,
+                printable_text : tmp.printable_text,
+                parent_hash_id : tmp.parent_hash_id,
+                location_hash_id : tmp.location_hash_id
+            }
+        }
+    }
+    /**
+     * @brief gets the location for the element.
+     * @return Location
+     */
+    pub fn getLocation(self) -> Location {
+        for (loc in Location(__all_data__)) {
+            if (loc.element_hash_id = self.getLocationHashId()) {
+                return loc
+            }
+        }
+    }
+    /**
+     * @brief gets the initializer value for the element.
+     * @return Expression
+     */
+    pub fn getInitializerValue(self) -> *Expression {
+        for (e in Expression(__all_data__)) {
+            if (self.element_hash_id = e.getParentHashId()) {
+                yield e
+            }
+        }
+    }
+    /**
+     * @brief gets the parent of the element.
+     * @return ElementParent 
+     */
+    pub fn getParent(self) -> AnnotationAccessArgument {
+        for (parent in AnnotationAccessArgument(__all_data__)) {
+            if (parent.getArgumentValueHashId() = self.element_hash_id) {
+                return parent
+            }
+        }
+    }
+    /**
+     * @brief gets an ancestor of the element.
+     * @return ElementParent 
+     */
+    pub fn getAnAncestor(self) -> *ElementParent {
+        for (tmp in ElementParent(__all_data__)) {
+            if (tmp.key_eq(self)) {
+                yield tmp.getAnAncestor()
+            }
+        }
+    }
+}
+/**
+ * @brief An annotation that applies to a declaration.
+ */
+schema AnnotationDeclaration extends AnnotationDeclarationDO {
+
+}
+impl AnnotationDeclaration {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *AnnotationDeclaration {
+        for (tmp in AnnotationDeclarationDO(db)) {
+            yield AnnotationDeclaration {
+                element_hash_id : tmp.element_hash_id,
+                qualified_name : tmp.qualified_name
+            }
+        }
+    }
+    /**
+     * @brief gets the Identifier of the annotation declaration element.
+     * @return Identifier 
+     */
+    pub fn getIdentifier(self) -> Identifier {
+        for (i in Identifier(__all_data__)) {
+            if (self.key_eq(i.getParent())) {
+                return i
+            }
+        }
+    }
+    /**
+     * @brief gets the location for the element.
+     * @return Location
+     */
+    pub fn getLocation(self) -> Location {
+        for (loc in Location(__all_data__),
+            i in Interface(__all_data__)) {
+            if (self.key_eq(i)) {
+                if (loc.element_hash_id = i.getLocationHashId()) {
+                    return loc
+                }
+            }
+        }
+    }
+}
+/**
+ * @brief A parameter that applied to a annotation declaration.
+ */
+schema AnnotationDeclarationParameter extends AnnotationDeclarationParameterDO {
+
+}
+impl AnnotationDeclarationParameter {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *AnnotationDeclarationParameter {
+        for (tmp in AnnotationDeclarationParameterDO(db)) {
+            yield AnnotationDeclarationParameter {
+                element_hash_id : tmp.element_hash_id,
+                annotation_declaration_hash_id : tmp.annotation_declaration_hash_id,
+                type_hash_id : tmp.type_hash_id,
+                parameter_value_hash_id : tmp.parameter_value_hash_id,
+                location_hash_id : tmp.location_hash_id,
+                printable_text : tmp.printable_text
+            }
+        }
+    }
+    /**
+     * @brief gets the annotation declaration.
+     * @return AnnotationDeclaration 
+     */
+    pub fn getAnnotationDeclaration(self) -> AnnotationDeclaration {
+        for (anno in AnnotationDeclaration(__all_data__)) {
+            if (anno.element_hash_id = self.getAnnotationDeclarationHashId()) {
+                return anno
+            }
+        }
+    }
+    /**
+     * @brief gets the reference type for the element.
+     * @return Type
+     */
+    pub fn getType(self) -> Type {
+        for (type in Type(__all_data__)) {
+            if (type.id = self.getTypeHashId()) {
+                return type
+            }
+        }
+    }
+    /**
+     * @brief gets the Identifier for this element.
+     * @return Identifier 
+     */
+    pub fn getIdentifier(self) -> Identifier {
+        for (i in Identifier(__all_data__)) {
+            if (i.element_hash_id = self.getParameterValueHashId()) {
+                return i
+            }
+        }
+    }
+    /**
+     * @brief gets the location for the element.
+     * @return Location
+     */
+    pub fn getLocation(self) -> Location {
+        for (loc in Location(__all_data__)) {
+            if (loc.element_hash_id = self.getLocationHashId()) {
+                return loc
+            }
+        }
+    }
+}
+/**
+ * @brief Default value for an annotation parameter, if any.
+ */
+schema AnnotationDeclarationParameterDefaultValue extends AnnotationDeclarationParameterDefaultValueDO {
+
+}
+impl AnnotationDeclarationParameterDefaultValue {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *AnnotationDeclarationParameterDefaultValue {
+        for (tmp in AnnotationDeclarationParameterDefaultValueDO(db)) {
+            yield AnnotationDeclarationParameterDefaultValue {
+                element_hash_id : tmp.element_hash_id,
+                default_value : tmp.default_value
+            }
+        }
+    }
+    /**
+     * @brief gets the location for the element.
+     * @return Location
+     */
+    pub fn getLocation(self) -> Location {
+        for (loc in Location(__all_data__),
+            m in Method(__all_data__)) {
+            if (self.key_eq(m)) {
+                if (loc.element_hash_id = m.getLocationHashId()) {
+                    return loc
+                }
+            }
+        }
+    }
+}
+pub fn isArrayInitializer(a : int) -> bool {
+    for (anno in AnnotationArrayInitializer(__all_data__)) {
+        if (a = anno.element_hash_id) {
+            return true
+        }
+    }
+}

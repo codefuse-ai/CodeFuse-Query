@@ -1,0 +1,53 @@
+/**
+ * @brief The location information of a locatable elements.
+ */
+schema Location extends LocationDO {
+    
+}
+impl Location {
+    @data_constraint
+    @inline
+    fn __all__(db: PythonDB) -> *Location {
+        for (tmp in LocationDO(db)) {
+            yield Location {
+                element_oid : tmp.element_oid,
+                file_oid : tmp.file_oid,
+                start_line_number : tmp.start_line_number,
+                start_column_number : tmp.start_column_number,
+                end_line_number : tmp.end_line_number,
+                end_column_number : tmp.end_column_number
+            }
+        }
+    }
+    /**
+     * @brief gets the file information for the location
+     * @return File 
+     */
+    pub fn getFile(self) -> File {
+        for (f in File(__all_data__)) {
+            if (f.element_oid = self.getFileOid()) {
+                return f
+            }
+        }
+    }
+}
+/**
+ * @brief The number of lines for a python file.
+ */
+schema NumberOfLines extends NumberOfLinesDO {
+    
+}
+impl NumberOfLines {
+    @data_constraint
+    @inline
+    fn __all__(db: PythonDB) -> *NumberOfLines {
+        for (tmp in NumberOfLinesDO(db)) {
+            yield NumberOfLines {
+                element_oid : tmp.element_oid,
+                number_of_total_lines : tmp.number_of_total_lines,
+                number_of_valid_lines : tmp.number_of_valid_lines,
+                number_of_comment_lines : tmp.number_of_comment_lines
+            }
+        }
+    }
+}

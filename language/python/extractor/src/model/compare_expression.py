@@ -1,0 +1,13 @@
+# coding: utf-8
+from sqlalchemy import Column, Integer
+from sqlalchemy.ext.declarative import declarative_base
+
+Base = declarative_base()
+metadata = Base.metadata
+
+
+class CompareExpression(Base):
+    __tablename__ = "compare_expression"
+
+    element_oid = Column(Integer, primary_key=True)
+    left_expr_oid = Column(Integer, nullable=False)

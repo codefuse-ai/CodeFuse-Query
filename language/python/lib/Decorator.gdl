@@ -1,0 +1,80 @@
+/**
+ * @brief A decorator for a class or a function.
+ */
+schema Decorator extends Expression {
+    
+}
+impl Decorator {
+    @data_constraint
+    @inline
+    fn __all__(db: PythonDB) -> *Decorator {
+        for (tmp in Expression(db)) {
+            for (d in DecoratorDO(db)) {
+                if (tmp.key_eq(d)) {
+                    yield Decorator {
+                        element_oid : tmp.element_oid,
+                        type : tmp.type,
+                        element_index : tmp.element_index,
+                        parent_oid : tmp.parent_oid,
+                        location_oid : tmp.location_oid,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the decorated element of the element, a class or a function.
+     * @return CombineElement
+     */
+    pub fn getDecoratedElement(self) -> CombineElement {
+        for (c in CombineElement(__all_data__),
+            r in DecoratedRelation(__all_data__)) {
+            if (self.key_eq(r)) {
+                if (c = r.getDecoratedElement()) {
+                    return c
+                }
+            }
+        }
+    }
+}
+/**
+ * @brief A decorated relation.
+ */
+schema DecoratedRelation extends DecoratedRelationDO {
+    
+}
+impl DecoratedRelation {
+    @data_constraint
+    @inline
+    fn __all__(db: PythonDB) -> *DecoratedRelation {
+        for (tmp in DecoratedRelationDO(db)) {
+            yield DecoratedRelation {
+                decorator_oid : tmp.decorator_oid,
+                decorated_element_oid : tmp.decorated_element_oid
+            }
+        }
+    }
+    /**
+     * @brief gets the decorator of the relation.
+     * @return Decorator
+     */
+    pub fn getDecorator(self) -> Decorator {
+        for (d in Decorator(__all_data__)) {
+            if (d.key_eq(self)) {
+                return d
+            }
+        }
+    }
+    /**
+     * @brief gets the decorated element of the relation.
+     * @return CombineElement
+     */
+    pub fn getDecoratedElement(self) -> CombineElement {
+        for (c in CombineElement(__all_data__)) {
+            if (c.id = self.getDecoratedElementOid()) {
+                return c
+            }
+        }
+    }
+}

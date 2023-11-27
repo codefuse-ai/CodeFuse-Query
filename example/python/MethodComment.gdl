@@ -1,0 +1,85 @@
+// script
+use coref::python::*
+
+schema PublicVisitedElement extends CombineElement {}
+
+impl PublicVisitedElement {
+    @data_constraint
+    pub fn __all__(db: PythonDB) -> *PublicVisitedElement {
+        for (tmp in Class(db)) {
+            yield PublicVisitedElement {id: tmp.element_oid}
+        }
+        for (tmp in Function(db)) {
+            yield PublicVisitedElement {id: tmp.element_oid}
+        }
+    }
+
+    pub fn getName(self) -> string {
+        let (tmp = Class(__all_data__).find(self)) {
+            return tmp.getQualifiedName() 
+        }
+        let (tmp = Function(__all_data__).find(self)) {
+            return tmp.getQualifiedName() 
+        }
+    }
+}
+
+fn default_db() -> PythonDB {
+    return PythonDB::load("coref_python_src.db")
+}
+
+fn hasComment(e: PublicVisitedElement) -> bool {
+    let (db = default_db()) {
+        for (j in DocstringComment(db)) {
+            if (e.key_eq(j.getDocumentableElement())) {
+                return true
+            }
+        }
+        for (j in Comment(db)) {
+            if (e.key_eq(j.getDocumentedClassOrFunctionElement())) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Get comment of each public element
+ *
+ * @param type          public visited element type
+ * @param name          public visited element name
+ * @param filePath      file path
+ * @param sline         element start line
+ * @param eline         element end line
+ * @param isCommented   if is commented
+ */
+fn output_result(
+    type: string,
+    name: string,
+    filePath: string,
+    sline: int,
+    eline: int,
+    isCommented: int) -> bool {
+    for (e in PublicVisitedElement(default_db())) {
+        if (type = e.getType() && 
+            name = e.getName() &&
+            filePath = e.getLocation().getFile().getRelativePath() &&
+            sline = e.getLocation().getStartLineNumber() &&
+            eline = e.getLocation().getEndLineNumber()) {
+            if (hasComment(e)) {
+                if (isCommented = 1) {
+                    return true
+                }
+            }
+            if (!hasComment(e)) {
+                if (isCommented = 0) {
+                    return true
+                }
+            }
+        }
+    }
+}
+
+fn main() {
+    output(output_result())
+}

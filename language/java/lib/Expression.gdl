@@ -1,0 +1,1581 @@
+/**
+ * @brief A common super-class that represents all kinds of expressions.
+ */
+schema Expression extends ExpressionDO {
+
+}
+impl Expression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *Expression {
+        for (tmp in ExpressionDO(db)) {
+            yield Expression {
+                element_hash_id : tmp.element_hash_id,
+                name : tmp.name,
+                parent_hash_id : tmp.parent_hash_id,
+                index_order : tmp.index_order,
+                location_hash_id : tmp.location_hash_id,
+                printable_text : tmp.printable_text
+            }
+        }
+    }
+    /**
+     * @brief gets the parent of the expression.
+     * @return ElementParent 
+     */
+    pub fn getParent(self) -> ElementParent {
+        for (c in ElementParent(__all_data__)) {
+            if (c.id = self.getParentHashId()) {
+                return c
+            }
+        }
+    }
+    /**
+     * @brief gets an ancestor of the element.
+     * @return ElementParent 
+     */
+    pub fn getAnAncestor(self) -> *ElementParent {
+        for (tmp in ElementParent(__all_data__)) {
+            if (tmp.key_eq(self)) {
+                yield tmp.getAnAncestor()
+            }
+        }
+    }
+    /**
+     * @brief gets the callable in which this expression occurs.
+     * @return Callable 
+     */
+    pub fn getEnclosingCallable(self) -> Callable {
+        let (cee = CallableEnclosingExpression(__all_data__).find(self)) {
+            return cee.getCallable()
+        }
+    }
+    /**
+     * @brief gets the statement which encloses the expression.
+     * @return Statement 
+     */
+    pub fn getEnclosingStatement(self) -> Statement {
+        for (stmt in Statement(__all_data__),
+            see in StatementEnclosingExpression(__all_data__)) {
+            if (self.key_eq(see)) {
+                if (see.getStatementHashId() = stmt.element_hash_id) {
+                    return stmt
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the location for the element.
+     * @return Location
+     */
+    pub fn getLocation(self) -> Location {
+        for (loc in Location(__all_data__)) {
+            if (loc.element_hash_id = self.getLocationHashId()) {
+                return loc
+            }
+        }
+    }
+    /**
+     * @brief gets the size information for the element.
+     * @return NumberOfLines
+     */
+    pub fn getSize(self) -> NumberOfLines {
+        for (n in NumberOfLines(__all_data__)) {
+            if (n.element_hash_id = self.getLocationHashId()) {
+                return n
+            }
+        }
+    }
+}
+/**
+ * @brief An array initializer.
+ */
+schema ArrayInitializer extends Expression {
+
+}
+impl ArrayInitializer {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *ArrayInitializer {
+        for (tmp in Expression(db)) {
+            for (ai in ArrayInitializerExpression(db)) {
+                if (ai.key_eq(tmp.getParent())) {
+                    yield ArrayInitializer {
+                        element_hash_id : tmp.element_hash_id,
+                        name : tmp.name,
+                        parent_hash_id : tmp.parent_hash_id,
+                        index_order : tmp.index_order,
+                        location_hash_id : tmp.location_hash_id,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the initializer expression.
+     * @return ArrayInitializerExpression 
+     */
+    pub fn getInitializerExpression(self) -> int {
+        return self.getParent().id
+    }
+}
+/**
+ * @brief A element in a expression list.
+ */
+schema ExpressionListElement extends Expression {
+
+}
+impl ExpressionListElement {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *ExpressionListElement {
+        for (tmp in Expression(db)) {
+            for (ele in ExpressionList(db)) {
+                if (ele.key_eq(tmp.getParent())) {
+                    yield ExpressionListElement {
+                        element_hash_id : tmp.element_hash_id,
+                        name : tmp.name,
+                        parent_hash_id : tmp.parent_hash_id,
+                        index_order : tmp.index_order,
+                        location_hash_id : tmp.location_hash_id,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the parent of the expression list element.
+     * @return ExpressionList 
+     */
+    pub fn getExpressionList(self) -> ExpressionList {
+        return ExpressionList(__all_data__).find(self.getParent())
+    }
+}
+/**
+ * @brief An assignment expression.
+ */
+schema AssignmentExpression extends Expression {
+
+}
+impl AssignmentExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *AssignmentExpression {
+        for (tmp in Expression(db)) {
+            for (ae in AssignmentExpressionDO(db)) {
+                if (tmp.key_eq(ae)) {
+                    yield AssignmentExpression {
+                        element_hash_id : tmp.element_hash_id,
+                        name : tmp.name,
+                        parent_hash_id : tmp.parent_hash_id,
+                        index_order : tmp.index_order,
+                        location_hash_id : tmp.location_hash_id,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the operand on the left-hand side of the binary expression.
+     * @return Expression 
+     */
+    pub fn getDestination(self) -> Expression {
+        for (lhs in Expression(__all_data__),
+            be in AssignmentExpressionDO(__all_data__)) {
+            if (self.key_eq(be)) {
+                if (lhs.element_hash_id = be.getLhsHashId()) {
+                    return lhs
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the operand on the right-hand side of the binary expression.
+     * @return Expression 
+     */
+    pub fn getSource(self) -> Expression {
+        for (rhs in Expression(__all_data__),
+            be in AssignmentExpressionDO(__all_data__)) {
+            if (self.key_eq(be)) {
+                if (rhs.element_hash_id = be.getRhsHashId()) {
+                    return rhs
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the opcode of the binary expression
+     * @return string 
+     */
+    pub fn getOpcode(self) -> string {
+        for (be in AssignmentExpressionDO(__all_data__)) {
+            if (self.key_eq(be)) {
+                let (op = be.getOpcode()) {
+                    return op
+                }
+            }
+        }
+    }
+}
+/**
+ * @brief A binary expression.
+ */
+schema BinaryExpression extends Expression {
+
+}
+impl BinaryExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *BinaryExpression {
+        for (tmp in Expression(db)) {
+            for (be in BinaryExpressionDO(db)) {
+                if (tmp.key_eq(be)) {
+                    yield BinaryExpression {
+                        element_hash_id : tmp.element_hash_id,
+                        name : tmp.name,
+                        parent_hash_id : tmp.parent_hash_id,
+                        index_order : tmp.index_order,
+                        location_hash_id : tmp.location_hash_id,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the operand on the left-hand side of the binary expression.
+     * @return Expression 
+     */
+    pub fn getLeftOperandExpression(self) -> Expression {
+        for (lhs in Expression(__all_data__),
+            be in BinaryExpressionDO(__all_data__)) {
+            if (self.key_eq(be)) {
+                if (lhs.element_hash_id = be.getLhsHashId()) {
+                    return lhs
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets an operand of the binary expression.
+     * @return Expression 
+     */
+    pub fn getOperand(self) -> *Expression {
+        for (e in Expression(__all_data__),
+            be in BinaryExpressionDO(__all_data__)) {
+            if (self.key_eq(be)) {
+                if (e.element_hash_id = be.getLhsHashId()) {
+                    yield e
+                }
+                if (e.element_hash_id = be.getRhsHashId()) {
+                    yield e
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the operand on the right-hand side of the binary expression.
+     * @return Expression 
+     */
+    pub fn getRightOperandExpression(self) -> Expression {
+        for (rhs in Expression(__all_data__),
+            be in BinaryExpressionDO(__all_data__)) {
+            if (self.key_eq(be)) {
+                if (rhs.element_hash_id = be.getRhsHashId()) {
+                    return rhs
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the opcode of the binary expression
+     * @return string 
+     */
+    pub fn getOpcode(self) -> string {
+        for (be in BinaryExpressionDO(__all_data__)) {
+            if (self.key_eq(be)) {
+                let (op = be.getOpcode()) {
+                    return op
+                }
+            }
+        }
+    }
+}
+/**
+ * @brief An '&&' expression.
+ */
+schema AndLogicalExpression extends BinaryExpression {
+
+}
+impl AndLogicalExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *AndLogicalExpression {
+        for (tmp in BinaryExpression(db)) {
+            for (be in BinaryExpression(db)) {
+                if (tmp = be) {
+                    if (be.getOpcode() = "&&") {
+                        yield AndLogicalExpression {
+                            element_hash_id : tmp.element_hash_id,
+                            name : tmp.name,
+                            parent_hash_id : tmp.parent_hash_id,
+                            index_order : tmp.index_order,
+                            location_hash_id : tmp.location_hash_id,
+                            printable_text : tmp.printable_text
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+/**
+ * @brief A '||' expression.
+ */
+schema OrLogicalExpression extends BinaryExpression {
+
+}
+impl OrLogicalExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *OrLogicalExpression {
+        for (tmp in BinaryExpression(db)) {
+            for (be in BinaryExpression(db)) {
+                if (tmp = be) {
+                    if (be.getOpcode() = "||") {
+                        yield OrLogicalExpression {
+                            element_hash_id : tmp.element_hash_id,
+                            name : tmp.name,
+                            parent_hash_id : tmp.parent_hash_id,
+                            index_order : tmp.index_order,
+                            location_hash_id : tmp.location_hash_id,
+                            printable_text : tmp.printable_text
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+schema ConditionalPolyadicExpression extends PolyadicExpression {
+
+}
+impl ConditionalPolyadicExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *ConditionalPolyadicExpression {
+        for (tmp in PolyadicExpression(db)) {
+            for (p in PolyadicExpression(db)) {
+                if (tmp = p) {
+                    if (p.getOpcode() = "ANDAND") {
+                        yield ConditionalPolyadicExpression {
+                            element_hash_id : tmp.element_hash_id,
+                            name : tmp.name,
+                            parent_hash_id : tmp.parent_hash_id,
+                            index_order : tmp.index_order,
+                            location_hash_id : tmp.location_hash_id,
+                            printable_text : tmp.printable_text
+                        }
+                    }
+                    if (p.getOpcode() = "OROR") {
+                        yield ConditionalPolyadicExpression {
+                            element_hash_id : tmp.element_hash_id,
+                            name : tmp.name,
+                            parent_hash_id : tmp.parent_hash_id,
+                            index_order : tmp.index_order,
+                            location_hash_id : tmp.location_hash_id,
+                            printable_text : tmp.printable_text
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+/**
+ * @brief An unary expression.
+ */
+schema UnaryExpression extends Expression {
+
+}
+impl UnaryExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *UnaryExpression {
+        for (tmp in Expression(db)) {
+            for (ue in UnaryExpressionDO(db)) {
+                if (tmp.key_eq(ue)) {
+                    yield UnaryExpression {
+                        element_hash_id : tmp.element_hash_id,
+                        name : tmp.name,
+                        parent_hash_id : tmp.parent_hash_id,
+                        index_order : tmp.index_order,
+                        location_hash_id : tmp.location_hash_id,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the operand expression of the unary expression.
+     * @return Expression 
+     */
+    pub fn getOperand(self) -> Expression {
+        for (e in Expression(__all_data__),
+            ue in UnaryExpressionDO(__all_data__)) {
+            if (self.key_eq(ue)) {
+                if (e.element_hash_id = ue.getOperandHashId()) {
+                    return e
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the opcode of the unary expression
+     * @return string 
+     */
+    pub fn getOpcode(self) -> string {
+        for (ue in UnaryExpressionDO(__all_data__)) {
+            if (self.key_eq(ue)) {
+                let (op = ue.getOpcode()) {
+                    return op
+                }
+            }
+        }
+    }
+}
+/**
+ * @brief An '!' expression.
+ */
+schema LogNotExpression extends UnaryExpression {
+
+}
+impl LogNotExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *LogNotExpression {
+        for (tmp in UnaryExpression(db)) {
+            if (tmp.getOpcode() = "!") {
+                yield LogNotExpression {
+                    element_hash_id : tmp.element_hash_id,
+                    name : tmp.name,
+                    parent_hash_id : tmp.parent_hash_id,
+                    index_order : tmp.index_order,
+                    location_hash_id : tmp.location_hash_id,
+                    printable_text : tmp.printable_text
+                }
+            }
+        }
+    }
+}
+/**
+ * @brief A logic expression.
+ */
+schema LogicExpression extends Expression {
+
+}
+impl LogicExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *LogicExpression {
+        for (tmp in Expression(db)) {
+            for (lne in LogNotExpression(db)) {
+                if (tmp.key_eq(lne)) {
+                    yield LogicExpression {
+                        element_hash_id : tmp.element_hash_id,
+                        name : tmp.name,
+                        parent_hash_id : tmp.parent_hash_id,
+                        index_order : tmp.index_order,
+                        location_hash_id : tmp.location_hash_id,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+            for (ale in AndLogicalExpression(db)) {
+                if (tmp.key_eq(ale)) {
+                    yield LogicExpression {
+                        element_hash_id : tmp.element_hash_id,
+                        name : tmp.name,
+                        parent_hash_id : tmp.parent_hash_id,
+                        index_order : tmp.index_order,
+                        location_hash_id : tmp.location_hash_id,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+            for (ole in OrLogicalExpression(db)) {
+                if (tmp.key_eq(ole)) {
+                    yield LogicExpression {
+                        element_hash_id : tmp.element_hash_id,
+                        name : tmp.name,
+                        parent_hash_id : tmp.parent_hash_id,
+                        index_order : tmp.index_order,
+                        location_hash_id : tmp.location_hash_id,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief description
+     * @return Expression 
+     */
+    pub fn getAnOperand(self) -> *Expression {
+        for (operand in Expression(__all_data__)) {
+            for (lne in LogNotExpression(__all_data__)) {
+                if (self.key_eq(lne)) {
+                    if (operand = lne.getOperand()) {
+                        yield operand
+                    }
+                }
+            }
+            for (ale in AndLogicalExpression(__all_data__)) {
+                if (self.key_eq(ale)) {
+                    for (auto_tmp1 in ale.getOperand()) {
+                        if (operand = auto_tmp1) {
+                            yield operand
+                        }
+                    }
+                }
+            }
+            for (ole in OrLogicalExpression(__all_data__)) {
+                if (self.key_eq(ole)) {
+                    for (auto_tmp2 in ole.getOperand()) {
+                        if (operand = auto_tmp2) {
+                            yield operand
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+/**
+ * @classname ConditionalExpression
+ * @brief A conditional expression of the form a ? b : c, where a is the condition, b is the expression that is evaluated if the condition evaluates to true, and c is the expression that is evaluated if the condition evaluates to false.
+ */
+schema ConditionalExpression extends Expression {
+
+}
+impl ConditionalExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *ConditionalExpression {
+        for (tmp in Expression(db)) {
+            for (ce in ConditionalExpressionDO(db)) {
+                if (tmp.key_eq(ce)) {
+                    yield ConditionalExpression {
+                        element_hash_id : tmp.element_hash_id,
+                        name : tmp.name,
+                        parent_hash_id : tmp.parent_hash_id,
+                        index_order : tmp.index_order,
+                        location_hash_id : tmp.location_hash_id,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the condition of the conditional expression.
+     * @return Expression 
+     */
+    pub fn getCondition(self) -> Expression {
+        for (cond in Expression(__all_data__),
+            ce in ConditionalExpressionDO(__all_data__)) {
+            if (self.key_eq(ce)) {
+                if (cond.element_hash_id = ce.getConditionExpressionHashId()) {
+                    return cond
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the true expression of the conditional expression if the condition is true.
+     * @return Expression 
+     */
+    pub fn getTrueExpression(self) -> Expression {
+        for (e in Expression(__all_data__),
+            ce in ConditionalExpressionDO(__all_data__)) {
+            if (self.key_eq(ce)) {
+                if (e.element_hash_id = ce.getThenPartHashId()) {
+                    return e
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the false expression of the conditional expression if the condition is false.
+     * @return Expression 
+     */
+    pub fn getFalseExpression(self) -> Expression {
+        for (e in Expression(__all_data__),
+            ce in ConditionalExpressionDO(__all_data__)) {
+            if (self.key_eq(ce)) {
+                if (e.element_hash_id = ce.getElsePartHashId()) {
+                    return e
+                }
+            }
+        }
+    }
+}
+/**
+ * @brief A lambda expression.
+ */
+schema LambdaExpression extends Expression {
+
+}
+impl LambdaExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *LambdaExpression {
+        for (tmp in Expression(db)) {
+            for (le in LambdaExpressionDO(db)) {
+                if (tmp.key_eq(le)) {
+                    yield LambdaExpression {
+                        element_hash_id : tmp.element_hash_id,
+                        name : tmp.name,
+                        parent_hash_id : tmp.parent_hash_id,
+                        index_order : tmp.index_order,
+                        location_hash_id : tmp.location_hash_id,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the parameter of the lambda expression.
+     * @return Parameter 
+     */
+    pub fn getParameter(self) -> *Parameter {
+        for (p in Parameter(__all_data__)) {
+            if (self.key_eq(p.getParent())) {
+                yield p
+            }
+        }
+    }
+    /**
+     * @brief gets the element representing lambda expression body, a code block or an expression.
+     * @return ElementParent 
+     */
+    pub fn getBody(self) -> ElementParent {
+        for (e in ElementParent(__all_data__),
+            l in LambdaExpressionDO(__all_data__)) {
+            if (self.key_eq(l)) {
+                if (e.id = l.getBodyHashId()) {
+                    return e
+                }
+            }
+        }
+    }
+}
+/**
+ * @brief A this access expression.
+ */
+schema ThisAccessExpression extends Expression {
+
+}
+impl ThisAccessExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *ThisAccessExpression {
+        for (tmp in Expression(db)) {
+            for (tae in ThisAccessExpressionDO(db)) {
+                if (tmp.key_eq(tae)) {
+                    yield ThisAccessExpression {
+                        element_hash_id : tmp.element_hash_id,
+                        name : tmp.name,
+                        parent_hash_id : tmp.parent_hash_id,
+                        index_order : tmp.index_order,
+                        location_hash_id : tmp.location_hash_id,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+}
+/**
+ * @brief A new expression.
+ */
+schema NewExpression extends Expression {
+
+}
+impl NewExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *NewExpression {
+        for (tmp in Expression(db)) {
+            for (ne in NewExpressionDO(db)) {
+                if (tmp.key_eq(ne)) {
+                    yield NewExpression {
+                        element_hash_id : tmp.element_hash_id,
+                        name : tmp.name,
+                        parent_hash_id : tmp.parent_hash_id,
+                        index_order : tmp.index_order,
+                        location_hash_id : tmp.location_hash_id,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the type for the element.
+     * @return Type
+     */
+    pub fn getType(self) -> Type {
+        for (type in Type(__all_data__),
+            ne in NewExpressionDO(__all_data__)) {
+            if (self.key_eq(ne)) {
+                if (type.id = ne.getTypeHashId()) {
+                    return type
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the created class instance.
+     * @return ReferenceElement 
+     */
+    pub fn getReference(self) -> ReferenceElement {
+        for (r in ReferenceElement(__all_data__),
+            ne in NewExpressionDO(__all_data__)) {
+            if (self.key_eq(ne)) {
+                if (r.element_hash_id = ne.getReferenceHashId()) {
+                    return r
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the created anonymous class instance.
+     * @return AnonymousClass 
+     */
+    pub fn getAnonymousClass(self) -> AnonymousClass {
+        for (r in AnonymousClass(__all_data__),
+            ne in NewExpressionDO(__all_data__)) {
+            if (r.element_hash_id = ne.getReferenceHashId()) {
+                if (self.key_eq(ne)) {
+                    return r
+                }
+            }
+        }
+    }
+}
+/**
+ * @brief A super access expression.
+ */
+schema SuperAccessExpression extends Expression {
+
+}
+impl SuperAccessExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *SuperAccessExpression {
+        for (tmp in Expression(db)) {
+            for (sae in SuperAccessExpressionDO(db)) {
+                if (tmp.key_eq(sae)) {
+                    yield SuperAccessExpression {
+                        element_hash_id : tmp.element_hash_id,
+                        name : tmp.name,
+                        parent_hash_id : tmp.parent_hash_id,
+                        index_order : tmp.index_order,
+                        location_hash_id : tmp.location_hash_id,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+    pub fn getMethod(self) -> Method {
+        for (c in Method(__all_data__),
+            sae in SuperAccessExpressionDO(__all_data__),
+            cc in CallableBinding(__all_data__)) {
+            if (self.key_eq(sae)) {
+                if (cc.key_eq(self)) {
+                    if (c.key_eq(cc.getCallee())) {
+                        return c
+                    }
+                }
+            }
+        }
+    }
+}
+/**
+ * @brief A super access expression.
+ */
+schema SuperConstructorInvocation extends Expression {
+
+}
+impl SuperConstructorInvocation {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *SuperConstructorInvocation {
+        for (tmp in Expression(db)) {
+            for (sci in SuperConstructorInvocationDO(db)) {
+                if (tmp.key_eq(sci)) {
+                    yield SuperConstructorInvocation {
+                        element_hash_id : tmp.element_hash_id,
+                        name : tmp.name,
+                        parent_hash_id : tmp.parent_hash_id,
+                        index_order : tmp.index_order,
+                        location_hash_id : tmp.location_hash_id,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+    pub fn getConstructor(self) -> Constructor {
+        for (c in Constructor(__all_data__),
+            sci in SuperConstructorInvocationDO(__all_data__),
+            cc in CallableBinding(__all_data__)) {
+            if (self.key_eq(sci)) {
+                if (cc.key_eq(self)) {
+                    if (c.key_eq(cc.getCallee())) {
+                        return c
+                    }
+                }
+            }
+        }
+    }
+}
+/**
+ * @brief A reference in code (either an identifier or a sequence of identifiers separated by periods, optionally with generic type arguments)
+ */
+schema ReferenceExpression extends Expression {
+
+}
+impl ReferenceExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *ReferenceExpression {
+        for (tmp in Expression(db)) {
+            for (re in ReferenceExpressionDO(db)) {
+                if (tmp.key_eq(re)) {
+                    yield ReferenceExpression {
+                        element_hash_id : tmp.element_hash_id,
+                        name : tmp.name,
+                        parent_hash_id : tmp.parent_hash_id,
+                        index_order : tmp.index_order,
+                        location_hash_id : tmp.location_hash_id,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the definition of the reference expression.
+     * @return ElementParent 
+     */
+    pub fn getDefinition(self) -> ElementParent {
+        for (element in ElementParent(__all_data__),
+            rr in ReferenceRelation(__all_data__)) {
+            if (rr.key_eq(self)) {
+                if (element = rr.getDestination()) {
+                    return element
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the MethodAccessExpression of the reference expression left.
+     * @return MethodAccessExpression 
+     */
+    pub fn getMethodAccessExpression(self) -> MethodAccessExpression {
+        for (element in MethodAccessExpression(__all_data__),
+            rr in ReferenceExpressionDO(__all_data__)) {
+            if (rr.key_eq(self)) {
+                if (element.getParent().key_eq(rr)) {
+                    return element
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the Identifier of the reference expression Right.
+     * @return Identifier 
+     */
+    pub fn getIdentifier(self) -> Identifier {
+        for (element in Identifier(__all_data__),
+            rr in ReferenceExpressionDO(__all_data__)) {
+            if (rr.key_eq(self)) {
+                if (element.getParent().key_eq(rr)) {
+                    return element
+                }
+            }
+        }
+    }
+}
+/**
+ * @brief Describe an expression enclosed by a certain statement.
+ */
+schema StatementEnclosingExpression extends StatementEnclosingExpressionDO {
+
+}
+impl StatementEnclosingExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *StatementEnclosingExpression {
+        for (tmp in StatementEnclosingExpressionDO(db)) {
+            yield StatementEnclosingExpression {
+                expression_hash_id : tmp.expression_hash_id,
+                statement_hash_id : tmp.statement_hash_id
+            }
+        }
+    }
+    /**
+     * @brief gets the statement which encloses the expression.
+     * @return Statement 
+     */
+    pub fn getStatement(self) -> Statement {
+        for (s in Statement(__all_data__)) {
+            if (s.element_hash_id = self.getStatementHashId()) {
+                return s
+            }
+        }
+    }
+}
+/**
+ * @brief An instanceof expression
+ */
+schema InstanceofExpression extends Expression {
+
+}
+impl InstanceofExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *InstanceofExpression {
+        for (tmp in Expression(db)) {
+            for (ioe in InstanceofExpressionDO(db)) {
+                if (tmp.key_eq(ioe)) {
+                    yield InstanceofExpression {
+                        element_hash_id : tmp.element_hash_id,
+                        name : tmp.name,
+                        parent_hash_id : tmp.parent_hash_id,
+                        index_order : tmp.index_order,
+                        location_hash_id : tmp.location_hash_id,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the operand expression of the instanceof expression
+     * @return Expression 
+     */
+    pub fn getOperand(self) -> Expression {
+        for (e in Expression(__all_data__),
+            ioe in InstanceofExpressionDO(__all_data__)) {
+            if (self.key_eq(ioe)) {
+                if (e.element_hash_id = ioe.getOperandHashId()) {
+                    return e
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the instance type of the instanceof expression
+     * @return TypeElement
+     */
+    pub fn getInstanceType(self) -> TypeElement {
+        for (e in TypeElement(__all_data__),
+            ioe in InstanceofExpressionDO(__all_data__)) {
+            if (self.key_eq(ioe)) {
+                if (e.getParent().key_eq(ioe)) {
+                    return e
+                }
+            }
+        }
+    }
+}
+schema MethodAccessExpressionWithType extends Expression {
+
+}
+impl MethodAccessExpressionWithType {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *MethodAccessExpressionWithType {
+        for (tmp in Expression(db)) {
+            for (m in MethodAccessExpressionWithTypeDO(db)) {
+                if (tmp.key_eq(m)) {
+                    yield MethodAccessExpressionWithType {
+                        element_hash_id : tmp.element_hash_id,
+                        name : tmp.name,
+                        parent_hash_id : tmp.parent_hash_id,
+                        index_order : tmp.index_order,
+                        location_hash_id : tmp.location_hash_id,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the type for the element.
+     * @return Type
+     */
+    pub fn getType(self) -> Type {
+        for (type in Type(__all_data__),
+            mae in MethodAccessExpressionWithTypeDO(__all_data__)) {
+            if (self.key_eq(mae)) {
+                if (type.id = mae.getTypeHashId()) {
+                    return type
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the reference expression of the element.
+     * @return ReferenceExpression 
+     */
+    pub fn getReference(self) -> ReferenceExpression {
+        for (expression in ReferenceExpression(__all_data__),
+            mae in MethodAccessExpressionWithTypeDO(__all_data__)) {
+            if (expression.element_hash_id = mae.getReferenMethodHashId()) {
+                if (self.key_eq(mae)) {
+                    return expression
+                }
+            }
+        }
+    }
+}
+schema MethodAccessExpressionWithoutType extends Expression {
+
+}
+impl MethodAccessExpressionWithoutType {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *MethodAccessExpressionWithoutType {
+        for (tmp in Expression(db)) {
+            for (m in MethodAccessExpressionWithoutTypeDO(db)) {
+                if (tmp.key_eq(m)) {
+                    yield MethodAccessExpressionWithoutType {
+                        element_hash_id : tmp.element_hash_id,
+                        name : tmp.name,
+                        parent_hash_id : tmp.parent_hash_id,
+                        index_order : tmp.index_order,
+                        location_hash_id : tmp.location_hash_id,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the reference expression of the element.
+     * @return ReferenceExpression 
+     */
+    pub fn getReference(self) -> ReferenceExpression {
+        for (expression in ReferenceExpression(__all_data__),
+            mae in MethodAccessExpressionWithoutTypeDO(__all_data__)) {
+            if (expression.element_hash_id = mae.getReferenMethodHashId()) {
+                if (self.key_eq(mae)) {
+                    return expression
+                }
+            }
+        }
+    }
+}
+/**
+ * @brief A call of a method.
+ */
+schema MethodAccessExpression extends Expression {
+
+}
+impl MethodAccessExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *MethodAccessExpression {
+        for (tmp in Expression(db)) {
+            for (mae in MethodAccessExpressionWithoutType(db)) {
+                if (tmp.key_eq(mae)) {
+                    yield MethodAccessExpression {
+                        element_hash_id : tmp.element_hash_id,
+                        name : tmp.name,
+                        parent_hash_id : tmp.parent_hash_id,
+                        index_order : tmp.index_order,
+                        location_hash_id : tmp.location_hash_id,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+            for (mae in MethodAccessExpressionWithType(db)) {
+                if (tmp.key_eq(mae)) {
+                    yield MethodAccessExpression {
+                        element_hash_id : tmp.element_hash_id,
+                        name : tmp.name,
+                        parent_hash_id : tmp.parent_hash_id,
+                        index_order : tmp.index_order,
+                        location_hash_id : tmp.location_hash_id,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+    pub fn getExpressionList(self) -> ExpressionList {
+        for (list in ExpressionList(__all_data__)) {
+            if (self.element_hash_id = list.getParentHashId()) {
+                return list
+            }
+        }
+    }
+    /**
+     * @brief gets the type for the element.
+     * @return Type
+     */
+    pub fn getType(self) -> Type {
+        for (mae in MethodAccessExpressionWithType(__all_data__)) {
+            if (self.key_eq(mae)) {
+                return mae.getType()
+            }
+        }
+        for (mae in MethodAccessExpressionWithoutType(__all_data__)) {
+            if (self.key_eq(mae)) {
+                return self.getCallable().getType()
+            }
+        }
+    }
+    /**
+     * @brief gets the reference expression of the element.
+     * @return ReferenceExpression 
+     */
+    pub fn getReference(self) -> ReferenceExpression {
+        for (mae in MethodAccessExpressionWithoutType(__all_data__)) {
+            if (self.key_eq(mae)) {
+                return mae.getReference()
+            }
+        }
+        for (mae in MethodAccessExpressionWithType(__all_data__)) {
+            if (self.key_eq(mae)) {
+                return mae.getReference()
+            }
+        }
+    }
+    /**
+     * @brief gets the method of the call.
+     * @return Method 
+     */
+    pub fn getMethod(self) -> Method {
+        let (c = CallableBinding(__all_data__).find(self)) {
+            for (tmp in Method(__all_data__)) {
+                if (tmp.element_hash_id = c.callee_hash_id) {
+                    return tmp
+                }
+            }
+            // ElementParent{id: c.callee_hash_id}
+            // return Method(__all_data__).find(ElementParent{id: c.callee_hash_id})
+        }
+    }
+    /**
+     * @brief gets the np-method of the call.
+     * @return NpMethod
+     */
+    pub fn getNpMethod(self) -> NpMethod {
+        let (c = CallableBinding(__all_data__).find(self)) {
+            return NpMethod(__all_data__).find(ElementParent{id: c.callee_hash_id})
+        }
+    }
+    /**
+     * @brief gets the constructor of the call.
+     * @return Constructor 
+     */
+    pub fn getConstructor(self) -> Constructor {
+        let (c = CallableBinding(__all_data__).find(self)) {
+            return Constructor(__all_data__).find(ElementParent{id: c.callee_hash_id})
+        }
+    }
+    /**
+     * @brief gets the callable of the call.
+     * @return Callable 
+     */
+    pub fn getCallable(self) -> Callable {
+        let (m = Callable(__all_data__).find(self.getMethod())) {
+            return m
+        }
+        let (m = Callable(__all_data__).find(self.getConstructor())) {
+            return m
+        }
+    }
+    /**
+     * @brief gets the call site of the call.
+     * @return ReferenceExpression 
+     */
+    pub fn getCallSite(self) -> ReferenceExpression {
+        for (element in ReferenceExpression(__all_data__)) {
+            if (self.getReference().key_eq(element.getParent())) {
+                return element
+            }
+        }
+    }
+    /**
+     * @brief gets the call site of the call.
+     * @return ReferenceExpression 
+     */
+    pub fn getArgument(self, idx : int) -> Expression {
+        return self.getExpressionList().getSubExpression(idx)
+    }
+}
+/**
+ * @brief A call of a method.
+ */
+schema MethodReferenceExpression extends Expression {
+
+}
+impl MethodReferenceExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *MethodReferenceExpression {
+        for (tmp in Expression(db)) {
+            for (m in MethodReferenceExpressionDO(db)) {
+                if (tmp.key_eq(m)) {
+                    yield MethodReferenceExpression {
+                        element_hash_id : tmp.element_hash_id,
+                        name : tmp.name,
+                        parent_hash_id : tmp.parent_hash_id,
+                        index_order : tmp.index_order,
+                        location_hash_id : tmp.location_hash_id,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the type for the element.
+     * @return Type
+     */
+    pub fn getType(self) -> Type {
+        for (type in Type(__all_data__)) {
+            if (type = self.getMethod().getType()) {
+                return type
+            }
+        }
+    }
+    /**
+     * @brief gets the method of the call.
+     * @return Method 
+     */
+    pub fn getMethod(self) -> Method {
+        for (mae in MethodReferenceExpressionDO(__all_data__),
+            c in CallableBinding(__all_data__)) {
+            if (self.key_eq(mae)) {
+                if (c.key_eq(mae)) {
+                    return Method(__all_data__).find(c.getCallee())
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the constructor of the call.
+     * @return Constructor 
+     */
+    pub fn getConstructor(self) -> Constructor {
+        for (m in Constructor(__all_data__),
+            mae in MethodReferenceExpressionDO(__all_data__),
+            c in CallableBinding(__all_data__)) {
+            if (self.key_eq(mae)) {
+                if (mae.isConstructor() = 1) {
+                    if (c.key_eq(mae)) {
+                        if (m.key_eq(c.getCallee())) {
+                            return m
+                        }
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the callable of the call.
+     * @return Callable 
+     */
+    pub fn getCallable(self) -> Callable {
+        for (m in Callable(__all_data__)) {
+            if (m.key_eq(self.getMethod())) {
+                return m
+            }
+            if (m.key_eq(self.getConstructor())) {
+                return m
+            }
+        }
+    }
+    /**
+     * @brief gets the reference expression of the element.
+     * @return ReferenceExpression 
+     */
+    pub fn getReference(self) -> ReferenceExpression {
+        for (expression in ReferenceExpression(__all_data__)) {
+            if (expression.getParent().key_eq(self)) {
+                return expression
+            }
+        }
+    }
+}
+/**
+ * @brief A constructor invocation statement.
+ */
+schema ConstructorInvocation extends Expression {
+
+}
+impl ConstructorInvocation {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *ConstructorInvocation {
+        for (tmp in Expression(db)) {
+            for (ci in ConstructorInvocationDO(db)) {
+                if (tmp.key_eq(ci)) {
+                    yield ConstructorInvocation {
+                        element_hash_id : tmp.element_hash_id,
+                        name : tmp.name,
+                        parent_hash_id : tmp.parent_hash_id,
+                        index_order : tmp.index_order,
+                        location_hash_id : tmp.location_hash_id,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the constructor of the expression
+     * @return Constructor 
+     */
+    pub fn getConstructor(self) -> Constructor {
+        for (c in Constructor(__all_data__),
+            ci in ConstructorInvocationDO(__all_data__),
+            cc in CallableBinding(__all_data__)) {
+            if (self.key_eq(ci)) {
+                if (ci.key_eq(cc)) {
+                    if (c.key_eq(cc.getCallee())) {
+                        return c
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the reference element of the expression
+     * @return ReferenceElement 
+     */
+    pub fn getReference(self) -> ReferenceElement {
+        for (r in ReferenceElement(__all_data__),
+            ci in ConstructorInvocationDO(__all_data__)) {
+            if (self.key_eq(ci)) {
+                if (ci.key_eq(r.getParent())) {
+                    return r
+                }
+            }
+        }
+    }
+   /**
+    * @brief gets the argument of the expression
+    * @return ExpressionList 
+    */
+    pub fn getExpressionList(self) -> ExpressionList {
+        for (r in ExpressionList(__all_data__),
+            ci in ConstructorInvocationDO(__all_data__)) {
+            if (self.key_eq(ci)) {
+                if (ci.key_eq(r.getParent())) {
+                    return r
+                }
+            }
+        }
+    }
+}
+/**
+ * @brief A list of reference separated by commas.
+ */
+schema ReferenceList extends ReferenceListDO {
+
+}
+impl ReferenceList {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *ReferenceList {
+        for (tmp in ReferenceListDO(db)) {
+            yield ReferenceList {
+                element_hash_id : tmp.element_hash_id,
+                location_hash_id : tmp.location_hash_id,
+                parent_hash_id : tmp.parent_hash_id,
+                printable_text : tmp.printable_text,
+                role : tmp.role
+            }
+        }
+    }
+    /**
+     * @brief gets the reference element of the list
+     * @return ReferenceElement 
+     */
+    pub fn getChild(self) -> *ReferenceElement {
+        for (r in ReferenceElement(__all_data__)) {
+            if (self.element_hash_id = r.getParentHashId()) {
+                yield r
+            }
+        }
+    }
+    /**
+     * @brief gets the location for the element.
+     * @return Location
+     */
+    pub fn getLocation(self) -> Location {
+        for (loc in Location(__all_data__)) {
+            if (loc.element_hash_id = self.getLocationHashId()) {
+                return loc
+            }
+        }
+    }
+    /**
+     * @brief gets the location for the element.
+     * @return ElementParent
+     */
+    pub fn getParent(self) -> ElementParent {
+        for (c in ElementParent(__all_data__)) {
+            if (c.id = self.getParentHashId()) {
+                return c
+            }
+        }
+    }
+    /**
+     * @brief gets an ancestor of the element.
+     * @return ElementParent 
+     */
+    pub fn getAnAncestor(self) -> *ElementParent {
+        for (tmp in ElementParent(__all_data__)) {
+            if (tmp.key_eq(self)) {
+                yield tmp.getAnAncestor()
+            }
+        }
+    }
+}
+/**
+ * @brief A cast expression.
+ */
+schema TypeCastExpression extends Expression {
+
+}
+impl TypeCastExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *TypeCastExpression {
+        for (tmp in Expression(db)) {
+            for (m in TypeCastExpressionDO(db)) {
+                if (tmp.key_eq(m)) {
+                    yield TypeCastExpression {
+                        element_hash_id : tmp.element_hash_id,
+                        name : tmp.name,
+                        parent_hash_id : tmp.parent_hash_id,
+                        index_order : tmp.index_order,
+                        location_hash_id : tmp.location_hash_id,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @description gets the type element of the expression.
+     * @return TypeElement 
+     */
+    pub fn getCastType(self) -> TypeElement {
+        for (t in TypeElement(__all_data__)) {
+            if (self.key_eq(t.getParent())) {
+                return t
+            }
+        }
+    }
+    /**
+     * @description get the operand of the expression.
+     * @return Expression 
+     */
+    pub fn getOperand(self) -> Expression {
+        for (e in Expression(__all_data__)) {
+            if (self.key_eq(e.getParent())) {
+                return e
+            }
+        }
+    }
+}
+/**
+ * @brief A polyadic expression.
+ */
+schema PolyadicExpression extends Expression {
+
+}
+impl PolyadicExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *PolyadicExpression {
+        for (tmp in Expression(db)) {
+            for (m in PolyadicExpressionDO(db)) {
+                if (tmp.key_eq(m)) {
+                    yield PolyadicExpression {
+                        element_hash_id : tmp.element_hash_id,
+                        name : tmp.name,
+                        parent_hash_id : tmp.parent_hash_id,
+                        index_order : tmp.index_order,
+                        location_hash_id : tmp.location_hash_id,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the size of the element.
+     * @return int
+     */
+    pub fn getSize(self) -> int {
+        for (m in PolyadicExpressionDO(__all_data__)) {
+            if (self.key_eq(m)) {
+                return m.getSize()
+            }
+        }
+    }
+    /**
+     * @brief gets the opcode of the element.
+     * @return string
+     */
+    pub fn getOpcode(self) -> string {
+        for (m in PolyadicExpressionDO(__all_data__)) {
+            if (self.key_eq(m)) {
+                let (name = m.getOpcode()) {
+                    return name
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the operand of the element.
+     * @return Expression
+     */
+    pub fn getOperand(self) -> *Expression {
+        for (e in Expression(__all_data__)) {
+            if (self.key_eq(e.getParent())) {
+                yield e
+            }
+        }
+    }
+    /**
+     * @brief gets the operand of the element at a given index.
+     * @return Expression
+     */
+    pub fn getOperandAt(self, index : int) -> Expression {
+        for (e in Expression(__all_data__)) {
+            if (self.key_eq(e.getParent())) {
+                if (index = e.getIndex()) {
+                    return e
+                }
+            }
+        }
+    }
+}

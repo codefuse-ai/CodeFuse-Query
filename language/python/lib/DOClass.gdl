@@ -1,0 +1,3234 @@
+/**
+ * @brief DO class: An alias.
+ */
+schema AliasDO {
+    @primary element_oid: int,
+    name: string,
+    asname: string,
+    element_index: int,
+    parent_oid: int,
+    location_oid: int,
+    printable_text: string
+}
+impl AliasDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PythonDB) -> *AliasDO {
+    	for (tmp in db.alias) {
+            yield AliasDO {
+                element_oid : tmp.element_oid,
+                name : tmp.name,
+                asname : tmp.asname,
+                element_index : tmp.element_index,
+                parent_oid : tmp.parent_oid,
+                location_oid : tmp.location_oid,
+                printable_text : tmp.printable_text
+            }
+    	}
+    }
+    /**
+     * @brief gets the name of this element.
+     * @return string
+     */
+    pub fn getName(self) -> string {
+        return self.name
+    }
+    /**
+     * @brief gets the asname of this element.
+     * @return string
+     */
+    pub fn getAsname(self) -> string {
+        return self.asname
+    }
+    /**
+     * @brief gets the element index of this element.
+     * @return int
+     */
+    pub fn getElementIndex(self) -> int {
+        return self.element_index
+    }
+    /**
+     * @brief gets the parent oid of this element.
+     * @return int
+     */
+    pub fn getParentOid(self) -> int {
+        return self.parent_oid
+    }
+    /**
+     * @brief gets the location oid of this element.
+     * @return int
+     */
+    pub fn getLocationOid(self) -> int {
+        return self.location_oid
+    }
+    /**
+     * @brief gets the printable text of this element.
+     * @return string
+     */
+    pub fn getPrintableText(self) -> string {
+        return self.printable_text
+    }
+}
+/**
+ * @brief DO class: An annotation assignment statement.
+ */
+schema AnnotationAssignmentStatementDO {
+    @primary element_oid: int,
+    annotation_oid: int,
+    target_oid: int,
+    is_simple: int
+}
+impl AnnotationAssignmentStatementDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PythonDB) -> *AnnotationAssignmentStatementDO {
+    	for (tmp in db.annotation_assignment_statement) {
+            yield AnnotationAssignmentStatementDO {
+                element_oid : tmp.element_oid,
+                annotation_oid : tmp.annotation_oid,
+                target_oid : tmp.target_oid,
+                is_simple : tmp.is_simple
+            }
+    	}
+    }
+    /**
+     * @brief gets the annotation oid of this element.
+     * @return int
+     */
+    pub fn getAnnotationOid(self) -> int {
+        return self.annotation_oid
+    }
+    /**
+     * @brief gets the target oid of this element.
+     * @return int
+     */
+    pub fn getTargetOid(self) -> int {
+        return self.target_oid
+    }
+    /**
+     * @brief gets the is simple of this element.
+     * @return int
+     */
+    pub fn getIsSimple(self) -> int {
+        return self.is_simple
+    }
+}
+/**
+ * 
+ * @brief DO class: An arg.
+ */
+schema ArgDO {
+    @primary element_oid: int,
+    annotation: int,
+    element_index: int,
+    parent_oid: int,
+    location_oid: int,
+    printable_text: string
+}
+impl ArgDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PythonDB) -> *ArgDO {
+    	for (tmp in db.arg) {
+            yield ArgDO {
+                element_oid : tmp.element_oid,
+                annotation : tmp.annotation,
+                element_index : tmp.element_index,
+                parent_oid : tmp.parent_oid,
+                location_oid : tmp.location_oid,
+                printable_text : tmp.printable_text
+            }
+    	}
+    }
+    /**
+     * @brief gets the annotation of this element.
+     * @return int
+     */
+    pub fn getAnnotationOid(self) -> int {
+        return self.annotation
+    }
+    /**
+     * @brief gets the element index of this element.
+     * @return int
+     */
+    pub fn getElementIndex(self) -> int {
+        return self.element_index
+    }
+    /**
+     * @brief gets the parent oid of this element.
+     * @return int
+     */
+    pub fn getParentOid(self) -> int {
+        return self.parent_oid
+    }
+    /**
+     * @brief gets the location oid of this element.
+     * @return int
+     */
+    pub fn getLocationOid(self) -> int {
+        return self.location_oid
+    }
+    /**
+     * @brief gets the printable text of this element.
+     * @return string
+     */
+    pub fn getPrintableText(self) -> string {
+        return self.printable_text
+    }
+}
+/**
+ * @brief DO class: An arguments.
+ */
+schema ArgumentsDO {
+    @primary element_oid: int,
+    parent_oid: int,
+    printable_text: string
+}
+impl ArgumentsDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PythonDB) -> *ArgumentsDO {
+    	for (tmp in db.arguments) {
+            yield ArgumentsDO {
+                element_oid : tmp.element_oid,
+                parent_oid : tmp.parent_oid,
+                printable_text : tmp.printable_text
+            }
+    	}
+    }
+    /**
+     * @brief gets the parent oid of this element.
+     * @return int
+     */
+    pub fn getParentOid(self) -> int {
+        return self.parent_oid
+    }
+    /**
+     * @brief gets the printable text of this element.
+     * @return string
+     */
+    pub fn getPrintableText(self) -> string {
+        return self.printable_text
+    }
+}
+/**
+ * @brief DO class: An assert statement.
+ */
+schema AssertStatementDO {
+    @primary element_oid: int,
+    assert_condition_oid: int
+}
+impl AssertStatementDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PythonDB) -> *AssertStatementDO {
+    	for (tmp in db.assert_statement) {
+            yield AssertStatementDO {
+                element_oid : tmp.element_oid,
+                assert_condition_oid : tmp.assert_condition_oid
+            }
+    	}
+    }
+    /**
+     * @brief gets the assert condition oid of this element.
+     * @return int
+     */
+    pub fn getAssertConditionOid(self) -> int {
+        return self.assert_condition_oid
+    }
+}
+/**
+ * @brief DO class: An assignment statement.
+ */
+schema AssignmentStatementDO {
+    @primary element_oid: int,
+    value_oid: int,
+    targets_size: int
+}
+impl AssignmentStatementDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PythonDB) -> *AssignmentStatementDO {
+    	for (tmp in db.assignment_statement) {
+            yield AssignmentStatementDO {
+                element_oid : tmp.element_oid,
+                value_oid : tmp.value_oid,
+                targets_size : tmp.targets_size
+            }
+    	}
+    }
+    /**
+     * @brief gets the value oid of this element.
+     * @return int
+     */
+    pub fn getValueOid(self) -> int {
+        return self.value_oid
+    }
+    /**
+     * @brief gets the targets size of this element.
+     * @return int
+     */
+    pub fn getTargetsSize(self) -> int {
+        return self.targets_size
+    }
+}
+/**
+ * @brief DO class: An async for statement.
+ */
+schema AsyncForStatementDO {
+    @primary element_oid: int
+}
+impl AsyncForStatementDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PythonDB) -> *AsyncForStatementDO {
+    	for (tmp in db.async_for_statement) {
+            yield AsyncForStatementDO {
+                element_oid : tmp.element_oid
+            }
+    	}
+    }
+}
+/**
+ * @brief DO class: An async function def statement.
+ */
+schema AsyncFunctionDefStatementDO {
+    @primary element_oid: int,
+    name: string
+}
+impl AsyncFunctionDefStatementDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PythonDB) -> *AsyncFunctionDefStatementDO {
+    	for (tmp in db.async_function_def_statement) {
+            yield AsyncFunctionDefStatementDO {
+                element_oid : tmp.element_oid,
+                name : tmp.name
+            }
+    	}
+    }
+    /**
+     * @brief gets the name of this element.
+     * @return string
+     */
+    pub fn getName(self) -> string {
+        return self.name
+    }
+}
+/**
+ * @brief DO class: An async with statement.
+ */
+schema AsyncWithStatementDO {
+    @primary element_oid: int
+}
+impl AsyncWithStatementDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PythonDB) -> *AsyncWithStatementDO {
+    	for (tmp in db.async_with_statement) {
+            yield AsyncWithStatementDO {
+                element_oid : tmp.element_oid
+            }
+    	}
+    }
+}
+/**
+ * @brief DO class: An attribute expression.
+ */
+schema AttributeExpressionDO {
+    @primary element_oid: int,
+    value_oid: int,
+    ctx_type: string
+}
+impl AttributeExpressionDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PythonDB) -> *AttributeExpressionDO {
+    	for (tmp in db.attribute_expression) {
+            yield AttributeExpressionDO {
+                element_oid : tmp.element_oid,
+                value_oid : tmp.value_oid,
+                ctx_type : tmp.ctx_type
+            }
+    	}
+    }
+    /**
+     * @brief gets the value oid of this element.
+     * @return int
+     */
+    pub fn getValueOid(self) -> int {
+        return self.value_oid
+    }
+    /**
+     * @brief gets the ctx type of this element.
+     * @return string
+     */
+    pub fn getCtxType(self) -> string {
+        return self.ctx_type
+    }
+}
+/**
+ * @brief DO class: An augmented assignment statement.
+ */
+schema AugmentedAssignmentStatementDO {
+    @primary element_oid: int,
+    op_code: string,
+    target_expr_oid: int,
+    value_expr_oid: int
+}
+impl AugmentedAssignmentStatementDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PythonDB) -> *AugmentedAssignmentStatementDO {
+    	for (tmp in db.augmented_assignment_statement) {
+            yield AugmentedAssignmentStatementDO {
+                element_oid : tmp.element_oid,
+                op_code : tmp.op_code,
+                target_expr_oid : tmp.target_expr_oid,
+                value_expr_oid : tmp.value_expr_oid
+            }
+    	}
+    }
+    /**
+     * @brief gets the op code of this element.
+     * @return string
+     */
+    pub fn getOpCode(self) -> string {
+        return self.op_code
+    }
+    /**
+     * @brief gets the target expr oid of this element.
+     * @return int
+     */
+    pub fn getTargetExprOid(self) -> int {
+        return self.target_expr_oid
+    }
+    /**
+     * @brief gets the value expr oid of this element.
+     * @return int
+     */
+    pub fn getValueExprOid(self) -> int {
+        return self.value_expr_oid
+    }
+}
+/**
+ * @brief DO class: An await expression.
+ */
+schema AwaitExpressionDO {
+    @primary element_oid: int,
+    expr_value_oid: int
+}
+impl AwaitExpressionDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PythonDB) -> *AwaitExpressionDO {
+    	for (tmp in db.await_expression) {
+            yield AwaitExpressionDO {
+                element_oid : tmp.element_oid,
+                expr_value_oid : tmp.expr_value_oid
+            }
+    	}
+    }
+    /**
+     * @brief gets the expr value oid of this element.
+     * @return int
+     */
+    pub fn getExprValueOid(self) -> int {
+        return self.expr_value_oid
+    }
+}
+/**
+ * @brief DO class: A bin op expression.
+ */
+schema BinOpExpressionDO {
+    @primary element_oid: int,
+    left_expr_oid: int,
+    opcode: int,
+    right_expr_oid: int
+}
+impl BinOpExpressionDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PythonDB) -> *BinOpExpressionDO {
+    	for (tmp in db.bin_op_expression) {
+            yield BinOpExpressionDO {
+                element_oid : tmp.element_oid,
+                left_expr_oid : tmp.left_expr_oid,
+                opcode : tmp.opcode,
+                right_expr_oid : tmp.right_expr_oid
+            }
+    	}
+    }
+    /**
+     * @brief gets the left expr oid of this element.
+     * @return int
+     */
+    pub fn getLeftExprOid(self) -> int {
+        return self.left_expr_oid
+    }
+    /**
+     * @brief gets the opcode of this element.
+     * @return int
+     */
+    pub fn getOpcode(self) -> int {
+        return self.opcode
+    }
+    /**
+     * @brief gets the right expr oid of this element.
+     * @return int
+     */
+    pub fn getRightExprOid(self) -> int {
+        return self.right_expr_oid
+    }
+}
+/**
+ * @brief DO class: A boolean op expression.
+ */
+schema BooleanOpExpressionDO {
+    @primary element_oid: int,
+    type: string,
+    size: int
+}
+impl BooleanOpExpressionDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PythonDB) -> *BooleanOpExpressionDO {
+    	for (tmp in db.boolean_op_expression) {
+            yield BooleanOpExpressionDO {
+                element_oid : tmp.element_oid,
+                type : tmp.type,
+                size : tmp.size
+            }
+    	}
+    }
+    /**
+     * @brief gets the type of this element.
+     * @return string
+     */
+    pub fn getType(self) -> string {
+        return self.type
+    }
+    /**
+     * @brief gets the size of this element.
+     * @return int
+     */
+    pub fn getSize(self) -> int {
+        return self.size
+    }
+}
+/**
+ * @brief DO class: A break statement.
+ */
+schema BreakStatementDO {
+    @primary element_oid: int
+}
+impl BreakStatementDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PythonDB) -> *BreakStatementDO {
+    	for (tmp in db.break_statement) {
+            yield BreakStatementDO {
+                element_oid : tmp.element_oid
+            }
+    	}
+    }
+}
+/**
+ * @brief DO class: A call expression.
+ */
+schema CallExpressionDO {
+    @primary element_oid: int,
+    expr_func_oid: int
+}
+impl CallExpressionDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PythonDB) -> *CallExpressionDO {
+    	for (tmp in db.call_expression) {
+            yield CallExpressionDO {
+                element_oid : tmp.element_oid,
+                expr_func_oid : tmp.expr_func_oid
+            }
+    	}
+    }
+    /**
+     * @brief gets the expr func oid of this element.
+     * @return int
+     */
+    pub fn getExprFuncOid(self) -> int {
+        return self.expr_func_oid
+    }
+}
+/**
+ * @brief DO class: A callable binding.
+ */
+schema CallableBindingDO {
+    @primary caller_oid: int,
+    callee_oid: int
+}
+impl CallableBindingDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PythonDB) -> *CallableBindingDO {
+    	for (tmp in db.callable_binding) {
+            yield CallableBindingDO {
+                caller_oid : tmp.caller_oid,
+                callee_oid : tmp.callee_oid
+            }
+    	}
+    }
+    /**
+     * @brief gets the callee oid of this element.
+     * @return int
+     */
+    pub fn getCalleeOid(self) -> int {
+        return self.callee_oid
+    }
+}
+/**
+ * @brief DO class: A class def statement.
+ */
+schema ClassDefStatementDO {
+    @primary element_oid: int,
+    name: string
+}
+impl ClassDefStatementDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PythonDB) -> *ClassDefStatementDO {
+    	for (tmp in db.class_def_statement) {
+            yield ClassDefStatementDO {
+                element_oid : tmp.element_oid,
+                name : tmp.name
+            }
+    	}
+    }
+    /**
+     * @brief gets the name of this element.
+     * @return string
+     */
+    pub fn getName(self) -> string {
+        return self.name
+    }
+}
+/**
+ * @brief DO class: A class hierarchy.
+ */
+schema ClassHierarchyDO {
+    @primary base_oid: int,
+    class_oid: int
+}
+impl ClassHierarchyDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PythonDB) -> *ClassHierarchyDO {
+    	for (tmp in db.class_hierarchy) {
+            yield ClassHierarchyDO {
+                base_oid : tmp.base_oid,
+                class_oid : tmp.class_oid
+            }
+    	}
+    }
+    /**
+     * @brief gets the class oid of this element.
+     * @return int
+     */
+    pub fn getClassOid(self) -> int {
+        return self.class_oid
+    }
+}
+/**
+ * @brief DO class: A cmpop.
+ */
+schema CmpopDO {
+    @primary element_oid: int,
+    value: int,
+    location_oid: int,
+    parent_oid: int
+}
+impl CmpopDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PythonDB) -> *CmpopDO {
+    	for (tmp in db.cmpop) {
+            yield CmpopDO {
+                element_oid : tmp.element_oid,
+                value : tmp.value,
+                location_oid : tmp.location_oid,
+                parent_oid : tmp.parent_oid
+            }
+    	}
+    }
+    /**
+     * @brief gets the value of this element.
+     * @return int
+     */
+    pub fn getValue(self) -> int {
+        return self.value
+    }
+    /**
+     * @brief gets the location oid of this element.
+     * @return int
+     */
+    pub fn getLocationOid(self) -> int {
+        return self.location_oid
+    }
+    /**
+     * @brief gets the parent oid of this element.
+     * @return int
+     */
+    pub fn getParentOid(self) -> int {
+        return self.parent_oid
+    }
+}
+/**
+ * @brief DO class: A comment.
+ */
+schema CommentDO {
+    @primary element_oid: int,
+    text: string,
+    parent_oid: int,
+    location_oid: int
+}
+impl CommentDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PythonDB) -> *CommentDO {
+    	for (tmp in db.comment) {
+            yield CommentDO {
+                element_oid : tmp.element_oid,
+                text : tmp.text,
+                parent_oid : tmp.parent_oid,
+                location_oid : tmp.location_oid
+            }
+    	}
+    }
+    /**
+     * @brief gets the text of this element.
+     * @return string
+     */
+    pub fn getText(self) -> string {
+        return self.text
+    }
+    /**
+     * @brief gets the parent oid of this element.
+     * @return int
+     */
+    pub fn getParentOid(self) -> int {
+        return self.parent_oid
+    }
+    /**
+     * @brief gets the location oid of this element.
+     * @return int
+     */
+    pub fn getLocationOid(self) -> int {
+        return self.location_oid
+    }
+}
+/**
+ * @brief DO class: A compare expression.
+ */
+schema CompareExpressionDO {
+    @primary element_oid: int,
+    left_expr_oid: int
+}
+impl CompareExpressionDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PythonDB) -> *CompareExpressionDO {
+    	for (tmp in db.compare_expression) {
+            yield CompareExpressionDO {
+                element_oid : tmp.element_oid,
+                left_expr_oid : tmp.left_expr_oid
+            }
+    	}
+    }
+    /**
+     * @brief gets the left expr oid of this element.
+     * @return int
+     */
+    pub fn getLeftExprOid(self) -> int {
+        return self.left_expr_oid
+    }
+}
+/**
+ * @brief DO class: A comprehension.
+ */
+schema ComprehensionDO {
+    @primary element_oid: int,
+    target_expr_oid: int,
+    iter_expr_oid: int,
+    element_index: int,
+    parent_oid: int,
+    printable_text: string
+}
+impl ComprehensionDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PythonDB) -> *ComprehensionDO {
+    	for (tmp in db.comprehension) {
+            yield ComprehensionDO {
+                element_oid : tmp.element_oid,
+                target_expr_oid : tmp.target_expr_oid,
+                iter_expr_oid : tmp.iter_expr_oid,
+                element_index : tmp.element_index,
+                parent_oid : tmp.parent_oid,
+                printable_text : tmp.printable_text
+            }
+    	}
+    }
+    /**
+     * @brief gets the target expr oid of this element.
+     * @return int
+     */
+    pub fn getTargetExprOid(self) -> int {
+        return self.target_expr_oid
+    }
+    /**
+     * @brief gets the iter expr oid of this element.
+     * @return int
+     */
+    pub fn getIterExprOid(self) -> int {
+        return self.iter_expr_oid
+    }
+    /**
+     * @brief gets the element index of this element.
+     * @return int
+     */
+    pub fn getElementIndex(self) -> int {
+        return self.element_index
+    }
+    /**
+     * @brief gets the parent oid of this element.
+     * @return int
+     */
+    pub fn getParentOid(self) -> int {
+        return self.parent_oid
+    }
+    /**
+     * @brief gets the printable text of this element.
+     * @return string
+     */
+    pub fn getPrintableText(self) -> string {
+        return self.printable_text
+    }
+}
+/**
+ * @brief DO class: A constant.
+ */
+schema ConstantDO {
+    @primary element_oid: int,
+    value: string
+}
+impl ConstantDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PythonDB) -> *ConstantDO {
+    	for (tmp in db.constant) {
+            yield ConstantDO {
+                element_oid : tmp.element_oid,
+                value : tmp.value
+            }
+    	}
+    }
+    /**
+     * @brief gets the value of this element.
+     * @return string
+     */
+    pub fn getValue(self) -> string {
+        return self.value
+    }
+}
+/**
+ * @brief DO class: A container parent.
+ */
+schema ContainerParentDO {
+    @primary child_oid: int,
+    parent_oid: int
+}
+impl ContainerParentDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PythonDB) -> *ContainerParentDO {
+    	for (tmp in db.container_parent) {
+            yield ContainerParentDO {
+                child_oid : tmp.child_oid,
+                parent_oid : tmp.parent_oid
+            }
+    	}
+    }
+    /**
+     * @brief gets the parent oid of this element.
+     * @return int
+     */
+    pub fn getParentOid(self) -> int {
+        return self.parent_oid
+    }
+}
+/**
+ * @brief DO class: A continue statement.
+ */
+schema ContinueStatementDO {
+    @primary element_oid: int
+}
+impl ContinueStatementDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PythonDB) -> *ContinueStatementDO {
+    	for (tmp in db.continue_statement) {
+            yield ContinueStatementDO {
+                element_oid : tmp.element_oid
+            }
+    	}
+    }
+}
+/**
+ * @brief DO class: A decorated relation.
+ */
+schema DecoratedRelationDO {
+    @primary decorator_oid: int,
+    decorated_element_oid: int
+}
+impl DecoratedRelationDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PythonDB) -> *DecoratedRelationDO {
+    	for (tmp in db.decorated_relation) {
+            yield DecoratedRelationDO {
+                decorator_oid : tmp.decorator_oid,
+                decorated_element_oid : tmp.decorated_element_oid
+            }
+    	}
+    }
+    /**
+     * @brief gets the decorated element oid of this element.
+     * @return int
+     */
+    pub fn getDecoratedElementOid(self) -> int {
+        return self.decorated_element_oid
+    }
+}
+/**
+ * @brief DO class: A decorator.
+ */
+schema DecoratorDO {
+    @primary element_oid: int,
+    type: string,
+    printable_text: string
+}
+impl DecoratorDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PythonDB) -> *DecoratorDO {
+    	for (tmp in db.decorator) {
+            yield DecoratorDO {
+                element_oid : tmp.element_oid,
+                type : tmp.type,
+                printable_text : tmp.printable_text
+            }
+    	}
+    }
+    /**
+     * @brief gets the type of this element.
+     * @return string
+     */
+    pub fn getType(self) -> string {
+        return self.type
+    }
+    /**
+     * @brief gets the printable text of this element.
+     * @return string
+     */
+    pub fn getPrintableText(self) -> string {
+        return self.printable_text
+    }
+}
+/**
+ * @brief DO class: A delete statement.
+ */
+schema DeleteStatementDO {
+    @primary element_oid: int,
+    targets_size: int
+}
+impl DeleteStatementDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PythonDB) -> *DeleteStatementDO {
+    	for (tmp in db.delete_statement) {
+            yield DeleteStatementDO {
+                element_oid : tmp.element_oid,
+                targets_size : tmp.targets_size
+            }
+    	}
+    }
+    /**
+     * @brief gets the targets size of this element.
+     * @return int
+     */
+    pub fn getTargetsSize(self) -> int {
+        return self.targets_size
+    }
+}
+/**
+ * @brief DO class: A dict comp expression.
+ */
+schema DictCompExpressionDO {
+    @primary element_oid: int,
+    comprehension_size: int
+}
+impl DictCompExpressionDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PythonDB) -> *DictCompExpressionDO {
+    	for (tmp in db.dict_comp_expression) {
+            yield DictCompExpressionDO {
+                element_oid : tmp.element_oid,
+                comprehension_size : tmp.comprehension_size
+            }
+    	}
+    }
+    /**
+     * @brief gets the comprehension size of this element.
+     * @return int
+     */
+    pub fn getComprehensionSize(self) -> int {
+        return self.comprehension_size
+    }
+}
+/**
+ * @brief DO class: A dict expression.
+ */
+schema DictExpressionDO {
+    @primary element_oid: int,
+    size: int
+}
+impl DictExpressionDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PythonDB) -> *DictExpressionDO {
+    	for (tmp in db.dict_expression) {
+            yield DictExpressionDO {
+                element_oid : tmp.element_oid,
+                size : tmp.size
+            }
+    	}
+    }
+    /**
+     * @brief gets the size of this element.
+     * @return int
+     */
+    pub fn getSize(self) -> int {
+        return self.size
+    }
+}
+/**
+ * @brief DO class: A docstring comment.
+ */
+schema DocstringCommentDO {
+    @primary element_oid: int,
+    text: string,
+    documented_element_oid: int
+}
+impl DocstringCommentDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PythonDB) -> *DocstringCommentDO {
+    	for (tmp in db.docstring_comment) {
+            yield DocstringCommentDO {
+                element_oid : tmp.element_oid,
+                text : tmp.text,
+                documented_element_oid : tmp.documented_element_oid
+            }
+    	}
+    }
+    /**
+     * @brief gets the text of this element.
+     * @return string
+     */
+    pub fn getText(self) -> string {
+        return self.text
+    }
+    /**
+     * @brief gets the documented element oid of this element.
+     * @return int
+     */
+    pub fn getDocumentedElementOid(self) -> int {
+        return self.documented_element_oid
+    }
+}
+/**
+ * @brief DO class: An element.
+ */
+schema ElementDO {
+    @primary oid: int,
+    value: string,
+    type: string,
+    parent_oid: int
+}
+impl ElementDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PythonDB) -> *ElementDO {
+    	for (tmp in db.element) {
+            yield ElementDO {
+                oid : tmp.oid,
+                value : tmp.value,
+                type : tmp.type,
+                parent_oid : tmp.parent_oid
+            }
+    	}
+    }
+    /**
+     * @brief gets the value of this element.
+     * @return string
+     */
+    pub fn getValue(self) -> string {
+        return self.value
+    }
+    /**
+     * @brief gets the type of this element.
+     * @return string
+     */
+    pub fn getType(self) -> string {
+        return self.type
+    }
+    /**
+     * @brief gets the parent oid of this element.
+     * @return int
+     */
+    pub fn getParentOid(self) -> int {
+        return self.parent_oid
+    }
+}
+/**
+ * @brief DO class: An except handler.
+ */
+schema ExceptHandlerDO {
+    @primary element_oid: int,
+    element_index: int,
+    parent_oid: int,
+    location_oid: int,
+    printable_text: string
+}
+impl ExceptHandlerDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PythonDB) -> *ExceptHandlerDO {
+    	for (tmp in db.except_handler) {
+            yield ExceptHandlerDO {
+                element_oid : tmp.element_oid,
+                element_index : tmp.element_index,
+                parent_oid : tmp.parent_oid,
+                location_oid : tmp.location_oid,
+                printable_text : tmp.printable_text
+            }
+    	}
+    }
+    /**
+     * @brief gets the element index of this element.
+     * @return int
+     */
+    pub fn getElementIndex(self) -> int {
+        return self.element_index
+    }
+    /**
+     * @brief gets the parent oid of this element.
+     * @return int
+     */
+    pub fn getParentOid(self) -> int {
+        return self.parent_oid
+    }
+    /**
+     * @brief gets the location oid of this element.
+     * @return int
+     */
+    pub fn getLocationOid(self) -> int {
+        return self.location_oid
+    }
+    /**
+     * @brief gets the printable text of this element.
+     * @return string
+     */
+    pub fn getPrintableText(self) -> string {
+        return self.printable_text
+    }
+}
+/**
+ * @brief DO class: An expr context.
+ */
+schema ExprContextDO {
+    @primary element_oid: int,
+    parent_oid: int,
+    printable_text: string
+}
+impl ExprContextDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PythonDB) -> *ExprContextDO {
+    	for (tmp in db.expr_context) {
+            yield ExprContextDO {
+                element_oid : tmp.element_oid,
+                parent_oid : tmp.parent_oid,
+                printable_text : tmp.printable_text
+            }
+    	}
+    }
+    /**
+     * @brief gets the parent oid of this element.
+     * @return int
+     */
+    pub fn getParentOid(self) -> int {
+        return self.parent_oid
+    }
+    /**
+     * @brief gets the printable text of this element.
+     * @return string
+     */
+    pub fn getPrintableText(self) -> string {
+        return self.printable_text
+    }
+}
+/**
+ * @brief DO class: An expression.
+ */
+schema ExpressionDO {
+    @primary element_oid: int,
+    type: string,
+    element_index: int,
+    parent_oid: int,
+    location_oid: int,
+    printable_text: string
+}
+impl ExpressionDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PythonDB) -> *ExpressionDO {
+    	for (tmp in db.expression) {
+            yield ExpressionDO {
+                element_oid : tmp.element_oid,
+                type : tmp.type,
+                element_index : tmp.element_index,
+                parent_oid : tmp.parent_oid,
+                location_oid : tmp.location_oid,
+                printable_text : tmp.printable_text
+            }
+    	}
+    }
+    /**
+     * @brief gets the type of this element.
+     * @return string
+     */
+    pub fn getType(self) -> string {
+        return self.type
+    }
+    /**
+     * @brief gets the element index of this element.
+     * @return int
+     */
+    pub fn getElementIndex(self) -> int {
+        return self.element_index
+    }
+    /**
+     * @brief gets the parent oid of this element.
+     * @return int
+     */
+    pub fn getParentOid(self) -> int {
+        return self.parent_oid
+    }
+    /**
+     * @brief gets the location oid of this element.
+     * @return int
+     */
+    pub fn getLocationOid(self) -> int {
+        return self.location_oid
+    }
+    /**
+     * @brief gets the printable text of this element.
+     * @return string
+     */
+    pub fn getPrintableText(self) -> string {
+        return self.printable_text
+    }
+}
+/**
+ * @brief DO class: An expression statement.
+ */
+schema ExpressionStatementDO {
+    @primary element_oid: int,
+    value_oid: int
+}
+impl ExpressionStatementDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PythonDB) -> *ExpressionStatementDO {
+    	for (tmp in db.expression_statement) {
+            yield ExpressionStatementDO {
+                element_oid : tmp.element_oid,
+                value_oid : tmp.value_oid
+            }
+    	}
+    }
+    /**
+     * @brief gets the value oid of this element.
+     * @return int
+     */
+    pub fn getValueOid(self) -> int {
+        return self.value_oid
+    }
+}
+/**
+ * @brief DO class: A file.
+ */
+schema FileDO {
+    @primary element_oid: int,
+    relative_path: string,
+    extension: string,
+    name: string,
+    number_of_lines_oid: int
+}
+impl FileDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PythonDB) -> *FileDO {
+    	for (tmp in db.file) {
+            yield FileDO {
+                element_oid : tmp.element_oid,
+                relative_path : tmp.relative_path,
+                extension : tmp.extension,
+                name : tmp.name,
+                number_of_lines_oid : tmp.number_of_lines_oid
+            }
+    	}
+    }
+    /**
+     * @brief gets the relative path of this element.
+     * @return string
+     */
+    pub fn getRelativePath(self) -> string {
+        return self.relative_path
+    }
+    /**
+     * @brief gets the extension of this element.
+     * @return string
+     */
+    pub fn getExtension(self) -> string {
+        return self.extension
+    }
+    /**
+     * @brief gets the name of this element.
+     * @return string
+     */
+    pub fn getName(self) -> string {
+        return self.name
+    }
+    /**
+     * @brief gets the number of lines oid of this element.
+     * @return int
+     */
+    pub fn getNumberOfLinesOid(self) -> int {
+        return self.number_of_lines_oid
+    }
+}
+/**
+ * @brief DO class: A modified 2to3 file.
+ */
+schema Modified2To3FileDO {
+    @primary element_oid: int,
+    relative_path: string
+}
+impl Modified2To3FileDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PythonDB) -> *Modified2To3FileDO {
+    	for (tmp in db.modified_2to3_file) {
+            yield Modified2To3FileDO {
+                element_oid : tmp.element_oid,
+                relative_path : tmp.relative_path
+            }
+    	}
+    }
+    /**
+     * @brief gets the relative path of this element.
+     * @return string
+     */
+    pub fn getRelativePath(self) -> string {
+        return self.relative_path
+    }
+}
+/**
+ * @brief DO class: A parsed error file.
+ */
+schema ParseErrorFileDO {
+    @primary element_oid: int,
+    relative_path: string,
+    error_message: string,
+    error_text: string
+}
+impl ParseErrorFileDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PythonDB) -> *ParseErrorFileDO {
+    	for (tmp in db.parse_error_file) {
+            yield ParseErrorFileDO {
+                element_oid : tmp.element_oid,
+                relative_path : tmp.relative_path,
+                error_message : tmp.error_message,
+                error_text : tmp.error_text
+            }
+    	}
+    }
+    /**
+     * @brief gets the relative path of this element.
+     * @return string
+     */
+    pub fn getRelativePath(self) -> string {
+        return self.relative_path
+    }
+    /**
+     * @brief gets the error message of this element.
+     * @return string
+     */
+    pub fn getErrorMessage(self) -> string {
+        return self.error_message
+    }
+    /**
+     * @brief gets the error text of this element.
+     * @return string
+     */
+    pub fn getErrorText(self) -> string {
+        return self.error_text
+    }
+}
+/**
+ * @brief DO class: A file md5 sum.
+ */
+schema FileMd5SumDO {
+    @primary file_oid: int,
+    value: string
+}
+impl FileMd5SumDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PythonDB) -> *FileMd5SumDO {
+    	for (tmp in db.file_md5_sum) {
+            yield FileMd5SumDO {
+                file_oid : tmp.file_oid,
+                value : tmp.value
+            }
+    	}
+    }
+    /**
+     * @brief gets the value of this element.
+     * @return string
+     */
+    pub fn getValue(self) -> string {
+        return self.value
+    }
+}
+/**
+ * @brief DO class: A file sha256 sum.
+ */
+schema FileSha256SumDO {
+    @primary file_oid: int,
+    value: string
+}
+impl FileSha256SumDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PythonDB) -> *FileSha256SumDO {
+    	for (tmp in db.file_sha256_sum) {
+            yield FileSha256SumDO {
+                file_oid : tmp.file_oid,
+                value : tmp.value
+            }
+    	}
+    }
+    /**
+     * @brief gets the value of this element.
+     * @return string
+     */
+    pub fn getValue(self) -> string {
+        return self.value
+    }
+}
+/**
+ * @brief DO class: A folder.
+ */
+schema FolderDO {
+    @primary element_oid: int,
+    qualified_name: string,
+    name: string,
+    parent_oid: int
+}
+impl FolderDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PythonDB) -> *FolderDO {
+    	for (tmp in db.folder) {
+            yield FolderDO {
+                element_oid : tmp.element_oid,
+                qualified_name : tmp.qualified_name,
+                name : tmp.name,
+                parent_oid : tmp.parent_oid
+            }
+    	}
+    }
+    /**
+     * @brief gets the qualified name of this element.
+     * @return string
+     */
+    pub fn getQualifiedName(self) -> string {
+        return self.qualified_name
+    }
+    /**
+     * @brief gets the name of this element.
+     * @return string
+     */
+    pub fn getName(self) -> string {
+        return self.name
+    }
+    /**
+     * @brief gets the parent oid of this element.
+     * @return int
+     */
+    pub fn getParentOid(self) -> int {
+        return self.parent_oid
+    }
+}
+/**
+ * @brief DO class: A for statement.
+ */
+schema ForStatementDO {
+    @primary element_oid: int
+}
+impl ForStatementDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PythonDB) -> *ForStatementDO {
+    	for (tmp in db.for_statement) {
+            yield ForStatementDO {
+                element_oid : tmp.element_oid
+            }
+    	}
+    }
+}
+/**
+ * @brief DO class: A formatted value expression.
+ */
+schema FormattedValueExpressionDO {
+    @primary element_oid: int,
+    value_oid: int
+}
+impl FormattedValueExpressionDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PythonDB) -> *FormattedValueExpressionDO {
+    	for (tmp in db.formatted_value_expression) {
+            yield FormattedValueExpressionDO {
+                element_oid : tmp.element_oid,
+                value_oid : tmp.value_oid
+            }
+    	}
+    }
+    /**
+     * @brief gets the value oid of this element.
+     * @return int
+     */
+    pub fn getValueOid(self) -> int {
+        return self.value_oid
+    }
+}
+/**
+ * @brief DO class: A function def statement.
+ */
+schema FunctionDefStatementDO {
+    @primary element_oid: int,
+    name: string
+}
+impl FunctionDefStatementDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PythonDB) -> *FunctionDefStatementDO {
+    	for (tmp in db.function_def_statement) {
+            yield FunctionDefStatementDO {
+                element_oid : tmp.element_oid,
+                name : tmp.name
+            }
+    	}
+    }
+    /**
+     * @brief gets the name of this element.
+     * @return string
+     */
+    pub fn getName(self) -> string {
+        return self.name
+    }
+}
+/**
+ * @brief DO class: A generator expression.
+ */
+schema GeneratorExpressionDO {
+    @primary element_oid: int,
+    elt_oid: int
+}
+impl GeneratorExpressionDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PythonDB) -> *GeneratorExpressionDO {
+    	for (tmp in db.generator_expression) {
+            yield GeneratorExpressionDO {
+                element_oid : tmp.element_oid,
+                elt_oid : tmp.elt_oid
+            }
+    	}
+    }
+    /**
+     * @brief gets the elt oid of this element.
+     * @return int
+     */
+    pub fn getEltOid(self) -> int {
+        return self.elt_oid
+    }
+}
+/**
+ * @brief DO class: A global statement.
+ */
+schema GlobalStatementDO {
+    @primary element_oid: int,
+    names: string
+}
+impl GlobalStatementDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PythonDB) -> *GlobalStatementDO {
+    	for (tmp in db.global_statement) {
+            yield GlobalStatementDO {
+                element_oid : tmp.element_oid,
+                names : tmp.names
+            }
+    	}
+    }
+    /**
+     * @brief gets the names of this element.
+     * @return string
+     */
+    pub fn getNames(self) -> string {
+        return self.names
+    }
+}
+/**
+ * @brief DO class: An if expression.
+ */
+schema IfExpressionDO {
+    @primary element_oid: int
+}
+impl IfExpressionDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PythonDB) -> *IfExpressionDO {
+    	for (tmp in db.if_expression) {
+            yield IfExpressionDO {
+                element_oid : tmp.element_oid
+            }
+    	}
+    }
+}
+/**
+ * @brief DO class: An if statement.
+ */
+schema IfStatementDO {
+    @primary element_oid: int
+}
+impl IfStatementDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PythonDB) -> *IfStatementDO {
+    	for (tmp in db.if_statement) {
+            yield IfStatementDO {
+                element_oid : tmp.element_oid
+            }
+    	}
+    }
+}
+/**
+ * @brief DO class: An import from statement.
+ */
+schema ImportFromStatementDO {
+    @primary element_oid: int,
+    module: string,
+    level: int
+}
+impl ImportFromStatementDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PythonDB) -> *ImportFromStatementDO {
+    	for (tmp in db.import_from_statement) {
+            yield ImportFromStatementDO {
+                element_oid : tmp.element_oid,
+                module : tmp.module,
+                level : tmp.level
+            }
+    	}
+    }
+    /**
+     * @brief gets the module of this element.
+     * @return string
+     */
+    pub fn getModule(self) -> string {
+        return self.module
+    }
+    /**
+     * @brief gets the level of this element.
+     * @return int
+     */
+    pub fn getLevel(self) -> int {
+        return self.level
+    }
+}
+/**
+ * @brief DO class: An import statement.
+ */
+schema ImportStatementDO {
+    @primary element_oid: int
+}
+impl ImportStatementDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PythonDB) -> *ImportStatementDO {
+    	for (tmp in db.import_statement) {
+            yield ImportStatementDO {
+                element_oid : tmp.element_oid
+            }
+    	}
+    }
+}
+/**
+ * @brief DO class: A joined str expression.
+ */
+schema JoinedStrExpressionDO {
+    @primary element_oid: int,
+    size: int
+}
+impl JoinedStrExpressionDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PythonDB) -> *JoinedStrExpressionDO {
+    	for (tmp in db.joined_str_expression) {
+            yield JoinedStrExpressionDO {
+                element_oid : tmp.element_oid,
+                size : tmp.size
+            }
+    	}
+    }
+    /**
+     * @brief gets the size of this element.
+     * @return int
+     */
+    pub fn getSize(self) -> int {
+        return self.size
+    }
+}
+/**
+ * @brief DO class: A keyword.
+ */
+schema KeywordDO {
+    @primary element_oid: int,
+    arg_value: string,
+    value_oid: int,
+    element_index: int,
+    parent_oid: int,
+    location_oid: int,
+    printable_text: string
+}
+impl KeywordDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PythonDB) -> *KeywordDO {
+    	for (tmp in db.keyword) {
+            yield KeywordDO {
+                element_oid : tmp.element_oid,
+                arg_value : tmp.arg_value,
+                value_oid : tmp.value_oid,
+                element_index : tmp.element_index,
+                parent_oid : tmp.parent_oid,
+                location_oid : tmp.location_oid,
+                printable_text : tmp.printable_text
+            }
+    	}
+    }
+    /**
+     * @brief gets the arg value of this element.
+     * @return string
+     */
+    pub fn getArgValue(self) -> string {
+        return self.arg_value
+    }
+    /**
+     * @brief gets the value oid of this element.
+     * @return int
+     */
+    pub fn getValueOid(self) -> int {
+        return self.value_oid
+    }
+    /**
+     * @brief gets the element index of this element.
+     * @return int
+     */
+    pub fn getElementIndex(self) -> int {
+        return self.element_index
+    }
+    /**
+     * @brief gets the parent oid of this element.
+     * @return int
+     */
+    pub fn getParentOid(self) -> int {
+        return self.parent_oid
+    }
+    /**
+     * @brief gets the location oid of this element.
+     * @return int
+     */
+    pub fn getLocationOid(self) -> int {
+        return self.location_oid
+    }
+    /**
+     * @brief gets the printable text of this element.
+     * @return string
+     */
+    pub fn getPrintableText(self) -> string {
+        return self.printable_text
+    }
+}
+/**
+ * @brief DO class: A lambda expression.
+ */
+schema LambdaExpressionDO {
+    @primary element_oid: int
+}
+impl LambdaExpressionDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PythonDB) -> *LambdaExpressionDO {
+    	for (tmp in db.lambda_expression) {
+            yield LambdaExpressionDO {
+                element_oid : tmp.element_oid
+            }
+    	}
+    }
+}
+/**
+ * @brief DO class: A list comp expression.
+ */
+schema ListCompExpressionDO {
+    @primary element_oid: int,
+    elt_oid: int,
+    generator_size: int
+}
+impl ListCompExpressionDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PythonDB) -> *ListCompExpressionDO {
+    	for (tmp in db.list_comp_expression) {
+            yield ListCompExpressionDO {
+                element_oid : tmp.element_oid,
+                elt_oid : tmp.elt_oid,
+                generator_size : tmp.generator_size
+            }
+    	}
+    }
+    /**
+     * @brief gets the elt oid of this element.
+     * @return int
+     */
+    pub fn getEltOid(self) -> int {
+        return self.elt_oid
+    }
+    /**
+     * @brief gets the generator size of this element.
+     * @return int
+     */
+    pub fn getGeneratorSize(self) -> int {
+        return self.generator_size
+    }
+}
+/**
+ * @brief DO class: A list expression.
+ */
+schema ListExpressionDO {
+    @primary element_oid: int,
+    elt_size: int,
+    ctx: string
+}
+impl ListExpressionDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PythonDB) -> *ListExpressionDO {
+    	for (tmp in db.list_expression) {
+            yield ListExpressionDO {
+                element_oid : tmp.element_oid,
+                elt_size : tmp.elt_size,
+                ctx : tmp.ctx
+            }
+    	}
+    }
+    /**
+     * @brief gets the elt size of this element.
+     * @return int
+     */
+    pub fn getEltSize(self) -> int {
+        return self.elt_size
+    }
+    /**
+     * @brief gets the ctx of this element.
+     * @return string
+     */
+    pub fn getCtx(self) -> string {
+        return self.ctx
+    }
+}
+/**
+ * @brief DO class: A location.
+ */
+schema LocationDO {
+    @primary element_oid: int,
+    file_oid: int,
+    start_line_number: int,
+    start_column_number: int,
+    end_line_number: int,
+    end_column_number: int
+}
+impl LocationDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PythonDB) -> *LocationDO {
+    	for (tmp in db.location) {
+            yield LocationDO {
+                element_oid : tmp.element_oid,
+                file_oid : tmp.file_oid,
+                start_line_number : tmp.start_line_number,
+                start_column_number : tmp.start_column_number,
+                end_line_number : tmp.end_line_number,
+                end_column_number : tmp.end_column_number
+            }
+    	}
+    }
+    /**
+     * @brief gets the file oid of this element.
+     * @return int
+     */
+    pub fn getFileOid(self) -> int {
+        return self.file_oid
+    }
+    /**
+     * @brief gets the start line number of this element.
+     * @return int
+     */
+    pub fn getStartLineNumber(self) -> int {
+        return self.start_line_number
+    }
+    /**
+     * @brief gets the start column number of this element.
+     * @return int
+     */
+    pub fn getStartColumnNumber(self) -> int {
+        return self.start_column_number
+    }
+    /**
+     * @brief gets the end line number of this element.
+     * @return int
+     */
+    pub fn getEndLineNumber(self) -> int {
+        return self.end_line_number
+    }
+    /**
+     * @brief gets the end column number of this element.
+     * @return int
+     */
+    pub fn getEndColumnNumber(self) -> int {
+        return self.end_column_number
+    }
+}
+/**
+ * @brief DO class: A match case.
+ */
+schema MatchCaseDO {
+    @primary element_oid: int,
+    pattern_oid: int,
+    element_index: int,
+    parent_oid: int,
+    location_oid: int,
+    printable_text: string,
+    is_default: int
+}
+impl MatchCaseDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PythonDB) -> *MatchCaseDO {
+    	for (tmp in db.match_case) {
+            yield MatchCaseDO {
+                element_oid : tmp.element_oid,
+                pattern_oid : tmp.pattern_oid,
+                element_index : tmp.element_index,
+                parent_oid : tmp.parent_oid,
+                location_oid : tmp.location_oid,
+                printable_text : tmp.printable_text,
+                is_default : tmp.is_default
+            }
+    	}
+    }
+    /**
+     * @brief gets the pattern oid of this element.
+     * @return int
+     */
+    pub fn getPatternOid(self) -> int {
+        return self.pattern_oid
+    }
+    /**
+     * @brief gets the element index of this element.
+     * @return int
+     */
+    pub fn getElementIndex(self) -> int {
+        return self.element_index
+    }
+    /**
+     * @brief gets the parent oid of this element.
+     * @return int
+     */
+    pub fn getParentOid(self) -> int {
+        return self.parent_oid
+    }
+    /**
+     * @brief gets the location oid of this element.
+     * @return int
+     */
+    pub fn getLocationOid(self) -> int {
+        return self.location_oid
+    }
+    /**
+     * @brief gets the printable text of this element.
+     * @return string
+     */
+    pub fn getPrintableText(self) -> string {
+        return self.printable_text
+    }
+    /**
+     * @brief gets the is default of this element.
+     * @return int
+     */
+    pub fn getIsDefault(self) -> int {
+        return self.is_default
+    }
+}
+/**
+ * @brief DO class: A match statement.
+ */
+schema MatchStatementDO {
+    @primary element_oid: int,
+    subject_oid: int
+}
+impl MatchStatementDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PythonDB) -> *MatchStatementDO {
+    	for (tmp in db.match_statement) {
+            yield MatchStatementDO {
+                element_oid : tmp.element_oid,
+                subject_oid : tmp.subject_oid
+            }
+    	}
+    }
+    /**
+     * @brief gets the subject oid of this element.
+     * @return int
+     */
+    pub fn getSubjectOid(self) -> int {
+        return self.subject_oid
+    }
+}
+/**
+ * @brief DO class: A metainfo.
+ */
+schema MetainfoDO {
+    @primary oid: int,
+    kind: string,
+    value: string,
+    program_oid: int
+}
+impl MetainfoDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PythonDB) -> *MetainfoDO {
+    	for (tmp in db.metainfo) {
+            yield MetainfoDO {
+                oid : tmp.oid,
+                kind : tmp.kind,
+                value : tmp.value,
+                program_oid : tmp.program_oid
+            }
+    	}
+    }
+    /**
+     * @brief gets the kind of this element.
+     * @return string
+     */
+    pub fn getKind(self) -> string {
+        return self.kind
+    }
+    /**
+     * @brief gets the value of this element.
+     * @return string
+     */
+    pub fn getValue(self) -> string {
+        return self.value
+    }
+    /**
+     * @brief gets the program oid of this element.
+     * @return int
+     */
+    pub fn getProgramOid(self) -> int {
+        return self.program_oid
+    }
+}
+/**
+ * @brief DO class: A mod.
+ */
+schema ModDO {
+    @primary element_oid: int,
+    type: string,
+    location_oid: int
+}
+impl ModDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PythonDB) -> *ModDO {
+    	for (tmp in db.mod) {
+            yield ModDO {
+                element_oid : tmp.element_oid,
+                type : tmp.type,
+                location_oid : tmp.location_oid
+            }
+    	}
+    }
+    /**
+     * @brief gets the type of this element.
+     * @return string
+     */
+    pub fn getType(self) -> string {
+        return self.type
+    }
+    /**
+     * @brief gets the location oid of this element.
+     * @return int
+     */
+    pub fn getLocationOid(self) -> int {
+        return self.location_oid
+    }
+}
+/**
+ * @brief DO class: A module.
+ */
+schema ModuleDO {
+    @primary element_oid: int,
+    name: string,
+    file_oid: int,
+    location_oid: int
+}
+impl ModuleDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PythonDB) -> *ModuleDO {
+    	for (tmp in db.module) {
+            yield ModuleDO {
+                element_oid : tmp.element_oid,
+                name : tmp.name,
+                file_oid : tmp.file_oid,
+                location_oid : tmp.location_oid
+            }
+    	}
+    }
+    /**
+     * @brief gets the name of this element.
+     * @return string
+     */
+    pub fn getName(self) -> string {
+        return self.name
+    }
+    /**
+     * @brief gets the file oid of this element.
+     * @return int
+     */
+    pub fn getFileOid(self) -> int {
+        return self.file_oid
+    }
+    /**
+     * @brief gets the location oid of this element.
+     * @return int
+     */
+    pub fn getLocationOid(self) -> int {
+        return self.location_oid
+    }
+}
+/**
+ * @brief DO class: A scope enclosing expression.
+ */
+schema ScopeEnclosingExpressionDO {
+    @primary expression_oid: int,
+    scope_oid: int
+}
+impl ScopeEnclosingExpressionDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PythonDB) -> *ScopeEnclosingExpressionDO {
+    	for (tmp in db.scope_enclosing_expression) {
+            yield ScopeEnclosingExpressionDO {
+                expression_oid : tmp.expression_oid,
+                scope_oid : tmp.scope_oid
+            }
+    	}
+    }
+    /**
+     * @brief gets the scope oid of this element.
+     * @return int
+     */
+    pub fn getScopeOid(self) -> int {
+        return self.scope_oid
+    }
+}
+/**
+ * @brief DO class: A scope enclosing statement.
+ */
+schema ScopeEnclosingStatementDO {
+    @primary statement_oid: int,
+    scope_oid: int
+}
+impl ScopeEnclosingStatementDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PythonDB) -> *ScopeEnclosingStatementDO {
+    	for (tmp in db.scope_enclosing_statement) {
+            yield ScopeEnclosingStatementDO {
+                statement_oid : tmp.statement_oid,
+                scope_oid : tmp.scope_oid
+            }
+    	}
+    }
+    /**
+     * @brief gets the scope oid of this element.
+     * @return int
+     */
+    pub fn getScopeOid(self) -> int {
+        return self.scope_oid
+    }
+}
+/**
+ * @brief DO class: A name expression.
+ */
+schema NameExpressionDO {
+    @primary element_oid: int,
+    ctx_type: string
+}
+impl NameExpressionDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PythonDB) -> *NameExpressionDO {
+    	for (tmp in db.name_expression) {
+            yield NameExpressionDO {
+                element_oid : tmp.element_oid,
+                ctx_type : tmp.ctx_type
+            }
+    	}
+    }
+    /**
+     * @brief gets the ctx type of this element.
+     * @return string
+     */
+    pub fn getCtxType(self) -> string {
+        return self.ctx_type
+    }
+}
+/**
+ * @brief DO class: A named expression.
+ */
+schema NamedExpressionDO {
+    @primary element_oid: int,
+    target_oid: int,
+    value_oid: int
+}
+impl NamedExpressionDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PythonDB) -> *NamedExpressionDO {
+    	for (tmp in db.named_expression) {
+            yield NamedExpressionDO {
+                element_oid : tmp.element_oid,
+                target_oid : tmp.target_oid,
+                value_oid : tmp.value_oid
+            }
+    	}
+    }
+    /**
+     * @brief gets the target oid of this element.
+     * @return int
+     */
+    pub fn getTargetOid(self) -> int {
+        return self.target_oid
+    }
+    /**
+     * @brief gets the value oid of this element.
+     * @return int
+     */
+    pub fn getValueOid(self) -> int {
+        return self.value_oid
+    }
+}
+/**
+ * @brief DO class: A non local statement.
+ */
+schema NonLocalStatementDO {
+    @primary element_oid: int,
+    names: int
+}
+impl NonLocalStatementDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PythonDB) -> *NonLocalStatementDO {
+    	for (tmp in db.non_local_statement) {
+            yield NonLocalStatementDO {
+                element_oid : tmp.element_oid,
+                names : tmp.names
+            }
+    	}
+    }
+    /**
+     * @brief gets the names of this element.
+     * @return int
+     */
+    pub fn getNames(self) -> int {
+        return self.names
+    }
+}
+/**
+ * @brief DO class: A number of lines.
+ */
+schema NumberOfLinesDO {
+    @primary element_oid: int,
+    number_of_total_lines: int,
+    number_of_valid_lines: int,
+    number_of_comment_lines: int
+}
+impl NumberOfLinesDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PythonDB) -> *NumberOfLinesDO {
+    	for (tmp in db.number_of_lines) {
+            yield NumberOfLinesDO {
+                element_oid : tmp.element_oid,
+                number_of_total_lines : tmp.number_of_total_lines,
+                number_of_valid_lines : tmp.number_of_valid_lines,
+                number_of_comment_lines : tmp.number_of_comment_lines
+            }
+    	}
+    }
+    /**
+     * @brief gets the number of total lines of this element.
+     * @return int
+     */
+    pub fn getNumberOfTotalLines(self) -> int {
+        return self.number_of_total_lines
+    }
+    /**
+     * @brief gets the number of valid lines of this element.
+     * @return int
+     */
+    pub fn getNumberOfValidLines(self) -> int {
+        return self.number_of_valid_lines
+    }
+    /**
+     * @brief gets the number of comment lines of this element.
+     * @return int
+     */
+    pub fn getNumberOfCommentLines(self) -> int {
+        return self.number_of_comment_lines
+    }
+}
+/**
+ * @brief DO class: An operator.
+ */
+schema OperatorDO {
+    @primary element_oid: int,
+    location_oid: int,
+    parent_oid: int,
+    printable_text: string
+}
+impl OperatorDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PythonDB) -> *OperatorDO {
+    	for (tmp in db.operator) {
+            yield OperatorDO {
+                element_oid : tmp.element_oid,
+                location_oid : tmp.location_oid,
+                parent_oid : tmp.parent_oid,
+                printable_text : tmp.printable_text
+            }
+    	}
+    }
+    /**
+     * @brief gets the location oid of this element.
+     * @return int
+     */
+    pub fn getLocationOid(self) -> int {
+        return self.location_oid
+    }
+    /**
+     * @brief gets the parent oid of this element.
+     * @return int
+     */
+    pub fn getParentOid(self) -> int {
+        return self.parent_oid
+    }
+    /**
+     * @brief gets the printable text of this element.
+     * @return string
+     */
+    pub fn getPrintableText(self) -> string {
+        return self.printable_text
+    }
+}
+/**
+ * @brief DO class: A parent.
+ */
+schema ParentDO {
+    @primary parent_oid: int,
+    parent_type: string
+}
+impl ParentDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PythonDB) -> *ParentDO {
+    	for (tmp in db.parent) {
+            yield ParentDO {
+                parent_oid : tmp.parent_oid,
+                parent_type : tmp.parent_type
+            }
+    	}
+    }
+    /**
+     * @brief gets the parent type of this element.
+     * @return string
+     */
+    pub fn getParentType(self) -> string {
+        return self.parent_type
+    }
+}
+/**
+ * @brief DO class: A pass statement.
+ */
+schema PassStatementDO {
+    @primary element_oid: int
+}
+impl PassStatementDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PythonDB) -> *PassStatementDO {
+    	for (tmp in db.pass_statement) {
+            yield PassStatementDO {
+                element_oid : tmp.element_oid
+            }
+    	}
+    }
+}
+/**
+ * @brief DO class: A program.
+ */
+schema ProgramDO {
+    @primary program_oid: int,
+    absolute_prefix_path: string
+}
+impl ProgramDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PythonDB) -> *ProgramDO {
+    	for (tmp in db.program) {
+            yield ProgramDO {
+                program_oid : tmp.program_oid,
+                absolute_prefix_path : tmp.absolute_prefix_path
+            }
+    	}
+    }
+    /**
+     * @brief gets the absolute prefix path of this element.
+     * @return string
+     */
+    pub fn getAbsolutePrefixPath(self) -> string {
+        return self.absolute_prefix_path
+    }
+}
+/**
+ * @brief DO class: A raise statement.
+ */
+schema RaiseStatementDO {
+    @primary element_oid: int
+}
+impl RaiseStatementDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PythonDB) -> *RaiseStatementDO {
+    	for (tmp in db.raise_statement) {
+            yield RaiseStatementDO {
+                element_oid : tmp.element_oid
+            }
+    	}
+    }
+}
+/**
+ * @brief DO class: A reference relation.
+ */
+schema ReferenceRelationDO {
+    @primary reference_element_oid: int,
+    definition_element_oid: int
+}
+impl ReferenceRelationDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PythonDB) -> *ReferenceRelationDO {
+    	for (tmp in db.reference_relation) {
+            yield ReferenceRelationDO {
+                reference_element_oid : tmp.reference_element_oid,
+                definition_element_oid : tmp.definition_element_oid
+            }
+    	}
+    }
+    /**
+     * @brief gets the definition element oid of this element.
+     * @return int
+     */
+    pub fn getDefinitionElementOid(self) -> int {
+        return self.definition_element_oid
+    }
+}
+/**
+ * @brief DO class: A return statement.
+ */
+schema ReturnStatementDO {
+    @primary element_oid: int,
+    is_return_empty: int
+}
+impl ReturnStatementDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PythonDB) -> *ReturnStatementDO {
+    	for (tmp in db.return_statement) {
+            yield ReturnStatementDO {
+                element_oid : tmp.element_oid,
+                is_return_empty : tmp.is_return_empty
+            }
+    	}
+    }
+    /**
+     * @brief gets the is return empty of this element.
+     * @return int
+     */
+    pub fn getIsReturnEmpty(self) -> int {
+        return self.is_return_empty
+    }
+}
+/**
+ * @brief DO class: A set comp expression.
+ */
+schema SetCompExpressionDO {
+    @primary element_oid: int,
+    elt_oid: int,
+    generator_size: int
+}
+impl SetCompExpressionDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PythonDB) -> *SetCompExpressionDO {
+    	for (tmp in db.set_comp_expression) {
+            yield SetCompExpressionDO {
+                element_oid : tmp.element_oid,
+                elt_oid : tmp.elt_oid,
+                generator_size : tmp.generator_size
+            }
+    	}
+    }
+    /**
+     * @brief gets the elt oid of this element.
+     * @return int
+     */
+    pub fn getEltOid(self) -> int {
+        return self.elt_oid
+    }
+    /**
+     * @brief gets the generator size of this element.
+     * @return int
+     */
+    pub fn getGeneratorSize(self) -> int {
+        return self.generator_size
+    }
+}
+/**
+ * @brief DO class: A set expression.
+ */
+schema SetExpressionDO {
+    @primary element_oid: int,
+    elt_size: int
+}
+impl SetExpressionDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PythonDB) -> *SetExpressionDO {
+    	for (tmp in db.set_expression) {
+            yield SetExpressionDO {
+                element_oid : tmp.element_oid,
+                elt_size : tmp.elt_size
+            }
+    	}
+    }
+    /**
+     * @brief gets the elt size of this element.
+     * @return int
+     */
+    pub fn getEltSize(self) -> int {
+        return self.elt_size
+    }
+}
+/**
+ * @brief DO class: A slice.
+ */
+schema SliceDO {
+    @primary element_oid: int,
+    element_index: int,
+    parent_oid: int,
+    location_oid: int,
+    printable_text: string,
+    has_step: int
+}
+impl SliceDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PythonDB) -> *SliceDO {
+    	for (tmp in db.slice) {
+            yield SliceDO {
+                element_oid : tmp.element_oid,
+                element_index : tmp.element_index,
+                parent_oid : tmp.parent_oid,
+                location_oid : tmp.location_oid,
+                printable_text : tmp.printable_text,
+                has_step : tmp.has_step
+            }
+    	}
+    }
+    /**
+     * @brief gets the element index of this element.
+     * @return int
+     */
+    pub fn getElementIndex(self) -> int {
+        return self.element_index
+    }
+    /**
+     * @brief gets the parent oid of this element.
+     * @return int
+     */
+    pub fn getParentOid(self) -> int {
+        return self.parent_oid
+    }
+    /**
+     * @brief gets the location oid of this element.
+     * @return int
+     */
+    pub fn getLocationOid(self) -> int {
+        return self.location_oid
+    }
+    /**
+     * @brief gets the printable text of this element.
+     * @return string
+     */
+    pub fn getPrintableText(self) -> string {
+        return self.printable_text
+    }
+    /**
+     * @brief gets the has step of this element.
+     * @return int
+     */
+    pub fn getHasStep(self) -> int {
+        return self.has_step
+    }
+}
+/**
+ * @brief DO class: A starred expression.
+ */
+schema StarredExpressionDO {
+    @primary element_oid: int,
+    ctx: string
+}
+impl StarredExpressionDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PythonDB) -> *StarredExpressionDO {
+    	for (tmp in db.starred_expression) {
+            yield StarredExpressionDO {
+                element_oid : tmp.element_oid,
+                ctx : tmp.ctx
+            }
+    	}
+    }
+    /**
+     * @brief gets the ctx of this element.
+     * @return string
+     */
+    pub fn getCtx(self) -> string {
+        return self.ctx
+    }
+}
+/**
+ * @brief DO class: A statement.
+ */
+schema StatementDO {
+    @primary element_oid: int,
+    type: string,
+    element_index: int,
+    parent_oid: int,
+    location_oid: int,
+    printable_text: string
+}
+impl StatementDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PythonDB) -> *StatementDO {
+    	for (tmp in db.statement) {
+            yield StatementDO {
+                element_oid : tmp.element_oid,
+                type : tmp.type,
+                element_index : tmp.element_index,
+                parent_oid : tmp.parent_oid,
+                location_oid : tmp.location_oid,
+                printable_text : tmp.printable_text
+            }
+    	}
+    }
+    /**
+     * @brief gets the type of this element.
+     * @return string
+     */
+    pub fn getType(self) -> string {
+        return self.type
+    }
+    /**
+     * @brief gets the element index of this element.
+     * @return int
+     */
+    pub fn getElementIndex(self) -> int {
+        return self.element_index
+    }
+    /**
+     * @brief gets the parent oid of this element.
+     * @return int
+     */
+    pub fn getParentOid(self) -> int {
+        return self.parent_oid
+    }
+    /**
+     * @brief gets the location oid of this element.
+     * @return int
+     */
+    pub fn getLocationOid(self) -> int {
+        return self.location_oid
+    }
+    /**
+     * @brief gets the printable text of this element.
+     * @return string
+     */
+    pub fn getPrintableText(self) -> string {
+        return self.printable_text
+    }
+}
+/**
+ * @brief DO class: A subscript expression.
+ */
+schema SubscriptExpressionDO {
+    @primary element_oid: int,
+    value_oid: int,
+    slice_oid: int,
+    ctx: string
+}
+impl SubscriptExpressionDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PythonDB) -> *SubscriptExpressionDO {
+    	for (tmp in db.subscript_expression) {
+            yield SubscriptExpressionDO {
+                element_oid : tmp.element_oid,
+                value_oid : tmp.value_oid,
+                slice_oid : tmp.slice_oid,
+                ctx : tmp.ctx
+            }
+    	}
+    }
+    /**
+     * @brief gets the value oid of this element.
+     * @return int
+     */
+    pub fn getValueOid(self) -> int {
+        return self.value_oid
+    }
+    /**
+     * @brief gets the slice oid of this element.
+     * @return int
+     */
+    pub fn getSliceOid(self) -> int {
+        return self.slice_oid
+    }
+    /**
+     * @brief gets the ctx of this element.
+     * @return string
+     */
+    pub fn getCtx(self) -> string {
+        return self.ctx
+    }
+}
+/**
+ * @brief DO class: A token.
+ */
+schema TokenDO {
+    @primary element_oid: int,
+    value: string,
+    location_oid: int,
+    parent_oid: int
+}
+impl TokenDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PythonDB) -> *TokenDO {
+    	for (tmp in db.token) {
+            yield TokenDO {
+                element_oid : tmp.element_oid,
+                value : tmp.value,
+                location_oid : tmp.location_oid,
+                parent_oid : tmp.parent_oid
+            }
+    	}
+    }
+    /**
+     * @brief gets the value of this element.
+     * @return string
+     */
+    pub fn getValue(self) -> string {
+        return self.value
+    }
+    /**
+     * @brief gets the location oid of this element.
+     * @return int
+     */
+    pub fn getLocationOid(self) -> int {
+        return self.location_oid
+    }
+    /**
+     * @brief gets the parent oid of this element.
+     * @return int
+     */
+    pub fn getParentOid(self) -> int {
+        return self.parent_oid
+    }
+}
+/**
+ * @brief DO class: A try statement.
+ */
+schema TryStatementDO {
+    @primary element_oid: int
+}
+impl TryStatementDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PythonDB) -> *TryStatementDO {
+    	for (tmp in db.try_statement) {
+            yield TryStatementDO {
+                element_oid : tmp.element_oid
+            }
+    	}
+    }
+}
+/**
+ * @brief DO class: A tuple expression.
+ */
+schema TupleExpressionDO {
+    @primary element_oid: int,
+    elt_size: int,
+    ctx: string
+}
+impl TupleExpressionDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PythonDB) -> *TupleExpressionDO {
+    	for (tmp in db.tuple_expression) {
+            yield TupleExpressionDO {
+                element_oid : tmp.element_oid,
+                elt_size : tmp.elt_size,
+                ctx : tmp.ctx
+            }
+    	}
+    }
+    /**
+     * @brief gets the elt size of this element.
+     * @return int
+     */
+    pub fn getEltSize(self) -> int {
+        return self.elt_size
+    }
+    /**
+     * @brief gets the ctx of this element.
+     * @return string
+     */
+    pub fn getCtx(self) -> string {
+        return self.ctx
+    }
+}
+/**
+ * @brief DO class: An unary op.
+ */
+schema UnaryOpDO {
+    @primary element_oid: int,
+    type: string,
+    location_oid: int,
+    parent_oid: int
+}
+impl UnaryOpDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PythonDB) -> *UnaryOpDO {
+    	for (tmp in db.unary_op) {
+            yield UnaryOpDO {
+                element_oid : tmp.element_oid,
+                type : tmp.type,
+                location_oid : tmp.location_oid,
+                parent_oid : tmp.parent_oid
+            }
+    	}
+    }
+    /**
+     * @brief gets the type of this element.
+     * @return string
+     */
+    pub fn getType(self) -> string {
+        return self.type
+    }
+    /**
+     * @brief gets the location oid of this element.
+     * @return int
+     */
+    pub fn getLocationOid(self) -> int {
+        return self.location_oid
+    }
+    /**
+     * @brief gets the parent oid of this element.
+     * @return int
+     */
+    pub fn getParentOid(self) -> int {
+        return self.parent_oid
+    }
+}
+/**
+ * @brief DO class: An unary op expression.
+ */
+schema UnaryOpExpressionDO {
+    @primary element_oid: int,
+    op_code: string,
+    operand_oid: int
+}
+impl UnaryOpExpressionDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PythonDB) -> *UnaryOpExpressionDO {
+    	for (tmp in db.unary_op_expression) {
+            yield UnaryOpExpressionDO {
+                element_oid : tmp.element_oid,
+                op_code : tmp.op_code,
+                operand_oid : tmp.operand_oid
+            }
+    	}
+    }
+    /**
+     * @brief gets the op code of this element.
+     * @return string
+     */
+    pub fn getOpCode(self) -> string {
+        return self.op_code
+    }
+    /**
+     * @brief gets the operand oid of this element.
+     * @return int
+     */
+    pub fn getOperandOid(self) -> int {
+        return self.operand_oid
+    }
+}
+/**
+ * @brief DO class: A variable.
+ */
+schema VariableDO {
+    @primary element_oid: int,
+    parent_oid: int,
+    location_oid: int,
+    printable_text: string,
+    name: string
+}
+impl VariableDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PythonDB) -> *VariableDO {
+    	for (tmp in db.variable) {
+            yield VariableDO {
+                element_oid : tmp.element_oid,
+                parent_oid : tmp.parent_oid,
+                location_oid : tmp.location_oid,
+                printable_text : tmp.printable_text,
+                name : tmp.name
+            }
+    	}
+    }
+    /**
+     * @brief gets the parent oid of this element.
+     * @return int
+     */
+    pub fn getParentOid(self) -> int {
+        return self.parent_oid
+    }
+    /**
+     * @brief gets the location oid of this element.
+     * @return int
+     */
+    pub fn getLocationOid(self) -> int {
+        return self.location_oid
+    }
+    /**
+     * @brief gets the printable text of this element.
+     * @return string
+     */
+    pub fn getPrintableText(self) -> string {
+        return self.printable_text
+    }
+    /**
+     * @brief gets the name of this element.
+     * @return string
+     */
+    pub fn getName(self) -> string {
+        return self.name
+    }
+}
+/**
+ * @brief DO class: A while statement.
+ */
+schema WhileStatementDO {
+    @primary element_oid: int
+}
+impl WhileStatementDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PythonDB) -> *WhileStatementDO {
+    	for (tmp in db.while_statement) {
+            yield WhileStatementDO {
+                element_oid : tmp.element_oid
+            }
+    	}
+    }
+}
+/**
+ * @brief DO class: A with item.
+ */
+schema WithItemDO {
+    @primary element_oid: int,
+    printable_text: string,
+    element_index: int,
+    parent_oid: int
+}
+impl WithItemDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PythonDB) -> *WithItemDO {
+    	for (tmp in db.with_item) {
+            yield WithItemDO {
+                element_oid : tmp.element_oid,
+                printable_text : tmp.printable_text,
+                element_index : tmp.element_index,
+                parent_oid : tmp.parent_oid
+            }
+    	}
+    }
+    /**
+     * @brief gets the printable text of this element.
+     * @return string
+     */
+    pub fn getPrintableText(self) -> string {
+        return self.printable_text
+    }
+    /**
+     * @brief gets the element index of this element.
+     * @return int
+     */
+    pub fn getElementIndex(self) -> int {
+        return self.element_index
+    }
+    /**
+     * @brief gets the parent oid of this element.
+     * @return int
+     */
+    pub fn getParentOid(self) -> int {
+        return self.parent_oid
+    }
+}
+/**
+ * @brief DO class: A with statement.
+ */
+schema WithStatementDO {
+    @primary element_oid: int
+}
+impl WithStatementDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PythonDB) -> *WithStatementDO {
+    	for (tmp in db.with_statement) {
+            yield WithStatementDO {
+                element_oid : tmp.element_oid
+            }
+    	}
+    }
+}
+/**
+ * @brief DO class: A yield expression.
+ */
+schema YieldExpressionDO {
+    @primary element_oid: int
+}
+impl YieldExpressionDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PythonDB) -> *YieldExpressionDO {
+    	for (tmp in db.yield_expression) {
+            yield YieldExpressionDO {
+                element_oid : tmp.element_oid
+            }
+    	}
+    }
+}
+/**
+ * @brief DO class: A yield from expression.
+ */
+schema YieldFromExpressionDO {
+    @primary element_oid: int,
+    value: int
+}
+impl YieldFromExpressionDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PythonDB) -> *YieldFromExpressionDO {
+    	for (tmp in db.yield_from_expression) {
+            yield YieldFromExpressionDO {
+                element_oid : tmp.element_oid,
+                value : tmp.value
+            }
+    	}
+    }
+    /**
+     * @brief gets the value of this element.
+     * @return int
+     */
+    pub fn getValue(self) -> int {
+        return self.value
+    }
+}
+database PythonDB {
+  alias: *AliasDO,
+  annotation_assignment_statement: *AnnotationAssignmentStatementDO,
+  arg: *ArgDO,
+  arguments: *ArgumentsDO,
+  assert_statement: *AssertStatementDO,
+  assignment_statement: *AssignmentStatementDO,
+  async_for_statement: *AsyncForStatementDO,
+  async_function_def_statement: *AsyncFunctionDefStatementDO,
+  async_with_statement: *AsyncWithStatementDO,
+  attribute_expression: *AttributeExpressionDO,
+  augmented_assignment_statement: *AugmentedAssignmentStatementDO,
+  await_expression: *AwaitExpressionDO,
+  bin_op_expression: *BinOpExpressionDO,
+  boolean_op_expression: *BooleanOpExpressionDO,
+  break_statement: *BreakStatementDO,
+  call_expression: *CallExpressionDO,
+  callable_binding: *CallableBindingDO,
+  class_def_statement: *ClassDefStatementDO,
+  class_hierarchy: *ClassHierarchyDO,
+  cmpop: *CmpopDO,
+  comment: *CommentDO,
+  compare_expression: *CompareExpressionDO,
+  comprehension: *ComprehensionDO,
+  constant: *ConstantDO,
+  container_parent: *ContainerParentDO,
+  continue_statement: *ContinueStatementDO,
+  decorated_relation: *DecoratedRelationDO,
+  decorator: *DecoratorDO,
+  delete_statement: *DeleteStatementDO,
+  dict_comp_expression: *DictCompExpressionDO,
+  dict_expression: *DictExpressionDO,
+  docstring_comment: *DocstringCommentDO,
+  element: *ElementDO,
+  except_handler: *ExceptHandlerDO,
+  expr_context: *ExprContextDO,
+  expression: *ExpressionDO,
+  expression_statement: *ExpressionStatementDO,
+  file: *FileDO,
+  modified_2to3_file: *Modified2To3FileDO,
+  parse_error_file: *ParseErrorFileDO,
+  file_md5_sum: *FileMd5SumDO,
+  file_sha256_sum: *FileSha256SumDO,
+  folder: *FolderDO,
+  for_statement: *ForStatementDO,
+  formatted_value_expression: *FormattedValueExpressionDO,
+  function_def_statement: *FunctionDefStatementDO,
+  generator_expression: *GeneratorExpressionDO,
+  global_statement: *GlobalStatementDO,
+  if_expression: *IfExpressionDO,
+  if_statement: *IfStatementDO,
+  import_from_statement: *ImportFromStatementDO,
+  import_statement: *ImportStatementDO,
+  joined_str_expression: *JoinedStrExpressionDO,
+  keyword: *KeywordDO,
+  lambda_expression: *LambdaExpressionDO,
+  list_comp_expression: *ListCompExpressionDO,
+  list_expression: *ListExpressionDO,
+  location: *LocationDO,
+  match_case: *MatchCaseDO,
+  match_statement: *MatchStatementDO,
+  metainfo: *MetainfoDO,
+  mod: *ModDO,
+  module: *ModuleDO,
+  scope_enclosing_expression: *ScopeEnclosingExpressionDO,
+  scope_enclosing_statement: *ScopeEnclosingStatementDO,
+  name_expression: *NameExpressionDO,
+  named_expression: *NamedExpressionDO,
+  non_local_statement: *NonLocalStatementDO,
+  number_of_lines: *NumberOfLinesDO,
+  operator: *OperatorDO,
+  parent: *ParentDO,
+  pass_statement: *PassStatementDO,
+  program: *ProgramDO,
+  raise_statement: *RaiseStatementDO,
+  reference_relation: *ReferenceRelationDO,
+  return_statement: *ReturnStatementDO,
+  set_comp_expression: *SetCompExpressionDO,
+  set_expression: *SetExpressionDO,
+  slice: *SliceDO,
+  starred_expression: *StarredExpressionDO,
+  statement: *StatementDO,
+  subscript_expression: *SubscriptExpressionDO,
+  token: *TokenDO,
+  try_statement: *TryStatementDO,
+  tuple_expression: *TupleExpressionDO,
+  unary_op: *UnaryOpDO,
+  unary_op_expression: *UnaryOpExpressionDO,
+  variable: *VariableDO,
+  while_statement: *WhileStatementDO,
+  with_item: *WithItemDO,
+  with_statement: *WithStatementDO,
+  yield_expression: *YieldExpressionDO,
+  yield_from_expression: *YieldFromExpressionDO
+}

@@ -1,0 +1,3270 @@
+/**
+ * @filename: Statement
+ * @brief: Provides classes and predicates for working with JavaScript / TypeScript statements
+ */
+
+/**
+ * A token.
+ */
+schema Token extends Node {
+}
+
+impl Token {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *Token {
+        for (tmp in Node(db)) {
+            if (isToken(tmp)) {
+                yield Token {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * An unknown token.
+ */
+schema Unknown extends Token {
+}
+
+impl Unknown {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *Unknown {
+        for (tmp in Token(db)) {
+            if (isUnknown(Node {id: tmp.id})) {
+                yield Unknown {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * An end-of-file token.
+ */
+schema EndOfFileToken extends Token {
+}
+
+impl EndOfFileToken {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *EndOfFileToken {
+        for (tmp in Token(db)) {
+            if (isEndOfFileToken(Node {id: tmp.id})) {
+                yield EndOfFileToken {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A numeric literal token.
+ */
+schema NumericLiteralToken extends Token {
+}
+
+impl NumericLiteralToken {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *NumericLiteralToken {
+        for (tmp in Token(db)) {
+            if (isNumericLiteral(Node {id: tmp.id})) {
+                yield NumericLiteralToken {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A big-int literal token.
+ */
+schema BigIntLiteralToken extends Token {
+}
+
+impl BigIntLiteralToken {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *BigIntLiteralToken {
+        for (tmp in Token(db)) {
+            if (isBigIntLiteral(Node {id: tmp.id})) {
+                yield BigIntLiteralToken {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A string literal token.
+ */
+schema StringLiteralToken extends Token {
+}
+
+impl StringLiteralToken {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *StringLiteralToken {
+        for (tmp in Token(db)) {
+            if (isStringLiteral(Node {id: tmp.id})) {
+                yield StringLiteralToken {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A JSX text token.
+ */
+schema JsxTextToken extends Token {
+}
+
+impl JsxTextToken {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *JsxTextToken {
+        for (tmp in Token(db)) {
+            if (isJsxText(Node {id: tmp.id})) {
+                yield JsxTextToken {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A regular expression literal.
+ */
+schema RegularExpressionLiteralToken extends Token {
+}
+
+impl RegularExpressionLiteralToken {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *RegularExpressionLiteralToken {
+        for (tmp in Token(db)) {
+            if (isRegularExpressionLiteral(Node {id: tmp.id})) {
+                yield RegularExpressionLiteralToken {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A no-substitution template literal token.
+ */
+schema NoSubstitutionTemplateLiteralToken extends Token {
+}
+
+impl NoSubstitutionTemplateLiteralToken {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *NoSubstitutionTemplateLiteralToken {
+        for (tmp in Token(db)) {
+            if (isNoSubstitutionTemplateLiteral(Node {id: tmp.id})) {
+                yield NoSubstitutionTemplateLiteralToken {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A template head token.
+ */
+schema TemplateHeadToken extends Token {
+}
+
+impl TemplateHeadToken {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *TemplateHeadToken {
+        for (tmp in Token(db)) {
+            if (isTemplateHead(Node {id: tmp.id})) {
+                yield TemplateHeadToken {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A template middle token.
+ */
+schema TemplateMiddleToken extends Token {
+}
+
+impl TemplateMiddleToken {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *TemplateMiddleToken {
+        for (tmp in Token(db)) {
+            if (isTemplateMiddle(Node {id: tmp.id})) {
+                yield TemplateMiddleToken {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A template tail token.
+ */
+schema TemplateTailToken extends Token {
+}
+
+impl TemplateTailToken {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *TemplateTailToken {
+        for (tmp in Token(db)) {
+            if (isTemplateTail(Node {id: tmp.id})) {
+                yield TemplateTailToken {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A `...` token.
+ */
+schema DotDotDotToken extends Token {
+}
+
+impl DotDotDotToken {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *DotDotDotToken {
+        for (tmp in Token(db)) {
+            if (isDotDotDotToken(Node {id: tmp.id})) {
+                yield DotDotDotToken {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A `,` token.
+ */
+schema CommaToken extends Token {
+}
+
+impl CommaToken {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *CommaToken {
+        for (tmp in Token(db)) {
+            if (isCommaToken(Node {id: tmp.id})) {
+                yield CommaToken {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A `?.` token.
+ */
+schema QuestionDotToken extends Token {
+}
+
+impl QuestionDotToken {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *QuestionDotToken {
+        for (tmp in Token(db)) {
+            if (isQuestionDotToken(Node {id: tmp.id})) {
+                yield QuestionDotToken {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A `<` token.
+ */
+schema LessThanToken extends Token {
+}
+
+impl LessThanToken {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *LessThanToken {
+        for (tmp in Token(db)) {
+            if (isLessThanToken(Node {id: tmp.id})) {
+                yield LessThanToken {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A `>` token.
+ */
+schema GreaterThanToken extends Token {
+}
+
+impl GreaterThanToken {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *GreaterThanToken {
+        for (tmp in Token(db)) {
+            if (isGreaterThanToken(Node {id: tmp.id})) {
+                yield GreaterThanToken {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A `<=` token.
+ */
+schema LessThanEqualsToken extends Token {
+}
+
+impl LessThanEqualsToken {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *LessThanEqualsToken {
+        for (tmp in Token(db)) {
+            if (isLessThanEqualsToken(Node {id: tmp.id})) {
+                yield LessThanEqualsToken {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A `>=` token.
+ */
+schema GreaterThanEqualsToken extends Token {
+}
+
+impl GreaterThanEqualsToken {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *GreaterThanEqualsToken {
+        for (tmp in Token(db)) {
+            if (isGreaterThanEqualsToken(Node {id: tmp.id})) {
+                yield GreaterThanEqualsToken {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * An `==` token.
+ */
+schema EqualsEqualsToken extends Token {
+}
+
+impl EqualsEqualsToken {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *EqualsEqualsToken {
+        for (tmp in Token(db)) {
+            if (isEqualsEqualsToken(Node {id: tmp.id})) {
+                yield EqualsEqualsToken {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A `!=` token.
+ */
+schema ExclamationEqualsToken extends Token {
+}
+
+impl ExclamationEqualsToken {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *ExclamationEqualsToken {
+        for (tmp in Token(db)) {
+            if (isExclamationEqualsToken(Node {id: tmp.id})) {
+                yield ExclamationEqualsToken {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * An `===` token.
+ */
+schema EqualsEqualsEqualsToken extends Token {
+}
+
+impl EqualsEqualsEqualsToken {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *EqualsEqualsEqualsToken {
+        for (tmp in Token(db)) {
+            if (isEqualsEqualsEqualsToken(Node {id: tmp.id})) {
+                yield EqualsEqualsEqualsToken {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A `!==` token.
+ */
+schema ExclamationEqualsEqualsToken extends Token {
+}
+
+impl ExclamationEqualsEqualsToken {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *ExclamationEqualsEqualsToken {
+        for (tmp in Token(db)) {
+            if (isExclamationEqualsEqualsToken(Node {id: tmp.id})) {
+                yield ExclamationEqualsEqualsToken {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A `+` token.
+ */
+schema PlusToken extends Token {
+}
+
+impl PlusToken {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *PlusToken {
+        for (tmp in Token(db)) {
+            if (isPlusToken(Node {id: tmp.id})) {
+                yield PlusToken {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A `-` token.
+ */
+schema MinusToken extends Token {
+}
+
+impl MinusToken {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *MinusToken {
+        for (tmp in Token(db)) {
+            if (isMinusToken(Node {id: tmp.id})) {
+                yield MinusToken {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A `*` token.
+ */
+schema AsteriskToken extends Token {
+}
+
+impl AsteriskToken {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *AsteriskToken {
+        for (tmp in Token(db)) {
+            if (isAsteriskToken(Node {id: tmp.id})) {
+                yield AsteriskToken {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A `**` token.
+ */
+schema AsteriskAsteriskToken extends Token {
+}
+
+impl AsteriskAsteriskToken {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *AsteriskAsteriskToken {
+        for (tmp in Token(db)) {
+            if (isAsteriskAsteriskToken(Node {id: tmp.id})) {
+                yield AsteriskAsteriskToken {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A `/` token.
+ */
+schema SlashToken extends Token {
+}
+
+impl SlashToken {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *SlashToken {
+        for (tmp in Token(db)) {
+            if (isSlashToken(Node {id: tmp.id})) {
+                yield SlashToken {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A `%` token.
+ */
+schema PercentToken extends Token {
+}
+
+impl PercentToken {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *PercentToken {
+        for (tmp in Token(db)) {
+            if (isPercentToken(Node {id: tmp.id})) {
+                yield PercentToken {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A `++` token.
+ */
+schema PlusPlusToken extends Token {
+}
+
+impl PlusPlusToken {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *PlusPlusToken {
+        for (tmp in Token(db)) {
+            if (isPlusPlusToken(Node {id: tmp.id})) {
+                yield PlusPlusToken {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A `--` token.
+ */
+schema MinusMinusToken extends Token {
+}
+
+impl MinusMinusToken {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *MinusMinusToken {
+        for (tmp in Token(db)) {
+            if (isMinusMinusToken(Node {id: tmp.id})) {
+                yield MinusMinusToken {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A `<<` token.
+ */
+schema LessThanLessThanToken extends Token {
+}
+
+impl LessThanLessThanToken {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *LessThanLessThanToken {
+        for (tmp in Token(db)) {
+            if (isLessThanLessThanToken(Node {id: tmp.id})) {
+                yield LessThanLessThanToken {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A `>>` token.
+ */
+schema GreaterThanGreaterThanToken extends Token {
+}
+
+impl GreaterThanGreaterThanToken {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *GreaterThanGreaterThanToken {
+        for (tmp in Token(db)) {
+            if (isGreaterThanGreaterThanToken(Node {id: tmp.id})) {
+                yield GreaterThanGreaterThanToken {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A `>>>` token.
+ */
+schema GreaterThanGreaterThanGreaterThanToken extends Token {
+}
+
+impl GreaterThanGreaterThanGreaterThanToken {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *GreaterThanGreaterThanGreaterThanToken {
+        for (tmp in Token(db)) {
+            if (isGreaterThanGreaterThanGreaterThanToken(Node {id: tmp.id})) {
+                yield GreaterThanGreaterThanGreaterThanToken {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * An `&` token.
+ */
+schema AmpersandToken extends Token {
+}
+
+impl AmpersandToken {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *AmpersandToken {
+        for (tmp in Token(db)) {
+            if (isAmpersandToken(Node {id: tmp.id})) {
+                yield AmpersandToken {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A `|` token.
+ */
+schema BarToken extends Token {
+}
+
+impl BarToken {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *BarToken {
+        for (tmp in Token(db)) {
+            if (isBarToken(Node {id: tmp.id})) {
+                yield BarToken {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A `^` token.
+ */
+schema CaretToken extends Token {
+}
+
+impl CaretToken {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *CaretToken {
+        for (tmp in Token(db)) {
+            if (isCaretToken(Node {id: tmp.id})) {
+                yield CaretToken {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * An `!` token.
+ */
+schema ExclamationToken extends Token {
+}
+
+impl ExclamationToken {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *ExclamationToken {
+        for (tmp in Token(db)) {
+            if (isExclamationToken(Node {id: tmp.id})) {
+                yield ExclamationToken {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A `~` token.
+ */
+schema TildeToken extends Token {
+}
+
+impl TildeToken {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *TildeToken {
+        for (tmp in Token(db)) {
+            if (isTildeToken(Node {id: tmp.id})) {
+                yield TildeToken {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * An `&&` token.
+ */
+schema AmpersandAmpersandToken extends Token {
+}
+
+impl AmpersandAmpersandToken {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *AmpersandAmpersandToken {
+        for (tmp in Token(db)) {
+            if (isAmpersandAmpersandToken(Node {id: tmp.id})) {
+                yield AmpersandAmpersandToken {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A `||` token.
+ */
+schema BarBarToken extends Token {
+}
+
+impl BarBarToken {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *BarBarToken {
+        for (tmp in Token(db)) {
+            if (isBarBarToken(Node {id: tmp.id})) {
+                yield BarBarToken {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A `?` token.
+ */
+schema QuestionToken extends Token {
+}
+
+impl QuestionToken {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *QuestionToken {
+        for (tmp in Token(db)) {
+            if (isQuestionToken(Node {id: tmp.id})) {
+                yield QuestionToken {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A `??` token.
+ */
+schema QuestionQuestionToken extends Token {
+}
+
+impl QuestionQuestionToken {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *QuestionQuestionToken {
+        for (tmp in Token(db)) {
+            if (isQuestionQuestionToken(Node {id: tmp.id})) {
+                yield QuestionQuestionToken {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * An `=` token.
+ */
+schema EqualsToken extends Token {
+}
+
+impl EqualsToken {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *EqualsToken {
+        for (tmp in Token(db)) {
+            if (isEqualsToken(Node {id: tmp.id})) {
+                yield EqualsToken {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A `+=` token.
+ */
+schema PlusEqualsToken extends Token {
+}
+
+impl PlusEqualsToken {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *PlusEqualsToken {
+        for (tmp in Token(db)) {
+            if (isPlusEqualsToken(Node {id: tmp.id})) {
+                yield PlusEqualsToken {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A `-=` token.
+ */
+schema MinusEqualsToken extends Token {
+}
+
+impl MinusEqualsToken {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *MinusEqualsToken {
+        for (tmp in Token(db)) {
+            if (isMinusEqualsToken(Node {id: tmp.id})) {
+                yield MinusEqualsToken {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * An `*=` token.
+ */
+schema AsteriskEqualsToken extends Token {
+}
+
+impl AsteriskEqualsToken {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *AsteriskEqualsToken {
+        for (tmp in Token(db)) {
+            if (isAsteriskEqualsToken(Node {id: tmp.id})) {
+                yield AsteriskEqualsToken {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * An `**=` token.
+ */
+schema AsteriskAsteriskEqualsToken extends Token {
+}
+
+impl AsteriskAsteriskEqualsToken {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *AsteriskAsteriskEqualsToken {
+        for (tmp in Token(db)) {
+            if (isAsteriskAsteriskEqualsToken(Node {id: tmp.id})) {
+                yield AsteriskAsteriskEqualsToken {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A `/=` token.
+ */
+schema SlashEqualsToken extends Token {
+}
+
+impl SlashEqualsToken {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *SlashEqualsToken {
+        for (tmp in Token(db)) {
+            if (isSlashEqualsToken(Node {id: tmp.id})) {
+                yield SlashEqualsToken {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A `%=` token.
+ */
+schema PercentEqualsToken extends Token {
+}
+
+impl PercentEqualsToken {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *PercentEqualsToken {
+        for (tmp in Token(db)) {
+            if (isPercentEqualsToken(Node {id: tmp.id})) {
+                yield PercentEqualsToken {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A `<<=` token.
+ */
+schema LessThanLessThanEqualsToken extends Token {
+}
+
+impl LessThanLessThanEqualsToken {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *LessThanLessThanEqualsToken {
+        for (tmp in Token(db)) {
+            if (isLessThanLessThanEqualsToken(Node {id: tmp.id})) {
+                yield LessThanLessThanEqualsToken {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A `>>=` token.
+ */
+schema GreaterThanGreaterThanEqualsToken extends Token {
+}
+
+impl GreaterThanGreaterThanEqualsToken {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *GreaterThanGreaterThanEqualsToken {
+        for (tmp in Token(db)) {
+            if (isGreaterThanGreaterThanEqualsToken(Node {id: tmp.id})) {
+                yield GreaterThanGreaterThanEqualsToken {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A `>>>=` token.
+ */
+schema GreaterThanGreaterThanGreaterThanEqualsToken extends Token {
+}
+
+impl GreaterThanGreaterThanGreaterThanEqualsToken {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *GreaterThanGreaterThanGreaterThanEqualsToken {
+        for (tmp in Token(db)) {
+            if (isGreaterThanGreaterThanGreaterThanEqualsToken(Node {id: tmp.id})) {
+                yield GreaterThanGreaterThanGreaterThanEqualsToken {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * An `&=` token.
+ */
+schema AmpersandEqualsToken extends Token {
+}
+
+impl AmpersandEqualsToken {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *AmpersandEqualsToken {
+        for (tmp in Token(db)) {
+            if (isAmpersandEqualsToken(Node {id: tmp.id})) {
+                yield AmpersandEqualsToken {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A `|=` token.
+ */
+schema BarEqualsToken extends Token {
+}
+
+impl BarEqualsToken {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *BarEqualsToken {
+        for (tmp in Token(db)) {
+            if (isBarEqualsToken(Node {id: tmp.id})) {
+                yield BarEqualsToken {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A `||=` token.
+ */
+schema BarBarEqualsToken extends Token {
+}
+
+impl BarBarEqualsToken {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *BarBarEqualsToken {
+        for (tmp in Token(db)) {
+            if (isBarBarEqualsToken(Node {id: tmp.id})) {
+                yield BarBarEqualsToken {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * An `&&=` token.
+ */
+schema AmpersandAmpersandEqualsToken extends Token {
+}
+
+impl AmpersandAmpersandEqualsToken {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *AmpersandAmpersandEqualsToken {
+        for (tmp in Token(db)) {
+            if (isAmpersandAmpersandEqualsToken(Node {id: tmp.id})) {
+                yield AmpersandAmpersandEqualsToken {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A `??=` token.
+ */
+schema QuestionQuestionEqualsToken extends Token {
+}
+
+impl QuestionQuestionEqualsToken {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *QuestionQuestionEqualsToken {
+        for (tmp in Token(db)) {
+            if (isQuestionQuestionEqualsToken(Node {id: tmp.id})) {
+                yield QuestionQuestionEqualsToken {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A `^=` token.
+ */
+schema CaretEqualsToken extends Token {
+}
+
+impl CaretEqualsToken {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *CaretEqualsToken {
+        for (tmp in Token(db)) {
+            if (isCaretEqualsToken(Node {id: tmp.id})) {
+                yield CaretEqualsToken {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * An identifier token.
+ */
+schema IdentifierToken extends Token {
+}
+
+impl IdentifierToken {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *IdentifierToken {
+        for (tmp in Token(db)) {
+            if (isIdentifier(Node {id: tmp.id})) {
+                yield IdentifierToken {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A private identifier.
+ */
+schema PrivateIdentifierToken extends Token {
+}
+
+impl PrivateIdentifierToken {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *PrivateIdentifierToken {
+        for (tmp in Token(db)) {
+            if (isPrivateIdentifier(Node {id: tmp.id})) {
+                yield PrivateIdentifierToken {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * An `extends` keyword.
+ */
+schema ExtendsKeyword extends Token {
+}
+
+impl ExtendsKeyword {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *ExtendsKeyword {
+        for (tmp in Token(db)) {
+            if (isExtendsKeyword(Node {id: tmp.id})) {
+                yield ExtendsKeyword {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A `false` keyword.
+ */
+schema FalseKeyword extends Token {
+}
+
+impl FalseKeyword {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *FalseKeyword {
+        for (tmp in Token(db)) {
+            if (isFalseKeyword(Node {id: tmp.id})) {
+                yield FalseKeyword {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * An `import` keyword.
+ */
+schema ImportKeyword extends Token {
+}
+
+impl ImportKeyword {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *ImportKeyword {
+        for (tmp in Token(db)) {
+            if (isImportKeyword(Node {id: tmp.id})) {
+                yield ImportKeyword {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * An `in` keyword.
+ */
+schema InKeyword extends Token {
+}
+
+impl InKeyword {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *InKeyword {
+        for (tmp in Token(db)) {
+            if (isInKeyword(Node {id: tmp.id})) {
+                yield InKeyword {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * An `instanceof` keyword.
+ */
+schema InstanceOfKeyword extends Token {
+}
+
+impl InstanceOfKeyword {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *InstanceOfKeyword {
+        for (tmp in Token(db)) {
+            if (isInstanceOfKeyword(Node {id: tmp.id})) {
+                yield InstanceOfKeyword {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A `null` keyword.
+ */
+schema NullKeyword extends Token {
+}
+
+impl NullKeyword {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *NullKeyword {
+        for (tmp in Token(db)) {
+            if (isNullKeyword(Node {id: tmp.id})) {
+                yield NullKeyword {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A `super` keyword.
+ */
+schema SuperKeyword extends Token {
+}
+
+impl SuperKeyword {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *SuperKeyword {
+        for (tmp in Token(db)) {
+            if (isSuperKeyword(Node {id: tmp.id})) {
+                yield SuperKeyword {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A `this` keyword.
+ */
+schema ThisKeyword extends Token {
+}
+
+impl ThisKeyword {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *ThisKeyword {
+        for (tmp in Token(db)) {
+            if (isThisKeyword(Node {id: tmp.id})) {
+                yield ThisKeyword {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A `true` keyword.
+ */
+schema TrueKeyword extends Token {
+}
+
+impl TrueKeyword {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *TrueKeyword {
+        for (tmp in Token(db)) {
+            if (isTrueKeyword(Node {id: tmp.id})) {
+                yield TrueKeyword {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A `void` keyword.
+ */
+schema VoidKeyword extends Token {
+}
+
+impl VoidKeyword {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *VoidKeyword {
+        for (tmp in Token(db)) {
+            if (isVoidKeyword(Node {id: tmp.id})) {
+                yield VoidKeyword {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * An `implements` keyword.
+ */
+schema ImplementsKeyword extends Token {
+}
+
+impl ImplementsKeyword {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *ImplementsKeyword {
+        for (tmp in Token(db)) {
+            if (isImplementsKeyword(Node {id: tmp.id})) {
+                yield ImplementsKeyword {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * An `any` keyword.
+ */
+schema AnyKeyword extends Token {
+}
+
+impl AnyKeyword {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *AnyKeyword {
+        for (tmp in Token(db)) {
+            if (isAnyKeyword(Node {id: tmp.id})) {
+                yield AnyKeyword {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * An `await` keyword.
+ */
+schema AwaitKeyword extends Token {
+}
+
+impl AwaitKeyword {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *AwaitKeyword {
+        for (tmp in Token(db)) {
+            if (isAwaitKeyword(Node {id: tmp.id})) {
+                yield AwaitKeyword {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A `boolean` keyword.
+ */
+schema BooleanKeyword extends Token {
+}
+
+impl BooleanKeyword {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *BooleanKeyword {
+        for (tmp in Token(db)) {
+            if (isBooleanKeyword(Node {id: tmp.id})) {
+                yield BooleanKeyword {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * An `intrinsic` keyword.
+ */
+schema IntrinsicKeyword extends Token {
+}
+
+impl IntrinsicKeyword {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *IntrinsicKeyword {
+        for (tmp in Token(db)) {
+            if (isIntrinsicKeyword(Node {id: tmp.id})) {
+                yield IntrinsicKeyword {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A `never` keyword.
+ */
+schema NeverKeyword extends Token {
+}
+
+impl NeverKeyword {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *NeverKeyword {
+        for (tmp in Token(db)) {
+            if (isNeverKeyword(Node {id: tmp.id})) {
+                yield NeverKeyword {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A `number` keyword.
+ */
+schema NumberKeyword extends Token {
+}
+
+impl NumberKeyword {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *NumberKeyword {
+        for (tmp in Token(db)) {
+            if (isNumberKeyword(Node {id: tmp.id})) {
+                yield NumberKeyword {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * An `object` keyword.
+ */
+schema ObjectKeyword extends Token {
+}
+
+impl ObjectKeyword {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *ObjectKeyword {
+        for (tmp in Token(db)) {
+            if (isObjectKeyword(Node {id: tmp.id})) {
+                yield ObjectKeyword {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A `string` keyword.
+ */
+schema StringKeyword extends Token {
+}
+
+impl StringKeyword {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *StringKeyword {
+        for (tmp in Token(db)) {
+            if (isStringKeyword(Node {id: tmp.id})) {
+                yield StringKeyword {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A `symbol` keyword.
+ */
+schema SymbolKeyword extends Token {
+}
+
+impl SymbolKeyword {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *SymbolKeyword {
+        for (tmp in Token(db)) {
+            if (isSymbolKeyword(Node {id: tmp.id})) {
+                yield SymbolKeyword {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * An `undefined` keyword.
+ */
+schema UndefinedKeyword extends Token {
+}
+
+impl UndefinedKeyword {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *UndefinedKeyword {
+        for (tmp in Token(db)) {
+            if (isUndefinedKeyword(Node {id: tmp.id})) {
+                yield UndefinedKeyword {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * An `unknown` keyword.
+ */
+schema UnknownKeyword extends Token {
+}
+
+impl UnknownKeyword {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *UnknownKeyword {
+        for (tmp in Token(db)) {
+            if (isUnknownKeyword(Node {id: tmp.id})) {
+                yield UnknownKeyword {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A `bigint` keyword.
+ */
+schema BigIntKeyword extends Token {
+}
+
+impl BigIntKeyword {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *BigIntKeyword {
+        for (tmp in Token(db)) {
+            if (isBigIntKeyword(Node {id: tmp.id})) {
+                yield BigIntKeyword {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A prefix unary operator.
+ */
+schema PrefixUnaryOperator extends Token {
+}
+
+impl PrefixUnaryOperator {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *PrefixUnaryOperator {
+        for (tmp in Token(db)) {
+            if (isPrefixUnaryOperator(Node {id: tmp.id})) {
+                yield PrefixUnaryOperator {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A postfix unary operator.
+ */
+schema PostfixUnaryOperator extends Token {
+}
+
+impl PostfixUnaryOperator {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *PostfixUnaryOperator {
+        for (tmp in Token(db)) {
+            if (isPostfixUnaryOperator(Node {id: tmp.id})) {
+                yield PostfixUnaryOperator {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * An update operator.
+ */
+schema UpdateOperator extends Token {
+}
+
+impl UpdateOperator {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *UpdateOperator {
+        for (tmp in Token(db)) {
+            if (isUpdateOperator(Node {id: tmp.id})) {
+                yield UpdateOperator {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * An exponentiation operator `**`.
+ */
+schema ExponentiationOperator extends Token {
+}
+
+impl ExponentiationOperator {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *ExponentiationOperator {
+        for (tmp in Token(db)) {
+            if (isExponentiationOperator(Node {id: tmp.id})) {
+                yield ExponentiationOperator {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A multiplicative operator `*`, `/` or `%`.
+ */
+schema MultiplicativeOperator extends Token {
+}
+
+impl MultiplicativeOperator {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *MultiplicativeOperator {
+        for (tmp in Token(db)) {
+            if (isMultiplicativeOperator(Node {id: tmp.id})) {
+                yield MultiplicativeOperator {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * An additive operator `+` or `-`.
+ */
+schema AdditiveOperator extends Token {
+}
+
+impl AdditiveOperator {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *AdditiveOperator {
+        for (tmp in Token(db)) {
+            if (isAdditiveOperator(Node {id: tmp.id})) {
+                yield AdditiveOperator {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A shift operator `<<`, `>>` or `>>>`.
+ */
+schema ShiftOperator extends Token {
+}
+
+impl ShiftOperator {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *ShiftOperator {
+        for (tmp in Token(db)) {
+            if (isShiftOperator(Node {id: tmp.id})) {
+                yield ShiftOperator {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A relational operator `<`, `<=`, `>`, `>=`, `instanceof` or `in`.
+ */
+schema RelationalOperator extends Token {
+}
+
+impl RelationalOperator {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *RelationalOperator {
+        for (tmp in Token(db)) {
+            if (isRelationalOperator(Node {id: tmp.id})) {
+                yield RelationalOperator {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * An equality operator `==`, `!=`, `===` or `!==`.
+ */
+schema EqualityOperator extends Token {
+}
+
+impl EqualityOperator {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *EqualityOperator {
+        for (tmp in Token(db)) {
+            if (isEqualityOperator(Node {id: tmp.id})) {
+                yield EqualityOperator {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A binary bitwise operator `&`, `|` or `^`.
+ */
+schema BinaryBitwiseOperator extends Token {
+}
+
+impl BinaryBitwiseOperator {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *BinaryBitwiseOperator {
+        for (tmp in Token(db)) {
+            if (isBinaryBitwiseOperator(Node {id: tmp.id})) {
+                yield BinaryBitwiseOperator {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A logical operator `&&`, `||` or `??`.
+ */
+schema BinaryLogicalOperator extends Token {
+}
+
+impl BinaryLogicalOperator {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *BinaryLogicalOperator {
+        for (tmp in Token(db)) {
+            if (isBinaryLogicalOperator(Node {id: tmp.id})) {
+                yield BinaryLogicalOperator {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A compound assignment operator.
+ * `+=`, `-=`, `**=`, `*=`, `/=`, `%=`, `&=`, `|=`, `^=`, `<<=`, `>>=`, `>>>=`,
+ * `&&=`, `||=` or `??=`.
+ */
+schema CompoundAssignmentOperator extends Token {
+}
+
+impl CompoundAssignmentOperator {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *CompoundAssignmentOperator {
+        for (tmp in Token(db)) {
+            if (isCompoundAssignmentOperator(Node {id: tmp.id})) {
+                yield CompoundAssignmentOperator {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A simple assignment operator `=` or a compound assignment operator.
+ */
+schema AssignmentOperator extends Token {
+}
+
+impl AssignmentOperator {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *AssignmentOperator {
+        for (tmp in Token(db)) {
+            if (isAssignmentOperator(Node {id: tmp.id})) {
+                yield AssignmentOperator {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A binary operator.
+ */
+schema BinaryOperator extends Token {
+}
+
+impl BinaryOperator {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *BinaryOperator {
+        for (tmp in Token(db)) {
+            if (isBinaryOperator(Node {id: tmp.id})) {
+                yield BinaryOperator {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A keyword token.
+ */
+schema KeywordToken extends Token {
+}
+
+impl KeywordToken {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *KeywordToken {
+        for (tmp in Token(db)) {
+            if (isKeywordToken(Node {id: tmp.id})) {
+                yield KeywordToken {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a token.
+ */
+pub fn isToken(node: Node) -> bool {
+    let (kind = node.getKind()) {
+        if (isTokenKind(kind)) {
+            return true
+        }
+    }
+}
+
+/**
+ * Determines whether a node is an unknown token.
+ */
+pub fn isUnknown(node: Node) -> bool {
+    if (node.getKind() = 0) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is an end-of-file token.
+ */
+pub fn isEndOfFileToken(node: Node) -> bool {
+    if (node.getKind() = 1) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a numeric literal.
+ */
+pub fn isNumericLiteral(node: Node) -> bool {
+    if (node.getKind() = 8) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a big-int literal.
+ */
+pub fn isBigIntLiteral(node: Node) -> bool {
+    if (node.getKind() = 9) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a string literal.
+ */
+pub fn isStringLiteral(node: Node) -> bool {
+    if (node.getKind() = 10) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a JSX text.
+ */
+pub fn isJsxText(node: Node) -> bool {
+    if (node.getKind() = 11) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a regular expression literal.
+ */
+pub fn isRegularExpressionLiteral(node: Node) -> bool {
+    if (node.getKind() = 13) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a no-substitution template literal.
+ */
+pub fn isNoSubstitutionTemplateLiteral(node: Node) -> bool {
+    if (node.getKind() = 14) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a template head.
+ */
+pub fn isTemplateHead(node: Node) -> bool {
+    if (node.getKind() = 15) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a template middle.
+ */
+pub fn isTemplateMiddle(node: Node) -> bool {
+    if (node.getKind() = 16) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a template tail.
+ */
+pub fn isTemplateTail(node: Node) -> bool {
+    if (node.getKind() = 17) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a `...` token.
+ */
+pub fn isDotDotDotToken(node: Node) -> bool {
+    if (node.getKind() = 25) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a `,` token.
+ */
+pub fn isCommaToken(node: Node) -> bool {
+    if (node.getKind() = 27) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a `?.` token.
+ */
+pub fn isQuestionDotToken(node: Node) -> bool {
+    if (node.getKind() = 28) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a `<` token.
+ */
+pub fn isLessThanToken(node: Node) -> bool {
+    if (node.getKind() = 29) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a `>` token.
+ */
+pub fn isGreaterThanToken(node: Node) -> bool {
+    if (node.getKind() = 31) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a `<=` token.
+ */
+pub fn isLessThanEqualsToken(node: Node) -> bool {
+    if (node.getKind() = 32) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a `>=` token.
+ */
+pub fn isGreaterThanEqualsToken(node: Node) -> bool {
+    if (node.getKind() = 33) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is an `==` token.
+ */
+pub fn isEqualsEqualsToken(node: Node) -> bool {
+    if (node.getKind() = 34) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a `!=` token.
+ */
+pub fn isExclamationEqualsToken(node: Node) -> bool {
+    if (node.getKind() = 35) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is an `===` token.
+ */
+pub fn isEqualsEqualsEqualsToken(node: Node) -> bool {
+    if (node.getKind() = 36) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a `!==` token.
+ */
+pub fn isExclamationEqualsEqualsToken(node: Node) -> bool {
+    if (node.getKind() = 37) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a `+` token.
+ */
+pub fn isPlusToken(node: Node) -> bool {
+    if (node.getKind() = 39) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a `-` token.
+ */
+pub fn isMinusToken(node: Node) -> bool {
+    if (node.getKind() = 40) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a `*` token.
+ */
+pub fn isAsteriskToken(node: Node) -> bool {
+    if (node.getKind() = 41) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a `**` token.
+ */
+pub fn isAsteriskAsteriskToken(node: Node) -> bool {
+    if (node.getKind() = 42) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a `/` token.
+ */
+pub fn isSlashToken(node: Node) -> bool {
+    if (node.getKind() = 43) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a `%` token.
+ */
+pub fn isPercentToken(node: Node) -> bool {
+    if (node.getKind() = 44) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a `++` token.
+ */
+pub fn isPlusPlusToken(node: Node) -> bool {
+    if (node.getKind() = 45) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a `--` token.
+ */
+pub fn isMinusMinusToken(node: Node) -> bool {
+    if (node.getKind() = 46) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a `<<` token.
+ */
+pub fn isLessThanLessThanToken(node: Node) -> bool {
+    if (node.getKind() = 47) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a `>>` token.
+ */
+pub fn isGreaterThanGreaterThanToken(node: Node) -> bool {
+    if (node.getKind() = 48) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a `>>>` token.
+ */
+pub fn isGreaterThanGreaterThanGreaterThanToken(node: Node) -> bool {
+    if (node.getKind() = 49) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a `&` token.
+ */
+pub fn isAmpersandToken(node: Node) -> bool {
+    if (node.getKind() = 50) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a `|` token.
+ */
+pub fn isBarToken(node: Node) -> bool {
+    if (node.getKind() = 51) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a `^` token.
+ */
+pub fn isCaretToken(node: Node) -> bool {
+    if (node.getKind() = 52) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is an `!` token.
+ */
+pub fn isExclamationToken(node: Node) -> bool {
+    if (node.getKind() = 53) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a `~` token.
+ */
+pub fn isTildeToken(node: Node) -> bool {
+    if (node.getKind() = 54) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is an `&&` token.
+ */
+pub fn isAmpersandAmpersandToken(node: Node) -> bool {
+    if (node.getKind() = 55) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a `||` token.
+ */
+pub fn isBarBarToken(node: Node) -> bool {
+    if (node.getKind() = 56) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a `?` token.
+ */
+pub fn isQuestionToken(node: Node) -> bool {
+    if (node.getKind() = 57) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a `??` token.
+ */
+pub fn isQuestionQuestionToken(node: Node) -> bool {
+    if (node.getKind() = 60) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is an `=` token.
+ */
+pub fn isEqualsToken(node: Node) -> bool {
+    if (node.getKind() = 63) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a `+=` token.
+ */
+pub fn isPlusEqualsToken(node: Node) -> bool {
+    if (node.getKind() = 64) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a `-=` token.
+ */
+pub fn isMinusEqualsToken(node: Node) -> bool {
+    if (node.getKind() = 65) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is an `*=` token.
+ */
+pub fn isAsteriskEqualsToken(node: Node) -> bool {
+    if (node.getKind() = 66) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is an `**=` token.
+ */
+pub fn isAsteriskAsteriskEqualsToken(node: Node) -> bool {
+    if (node.getKind() = 67) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a `/=` token.
+ */
+pub fn isSlashEqualsToken(node: Node) -> bool {
+    if (node.getKind() = 68) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a `%=` token.
+ */
+pub fn isPercentEqualsToken(node: Node) -> bool {
+    if (node.getKind() = 69) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a `<<=` token.
+ */
+pub fn isLessThanLessThanEqualsToken(node: Node) -> bool {
+    if (node.getKind() = 70) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a `>>=` token.
+ */
+pub fn isGreaterThanGreaterThanEqualsToken(node: Node) -> bool {
+    if (node.getKind() = 71) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a `>>>=` token.
+ */
+pub fn isGreaterThanGreaterThanGreaterThanEqualsToken(node: Node) -> bool {
+    if (node.getKind() = 72) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is an `&=` token.
+ */
+pub fn isAmpersandEqualsToken(node: Node) -> bool {
+    if (node.getKind() = 73) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a `|=` token.
+ */
+pub fn isBarEqualsToken(node: Node) -> bool {
+    if (node.getKind() = 74) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a `||=` token.
+ */
+pub fn isBarBarEqualsToken(node: Node) -> bool {
+    if (node.getKind() = 75) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is an `&&=` token.
+ */
+pub fn isAmpersandAmpersandEqualsToken(node: Node) -> bool {
+    if (node.getKind() = 76) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a `??=` token.
+ */
+pub fn isQuestionQuestionEqualsToken(node: Node) -> bool {
+    if (node.getKind() = 77) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a `^=` token.
+ */
+pub fn isCaretEqualsToken(node: Node) -> bool {
+    if (node.getKind() = 78) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is an identifier.
+ */
+pub fn isIdentifier(node: Node) -> bool {
+    if (node.getKind() = 79) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a private identifier.
+ */
+pub fn isPrivateIdentifier(node: Node) -> bool {
+    if (node.getKind() = 80) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is an `extends` keyword.
+ */
+pub fn isExtendsKeyword(node: Node) -> bool {
+    if (node.getKind() = 94) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a `false` keyword.
+ */
+pub fn isFalseKeyword(node: Node) -> bool {
+    if (node.getKind() = 95) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is an `import` keyword.
+ */
+pub fn isImportKeyword(node: Node) -> bool {
+    if (node.getKind() = 100) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is an `in` keyword.
+ */
+pub fn isInKeyword(node: Node) -> bool {
+    if (node.getKind() = 101) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is an `instanceof` keyword.
+ */
+pub fn isInstanceOfKeyword(node: Node) -> bool {
+    if (node.getKind() = 102) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a `null` keyword.
+ */
+pub fn isNullKeyword(node: Node) -> bool {
+    if (node.getKind() = 104) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a `super` keyword.
+ */
+pub fn isSuperKeyword(node: Node) -> bool {
+    if (node.getKind() = 106) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a `this` keyword.
+ */
+pub fn isThisKeyword(node: Node) -> bool {
+    if (node.getKind() = 108) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a `true` keyword.
+ */
+pub fn isTrueKeyword(node: Node) -> bool {
+    if (node.getKind() = 110) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a `void` keyword.
+ */
+pub fn isVoidKeyword(node: Node) -> bool {
+    if (node.getKind() = 114) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is an `implements` keyword.
+ */
+pub fn isImplementsKeyword(node: Node) -> bool {
+    if (node.getKind() = 117) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is an `any` keyword.
+ */
+pub fn isAnyKeyword(node: Node) -> bool {
+    if (node.getKind() = 130) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is an `await` keyword.
+ */
+pub fn isAwaitKeyword(node: Node) -> bool {
+    if (node.getKind() = 132) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a `boolean` keyword.
+ */
+pub fn isBooleanKeyword(node: Node) -> bool {
+    if (node.getKind() = 133) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is an `intrinsic` keyword.
+ */
+pub fn isIntrinsicKeyword(node: Node) -> bool {
+    if (node.getKind() = 138) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a `never` keyword.
+ */
+pub fn isNeverKeyword(node: Node) -> bool {
+    if (node.getKind() = 143) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a `number` keyword.
+ */
+pub fn isNumberKeyword(node: Node) -> bool {
+    if (node.getKind() = 146) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is an `object` keyword.
+ */
+pub fn isObjectKeyword(node: Node) -> bool {
+    if (node.getKind() = 147) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a `string` keyword.
+ */
+pub fn isStringKeyword(node: Node) -> bool {
+    if (node.getKind() = 149) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a `symbol` keyword.
+ */
+pub fn isSymbolKeyword(node: Node) -> bool {
+    if (node.getKind() = 150) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is an `undefined` keyword.
+ */
+pub fn isUndefinedKeyword(node: Node) -> bool {
+    if (node.getKind() = 152) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is an `unknown` keyword.
+ */
+pub fn isUnknownKeyword(node: Node) -> bool {
+    if (node.getKind() = 154) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a `bigint` keyword.
+ */
+pub fn isBigIntKeyword(node: Node) -> bool {
+    if (node.getKind() = 157) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a prefix unary operator.
+ */
+pub fn isPrefixUnaryOperator(node: Node) -> bool {
+    if (isPlusPlusToken(node)) {
+        return true
+    }
+    if (isMinusMinusToken(node)) {
+        return true
+    }
+    if (isPlusToken(node)) {
+        return true
+    }
+    if (isMinusToken(node)) {
+        return true
+    }
+    if (isTildeToken(node)) {
+        return true
+    }
+    if (isExclamationToken(node)) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a postfix unary operator.
+ */
+pub fn isPostfixUnaryOperator(node: Node) -> bool {
+    if (isPlusPlusToken(node)) {
+        return true
+    }
+    if (isMinusMinusToken(node)) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is an update operator.
+ */
+pub fn isUpdateOperator(node: Node) -> bool {
+    if (isPlusPlusToken(node)) {
+        return true
+    }
+    if (isMinusMinusToken(node)) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is an exponentiation operator `**`.
+ */
+pub fn isExponentiationOperator(node: Node) -> bool {
+    if (isAsteriskAsteriskToken(node)) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a multiplicative operator `*`, `/` or `%`.
+ */
+pub fn isMultiplicativeOperator(node: Node) -> bool {
+    if (isAsteriskToken(node)) {
+        return true
+    }
+    if (isSlashToken(node)) {
+        return true
+    }
+    if (isPercentToken(node)) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a multiplicative operator or higher.
+ */
+pub fn isMultiplicativeOperatorOrHigher(node: Node) -> bool {
+    if (isExponentiationOperator(node)) {
+        return true
+    }
+    if (isMultiplicativeOperator(node)) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is an additive operator `+` or `-`.
+ */
+pub fn isAdditiveOperator(node: Node) -> bool {
+    if (isPlusToken(node)) {
+        return true
+    }
+    if (isMinusToken(node)) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is an additive operator or higher.
+ */
+pub fn isAdditiveOperatorOrHigher(node: Node) -> bool {
+    if (isMultiplicativeOperatorOrHigher(node)) {
+        return true
+    }
+    if (isAdditiveOperator(node)) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a shift operator `<<`, `>>` or `>>>`.
+ */
+pub fn isShiftOperator(node: Node) -> bool {
+    if (isLessThanLessThanToken(node)) {
+        return true
+    }
+    if (isGreaterThanGreaterThanToken(node)) {
+        return true
+    }
+    if (isGreaterThanGreaterThanGreaterThanToken(node)) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a shift operator or higher.
+ */
+pub fn isShiftOperatorOrHigher(node: Node) -> bool {
+    if (isAdditiveOperatorOrHigher(node)) {
+        return true
+    }
+    if (isShiftOperator(node)) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a relational operator `<`, `<=`, `>`, `>=`, `instanceof` or `in`.
+ */
+pub fn isRelationalOperator(node: Node) -> bool {
+    if (isLessThanToken(node)) {
+        return true
+    }
+    if (isLessThanEqualsToken(node)) {
+        return true
+    }
+    if (isGreaterThanToken(node)) {
+        return true
+    }
+    if (isGreaterThanEqualsToken(node)) {
+        return true
+    }
+    if (isInstanceOfKeyword(node)) {
+        return true
+    }
+    if (isInKeyword(node)) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a relational operator or higher.
+ */
+pub fn isRelationalOperatorOrHigher(node: Node) -> bool {
+    if (isShiftOperatorOrHigher(node)) {
+        return true
+    }
+    if (isRelationalOperator(node)) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is an equality operator `==`, `!=`, `===` or `!==`.
+ */
+pub fn isEqualityOperator(node: Node) -> bool {
+    if (isEqualsEqualsToken(node)) {
+        return true
+    }
+    if (isExclamationEqualsToken(node)) {
+        return true
+    }
+    if (isEqualsEqualsEqualsToken(node)) {
+        return true
+    }
+    if (isExclamationEqualsEqualsToken(node)) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is an equality operator or higher.
+ */
+pub fn isEqualityOperatorOrHigher(node: Node) -> bool {
+    if (isRelationalOperatorOrHigher(node)) {
+        return true
+    }
+    if (isEqualityOperator(node)) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a binary bitwise operator `&`, `|` or `^`.
+ */
+pub fn isBinaryBitwiseOperator(node: Node) -> bool {
+    if (isAmpersandToken(node)) {
+        return true
+    }
+    if (isBarToken(node)) {
+        return true
+    }
+    if (isCaretToken(node)) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a binary bitwise operator or higher.
+ */
+pub fn isBinaryBitwiseOperatorOrHigher(node: Node) -> bool {
+    if (isEqualityOperatorOrHigher(node)) {
+        return true
+    }
+    if (isBinaryBitwiseOperator(node)) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a logical operator `&&`, `||` or `??`.
+ */
+pub fn isBinaryLogicalOperator(node: Node) -> bool {
+    if (isAmpersandAmpersandToken(node)) {
+        return true
+    }
+    if (isBarBarToken(node)) {
+        return true
+    }
+    if (isQuestionQuestionToken(node)) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a logical operator or higher.
+ */
+pub fn isBinaryLogicalOperatorOrHigher(node: Node) -> bool {
+    if (isBinaryBitwiseOperatorOrHigher(node)) {
+        return true
+    }
+    if (isBinaryLogicalOperator(node)) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a compound assignment operator
+ * `+=`, `-=`, `**=`, `*=`, `/=`, `%=`, `&=`, `|=`, `^=`, `<<=`, `>>=`, `>>>=`,
+ * `&&=`, `||=` or `??=`.
+ */
+pub fn isCompoundAssignmentOperator(node: Node) -> bool {
+    if (isPlusEqualsToken(node)) {
+        return true
+    }
+    if (isMinusEqualsToken(node)) {
+        return true
+    }
+    if (isAsteriskAsteriskEqualsToken(node)) {
+        return true
+    }
+    if (isAsteriskEqualsToken(node)) {
+        return true
+    }
+    if (isSlashEqualsToken(node)) {
+        return true
+    }
+    if (isPercentEqualsToken(node)) {
+        return true
+    }
+    if (isAmpersandEqualsToken(node)) {
+        return true
+    }
+    if (isBarEqualsToken(node)) {
+        return true
+    }
+    if (isCaretEqualsToken(node)) {
+        return true
+    }
+    if (isLessThanLessThanEqualsToken(node)) {
+        return true
+    }
+    if (isGreaterThanGreaterThanEqualsToken(node)) {
+        return true
+    }
+    if (isGreaterThanGreaterThanGreaterThanEqualsToken(node)) {
+        return true
+    }
+    if (isAmpersandAmpersandEqualsToken(node)) {
+        return true
+    }
+    if (isBarBarEqualsToken(node)) {
+        return true
+    }
+    if (isQuestionQuestionEqualsToken(node)) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a simple assignment operator `=` or a compound
+ * assignment operator.
+ */
+pub fn isAssignmentOperator(node: Node) -> bool {
+    if (isEqualsToken(node)) {
+        return true
+    }
+    if (isCompoundAssignmentOperator(node)) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is an assignment operator or higher.
+ */
+pub fn isAssignmentOperatorOrHigher(node: Node) -> bool {
+    if (isBinaryLogicalOperatorOrHigher(node)) {
+        return true
+    }
+    if (isAssignmentOperator(node)) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a binary operator.
+ */
+pub fn isBinaryOperator(node: Node) -> bool {
+    if (isAssignmentOperatorOrHigher(node)) {
+        return true
+    }
+    if (isCommaToken(node)) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a keyword token.
+ */
+pub fn isKeywordToken(node: Node) -> bool {
+    let (kind = node.getKind()) {
+        if (kind >= 81) {
+            if (kind <= 159) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node kind is a token kind.
+ */
+pub fn isTokenKind(kind: int) -> bool {
+    [
+        {0},    // Unknown
+        {1},    // EndOfFileToken
+        {2},    // SingleLineCommentTrivia
+        {3},    // MultiLineCommentTrivia
+        {4},    // NewLineTrivia
+        {5},    // WhitespaceTrivia
+        {6},    // ShebangTrivia
+        {7},    // ConflictMarkerTrivia
+        {8},    // NumericLiteral
+        {9},    // BigIntLiteral
+        {10},   // StringLiteral
+        {11},   // JsxText
+        {12},   // JsxTextAllWhiteSpaces
+        {13},   // RegularExpressionLiteral
+        {14},   // NoSubstitutionTemplateLiteral
+        {15},   // TemplateHead
+        {16},   // TemplateMiddle
+        {17},   // TemplateTail
+        {18},   // OpenBraceToken
+        {19},   // CloseBraceToken
+        {20},   // OpenParenToken
+        {21},   // CloseParenToken
+        {22},   // OpenBracketToken
+        {23},   // CloseBracketToken
+        {24},   // DotToken
+        {25},   // DotDotDotToken
+        {26},   // SemicolonToken
+        {27},   // CommaToken
+        {28},   // QuestionDotToken
+        {29},   // LessThanToken
+        {30},   // LessThanSlashToken
+        {31},   // GreaterThanToken
+        {32},   // LessThanEqualsToken
+        {33},   // GreaterThanEqualsToken
+        {34},   // EqualsEqualsToken
+        {35},   // ExclamationEqualsToken
+        {36},   // EqualsEqualsEqualsToken
+        {37},   // ExclamationEqualsEqualsToken
+        {38},   // EqualsGreaterThanToken
+        {39},   // PlusToken
+        {40},   // MinusToken
+        {41},   // AsteriskToken
+        {42},   // AsteriskAsteriskToken
+        {43},   // SlashToken
+        {44},   // PercentToken
+        {45},   // PlusPlusToken
+        {46},   // MinusMinusToken
+        {47},   // LessThanLessThanToken
+        {48},   // GreaterThanGreaterThanToken
+        {49},   // GreaterThanGreaterThanGreaterThanToken
+        {50},   // AmpersandToken
+        {51},   // BarToken
+        {52},   // CaretToken
+        {53},   // ExclamationToken
+        {54},   // TildeToken
+        {55},   // AmpersandAmpersandToken
+        {56},   // BarBarToken
+        {57},   // QuestionToken
+        {58},   // ColonToken
+        {59},   // AtToken
+        {60},   // QuestionQuestionToken
+        {61},   // BacktickToken
+        {62},   // HashToken
+        {63},   // EqualsToken
+        {64},   // PlusEqualsToken
+        {65},   // MinusEqualsToken
+        {66},   // AsteriskEqualsToken
+        {67},   // AsteriskAsteriskEqualsToken
+        {68},   // SlashEqualsToken
+        {69},   // PercentEqualsToken
+        {70},   // LessThanLessThanEqualsToken
+        {71},   // GreaterThanGreaterThanEqualsToken
+        {72},   // GreaterThanGreaterThanGreaterThanEqualsToken
+        {73},   // AmpersandEqualsToken
+        {74},   // BarEqualsToken
+        {75},   // BarBarEqualsToken
+        {76},   // AmpersandAmpersandEqualsToken
+        {77},   // QuestionQuestionEqualsToken
+        {78},   // CaretEqualsToken
+        {79},   // Identifier
+        {80},   // PrivateIdentifier
+        {81},   // BreakKeyword
+        {82},   // CaseKeyword
+        {83},   // CatchKeyword
+        {84},   // ClassKeyword
+        {85},   // ConstKeyword
+        {86},   // ContinueKeyword
+        {87},   // DebuggerKeyword
+        {88},   // DefaultKeyword
+        {89},   // DeleteKeyword
+        {90},   // DoKeyword
+        {91},   // ElseKeyword
+        {92},   // EnumKeyword
+        {93},   // ExportKeyword
+        {94},   // ExtendsKeyword
+        {95},   // FalseKeyword
+        {96},   // FinallyKeyword
+        {97},   // ForKeyword
+        {98},   // FunctionKeyword
+        {99},   // IfKeyword
+        {100},  // ImportKeyword
+        {101},  // InKeyword
+        {102},  // InstanceOfKeyword
+        {103},  // NewKeyword
+        {104},  // NullKeyword
+        {105},  // ReturnKeyword
+        {106},  // SuperKeyword
+        {107},  // SwitchKeyword
+        {108},  // ThisKeyword
+        {109},  // ThrowKeyword
+        {110},  // TrueKeyword
+        {111},  // TryKeyword
+        {112},  // TypeOfKeyword
+        {113},  // VarKeyword
+        {114},  // VoidKeyword
+        {115},  // WhileKeyword
+        {116},  // WithKeyword
+        {117},  // ImplementsKeyword
+        {118},  // InterfaceKeyword
+        {119},  // LetKeyword
+        {120},  // PackageKeyword
+        {121},  // PrivateKeyword
+        {122},  // ProtectedKeyword
+        {123},  // PublicKeyword
+        {124},  // StaticKeyword
+        {125},  // YieldKeyword
+        {126},  // AbstractKeyword
+        {127},  // AsKeyword
+        {128},  // AssertsKeyword
+        {129},  // AssertKeyword
+        {130},  // AnyKeyword
+        {131},  // AsyncKeyword
+        {132},  // AwaitKeyword
+        {133},  // BooleanKeyword
+        {134},  // ConstructorKeyword
+        {135},  // DeclareKeyword
+        {136},  // GetKeyword
+        {137},  // InferKeyword
+        {138},  // IntrinsicKeyword
+        {139},  // IsKeyword
+        {140},  // KeyOfKeyword
+        {141},  // ModuleKeyword
+        {142},  // NamespaceKeyword
+        {143},  // NeverKeyword
+        {144},  // ReadonlyKeyword
+        {145},  // RequireKeyword
+        {146},  // NumberKeyword
+        {147},  // ObjectKeyword
+        {148},  // SetKeyword
+        {149},  // StringKeyword
+        {150},  // SymbolKeyword
+        {151},  // TypeKeyword
+        {152},  // UndefinedKeyword
+        {153},  // UniqueKeyword
+        {154},  // UnknownKeyword
+        {155},  // FromKeyword
+        {156},  // GlobalKeyword
+        {157},  // BigIntKeyword
+        {158},  // OverrideKeyword
+        {159},  // OfKeyword
+    ]
+}

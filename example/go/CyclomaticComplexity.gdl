@@ -1,0 +1,30 @@
+// script
+use coref::go::*
+
+fn default_db() -> GoDB {
+    return GoDB::load("coref_go_src.db")
+}
+
+/**
+ * @param name: file name
+ * @param func: function name
+ * @param cmplx: function cyclomatic complexity
+ * @param sl,el,sc,ec: function location info
+ */
+fn out(name: string, func: string, cmplx: int, sl: int, el: int) -> bool {
+    for(f in GoFile(default_db()), function in Function(default_db())) {
+        if ((!f.isAutoGenereatedFile()) &&
+            f.key_eq(function.getBelongsFile()) &&
+            name = f.getName() &&
+            func = function.getName() &&
+            cmplx = function.getCyclomaticComplexity() &&
+            sl = function.getLocation().getStartLineNumber() &&
+            el = function.getLocation().getEndLineNumber()) {
+            return true
+        }
+    }
+}
+
+fn main() {
+    output(out())
+}

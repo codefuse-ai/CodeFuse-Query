@@ -1,0 +1,659 @@
+/**
+ * @filename: AlipayMiniProgram
+ * @brief: Provides classes and predicates for working with Alipay mini-program.
+ */
+
+/**
+ * The `app.js` file.
+ */
+schema AppJsFile extends File {
+}
+
+impl AppJsFile {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *AppJsFile {
+        for (tmp in File(db)) {
+            if (tmp.getRelativePath() = "app.js") {
+                yield AppJsFile {
+                    oid : tmp.oid,
+                    name : tmp.name,
+                    extension : tmp.extension,
+                    relative_path : tmp.relative_path,
+                    location_oid : tmp.location_oid
+                }
+            }
+        }
+    }
+}
+
+/**
+ * The `App` call expression used to register the app.
+ */
+schema AppRegistrationExpression extends CallExpression {
+}
+
+impl AppRegistrationExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *AppRegistrationExpression {
+        for (tmp in CallExpression(db)) {
+            for (appIdentifier in Identifier(db),
+                location in Location(db),
+                appJsFile in AppJsFile(db)) {
+                if (location = tmp.getLocation()) {
+                    if (appJsFile.key_eq(location.getFile())) {
+                        if (appIdentifier.key_eq(tmp.getExpression())) {
+                            if (appIdentifier.getName() = "App") {
+                                yield AppRegistrationExpression {
+                                    id : tmp.id
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+/**
+ * The app object, which is the first argument of the AppRegistrationExpression.
+ */
+schema AppObject extends ObjectLiteralExpression {
+}
+
+impl AppObject {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *AppObject {
+        for (tmp in ObjectLiteralExpression(db)) {
+            for (appRegistrationExpression in AppRegistrationExpression(db)) {
+                if (tmp.key_eq(appRegistrationExpression.getArgument(0))) {
+                    yield AppObject {
+                        id : tmp.id
+                    }
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A `Page` call expression used to register a page.
+ */
+schema PageRegistrationExpression extends CallExpression {
+}
+
+impl PageRegistrationExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *PageRegistrationExpression {
+        for (tmp in CallExpression(db)) {
+            for (pageIdentifier in Identifier(db)) {
+                if (pageIdentifier.key_eq(tmp.getExpression())) {
+                    if (pageIdentifier.getName() = "Page") {
+                        yield PageRegistrationExpression {
+                            id : tmp.id
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A page object, which is the first argument of a PageRegistrationExpression.
+ */
+schema PageObject extends ObjectLiteralExpression {
+}
+
+impl PageObject {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *PageObject {
+        for (tmp in ObjectLiteralExpression(db)) {
+            for (pageRegistrationExpression in PageRegistrationExpression(db)) {
+                if (tmp.key_eq(pageRegistrationExpression.getArgument(0))) {
+                    yield PageObject {
+                        id : tmp.id
+                    }
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A `Component` call expression used to register a custom component.
+ */
+schema ComponentRegistrationExpression extends CallExpression {
+}
+
+impl ComponentRegistrationExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *ComponentRegistrationExpression {
+        for (tmp in CallExpression(db)) {
+            for (componentIdentifier in Identifier(db)) {
+                if (componentIdentifier.key_eq(tmp.getExpression())) {
+                    if (componentIdentifier.getName() = "Component") {
+                        yield ComponentRegistrationExpression {
+                            id : tmp.id
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A component object, which is the first argument of a ComponentRegistrationExpression.
+ */
+schema ComponentObject extends ObjectLiteralExpression {
+}
+
+impl ComponentObject {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *ComponentObject {
+        for (tmp in ObjectLiteralExpression(db)) {
+            for (componentRegistrationExpression in ComponentRegistrationExpression(db)) {
+                if (tmp.key_eq(componentRegistrationExpression.getArgument(0))) {
+                    yield ComponentObject {
+                        id : tmp.id
+                    }
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A mini-program object, which is an AppObject, PageObject or ComponentObject.
+ */
+schema MiniObject extends ObjectLiteralExpression {
+}
+
+impl MiniObject {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *MiniObject {
+        for (tmp in ObjectLiteralExpression(db)) {
+            for (appObject in AppObject(db)) {
+                if (tmp.key_eq(appObject)) {
+                    yield MiniObject {
+                        id : tmp.id
+                    }
+                }
+            }
+            for (pageObject in PageObject(db)) {
+                if (tmp.key_eq(pageObject)) {
+                    yield MiniObject {
+                        id : tmp.id
+                    }
+                }
+            }
+            for (componentObject in ComponentObject(db)) {
+                if (tmp.key_eq(componentObject)) {
+                    yield MiniObject {
+                        id : tmp.id
+                    }
+                }
+            }
+        }
+    }
+}
+
+/**
+ * An Alipay mini program API call expression.
+ */
+schema ApiCallExpression extends CallExpression {
+}
+
+impl ApiCallExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *ApiCallExpression {
+        for (tmp in CallExpression(db)) {
+            for (accessExpression in AccessExpression(db),
+                myIdentifier in Identifier(db)) {
+                if (accessExpression.key_eq(tmp.getExpression())) {
+                    if (myIdentifier.key_eq(accessExpression.getExpression())) {
+                        if (myIdentifier.getName() = "my") {
+                            yield ApiCallExpression {
+                                id : tmp.id
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A call expression in Alipay mini program project.
+ */
+schema MiniCallExpression extends CallExpression {
+}
+
+impl MiniCallExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *MiniCallExpression {
+        for (tmp in CallExpression(db)) {
+            yield MiniCallExpression {
+                id : tmp.id
+            }
+        }
+    }
+
+    /**
+     * Gets the callee of this MiniCallExpression.
+     *
+     * In addition to the results of CallExpression.getCallee(),
+     * this method add some callees according to Alipay mini program framework.
+     */
+    pub fn getCallee(self) -> FunctionLikeDeclaration {
+        for (callee in FunctionLikeDeclaration(__all_data__)) {
+            for (callExpression in CallExpression(__all_data__)) {
+                if (callExpression.key_eq(self)) {
+                    if (callee = callExpression.getCallee()) {
+                        return callee
+                    }
+                }
+            }
+            for (accessExpression in AccessExpression(__all_data__)) {
+                if (accessExpression.key_eq(self.getExpression())) {
+                    for (thisExpression in ThisExpression(__all_data__)) {
+                        if (thisExpression.key_eq(accessExpression.getExpression())) {
+                            let (functionName = accessExpression.getPropertyName()) {
+                                for (miniObject in MiniObject(__all_data__)) {
+                                    for (auto_tmp1 in self.getAnAncestor()) {
+                                        if (auto_tmp1.key_eq(miniObject)) {
+                                            let (objectLiteralElement = miniObject.getPropertyByName(functionName)) {
+                                                // TODO: handle ShorthandPropertyAssignment
+                                                for (propertyAssignment in PropertyAssignment(__all_data__)) {
+                                                    if (propertyAssignment.key_eq(objectLiteralElement)) {
+                                                        if (callee.key_eq(propertyAssignment.getInitializer())) {
+                                                            return callee
+                                                        }
+                                                    }
+                                                }
+                                                if (isMethodDeclaration(Node(__all_data__).find(objectLiteralElement))) {
+                                                    if (callee.key_eq(objectLiteralElement)) {
+                                                        return callee
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+schema RouterKind {
+    @primary id: int,
+    name: string
+}
+
+impl RouterKind {
+    @data_constraint
+    pub fn __all__() -> *RouterKind {
+        for (id in int::__undetermined_all__()) {
+            for (name in string::__undetermined_all__()) {
+                if (routerKindInit(id, name)) {
+                    yield RouterKind{id: id, name: name}
+                }
+            }
+        }
+    }
+
+    pub fn getName(self) -> string {
+        return self.name
+    }
+
+    pub fn getValue(self) -> int {
+        return self.id
+    }
+
+    pub fn isSwitchTab(self) -> bool {
+        if (self.id = 1000011) {
+            return true
+        }
+    }
+
+    pub fn isReLaunch(self) -> bool {
+        if (self.id = 1000012) {
+            return true
+        }
+    }
+
+    pub fn isRedirectTo(self) -> bool {
+        if (self.id = 1000013) {
+            return true
+        }
+    }
+
+    pub fn isNavigateTo(self) -> bool {
+        if (self.id = 1000014) {
+            return true
+        }
+    }
+
+    pub fn isNavigateBack(self) -> bool {
+        if (self.id = 1000015) {
+            return true
+        }
+    }
+}
+
+pub fn pageRouterRule(fromPage: PageObject, toPage: PageObject, kind: RouterKind) -> bool {
+    for (callExpression in CallExpression(__all_data__),
+        accessExpression in AccessExpression(__all_data__)) {
+        if (accessExpression.key_eq(callExpression.getExpression())) {
+            let (calledFuncName = accessExpression.getPropertyName()) {
+                for (urlAdj in string::__undetermined_all__(),
+                    toPagePath in string::__undetermined_all__()) {
+                    if (calledFuncName = accessExpression.getPropertyName()) {
+                        if (calledFuncName = "switchTab") {
+                            if (kind.isSwitchTab()) {
+                                if (fromPage.getRelativePath() = callExpression.getRelativePath()) {
+                                    if (kind.isNavigateBack()) {
+                                        if (toPagePath = "") {
+                                            for (tmpKind in RouterKind()) {
+                                                if (!tmpKind.isNavigateBack()) {
+                                                    if (pageRouterRule(toPage, __all_data__, tmpKind)) {
+                                                        if (urlAdj = "") {
+                                                            return true
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                    if (!kind.isNavigateBack()) {
+                                        if (toPage.getRelativePath() = toPagePath) {
+                                            for (url in string::__undetermined_all__()) {
+                                                // TODO: router url may contains parameters, need to prune parameter sub string
+                                                for (arg in ObjectLiteralExpression(__all_data__),
+                                                    urlPAE in PropertyAssignment(__all_data__),
+                                                    urlSL in StringLiteral(__all_data__)) {
+                                                    if (arg.key_eq(callExpression.getArgument(0))) {
+                                                        if (urlPAE.key_eq(arg.getPropertyByName("url"))) {
+                                                            if (urlSL.key_eq(urlPAE.getInitializer())) {
+                                                                if (url = urlSL.getString()) {
+                                                                    if (url.substr(0, 3) = "../") {
+                                                                        for (urlAdjLen in int::__undetermined_all__()) {
+                                                                            if (urlAdjLen = url.len()) {
+                                                                                if (urlAdj = url.substr(3, urlAdjLen) + ".js") {
+                                                                                    if (toPagePath.contains(urlAdj)) {
+                                                                                        return true
+                                                                                    }
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                    if (url.substr(0, 3) != "../") {
+                                                                        if (urlAdj = url + ".js") {
+                                                                            if (toPagePath.contains(urlAdj)) {
+                                                                                return true
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        if (calledFuncName = "reLaunch") {
+                            if (kind.isReLaunch()) {
+                                if (fromPage.getRelativePath() = callExpression.getRelativePath()) {
+                                    if (kind.isNavigateBack()) {
+                                        if (toPagePath = "") {
+                                            for (tmpKind in RouterKind()) {
+                                                if (!tmpKind.isNavigateBack()) {
+                                                    if (pageRouterRule(toPage, __all_data__, tmpKind)) {
+                                                        if (urlAdj = "") {
+                                                            return true
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                    if (!kind.isNavigateBack()) {
+                                        if (toPage.getRelativePath() = toPagePath) {
+                                            for (url in string::__undetermined_all__()) {
+                                                for (arg in ObjectLiteralExpression(__all_data__),
+                                                    urlPAE in PropertyAssignment(__all_data__),
+                                                    urlSL in StringLiteral(__all_data__)) {
+                                                    if (arg.key_eq(callExpression.getArgument(0))) {
+                                                        if (urlPAE.key_eq(arg.getPropertyByName("url"))) {
+                                                            if (urlSL.key_eq(urlPAE.getInitializer())) {
+                                                                if (url = urlSL.getString()) {
+                                                                    if (url.substr(0, 3) = "../") {
+                                                                        for (urlAdjLen in int::__undetermined_all__()) {
+                                                                            if (urlAdjLen = url.len()) {
+                                                                                if (urlAdj = url.substr(3, urlAdjLen) + ".js") {
+                                                                                    if (toPagePath.contains(urlAdj)) {
+                                                                                        return true
+                                                                                    }
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                    if (url.substr(0, 3) != "../") {
+                                                                        if (urlAdj = url + ".js") {
+                                                                            if (toPagePath.contains(urlAdj)) {
+                                                                                return true
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        if (calledFuncName = "redirectTo") {
+                            if (kind.isRedirectTo()) {
+                                if (fromPage.getRelativePath() = callExpression.getRelativePath()) {
+                                    if (kind.isNavigateBack()) {
+                                        if (toPagePath = "") {
+                                            for (tmpKind in RouterKind()) {
+                                                if (!tmpKind.isNavigateBack()) {
+                                                    if (pageRouterRule(toPage, __all_data__, tmpKind)) {
+                                                        if (urlAdj = "") {
+                                                            return true
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                    if (!kind.isNavigateBack()) {
+                                        if (toPage.getRelativePath() = toPagePath) {
+                                            for (url in string::__undetermined_all__()) {
+                                                for (arg in ObjectLiteralExpression(__all_data__),
+                                                    urlPAE in PropertyAssignment(__all_data__),
+                                                    urlSL in StringLiteral(__all_data__)) {
+                                                    if (arg.key_eq(callExpression.getArgument(0))) {
+                                                        if (urlPAE.key_eq(arg.getPropertyByName("url"))) {
+                                                            if (urlSL.key_eq(urlPAE.getInitializer())) {
+                                                                if (url = urlSL.getString()) {
+                                                                    if (url.substr(0, 3) = "../") {
+                                                                        for (urlAdjLen in int::__undetermined_all__()) {
+                                                                            if (urlAdjLen = url.len()) {
+                                                                                if (urlAdj = url.substr(3, urlAdjLen) + ".js") {
+                                                                                    if (toPagePath.contains(urlAdj)) {
+                                                                                        return true
+                                                                                    }
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                    if (url.substr(0, 3) != "../") {
+                                                                        if (urlAdj = url + ".js") {
+                                                                            if (toPagePath.contains(urlAdj)) {
+                                                                                return true
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        if (calledFuncName = "navigateTo") {
+                            if (kind.isNavigateTo()) {
+                                if (fromPage.getRelativePath() = callExpression.getRelativePath()) {
+                                    if (kind.isNavigateBack()) {
+                                        if (toPagePath = "") {
+                                            for (tmpKind in RouterKind()) {
+                                                if (!tmpKind.isNavigateBack()) {
+                                                    if (pageRouterRule(toPage, __all_data__, tmpKind)) {
+                                                        if (urlAdj = "") {
+                                                            return true
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                    if (!kind.isNavigateBack()) {
+                                        if (toPage.getRelativePath() = toPagePath) {
+                                            for (url in string::__undetermined_all__()) {
+                                                for (arg in ObjectLiteralExpression(__all_data__),
+                                                    urlPAE in PropertyAssignment(__all_data__),
+                                                    urlSL in StringLiteral(__all_data__)) {
+                                                    if (arg.key_eq(callExpression.getArgument(0))) {
+                                                        if (urlPAE.key_eq(arg.getPropertyByName("url"))) {
+                                                            if (urlSL.key_eq(urlPAE.getInitializer())) {
+                                                                if (url = urlSL.getString()) {
+                                                                    if (url.substr(0, 3) = "../") {
+                                                                        for (urlAdjLen in int::__undetermined_all__()) {
+                                                                            if (urlAdjLen = url.len()) {
+                                                                                if (urlAdj = url.substr(3, urlAdjLen) + ".js") {
+                                                                                    if (toPagePath.contains(urlAdj)) {
+                                                                                        return true
+                                                                                    }
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                    if (url.substr(0, 3) != "../") {
+                                                                        if (urlAdj = url + ".js") {
+                                                                            if (toPagePath.contains(urlAdj)) {
+                                                                                return true
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        if (calledFuncName = "navigateBack") {
+                            if (kind.isNavigateBack()) {
+                                if (fromPage.getRelativePath() = callExpression.getRelativePath()) {
+                                    if (kind.isNavigateBack()) {
+                                        if (toPagePath = "") {
+                                            for (tmpKind in RouterKind()) {
+                                                if (!tmpKind.isNavigateBack()) {
+                                                    if (pageRouterRule(toPage, __all_data__, tmpKind)) {
+                                                        if (urlAdj = "") {
+                                                            return true
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                    if (!kind.isNavigateBack()) {
+                                        if (toPage.getRelativePath() = toPagePath) {
+                                            for (url in string::__undetermined_all__()) {
+                                                for (arg in ObjectLiteralExpression(__all_data__),
+                                                    urlPAE in PropertyAssignment(__all_data__),
+                                                    urlSL in StringLiteral(__all_data__)) {
+                                                    if (arg.key_eq(callExpression.getArgument(0))) {
+                                                        if (urlPAE.key_eq(arg.getPropertyByName("url"))) {
+                                                            if (urlSL.key_eq(urlPAE.getInitializer())) {
+                                                                if (url = urlSL.getString()) {
+                                                                    if (url.substr(0, 3) = "../") {
+                                                                        for (urlAdjLen in int::__undetermined_all__()) {
+                                                                            if (urlAdjLen = url.len()) {
+                                                                                if (urlAdj = url.substr(3, urlAdjLen) + ".js") {
+                                                                                    if (toPagePath.contains(urlAdj)) {
+                                                                                        return true
+                                                                                    }
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                    if (url.substr(0, 3) != "../") {
+                                                                        if (urlAdj = url + ".js") {
+                                                                            if (toPagePath.contains(urlAdj)) {
+                                                                                return true
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+pub fn routerKindInit(id: int, name: string) -> bool {
+    [
+        {1000011, "SwitchTab"},
+        {1000012, "ReLaunch"},
+        {1000013, "RedirectTo"},
+        {1000014, "NavigateTo"},
+        {1000015, "NavigateBack"},
+    ]
+}

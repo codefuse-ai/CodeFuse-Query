@@ -1,0 +1,405 @@
+/**
+ * @filename: Statement
+ * @brief: Provides classes and predicates for working with JavaScript / TypeScript modifiers
+ */
+
+/**
+ * A modifier.
+ */
+schema Modifier extends Token {
+}
+
+impl Modifier {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *Modifier {
+        for (tmp in Token(db)) {
+            if (isModifier(Node {id: tmp.id})) {
+                yield Modifier {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A `const` keyword.
+ */
+schema ConstKeyword extends Modifier {
+}
+
+impl ConstKeyword {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *ConstKeyword {
+        for (tmp in Modifier(db)) {
+            if (isConstKeyword(Node {id: tmp.id})) {
+                yield ConstKeyword {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A `default` keyword.
+ */
+schema DefaultKeyword extends Modifier {
+}
+
+impl DefaultKeyword {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *DefaultKeyword {
+        for (tmp in Modifier(db)) {
+            if (isDefaultKeyword(Node {id: tmp.id})) {
+                yield DefaultKeyword {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * An `export` keyword.
+ */
+schema ExportKeyword extends Modifier {
+}
+
+impl ExportKeyword {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *ExportKeyword {
+        for (tmp in Modifier(db)) {
+            if (isExportKeyword(Node {id: tmp.id})) {
+                yield ExportKeyword {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A `private` keyword.
+ */
+schema PrivateKeyword extends Modifier {
+}
+
+impl PrivateKeyword {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *PrivateKeyword {
+        for (tmp in Modifier(db)) {
+            if (isPrivateKeyword(Node {id: tmp.id})) {
+                yield PrivateKeyword {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A `protected` keyword.
+ */
+schema ProtectedKeyword extends Modifier {
+}
+
+impl ProtectedKeyword {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *ProtectedKeyword {
+        for (tmp in Modifier(db)) {
+            if (isProtectedKeyword(Node {id: tmp.id})) {
+                yield ProtectedKeyword {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A `public` keyword.
+ */
+schema PublicKeyword extends Modifier {
+}
+
+impl PublicKeyword {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *PublicKeyword {
+        for (tmp in Modifier(db)) {
+            if (isPublicKeyword(Node {id: tmp.id})) {
+                yield PublicKeyword {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A `static` keyword.
+ */
+schema StaticKeyword extends Modifier {
+}
+
+impl StaticKeyword {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *StaticKeyword {
+        for (tmp in Modifier(db)) {
+            if (isStaticKeyword(Node {id: tmp.id})) {
+                yield StaticKeyword {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * An `abstract` keyword.
+ */
+schema AbstractKeyword extends Modifier {
+}
+
+impl AbstractKeyword {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *AbstractKeyword {
+        for (tmp in Modifier(db)) {
+            if (isAbstractKeyword(Node {id: tmp.id})) {
+                yield AbstractKeyword {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * An `async` keyword.
+ */
+schema AsyncKeyword extends Modifier {
+}
+
+impl AsyncKeyword {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *AsyncKeyword {
+        for (tmp in Modifier(db)) {
+            if (isAsyncKeyword(Node {id: tmp.id})) {
+                yield AsyncKeyword {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A `declare` keyword.
+ */
+schema DeclareKeyword extends Modifier {
+}
+
+impl DeclareKeyword {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *DeclareKeyword {
+        for (tmp in Modifier(db)) {
+            if (isDeclareKeyword(Node {id: tmp.id})) {
+                yield DeclareKeyword {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A `readonly` keyword.
+ */
+schema ReadonlyKeyword extends Modifier {
+}
+
+impl ReadonlyKeyword {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *ReadonlyKeyword {
+        for (tmp in Modifier(db)) {
+            if (isReadonlyKeyword(Node {id: tmp.id})) {
+                yield ReadonlyKeyword {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * An `override` keyword.
+ */
+schema OverrideKeyword extends Modifier {
+}
+
+impl OverrideKeyword {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *OverrideKeyword {
+        for (tmp in Modifier(db)) {
+            if (isOverrideKeyword(Node {id: tmp.id})) {
+                yield OverrideKeyword {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a modifier.
+ */
+pub fn isModifier(node: Node) -> bool {
+    for (kind in int::__undetermined_all__()) {
+        if (kind = node.getKind()) {
+            if (isModifierKind(kind)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a `const` keyword.
+ */
+pub fn isConstKeyword(node: Node) -> bool {
+    if (node.getKind() = 85) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a `default` keyword.
+ */
+pub fn isDefaultKeyword(node: Node) -> bool {
+    if (node.getKind() = 88) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is an `export` keyword.
+ */
+pub fn isExportKeyword(node: Node) -> bool {
+    if (node.getKind() = 93) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a `private` keyword.
+ */
+pub fn isPrivateKeyword(node: Node) -> bool {
+    if (node.getKind() = 121) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a `protected` keyword.
+ */
+pub fn isProtectedKeyword(node: Node) -> bool {
+    if (node.getKind() = 122) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a `public` keyword.
+ */
+pub fn isPublicKeyword(node: Node) -> bool {
+    if (node.getKind() = 123) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a `static` keyword.
+ */
+pub fn isStaticKeyword(node: Node) -> bool {
+    if (node.getKind() = 124) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is an `abstract` keyword.
+ */
+pub fn isAbstractKeyword(node: Node) -> bool {
+    if (node.getKind() = 126) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is an `async` keyword.
+ */
+pub fn isAsyncKeyword(node: Node) -> bool {
+    if (node.getKind() = 131) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a `declare` keyword.
+ */
+pub fn isDeclareKeyword(node: Node) -> bool {
+    if (node.getKind() = 135) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a `readonly` keyword.
+ */
+pub fn isReadonlyKeyword(node: Node) -> bool {
+    if (node.getKind() = 144) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is an `override` keyword.
+ */
+pub fn isOverrideKeyword(node: Node) -> bool {
+    if (node.getKind() = 158) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node kind is a modifier kind.
+ */
+pub fn isModifierKind(kind: int) -> bool {
+    [
+        {126},  // AbstractKeyword
+        {131},  // AsyncKeyword
+        {85},   // ConstKeyword
+        {135},  // DeclareKeyword
+        {88},   // DefaultKeyword
+        {93},   // ExportKeyword
+        {121},  // PrivateKeyword
+        {122},  // ProtectedKeyword
+        {123},  // PublicKeyword
+        {158},  // OverrideKeyword
+        {144},  // ReadonlyKeyword
+        {124},  // StaticKeyword
+    ]
+}

@@ -1,0 +1,55 @@
+/**
+ * @brief One for clause in a comprehension.
+ */
+schema Comprehension extends ComprehensionDO {
+    
+}
+impl Comprehension {
+    @data_constraint
+    @inline
+    fn __all__(db: PythonDB) -> *Comprehension {
+        for (tmp in ComprehensionDO(db)) {
+            yield Comprehension {
+                element_oid : tmp.element_oid,
+                target_expr_oid : tmp.target_expr_oid,
+                iter_expr_oid : tmp.iter_expr_oid,
+                element_index : tmp.element_index,
+                parent_oid : tmp.parent_oid,
+                printable_text : tmp.printable_text
+            }
+        }
+    }
+    /**
+     * @brief gets the parent element of the element
+     * @return CombineElement 
+     */
+    pub fn getParent(self) -> CombineElement {
+        for (parent in CombineElement(__all_data__)) {
+            if (parent.id = self.getParentOid()) {
+                return parent
+            }
+        }
+    }
+    /**
+     * @brief gets an ancestor of the element.
+     * @return CombineElement 
+     */
+    pub fn getAnAncestor(self) -> *CombineElement {
+        for (temp in CombineElement(__all_data__)) {
+            if (self.key_eq(temp)) {
+                yield temp.getAnAncestor()
+            }
+        }
+    }
+    /**
+     * @brief gets the location for the element's parent since this type has no location info.
+     * @return Location
+     */
+    pub fn getLocation(self) -> Location {
+        for (loc in Location(__all_data__)) {
+            if (loc.element_oid = self.getParentOid()) {
+                return loc
+            }
+        }
+    }
+}

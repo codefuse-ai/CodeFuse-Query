@@ -1,0 +1,26 @@
+/**
+ * @filename: FileSystem
+ * @brief: Provides classes and predicates for working with the file system.
+ */
+
+/**
+ * A JavaScript / TypeScript file.
+ */
+schema File extends FileDO {
+}
+
+impl File {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *File {
+        for (tmp in FileDO(db)) {
+            yield File {
+                oid : tmp.oid,
+                name : tmp.name,
+                extension : tmp.extension,
+                relative_path : tmp.relative_path,
+                location_oid : tmp.location_oid
+            }
+        }
+    }
+}

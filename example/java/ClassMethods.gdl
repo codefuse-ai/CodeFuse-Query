@@ -1,0 +1,20 @@
+// script
+use coref::java::*
+
+fn default_java_db() -> JavaDB {
+	return JavaDB::load("coref_java_src.db")
+}
+
+// Find all methods of the class
+fn methods(className : string, methodName : string) -> bool {
+    for (c in Class(default_java_db()), m in c.getAllMethods()) {
+        if (className = c.getQualifiedName() &&
+            methodName = m.getName()){
+            return true
+        }
+    }
+}
+
+fn main() { 
+	output(methods())
+}

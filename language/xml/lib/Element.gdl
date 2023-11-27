@@ -1,0 +1,582 @@
+/**
+ * @brief An xml attribute.
+ */
+schema XmlAttribute extends XmlAttributeDO {
+
+}
+impl XmlAttribute {
+    @data_constraint
+    @inline
+    fn __all__(db: XmlDB) -> *XmlAttribute {
+        for (tmp in XmlAttributeDO(db)) {
+            yield XmlAttribute {
+                id : tmp.id,
+                element_id : tmp.element_id,
+                name : tmp.name,
+                value : tmp.value,
+                index_order : tmp.index_order,
+                location_id : tmp.location_id
+            }
+        }
+    }
+    /**
+     * @brief gets the xml element of the attribute
+     * @return XmlElement 
+     */
+    pub fn getXmlElement(self) -> XmlElement {
+        for (element in XmlElement(__all_data__)) {
+            if (element.id = self.getElementId()) {
+                return element
+            }
+        }
+    }
+    /**
+     * @brief gets the location for the element.
+     * @return Location
+     */
+    pub fn getLocation(self) -> Location {
+        for (loc in Location(__all_data__)) {
+            if (loc.id = self.getLocationId()) {
+                return loc
+            }
+        }
+    }
+}
+/**
+ * @brief An xml character.
+ */
+schema XmlCharacter extends XmlCharacterDO {
+
+}
+impl XmlCharacter {
+    @data_constraint
+    @inline
+    fn __all__(db: XmlDB) -> *XmlCharacter {
+        for (tmp in XmlCharacterDO(db)) {
+            yield XmlCharacter {
+                id : tmp.id,
+                text : tmp.text,
+                parentid : tmp.parentid,
+                index_order : tmp.index_order,
+                is_cdata : tmp.is_cdata,
+                location_id : tmp.location_id
+            }
+        }
+    }
+    /**
+     * @brief gets the belonged xml element of this xml character.
+     * @return XmlElement 
+     */
+    pub fn getBelongedElement(self) -> XmlElement {
+        for (e in XmlElement(__all_data__)) {
+            if (e.id = self.getParentid()) {
+                return e
+            }
+        }
+    }
+    /**
+     * @brief gets the location for the element.
+     * @return Location
+     */
+    pub fn getLocation(self) -> Location {
+        for (loc in Location(__all_data__)) {
+            if (loc.id = self.getLocationId()) {
+                return loc
+            }
+        }
+    }
+}
+/**
+ * @brief An xml comment.
+ */
+schema XmlComment extends XmlCommentDO {
+
+}
+impl XmlComment {
+    @data_constraint
+    @inline
+    fn __all__(db: XmlDB) -> *XmlComment {
+        for (tmp in XmlCommentDO(db)) {
+            yield XmlComment {
+                id : tmp.id,
+                text : tmp.text,
+                parent_id : tmp.parent_id,
+                location_id : tmp.location_id
+            }
+        }
+    }
+    /**
+     * @brief gets the location for the element.
+     * @return Location
+     */
+    pub fn getLocation(self) -> Location {
+        for (loc in Location(__all_data__)) {
+            if (loc.id = self.getLocationId()) {
+                return loc
+            }
+        }
+    }
+}
+/**
+ * @brief An xml dtd.
+ */
+schema XmlDtd extends XmlDtdDO {
+
+}
+impl XmlDtd {
+    @data_constraint
+    @inline
+    fn __all__(db: XmlDB) -> *XmlDtd {
+        for (tmp in XmlDtdDO(db)) {
+            yield XmlDtd {
+                id : tmp.id,
+                root : tmp.root,
+                public_id : tmp.public_id,
+                system_id : tmp.system_id,
+                location_id : tmp.location_id
+            }
+        }
+    }
+    /**
+     * @brief gets the location for the element.
+     * @return Location
+     */
+    pub fn getLocation(self) -> Location {
+        for (loc in Location(__all_data__)) {
+            if (loc.id = self.getLocationId()) {
+                return loc
+            }
+        }
+    }
+}
+/**
+ * @brief An xml encoding element.
+ */
+schema XmlEncoding extends XmlEncodingDO {
+
+}
+impl XmlEncoding {
+    @data_constraint
+    @inline
+    fn __all__(db: XmlDB) -> *XmlEncoding {
+        for (tmp in XmlEncodingDO(db)) {
+            yield XmlEncoding {
+                id : tmp.id,
+                encoding : tmp.encoding
+            }
+        }
+    }
+}
+/**
+ * @brief Describe the name space relation.
+ */
+schema XmlHasNamespace extends XmlHasNamespaceDO {
+
+}
+impl XmlHasNamespace {
+    @data_constraint
+    @inline
+    fn __all__(db: XmlDB) -> *XmlHasNamespace {
+        for (tmp in XmlHasNamespaceDO(db)) {
+            yield XmlHasNamespace {
+                id : tmp.id,
+                element_id : tmp.element_id,
+                namespace_id : tmp.namespace_id,
+                container_id : tmp.container_id
+            }
+        }
+    }
+     /**
+      * @brief gets the element of the relation.
+      * @return XmlElement 
+      */
+    pub fn getXmlElement(self) -> XmlElement {
+        for (element in XmlElement(__all_data__)) {
+            if (element.id = self.getElementId()) {
+                return element
+            }
+        }
+    }
+     /**
+      * @brief gets the namespace of the relation.
+      * @return XmlNamespace 
+      */
+    pub fn getXmlNamespace(self) -> XmlNamespace {
+        for (namespace in XmlNamespace(__all_data__)) {
+            if (namespace.id = self.getNamespaceId()) {
+                return namespace
+            }
+        }
+    }
+     /**
+      * @brief gets the file of the location.
+      * @return XmlFile 
+      */
+    pub fn getFile(self) -> XmlFile {
+        for (file in XmlFile(__all_data__)) {
+            if (file.id = self.getContainerId()) {
+                return file
+            }
+        }
+    }
+}
+/**
+ * @brief An xml namespace.
+ */
+schema XmlNamespace extends XmlNamespaceDO {
+
+}
+impl XmlNamespace {
+    @data_constraint
+    @inline
+    fn __all__(db: XmlDB) -> *XmlNamespace {
+        for (tmp in XmlNamespaceDO(db)) {
+            yield XmlNamespace {
+                id : tmp.id,
+                prefix_name : tmp.prefix_name,
+                url : tmp.url,
+                location_id : tmp.location_id
+            }
+        }
+    }
+    /**
+     * @brief gets the belonged xml element of the element.
+     * @return XmlElement 
+     */
+    pub fn getXmlElement(self) -> XmlElement {
+        for (relation in XmlHasNamespace(__all_data__),
+            element in XmlElement(__all_data__)) {
+            if (self = relation.getXmlNamespace()) {
+                if (element = relation.getXmlElement()) {
+                    return element
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the location for the element.
+     * @return Location
+     */
+    pub fn getLocation(self) -> Location {
+        for (loc in Location(__all_data__)) {
+            if (loc.id = self.getLocationId()) {
+                return loc
+            }
+        }
+    }
+    /**
+     * @brief gets the name for the element.
+     * @return string
+     */
+    pub fn getName(self) -> string {
+        let (temp = self.getPrefixName()) {
+            if (temp = "-1") {
+                return "xmlns"
+            }
+            if (temp != "-1") {
+                return "xmlns:" + temp
+            }
+        }
+    }
+}
+/**
+ * @brief An xml element prefix.
+ */
+schema XmlElementPrefix extends XmlElementPrefixDO {
+
+}
+impl XmlElementPrefix {
+    @data_constraint
+    @inline
+    fn __all__(db: XmlDB) -> *XmlElementPrefix {
+        for (tmp in XmlElementPrefixDO(db)) {
+            yield XmlElementPrefix {
+                name : tmp.name,
+                id : tmp.id,
+                parent_id : tmp.parent_id,
+                location_id : tmp.location_id
+            }
+        }
+    }
+     /**
+      * @brief gets the location for the element.
+      * @return Location
+      */
+    pub fn getLocation(self) -> Location {
+        for (loc in Location(__all_data__)) {
+            if (loc.id = self.getLocationId()) {
+                return loc
+            }
+        }
+    }
+     /**
+      * @brief gets the element of the prefix.
+      * @return XmlElement 
+      */
+    pub fn getParent(self) -> XmlElement {
+        for (parent in XmlElement(__all_data__)) {
+            if (parent.id = self.getParentId()) {
+                return parent
+            }
+        }
+    }
+}
+/**
+ * @brief An xml element name.
+ */
+schema XmlElementName extends XmlElementNameDO {
+
+}
+impl XmlElementName {
+    @data_constraint
+    @inline
+    fn __all__(db: XmlDB) -> *XmlElementName {
+        for (tmp in XmlElementNameDO(db)) {
+            yield XmlElementName {
+                name : tmp.name,
+                id : tmp.id,
+                parent_id : tmp.parent_id,
+                location_id : tmp.location_id
+            }
+        }
+    }
+    /**
+     * @brief gets the location for the element.
+     * @return Location
+     */
+    pub fn getLocation(self) -> Location {
+        for (loc in Location(__all_data__)) {
+            if (loc.id = self.getLocationId()) {
+                return loc
+            }
+        }
+    }
+    /**
+     * @brief gets the xml element of the element.
+     * @return XmlElement 
+     */
+    pub fn getParent(self) -> XmlElement {
+        for (parent in XmlElement(__all_data__)) {
+            if (parent.id = self.getParentId()) {
+                return parent
+            }
+        }
+    }
+}
+/**
+ * @brief An xml element.
+ */
+schema XmlElement extends XmlElementDO {
+
+}
+impl XmlElement {
+    @data_constraint
+    @inline
+    fn __all__(db: XmlDB) -> *XmlElement {
+        for (tmp in XmlElementDO(db)) {
+            yield XmlElement {
+                id : tmp.id,
+                parent_id : tmp.parent_id,
+                index_order : tmp.index_order,
+                location_id : tmp.location_id
+            }
+        }
+    }
+    /**
+     * @brief gets the parent of the element.
+     * @return XmlElement 
+     */
+    pub fn getParent(self) -> XmlElement {
+        for (parent in XmlElement(__all_data__)) {
+            if (parent.id = self.getParentId()) {
+                return parent
+            }
+        }
+    }
+    /**
+     * @brief gets an ancestor of the element.
+     * @return XmlElement 
+     */
+    pub fn getAnAncestor(self) -> *XmlElement {
+        for (ancestor in XmlElement(__all_data__)) {
+            if (ancestor = self.getParent()) {
+                yield ancestor
+            }
+            for (temp in XmlElement(__all_data__)) {
+                if (ancestor = temp.getParent()) {
+                    for (auto_tmp1 in self.getAnAncestor()) {
+                        if (temp = auto_tmp1) {
+                            yield ancestor
+                        }
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets a child element of the element.
+     * @return XmlElement 
+     */
+    pub fn getAChild(self) -> *XmlElement {
+        for (child in XmlElement(__all_data__)) {
+            if (self = child.getParent()) {
+                yield child
+            }
+        }
+    }
+    /**
+     * @brief gets the prefix of the element
+     * @return string 
+     */
+    pub fn getElementPrefix(self) -> string {
+        for (prefix in string::__undetermined_all__()) {
+            for (elementPrefix in XmlElementPrefix(__all_data__)) {
+                if (self = elementPrefix.getParent()) {
+                    if (prefix = elementPrefix.getName()) {
+                        return prefix
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the element name.
+     * @return string 
+     */
+    pub fn getElementName(self) -> string {
+        for (name in string::__undetermined_all__()) {
+            for (element in XmlElementName(__all_data__)) {
+                if (self = element.getParent()) {
+                    if (name = element.getName()) {
+                        return name
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the attribute of the element, if any.
+     * @return XmlAttribute 
+     */
+    pub fn getAttribute(self) -> *XmlAttribute {
+        for (attribute in XmlAttribute(__all_data__)) {
+            if (self = attribute.getXmlElement()) {
+                yield attribute
+            }
+        }
+    }
+    /**
+     * @brief gets the xml character of the element, if any.
+     * @return XmlCharacter 
+     */
+    pub fn getCharacter(self) -> *XmlCharacter {
+        for (char in XmlCharacter(__all_data__)) {
+            if (self = char.getBelongedElement()) {
+                yield char
+            }
+        }
+    }
+    /**
+     * @brief gets the location for the element.
+     * @return Location
+     */
+    pub fn getLocation(self) -> Location {
+        for (loc in Location(__all_data__)) {
+            if (loc.id = self.getLocationId()) {
+                return loc
+            }
+        }
+    }
+    /**
+     * @brief gets the attribute's value by a given attribute name.
+     * @return string
+     */
+    pub fn getValueByAttributeName(self, name : string) -> *string {
+        for (value in string::__undetermined_all__()) {
+            for (attr in XmlAttribute(__all_data__)) {
+                if (self = attr.getXmlElement()) {
+                    if (name = attr.getName()) {
+                        if (value = attr.getValue()) {
+                            yield value
+                        }
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the element's name with the prefix.
+     * @return string 
+     */
+    pub fn getName(self) -> string {
+        if (existsPrefix(self)) {
+            return self.getElementPrefix() + ":" + self.getElementName()
+        }
+        if (!existsPrefix(self)) {
+            return self.getElementName()
+        }
+    }
+}
+/**
+ * @brief An xml file.
+ */
+schema XmlFile extends XmlFileDO {
+
+}
+impl XmlFile {
+    @data_constraint
+    @inline
+    fn __all__(db: XmlDB) -> *XmlFile {
+        for (tmp in XmlFileDO(db)) {
+            yield XmlFile {
+                id : tmp.id,
+                file_name : tmp.file_name,
+                relative_path : tmp.relative_path
+            }
+        }
+    }
+}
+/**
+ * @brief The location information of a locatable xml elements.
+ */
+schema Location extends LocationDO {
+
+}
+impl Location {
+    @data_constraint
+    @inline
+    fn __all__(db: XmlDB) -> *Location {
+        for (tmp in LocationDO(db)) {
+            yield Location {
+                id : tmp.id,
+                start_line_number : tmp.start_line_number,
+                start_column_number : tmp.start_column_number,
+                end_line_number : tmp.end_line_number,
+                end_column_number : tmp.end_column_number,
+                file_id : tmp.file_id
+            }
+        }
+    }
+    /**
+     * @brief gets the file of the location.
+     * @return XmlFile 
+     */
+    pub fn getFile(self) -> XmlFile {
+        for (file in XmlFile(__all_data__)) {
+            if (file.id = self.getFileId()) {
+                return file
+            }
+        }
+    }
+}
+pub fn existsPrefix(e : XmlElement) -> bool {
+    for (prefix in string::__undetermined_all__()) {
+        for (elementPrefix in XmlElementPrefix(__all_data__)) {
+            if (e = elementPrefix.getParent()) {
+                if (prefix = elementPrefix.getName()) {
+                    return true
+                }
+            }
+        }
+    }
+}

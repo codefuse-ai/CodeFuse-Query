@@ -1,0 +1,368 @@
+/**
+ * @brief A scope enclosing expression relation. 
+ */
+schema ScopeEnclosingExpression extends ScopeEnclosingExpressionDO {
+    
+}
+impl ScopeEnclosingExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: PythonDB) -> *ScopeEnclosingExpression {
+        for (tmp in ScopeEnclosingExpressionDO(db)) {
+            yield ScopeEnclosingExpression {
+                expression_oid : tmp.expression_oid,
+                scope_oid : tmp.scope_oid
+            }
+        }
+    }
+    /**
+     * @brief gets the enclosing expression in the relation.
+     * @return Expression 
+     */
+    pub fn getExpression(self) -> Expression {
+        for (f in Expression(__all_data__)) {
+            if (f.key_eq(self)) {
+                return f
+            }
+        }
+    }
+    /**
+     * @brief gets the enclosed function in the relation.
+     * @return Function 
+     */
+    pub fn getFunction(self) -> Function {
+        for (f in Function(__all_data__)) {
+            if (f.element_oid = self.getScopeOid()) {
+                return f
+            }
+        }
+    }
+    /**
+     * @brief gets the enclosed class in the relation.
+     * @return Class 
+     */
+    pub fn getClass(self) -> Class {
+        for (f in Class(__all_data__)) {
+            if (f.element_oid = self.getScopeOid()) {
+                return f
+            }
+        }
+    }
+    /**
+     * @brief gets the enclosed module in the relation.
+     * @return module 
+     */
+    pub fn getModule(self) -> Module {
+        for (m in Module(__all_data__)) {
+            if (m.key_eq(self.getEnclosingScope())) {
+                return m
+            }
+            if (m.key_eq(self.getEnclosingScope().getEnclosingScope())) {
+                return m
+            }
+        }
+    }
+    /**
+     * @brief gets the direct enclosed scope in the relation.
+     * @return Scope 
+     */
+    pub fn getEnclosingScope(self) -> Scope {
+        for (f in Scope(__all_data__)) {
+            if (f.id = self.getScopeOid()) {
+                return f
+            }
+        }
+    }
+}
+/**
+ * @brief A scope enclosing statement relation. 
+ */
+schema ScopeEnclosignStatement extends ScopeEnclosingStatementDO {
+    
+}
+impl ScopeEnclosignStatement {
+    @data_constraint
+    @inline
+    fn __all__(db: PythonDB) -> *ScopeEnclosignStatement {
+        for (tmp in ScopeEnclosingStatementDO(db)) {
+            yield ScopeEnclosignStatement {
+                statement_oid : tmp.statement_oid,
+                scope_oid : tmp.scope_oid
+            }
+        }
+    }
+    /**
+     * @brief gets the enclosing statement in the relation.
+     * @return Statement 
+     */
+    pub fn getStatement(self) -> Statement {
+        for (f in Statement(__all_data__)) {
+            if (f.key_eq(self)) {
+                return f
+            }
+        }
+    }
+    /**
+     * @brief gets the enclosed function in the relation.
+     * @return Function 
+     */
+    pub fn getFunction(self) -> Function {
+        for (f in Function(__all_data__)) {
+            if (f.element_oid = self.getScopeOid()) {
+                return f
+            }
+        }
+    }
+    /**
+     * @brief gets the enclosed class in the relation.
+     * @return Class 
+     */
+    pub fn getClass(self) -> Class {
+        for (f in Class(__all_data__)) {
+            if (f.element_oid = self.getScopeOid()) {
+                return f
+            }
+        }
+    }
+    /**
+     * @brief gets the enclosed module in the relation.
+     * @return module 
+     */
+    pub fn getModule(self) -> Module {
+        for (m in Module(__all_data__)) {
+            if (m.key_eq(self.getEnclosingScope())) {
+                return m
+            }
+            if (m.key_eq(self.getEnclosingScope().getEnclosingScope())) {
+                return m
+            }
+        }
+    }
+    /**
+     * @brief gets the direct enclosed scope in the relation.
+     * @return Scope 
+     */
+    pub fn getEnclosingScope(self) -> Scope {
+        for (f in Scope(__all_data__)) {
+            if (f.id = self.getScopeOid()) {
+                return f
+            }
+        }
+    }
+}
+/**
+ * @brief A metric function. 
+ */
+schema MetricFunction extends Function {
+    
+}
+impl MetricFunction {
+    @data_constraint
+    @inline
+    fn __all__(db: PythonDB) -> *MetricFunction {
+        for (tmp in Function(db)) {
+            yield MetricFunction {
+                element_oid : tmp.element_oid,
+                type : tmp.type,
+                element_index : tmp.element_index,
+                parent_oid : tmp.parent_oid,
+                location_oid : tmp.location_oid,
+                printable_text : tmp.printable_text
+            }
+        }
+    }
+    /**
+     * @brief The cyclomatic complexity of a callable is defined as the number
+     * of branching statements (`if`, `while`, `do`, `for`, `matchcase`, `except`)
+     * plus the number of branching expressions (`?`, `&&` and `||`)
+     * plus one.
+     * @return int 
+     */
+    pub fn getCyclomaticComplexity(self) -> int {
+        let (tmp1 = tmp_branchingStatement(self).len(),
+            tmp2 = tmp_branchingExceptHandle(self).len(),
+            tmp3 = tmp_branchingMatchCase(self).len()) {
+            for (tmp4 in int::__undetermined_all__()) {
+                if (branchingExpression(tmp4, self.element_oid)) {
+                    return tmp1 + tmp2 + tmp3 + tmp4 + 1
+                }
+            }
+        }
+    }
+}
+pub fn branchingExceptHandle(c : ExceptHandler, f : Function) -> bool {
+    let (m = c.getTryStatement()) {
+        if (f.key_eq(m.getEnclosingScope())) {
+            return true
+        }
+    }
+}
+pub fn branchingStatement(tmp : Statement, f : Function) -> bool {
+    for (i in IfStatement(__all_data__)) {
+        if (i.key_eq(tmp)) {
+            if (f.key_eq(i.getEnclosingScope())) {
+                return true
+            }
+        }
+    }
+    for (i in WhileStatement(__all_data__)) {
+        if (i.key_eq(tmp)) {
+            if (f.key_eq(i.getEnclosingScope())) {
+                return true
+            }
+        }
+    }
+    for (i in ForStatement(__all_data__)) {
+        if (i.key_eq(tmp)) {
+            if (f.key_eq(i.getEnclosingScope())) {
+                return true
+            }
+        }
+    }
+}
+pub fn branchingMatchCase(l : MatchCase, f : Function) -> bool {
+    for (c in MatchStatement(__all_data__)) {
+        if (l.isDefault() = 0) {
+            if (c = l.getMatchStatement()) {
+                if (f.key_eq(c.getEnclosingScope())) {
+                    for (b in BreakStatement(__all_data__)) {
+                        for (auto_tmp1 in b.getAnAncestor()) {
+                            if (l.key_eq(auto_tmp1)) {
+                                return true
+                            }
+                        }
+                    }
+                    for (r in ReturnStatement(__all_data__)) {
+                        for (auto_tmp2 in r.getAnAncestor()) {
+                            if (l.key_eq(auto_tmp2)) {
+                                return true
+                            }
+                        }
+                    }
+                    for (t in ExceptHandler(__all_data__)) {
+                        for (auto_tmp3 in t.getAnAncestor()) {
+                            if (l.key_eq(auto_tmp3)) {
+                                return true
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn branchingIfExpression(tmp : int, f : int) -> bool {
+    for (i in IfExpression(__all_data__)) {
+        if (f = i.getEnclosingScope().id && tmp = i.element_oid) {
+            return true
+        }
+    }
+}
+pub fn branchingBooleanExpression(tmp : int, size : int) -> bool {
+    for (i in AndLogicalExpression(__all_data__)) {
+        if (size = i.getSize() && tmp = i.element_oid) {
+            return true
+        }
+    }
+    for (i in OrLogicalExpression(__all_data__)) {
+        if (size = i.getSize() && tmp = i.element_oid) {
+            return true
+        }
+    }
+}
+pub fn branchingExpression(tmp1: int, tmp2: int) -> bool {
+    for (f in Function(__all_data__)) {
+        if (f.element_oid = tmp2) {
+            let (m = tmp_branchingExpression_branchingIfExpression(__all_data__, tmp2).len()) {
+                let (n = tmp_branchingExpression_branchingBooleanExpression(__all_data__, __all_data__, tmp2).sum()) {
+                    if (tmp1 = m + n) {
+                        return true
+                    }
+                }
+            }
+        }
+    }
+}
+
+fn tmp_branchingStatement(x: MetricFunction) -> *int {
+    for (i in IfStatement(__all_data__)) {
+        if (i.getEnclosingScope().key_eq(x)) {
+            yield i.element_oid
+        }
+    }
+    for (i in WhileStatement(__all_data__)) {
+        if (i.getEnclosingScope().key_eq(x)) {
+            yield i.element_oid
+        }
+    }
+    for (i in ForStatement(__all_data__)) {
+        if (i.getEnclosingScope().key_eq(x)) {
+            yield i.element_oid
+        }
+    }
+}
+
+fn tmp_branchingExceptHandle(x: MetricFunction) -> *ExceptHandler {
+    for (c in ExceptHandler(__all_data__)) {
+        let (m = c.getTryStatement()) {
+            if (x.key_eq(m.getEnclosingScope())) {
+                yield c
+            }
+        }
+    }
+}
+
+fn tmp_branchingMatchCase(x: MetricFunction) -> *MatchCase {
+    for (l in MatchCase(__all_data__)) {
+        if (l.isDefault() = 0) {
+            let (c = l.getMatchStatement()) {
+                if (x.key_eq(c.getEnclosingScope())) {
+                    for (b in BreakStatement(__all_data__)) {
+                        for (tmp in b.getAnAncestor()) {
+                            if (l.key_eq(tmp)) {
+                                yield l
+                            }
+                        }
+                    }
+                    for (r in ReturnStatement(__all_data__)) {
+                        for (tmp in r.getAnAncestor()) {
+                            if (l.key_eq(tmp)) {
+                                yield l
+                            }
+                        }
+                    }
+                    for (e in ExceptHandler(__all_data__)) {
+                        for (tmp in e.getAnAncestor()) {
+                            if (l.key_eq(tmp)) {
+                                yield l
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+fn tmp_branchingExpression_branchingIfExpression(e: Expression, f: int) -> *IfExpression{
+    for (i in IfExpression(__all_data__)) {
+        if (i.key_eq(e)) {
+            if (i.getEnclosingScope().id = f) {
+                yield i
+            }
+        }
+    }
+}
+
+fn tmp_branchingExpression_branchingBooleanExpression(e: BooleanExpression, i: int, f: int) -> *int {
+    for (tmp in BooleanExpression(__all_data__)) {
+        if (e = tmp) {
+            if (f = e.getEnclosingScope().id) {
+                if (branchingBooleanExpression(e.element_oid, i)) {
+                    yield i
+                }
+            }
+        }
+    }
+
+}

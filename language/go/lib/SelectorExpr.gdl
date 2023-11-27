@@ -1,0 +1,68 @@
+schema Selector extends Expr {
+
+}
+impl Selector {
+    @data_constraint
+    @inline
+    fn __all__(db: GoDB) -> *Selector {
+        for (tmp in Expr(db)) {
+            yield Selector {
+                id : tmp.id
+            }
+        }
+    }
+
+    pub fn getSelectorSignature(self) -> *string {
+        for (e in Expr(__all_data__),
+            to in TypeOfDO(__all_data__),
+            t in Type(__all_data__)) {
+            if (e.key_eq(self)) {
+                if (e.id = to.getExpr()) {
+                    if (t.oid = to.getTp()) {
+                        yield t.getFormatString()
+                    }
+                }
+            }
+        }
+    }
+}
+schema SelectorExpr extends Expr {
+
+}
+impl SelectorExpr {
+    @data_constraint
+    @inline
+    fn __all__(db: GoDB) -> *SelectorExpr {
+        for (e in Expr(db)) {
+            if (e.isSelectorExpr()) {
+                yield SelectorExpr {
+                    id : e.id
+                }
+            }
+        }
+    }
+    pub fn getBase(self) -> Node {
+        for (n in Node(__all_data__),
+            e in Expr(__all_data__)) {
+            if (e.getIdx() = 0) {
+                if (e.getParentNode().key_eq(self)) {
+                    if (n.key_eq(e)) {
+                        return n
+                    }
+                }
+            }
+        }
+    }
+    pub fn getSelector(self) -> Selector {
+        for (s in Selector(__all_data__),
+            e in Expr(__all_data__)) {
+            if (e.getIdx() = 1) {
+                if (e.getParentNode().key_eq(self)) {
+                    if (s.key_eq(e)) {
+                        return s
+                    }
+                }
+            }
+        }
+    }
+}

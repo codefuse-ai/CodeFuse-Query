@@ -1,0 +1,39 @@
+// script
+use coref::go::*
+
+fn default_db() -> GoDB {
+    return GoDB::load("coref_go_src.db")
+}
+/**
+ * @param name          file name
+ * @param funcCount     function/method quantity
+ * @param totallines    total lines of file
+ * @param codelines     code line of file
+ * @param commentlines  comment line of fine
+ * @param md5           md5 of this file
+ * @param sha256        sha256 of this file
+ */
+fn out(
+    name: string,
+    funcCount: int,
+    totallines: int,
+    codelines: int,
+    commentlines: int,
+    md5: string,
+    sha256: string) -> bool {
+    for(f in File(default_db())) {
+        if (name = f.getName() &&
+            funcCount = f.getFunctionCount() &&
+            md5 = f.getMd5Sum() &&
+            sha256 = f.getSha256Sum() &&
+            totallines = f.getLineInfo().getNumberOfTotalLines() &&
+            codelines = f.getLineInfo().getNumberOfCodeLines() &&
+            commentlines = f.getLineInfo().getNumberOfCommentLines()) {
+            return true
+        }
+    }
+}
+
+fn main() {
+    output(out())
+}

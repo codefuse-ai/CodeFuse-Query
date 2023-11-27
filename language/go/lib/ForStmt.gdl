@@ -1,0 +1,56 @@
+schema ForStmt extends Statement {
+
+}
+impl ForStmt {
+    @data_constraint
+    @inline
+    fn __all__(db: GoDB) -> *ForStmt {
+        for (tmp in Statement(db)) {
+            for (s in Statement(db)) {
+                if (tmp = s) {
+                    if (s.isForStmt()) {
+                        yield ForStmt {
+                            id : tmp.id
+                        }
+                    }
+                }
+            }
+        }
+    }
+    pub fn getInitStmt(self) -> Statement {
+        for (s in Statement(__all_data__)) {
+            if (s.getParentNode().key_eq(self)) {
+                if (s.getIdx() = 0) {
+                    return s
+                }
+            }
+        }
+    }
+    pub fn getCondExpr(self) -> Expr {
+        for (e in Expr(__all_data__)) {
+            if (e.getParentNode().key_eq(self)) {
+                if (e.getIdx() = 1) {
+                    return e
+                }
+            }
+        }
+    }
+    pub fn getPostStmt(self) -> Statement {
+        for (s in Statement(__all_data__)) {
+            if (s.getParentNode().key_eq(self)) {
+                if (s.getIdx() = 2) {
+                    return s
+                }
+            }
+        }
+    }
+    pub fn getBodyStmt(self) -> Statement {
+        for (s in Statement(__all_data__)) {
+            if (s.getParentNode().key_eq(self)) {
+                if (s.getIdx() = 3) {
+                    return s
+                }
+            }
+        }
+    }
+}

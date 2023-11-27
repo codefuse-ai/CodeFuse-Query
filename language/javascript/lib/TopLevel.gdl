@@ -1,0 +1,131 @@
+/**
+ * @filename: Statement
+ * @brief: Provides classes and predicates for working with JavaScript / TypeScript top-levels.
+ */
+
+schema TopLevel extends TopLevelDO {
+}
+
+impl TopLevel {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *TopLevel {
+        for (tmp in TopLevelDO(db)) {
+            yield TopLevel {
+                oid : tmp.oid,
+                kind : tmp.kind,
+                location_oid : tmp.location_oid
+            }
+        }
+    }
+
+    /**
+     * Gets the location of this top-level.
+     */
+    pub fn getLocation(self) -> Location {
+        for (location in Location(__all_data__)) {
+            if (location.oid = self.getLocationOid()) {
+                return location
+            }
+        }
+    }
+
+    /**
+     * Gets a child node of this top-level.
+     */
+    pub fn getAChild(self) -> *Node {
+        for (child in Node(__all_data__)) {
+            if (child.getParent().key_eq(self)) {
+                yield child
+            }
+        }
+    }
+
+    /**
+     * Gets the `i`th child of this top-level.
+     */
+    pub fn getChild(self, i: int) -> Node {
+        for (child in Node(__all_data__)) {
+            if (child.getIndex() = i) {
+                if (child.getParent().key_eq(self)) {
+                    return child
+                }
+            }
+        }
+    }
+
+    /**
+     * Get a statement of this top-level.
+     */
+    pub fn getAStatement(self) -> *Statement {
+        for (statement in Statement(__all_data__)) {
+            if (statement.getParent().key_eq(self)) {
+                yield statement
+            }
+        }
+    }
+
+    /**
+     * Get the `i`th statement of this top-level.
+     */
+    pub fn getStatement(self, i: int) -> Statement {
+        for (statement in Statement(__all_data__)) {
+            if (statement.getIndex() = i) {
+                if (statement.getParent().key_eq(self)) {
+                    return statement
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets a descendant of this top-level.
+     */
+    pub fn getADescendant(self) -> *Node {
+        yield self.getAChild()
+        for (child in self.getAChild()) {
+            yield child.getADescendant()
+        }
+    }
+
+    /**
+     * Gets a descendant of this top-level by the level of the hierarchy.
+     *
+     * @param level: the number of levels to go up in the hierarchy.
+     */
+    pub fn getADescendantByLevel(self, level: int) -> *Node {
+        if (level = 1) {
+            yield self.getAChild()
+        }
+        for (child in self.getAChild()) {
+            for (childLevel in int::__undetermined_all__()) {
+                for (descendant in child.getADescendantByLevel(childLevel)) {
+                    if (level = childLevel + 1) {
+                        yield descendant
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets the text of this top-level.
+     */
+    pub fn getText(self) -> string {
+        return self.getLocation().getText()
+    }
+
+    /**
+     * Gets the number of child nodes.
+     */
+    pub fn getChildCount(self) -> int {
+        return self.getAChild().len()
+    }
+
+    /**
+     * Get the number of statements in this top-level.
+     */
+    pub fn getStatementCount(self) -> int {
+        return self.getAStatement().len()
+    }
+}

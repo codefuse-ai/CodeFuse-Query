@@ -1,0 +1,61 @@
+// script
+use coref::xml::*
+
+// select XmlElement containing "mobileService"
+schema MobileServiceXmlElement extends XmlElement{}
+
+impl MobileServiceXmlElement {
+    @data_constraint
+    pub fn __all__(db: XmlDB) -> *MobileServiceXmlElement {
+        for (e in XmlElement(db)) {
+            if (e.getElementName() = "mobileService") {
+                yield MobileServiceXmlElement {
+                    id: e.id,
+                    location_id: e.location_id,
+                    parent_id: e.parent_id,
+                    index_order: e.index_order
+                }
+            }
+        }
+    }
+
+    pub fn getServiceBeanValue(self) -> string {
+        for (a in self.getAttribute()) {
+            if (a.getName() = "serviceBean") {
+                return a.getValue()
+            }
+        }
+    }
+}
+
+// select XmlElement containing "sofa:extension"
+schema SofaExtensionXmlElement extends XmlElement{}
+impl SofaExtensionXmlElement {
+    @data_constraint
+    pub fn __all__(db: XmlDB) -> *SofaExtensionXmlElement {
+        for (e in XmlElement(db)) {
+            if (e.getName() = "sofa:extension") {
+                yield SofaExtensionXmlElement {
+                    id: e.id,
+                    location_id: e.location_id,
+                    parent_id: e.parent_id,
+                    index_order: e.index_order
+                }
+            }
+        }
+    }
+}
+
+fn out(value: string) -> bool {
+    let (db = XmlDB::load("coref_xml_src.db")) {
+        for (m in MobileServiceXmlElement(db), s in SofaExtensionXmlElement(db), ancestor in m.getAnAncestor()) {
+            if (s.key_eq(ancestor) && value = m.getServiceBeanValue()) {
+                return true
+            }
+        }
+    }
+}
+
+fn main() {
+    output(out())
+}

@@ -1,0 +1,278 @@
+schema Spec extends Node {
+
+}
+impl Spec {
+    @data_constraint
+    @inline
+    fn __all__(db: GoDB) -> *Spec {
+        for (s in SpecDO(db)) {
+            yield Spec {
+                id : s.oid
+            }
+        }
+    }
+    pub fn getKind(self) -> int {
+        for (s in SpecDO(__all_data__)) {
+            if (s.key_eq(self)) {
+                let (k = s.getKind()) {
+                    return k
+                }
+            }
+        }
+    }
+    pub fn getIdx(self) -> int {
+        for (s in SpecDO(__all_data__)) {
+            if (s.key_eq(self)) {
+                let (k = s.getIdx()) {
+                    return k
+                }
+            }
+        }
+    }
+
+    pub fn getType(self) -> string {
+        if (self.isImportSpec()) {
+            return "ImportSpec"
+        }
+        if (self.isValueSpec()) {
+            return "ValueSpec"
+        }
+        if (self.isTypedefSpec()) {
+            return "TypedefSpec"
+        }
+        if (self.isAliasSpec()) {
+            return "AliasSpec"
+        }
+    }
+    pub fn isImportSpec(self) -> bool {
+        if (self.getKind() = 0) {
+            return true
+        }
+    }
+    pub fn isValueSpec(self) -> bool {
+        if (self.getKind() = 1) {
+            return true
+        }
+    }
+    pub fn isTypedefSpec(self) -> bool {
+        if (self.getKind() = 2) {
+            return true
+        }
+    }
+    pub fn isAliasSpec(self) -> bool {
+        if (self.getKind() = 3) {
+            return true
+        }
+    }
+    pub fn getAssociatedGenDecl(self) -> Node {
+        let (tmp = self.getParentNode()) {
+            for (d in Decl(__all_data__)) {
+                if (d.key_eq(tmp)) {
+                    return tmp
+                }
+            }
+        }
+    }
+}
+schema ImportSpec extends Spec {
+
+}
+impl ImportSpec {
+    @data_constraint
+    @inline
+    fn __all__(db: GoDB) -> *ImportSpec {
+        for (s in Spec(db)) {
+            if (s.isImportSpec()) {
+                yield ImportSpec {
+                    id : s.id
+                }
+            }
+        }
+    }
+    pub fn getImportSpecName(self) -> string {
+        for (e in Expr(__all_data__)) {
+            if (e.getIdx() = 0) {
+                if (e.getParentNode().key_eq(self)) {
+                    for (auto_tmp1 in e.print()) {
+                        return auto_tmp1
+                    }
+                }
+            }
+        }
+    }
+    pub fn getImportSpecPath(self) -> string {
+        for (e in Expr(__all_data__)) {
+            if (e.getIdx() = 1) {
+                if (e.getParentNode().key_eq(self)) {
+                    for (auto_tmp1 in e.print()) {
+                        return auto_tmp1
+                    }
+                }
+            }
+        }
+    }
+}
+schema TypeSpec extends Spec {
+
+}
+impl TypeSpec {
+    @data_constraint
+    @inline
+    fn __all__(db: GoDB) -> *TypeSpec {
+        for (s in Spec(db)) {
+            if (s.isTypedefSpec()) {
+                yield TypeSpec {
+                    id : s.id
+                }
+            }
+        }
+    }
+    pub fn getTypeSpecName(self) -> string {
+        for (e in Expr(__all_data__)) {
+            if (e.getParentNode().key_eq(self)) {
+                if (e.getIdx() = 0) {
+                    for (auto_tmp1 in e.print()) {
+                        return auto_tmp1
+                    }
+                }
+            }
+        }
+    }
+}
+schema ValueSpec extends Spec {
+
+}
+impl ValueSpec {
+    @data_constraint
+    @inline
+    fn __all__(db: GoDB) -> *ValueSpec {
+        for (s in Spec(db)) {
+            if (s.isValueSpec()) {
+                yield ValueSpec {
+                    id : s.id
+                }
+            }
+        }
+    }
+    pub fn getAValueSpecName(self) -> *string {
+        for (e in Expr(__all_data__)) {
+            if (e.getIdx() < 0) {
+                if (e.getParentNode().key_eq(self)) {
+                    for (auto_tmp1 in e.print()) {
+                        yield auto_tmp1
+                    }
+                }
+            }
+        }
+    }
+    pub fn getAValueSpecNameByIdx(self, id : int) -> *string {
+        for (e in Expr(__all_data__)) {
+            let (idx = e.getIdx()) {
+                if (idx < 0 && id = idx) {
+                    if (e.getParentNode().key_eq(self)) {
+                        for (auto_tmp1 in e.print()) {
+                            yield auto_tmp1
+                        }
+                    }
+                }
+            }
+        }
+    }
+    pub fn getSignature(self) -> *string {
+        for (e in Expr(__all_data__),
+            to in TypeOfDO(__all_data__),
+            t in Type(__all_data__)) {
+            if (e.getParentNode().key_eq(self)) {
+                let (idx = e.getIdx()) {
+                    if (idx < 0) {
+                        if (to.getExpr() = e.id) {
+                            if (t.oid = to.getTp()) {
+                                for (auto_tmp1 in t.getFormatString()) {
+                                    yield auto_tmp1
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    pub fn hasUserInitValue(self) -> bool {
+        for (e in Expr(__all_data__)) {
+            if (e.getParentNode().key_eq(self)) {
+                let (idx = e.getIdx()) {
+                    if (idx > 0) {
+                        return true
+                    }
+                }
+            }
+        }
+    }
+    pub fn getAValueByIdx(self, id : int) -> *string {
+        for (e in Expr(__all_data__)) {
+            let (idx = e.getIdx()) {
+                if (idx > 0 && id = idx) {
+                    if (e.getParentNode().key_eq(self)) {
+                        for (auto_tmp1 in e.print()) {
+                            yield auto_tmp1
+                        }
+                    }
+                }
+            }
+        }
+    }
+    pub fn getAValueNodeByIdx(self, id : int) -> *Node {
+        for (e in Expr(__all_data__)) {
+            let (idx = e.getIdx()) {
+                if (idx > 0 && idx = id) {
+                    if (e.getParentNode().key_eq(self)) {
+                        yield Node{id: e.id}
+                    }
+                }
+            }
+        }
+    }
+}
+schema LocalVaribleDecl extends Decl {
+
+}
+impl LocalVaribleDecl {
+    @data_constraint
+    @inline
+    fn __all__(db: GoDB) -> *LocalVaribleDecl {
+        for (d in Decl(db)) {
+            if (d.isLocalVaribleDecl()) {
+                yield LocalVaribleDecl {
+                    id : d.id
+                }
+            }
+        }
+    }
+    pub fn getName(self) -> *string {
+        for (ts in TypeSpec(__all_data__)) {
+            if (ts.getAssociatedGenDecl().key_eq(self)) {
+                yield ts.getTypeSpecName()
+            }
+        }
+        for (vs in ValueSpec(__all_data__)) {
+            if (vs.getAssociatedGenDecl().key_eq(self)) {
+                yield vs.getAValueSpecName()
+            }
+        }
+    }
+    pub fn isPublicDecl(self) -> bool {
+        if (self.isConstDecl()) {
+            return true
+        }
+        for (auto_tmp1 in self.getName()) {
+            if (auto_tmp1.matches("^[A-Z].*")) {
+                return true
+            }
+        }
+    }
+    pub fn isCommented(self) -> bool {
+        if (self.countAssociatedComment() > 0) {
+            return true
+        }
+    }
+}

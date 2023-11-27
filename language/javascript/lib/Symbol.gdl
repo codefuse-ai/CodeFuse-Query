@@ -1,0 +1,38 @@
+/**
+ * @filename: Statement
+ * @brief: Provides classes and predicates for working with JavaScript / TypeScript symbols.
+ */
+
+/**
+ * A symbol.
+ */
+schema Symbol extends SymbolDO {
+}
+
+impl Symbol {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *Symbol {
+        for (tmp in SymbolDO(db)) {
+            yield Symbol {
+                oid : tmp.oid,
+                name : tmp.name,
+                description : tmp.description
+            }
+        }
+    }
+
+    /**
+     * Gets a node associated with this symbol.
+     */
+    pub fn getANode(self) -> *Node {
+        for (node in Node(__all_data__),
+            nodeSymbol in NodeSymbolDO(__all_data__)) {
+            if (node.key_eq(nodeSymbol)) {
+                if (nodeSymbol.getSymbolOid() = self.oid) {
+                    yield node
+                }
+            }
+        }
+    }
+}

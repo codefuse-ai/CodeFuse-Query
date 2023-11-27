@@ -1,0 +1,1234 @@
+/**
+ * @brief A ast parent of a coref element.
+ */
+schema ElementParent {
+    @primary id: int
+}
+impl ElementParent {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *ElementParent {
+        for (s in Statement(db)) {
+            yield ElementParent {id : s.element_hash_id}
+        }
+        for (e in Expression(db)) {
+            yield ElementParent {id : e.element_hash_id}
+        }
+        for (var in LocalVariable(db)) {
+            yield ElementParent {id : var.element_hash_id}
+        }
+        for (m in Method(db)) {
+            yield ElementParent {id : m.element_hash_id}
+        }
+        for (c in Constructor(db)) {
+            yield ElementParent {id : c.element_hash_id}
+        }
+        for (f in Field(db)) {
+            yield ElementParent {id : f.element_hash_id}
+        }
+        for (clazz in Class(db)) {
+            yield ElementParent {id : clazz.element_hash_id}
+        }
+        for (inf in Interface(db)) {
+            yield ElementParent {id : inf.element_hash_id}
+        }
+        for (p in Parameter(db)) {
+            yield ElementParent {id : p.element_hash_id}
+        }
+        for (cb in CodeBlock(db)) {
+            yield ElementParent {id : cb.element_hash_id}
+        }
+        for (ident in Identifier(db)) {
+            yield ElementParent {id : ident.element_hash_id}
+        }
+        for (te in TypeElement(db)) {
+            yield ElementParent {id : te.element_hash_id}
+        }
+        for (mo in Modifier(db)) {
+            yield ElementParent {id : mo.element_hash_id}
+        }
+        for (el in ExpressionList(db)) {
+            yield ElementParent {id : el.element_hash_id}
+        }
+        for (ml in ModifierList(db)) {
+            yield ElementParent {id : ml.element_hash_id}
+        }
+        for (ac in AnonymousClass(db)) {
+            yield ElementParent {id : ac.element_hash_id}
+        }
+        for (comment in Comment(db)) {
+            yield ElementParent {id : comment.element_hash_id}
+        }
+        for (ai in AnnotationArrayInitializer(db)) {
+            yield ElementParent {id : ai.element_hash_id}
+        }
+        for (file in File(db)) {
+            yield ElementParent {id : file.element_hash_id}
+        }
+        for (root in Program(db)) {
+            yield ElementParent {id : root.program_hash_id}
+        }
+        for (de in DeclaredElement(db)) {
+            yield ElementParent {id : de.element_hash_id}
+        }
+        for (re in ReferenceElement(db)) {
+            yield ElementParent {id : re.element_hash_id}
+        }
+        for (im in Import(db)) {
+            yield ElementParent {id : im.element_hash_id}
+        }
+        for (im in ReferenceList(db)) {
+            yield ElementParent {id : im.element_hash_id}
+        }
+        for (im in Annotation(db)) {
+            yield ElementParent {id : im.id}
+        }
+        for (im in JavadocComment(db)) {
+            yield ElementParent {id : im.element_hash_id}
+        }
+        for (im in ReferenceParameterList(db)) {
+            yield ElementParent {id : im.id}
+        }
+        for (im in ImportStaticStatement(db)) {
+            yield ElementParent {id : im.element_hash_id}
+        }
+        for (im in ImportStaticReferenceElement(db)) {
+            yield ElementParent {id : im.element_hash_id}
+        }
+        for (im in ResourceList(db)) {
+            yield ElementParent {id : im.element_hash_id}
+        }
+        for (im in ClassInitializer(db)) {
+            yield ElementParent {id : im.element_hash_id}
+        }
+        for (im in CatchClause(db)) {
+            yield ElementParent {id : im.element_hash_id}
+        }
+        for (im in EnumConstant(db)) {
+            yield ElementParent {id : im.element_hash_id}
+        }
+        for (im in PackageStatement(db)) {
+            yield ElementParent {id : im.element_hash_id}
+        }
+        for (im in JavadocTag(db)) {
+            yield ElementParent {id : im.element_hash_id}
+        }
+        for (im in AnnotationAccessArgument(db)) {
+            yield ElementParent {id : im.id}
+        }
+        for (l in LocalClass(db)) {
+            yield ElementParent {id : l.element_hash_id}
+        }
+        for (im in JavadocTagValue(db)) {
+            yield ElementParent {id : im.element_hash_id}
+        }
+        for (im in JavadocDataToken(db)) {
+            yield ElementParent {id : im.element_hash_id}
+        }
+        for (nf in NpFile(db)) {
+            yield ElementParent {id : nf.element_hash_id}
+        }
+        for (nc in NpClass(db)) {
+            yield ElementParent {id : nc.element_hash_id}
+        }
+        for (ni in NpInterface(db)) {
+            yield ElementParent {id : ni.element_hash_id}
+        }
+    }
+    /**
+     * @brief gets the parent of the element.
+     * @return ElementParent 
+     */
+    pub fn getElementParent(self) -> ElementParent {
+        for (tmp in Expression(__all_data__)) {
+            if (self.id = tmp.element_hash_id) {
+                return tmp.getParent()
+            }
+        }
+        for (tmp in LocalVariable(__all_data__)) {
+            if (self.id = tmp.element_hash_id) {
+                return tmp.getParent()
+            }
+        }
+        for (tmp in Method(__all_data__)) {
+            if (self.id = tmp.element_hash_id) {
+                for (parent in ElementParent(__all_data__)) {
+                    if (parent.key_eq(tmp.getParent())) {
+                        return parent
+                    }
+                }
+            }
+        }
+        for (tmp in Constructor(__all_data__)) {
+            if (self.id = tmp.element_hash_id) {
+                for (parent in ElementParent(__all_data__)) {
+                    if (parent.key_eq(tmp.getParent())) {
+                        return parent
+                    }
+                }
+            }
+        }
+        for (tmp in Field(__all_data__)) {
+            if (self.id = tmp.element_hash_id) {
+                for (parent in ElementParent(__all_data__)) {
+                    if (parent.key_eq(tmp.getParent())) {
+                        return parent
+                    }
+                }
+            }
+        }
+        for (tmp in Class(__all_data__)) {
+            if (self.id = tmp.element_hash_id) {
+                return tmp.getParent()
+            }
+        }
+        for (tmp in Interface(__all_data__)) {
+            if (self.id = tmp.element_hash_id) {
+                return tmp.getParent()
+            }
+        }
+        for (tmp in Parameter(__all_data__)) {
+            if (self.id = tmp.element_hash_id) {
+                return tmp.getParent()
+            }
+        }
+        for (tmp in CodeBlock(__all_data__)) {
+            if (self.id = tmp.element_hash_id) {
+                return tmp.getParent()
+            }
+        }
+        for (tmp in Statement(__all_data__)) {
+            if (self.id = tmp.element_hash_id) {
+                return tmp.getParent()
+            }
+        }
+        for (tmp in Identifier(__all_data__)) {
+            if (self.id = tmp.element_hash_id) {
+                return tmp.getParent()
+            }
+        }
+        for (tmp in TypeElement(__all_data__)) {
+            if (self.id = tmp.element_hash_id) {
+                return tmp.getParent()
+            }
+        }
+        for (tmp in Modifier(__all_data__)) {
+            if (self.id = tmp.element_hash_id) {
+                return tmp.getParent()
+            }
+        }
+        for (tmp in ExpressionList(__all_data__)) {
+            if (self.id = tmp.element_hash_id) {
+                return tmp.getParent()
+            }
+        }
+        for (tmp in ReferenceList(__all_data__)) {
+            if (self.id = tmp.element_hash_id) {
+                return tmp.getParent()
+            }
+        }
+        for (tmp in ModifierList(__all_data__)) {
+            if (self.id = tmp.element_hash_id) {
+                return tmp.getParent()
+            }
+        }
+        for (tmp in AnonymousClass(__all_data__)) {
+            if (self.id = tmp.element_hash_id) {
+                for (parent in ElementParent(__all_data__)) {
+                    if (parent.key_eq(tmp.getParent())) {
+                        return parent
+                    }
+                }
+            }
+        }
+        for (tmp in Comment(__all_data__)) {
+            if (self.id = tmp.element_hash_id) {
+                return tmp.getParent()
+            }
+        }
+        for (tmp in AnnotationArrayInitializer(__all_data__)) {
+            if (self.id = tmp.element_hash_id) {
+                for (parent in ElementParent(__all_data__)) {
+                    if (parent.key_eq(tmp.getParent())) {
+                        return parent
+                    }
+                }
+            }
+        }
+        for (tmp in ReferenceElement(__all_data__)) {
+            if (self.id = tmp.element_hash_id) {
+                return tmp.getParent()
+            }
+        }
+        for (tmp in File(__all_data__),
+            p in Program(__all_data__)) {
+            if (self.id = tmp.element_hash_id) {
+                for (parent in ElementParent(__all_data__)) {
+                    if (parent.key_eq(p)) {
+                        return parent
+                    }
+                }
+            }
+        }
+        for (tmp in Import(__all_data__)) {
+            if (self.id = tmp.element_hash_id) {
+                for (parent in ElementParent(__all_data__)) {
+                    if (parent.key_eq(tmp.getContainingFile())) {
+                        return parent
+                    }
+                }
+            }
+        }
+        for (tmp in Annotation(__all_data__)) {
+            if (self.id = tmp.id) {
+                return tmp.getParent()
+            }
+        }
+        for (tmp in JavadocComment(__all_data__)) {
+            if (self.id = tmp.element_hash_id) {
+                return tmp.getParent()
+            }
+        }
+        for (tmp in ReferenceParameterList(__all_data__)) {
+            if (self.id = tmp.id) {
+                return tmp.getParent()
+            }
+        }
+        for (tmp in ImportStaticStatement(__all_data__)) {
+            if (self.id = tmp.element_hash_id) {
+                for (parent in ElementParent(__all_data__)) {
+                    if (parent.key_eq(tmp.getParent())) {
+                        return parent
+                    }
+                }
+            }
+        }
+        for (tmp in ImportStaticReferenceElement(__all_data__)) {
+            if (self.id = tmp.element_hash_id) {
+                for (parent in ElementParent(__all_data__)) {
+                    if (parent.key_eq(tmp.getParent())) {
+                        return parent
+                    }
+                }
+            }
+        }
+        for (tmp in ResourceList(__all_data__)) {
+            if (self.id = tmp.element_hash_id) {
+                return tmp.getParent()
+            }
+        }
+        for (tmp in ClassInitializer(__all_data__)) {
+            if (self.id = tmp.element_hash_id) {
+                return tmp.getParent()
+            }
+        }
+        for (tmp in TypeLiteral(__all_data__)) {
+            if (self.id = tmp.element_hash_id) {
+                return tmp.getParent()
+            }
+        }
+        for (tmp in CatchClause(__all_data__)) {
+            if (self.id = tmp.element_hash_id) {
+                return tmp.getParent()
+            }
+        }
+        for (tmp in EnumConstant(__all_data__)) {
+            if (self.id = tmp.element_hash_id) {
+                for (parent in ElementParent(__all_data__)) {
+                    if (parent.key_eq(tmp.getParent())) {
+                        return parent
+                    }
+                }
+            }
+        }
+        for (tmp in PackageStatement(__all_data__)) {
+            if (self.id = tmp.element_hash_id) {
+                return tmp.getParent()
+            }
+        }
+        for (tmp in JavadocTag(__all_data__)) {
+            if (self.id = tmp.element_hash_id) {
+                for (parent in ElementParent(__all_data__)) {
+                    if (parent.key_eq(tmp.getComment())) {
+                        return parent
+                    }
+                }
+            }
+        }
+        for (tmp in AnnotationAccessArgument(__all_data__)) {
+            if (self.id = tmp.id) {
+                for (parent in ElementParent(__all_data__)) {
+                    if (parent.key_eq(tmp.getAnnotation())) {
+                        return parent
+                    }
+                }
+            }
+        }
+        for (tmp in LocalClass(__all_data__)) {
+            if (self.id = tmp.element_hash_id) {
+                return tmp.getParent()
+            }
+        }
+        for (tmp in JavadocTagValue(__all_data__)) {
+            if (self.id = tmp.element_hash_id) {
+                for (parent in ElementParent(__all_data__)) {
+                    if (parent.key_eq(tmp.getJavaDocTag())) {
+                        return parent
+                    }
+                }
+            }
+        }
+        for (tmp in JavadocDataToken(__all_data__)) {
+            if (self.id = tmp.element_hash_id) {
+                return tmp.getParent()
+            }
+        }
+    }
+    /**
+     * @brief gets the location info of the element.
+     * @return Location 
+     */
+    pub fn getLocation(self) -> Location {
+        for (tmp in Expression(__all_data__)) {
+            if (self.id = tmp.element_hash_id) {
+                return tmp.getLocation()
+            }
+        }
+        for (tmp in LocalVariable(__all_data__)) {
+            if (self.id = tmp.element_hash_id) {
+                return tmp.getLocation()
+            }
+        }
+        for (tmp in Method(__all_data__)) {
+            if (self.id = tmp.element_hash_id) {
+                return tmp.getLocation()
+            }
+        }
+        for (tmp in Constructor(__all_data__)) {
+            if (self.id = tmp.element_hash_id) {
+                return tmp.getLocation()
+            }
+        }
+        for (tmp in Field(__all_data__)) {
+            if (self.id = tmp.element_hash_id) {
+                return tmp.getLocation()
+            }
+        }
+        for (tmp in Class(__all_data__)) {
+            if (self.id = tmp.element_hash_id) {
+                return tmp.getLocation()
+            }
+        }
+        for (tmp in Interface(__all_data__)) {
+            if (self.id = tmp.element_hash_id) {
+                return tmp.getLocation()
+            }
+        }
+        for (tmp in Parameter(__all_data__)) {
+            if (self.id = tmp.element_hash_id) {
+                return tmp.getLocation()
+            }
+        }
+        for (tmp in CodeBlock(__all_data__)) {
+            if (self.id = tmp.element_hash_id) {
+                return tmp.getLocation()
+            }
+        }
+        for (tmp in Statement(__all_data__)) {
+            if (self.id = tmp.element_hash_id) {
+                return tmp.getLocation()
+            }
+        }
+        for (tmp in Identifier(__all_data__)) {
+            if (self.id = tmp.element_hash_id) {
+                return tmp.getLocation()
+            }
+        }
+        for (tmp in TypeElement(__all_data__)) {
+            if (self.id = tmp.element_hash_id) {
+                return tmp.getLocation()
+            }
+        }
+        for (tmp in Modifier(__all_data__)) {
+            if (self.id = tmp.element_hash_id) {
+                return tmp.getLocation()
+            }
+        }
+        for (tmp in ExpressionList(__all_data__)) {
+            if (self.id = tmp.element_hash_id) {
+                return tmp.getLocation()
+            }
+        }
+        for (tmp in ReferenceList(__all_data__)) {
+            if (self.id = tmp.element_hash_id) {
+                return tmp.getLocation()
+            }
+        }
+        for (tmp in ModifierList(__all_data__)) {
+            if (self.id = tmp.element_hash_id) {
+                return tmp.getLocation()
+            }
+        }
+        for (tmp in AnonymousClass(__all_data__)) {
+            if (self.id = tmp.element_hash_id) {
+                return tmp.getLocation()
+            }
+        }
+        for (tmp in Comment(__all_data__)) {
+            if (self.id = tmp.element_hash_id) {
+                return tmp.getLocation()
+            }
+        }
+        for (tmp in AnnotationArrayInitializer(__all_data__)) {
+            if (self.id = tmp.element_hash_id) {
+                return tmp.getLocation()
+            }
+        }
+        for (tmp in ReferenceElement(__all_data__)) {
+            if (self.id = tmp.element_hash_id) {
+                return tmp.getLocation()
+            }
+        }
+        for (tmp in Import(__all_data__)) {
+            if (self.id = tmp.element_hash_id) {
+                return tmp.getLocation()
+            }
+        }
+        for (tmp in Program(__all_data__)) {
+            if (self.id = tmp.program_hash_id) {
+                for (l in Location(__all_data__)) {
+                    if (l.element_hash_id = 0) {
+                        return l
+                    }
+                }
+            }
+        }
+        for (tmp in Annotation(__all_data__)) {
+            if (self.id = tmp.id) {
+                return tmp.getLocation()
+            }
+        }
+        for (tmp in JavadocComment(__all_data__)) {
+            if (self.id = tmp.element_hash_id) {
+                return tmp.getLocation()
+            }
+        }
+        for (tmp in ReferenceParameterList(__all_data__)) {
+            if (self.id = tmp.id) {
+                return tmp.getLocation()
+            }
+        }
+        for (tmp in ImportStaticStatement(__all_data__)) {
+            if (self.id = tmp.element_hash_id) {
+                return tmp.getLocation()
+            }
+        }
+        for (tmp in ImportStaticReferenceElement(__all_data__)) {
+            if (self.id = tmp.element_hash_id) {
+                return tmp.getLocation()
+            }
+        }
+        for (tmp in ResourceList(__all_data__)) {
+            if (self.id = tmp.element_hash_id) {
+                return tmp.getLocation()
+            }
+        }
+        for (tmp in ClassInitializer(__all_data__)) {
+            if (self.id = tmp.element_hash_id) {
+                return tmp.getLocation()
+            }
+        }
+        for (tmp in TypeLiteral(__all_data__)) {
+            if (self.id = tmp.element_hash_id) {
+                return tmp.getLocation()
+            }
+        }
+        for (tmp in CatchClause(__all_data__)) {
+            if (self.id = tmp.element_hash_id) {
+                return tmp.getLocation()
+            }
+        }
+        for (tmp in EnumConstant(__all_data__)) {
+            if (self.id = tmp.element_hash_id) {
+                return tmp.getLocation()
+            }
+        }
+        for (tmp in PackageStatement(__all_data__)) {
+            if (self.id = tmp.element_hash_id) {
+                return tmp.getLocation()
+            }
+        }
+        for (tmp in JavadocTag(__all_data__)) {
+            if (self.id = tmp.element_hash_id) {
+                return tmp.getLocation()
+            }
+        }
+        for (tmp in AnnotationAccessArgument(__all_data__)) {
+            if (self.id = tmp.id) {
+                return tmp.getLocation()
+            }
+        }
+        for (tmp in LocalClass(__all_data__)) {
+            if (self.id = tmp.element_hash_id) {
+                return tmp.getLocation()
+            }
+        }
+        for (tmp in JavadocTagValue(__all_data__)) {
+            if (self.id = tmp.element_hash_id) {
+                return tmp.getLocation()
+            }
+        }
+        for (tmp in JavadocDataToken(__all_data__)) {
+            if (self.id = tmp.element_hash_id) {
+                return tmp.getLocation()
+            }
+        }
+    }
+    /**
+     * @brief gets an ancestor of the element.
+     * @return ElementParent 
+     */
+    pub fn getAnAncestor(self) -> *ElementParent {
+        yield self.getElementParent()
+        for (auto_tmp1 in self.getAnAncestor()) {
+            yield auto_tmp1.getElementParent()
+        }
+    }
+    /**
+     * @brief gets the index for printing AST.
+     * @return int 
+     */
+    pub fn getAnAncestorForIndex(self, index : int) -> ElementParent {
+        let (ancestor = self.getElementParent()) {
+            if (index = 1) {
+                return ancestor
+            }
+        }
+        for (indexTemp in int::__undetermined_all__()) {
+            let (temp = self.getElementParent()) {
+                let (ancestor = temp.getAnAncestorForIndex(indexTemp)) {
+                    if (index = indexTemp + 1) {
+                        return ancestor
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the type of the element for printing AST.
+     * @return string 
+     */
+    pub fn getType(self) -> string {
+        for (s in Statement(__all_data__)) {
+            if (self.id = s.element_hash_id) {
+                if (isBlock(s)) {
+                    let (text = "BlockStatement") {
+                        return text
+                    }
+                }
+                if (!isBlock(s)) {
+                    let (text = "Statement") {
+                        return text
+                    }
+                }
+            }
+        }
+        for (e in Expression(__all_data__)) {
+            if (self.id = e.element_hash_id) {
+                let (text = "Expression") {
+                    return text
+                }
+            }
+        }
+        for (m in Method(__all_data__)) {
+            if (self.id = m.element_hash_id) {
+                let (text = "Method") {
+                    return text
+                }
+            }
+        }
+        for (c in Constructor(__all_data__)) {
+            if (self.id = c.element_hash_id) {
+                let (text = "Constructor") {
+                    return text
+                }
+            }
+        }
+        for (f in Field(__all_data__)) {
+            if (self.id = f.element_hash_id) {
+                let (text = "Field") {
+                    return text
+                }
+            }
+        }
+        for (clazz in Class(__all_data__)) {
+            if (self.id = clazz.element_hash_id) {
+                let (text = "Class") {
+                    return text
+                }
+            }
+        }
+        for (inf in Interface(__all_data__)) {
+            if (self.id = inf.element_hash_id) {
+                let (text = "Interface") {
+                    return text
+                }
+            }
+        }
+        for (p in Parameter(__all_data__)) {
+            if (self.id = p.element_hash_id) {
+                let (text = "Parameter") {
+                    return text
+                }
+            }
+        }
+        for (var in LocalVariable(__all_data__)) {
+            if (self.id = var.element_hash_id) {
+                let (text = "LocalVariable") {
+                    return text
+                }
+            }
+        }
+        for (cb in CodeBlock(__all_data__)) {
+            if (self.id = cb.element_hash_id) {
+                let (text = "CodeBlock") {
+                    return text
+                }
+            }
+        }
+        for (ident in Identifier(__all_data__)) {
+            if (self.id = ident.element_hash_id) {
+                let (text = "Identifier") {
+                    return text
+                }
+            }
+        }
+        for (te in TypeElement(__all_data__)) {
+            if (self.id = te.element_hash_id) {
+                let (text = "TypeElement") {
+                    return text
+                }
+            }
+        }
+        for (mo in Modifier(__all_data__)) {
+            if (self.id = mo.element_hash_id) {
+                let (text = "Keyword") {
+                    return text
+                }
+            }
+        }
+        for (el in ExpressionList(__all_data__)) {
+            if (self.id = el.element_hash_id) {
+                let (text = "ExpressionList") {
+                    return text
+                }
+            }
+        }
+        for (ml in ModifierList(__all_data__)) {
+            if (self.id = ml.element_hash_id) {
+                let (text = "ModifierList") {
+                    return text
+                }
+            }
+        }
+        for (ac in AnonymousClass(__all_data__)) {
+            if (self.id = ac.element_hash_id) {
+                let (text = "Anonymousclass") {
+                    return text
+                }
+            }
+        }
+        for (comment in Comment(__all_data__)) {
+            if (self.id = comment.element_hash_id) {
+                let (text = "Comment") {
+                    return text
+                }
+            }
+        }
+        for (ai in AnnotationArrayInitializer(__all_data__)) {
+            if (self.id = ai.element_hash_id) {
+                let (text = "AnnotationArrayInitializer") {
+                    return text
+                }
+            }
+        }
+        for (re in ReferenceElement(__all_data__)) {
+            if (self.id = re.element_hash_id) {
+                let (text = "ReferenceElement") {
+                    return text
+                }
+            }
+        }
+        for (im in Import(__all_data__)) {
+            if (self.id = im.element_hash_id) {
+                let (text = "ImportStatement") {
+                    return text
+                }
+            }
+        }
+        for (im in ReferenceList(__all_data__)) {
+            if (self.id = im.element_hash_id) {
+                let (text = "ReferenceList") {
+                    return text
+                }
+            }
+        }
+        for (de in File(__all_data__)) {
+            if (self.id = de.element_hash_id) {
+                let (text = "File") {
+                    return text
+                }
+            }
+        }
+        for (de in Annotation(__all_data__)) {
+            if (self.id = de.id) {
+                let (text = "Annotation") {
+                    return text
+                }
+            }
+        }
+        for (de in JavadocComment(__all_data__)) {
+            if (self.id = de.element_hash_id) {
+                let (text = "JavaDocComment") {
+                    return text
+                }
+            }
+        }
+        for (de in JavadocTag(__all_data__)) {
+            if (self.id = de.element_hash_id) {
+                let (text = "JavaDocTag") {
+                    return text
+                }
+            }
+        }
+        for (de in ReferenceParameterList(__all_data__)) {
+            if (self.id = de.id) {
+                let (text = "ReferenceParameterList") {
+                    return text
+                }
+            }
+        }
+        for (de in ImportStaticStatement(__all_data__)) {
+            if (self.id = de.element_hash_id) {
+                let (text = "ImportStaticStatement") {
+                    return text
+                }
+            }
+        }
+        for (de in ImportStaticReferenceElement(__all_data__)) {
+            if (self.id = de.element_hash_id) {
+                let (text = "ImportStaticReferenceElement") {
+                    return text
+                }
+            }
+        }
+        for (de in ResourceList(__all_data__)) {
+            if (self.id = de.element_hash_id) {
+                let (text = "ResourceList") {
+                    return text
+                }
+            }
+        }
+        for (de in ClassInitializer(__all_data__)) {
+            if (self.id = de.element_hash_id) {
+                let (text = "ClassInitializer") {
+                    return text
+                }
+            }
+        }
+        for (de in CatchClause(__all_data__)) {
+            if (self.id = de.element_hash_id) {
+                let (text = "CatchClauseSection") {
+                    return text
+                }
+            }
+        }
+        for (de in EnumConstant(__all_data__)) {
+            if (self.id = de.element_hash_id) {
+                let (text = "EnumConstant") {
+                    return text
+                }
+            }
+        }
+        for (de in PackageStatement(__all_data__)) {
+            if (self.id = de.element_hash_id) {
+                let (text = "PackageStatement") {
+                    return text
+                }
+            }
+        }
+        for (de in AnnotationAccessArgument(__all_data__)) {
+            if (self.id = de.id) {
+                let (text = "AnnotationArgument") {
+                    return text
+                }
+            }
+        }
+        for (de in LocalClass(__all_data__)) {
+            if (self.id = de.element_hash_id) {
+                let (text = "LocalClass") {
+                    return text
+                }
+            }
+        }
+        for (im in JavadocTagValue(__all_data__)) {
+            if (self.id = im.element_hash_id) {
+                let (text = "JavadocTagValue") {
+                    return text
+                }
+            }
+        }
+        for (im in JavadocDataToken(__all_data__)) {
+            if (self.id = im.element_hash_id) {
+                let (text = "JavadocDataToken") {
+                    return text
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the printable text for printing AST
+     * @return string 
+     */
+    pub fn print(self) -> string {
+        for (s in Statement(__all_data__)) {
+            if (self.key_eq(s)) {
+                let (i = s.getSize().getNumberOfLines()) {
+                    if (i > 4) {
+                        let (text = s.getType()) {
+                            return text
+                        }
+                    }
+                    if (i <= 4) {
+                        let (text = s.getPrintableText()) {
+                            return text
+                        }
+                    }
+                }
+            }
+        }
+        for (e in Expression(__all_data__)) {
+            if (self.key_eq(e)) {
+                let (text = e.getPrintableText()) {
+                    return text
+                }
+            }
+        }
+        for (m in Method(__all_data__)) {
+            if (self.key_eq(m)) {
+                let (text = m.getName()) {
+                    return text
+                }
+            }
+        }
+        for (c in Constructor(__all_data__)) {
+            if (self.key_eq(c)) {
+                let (text = c.getName()) {
+                    return text
+                }
+            }
+        }
+        for (f in Field(__all_data__)) {
+            if (self.key_eq(f)) {
+                let (text = f.getName()) {
+                    return text
+                }
+            }
+        }
+        for (clazz in Class(__all_data__)) {
+            if (self.key_eq(clazz)) {
+                let (text = clazz.getQualifiedName()) {
+                    return text
+                }
+            }
+        }
+        for (inf in Interface(__all_data__)) {
+            if (self.key_eq(inf)) {
+                let (text = inf.getQualifiedName()) {
+                    return text
+                }
+            }
+        }
+        for (p in Parameter(__all_data__)) {
+            if (self.key_eq(p)) {
+                let (text = p.getPrintableText()) {
+                    return text
+                }
+            }
+        }
+        for (var in LocalVariable(__all_data__)) {
+            if (self.key_eq(var)) {
+                let (text = var.getPrintableText()) {
+                    return text
+                }
+            }
+        }
+        for (cb in CodeBlock(__all_data__)) {
+            if (self.key_eq(cb)) {
+                let (text = "CodeBlock{...}") {
+                    return text
+                }
+            }
+        }
+        for (ident in Identifier(__all_data__)) {
+            if (self.key_eq(ident)) {
+                let (text = ident.getName()) {
+                    return text
+                }
+            }
+        }
+        for (te in TypeElement(__all_data__)) {
+            if (self.key_eq(te)) {
+                let (text = te.getPrintableText()) {
+                    return text
+                }
+            }
+        }
+        for (mo in Modifier(__all_data__)) {
+            if (self.key_eq(mo)) {
+                let (text = mo.getName()) {
+                    return text
+                }
+            }
+        }
+        for (el in ExpressionList(__all_data__)) {
+            if (self.key_eq(el)) {
+                let (text = el.getPrintableText()) {
+                    return text
+                }
+            }
+        }
+        for (ml in ModifierList(__all_data__)) {
+            if (self.key_eq(ml)) {
+                let (text = "modifierlist") {
+                    return text
+                }
+            }
+        }
+        for (ac in AnonymousClass(__all_data__)) {
+            if (self.key_eq(ac)) {
+                let (text = "anonymousclass") {
+                    return text
+                }
+            }
+        }
+        for (comment in Comment(__all_data__)) {
+            if (self.key_eq(comment)) {
+                let (text = comment.getText()) {
+                    return text
+                }
+            }
+        }
+        for (ai in AnnotationArrayInitializer(__all_data__)) {
+            if (self.key_eq(ai)) {
+                let (text = ai.getPrintableText()) {
+                    return text
+                }
+            }
+        }
+        for (re in ReferenceElement(__all_data__)) {
+            if (self.key_eq(re)) {
+                let (text = re.getPrintableText()) {
+                    return text
+                }
+            }
+        }
+        for (im in Import(__all_data__)) {
+            if (self.key_eq(im)) {
+                let (text = im.getName()) {
+                    return text
+                }
+            }
+        }
+        for (im in ReferenceList(__all_data__)) {
+            if (self.key_eq(im)) {
+                let (text = im.getPrintableText()) {
+                    return text
+                }
+            }
+        }
+        for (de in File(__all_data__)) {
+            if (self.key_eq(de)) {
+                let (text = de.getRelativePath()) {
+                    return text
+                }
+            }
+        }
+        for (de in Annotation(__all_data__)) {
+            if (self.key_eq(de)) {
+                let (text = de.getName()) {
+                    return text
+                }
+            }
+        }
+        for (de in JavadocComment(__all_data__)) {
+            if (self.key_eq(de)) {
+                let (text = de.getText()) {
+                    return text
+                }
+            }
+        }
+        for (de in JavadocTag(__all_data__)) {
+            if (self.key_eq(de)) {
+                let (text = de.getName()) {
+                    return text
+                }
+            }
+        }
+        for (de in ReferenceParameterList(__all_data__)) {
+            if (self.key_eq(de)) {
+                let (text = "ReferenceParameterList") {
+                    return text
+                }
+            }
+        }
+        for (de in ImportStaticStatement(__all_data__)) {
+            if (self.key_eq(de)) {
+                let (text = de.getName()) {
+                    return text
+                }
+            }
+        }
+        for (de in ImportStaticReferenceElement(__all_data__)) {
+            if (self.key_eq(de)) {
+                let (text = de.getPrintableText()) {
+                    return text
+                }
+            }
+        }
+        for (de in ResourceList(__all_data__)) {
+            if (self.key_eq(de)) {
+                let (text = de.getPrintableText()) {
+                    return text
+                }
+            }
+        }
+        for (de in ClassInitializer(__all_data__)) {
+            if (self.key_eq(de)) {
+                let (text = de.getPrintableText()) {
+                    return text
+                }
+            }
+        }
+        for (de in CatchClause(__all_data__)) {
+            if (self.key_eq(de)) {
+                let (text = de.getPrintableText()) {
+                    return text
+                }
+            }
+        }
+        for (de in EnumConstant(__all_data__)) {
+            if (self.key_eq(de)) {
+                let (text = de.getName()) {
+                    return text
+                }
+            }
+        }
+        for (de in PackageStatement(__all_data__)) {
+            if (self.key_eq(de)) {
+                let (text = de.getQualifiedName()) {
+                    return text
+                }
+            }
+        }
+        for (de in AnnotationAccessArgument(__all_data__)) {
+            if (self.key_eq(de)) {
+                let (text = de.getPrintableText()) {
+                    return text
+                }
+            }
+        }
+        for (de in LocalClass(__all_data__)) {
+            if (self.key_eq(de)) {
+                let (text = de.getName()) {
+                    return text
+                }
+            }
+        }
+        for (im in JavadocTagValue(__all_data__)) {
+            if (self.key_eq(im)) {
+                let (text = im.getValue()) {
+                    return text
+                }
+            }
+        }
+        for (im in JavadocDataToken(__all_data__)) {
+            if (self.key_eq(im)) {
+                let (text = im.getValue()) {
+                    return text
+                }
+            }
+        }
+    }
+}
+/**
+ * @brief A ast parent of a statement.
+ */
+schema StatementParent extends ElementParent {
+
+}
+impl StatementParent {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *StatementParent {
+        for (tmp in ElementParent(db)) {
+            for (s in Statement(db)) {
+                if (tmp = s.getParent()) {
+                    yield StatementParent {
+                        id : tmp.id
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief get a child  statement of the element. 
+     * @return Statement 
+     */
+    pub fn getChild(self) -> *Statement {
+        for (s in Statement(__all_data__)) {
+            if (self.key_eq(s.getParent())) {
+                yield s
+            }
+        }
+    }
+}
+/**
+ * @brief A ast parent of an expression.
+ */
+schema ExpressionParent extends ElementParent {
+
+}
+impl ExpressionParent {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *ExpressionParent {
+        for (tmp in ElementParent(db)) {
+            for (s in Expression(db)) {
+                if (tmp = s.getParent()) {
+                    yield ExpressionParent {
+                        id : tmp.id
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief get a child expression of the element. 
+     * @return Expression 
+     */
+    pub fn getChild(self) -> *Expression {
+        for (s in Expression(__all_data__)) {
+            if (self.key_eq(s.getParent())) {
+                yield s
+            }
+        }
+    }
+}
+pub fn isBlock(s : Statement) -> bool {
+    for (b in BlockStatement(__all_data__)) {
+        if (b.key_eq(s)) {
+            return true
+        }
+    }
+}

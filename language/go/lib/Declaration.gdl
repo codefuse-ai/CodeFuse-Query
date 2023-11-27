@@ -1,0 +1,155 @@
+schema Decl extends Node {
+
+}
+impl Decl {
+    @data_constraint
+    @inline
+    fn __all__(db: GoDB) -> *Decl {
+        for (tmp in Node(db)) {
+            for (d in DeclDO(db)) {
+                if (tmp.key_eq(d)) {
+                    yield Decl {
+                        id : tmp.id
+                    }
+                }
+            }
+        }
+    }
+    pub fn getKind(self) -> int {
+        for (d in DeclDO(__all_data__)) {
+            if (d.key_eq(self)) {
+                return d.getKind()
+            }
+        }
+    }
+    pub fn getBelongsFunction(self) -> Function {
+        for (f in Function(__all_data__)) {
+            if (f.key_eq(self.getParentNode())) {
+                return f
+            }
+            for (d in Decl(__all_data__)) {
+                let (n = self.getParentNode()) {
+                    if (d.key_eq(n)) {
+                        if (f = d.getBelongsFunction()) {
+                            return f
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    pub fn getType(self) -> string {
+        if (self.isBadDecl()) {
+            return "BadDecl"
+        }
+        if (self.isImportDecl()) {
+            return "ImportDecl"
+        }
+        if (self.isConstDecl()) {
+            return "ConstDecl"
+        }
+        if (self.isTypeDecl()) {
+            return "TypeDecl"
+        }
+        if (self.isVarDecl()) {
+            return "VarDecl"
+        }
+        if (self.isFuncDecl()) {
+            return "FuncDecl"
+        }
+    }
+    pub fn isBadDecl(self) -> bool {
+        if (self.getKind() = 0) {
+            return true
+        }
+    }
+    pub fn isImportDecl(self) -> bool {
+        if (self.getKind() = 1) {
+            return true
+        }
+    }
+    pub fn isConstDecl(self) -> bool {
+        if (self.getKind() = 2) {
+            return true
+        }
+    }
+    pub fn isTypeDecl(self) -> bool {
+        if (self.getKind() = 3) {
+            return true
+        }
+    }
+    pub fn isVarDecl(self) -> bool {
+        if (self.getKind() = 4) {
+            return true
+        }
+    }
+    pub fn isFuncDecl(self) -> bool {
+        if (self.getKind() = 5) {
+            return true
+        }
+    }
+    pub fn isLocalVaribleDecl(self) -> bool {
+        if (self.isConstDecl()) {
+            return true
+        }
+        if (self.isTypeDecl()) {
+            return true
+        }
+        if (self.isVarDecl()) {
+            return true
+        }
+    }
+}
+schema ConstDecl extends Decl {
+
+}
+impl ConstDecl {
+    @data_constraint
+    @inline
+    fn __all__(db: GoDB) -> *ConstDecl {
+        for (tmp in Decl(db)) {
+            for (d in DeclDO(db)) {
+                if (tmp.key_eq(d)) {
+                    if (tmp.isConstDecl()) {
+                        yield ConstDecl {
+                            id : tmp.id
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+schema VarDecl extends Decl {
+
+}
+impl VarDecl {
+    @data_constraint
+    @inline
+    fn __all__(db: GoDB) -> *VarDecl {
+        for (tmp in Decl(db)) {
+            for (d in DeclDO(db)) {
+                if (tmp.key_eq(d)) {
+                    if (tmp.isVarDecl()) {
+                        yield VarDecl {
+                            id : tmp.id
+                        }
+                    }
+                }
+            }
+        }
+    }
+    pub fn getName(self) -> string {
+        for (e in Expr(__all_data__),
+            l in LiteralDO(__all_data__)) {
+            if (e.isIdent()) {
+                if (e.getParentNode().key_eq(self)) {
+                    if (l.getExpr() = e.id) {
+                        return l.getValue()
+                    }
+                }
+            }
+        }
+    }
+}

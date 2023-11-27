@@ -1,0 +1,560 @@
+/**
+ * @brief This is the base of all AST node classes. 
+ */
+schema CombineElement {
+    @primary id: int
+}
+impl CombineElement {
+    @data_constraint
+    @inline
+    fn __all__(db: PythonDB) -> *CombineElement {
+        for (e in Element(db)) {
+            yield CombineElement {id : e.oid}
+        }
+        for (e in Statement(db)) {
+            yield CombineElement {id : e.element_oid}
+        }
+        for (e in MatchCase(db)) {
+            yield CombineElement {id : e.element_oid}
+        }
+        for (e in ExceptHandler(db)) {
+            yield CombineElement {id : e.element_oid}
+        }
+        for (e in Expression(db)) {
+            yield CombineElement {id : e.element_oid}
+        }
+        for (e in Alias(db)) {
+            yield CombineElement {id : e.element_oid}
+        }
+        for (e in Module(db)) {
+            yield CombineElement {id : e.element_oid}
+        }
+        for (e in Arg(db)) {
+            yield CombineElement {id : e.element_oid}
+        }
+        for (e in Arguments(db)) {
+            yield CombineElement {id : e.element_oid}
+        }
+        for (e in Comprehension(db)) {
+            yield CombineElement {id : e.element_oid}
+        }
+        for (e in Keyword(db)) {
+            yield CombineElement {id : e.element_oid}
+        }
+        for (e in WithItem(db)) {
+            yield CombineElement {id : e.element_oid}
+        }
+        for (e in Slice(db)) {
+            yield CombineElement {id : e.element_oid}
+        }
+        for (e in File(db)) {
+            yield CombineElement {id : e.element_oid}
+        }
+        for (e in Comment(db)) {
+            yield CombineElement {id : e.element_oid}
+        }
+        for (e in DocstringComment(db)) {
+            yield CombineElement {id : e.element_oid}
+        }
+    }
+    pub fn getParentOid(self) -> int {
+        for (e in Element(__all_data__)) {
+            if (self.key_eq(e)) {
+                return e.getParentOid()
+            }
+        }
+        for (e in Statement(__all_data__)) {
+            if (self.key_eq(e)) {
+                return e.getParentOid()
+            }
+        }
+        for (e in MatchCase(__all_data__)) {
+            if (self.key_eq(e)) {
+                return e.getParentOid()
+            }
+        }
+        for (e in ExceptHandler(__all_data__)) {
+            if (self.key_eq(e)) {
+                return e.getParentOid()
+            }
+        }
+        for (e in Expression(__all_data__)) {
+            if (self.key_eq(e)) {
+                return e.getParentOid()
+            }
+        }
+        for (e in Alias(__all_data__)) {
+            if (self.key_eq(e)) {
+                return e.getParentOid()
+            }
+        }
+        for (e in Module(__all_data__)) {
+            if (self.key_eq(e)) {
+                let (id = e.getParent().element_oid) {
+                    return id
+                }
+            }
+        }
+        for (e in Arg(__all_data__)) {
+            if (self.key_eq(e)) {
+                return e.getParentOid()
+            }
+        }
+        for (e in Arguments(__all_data__)) {
+            if (self.key_eq(e)) {
+                return e.getParentOid()
+            }
+        }
+        for (e in Comprehension(__all_data__)) {
+            if (self.key_eq(e)) {
+                return e.getParentOid()
+            }
+        }
+        for (e in Keyword(__all_data__)) {
+            if (self.key_eq(e)) {
+                return e.getParentOid()
+            }
+        }
+        for (e in WithItem(__all_data__)) {
+            if (self.key_eq(e)) {
+                return e.getParentOid()
+            }
+        }
+        for (e in Slice(__all_data__)) {
+            if (self.key_eq(e)) {
+                return e.getParentOid()
+            }
+        }
+        for (e in File(__all_data__),
+            p in Program(__all_data__)) {
+            if (self.key_eq(e)) {
+                let (id = p.program_oid) {
+                    return id
+                }
+            }
+        }
+        for (e in Comment(__all_data__),
+            m in Module(__all_data__)) {
+            if (self.key_eq(e)) {
+                if (m.getParent().element_oid = e.getParentOid()) {
+                    let (id = m.element_oid) {
+                        return id
+                    }
+                }
+            }
+        }
+        for (e in DocstringComment(__all_data__)) {
+            if (self.key_eq(e)) {
+                let (id = e.getDocumentableElement().id) {
+                    return id
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the parent element of the element
+     * @return CombineElement 
+     */
+    pub fn getParent(self) -> CombineElement {
+        for (e in CombineElement(__all_data__)) {
+            if (e.id = self.getParentOid()) {
+                return e
+            }
+        }
+    }
+    /**
+     * @brief gets an ancestor of the element.
+     * @return CombineElement 
+     */
+    pub fn getAnAncestor(self) -> *CombineElement {
+        yield self.getParent()
+        for (auto_tmp1 in self.getAnAncestor()) {
+            yield auto_tmp1.getParent()
+        }
+    }
+
+    /**
+     * @brief gets the location for the element.
+     * @return Location
+     */
+    pub fn getLocation(self) -> Location {
+        for (id in Location(__all_data__)) {
+            for (e in Statement(__all_data__)) {
+                if (self.key_eq(e)) {
+                    if (id.element_oid = e.getLocationOid()) {
+                        return id
+                    }
+                }
+            }
+            for (e in MatchCase(__all_data__)) {
+                if (self.key_eq(e)) {
+                    if (id.element_oid = e.getLocationOid()) {
+                        return id
+                    }
+                }
+            }
+            for (e in ExceptHandler(__all_data__)) {
+                if (self.key_eq(e)) {
+                    if (id.element_oid = e.getLocationOid()) {
+                        return id
+                    }
+                }
+            }
+            for (e in Expression(__all_data__)) {
+                if (self.key_eq(e)) {
+                    if (id.element_oid = e.getLocationOid()) {
+                        return id
+                    }
+                }
+            }
+            for (e in Alias(__all_data__)) {
+                if (self.key_eq(e)) {
+                    if (id.element_oid = e.getLocationOid()) {
+                        return id
+                    }
+                }
+            }
+            for (e in Arg(__all_data__)) {
+                if (self.key_eq(e)) {
+                    if (id.element_oid = e.getLocationOid()) {
+                        return id
+                    }
+                }
+            }
+            for (e in Arguments(__all_data__)) {
+                if (self.key_eq(e)) {
+                    if (id = e.getLocation()) {
+                        return id
+                    }
+                }
+            }
+            for (e in Comprehension(__all_data__)) {
+                if (self.key_eq(e)) {
+                    if (id = e.getLocation()) {
+                        return id
+                    }
+                }
+            }
+            for (e in Keyword(__all_data__)) {
+                if (self.key_eq(e)) {
+                    if (id = e.getLocation()) {
+                        return id
+                    }
+                }
+            }
+            for (e in WithItem(__all_data__)) {
+                if (self.key_eq(e)) {
+                    if (id = e.getLocation()) {
+                        return id
+                    }
+                }
+            }
+            for (e in Slice(__all_data__)) {
+                if (self.key_eq(e)) {
+                    if (id = e.getLocation()) {
+                        return id
+                    }
+                }
+            }
+            for (e in Comment(__all_data__)) {
+                if (self.key_eq(e)) {
+                    if (id = e.getLocation()) {
+                        return id
+                    }
+                }
+            }
+            for (e in Module(__all_data__)) {
+                if (self.key_eq(e)) {
+                    if (id = e.getLocation()) {
+                        return id
+                    }
+                }
+            }
+            for (e in DocstringComment(__all_data__)) {
+                if (self.key_eq(e)) {
+                    if (id.key_eq(e.getDocumentableElement())) {
+                        return id
+                    }
+                }
+            }
+            for (e in File(__all_data__),
+                m in Module(__all_data__)) {
+                if (self.key_eq(e)) {
+                    if (e = m.getParent()) {
+                        if (id = m.getLocation()) {
+                            return id
+                        }
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the index for printing AST.
+     * @return int 
+     */
+    pub fn getAnAncestorForIndex(self, index : int) -> CombineElement {
+        if (index = 1) {
+            return self.getParent()
+        }
+        for (indexTemp in int::__undetermined_all__()) {
+            let (temp = self.getParent()) {
+                let (ancestor = temp.getAnAncestorForIndex(indexTemp)) {
+                    if (index = indexTemp + 1) {
+                        return ancestor
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the printable text for printing AST
+     * @return string 
+     */
+    pub fn print(self) -> string {
+        for (e in Element(__all_data__)) {
+            if (self.key_eq(e)) {
+                let (text = e.getValue()) {
+                    return text
+                }
+            }
+        }
+        for (e in Statement(__all_data__)) {
+            if (self.key_eq(e)) {
+                let (text = e.getPrintableText()) {
+                    return text
+                }
+            }
+        }
+        for (e in MatchCase(__all_data__)) {
+            if (self.key_eq(e)) {
+                let (text = e.getPrintableText()) {
+                    return text
+                }
+            }
+        }
+        for (e in ExceptHandler(__all_data__)) {
+            if (self.key_eq(e)) {
+                let (text = e.getPrintableText()) {
+                    return text
+                }
+            }
+        }
+        for (e in Expression(__all_data__)) {
+            if (self.key_eq(e)) {
+                let (text = e.getPrintableText()) {
+                    return text
+                }
+            }
+        }
+        for (e in Alias(__all_data__)) {
+            if (self.key_eq(e)) {
+                let (text = e.getPrintableText()) {
+                    return text
+                }
+            }
+        }
+        for (e in Module(__all_data__)) {
+            if (self.key_eq(e)) {
+                let (text = "Module") {
+                    return text
+                }
+            }
+        }
+        for (e in Arg(__all_data__)) {
+            if (self.key_eq(e)) {
+                let (text = e.getPrintableText()) {
+                    return text
+                }
+            }
+        }
+        for (e in Arguments(__all_data__)) {
+            if (self.key_eq(e)) {
+                let (text = e.getPrintableText()) {
+                    return text
+                }
+            }
+        }
+        for (e in Comprehension(__all_data__)) {
+            if (self.key_eq(e)) {
+                let (text = e.getPrintableText()) {
+                    return text
+                }
+            }
+        }
+        for (e in Keyword(__all_data__)) {
+            if (self.key_eq(e)) {
+                let (text = e.getPrintableText()) {
+                    return text
+                }
+            }
+        }
+        for (e in WithItem(__all_data__)) {
+            if (self.key_eq(e)) {
+                let (text = e.getPrintableText()) {
+                    return text
+                }
+            }
+        }
+        for (e in Slice(__all_data__)) {
+            if (self.key_eq(e)) {
+                let (text = e.getPrintableText()) {
+                    return text
+                }
+            }
+        }
+        for (e in Comment(__all_data__)) {
+            if (self.key_eq(e)) {
+                let (text = e.getText()) {
+                    return text
+                }
+            }
+        }
+        for (e in DocstringComment(__all_data__)) {
+            if (self.key_eq(e)) {
+                let (text = e.getText()) {
+                    return text
+                }
+            }
+        }
+        for (e in File(__all_data__)) {
+            if (self.key_eq(e)) {
+                let (text = "File") {
+                    return text
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the printable text for printing AST
+     * @return string 
+     */
+    pub fn getType(self) -> string {
+        for (e in Element(__all_data__)) {
+            if (self.key_eq(e)) {
+                return "Normal Element"
+            }
+        }
+        for (s in string::__undetermined_all__()) {
+            for (e in Statement(__all_data__)) {
+                if (self.key_eq(e)) {
+                    return e.getType() + " Expression"
+                }
+            }
+        }
+        for (e in MatchCase(__all_data__)) {
+            if (self.key_eq(e)) {
+                return "Match Case"
+            }
+        }
+        for (e in ExceptHandler(__all_data__)) {
+            if (self.key_eq(e)) {
+                return "Except Handler"
+            }
+        }
+        for (s in string::__undetermined_all__()) {
+            for (e in Expression(__all_data__)) {
+                if (self.key_eq(e)) {
+                    return e.getType() + " Expression"
+                }
+            }
+        }
+        for (e in Alias(__all_data__)) {
+            if (self.key_eq(e)) {
+                return "Alias"
+            }
+        }
+        for (e in Module(__all_data__)) {
+            if (self.key_eq(e)) {
+                return "Module"
+            }
+        }
+        for (e in Arg(__all_data__)) {
+            if (self.key_eq(e)) {
+                return "Arg"
+            }
+        }
+        for (e in Arguments(__all_data__)) {
+            if (self.key_eq(e)) {
+                return "Arguments"
+            }
+        }
+        for (e in Comprehension(__all_data__)) {
+            if (self.key_eq(e)) {
+                return "Comprehension"
+            }
+        }
+        for (e in Keyword(__all_data__)) {
+            if (self.key_eq(e)) {
+                return "Keyword"
+            }
+        }
+        for (e in WithItem(__all_data__)) {
+            if (self.key_eq(e)) {
+                return "With item"
+            }
+        }
+        for (e in Slice(__all_data__)) {
+            if (self.key_eq(e)) {
+                return "Slice"
+            }
+        }
+        for (e in Comment(__all_data__)) {
+            if (self.key_eq(e)) {
+                return "Comment"
+            }
+        }
+        for (e in DocstringComment(__all_data__)) {
+            if (self.key_eq(e)) {
+                return "Docstring Comment"
+            }
+        }
+        for (e in File(__all_data__)) {
+            if (self.key_eq(e)) {
+                return "File"
+            }
+        }
+    }
+}
+/**
+ * @brief An element without classification. 
+ */
+schema Element extends ElementDO {
+    
+}
+impl Element {
+    @data_constraint
+    @inline
+    fn __all__(db: PythonDB) -> *Element {
+        for (tmp in ElementDO(db)) {
+            yield Element {
+                oid : tmp.oid,
+                value : tmp.value,
+                type : tmp.type,
+                parent_oid : tmp.parent_oid
+            }
+        }
+    }
+    /**
+     * @brief gets the parent element of the element
+     * @return CombineElement 
+     */
+    pub fn getParent(self) -> CombineElement {
+        for (e in CombineElement(__all_data__)) {
+            if (e.id = self.getParentOid()) {
+                return e
+            }
+        }
+    }
+    /**
+     * @brief gets an ancestor of the element.
+     * @return CombineElement 
+     */
+    pub fn getAnAncestor(self) -> *CombineElement {
+        for (temp in CombineElement(__all_data__)) {
+            if (self.key_eq(temp)) {
+                yield temp.getAnAncestor()
+            }
+        }
+    }
+}

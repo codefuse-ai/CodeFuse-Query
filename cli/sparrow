@@ -1,0 +1,27 @@
+#!/bin/sh
+
+# A convenient method to return the actual path even for non symlinks
+# and multi-level symlinks.
+function get_realpath() {
+    local previous="$1"
+    local next=$(readlink "${previous}")
+    while [ -n "${next}" ]; do
+        previous="${next}"
+        next=$(readlink "${previous}")
+    done
+    echo "${previous}"
+}
+
+PYTHON=""
+if command -v python > /dev/null 2>&1; then
+    PYTHON="python"
+elif command -v python2 > /dev/null 2>&1; then
+    PYTHON="python2"
+elif command -v python3 > /dev/null 2>&1; then
+    PYTHON="python3"
+else
+    echo "No python interpreter founded."
+    exit -1
+fi
+
+exec $PYTHON "$(dirname $(get_realpath "$0"))"/cli/sparrow-cli.zip --sparrow-cli-internal "$(dirname $(get_realpath "$0"))" "$@"

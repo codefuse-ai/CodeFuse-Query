@@ -1,0 +1,2423 @@
+/**
+ * @brief DO class: An array length.
+ */
+schema ArrayLengthDO {
+    @primary oid: int,
+    tp: int,
+    file_id: int,
+    len: int
+}
+impl ArrayLengthDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: GoDB) -> *ArrayLengthDO {
+    	for (tmp in db.array_length) {
+            yield ArrayLengthDO {
+                oid : tmp.oid,
+                tp : tmp.tp,
+                file_id : tmp.file_id,
+                len : tmp.len
+            }
+    	}
+    }
+    /**
+     * @brief gets the tp of this element.
+     * @return int
+     */
+    pub fn getTp(self) -> int {
+        return self.tp
+    }
+    /**
+     * @brief gets the file id of this element.
+     * @return int
+     */
+    pub fn getFileId(self) -> int {
+        return self.file_id
+    }
+    /**
+     * @brief gets the len of this element.
+     * @return int
+     */
+    pub fn getLen(self) -> int {
+        return self.len
+    }
+}
+/**
+ * @brief DO class: A base type.
+ */
+schema BaseTypeDO {
+    @primary oid: int,
+    ptr: int,
+    tp: int
+}
+impl BaseTypeDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: GoDB) -> *BaseTypeDO {
+    	for (tmp in db.base_type) {
+            yield BaseTypeDO {
+                oid : tmp.oid,
+                ptr : tmp.ptr,
+                tp : tmp.tp
+            }
+    	}
+    }
+    /**
+     * @brief gets the ptr of this element.
+     * @return int
+     */
+    pub fn getPtr(self) -> int {
+        return self.ptr
+    }
+    /**
+     * @brief gets the tp of this element.
+     * @return int
+     */
+    pub fn getTp(self) -> int {
+        return self.tp
+    }
+}
+/**
+ * @brief DO class: A comment.
+ */
+schema CommentDO {
+    @primary oid: int,
+    file_id: int,
+    comment_type: int,
+    parent: int,
+    index: int,
+    debug_info: string
+}
+impl CommentDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: GoDB) -> *CommentDO {
+    	for (tmp in db.comment) {
+            yield CommentDO {
+                oid : tmp.oid,
+                file_id : tmp.file_id,
+                comment_type : tmp.comment_type,
+                parent : tmp.parent,
+                index : tmp.index,
+                debug_info : tmp.debug_info
+            }
+    	}
+    }
+    /**
+     * @brief gets the file id of this element.
+     * @return int
+     */
+    pub fn getFileId(self) -> int {
+        return self.file_id
+    }
+    /**
+     * @brief gets the comment type of this element.
+     * @return int
+     */
+    pub fn getCommentType(self) -> int {
+        return self.comment_type
+    }
+    /**
+     * @brief gets the parent of this element.
+     * @return int
+     */
+    pub fn getParent(self) -> int {
+        return self.parent
+    }
+    /**
+     * @brief gets the index of this element.
+     * @return int
+     */
+    pub fn getIndex(self) -> int {
+        return self.index
+    }
+    /**
+     * @brief gets the debug info of this element.
+     * @return string
+     */
+    pub fn getDebugInfo(self) -> string {
+        return self.debug_info
+    }
+}
+/**
+ * @brief DO class: A comment group.
+ */
+schema CommentGroupDO {
+    @primary oid: int,
+    file_id: int,
+    parent: int,
+    idx: int
+}
+impl CommentGroupDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: GoDB) -> *CommentGroupDO {
+    	for (tmp in db.comment_group) {
+            yield CommentGroupDO {
+                oid : tmp.oid,
+                file_id : tmp.file_id,
+                parent : tmp.parent,
+                idx : tmp.idx
+            }
+    	}
+    }
+    /**
+     * @brief gets the file id of this element.
+     * @return int
+     */
+    pub fn getFileId(self) -> int {
+        return self.file_id
+    }
+    /**
+     * @brief gets the parent of this element.
+     * @return int
+     */
+    pub fn getParent(self) -> int {
+        return self.parent
+    }
+    /**
+     * @brief gets the idx of this element.
+     * @return int
+     */
+    pub fn getIdx(self) -> int {
+        return self.idx
+    }
+}
+/**
+ * @brief DO class: A compilation.
+ */
+schema CompilationDO {
+    @primary oid: int,
+    cwd: string
+}
+impl CompilationDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: GoDB) -> *CompilationDO {
+    	for (tmp in db.compilation) {
+            yield CompilationDO {
+                oid : tmp.oid,
+                cwd : tmp.cwd
+            }
+    	}
+    }
+    /**
+     * @brief gets the cwd of this element.
+     * @return string
+     */
+    pub fn getCwd(self) -> string {
+        return self.cwd
+    }
+}
+/**
+ * @brief DO class: A compilation args.
+ */
+schema CompilationArgsDO {
+    @primary oid: int,
+    num: int,
+    arg: string
+}
+impl CompilationArgsDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: GoDB) -> *CompilationArgsDO {
+    	for (tmp in db.compilation_args) {
+            yield CompilationArgsDO {
+                oid : tmp.oid,
+                num : tmp.num,
+                arg : tmp.arg
+            }
+    	}
+    }
+    /**
+     * @brief gets the num of this element.
+     * @return int
+     */
+    pub fn getNum(self) -> int {
+        return self.num
+    }
+    /**
+     * @brief gets the arg of this element.
+     * @return string
+     */
+    pub fn getArg(self) -> string {
+        return self.arg
+    }
+}
+/**
+ * @brief DO class: A compilation compiling file.
+ */
+schema CompilationCompilingFileDO {
+    @primary oid: int,
+    num: int,
+    file: int
+}
+impl CompilationCompilingFileDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: GoDB) -> *CompilationCompilingFileDO {
+    	for (tmp in db.compilation_compiling_file) {
+            yield CompilationCompilingFileDO {
+                oid : tmp.oid,
+                num : tmp.num,
+                file : tmp.file
+            }
+    	}
+    }
+    /**
+     * @brief gets the num of this element.
+     * @return int
+     */
+    pub fn getNum(self) -> int {
+        return self.num
+    }
+    /**
+     * @brief gets the file of this element.
+     * @return int
+     */
+    pub fn getFile(self) -> int {
+        return self.file
+    }
+}
+/**
+ * @brief DO class: A compilation finished.
+ */
+schema CompilationFinishedDO {
+    @primary oid: int,
+    cpu_seconds: int,
+    elapsed_seconds: int
+}
+impl CompilationFinishedDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: GoDB) -> *CompilationFinishedDO {
+    	for (tmp in db.compilation_finished) {
+            yield CompilationFinishedDO {
+                oid : tmp.oid,
+                cpu_seconds : tmp.cpu_seconds,
+                elapsed_seconds : tmp.elapsed_seconds
+            }
+    	}
+    }
+    /**
+     * @brief gets the cpu seconds of this element.
+     * @return int
+     */
+    pub fn getCpuSeconds(self) -> int {
+        return self.cpu_seconds
+    }
+    /**
+     * @brief gets the elapsed seconds of this element.
+     * @return int
+     */
+    pub fn getElapsedSeconds(self) -> int {
+        return self.elapsed_seconds
+    }
+}
+/**
+ * @brief DO class: A component type.
+ */
+schema ComponentTypeDO {
+    @primary oid: int,
+    parent: int,
+    index: int,
+    name: string,
+    tp: int
+}
+impl ComponentTypeDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: GoDB) -> *ComponentTypeDO {
+    	for (tmp in db.component_type) {
+            yield ComponentTypeDO {
+                oid : tmp.oid,
+                parent : tmp.parent,
+                index : tmp.index,
+                name : tmp.name,
+                tp : tmp.tp
+            }
+    	}
+    }
+    /**
+     * @brief gets the parent of this element.
+     * @return int
+     */
+    pub fn getParent(self) -> int {
+        return self.parent
+    }
+    /**
+     * @brief gets the index of this element.
+     * @return int
+     */
+    pub fn getIndex(self) -> int {
+        return self.index
+    }
+    /**
+     * @brief gets the name of this element.
+     * @return string
+     */
+    pub fn getName(self) -> string {
+        return self.name
+    }
+    /**
+     * @brief gets the tp of this element.
+     * @return int
+     */
+    pub fn getTp(self) -> int {
+        return self.tp
+    }
+}
+/**
+ * @brief DO class: A const value.
+ */
+schema ConstValueDO {
+    @primary oid: int,
+    expr: int,
+    value: string,
+    exact: string
+}
+impl ConstValueDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: GoDB) -> *ConstValueDO {
+    	for (tmp in db.const_value) {
+            yield ConstValueDO {
+                oid : tmp.oid,
+                expr : tmp.expr,
+                value : tmp.value,
+                exact : tmp.exact
+            }
+    	}
+    }
+    /**
+     * @brief gets the expr of this element.
+     * @return int
+     */
+    pub fn getExpr(self) -> int {
+        return self.expr
+    }
+    /**
+     * @brief gets the value of this element.
+     * @return string
+     */
+    pub fn getValue(self) -> string {
+        return self.value
+    }
+    /**
+     * @brief gets the exact of this element.
+     * @return string
+     */
+    pub fn getExact(self) -> string {
+        return self.exact
+    }
+}
+/**
+ * @brief DO class: A container parent.
+ */
+schema ContainerParentDO {
+    @primary oid: int,
+    parent: int,
+    child: int
+}
+impl ContainerParentDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: GoDB) -> *ContainerParentDO {
+    	for (tmp in db.container_parent) {
+            yield ContainerParentDO {
+                oid : tmp.oid,
+                parent : tmp.parent,
+                child : tmp.child
+            }
+    	}
+    }
+    /**
+     * @brief gets the parent of this element.
+     * @return int
+     */
+    pub fn getParent(self) -> int {
+        return self.parent
+    }
+    /**
+     * @brief gets the child of this element.
+     * @return int
+     */
+    pub fn getChild(self) -> int {
+        return self.child
+    }
+}
+/**
+ * @brief DO class: A decl.
+ */
+schema DeclDO {
+    @primary oid: int,
+    file_id: int,
+    kind: int,
+    parent_id: int,
+    idx: int,
+    debug_info: string
+}
+impl DeclDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: GoDB) -> *DeclDO {
+    	for (tmp in db.decl) {
+            yield DeclDO {
+                oid : tmp.oid,
+                file_id : tmp.file_id,
+                kind : tmp.kind,
+                parent_id : tmp.parent_id,
+                idx : tmp.idx,
+                debug_info : tmp.debug_info
+            }
+    	}
+    }
+    /**
+     * @brief gets the file id of this element.
+     * @return int
+     */
+    pub fn getFileId(self) -> int {
+        return self.file_id
+    }
+    /**
+     * @brief gets the kind of this element.
+     * @return int
+     */
+    pub fn getKind(self) -> int {
+        return self.kind
+    }
+    /**
+     * @brief gets the parent id of this element.
+     * @return int
+     */
+    pub fn getParentId(self) -> int {
+        return self.parent_id
+    }
+    /**
+     * @brief gets the idx of this element.
+     * @return int
+     */
+    pub fn getIdx(self) -> int {
+        return self.idx
+    }
+    /**
+     * @brief gets the debug info of this element.
+     * @return string
+     */
+    pub fn getDebugInfo(self) -> string {
+        return self.debug_info
+    }
+}
+/**
+ * @brief DO class: A def.
+ */
+schema DefDO {
+    @primary oid: int,
+    ident: int,
+    object: int
+}
+impl DefDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: GoDB) -> *DefDO {
+    	for (tmp in db.def) {
+            yield DefDO {
+                oid : tmp.oid,
+                ident : tmp.ident,
+                object : tmp.object
+            }
+    	}
+    }
+    /**
+     * @brief gets the ident of this element.
+     * @return int
+     */
+    pub fn getIdent(self) -> int {
+        return self.ident
+    }
+    /**
+     * @brief gets the object of this element.
+     * @return int
+     */
+    pub fn getObject(self) -> int {
+        return self.object
+    }
+}
+/**
+ * @brief DO class: A diagnostic.
+ */
+schema DiagnosticDO {
+    @primary oid: int,
+    severity: int,
+    error_tag: string,
+    error_message: string,
+    full_error_message: string,
+    location_id: int
+}
+impl DiagnosticDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: GoDB) -> *DiagnosticDO {
+    	for (tmp in db.diagnostic) {
+            yield DiagnosticDO {
+                oid : tmp.oid,
+                severity : tmp.severity,
+                error_tag : tmp.error_tag,
+                error_message : tmp.error_message,
+                full_error_message : tmp.full_error_message,
+                location_id : tmp.location_id
+            }
+    	}
+    }
+    /**
+     * @brief gets the severity of this element.
+     * @return int
+     */
+    pub fn getSeverity(self) -> int {
+        return self.severity
+    }
+    /**
+     * @brief gets the error tag of this element.
+     * @return string
+     */
+    pub fn getErrorTag(self) -> string {
+        return self.error_tag
+    }
+    /**
+     * @brief gets the error message of this element.
+     * @return string
+     */
+    pub fn getErrorMessage(self) -> string {
+        return self.error_message
+    }
+    /**
+     * @brief gets the full error message of this element.
+     * @return string
+     */
+    pub fn getFullErrorMessage(self) -> string {
+        return self.full_error_message
+    }
+    /**
+     * @brief gets the location id of this element.
+     * @return int
+     */
+    pub fn getLocationId(self) -> int {
+        return self.location_id
+    }
+}
+/**
+ * @brief DO class: A diagnostic for.
+ */
+schema DiagnosticForDO {
+    @primary diagnostic: int,
+    compilation: int,
+    file_number: int,
+    file_number_diagnostic_number: int
+}
+impl DiagnosticForDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: GoDB) -> *DiagnosticForDO {
+    	for (tmp in db.diagnostic_for) {
+            yield DiagnosticForDO {
+                diagnostic : tmp.diagnostic,
+                compilation : tmp.compilation,
+                file_number : tmp.file_number,
+                file_number_diagnostic_number : tmp.file_number_diagnostic_number
+            }
+    	}
+    }
+    /**
+     * @brief gets the compilation of this element.
+     * @return int
+     */
+    pub fn getCompilation(self) -> int {
+        return self.compilation
+    }
+    /**
+     * @brief gets the file number of this element.
+     * @return int
+     */
+    pub fn getFileNumber(self) -> int {
+        return self.file_number
+    }
+    /**
+     * @brief gets the file number diagnostic number of this element.
+     * @return int
+     */
+    pub fn getFileNumberDiagnosticNumber(self) -> int {
+        return self.file_number_diagnostic_number
+    }
+}
+/**
+ * @brief DO class: A doc comment.
+ */
+schema DocCommentDO {
+    @primary oid: int,
+    associate_obj: int,
+    comment_group_id: int
+}
+impl DocCommentDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: GoDB) -> *DocCommentDO {
+    	for (tmp in db.doc_comment) {
+            yield DocCommentDO {
+                oid : tmp.oid,
+                associate_obj : tmp.associate_obj,
+                comment_group_id : tmp.comment_group_id
+            }
+    	}
+    }
+    /**
+     * @brief gets the associate obj of this element.
+     * @return int
+     */
+    pub fn getAssociateObj(self) -> int {
+        return self.associate_obj
+    }
+    /**
+     * @brief gets the comment group id of this element.
+     * @return int
+     */
+    pub fn getCommentGroupId(self) -> int {
+        return self.comment_group_id
+    }
+}
+/**
+ * @brief DO class: An element type.
+ */
+schema ElementTypeDO {
+    @primary oid: int,
+    container: int,
+    tp: int
+}
+impl ElementTypeDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: GoDB) -> *ElementTypeDO {
+    	for (tmp in db.element_type) {
+            yield ElementTypeDO {
+                oid : tmp.oid,
+                container : tmp.container,
+                tp : tmp.tp
+            }
+    	}
+    }
+    /**
+     * @brief gets the container of this element.
+     * @return int
+     */
+    pub fn getContainer(self) -> int {
+        return self.container
+    }
+    /**
+     * @brief gets the tp of this element.
+     * @return int
+     */
+    pub fn getTp(self) -> int {
+        return self.tp
+    }
+}
+/**
+ * @brief DO class: An error.
+ */
+schema ErrorDO {
+    @primary oid: int,
+    kind: int,
+    msg: string,
+    raw_pos: string,
+    file: string,
+    line: int,
+    col: int,
+    pkg: int,
+    idx: int
+}
+impl ErrorDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: GoDB) -> *ErrorDO {
+    	for (tmp in db.error) {
+            yield ErrorDO {
+                oid : tmp.oid,
+                kind : tmp.kind,
+                msg : tmp.msg,
+                raw_pos : tmp.raw_pos,
+                file : tmp.file,
+                line : tmp.line,
+                col : tmp.col,
+                pkg : tmp.pkg,
+                idx : tmp.idx
+            }
+    	}
+    }
+    /**
+     * @brief gets the kind of this element.
+     * @return int
+     */
+    pub fn getKind(self) -> int {
+        return self.kind
+    }
+    /**
+     * @brief gets the msg of this element.
+     * @return string
+     */
+    pub fn getMsg(self) -> string {
+        return self.msg
+    }
+    /**
+     * @brief gets the raw pos of this element.
+     * @return string
+     */
+    pub fn getRawPos(self) -> string {
+        return self.raw_pos
+    }
+    /**
+     * @brief gets the file of this element.
+     * @return string
+     */
+    pub fn getFile(self) -> string {
+        return self.file
+    }
+    /**
+     * @brief gets the line of this element.
+     * @return int
+     */
+    pub fn getLine(self) -> int {
+        return self.line
+    }
+    /**
+     * @brief gets the col of this element.
+     * @return int
+     */
+    pub fn getCol(self) -> int {
+        return self.col
+    }
+    /**
+     * @brief gets the pkg of this element.
+     * @return int
+     */
+    pub fn getPkg(self) -> int {
+        return self.pkg
+    }
+    /**
+     * @brief gets the idx of this element.
+     * @return int
+     */
+    pub fn getIdx(self) -> int {
+        return self.idx
+    }
+}
+/**
+ * @brief DO class: An expr.
+ */
+schema ExprDO {
+    @primary oid: int,
+    file_id: int,
+    kind: int,
+    parent_id: int,
+    idx: int,
+    debug_info: string
+}
+impl ExprDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: GoDB) -> *ExprDO {
+    	for (tmp in db.expr) {
+            yield ExprDO {
+                oid : tmp.oid,
+                file_id : tmp.file_id,
+                kind : tmp.kind,
+                parent_id : tmp.parent_id,
+                idx : tmp.idx,
+                debug_info : tmp.debug_info
+            }
+    	}
+    }
+    /**
+     * @brief gets the file id of this element.
+     * @return int
+     */
+    pub fn getFileId(self) -> int {
+        return self.file_id
+    }
+    /**
+     * @brief gets the kind of this element.
+     * @return int
+     */
+    pub fn getKind(self) -> int {
+        return self.kind
+    }
+    /**
+     * @brief gets the parent id of this element.
+     * @return int
+     */
+    pub fn getParentId(self) -> int {
+        return self.parent_id
+    }
+    /**
+     * @brief gets the idx of this element.
+     * @return int
+     */
+    pub fn getIdx(self) -> int {
+        return self.idx
+    }
+    /**
+     * @brief gets the debug info of this element.
+     * @return string
+     */
+    pub fn getDebugInfo(self) -> string {
+        return self.debug_info
+    }
+}
+/**
+ * @brief DO class: A field struct.
+ */
+schema FieldStructDO {
+    @primary oid: int,
+    struct: int
+}
+impl FieldStructDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: GoDB) -> *FieldStructDO {
+    	for (tmp in db.field_struct) {
+            yield FieldStructDO {
+                oid : tmp.oid,
+                struct : tmp.struct
+            }
+    	}
+    }
+    /**
+     * @brief gets the struct of this element.
+     * @return int
+     */
+    pub fn getStruct(self) -> int {
+        return self.struct
+    }
+}
+/**
+ * @brief DO class: A fields.
+ */
+schema FieldsDO {
+    @primary oid: int,
+    parent_id: int,
+    idx: int,
+    kind: int
+}
+impl FieldsDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: GoDB) -> *FieldsDO {
+    	for (tmp in db.fields) {
+            yield FieldsDO {
+                oid : tmp.oid,
+                parent_id : tmp.parent_id,
+                idx : tmp.idx,
+                kind : tmp.kind
+            }
+    	}
+    }
+    /**
+     * @brief gets the parent id of this element.
+     * @return int
+     */
+    pub fn getParentId(self) -> int {
+        return self.parent_id
+    }
+    /**
+     * @brief gets the idx of this element.
+     * @return int
+     */
+    pub fn getIdx(self) -> int {
+        return self.idx
+    }
+    /**
+     * @brief gets the kind of this element.
+     * @return int
+     */
+    pub fn getKind(self) -> int {
+        return self.kind
+    }
+}
+/**
+ * @brief DO class: A file.
+ */
+schema FileDO {
+    @primary oid: int,
+    pkg_oid: int,
+    name: string,
+    md5_sum: string,
+    sha256_sum: string
+}
+impl FileDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: GoDB) -> *FileDO {
+    	for (tmp in db.file) {
+            yield FileDO {
+                oid : tmp.oid,
+                pkg_oid : tmp.pkg_oid,
+                name : tmp.name,
+                md5_sum : tmp.md5_sum,
+                sha256_sum : tmp.sha256_sum
+            }
+    	}
+    }
+    /**
+     * @brief gets the pkg oid of this element.
+     * @return int
+     */
+    pub fn getPkgOid(self) -> int {
+        return self.pkg_oid
+    }
+    /**
+     * @brief gets the name of this element.
+     * @return string
+     */
+    pub fn getName(self) -> string {
+        return self.name
+    }
+    /**
+     * @brief gets the md5 sum of this element.
+     * @return string
+     */
+    pub fn getMd5Sum(self) -> string {
+        return self.md5_sum
+    }
+    /**
+     * @brief gets the sha256 sum of this element.
+     * @return string
+     */
+    pub fn getSha256Sum(self) -> string {
+        return self.sha256_sum
+    }
+}
+/**
+ * @brief DO class: A file data.
+ */
+schema FileDataDO {
+    @primary oid: int,
+    file_id: int,
+    type: int,
+    content: string
+}
+impl FileDataDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: GoDB) -> *FileDataDO {
+    	for (tmp in db.file_data) {
+            yield FileDataDO {
+                oid : tmp.oid,
+                file_id : tmp.file_id,
+                type : tmp.type,
+                content : tmp.content
+            }
+    	}
+    }
+    /**
+     * @brief gets the file id of this element.
+     * @return int
+     */
+    pub fn getFileId(self) -> int {
+        return self.file_id
+    }
+    /**
+     * @brief gets the type of this element.
+     * @return int
+     */
+    pub fn getType(self) -> int {
+        return self.type
+    }
+    /**
+     * @brief gets the content of this element.
+     * @return string
+     */
+    pub fn getContent(self) -> string {
+        return self.content
+    }
+}
+/**
+ * @brief DO class: A folder.
+ */
+schema FolderDO {
+    @primary oid: int,
+    name: string
+}
+impl FolderDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: GoDB) -> *FolderDO {
+    	for (tmp in db.folder) {
+            yield FolderDO {
+                oid : tmp.oid,
+                name : tmp.name
+            }
+    	}
+    }
+    /**
+     * @brief gets the name of this element.
+     * @return string
+     */
+    pub fn getName(self) -> string {
+        return self.name
+    }
+}
+/**
+ * @brief DO class: A has ellipsis.
+ */
+schema HasEllipsisDO {
+    @primary oid: int,
+    call_or_conversion_expr_id: int
+}
+impl HasEllipsisDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: GoDB) -> *HasEllipsisDO {
+    	for (tmp in db.has_ellipsis) {
+            yield HasEllipsisDO {
+                oid : tmp.oid,
+                call_or_conversion_expr_id : tmp.call_or_conversion_expr_id
+            }
+    	}
+    }
+    /**
+     * @brief gets the call or conversion expr id of this element.
+     * @return int
+     */
+    pub fn getCallOrConversionExprId(self) -> int {
+        return self.call_or_conversion_expr_id
+    }
+}
+/**
+ * @brief DO class: A has location.
+ */
+schema HasLocationDO {
+    @primary oid: int,
+    location_obj: int,
+    location_id: int
+}
+impl HasLocationDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: GoDB) -> *HasLocationDO {
+    	for (tmp in db.has_location) {
+            yield HasLocationDO {
+                oid : tmp.oid,
+                location_obj : tmp.location_obj,
+                location_id : tmp.location_id
+            }
+    	}
+    }
+    /**
+     * @brief gets the location obj of this element.
+     * @return int
+     */
+    pub fn getLocationObj(self) -> int {
+        return self.location_obj
+    }
+    /**
+     * @brief gets the location id of this element.
+     * @return int
+     */
+    pub fn getLocationId(self) -> int {
+        return self.location_id
+    }
+}
+/**
+ * @brief DO class: A key type.
+ */
+schema KeyTypeDO {
+    @primary oid: int,
+    map: int,
+    tp: int
+}
+impl KeyTypeDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: GoDB) -> *KeyTypeDO {
+    	for (tmp in db.key_type) {
+            yield KeyTypeDO {
+                oid : tmp.oid,
+                map : tmp.map,
+                tp : tmp.tp
+            }
+    	}
+    }
+    /**
+     * @brief gets the map of this element.
+     * @return int
+     */
+    pub fn getMap(self) -> int {
+        return self.map
+    }
+    /**
+     * @brief gets the tp of this element.
+     * @return int
+     */
+    pub fn getTp(self) -> int {
+        return self.tp
+    }
+}
+/**
+ * @brief DO class: A literal.
+ */
+schema LiteralDO {
+    @primary oid: int,
+    expr: int,
+    value: string,
+    raw: string
+}
+impl LiteralDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: GoDB) -> *LiteralDO {
+    	for (tmp in db.literal) {
+            yield LiteralDO {
+                oid : tmp.oid,
+                expr : tmp.expr,
+                value : tmp.value,
+                raw : tmp.raw
+            }
+    	}
+    }
+    /**
+     * @brief gets the expr of this element.
+     * @return int
+     */
+    pub fn getExpr(self) -> int {
+        return self.expr
+    }
+    /**
+     * @brief gets the value of this element.
+     * @return string
+     */
+    pub fn getValue(self) -> string {
+        return self.value
+    }
+    /**
+     * @brief gets the raw of this element.
+     * @return string
+     */
+    pub fn getRaw(self) -> string {
+        return self.raw
+    }
+}
+/**
+ * @brief DO class: A location.
+ */
+schema LocationDO {
+    @primary oid: int,
+    start_line_number: int,
+    start_column_number: int,
+    end_line_number: int,
+    end_column_number: int,
+    token_start_offset: int,
+    token_end_offset: int
+}
+impl LocationDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: GoDB) -> *LocationDO {
+    	for (tmp in db.location) {
+            yield LocationDO {
+                oid : tmp.oid,
+                start_line_number : tmp.start_line_number,
+                start_column_number : tmp.start_column_number,
+                end_line_number : tmp.end_line_number,
+                end_column_number : tmp.end_column_number,
+                token_start_offset : tmp.token_start_offset,
+                token_end_offset : tmp.token_end_offset
+            }
+    	}
+    }
+    /**
+     * @brief gets the start line number of this element.
+     * @return int
+     */
+    pub fn getStartLineNumber(self) -> int {
+        return self.start_line_number
+    }
+    /**
+     * @brief gets the start column number of this element.
+     * @return int
+     */
+    pub fn getStartColumnNumber(self) -> int {
+        return self.start_column_number
+    }
+    /**
+     * @brief gets the end line number of this element.
+     * @return int
+     */
+    pub fn getEndLineNumber(self) -> int {
+        return self.end_line_number
+    }
+    /**
+     * @brief gets the end column number of this element.
+     * @return int
+     */
+    pub fn getEndColumnNumber(self) -> int {
+        return self.end_column_number
+    }
+    /**
+     * @brief gets the token start offset of this element.
+     * @return int
+     */
+    pub fn getTokenStartOffset(self) -> int {
+        return self.token_start_offset
+    }
+    /**
+     * @brief gets the token end offset of this element.
+     * @return int
+     */
+    pub fn getTokenEndOffset(self) -> int {
+        return self.token_end_offset
+    }
+}
+/**
+ * @brief DO class: A method host.
+ */
+schema MethodHostDO {
+    @primary oid: int,
+    method: int,
+    host: int
+}
+impl MethodHostDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: GoDB) -> *MethodHostDO {
+    	for (tmp in db.method_host) {
+            yield MethodHostDO {
+                oid : tmp.oid,
+                method : tmp.method,
+                host : tmp.host
+            }
+    	}
+    }
+    /**
+     * @brief gets the method of this element.
+     * @return int
+     */
+    pub fn getMethod(self) -> int {
+        return self.method
+    }
+    /**
+     * @brief gets the host of this element.
+     * @return int
+     */
+    pub fn getHost(self) -> int {
+        return self.host
+    }
+}
+/**
+ * @brief DO class: A method receiver.
+ */
+schema MethodReceiverDO {
+    @primary oid: int,
+    method: int,
+    receiver: int
+}
+impl MethodReceiverDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: GoDB) -> *MethodReceiverDO {
+    	for (tmp in db.method_receiver) {
+            yield MethodReceiverDO {
+                oid : tmp.oid,
+                method : tmp.method,
+                receiver : tmp.receiver
+            }
+    	}
+    }
+    /**
+     * @brief gets the method of this element.
+     * @return int
+     */
+    pub fn getMethod(self) -> int {
+        return self.method
+    }
+    /**
+     * @brief gets the receiver of this element.
+     * @return int
+     */
+    pub fn getReceiver(self) -> int {
+        return self.receiver
+    }
+}
+/**
+ * @brief DO class: A mod expr.
+ */
+schema ModExprDO {
+    @primary oid: int,
+    kind: int,
+    parent: int,
+    idx: int
+}
+impl ModExprDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: GoDB) -> *ModExprDO {
+    	for (tmp in db.mod_expr) {
+            yield ModExprDO {
+                oid : tmp.oid,
+                kind : tmp.kind,
+                parent : tmp.parent,
+                idx : tmp.idx
+            }
+    	}
+    }
+    /**
+     * @brief gets the kind of this element.
+     * @return int
+     */
+    pub fn getKind(self) -> int {
+        return self.kind
+    }
+    /**
+     * @brief gets the parent of this element.
+     * @return int
+     */
+    pub fn getParent(self) -> int {
+        return self.parent
+    }
+    /**
+     * @brief gets the idx of this element.
+     * @return int
+     */
+    pub fn getIdx(self) -> int {
+        return self.idx
+    }
+}
+/**
+ * @brief DO class: A mod file.
+ */
+schema ModFileDO {
+    @primary oid: int,
+    path: string,
+    name: string,
+    go_version: string
+}
+impl ModFileDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: GoDB) -> *ModFileDO {
+    	for (tmp in db.mod_file) {
+            yield ModFileDO {
+                oid : tmp.oid,
+                path : tmp.path,
+                name : tmp.name,
+                go_version : tmp.go_version
+            }
+    	}
+    }
+    /**
+     * @brief gets the path of this element.
+     * @return string
+     */
+    pub fn getPath(self) -> string {
+        return self.path
+    }
+    /**
+     * @brief gets the name of this element.
+     * @return string
+     */
+    pub fn getName(self) -> string {
+        return self.name
+    }
+    /**
+     * @brief gets the go version of this element.
+     * @return string
+     */
+    pub fn getGoVersion(self) -> string {
+        return self.go_version
+    }
+}
+/**
+ * @brief DO class: A mod require.
+ */
+schema ModRequireDO {
+    @primary oid: int,
+    mod_id: int,
+    require: string
+}
+impl ModRequireDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: GoDB) -> *ModRequireDO {
+    	for (tmp in db.mod_require) {
+            yield ModRequireDO {
+                oid : tmp.oid,
+                mod_id : tmp.mod_id,
+                require : tmp.require
+            }
+    	}
+    }
+    /**
+     * @brief gets the mod id of this element.
+     * @return int
+     */
+    pub fn getModId(self) -> int {
+        return self.mod_id
+    }
+    /**
+     * @brief gets the require of this element.
+     * @return string
+     */
+    pub fn getRequire(self) -> string {
+        return self.require
+    }
+}
+/**
+ * @brief DO class: A mod token.
+ */
+schema ModTokenDO {
+    @primary oid: int,
+    token: string,
+    parent: int,
+    idx: int
+}
+impl ModTokenDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: GoDB) -> *ModTokenDO {
+    	for (tmp in db.mod_token) {
+            yield ModTokenDO {
+                oid : tmp.oid,
+                token : tmp.token,
+                parent : tmp.parent,
+                idx : tmp.idx
+            }
+    	}
+    }
+    /**
+     * @brief gets the token of this element.
+     * @return string
+     */
+    pub fn getToken(self) -> string {
+        return self.token
+    }
+    /**
+     * @brief gets the parent of this element.
+     * @return int
+     */
+    pub fn getParent(self) -> int {
+        return self.parent
+    }
+    /**
+     * @brief gets the idx of this element.
+     * @return int
+     */
+    pub fn getIdx(self) -> int {
+        return self.idx
+    }
+}
+/**
+ * @brief DO class: A number of line.
+ */
+schema NumberOfLineDO {
+    @primary oid: int,
+    number_of_total_lines: int,
+    number_of_code_lines: int,
+    number_of_comment_lines: int
+}
+impl NumberOfLineDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: GoDB) -> *NumberOfLineDO {
+    	for (tmp in db.number_of_line) {
+            yield NumberOfLineDO {
+                oid : tmp.oid,
+                number_of_total_lines : tmp.number_of_total_lines,
+                number_of_code_lines : tmp.number_of_code_lines,
+                number_of_comment_lines : tmp.number_of_comment_lines
+            }
+    	}
+    }
+    /**
+     * @brief gets the number of total lines of this element.
+     * @return int
+     */
+    pub fn getNumberOfTotalLines(self) -> int {
+        return self.number_of_total_lines
+    }
+    /**
+     * @brief gets the number of code lines of this element.
+     * @return int
+     */
+    pub fn getNumberOfCodeLines(self) -> int {
+        return self.number_of_code_lines
+    }
+    /**
+     * @brief gets the number of comment lines of this element.
+     * @return int
+     */
+    pub fn getNumberOfCommentLines(self) -> int {
+        return self.number_of_comment_lines
+    }
+}
+/**
+ * @brief DO class: An object.
+ */
+schema ObjectDO {
+    @primary oid: int,
+    kind: int,
+    name: string,
+    debug_info: string
+}
+impl ObjectDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: GoDB) -> *ObjectDO {
+    	for (tmp in db.object) {
+            yield ObjectDO {
+                oid : tmp.oid,
+                kind : tmp.kind,
+                name : tmp.name,
+                debug_info : tmp.debug_info
+            }
+    	}
+    }
+    /**
+     * @brief gets the kind of this element.
+     * @return int
+     */
+    pub fn getKind(self) -> int {
+        return self.kind
+    }
+    /**
+     * @brief gets the name of this element.
+     * @return string
+     */
+    pub fn getName(self) -> string {
+        return self.name
+    }
+    /**
+     * @brief gets the debug info of this element.
+     * @return string
+     */
+    pub fn getDebugInfo(self) -> string {
+        return self.debug_info
+    }
+}
+/**
+ * @brief DO class: An object scope.
+ */
+schema ObjectScopeDO {
+    @primary oid: int,
+    object: int,
+    scope: int
+}
+impl ObjectScopeDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: GoDB) -> *ObjectScopeDO {
+    	for (tmp in db.object_scope) {
+            yield ObjectScopeDO {
+                oid : tmp.oid,
+                object : tmp.object,
+                scope : tmp.scope
+            }
+    	}
+    }
+    /**
+     * @brief gets the object of this element.
+     * @return int
+     */
+    pub fn getObject(self) -> int {
+        return self.object
+    }
+    /**
+     * @brief gets the scope of this element.
+     * @return int
+     */
+    pub fn getScope(self) -> int {
+        return self.scope
+    }
+}
+/**
+ * @brief DO class: An object type.
+ */
+schema ObjectTypeDO {
+    @primary object: int,
+    tp: int
+}
+impl ObjectTypeDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: GoDB) -> *ObjectTypeDO {
+    	for (tmp in db.object_type) {
+            yield ObjectTypeDO {
+                object : tmp.object,
+                tp : tmp.tp
+            }
+    	}
+    }
+    /**
+     * @brief gets the tp of this element.
+     * @return int
+     */
+    pub fn getTp(self) -> int {
+        return self.tp
+    }
+}
+/**
+ * @brief DO class: A pkg.
+ */
+schema PkgDO {
+    @primary oid: int,
+    path: string,
+    name: string,
+    scope: int
+}
+impl PkgDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: GoDB) -> *PkgDO {
+    	for (tmp in db.pkg) {
+            yield PkgDO {
+                oid : tmp.oid,
+                path : tmp.path,
+                name : tmp.name,
+                scope : tmp.scope
+            }
+    	}
+    }
+    /**
+     * @brief gets the path of this element.
+     * @return string
+     */
+    pub fn getPath(self) -> string {
+        return self.path
+    }
+    /**
+     * @brief gets the name of this element.
+     * @return string
+     */
+    pub fn getName(self) -> string {
+        return self.name
+    }
+    /**
+     * @brief gets the scope of this element.
+     * @return int
+     */
+    pub fn getScope(self) -> int {
+        return self.scope
+    }
+}
+/**
+ * @brief DO class: A runtime info.
+ */
+schema RuntimeInfoDO {
+    @primary oid: int,
+    build_version: string,
+    extractor_info: string,
+    go_os: string,
+    go_arch: string
+}
+impl RuntimeInfoDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: GoDB) -> *RuntimeInfoDO {
+    	for (tmp in db.runtime_info) {
+            yield RuntimeInfoDO {
+                oid : tmp.oid,
+                build_version : tmp.build_version,
+                extractor_info : tmp.extractor_info,
+                go_os : tmp.go_os,
+                go_arch : tmp.go_arch
+            }
+    	}
+    }
+    /**
+     * @brief gets the build version of this element.
+     * @return string
+     */
+    pub fn getBuildVersion(self) -> string {
+        return self.build_version
+    }
+    /**
+     * @brief gets the extractor info of this element.
+     * @return string
+     */
+    pub fn getExtractorInfo(self) -> string {
+        return self.extractor_info
+    }
+    /**
+     * @brief gets the go os of this element.
+     * @return string
+     */
+    pub fn getGoOs(self) -> string {
+        return self.go_os
+    }
+    /**
+     * @brief gets the go arch of this element.
+     * @return string
+     */
+    pub fn getGoArch(self) -> string {
+        return self.go_arch
+    }
+}
+/**
+ * @brief DO class: A scope.
+ */
+schema ScopeDO {
+    @primary oid: int,
+    kind: int,
+    debug_info: string
+}
+impl ScopeDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: GoDB) -> *ScopeDO {
+    	for (tmp in db.scope) {
+            yield ScopeDO {
+                oid : tmp.oid,
+                kind : tmp.kind,
+                debug_info : tmp.debug_info
+            }
+    	}
+    }
+    /**
+     * @brief gets the kind of this element.
+     * @return int
+     */
+    pub fn getKind(self) -> int {
+        return self.kind
+    }
+    /**
+     * @brief gets the debug info of this element.
+     * @return string
+     */
+    pub fn getDebugInfo(self) -> string {
+        return self.debug_info
+    }
+}
+/**
+ * @brief DO class: A scope nesting.
+ */
+schema ScopeNestingDO {
+    @primary oid: int,
+    inner: int,
+    outer: int
+}
+impl ScopeNestingDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: GoDB) -> *ScopeNestingDO {
+    	for (tmp in db.scope_nesting) {
+            yield ScopeNestingDO {
+                oid : tmp.oid,
+                inner : tmp.inner,
+                outer : tmp.outer
+            }
+    	}
+    }
+    /**
+     * @brief gets the inner of this element.
+     * @return int
+     */
+    pub fn getInner(self) -> int {
+        return self.inner
+    }
+    /**
+     * @brief gets the outer of this element.
+     * @return int
+     */
+    pub fn getOuter(self) -> int {
+        return self.outer
+    }
+}
+/**
+ * @brief DO class: A scope node.
+ */
+schema ScopeNodeDO {
+    @primary oid: int,
+    node: int,
+    scope: int
+}
+impl ScopeNodeDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: GoDB) -> *ScopeNodeDO {
+    	for (tmp in db.scope_node) {
+            yield ScopeNodeDO {
+                oid : tmp.oid,
+                node : tmp.node,
+                scope : tmp.scope
+            }
+    	}
+    }
+    /**
+     * @brief gets the node of this element.
+     * @return int
+     */
+    pub fn getNode(self) -> int {
+        return self.node
+    }
+    /**
+     * @brief gets the scope of this element.
+     * @return int
+     */
+    pub fn getScope(self) -> int {
+        return self.scope
+    }
+}
+/**
+ * @brief DO class: A spec.
+ */
+schema SpecDO {
+    @primary oid: int,
+    kind: int,
+    parent_id: int,
+    idx: int,
+    debug_info: string
+}
+impl SpecDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: GoDB) -> *SpecDO {
+    	for (tmp in db.spec) {
+            yield SpecDO {
+                oid : tmp.oid,
+                kind : tmp.kind,
+                parent_id : tmp.parent_id,
+                idx : tmp.idx,
+                debug_info : tmp.debug_info
+            }
+    	}
+    }
+    /**
+     * @brief gets the kind of this element.
+     * @return int
+     */
+    pub fn getKind(self) -> int {
+        return self.kind
+    }
+    /**
+     * @brief gets the parent id of this element.
+     * @return int
+     */
+    pub fn getParentId(self) -> int {
+        return self.parent_id
+    }
+    /**
+     * @brief gets the idx of this element.
+     * @return int
+     */
+    pub fn getIdx(self) -> int {
+        return self.idx
+    }
+    /**
+     * @brief gets the debug info of this element.
+     * @return string
+     */
+    pub fn getDebugInfo(self) -> string {
+        return self.debug_info
+    }
+}
+/**
+ * @brief DO class: A stmt.
+ */
+schema StmtDO {
+    @primary oid: int,
+    file_id: int,
+    kind: int,
+    parent_id: int,
+    idx: int,
+    debug_info: string
+}
+impl StmtDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: GoDB) -> *StmtDO {
+    	for (tmp in db.stmt) {
+            yield StmtDO {
+                oid : tmp.oid,
+                file_id : tmp.file_id,
+                kind : tmp.kind,
+                parent_id : tmp.parent_id,
+                idx : tmp.idx,
+                debug_info : tmp.debug_info
+            }
+    	}
+    }
+    /**
+     * @brief gets the file id of this element.
+     * @return int
+     */
+    pub fn getFileId(self) -> int {
+        return self.file_id
+    }
+    /**
+     * @brief gets the kind of this element.
+     * @return int
+     */
+    pub fn getKind(self) -> int {
+        return self.kind
+    }
+    /**
+     * @brief gets the parent id of this element.
+     * @return int
+     */
+    pub fn getParentId(self) -> int {
+        return self.parent_id
+    }
+    /**
+     * @brief gets the idx of this element.
+     * @return int
+     */
+    pub fn getIdx(self) -> int {
+        return self.idx
+    }
+    /**
+     * @brief gets the debug info of this element.
+     * @return string
+     */
+    pub fn getDebugInfo(self) -> string {
+        return self.debug_info
+    }
+}
+/**
+ * @brief DO class: A type.
+ */
+schema TypeDO {
+    @primary oid: int,
+    kind: int,
+    format_string: string,
+    raw_string: string
+}
+impl TypeDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: GoDB) -> *TypeDO {
+    	for (tmp in db.type) {
+            yield TypeDO {
+                oid : tmp.oid,
+                kind : tmp.kind,
+                format_string : tmp.format_string,
+                raw_string : tmp.raw_string
+            }
+    	}
+    }
+    /**
+     * @brief gets the kind of this element.
+     * @return int
+     */
+    pub fn getKind(self) -> int {
+        return self.kind
+    }
+    /**
+     * @brief gets the format string of this element.
+     * @return string
+     */
+    pub fn getFormatString(self) -> string {
+        return self.format_string
+    }
+    /**
+     * @brief gets the raw string of this element.
+     * @return string
+     */
+    pub fn getRawString(self) -> string {
+        return self.raw_string
+    }
+}
+/**
+ * @brief DO class: A type name.
+ */
+schema TypeNameDO {
+    @primary oid: int,
+    name: string
+}
+impl TypeNameDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: GoDB) -> *TypeNameDO {
+    	for (tmp in db.type_name) {
+            yield TypeNameDO {
+                oid : tmp.oid,
+                name : tmp.name
+            }
+    	}
+    }
+    /**
+     * @brief gets the name of this element.
+     * @return string
+     */
+    pub fn getName(self) -> string {
+        return self.name
+    }
+}
+/**
+ * @brief DO class: A type object.
+ */
+schema TypeObjectDO {
+    @primary oid: int,
+    object: int
+}
+impl TypeObjectDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: GoDB) -> *TypeObjectDO {
+    	for (tmp in db.type_object) {
+            yield TypeObjectDO {
+                oid : tmp.oid,
+                object : tmp.object
+            }
+    	}
+    }
+    /**
+     * @brief gets the object of this element.
+     * @return int
+     */
+    pub fn getObject(self) -> int {
+        return self.object
+    }
+}
+/**
+ * @brief DO class: A type of.
+ */
+schema TypeOfDO {
+    @primary oid: int,
+    expr: int,
+    tp: int
+}
+impl TypeOfDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: GoDB) -> *TypeOfDO {
+    	for (tmp in db.type_of) {
+            yield TypeOfDO {
+                oid : tmp.oid,
+                expr : tmp.expr,
+                tp : tmp.tp
+            }
+    	}
+    }
+    /**
+     * @brief gets the expr of this element.
+     * @return int
+     */
+    pub fn getExpr(self) -> int {
+        return self.expr
+    }
+    /**
+     * @brief gets the tp of this element.
+     * @return int
+     */
+    pub fn getTp(self) -> int {
+        return self.tp
+    }
+}
+/**
+ * @brief DO class: A type param.
+ */
+schema TypeParamDO {
+    @primary oid: int,
+    tp: int,
+    name: string,
+    bound: int,
+    parent: int,
+    index: int
+}
+impl TypeParamDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: GoDB) -> *TypeParamDO {
+    	for (tmp in db.type_param) {
+            yield TypeParamDO {
+                oid : tmp.oid,
+                tp : tmp.tp,
+                name : tmp.name,
+                bound : tmp.bound,
+                parent : tmp.parent,
+                index : tmp.index
+            }
+    	}
+    }
+    /**
+     * @brief gets the tp of this element.
+     * @return int
+     */
+    pub fn getTp(self) -> int {
+        return self.tp
+    }
+    /**
+     * @brief gets the name of this element.
+     * @return string
+     */
+    pub fn getName(self) -> string {
+        return self.name
+    }
+    /**
+     * @brief gets the bound of this element.
+     * @return int
+     */
+    pub fn getBound(self) -> int {
+        return self.bound
+    }
+    /**
+     * @brief gets the parent of this element.
+     * @return int
+     */
+    pub fn getParent(self) -> int {
+        return self.parent
+    }
+    /**
+     * @brief gets the index of this element.
+     * @return int
+     */
+    pub fn getIndex(self) -> int {
+        return self.index
+    }
+}
+/**
+ * @brief DO class: A type param decls.
+ */
+schema TypeParamDeclsDO {
+    @primary oid: int,
+    parent: int,
+    index: int
+}
+impl TypeParamDeclsDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: GoDB) -> *TypeParamDeclsDO {
+    	for (tmp in db.type_param_decls) {
+            yield TypeParamDeclsDO {
+                oid : tmp.oid,
+                parent : tmp.parent,
+                index : tmp.index
+            }
+    	}
+    }
+    /**
+     * @brief gets the parent of this element.
+     * @return int
+     */
+    pub fn getParent(self) -> int {
+        return self.parent
+    }
+    /**
+     * @brief gets the index of this element.
+     * @return int
+     */
+    pub fn getIndex(self) -> int {
+        return self.index
+    }
+}
+/**
+ * @brief DO class: A typeiadic.
+ */
+schema TypeiadicDO {
+    @primary oid: int,
+    association_obj_id: int
+}
+impl TypeiadicDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: GoDB) -> *TypeiadicDO {
+    	for (tmp in db.typeiadic) {
+            yield TypeiadicDO {
+                oid : tmp.oid,
+                association_obj_id : tmp.association_obj_id
+            }
+    	}
+    }
+    /**
+     * @brief gets the association obj id of this element.
+     * @return int
+     */
+    pub fn getAssociationObjId(self) -> int {
+        return self.association_obj_id
+    }
+}
+/**
+ * @brief DO class: An un extracted.
+ */
+schema UnExtractedDO {
+    @primary oid: int,
+    type: int,
+    name: string
+}
+impl UnExtractedDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: GoDB) -> *UnExtractedDO {
+    	for (tmp in db.un_extracted) {
+            yield UnExtractedDO {
+                oid : tmp.oid,
+                type : tmp.type,
+                name : tmp.name
+            }
+    	}
+    }
+    /**
+     * @brief gets the type of this element.
+     * @return int
+     */
+    pub fn getType(self) -> int {
+        return self.type
+    }
+    /**
+     * @brief gets the name of this element.
+     * @return string
+     */
+    pub fn getName(self) -> string {
+        return self.name
+    }
+}
+/**
+ * @brief DO class: An underlying type.
+ */
+schema UnderlyingTypeDO {
+    @primary oid: int,
+    named: int,
+    tp: int
+}
+impl UnderlyingTypeDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: GoDB) -> *UnderlyingTypeDO {
+    	for (tmp in db.underlying_type) {
+            yield UnderlyingTypeDO {
+                oid : tmp.oid,
+                named : tmp.named,
+                tp : tmp.tp
+            }
+    	}
+    }
+    /**
+     * @brief gets the named of this element.
+     * @return int
+     */
+    pub fn getNamed(self) -> int {
+        return self.named
+    }
+    /**
+     * @brief gets the tp of this element.
+     * @return int
+     */
+    pub fn getTp(self) -> int {
+        return self.tp
+    }
+}
+/**
+ * @brief DO class: An uses.
+ */
+schema UsesDO {
+    @primary oid: int,
+    ident: int,
+    object: int
+}
+impl UsesDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: GoDB) -> *UsesDO {
+    	for (tmp in db.uses) {
+            yield UsesDO {
+                oid : tmp.oid,
+                ident : tmp.ident,
+                object : tmp.object
+            }
+    	}
+    }
+    /**
+     * @brief gets the ident of this element.
+     * @return int
+     */
+    pub fn getIdent(self) -> int {
+        return self.ident
+    }
+    /**
+     * @brief gets the object of this element.
+     * @return int
+     */
+    pub fn getObject(self) -> int {
+        return self.object
+    }
+}
+/**
+ * @brief DO class: A variadic.
+ */
+schema VariadicDO {
+    @primary oid: int,
+    associated_node: int
+}
+impl VariadicDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: GoDB) -> *VariadicDO {
+    	for (tmp in db.variadic) {
+            yield VariadicDO {
+                oid : tmp.oid,
+                associated_node : tmp.associated_node
+            }
+    	}
+    }
+    /**
+     * @brief gets the associated node of this element.
+     * @return int
+     */
+    pub fn getAssociatedNode(self) -> int {
+        return self.associated_node
+    }
+}
+database GoDB {
+    array_length: *ArrayLengthDO,
+    base_type: *BaseTypeDO,
+    comment: *CommentDO,
+    comment_group: *CommentGroupDO,
+    compilation: *CompilationDO,
+    compilation_args: *CompilationArgsDO,
+    compilation_compiling_file: *CompilationCompilingFileDO,
+    compilation_finished: *CompilationFinishedDO,
+    component_type: *ComponentTypeDO,
+    const_value: *ConstValueDO,
+    container_parent: *ContainerParentDO,
+    decl: *DeclDO,
+    def: *DefDO,
+    diagnostic: *DiagnosticDO,
+    diagnostic_for: *DiagnosticForDO,
+    doc_comment: *DocCommentDO,
+    element_type: *ElementTypeDO,
+    error: *ErrorDO,
+    expr: *ExprDO,
+    field_struct: *FieldStructDO,
+    fields: *FieldsDO,
+    file: *FileDO,
+    file_data: *FileDataDO,
+    folder: *FolderDO,
+    has_ellipsis: *HasEllipsisDO,
+    has_location: *HasLocationDO,
+    key_type: *KeyTypeDO,
+    literal: *LiteralDO,
+    location: *LocationDO,
+    method_host: *MethodHostDO,
+    method_receiver: *MethodReceiverDO,
+    mod_expr: *ModExprDO,
+    mod_file: *ModFileDO,
+    mod_require: *ModRequireDO,
+    mod_token: *ModTokenDO,
+    number_of_line: *NumberOfLineDO,
+    object: *ObjectDO,
+    object_scope: *ObjectScopeDO,
+    object_type: *ObjectTypeDO,
+    pkg: *PkgDO,
+    runtime_info: *RuntimeInfoDO,
+    scope: *ScopeDO,
+    scope_nesting: *ScopeNestingDO,
+    scope_node: *ScopeNodeDO,
+    spec: *SpecDO,
+    stmt: *StmtDO,
+    type: *TypeDO,
+    type_name: *TypeNameDO,
+    type_object: *TypeObjectDO,
+    type_of: *TypeOfDO,
+    type_param: *TypeParamDO,
+    type_param_decls: *TypeParamDeclsDO,
+    typeiadic: *TypeiadicDO,
+    un_extracted: *UnExtractedDO,
+    underlying_type: *UnderlyingTypeDO,
+    uses: *UsesDO,
+    variadic: *VariadicDO,
+}

@@ -1,0 +1,95 @@
+/**
+ * @filename: HeritageClause
+ * @brief: Provides classes and predicates for working with JavaScript / TypeScript heritage clauses.
+ */
+
+/**
+ * A heritage token, that is an `extends` or `implements` keyword.
+ */
+schema HeritageToken extends Node {
+}
+
+impl HeritageToken {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *HeritageToken {
+        for (tmp in Node(db)) {
+            if (isHeritageToken(tmp)) {
+                yield HeritageToken {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A heritage clause.
+ */
+schema HeritageClause extends Node {
+}
+
+impl HeritageClause {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *HeritageClause {
+        for (tmp in Node(db)) {
+            if (isHeritageClause(tmp)) {
+                yield HeritageClause {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+
+    pub fn getToken(self) -> HeritageToken {
+        for (token in HeritageToken(__all_data__)) {
+            if (token.key_eq(self.getChild(0))) {
+                return token
+            }
+        }
+    }
+
+    pub fn getAType(self) -> *ExpressionWithTypeArguments {
+        for (type in ExpressionWithTypeArguments(__all_data__)) {
+            for (auto_tmp1 in self.getAChild()) {
+                if (type.key_eq(auto_tmp1)) {
+                    yield type
+                }
+            }
+        }
+    }
+
+    pub fn getType(self, i: int) -> ExpressionWithTypeArguments {
+        for (childIndex in int::__undetermined_all__()) {
+            for (type in ExpressionWithTypeArguments(__all_data__)) {
+                if (type.key_eq(self.getChild(childIndex))) {
+                    if (i = childIndex - 1) {
+                        return type
+                    }
+                }
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a heritage clause.
+ */
+pub fn isHeritageClause(node: Node) -> bool {
+    if (node.getKind() = 290) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a heritage token, that is an `extends` or `implements` keyword.
+ */
+pub fn isHeritageToken(node: Node) -> bool {
+    if (isExtendsKeyword(node)) {
+        return true
+    }
+    if (isImplementsKeyword(node)) {
+        return true
+    }
+}

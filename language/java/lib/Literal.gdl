@@ -1,0 +1,512 @@
+/**
+ * @brief A literal.
+ */
+schema Literal extends Expression {
+
+}
+impl Literal {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *Literal {
+        for (tmp in Expression(db)) {
+            for (s in StringLiteralDO(db)) {
+                if (tmp.key_eq(s)) {
+                    yield Literal {
+                        element_hash_id : tmp.element_hash_id,
+                        name : tmp.name,
+                        parent_hash_id : tmp.parent_hash_id,
+                        index_order : tmp.index_order,
+                        location_hash_id : tmp.location_hash_id,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+            for (l in LongLiteralDO(db)) {
+                if (tmp.key_eq(l)) {
+                    yield Literal {
+                        element_hash_id : tmp.element_hash_id,
+                        name : tmp.name,
+                        parent_hash_id : tmp.parent_hash_id,
+                        index_order : tmp.index_order,
+                        location_hash_id : tmp.location_hash_id,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+            for (d in DoubleLiteralDO(db)) {
+                if (tmp.key_eq(d)) {
+                    yield Literal {
+                        element_hash_id : tmp.element_hash_id,
+                        name : tmp.name,
+                        parent_hash_id : tmp.parent_hash_id,
+                        index_order : tmp.index_order,
+                        location_hash_id : tmp.location_hash_id,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+            for (f in FloatingPointLiteralDO(db)) {
+                if (tmp.key_eq(f)) {
+                    yield Literal {
+                        element_hash_id : tmp.element_hash_id,
+                        name : tmp.name,
+                        parent_hash_id : tmp.parent_hash_id,
+                        index_order : tmp.index_order,
+                        location_hash_id : tmp.location_hash_id,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+            for (n in NullLiteralDO(db)) {
+                if (tmp.key_eq(n)) {
+                    yield Literal {
+                        element_hash_id : tmp.element_hash_id,
+                        name : tmp.name,
+                        parent_hash_id : tmp.parent_hash_id,
+                        index_order : tmp.index_order,
+                        location_hash_id : tmp.location_hash_id,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+            for (c in CharacterLiteralDO(db)) {
+                if (tmp.key_eq(c)) {
+                    yield Literal {
+                        element_hash_id : tmp.element_hash_id,
+                        name : tmp.name,
+                        parent_hash_id : tmp.parent_hash_id,
+                        index_order : tmp.index_order,
+                        location_hash_id : tmp.location_hash_id,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+            for (b in BooleanLiteralDO(db)) {
+                if (tmp.key_eq(b)) {
+                    yield Literal {
+                        element_hash_id : tmp.element_hash_id,
+                        name : tmp.name,
+                        parent_hash_id : tmp.parent_hash_id,
+                        index_order : tmp.index_order,
+                        location_hash_id : tmp.location_hash_id,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+            for (i in IntegerLiteralDO(db)) {
+                if (tmp.key_eq(i)) {
+                    yield Literal {
+                        element_hash_id : tmp.element_hash_id,
+                        name : tmp.name,
+                        parent_hash_id : tmp.parent_hash_id,
+                        index_order : tmp.index_order,
+                        location_hash_id : tmp.location_hash_id,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the value of the Literal.
+     * @return string
+     */
+    pub fn getValue(self) -> string {
+        for (s in StringLiteralDO(__all_data__)) {
+            if (self.key_eq(s)) {
+                let (value = s.getValue()) {
+                    return value
+                }
+            }
+        }
+        for (l in LongLiteralDO(__all_data__)) {
+            if (self.key_eq(l)) {
+                let (value = l.getValue()) {
+                    return value
+                }
+            }
+        }
+        for (d in DoubleLiteralDO(__all_data__)) {
+            if (self.key_eq(d)) {
+                let (value = d.getValue()) {
+                    return value
+                }
+            }
+        }
+        for (f in FloatingPointLiteralDO(__all_data__)) {
+            if (self.key_eq(f)) {
+                let (value = f.getValue()) {
+                    return value
+                }
+            }
+        }
+        for (n in NullLiteralDO(__all_data__)) {
+            if (self.key_eq(n)) {
+                let (value = n.getValue()) {
+                    return value
+                }
+            }
+        }
+        for (c in CharacterLiteralDO(__all_data__)) {
+            if (self.key_eq(c)) {
+                let (value = c.getValue()) {
+                    return value
+                }
+            }
+        }
+        for (b in BooleanLiteralDO(__all_data__)) {
+            if (self.key_eq(b)) {
+                let (value = b.getValue()) {
+                    return value
+                }
+            }
+        }
+        for (i in IntegerLiteralDO(__all_data__)) {
+            if (self.key_eq(i)) {
+                let (value = i.getValue()) {
+                    return value
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the type of the Literal value.
+     * @return string
+     */
+    pub fn getValueType(self) -> Type {
+        for (t in Type(__all_data__)) {
+            for (s in StringLiteralDO(__all_data__)) {
+                if (self.key_eq(s)) {
+                    if (t.getQualifiedName() = "java.lang.String") {
+                        return t
+                    }
+                }
+            }
+            for (l in LongLiteralDO(__all_data__)) {
+                if (self.key_eq(l)) {
+                    if (t.id = 6) {
+                        return t
+                    }
+                }
+            }
+            for (d in DoubleLiteralDO(__all_data__)) {
+                if (self.key_eq(d)) {
+                    if (t.id = 3) {
+                        return t
+                    }
+                }
+            }
+            for (f in FloatingPointLiteralDO(__all_data__)) {
+                if (self.key_eq(f)) {
+                    if (t.id = 4) {
+                        return t
+                    }
+                }
+            }
+            for (n in NullLiteralDO(__all_data__)) {
+                if (self.key_eq(n)) {
+                    if (t.id = 10) {
+                        return t
+                    }
+                }
+            }
+            for (c in CharacterLiteralDO(__all_data__)) {
+                if (self.key_eq(c)) {
+                    if (t.id = 2) {
+                        return t
+                    }
+                }
+            }
+            for (b in BooleanLiteralDO(__all_data__)) {
+                if (self.key_eq(b)) {
+                    if (t.id = 8) {
+                        return t
+                    }
+                }
+            }
+            for (i in IntegerLiteralDO(__all_data__)) {
+                if (self.key_eq(i)) {
+                    if (t.id = 5) {
+                        return t
+                    }
+                }
+            }
+        }
+    }
+}
+/**
+ * @brief A string literal, for example "abc".
+ */
+schema StringLiteral extends Literal {
+
+}
+impl StringLiteral {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *StringLiteral {
+        for (tmp in Literal(db)) {
+            for (l in StringLiteralDO(db)) {
+                if (tmp.key_eq(l)) {
+                    yield StringLiteral {
+                        element_hash_id : tmp.element_hash_id,
+                        name : tmp.name,
+                        parent_hash_id : tmp.parent_hash_id,
+                        index_order : tmp.index_order,
+                        location_hash_id : tmp.location_hash_id,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+    pub fn getRealValue(self) -> string {
+        let (temp = self.getValue()) {
+            let (l = temp.len()) {
+                let (s = temp.substr(1, l - 2)) {
+                    return s
+                }
+            }
+        }
+    }
+}
+/**
+ * @brief A double literal. For example, "1.5".
+ */
+schema DoubleLiteral extends Literal {
+
+}
+
+impl DoubleLiteral {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *DoubleLiteral {
+        for (tmp in Literal(db)) {
+            for (l in DoubleLiteralDO(db)) {
+                if (tmp.key_eq(l)) {
+                    yield DoubleLiteral {
+                        element_hash_id : tmp.element_hash_id,
+                        name : tmp.name,
+                        parent_hash_id : tmp.parent_hash_id,
+                        index_order : tmp.index_order,
+                        location_hash_id : tmp.location_hash_id,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+}
+/**
+ * @brief An integer literal, for example, "4".
+ */
+schema IntegerLiteral extends Literal {
+
+}
+impl IntegerLiteral {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *IntegerLiteral {
+        for (tmp in Literal(db)) {
+            for (l in IntegerLiteralDO(db)) {
+                if (tmp.key_eq(l)) {
+                    yield IntegerLiteral {
+                        element_hash_id : tmp.element_hash_id,
+                        name : tmp.name,
+                        parent_hash_id : tmp.parent_hash_id,
+                        index_order : tmp.index_order,
+                        location_hash_id : tmp.location_hash_id,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+}
+/**
+ * @brief A floating point literal, for example, "1.5f".
+ */
+schema FloatingPointLiteral extends Literal {
+
+}
+impl FloatingPointLiteral {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *FloatingPointLiteral {
+        for (tmp in Literal(db)) {
+            for (l in FloatingPointLiteralDO(db)) {
+                if (tmp.key_eq(l)) {
+                    yield FloatingPointLiteral {
+                        element_hash_id : tmp.element_hash_id,
+                        name : tmp.name,
+                        parent_hash_id : tmp.parent_hash_id,
+                        index_order : tmp.index_order,
+                        location_hash_id : tmp.location_hash_id,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+}
+/**
+ * @brief A long literal, for example, "15l".
+ */
+schema LongLiteral extends Literal {
+
+}
+impl LongLiteral {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *LongLiteral {
+        for (tmp in Literal(db)) {
+            for (l in LongLiteralDO(db)) {
+                if (tmp.key_eq(l)) {
+                    yield LongLiteral {
+                        element_hash_id : tmp.element_hash_id,
+                        name : tmp.name,
+                        parent_hash_id : tmp.parent_hash_id,
+                        index_order : tmp.index_order,
+                        location_hash_id : tmp.location_hash_id,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+}
+/**
+ * @brief A null literal, written "null".
+ */
+schema NullLiteral extends Literal {
+
+}
+impl NullLiteral {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *NullLiteral {
+        for (tmp in Literal(db)) {
+            for (l in NullLiteralDO(db)) {
+                if (tmp.key_eq(l)) {
+                    yield NullLiteral {
+                        element_hash_id : tmp.element_hash_id,
+                        name : tmp.name,
+                        parent_hash_id : tmp.parent_hash_id,
+                        index_order : tmp.index_order,
+                        location_hash_id : tmp.location_hash_id,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+}
+/**
+ * @brief A character literal, for example, 'a'.
+ */
+schema CharacterLiteral extends Literal {
+
+}
+impl CharacterLiteral {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *CharacterLiteral {
+        for (tmp in Literal(db)) {
+            for (l in CharacterLiteralDO(db)) {
+                if (tmp.key_eq(l)) {
+                    yield CharacterLiteral {
+                        element_hash_id : tmp.element_hash_id,
+                        name : tmp.name,
+                        parent_hash_id : tmp.parent_hash_id,
+                        index_order : tmp.index_order,
+                        location_hash_id : tmp.location_hash_id,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+}
+/**
+ * @brief A boolean literal, either true or false.
+ */
+schema BooleanLiteral extends Literal {
+
+}
+impl BooleanLiteral {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *BooleanLiteral {
+        for (tmp in Literal(db)) {
+            for (l in BooleanLiteralDO(db)) {
+                if (tmp.key_eq(l)) {
+                    yield BooleanLiteral {
+                        element_hash_id : tmp.element_hash_id,
+                        name : tmp.name,
+                        parent_hash_id : tmp.parent_hash_id,
+                        index_order : tmp.index_order,
+                        location_hash_id : tmp.location_hash_id,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+}
+/**
+ * @brief A type literal, for example, "String.class".
+ */
+schema TypeLiteral extends Expression {
+
+}
+impl TypeLiteral {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *TypeLiteral {
+        for (tmp in Expression(db)) {
+            for (t in TypeLiteralDO(db)) {
+                if (tmp.key_eq(t)) {
+                    yield TypeLiteral {
+                        element_hash_id : tmp.element_hash_id,
+                        name : tmp.name,
+                        parent_hash_id : tmp.parent_hash_id,
+                        index_order : tmp.index_order,
+                        location_hash_id : tmp.location_hash_id,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the type element of the element.
+     * @return TypeElement 
+     */
+    pub fn getTypeElement(self) -> TypeElement {
+        for (t in TypeLiteralDO(__all_data__),
+            element in TypeElement(__all_data__)) {
+            if (self.key_eq(t)) {
+                if (element.element_hash_id = t.getTypeElementHashId()) {
+                    return element
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the reference type of the element.
+     * @return Type 
+     */
+    pub fn getType(self) -> Type {
+        for (type in Type(__all_data__)) {
+            if (type = self.getTypeElement().getType()) {
+                return type
+            }
+        }
+    }
+    /**
+     * @brief gets the value of the element.
+     * @return string 
+     */
+    pub fn getValue(self) -> string {
+        return self.getPrintableText()
+    }
+}

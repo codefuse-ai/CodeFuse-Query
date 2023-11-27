@@ -1,0 +1,505 @@
+/**
+ * @filename: BasicBlock
+ * @brief: Provides classes and predicates for working with basic block of control flow graph.
+ */
+
+schema BasicBlock extends ControlFlowNode {
+}
+
+impl BasicBlock {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *BasicBlock {
+        for (cfn in ControlFlowNode(db)) {
+            // CfgEntryNode is a standalone BB
+            for (cfgEntryNode in CfgEntryNode(db)) {
+                for (predecessor in cfn.getAPredecessor()) {
+                    if (predecessor.key_eq(cfgEntryNode)) {
+                        yield BasicBlock {
+                            id : cfn.id
+                        }
+                    }
+                }
+            }
+            // CfgExitNode is a standalone BB
+            for (cfgExitNode in CfgExitNode(db)) {
+                if (cfn.key_eq(cfgExitNode)) {
+                    yield BasicBlock {
+                        id : cfn.id
+                    }
+                }
+            }
+            // a node don't have predecessor but successor.
+            let (predecessorCount = cfn.getPredecessorCount()) {
+                if (predecessorCount = 0) {
+                    let (successorCount = cfn.getSuccessorCount()) {
+                        // maybe this constraint can be deleted or adjusted
+                        if (successorCount > 0) {
+                            yield BasicBlock {
+                                id : cfn.id
+                            }
+                        }
+                    }
+                }
+            }
+            // a node have more than 1 predecessor
+            let (predecessorCount = cfn.getPredecessorCount()) {
+                if (predecessorCount > 1) {
+                    yield BasicBlock {
+                        id : cfn.id
+                    }
+                }
+            }
+            // any predecessor of the node has more than 1 successor
+            for (predecessor in cfn.getAPredecessor()) {
+                let (successorCount = predecessor.getSuccessorCount()) {
+                    if (successorCount > 1) {
+                        yield BasicBlock {
+                            id : cfn.id
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets an immediate successor of this basic block.
+     */
+    pub fn getABBSuccessor(self) -> *BasicBlock {
+        let (lastNode = self.getLastNode()) {
+            for (lastNodeSucc in ControlFlowNode(__all_data__)) {
+                if (lastNodeSucc in lastNode.getASuccessor()) {
+                    yield lastNodeSucc.to<BasicBlock>()
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets an immediate predecessor of this basic block.
+     */
+    pub fn getABBPredecessor(self) -> *BasicBlock {
+        for (bbPredecessor in BasicBlock(__all_data__)) {
+            if (self in bbPredecessor.getABBSuccessor()) {
+                yield bbPredecessor
+            }
+        }
+    }
+
+    /**
+     * Get the node in this basic block with the given index.
+     */
+    pub fn getNode(self, index: int) -> ControlFlowNode {
+        for (cfn in ControlFlowNode(__all_data__)) {
+            if (self.key_eq(cfn)) {
+                if (index = 0) {
+                    return cfn
+                }
+            }
+            for (middleNodeIndex in int::__undetermined_all__()) {
+                let (middleNode = self.getNode(middleNodeIndex)) {
+                    if (index = middleNodeIndex + 1) {
+                        for (auto_tmp1 in middleNode.getASuccessor()) {
+                            if (cfn = auto_tmp1) {
+                                if (!isFirstOfBasicBlock(cfn)) {
+                                    return cfn
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Get a node in this basic block.
+     */
+    pub fn getANode(self) -> *ControlFlowNode {
+        yield self.getNode(__all_data__)
+    }
+
+    /**
+     * Get the first node in this basic block.
+     */
+    pub fn getFirstNode(self) -> ControlFlowNode {
+        for (cfn in ControlFlowNode(__all_data__)) {
+            if (cfn.key_eq(self)) {
+                return cfn
+            }
+        }
+    }
+
+    /**
+     * Get the last node in this basic block.
+     */
+    pub fn getLastNode(self) -> ControlFlowNode {
+        let (length = self.getLength()) {
+            return self.getNode(length - 1)
+        }
+    }
+
+    /**
+     * Determine whether this basic block is an entry bb.
+     */
+    pub fn isEntryBB(self) -> bool {
+        return self.isEntryNode()
+    }
+
+    /**
+     * Determine whether this basic block is an exit bb.
+     */
+    pub fn isExitBB(self) -> bool {
+        return self.isExitNode()
+    }
+
+    /**
+     * Gets the count of bb successor of this bb.
+     */
+    pub fn getBBSuccessorCount(self) -> int {
+        return self.getABBSuccessor().len()
+    }
+
+    /**
+     * Get the length of this basic block.
+     */
+    pub fn getLength(self) -> int {
+        return self.getANode().len()
+    }
+
+    /**
+     * Gets the count of bb predecessor of this bb.
+     */
+    pub fn getBBPredecessorCount(self) -> int {
+        return self.getABBPredecessor().len()
+    }
+}
+
+/**
+ * Hold if the node is the first node of a basic block.
+ */
+pub fn isFirstOfBasicBlock(cfn: ControlFlowNode) -> bool {
+    for (basicBlock in BasicBlock(__all_data__)) {
+        if (basicBlock.key_eq(cfn)) {
+            return true
+        }
+    }
+}
+
+/**
+ * Hold the entry BB and it's all reachable BBs.
+ */
+pub fn entryBBReachableBB(entryBB: BasicBlock, reachableBB: BasicBlock) -> bool {
+    if (entryBB.isEntryBB()) {
+        if (reachableBB = entryBB) {
+            return true
+        }
+        if (reachableBB in entryBB.getABBSuccessor()) {
+            return true
+        }
+        for (tmpReachableBB in BasicBlock(__all_data__)) {
+            if (entryBBReachableBB(entryBB, tmpReachableBB)) {
+                if (reachableBB in tmpReachableBB.getABBSuccessor()) {
+                    return true
+                }
+            }
+        }
+    }
+}
+
+/**
+ * Hold if two bb are in same CFG.
+ */
+pub fn bbInSameCFG(bb1: BasicBlock, bb2: BasicBlock) -> bool {
+    if (bb1 = bb2) {
+        return true
+    }
+    if (bb1 != bb2) {
+        for (entryBB in BasicBlock(__all_data__)) {
+            if (entryBBReachableBB(entryBB, bb1)) {
+                if (entryBBReachableBB(entryBB, bb2)) {
+                    return true
+                }
+            }
+        }
+    }
+}
+
+ /*
+ * The flowing predicates are dominate analysis,
+ * ATTENTION: the result of the predicate
+ *  `bbNotDominates(BasicBlock ndomBB, BasicBlock bb)`
+ *  is not same with `not bbDominates(ndomBB, bb)`,
+ *  it two BB are in different CFG, they have
+ *  neither bbDominates relation nor bbNotDominates
+ *  relation.
+ *  So pay attention to use predicate like this
+ *  `not bbNotDominates` or `not bbDominates`,
+ *  make sure two BBs are in same CFG.
+ */
+/**
+ * Hold if ndomBB don't dominates bb.
+ */
+pub fn bbNotDominates(ndomBB: BasicBlock, bb: BasicBlock) -> bool {
+    // bb is entry node, all nodes in the same function
+    // except node itself don't dominate this bb
+    if (bbInSameCFG(ndomBB, bb)) {
+        if (bb.isEntryBB()) {
+            if (ndomBB != bb) {
+                return true
+            }
+        }
+    }
+    // if ndom don't dominate at least of of bb's predecessor,
+    // ndom don't dominate bb itself
+    for (bbPredecessor in BasicBlock(__all_data__)) {
+        for (auto_tmp1 in bb.getABBPredecessor()) {
+            if (bbPredecessor = auto_tmp1) {
+                if (bbNotDominates(ndomBB, bbPredecessor)) {
+                    if (ndomBB != bb) {
+                        return true
+                    }
+                }
+            }
+        }
+    }
+}
+
+/**
+ * Hold if domBB dominates bb.
+ */
+pub fn bbDominates(domBB: BasicBlock, bb: BasicBlock) -> bool {
+    if (bbInSameCFG(domBB, bb)) {
+        // domBB DON'T have the bbNotDominates relation with bb,
+        // means domBB is a dominator of bb
+        if (!bbNotDominates(domBB, bb)) {
+            return true
+        }
+    }
+}
+
+/**
+ * Hold if sdomBB strictly dominates bb.
+ */
+pub fn bbStrictDominates(sdomBB: BasicBlock, bb: BasicBlock) -> bool {
+    // sdomBB dominates bb, but sdomBB is not same as bb
+    if (bbDominates(sdomBB, bb)) {
+        if (sdomBB != bb) {
+            return true
+        }
+    }
+}
+
+/**
+ * Hold if dom dominates cfn.
+ */
+pub fn dominates(dom: ControlFlowNode, cfn: ControlFlowNode) -> bool {
+    for (domBB in BasicBlock(__all_data__),
+        cfnBB in BasicBlock(__all_data__)) {
+        if (domBB = dom.getBasicBlock()) {
+            if (cfnBB = cfn.getBasicBlock()) {
+                // two nodes are in different bbs,
+                // dom dominates cfn if domBB dominates nodeBB
+                if (bbDominates(domBB, cfnBB)) {
+                    if (domBB != cfnBB) {
+                        return true
+                    }
+                }
+            }
+        }
+        // two node are in same bb,
+        // dom dominates cfn if dom's index in current basic
+        // block is less equal than the cfn's index
+        for (domIndex in int::__undetermined_all__(),
+            cfnIndex in int::__undetermined_all__()) {
+            if (dom = cfnBB.getNode(domIndex)) {
+                if (cfn = cfnBB.getNode(cfnIndex)) {
+                    if (domIndex <= cfnIndex) {
+                        return true
+                    }
+                }
+            }
+        }
+    }
+}
+
+/**
+ * Hold bb's dominance frontier.
+ * bb dominates at least one of df's predecessor,
+ * but bb don't strictly dominates df.
+ */
+pub fn dominanceFrontier(bb: BasicBlock, df: BasicBlock) -> bool {
+    for (dfBBPredecessor in df.getABBPredecessor()) {
+        if (bbDominates(bb, dfBBPredecessor)) {
+            if (!bbStrictDominates(bb, df)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Hold if npdomBB don't post dominates bb.
+ * the relation is same as not dominates relation but apply to Reverse-CFG.
+ */
+pub fn bbNotPostDominates(npdomBB: BasicBlock, bb: BasicBlock) -> bool {
+    // bb is exit node, all nodes in the same function
+    // except node itself don't post dominate this bb
+    if (bb.isExitBB()) {
+        if (bbInSameCFG(npdomBB, bb)) {
+            if (npdomBB != bb) {
+                return true
+            }
+        }
+    }
+    // if npdom don't dominate at least of of bb's successor,
+    // npdom don't post dominate bb itself
+    for (bbSuccessor in BasicBlock(__all_data__)) {
+        for (auto_tmp1 in bb.getABBSuccessor()) {
+            if (bbSuccessor = auto_tmp1) {
+                if (bbNotPostDominates(npdomBB, bbSuccessor)) {
+                    if (npdomBB != bb) {
+                        return true
+                    }
+                }
+            }
+        }
+    }
+}
+
+/**
+ * Hold if pdomBB post dominates bb.
+ */
+pub fn bbPostDominates(pdomBB: BasicBlock, bb: BasicBlock) -> bool {
+    if (bbInSameCFG(pdomBB, bb)) {
+        // pdomBB DON'T have the bbNotPostDominates relation with bb,
+        // means pdomBB is a post dominator of bb
+        if (!bbNotPostDominates(pdomBB, bb)) {
+            return true
+        }
+    }
+}
+
+/**
+ * Hold if spdom strictly post dominates bb.
+ */
+pub fn bbStrictPostDominates(spdomBB: BasicBlock, bb: BasicBlock) -> bool {
+    // spdomBB post dominates bb, but spdomBB is not same as bb
+    if (bbPostDominates(spdomBB, bb)) {
+        if (spdomBB != bb) {
+            return true
+        }
+    }
+}
+
+/**
+ * Hold bb's post dominance frontier.
+ * bb post dominates at least one of pdf's successor,
+ * but bb don't strictly post dominates pdf.
+ */
+pub fn postDominanceFrontier(bb: BasicBlock, pdf: BasicBlock) -> bool {
+    for (pdfBBSuccessor in pdf.getABBSuccessor()) {
+        if (bbPostDominates(bb, pdfBBSuccessor)) {
+            if (!bbStrictPostDominates(bb, pdf)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Hold bb's control dependencies.
+ * same with postDominanceFrontier+.
+ */
+pub fn controlDependencies(bb: BasicBlock, controlDependencyBB: BasicBlock) -> bool {
+    if (postDominanceFrontier(bb, controlDependencyBB)) {
+        return true
+    }
+    for (tmpPostDF in BasicBlock(__all_data__)) {
+        if (postDominanceFrontier(bb, tmpPostDF)) {
+            if (controlDependencies(tmpPostDF, controlDependencyBB)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Hold if pdom post dominates cfn.
+ */
+pub fn postDominates(pdom: ControlFlowNode, cfn: ControlFlowNode) -> bool {
+    for (pdomBB in BasicBlock(__all_data__),
+        cfnBB in BasicBlock(__all_data__)) {
+        if (pdomBB = pdom.getBasicBlock()) {
+            if (cfnBB = cfn.getBasicBlock()) {
+                // two nodes are in different bbs,
+                // pdom dominates cfn if pdomBB post dominates cfnBB
+                if (bbPostDominates(pdomBB, cfnBB)) {
+                    if (pdomBB != cfnBB) {
+                        return true
+                    }
+                }
+            }
+        }
+        // two node are in same bb,
+        // pdom post dominates cfn if pdom's index in current basic
+        // block is greater equal than the cfn's index
+        for (pdomIndex in int::__undetermined_all__(),
+            cfnIndex in int::__undetermined_all__()) {
+            if (pdom = cfnBB.getNode(pdomIndex)) {
+                if (cfn = cfnBB.getNode(cfnIndex)) {
+                    if (pdomIndex >= cfnIndex) {
+                        return true
+                    }
+                }
+            }
+        }
+    }
+}
+
+/**
+ * Hold if idomBB immediately dominates bb.
+ * idomBB is the closest strict dominator of bb, fit the following conditions:
+ * 1. idomBB strictly dominates bb
+ * 2. idomBB can't dominate any other bb's strict dominator
+ */
+pub fn bbIDominates(idomBB: BasicBlock, bb: BasicBlock) -> bool {
+    for (aIDomBB in BasicBlock(__all_data__), aBB in BasicBlock(__all_data__)) {
+        if (bbStrictDominates(aIDomBB, aBB)) {
+            // the count of strict dominator
+            let (sdomBBCount = getBBAllSDom(aBB).len()) {
+                // the count of strict dominator is 1, idom is same with sdom
+                if (sdomBBCount = 1) {
+                    if (idomBB = aIDomBB && bb = aBB) {
+                        return true
+                    }
+                }
+               /*
+                select the strict dominator of bb that the count of it's strict
+                dominator set intersect with bb's strict dominator set is (sdomBBCount - 1),
+                means idom don't dominate any BasicBlock in bb's strict dominator set
+
+                ATTENTION:
+                    count aggregator is so expensive when the counted relation is not prepared,
+                    so can't add more logic in the fllowing count clause
+                */
+                if (sdomBBCount != 1) {
+                    if (getBBAllSDom(aIDomBB).len() = sdomBBCount - 1) {
+                        if (idomBB = aIDomBB && bb = aBB) {
+                            return true
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+fn getBBAllSDom(bb: BasicBlock) -> *BasicBlock {
+    for (sdomBB in BasicBlock(__all_data__)) {
+        if (bbStrictDominates(sdomBB, bb)) {
+            yield sdomBB
+        }
+    }
+}

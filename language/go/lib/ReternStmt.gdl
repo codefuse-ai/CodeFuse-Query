@@ -1,0 +1,37 @@
+schema ReturnStmt extends Statement {
+
+}
+impl ReturnStmt {
+    @data_constraint
+    @inline
+    fn __all__(db: GoDB) -> *ReturnStmt {
+        for (s in Statement(db)) {
+            if (s.isReturnStmt()) {
+                yield ReturnStmt {
+                    id : s.id
+                }
+            }
+        }
+    }
+    pub fn getAReturnField(self) -> *Node {
+        for (e in Expr(__all_data__)) {
+            if (e.getParentNode().key_eq(self)) {
+                yield Node(__all_data__).find(e)
+            }
+        }
+    }
+    pub fn getAReturnFieldByIndex(self, index : int) -> *Node {
+        for (e in Expr(__all_data__)) {
+            if (e.getIdx() = index) {
+                if (e.getParentNode().key_eq(self)) {
+                    yield Node(__all_data__).find(e)
+                }
+            }
+        }
+    }
+    pub fn getReturnListCount(self) -> int {
+        let (tmp = self.getAReturnField().len()) {
+            return tmp
+        }
+    }
+}

@@ -1,0 +1,321 @@
+/**
+ * @brief A common super-class that represents all kinds of expressions.
+ */
+schema Expression extends ExpressionDO {
+    
+}
+impl Expression {
+    @data_constraint
+    @inline
+    fn __all__(db: PythonDB) -> *Expression {
+        for (tmp in ExpressionDO(db)) {
+            yield Expression {
+                element_oid : tmp.element_oid,
+                type : tmp.type,
+                element_index : tmp.element_index,
+                parent_oid : tmp.parent_oid,
+                location_oid : tmp.location_oid,
+                printable_text : tmp.printable_text
+            }
+        }
+    }
+    /**
+     * @brief gets the parent of the expression.
+     * @return CombineElement 
+     */
+    pub fn getParent(self) -> CombineElement {
+        for (parent in CombineElement(__all_data__)) {
+            if (parent.id = self.getParentOid()) {
+                return parent
+            }
+        }
+    }
+    /**
+     * @brief gets an ancestor of the element.
+     * @return CombineElement 
+     */
+    pub fn getAnAncestor(self) -> *CombineElement {
+        for (temp in CombineElement(__all_data__)) {
+            if (self.key_eq(temp)) {
+                yield temp.getAnAncestor()
+            }
+        }
+    }
+    /**
+     * @brief gets the location for the element.
+     * @return Location
+     */
+    pub fn getLocation(self) -> Location {
+        for (loc in Location(__all_data__)) {
+            if (loc.element_oid = self.getLocationOid()) {
+                return loc
+            }
+        }
+    }
+    /**
+     * @brief gets the size information for the element.
+     * @return NumberOfLines
+     */
+    pub fn getSize(self) -> NumberOfLines {
+        for (n in NumberOfLines(__all_data__)) {
+            if (n.element_oid = self.getLocationOid()) {
+                return n
+            }
+        }
+    }
+    /**
+     * @brief gets the immediately enclosing scope (module, function or class) whose body contains this statement.
+     * @return Scope 
+     */
+    pub fn getEnclosingScope(self) -> Scope {
+        for (s in Scope(__all_data__),
+            m in ScopeEnclosingExpression(__all_data__)) {
+            if (self.key_eq(m)) {
+                if (s = m.getEnclosingScope()) {
+                    return s
+                }
+            }
+        }
+    }
+}
+/**
+ * @brief An if expression.
+ */
+schema IfExpression extends Expression {
+    
+}
+impl IfExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: PythonDB) -> *IfExpression {
+        for (tmp in Expression(db)) {
+            for (e in IfExpressionDO(db)) {
+                if (tmp.key_eq(e)) {
+                    yield IfExpression {
+                        element_oid : tmp.element_oid,
+                        type : tmp.type,
+                        element_index : tmp.element_index,
+                        parent_oid : tmp.parent_oid,
+                        location_oid : tmp.location_oid,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+}
+/**
+ * @brief A boolean expression.
+ */
+schema BooleanExpression extends Expression {
+    
+}
+impl BooleanExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: PythonDB) -> *BooleanExpression {
+        for (tmp in Expression(db)) {
+            for (e in BooleanOpExpressionDO(db)) {
+                if (tmp.key_eq(e)) {
+                    yield BooleanExpression {
+                        element_oid : tmp.element_oid,
+                        type : tmp.type,
+                        element_index : tmp.element_index,
+                        parent_oid : tmp.parent_oid,
+                        location_oid : tmp.location_oid,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the type of the expression.
+     * @return string
+     */
+    pub fn getType(self) -> string {
+        for (e in BooleanOpExpressionDO(__all_data__)) {
+            if (self.key_eq(e)) {
+                return e.getType()
+            }
+        }
+    }
+    /**
+     * @brief gets the size information for the element.
+     * @return int
+     */
+    pub fn getSize(self) -> int {
+        for (e in BooleanOpExpressionDO(__all_data__)) {
+            if (self.key_eq(e)) {
+                return e.getSize()
+            }
+        }
+    }
+}
+/**
+ * @brief An "and" logical expression.
+ */
+schema AndLogicalExpression extends BooleanExpression {
+    
+}
+impl AndLogicalExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: PythonDB) -> *AndLogicalExpression {
+        for (tmp in BooleanExpression(db)) {
+            if (tmp.getType() = "And") {
+                yield AndLogicalExpression {
+                    element_oid : tmp.element_oid,
+                    type : tmp.type,
+                    element_index : tmp.element_index,
+                    parent_oid : tmp.parent_oid,
+                    location_oid : tmp.location_oid,
+                    printable_text : tmp.printable_text
+                }
+            }
+        }
+    }
+}
+/**
+ * @brief A "or" logical expression.
+ */
+schema OrLogicalExpression extends BooleanExpression {
+    
+}
+impl OrLogicalExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: PythonDB) -> *OrLogicalExpression {
+        for (tmp in BooleanExpression(db)) {
+            if (tmp.getType() = "Or") {
+                yield OrLogicalExpression {
+                    element_oid : tmp.element_oid,
+                    type : tmp.type,
+                    element_index : tmp.element_index,
+                    parent_oid : tmp.parent_oid,
+                    location_oid : tmp.location_oid,
+                    printable_text : tmp.printable_text
+                }
+            }
+        }
+    }
+}
+/**
+ * @brief An attribute expression.
+ */
+schema AttributeExpression extends Expression {
+    
+}
+impl AttributeExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: PythonDB) -> *AttributeExpression {
+        for (tmp in Expression(db)) {
+            for (a in AttributeExpressionDO(db)) {
+                if (tmp.key_eq(a)) {
+                    yield AttributeExpression {
+                        element_oid : tmp.element_oid,
+                        type : tmp.type,
+                        element_index : tmp.element_index,
+                        parent_oid : tmp.parent_oid,
+                        location_oid : tmp.location_oid,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+}
+/**
+ * @brief A function call expression.
+ */
+schema CallExpression extends Expression {
+    
+}
+impl CallExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: PythonDB) -> *CallExpression {
+        for (tmp in Expression(db)) {
+            for (c in CallExpressionDO(db)) {
+                if (tmp.key_eq(c)) {
+                    yield CallExpression {
+                        element_oid : tmp.element_oid,
+                        type : tmp.type,
+                        element_index : tmp.element_index,
+                        parent_oid : tmp.parent_oid,
+                        location_oid : tmp.location_oid,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the function expression in the call.
+     * @return Expression
+     */
+    pub fn getFunctionExpression(self) -> Expression {
+        for (e in Expression(__all_data__),
+            c in CallExpressionDO(__all_data__)) {
+            if (self.key_eq(c)) {
+                if (e.element_oid = c.getExprFuncOid()) {
+                    return e
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the arguments in the call.
+     * @return CombineElement
+     */
+    pub fn getArgs(self) -> *CombineElement {
+        for (h in CombineElement(__all_data__),
+            c in CallExpressionDO(__all_data__)) {
+            if (self.key_eq(c)) {
+                for (e in Expression(__all_data__)) {
+                    if (c.key_eq(e.getParent())) {
+                        if (e.getElementIndex() > 0) {
+                            if (h.key_eq(e)) {
+                                yield h
+                            }
+                        }
+                    }
+                }
+                for (e in Keyword(__all_data__)) {
+                    if (c.key_eq(e.getParent())) {
+                        if (h.key_eq(e)) {
+                            yield h
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+/**
+ * @brief A list compare expression.
+ */
+schema ListCompExpression extends Expression {
+    
+}
+impl ListCompExpression {
+    @data_constraint
+    @inline
+    fn __all__(db: PythonDB) -> *ListCompExpression {
+        for (tmp in Expression(db)) {
+            for (c in ListCompExpressionDO(db)) {
+                if (tmp.key_eq(c)) {
+                    yield ListCompExpression {
+                        element_oid : tmp.element_oid,
+                        type : tmp.type,
+                        element_index : tmp.element_index,
+                        parent_oid : tmp.parent_oid,
+                        location_oid : tmp.location_oid,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+}

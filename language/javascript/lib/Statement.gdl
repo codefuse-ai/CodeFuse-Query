@@ -1,0 +1,2093 @@
+/**
+ * @filename: Statement
+ * @brief: Provides classes and predicates for working with JavaScript / TypeScript statements
+ */
+
+/**
+ * The base class for all statements
+ */
+schema Statement extends Node {
+}
+
+impl Statement {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *Statement {
+        for (tmp in Node(db)) {
+            if (isStatement(tmp)) {
+                yield Statement {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A declaration statement
+ */
+schema DeclarationStatement extends Statement {
+}
+
+impl DeclarationStatement {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *DeclarationStatement {
+        for (tmp in Statement(db)) {
+            if (isDeclarationStatement(Node {id: tmp.id})) {
+                yield DeclarationStatement {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A statement but not declaration
+ */
+schema StatementButNotDeclaration extends Statement {
+}
+
+impl StatementButNotDeclaration {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *StatementButNotDeclaration {
+        for (tmp in Statement(db)) {
+            if (isStatementButNotDeclaration(Node {id: tmp.id})) {
+                yield StatementButNotDeclaration {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A block of statements.
+ */
+schema BlockStatement extends Statement {
+}
+
+impl BlockStatement {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *BlockStatement {
+        for (tmp in Statement(db)) {
+            if (isBlockStatement(Node {id: tmp.id})) {
+                yield BlockStatement {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets the `i`th statement in this block.
+     */
+    pub fn getStatement(self, i: int) -> Statement {
+        for (statement in Statement(__all_data__)) {
+            if (statement.key_eq(self.getChild(i))) {
+                return statement
+            }
+        }
+    }
+
+    /** 
+     * Gets a statement in this block.
+     */
+    pub fn getAStatement(self) -> *Statement {
+        for (statement in Statement(__all_data__)) {
+            for (auto_tmp1 in self.getAChild()) {
+                if (statement.key_eq(auto_tmp1)) {
+                    yield statement
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets the number of statements in this block.
+     */
+     pub fn getStatementCount(self) -> int {
+        return self.getAStatement().len()
+    }
+}
+
+/**
+ * An empty statement.
+ */
+schema EmptyStatement extends Statement {
+}
+
+impl EmptyStatement {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *EmptyStatement {
+        for (tmp in Statement(db)) {
+            if (tmp.getKind() = 235) {
+                yield EmptyStatement {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A variable declaration statement, that is, a `var`, `const` or `let` declaration
+ */
+schema VariableStatement extends Statement {
+}
+
+impl VariableStatement {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *VariableStatement {
+        for (tmp in Statement(db)) {
+            if (isVariableStatement(Node {id: tmp.id})) {
+                yield VariableStatement {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+
+    /**
+     * VariableStatement contains a VariableDeclarationList, get that list
+     */
+    pub fn getVariableDeclarationList(self) -> VariableDeclarationList {
+        for (vdl in VariableDeclarationList(__all_data__)) {
+            for (auto_tmp1 in self.getAChild()) {
+                if (vdl.key_eq(auto_tmp1)) {
+                    return vdl
+                }
+            }
+        }
+    }
+}
+
+/**
+ * An expression statement
+ */
+schema ExpressionStatement extends Statement {
+}
+
+impl ExpressionStatement {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *ExpressionStatement {
+        for (tmp in Statement(db)) {
+            if (isExpressionStatement(Node {id: tmp.id})) {
+                yield ExpressionStatement {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+
+    pub fn getExpression(self) -> Expression {
+        for (expr in Expression(__all_data__)) {
+            for (auto_tmp1 in self.getAChild()) {
+                if (expr.key_eq(auto_tmp1)) {
+                    return expr
+                }
+            }
+        }
+    }
+}
+
+/**
+ * An `if` statement
+ */
+schema IfStatement extends Statement {
+}
+
+impl IfStatement {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *IfStatement {
+        for (tmp in Statement(db)) {
+            if (isIfStatement(Node {id: tmp.id})) {
+                yield IfStatement {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets the condition of this `if` statement.
+     */
+    pub fn getCondition(self) -> Expression {
+        for (condition in Expression(__all_data__)) {
+            if (condition.key_eq(self.getChild(0))) {
+                return condition
+            }
+        }
+    }
+
+    /**
+     * Gets the "then" branch of this `if` statement.
+     */
+    pub fn getThen(self) -> Statement {
+        for (thenStatement in Statement(__all_data__)) {
+            if (thenStatement.key_eq(self.getChild(1))) {
+                return thenStatement
+            }
+        }
+    }
+
+    /**
+     * Gets the "else" branch of this `if` statement, if any.
+     */
+    pub fn getElse(self) -> Statement {
+        for (elseStatement in Statement(__all_data__)) {
+            if (elseStatement.key_eq(self.getChild(2))) {
+                return elseStatement
+            }
+        }
+    }
+
+    /**
+     * Determine this IfStatement has else expr.
+     */
+    pub fn hasElse(self) -> bool {
+        for (elseNode in Node(__all_data__)) {
+            if (elseNode.key_eq(self.getElse())) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * A `do`-`while` loop.
+ */
+schema DoWhileStatement extends Statement {
+}
+
+impl DoWhileStatement {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *DoWhileStatement {
+        for (tmp in Statement(db)) {
+            if (isDoWhileStatement(Node {id: tmp.id})) {
+                yield DoWhileStatement {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+
+    /** 
+     * Gets the loop condition of this `do`-`while` loop. 
+     */
+    pub fn getCondition(self) -> Expression {
+        for (condition in Expression(__all_data__)) {
+            if (condition.key_eq(self.getChild(1))) {
+                return condition
+            }
+        }
+    }
+
+    /** 
+     * Gets the body of this `do`-`while` loop. 
+     */
+    pub fn getBody(self) -> Statement {
+        for (body in Statement(__all_data__)) {
+            if (body.key_eq(self.getChild(0))) {
+                return body
+            }
+        }
+    }
+}
+
+/**
+ * A `while` loop.
+ */
+schema WhileStatement extends Statement {
+}
+
+impl WhileStatement {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *WhileStatement {
+        for (tmp in Statement(db)) {
+            if (isWhileStatement(Node {id: tmp.id})) {
+                yield WhileStatement {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+
+    /** 
+     * Gets the loop condition of this `while` loop. 
+     */
+    pub fn getCondition(self) -> Expression {
+        for (condition in Expression(__all_data__)) {
+            if (condition.key_eq(self.getChild(0))) {
+                return condition
+            }
+        }
+    }
+
+    /** 
+     * Gets the body of this `while` loop. 
+     */
+    pub fn getBody(self) -> Statement {
+        for (body in Statement(__all_data__)) {
+            if (body.key_eq(self.getChild(1))) {
+                return body
+            }
+        }
+    }
+}
+
+/**
+ * A `for` initializer.
+ */
+schema ForInitializer extends Node {
+}
+
+impl ForInitializer {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *ForInitializer {
+        for (tmp in Node(db)) {
+            if (isForInitializer(tmp)) {
+                yield ForInitializer {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A `for` loop.
+ */
+schema ForStatement extends Statement {
+}
+
+impl ForStatement {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *ForStatement {
+        for (tmp in Statement(db)) {
+            if (isForStatement(Node {id: tmp.id})) {
+                yield ForStatement {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets the initializer index of this for loop.
+     */
+    pub fn getInitializerIndex(self) -> int {
+        return 0
+    }
+
+    /** 
+     * Gets the Initializer of this `for` loop.
+     */
+    pub fn getInitializer(self) -> ForInitializer {
+        for (initializer in ForInitializer(__all_data__)) {
+            let (initializerIndex = self.getInitializerIndex()) {
+                if (initializer.key_eq(self.getChild(initializerIndex))) {
+                    return initializer
+                }
+            }
+        }
+    }
+
+    /**
+     * Determine this ForStatement has initializer expr.
+     */
+    pub fn hasInitializer(self) -> bool {
+        for (initializer in ForInitializer(__all_data__)) {
+            if (initializer = self.getInitializer()) {
+                return true
+            }
+        }
+    }
+
+    /** 
+     * Gets the boolean condition of this `for` loop.
+     */
+    pub fn getCondition(self) -> Expression {
+        for (condition in Expression(__all_data__)) {
+            if (condition.key_eq(self.getChild(1))) {
+                return condition
+            }
+        }
+    }
+
+    /**
+     * Determine this ForStatement has condition expr.
+     */
+    pub fn hasCondition(self) -> bool {
+        for (condition in Expression(__all_data__)) {
+            if (condition = self.getCondition()) {
+                return true
+            }
+        }
+    }
+
+    /** 
+     * Gets the incrementor of this `for` loop.
+    */
+    pub fn getIncrementor(self) -> Expression {
+        for (update in Expression(__all_data__)) {
+            if (update.key_eq(self.getChild(2))) {
+                return update
+            }
+        }
+    }
+
+    /**
+     * Determine this ForStatement has incrementor expr.
+     */
+    pub fn hasIncrementor(self) -> bool {
+        for (incrementor in Expression(__all_data__)) {
+            if (incrementor = self.getIncrementor()) {
+                return true
+            }
+        }
+    }
+
+    /** 
+     * Gets the body of this `for` loop.
+     */
+    pub fn getBody(self) -> Statement {
+        for (body in Statement(__all_data__)) {
+            if (body.key_eq(self.getChild(3))) {
+                return body
+            }
+        }
+    }
+}
+
+/**
+ * A `for`-`in` or `for`-`of` loop.
+ */
+schema EnhancedForStatement extends Statement {
+}
+
+impl EnhancedForStatement {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *EnhancedForStatement {
+        for (tmp in Statement(db)) {
+            if (isEnhancedForStatement(Node {id: tmp.id})) {
+                yield EnhancedForStatement {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets the iterator index of this loop.
+     *
+     * In a `for`-`in` loop, the index is always 0.
+     * In a `for`-`of` loop, the index is 1 if it is a `for`-`await`-`of`, otherwise, the index is 0.
+     */
+    pub fn getInitializerIndex(self) -> int {
+        for (index in int::__undetermined_all__()) {
+            for (enhancedForStatement in EnhancedForStatement(__all_data__),
+                firstChildNode in Node(__all_data__)) {
+                if (self = enhancedForStatement) {
+                    if (firstChildNode = self.getChild(0)) {
+                        if (isAwaitKeyword(firstChildNode)) {
+                            if (index = 1) {
+                                return index
+                            }
+                        }
+                        if (!isAwaitKeyword(firstChildNode)) {
+                            if (index = 0) {
+                                return index
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets the iterator of this `for`-`in` or `for`-`of` loop.
+     */
+    pub fn getInitializer(self) -> ForInitializer {
+        for (iterator in Node(__all_data__)) {
+            let (initializerIndex = self.getInitializerIndex()) {
+                if (iterator = self.getChild(initializerIndex)) {
+                    return ForInitializer(__all_data__).find(iterator)
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets the expression over which this `for`-`in` or `for`-`of` loop iterates.
+     */
+    pub fn getExpression(self) -> Expression {
+        for (expression in Expression(__all_data__)) {
+            let (initializerIndex = self.getInitializerIndex()) {
+                if (expression.key_eq(self.getChild(initializerIndex + 1))) {
+                    return expression
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets the body of this `for`-`in` or `for`-`of` loop.
+     */
+    pub fn getBody(self) -> Statement {
+        for (body in Statement(__all_data__)) {
+            let (initializerIndex = self.getInitializerIndex()) {
+                if (body.key_eq(self.getChild(initializerIndex + 2))) {
+                    return body
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A `for`-`in` loop.
+ */
+schema ForInStatement extends EnhancedForStatement {
+}
+
+impl ForInStatement {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *ForInStatement {
+        for (tmp in EnhancedForStatement(db)) {
+            if (isForInStatement(Node {id: tmp.id})) {
+                yield ForInStatement {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A `for`-`of` loop.
+ */
+schema ForOfStatement extends EnhancedForStatement {
+}
+
+impl ForOfStatement {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *ForOfStatement {
+        for (tmp in EnhancedForStatement(db)) {
+            if (isForOfStatement(Node {id: tmp.id})) {
+                yield ForOfStatement {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+
+    /**
+     * Determines whether the `for`-`of` loop is a `for`-`await`-`of` loop
+     */
+    pub fn isAwait(self) -> bool {
+        for (awaitKeyword in AwaitKeyword(__all_data__)) {
+            if (awaitKeyword.key_eq(self.getChild(0))) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * An iteration statement, including `while`, `do`-`while`,
+ * `for` and enhanced `for` (`for`-`in`, `for`-`of`) statements.
+ */
+schema IterationStatement extends Statement {
+}
+
+impl IterationStatement {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *IterationStatement {
+        for (tmp in Statement(db)) {
+            if (isIterationStatement(Node {id: tmp.id})) {
+                yield IterationStatement {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets the body statement of this iteration statement.
+     */
+    pub fn getBody(self) -> Statement {
+        for (whileStatement in WhileStatement(__all_data__)) {
+            if (whileStatement.key_eq(self)) {
+                let (body = whileStatement.getBody()) {
+                    return body
+                }
+            }
+        }
+        for (doWhileStatement in DoWhileStatement(__all_data__)) {
+            if (doWhileStatement.key_eq(self)) {
+                let (body = doWhileStatement.getBody()) {
+                    return body
+                }
+            }
+        }
+        for (forStatement in ForStatement(__all_data__)) {
+            if (forStatement.key_eq(self)) {
+                let (body = forStatement.getBody()) {
+                    return body
+                }
+            }
+        }
+        for (enhancedForStatement in EnhancedForStatement(__all_data__)) {
+            if (enhancedForStatement.key_eq(self)) {
+                let (body = enhancedForStatement.getBody()) {
+                    return body
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets the condition expression of this iteration statement.
+     * Only a `while`, `do`-`while` and `for` statement has a condition.
+     */
+    pub fn getCondition(self) -> Expression {
+        for (whileStatement in WhileStatement(__all_data__)) {
+            if (whileStatement.key_eq(self)) {
+                let (condition = whileStatement.getCondition()) {
+                    return condition
+                }
+            }
+        }
+        for (doWhileStatement in DoWhileStatement(__all_data__)) {
+            if (doWhileStatement.key_eq(self)) {
+                let (condition = doWhileStatement.getCondition()) {
+                    return condition
+                }
+            }
+        }
+        for (forStatement in ForStatement(__all_data__)) {
+            if (forStatement.key_eq(self)) {
+                let (condition = forStatement.getCondition()) {
+                    return condition
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A `continue` statement
+ */
+schema ContinueStatement extends Statement {
+}
+
+impl ContinueStatement {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *ContinueStatement {
+        for (tmp in Statement(db)) {
+            if (isContinueStatement(Node {id: tmp.id})) {
+                yield ContinueStatement {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A `break` statement
+ */
+schema BreakStatement extends Statement {
+}
+
+impl BreakStatement {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *BreakStatement {
+        for (tmp in Statement(db)) {
+            if (isBreakStatement(Node {id: tmp.id})) {
+                yield BreakStatement {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A `return` statement
+ */
+schema ReturnStatement extends Statement {
+}
+
+impl ReturnStatement {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *ReturnStatement {
+        for (tmp in Statement(db)) {
+            if (isReturnStatement(Node {id: tmp.id})) {
+                yield ReturnStatement {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+
+    /**
+     * Get the expression that specifies the returned value, if any.
+     */
+    pub fn getExpression(self) -> Expression {
+        for (returnExpression in Expression(__all_data__)) {
+            if (returnExpression.key_eq(self.getChild(0))) {
+                return returnExpression
+            }
+        }
+    }
+}
+
+/**
+ * A `with` statement
+ */
+schema WithStatement extends Statement {
+}
+
+impl WithStatement {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *WithStatement {
+        for (tmp in Statement(db)) {
+            if (isWithStatement(Node {id: tmp.id})) {
+                yield WithStatement {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets the expression belong to the WithStatement.
+     * Each WithStatement contains one and only one expression.
+     */
+    pub fn getExpression(self) -> Expression {
+        for (expression in Expression(__all_data__)) {
+            if (expression.key_eq(self.getChild(0))) {
+                return expression
+            }
+        }
+    }
+
+    /**
+     * Gets the statement belong to the WithStatement.
+     * Each WithStatement contains one and only one statement,
+     * Multiple statements should be grounded by a BlockStatement.
+     */
+    pub fn getStatement(self) -> Statement {
+        for (statement in Statement(__all_data__)) {
+            if (statement.key_eq(self.getChild(1))) {
+                return statement
+            }
+        }
+    }
+}
+
+/**
+ * A function declaration statement.
+ */
+schema FunctionDeclarationStatement extends DeclarationStatement {
+}
+
+impl FunctionDeclarationStatement {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *FunctionDeclarationStatement {
+        for (tmp in DeclarationStatement(db)) {
+            if (isFunctionDeclaration(Node {id: tmp.id})) {
+                yield FunctionDeclarationStatement {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A class declaration statement.
+ */
+schema ClassDeclarationStatement extends DeclarationStatement {
+}
+
+impl ClassDeclarationStatement {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *ClassDeclarationStatement {
+        for (tmp in DeclarationStatement(db)) {
+            if (isClassDeclaration(Node {id: tmp.id})) {
+                yield ClassDeclarationStatement {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * An interface declaration.
+ */
+schema InterfaceDeclaration extends DeclarationStatement {
+}
+
+impl InterfaceDeclaration {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *InterfaceDeclaration {
+        for (tmp in DeclarationStatement(db)) {
+            if (isInterfaceDeclaration(Node {id: tmp.id})) {
+                yield InterfaceDeclaration {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A type alias declaration.
+ */
+schema TypeAliasDeclaration extends DeclarationStatement {
+}
+
+impl TypeAliasDeclaration {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *TypeAliasDeclaration {
+        for (tmp in DeclarationStatement(db)) {
+            if (isTypeAliasDeclaration(Node {id: tmp.id})) {
+                yield TypeAliasDeclaration {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * An enum declaration.
+ */
+schema EnumDeclaration extends DeclarationStatement {
+}
+
+impl EnumDeclaration {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *EnumDeclaration {
+        for (tmp in DeclarationStatement(db)) {
+            if (isEnumDeclaration(Node {id: tmp.id})) {
+                yield EnumDeclaration {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets the identifier this EnumDeclaration.
+     */
+    pub fn getIdentifier(self) -> Identifier {
+        for (identifier in Identifier(__all_data__)) {
+            if (identifier.key_eq(self.getChild(0))) {
+                return identifier
+            }
+        }
+    }
+
+    /**
+     * Gets a EnumMember of this EnumDeclaration.
+     */
+    pub fn getAEnumMember(self) -> *EnumMember {
+        for (enumMember in EnumMember(__all_data__)) {
+            if (self = enumMember.getParent()) {
+                yield enumMember
+            }
+        }
+    }
+
+    /**
+     * Gets the EnumMember with index, start from 0.
+     */
+    pub fn getEnumMember(self, index: int) -> EnumMember {
+        for (childIndex in int::__undetermined_all__()) {
+            for (enumMember in EnumMember(__all_data__)) {
+                if (index = childIndex - 1) {
+                    if (enumMember.key_eq(self.getChild(childIndex))) {
+                        return enumMember
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets the count of EnumMember.
+     */
+    pub fn getEnumMemberCount(self) -> int {
+        return self.getAEnumMember().len()
+    }
+}
+
+/**
+ * A module declaration.
+ */
+schema ModuleDeclaration extends DeclarationStatement {
+}
+
+impl ModuleDeclaration {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *ModuleDeclaration {
+        for (tmp in DeclarationStatement(db)) {
+            if (isModuleDeclaration(Node {id: tmp.id})) {
+                yield ModuleDeclaration {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A namespace export declaration.
+ */
+schema NamespaceExportDeclaration extends DeclarationStatement {
+}
+
+impl NamespaceExportDeclaration {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *NamespaceExportDeclaration {
+        for (tmp in DeclarationStatement(db)) {
+            if (isNamespaceExportDeclaration(Node {id: tmp.id})) {
+                yield NamespaceExportDeclaration {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * An import-equals declaration.
+ */
+schema ImportEqualsDeclaration extends DeclarationStatement {
+}
+
+impl ImportEqualsDeclaration {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *ImportEqualsDeclaration {
+        for (tmp in DeclarationStatement(db)) {
+            if (isImportEqualsDeclaration(Node {id: tmp.id})) {
+                yield ImportEqualsDeclaration {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * An import declaration.
+ */
+schema ImportDeclaration extends DeclarationStatement {
+}
+
+impl ImportDeclaration {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *ImportDeclaration {
+        for (tmp in DeclarationStatement(db)) {
+            if (isImportDeclaration(Node {id: tmp.id})) {
+                yield ImportDeclaration {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * An export assignment.
+ */
+schema ExportAssignment extends DeclarationStatement {
+}
+
+impl ExportAssignment {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *ExportAssignment {
+        for (tmp in DeclarationStatement(db)) {
+            if (isExportAssignment(Node {id: tmp.id})) {
+                yield ExportAssignment {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * An export declaration.
+ */
+schema ExportDeclaration extends DeclarationStatement {
+}
+
+impl ExportDeclaration {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *ExportDeclaration {
+        for (tmp in DeclarationStatement(db)) {
+            if (isExportDeclaration(Node {id: tmp.id})) {
+                yield ExportDeclaration {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A missing declaration.
+ */
+schema MissingDeclaration extends DeclarationStatement {
+}
+
+impl MissingDeclaration {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *MissingDeclaration {
+        for (tmp in DeclarationStatement(db)) {
+            if (isMissingDeclaration(Node {id: tmp.id})) {
+                yield MissingDeclaration {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+
+    pub fn getName(self) -> Identifier {
+        for (identifier in Identifier(__all_data__)) {
+            if (self.key_eq(identifier.getParent())) {
+                return identifier
+            }
+        }
+    }
+
+    pub fn haveName(self) -> bool {
+        for (identifier in Identifier(__all_data__)) {
+            if (identifier = self.getName()) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * A `case` clause.
+ */
+schema CaseClause extends Statement {
+}
+
+impl CaseClause {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *CaseClause {
+        for (tmp in Statement(db)) {
+            if (isCaseClause(Node {id: tmp.id})) {
+                yield CaseClause {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets the expression of this CaseClause.
+     */
+    pub fn getExpression(self) -> Expression {
+        return self.getChild(0).to<Expression>()
+    }
+
+    /**
+     * Gets the statement of this CaseClause with index,
+     * starts from 0.
+     */
+    pub fn getStatement(self, index: int) -> Statement {
+        for (childIndex in int::__undetermined_all__()) {
+            if (index = childIndex - 1) {
+                return self.getChild(childIndex).to<Statement>()
+            }
+        }
+    }
+
+    /**
+     * Gets a statement of this CaseClause.
+     */
+    pub fn getAStatement(self) -> *Statement {
+        for (i in int::__undetermined_all__()) {
+            yield self.getStatement(i)
+        }
+    }
+
+    /**
+     * Gets the statement count of this CaseClause.
+     */
+    pub fn getStatementCount(self) -> int {
+        return self.getAStatement().len()
+    }
+}
+
+/**
+ * A `default` clause.
+ */
+schema DefaultClause extends Statement {
+}
+
+impl DefaultClause {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *DefaultClause {
+        for (tmp in Statement(db)) {
+            if (isDefaultClause(Node {id: tmp.id})) {
+                yield DefaultClause {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets the statement of this DefaultClause with index,
+     * starts from 0.
+     */
+    pub fn getStatement(self, index: int) -> Statement {
+        for (statement in Statement(__all_data__)) {
+            if (statement.key_eq(self.getChild(index))) {
+                return statement
+            }
+        }
+    }
+
+    /**
+     * Gets a statement of this DefaultClause.
+     */
+    pub fn getAStatement(self) -> *Statement {
+        yield self.getStatement(__all_data__)
+    }
+
+    /**
+     * Gets the statement count of this DefaultClause.
+     */
+    pub fn getStatementCount(self) -> int {
+        return self.getAStatement().len()
+    }
+}
+
+schema CatchClause extends Statement {
+}
+
+impl CatchClause {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *CatchClause {
+        for (tmp in Statement(db)) {
+            if (isCatchClause(Node {id: tmp.id})) {
+                yield CatchClause {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets the variable declaration of this CatchClause.
+     */
+    pub fn getVariableDeclaration(self) -> VariableDeclaration {
+        for (variableDeclaration in VariableDeclaration(__all_data__)) {
+            if (self.key_eq(variableDeclaration)) {
+                return variableDeclaration
+            }
+        }
+    }
+
+    /**
+     * Determine this CatchClause has variable declaration or not.
+     */
+    pub fn haveVariableDeclaration(self) -> bool {
+        for (variableDeclaration in VariableDeclaration(__all_data__)) {
+            if (variableDeclaration = self.getVariableDeclaration()) {
+                return true
+            }
+        }
+    }
+
+    /**
+     * Gets the catch block of this CatchClause.
+     */
+    pub fn getBlock(self) -> BlockStatement {
+        for (blockStatement in BlockStatement(__all_data__)) {
+            if (self.key_eq(blockStatement.getParent())) {
+                return blockStatement
+            }
+        }
+    }
+}
+
+/**
+ * A `switch`-`case` block.
+ */
+schema CaseBlock extends Statement {
+}
+
+impl CaseBlock {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *CaseBlock {
+        for (tmp in Statement(db)) {
+            if (isCaseBlock(Node {id: tmp.id})) {
+                yield CaseBlock {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets a `case` clause of this `switch`-`case` block.
+     */
+    pub fn getACaseClause(self) -> *CaseClause {
+        for (caseClause in CaseClause(__all_data__)) {
+            for (auto_tmp1 in self.getAChild()) {
+                if (caseClause.key_eq(auto_tmp1)) {
+                    yield caseClause
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets the `i`th `case` clause of this `switch`-`case` block.
+     * index starts from 0.
+     */
+    pub fn getCaseClause(self, i: int) -> CaseClause {
+        for (childIndex in int::__undetermined_all__()) {
+            for (caseClause in CaseClause(__all_data__)) {
+                if (caseClause.key_eq(self.getChild(childIndex))) {
+                    // CaseBlock have DefaultClause, should adjust index of
+                    // CaseClause nodes that after DefaultClause, DefaultClause
+                    // can be any order with CaseClause.
+                    if (self.haveDefaultClause()) {
+                        for (defaultIndex in int::__undetermined_all__()) {
+                            for (defaultClause in DefaultClause(__all_data__)) {
+                                if (defaultClause.key_eq(self.getChild(defaultIndex))) {
+                                    if (childIndex < defaultIndex) {
+                                        if (i = childIndex) {
+                                            return caseClause
+                                        }
+                                    }
+                                    if (childIndex >= defaultIndex) {
+                                        if (i = childIndex - 1) {
+                                            return caseClause
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    // CaseBlock don't have DefaultClause, the child index
+                    // is equal with case index
+                    if (!self.haveDefaultClause()) {
+                        if (i = childIndex) {
+                            return caseClause
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets the `default` clause of this `switch`-`case` block.
+     */
+    pub fn getDefaultClause(self) -> DefaultClause {
+        for (defaultClause in DefaultClause(__all_data__)) {
+            for (auto_tmp1 in self.getAChild()) {
+                if (defaultClause.key_eq(auto_tmp1)) {
+                    return defaultClause
+                }
+            }
+        }
+    }
+
+    /**
+     * Determine whether this CaseBlock has a DefaultClause.
+     */
+    pub fn haveDefaultClause(self) -> bool {
+        for (defaultClause in DefaultClause(__all_data__)) {
+            if (defaultClause = self.getDefaultClause()) {
+                return true
+            }
+        }
+    }
+
+    /**
+     * Gets a CaseClause or DefaultClause of this CaseBlock.
+     */
+    pub fn getACaseOrDefault(self) -> *Statement {
+        for (statement in Statement(__all_data__)) {
+            if (self.key_eq(statement.getParent())) {
+                yield statement
+            }
+        }
+    }
+
+    /**
+     * Gets the CaseClause count of this CaseBlock.
+     */
+    pub fn getCaseClauseCount(self) -> int {
+        return self.getACaseClause().len()
+    }
+}
+
+/**
+ * An `switch` statement
+ */
+schema SwitchStatement extends Statement {
+}
+
+impl SwitchStatement {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *SwitchStatement {
+        for (tmp in Statement(db)) {
+            if (isSwitchStatement(Node {id: tmp.id})) {
+                yield SwitchStatement {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+
+    pub fn getExpression(self) -> Expression {
+        for (expression in Expression(__all_data__)) {
+            if (expression.key_eq(self.getChild(0))) {
+                return expression
+            }
+        }
+    }
+
+    pub fn getCaseBlock(self) -> CaseBlock {
+        for (caseBlock in CaseBlock(__all_data__)) {
+            if (caseBlock.key_eq(self.getChild(1))) {
+                return caseBlock
+            }
+        }
+    }
+}
+
+/**
+ * A `throw` statement
+ */
+schema ThrowStatement extends Statement {
+}
+
+impl ThrowStatement {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *ThrowStatement {
+        for (tmp in Statement(db)) {
+            if (isThrowStatement(Node {id: tmp.id})) {
+                yield ThrowStatement {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets the expression throwed by this ThrowStatement.
+     */
+    pub fn getExpression(self) -> Expression {
+        for (expression in Expression(__all_data__)) {
+            if (expression.key_eq(self.getChild(0))) {
+                return expression
+            }
+        }
+    }
+}
+
+/**
+ * A `try` Statement
+ */
+schema TryStatement extends Statement {
+}
+
+impl TryStatement {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *TryStatement {
+        for (tmp in Statement(db)) {
+            if (isTryStatement(Node {id: tmp.id})) {
+                yield TryStatement {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+
+    /** 
+     * Gets the body of this `try` statement. 
+     */
+    pub fn getTryBlock(self) -> BlockStatement {
+        for (tryBlock in BlockStatement(__all_data__)) {
+            if (tryBlock.key_eq(self.getChild(0))) {
+                return tryBlock
+            }
+        }
+    }
+
+    /** 
+     * Gets the `catch` clause of this `try` statement, if any. 
+     */
+    pub fn getCatchClause(self) -> CatchClause {
+        for (catchClause in CatchClause(__all_data__)) {
+            for (auto_tmp1 in self.getAChild()) {
+                if (catchClause.key_eq(auto_tmp1)) {
+                    return catchClause
+                }
+            }
+        }
+    }
+
+    /** 
+     * Gets the `finally` block of this `try` statement, if any. 
+     */
+    pub fn getFinallyBlock(self) -> BlockStatement {
+        for (finallyBlock in BlockStatement(__all_data__)) {
+            if (finallyBlock.getParent().key_eq(self)) {
+                let (finallyIndex = finallyBlock.getIndex()) {
+                    if (finallyIndex != 0) {
+                        return finallyBlock
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Determine whether this TryStatement has finally block or not.
+     */
+    pub fn haveFinallyBlock(self) -> bool {
+        for (finallyBlockStatement in BlockStatement(__all_data__)) {
+            if (finallyBlockStatement = self.getFinallyBlock()) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * A `debugger` statement.
+ */
+schema DebuggerStatement extends Statement {
+}
+
+impl DebuggerStatement {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *DebuggerStatement {
+        for (tmp in Statement(db)) {
+            if (isDebuggerStatement(Node {id: tmp.id})) {
+                yield DebuggerStatement {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A not-emmitted statement.
+ * Will not appear in the AST.
+ */
+schema NotEmittedStatement extends Statement {
+}
+
+impl NotEmittedStatement {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *NotEmittedStatement {
+        for (tmp in Statement(db)) {
+            if (isNotEmittedStatement(Node {id: tmp.id})) {
+                yield NotEmittedStatement {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A merge-declaration marker.
+ * Will not appear in the AST.
+ */
+schema MergeDeclarationMarker extends Statement {
+}
+
+impl MergeDeclarationMarker {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *MergeDeclarationMarker {
+        for (tmp in Statement(db)) {
+            if (isMergeDeclarationMarker(Node {id: tmp.id})) {
+                yield MergeDeclarationMarker {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * An end-of-declaration marker.
+ * Will not appear in the AST.
+ */
+schema EndOfDeclarationMarker extends Statement {
+}
+
+impl EndOfDeclarationMarker {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *EndOfDeclarationMarker {
+        for (tmp in Statement(db)) {
+            if (isEndOfDeclarationMarker(Node {id: tmp.id})) {
+                yield EndOfDeclarationMarker {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a declaration statement
+ */
+pub fn isDeclarationStatement(node: Node) -> bool {
+    let (kind = node.getKind()) {
+        if (isDeclarationStatementKind(kind)) {
+            return true
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a statement, but not a declaration
+ */
+pub fn isStatementButNotDeclaration(node: Node) -> bool {
+    let (kind = node.getKind()) {
+        if (isStatementKindButNotDeclarationKind(kind)) {
+            return true
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a statement
+ */
+pub fn isStatement(node: Node) -> bool {
+    if (isStatementButNotDeclaration(node)) {
+        return true
+    }
+    if (isDeclarationStatement(node)) {
+        return true
+    }
+    if (isBlockStatement(node)) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a block statement
+ */
+pub fn isBlockStatement(node: Node) -> bool {
+    // Block
+    if (node.getKind() = 234) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is an empty statement.
+ */
+pub fn isEmptyStatement(node: Node) -> bool {
+    if (node.getKind() = 235) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a variable statement
+ */
+pub fn isVariableStatement(node: Node) -> bool {
+    if (node.getKind() = 236) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is an expression statement
+ */
+pub fn isExpressionStatement(node: Node) -> bool {
+    if (node.getKind() = 237) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is an `if` statement
+ */
+pub fn isIfStatement(node: Node) -> bool {
+    if (node.getKind() = 238) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a `do`-`while` statement
+ */
+pub fn isDoWhileStatement(node: Node) -> bool {
+    if (node.getKind() = 239) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a `while` statement
+ */
+pub fn isWhileStatement(node: Node) -> bool {
+    if (node.getKind() = 240) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a `for` statement
+ */
+pub fn isForStatement(node: Node) -> bool {
+    if (node.getKind() = 241) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a initializer of for statement or enhanced for statement.
+ */
+pub fn isForInitializer(node: Node) -> bool {
+    for (forStatement in ForStatement(__all_data__)) {
+        let (initializerIndex = forStatement.getInitializerIndex()) {
+            if (node = forStatement.getChild(initializerIndex)) {
+                if (isVariableDeclarationList(node)) {
+                    return true
+                }
+                if (isExpression(node)) {
+                    return true
+                }
+            }
+        }
+    }
+    for (enhancedForStatement in EnhancedForStatement(__all_data__)) {
+        let (initializerIndex = enhancedForStatement.getInitializerIndex()) {
+            if (node = enhancedForStatement.getChild(initializerIndex)) {
+                if (isVariableDeclarationList(node)) {
+                    return true
+                }
+                if (isExpression(node)) {
+                    return true
+                }
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a `for`-`in` statement
+ */
+pub fn isForInStatement(node: Node) -> bool {
+    if (node.getKind() = 242) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a `for`-`of` statement
+ */
+pub fn isForOfStatement(node: Node) -> bool {
+    if (node.getKind() = 243) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a `for`-`in` or `for`-`of` statement
+ */
+pub fn isEnhancedForStatement(node: Node) -> bool {
+    if (isForInStatement(node)) {
+        return true
+    }
+    if (isForOfStatement(node)) {
+        return true
+    }
+}
+
+/**
+ * Determine whether a node is an iteration statement, including `while`, `do`-`while`,
+ * `for` and enhanced `for` (`for`-`in`, `for`-`of`) statements.
+ */
+pub fn isIterationStatement(node: Node) -> bool {
+    let (kind = node.getKind()) {
+        if (isIterationStatementKind(kind)) {
+            return true
+        }
+    }
+}
+
+/**
+ * @todo Labeled statement.
+ */
+
+/**
+ * Determines whether a node is a `continue` statement
+ */
+pub fn isContinueStatement(node: Node) -> bool {
+    if (node.getKind() = 244) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a `break` statement
+ */
+pub fn isBreakStatement(node: Node) -> bool {
+    if (node.getKind() = 245) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a `return` statement
+ */
+pub fn isReturnStatement(node: Node) -> bool {
+    if (node.getKind() = 246) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a `with` statement
+ */
+pub fn isWithStatement(node: Node) -> bool {
+    if (node.getKind() = 247) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a function declaration.
+ */
+pub fn isFunctionDeclaration(node: Node) -> bool {
+    if (node.getKind() = 255) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a class declaration.
+ */
+pub fn isClassDeclaration(node: Node) -> bool {
+    if (node.getKind() = 256) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is an interface declaration.
+ */
+pub fn isInterfaceDeclaration(node: Node) -> bool {
+    if (node.getKind() = 257) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a type alias declaration.
+ */
+pub fn isTypeAliasDeclaration(node: Node) -> bool {
+    if (node.getKind() = 258) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is an enum declaration.
+ */
+pub fn isEnumDeclaration(node: Node) -> bool {
+    if (node.getKind() = 259) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a module declaration.
+ */
+pub fn isModuleDeclaration(node: Node) -> bool {
+    if (node.getKind() = 260) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a namespace export declaration.
+ */
+pub fn isNamespaceExportDeclaration(node: Node) -> bool {
+    if (node.getKind() = 263) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is an import-equals declaration.
+ */
+pub fn isImportEqualsDeclaration(node: Node) -> bool {
+    if (node.getKind() = 264) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is an import declaration.
+ */
+pub fn isImportDeclaration(node: Node) -> bool {
+    if (node.getKind() = 265) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is an export assignment.
+ */
+pub fn isExportAssignment(node: Node) -> bool {
+    if (node.getKind() = 270) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is an export declaration.
+ */
+pub fn isExportDeclaration(node: Node) -> bool {
+    if (node.getKind() = 271) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a missing declaration.
+ */
+pub fn isMissingDeclaration(node: Node) -> bool {
+    if (node.getKind() = 275) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is an `case` clause
+ */
+pub fn isCaseClause(node: Node) -> bool {
+    if (node.getKind() = 288) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is an `default` clause
+ */
+pub fn isDefaultClause(node: Node) -> bool {
+    if (node.getKind() = 289) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is an `catch` clause
+ */
+pub fn isCatchClause(node: Node) -> bool {
+    if (node.getKind() = 291) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a `switch`-`case` block.
+ */
+pub fn isCaseBlock(node: Node) -> bool {
+    if (node.getKind() = 262) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is an `switch` statement
+ */
+pub fn isSwitchStatement(node: Node) -> bool {
+    if (node.getKind() = 248) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a `throw` statement
+ */
+pub fn isThrowStatement(node: Node) -> bool {
+    if (node.getKind() = 250) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a `try` statement
+ */
+pub fn isTryStatement(node: Node) -> bool {
+    if (node.getKind() = 251) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a `debugger` statement.
+ */
+pub fn isDebuggerStatement(node: Node) -> bool {
+    if (node.getKind() = 252) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a not-emmitted statement.
+ */
+pub fn isNotEmittedStatement(node: Node) -> bool {
+    if (node.getKind() = 347) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a merge-declaration marker.
+ */
+pub fn isMergeDeclarationMarker(node: Node) -> bool {
+    if (node.getKind() = 350) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is an end-of-declaration marker.
+ */
+pub fn isEndOfDeclarationMarker(node: Node) -> bool {
+    if (node.getKind() = 351) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node kind is an iteration statement kind,
+ * including `while`, `do`-`while`, `for` and enhanced `for` (`for`-`in`, `for`-`of`) statements.
+ */
+pub fn isIterationStatementKind(kind: int) -> bool {
+    [
+        {239},  // DoStatement
+        {240},  // WhileStatement
+        {241},  // ForStatement
+        {242},  // ForInStatement
+        {243},  // ForOfStatement
+    ]
+}
+
+/**
+ * Determines whether a node kind is a statement kind, but not a declaration kind
+ */
+pub fn isStatementKindButNotDeclarationKind(kind: int) -> bool {
+    [
+        {235},  // EmptyStatement
+        {236},  // VariableStatement
+        {237},  // ExpressionStatement
+        {238},  // IfStatement
+        {239},  // DoStatement
+        {240},  // WhileStatement
+        {241},  // ForStatement
+        {242},  // ForInStatement
+        {243},  // ForOfStatement
+        {244},  // ContinueStatement
+        {245},  // BreakStatement
+        {246},  // ReturnStatement
+        {247},  // WithStatement
+        {248},  // SwitchStatement
+        {249},  // LabeledStatement
+        {250},  // ThrowStatement
+        {251},  // TryStatement
+        {252},  // DebuggerStatement
+        {347},  // NotEmittedStatement
+        {350},  // MergeDeclarationMarker
+        {351},  // EndOfDeclarationMarker
+
+        {262},  // CaseBlock
+        {291},  // CatchClause
+        {288},  // CaseClause
+        {289},  // DefaultClause
+    ]
+}
+
+/**
+ * Determines whether a node kind is a declaration statement kind
+ */
+pub fn isDeclarationStatementKind(kind: int) -> bool {
+    [
+        {255},  // FunctionDeclaration
+        {256},  // ClassDeclaration
+        {257},  // InterfaceDeclaration
+        {258},  // TypeAliasDeclaration
+        {259},  // EnumDeclaration
+        {260},  // ModuleDeclaration
+        {263},  // NamespaceExportDeclaration
+        {264},  // ImportEqualsDeclaration
+        {265},  // ImportDeclaration
+        {270},  // ExportAssignment
+        {271},  // ExportDeclaration
+        {275},  // MissingDeclaration
+    ]
+}

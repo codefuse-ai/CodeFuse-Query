@@ -1,0 +1,102 @@
+schema Literal extends LiteralDO {
+
+}
+impl Literal {
+    @data_constraint
+    @inline
+    fn __all__(db: GoDB) -> *Literal {
+        for (tmp in LiteralDO(db)) {
+            yield Literal {
+                oid : tmp.oid,
+                expr : tmp.expr,
+                value : tmp.value,
+                raw : tmp.raw
+            }
+        }
+    }
+    pub fn getExpression(self) -> Expr {
+        for (e in Expr(__all_data__)) {
+            if (e.id = self.getExpr()) {
+                return e
+            }
+        }
+    }
+}
+schema Variables extends Literal {
+
+}
+impl Variables {
+    @data_constraint
+    @inline
+    fn __all__(db: GoDB) -> *Variables {
+        for (tmp in Literal(db)) {
+            yield Variables {
+                oid : tmp.oid,
+                expr : tmp.expr,
+                value : tmp.value,
+                raw : tmp.raw
+            }
+        }
+    }
+    pub fn getBelongsFunction(self) -> Function {
+        for (s in Statement(__all_data__),
+            e in ExprDO(__all_data__)) {
+            if (e.oid = self.getExpr()) {
+                if (s.id = e.getParentId()) {
+                    let (f = s.getBelongsFunction()) {
+                        return f
+                    }
+                }
+            }
+        }
+    }
+    pub fn getName(self) -> string {
+        return self.getValue()
+    }
+    pub fn getSignature(self) -> *string {
+        for (to in TypeOfDO(__all_data__),
+            t in Type(__all_data__)) {
+            let (e = self.getExpression()) {
+                if (to.getExpr() = e.id) {
+                    if (t.oid = to.getTp()) {
+                        yield t.getFormatString()
+                    }
+                }
+            }
+        }
+    }
+}
+schema IOTALiteral extends Literal {
+
+}
+impl IOTALiteral {
+    @data_constraint
+    @inline
+    fn __all__(db: GoDB) -> *IOTALiteral {
+        for (tmp in Literal(db)) {
+            if (tmp.getValue() = "iota") {
+                yield IOTALiteral {
+                    oid : tmp.oid,
+                    expr : tmp.expr,
+                    value : tmp.value,
+                    raw : tmp.raw
+                }
+            }
+        }
+    }
+}
+schema TypeName extends TypeNameDO {
+
+}
+impl TypeName {
+    @data_constraint
+    @inline
+    fn __all__(db: GoDB) -> *TypeName {
+        for (tmp in TypeNameDO(db)) {
+            yield TypeName {
+                oid : tmp.oid,
+                name : tmp.name
+            }
+        }
+    }
+}

@@ -1,0 +1,488 @@
+/**
+ * @filename: Class
+ * @brief: Provides classes and predicates for working with JavaScript / TypeScript classes
+ */
+
+/**
+ * A ClassLikeDeclaration
+ */
+schema ClassLikeDeclaration extends Node {
+}
+
+impl ClassLikeDeclaration {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *ClassLikeDeclaration {
+        for (tmp in Node(db)) {
+            if (isClassLikeDeclaration(tmp)) {
+                yield ClassLikeDeclaration {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A ClassDeclaration
+ */
+schema ClassDeclaration extends ClassLikeDeclaration {
+}
+
+impl ClassDeclaration {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *ClassDeclaration {
+        for (tmp in ClassLikeDeclaration(db)) {
+            if (isClassDeclaration(Node {id: tmp.id})) {
+                yield ClassDeclaration {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A ClassExpression
+ */
+schema ClassExpressionDeclaration extends ClassLikeDeclaration {
+}
+
+impl ClassExpressionDeclaration {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *ClassExpressionDeclaration {
+        for (tmp in ClassLikeDeclaration(db)) {
+            if (isClassExpression(Node {id: tmp.id})) {
+                yield ClassExpressionDeclaration {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A ClassElement
+ */
+schema ClassElement extends Node {
+}
+
+impl ClassElement {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *ClassElement {
+        for (tmp in Node(db)) {
+            if (isClassElement(tmp)) {
+                yield ClassElement {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A PropertyDeclaration
+ */
+schema PropertyDeclaration extends ClassElement {
+}
+
+impl PropertyDeclaration {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *PropertyDeclaration {
+        for (tmp in ClassElement(db)) {
+            if (tmp.getKind() = 166) {
+                yield PropertyDeclaration {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+
+    fn getAllPropertyNameIndex(self) -> *int {
+        for (childIndex in int::__undetermined_all__()) {
+            let (child = self.getChild(childIndex)) {
+                let (tmp = PropertyName(__all_data__).find(child)) {
+                    yield childIndex
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets a decorator.
+     */
+    pub fn getADecorator(self) -> *Decorator {
+        for (decorator in Decorator(__all_data__)) {
+            for (auto_tmp1 in self.getAChild()) {
+                if (decorator.key_eq(auto_tmp1)) {
+                    yield decorator
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets the `i`th decorator.
+     */
+    pub fn getDecorator(self, i: int) -> Decorator {
+        for (decorator in Decorator(__all_data__)) {
+            if (decorator.key_eq(self.getChild(i))) {
+                return decorator
+            }
+        }
+    }
+
+    /**
+     * Gets a modifier.
+     */
+    pub fn getAModifier(self) -> *Modifier {
+        for (modifier in Modifier(__all_data__)) {
+            for (auto_tmp1 in self.getAChild()) {
+                if (modifier.key_eq(auto_tmp1)) {
+                    yield modifier
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets the `i`th modifier.
+     */
+    pub fn getModifier(self, i: int) -> Modifier {
+        for (childIndex in int::__undetermined_all__()) {
+            for (modifier in Modifier(__all_data__)) {
+                let (decoratorCount = self.getDecoratorCount()) {
+                    if (modifier.key_eq(self.getChild(childIndex))) {
+                        if (i = childIndex - decoratorCount) {
+                            return modifier
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets the name node, which is a PropertyName.
+     */
+    pub fn getNameNode(self) -> PropertyName {
+        for (nameNode in PropertyName(__all_data__)) {
+            let (index = self.getNameNodeIndex()) {
+                if (nameNode.key_eq(self.getChild(index))) {
+                    return nameNode
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets the `?` token. (Optional)
+     */
+    pub fn getQuestionToken(self) -> QuestionToken {
+        for (questionToken in QuestionToken(__all_data__)) {
+            for (auto_tmp1 in self.getAChild()) {
+                if (questionToken.key_eq(auto_tmp1)) {
+                    return questionToken
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets the `!` token. (Optional)
+     */
+    pub fn getExclamationToken(self) -> ExclamationToken {
+        for (exclamationToken in ExclamationToken(__all_data__)) {
+            for (auto_tmp1 in self.getAChild()) {
+                if (exclamationToken.key_eq(auto_tmp1)) {
+                    return exclamationToken
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets the type node. (Optional)
+     */
+    pub fn getTypeNode(self) -> TypeNode {
+        for (typeNode in TypeNode(__all_data__)) {
+            for (auto_tmp1 in self.getAChild()) {
+                if (typeNode.key_eq(auto_tmp1)) {
+                    return typeNode
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets the initializer expression.
+     */
+    pub fn getInitializer(self) -> Expression {
+        for (expression in Expression(__all_data__)) {
+            if (expression.key_eq(self.getLastChild())) {
+                let (index = expression.getIndex()) {
+                    let (nameNodeIndex = self.getNameNodeIndex()) {
+                        if (index > nameNodeIndex) {
+                            return expression
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Get the index of name node.
+     */
+    pub fn getNameNodeIndex(self) -> int {
+        return self.getAllPropertyNameIndex().min()
+    }
+
+    /**
+     * Gets the number of decorators.
+     */
+    pub fn getDecoratorCount(self) -> int {
+        return self.getADecorator().len()
+    }
+
+    /**
+     * Gets the number of modifiers.
+     */
+    pub fn getModifierCount(self) -> int {
+        return self.getAModifier().len()
+    }
+}
+
+/**
+ * A MethodElement
+ */
+schema MethodElement extends ClassElement {
+}
+
+impl MethodElement {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *MethodElement {
+        for (tmp in ClassElement(db)) {
+            if (tmp.getKind() = 168) {
+                yield MethodElement {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A ClassStaticBlockElement
+ */
+schema ClassStaticBlockElement extends ClassElement {
+}
+
+impl ClassStaticBlockElement {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *ClassStaticBlockElement {
+        for (tmp in ClassElement(db)) {
+            // ClassStaticBlockDeclaration
+            if (tmp.getKind() = 169) {
+                yield ClassStaticBlockElement {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A ConstructorElement
+ */
+schema ConstructorElement extends ClassElement {
+}
+
+impl ConstructorElement {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *ConstructorElement {
+        for (tmp in ClassElement(db)) {
+            if (tmp.getKind() = 170) {
+                yield ConstructorElement {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * An AccessorElement
+ */
+schema AccessorElement extends ClassElement {
+}
+
+impl AccessorElement {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *AccessorElement {
+        for (tmp in ClassElement(db)) {
+            if (isAccessor(Node {id: tmp.id})) {
+                yield AccessorElement {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A GetAccessorElement
+ */
+schema GetAccessorElement extends AccessorElement {
+}
+
+impl GetAccessorElement {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *GetAccessorElement {
+        for (tmp in AccessorElement(db)) {
+            if (tmp.getKind() = 171) {
+                yield GetAccessorElement {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A SetAccessorElement
+ */
+schema SetAccessorElement extends AccessorElement {
+}
+
+impl SetAccessorElement {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *SetAccessorElement {
+        for (tmp in AccessorElement(db)) {
+            if (tmp.getKind() = 172) {
+                yield SetAccessorElement {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * An IndexSignature
+ */
+schema IndexSignature extends ClassElement {
+}
+
+impl IndexSignature {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *IndexSignature {
+        for (tmp in ClassElement(db)) {
+            if (tmp.getKind() = 175) {
+                yield IndexSignature {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A SemicolonClassElement
+ */
+schema SemicolonClassElement extends ClassElement {
+}
+
+impl SemicolonClassElement {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *SemicolonClassElement {
+        for (tmp in ClassElement(db)) {
+            if (tmp.getKind() = 233) {
+                yield SemicolonClassElement {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a ClassLikeDeclaration
+ */
+pub fn isClassLikeDeclaration(node: Node) -> bool {
+    let (kind = node.getKind()) {
+        if (isClassLikeDeclarationKind(kind)) {
+            return true
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a ClassElement
+ */
+pub fn isClassElement(node: Node) -> bool {
+    let (kind = node.getKind()) {
+        if (isClassElementKind(kind)) {
+            return true
+        }
+    }
+}
+
+/**
+ * Determines whether a node is an Accessor
+ */
+pub fn isAccessor(node: Node) -> bool {
+    let (kind = node.getKind()) {
+        if (isAccessorKind(kind)) {
+            return true
+        }
+    }
+}
+
+/**
+ * Determines whether a node kind is an Accessor kind
+ */
+pub fn isAccessorKind(kind: int) -> bool {
+    [
+        {171},  // GetAccessor
+        {172},  // SetAccessor
+    ]
+}
+
+/**
+ * Determines whether a node kind is a ClassLikeDeclaration kind
+ */
+pub fn isClassLikeDeclarationKind(kind: int) -> bool {
+    [
+        {256},  // ClassDeclaration
+        {225},  // ClassExpression
+    ]
+}
+
+/**
+ * Determines whether a node kind is a ClassElement kind
+ */
+pub fn isClassElementKind(kind: int) -> bool {
+    [
+        {166},  // PropertyDeclaration
+        {168},  // MethodDeclaration
+        {169},  // ClassStaticBlockDeclaration
+        {170},  // Constructor
+        {171},  // GetAccessor
+        {172},  // SetAccessor
+        {175},  // IndexSignature
+        {233},  // SemicolonClassElement
+    ]
+}

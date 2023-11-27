@@ -1,0 +1,99 @@
+/**
+ * @brief A keyword argument to a function call or class definition. 
+ */
+schema Keyword extends KeywordDO {
+    
+}
+impl Keyword {
+    @data_constraint
+    @inline
+    fn __all__(db: PythonDB) -> *Keyword {
+        for (tmp in KeywordDO(db)) {
+            yield Keyword {
+                element_oid : tmp.element_oid,
+                arg_value : tmp.arg_value,
+                value_oid : tmp.value_oid,
+                element_index : tmp.element_index,
+                parent_oid : tmp.parent_oid,
+                location_oid : tmp.location_oid,
+                printable_text : tmp.printable_text
+            }
+        }
+    }
+    /**
+     * @brief gets the value of the keyword.
+     * @return Expression 
+     */
+    pub fn getValue(self) -> Expression {
+        for (c in Expression(__all_data__)) {
+            if (c.element_oid = self.getValueOid()) {
+                return c
+            }
+        }
+    }
+    /**
+     * @brief gets the parameter name of the keyword.
+     * @return string 
+     */
+    pub fn getArgName(self) -> string {
+        return self.getArgValue()
+    }
+    /**
+     * @brief gets the parent element of the element
+     * @return CombineElement 
+     */
+    pub fn getParent(self) -> CombineElement {
+        for (parent in CombineElement(__all_data__)) {
+            if (parent.id = self.getParentOid()) {
+                return parent
+            }
+        }
+    }
+    /**
+     * @brief gets an ancestor of the element.
+     * @return CombineElement 
+     */
+    pub fn getAnAncestor(self) -> *CombineElement {
+        for (temp in CombineElement(__all_data__)) {
+            if (self.key_eq(temp)) {
+                yield temp.getAnAncestor()
+            }
+        }
+    }
+    /**
+     * @brief gets the location for the element.
+     * @return Location
+     */
+    pub fn getLocation(self) -> Location {
+        for (loc in Location(__all_data__)) {
+            if (loc.element_oid = self.getLocationOid()) {
+                return loc
+            }
+        }
+    }
+}
+/**
+ * @brief A keyword without name to a function call or class definition.
+ */
+schema KeywordWithoutName extends Keyword {
+    
+}
+impl KeywordWithoutName {
+    @data_constraint
+    @inline
+    fn __all__(db: PythonDB) -> *KeywordWithoutName {
+        for (tmp in Keyword(db)) {
+            if (tmp.getArgName() = "None") {
+                yield KeywordWithoutName {
+                    element_oid : tmp.element_oid,
+                    arg_value : tmp.arg_value,
+                    value_oid : tmp.value_oid,
+                    element_index : tmp.element_index,
+                    parent_oid : tmp.parent_oid,
+                    location_oid : tmp.location_oid,
+                    printable_text : tmp.printable_text
+                }
+            }
+        }
+    }
+}

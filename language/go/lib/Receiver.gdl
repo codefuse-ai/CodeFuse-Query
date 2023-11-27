@@ -1,0 +1,36 @@
+schema Receiver extends Method {
+
+}
+impl Receiver {
+    @data_constraint
+    @inline
+    fn __all__(db: GoDB) -> *Receiver {
+        for (m in Method(db)) {
+            yield Receiver {
+                id : m.id
+            }
+        }
+    }
+    pub fn isPointerReceiver(self) -> bool {
+        for (m in Method(__all_data__)) {
+            if (m.key_eq(self)) {
+                let (t = m.getMethodReceiverType()) {
+                    if (t.matches("^[*&].*$")) {
+                        return true
+                    }
+                }
+            }
+        }
+    }
+    pub fn isValueReceiver(self) -> bool {
+        for (m in Method(__all_data__)) {
+            if (m.key_eq(self)) {
+                let (t = m.getMethodReceiverType()) {
+                    if (t.matches("^[a-zA-Z].*$")) {
+                        return true
+                    }
+                }
+            }
+        }
+    }
+}

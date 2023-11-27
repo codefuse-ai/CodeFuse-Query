@@ -1,0 +1,53 @@
+/**
+ * @brief The location information of a locatable elements.
+ */
+schema Location extends LocationDO {
+
+}
+impl Location {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *Location {
+        for (tmp in LocationDO(db)) {
+            yield Location {
+                element_hash_id : tmp.element_hash_id,
+                file_hash_id : tmp.file_hash_id,
+                start_line_number : tmp.start_line_number,
+                start_column_number : tmp.start_column_number,
+                end_line_number : tmp.end_line_number,
+                end_column_number : tmp.end_column_number
+            }
+        }
+    }
+    /**
+     * @brief gets the file information for the location
+     * @return File 
+     */
+    pub fn getFile(self) -> File {
+        for (f in File(__all_data__)) {
+            if (f.element_hash_id = self.getFileHashId()) {
+                return f
+            }
+        }
+    }
+}
+/**
+ * @brief The number of lines for a java file.
+ */
+schema NumberOfLines extends NumberOfLinesDO {
+
+}
+impl NumberOfLines {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *NumberOfLines {
+        for (tmp in NumberOfLinesDO(db)) {
+            yield NumberOfLines {
+                element_hash_id : tmp.element_hash_id,
+                number_of_total_lines : tmp.number_of_total_lines,
+                number_of_valid_lines : tmp.number_of_valid_lines,
+                number_of_comment_lines : tmp.number_of_comment_lines
+            }
+        }
+    }
+}

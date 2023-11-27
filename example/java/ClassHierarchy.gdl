@@ -1,0 +1,23 @@
+// script
+use coref::java::*
+
+fn default_java_db() -> JavaDB {
+	return JavaDB::load("coref_java_src.db")
+}
+
+/**
+ * Find all class and the inheritances
+ * including parent class inheritance and ancestor class inheritance
+ */
+fn class_hierarchy(className : string, superClassName : string) -> bool {
+    for (c in Class(default_java_db()), ancestor in c.getAnAncestorClass()) {
+        if (className = c.getQualifiedName() &&
+            superClassName = ancestor.getQualifiedName()) {
+            return true
+        }
+    }
+}
+
+fn main() { 
+	output(class_hierarchy())
+}

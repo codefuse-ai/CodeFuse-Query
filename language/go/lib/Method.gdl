@@ -1,0 +1,59 @@
+schema Method extends Function {
+
+}
+impl Method {
+    @data_constraint
+    @inline
+    fn __all__(db: GoDB) -> *Method {
+        for (f in Function(db)) {
+            if (f.isMethod()) {
+                yield Method {
+                    id : f.id
+                }
+            }
+        }
+    }
+    pub fn getIdx(self) -> int {
+        for (e in ExprDO(__all_data__)) {
+            if (e.key_eq(self)) {
+                return e.getIdx()
+            }
+        }
+    }
+    pub fn getMethodReceiverName(self) -> string {
+        for (f in Fields(__all_data__),
+            e in Expr(__all_data__),
+            l in LiteralDO(__all_data__)) {
+            if (self.key_eq(f.getParentNode())) {
+                if (f.key_eq(e.getParentNode())) {
+                    let (idx = e.getIdx()) {
+                        if (l.getExpr() = e.id) {
+                            let (r = l.getValue()) {
+                                if (idx > 0) {
+                                    return r
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    pub fn getMethodReceiverType(self) -> string {
+        for (f in Fields(__all_data__),
+            e in Expr(__all_data__)) {
+            if (self.key_eq(f.getParentNode())) {
+                if (f.key_eq(e.getParentNode())) {
+                    for (auto_tmp1 in e.getExprTypeName()) {
+                        let (idx = e.getIdx()) {
+                            if (idx = 0) {
+                                return auto_tmp1
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,265 @@
+/**
+ * @filename: ImportOrExportElement
+ * @brief: Provides classes and predicates for working with JavaScript / TypeScript import or export elements.
+ */
+
+/**
+ * A qualified name.
+ */
+schema QualifiedName extends Node {
+}
+
+impl QualifiedName {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *QualifiedName {
+        for (tmp in Node(db)) {
+            if (isQualifiedName(tmp)) {
+                yield QualifiedName {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * An import clause.
+ */
+schema ImportClause extends Node {
+}
+
+impl ImportClause {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *ImportClause {
+        for (tmp in Node(db)) {
+            if (isImportClause(tmp)) {
+                yield ImportClause {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A namespace import.
+ */
+schema NamespaceImport extends Node {
+}
+
+impl NamespaceImport {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *NamespaceImport {
+        for (tmp in Node(db)) {
+            if (isNamespaceImport(tmp)) {
+                yield NamespaceImport {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A named imports.
+ */
+schema NamedImports extends Node {
+}
+
+impl NamedImports {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *NamedImports {
+        for (tmp in Node(db)) {
+            if (isNamedImports(tmp)) {
+                yield NamedImports {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * An import specifier.
+ */
+schema ImportSpecifier extends Node {
+}
+
+impl ImportSpecifier {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *ImportSpecifier {
+        for (tmp in Node(db)) {
+            if (isImportSpecifier(tmp)) {
+                yield ImportSpecifier {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A named exports.
+ */
+schema NamedExports extends Node {
+}
+
+impl NamedExports {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *NamedExports {
+        for (tmp in Node(db)) {
+            if (isNamedExports(tmp)) {
+                yield NamedExports {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A namespace export.
+ */
+schema NamespaceExport extends Node {
+}
+
+impl NamespaceExport {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *NamespaceExport {
+        for (tmp in Node(db)) {
+            if (isNamespaceExport(tmp)) {
+                yield NamespaceExport {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * An export specifier.
+ */
+schema ExportSpecifier extends Node {
+}
+
+impl ExportSpecifier {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *ExportSpecifier {
+        for (tmp in Node(db)) {
+            if (isExportSpecifier(tmp)) {
+                yield ExportSpecifier {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * An external module reference.
+ */
+schema ExternalModuleReference extends Node {
+}
+
+impl ExternalModuleReference {
+    @data_constraint
+    @inline
+    fn __all__(db: JavascriptDB) -> *ExternalModuleReference {
+        for (tmp in Node(db)) {
+            if (isExternalModuleReference(tmp)) {
+                yield ExternalModuleReference {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a qualified name.
+ */
+pub fn isQualifiedName(node: Node) -> bool {
+    if (node.getKind() = 160) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is an import clause.
+ */
+pub fn isImportClause(node: Node) -> bool {
+    if (node.getKind() = 266) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a namespace import.
+ */
+pub fn isNamespaceImport(node: Node) -> bool {
+    if (node.getKind() = 267) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a named imports.
+ */
+pub fn isNamedImports(node: Node) -> bool {
+    if (node.getKind() = 268) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is an import specifier.
+ */
+pub fn isImportSpecifier(node: Node) -> bool {
+    if (node.getKind() = 269) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a named exports.
+ */
+pub fn isNamedExports(node: Node) -> bool {
+    if (node.getKind() = 272) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a namespace export.
+ */
+pub fn isNamespaceExport(node: Node) -> bool {
+    if (node.getKind() = 273) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is an export specifier.
+ */
+pub fn isExportSpecifier(node: Node) -> bool {
+    if (node.getKind() = 274) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is an external module reference.
+ */
+pub fn isExternalModuleReference(node: Node) -> bool {
+    if (node.getKind() = 276) {
+        return true
+    }
+}

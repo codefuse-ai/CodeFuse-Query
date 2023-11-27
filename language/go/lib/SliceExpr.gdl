@@ -1,0 +1,64 @@
+schema SliceExpr extends Expr {
+
+}
+impl SliceExpr {
+    @data_constraint
+    @inline
+    fn __all__(db: GoDB) -> *SliceExpr {
+        for (e in Expr(db)) {
+            if (e.isSliceExpr()) {
+                yield SliceExpr {
+                    id : e.id
+                }
+            }
+        }
+    }
+    pub fn getBase(self) -> Node {
+        for (b in Node(__all_data__),
+            s in SliceExpr(__all_data__)) {
+            if (s.getParentNode().key_eq(self)) {
+                if (s.getIdx() = 0) {
+                    if (b.key_eq(s)) {
+                        return b
+                    }
+                }
+            }
+        }
+    }
+    pub fn getLow(self) -> Node {
+        for (b in Node(__all_data__),
+            s in SliceExpr(__all_data__)) {
+            if (s.getParentNode().key_eq(self)) {
+                if (s.getIdx() = 1) {
+                    if (b.key_eq(s)) {
+                        return b
+                    }
+                }
+            }
+        }
+    }
+    pub fn getHigh(self) -> Node {
+        for (b in Node(__all_data__),
+            s in SliceExpr(__all_data__)) {
+            if (s.getParentNode().key_eq(self)) {
+                if (s.getIdx() = 2) {
+                    if (b.key_eq(s)) {
+                        return b
+                    }
+                }
+            }
+        }
+    }
+    pub fn getMax(self) -> Node {
+        for (b in Node(__all_data__),
+            s in SliceExpr(__all_data__)) {
+            if (s.getParentNode().key_eq(self)) {
+                if (s.getIdx() = 3) {
+                    if (b.key_eq(s)) {
+                        return b
+                    }
+                }
+            }
+        }
+    }
+}

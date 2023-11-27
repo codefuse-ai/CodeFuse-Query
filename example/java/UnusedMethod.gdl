@@ -1,0 +1,19 @@
+// script
+use coref::java::*
+
+fn default_java_db() -> JavaDB {
+    return JavaDB::load("coref_java_src.db")
+}
+
+// find unused methods
+fn unused_method(unused: string) -> bool {
+    for(c in Callable(default_java_db()), method in Callable(default_java_db()), caller in method.getCaller()) {
+        if (c != caller && unused = method.getSignature()) {
+            return true
+        }
+    }
+}
+
+fn main() {
+    output(unused_method())
+}

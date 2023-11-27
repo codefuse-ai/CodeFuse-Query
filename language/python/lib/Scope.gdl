@@ -1,0 +1,59 @@
+/**
+ * A Scope. A scope is the lexical extent over which all identifiers with the same name refer to the same variable.
+ * Modules, Classes and Functions are all Scopes. There are no other scopes.
+ * The scopes for expressions that create new scopes, lambdas and comprehensions, are handled by creating an anonymous Function.
+ */
+schema Scope extends CombineElement {
+    
+}
+impl Scope {
+    @data_constraint
+    @inline
+    fn __all__(db: PythonDB) -> *Scope {
+        for (tmp in CombineElement(db)) {
+            for (m in Module(db)) {
+                if (tmp.key_eq(m)) {
+                    yield Scope {
+                        id : tmp.id
+                    }
+                }
+            }
+            for (c in Class(db)) {
+                if (tmp.key_eq(c)) {
+                    yield Scope {
+                        id : tmp.id
+                    }
+                }
+            }
+            for (f in Function(db)) {
+                if (tmp.key_eq(f)) {
+                    yield Scope {
+                        id : tmp.id
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the immediately enclosing scope (module, function or class) whose body contains this statement.
+     * @return Scope 
+     */
+    pub fn getEnclosingScope(self) -> Scope {
+        for (s in Scope(__all_data__)) {
+            for (m in Module(__all_data__)) {
+                if (self.key_eq(m)) {
+                    if (s.key_eq(m)) {
+                        return s
+                    }
+                }
+            }
+            for (m in ScopeEnclosignStatement(__all_data__)) {
+                if (self.key_eq(m)) {
+                    if (s = m.getEnclosingScope()) {
+                        return s
+                    }
+                }
+            }
+        }
+    }
+}

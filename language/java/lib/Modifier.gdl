@@ -1,0 +1,160 @@
+/**
+ * @brief A modifier keywords for java classes, methods and fields.
+ */
+schema Modifier extends ModifierDO {
+
+}
+impl Modifier {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *Modifier {
+        for (tmp in ModifierDO(db)) {
+            yield Modifier {
+                element_hash_id : tmp.element_hash_id,
+                name : tmp.name,
+                parent_hash_id : tmp.parent_hash_id,
+                location_hash_id : tmp.location_hash_id
+            }
+        }
+    }
+    /**
+     * @brief gets the ast element parent of the element.
+     * @return ElementParent 
+     */
+    pub fn getParent(self) -> ElementParent {
+        for (c in ElementParent(__all_data__)) {
+            if (c.id = self.getParentHashId()) {
+                return c
+            }
+        }
+    }
+    /**
+     * @brief gets an ancestor of the element.
+     * @return ElementParent 
+     */
+    pub fn getAnAncestor(self) -> *ElementParent {
+        for (tmp in ElementParent(__all_data__)) {
+            if (tmp.key_eq(self)) {
+                yield tmp.getAnAncestor()
+            }
+        }
+    }
+    /**
+     * @brief gets the modifier list of the modifier occurs.
+     * @return ModifierList 
+     */
+    pub fn getModifierList(self) -> ModifierList {
+        for (list in ModifierList(__all_data__)) {
+            if (list.element_hash_id = self.getParentHashId()) {
+                return list
+            }
+        }
+    }
+    /**
+     * @brief gets the location for the element.
+     * @return Location
+     */
+    pub fn getLocation(self) -> Location {
+        for (loc in Location(__all_data__)) {
+            if (loc.element_hash_id = self.getLocationHashId()) {
+                return loc
+            }
+        }
+    }
+}
+/**
+ * @brief A list of modifiers and annotations on a java element (class, method, field and so on).
+ */
+schema ModifierList extends ModifierListDO {
+
+}
+impl ModifierList {
+    @data_constraint
+    @inline
+    fn __all__(db: JavaDB) -> *ModifierList {
+        for (tmp in ModifierListDO(db)) {
+            yield ModifierList {
+                element_hash_id : tmp.element_hash_id,
+                parent_hash_id : tmp.parent_hash_id,
+                location_hash_id : tmp.location_hash_id
+            }
+        }
+    }
+    /**
+     * @brief gets the ast element parent of the element.
+     * @return ElementParent 
+     */
+    pub fn getParent(self) -> ElementParent {
+        for (c in ElementParent(__all_data__)) {
+            if (c.id = self.getParentHashId()) {
+                return c
+            }
+        }
+    }
+    /**
+     * @brief gets an ancestor of the element.
+     * @return ElementParent 
+     */
+    pub fn getAnAncestor(self) -> *ElementParent {
+        for (tmp in ElementParent(__all_data__)) {
+            if (tmp.key_eq(self)) {
+                yield tmp.getAnAncestor()
+            }
+        }
+    }
+    /**
+     * @brief gets the parent of the modifier list if the parent is a class.
+     * @return Class 
+     */
+    pub fn getClassParent(self) -> Class {
+        for (c in Class(__all_data__)) {
+            if (c.element_hash_id = self.getParentHashId()) {
+                return c
+            }
+        }
+    }
+    /**
+     * @brief gets the parent of the modifier list if the parent is a Method.
+     * @return Method 
+     */
+    pub fn getMethodParent(self) -> Method {
+        for (m in Method(__all_data__)) {
+            if (m.element_hash_id = self.getParentHashId()) {
+                return m
+            }
+        }
+    }
+    /**
+     * @brief gets the parent of the modifier list if the parent is a Field.
+     * @return Field 
+     */
+    pub fn getFieldParent(self) -> Field {
+        for (f in Field(__all_data__)) {
+            if (f.element_hash_id = self.getParentHashId()) {
+                return f
+            }
+        }
+    }
+    /**
+     * @brief gets the parent of the modifier list if the parent is a Constructor.
+     * @return Constructor 
+     */
+    pub fn getConstructorParent(self) -> Constructor {
+        for (con in Constructor(__all_data__)) {
+            if (con.element_hash_id = self.getParentHashId()) {
+                return con
+            }
+        }
+    }
+    /**
+     * @brief gets the location for the element.
+     * @return Location
+     */
+    pub fn getLocation(self) -> Location {
+        for (loc in Location(__all_data__)) {
+            if (loc.element_hash_id = self.getLocationHashId()) {
+                return loc
+            }
+        }
+    }
+}

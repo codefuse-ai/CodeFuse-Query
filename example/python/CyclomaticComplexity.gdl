@@ -1,0 +1,37 @@
+// script
+use coref::python::*
+
+fn default_db() -> PythonDB {
+    return PythonDB::load("coref_python_src.db")
+}
+
+/**
+ * Get cyclomatic complexity of functions
+ *
+ * @param name   function name
+ * @param value  cyclomatic complexity of function
+ * @param path   path of file including this function
+ * @param sline  function start line
+ * @param eline  function end line
+ */
+fn getCyclomaticComplexity(
+    name: string,
+    value: int,
+    path: string,
+    sline: int,
+    eline: int) -> bool {
+    // get metric function
+    for (c in MetricFunction(default_db())) {
+        if (path = c.getLocation().getFile().getRelativePath() &&
+            name = c.getQualifiedName() &&
+            value = c.getCyclomaticComplexity() &&
+            sline = c.getLocation().getStartLineNumber() &&
+            eline = c.getLocation().getEndLineNumber()) {
+            return true
+        }
+    }
+}
+
+fn main() {
+    output(getCyclomaticComplexity())
+}

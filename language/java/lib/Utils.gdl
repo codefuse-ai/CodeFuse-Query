@@ -1,0 +1,133 @@
+// util function, convert letters to upper and lower case
+pub fn lowerToUpper(m : string, n : string) -> bool {
+    if (n = "A") {
+        if (m = "a") {
+            return true
+        }
+    }
+    if (n = "B") {
+        if (m = "b") {
+            return true
+        }
+    }
+    if (n = "C") {
+        if (m = "c") {
+            return true
+        }
+    }
+    if (n = "D") {
+        if (m = "d") {
+            return true
+        }
+    }
+    if (n = "E") {
+        if (m = "e") {
+            return true
+        }
+    }
+    if (n = "F") {
+        if (m = "f") {
+            return true
+        }
+    }
+    if (n = "G") {
+        if (m = "g") {
+            return true
+        }
+    }
+    if (n = "H") {
+        if (m = "h") {
+            return true
+        }
+    }
+    if (n = "I") {
+        if (m = "i") {
+            return true
+        }
+    }
+    if (n = "J") {
+        if (m = "j") {
+            return true
+        }
+    }
+    if (n = "K") {
+        if (m = "k") {
+            return true
+        }
+    }
+    if (n = "L") {
+        if (m = "l") {
+            return true
+        }
+    }
+    if (n = "M") {
+        if (m = "m") {
+            return true
+        }
+    }
+    if (n = "N") {
+        if (m = "n") {
+            return true
+        }
+    }
+    if (n = "O") {
+        if (m = "o") {
+            return true
+        }
+    }
+    if (n = "P") {
+        if (m = "p") {
+            return true
+        }
+    }
+    if (n = "Q") {
+        if (m = "q") {
+            return true
+        }
+    }
+    if (n = "R") {
+        if (m = "r") {
+            return true
+        }
+    }
+    if (n = "S") {
+        if (m = "s") {
+            return true
+        }
+    }
+    if (n = "T") {
+        if (m = "t") {
+            return true
+        }
+    }
+    if (n = "U") {
+        if (m = "u") {
+            return true
+        }
+    }
+    if (n = "V") {
+        if (m = "v") {
+            return true
+        }
+    }
+    if (n = "W") {
+        if (m = "w") {
+            return true
+        }
+    }
+    if (n = "X") {
+        if (m = "x") {
+            return true
+        }
+    }
+    if (n = "Y") {
+        if (m = "y") {
+            return true
+        }
+    }
+    if (n = "Z") {
+        if (m = "z") {
+            return true
+        }
+    }
+}
