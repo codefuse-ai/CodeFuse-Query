@@ -102,14 +102,22 @@ CodeFuse-Query为CodeFuse代码大模型提供了以下数据清洗能力：
 - 结合线上动态调用链路（方法链路）、CodeFuse-Query静态分析调用链路的影响面精准分析能力，提升变更分析影响面的有效性、准备率
 
 到目前为止，优酷已通过CodeFuse-Query接入所有核心应用，并基于静态分析采集数据，构建了服务端完整的代码知识库和流量知识库。
+
 ## 快速使用（QuickStart）
-参考文档第三章节：[安装、配置、运行](./doc/3_install_and_run.md)
+[安装、配置、运行](./doc/3_install_and_run.md)
+
+## 文档 (Documentation)
+[引言](./doc/1_abstract.md)
+[概述](./doc/2_introduction.md)
+[安装、配置、运行](./doc/3_install_and_run.md)
+[Godel查询语言介绍](./doc/4_godelscript_language.md)
+[VSCode开发插件](./doc/5_toolchain.md)
 
 ## 目录结构说明
-`cli`：命令行工具的入口，提供统一的命令行接口，调用其他模块完成具体功能
-`language`：各语言的数据化核心（extractor）和数据建模（lib）。关于开放度的问题，请参见《关于开源范围的一些说明》章节
-`doc`：参考文档
-`examples`：Godel 查询语言示例
+- `cli`：命令行工具的入口，提供统一的命令行接口，调用其他模块完成具体功能
+- `language`：各语言的数据化核心（extractor）和数据建模（lib）。关于开放度的问题，请参见《关于开源范围的一些说明》章节
+- `doc`：参考文档
+- `examples`：Godel 查询语言示例
 
 ## 关于开源范围的一些说明
 截止目前，从源码**不能**构建出可执行的程序，原因在于本次开源并没有开放所有的模块，缺少的模块会在之后的一年陆续开源。尽管如此，为保障完整的体验，我们开放了**完整的安装包**下载，请见Release页面。
