@@ -1,0 +1,444 @@
+// script
+use coref::java::*
+
+pub fn default_db() -> JavaDB {
+    return JavaDB::load("coref_java_src.db")
+}
+
+schema PublicClass extends Class {
+    
+}
+
+//具有public修饰符的类
+impl PublicClass {
+
+    @data_constraint
+    @inline
+    pub fn __all__(db: JavaDB) -> *PublicClass {
+        for (tmp in Class(db)) {
+            for (m in Modifier(db)) {
+                if (m.getName() = "public") {
+                    if (tmp.key_eq(m.getModifierList().getParent())) {
+                        yield PublicClass {
+                            element_hash_id: tmp.element_hash_id,
+                            qualified_name: tmp.qualified_name,
+                            identifier_hash_id: tmp.identifier_hash_id,
+                            location_hash_id: tmp.location_hash_id,
+                            parent_hash_id: tmp.parent_hash_id
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+//具有public修饰符的接口
+schema PublicInterface extends Interface {
+    
+}
+
+impl PublicInterface {
+
+    @data_constraint
+    @inline
+    pub fn __all__(db: JavaDB) -> *PublicInterface {
+        for (tmp in Interface(db)) {
+            for (m in Modifier(db)) {
+                if (m.getName() = "public") {
+                    if (tmp.key_eq(m.getModifierList().getParent())) {
+                        yield PublicInterface {
+                            element_hash_id: tmp.element_hash_id,
+                            qualified_name: tmp.qualified_name,
+                            identifier_hash_id: tmp.identifier_hash_id,
+                            location_hash_id: tmp.location_hash_id,
+                            parent_hash_id: tmp.parent_hash_id
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+//具有public修饰符的函数，并且不属于匿名函数
+schema PublicMethod extends Method {
+    
+}
+
+impl PublicMethod {
+
+    @data_constraint
+    @inline
+    pub fn __all__(db: JavaDB) -> *PublicMethod {
+        for (tmp in Method(db)) {
+            for (m in Modifier(db)) {
+                for (auto_tmp1 in tmp.getModifier()) {
+                    if (m = auto_tmp1) {
+                        if (m.getName() = "public") {
+                            if (!_isAnonymousMethod(tmp) && !isOverrideMethod(tmp)) {
+                                yield PublicMethod {
+                                    element_hash_id: tmp.element_hash_id,
+                                    name: tmp.name,
+                                    signature: tmp.signature,
+                                    type_hash_id: tmp.type_hash_id,
+                                    parent_hash_id: tmp.parent_hash_id,
+                                    location_hash_id: tmp.location_hash_id,
+                                    definition_body: tmp.definition_body
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+pub fn _isAnonymousMethod(m: Method) -> bool {
+    let (db = default_db()) {
+        for (a in AnonymousClass(db)) {
+            if (a.key_eq(m.getParent())) {
+                return true
+            }
+        }
+    }
+}
+
+pub fn isOverrideMethod(m: Method) -> bool {
+    let (db = default_db()) {
+        for (a in Annotation(db)) {
+            for (auto_tmp1 in m.getAnnotation()) {
+                if (a = auto_tmp1) {
+                    if (a.getName() = "java.lang.Override") {
+                        return true
+                    }
+                }
+            }
+        }
+    }
+}
+
+schema PublicField extends Field {
+    
+}
+
+//具有public修饰符的字段
+impl PublicField {
+
+    @data_constraint
+    @inline
+    pub fn __all__(db: JavaDB) -> *PublicField {
+        for (tmp in Field(db)) {
+            for (m in Modifier(db)) {
+                for (auto_tmp1 in tmp.getModifier()) {
+                    if (m = auto_tmp1) {
+                        if (m.getName() = "public") {
+                            yield PublicField {
+                                element_hash_id: tmp.element_hash_id,
+                                name: tmp.name,
+                                parent_hash_id: tmp.parent_hash_id,
+                                printable_text: tmp.printable_text,
+                                location_hash_id: tmp.location_hash_id
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+schema PublicEnum extends EnumConstant {
+    
+}
+
+//具有public修饰符的枚举常量
+impl PublicEnum {
+
+    @data_constraint
+    @inline
+    pub fn __all__(db: JavaDB) -> *PublicEnum {
+        for (tmp in EnumConstant(db)) {
+            for (m in Modifier(db)) {
+               if (m.getName() = "public") {
+                    if (tmp.key_eq(m.getModifierList().getParent())) {
+                        yield PublicEnum {
+                            element_hash_id: tmp.element_hash_id,
+                            name: tmp.name,
+                            parent_hash_id: tmp.parent_hash_id,
+                            location_hash_id: tmp.location_hash_id,
+                            printable_text: tmp.printable_text
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+schema PublicConstructor extends Constructor {
+    
+}
+
+//具有public修饰符的构造函数
+impl PublicConstructor {
+
+    @data_constraint
+    @inline
+    pub fn __all__(db: JavaDB) -> *PublicConstructor {
+        for (tmp in Constructor(db)) {
+            for (m in Modifier(db)) {
+                if (m = tmp.getModifier()) {
+                    if (m.getName() = "public") {
+                        yield PublicConstructor {
+                            element_hash_id: tmp.element_hash_id,
+                            name: tmp.name,
+                            signature: tmp.signature,
+                            parent_hash_id: tmp.parent_hash_id,
+                            location_hash_id: tmp.location_hash_id,
+                            definition_body: tmp.definition_body
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+schema ConstructorWithParameter extends PublicConstructor {
+    
+}
+
+//具有public修饰符的带参构造函数
+impl ConstructorWithParameter {
+
+    @data_constraint
+    @inline
+    pub fn __all__(db: JavaDB) -> *ConstructorWithParameter {
+        for (tmp in PublicConstructor(db)) {
+            for (p in Parameter(db)) {
+                if (tmp.key_eq(p.getParent())) {
+                    yield ConstructorWithParameter {
+                        element_hash_id: tmp.element_hash_id,
+                        name: tmp.name,
+                        signature: tmp.signature,
+                        parent_hash_id: tmp.parent_hash_id,
+                        location_hash_id: tmp.location_hash_id,
+                        definition_body: tmp.definition_body
+                    }
+                }
+            }
+        }
+    }
+}
+
+schema ConstructorWithoutParameter extends PublicConstructor {
+    
+}
+
+fn getParameter(tmp: PublicConstructor, db: JavaDB) -> *Parameter {
+   for (p in Parameter(db)) {
+      if (p.getParent().key_eq(tmp)) {
+         yield p
+      }
+   }
+}
+
+//具有public修饰符的不带参构造函数
+impl ConstructorWithoutParameter {
+
+    @data_constraint
+    @inline
+    pub fn __all__(db: JavaDB) -> *ConstructorWithoutParameter {
+        for (tmp in PublicConstructor(db)) {
+            for (p in Parameter(db)) {
+                if (getParameter(tmp, db).len() = 0) {
+                    yield ConstructorWithoutParameter {
+                        element_hash_id: tmp.element_hash_id,
+                        name: tmp.name,
+                        signature: tmp.signature,
+                        parent_hash_id: tmp.parent_hash_id,
+                        location_hash_id: tmp.location_hash_id,
+                        definition_body: tmp.definition_body
+                    }
+                }
+            }
+        }
+    }
+}
+
+schema PublicVisitedElement extends ElementParent {
+    
+}
+
+impl PublicVisitedElement {
+
+    @data_constraint
+    @inline
+    pub fn __all__(db: JavaDB) -> *PublicVisitedElement {
+        for (tmp in ElementParent(db)) {
+            for (c in PublicClass(db)) {
+                if (tmp.key_eq(c)) {
+                    yield PublicVisitedElement {
+                        id: tmp.id
+                    }
+                }
+            }
+            for (c in PublicInterface(db)) {
+                if (tmp.key_eq(c)) {
+                    yield PublicVisitedElement {
+                        id: tmp.id
+                    }
+                }
+            }
+            for (c in PublicField(db)) {
+                if (tmp.key_eq(c)) {
+                    yield PublicVisitedElement {
+                        id: tmp.id
+                    }
+                }
+            }
+            for (c in PublicEnum(db)) {
+                if (tmp.key_eq(c)) {
+                    yield PublicVisitedElement {
+                        id: tmp.id
+                    }
+                }
+            }
+            for (c in ConstructorWithoutParameter(db)) {
+                if (tmp.key_eq(c)) {
+                    yield PublicVisitedElement {
+                        id: tmp.id
+                    }
+                }
+            }
+            for (c in ConstructorWithParameter(db)) {
+                if (tmp.key_eq(c)) {
+                    yield PublicVisitedElement {
+                        id: tmp.id
+                    }
+                }
+            }
+            for (c in PublicMethod(db)) {
+                if (tmp.key_eq(c)) {
+                    yield PublicVisitedElement {
+                        id: tmp.id
+                    }
+                }
+            }
+        }
+    }
+
+    pub fn getPossibleAboveComment(self) -> Comment {
+        for (c in Comment(__all_data__)) {
+            if (self.key_eq(c.getParent())) {
+                if (self.getLocation().getStartLineNumber() = c.getLocation().getStartLineNumber()) {
+                    if (!commentConnectDocComment(c)) {
+                        return c
+                    }
+                }
+            }
+        }
+    }
+}
+
+//找到注释与JavaDoc注释连在一起的情况，用于排除
+pub fn commentConnectDocComment(c: Comment) -> bool {
+    let (db = default_db()) {
+        for (i in int::__undetermined_all__(), j in JavadocComment(__all_data__)) {
+            if (c.getLocation().getFile() = j.getLocation().getFile()) {
+                if (i = j.getLocation().getStartLineNumber()) {
+                    if (i - 1 = c.getLocation().getEndLineNumber()) {
+                        return true
+                    }
+                }
+            }
+        }
+    }
+}
+
+//找到JavaDoc注释的owner为空的情况
+pub fn connectDoc(j: JavadocComment, e: PublicVisitedElement) -> bool {
+    let (db = default_db()) {
+        for (i in int::__undetermined_all__()) {
+            if (j.getLocation().getFile() = e.getLocation().getFile()) {
+                if (i = j.getLocation().getEndLineNumber()) {
+                    if (i + 1 = e.getLocation().getStartLineNumber()) {
+                        return true
+                    }
+                }
+            }
+        }
+    }
+}
+
+pub fn hasComment(e: PublicVisitedElement) -> bool {
+    let (db = default_db()) {
+        for (j in JavadocComment(__all_data__)) {
+            if (e.key_eq(j.getDocumentableElement())) {
+                return true
+            }
+            if (connectDoc(j, e)) {
+                return true
+            }
+        }
+        for (j in Comment(__all_data__)) {
+            if (j = e.getPossibleAboveComment()) {
+                return true
+            }
+        }
+    }
+}
+
+//分母统计，公开访问元素一共有多少个
+pub fn countTotalPublicElement() -> int {
+    let (db = default_db()) {
+        return PublicVisitedElement(db).len()
+    }
+}
+
+pub fn totalPublicDocumentedElement() -> *PublicVisitedElement {
+    let (db = default_db()) {
+        for (e in PublicVisitedElement(db),
+            j in JavadocComment(db)) {
+            if (e.key_eq(j.getDocumentableElement())) {
+                yield e
+            }
+            if (connectDoc(j, e)) {
+                yield e
+            }
+        }
+        for (e in PublicVisitedElement(db),
+            j in Comment(db)) {
+            if (j.key_eq(e.getPossibleAboveComment())) {
+                yield e
+            }
+        }
+    }
+}
+
+//分子统计，带有注释的公开访问元素有多少个
+pub fn countTotalPublicDocumentedElement() -> int {
+    return totalPublicDocumentedElement().len()
+}
+
+//注释率计算，如果分母为0，则输出为-1，否则，分子*100000/分母
+pub fn commentRatio(documentedPercentage: int) -> bool {
+    let (i = countTotalPublicElement(), j = countTotalPublicDocumentedElement()) {
+        if (i = 0) {
+            if (documentedPercentage = -1) {
+                return true
+            }
+        }
+        if (i > 0) {
+            if (documentedPercentage = j * 1000 / i) {
+                return true
+            }
+        }
+    }
+}
+
+fn main() {
+    output(commentRatio())
+}

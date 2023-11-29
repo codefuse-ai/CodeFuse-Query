@@ -1,0 +1,151 @@
+// script
+use coref::javascript::*
+
+pub fn default_db() -> JavascriptDB {
+    return JavascriptDB::load("coref_javascript_src.db")
+}
+
+/**
+ * 获取函数和对应的注释
+ *
+ * 其中：FunctionDeclaration, MethodDeclaration, Constructor, GetAccessor, SetAccessor,
+ * 直接查询节点前是否有关联的注释
+ * 而FunctionExpression 和 ArrowFunction 除了前面关联的注释，还需要统计包含在 VariableStatement 或 PropertyDeclaration 中，
+ * 而且 VariableStatement 或 PropertyDeclaration 节点前有关联的注释
+ *
+ * VariableStatement 中包含函数的结构为:
+ * VariableStatement
+ * └-- VariableDeclarationList
+ *     └-- VariableDeclaration
+ *         └-- FunctionExpression / ArrowFunction
+ *
+ * PropertyDeclaration 中包含函数的结构为:
+ * PropertyDeclaration
+ * └-- FunctionExpression / ArrowFunction
+ */
+pub fn getFunctionCommentPair(function: FunctionLikeDeclaration, comment: Comment) -> bool {
+    let (db = default_db(), node = Node(db).find(function)) {
+        if (isFunctionDeclaration(node)) {
+            for (auto_tmp1 in function.getALeadingComment()) {
+                if (auto_tmp1 = comment) {
+                    return true
+                }
+            }
+        }
+
+        if (isMethodDeclaration(node)) {
+            for (auto_tmp1 in function.getALeadingComment()) {
+                if (auto_tmp1 = comment) {
+                    return true
+                }
+            }
+        }
+
+        if (isConstructor(node)) {
+            for (auto_tmp1 in function.getALeadingComment()) {
+                if (auto_tmp1 = comment) {
+                    return true
+                }
+            }
+        }
+
+        if (isGetAccessor(node)) {
+            for (auto_tmp1 in function.getALeadingComment()) {
+                if (auto_tmp1 = comment) {
+                    return true
+                }
+            }
+        }
+
+        if (isSetAccessor(node)) {
+            for (auto_tmp1 in function.getALeadingComment()) {
+                if (auto_tmp1 = comment) {
+                    return true
+                }
+            }
+        }
+
+        if (isFunctionExpression(node)) {
+            for (auto_tmp1 in function.getALeadingComment()) {
+                if (auto_tmp1 = comment) {
+                    return true
+                }
+            }
+        }
+
+        if (isArrowFunction(node)) {
+            for (auto_tmp1 in function.getALeadingComment()) {
+                if (auto_tmp1 = comment) {
+                    return true
+                }
+            }
+        }
+
+        if (isFunctionExpression(node)) {
+            for (variableStatement in VariableStatement(db)) {
+                if (variableStatement.key_eq(function.getParent().getParent().getParent())) {
+                    for (auto_tmp2 in variableStatement.getALeadingComment()) {
+                        if (auto_tmp2 = comment) {
+                            return true
+                        }
+                    }
+                }
+            }
+
+            for (propertyDeclaration in PropertyDeclaration(db)) {
+                if (propertyDeclaration.key_eq(function.getParent())) {
+                    for (auto_tmp3 in propertyDeclaration.getALeadingComment()) {
+                        if (auto_tmp3 = comment) {
+                            return true
+                        }
+                    }
+                }
+            }
+        }
+
+        if (isArrowFunction(node)) {
+            for (variableStatement in VariableStatement(db)) {
+                if (variableStatement.key_eq(function.getParent().getParent().getParent())) {
+                    for (auto_tmp2 in variableStatement.getALeadingComment()) {
+                        if (auto_tmp2 = comment) {
+                            return true
+                        }
+                    }
+                }
+            }
+            
+            for (propertyDeclaration in PropertyDeclaration(db)) {
+                if (propertyDeclaration.key_eq(function.getParent())) {
+                    for (auto_tmp3 in propertyDeclaration.getALeadingComment()) {
+                        if (auto_tmp3 = comment) {
+                            return true
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+pub fn output_(methodText: string, commentText: string) -> bool {
+    let (db = default_db()) {
+        for (function in FunctionLikeDeclaration(db),
+            comment in Comment(db)) {
+            if (getFunctionCommentPair(function, comment)) {
+                if (methodText = function.getText()) {
+                    for (location in Location(db)) {
+                        if (location = comment.getLocation()) {
+                            if (commentText = location.getText()) {
+                                return true
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+fn main() {
+    output(output_())
+}

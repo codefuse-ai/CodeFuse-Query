@@ -1,0 +1,14 @@
+// script
+use coref::java::{Import, JavaDB}
+
+fn db() -> JavaDB {
+    return JavaDB::load("coref_java_src.db")
+}
+
+query importStatement from
+    i in Import(db())
+where
+    i.getName().contains("springframework")
+select
+    i.getName() as name,
+    i.getLocation().getFile().getRelativePath() as filepath

@@ -1,0 +1,28 @@
+// script
+use coref::go::*
+
+pub fn default_db() -> GoDB {
+    return GoDB::load("coref_go_src.db")
+}
+
+pub fn output_(methodText: string, commentText: string, signature: string) -> bool {
+    let (db = default_db()) {
+        // Check if there exists a Function object 'func'
+        for (func in Function(db)) {
+            // Get the name of the function and assign it to the variable 'methodText'
+            if (methodText = func.getText()) {
+                // Get the associated comment string for the function and assign it to the variable 'commentText'
+                if (commentText = func.getAssociatedCommentString()) {
+                    // Get the function type signature and assign it to the variable 'signature'
+                    if (signature = func.getFunctionTypeSignature()) {
+                        return true
+                    }
+                }
+            }
+        }
+    }
+}
+
+fn main() {
+    output(output_())
+}

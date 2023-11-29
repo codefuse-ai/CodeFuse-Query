@@ -1,0 +1,99 @@
+// script
+use coref::python::*
+
+pub fn default_db() -> PythonDB {
+    return PythonDB::load("coref_python_src.db")
+}
+
+schema PublicVisitedElement extends CombineElement {
+    
+}
+
+//定义分母，只有Function元素会被统计
+impl PublicVisitedElement {
+
+    @data_constraint
+    @inline
+    pub fn __all__(db: PythonDB) -> *PublicVisitedElement {
+        for (tmp in CombineElement(db)) {
+            for (c in Function(db)) {
+                if (tmp.key_eq(c)) {
+                    yield PublicVisitedElement {
+                        id: tmp.id
+                    }
+                }
+            }
+        }
+    }
+    
+    pub fn getName(self) -> string {
+        for (name in string::__undetermined_all__()) {
+            for (c in Class(__all_data__)) {
+                if (self.key_eq(c)) {
+                    if (name = c.getQualifiedName()) {
+                        return name
+                    }
+                }
+            }
+            for (c in Function(__all_data__)) {
+                if (self.key_eq(c)) {
+                    if (name = c.getQualifiedName()) {
+                        return name
+                    }
+                }
+            }
+        }
+    }
+    
+    pub fn getCommentContent(self) -> string {
+        for (text in string::__undetermined_all__()) {
+            for (j in DocstringComment(__all_data__)) {
+                if (self.key_eq(j.getDocumentableElement())) {
+                    if (text = j.getText()) {
+                        return text
+                    }
+                }
+            }
+            for (j in Comment(__all_data__)) {
+                if (self.key_eq(j.getDocumentedClassOrFunctionElement())) {
+                    if (text = j.getText()) {
+                        return text
+                    }
+                }
+            }
+        }
+    }
+}
+
+pub fn hasComment(e: PublicVisitedElement) -> bool {
+    let (db = default_db()) {
+        for (j in DocstringComment(db)) {
+            if (e.key_eq(j.getDocumentableElement())) {
+                return true
+            }
+        }
+        for (j in Comment(db)) {
+            if (e.key_eq(j.getDocumentedClassOrFunctionElement())) {
+                return true
+            }
+        }
+    }
+}
+
+pub fn output_(methodText: string, commentText: string, signature: string) -> bool {
+    let (db = default_db()) {
+        for (e in PublicVisitedElement(db)) {
+            if (signature = e.getName()) {
+                if (methodText = e.print()) {
+                    if (commentText = e.getCommentContent()) {
+                        return true
+                    }
+                }
+            }
+        }
+    }
+}
+
+fn main() {
+    output(output_())
+}
