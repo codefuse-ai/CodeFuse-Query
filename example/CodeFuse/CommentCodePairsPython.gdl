@@ -19,7 +19,7 @@ impl PublicVisitedElement {
             for (c in Function(db)) {
                 if (tmp.key_eq(c)) {
                     yield PublicVisitedElement {
-                        id : tmp.id
+                        id: tmp.id
                     }
                 }
             }
