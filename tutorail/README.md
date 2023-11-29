@@ -1,10 +1,13 @@
 ## CodeQuery使用教程
 
-你可以使用Github codespace 来体验CodeQuery的能力。
+### 使用Github codespace 来体验CodeQuery分析能力 
 
-### 使用步骤 
+#### 步骤
 
-- 1. 在项目主页切换到 main 分支
-- 2. 打开项目 Code/Codespaces
-- 3. 打开 Codespace 后，切换至项目tutorail/notebook下
-- 4. 选择示例下的 jupyter notebook 分析教程，开始体验吧
+- 在项目主页切换到目标分支
+- 创建Codespace，依次点击 Code -> Codespaces，在当前分支创建一个 Codespace
+- 创建后，打开 Codespace，加载完成后，切换至项目tutorail/notebook 目录下
+- 选择示例下的 jupyter notebook 分析教程，即可开始体验
+
+#### 注意
+- 打开jupyter页面之后，如果是第一次加载容器，你还需要配置教程所使用的内核，在右上角 “选择内核”弹出框中，依次选择 “Juypter Kernel...” -> “Godel Kernel” 即可。
