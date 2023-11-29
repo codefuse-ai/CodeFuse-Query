@@ -31,8 +31,6 @@ impl PublicClass {
            }
         }
     }
-    
-    
 }
 
 //具有public修饰符的接口
@@ -61,8 +59,6 @@ impl PublicInterface {
            }
         }
     }
-    
-    
 }
 
 //具有public修饰符的函数，并且不属于匿名函数
@@ -97,8 +93,6 @@ impl PublicMethod {
            }
         }
     }
-    
-    
 }
 
 pub fn _isAnonymousMethod(m: Method) -> bool {
@@ -153,8 +147,6 @@ impl PublicField {
            }
         }
     }
-    
-    
 }
 
 schema PublicEnum extends EnumConstant {
@@ -183,8 +175,6 @@ impl PublicEnum {
            }
         }
     }
-    
-    
 }
 
 schema PublicConstructor extends Constructor {
@@ -214,8 +204,6 @@ impl PublicConstructor {
            }
         }
     }
-    
-    
 }
 
 schema ConstructorWithParameter extends PublicConstructor {
@@ -243,8 +231,6 @@ impl ConstructorWithParameter {
            }
         }
     }
-    
-    
 }
 
 schema ConstructorWithoutParameter extends PublicConstructor {
@@ -280,8 +266,6 @@ impl ConstructorWithoutParameter {
             }
         }
     }
-    
-    
 }
 
 schema PublicVisitedElement extends ElementParent {
@@ -357,8 +341,6 @@ impl PublicVisitedElement {
           }
        }
     }
-    
-    
 }
 
 //找到注释与JavaDoc注释连在一起的情况，用于排除
