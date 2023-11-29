@@ -107,11 +107,11 @@ CodeFuse-Query为CodeFuse代码大模型提供了以下数据清洗能力：
 [安装、配置、运行](./doc/3_install_and_run.md)
 
 ## 文档 (Documentation)
-[引言](./doc/1_abstract.md)
-[概述](./doc/2_introduction.md)
-[安装、配置、运行](./doc/3_install_and_run.md)
-[Godel查询语言介绍](./doc/4_godelscript_language.md)
-[VSCode开发插件](./doc/5_toolchain.md)
+- [引言](./doc/1_abstract.md)
+- [概述](./doc/2_introduction.md)
+- [安装、配置、运行](./doc/3_install_and_run.md)
+- [Godel查询语言介绍](./doc/4_godelscript_language.md)
+- [VSCode开发插件](./doc/5_toolchain.md)
 
 ## 目录结构说明
 - `cli`：命令行工具的入口，提供统一的命令行接口，调用其他模块完成具体功能
