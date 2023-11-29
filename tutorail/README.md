@@ -1,12 +1,12 @@
 ## CodeQuery使用教程
 
-### 使用Github codespace 来体验CodeQuery分析能力 
+### 使用Github Codespaces 来体验CodeQuery分析能力 
 
 #### 步骤
 
 - 在项目主页切换到目标分支
-- 创建Codespace，依次点击 Code -> Codespaces，在当前分支创建一个 Codespace
-- 创建后，打开 Codespace，加载完成后，切换至项目tutorail/notebook 目录下
+- 创建 Codespaces，依次点击 Code -> Codespaces，在当前分支创建一个 Codespaces
+- 创建后，打开该 Codespaces，加载完成后，切换至项目tutorail/notebook 目录下
 - 选择示例下的 jupyter notebook 分析教程，即可开始体验
 
 #### 注意
