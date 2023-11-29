@@ -1,0 +1,8 @@
+// script
+use coref::java::{MetricCallable, JavaDB}
+
+query CyclComplexity from
+    m in MetricCallable(JavaDB::load("coref_java_src.db"))
+select
+    m.getCyclomaticComplexity() as i, // 圈复杂度
+    m.getSignature() as n

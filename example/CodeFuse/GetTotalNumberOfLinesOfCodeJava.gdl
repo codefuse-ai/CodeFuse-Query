@@ -1,0 +1,10 @@
+// script
+
+// 计算代码有效行数，以便过滤无效的代码文件
+use coref::java::{Method, JavaDB}
+
+query total_number_of_lines_of_code from
+    c in Method(JavaDB::load("coref_java_src.db"))
+select
+    c.getSignature() as name,
+    c.getSize().getNumberOfLinesOfCode() as linesOfCode

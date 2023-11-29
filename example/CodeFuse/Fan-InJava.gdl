@@ -1,0 +1,6 @@
+// script
+use coref::java::{MetricCallable, JavaDB}
+
+query fan_in from
+    m in MetricCallable(JavaDB::load("coref_java_src.db"))
+select m.getAfferentCoupling() as i, m.getSignature() as n
