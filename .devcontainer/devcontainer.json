@@ -5,7 +5,7 @@
     },
     "customizations": {
       "codespaces": {
-        "openFiles": ["tutorail/README.md"]
+        "openFiles": ["tutorial/README.md"]
       }
     }
   }
