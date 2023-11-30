@@ -1,16 +1,22 @@
 {
     "image": "ghcr.io/lonrun/codefuse-query-tutorial:0.5",
     "hostRequirements": {
-      "cpus": 4
+        "cpus": 4
     },
     "customizations": {
-      "codespaces": {
-        "openFiles": ["tutorial/README.md"]
-      },
-      // Configure properties specific to VS Code.
-      "vscode": {
-        // Add the IDs of extensions you want installed when the container is created.
-        "extensions": ["ms-toolsai.jupyter"]
-      }
+        "codespaces": {
+            "openFiles": [
+                "tutorial/README.md"
+            ]
+        },
+        // Configure properties specific to VS Code.
+        "vscode": {
+            // Add the IDs of extensions you want installed when the container is created.
+            "extensions": [
+                "ms-toolsai.jupyter",
+                "MS-CEINTL.vscode-language-pack-zh-hans",
+                "CodeFuse-Query.codefuse-query-extension"
+            ]
+        }
     }
-  }
+}
