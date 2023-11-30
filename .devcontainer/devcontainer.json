@@ -1,0 +1,11 @@
+{
+    "image": "ghcr.io/lonrun/codefuse-query-tutorial:0.5",
+    "hostRequirements": {
+      "cpus": 4
+    },
+    "customizations": {
+      "codespaces": {
+        "openFiles": ["tutorial/README.md"]
+      }
+    }
+  }
