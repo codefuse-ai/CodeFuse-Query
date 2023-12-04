@@ -15,7 +15,7 @@ fn main() {
 }
 ```
 
-GödelScript 是 CodeQuery 用于查询和数据处理的领域专用语言 (DSL)。GödelScript 使用了类 Rust 的语法，提供了严格的类型检查、方便快捷的类型推导、智能友好的错误提示信息，使用户能够快速上手。
+GödelScript 即 Gödel 查询语言。GödelScript 是 CodeQuery 用于查询和数据处理的领域专用语言 (DSL)。GödelScript 使用了类 Rust 的语法，提供了严格的类型检查、方便快捷的类型推导、智能友好的错误提示信息，使用户能够快速上手。
 
 GödelScript 编译器主要应用场景为：
 
