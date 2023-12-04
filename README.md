@@ -134,3 +134,7 @@ CodeFuse-Query为CodeFuse代码大模型提供了以下数据清洗能力：
 | SQL | N | N | BETA |
 | Swift | N | N | BETA |
 | Properties | N | N | BETA |
+
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=codefuse-ai/CodeFuse-Query&type=Date)](https://star-history.com/#codefuse-ai/CodeFuse-Query&Date)
