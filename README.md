@@ -113,6 +113,9 @@ CodeFuse-Query为CodeFuse代码大模型提供了以下数据清洗能力：
 - [Gödel查询语言介绍](./doc/4_godelscript_language.md)
 - [VSCode开发插件](./doc/5_toolchain.md)
 
+## 教程 (tutorial)
+- [在线教程](./tutorial/README.md)
+
 ## 目录结构说明
 - `cli`：命令行工具的入口，提供统一的命令行接口，调用其他模块完成具体功能
 - `language`：各语言的数据化核心（extractor）和数据建模（lib）。关于开放度的问题，请参见《关于开源范围的一些说明》章节
