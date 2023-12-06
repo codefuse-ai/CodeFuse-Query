@@ -1,11 +1,15 @@
 ## CodeFuse-Query使用教程
 
-### 使用Github Codespaces 来体验CodeFuse-Query分析能力
-我们编写了Jupyter Notebook形式的教程，你可以在 CodeFuse-Query 预置好的 Github Codespace 中打开，在阅读的同时执行代码，观察执行结果，也可以修改代码观察反馈，亲手体验 CodeFuse-Query 强大的自定义分析能力。
+我们编写了Jupyter Notebook形式的教程，你可以使用项目配置的开发容器（devcontainer） 来体验 CodeFuse-Query，在阅读的同时执行代码，观察执行结果，也可以修改代码观察反馈，亲手体验 CodeFuse-Query 强大的自定义分析能力。
+
+关于教程所运行的开发容器，你可以使用 GitHub Codespaces 功能进行远程加载体验，无需额外配置开发环境，通过浏览器访问，享受远程访问的便利性；也可以使用 VS Code在本地使用开发容器（dev container）功能体验 CodeFuse-Query 的使用教程（需要本地预装 VS Code和 Docker）。
 
 #### 扩展阅读
 - [Github Codespaces](https://github.com/features/codespaces)
 - [Jupyter Notebook](https://jupyter.org/)
+- [VS Code devcontainer](https://code.visualstudio.com/docs/devcontainers/containers)
+
+### 1. 使用 Github Codespaces 来体验CodeFuse-Query分析能力
 
 #### 体验步骤
 1. 创建 Codespaces。依次点击项目首页的 Code -> Codespaces，在当前分支创建一个 Codespaces。
@@ -14,7 +18,15 @@
 4. 在右上角的 "选择内核" 弹出框中，依次选择 "Jupyter Kernel..." -> "Godel Kernel"。
 5. 开始体验。
 
-### Jupyter kernel for CodeFuse-Query 介绍
+### 2. 使用 VS Code 本地开发容器来体验CodeFuse-Query分析能力
+
+#### 体验步骤
+1. 克隆代码到本地，然后使用VS Code 打开项目
+2. VS Code 会自动检测到 devcontainer 配置文件（ .devcontainer/devcontainer.json）。它将会提示你是否要重新打开仓库以应用 devcontainer 配置。点击「重新打开」按钮即可。
+3. 加载完成后，切换至项目 tutorial/notebook 目录下
+4. 选择示例下的 Jupyter Notebook 分析教程，即可开始体验
+
+## Jupyter kernel for CodeFuse-Query 介绍
 Jupyter kernel for CodeFuse-Query(以下称 Godel Kernel) 是 Jupyter 的一个特定内核，它为 Jupyter 环境提供了与 CodeFuse-Query 相关的交互式功能。该内核提供以下能力：
 - 支持在 Jupyter Notebook 中编写和执行 Godel 脚本。
 - 支持 `%%python` 命令编写并执行 Python 代码，以便对查询到的数据进行更深入的数据可视化和数据后处理操作。
