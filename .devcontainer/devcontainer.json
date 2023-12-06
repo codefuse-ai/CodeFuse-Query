@@ -1,5 +1,5 @@
 {
-    "image": "ghcr.io/lonrun/codefuse-query-tutorial:0.5",
+    "image": "ghcr.io/lonrun/codefuse-query-tutorial:0.6",
     "hostRequirements": {
         "cpus": 4
     },
