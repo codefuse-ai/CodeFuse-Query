@@ -26,6 +26,8 @@
 3. 加载完成后，切换至项目 tutorial/notebook 目录下
 4. 选择示例下的 Jupyter Notebook 分析教程，即可开始体验
 
+**注意**：执行第2步前，需要确保你的 VS Code 预先安装了 Dev Containners 扩展插件（扩展ID：`ms-vscode-remote.remote-containers`）或者 Remote Development 扩展套件（扩展ID：`ms-vscode-remote.vscode-remote-extensionpack`，该套件包含 Dev Containners 扩展）。如果还未安装，你可以在扩展商店通过扩展 ID 进行搜索安装。
+
 ## Jupyter kernel for CodeFuse-Query 介绍
 Jupyter kernel for CodeFuse-Query(以下称 Godel Kernel) 是 Jupyter 的一个特定内核，它为 Jupyter 环境提供了与 CodeFuse-Query 相关的交互式功能。该内核提供以下能力：
 - 支持在 Jupyter Notebook 中编写和执行 Godel 脚本。
