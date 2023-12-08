@@ -1,5 +1,31 @@
 # GödelScript 查询语言
 
+## 目录
+
+- [GödelScript 基本概念和语法](#gödelscript-基本概念和语法)
+  - [简介](#简介)
+  - [基本程序构成](#基本程序构成)
+  - [基础类型和编译器内建函数](#基础类型和编译器内建函数)
+  - [函数](#函数)
+  - [语句](#语句)
+  - [Schema](#schema)
+  - [数据库](#数据库)
+  - [Trait](#trait)
+  - [Import](#import)
+  - [Query](#query)
+  - [Ungrounded Error: 未赋值/未绑定错误](#ungrounded-error-未赋值未绑定错误)
+- [查询示例](#查询示例)
+  - [Java](#java)
+  - [Python](#python)
+  - [JavaScript](#javascript)
+  - [XML](#xml)
+  - [Go](#go)
+- [查询调试和优化技巧](#查询调试和优化技巧)
+  - [Schema 传参导致笛卡尔积过大](#schema-传参导致笛卡尔积过大)
+  - [多层 for 导致笛卡尔积过大](#多层-for-导致笛卡尔积过大)
+  - [不要滥用`@inline`](#不要滥用inline必须用inline的优化策略)
+- [在本机使用查询脚本流程](#在本机使用查询脚本流程)
+
 ## GödelScript 基本概念和语法
 
 ### 简介
@@ -30,13 +56,13 @@ GödelScript 编译器主要应用场景为：
 
 GödelScript 程序可能包含:
 
-- 模块和符号[引用语句](#import)
-- Schema [类型声明](#schema)
-- 数据库[类型声明](#数据库)
-- Trait [声明](#trait)
-- [方法实现](#方法实现)
-- 函数[声明和实现](#函数)
-- Query [声明](#query)
+- [模块和符号引用](#import)
+- [Schema 类型声明](#schema)
+- [数据库类型声明](#数据库)
+- [Trait 声明](#trait)
+- [Schema 方法实现](#方法实现)
+- [函数声明和实现](#函数)
+- [Query 声明](#query)
 
 包含以上所有组成内容的样例:
 
@@ -99,7 +125,6 @@ GödelScript 采用类 C 语言的注释方式。
 /*
 * 1. 多行注释
 * 2. 多行注释
-* 3. 多行注释
 */
 ```
 
@@ -107,7 +132,7 @@ GödelScript 采用类 C 语言的注释方式。
 
 GödelScript 查询脚本可以包含`main`函数，该函数无返回值。在不实现`main`函数，且没有写 query 声明的情况下，程序不会输出。
 
-更多详细内容请看 [`main`函数](#gödelscript-main-函数)。
+更多详细内容请看 [main 函数](#gödelscript-main-函数)。
 
 ```rust
 fn main() {
@@ -496,9 +521,9 @@ fn a() -> int {
 }
 
 fn b() -> *int {
-	yield 1
-	yield 2
-	yield 3
+    yield 1
+    yield 2
+    yield 3
 }
 ```
 
@@ -536,9 +561,9 @@ GödelScript 使用如下方式来声明和实现`schema`的相关方法：
 impl File {
     // 静态方法
     fn f1() -> ... {...}
-	// 成员方法，第一个参数必须为 self
-	fn f2(self) -> ... {...}
-	...
+    // 成员方法，第一个参数必须为 self
+    fn f2(self) -> ... {...}
+    ...
 }
 ```
 ##### 静态方法
@@ -678,7 +703,7 @@ schema File {
 impl File {
     @data_constraint
     fn __all__() -> *File {...}
-	fn getId(self) -> int {...}
+    fn getId(self) -> int {...}
     fn staticMethod() -> string {return "File"}
 }
 
@@ -947,11 +972,11 @@ database MyDB {
 
 ```rust
 query example from
-	coref::java::Location loc in coref::java::Location(coref::java::JavaDB::load("..."))
+    coref::java::Location loc in coref::java::Location(coref::java::JavaDB::load("..."))
 where
-	...
+    ...
 select
-	...
+    ...
 ```
 
 - schema 静态方法调用
@@ -971,12 +996,12 @@ Query 用于进行一些简单的查询，编写的 query 一定会被输出，�
 
 ```rust
 query 名字 from
-	变量名 in 初始值,
+    变量名 in 初始值,
     变量名 in 初始值,
     变量名 in 初始值
 where 条件
 select 值 as 输出的列名
-	值 as 输出的列名,
+    值 as 输出的列名,
     值 as 输出的列名,
     值 as 输出的列名
 ```
@@ -987,7 +1012,7 @@ from 列表中的变量声明无需加上类型标注，编译器会进行自动
 
 ```rust
 query hello_world from
-	info in "hello world"
+    info in "hello world"
 select info as greeting
 ```
 
@@ -1063,14 +1088,14 @@ fn class_method(className: string, methodName: string, methodSignature: string) 
 GödelScript 会将未与数据绑定的符号判定为`ungrounded(未赋值/未绑定)`。基本判定规则为:
 
 - 未初始化的/未被使用的/未与集合绑定的符号
-   - 未被绑定的`int``string`参数
+   - 未被绑定的`int` `string`参数
    - 未被使用的 database 类型的参数
    - 函数体有语句，但是没有任何返回语句
 - 在取非运算块中进行绑定的符号
    - 例如 `!(__tmp = 1)`，`__tmp`会被认为是未绑定的
    - 在取非运算块中调用 inline 函数或数据构造函数
 
-#### 未使用的 database/基础类型参数
+#### 1. 未使用的 database/基础类型参数
 
 函数代码块中，如果有一个语句分支没有使用参数中的`database`或者基础类型参数，则一定会导致`ungrounded`：
 
@@ -1091,7 +1116,7 @@ impl XXX {
         if (self.hasAttribute(attributeName)) {
             return self.getValueByAttributeName(attributeName)
         }
-        if (!self.hasAttribute(attributeName) {
+        if (!self.hasAttribute(attributeName)) {
             return "null"
         }
     }
@@ -1104,7 +1129,7 @@ fn xxx() -> xx {
 }
 ```
 
-#### 函数体有语句的情况下无返回语句
+#### 2. 函数体有语句的情况下无返回语句
 
 GödelScript 允许一个函数体不包含任何语句，即空函数体。但是如果函数体中有其他语句，则 GödelScript 会要求必须有至少一个返回语句，否则就会出现 ungrounded error。
 
@@ -1118,7 +1143,7 @@ fn test() -> int {
 }
 ```
 
-#### 取非运算块中使用 inline 函数或数据构造函数
+#### 3. 取非运算块中使用 inline 函数或数据构造函数
 
 上文提到了可以通过`@inline`注解来规避 ungrounded error。但是如果在取非运算中使用了含有该注解的函数，则必然会导致 ungrounded error。
 
@@ -1142,7 +1167,7 @@ if (!check(for_test())) {
 }
 ```
 
-#### 对链式调用的取非运算
+#### 4. 对链式调用的取非运算
 
 GödelScript 未对该情况执行`ungrounded`检测，但是该写法会导致在 Soufflé 中报`ungrounded`错误:
 
@@ -1226,7 +1251,7 @@ fn main() {
 use coref::java::*
 
 fn default_java_db() -> JavaDB {
-	return JavaDB::load("coref_java_src.db")
+    return JavaDB::load("coref_java_src.db")
 }
 
 /**
@@ -1243,7 +1268,7 @@ fn class_hierarchy(className : string, superClassName : string) -> bool {
 }
 
 fn main() { 
-	output(class_hierarchy())
+    output(class_hierarchy())
 }
 ```
 
@@ -1254,7 +1279,7 @@ fn main() {
 use coref::java::*
 
 fn default_java_db() -> JavaDB {
-	return JavaDB::load("coref_java_src.db")
+    return JavaDB::load("coref_java_src.db")
 }
 
 // Find all methods of the class
@@ -1268,7 +1293,7 @@ fn methods(className : string, methodName : string) -> bool {
 }
 
 fn main() { 
-	output(methods())
+    output(methods())
 }
 ```
 
@@ -2191,7 +2216,7 @@ fn getByIndex(self) -> Expression {
                 return e
             }
         }
-	}
+    }
 }
 ```
 
