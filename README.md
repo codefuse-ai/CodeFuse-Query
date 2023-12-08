@@ -16,6 +16,12 @@
     <a href="https://github.com/codefuse-ai/CodeFuse-Query/issues">
       <img alt="Open Issues" src="https://img.shields.io/github/issues-raw/codefuse-ai/CodeFuse-Query" />
     </a>
+    <a href="https://github.com/codefuse-ai/CodeFuse-Query/releases">
+      <img alt="Release Download" src="https://img.shields.io/github/downloads/codefuse-ai/CodeFuse-Query/total" />
+    </a>
+    <a href="https://marketplace.visualstudio.com/items?itemName=CodeFuse-Query.codefuse-query-extension">
+      <img alt="VSCode Plugin" src="https://img.shields.io/visual-studio-marketplace/i/CodeFuse-Query.codefuse-query-extension" />
+    </a>
 </p>
 
 ## 什么是CodeFuse-Query？
@@ -139,6 +145,8 @@ CodeFuse-Query为CodeFuse代码大模型提供了以下数据清洗能力：
 | Swift | N | N | BETA |
 | Properties | N | N | BETA |
 
+## 联系我们
+![微信用户群图片](./assets/wechat_qrcode_1214.JPG)
 ## Star History
 
 [![Star History Chart](https://api.star-history.com/svg?repos=codefuse-ai/CodeFuse-Query&type=Date)](https://star-history.com/#codefuse-ai/CodeFuse-Query&Date)
