@@ -20,7 +20,7 @@
       <img alt="Release Download" src="https://img.shields.io/github/downloads/codefuse-ai/CodeFuse-Query/total" />
     </a>
     <a href="https://marketplace.visualstudio.com/items?itemName=CodeFuse-Query.codefuse-query-extension">
-      <img alt="VSCode Plugin" src="https://img.shields.io/visual-studio-marketplace/i/CodeFuse-Query.codefuse-query-extension" />
+      <img alt="VSCode Plugin" src="https://img.shields.io/visual-studio-marketplace/i/CodeFuse-Query.codefuse-query-extension?style=social&logo=visualstudiocode&logoColor=%23007ACC" />
     </a>
 </p>
 
