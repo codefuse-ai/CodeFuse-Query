@@ -196,14 +196,16 @@ GödelScript 包含基础类型`int` `string`，`bool`属于基础类型，但�
 | eq | (bool, bool) -> bool | 相等。 |
 | ne | (bool, bool) -> bool | 不相等。 |
 
-#### 作用于集合的 native 函数
+#### 作用于集合的 native 函数 (Aggregator)
+
+作用于集合的 native 函数，或者称作 aggregator，如下所示：
 
 | 函数 | 类型 | 解释 |
 | --- | --- | --- |
 | len | (*T) -> int | 获取数据集合的数量。 |
 | max | (*int) -> int | 查找最大值。 |
 | min | (*int) -> int | 查找最小值。 |
-| sum | (*int) -> int | 求和。 |
+| sum | (*int) -> int | 集合求和。 |
 | find | (*T0) -> T1 | 从一个集合中，通过主键查找数据。 |
 
 #### 全局 native 函数
