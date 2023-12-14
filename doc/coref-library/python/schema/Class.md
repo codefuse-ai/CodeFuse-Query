@@ -1,9 +1,11 @@
 # Class
 
+Inherit from [ClassDefStatement](./ClassDefStatement.md)
+
 Primary key: `element_oid: int`
 
 ```rust
-schema Class {
+schema Class extends ClassDefStatement {
   @primary element_oid: int,
   element_index: int,
   parent_oid: int,

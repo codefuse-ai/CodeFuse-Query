@@ -1,9 +1,11 @@
 # IndexSignature
 
+Inherit from [ClassElement](./ClassElement.md)
+
 Primary key: `id: int`
 
 ```rust
-schema IndexSignature {
+schema IndexSignature extends ClassElement {
   @primary id: int,
 }
 ```

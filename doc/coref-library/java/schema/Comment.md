@@ -1,9 +1,11 @@
 # Comment
 
+Inherit from [CommentDO](./CommentDO.md)
+
 Primary key: `element_hash_id: int`
 
 ```rust
-schema Comment {
+schema Comment extends CommentDO {
   @primary element_hash_id: int,
   text: string,
   location_hash_id: int,

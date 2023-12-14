@@ -1,9 +1,11 @@
 # ForStatement
 
+Inherit from [Statement](./Statement.md)
+
 Primary key: `id: int`
 
 ```rust
-schema ForStatement {
+schema ForStatement extends Statement {
   @primary id: int,
 }
 ```

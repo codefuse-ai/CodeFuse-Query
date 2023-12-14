@@ -1,9 +1,11 @@
 # ReferenceType
 
+Inherit from [ReferenceTypeDO](./ReferenceTypeDO.md)
+
 Primary key: `oid: int`
 
 ```rust
-schema ReferenceType {
+schema ReferenceType extends ReferenceTypeDO {
   @primary oid: int,
   name: string,
   qualified_name: string,

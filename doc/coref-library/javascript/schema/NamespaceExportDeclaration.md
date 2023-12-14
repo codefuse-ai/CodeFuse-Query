@@ -1,9 +1,11 @@
 # NamespaceExportDeclaration
 
+Inherit from [DeclarationStatement](./DeclarationStatement.md)
+
 Primary key: `id: int`
 
 ```rust
-schema NamespaceExportDeclaration {
+schema NamespaceExportDeclaration extends DeclarationStatement {
   @primary id: int,
 }
 ```

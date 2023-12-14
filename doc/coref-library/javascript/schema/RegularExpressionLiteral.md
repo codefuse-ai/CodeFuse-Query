@@ -1,9 +1,11 @@
 # RegularExpressionLiteral
 
+Inherit from [LiteralExpression](./LiteralExpression.md)
+
 Primary key: `id: int`
 
 ```rust
-schema RegularExpressionLiteral {
+schema RegularExpressionLiteral extends LiteralExpression {
   @primary id: int,
 }
 ```

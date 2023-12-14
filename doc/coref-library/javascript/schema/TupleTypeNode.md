@@ -1,9 +1,11 @@
 # TupleTypeNode
 
+Inherit from [TypeNode](./TypeNode.md)
+
 Primary key: `id: int`
 
 ```rust
-schema TupleTypeNode {
+schema TupleTypeNode extends TypeNode {
   @primary id: int,
 }
 ```

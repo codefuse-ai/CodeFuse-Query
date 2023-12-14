@@ -1,9 +1,11 @@
 # IfExpression
 
+Inherit from [Expression](./Expression.md)
+
 Primary key: `element_oid: int`
 
 ```rust
-schema IfExpression {
+schema IfExpression extends Expression {
   printable_text: string,
   location_oid: int,
   type: string,

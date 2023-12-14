@@ -1,9 +1,11 @@
 # TemplateSpan
 
+Inherit from [Node](./Node.md)
+
 Primary key: `id: int`
 
 ```rust
-schema TemplateSpan {
+schema TemplateSpan extends Node {
   @primary id: int,
 }
 ```

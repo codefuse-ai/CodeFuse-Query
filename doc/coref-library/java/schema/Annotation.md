@@ -1,9 +1,11 @@
 # Annotation
 
+Inherit from [AnnotationDo](./AnnotationDo.md)
+
 Primary key: `id: int`
 
 ```rust
-schema Annotation {
+schema Annotation extends AnnotationDo {
   @primary id: int,
 }
 ```

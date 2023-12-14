@@ -1,9 +1,11 @@
 # MiniCallExpression
 
+Inherit from [CallExpression](./CallExpression.md)
+
 Primary key: `id: int`
 
 ```rust
-schema MiniCallExpression {
+schema MiniCallExpression extends CallExpression {
   @primary id: int,
 }
 ```

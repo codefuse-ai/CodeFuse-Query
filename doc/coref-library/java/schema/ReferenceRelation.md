@@ -1,9 +1,11 @@
 # ReferenceRelation
 
+Inherit from [ReferenceRelationDO](./ReferenceRelationDO.md)
+
 Primary key: `reference_element_hash_id: int`
 
 ```rust
-schema ReferenceRelation {
+schema ReferenceRelation extends ReferenceRelationDO {
   @primary reference_element_hash_id: int,
   definition_element_hash_id: int,
 }

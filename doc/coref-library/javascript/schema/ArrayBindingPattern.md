@@ -1,9 +1,11 @@
 # ArrayBindingPattern
 
+Inherit from [BindingPattern](./BindingPattern.md)
+
 Primary key: `id: int`
 
 ```rust
-schema ArrayBindingPattern {
+schema ArrayBindingPattern extends BindingPattern {
   @primary id: int,
 }
 ```

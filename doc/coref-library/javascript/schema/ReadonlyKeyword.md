@@ -1,9 +1,11 @@
 # ReadonlyKeyword
 
+Inherit from [Modifier](./Modifier.md)
+
 Primary key: `id: int`
 
 ```rust
-schema ReadonlyKeyword {
+schema ReadonlyKeyword extends Modifier {
   @primary id: int,
 }
 ```

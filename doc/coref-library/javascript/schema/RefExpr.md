@@ -1,9 +1,11 @@
 # RefExpr
 
+Inherit from [Node](./Node.md)
+
 Primary key: `id: int`
 
 ```rust
-schema RefExpr {
+schema RefExpr extends Node {
   @primary id: int,
 }
 ```

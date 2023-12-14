@@ -1,9 +1,11 @@
 # MultiplicativeOperator
 
+Inherit from [Token](./Token.md)
+
 Primary key: `id: int`
 
 ```rust
-schema MultiplicativeOperator {
+schema MultiplicativeOperator extends Token {
   @primary id: int,
 }
 ```

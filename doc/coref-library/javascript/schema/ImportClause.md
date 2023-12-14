@@ -1,9 +1,11 @@
 # ImportClause
 
+Inherit from [Node](./Node.md)
+
 Primary key: `id: int`
 
 ```rust
-schema ImportClause {
+schema ImportClause extends Node {
   @primary id: int,
 }
 ```

@@ -1,9 +1,11 @@
 # NpFile
 
+Inherit from [NpFileDO](./NpFileDO.md)
+
 Primary key: `element_hash_id: int`
 
 ```rust
-schema NpFile {
+schema NpFile extends NpFileDO {
   @primary element_hash_id: int,
   qualified_name: string,
   name: string,

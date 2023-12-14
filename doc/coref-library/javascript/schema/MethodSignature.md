@@ -1,9 +1,11 @@
 # MethodSignature
 
+Inherit from [TypeElement](./TypeElement.md)
+
 Primary key: `id: int`
 
 ```rust
-schema MethodSignature {
+schema MethodSignature extends TypeElement {
   @primary id: int,
 }
 ```

@@ -1,9 +1,11 @@
 # GetAccessor
 
+Inherit from [FunctionLikeDeclaration](./FunctionLikeDeclaration.md)
+
 Primary key: `id: int`
 
 ```rust
-schema GetAccessor {
+schema GetAccessor extends FunctionLikeDeclaration {
   @primary id: int,
 }
 ```

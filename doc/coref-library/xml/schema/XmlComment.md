@@ -1,9 +1,11 @@
 # XmlComment
 
+Inherit from [XmlCommentDO](./XmlCommentDO.md)
+
 Primary key: `id: int`
 
 ```rust
-schema XmlComment {
+schema XmlComment extends XmlCommentDO {
   @primary id: int,
   location_id: int,
   text: string,

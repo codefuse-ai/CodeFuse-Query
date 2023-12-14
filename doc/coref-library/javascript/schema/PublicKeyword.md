@@ -1,9 +1,11 @@
 # PublicKeyword
 
+Inherit from [Modifier](./Modifier.md)
+
 Primary key: `id: int`
 
 ```rust
-schema PublicKeyword {
+schema PublicKeyword extends Modifier {
   @primary id: int,
 }
 ```

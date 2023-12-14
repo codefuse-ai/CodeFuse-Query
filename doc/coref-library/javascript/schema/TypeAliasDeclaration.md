@@ -1,9 +1,11 @@
 # TypeAliasDeclaration
 
+Inherit from [DeclarationStatement](./DeclarationStatement.md)
+
 Primary key: `id: int`
 
 ```rust
-schema TypeAliasDeclaration {
+schema TypeAliasDeclaration extends DeclarationStatement {
   @primary id: int,
 }
 ```

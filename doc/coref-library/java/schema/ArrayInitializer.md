@@ -1,9 +1,11 @@
 # ArrayInitializer
 
+Inherit from [Expression](./Expression.md)
+
 Primary key: `element_hash_id: int`
 
 ```rust
-schema ArrayInitializer {
+schema ArrayInitializer extends Expression {
   printable_text: string,
   index_order: int,
   parent_hash_id: int,

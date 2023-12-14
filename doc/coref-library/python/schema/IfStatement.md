@@ -1,9 +1,11 @@
 # IfStatement
 
+Inherit from [Statement](./Statement.md)
+
 Primary key: `element_oid: int`
 
 ```rust
-schema IfStatement {
+schema IfStatement extends Statement {
   printable_text: string,
   location_oid: int,
   type: string,

@@ -1,9 +1,11 @@
 # InnerClass
 
+Inherit from [NestedClass](./NestedClass.md)
+
 Primary key: `element_hash_id: int`
 
 ```rust
-schema InnerClass {
+schema InnerClass extends NestedClass {
   @primary element_hash_id: int,
   qualified_name: string,
   location_hash_id: int,

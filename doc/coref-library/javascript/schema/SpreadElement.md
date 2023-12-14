@@ -1,9 +1,11 @@
 # SpreadElement
 
+Inherit from [Expression](./Expression.md)
+
 Primary key: `id: int`
 
 ```rust
-schema SpreadElement {
+schema SpreadElement extends Expression {
   @primary id: int,
 }
 ```

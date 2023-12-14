@@ -1,9 +1,11 @@
 # FileData
 
+Inherit from [FileDataDO](./FileDataDO.md)
+
 Primary key: `oid: int`
 
 ```rust
-schema FileData {
+schema FileData extends FileDataDO {
   @primary oid: int,
   file_id: int,
   type: int,

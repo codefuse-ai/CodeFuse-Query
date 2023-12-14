@@ -1,9 +1,11 @@
 # PropertyAccessExpression
 
+Inherit from [AccessExpression](./AccessExpression.md)
+
 Primary key: `id: int`
 
 ```rust
-schema PropertyAccessExpression {
+schema PropertyAccessExpression extends AccessExpression {
   @primary id: int,
 }
 ```

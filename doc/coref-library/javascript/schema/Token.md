@@ -1,9 +1,11 @@
 # Token
 
+Inherit from [Node](./Node.md)
+
 Primary key: `id: int`
 
 ```rust
-schema Token {
+schema Token extends Node {
   @primary id: int,
 }
 ```

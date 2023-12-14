@@ -1,9 +1,11 @@
 # JsxSpreadAttribute
 
+Inherit from [Node](./Node.md)
+
 Primary key: `id: int`
 
 ```rust
-schema JsxSpreadAttribute {
+schema JsxSpreadAttribute extends Node {
   @primary id: int,
 }
 ```

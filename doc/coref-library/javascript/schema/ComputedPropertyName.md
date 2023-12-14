@@ -1,9 +1,11 @@
 # ComputedPropertyName
 
+Inherit from [Node](./Node.md)
+
 Primary key: `id: int`
 
 ```rust
-schema ComputedPropertyName {
+schema ComputedPropertyName extends Node {
   @primary id: int,
 }
 ```

@@ -1,9 +1,11 @@
 # IndexedAccessTypeNode
 
+Inherit from [TypeNode](./TypeNode.md)
+
 Primary key: `id: int`
 
 ```rust
-schema IndexedAccessTypeNode {
+schema IndexedAccessTypeNode extends TypeNode {
   @primary id: int,
 }
 ```

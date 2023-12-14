@@ -1,9 +1,11 @@
 # MethodElement
 
+Inherit from [ClassElement](./ClassElement.md)
+
 Primary key: `id: int`
 
 ```rust
-schema MethodElement {
+schema MethodElement extends ClassElement {
   @primary id: int,
 }
 ```

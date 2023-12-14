@@ -1,9 +1,11 @@
 # Function
 
+Inherit from [Statement](./Statement.md)
+
 Primary key: `element_oid: int`
 
 ```rust
-schema Function {
+schema Function extends Statement {
   printable_text: string,
   location_oid: int,
   type: string,

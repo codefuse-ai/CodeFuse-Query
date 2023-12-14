@@ -1,9 +1,11 @@
 # XmlHasNamespace
 
+Inherit from [XmlHasNamespaceDO](./XmlHasNamespaceDO.md)
+
 Primary key: `id: int`
 
 ```rust
-schema XmlHasNamespace {
+schema XmlHasNamespace extends XmlHasNamespaceDO {
   @primary id: int,
   element_id: int,
   namespace_id: int,

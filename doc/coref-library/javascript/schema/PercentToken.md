@@ -1,9 +1,11 @@
 # PercentToken
 
+Inherit from [Token](./Token.md)
+
 Primary key: `id: int`
 
 ```rust
-schema PercentToken {
+schema PercentToken extends Token {
   @primary id: int,
 }
 ```

@@ -1,9 +1,11 @@
 # Class
 
+Inherit from [ClassDO](./ClassDO.md)
+
 Primary key: `element_hash_id: int`
 
 ```rust
-schema Class {
+schema Class extends ClassDO {
   @primary element_hash_id: int,
   qualified_name: string,
   location_hash_id: int,

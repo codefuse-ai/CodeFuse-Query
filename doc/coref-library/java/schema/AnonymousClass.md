@@ -1,9 +1,11 @@
 # AnonymousClass
 
+Inherit from [AnonymousClassDO](./AnonymousClassDO.md)
+
 Primary key: `element_hash_id: int`
 
 ```rust
-schema AnonymousClass {
+schema AnonymousClass extends AnonymousClassDO {
   @primary element_hash_id: int,
   location_hash_id: int,
   base_class_reference_hash_id: int,

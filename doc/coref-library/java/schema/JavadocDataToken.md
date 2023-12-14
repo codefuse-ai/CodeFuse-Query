@@ -1,9 +1,11 @@
 # JavadocDataToken
 
+Inherit from [JavadocDataTokenDO](./JavadocDataTokenDO.md)
+
 Primary key: `element_hash_id: int`
 
 ```rust
-schema JavadocDataToken {
+schema JavadocDataToken extends JavadocDataTokenDO {
   @primary element_hash_id: int,
   value: string,
   location_hash_id: int,

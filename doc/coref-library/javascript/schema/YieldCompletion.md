@@ -1,9 +1,11 @@
 # YieldCompletion
 
+Inherit from [Completion](./Completion.md)
+
 Primary key: `id: int`
 
 ```rust
-schema YieldCompletion {
+schema YieldCompletion extends Completion {
   @primary id: int,
   name: string,
 }

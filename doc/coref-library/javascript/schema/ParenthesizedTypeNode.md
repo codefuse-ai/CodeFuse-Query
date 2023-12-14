@@ -1,9 +1,11 @@
 # ParenthesizedTypeNode
 
+Inherit from [TypeNode](./TypeNode.md)
+
 Primary key: `id: int`
 
 ```rust
-schema ParenthesizedTypeNode {
+schema ParenthesizedTypeNode extends TypeNode {
   @primary id: int,
 }
 ```

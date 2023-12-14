@@ -1,9 +1,11 @@
 # Folder
 
+Inherit from [FolderDO](./FolderDO.md)
+
 Primary key: `element_hash_id: int`
 
 ```rust
-schema Folder {
+schema Folder extends FolderDO {
   @primary element_hash_id: int,
   qualified_name: string,
   name: string,

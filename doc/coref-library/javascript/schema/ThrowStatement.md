@@ -1,9 +1,11 @@
 # ThrowStatement
 
+Inherit from [Statement](./Statement.md)
+
 Primary key: `id: int`
 
 ```rust
-schema ThrowStatement {
+schema ThrowStatement extends Statement {
   @primary id: int,
 }
 ```

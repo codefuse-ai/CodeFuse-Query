@@ -1,9 +1,11 @@
 # TemplateHead
 
+Inherit from [TemplateLiteralLikeNode](./TemplateLiteralLikeNode.md)
+
 Primary key: `id: int`
 
 ```rust
-schema TemplateHead {
+schema TemplateHead extends TemplateLiteralLikeNode {
   @primary id: int,
 }
 ```

@@ -1,9 +1,11 @@
 # Statement
 
+Inherit from [StatementDO](./StatementDO.md)
+
 Primary key: `element_hash_id: int`
 
 ```rust
-schema Statement {
+schema Statement extends StatementDO {
   @primary element_hash_id: int,
   location_hash_id: int,
   parent_hash_id: int,

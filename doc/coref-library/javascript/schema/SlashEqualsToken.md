@@ -1,9 +1,11 @@
 # SlashEqualsToken
 
+Inherit from [Token](./Token.md)
+
 Primary key: `id: int`
 
 ```rust
-schema SlashEqualsToken {
+schema SlashEqualsToken extends Token {
   @primary id: int,
 }
 ```

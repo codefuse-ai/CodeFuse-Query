@@ -1,9 +1,11 @@
 # Expr
 
+Inherit from [Node](./Node.md)
+
 Primary key: `id: int`
 
 ```rust
-schema Expr {
+schema Expr extends Node {
   @primary id: int,
 }
 ```

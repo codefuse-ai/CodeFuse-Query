@@ -1,9 +1,11 @@
 # ClassExpressionDeclaration
 
+Inherit from [ClassLikeDeclaration](./ClassLikeDeclaration.md)
+
 Primary key: `id: int`
 
 ```rust
-schema ClassExpressionDeclaration {
+schema ClassExpressionDeclaration extends ClassLikeDeclaration {
   @primary id: int,
 }
 ```

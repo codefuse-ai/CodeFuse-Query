@@ -1,9 +1,11 @@
 # CodeBlock
 
+Inherit from [CodeBlockDO](./CodeBlockDO.md)
+
 Primary key: `element_hash_id: int`
 
 ```rust
-schema CodeBlock {
+schema CodeBlock extends CodeBlockDO {
   @primary element_hash_id: int,
   location_hash_id: int,
   number_of_statement: int,

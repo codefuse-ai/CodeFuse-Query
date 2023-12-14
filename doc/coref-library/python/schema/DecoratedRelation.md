@@ -1,9 +1,11 @@
 # DecoratedRelation
 
+Inherit from [DecoratedRelationDO](./DecoratedRelationDO.md)
+
 Primary key: `decorator_oid: int`
 
 ```rust
-schema DecoratedRelation {
+schema DecoratedRelation extends DecoratedRelationDO {
   @primary decorator_oid: int,
   decorated_element_oid: int,
 }

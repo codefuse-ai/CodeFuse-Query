@@ -1,9 +1,11 @@
 # ParenthesizedExpression
 
+Inherit from [PrimaryExpression](./PrimaryExpression.md)
+
 Primary key: `id: int`
 
 ```rust
-schema ParenthesizedExpression {
+schema ParenthesizedExpression extends PrimaryExpression {
   @primary id: int,
 }
 ```

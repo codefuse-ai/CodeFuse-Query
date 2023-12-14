@@ -1,9 +1,11 @@
 # Function
 
+Inherit from [Node](./Node.md)
+
 Primary key: `id: int`
 
 ```rust
-schema Function {
+schema Function extends Node {
   @primary id: int,
 }
 ```

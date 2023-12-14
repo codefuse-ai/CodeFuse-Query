@@ -1,9 +1,11 @@
 # TypeReferenceNode
 
+Inherit from [NodeWithTypeArguments](./NodeWithTypeArguments.md)
+
 Primary key: `id: int`
 
 ```rust
-schema TypeReferenceNode {
+schema TypeReferenceNode extends NodeWithTypeArguments {
   @primary id: int,
 }
 ```

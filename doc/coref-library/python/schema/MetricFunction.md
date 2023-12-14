@@ -1,9 +1,11 @@
 # MetricFunction
 
+Inherit from [Function](./Function.md)
+
 Primary key: `element_oid: int`
 
 ```rust
-schema MetricFunction {
+schema MetricFunction extends Function {
   @primary element_oid: int,
   element_index: int,
   parent_oid: int,

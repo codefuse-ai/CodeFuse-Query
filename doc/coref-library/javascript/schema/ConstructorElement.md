@@ -1,9 +1,11 @@
 # ConstructorElement
 
+Inherit from [ClassElement](./ClassElement.md)
+
 Primary key: `id: int`
 
 ```rust
-schema ConstructorElement {
+schema ConstructorElement extends ClassElement {
   @primary id: int,
 }
 ```

@@ -1,9 +1,11 @@
 # NamedExports
 
+Inherit from [Node](./Node.md)
+
 Primary key: `id: int`
 
 ```rust
-schema NamedExports {
+schema NamedExports extends Node {
   @primary id: int,
 }
 ```

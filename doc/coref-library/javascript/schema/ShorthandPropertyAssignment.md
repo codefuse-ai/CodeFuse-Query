@@ -1,9 +1,11 @@
 # ShorthandPropertyAssignment
 
+Inherit from [ObjectLiteralElement](./ObjectLiteralElement.md)
+
 Primary key: `id: int`
 
 ```rust
-schema ShorthandPropertyAssignment {
+schema ShorthandPropertyAssignment extends ObjectLiteralElement {
   @primary id: int,
 }
 ```

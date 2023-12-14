@@ -1,9 +1,11 @@
 # SpreadAssignment
 
+Inherit from [ObjectLiteralElement](./ObjectLiteralElement.md)
+
 Primary key: `id: int`
 
 ```rust
-schema SpreadAssignment {
+schema SpreadAssignment extends ObjectLiteralElement {
   @primary id: int,
 }
 ```

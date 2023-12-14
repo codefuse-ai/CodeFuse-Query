@@ -1,9 +1,11 @@
 # PropertyDeclaration
 
+Inherit from [ClassElement](./ClassElement.md)
+
 Primary key: `id: int`
 
 ```rust
-schema PropertyDeclaration {
+schema PropertyDeclaration extends ClassElement {
   @primary id: int,
 }
 ```

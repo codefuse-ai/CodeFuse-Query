@@ -1,9 +1,11 @@
 # MemberExpression
 
+Inherit from [LeftHandSideExpression](./LeftHandSideExpression.md)
+
 Primary key: `id: int`
 
 ```rust
-schema MemberExpression {
+schema MemberExpression extends LeftHandSideExpression {
   @primary id: int,
 }
 ```

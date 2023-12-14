@@ -1,9 +1,11 @@
 # ClassInitializer
 
+Inherit from [ClassInitializerDO](./ClassInitializerDO.md)
+
 Primary key: `element_hash_id: int`
 
 ```rust
-schema ClassInitializer {
+schema ClassInitializer extends ClassInitializerDO {
   @primary element_hash_id: int,
   location_hash_id: int,
   printable_text: string,

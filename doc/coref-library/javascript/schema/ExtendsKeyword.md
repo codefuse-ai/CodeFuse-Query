@@ -1,9 +1,11 @@
 # ExtendsKeyword
 
+Inherit from [Token](./Token.md)
+
 Primary key: `id: int`
 
 ```rust
-schema ExtendsKeyword {
+schema ExtendsKeyword extends Token {
   @primary id: int,
 }
 ```

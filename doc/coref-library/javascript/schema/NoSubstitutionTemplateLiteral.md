@@ -1,9 +1,11 @@
 # NoSubstitutionTemplateLiteral
 
+Inherit from [LiteralExpression](./LiteralExpression.md)
+
 Primary key: `id: int`
 
 ```rust
-schema NoSubstitutionTemplateLiteral {
+schema NoSubstitutionTemplateLiteral extends LiteralExpression {
   @primary id: int,
 }
 ```

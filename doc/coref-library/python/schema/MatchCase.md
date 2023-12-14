@@ -1,9 +1,11 @@
 # MatchCase
 
+Inherit from [MatchCaseDO](./MatchCaseDO.md)
+
 Primary key: `element_oid: int`
 
 ```rust
-schema MatchCase {
+schema MatchCase extends MatchCaseDO {
   @primary element_oid: int,
   pattern_oid: int,
   parent_oid: int,

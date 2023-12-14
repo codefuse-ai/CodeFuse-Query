@@ -1,9 +1,11 @@
 # Scope
 
+Inherit from [CombineElement](./CombineElement.md)
+
 Primary key: `id: int`
 
 ```rust
-schema Scope {
+schema Scope extends CombineElement {
   @primary id: int,
 }
 ```

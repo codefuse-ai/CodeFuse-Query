@@ -1,9 +1,11 @@
 # CallableEnclosingExpression
 
+Inherit from [CallableEnclosingExpressionDO](./CallableEnclosingExpressionDO.md)
+
 Primary key: `expression_hash_id: int`
 
 ```rust
-schema CallableEnclosingExpression {
+schema CallableEnclosingExpression extends CallableEnclosingExpressionDO {
   @primary expression_hash_id: int,
   callable_hash_id: int,
 }

@@ -1,9 +1,11 @@
 # ListCompExpression
 
+Inherit from [Expression](./Expression.md)
+
 Primary key: `element_oid: int`
 
 ```rust
-schema ListCompExpression {
+schema ListCompExpression extends Expression {
   printable_text: string,
   location_oid: int,
   type: string,

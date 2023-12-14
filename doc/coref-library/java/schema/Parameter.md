@@ -1,9 +1,11 @@
 # Parameter
 
+Inherit from [ParameterDO](./ParameterDO.md)
+
 Primary key: `element_hash_id: int`
 
 ```rust
-schema Parameter {
+schema Parameter extends ParameterDO {
   @primary element_hash_id: int,
   name: string,
   location_hash_id: int,

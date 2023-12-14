@@ -1,9 +1,11 @@
 # BigIntLiteral
 
+Inherit from [LiteralExpression](./LiteralExpression.md)
+
 Primary key: `id: int`
 
 ```rust
-schema BigIntLiteral {
+schema BigIntLiteral extends LiteralExpression {
   @primary id: int,
 }
 ```

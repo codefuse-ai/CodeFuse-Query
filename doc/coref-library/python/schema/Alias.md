@@ -1,9 +1,11 @@
 # Alias
 
+Inherit from [AliasDO](./AliasDO.md)
+
 Primary key: `element_oid: int`
 
 ```rust
-schema Alias {
+schema Alias extends AliasDO {
   @primary element_oid: int,
   name: string,
   asname: string,

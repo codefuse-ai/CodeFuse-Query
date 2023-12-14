@@ -1,9 +1,11 @@
 # LogNotExpression
 
+Inherit from [UnaryExpression](./UnaryExpression.md)
+
 Primary key: `element_hash_id: int`
 
 ```rust
-schema LogNotExpression {
+schema LogNotExpression extends UnaryExpression {
   @primary element_hash_id: int,
   name: string,
   location_hash_id: int,

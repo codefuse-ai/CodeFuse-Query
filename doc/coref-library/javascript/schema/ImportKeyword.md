@@ -1,9 +1,11 @@
 # ImportKeyword
 
+Inherit from [Token](./Token.md)
+
 Primary key: `id: int`
 
 ```rust
-schema ImportKeyword {
+schema ImportKeyword extends Token {
   @primary id: int,
 }
 ```

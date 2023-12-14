@@ -1,9 +1,11 @@
 # CatchClause
 
+Inherit from [Statement](./Statement.md)
+
 Primary key: `id: int`
 
 ```rust
-schema CatchClause {
+schema CatchClause extends Statement {
   @primary id: int,
 }
 ```

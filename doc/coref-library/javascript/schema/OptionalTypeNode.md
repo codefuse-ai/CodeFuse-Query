@@ -1,9 +1,11 @@
 # OptionalTypeNode
 
+Inherit from [TypeNode](./TypeNode.md)
+
 Primary key: `id: int`
 
 ```rust
-schema OptionalTypeNode {
+schema OptionalTypeNode extends TypeNode {
   @primary id: int,
 }
 ```

@@ -1,9 +1,11 @@
 # DocComment
 
+Inherit from [Node](./Node.md)
+
 Primary key: `id: int`
 
 ```rust
-schema DocComment {
+schema DocComment extends Node {
   @primary id: int,
 }
 ```

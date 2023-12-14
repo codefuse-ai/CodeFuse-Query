@@ -1,9 +1,11 @@
 # MiniObject
 
+Inherit from [ObjectLiteralExpression](./ObjectLiteralExpression.md)
+
 Primary key: `id: int`
 
 ```rust
-schema MiniObject {
+schema MiniObject extends ObjectLiteralExpression {
   @primary id: int,
 }
 ```

@@ -1,9 +1,11 @@
 # LogicalOrExpression
 
+Inherit from [BinaryLogicalExpression](./BinaryLogicalExpression.md)
+
 Primary key: `id: int`
 
 ```rust
-schema LogicalOrExpression {
+schema LogicalOrExpression extends BinaryLogicalExpression {
   @primary id: int,
 }
 ```

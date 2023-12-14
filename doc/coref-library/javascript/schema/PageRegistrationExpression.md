@@ -1,9 +1,11 @@
 # PageRegistrationExpression
 
+Inherit from [CallExpression](./CallExpression.md)
+
 Primary key: `id: int`
 
 ```rust
-schema PageRegistrationExpression {
+schema PageRegistrationExpression extends CallExpression {
   @primary id: int,
 }
 ```

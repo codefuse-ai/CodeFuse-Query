@@ -1,9 +1,11 @@
 # Literal
 
+Inherit from [LiteralDO](./LiteralDO.md)
+
 Primary key: `oid: int`
 
 ```rust
-schema Literal {
+schema Literal extends LiteralDO {
   @primary oid: int,
   expr: int,
   raw: string,

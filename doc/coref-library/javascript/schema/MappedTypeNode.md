@@ -1,9 +1,11 @@
 # MappedTypeNode
 
+Inherit from [TypeNode](./TypeNode.md)
+
 Primary key: `id: int`
 
 ```rust
-schema MappedTypeNode {
+schema MappedTypeNode extends TypeNode {
   @primary id: int,
 }
 ```

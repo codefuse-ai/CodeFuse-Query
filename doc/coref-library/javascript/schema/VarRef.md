@@ -1,9 +1,11 @@
 # VarRef
 
+Inherit from [BindingName](./BindingName.md)
+
 Primary key: `id: int`
 
 ```rust
-schema VarRef {
+schema VarRef extends BindingName {
   @primary id: int,
 }
 ```

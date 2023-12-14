@@ -1,9 +1,11 @@
 # Import
 
+Inherit from [ImportDO](./ImportDO.md)
+
 Primary key: `element_hash_id: int`
 
 ```rust
-schema Import {
+schema Import extends ImportDO {
   @primary element_hash_id: int,
   name: string,
   location_hash_id: int,

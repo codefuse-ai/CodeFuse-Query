@@ -1,9 +1,11 @@
 # ExponentiationAssignmentExpression
 
+Inherit from [CompoundAssignmentExpression](./CompoundAssignmentExpression.md)
+
 Primary key: `id: int`
 
 ```rust
-schema ExponentiationAssignmentExpression {
+schema ExponentiationAssignmentExpression extends CompoundAssignmentExpression {
   @primary id: int,
 }
 ```

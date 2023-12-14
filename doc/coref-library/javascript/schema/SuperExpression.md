@@ -1,9 +1,11 @@
 # SuperExpression
 
+Inherit from [PrimaryExpression](./PrimaryExpression.md)
+
 Primary key: `id: int`
 
 ```rust
-schema SuperExpression {
+schema SuperExpression extends PrimaryExpression {
   @primary id: int,
 }
 ```

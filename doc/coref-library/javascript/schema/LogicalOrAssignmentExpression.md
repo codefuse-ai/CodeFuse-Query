@@ -1,9 +1,11 @@
 # LogicalOrAssignmentExpression
 
+Inherit from [CompoundAssignmentExpression](./CompoundAssignmentExpression.md)
+
 Primary key: `id: int`
 
 ```rust
-schema LogicalOrAssignmentExpression {
+schema LogicalOrAssignmentExpression extends CompoundAssignmentExpression {
   @primary id: int,
 }
 ```

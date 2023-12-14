@@ -1,9 +1,11 @@
 # AnnotationDeclarationParameter
 
+Inherit from [AnnotationDeclarationParameterDO](./AnnotationDeclarationParameterDO.md)
+
 Primary key: `element_hash_id: int`
 
 ```rust
-schema AnnotationDeclarationParameter {
+schema AnnotationDeclarationParameter extends AnnotationDeclarationParameterDO {
   annotation_declaration_hash_id: int,
   printable_text: string,
   parameter_value_hash_id: int,

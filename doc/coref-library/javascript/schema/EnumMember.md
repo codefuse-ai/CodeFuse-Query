@@ -1,9 +1,11 @@
 # EnumMember
 
+Inherit from [Node](./Node.md)
+
 Primary key: `id: int`
 
 ```rust
-schema EnumMember {
+schema EnumMember extends Node {
   @primary id: int,
 }
 ```

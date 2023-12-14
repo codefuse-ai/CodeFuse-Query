@@ -1,9 +1,11 @@
 # WithItem
 
+Inherit from [WithItemDO](./WithItemDO.md)
+
 Primary key: `element_oid: int`
 
 ```rust
-schema WithItem {
+schema WithItem extends WithItemDO {
   @primary element_oid: int,
   printable_text: string,
   element_index: int,

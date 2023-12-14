@@ -1,9 +1,11 @@
 # ObjectLiteralExpression
 
+Inherit from [PrimaryExpression](./PrimaryExpression.md)
+
 Primary key: `id: int`
 
 ```rust
-schema ObjectLiteralExpression {
+schema ObjectLiteralExpression extends PrimaryExpression {
   @primary id: int,
 }
 ```

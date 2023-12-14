@@ -1,9 +1,11 @@
 # SimpleAssignmentExpression
 
+Inherit from [AssignmentExpression](./AssignmentExpression.md)
+
 Primary key: `id: int`
 
 ```rust
-schema SimpleAssignmentExpression {
+schema SimpleAssignmentExpression extends AssignmentExpression {
   @primary id: int,
 }
 ```

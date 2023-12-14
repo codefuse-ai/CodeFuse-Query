@@ -1,9 +1,11 @@
 # NumericLiteralToken
 
+Inherit from [Token](./Token.md)
+
 Primary key: `id: int`
 
 ```rust
-schema NumericLiteralToken {
+schema NumericLiteralToken extends Token {
   @primary id: int,
 }
 ```

@@ -1,9 +1,11 @@
 # ExpressionListExpressionRelation
 
+Inherit from [ExpressionListExpressionRelationDO](./ExpressionListExpressionRelationDO.md)
+
 Primary key: `expression_hash_id: int`
 
 ```rust
-schema ExpressionListExpressionRelation {
+schema ExpressionListExpressionRelation extends ExpressionListExpressionRelationDO {
   expression_list_hash_id: int,
   @primary expression_hash_id: int,
   position: int,

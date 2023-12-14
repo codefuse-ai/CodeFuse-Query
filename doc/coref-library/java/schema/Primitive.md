@@ -1,9 +1,11 @@
 # Primitive
 
+Inherit from [PrimitiveDO](./PrimitiveDO.md)
+
 Primary key: `oid: int`
 
 ```rust
-schema Primitive {
+schema Primitive extends PrimitiveDO {
   @primary oid: int,
   name: string,
 }

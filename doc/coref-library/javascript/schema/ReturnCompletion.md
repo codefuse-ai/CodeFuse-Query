@@ -1,9 +1,11 @@
 # ReturnCompletion
 
+Inherit from [Completion](./Completion.md)
+
 Primary key: `id: int`
 
 ```rust
-schema ReturnCompletion {
+schema ReturnCompletion extends Completion {
   @primary id: int,
   name: string,
 }

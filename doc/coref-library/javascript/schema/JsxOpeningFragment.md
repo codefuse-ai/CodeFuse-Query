@@ -1,9 +1,11 @@
 # JsxOpeningFragment
 
+Inherit from [Expression](./Expression.md)
+
 Primary key: `id: int`
 
 ```rust
-schema JsxOpeningFragment {
+schema JsxOpeningFragment extends Expression {
   @primary id: int,
 }
 ```

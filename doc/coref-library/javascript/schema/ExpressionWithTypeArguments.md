@@ -1,9 +1,11 @@
 # ExpressionWithTypeArguments
 
+Inherit from [NodeWithTypeArguments](./NodeWithTypeArguments.md)
+
 Primary key: `id: int`
 
 ```rust
-schema ExpressionWithTypeArguments {
+schema ExpressionWithTypeArguments extends NodeWithTypeArguments {
   @primary id: int,
 }
 ```

@@ -1,9 +1,11 @@
 # CfgEntryNode
 
+Inherit from [CfgEntryNodeDO](./CfgEntryNodeDO.md)
+
 Primary key: `oid: int`
 
 ```rust
-schema CfgEntryNode {
+schema CfgEntryNode extends CfgEntryNodeDO {
   @primary oid: int,
   ast_node_oid: int,
 }

@@ -1,9 +1,11 @@
 # StaticNestedClass
 
+Inherit from [NestedClass](./NestedClass.md)
+
 Primary key: `element_hash_id: int`
 
 ```rust
-schema StaticNestedClass {
+schema StaticNestedClass extends NestedClass {
   @primary element_hash_id: int,
   qualified_name: string,
   location_hash_id: int,

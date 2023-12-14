@@ -1,9 +1,11 @@
 # ForInStatement
 
+Inherit from [EnhancedForStatement](./EnhancedForStatement.md)
+
 Primary key: `id: int`
 
 ```rust
-schema ForInStatement {
+schema ForInStatement extends EnhancedForStatement {
   @primary id: int,
 }
 ```

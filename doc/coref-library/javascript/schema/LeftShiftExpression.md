@@ -1,9 +1,11 @@
 # LeftShiftExpression
 
+Inherit from [ShiftExpression](./ShiftExpression.md)
+
 Primary key: `id: int`
 
 ```rust
-schema LeftShiftExpression {
+schema LeftShiftExpression extends ShiftExpression {
   @primary id: int,
 }
 ```

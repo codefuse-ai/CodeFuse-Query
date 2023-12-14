@@ -1,9 +1,11 @@
 # PrefixIncrementExpression
 
+Inherit from [PrefixUnaryExpression](./PrefixUnaryExpression.md)
+
 Primary key: `id: int`
 
 ```rust
-schema PrefixIncrementExpression {
+schema PrefixIncrementExpression extends PrefixUnaryExpression {
   @primary id: int,
 }
 ```

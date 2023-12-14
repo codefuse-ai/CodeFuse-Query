@@ -1,9 +1,11 @@
 # DivisionAssignmentExpression
 
+Inherit from [CompoundAssignmentExpression](./CompoundAssignmentExpression.md)
+
 Primary key: `id: int`
 
 ```rust
-schema DivisionAssignmentExpression {
+schema DivisionAssignmentExpression extends CompoundAssignmentExpression {
   @primary id: int,
 }
 ```

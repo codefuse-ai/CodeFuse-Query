@@ -1,9 +1,11 @@
 # ParseErrorFile
 
+Inherit from [ParseErrorFileDO](./ParseErrorFileDO.md)
+
 Primary key: `element_oid: int`
 
 ```rust
-schema ParseErrorFile {
+schema ParseErrorFile extends ParseErrorFileDO {
   @primary element_oid: int,
   error_message: string,
   relative_path: string,

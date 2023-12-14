@@ -1,9 +1,11 @@
 # Interface
 
+Inherit from [InterfaceDO](./InterfaceDO.md)
+
 Primary key: `element_hash_id: int`
 
 ```rust
-schema Interface {
+schema Interface extends InterfaceDO {
   @primary element_hash_id: int,
   qualified_name: string,
   location_hash_id: int,

@@ -1,9 +1,11 @@
 # ExpressionParent
 
+Inherit from [ElementParent](./ElementParent.md)
+
 Primary key: `id: int`
 
 ```rust
-schema ExpressionParent {
+schema ExpressionParent extends ElementParent {
   @primary id: int,
 }
 ```

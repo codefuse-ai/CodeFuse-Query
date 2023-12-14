@@ -1,9 +1,11 @@
 # Symbol
 
+Inherit from [SymbolDO](./SymbolDO.md)
+
 Primary key: `oid: int`
 
 ```rust
-schema Symbol {
+schema Symbol extends SymbolDO {
   @primary oid: int,
   name: string,
   description: string,

@@ -1,9 +1,11 @@
 # TypeParameter
 
+Inherit from [TypeParameterDO](./TypeParameterDO.md)
+
 Primary key: `element_hash_id: int`
 
 ```rust
-schema TypeParameter {
+schema TypeParameter extends TypeParameterDO {
   @primary element_hash_id: int,
   location_hash_id: int,
   owner_hash_id: int,

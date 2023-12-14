@@ -1,9 +1,11 @@
 # Method
 
+Inherit from [Function](./Function.md)
+
 Primary key: `id: int`
 
 ```rust
-schema Method {
+schema Method extends Function {
   @primary id: int,
 }
 ```

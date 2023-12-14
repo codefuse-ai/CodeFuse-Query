@@ -1,9 +1,11 @@
 # TypeQueryNode
 
+Inherit from [TypeNode](./TypeNode.md)
+
 Primary key: `id: int`
 
 ```rust
-schema TypeQueryNode {
+schema TypeQueryNode extends TypeNode {
   @primary id: int,
 }
 ```

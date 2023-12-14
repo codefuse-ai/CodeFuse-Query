@@ -1,9 +1,11 @@
 # ImportStatement
 
+Inherit from [Statement](./Statement.md)
+
 Primary key: `element_oid: int`
 
 ```rust
-schema ImportStatement {
+schema ImportStatement extends Statement {
   printable_text: string,
   location_oid: int,
   type: string,

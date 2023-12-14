@@ -1,9 +1,11 @@
 # UnionTypeNode
 
+Inherit from [TypeNode](./TypeNode.md)
+
 Primary key: `id: int`
 
 ```rust
-schema UnionTypeNode {
+schema UnionTypeNode extends TypeNode {
   @primary id: int,
 }
 ```

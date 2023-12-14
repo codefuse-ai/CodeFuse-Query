@@ -1,9 +1,11 @@
 # TemplateMiddleToken
 
+Inherit from [Token](./Token.md)
+
 Primary key: `id: int`
 
 ```rust
-schema TemplateMiddleToken {
+schema TemplateMiddleToken extends Token {
   @primary id: int,
 }
 ```

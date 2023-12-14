@@ -1,9 +1,11 @@
 # NullishAssignmentExpression
 
+Inherit from [CompoundAssignmentExpression](./CompoundAssignmentExpression.md)
+
 Primary key: `id: int`
 
 ```rust
-schema NullishAssignmentExpression {
+schema NullishAssignmentExpression extends CompoundAssignmentExpression {
   @primary id: int,
 }
 ```

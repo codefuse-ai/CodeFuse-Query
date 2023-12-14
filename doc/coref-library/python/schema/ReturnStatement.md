@@ -1,9 +1,11 @@
 # ReturnStatement
 
+Inherit from [Statement](./Statement.md)
+
 Primary key: `element_oid: int`
 
 ```rust
-schema ReturnStatement {
+schema ReturnStatement extends Statement {
   printable_text: string,
   location_oid: int,
   type: string,

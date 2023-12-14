@@ -1,9 +1,11 @@
 # EqualityOperator
 
+Inherit from [Token](./Token.md)
+
 Primary key: `id: int`
 
 ```rust
-schema EqualityOperator {
+schema EqualityOperator extends Token {
   @primary id: int,
 }
 ```

@@ -1,9 +1,11 @@
 # StatementParent
 
+Inherit from [ElementParent](./ElementParent.md)
+
 Primary key: `id: int`
 
 ```rust
-schema StatementParent {
+schema StatementParent extends ElementParent {
   @primary id: int,
 }
 ```

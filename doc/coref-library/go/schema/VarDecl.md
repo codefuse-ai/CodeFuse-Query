@@ -1,9 +1,11 @@
 # VarDecl
 
+Inherit from [Decl](./Decl.md)
+
 Primary key: `id: int`
 
 ```rust
-schema VarDecl {
+schema VarDecl extends Decl {
   @primary id: int,
 }
 ```

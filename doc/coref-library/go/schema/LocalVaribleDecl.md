@@ -1,9 +1,11 @@
 # LocalVaribleDecl
 
+Inherit from [Decl](./Decl.md)
+
 Primary key: `id: int`
 
 ```rust
-schema LocalVaribleDecl {
+schema LocalVaribleDecl extends Decl {
   @primary id: int,
 }
 ```

@@ -1,9 +1,11 @@
 # ExpressionStatement
 
+Inherit from [Statement](./Statement.md)
+
 Primary key: `element_hash_id: int`
 
 ```rust
-schema ExpressionStatement {
+schema ExpressionStatement extends Statement {
   type: string,
   printable_text: string,
   index_order: int,

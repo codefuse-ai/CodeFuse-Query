@@ -1,9 +1,11 @@
 # InstanceOfKeyword
 
+Inherit from [Token](./Token.md)
+
 Primary key: `id: int`
 
 ```rust
-schema InstanceOfKeyword {
+schema InstanceOfKeyword extends Token {
   @primary id: int,
 }
 ```

@@ -1,9 +1,11 @@
 # IOTALiteral
 
+Inherit from [Literal](./Literal.md)
+
 Primary key: `oid: int`
 
 ```rust
-schema IOTALiteral {
+schema IOTALiteral extends Literal {
   value: string,
   raw: string,
   expr: int,

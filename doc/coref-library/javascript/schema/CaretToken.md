@@ -1,9 +1,11 @@
 # CaretToken
 
+Inherit from [Token](./Token.md)
+
 Primary key: `id: int`
 
 ```rust
-schema CaretToken {
+schema CaretToken extends Token {
   @primary id: int,
 }
 ```

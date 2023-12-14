@@ -1,9 +1,11 @@
 # EqualsEqualsToken
 
+Inherit from [Token](./Token.md)
+
 Primary key: `id: int`
 
 ```rust
-schema EqualsEqualsToken {
+schema EqualsEqualsToken extends Token {
   @primary id: int,
 }
 ```

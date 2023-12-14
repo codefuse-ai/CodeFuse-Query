@@ -1,9 +1,11 @@
 # JsxText
 
+Inherit from [Node](./Node.md)
+
 Primary key: `id: int`
 
 ```rust
-schema JsxText {
+schema JsxText extends Node {
   @primary id: int,
 }
 ```

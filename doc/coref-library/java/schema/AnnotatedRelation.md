@@ -1,9 +1,11 @@
 # AnnotatedRelation
 
+Inherit from [AnnotatedRelationDO](./AnnotatedRelationDO.md)
+
 Primary key: `annotation_hash_id: int`
 
 ```rust
-schema AnnotatedRelation {
+schema AnnotatedRelation extends AnnotatedRelationDO {
   @primary annotation_hash_id: int,
   annotated_item_hash_id: int,
 }

@@ -1,9 +1,11 @@
 # JsxFragment
 
+Inherit from [PrimaryExpression](./PrimaryExpression.md)
+
 Primary key: `id: int`
 
 ```rust
-schema JsxFragment {
+schema JsxFragment extends PrimaryExpression {
   @primary id: int,
 }
 ```

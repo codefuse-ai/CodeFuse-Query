@@ -1,9 +1,11 @@
 # Expression
 
+Inherit from [ExpressionDO](./ExpressionDO.md)
+
 Primary key: `element_oid: int`
 
 ```rust
-schema Expression {
+schema Expression extends ExpressionDO {
   @primary element_oid: int,
   element_index: int,
   parent_oid: int,

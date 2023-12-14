@@ -1,9 +1,11 @@
 # LeftHandSideExpression
 
+Inherit from [UpdateExpression](./UpdateExpression.md)
+
 Primary key: `id: int`
 
 ```rust
-schema LeftHandSideExpression {
+schema LeftHandSideExpression extends UpdateExpression {
   @primary id: int,
 }
 ```

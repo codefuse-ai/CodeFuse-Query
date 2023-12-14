@@ -1,9 +1,11 @@
 # VariableStatement
 
+Inherit from [Statement](./Statement.md)
+
 Primary key: `id: int`
 
 ```rust
-schema VariableStatement {
+schema VariableStatement extends Statement {
   @primary id: int,
 }
 ```

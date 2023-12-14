@@ -1,9 +1,11 @@
 # NumberOfLines
 
+Inherit from [NumberOfLinesDO](./NumberOfLinesDO.md)
+
 Primary key: `location_oid: int`
 
 ```rust
-schema NumberOfLines {
+schema NumberOfLines extends NumberOfLinesDO {
   @primary location_oid: int,
   comment_lines: int,
   lines: int,

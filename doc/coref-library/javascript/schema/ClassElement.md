@@ -1,9 +1,11 @@
 # ClassElement
 
+Inherit from [Node](./Node.md)
+
 Primary key: `id: int`
 
 ```rust
-schema ClassElement {
+schema ClassElement extends Node {
   @primary id: int,
 }
 ```

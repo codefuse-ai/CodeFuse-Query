@@ -1,9 +1,11 @@
 # ElementAccessExpression
 
+Inherit from [AccessExpression](./AccessExpression.md)
+
 Primary key: `id: int`
 
 ```rust
-schema ElementAccessExpression {
+schema ElementAccessExpression extends AccessExpression {
   @primary id: int,
 }
 ```

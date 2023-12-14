@@ -1,9 +1,11 @@
 # JsxAttributeInitializer
 
+Inherit from [Node](./Node.md)
+
 Primary key: `id: int`
 
 ```rust
-schema JsxAttributeInitializer {
+schema JsxAttributeInitializer extends Node {
   @primary id: int,
 }
 ```

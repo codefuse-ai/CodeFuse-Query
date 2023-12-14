@@ -1,9 +1,11 @@
 # Constructor
 
+Inherit from [ConstructorDO](./ConstructorDO.md)
+
 Primary key: `element_hash_id: int`
 
 ```rust
-schema Constructor {
+schema Constructor extends ConstructorDO {
   @primary element_hash_id: int,
   name: string,
   location_hash_id: int,

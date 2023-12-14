@@ -1,9 +1,11 @@
 # LessThanToken
 
+Inherit from [Token](./Token.md)
+
 Primary key: `id: int`
 
 ```rust
-schema LessThanToken {
+schema LessThanToken extends Token {
   @primary id: int,
 }
 ```

@@ -1,9 +1,11 @@
 # XmlAttribute
 
+Inherit from [XmlAttributeDO](./XmlAttributeDO.md)
+
 Primary key: `id: int`
 
 ```rust
-schema XmlAttribute {
+schema XmlAttribute extends XmlAttributeDO {
   index_order: int,
   name: string,
   @primary id: int,

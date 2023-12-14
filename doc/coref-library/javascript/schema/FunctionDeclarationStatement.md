@@ -1,9 +1,11 @@
 # FunctionDeclarationStatement
 
+Inherit from [DeclarationStatement](./DeclarationStatement.md)
+
 Primary key: `id: int`
 
 ```rust
-schema FunctionDeclarationStatement {
+schema FunctionDeclarationStatement extends DeclarationStatement {
   @primary id: int,
 }
 ```

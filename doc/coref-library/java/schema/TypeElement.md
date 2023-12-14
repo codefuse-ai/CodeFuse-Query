@@ -1,9 +1,11 @@
 # TypeElement
 
+Inherit from [TypeElementDO](./TypeElementDO.md)
+
 Primary key: `element_hash_id: int`
 
 ```rust
-schema TypeElement {
+schema TypeElement extends TypeElementDO {
   @primary element_hash_id: int,
   reference_type_hash_id: int,
   location_hash_id: int,

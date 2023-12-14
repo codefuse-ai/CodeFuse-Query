@@ -1,9 +1,11 @@
 # Variables
 
+Inherit from [Literal](./Literal.md)
+
 Primary key: `oid: int`
 
 ```rust
-schema Variables {
+schema Variables extends Literal {
   value: string,
   raw: string,
   expr: int,

@@ -1,9 +1,11 @@
 # TemplateLiteralTypeSpan
 
+Inherit from [TypeNode](./TypeNode.md)
+
 Primary key: `id: int`
 
 ```rust
-schema TemplateLiteralTypeSpan {
+schema TemplateLiteralTypeSpan extends TypeNode {
   @primary id: int,
 }
 ```

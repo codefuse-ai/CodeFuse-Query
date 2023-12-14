@@ -1,9 +1,11 @@
 # XmlDtd
 
+Inherit from [XmlDtdDO](./XmlDtdDO.md)
+
 Primary key: `id: int`
 
 ```rust
-schema XmlDtd {
+schema XmlDtd extends XmlDtdDO {
   @primary id: int,
   location_id: int,
   root: string,

@@ -1,9 +1,11 @@
 # EnumClass
 
+Inherit from [Class](./Class.md)
+
 Primary key: `element_hash_id: int`
 
 ```rust
-schema EnumClass {
+schema EnumClass extends Class {
   parent_hash_id: int,
   identifier_hash_id: int,
   location_hash_id: int,

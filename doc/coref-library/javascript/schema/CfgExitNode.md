@@ -1,9 +1,11 @@
 # CfgExitNode
 
+Inherit from [CfgExitNodeDO](./CfgExitNodeDO.md)
+
 Primary key: `oid: int`
 
 ```rust
-schema CfgExitNode {
+schema CfgExitNode extends CfgExitNodeDO {
   @primary oid: int,
   ast_node_oid: int,
 }

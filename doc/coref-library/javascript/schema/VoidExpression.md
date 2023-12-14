@@ -1,9 +1,11 @@
 # VoidExpression
 
+Inherit from [UnaryExpression](./UnaryExpression.md)
+
 Primary key: `id: int`
 
 ```rust
-schema VoidExpression {
+schema VoidExpression extends UnaryExpression {
   @primary id: int,
 }
 ```

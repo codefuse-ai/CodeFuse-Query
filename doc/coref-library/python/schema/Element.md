@@ -1,9 +1,11 @@
 # Element
 
+Inherit from [ElementDO](./ElementDO.md)
+
 Primary key: `oid: int`
 
 ```rust
-schema Element {
+schema Element extends ElementDO {
   @primary oid: int,
   value: string,
   parent_oid: int,

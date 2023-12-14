@@ -1,9 +1,11 @@
 # FunctionTypeNode
 
+Inherit from [TypeNode](./TypeNode.md)
+
 Primary key: `id: int`
 
 ```rust
-schema FunctionTypeNode {
+schema FunctionTypeNode extends TypeNode {
   @primary id: int,
 }
 ```

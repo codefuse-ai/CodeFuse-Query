@@ -1,9 +1,11 @@
 # NpMethod
 
+Inherit from [NpMethodDO](./NpMethodDO.md)
+
 Primary key: `element_hash_id: int`
 
 ```rust
-schema NpMethod {
+schema NpMethod extends NpMethodDO {
   @primary element_hash_id: int,
   name: string,
   signature: string,

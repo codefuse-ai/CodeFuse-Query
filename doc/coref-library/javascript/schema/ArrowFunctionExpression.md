@@ -1,9 +1,11 @@
 # ArrowFunctionExpression
 
+Inherit from [Expression](./Expression.md)
+
 Primary key: `id: int`
 
 ```rust
-schema ArrowFunctionExpression {
+schema ArrowFunctionExpression extends Expression {
   @primary id: int,
 }
 ```

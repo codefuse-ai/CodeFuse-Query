@@ -1,9 +1,11 @@
 # ResourceList
 
+Inherit from [ResourceListDO](./ResourceListDO.md)
+
 Primary key: `element_hash_id: int`
 
 ```rust
-schema ResourceList {
+schema ResourceList extends ResourceListDO {
   @primary element_hash_id: int,
   location_hash_id: int,
   printable_text: string,

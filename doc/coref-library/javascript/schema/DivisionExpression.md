@@ -1,9 +1,11 @@
 # DivisionExpression
 
+Inherit from [MultiplicativeExpression](./MultiplicativeExpression.md)
+
 Primary key: `id: int`
 
 ```rust
-schema DivisionExpression {
+schema DivisionExpression extends MultiplicativeExpression {
   @primary id: int,
 }
 ```

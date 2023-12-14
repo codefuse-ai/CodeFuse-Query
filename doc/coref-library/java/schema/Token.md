@@ -1,9 +1,11 @@
 # Token
 
+Inherit from [TokenDO](./TokenDO.md)
+
 Primary key: `element_hash_id: int`
 
 ```rust
-schema Token {
+schema Token extends TokenDO {
   @primary element_hash_id: int,
   value: string,
   location_hash_id: int,

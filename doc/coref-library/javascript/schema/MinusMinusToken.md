@@ -1,9 +1,11 @@
 # MinusMinusToken
 
+Inherit from [Token](./Token.md)
+
 Primary key: `id: int`
 
 ```rust
-schema MinusMinusToken {
+schema MinusMinusToken extends Token {
   @primary id: int,
 }
 ```

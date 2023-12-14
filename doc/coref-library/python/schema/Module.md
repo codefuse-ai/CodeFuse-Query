@@ -1,9 +1,11 @@
 # Module
 
+Inherit from [ModuleDO](./ModuleDO.md)
+
 Primary key: `element_oid: int`
 
 ```rust
-schema Module {
+schema Module extends ModuleDO {
   @primary element_oid: int,
   file_oid: int,
   name: string,

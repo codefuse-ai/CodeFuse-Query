@@ -1,9 +1,11 @@
 # IntersectionTypeNode
 
+Inherit from [TypeNode](./TypeNode.md)
+
 Primary key: `id: int`
 
 ```rust
-schema IntersectionTypeNode {
+schema IntersectionTypeNode extends TypeNode {
   @primary id: int,
 }
 ```

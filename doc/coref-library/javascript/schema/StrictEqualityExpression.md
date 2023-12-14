@@ -1,9 +1,11 @@
 # StrictEqualityExpression
 
+Inherit from [EqualityTestExpression](./EqualityTestExpression.md)
+
 Primary key: `id: int`
 
 ```rust
-schema StrictEqualityExpression {
+schema StrictEqualityExpression extends EqualityTestExpression {
   @primary id: int,
 }
 ```

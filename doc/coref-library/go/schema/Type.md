@@ -1,9 +1,11 @@
 # Type
 
+Inherit from [TypeDO](./TypeDO.md)
+
 Primary key: `oid: int`
 
 ```rust
-schema Type {
+schema Type extends TypeDO {
   @primary oid: int,
   kind: int,
   raw_string: string,

@@ -1,9 +1,11 @@
 # ClassLikeDeclaration
 
+Inherit from [Node](./Node.md)
+
 Primary key: `id: int`
 
 ```rust
-schema ClassLikeDeclaration {
+schema ClassLikeDeclaration extends Node {
   @primary id: int,
 }
 ```

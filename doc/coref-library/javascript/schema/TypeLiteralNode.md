@@ -1,9 +1,11 @@
 # TypeLiteralNode
 
+Inherit from [TypeNode](./TypeNode.md)
+
 Primary key: `id: int`
 
 ```rust
-schema TypeLiteralNode {
+schema TypeLiteralNode extends TypeNode {
   @primary id: int,
 }
 ```

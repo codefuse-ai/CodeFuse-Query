@@ -1,9 +1,11 @@
 # JsxOpeningElement
 
+Inherit from [Expression](./Expression.md)
+
 Primary key: `id: int`
 
 ```rust
-schema JsxOpeningElement {
+schema JsxOpeningElement extends Expression {
   @primary id: int,
 }
 ```

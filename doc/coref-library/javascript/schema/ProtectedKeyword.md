@@ -1,9 +1,11 @@
 # ProtectedKeyword
 
+Inherit from [Modifier](./Modifier.md)
+
 Primary key: `id: int`
 
 ```rust
-schema ProtectedKeyword {
+schema ProtectedKeyword extends Modifier {
   @primary id: int,
 }
 ```

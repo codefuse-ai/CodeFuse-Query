@@ -1,9 +1,11 @@
 # PrefixUnaryOperator
 
+Inherit from [Token](./Token.md)
+
 Primary key: `id: int`
 
 ```rust
-schema PrefixUnaryOperator {
+schema PrefixUnaryOperator extends Token {
   @primary id: int,
 }
 ```

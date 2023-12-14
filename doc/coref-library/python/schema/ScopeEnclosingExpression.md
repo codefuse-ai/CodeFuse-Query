@@ -1,9 +1,11 @@
 # ScopeEnclosingExpression
 
+Inherit from [ScopeEnclosingExpressionDO](./ScopeEnclosingExpressionDO.md)
+
 Primary key: `expression_oid: int`
 
 ```rust
-schema ScopeEnclosingExpression {
+schema ScopeEnclosingExpression extends ScopeEnclosingExpressionDO {
   @primary expression_oid: int,
   scope_oid: int,
 }

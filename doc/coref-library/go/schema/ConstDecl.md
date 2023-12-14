@@ -1,9 +1,11 @@
 # ConstDecl
 
+Inherit from [Decl](./Decl.md)
+
 Primary key: `id: int`
 
 ```rust
-schema ConstDecl {
+schema ConstDecl extends Decl {
   @primary id: int,
 }
 ```

@@ -1,9 +1,11 @@
 # PageObject
 
+Inherit from [ObjectLiteralExpression](./ObjectLiteralExpression.md)
+
 Primary key: `id: int`
 
 ```rust
-schema PageObject {
+schema PageObject extends ObjectLiteralExpression {
   @primary id: int,
 }
 ```

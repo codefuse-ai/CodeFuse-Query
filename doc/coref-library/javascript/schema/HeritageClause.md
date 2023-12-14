@@ -1,9 +1,11 @@
 # HeritageClause
 
+Inherit from [Node](./Node.md)
+
 Primary key: `id: int`
 
 ```rust
-schema HeritageClause {
+schema HeritageClause extends Node {
   @primary id: int,
 }
 ```

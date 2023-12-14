@@ -1,9 +1,11 @@
 # ImportExpression
 
+Inherit from [PrimaryExpression](./PrimaryExpression.md)
+
 Primary key: `id: int`
 
 ```rust
-schema ImportExpression {
+schema ImportExpression extends PrimaryExpression {
   @primary id: int,
 }
 ```

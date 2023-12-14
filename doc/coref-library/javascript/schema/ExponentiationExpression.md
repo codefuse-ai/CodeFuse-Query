@@ -1,9 +1,11 @@
 # ExponentiationExpression
 
+Inherit from [BinaryExpression](./BinaryExpression.md)
+
 Primary key: `id: int`
 
 ```rust
-schema ExponentiationExpression {
+schema ExponentiationExpression extends BinaryExpression {
   @primary id: int,
 }
 ```

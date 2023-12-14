@@ -1,9 +1,11 @@
 # Exception
 
+Inherit from [ExceptionDO](./ExceptionDO.md)
+
 Primary key: `element_hash_id: int`
 
 ```rust
-schema Exception {
+schema Exception extends ExceptionDO {
   @primary element_hash_id: int,
   callable_hash_id: int,
   name: string,

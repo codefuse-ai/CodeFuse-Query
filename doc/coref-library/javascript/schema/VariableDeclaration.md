@@ -1,9 +1,11 @@
 # VariableDeclaration
 
+Inherit from [Node](./Node.md)
+
 Primary key: `id: int`
 
 ```rust
-schema VariableDeclaration {
+schema VariableDeclaration extends Node {
   @primary id: int,
 }
 ```

@@ -1,9 +1,11 @@
 # AsteriskToken
 
+Inherit from [Token](./Token.md)
+
 Primary key: `id: int`
 
 ```rust
-schema AsteriskToken {
+schema AsteriskToken extends Token {
   @primary id: int,
 }
 ```

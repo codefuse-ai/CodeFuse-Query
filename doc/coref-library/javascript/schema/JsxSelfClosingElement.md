@@ -1,9 +1,11 @@
 # JsxSelfClosingElement
 
+Inherit from [PrimaryExpression](./PrimaryExpression.md)
+
 Primary key: `id: int`
 
 ```rust
-schema JsxSelfClosingElement {
+schema JsxSelfClosingElement extends PrimaryExpression {
   @primary id: int,
 }
 ```

@@ -1,9 +1,11 @@
 # ClassStaticBlockElement
 
+Inherit from [ClassElement](./ClassElement.md)
+
 Primary key: `id: int`
 
 ```rust
-schema ClassStaticBlockElement {
+schema ClassStaticBlockElement extends ClassElement {
   @primary id: int,
 }
 ```

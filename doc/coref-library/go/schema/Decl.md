@@ -1,9 +1,11 @@
 # Decl
 
+Inherit from [Node](./Node.md)
+
 Primary key: `id: int`
 
 ```rust
-schema Decl {
+schema Decl extends Node {
   @primary id: int,
 }
 ```

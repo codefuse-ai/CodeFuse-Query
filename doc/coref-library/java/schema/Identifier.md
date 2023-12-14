@@ -1,9 +1,11 @@
 # Identifier
 
+Inherit from [IdentifierDO](./IdentifierDO.md)
+
 Primary key: `element_hash_id: int`
 
 ```rust
-schema Identifier {
+schema Identifier extends IdentifierDO {
   @primary element_hash_id: int,
   location_hash_id: int,
   name: string,

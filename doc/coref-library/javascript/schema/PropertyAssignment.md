@@ -1,9 +1,11 @@
 # PropertyAssignment
 
+Inherit from [ObjectLiteralElement](./ObjectLiteralElement.md)
+
 Primary key: `id: int`
 
 ```rust
-schema PropertyAssignment {
+schema PropertyAssignment extends ObjectLiteralElement {
   @primary id: int,
 }
 ```

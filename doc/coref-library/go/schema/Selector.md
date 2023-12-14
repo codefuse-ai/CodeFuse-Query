@@ -1,9 +1,11 @@
 # Selector
 
+Inherit from [Expr](./Expr.md)
+
 Primary key: `id: int`
 
 ```rust
-schema Selector {
+schema Selector extends Expr {
   @primary id: int,
 }
 ```

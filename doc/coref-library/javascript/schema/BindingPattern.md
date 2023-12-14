@@ -1,9 +1,11 @@
 # BindingPattern
 
+Inherit from [Node](./Node.md)
+
 Primary key: `id: int`
 
 ```rust
-schema BindingPattern {
+schema BindingPattern extends Node {
   @primary id: int,
 }
 ```

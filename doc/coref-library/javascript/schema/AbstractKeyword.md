@@ -1,9 +1,11 @@
 # AbstractKeyword
 
+Inherit from [Modifier](./Modifier.md)
+
 Primary key: `id: int`
 
 ```rust
-schema AbstractKeyword {
+schema AbstractKeyword extends Modifier {
   @primary id: int,
 }
 ```

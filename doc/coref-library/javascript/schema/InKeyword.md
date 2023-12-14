@@ -1,9 +1,11 @@
 # InKeyword
 
+Inherit from [Token](./Token.md)
+
 Primary key: `id: int`
 
 ```rust
-schema InKeyword {
+schema InKeyword extends Token {
   @primary id: int,
 }
 ```

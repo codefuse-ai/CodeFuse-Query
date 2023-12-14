@@ -1,9 +1,11 @@
 # LombokField
 
+Inherit from [Field](./Field.md)
+
 Primary key: `element_hash_id: int`
 
 ```rust
-schema LombokField {
+schema LombokField extends Field {
   printable_text: string,
   parent_hash_id: int,
   location_hash_id: int,

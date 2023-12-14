@@ -1,9 +1,11 @@
 # FunctionDeclaration
 
+Inherit from [FunctionLikeDeclaration](./FunctionLikeDeclaration.md)
+
 Primary key: `id: int`
 
 ```rust
-schema FunctionDeclaration {
+schema FunctionDeclaration extends FunctionLikeDeclaration {
   @primary id: int,
 }
 ```

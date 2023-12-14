@@ -1,9 +1,11 @@
 # AdditionExpression
 
+Inherit from [AdditiveExpression](./AdditiveExpression.md)
+
 Primary key: `id: int`
 
 ```rust
-schema AdditionExpression {
+schema AdditionExpression extends AdditiveExpression {
   @primary id: int,
 }
 ```

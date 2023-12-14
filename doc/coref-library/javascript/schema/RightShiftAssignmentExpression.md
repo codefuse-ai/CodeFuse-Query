@@ -1,9 +1,11 @@
 # RightShiftAssignmentExpression
 
+Inherit from [CompoundAssignmentExpression](./CompoundAssignmentExpression.md)
+
 Primary key: `id: int`
 
 ```rust
-schema RightShiftAssignmentExpression {
+schema RightShiftAssignmentExpression extends CompoundAssignmentExpression {
   @primary id: int,
 }
 ```

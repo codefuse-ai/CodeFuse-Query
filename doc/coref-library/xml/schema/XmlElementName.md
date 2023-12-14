@@ -1,9 +1,11 @@
 # XmlElementName
 
+Inherit from [XmlElementNameDO](./XmlElementNameDO.md)
+
 Primary key: `id: int`
 
 ```rust
-schema XmlElementName {
+schema XmlElementName extends XmlElementNameDO {
   name: string,
   @primary id: int,
   location_id: int,

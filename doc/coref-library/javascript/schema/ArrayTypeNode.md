@@ -1,9 +1,11 @@
 # ArrayTypeNode
 
+Inherit from [TypeNode](./TypeNode.md)
+
 Primary key: `id: int`
 
 ```rust
-schema ArrayTypeNode {
+schema ArrayTypeNode extends TypeNode {
   @primary id: int,
 }
 ```

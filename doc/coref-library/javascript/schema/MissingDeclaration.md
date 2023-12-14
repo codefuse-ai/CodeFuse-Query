@@ -1,9 +1,11 @@
 # MissingDeclaration
 
+Inherit from [DeclarationStatement](./DeclarationStatement.md)
+
 Primary key: `id: int`
 
 ```rust
-schema MissingDeclaration {
+schema MissingDeclaration extends DeclarationStatement {
   @primary id: int,
 }
 ```

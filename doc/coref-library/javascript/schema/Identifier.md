@@ -1,9 +1,11 @@
 # Identifier
 
+Inherit from [PrimaryExpression](./PrimaryExpression.md)
+
 Primary key: `id: int`
 
 ```rust
-schema Identifier {
+schema Identifier extends PrimaryExpression {
   @primary id: int,
 }
 ```

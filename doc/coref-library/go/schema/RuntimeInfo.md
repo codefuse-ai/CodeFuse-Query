@@ -1,9 +1,11 @@
 # RuntimeInfo
 
+Inherit from [RuntimeInfoDO](./RuntimeInfoDO.md)
+
 Primary key: `oid: int`
 
 ```rust
-schema RuntimeInfo {
+schema RuntimeInfo extends RuntimeInfoDO {
   @primary oid: int,
   build_version: string,
   go_os: string,

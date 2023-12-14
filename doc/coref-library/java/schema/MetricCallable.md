@@ -1,9 +1,11 @@
 # MetricCallable
 
+Inherit from [Callable](./Callable.md)
+
 Primary key: `id: int`
 
 ```rust
-schema MetricCallable {
+schema MetricCallable extends Callable {
   @primary id: int,
 }
 ```

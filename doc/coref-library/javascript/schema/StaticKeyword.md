@@ -1,9 +1,11 @@
 # StaticKeyword
 
+Inherit from [Modifier](./Modifier.md)
+
 Primary key: `id: int`
 
 ```rust
-schema StaticKeyword {
+schema StaticKeyword extends Modifier {
   @primary id: int,
 }
 ```

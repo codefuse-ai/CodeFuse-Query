@@ -1,9 +1,11 @@
 # File
 
+Inherit from [Node](./Node.md)
+
 Primary key: `id: int`
 
 ```rust
-schema File {
+schema File extends Node {
   @primary id: int,
 }
 ```

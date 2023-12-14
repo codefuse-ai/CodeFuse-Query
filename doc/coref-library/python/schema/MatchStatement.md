@@ -1,9 +1,11 @@
 # MatchStatement
 
+Inherit from [Statement](./Statement.md)
+
 Primary key: `element_oid: int`
 
 ```rust
-schema MatchStatement {
+schema MatchStatement extends Statement {
   printable_text: string,
   location_oid: int,
   type: string,

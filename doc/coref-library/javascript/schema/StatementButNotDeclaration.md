@@ -1,9 +1,11 @@
 # StatementButNotDeclaration
 
+Inherit from [Statement](./Statement.md)
+
 Primary key: `id: int`
 
 ```rust
-schema StatementButNotDeclaration {
+schema StatementButNotDeclaration extends Statement {
   @primary id: int,
 }
 ```

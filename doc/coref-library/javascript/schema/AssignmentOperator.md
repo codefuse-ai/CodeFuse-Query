@@ -1,9 +1,11 @@
 # AssignmentOperator
 
+Inherit from [Token](./Token.md)
+
 Primary key: `id: int`
 
 ```rust
-schema AssignmentOperator {
+schema AssignmentOperator extends Token {
   @primary id: int,
 }
 ```

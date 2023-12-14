@@ -1,9 +1,11 @@
 # NullLiteral
 
+Inherit from [Literal](./Literal.md)
+
 Primary key: `element_hash_id: int`
 
 ```rust
-schema NullLiteral {
+schema NullLiteral extends Literal {
   @primary element_hash_id: int,
   name: string,
   location_hash_id: int,

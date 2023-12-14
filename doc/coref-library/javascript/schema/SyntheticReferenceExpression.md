@@ -1,9 +1,11 @@
 # SyntheticReferenceExpression
 
+Inherit from [LeftHandSideExpression](./LeftHandSideExpression.md)
+
 Primary key: `id: int`
 
 ```rust
-schema SyntheticReferenceExpression {
+schema SyntheticReferenceExpression extends LeftHandSideExpression {
   @primary id: int,
 }
 ```

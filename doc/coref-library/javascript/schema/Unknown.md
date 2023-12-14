@@ -1,9 +1,11 @@
 # Unknown
 
+Inherit from [Token](./Token.md)
+
 Primary key: `id: int`
 
 ```rust
-schema Unknown {
+schema Unknown extends Token {
   @primary id: int,
 }
 ```

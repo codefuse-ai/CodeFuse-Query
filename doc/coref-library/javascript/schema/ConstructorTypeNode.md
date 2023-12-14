@@ -1,9 +1,11 @@
 # ConstructorTypeNode
 
+Inherit from [TypeNode](./TypeNode.md)
+
 Primary key: `id: int`
 
 ```rust
-schema ConstructorTypeNode {
+schema ConstructorTypeNode extends TypeNode {
   @primary id: int,
 }
 ```

@@ -1,9 +1,11 @@
 # GoFile
 
+Inherit from [File](./File.md)
+
 Primary key: `id: int`
 
 ```rust
-schema GoFile {
+schema GoFile extends File {
   @primary id: int,
 }
 ```

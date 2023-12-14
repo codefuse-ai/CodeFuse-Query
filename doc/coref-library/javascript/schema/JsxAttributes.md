@@ -1,9 +1,11 @@
 # JsxAttributes
 
+Inherit from [PrimaryExpression](./PrimaryExpression.md)
+
 Primary key: `id: int`
 
 ```rust
-schema JsxAttributes {
+schema JsxAttributes extends PrimaryExpression {
   @primary id: int,
 }
 ```

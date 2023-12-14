@@ -1,9 +1,11 @@
 # InExpression
 
+Inherit from [RelationalExpression](./RelationalExpression.md)
+
 Primary key: `id: int`
 
 ```rust
-schema InExpression {
+schema InExpression extends RelationalExpression {
   @primary id: int,
 }
 ```

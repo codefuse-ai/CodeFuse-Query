@@ -1,9 +1,11 @@
 # TopLevel
 
+Inherit from [TopLevelDO](./TopLevelDO.md)
+
 Primary key: `oid: int`
 
 ```rust
-schema TopLevel {
+schema TopLevel extends TopLevelDO {
   @primary oid: int,
   kind: int,
   location_oid: int,

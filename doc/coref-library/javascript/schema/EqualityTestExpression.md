@@ -1,9 +1,11 @@
 # EqualityTestExpression
 
+Inherit from [BinaryExpression](./BinaryExpression.md)
+
 Primary key: `id: int`
 
 ```rust
-schema EqualityTestExpression {
+schema EqualityTestExpression extends BinaryExpression {
   @primary id: int,
 }
 ```

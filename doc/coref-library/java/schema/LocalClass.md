@@ -1,9 +1,11 @@
 # LocalClass
 
+Inherit from [LocalClassDO](./LocalClassDO.md)
+
 Primary key: `element_hash_id: int`
 
 ```rust
-schema LocalClass {
+schema LocalClass extends LocalClassDO {
   @primary element_hash_id: int,
   name: string,
   location_hash_id: int,

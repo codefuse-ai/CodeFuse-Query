@@ -1,9 +1,11 @@
 # LocalVariable
 
+Inherit from [LocalVariableDO](./LocalVariableDO.md)
+
 Primary key: `element_hash_id: int`
 
 ```rust
-schema LocalVariable {
+schema LocalVariable extends LocalVariableDO {
   @primary element_hash_id: int,
   location_hash_id: int,
   name: string,

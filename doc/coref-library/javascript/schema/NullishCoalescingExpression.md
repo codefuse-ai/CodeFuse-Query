@@ -1,9 +1,11 @@
 # NullishCoalescingExpression
 
+Inherit from [BinaryLogicalExpression](./BinaryLogicalExpression.md)
+
 Primary key: `id: int`
 
 ```rust
-schema NullishCoalescingExpression {
+schema NullishCoalescingExpression extends BinaryLogicalExpression {
   @primary id: int,
 }
 ```

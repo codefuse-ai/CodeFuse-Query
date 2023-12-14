@@ -1,9 +1,11 @@
 # ClassImplementList
 
+Inherit from [ClassImplementListDO](./ClassImplementListDO.md)
+
 Primary key: `element_hash_id: int`
 
 ```rust
-schema ClassImplementList {
+schema ClassImplementList extends ClassImplementListDO {
   @primary element_hash_id: int,
   implemented_element_hash_id: int,
 }

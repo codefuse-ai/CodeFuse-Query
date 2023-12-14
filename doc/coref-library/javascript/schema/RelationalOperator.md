@@ -1,9 +1,11 @@
 # RelationalOperator
 
+Inherit from [Token](./Token.md)
+
 Primary key: `id: int`
 
 ```rust
-schema RelationalOperator {
+schema RelationalOperator extends Token {
   @primary id: int,
 }
 ```

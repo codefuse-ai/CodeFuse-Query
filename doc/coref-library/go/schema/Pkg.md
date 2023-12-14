@@ -1,9 +1,11 @@
 # Pkg
 
+Inherit from [PkgDO](./PkgDO.md)
+
 Primary key: `oid: int`
 
 ```rust
-schema Pkg {
+schema Pkg extends PkgDO {
   @primary oid: int,
   path: string,
   name: string,

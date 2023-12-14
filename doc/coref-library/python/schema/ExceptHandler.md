@@ -1,9 +1,11 @@
 # ExceptHandler
 
+Inherit from [ExceptHandlerDO](./ExceptHandlerDO.md)
+
 Primary key: `element_oid: int`
 
 ```rust
-schema ExceptHandler {
+schema ExceptHandler extends ExceptHandlerDO {
   @primary element_oid: int,
   element_index: int,
   parent_oid: int,

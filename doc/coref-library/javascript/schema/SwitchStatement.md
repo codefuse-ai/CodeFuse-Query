@@ -1,9 +1,11 @@
 # SwitchStatement
 
+Inherit from [Statement](./Statement.md)
+
 Primary key: `id: int`
 
 ```rust
-schema SwitchStatement {
+schema SwitchStatement extends Statement {
   @primary id: int,
 }
 ```

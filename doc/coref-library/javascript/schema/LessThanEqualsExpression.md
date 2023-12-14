@@ -1,9 +1,11 @@
 # LessThanEqualsExpression
 
+Inherit from [RelationalExpression](./RelationalExpression.md)
+
 Primary key: `id: int`
 
 ```rust
-schema LessThanEqualsExpression {
+schema LessThanEqualsExpression extends RelationalExpression {
   @primary id: int,
 }
 ```

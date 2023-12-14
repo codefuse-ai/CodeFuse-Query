@@ -1,9 +1,11 @@
 # NonNullExpression
 
+Inherit from [LeftHandSideExpression](./LeftHandSideExpression.md)
+
 Primary key: `id: int`
 
 ```rust
-schema NonNullExpression {
+schema NonNullExpression extends LeftHandSideExpression {
   @primary id: int,
 }
 ```

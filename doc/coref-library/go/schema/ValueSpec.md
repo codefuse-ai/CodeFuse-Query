@@ -1,9 +1,11 @@
 # ValueSpec
 
+Inherit from [Spec](./Spec.md)
+
 Primary key: `id: int`
 
 ```rust
-schema ValueSpec {
+schema ValueSpec extends Spec {
   @primary id: int,
 }
 ```

@@ -1,9 +1,11 @@
 # CatchClause
 
+Inherit from [CatchSectionDO](./CatchSectionDO.md)
+
 Primary key: `element_hash_id: int`
 
 ```rust
-schema CatchClause {
+schema CatchClause extends CatchSectionDO {
   @primary element_hash_id: int,
   location_hash_id: int,
   printable_text: string,

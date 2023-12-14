@@ -1,9 +1,11 @@
 # PostfixUnaryOperator
 
+Inherit from [Token](./Token.md)
+
 Primary key: `id: int`
 
 ```rust
-schema PostfixUnaryOperator {
+schema PostfixUnaryOperator extends Token {
   @primary id: int,
 }
 ```

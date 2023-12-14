@@ -1,9 +1,11 @@
 # TypeSpec
 
+Inherit from [Spec](./Spec.md)
+
 Primary key: `id: int`
 
 ```rust
-schema TypeSpec {
+schema TypeSpec extends Spec {
   @primary id: int,
 }
 ```

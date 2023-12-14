@@ -1,9 +1,11 @@
 # Comprehension
 
+Inherit from [ComprehensionDO](./ComprehensionDO.md)
+
 Primary key: `element_oid: int`
 
 ```rust
-schema Comprehension {
+schema Comprehension extends ComprehensionDO {
   @primary element_oid: int,
   target_expr_oid: int,
   iter_expr_oid: int,

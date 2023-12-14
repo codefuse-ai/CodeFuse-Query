@@ -1,9 +1,11 @@
 # Mod
 
+Inherit from [ModFileDO](./ModFileDO.md)
+
 Primary key: `oid: int`
 
 ```rust
-schema Mod {
+schema Mod extends ModFileDO {
   @primary oid: int,
   path: string,
   name: string,

@@ -1,9 +1,11 @@
 # PropertySignature
 
+Inherit from [TypeElement](./TypeElement.md)
+
 Primary key: `id: int`
 
 ```rust
-schema PropertySignature {
+schema PropertySignature extends TypeElement {
   @primary id: int,
 }
 ```

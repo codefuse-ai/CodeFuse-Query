@@ -1,9 +1,11 @@
 # PostOrderNode
 
+Inherit from [ControlFlowNode](./ControlFlowNode.md)
+
 Primary key: `id: int`
 
 ```rust
-schema PostOrderNode {
+schema PostOrderNode extends ControlFlowNode {
   @primary id: int,
 }
 ```

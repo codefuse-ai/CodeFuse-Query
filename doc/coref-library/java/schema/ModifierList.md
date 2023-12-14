@@ -1,9 +1,11 @@
 # ModifierList
 
+Inherit from [ModifierListDO](./ModifierListDO.md)
+
 Primary key: `element_hash_id: int`
 
 ```rust
-schema ModifierList {
+schema ModifierList extends ModifierListDO {
   @primary element_hash_id: int,
   location_hash_id: int,
   parent_hash_id: int,

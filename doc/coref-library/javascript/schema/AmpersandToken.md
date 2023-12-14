@@ -1,9 +1,11 @@
 # AmpersandToken
 
+Inherit from [Token](./Token.md)
+
 Primary key: `id: int`
 
 ```rust
-schema AmpersandToken {
+schema AmpersandToken extends Token {
   @primary id: int,
 }
 ```

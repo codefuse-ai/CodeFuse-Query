@@ -1,9 +1,11 @@
 # CaseClause
 
+Inherit from [Statement](./Statement.md)
+
 Primary key: `id: int`
 
 ```rust
-schema CaseClause {
+schema CaseClause extends Statement {
   @primary id: int,
 }
 ```

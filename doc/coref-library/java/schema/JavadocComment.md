@@ -1,9 +1,11 @@
 # JavadocComment
 
+Inherit from [JavadocCommentDO](./JavadocCommentDO.md)
+
 Primary key: `element_hash_id: int`
 
 ```rust
-schema JavadocComment {
+schema JavadocComment extends JavadocCommentDO {
   @primary element_hash_id: int,
   text: string,
   location_hash_id: int,

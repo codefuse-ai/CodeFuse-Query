@@ -1,9 +1,11 @@
 # ImportEqualsDeclaration
 
+Inherit from [DeclarationStatement](./DeclarationStatement.md)
+
 Primary key: `id: int`
 
 ```rust
-schema ImportEqualsDeclaration {
+schema ImportEqualsDeclaration extends DeclarationStatement {
   @primary id: int,
 }
 ```

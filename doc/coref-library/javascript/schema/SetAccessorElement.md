@@ -1,9 +1,11 @@
 # SetAccessorElement
 
+Inherit from [AccessorElement](./AccessorElement.md)
+
 Primary key: `id: int`
 
 ```rust
-schema SetAccessorElement {
+schema SetAccessorElement extends AccessorElement {
   @primary id: int,
 }
 ```

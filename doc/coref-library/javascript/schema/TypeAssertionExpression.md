@@ -1,9 +1,11 @@
 # TypeAssertionExpression
 
+Inherit from [UnaryExpression](./UnaryExpression.md)
+
 Primary key: `id: int`
 
 ```rust
-schema TypeAssertionExpression {
+schema TypeAssertionExpression extends UnaryExpression {
   @primary id: int,
 }
 ```

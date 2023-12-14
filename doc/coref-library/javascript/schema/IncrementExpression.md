@@ -1,9 +1,11 @@
 # IncrementExpression
 
+Inherit from [UpdateExpression](./UpdateExpression.md)
+
 Primary key: `id: int`
 
 ```rust
-schema IncrementExpression {
+schema IncrementExpression extends UpdateExpression {
   @primary id: int,
 }
 ```

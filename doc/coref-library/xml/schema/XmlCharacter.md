@@ -1,9 +1,11 @@
 # XmlCharacter
 
+Inherit from [XmlCharacterDO](./XmlCharacterDO.md)
+
 Primary key: `id: int`
 
 ```rust
-schema XmlCharacter {
+schema XmlCharacter extends XmlCharacterDO {
   @primary id: int,
   text: string,
   parentid: int,

@@ -1,9 +1,11 @@
 # BinaryLogicalOperator
 
+Inherit from [Token](./Token.md)
+
 Primary key: `id: int`
 
 ```rust
-schema BinaryLogicalOperator {
+schema BinaryLogicalOperator extends Token {
   @primary id: int,
 }
 ```

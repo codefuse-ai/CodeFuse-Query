@@ -1,9 +1,11 @@
 # Decorator
 
+Inherit from [Node](./Node.md)
+
 Primary key: `id: int`
 
 ```rust
-schema Decorator {
+schema Decorator extends Node {
   @primary id: int,
 }
 ```

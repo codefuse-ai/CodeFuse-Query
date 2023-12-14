@@ -1,9 +1,11 @@
 # IterationStatement
 
+Inherit from [Statement](./Statement.md)
+
 Primary key: `id: int`
 
 ```rust
-schema IterationStatement {
+schema IterationStatement extends Statement {
   @primary id: int,
 }
 ```

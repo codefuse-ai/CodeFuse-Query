@@ -1,9 +1,11 @@
 # AppJsFile
 
+Inherit from [File](./File.md)
+
 Primary key: `oid: int`
 
 ```rust
-schema AppJsFile {
+schema AppJsFile extends File {
   location_oid: int,
   relative_path: string,
   name: string,

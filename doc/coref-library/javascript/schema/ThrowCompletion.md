@@ -1,9 +1,11 @@
 # ThrowCompletion
 
+Inherit from [Completion](./Completion.md)
+
 Primary key: `id: int`
 
 ```rust
-schema ThrowCompletion {
+schema ThrowCompletion extends Completion {
   @primary id: int,
   name: string,
 }

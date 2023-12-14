@@ -1,9 +1,11 @@
 # ExclamationEqualsEqualsToken
 
+Inherit from [Token](./Token.md)
+
 Primary key: `id: int`
 
 ```rust
-schema ExclamationEqualsEqualsToken {
+schema ExclamationEqualsEqualsToken extends Token {
   @primary id: int,
 }
 ```

@@ -1,9 +1,11 @@
 # NewExpression
 
+Inherit from [PrimaryExpression](./PrimaryExpression.md)
+
 Primary key: `id: int`
 
 ```rust
-schema NewExpression {
+schema NewExpression extends PrimaryExpression {
   @primary id: int,
 }
 ```

@@ -1,9 +1,11 @@
 # JavadocTagValue
 
+Inherit from [JavadocTagValueDO](./JavadocTagValueDO.md)
+
 Primary key: `element_hash_id: int`
 
 ```rust
-schema JavadocTagValue {
+schema JavadocTagValue extends JavadocTagValueDO {
   @primary element_hash_id: int,
   value: string,
   location_hash_id: int,

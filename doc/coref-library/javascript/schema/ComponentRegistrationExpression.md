@@ -1,9 +1,11 @@
 # ComponentRegistrationExpression
 
+Inherit from [CallExpression](./CallExpression.md)
+
 Primary key: `id: int`
 
 ```rust
-schema ComponentRegistrationExpression {
+schema ComponentRegistrationExpression extends CallExpression {
   @primary id: int,
 }
 ```

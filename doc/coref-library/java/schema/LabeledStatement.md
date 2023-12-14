@@ -1,9 +1,11 @@
 # LabeledStatement
 
+Inherit from [Statement](./Statement.md)
+
 Primary key: `element_hash_id: int`
 
 ```rust
-schema LabeledStatement {
+schema LabeledStatement extends Statement {
   type: string,
   printable_text: string,
   index_order: int,

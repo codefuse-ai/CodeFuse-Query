@@ -1,9 +1,11 @@
 # Arguments
 
+Inherit from [ArgumentsDO](./ArgumentsDO.md)
+
 Primary key: `element_oid: int`
 
 ```rust
-schema Arguments {
+schema Arguments extends ArgumentsDO {
   @primary element_oid: int,
   parent_oid: int,
   printable_text: string,

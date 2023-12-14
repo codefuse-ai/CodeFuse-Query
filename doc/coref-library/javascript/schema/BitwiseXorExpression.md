@@ -1,9 +1,11 @@
 # BitwiseXorExpression
 
+Inherit from [BinaryBitwiseExpression](./BinaryBitwiseExpression.md)
+
 Primary key: `id: int`
 
 ```rust
-schema BitwiseXorExpression {
+schema BitwiseXorExpression extends BinaryBitwiseExpression {
   @primary id: int,
 }
 ```

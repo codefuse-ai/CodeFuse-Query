@@ -1,9 +1,11 @@
 # SubtractionAssignmentExpression
 
+Inherit from [CompoundAssignmentExpression](./CompoundAssignmentExpression.md)
+
 Primary key: `id: int`
 
 ```rust
-schema SubtractionAssignmentExpression {
+schema SubtractionAssignmentExpression extends CompoundAssignmentExpression {
   @primary id: int,
 }
 ```

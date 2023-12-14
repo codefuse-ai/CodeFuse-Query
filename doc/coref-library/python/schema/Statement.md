@@ -1,9 +1,11 @@
 # Statement
 
+Inherit from [StatementDO](./StatementDO.md)
+
 Primary key: `element_oid: int`
 
 ```rust
-schema Statement {
+schema Statement extends StatementDO {
   @primary element_oid: int,
   element_index: int,
   parent_oid: int,

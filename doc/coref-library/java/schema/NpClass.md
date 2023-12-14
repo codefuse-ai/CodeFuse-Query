@@ -1,9 +1,11 @@
 # NpClass
 
+Inherit from [NpClassDO](./NpClassDO.md)
+
 Primary key: `element_hash_id: int`
 
 ```rust
-schema NpClass {
+schema NpClass extends NpClassDO {
   @primary element_hash_id: int,
   name: string,
   qualified_name: string,

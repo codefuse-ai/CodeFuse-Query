@@ -1,9 +1,11 @@
 # NullKeyword
 
+Inherit from [Token](./Token.md)
+
 Primary key: `id: int`
 
 ```rust
-schema NullKeyword {
+schema NullKeyword extends Token {
   @primary id: int,
 }
 ```

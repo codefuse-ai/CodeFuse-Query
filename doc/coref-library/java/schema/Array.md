@@ -1,9 +1,11 @@
 # Array
 
+Inherit from [ArrayDO](./ArrayDO.md)
+
 Primary key: `element_hash_id: int`
 
 ```rust
-schema Array {
+schema Array extends ArrayDO {
   @primary element_hash_id: int,
   name: string,
 }

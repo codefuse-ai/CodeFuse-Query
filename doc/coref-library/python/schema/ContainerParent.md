@@ -1,9 +1,11 @@
 # ContainerParent
 
+Inherit from [ContainerParentDO](./ContainerParentDO.md)
+
 Primary key: `child_oid: int`
 
 ```rust
-schema ContainerParent {
+schema ContainerParent extends ContainerParentDO {
   @primary child_oid: int,
   parent_oid: int,
 }

@@ -1,9 +1,11 @@
 # BigIntLiteralToken
 
+Inherit from [Token](./Token.md)
+
 Primary key: `id: int`
 
 ```rust
-schema BigIntLiteralToken {
+schema BigIntLiteralToken extends Token {
   @primary id: int,
 }
 ```

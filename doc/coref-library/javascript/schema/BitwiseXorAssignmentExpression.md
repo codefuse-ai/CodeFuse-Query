@@ -1,9 +1,11 @@
 # BitwiseXorAssignmentExpression
 
+Inherit from [CompoundAssignmentExpression](./CompoundAssignmentExpression.md)
+
 Primary key: `id: int`
 
 ```rust
-schema BitwiseXorAssignmentExpression {
+schema BitwiseXorAssignmentExpression extends CompoundAssignmentExpression {
   @primary id: int,
 }
 ```

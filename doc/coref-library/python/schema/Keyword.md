@@ -1,9 +1,11 @@
 # Keyword
 
+Inherit from [KeywordDO](./KeywordDO.md)
+
 Primary key: `element_oid: int`
 
 ```rust
-schema Keyword {
+schema Keyword extends KeywordDO {
   @primary element_oid: int,
   arg_value: string,
   value_oid: int,

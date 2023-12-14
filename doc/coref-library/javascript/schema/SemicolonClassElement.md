@@ -1,9 +1,11 @@
 # SemicolonClassElement
 
+Inherit from [ClassElement](./ClassElement.md)
+
 Primary key: `id: int`
 
 ```rust
-schema SemicolonClassElement {
+schema SemicolonClassElement extends ClassElement {
   @primary id: int,
 }
 ```

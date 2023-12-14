@@ -1,9 +1,11 @@
 # NpInterface
 
+Inherit from [NpInterfaceDO](./NpInterfaceDO.md)
+
 Primary key: `element_hash_id: int`
 
 ```rust
-schema NpInterface {
+schema NpInterface extends NpInterfaceDO {
   @primary element_hash_id: int,
   name: string,
   qualified_name: string,

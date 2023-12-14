@@ -1,9 +1,11 @@
 # XmlEncoding
 
+Inherit from [XmlEncodingDO](./XmlEncodingDO.md)
+
 Primary key: `id: int`
 
 ```rust
-schema XmlEncoding {
+schema XmlEncoding extends XmlEncodingDO {
   @primary id: int,
   encoding: string,
 }

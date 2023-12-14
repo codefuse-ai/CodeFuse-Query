@@ -1,9 +1,11 @@
 # QuestionToken
 
+Inherit from [Token](./Token.md)
+
 Primary key: `id: int`
 
 ```rust
-schema QuestionToken {
+schema QuestionToken extends Token {
   @primary id: int,
 }
 ```

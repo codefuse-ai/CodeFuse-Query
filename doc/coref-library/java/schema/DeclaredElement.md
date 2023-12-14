@@ -1,9 +1,11 @@
 # DeclaredElement
 
+Inherit from [DeclarationElementDO](./DeclarationElementDO.md)
+
 Primary key: `element_hash_id: int`
 
 ```rust
-schema DeclaredElement {
+schema DeclaredElement extends DeclarationElementDO {
   @primary element_hash_id: int,
   index_order: int,
   declaration_statement_hash_id: int,

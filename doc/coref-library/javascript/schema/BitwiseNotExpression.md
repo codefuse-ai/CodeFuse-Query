@@ -1,9 +1,11 @@
 # BitwiseNotExpression
 
+Inherit from [PrefixUnaryExpression](./PrefixUnaryExpression.md)
+
 Primary key: `id: int`
 
 ```rust
-schema BitwiseNotExpression {
+schema BitwiseNotExpression extends PrefixUnaryExpression {
   @primary id: int,
 }
 ```

@@ -1,9 +1,11 @@
 # NamedTupleMember
 
+Inherit from [TypeNode](./TypeNode.md)
+
 Primary key: `id: int`
 
 ```rust
-schema NamedTupleMember {
+schema NamedTupleMember extends TypeNode {
   @primary id: int,
 }
 ```

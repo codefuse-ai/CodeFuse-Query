@@ -1,9 +1,11 @@
 # RValue
 
+Inherit from [RefExpr](./RefExpr.md)
+
 Primary key: `id: int`
 
 ```rust
-schema RValue {
+schema RValue extends RefExpr {
   @primary id: int,
 }
 ```

@@ -1,9 +1,11 @@
 # Method
 
+Inherit from [MethodDO](./MethodDO.md)
+
 Primary key: `element_hash_id: int`
 
 ```rust
-schema Method {
+schema Method extends MethodDO {
   @primary element_hash_id: int,
   name: string,
   location_hash_id: int,

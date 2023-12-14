@@ -1,9 +1,11 @@
 # ImportSpec
 
+Inherit from [Spec](./Spec.md)
+
 Primary key: `id: int`
 
 ```rust
-schema ImportSpec {
+schema ImportSpec extends Spec {
   @primary id: int,
 }
 ```

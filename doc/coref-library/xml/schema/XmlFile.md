@@ -1,9 +1,11 @@
 # XmlFile
 
+Inherit from [XmlFileDO](./XmlFileDO.md)
+
 Primary key: `id: int`
 
 ```rust
-schema XmlFile {
+schema XmlFile extends XmlFileDO {
   @primary id: int,
   file_name: string,
   relative_path: string,

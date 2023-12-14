@@ -1,9 +1,11 @@
 # VarUse
 
+Inherit from [ControlFlowNode](./ControlFlowNode.md)
+
 Primary key: `id: int`
 
 ```rust
-schema VarUse {
+schema VarUse extends ControlFlowNode {
   @primary id: int,
 }
 ```

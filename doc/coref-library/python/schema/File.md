@@ -1,9 +1,11 @@
 # File
 
+Inherit from [FileDO](./FileDO.md)
+
 Primary key: `element_oid: int`
 
 ```rust
-schema File {
+schema File extends FileDO {
   @primary element_oid: int,
   relative_path: string,
   extension: string,

@@ -1,9 +1,11 @@
 # GreaterThanGreaterThanGreaterThanEqualsToken
 
+Inherit from [Token](./Token.md)
+
 Primary key: `id: int`
 
 ```rust
-schema GreaterThanGreaterThanGreaterThanEqualsToken {
+schema GreaterThanGreaterThanGreaterThanEqualsToken extends Token {
   @primary id: int,
 }
 ```

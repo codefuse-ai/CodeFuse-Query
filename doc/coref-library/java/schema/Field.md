@@ -1,9 +1,11 @@
 # Field
 
+Inherit from [FieldDO](./FieldDO.md)
+
 Primary key: `element_hash_id: int`
 
 ```rust
-schema Field {
+schema Field extends FieldDO {
   @primary element_hash_id: int,
   name: string,
   location_hash_id: int,

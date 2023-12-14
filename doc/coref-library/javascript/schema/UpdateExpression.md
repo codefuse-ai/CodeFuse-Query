@@ -1,9 +1,11 @@
 # UpdateExpression
 
+Inherit from [UnaryExpression](./UnaryExpression.md)
+
 Primary key: `id: int`
 
 ```rust
-schema UpdateExpression {
+schema UpdateExpression extends UnaryExpression {
   @primary id: int,
 }
 ```

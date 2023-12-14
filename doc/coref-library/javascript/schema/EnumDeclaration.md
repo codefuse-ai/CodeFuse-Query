@@ -1,9 +1,11 @@
 # EnumDeclaration
 
+Inherit from [DeclarationStatement](./DeclarationStatement.md)
+
 Primary key: `id: int`
 
 ```rust
-schema EnumDeclaration {
+schema EnumDeclaration extends DeclarationStatement {
   @primary id: int,
 }
 ```

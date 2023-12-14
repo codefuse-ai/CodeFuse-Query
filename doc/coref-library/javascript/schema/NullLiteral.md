@@ -1,9 +1,11 @@
 # NullLiteral
 
+Inherit from [PrimaryExpression](./PrimaryExpression.md)
+
 Primary key: `id: int`
 
 ```rust
-schema NullLiteral {
+schema NullLiteral extends PrimaryExpression {
   @primary id: int,
 }
 ```

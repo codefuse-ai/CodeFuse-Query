@@ -1,9 +1,11 @@
 # FalseLiteral
 
+Inherit from [PrimaryExpression](./PrimaryExpression.md)
+
 Primary key: `id: int`
 
 ```rust
-schema FalseLiteral {
+schema FalseLiteral extends PrimaryExpression {
   @primary id: int,
 }
 ```

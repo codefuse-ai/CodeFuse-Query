@@ -1,9 +1,11 @@
 # TryStatement
 
+Inherit from [Statement](./Statement.md)
+
 Primary key: `id: int`
 
 ```rust
-schema TryStatement {
+schema TryStatement extends Statement {
   @primary id: int,
 }
 ```

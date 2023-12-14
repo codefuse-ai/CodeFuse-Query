@@ -1,9 +1,11 @@
 # TypeElement
 
+Inherit from [Node](./Node.md)
+
 Primary key: `id: int`
 
 ```rust
-schema TypeElement {
+schema TypeElement extends Node {
   @primary id: int,
 }
 ```

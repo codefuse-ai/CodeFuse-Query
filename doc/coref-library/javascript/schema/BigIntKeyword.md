@@ -1,9 +1,11 @@
 # BigIntKeyword
 
+Inherit from [Token](./Token.md)
+
 Primary key: `id: int`
 
 ```rust
-schema BigIntKeyword {
+schema BigIntKeyword extends Token {
   @primary id: int,
 }
 ```

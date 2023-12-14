@@ -1,9 +1,11 @@
 # AwaitExpression
 
+Inherit from [UnaryExpression](./UnaryExpression.md)
+
 Primary key: `id: int`
 
 ```rust
-schema AwaitExpression {
+schema AwaitExpression extends UnaryExpression {
   @primary id: int,
 }
 ```

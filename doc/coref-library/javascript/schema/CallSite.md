@@ -1,9 +1,11 @@
 # CallSite
 
+Inherit from [CallSiteDO](./CallSiteDO.md)
+
 Primary key: `invoke_expression_oid: int`
 
 ```rust
-schema CallSite {
+schema CallSite extends CallSiteDO {
   @primary invoke_expression_oid: int,
   callee_oid: int,
 }

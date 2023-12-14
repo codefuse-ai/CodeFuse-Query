@@ -1,9 +1,11 @@
 # CallLikeExpression
 
+Inherit from [Expression](./Expression.md)
+
 Primary key: `id: int`
 
 ```rust
-schema CallLikeExpression {
+schema CallLikeExpression extends Expression {
   @primary id: int,
 }
 ```

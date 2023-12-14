@@ -1,9 +1,11 @@
 # JsxClosingFragment
 
+Inherit from [Expression](./Expression.md)
+
 Primary key: `id: int`
 
 ```rust
-schema JsxClosingFragment {
+schema JsxClosingFragment extends Expression {
   @primary id: int,
 }
 ```

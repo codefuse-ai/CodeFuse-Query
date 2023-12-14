@@ -1,9 +1,11 @@
 # ExportKeyword
 
+Inherit from [Modifier](./Modifier.md)
+
 Primary key: `id: int`
 
 ```rust
-schema ExportKeyword {
+schema ExportKeyword extends Modifier {
   @primary id: int,
 }
 ```

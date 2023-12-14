@@ -1,9 +1,11 @@
 # NumericLiteral
 
+Inherit from [LiteralExpression](./LiteralExpression.md)
+
 Primary key: `id: int`
 
 ```rust
-schema NumericLiteral {
+schema NumericLiteral extends LiteralExpression {
   @primary id: int,
 }
 ```

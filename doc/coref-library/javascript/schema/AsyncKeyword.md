@@ -1,9 +1,11 @@
 # AsyncKeyword
 
+Inherit from [Modifier](./Modifier.md)
+
 Primary key: `id: int`
 
 ```rust
-schema AsyncKeyword {
+schema AsyncKeyword extends Modifier {
   @primary id: int,
 }
 ```

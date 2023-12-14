@@ -1,9 +1,11 @@
 # UpdateOperator
 
+Inherit from [Token](./Token.md)
+
 Primary key: `id: int`
 
 ```rust
-schema UpdateOperator {
+schema UpdateOperator extends Token {
   @primary id: int,
 }
 ```

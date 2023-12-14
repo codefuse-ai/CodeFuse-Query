@@ -1,9 +1,11 @@
 # BreakStatement
 
+Inherit from [Statement](./Statement.md)
+
 Primary key: `id: int`
 
 ```rust
-schema BreakStatement {
+schema BreakStatement extends Statement {
   @primary id: int,
 }
 ```

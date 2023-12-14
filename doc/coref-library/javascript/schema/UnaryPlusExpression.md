@@ -1,9 +1,11 @@
 # UnaryPlusExpression
 
+Inherit from [PrefixUnaryExpression](./PrefixUnaryExpression.md)
+
 Primary key: `id: int`
 
 ```rust
-schema UnaryPlusExpression {
+schema UnaryPlusExpression extends PrefixUnaryExpression {
   @primary id: int,
 }
 ```

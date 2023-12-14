@@ -1,9 +1,11 @@
 # Program
 
+Inherit from [ProgramDO](./ProgramDO.md)
+
 Primary key: `program_oid: int`
 
 ```rust
-schema Program {
+schema Program extends ProgramDO {
   @primary program_oid: int,
   absolute_prefix_path: string,
 }

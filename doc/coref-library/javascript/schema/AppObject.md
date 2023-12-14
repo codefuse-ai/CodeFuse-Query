@@ -1,9 +1,11 @@
 # AppObject
 
+Inherit from [ObjectLiteralExpression](./ObjectLiteralExpression.md)
+
 Primary key: `id: int`
 
 ```rust
-schema AppObject {
+schema AppObject extends ObjectLiteralExpression {
   @primary id: int,
 }
 ```

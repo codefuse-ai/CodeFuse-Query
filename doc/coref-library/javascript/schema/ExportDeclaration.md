@@ -1,9 +1,11 @@
 # ExportDeclaration
 
+Inherit from [DeclarationStatement](./DeclarationStatement.md)
+
 Primary key: `id: int`
 
 ```rust
-schema ExportDeclaration {
+schema ExportDeclaration extends DeclarationStatement {
   @primary id: int,
 }
 ```

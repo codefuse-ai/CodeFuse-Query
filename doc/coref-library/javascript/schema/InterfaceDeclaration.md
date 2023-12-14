@@ -1,9 +1,11 @@
 # InterfaceDeclaration
 
+Inherit from [DeclarationStatement](./DeclarationStatement.md)
+
 Primary key: `id: int`
 
 ```rust
-schema InterfaceDeclaration {
+schema InterfaceDeclaration extends DeclarationStatement {
   @primary id: int,
 }
 ```

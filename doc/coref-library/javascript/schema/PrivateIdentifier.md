@@ -1,9 +1,11 @@
 # PrivateIdentifier
 
+Inherit from [PrimaryExpression](./PrimaryExpression.md)
+
 Primary key: `id: int`
 
 ```rust
-schema PrivateIdentifier {
+schema PrivateIdentifier extends PrimaryExpression {
   @primary id: int,
 }
 ```

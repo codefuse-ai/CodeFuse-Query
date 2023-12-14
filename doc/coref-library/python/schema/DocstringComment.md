@@ -1,9 +1,11 @@
 # DocstringComment
 
+Inherit from [DocstringCommentDO](./DocstringCommentDO.md)
+
 Primary key: `element_oid: int`
 
 ```rust
-schema DocstringComment {
+schema DocstringComment extends DocstringCommentDO {
   @primary element_oid: int,
   text: string,
   documented_element_oid: int,

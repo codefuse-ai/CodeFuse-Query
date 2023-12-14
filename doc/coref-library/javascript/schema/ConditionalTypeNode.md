@@ -1,9 +1,11 @@
 # ConditionalTypeNode
 
+Inherit from [TypeNode](./TypeNode.md)
+
 Primary key: `id: int`
 
 ```rust
-schema ConditionalTypeNode {
+schema ConditionalTypeNode extends TypeNode {
   @primary id: int,
 }
 ```

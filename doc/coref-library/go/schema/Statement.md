@@ -1,9 +1,11 @@
 # Statement
 
+Inherit from [Node](./Node.md)
+
 Primary key: `id: int`
 
 ```rust
-schema Statement {
+schema Statement extends Node {
   @primary id: int,
 }
 ```

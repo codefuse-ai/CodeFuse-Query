@@ -1,9 +1,11 @@
 # ComponentObject
 
+Inherit from [ObjectLiteralExpression](./ObjectLiteralExpression.md)
+
 Primary key: `id: int`
 
 ```rust
-schema ComponentObject {
+schema ComponentObject extends ObjectLiteralExpression {
   @primary id: int,
 }
 ```

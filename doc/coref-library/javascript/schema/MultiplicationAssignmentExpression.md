@@ -1,9 +1,11 @@
 # MultiplicationAssignmentExpression
 
+Inherit from [CompoundAssignmentExpression](./CompoundAssignmentExpression.md)
+
 Primary key: `id: int`
 
 ```rust
-schema MultiplicationAssignmentExpression {
+schema MultiplicationAssignmentExpression extends CompoundAssignmentExpression {
   @primary id: int,
 }
 ```

@@ -1,9 +1,11 @@
 # NameString
 
+Inherit from [NameStringDO](./NameStringDO.md)
+
 Primary key: `parent_hash_id: int`
 
 ```rust
-schema NameString {
+schema NameString extends NameStringDO {
   @primary parent_hash_id: int,
   value_element_hash_id: int,
   name_element_hash_id: int,

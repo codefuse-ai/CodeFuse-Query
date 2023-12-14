@@ -1,9 +1,11 @@
 # TaggedTemplateExpression
 
+Inherit from [MemberExpression](./MemberExpression.md)
+
 Primary key: `id: int`
 
 ```rust
-schema TaggedTemplateExpression {
+schema TaggedTemplateExpression extends MemberExpression {
   @primary id: int,
 }
 ```

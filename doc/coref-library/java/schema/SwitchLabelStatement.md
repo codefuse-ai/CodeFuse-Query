@@ -1,9 +1,11 @@
 # SwitchLabelStatement
 
+Inherit from [Statement](./Statement.md)
+
 Primary key: `element_hash_id: int`
 
 ```rust
-schema SwitchLabelStatement {
+schema SwitchLabelStatement extends Statement {
   type: string,
   printable_text: string,
   index_order: int,

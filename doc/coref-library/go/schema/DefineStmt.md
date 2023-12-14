@@ -1,9 +1,11 @@
 # DefineStmt
 
+Inherit from [Statement](./Statement.md)
+
 Primary key: `id: int`
 
 ```rust
-schema DefineStmt {
+schema DefineStmt extends Statement {
   @primary id: int,
 }
 ```

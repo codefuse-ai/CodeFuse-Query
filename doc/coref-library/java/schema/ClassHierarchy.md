@@ -1,9 +1,11 @@
 # ClassHierarchy
 
+Inherit from [ClassHierarchyDO](./ClassHierarchyDO.md)
+
 Primary key: `child_hash_id: int`
 
 ```rust
-schema ClassHierarchy {
+schema ClassHierarchy extends ClassHierarchyDO {
   @primary child_hash_id: int,
   parent_hash_id: int,
 }

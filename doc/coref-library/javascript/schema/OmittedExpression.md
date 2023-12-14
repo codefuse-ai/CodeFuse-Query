@@ -1,9 +1,11 @@
 # OmittedExpression
 
+Inherit from [Expression](./Expression.md)
+
 Primary key: `id: int`
 
 ```rust
-schema OmittedExpression {
+schema OmittedExpression extends Expression {
   @primary id: int,
 }
 ```

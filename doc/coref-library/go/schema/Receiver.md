@@ -1,9 +1,11 @@
 # Receiver
 
+Inherit from [Method](./Method.md)
+
 Primary key: `id: int`
 
 ```rust
-schema Receiver {
+schema Receiver extends Method {
   @primary id: int,
 }
 ```

@@ -1,9 +1,11 @@
 # Arg
 
+Inherit from [ArgDO](./ArgDO.md)
+
 Primary key: `element_oid: int`
 
 ```rust
-schema Arg {
+schema Arg extends ArgDO {
   @primary element_oid: int,
   annotation: int,
   element_index: int,

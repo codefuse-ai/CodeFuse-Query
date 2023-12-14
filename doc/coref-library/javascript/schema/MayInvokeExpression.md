@@ -1,9 +1,11 @@
 # MayInvokeExpression
 
+Inherit from [Expression](./Expression.md)
+
 Primary key: `id: int`
 
 ```rust
-schema MayInvokeExpression {
+schema MayInvokeExpression extends Expression {
   @primary id: int,
 }
 ```

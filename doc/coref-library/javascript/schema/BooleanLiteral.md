@@ -1,9 +1,11 @@
 # BooleanLiteral
 
+Inherit from [PrimaryExpression](./PrimaryExpression.md)
+
 Primary key: `id: int`
 
 ```rust
-schema BooleanLiteral {
+schema BooleanLiteral extends PrimaryExpression {
   @primary id: int,
 }
 ```

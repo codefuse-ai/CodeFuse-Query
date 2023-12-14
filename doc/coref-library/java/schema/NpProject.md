@@ -1,9 +1,11 @@
 # NpProject
 
+Inherit from [NpProjectDO](./NpProjectDO.md)
+
 Primary key: `element_hash_id: int`
 
 ```rust
-schema NpProject {
+schema NpProject extends NpProjectDO {
   @primary element_hash_id: int,
   name: string,
   extension: string,

@@ -1,9 +1,11 @@
 # ArrowFunction
 
+Inherit from [FunctionLikeDeclaration](./FunctionLikeDeclaration.md)
+
 Primary key: `id: int`
 
 ```rust
-schema ArrowFunction {
+schema ArrowFunction extends FunctionLikeDeclaration {
   @primary id: int,
 }
 ```

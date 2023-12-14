@@ -1,9 +1,11 @@
 # Slice
 
+Inherit from [SliceDO](./SliceDO.md)
+
 Primary key: `element_oid: int`
 
 ```rust
-schema Slice {
+schema Slice extends SliceDO {
   @primary element_oid: int,
   parent_oid: int,
   element_index: int,

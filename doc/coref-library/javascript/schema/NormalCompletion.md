@@ -1,9 +1,11 @@
 # NormalCompletion
 
+Inherit from [Completion](./Completion.md)
+
 Primary key: `id: int`
 
 ```rust
-schema NormalCompletion {
+schema NormalCompletion extends Completion {
   @primary id: int,
   name: string,
 }

@@ -1,9 +1,11 @@
 # ModuleDeclaration
 
+Inherit from [DeclarationStatement](./DeclarationStatement.md)
+
 Primary key: `id: int`
 
 ```rust
-schema ModuleDeclaration {
+schema ModuleDeclaration extends DeclarationStatement {
   @primary id: int,
 }
 ```

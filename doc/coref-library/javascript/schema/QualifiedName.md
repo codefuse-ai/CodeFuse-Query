@@ -1,9 +1,11 @@
 # QualifiedName
 
+Inherit from [Node](./Node.md)
+
 Primary key: `id: int`
 
 ```rust
-schema QualifiedName {
+schema QualifiedName extends Node {
   @primary id: int,
 }
 ```

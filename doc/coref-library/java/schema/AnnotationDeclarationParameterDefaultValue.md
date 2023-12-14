@@ -1,9 +1,11 @@
 # AnnotationDeclarationParameterDefaultValue
 
+Inherit from [AnnotationDeclarationParameterDefaultValueDO](./AnnotationDeclarationParameterDefaultValueDO.md)
+
 Primary key: `element_hash_id: int`
 
 ```rust
-schema AnnotationDeclarationParameterDefaultValue {
+schema AnnotationDeclarationParameterDefaultValue extends AnnotationDeclarationParameterDefaultValueDO {
   @primary element_hash_id: int,
   default_value: string,
 }

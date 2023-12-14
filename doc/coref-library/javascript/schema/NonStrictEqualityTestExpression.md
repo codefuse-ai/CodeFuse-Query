@@ -1,9 +1,11 @@
 # NonStrictEqualityTestExpression
 
+Inherit from [EqualityTestExpression](./EqualityTestExpression.md)
+
 Primary key: `id: int`
 
 ```rust
-schema NonStrictEqualityTestExpression {
+schema NonStrictEqualityTestExpression extends EqualityTestExpression {
   @primary id: int,
 }
 ```

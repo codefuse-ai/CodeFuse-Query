@@ -1,9 +1,11 @@
 # YieldExpression
 
+Inherit from [Expression](./Expression.md)
+
 Primary key: `id: int`
 
 ```rust
-schema YieldExpression {
+schema YieldExpression extends Expression {
   @primary id: int,
 }
 ```

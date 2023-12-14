@@ -1,9 +1,11 @@
 # SliceExpr
 
+Inherit from [Expr](./Expr.md)
+
 Primary key: `id: int`
 
 ```rust
-schema SliceExpr {
+schema SliceExpr extends Expr {
   @primary id: int,
 }
 ```

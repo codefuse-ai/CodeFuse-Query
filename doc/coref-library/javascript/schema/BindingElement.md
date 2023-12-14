@@ -1,9 +1,11 @@
 # BindingElement
 
+Inherit from [Node](./Node.md)
+
 Primary key: `id: int`
 
 ```rust
-schema BindingElement {
+schema BindingElement extends Node {
   @primary id: int,
 }
 ```

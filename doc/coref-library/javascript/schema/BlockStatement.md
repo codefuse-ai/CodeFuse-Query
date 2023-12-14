@@ -1,9 +1,11 @@
 # BlockStatement
 
+Inherit from [Statement](./Statement.md)
+
 Primary key: `id: int`
 
 ```rust
-schema BlockStatement {
+schema BlockStatement extends Statement {
   @primary id: int,
 }
 ```

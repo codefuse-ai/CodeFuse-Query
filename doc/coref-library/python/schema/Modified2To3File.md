@@ -1,9 +1,11 @@
 # Modified2To3File
 
+Inherit from [Modified2To3FileDO](./Modified2To3FileDO.md)
+
 Primary key: `element_oid: int`
 
 ```rust
-schema Modified2To3File {
+schema Modified2To3File extends Modified2To3FileDO {
   @primary element_oid: int,
   relative_path: string,
 }

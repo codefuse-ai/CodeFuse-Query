@@ -1,9 +1,11 @@
 # CommaListExpression
 
+Inherit from [Expression](./Expression.md)
+
 Primary key: `id: int`
 
 ```rust
-schema CommaListExpression {
+schema CommaListExpression extends Expression {
   @primary id: int,
 }
 ```

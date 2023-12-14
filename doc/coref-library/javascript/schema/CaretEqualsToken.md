@@ -1,9 +1,11 @@
 # CaretEqualsToken
 
+Inherit from [Token](./Token.md)
+
 Primary key: `id: int`
 
 ```rust
-schema CaretEqualsToken {
+schema CaretEqualsToken extends Token {
   @primary id: int,
 }
 ```

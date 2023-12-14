@@ -1,9 +1,11 @@
 # FalseBooleanCompletion
 
+Inherit from [BooleanCompletion](./BooleanCompletion.md)
+
 Primary key: `id: int`
 
 ```rust
-schema FalseBooleanCompletion {
+schema FalseBooleanCompletion extends BooleanCompletion {
   name: string,
   @primary id: int,
 }

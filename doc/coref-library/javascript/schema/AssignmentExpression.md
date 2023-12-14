@@ -1,9 +1,11 @@
 # AssignmentExpression
 
+Inherit from [BinaryExpression](./BinaryExpression.md)
+
 Primary key: `id: int`
 
 ```rust
-schema AssignmentExpression {
+schema AssignmentExpression extends BinaryExpression {
   @primary id: int,
 }
 ```

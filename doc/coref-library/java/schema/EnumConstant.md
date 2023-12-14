@@ -1,9 +1,11 @@
 # EnumConstant
 
+Inherit from [EnumConstantDO](./EnumConstantDO.md)
+
 Primary key: `element_hash_id: int`
 
 ```rust
-schema EnumConstant {
+schema EnumConstant extends EnumConstantDO {
   @primary element_hash_id: int,
   name: string,
   location_hash_id: int,

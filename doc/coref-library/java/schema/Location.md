@@ -1,9 +1,11 @@
 # Location
 
+Inherit from [LocationDO](./LocationDO.md)
+
 Primary key: `element_hash_id: int`
 
 ```rust
-schema Location {
+schema Location extends LocationDO {
   @primary element_hash_id: int,
   file_hash_id: int,
   end_line_number: int,

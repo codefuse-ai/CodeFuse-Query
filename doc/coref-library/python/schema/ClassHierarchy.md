@@ -1,9 +1,11 @@
 # ClassHierarchy
 
+Inherit from [ClassHierarchyDO](./ClassHierarchyDO.md)
+
 Primary key: `base_oid: int`
 
 ```rust
-schema ClassHierarchy {
+schema ClassHierarchy extends ClassHierarchyDO {
   @primary base_oid: int,
   class_oid: int,
 }

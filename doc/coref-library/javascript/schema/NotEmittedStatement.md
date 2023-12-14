@@ -1,9 +1,11 @@
 # NotEmittedStatement
 
+Inherit from [Statement](./Statement.md)
+
 Primary key: `id: int`
 
 ```rust
-schema NotEmittedStatement {
+schema NotEmittedStatement extends Statement {
   @primary id: int,
 }
 ```

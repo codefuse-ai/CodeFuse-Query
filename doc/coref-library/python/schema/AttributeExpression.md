@@ -1,9 +1,11 @@
 # AttributeExpression
 
+Inherit from [Expression](./Expression.md)
+
 Primary key: `element_oid: int`
 
 ```rust
-schema AttributeExpression {
+schema AttributeExpression extends Expression {
   printable_text: string,
   location_oid: int,
   type: string,

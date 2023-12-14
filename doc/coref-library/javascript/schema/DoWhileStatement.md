@@ -1,9 +1,11 @@
 # DoWhileStatement
 
+Inherit from [Statement](./Statement.md)
+
 Primary key: `id: int`
 
 ```rust
-schema DoWhileStatement {
+schema DoWhileStatement extends Statement {
   @primary id: int,
 }
 ```

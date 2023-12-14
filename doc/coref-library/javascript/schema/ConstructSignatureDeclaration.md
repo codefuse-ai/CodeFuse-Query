@@ -1,9 +1,11 @@
 # ConstructSignatureDeclaration
 
+Inherit from [TypeElement](./TypeElement.md)
+
 Primary key: `id: int`
 
 ```rust
-schema ConstructSignatureDeclaration {
+schema ConstructSignatureDeclaration extends TypeElement {
   @primary id: int,
 }
 ```

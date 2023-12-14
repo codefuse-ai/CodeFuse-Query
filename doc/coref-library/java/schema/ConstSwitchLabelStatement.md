@@ -1,9 +1,11 @@
 # ConstSwitchLabelStatement
 
+Inherit from [SwitchLabelStatement](./SwitchLabelStatement.md)
+
 Primary key: `element_hash_id: int`
 
 ```rust
-schema ConstSwitchLabelStatement {
+schema ConstSwitchLabelStatement extends SwitchLabelStatement {
   @primary element_hash_id: int,
   location_hash_id: int,
   parent_hash_id: int,

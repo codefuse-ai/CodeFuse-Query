@@ -1,9 +1,11 @@
 # ObjectLiteralElement
 
+Inherit from [Node](./Node.md)
+
 Primary key: `id: int`
 
 ```rust
-schema ObjectLiteralElement {
+schema ObjectLiteralElement extends Node {
   @primary id: int,
 }
 ```

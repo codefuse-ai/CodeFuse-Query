@@ -1,9 +1,11 @@
 # DataFlowNode
 
+Inherit from [Node](./Node.md)
+
 Primary key: `id: int`
 
 ```rust
-schema DataFlowNode {
+schema DataFlowNode extends Node {
   @primary id: int,
 }
 ```

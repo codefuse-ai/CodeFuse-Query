@@ -1,9 +1,11 @@
 # ArrayBindingElement
 
+Inherit from [Node](./Node.md)
+
 Primary key: `id: int`
 
 ```rust
-schema ArrayBindingElement {
+schema ArrayBindingElement extends Node {
   @primary id: int,
 }
 ```

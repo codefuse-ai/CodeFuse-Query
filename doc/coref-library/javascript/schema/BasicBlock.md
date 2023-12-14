@@ -1,9 +1,11 @@
 # BasicBlock
 
+Inherit from [ControlFlowNode](./ControlFlowNode.md)
+
 Primary key: `id: int`
 
 ```rust
-schema BasicBlock {
+schema BasicBlock extends ControlFlowNode {
   @primary id: int,
 }
 ```

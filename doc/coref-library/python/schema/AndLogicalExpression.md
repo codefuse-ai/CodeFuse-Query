@@ -1,9 +1,11 @@
 # AndLogicalExpression
 
+Inherit from [BooleanExpression](./BooleanExpression.md)
+
 Primary key: `element_oid: int`
 
 ```rust
-schema AndLogicalExpression {
+schema AndLogicalExpression extends BooleanExpression {
   @primary element_oid: int,
   element_index: int,
   parent_oid: int,

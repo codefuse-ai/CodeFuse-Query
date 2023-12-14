@@ -1,9 +1,11 @@
 # PartiallyEmittedExpression
 
+Inherit from [LeftHandSideExpression](./LeftHandSideExpression.md)
+
 Primary key: `id: int`
 
 ```rust
-schema PartiallyEmittedExpression {
+schema PartiallyEmittedExpression extends LeftHandSideExpression {
   @primary id: int,
 }
 ```

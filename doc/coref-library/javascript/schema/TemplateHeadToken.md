@@ -1,9 +1,11 @@
 # TemplateHeadToken
 
+Inherit from [Token](./Token.md)
+
 Primary key: `id: int`
 
 ```rust
-schema TemplateHeadToken {
+schema TemplateHeadToken extends Token {
   @primary id: int,
 }
 ```

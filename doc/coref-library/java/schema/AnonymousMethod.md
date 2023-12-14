@@ -1,9 +1,11 @@
 # AnonymousMethod
 
+Inherit from [Callable](./Callable.md)
+
 Primary key: `id: int`
 
 ```rust
-schema AnonymousMethod {
+schema AnonymousMethod extends Callable {
   @primary id: int,
 }
 ```

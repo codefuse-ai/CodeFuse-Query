@@ -1,9 +1,11 @@
 # RegularExpressionLiteralToken
 
+Inherit from [Token](./Token.md)
+
 Primary key: `id: int`
 
 ```rust
-schema RegularExpressionLiteralToken {
+schema RegularExpressionLiteralToken extends Token {
   @primary id: int,
 }
 ```

@@ -1,9 +1,11 @@
 # ScopeEnclosignStatement
 
+Inherit from [ScopeEnclosingStatementDO](./ScopeEnclosingStatementDO.md)
+
 Primary key: `statement_oid: int`
 
 ```rust
-schema ScopeEnclosignStatement {
+schema ScopeEnclosignStatement extends ScopeEnclosingStatementDO {
   @primary statement_oid: int,
   scope_oid: int,
 }

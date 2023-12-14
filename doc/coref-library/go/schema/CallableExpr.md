@@ -1,9 +1,11 @@
 # CallableExpr
 
+Inherit from [Expr](./Expr.md)
+
 Primary key: `id: int`
 
 ```rust
-schema CallableExpr {
+schema CallableExpr extends Expr {
   @primary id: int,
 }
 ```

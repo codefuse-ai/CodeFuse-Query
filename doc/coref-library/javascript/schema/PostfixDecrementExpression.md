@@ -1,9 +1,11 @@
 # PostfixDecrementExpression
 
+Inherit from [PostfixUnaryExpression](./PostfixUnaryExpression.md)
+
 Primary key: `id: int`
 
 ```rust
-schema PostfixDecrementExpression {
+schema PostfixDecrementExpression extends PostfixUnaryExpression {
   @primary id: int,
 }
 ```

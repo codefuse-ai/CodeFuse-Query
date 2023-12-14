@@ -1,9 +1,11 @@
 # AnnotationAccessArgument
 
+Inherit from [AnnotationAccessArgumentDO](./AnnotationAccessArgumentDO.md)
+
 Primary key: `id: int`
 
 ```rust
-schema AnnotationAccessArgument {
+schema AnnotationAccessArgument extends AnnotationAccessArgumentDO {
   @primary id: int,
 }
 ```

@@ -1,9 +1,11 @@
 # WithStatement
 
+Inherit from [Statement](./Statement.md)
+
 Primary key: `id: int`
 
 ```rust
-schema WithStatement {
+schema WithStatement extends Statement {
   @primary id: int,
 }
 ```

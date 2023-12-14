@@ -1,9 +1,11 @@
 # SyntheticExpression
 
+Inherit from [Expression](./Expression.md)
+
 Primary key: `id: int`
 
 ```rust
-schema SyntheticExpression {
+schema SyntheticExpression extends Expression {
   @primary id: int,
 }
 ```

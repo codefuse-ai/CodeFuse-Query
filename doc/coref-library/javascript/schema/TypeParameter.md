@@ -1,9 +1,11 @@
 # TypeParameter
 
+Inherit from [Node](./Node.md)
+
 Primary key: `id: int`
 
 ```rust
-schema TypeParameter {
+schema TypeParameter extends Node {
   @primary id: int,
 }
 ```

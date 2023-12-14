@@ -1,9 +1,11 @@
 # ContinueCompletion
 
+Inherit from [Completion](./Completion.md)
+
 Primary key: `id: int`
 
 ```rust
-schema ContinueCompletion {
+schema ContinueCompletion extends Completion {
   @primary id: int,
   name: string,
 }

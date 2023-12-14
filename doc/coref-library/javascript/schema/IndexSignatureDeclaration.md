@@ -1,9 +1,11 @@
 # IndexSignatureDeclaration
 
+Inherit from [TypeElement](./TypeElement.md)
+
 Primary key: `id: int`
 
 ```rust
-schema IndexSignatureDeclaration {
+schema IndexSignatureDeclaration extends TypeElement {
   @primary id: int,
 }
 ```

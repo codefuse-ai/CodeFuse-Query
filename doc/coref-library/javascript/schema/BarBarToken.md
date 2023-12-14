@@ -1,9 +1,11 @@
 # BarBarToken
 
+Inherit from [Token](./Token.md)
+
 Primary key: `id: int`
 
 ```rust
-schema BarBarToken {
+schema BarBarToken extends Token {
   @primary id: int,
 }
 ```

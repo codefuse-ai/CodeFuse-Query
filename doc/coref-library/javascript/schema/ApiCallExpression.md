@@ -1,9 +1,11 @@
 # ApiCallExpression
 
+Inherit from [CallExpression](./CallExpression.md)
+
 Primary key: `id: int`
 
 ```rust
-schema ApiCallExpression {
+schema ApiCallExpression extends CallExpression {
   @primary id: int,
 }
 ```

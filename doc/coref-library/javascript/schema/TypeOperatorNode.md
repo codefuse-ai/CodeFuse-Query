@@ -1,9 +1,11 @@
 # TypeOperatorNode
 
+Inherit from [TypeNode](./TypeNode.md)
+
 Primary key: `id: int`
 
 ```rust
-schema TypeOperatorNode {
+schema TypeOperatorNode extends TypeNode {
   @primary id: int,
 }
 ```

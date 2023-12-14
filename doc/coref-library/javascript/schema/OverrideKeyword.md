@@ -1,9 +1,11 @@
 # OverrideKeyword
 
+Inherit from [Modifier](./Modifier.md)
+
 Primary key: `id: int`
 
 ```rust
-schema OverrideKeyword {
+schema OverrideKeyword extends Modifier {
   @primary id: int,
 }
 ```

@@ -1,9 +1,11 @@
 # BooleanExpression
 
+Inherit from [Expression](./Expression.md)
+
 Primary key: `element_oid: int`
 
 ```rust
-schema BooleanExpression {
+schema BooleanExpression extends Expression {
   printable_text: string,
   location_oid: int,
   type: string,
