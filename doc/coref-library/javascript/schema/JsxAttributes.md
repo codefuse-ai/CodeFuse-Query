@@ -1,0 +1,333 @@
+# JsxAttributes
+
+Primary key: `id: int`
+
+```rust
+schema JsxAttributes {
+  @primary id: int,
+}
+```
+## JsxAttributes::getADescendant
+
+```rust
+/**
+     * Gets a descendant of this node. 
+     */
+```
+```rust
+pub fn getADescendant(self: JsxAttributes) -> *Node;
+```
+## JsxAttributes::getEndLineNumber
+
+```rust
+pub fn getEndLineNumber(self: JsxAttributes) -> int;
+```
+## JsxAttributes::getRelativePath
+
+```rust
+/**
+     * Gets the relative path of this node.
+     */
+```
+```rust
+pub fn getRelativePath(self: JsxAttributes) -> string;
+```
+## JsxAttributes::getExpression
+
+```rust
+pub fn getExpression(self: JsxAttributes) -> Expression;
+```
+## JsxAttributes::getIndex
+
+```rust
+pub fn getIndex(self: JsxAttributes) -> int;
+```
+## JsxAttributes::getParentOid
+
+```rust
+/**
+     * Gets the parent oid of this node.
+     */
+```
+```rust
+pub fn getParentOid(self: JsxAttributes) -> int;
+```
+## JsxAttributes::getAnAncestorByLevel
+
+```rust
+/**
+     * Gets an ancestor of this node by the level of the hierarchy.
+     *
+     * @param level: the number of levels to go up in the hierarchy.
+     */
+```
+```rust
+pub fn getAnAncestorByLevel(self: JsxAttributes, level: int) -> Node;
+```
+## JsxAttributes::getFile
+
+```rust
+/**
+     * Gets the file of this node.
+     */
+```
+```rust
+pub fn getFile(self: JsxAttributes) -> File;
+```
+## JsxAttributes::getEndColumnNumber
+
+```rust
+pub fn getEndColumnNumber(self: JsxAttributes) -> int;
+```
+## JsxAttributes::getEnclosingFunction
+
+```rust
+/**
+     * Gets the enclosing function of it
+     */
+```
+```rust
+pub fn getEnclosingFunction(self: JsxAttributes) -> FunctionLikeDeclaration;
+```
+## JsxAttributes::getATrailingComment
+
+```rust
+/**
+     * Gets the trailing comments of it
+     */
+```
+```rust
+pub fn getATrailingComment(self: JsxAttributes) -> *Comment;
+```
+## JsxAttributes::getALeadingComment
+
+```rust
+/**
+     * Gets the leading comments of it
+     */
+```
+```rust
+pub fn getALeadingComment(self: JsxAttributes) -> *Comment;
+```
+## JsxAttributes::getAnAncestorEnclosingFunction
+
+```rust
+/**
+     * Gets an ancestor enclosing function of it
+     */
+```
+```rust
+pub fn getAnAncestorEnclosingFunction(self: JsxAttributes) -> *FunctionLikeDeclaration;
+```
+## JsxAttributes::getADescendantByLevel
+
+```rust
+/**
+     * Gets a descendant of this node by the level of the hierarchy.
+     *
+     * @param level: the number of levels to go up in the hierarchy.
+     */
+```
+```rust
+pub fn getADescendantByLevel(self: JsxAttributes, level: int) -> *Node;
+```
+## JsxAttributes::getKind
+
+```rust
+/**
+     * Get the syntax kind of this node
+     */
+```
+```rust
+pub fn getKind(self: JsxAttributes) -> int;
+```
+## JsxAttributes::getAModifier
+
+```rust
+/**
+     * Gets a modifier.
+     */
+```
+```rust
+pub fn getAModifier(self: JsxAttributes) -> *Modifier;
+```
+## JsxAttributes::getStartColumnNumber
+
+```rust
+pub fn getStartColumnNumber(self: JsxAttributes) -> int;
+```
+## JsxAttributes::getStartLineNumber
+
+```rust
+pub fn getStartLineNumber(self: JsxAttributes) -> int;
+```
+## JsxAttributes::getChild
+
+```rust
+/**
+     * Gets the `i`th child of this node.
+     */
+```
+```rust
+pub fn getChild(self: JsxAttributes, i: int) -> Node;
+```
+## JsxAttributes::getDecorator
+
+```rust
+/**
+     * Gets the `i`th decorator.
+     */
+```
+```rust
+pub fn getDecorator(self: JsxAttributes, i: int) -> Decorator;
+```
+## JsxAttributes::getRoot
+
+```rust
+/**
+     * Gets the root top-level of this node. 
+     */
+```
+```rust
+pub fn getRoot(self: JsxAttributes) -> TopLevelDO;
+```
+## JsxAttributes::getChildCount
+
+```rust
+/**
+     * Gets the number of child nodes.
+     */
+```
+```rust
+pub fn getChildCount(self: JsxAttributes) -> int;
+```
+## JsxAttributes::getLastChild
+
+```rust
+/**
+     * Gets the last child of this node parent.
+     */
+```
+```rust
+pub fn getLastChild(self: JsxAttributes) -> Node;
+```
+## JsxAttributes::getParent
+
+```rust
+/**
+     * Gets the parent node of this node.
+     */
+```
+```rust
+pub fn getParent(self: JsxAttributes) -> Node;
+```
+## JsxAttributes::getAChild
+
+```rust
+/**
+     * Gets a child node of this node.
+     */
+```
+```rust
+pub fn getAChild(self: JsxAttributes) -> *Node;
+```
+## JsxAttributes::getAnAncestor
+
+```rust
+/**
+     * Gets an ancestor of this node. 
+     */
+```
+```rust
+pub fn getAnAncestor(self: JsxAttributes) -> *Node;
+```
+## JsxAttributes::getAComment
+
+```rust
+/**
+     * Gets the comments related to it
+     */
+```
+```rust
+pub fn getAComment(self: JsxAttributes) -> *Comment;
+```
+## JsxAttributes::\_\_all\_\_
+
+```rust
+pub fn __all__(db: JavascriptDB) -> *JsxAttributes;
+```
+## JsxAttributes::getLocation
+
+```rust
+/**
+     * Gets the location of this node.
+     */
+```
+```rust
+pub fn getLocation(self: JsxAttributes) -> Location;
+```
+## JsxAttributes::getSymbol
+
+```rust
+/**
+     * Gets the symbol associated with this node.
+     */
+```
+```rust
+pub fn getSymbol(self: JsxAttributes) -> Symbol;
+```
+## JsxAttributes::getADecorator
+
+```rust
+/**
+     * Gets a decorator.
+     */
+```
+```rust
+pub fn getADecorator(self: JsxAttributes) -> *Decorator;
+```
+## JsxAttributes::getModifier
+
+```rust
+/**
+     * Gets the `i`th modifier.
+     */
+```
+```rust
+pub fn getModifier(self: JsxAttributes, i: int) -> Modifier;
+```
+## JsxAttributes::getText
+
+```rust
+/**
+     * Gets the text of this node.
+     */
+```
+```rust
+pub fn getText(self: JsxAttributes) -> string;
+```
+## JsxAttributes::is\<T\>
+
+```rust
+pub fn is<T>(self: JsxAttributes) -> bool;
+```
+## JsxAttributes::to\<T\>
+
+```rust
+pub fn to<T>(self: JsxAttributes) -> <any>;
+```
+## JsxAttributes::key\_neq
+
+```rust
+pub fn key_neq(self: JsxAttributes, object: <any>) -> bool;
+```
+## JsxAttributes::key\_eq
+
+```rust
+pub fn key_eq(self: JsxAttributes, object: <any>) -> bool;
+```
+## JsxAttributes::to\_set
+
+```rust
+pub fn to_set(self: JsxAttributes) -> *JsxAttributes;
+```

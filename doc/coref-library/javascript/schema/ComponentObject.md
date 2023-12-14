@@ -1,0 +1,383 @@
+# ComponentObject
+
+Primary key: `id: int`
+
+```rust
+schema ComponentObject {
+  @primary id: int,
+}
+```
+## ComponentObject::getAProperty
+
+```rust
+/**
+     * Get a property, which is an ObjectLiteralElement.
+     */
+```
+```rust
+pub fn getAProperty(self: ComponentObject) -> *ObjectLiteralElement;
+```
+## ComponentObject::getProperty
+
+```rust
+/**
+     * Get the `i`th property.
+     */
+```
+```rust
+pub fn getProperty(self: ComponentObject, i: int) -> ObjectLiteralElement;
+```
+## ComponentObject::getChildCount
+
+```rust
+/**
+     * Gets the number of child nodes.
+     */
+```
+```rust
+pub fn getChildCount(self: ComponentObject) -> int;
+```
+## ComponentObject::getText
+
+```rust
+/**
+     * Gets the text of this node.
+     */
+```
+```rust
+pub fn getText(self: ComponentObject) -> string;
+```
+## ComponentObject::getModifier
+
+```rust
+/**
+     * Gets the `i`th modifier.
+     */
+```
+```rust
+pub fn getModifier(self: ComponentObject, i: int) -> Modifier;
+```
+## ComponentObject::hasProperty
+
+```rust
+/**
+     * Determine whether this ObjectLiteralExpression has a property with the specified name.
+     */
+```
+```rust
+pub fn hasProperty(self: ComponentObject, name: string) -> bool;
+```
+## ComponentObject::getADecorator
+
+```rust
+/**
+     * Gets a decorator.
+     */
+```
+```rust
+pub fn getADecorator(self: ComponentObject) -> *Decorator;
+```
+## ComponentObject::getSymbol
+
+```rust
+/**
+     * Gets the symbol associated with this node.
+     */
+```
+```rust
+pub fn getSymbol(self: ComponentObject) -> Symbol;
+```
+## ComponentObject::getPropertyByName
+
+```rust
+/**
+     * Get the property of this ObjectLiteralExpression by name.
+     */
+```
+```rust
+pub fn getPropertyByName(self: ComponentObject, name: string) -> ObjectLiteralElement;
+```
+## ComponentObject::getLocation
+
+```rust
+/**
+     * Gets the location of this node.
+     */
+```
+```rust
+pub fn getLocation(self: ComponentObject) -> Location;
+```
+## ComponentObject::getAComment
+
+```rust
+/**
+     * Gets the comments related to it
+     */
+```
+```rust
+pub fn getAComment(self: ComponentObject) -> *Comment;
+```
+## ComponentObject::getAnAncestor
+
+```rust
+/**
+     * Gets an ancestor of this node. 
+     */
+```
+```rust
+pub fn getAnAncestor(self: ComponentObject) -> *Node;
+```
+## ComponentObject::getAChild
+
+```rust
+/**
+     * Gets a child node of this node.
+     */
+```
+```rust
+pub fn getAChild(self: ComponentObject) -> *Node;
+```
+## ComponentObject::getParent
+
+```rust
+/**
+     * Gets the parent node of this node.
+     */
+```
+```rust
+pub fn getParent(self: ComponentObject) -> Node;
+```
+## ComponentObject::getLastChild
+
+```rust
+/**
+     * Gets the last child of this node parent.
+     */
+```
+```rust
+pub fn getLastChild(self: ComponentObject) -> Node;
+```
+## ComponentObject::getDecorator
+
+```rust
+/**
+     * Gets the `i`th decorator.
+     */
+```
+```rust
+pub fn getDecorator(self: ComponentObject, i: int) -> Decorator;
+```
+## ComponentObject::getRoot
+
+```rust
+/**
+     * Gets the root top-level of this node. 
+     */
+```
+```rust
+pub fn getRoot(self: ComponentObject) -> TopLevelDO;
+```
+## ComponentObject::getKind
+
+```rust
+/**
+     * Get the syntax kind of this node
+     */
+```
+```rust
+pub fn getKind(self: ComponentObject) -> int;
+```
+## ComponentObject::getAModifier
+
+```rust
+/**
+     * Gets a modifier.
+     */
+```
+```rust
+pub fn getAModifier(self: ComponentObject) -> *Modifier;
+```
+## ComponentObject::getStartColumnNumber
+
+```rust
+pub fn getStartColumnNumber(self: ComponentObject) -> int;
+```
+## ComponentObject::getPropertyAssignmentByName
+
+```rust
+/**
+     * Get the PropertyAssignment of this ObjectLiteralExpression by name.
+     */
+```
+```rust
+pub fn getPropertyAssignmentByName(self: ComponentObject, name: string) -> PropertyAssignment;
+```
+## ComponentObject::getChild
+
+```rust
+/**
+     * Gets the `i`th child of this node.
+     */
+```
+```rust
+pub fn getChild(self: ComponentObject, i: int) -> Node;
+```
+## ComponentObject::getStartLineNumber
+
+```rust
+pub fn getStartLineNumber(self: ComponentObject) -> int;
+```
+## ComponentObject::getADescendantByLevel
+
+```rust
+/**
+     * Gets a descendant of this node by the level of the hierarchy.
+     *
+     * @param level: the number of levels to go up in the hierarchy.
+     */
+```
+```rust
+pub fn getADescendantByLevel(self: ComponentObject, level: int) -> *Node;
+```
+## ComponentObject::getAnAncestorEnclosingFunction
+
+```rust
+/**
+     * Gets an ancestor enclosing function of it
+     */
+```
+```rust
+pub fn getAnAncestorEnclosingFunction(self: ComponentObject) -> *FunctionLikeDeclaration;
+```
+## ComponentObject::getALeadingComment
+
+```rust
+/**
+     * Gets the leading comments of it
+     */
+```
+```rust
+pub fn getALeadingComment(self: ComponentObject) -> *Comment;
+```
+## ComponentObject::getATrailingComment
+
+```rust
+/**
+     * Gets the trailing comments of it
+     */
+```
+```rust
+pub fn getATrailingComment(self: ComponentObject) -> *Comment;
+```
+## ComponentObject::getEnclosingFunction
+
+```rust
+/**
+     * Gets the enclosing function of it
+     */
+```
+```rust
+pub fn getEnclosingFunction(self: ComponentObject) -> FunctionLikeDeclaration;
+```
+## ComponentObject::getEndColumnNumber
+
+```rust
+pub fn getEndColumnNumber(self: ComponentObject) -> int;
+```
+## ComponentObject::getFile
+
+```rust
+/**
+     * Gets the file of this node.
+     */
+```
+```rust
+pub fn getFile(self: ComponentObject) -> File;
+```
+## ComponentObject::getAnAncestorByLevel
+
+```rust
+/**
+     * Gets an ancestor of this node by the level of the hierarchy.
+     *
+     * @param level: the number of levels to go up in the hierarchy.
+     */
+```
+```rust
+pub fn getAnAncestorByLevel(self: ComponentObject, level: int) -> Node;
+```
+## ComponentObject::getParentOid
+
+```rust
+/**
+     * Gets the parent oid of this node.
+     */
+```
+```rust
+pub fn getParentOid(self: ComponentObject) -> int;
+```
+## ComponentObject::getIndex
+
+```rust
+pub fn getIndex(self: ComponentObject) -> int;
+```
+## ComponentObject::\_\_all\_\_
+
+```rust
+pub fn __all__(db: JavascriptDB) -> *ComponentObject;
+```
+## ComponentObject::getExpression
+
+```rust
+pub fn getExpression(self: ComponentObject) -> Expression;
+```
+## ComponentObject::getRelativePath
+
+```rust
+/**
+     * Gets the relative path of this node.
+     */
+```
+```rust
+pub fn getRelativePath(self: ComponentObject) -> string;
+```
+## ComponentObject::getEndLineNumber
+
+```rust
+pub fn getEndLineNumber(self: ComponentObject) -> int;
+```
+## ComponentObject::getADescendant
+
+```rust
+/**
+     * Gets a descendant of this node. 
+     */
+```
+```rust
+pub fn getADescendant(self: ComponentObject) -> *Node;
+```
+## ComponentObject::is\<T\>
+
+```rust
+pub fn is<T>(self: ComponentObject) -> bool;
+```
+## ComponentObject::to\<T\>
+
+```rust
+pub fn to<T>(self: ComponentObject) -> <any>;
+```
+## ComponentObject::key\_neq
+
+```rust
+pub fn key_neq(self: ComponentObject, object: <any>) -> bool;
+```
+## ComponentObject::key\_eq
+
+```rust
+pub fn key_eq(self: ComponentObject, object: <any>) -> bool;
+```
+## ComponentObject::to\_set
+
+```rust
+pub fn to_set(self: ComponentObject) -> *ComponentObject;
+```
