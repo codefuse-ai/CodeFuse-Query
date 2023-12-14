@@ -12,97 +12,74 @@ schema Folder {
 ```
 ## Folder::getName
 
-```rust
+```java
 /**
-     * @brief gets the name of this element.
-     * @return string
-     */
+* @brief gets the name of this element.
+* @return string
+*/
 ```
 ```rust
 pub fn getName(self: Folder) -> string;
 ```
 ## Folder::getParentHashId
 
-```rust
+```java
 /**
-     * @brief gets the parent hash id of this element.
-     * @return int
-     */
+* @brief gets the parent hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getParentHashId(self: Folder) -> int;
 ```
 ## Folder::getRelativePath
 
-```rust
+```java
 /**
-     * @brief gets the qualified name of this element.
-     * @return string
-     */
+* @brief gets the qualified name of this element.
+* @return string
+*/
 ```
 ```rust
 pub fn getRelativePath(self: Folder) -> string;
 ```
 ## Folder::getParent
 
-```rust
+```java
 /**
-     * @brief gets the folder which contains the element.
-     * @return Folder
-     */
+* @brief gets the folder which contains the element.
+* @return Folder
+*/
 ```
 ```rust
 pub fn getParent(self: Folder) -> Folder;
 ```
 ## Folder::getAllContainingFiles
 
-```rust
+```java
 /**
-     * @brief gets all files in the folder.
-     * @return File 
-     */
+* @brief gets all files in the folder.
+* @return File 
+*/
 ```
 ```rust
 pub fn getAllContainingFiles(self: Folder) -> *File;
 ```
 ## Folder::getAnAncestor
 
-```rust
+```java
 /**
-     * @brief gets an ancestor of the element.
-     * @return ElementParent 
-     */
+* @brief gets an ancestor of the element.
+* @return ElementParent 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: Folder) -> *ElementParent;
 ```
 ## Folder::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavaDB) -> *Folder;
-```
-## Folder::is\<T\>
-
-```rust
-pub fn is<T>(self: Folder) -> bool;
-```
-## Folder::to\<T\>
-
-```rust
-pub fn to<T>(self: Folder) -> <any>;
-```
-## Folder::key\_neq
-
-```rust
-pub fn key_neq(self: Folder, object: <any>) -> bool;
-```
-## Folder::key\_eq
-
-```rust
-pub fn key_eq(self: Folder, object: <any>) -> bool;
-```
-## Folder::to\_set
-
-```rust
-pub fn to_set(self: Folder) -> *Folder;
 ```

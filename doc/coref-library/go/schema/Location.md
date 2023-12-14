@@ -15,97 +15,74 @@ schema Location {
 ```
 ## Location::getStartLineNumber
 
-```rust
+```java
 /**
-     * @brief gets the start line number of this element.
-     * @return int
-     */
+* @brief gets the start line number of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getStartLineNumber(self: Location) -> int;
 ```
 ## Location::getStartColumnNumber
 
-```rust
+```java
 /**
-     * @brief gets the start column number of this element.
-     * @return int
-     */
+* @brief gets the start column number of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getStartColumnNumber(self: Location) -> int;
 ```
 ## Location::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: GoDB) -> *Location;
 ```
 ## Location::getEndLineNumber
 
-```rust
+```java
 /**
-     * @brief gets the end line number of this element.
-     * @return int
-     */
+* @brief gets the end line number of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getEndLineNumber(self: Location) -> int;
 ```
 ## Location::getEndColumnNumber
 
-```rust
+```java
 /**
-     * @brief gets the end column number of this element.
-     * @return int
-     */
+* @brief gets the end column number of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getEndColumnNumber(self: Location) -> int;
 ```
 ## Location::getTokenStartOffset
 
-```rust
+```java
 /**
-     * @brief gets the token start offset of this element.
-     * @return int
-     */
+* @brief gets the token start offset of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getTokenStartOffset(self: Location) -> int;
 ```
 ## Location::getTokenEndOffset
 
-```rust
+```java
 /**
-     * @brief gets the token end offset of this element.
-     * @return int
-     */
+* @brief gets the token end offset of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getTokenEndOffset(self: Location) -> int;
-```
-## Location::is\<T\>
-
-```rust
-pub fn is<T>(self: Location) -> bool;
-```
-## Location::to\<T\>
-
-```rust
-pub fn to<T>(self: Location) -> <any>;
-```
-## Location::key\_neq
-
-```rust
-pub fn key_neq(self: Location, object: <any>) -> bool;
-```
-## Location::key\_eq
-
-```rust
-pub fn key_eq(self: Location, object: <any>) -> bool;
-```
-## Location::to\_set
-
-```rust
-pub fn to_set(self: Location) -> *Location;
 ```

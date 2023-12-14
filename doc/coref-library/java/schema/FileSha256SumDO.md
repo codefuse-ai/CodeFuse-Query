@@ -10,42 +10,19 @@ schema FileSha256SumDO {
 ```
 ## FileSha256SumDO::getValue
 
-```rust
+```java
 /**
-     * @brief gets the value of this element.
-     * @return string
-     */
+* @brief gets the value of this element.
+* @return string
+*/
 ```
 ```rust
 pub fn getValue(self: FileSha256SumDO) -> string;
 ```
 ## FileSha256SumDO::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavaDB) -> *FileSha256SumDO;
-```
-## FileSha256SumDO::is\<T\>
-
-```rust
-pub fn is<T>(self: FileSha256SumDO) -> bool;
-```
-## FileSha256SumDO::to\<T\>
-
-```rust
-pub fn to<T>(self: FileSha256SumDO) -> <any>;
-```
-## FileSha256SumDO::key\_neq
-
-```rust
-pub fn key_neq(self: FileSha256SumDO, object: <any>) -> bool;
-```
-## FileSha256SumDO::key\_eq
-
-```rust
-pub fn key_eq(self: FileSha256SumDO, object: <any>) -> bool;
-```
-## FileSha256SumDO::to\_set
-
-```rust
-pub fn to_set(self: FileSha256SumDO) -> *FileSha256SumDO;
 ```

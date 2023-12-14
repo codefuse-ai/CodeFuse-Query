@@ -12,64 +12,41 @@ schema EmptyReferenceParameterListDO {
 ```
 ## EmptyReferenceParameterListDO::getLocationHashId
 
-```rust
+```java
 /**
-     * @brief gets the location hash id of this element.
-     * @return int
-     */
+* @brief gets the location hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getLocationHashId(self: EmptyReferenceParameterListDO) -> int;
 ```
 ## EmptyReferenceParameterListDO::getPrintableText
 
-```rust
+```java
 /**
-     * @brief gets a printed representation of this element, including its structure where applicable.
-     * @return string.
-     */
+* @brief gets a printed representation of this element, including its structure where applicable.
+* @return string.
+*/
 ```
 ```rust
 pub fn getPrintableText(self: EmptyReferenceParameterListDO) -> string;
 ```
 ## EmptyReferenceParameterListDO::getParentHashId
 
-```rust
+```java
 /**
-     * @brief gets the parent hash id of this element.
-     * @return int
-     */
+* @brief gets the parent hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getParentHashId(self: EmptyReferenceParameterListDO) -> int;
 ```
 ## EmptyReferenceParameterListDO::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavaDB) -> *EmptyReferenceParameterListDO;
-```
-## EmptyReferenceParameterListDO::is\<T\>
-
-```rust
-pub fn is<T>(self: EmptyReferenceParameterListDO) -> bool;
-```
-## EmptyReferenceParameterListDO::to\<T\>
-
-```rust
-pub fn to<T>(self: EmptyReferenceParameterListDO) -> <any>;
-```
-## EmptyReferenceParameterListDO::key\_neq
-
-```rust
-pub fn key_neq(self: EmptyReferenceParameterListDO, object: <any>) -> bool;
-```
-## EmptyReferenceParameterListDO::key\_eq
-
-```rust
-pub fn key_eq(self: EmptyReferenceParameterListDO, object: <any>) -> bool;
-```
-## EmptyReferenceParameterListDO::to\_set
-
-```rust
-pub fn to_set(self: EmptyReferenceParameterListDO) -> *EmptyReferenceParameterListDO;
 ```

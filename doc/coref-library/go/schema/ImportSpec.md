@@ -59,6 +59,8 @@ pub fn getBelongsFunction(self: ImportSpec) -> Function;
 ```
 ## ImportSpec::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: GoDB) -> *ImportSpec;
 ```
@@ -89,7 +91,7 @@ pub fn print(self: ImportSpec) -> *string;
 ```
 ## ImportSpec::getText
 
-```rust
+```java
 // getText Extract the text associated with a specific node in a file
 ```
 ```rust
@@ -107,9 +109,6 @@ pub fn getImportSpecName(self: ImportSpec) -> string;
 ```
 ## ImportSpec::getBelongsFile
 
-```rust
-// root node
-```
 ```rust
 pub fn getBelongsFile(self: ImportSpec) -> File;
 ```
@@ -152,29 +151,4 @@ pub fn isAliasSpec(self: ImportSpec) -> bool;
 
 ```rust
 pub fn getImportSpecPath(self: ImportSpec) -> string;
-```
-## ImportSpec::is\<T\>
-
-```rust
-pub fn is<T>(self: ImportSpec) -> bool;
-```
-## ImportSpec::to\<T\>
-
-```rust
-pub fn to<T>(self: ImportSpec) -> <any>;
-```
-## ImportSpec::key\_neq
-
-```rust
-pub fn key_neq(self: ImportSpec, object: <any>) -> bool;
-```
-## ImportSpec::key\_eq
-
-```rust
-pub fn key_eq(self: ImportSpec, object: <any>) -> bool;
-```
-## ImportSpec::to\_set
-
-```rust
-pub fn to_set(self: ImportSpec) -> *ImportSpec;
 ```

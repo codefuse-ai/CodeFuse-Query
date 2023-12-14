@@ -12,108 +12,85 @@ schema AnnotationArrayInitializer {
 ```
 ## AnnotationArrayInitializer::getPrintableText
 
-```rust
+```java
 /**
-     * @brief gets a printed representation of this element, including its structure where applicable.
-     * @return string.
-     */
+* @brief gets a printed representation of this element, including its structure where applicable.
+* @return string.
+*/
 ```
 ```rust
 pub fn getPrintableText(self: AnnotationArrayInitializer) -> string;
 ```
 ## AnnotationArrayInitializer::getLocationHashId
 
-```rust
+```java
 /**
-     * @brief gets the location hash id of this element.
-     * @return int
-     */
+* @brief gets the location hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getLocationHashId(self: AnnotationArrayInitializer) -> int;
 ```
 ## AnnotationArrayInitializer::getParent
 
-```rust
+```java
 /**
-     * @brief gets the parent of the element.
-     * @return ElementParent 
-     */
+* @brief gets the parent of the element.
+* @return ElementParent 
+*/
 ```
 ```rust
 pub fn getParent(self: AnnotationArrayInitializer) -> AnnotationAccessArgument;
 ```
 ## AnnotationArrayInitializer::getInitializerValue
 
-```rust
+```java
 /**
-     * @brief gets the initializer value for the element.
-     * @return Expression
-     */
+* @brief gets the initializer value for the element.
+* @return Expression
+*/
 ```
 ```rust
 pub fn getInitializerValue(self: AnnotationArrayInitializer) -> *Expression;
 ```
 ## AnnotationArrayInitializer::getParentHashId
 
-```rust
+```java
 /**
-     * @brief gets the parent hash id of this element.
-     * @return int
-     */
+* @brief gets the parent hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getParentHashId(self: AnnotationArrayInitializer) -> int;
 ```
 ## AnnotationArrayInitializer::getLocation
 
-```rust
+```java
 /**
-     * @brief gets the location for the element.
-     * @return Location
-     */
+* @brief gets the location for the element.
+* @return Location
+*/
 ```
 ```rust
 pub fn getLocation(self: AnnotationArrayInitializer) -> Location;
 ```
 ## AnnotationArrayInitializer::getAnAncestor
 
-```rust
+```java
 /**
-     * @brief gets an ancestor of the element.
-     * @return ElementParent 
-     */
+* @brief gets an ancestor of the element.
+* @return ElementParent 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: AnnotationArrayInitializer) -> *ElementParent;
 ```
 ## AnnotationArrayInitializer::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavaDB) -> *AnnotationArrayInitializer;
-```
-## AnnotationArrayInitializer::is\<T\>
-
-```rust
-pub fn is<T>(self: AnnotationArrayInitializer) -> bool;
-```
-## AnnotationArrayInitializer::to\<T\>
-
-```rust
-pub fn to<T>(self: AnnotationArrayInitializer) -> <any>;
-```
-## AnnotationArrayInitializer::key\_neq
-
-```rust
-pub fn key_neq(self: AnnotationArrayInitializer, object: <any>) -> bool;
-```
-## AnnotationArrayInitializer::key\_eq
-
-```rust
-pub fn key_eq(self: AnnotationArrayInitializer, object: <any>) -> bool;
-```
-## AnnotationArrayInitializer::to\_set
-
-```rust
-pub fn to_set(self: AnnotationArrayInitializer) -> *AnnotationArrayInitializer;
 ```

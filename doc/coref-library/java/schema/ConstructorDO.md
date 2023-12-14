@@ -19,75 +19,52 @@ pub fn getDefinitionBody(self: ConstructorDO) -> string;
 ```
 ## ConstructorDO::getLocationHashId
 
-```rust
+```java
 /**
-     * @brief gets the location hash id of this element.
-     * @return int
-     */
+* @brief gets the location hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getLocationHashId(self: ConstructorDO) -> int;
 ```
 ## ConstructorDO::getSignature
 
-```rust
+```java
 /**
-     * @brief gets the signature of this element.
-     * @return string
-     */
+* @brief gets the signature of this element.
+* @return string
+*/
 ```
 ```rust
 pub fn getSignature(self: ConstructorDO) -> string;
 ```
 ## ConstructorDO::getParentHashId
 
-```rust
+```java
 /**
-     * @brief gets the parent hash id of this element.
-     * @return int
-     */
+* @brief gets the parent hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getParentHashId(self: ConstructorDO) -> int;
 ```
 ## ConstructorDO::getName
 
-```rust
+```java
 /**
-     * @brief gets the name of this element.
-     * @return string
-     */
+* @brief gets the name of this element.
+* @return string
+*/
 ```
 ```rust
 pub fn getName(self: ConstructorDO) -> string;
 ```
 ## ConstructorDO::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavaDB) -> *ConstructorDO;
-```
-## ConstructorDO::is\<T\>
-
-```rust
-pub fn is<T>(self: ConstructorDO) -> bool;
-```
-## ConstructorDO::to\<T\>
-
-```rust
-pub fn to<T>(self: ConstructorDO) -> <any>;
-```
-## ConstructorDO::key\_neq
-
-```rust
-pub fn key_neq(self: ConstructorDO, object: <any>) -> bool;
-```
-## ConstructorDO::key\_eq
-
-```rust
-pub fn key_eq(self: ConstructorDO, object: <any>) -> bool;
-```
-## ConstructorDO::to\_set
-
-```rust
-pub fn to_set(self: ConstructorDO) -> *ConstructorDO;
 ```

@@ -9,10 +9,10 @@ schema PrivateKeyword {
 ```
 ## PrivateKeyword::getADescendant
 
-```rust
+```java
 /**
-     * Gets a descendant of this node. 
-     */
+* Gets a descendant of this node. 
+*/
 ```
 ```rust
 pub fn getADescendant(self: PrivateKeyword) -> *Node;
@@ -24,10 +24,10 @@ pub fn getIndex(self: PrivateKeyword) -> int;
 ```
 ## PrivateKeyword::getParentOid
 
-```rust
+```java
 /**
-     * Gets the parent oid of this node.
-     */
+* Gets the parent oid of this node.
+*/
 ```
 ```rust
 pub fn getParentOid(self: PrivateKeyword) -> int;
@@ -39,62 +39,62 @@ pub fn getEndColumnNumber(self: PrivateKeyword) -> int;
 ```
 ## PrivateKeyword::getEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets the enclosing function of it
-     */
+* Gets the enclosing function of it
+*/
 ```
 ```rust
 pub fn getEnclosingFunction(self: PrivateKeyword) -> FunctionLikeDeclaration;
 ```
 ## PrivateKeyword::getLastChild
 
-```rust
+```java
 /**
-     * Gets the last child of this node parent.
-     */
+* Gets the last child of this node parent.
+*/
 ```
 ```rust
 pub fn getLastChild(self: PrivateKeyword) -> Node;
 ```
 ## PrivateKeyword::getATrailingComment
 
-```rust
+```java
 /**
-     * Gets the trailing comments of it
-     */
+* Gets the trailing comments of it
+*/
 ```
 ```rust
 pub fn getATrailingComment(self: PrivateKeyword) -> *Comment;
 ```
 ## PrivateKeyword::getALeadingComment
 
-```rust
+```java
 /**
-     * Gets the leading comments of it
-     */
+* Gets the leading comments of it
+*/
 ```
 ```rust
 pub fn getALeadingComment(self: PrivateKeyword) -> *Comment;
 ```
 ## PrivateKeyword::getFile
 
-```rust
+```java
 /**
-     * Gets the file of this node.
-     */
+* Gets the file of this node.
+*/
 ```
 ```rust
 pub fn getFile(self: PrivateKeyword) -> File;
 ```
 ## PrivateKeyword::getAnAncestorByLevel
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets an ancestor of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getAnAncestorByLevel(self: PrivateKeyword, level: int) -> Node;
@@ -106,52 +106,52 @@ pub fn getEndLineNumber(self: PrivateKeyword) -> int;
 ```
 ## PrivateKeyword::getRelativePath
 
-```rust
+```java
 /**
-     * Gets the relative path of this node.
-     */
+* Gets the relative path of this node.
+*/
 ```
 ```rust
 pub fn getRelativePath(self: PrivateKeyword) -> string;
 ```
 ## PrivateKeyword::getAnAncestorEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets an ancestor enclosing function of it
-     */
+* Gets an ancestor enclosing function of it
+*/
 ```
 ```rust
 pub fn getAnAncestorEnclosingFunction(self: PrivateKeyword) -> *FunctionLikeDeclaration;
 ```
 ## PrivateKeyword::getADescendantByLevel
 
-```rust
+```java
 /**
-     * Gets a descendant of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets a descendant of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getADescendantByLevel(self: PrivateKeyword, level: int) -> *Node;
 ```
 ## PrivateKeyword::getKind
 
-```rust
+```java
 /**
-     * Get the syntax kind of this node
-     */
+* Get the syntax kind of this node
+*/
 ```
 ```rust
 pub fn getKind(self: PrivateKeyword) -> int;
 ```
 ## PrivateKeyword::getAModifier
 
-```rust
+```java
 /**
-     * Gets a modifier.
-     */
+* Gets a modifier.
+*/
 ```
 ```rust
 pub fn getAModifier(self: PrivateKeyword) -> *Modifier;
@@ -168,161 +168,138 @@ pub fn getStartLineNumber(self: PrivateKeyword) -> int;
 ```
 ## PrivateKeyword::getChild
 
-```rust
+```java
 /**
-     * Gets the `i`th child of this node.
-     */
+* Gets the `i`th child of this node.
+*/
 ```
 ```rust
 pub fn getChild(self: PrivateKeyword, i: int) -> Node;
 ```
 ## PrivateKeyword::getDecorator
 
-```rust
+```java
 /**
-     * Gets the `i`th decorator.
-     */
+* Gets the `i`th decorator.
+*/
 ```
 ```rust
 pub fn getDecorator(self: PrivateKeyword, i: int) -> Decorator;
 ```
 ## PrivateKeyword::getRoot
 
-```rust
+```java
 /**
-     * Gets the root top-level of this node. 
-     */
+* Gets the root top-level of this node. 
+*/
 ```
 ```rust
 pub fn getRoot(self: PrivateKeyword) -> TopLevelDO;
 ```
 ## PrivateKeyword::getChildCount
 
-```rust
+```java
 /**
-     * Gets the number of child nodes.
-     */
+* Gets the number of child nodes.
+*/
 ```
 ```rust
 pub fn getChildCount(self: PrivateKeyword) -> int;
 ```
 ## PrivateKeyword::getParent
 
-```rust
+```java
 /**
-     * Gets the parent node of this node.
-     */
+* Gets the parent node of this node.
+*/
 ```
 ```rust
 pub fn getParent(self: PrivateKeyword) -> Node;
 ```
 ## PrivateKeyword::getAChild
 
-```rust
+```java
 /**
-     * Gets a child node of this node.
-     */
+* Gets a child node of this node.
+*/
 ```
 ```rust
 pub fn getAChild(self: PrivateKeyword) -> *Node;
 ```
 ## PrivateKeyword::getAnAncestor
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node. 
-     */
+* Gets an ancestor of this node. 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: PrivateKeyword) -> *Node;
 ```
 ## PrivateKeyword::getAComment
 
-```rust
+```java
 /**
-     * Gets the comments related to it
-     */
+* Gets the comments related to it
+*/
 ```
 ```rust
 pub fn getAComment(self: PrivateKeyword) -> *Comment;
 ```
 ## PrivateKeyword::getSymbol
 
-```rust
+```java
 /**
-     * Gets the symbol associated with this node.
-     */
+* Gets the symbol associated with this node.
+*/
 ```
 ```rust
 pub fn getSymbol(self: PrivateKeyword) -> Symbol;
 ```
 ## PrivateKeyword::getADecorator
 
-```rust
+```java
 /**
-     * Gets a decorator.
-     */
+* Gets a decorator.
+*/
 ```
 ```rust
 pub fn getADecorator(self: PrivateKeyword) -> *Decorator;
 ```
 ## PrivateKeyword::getModifier
 
-```rust
+```java
 /**
-     * Gets the `i`th modifier.
-     */
+* Gets the `i`th modifier.
+*/
 ```
 ```rust
 pub fn getModifier(self: PrivateKeyword, i: int) -> Modifier;
 ```
 ## PrivateKeyword::getText
 
-```rust
+```java
 /**
-     * Gets the text of this node.
-     */
+* Gets the text of this node.
+*/
 ```
 ```rust
 pub fn getText(self: PrivateKeyword) -> string;
 ```
 ## PrivateKeyword::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavascriptDB) -> *PrivateKeyword;
 ```
 ## PrivateKeyword::getLocation
 
-```rust
+```java
 /**
-     * Gets the location of this node.
-     */
+* Gets the location of this node.
+*/
 ```
 ```rust
 pub fn getLocation(self: PrivateKeyword) -> Location;
-```
-## PrivateKeyword::is\<T\>
-
-```rust
-pub fn is<T>(self: PrivateKeyword) -> bool;
-```
-## PrivateKeyword::to\<T\>
-
-```rust
-pub fn to<T>(self: PrivateKeyword) -> <any>;
-```
-## PrivateKeyword::key\_neq
-
-```rust
-pub fn key_neq(self: PrivateKeyword, object: <any>) -> bool;
-```
-## PrivateKeyword::key\_eq
-
-```rust
-pub fn key_eq(self: PrivateKeyword, object: <any>) -> bool;
-```
-## PrivateKeyword::to\_set
-
-```rust
-pub fn to_set(self: PrivateKeyword) -> *PrivateKeyword;
 ```

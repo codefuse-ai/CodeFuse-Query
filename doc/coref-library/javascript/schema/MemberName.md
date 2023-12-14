@@ -9,10 +9,10 @@ schema MemberName {
 ```
 ## MemberName::getADescendant
 
-```rust
+```java
 /**
-     * Gets a descendant of this node. 
-     */
+* Gets a descendant of this node. 
+*/
 ```
 ```rust
 pub fn getADescendant(self: MemberName) -> *Node;
@@ -24,10 +24,10 @@ pub fn getIndex(self: MemberName) -> int;
 ```
 ## MemberName::getParentOid
 
-```rust
+```java
 /**
-     * Gets the parent oid of this node.
-     */
+* Gets the parent oid of this node.
+*/
 ```
 ```rust
 pub fn getParentOid(self: MemberName) -> int;
@@ -39,52 +39,52 @@ pub fn getEndColumnNumber(self: MemberName) -> int;
 ```
 ## MemberName::getLastChild
 
-```rust
+```java
 /**
-     * Gets the last child of this node parent.
-     */
+* Gets the last child of this node parent.
+*/
 ```
 ```rust
 pub fn getLastChild(self: MemberName) -> Node;
 ```
 ## MemberName::getEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets the enclosing function of it
-     */
+* Gets the enclosing function of it
+*/
 ```
 ```rust
 pub fn getEnclosingFunction(self: MemberName) -> FunctionLikeDeclaration;
 ```
 ## MemberName::getFile
 
-```rust
+```java
 /**
-     * Gets the file of this node.
-     */
+* Gets the file of this node.
+*/
 ```
 ```rust
 pub fn getFile(self: MemberName) -> File;
 ```
 ## MemberName::getAnAncestorByLevel
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets an ancestor of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getAnAncestorByLevel(self: MemberName, level: int) -> Node;
 ```
 ## MemberName::getRelativePath
 
-```rust
+```java
 /**
-     * Gets the relative path of this node.
-     */
+* Gets the relative path of this node.
+*/
 ```
 ```rust
 pub fn getRelativePath(self: MemberName) -> string;
@@ -96,42 +96,42 @@ pub fn getEndLineNumber(self: MemberName) -> int;
 ```
 ## MemberName::getAnAncestorEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets an ancestor enclosing function of it
-     */
+* Gets an ancestor enclosing function of it
+*/
 ```
 ```rust
 pub fn getAnAncestorEnclosingFunction(self: MemberName) -> *FunctionLikeDeclaration;
 ```
 ## MemberName::getADescendantByLevel
 
-```rust
+```java
 /**
-     * Gets a descendant of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets a descendant of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getADescendantByLevel(self: MemberName, level: int) -> *Node;
 ```
 ## MemberName::getKind
 
-```rust
+```java
 /**
-     * Get the syntax kind of this node
-     */
+* Get the syntax kind of this node
+*/
 ```
 ```rust
 pub fn getKind(self: MemberName) -> int;
 ```
 ## MemberName::getAModifier
 
-```rust
+```java
 /**
-     * Gets a modifier.
-     */
+* Gets a modifier.
+*/
 ```
 ```rust
 pub fn getAModifier(self: MemberName) -> *Modifier;
@@ -148,191 +148,168 @@ pub fn getStartLineNumber(self: MemberName) -> int;
 ```
 ## MemberName::getChild
 
-```rust
+```java
 /**
-     * Gets the `i`th child of this node.
-     */
+* Gets the `i`th child of this node.
+*/
 ```
 ```rust
 pub fn getChild(self: MemberName, i: int) -> Node;
 ```
 ## MemberName::getRoot
 
-```rust
+```java
 /**
-     * Gets the root top-level of this node. 
-     */
+* Gets the root top-level of this node. 
+*/
 ```
 ```rust
 pub fn getRoot(self: MemberName) -> TopLevelDO;
 ```
 ## MemberName::getDecorator
 
-```rust
+```java
 /**
-     * Gets the `i`th decorator.
-     */
+* Gets the `i`th decorator.
+*/
 ```
 ```rust
 pub fn getDecorator(self: MemberName, i: int) -> Decorator;
 ```
 ## MemberName::getName
 
-```rust
+```java
 /**
-     * Gets the name of this MemberName.
-     */
+* Gets the name of this MemberName.
+*/
 ```
 ```rust
 pub fn getName(self: MemberName) -> string;
 ```
 ## MemberName::getChildCount
 
-```rust
+```java
 /**
-     * Gets the number of child nodes.
-     */
+* Gets the number of child nodes.
+*/
 ```
 ```rust
 pub fn getChildCount(self: MemberName) -> int;
 ```
 ## MemberName::getATrailingComment
 
-```rust
+```java
 /**
-     * Gets the trailing comments of it
-     */
+* Gets the trailing comments of it
+*/
 ```
 ```rust
 pub fn getATrailingComment(self: MemberName) -> *Comment;
 ```
 ## MemberName::getALeadingComment
 
-```rust
+```java
 /**
-     * Gets the leading comments of it
-     */
+* Gets the leading comments of it
+*/
 ```
 ```rust
 pub fn getALeadingComment(self: MemberName) -> *Comment;
 ```
 ## MemberName::getAChild
 
-```rust
+```java
 /**
-     * Gets a child node of this node.
-     */
+* Gets a child node of this node.
+*/
 ```
 ```rust
 pub fn getAChild(self: MemberName) -> *Node;
 ```
 ## MemberName::getParent
 
-```rust
+```java
 /**
-     * Gets the parent node of this node.
-     */
+* Gets the parent node of this node.
+*/
 ```
 ```rust
 pub fn getParent(self: MemberName) -> Node;
 ```
 ## MemberName::getModifier
 
-```rust
+```java
 /**
-     * Gets the `i`th modifier.
-     */
+* Gets the `i`th modifier.
+*/
 ```
 ```rust
 pub fn getModifier(self: MemberName, i: int) -> Modifier;
 ```
 ## MemberName::getText
 
-```rust
+```java
 /**
-     * Gets the text of this node.
-     */
+* Gets the text of this node.
+*/
 ```
 ```rust
 pub fn getText(self: MemberName) -> string;
 ```
 ## MemberName::getADecorator
 
-```rust
+```java
 /**
-     * Gets a decorator.
-     */
+* Gets a decorator.
+*/
 ```
 ```rust
 pub fn getADecorator(self: MemberName) -> *Decorator;
 ```
 ## MemberName::getSymbol
 
-```rust
+```java
 /**
-     * Gets the symbol associated with this node.
-     */
+* Gets the symbol associated with this node.
+*/
 ```
 ```rust
 pub fn getSymbol(self: MemberName) -> Symbol;
 ```
 ## MemberName::getLocation
 
-```rust
+```java
 /**
-     * Gets the location of this node.
-     */
+* Gets the location of this node.
+*/
 ```
 ```rust
 pub fn getLocation(self: MemberName) -> Location;
 ```
 ## MemberName::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavascriptDB) -> *MemberName;
 ```
 ## MemberName::getAnAncestor
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node. 
-     */
+* Gets an ancestor of this node. 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: MemberName) -> *Node;
 ```
 ## MemberName::getAComment
 
-```rust
+```java
 /**
-     * Gets the comments related to it
-     */
+* Gets the comments related to it
+*/
 ```
 ```rust
 pub fn getAComment(self: MemberName) -> *Comment;
-```
-## MemberName::is\<T\>
-
-```rust
-pub fn is<T>(self: MemberName) -> bool;
-```
-## MemberName::to\<T\>
-
-```rust
-pub fn to<T>(self: MemberName) -> <any>;
-```
-## MemberName::key\_neq
-
-```rust
-pub fn key_neq(self: MemberName, object: <any>) -> bool;
-```
-## MemberName::key\_eq
-
-```rust
-pub fn key_eq(self: MemberName, object: <any>) -> bool;
-```
-## MemberName::to\_set
-
-```rust
-pub fn to_set(self: MemberName) -> *MemberName;
 ```

@@ -14,174 +14,151 @@ schema NewExpression {
 ```
 ## NewExpression::getAnAncestor
 
-```rust
+```java
 /**
-     * @brief gets an ancestor of the element.
-     * @return ElementParent 
-     */
+* @brief gets an ancestor of the element.
+* @return ElementParent 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: NewExpression) -> *ElementParent;
 ```
 ## NewExpression::getPrintableText
 
-```rust
+```java
 /**
-     * @brief gets a printed representation of this element, including its structure where applicable.
-     * @return string.
-     */
+* @brief gets a printed representation of this element, including its structure where applicable.
+* @return string.
+*/
 ```
 ```rust
 pub fn getPrintableText(self: NewExpression) -> string;
 ```
 ## NewExpression::getEnclosingStatement
 
-```rust
+```java
 /**
-     * @brief gets the statement which encloses the expression.
-     * @return Statement 
-     */
+* @brief gets the statement which encloses the expression.
+* @return Statement 
+*/
 ```
 ```rust
 pub fn getEnclosingStatement(self: NewExpression) -> Statement;
 ```
 ## NewExpression::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavaDB) -> *NewExpression;
 ```
 ## NewExpression::getLocation
 
-```rust
+```java
 /**
-     * @brief gets the location for the element.
-     * @return Location
-     */
+* @brief gets the location for the element.
+* @return Location
+*/
 ```
 ```rust
 pub fn getLocation(self: NewExpression) -> Location;
 ```
 ## NewExpression::getLocationHashId
 
-```rust
+```java
 /**
-     * @brief gets the location hash id of this element.
-     * @return int
-     */
+* @brief gets the location hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getLocationHashId(self: NewExpression) -> int;
 ```
 ## NewExpression::getParent
 
-```rust
+```java
 /**
-     * @brief gets the parent of the expression.
-     * @return ElementParent 
-     */
+* @brief gets the parent of the expression.
+* @return ElementParent 
+*/
 ```
 ```rust
 pub fn getParent(self: NewExpression) -> ElementParent;
 ```
 ## NewExpression::getParentHashId
 
-```rust
+```java
 /**
-     * @brief gets the parent hash id of this element.
-     * @return int
-     */
+* @brief gets the parent hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getParentHashId(self: NewExpression) -> int;
 ```
 ## NewExpression::getEnclosingCallable
 
-```rust
+```java
 /**
-     * @brief gets the callable in which this expression occurs.
-     * @return Callable 
-     */
+* @brief gets the callable in which this expression occurs.
+* @return Callable 
+*/
 ```
 ```rust
 pub fn getEnclosingCallable(self: NewExpression) -> Callable;
 ```
 ## NewExpression::getIndex
 
-```rust
+```java
 /**
-     * @brief gets the index order of this element.
-     * @return int
-     */
+* @brief gets the index order of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getIndex(self: NewExpression) -> int;
 ```
 ## NewExpression::getAnonymousClass
 
-```rust
+```java
 /**
-     * @brief gets the created anonymous class instance.
-     * @return AnonymousClass 
-     */
+* @brief gets the created anonymous class instance.
+* @return AnonymousClass 
+*/
 ```
 ```rust
 pub fn getAnonymousClass(self: NewExpression) -> AnonymousClass;
 ```
 ## NewExpression::getSize
 
-```rust
+```java
 /**
-     * @brief gets the size information for the element.
-     * @return NumberOfLines
-     */
+* @brief gets the size information for the element.
+* @return NumberOfLines
+*/
 ```
 ```rust
 pub fn getSize(self: NewExpression) -> NumberOfLines;
 ```
 ## NewExpression::getReference
 
-```rust
+```java
 /**
-     * @brief gets the created class instance.
-     * @return ReferenceElement 
-     */
+* @brief gets the created class instance.
+* @return ReferenceElement 
+*/
 ```
 ```rust
 pub fn getReference(self: NewExpression) -> ReferenceElement;
 ```
 ## NewExpression::getType
 
-```rust
+```java
 /**
-     * @brief gets the type for the element.
-     * @return Type
-     */
+* @brief gets the type for the element.
+* @return Type
+*/
 ```
 ```rust
 pub fn getType(self: NewExpression) -> Type;
-```
-## NewExpression::is\<T\>
-
-```rust
-pub fn is<T>(self: NewExpression) -> bool;
-```
-## NewExpression::to\<T\>
-
-```rust
-pub fn to<T>(self: NewExpression) -> <any>;
-```
-## NewExpression::key\_neq
-
-```rust
-pub fn key_neq(self: NewExpression, object: <any>) -> bool;
-```
-## NewExpression::key\_eq
-
-```rust
-pub fn key_eq(self: NewExpression, object: <any>) -> bool;
-```
-## NewExpression::to\_set
-
-```rust
-pub fn to_set(self: NewExpression) -> *NewExpression;
 ```

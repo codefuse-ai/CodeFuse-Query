@@ -9,162 +9,162 @@ schema LValue {
 ```
 ## LValue::getRefName
 
-```rust
+```java
 /**
-     * Get the name of this RefExpr.
-     */
+* Get the name of this RefExpr.
+*/
 ```
 ```rust
 pub fn getRefName(self: LValue) -> string;
 ```
 ## LValue::getAnAncestorByLevel
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets an ancestor of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getAnAncestorByLevel(self: LValue, level: int) -> Node;
 ```
 ## LValue::getText
 
-```rust
+```java
 /**
-     * Gets the text of this node.
-     */
+* Gets the text of this node.
+*/
 ```
 ```rust
 pub fn getText(self: LValue) -> string;
 ```
 ## LValue::getModifier
 
-```rust
+```java
 /**
-     * Gets the `i`th modifier.
-     */
+* Gets the `i`th modifier.
+*/
 ```
 ```rust
 pub fn getModifier(self: LValue, i: int) -> Modifier;
 ```
 ## LValue::getADecorator
 
-```rust
+```java
 /**
-     * Gets a decorator.
-     */
+* Gets a decorator.
+*/
 ```
 ```rust
 pub fn getADecorator(self: LValue) -> *Decorator;
 ```
 ## LValue::getSymbol
 
-```rust
+```java
 /**
-     * Gets the symbol associated with this node.
-     */
+* Gets the symbol associated with this node.
+*/
 ```
 ```rust
 pub fn getSymbol(self: LValue) -> Symbol;
 ```
 ## LValue::getAComment
 
-```rust
+```java
 /**
-     * Gets the comments related to it
-     */
+* Gets the comments related to it
+*/
 ```
 ```rust
 pub fn getAComment(self: LValue) -> *Comment;
 ```
 ## LValue::getAnAncestor
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node. 
-     */
+* Gets an ancestor of this node. 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: LValue) -> *Node;
 ```
 ## LValue::hasSymbol
 
-```rust
+```java
 /**
-     * Determine whether this RefExpr has symbol.
-     */
+* Determine whether this RefExpr has symbol.
+*/
 ```
 ```rust
 pub fn hasSymbol(self: LValue) -> bool;
 ```
 ## LValue::getFile
 
-```rust
+```java
 /**
-     * Gets the file of this node.
-     */
+* Gets the file of this node.
+*/
 ```
 ```rust
 pub fn getFile(self: LValue) -> File;
 ```
 ## LValue::getParent
 
-```rust
+```java
 /**
-     * Gets the parent node of this node.
-     */
+* Gets the parent node of this node.
+*/
 ```
 ```rust
 pub fn getParent(self: LValue) -> Node;
 ```
 ## LValue::getAChild
 
-```rust
+```java
 /**
-     * Gets a child node of this node.
-     */
+* Gets a child node of this node.
+*/
 ```
 ```rust
 pub fn getAChild(self: LValue) -> *Node;
 ```
 ## LValue::getDecorator
 
-```rust
+```java
 /**
-     * Gets the `i`th decorator.
-     */
+* Gets the `i`th decorator.
+*/
 ```
 ```rust
 pub fn getDecorator(self: LValue, i: int) -> Decorator;
 ```
 ## LValue::getRoot
 
-```rust
+```java
 /**
-     * Gets the root top-level of this node. 
-     */
+* Gets the root top-level of this node. 
+*/
 ```
 ```rust
 pub fn getRoot(self: LValue) -> TopLevelDO;
 ```
 ## LValue::getChildCount
 
-```rust
+```java
 /**
-     * Gets the number of child nodes.
-     */
+* Gets the number of child nodes.
+*/
 ```
 ```rust
 pub fn getChildCount(self: LValue) -> int;
 ```
 ## LValue::getChild
 
-```rust
+```java
 /**
-     * Gets the `i`th child of this node.
-     */
+* Gets the `i`th child of this node.
+*/
 ```
 ```rust
 pub fn getChild(self: LValue, i: int) -> Node;
@@ -181,42 +181,42 @@ pub fn getStartColumnNumber(self: LValue) -> int;
 ```
 ## LValue::getKind
 
-```rust
+```java
 /**
-     * Get the syntax kind of this node
-     */
+* Get the syntax kind of this node
+*/
 ```
 ```rust
 pub fn getKind(self: LValue) -> int;
 ```
 ## LValue::getAModifier
 
-```rust
+```java
 /**
-     * Gets a modifier.
-     */
+* Gets a modifier.
+*/
 ```
 ```rust
 pub fn getAModifier(self: LValue) -> *Modifier;
 ```
 ## LValue::getAnAncestorEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets an ancestor enclosing function of it
-     */
+* Gets an ancestor enclosing function of it
+*/
 ```
 ```rust
 pub fn getAnAncestorEnclosingFunction(self: LValue) -> *FunctionLikeDeclaration;
 ```
 ## LValue::getADescendantByLevel
 
-```rust
+```java
 /**
-     * Gets a descendant of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets a descendant of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getADescendantByLevel(self: LValue, level: int) -> *Node;
@@ -228,50 +228,50 @@ pub fn getEndLineNumber(self: LValue) -> int;
 ```
 ## LValue::getRelativePath
 
-```rust
+```java
 /**
-     * Gets the relative path of this node.
-     */
+* Gets the relative path of this node.
+*/
 ```
 ```rust
 pub fn getRelativePath(self: LValue) -> string;
 ```
 ## LValue::getALeadingComment
 
-```rust
+```java
 /**
-     * Gets the leading comments of it
-     */
+* Gets the leading comments of it
+*/
 ```
 ```rust
 pub fn getALeadingComment(self: LValue) -> *Comment;
 ```
 ## LValue::getATrailingComment
 
-```rust
+```java
 /**
-     * Gets the trailing comments of it
-     */
+* Gets the trailing comments of it
+*/
 ```
 ```rust
 pub fn getATrailingComment(self: LValue) -> *Comment;
 ```
 ## LValue::getLastChild
 
-```rust
+```java
 /**
-     * Gets the last child of this node parent.
-     */
+* Gets the last child of this node parent.
+*/
 ```
 ```rust
 pub fn getLastChild(self: LValue) -> Node;
 ```
 ## LValue::getEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets the enclosing function of it
-     */
+* Gets the enclosing function of it
+*/
 ```
 ```rust
 pub fn getEnclosingFunction(self: LValue) -> FunctionLikeDeclaration;
@@ -283,10 +283,10 @@ pub fn getEndColumnNumber(self: LValue) -> int;
 ```
 ## LValue::getParentOid
 
-```rust
+```java
 /**
-     * Gets the parent oid of this node.
-     */
+* Gets the parent oid of this node.
+*/
 ```
 ```rust
 pub fn getParentOid(self: LValue) -> int;
@@ -298,71 +298,48 @@ pub fn getIndex(self: LValue) -> int;
 ```
 ## LValue::getDefNode
 
-```rust
+```java
 /**
-     * Get the defination node in cfg.
-     */
+* Get the defination node in cfg.
+*/
 ```
 ```rust
 pub fn getDefNode(self: LValue) -> ControlFlowNode;
 ```
 ## LValue::getADescendant
 
-```rust
+```java
 /**
-     * Gets a descendant of this node. 
-     */
+* Gets a descendant of this node. 
+*/
 ```
 ```rust
 pub fn getADescendant(self: LValue) -> *Node;
 ```
 ## LValue::getRhs
 
-```rust
+```java
 /**
-     * Get the source of the expression that is written to this LValue.
-     */
+* Get the source of the expression that is written to this LValue.
+*/
 ```
 ```rust
 pub fn getRhs(self: LValue) -> Expression;
 ```
 ## LValue::getLocation
 
-```rust
+```java
 /**
-     * Gets the location of this node.
-     */
+* Gets the location of this node.
+*/
 ```
 ```rust
 pub fn getLocation(self: LValue) -> Location;
 ```
 ## LValue::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavascriptDB) -> *LValue;
-```
-## LValue::is\<T\>
-
-```rust
-pub fn is<T>(self: LValue) -> bool;
-```
-## LValue::to\<T\>
-
-```rust
-pub fn to<T>(self: LValue) -> <any>;
-```
-## LValue::key\_neq
-
-```rust
-pub fn key_neq(self: LValue, object: <any>) -> bool;
-```
-## LValue::key\_eq
-
-```rust
-pub fn key_eq(self: LValue, object: <any>) -> bool;
-```
-## LValue::to\_set
-
-```rust
-pub fn to_set(self: LValue) -> *LValue;
 ```

@@ -14,185 +14,162 @@ schema ConditionalExpression {
 ```
 ## ConditionalExpression::getAnAncestor
 
-```rust
+```java
 /**
-     * @brief gets an ancestor of the element.
-     * @return ElementParent 
-     */
+* @brief gets an ancestor of the element.
+* @return ElementParent 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: ConditionalExpression) -> *ElementParent;
 ```
 ## ConditionalExpression::getPrintableText
 
-```rust
+```java
 /**
-     * @brief gets a printed representation of this element, including its structure where applicable.
-     * @return string.
-     */
+* @brief gets a printed representation of this element, including its structure where applicable.
+* @return string.
+*/
 ```
 ```rust
 pub fn getPrintableText(self: ConditionalExpression) -> string;
 ```
 ## ConditionalExpression::getEnclosingStatement
 
-```rust
+```java
 /**
-     * @brief gets the statement which encloses the expression.
-     * @return Statement 
-     */
+* @brief gets the statement which encloses the expression.
+* @return Statement 
+*/
 ```
 ```rust
 pub fn getEnclosingStatement(self: ConditionalExpression) -> Statement;
 ```
 ## ConditionalExpression::getParentHashId
 
-```rust
+```java
 /**
-     * @brief gets the parent hash id of this element.
-     * @return int
-     */
+* @brief gets the parent hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getParentHashId(self: ConditionalExpression) -> int;
 ```
 ## ConditionalExpression::getParent
 
-```rust
+```java
 /**
-     * @brief gets the parent of the expression.
-     * @return ElementParent 
-     */
+* @brief gets the parent of the expression.
+* @return ElementParent 
+*/
 ```
 ```rust
 pub fn getParent(self: ConditionalExpression) -> ElementParent;
 ```
 ## ConditionalExpression::getSize
 
-```rust
+```java
 /**
-     * @brief gets the size information for the element.
-     * @return NumberOfLines
-     */
+* @brief gets the size information for the element.
+* @return NumberOfLines
+*/
 ```
 ```rust
 pub fn getSize(self: ConditionalExpression) -> NumberOfLines;
 ```
 ## ConditionalExpression::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavaDB) -> *ConditionalExpression;
 ```
 ## ConditionalExpression::getLocation
 
-```rust
+```java
 /**
-     * @brief gets the location for the element.
-     * @return Location
-     */
+* @brief gets the location for the element.
+* @return Location
+*/
 ```
 ```rust
 pub fn getLocation(self: ConditionalExpression) -> Location;
 ```
 ## ConditionalExpression::getLocationHashId
 
-```rust
+```java
 /**
-     * @brief gets the location hash id of this element.
-     * @return int
-     */
+* @brief gets the location hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getLocationHashId(self: ConditionalExpression) -> int;
 ```
 ## ConditionalExpression::getEnclosingCallable
 
-```rust
+```java
 /**
-     * @brief gets the callable in which this expression occurs.
-     * @return Callable 
-     */
+* @brief gets the callable in which this expression occurs.
+* @return Callable 
+*/
 ```
 ```rust
 pub fn getEnclosingCallable(self: ConditionalExpression) -> Callable;
 ```
 ## ConditionalExpression::getIndex
 
-```rust
+```java
 /**
-     * @brief gets the index order of this element.
-     * @return int
-     */
+* @brief gets the index order of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getIndex(self: ConditionalExpression) -> int;
 ```
 ## ConditionalExpression::getType
 
-```rust
+```java
 /**
-     * @brief gets the type of this element.
-     * @return string
-     */
+* @brief gets the type of this element.
+* @return string
+*/
 ```
 ```rust
 pub fn getType(self: ConditionalExpression) -> string;
 ```
 ## ConditionalExpression::getFalseExpression
 
-```rust
+```java
 /**
-     * @brief gets the false expression of the conditional expression if the condition is false.
-     * @return Expression 
-     */
+* @brief gets the false expression of the conditional expression if the condition is false.
+* @return Expression 
+*/
 ```
 ```rust
 pub fn getFalseExpression(self: ConditionalExpression) -> Expression;
 ```
 ## ConditionalExpression::getCondition
 
-```rust
+```java
 /**
-     * @brief gets the condition of the conditional expression.
-     * @return Expression 
-     */
+* @brief gets the condition of the conditional expression.
+* @return Expression 
+*/
 ```
 ```rust
 pub fn getCondition(self: ConditionalExpression) -> Expression;
 ```
 ## ConditionalExpression::getTrueExpression
 
-```rust
+```java
 /**
-     * @brief gets the true expression of the conditional expression if the condition is true.
-     * @return Expression 
-     */
+* @brief gets the true expression of the conditional expression if the condition is true.
+* @return Expression 
+*/
 ```
 ```rust
 pub fn getTrueExpression(self: ConditionalExpression) -> Expression;
-```
-## ConditionalExpression::is\<T\>
-
-```rust
-pub fn is<T>(self: ConditionalExpression) -> bool;
-```
-## ConditionalExpression::to\<T\>
-
-```rust
-pub fn to<T>(self: ConditionalExpression) -> <any>;
-```
-## ConditionalExpression::key\_neq
-
-```rust
-pub fn key_neq(self: ConditionalExpression, object: <any>) -> bool;
-```
-## ConditionalExpression::key\_eq
-
-```rust
-pub fn key_eq(self: ConditionalExpression, object: <any>) -> bool;
-```
-## ConditionalExpression::to\_set
-
-```rust
-pub fn to_set(self: ConditionalExpression) -> *ConditionalExpression;
 ```

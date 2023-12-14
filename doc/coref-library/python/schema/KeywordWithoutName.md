@@ -15,152 +15,129 @@ schema KeywordWithoutName {
 ```
 ## KeywordWithoutName::getAnAncestor
 
-```rust
+```java
 /**
-     * @brief gets an ancestor of the element.
-     * @return CombineElement 
-     */
+* @brief gets an ancestor of the element.
+* @return CombineElement 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: KeywordWithoutName) -> *CombineElement;
 ```
 ## KeywordWithoutName::getArgValue
 
-```rust
+```java
 /**
-     * @brief gets the arg value of this element.
-     * @return string
-     */
+* @brief gets the arg value of this element.
+* @return string
+*/
 ```
 ```rust
 pub fn getArgValue(self: KeywordWithoutName) -> string;
 ```
 ## KeywordWithoutName::getArgName
 
-```rust
+```java
 /**
-     * @brief gets the parameter name of the keyword.
-     * @return string 
-     */
+* @brief gets the parameter name of the keyword.
+* @return string 
+*/
 ```
 ```rust
 pub fn getArgName(self: KeywordWithoutName) -> string;
 ```
 ## KeywordWithoutName::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: PythonDB) -> *KeywordWithoutName;
 ```
 ## KeywordWithoutName::getLocation
 
-```rust
+```java
 /**
-     * @brief gets the location for the element.
-     * @return Location
-     */
+* @brief gets the location for the element.
+* @return Location
+*/
 ```
 ```rust
 pub fn getLocation(self: KeywordWithoutName) -> Location;
 ```
 ## KeywordWithoutName::getPrintableText
 
-```rust
+```java
 /**
-     * @brief gets the printable text of this element.
-     * @return string
-     */
+* @brief gets the printable text of this element.
+* @return string
+*/
 ```
 ```rust
 pub fn getPrintableText(self: KeywordWithoutName) -> string;
 ```
 ## KeywordWithoutName::getParentOid
 
-```rust
+```java
 /**
-     * @brief gets the parent oid of this element.
-     * @return int
-     */
+* @brief gets the parent oid of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getParentOid(self: KeywordWithoutName) -> int;
 ```
 ## KeywordWithoutName::getValue
 
-```rust
+```java
 /**
-     * @brief gets the value of the keyword.
-     * @return Expression 
-     */
+* @brief gets the value of the keyword.
+* @return Expression 
+*/
 ```
 ```rust
 pub fn getValue(self: KeywordWithoutName) -> Expression;
 ```
 ## KeywordWithoutName::getElementIndex
 
-```rust
+```java
 /**
-     * @brief gets the element index of this element.
-     * @return int
-     */
+* @brief gets the element index of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getElementIndex(self: KeywordWithoutName) -> int;
 ```
 ## KeywordWithoutName::getParent
 
-```rust
+```java
 /**
-     * @brief gets the parent element of the element
-     * @return CombineElement 
-     */
+* @brief gets the parent element of the element
+* @return CombineElement 
+*/
 ```
 ```rust
 pub fn getParent(self: KeywordWithoutName) -> CombineElement;
 ```
 ## KeywordWithoutName::getLocationOid
 
-```rust
+```java
 /**
-     * @brief gets the location oid of this element.
-     * @return int
-     */
+* @brief gets the location oid of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getLocationOid(self: KeywordWithoutName) -> int;
 ```
 ## KeywordWithoutName::getValueOid
 
-```rust
+```java
 /**
-     * @brief gets the value oid of this element.
-     * @return int
-     */
+* @brief gets the value oid of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getValueOid(self: KeywordWithoutName) -> int;
-```
-## KeywordWithoutName::is\<T\>
-
-```rust
-pub fn is<T>(self: KeywordWithoutName) -> bool;
-```
-## KeywordWithoutName::to\<T\>
-
-```rust
-pub fn to<T>(self: KeywordWithoutName) -> <any>;
-```
-## KeywordWithoutName::key\_neq
-
-```rust
-pub fn key_neq(self: KeywordWithoutName, object: <any>) -> bool;
-```
-## KeywordWithoutName::key\_eq
-
-```rust
-pub fn key_eq(self: KeywordWithoutName, object: <any>) -> bool;
-```
-## KeywordWithoutName::to\_set
-
-```rust
-pub fn to_set(self: KeywordWithoutName) -> *KeywordWithoutName;
 ```

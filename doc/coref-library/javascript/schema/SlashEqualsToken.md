@@ -9,140 +9,140 @@ schema SlashEqualsToken {
 ```
 ## SlashEqualsToken::getLocation
 
-```rust
+```java
 /**
-     * Gets the location of this node.
-     */
+* Gets the location of this node.
+*/
 ```
 ```rust
 pub fn getLocation(self: SlashEqualsToken) -> Location;
 ```
 ## SlashEqualsToken::getSymbol
 
-```rust
+```java
 /**
-     * Gets the symbol associated with this node.
-     */
+* Gets the symbol associated with this node.
+*/
 ```
 ```rust
 pub fn getSymbol(self: SlashEqualsToken) -> Symbol;
 ```
 ## SlashEqualsToken::getADecorator
 
-```rust
+```java
 /**
-     * Gets a decorator.
-     */
+* Gets a decorator.
+*/
 ```
 ```rust
 pub fn getADecorator(self: SlashEqualsToken) -> *Decorator;
 ```
 ## SlashEqualsToken::getText
 
-```rust
+```java
 /**
-     * Gets the text of this node.
-     */
+* Gets the text of this node.
+*/
 ```
 ```rust
 pub fn getText(self: SlashEqualsToken) -> string;
 ```
 ## SlashEqualsToken::getModifier
 
-```rust
+```java
 /**
-     * Gets the `i`th modifier.
-     */
+* Gets the `i`th modifier.
+*/
 ```
 ```rust
 pub fn getModifier(self: SlashEqualsToken, i: int) -> Modifier;
 ```
 ## SlashEqualsToken::getAComment
 
-```rust
+```java
 /**
-     * Gets the comments related to it
-     */
+* Gets the comments related to it
+*/
 ```
 ```rust
 pub fn getAComment(self: SlashEqualsToken) -> *Comment;
 ```
 ## SlashEqualsToken::getAnAncestor
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node. 
-     */
+* Gets an ancestor of this node. 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: SlashEqualsToken) -> *Node;
 ```
 ## SlashEqualsToken::getAChild
 
-```rust
+```java
 /**
-     * Gets a child node of this node.
-     */
+* Gets a child node of this node.
+*/
 ```
 ```rust
 pub fn getAChild(self: SlashEqualsToken) -> *Node;
 ```
 ## SlashEqualsToken::getParent
 
-```rust
+```java
 /**
-     * Gets the parent node of this node.
-     */
+* Gets the parent node of this node.
+*/
 ```
 ```rust
 pub fn getParent(self: SlashEqualsToken) -> Node;
 ```
 ## SlashEqualsToken::getChildCount
 
-```rust
+```java
 /**
-     * Gets the number of child nodes.
-     */
+* Gets the number of child nodes.
+*/
 ```
 ```rust
 pub fn getChildCount(self: SlashEqualsToken) -> int;
 ```
 ## SlashEqualsToken::getRoot
 
-```rust
+```java
 /**
-     * Gets the root top-level of this node. 
-     */
+* Gets the root top-level of this node. 
+*/
 ```
 ```rust
 pub fn getRoot(self: SlashEqualsToken) -> TopLevelDO;
 ```
 ## SlashEqualsToken::getDecorator
 
-```rust
+```java
 /**
-     * Gets the `i`th decorator.
-     */
+* Gets the `i`th decorator.
+*/
 ```
 ```rust
 pub fn getDecorator(self: SlashEqualsToken, i: int) -> Decorator;
 ```
 ## SlashEqualsToken::getKind
 
-```rust
+```java
 /**
-     * Get the syntax kind of this node
-     */
+* Get the syntax kind of this node
+*/
 ```
 ```rust
 pub fn getKind(self: SlashEqualsToken) -> int;
 ```
 ## SlashEqualsToken::getAModifier
 
-```rust
+```java
 /**
-     * Gets a modifier.
-     */
+* Gets a modifier.
+*/
 ```
 ```rust
 pub fn getAModifier(self: SlashEqualsToken) -> *Modifier;
@@ -154,10 +154,10 @@ pub fn getStartColumnNumber(self: SlashEqualsToken) -> int;
 ```
 ## SlashEqualsToken::getChild
 
-```rust
+```java
 /**
-     * Gets the `i`th child of this node.
-     */
+* Gets the `i`th child of this node.
+*/
 ```
 ```rust
 pub fn getChild(self: SlashEqualsToken, i: int) -> Node;
@@ -169,22 +169,22 @@ pub fn getStartLineNumber(self: SlashEqualsToken) -> int;
 ```
 ## SlashEqualsToken::getAnAncestorEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets an ancestor enclosing function of it
-     */
+* Gets an ancestor enclosing function of it
+*/
 ```
 ```rust
 pub fn getAnAncestorEnclosingFunction(self: SlashEqualsToken) -> *FunctionLikeDeclaration;
 ```
 ## SlashEqualsToken::getADescendantByLevel
 
-```rust
+```java
 /**
-     * Gets a descendant of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets a descendant of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getADescendantByLevel(self: SlashEqualsToken, level: int) -> *Node;
@@ -196,72 +196,72 @@ pub fn getEndLineNumber(self: SlashEqualsToken) -> int;
 ```
 ## SlashEqualsToken::getRelativePath
 
-```rust
+```java
 /**
-     * Gets the relative path of this node.
-     */
+* Gets the relative path of this node.
+*/
 ```
 ```rust
 pub fn getRelativePath(self: SlashEqualsToken) -> string;
 ```
 ## SlashEqualsToken::getAnAncestorByLevel
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets an ancestor of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getAnAncestorByLevel(self: SlashEqualsToken, level: int) -> Node;
 ```
 ## SlashEqualsToken::getFile
 
-```rust
+```java
 /**
-     * Gets the file of this node.
-     */
+* Gets the file of this node.
+*/
 ```
 ```rust
 pub fn getFile(self: SlashEqualsToken) -> File;
 ```
 ## SlashEqualsToken::getALeadingComment
 
-```rust
+```java
 /**
-     * Gets the leading comments of it
-     */
+* Gets the leading comments of it
+*/
 ```
 ```rust
 pub fn getALeadingComment(self: SlashEqualsToken) -> *Comment;
 ```
 ## SlashEqualsToken::getATrailingComment
 
-```rust
+```java
 /**
-     * Gets the trailing comments of it
-     */
+* Gets the trailing comments of it
+*/
 ```
 ```rust
 pub fn getATrailingComment(self: SlashEqualsToken) -> *Comment;
 ```
 ## SlashEqualsToken::getLastChild
 
-```rust
+```java
 /**
-     * Gets the last child of this node parent.
-     */
+* Gets the last child of this node parent.
+*/
 ```
 ```rust
 pub fn getLastChild(self: SlashEqualsToken) -> Node;
 ```
 ## SlashEqualsToken::getEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets the enclosing function of it
-     */
+* Gets the enclosing function of it
+*/
 ```
 ```rust
 pub fn getEnclosingFunction(self: SlashEqualsToken) -> FunctionLikeDeclaration;
@@ -273,10 +273,10 @@ pub fn getEndColumnNumber(self: SlashEqualsToken) -> int;
 ```
 ## SlashEqualsToken::getParentOid
 
-```rust
+```java
 /**
-     * Gets the parent oid of this node.
-     */
+* Gets the parent oid of this node.
+*/
 ```
 ```rust
 pub fn getParentOid(self: SlashEqualsToken) -> int;
@@ -288,41 +288,18 @@ pub fn getIndex(self: SlashEqualsToken) -> int;
 ```
 ## SlashEqualsToken::getADescendant
 
-```rust
+```java
 /**
-     * Gets a descendant of this node. 
-     */
+* Gets a descendant of this node. 
+*/
 ```
 ```rust
 pub fn getADescendant(self: SlashEqualsToken) -> *Node;
 ```
 ## SlashEqualsToken::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavascriptDB) -> *SlashEqualsToken;
-```
-## SlashEqualsToken::is\<T\>
-
-```rust
-pub fn is<T>(self: SlashEqualsToken) -> bool;
-```
-## SlashEqualsToken::to\<T\>
-
-```rust
-pub fn to<T>(self: SlashEqualsToken) -> <any>;
-```
-## SlashEqualsToken::key\_neq
-
-```rust
-pub fn key_neq(self: SlashEqualsToken, object: <any>) -> bool;
-```
-## SlashEqualsToken::key\_eq
-
-```rust
-pub fn key_eq(self: SlashEqualsToken, object: <any>) -> bool;
-```
-## SlashEqualsToken::to\_set
-
-```rust
-pub fn to_set(self: SlashEqualsToken) -> *SlashEqualsToken;
 ```

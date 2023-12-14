@@ -10,64 +10,41 @@ schema Cupackage {
 ```
 ## Cupackage::getPackageHashId
 
-```rust
+```java
 /**
-     * @brief gets the package hash id of this element.
-     * @return int
-     */
+* @brief gets the package hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getPackageHashId(self: Cupackage) -> int;
 ```
 ## Cupackage::getPackage
 
-```rust
+```java
 /**
-     * @brief gets the package of the element.
-     * @return Package 
-     */
+* @brief gets the package of the element.
+* @return Package 
+*/
 ```
 ```rust
 pub fn getPackage(self: Cupackage) -> Package;
 ```
 ## Cupackage::getCompilationUnit
 
-```rust
+```java
 /**
-     * @brief gets the compilation unit.
-     * @return File 
-     */
+* @brief gets the compilation unit.
+* @return File 
+*/
 ```
 ```rust
 pub fn getCompilationUnit(self: Cupackage) -> File;
 ```
 ## Cupackage::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavaDB) -> *Cupackage;
-```
-## Cupackage::is\<T\>
-
-```rust
-pub fn is<T>(self: Cupackage) -> bool;
-```
-## Cupackage::to\<T\>
-
-```rust
-pub fn to<T>(self: Cupackage) -> <any>;
-```
-## Cupackage::key\_neq
-
-```rust
-pub fn key_neq(self: Cupackage, object: <any>) -> bool;
-```
-## Cupackage::key\_eq
-
-```rust
-pub fn key_eq(self: Cupackage, object: <any>) -> bool;
-```
-## Cupackage::to\_set
-
-```rust
-pub fn to_set(self: Cupackage) -> *Cupackage;
 ```

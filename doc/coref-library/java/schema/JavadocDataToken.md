@@ -13,130 +13,107 @@ schema JavadocDataToken {
 ```
 ## JavadocDataToken::getLocationHashId
 
-```rust
+```java
 /**
-     * @brief gets the location hash id of this element.
-     * @return int
-     */
+* @brief gets the location hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getLocationHashId(self: JavadocDataToken) -> int;
 ```
 ## JavadocDataToken::getIndex
 
-```rust
+```java
 /**
-     * @brief gets the index order of this element.
-     * @return int
-     */
+* @brief gets the index order of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getIndex(self: JavadocDataToken) -> int;
 ```
 ## JavadocDataToken::getAnAncestor
 
-```rust
+```java
 /**
-     * @brief gets an ancestor of the element.
-     * @return ElementParent 
-     */
+* @brief gets an ancestor of the element.
+* @return ElementParent 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: JavadocDataToken) -> *ElementParent;
 ```
 ## JavadocDataToken::getComment
 
-```rust
+```java
 /**
-     * @brief gets the doc comment in which the element is contained, if any.
-     * @return JavadocComment 
-     */
+* @brief gets the doc comment in which the element is contained, if any.
+* @return JavadocComment 
+*/
 ```
 ```rust
 pub fn getComment(self: JavadocDataToken) -> JavadocComment;
 ```
 ## JavadocDataToken::getValue
 
-```rust
+```java
 /**
-     * @brief gets the value of this element.
-     * @return string
-     */
+* @brief gets the value of this element.
+* @return string
+*/
 ```
 ```rust
 pub fn getValue(self: JavadocDataToken) -> string;
 ```
 ## JavadocDataToken::getJavaDocTag
 
-```rust
+```java
 /**
-     * @brief gets the doc tag in which the element is contained, if any.
-     * @return JavadocTag 
-     */
+* @brief gets the doc tag in which the element is contained, if any.
+* @return JavadocTag 
+*/
 ```
 ```rust
 pub fn getJavaDocTag(self: JavadocDataToken) -> JavadocTag;
 ```
 ## JavadocDataToken::getParent
 
-```rust
+```java
 /**
-     * @brief gets the parent of the element.
-     * @return ElementParent 
-     */
+* @brief gets the parent of the element.
+* @return ElementParent 
+*/
 ```
 ```rust
 pub fn getParent(self: JavadocDataToken) -> ElementParent;
 ```
 ## JavadocDataToken::getParentHashId
 
-```rust
+```java
 /**
-     * @brief gets the parent hash id of this element.
-     * @return int
-     */
+* @brief gets the parent hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getParentHashId(self: JavadocDataToken) -> int;
 ```
 ## JavadocDataToken::getLocation
 
-```rust
+```java
 /**
-     * @brief gets the location for the element.
-     * @return Location
-     */
+* @brief gets the location for the element.
+* @return Location
+*/
 ```
 ```rust
 pub fn getLocation(self: JavadocDataToken) -> Location;
 ```
 ## JavadocDataToken::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavaDB) -> *JavadocDataToken;
-```
-## JavadocDataToken::is\<T\>
-
-```rust
-pub fn is<T>(self: JavadocDataToken) -> bool;
-```
-## JavadocDataToken::to\<T\>
-
-```rust
-pub fn to<T>(self: JavadocDataToken) -> <any>;
-```
-## JavadocDataToken::key\_neq
-
-```rust
-pub fn key_neq(self: JavadocDataToken, object: <any>) -> bool;
-```
-## JavadocDataToken::key\_eq
-
-```rust
-pub fn key_eq(self: JavadocDataToken, object: <any>) -> bool;
-```
-## JavadocDataToken::to\_set
-
-```rust
-pub fn to_set(self: JavadocDataToken) -> *JavadocDataToken;
 ```

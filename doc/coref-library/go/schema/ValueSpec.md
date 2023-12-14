@@ -64,6 +64,8 @@ pub fn getBelongsFunction(self: ValueSpec) -> Function;
 ```
 ## ValueSpec::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: GoDB) -> *ValueSpec;
 ```
@@ -94,7 +96,7 @@ pub fn isRootNode(self: ValueSpec) -> bool;
 ```
 ## ValueSpec::getText
 
-```rust
+```java
 // getText Extract the text associated with a specific node in a file
 ```
 ```rust
@@ -148,9 +150,6 @@ pub fn getAValueSpecNameByIdx(self: ValueSpec, id: int) -> *string;
 ## ValueSpec::getBelongsFile
 
 ```rust
-// root node
-```
-```rust
 pub fn getBelongsFile(self: ValueSpec) -> File;
 ```
 ## ValueSpec::getAValueByIdx
@@ -172,29 +171,4 @@ pub fn getTextSize(self: ValueSpec) -> int;
 
 ```rust
 pub fn getAnAncestorForIndex(self: ValueSpec, index: int) -> Node;
-```
-## ValueSpec::is\<T\>
-
-```rust
-pub fn is<T>(self: ValueSpec) -> bool;
-```
-## ValueSpec::to\<T\>
-
-```rust
-pub fn to<T>(self: ValueSpec) -> <any>;
-```
-## ValueSpec::key\_neq
-
-```rust
-pub fn key_neq(self: ValueSpec, object: <any>) -> bool;
-```
-## ValueSpec::key\_eq
-
-```rust
-pub fn key_eq(self: ValueSpec, object: <any>) -> bool;
-```
-## ValueSpec::to\_set
-
-```rust
-pub fn to_set(self: ValueSpec) -> *ValueSpec;
 ```

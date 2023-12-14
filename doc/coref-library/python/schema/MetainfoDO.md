@@ -12,64 +12,41 @@ schema MetainfoDO {
 ```
 ## MetainfoDO::getProgramOid
 
-```rust
+```java
 /**
-     * @brief gets the program oid of this element.
-     * @return int
-     */
+* @brief gets the program oid of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getProgramOid(self: MetainfoDO) -> int;
 ```
 ## MetainfoDO::getValue
 
-```rust
+```java
 /**
-     * @brief gets the value of this element.
-     * @return string
-     */
+* @brief gets the value of this element.
+* @return string
+*/
 ```
 ```rust
 pub fn getValue(self: MetainfoDO) -> string;
 ```
 ## MetainfoDO::getKind
 
-```rust
+```java
 /**
-     * @brief gets the kind of this element.
-     * @return string
-     */
+* @brief gets the kind of this element.
+* @return string
+*/
 ```
 ```rust
 pub fn getKind(self: MetainfoDO) -> string;
 ```
 ## MetainfoDO::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: PythonDB) -> *MetainfoDO;
-```
-## MetainfoDO::is\<T\>
-
-```rust
-pub fn is<T>(self: MetainfoDO) -> bool;
-```
-## MetainfoDO::to\<T\>
-
-```rust
-pub fn to<T>(self: MetainfoDO) -> <any>;
-```
-## MetainfoDO::key\_neq
-
-```rust
-pub fn key_neq(self: MetainfoDO, object: <any>) -> bool;
-```
-## MetainfoDO::key\_eq
-
-```rust
-pub fn key_eq(self: MetainfoDO, object: <any>) -> bool;
-```
-## MetainfoDO::to\_set
-
-```rust
-pub fn to_set(self: MetainfoDO) -> *MetainfoDO;
 ```

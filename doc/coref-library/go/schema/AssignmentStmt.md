@@ -59,7 +59,7 @@ pub fn isCaseClause(self: AssignmentStmt) -> bool;
 ```
 ## AssignmentStmt::getText
 
-```rust
+```java
 // getText Extract the text associated with a specific node in a file
 ```
 ```rust
@@ -183,9 +183,6 @@ pub fn countAssociatedComment(self: AssignmentStmt) -> int;
 ## AssignmentStmt::getBelongsFile
 
 ```rust
-// root node
-```
-```rust
 pub fn getBelongsFile(self: AssignmentStmt) -> File;
 ```
 ## AssignmentStmt::isCommClause
@@ -234,6 +231,8 @@ pub fn getTextStartOffset(self: AssignmentStmt) -> int;
 pub fn isOrassignStmt(self: AssignmentStmt) -> bool;
 ```
 ## AssignmentStmt::\_\_all\_\_
+
+Data constraint method.
 
 ```rust
 pub fn __all__(db: GoDB) -> *AssignmentStmt;
@@ -317,29 +316,4 @@ pub fn hasLocation(self: AssignmentStmt) -> bool;
 
 ```rust
 pub fn getTextSize(self: AssignmentStmt) -> int;
-```
-## AssignmentStmt::is\<T\>
-
-```rust
-pub fn is<T>(self: AssignmentStmt) -> bool;
-```
-## AssignmentStmt::to\<T\>
-
-```rust
-pub fn to<T>(self: AssignmentStmt) -> <any>;
-```
-## AssignmentStmt::key\_neq
-
-```rust
-pub fn key_neq(self: AssignmentStmt, object: <any>) -> bool;
-```
-## AssignmentStmt::key\_eq
-
-```rust
-pub fn key_eq(self: AssignmentStmt, object: <any>) -> bool;
-```
-## AssignmentStmt::to\_set
-
-```rust
-pub fn to_set(self: AssignmentStmt) -> *AssignmentStmt;
 ```

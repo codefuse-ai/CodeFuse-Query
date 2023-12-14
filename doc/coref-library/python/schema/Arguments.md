@@ -11,97 +11,74 @@ schema Arguments {
 ```
 ## Arguments::getParentOid
 
-```rust
+```java
 /**
-     * @brief gets the parent oid of this element.
-     * @return int
-     */
+* @brief gets the parent oid of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getParentOid(self: Arguments) -> int;
 ```
 ## Arguments::getPrintableText
 
-```rust
+```java
 /**
-     * @brief gets the printable text of this element.
-     * @return string
-     */
+* @brief gets the printable text of this element.
+* @return string
+*/
 ```
 ```rust
 pub fn getPrintableText(self: Arguments) -> string;
 ```
 ## Arguments::getLocation
 
-```rust
+```java
 /**
-     * @brief gets the location for the element's parent since this type has no location info.
-     * @return Location
-     */
+* @brief gets the location for the element's parent since this type has no location info.
+* @return Location
+*/
 ```
 ```rust
 pub fn getLocation(self: Arguments) -> Location;
 ```
 ## Arguments::getParent
 
-```rust
+```java
 /**
-     * @brief gets the parent element of the element
-     * @return CombineElement 
-     */
+* @brief gets the parent element of the element
+* @return CombineElement 
+*/
 ```
 ```rust
 pub fn getParent(self: Arguments) -> CombineElement;
 ```
 ## Arguments::getArgByIndex
 
-```rust
+```java
 /**
-     * @brief gets the arg in the arguments by index, if any.
-     * @return Arg
-     */
+* @brief gets the arg in the arguments by index, if any.
+* @return Arg
+*/
 ```
 ```rust
 pub fn getArgByIndex(self: Arguments, i: int) -> Arg;
 ```
 ## Arguments::getAnAncestor
 
-```rust
+```java
 /**
-     * @brief gets an ancestor of the element.
-     * @return CombineElement 
-     */
+* @brief gets an ancestor of the element.
+* @return CombineElement 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: Arguments) -> *CombineElement;
 ```
 ## Arguments::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: PythonDB) -> *Arguments;
-```
-## Arguments::is\<T\>
-
-```rust
-pub fn is<T>(self: Arguments) -> bool;
-```
-## Arguments::to\<T\>
-
-```rust
-pub fn to<T>(self: Arguments) -> <any>;
-```
-## Arguments::key\_neq
-
-```rust
-pub fn key_neq(self: Arguments, object: <any>) -> bool;
-```
-## Arguments::key\_eq
-
-```rust
-pub fn key_eq(self: Arguments, object: <any>) -> bool;
-```
-## Arguments::to\_set
-
-```rust
-pub fn to_set(self: Arguments) -> *Arguments;
 ```

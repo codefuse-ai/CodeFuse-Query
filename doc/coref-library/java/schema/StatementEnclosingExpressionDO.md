@@ -10,42 +10,19 @@ schema StatementEnclosingExpressionDO {
 ```
 ## StatementEnclosingExpressionDO::getStatementHashId
 
-```rust
+```java
 /**
-     * @brief gets the statement hash id of this element.
-     * @return int
-     */
+* @brief gets the statement hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getStatementHashId(self: StatementEnclosingExpressionDO) -> int;
 ```
 ## StatementEnclosingExpressionDO::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavaDB) -> *StatementEnclosingExpressionDO;
-```
-## StatementEnclosingExpressionDO::is\<T\>
-
-```rust
-pub fn is<T>(self: StatementEnclosingExpressionDO) -> bool;
-```
-## StatementEnclosingExpressionDO::to\<T\>
-
-```rust
-pub fn to<T>(self: StatementEnclosingExpressionDO) -> <any>;
-```
-## StatementEnclosingExpressionDO::key\_neq
-
-```rust
-pub fn key_neq(self: StatementEnclosingExpressionDO, object: <any>) -> bool;
-```
-## StatementEnclosingExpressionDO::key\_eq
-
-```rust
-pub fn key_eq(self: StatementEnclosingExpressionDO, object: <any>) -> bool;
-```
-## StatementEnclosingExpressionDO::to\_set
-
-```rust
-pub fn to_set(self: StatementEnclosingExpressionDO) -> *StatementEnclosingExpressionDO;
 ```

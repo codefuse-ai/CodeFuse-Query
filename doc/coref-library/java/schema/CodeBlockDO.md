@@ -14,86 +14,63 @@ schema CodeBlockDO {
 ```
 ## CodeBlockDO::getLocationHashId
 
-```rust
+```java
 /**
-     * @brief gets the location hash id of this element.
-     * @return int
-     */
+* @brief gets the location hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getLocationHashId(self: CodeBlockDO) -> int;
 ```
 ## CodeBlockDO::getPrintableText
 
-```rust
+```java
 /**
-     * @brief gets a printed representation of this element, including its structure where applicable.
-     * @return string.
-     */
+* @brief gets a printed representation of this element, including its structure where applicable.
+* @return string.
+*/
 ```
 ```rust
 pub fn getPrintableText(self: CodeBlockDO) -> string;
 ```
 ## CodeBlockDO::getNumberOfStatement
 
-```rust
+```java
 /**
-     * @brief gets the number of statement of this element.
-     * @return int
-     */
+* @brief gets the number of statement of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getNumberOfStatement(self: CodeBlockDO) -> int;
 ```
 ## CodeBlockDO::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavaDB) -> *CodeBlockDO;
 ```
 ## CodeBlockDO::getIsEmpty
 
-```rust
+```java
 /**
-     * @brief gets the is empty of this element.
-     * @return int
-     */
+* @brief gets the is empty of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getIsEmpty(self: CodeBlockDO) -> int;
 ```
 ## CodeBlockDO::getParentHashId
 
-```rust
+```java
 /**
-     * @brief gets the parent hash id of this element.
-     * @return int
-     */
+* @brief gets the parent hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getParentHashId(self: CodeBlockDO) -> int;
-```
-## CodeBlockDO::is\<T\>
-
-```rust
-pub fn is<T>(self: CodeBlockDO) -> bool;
-```
-## CodeBlockDO::to\<T\>
-
-```rust
-pub fn to<T>(self: CodeBlockDO) -> <any>;
-```
-## CodeBlockDO::key\_neq
-
-```rust
-pub fn key_neq(self: CodeBlockDO, object: <any>) -> bool;
-```
-## CodeBlockDO::key\_eq
-
-```rust
-pub fn key_eq(self: CodeBlockDO, object: <any>) -> bool;
-```
-## CodeBlockDO::to\_set
-
-```rust
-pub fn to_set(self: CodeBlockDO) -> *CodeBlockDO;
 ```

@@ -9,150 +9,150 @@ schema NoSubstitutionTemplateLiteral {
 ```
 ## NoSubstitutionTemplateLiteral::getLastChild
 
-```rust
+```java
 /**
-     * Gets the last child of this node parent.
-     */
+* Gets the last child of this node parent.
+*/
 ```
 ```rust
 pub fn getLastChild(self: NoSubstitutionTemplateLiteral) -> Node;
 ```
 ## NoSubstitutionTemplateLiteral::getText
 
-```rust
+```java
 /**
-     * Gets the text of this node.
-     */
+* Gets the text of this node.
+*/
 ```
 ```rust
 pub fn getText(self: NoSubstitutionTemplateLiteral) -> string;
 ```
 ## NoSubstitutionTemplateLiteral::getModifier
 
-```rust
+```java
 /**
-     * Gets the `i`th modifier.
-     */
+* Gets the `i`th modifier.
+*/
 ```
 ```rust
 pub fn getModifier(self: NoSubstitutionTemplateLiteral, i: int) -> Modifier;
 ```
 ## NoSubstitutionTemplateLiteral::getLocation
 
-```rust
+```java
 /**
-     * Gets the location of this node.
-     */
+* Gets the location of this node.
+*/
 ```
 ```rust
 pub fn getLocation(self: NoSubstitutionTemplateLiteral) -> Location;
 ```
 ## NoSubstitutionTemplateLiteral::getADecorator
 
-```rust
+```java
 /**
-     * Gets a decorator.
-     */
+* Gets a decorator.
+*/
 ```
 ```rust
 pub fn getADecorator(self: NoSubstitutionTemplateLiteral) -> *Decorator;
 ```
 ## NoSubstitutionTemplateLiteral::getSymbol
 
-```rust
+```java
 /**
-     * Gets the symbol associated with this node.
-     */
+* Gets the symbol associated with this node.
+*/
 ```
 ```rust
 pub fn getSymbol(self: NoSubstitutionTemplateLiteral) -> Symbol;
 ```
 ## NoSubstitutionTemplateLiteral::getAComment
 
-```rust
+```java
 /**
-     * Gets the comments related to it
-     */
+* Gets the comments related to it
+*/
 ```
 ```rust
 pub fn getAComment(self: NoSubstitutionTemplateLiteral) -> *Comment;
 ```
 ## NoSubstitutionTemplateLiteral::getAnAncestor
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node. 
-     */
+* Gets an ancestor of this node. 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: NoSubstitutionTemplateLiteral) -> *Node;
 ```
 ## NoSubstitutionTemplateLiteral::getValue
 
-```rust
+```java
 /**
-     * Gets the value of this literal, as a string.
-     */
+* Gets the value of this literal, as a string.
+*/
 ```
 ```rust
 pub fn getValue(self: NoSubstitutionTemplateLiteral) -> string;
 ```
 ## NoSubstitutionTemplateLiteral::getAChild
 
-```rust
+```java
 /**
-     * Gets a child node of this node.
-     */
+* Gets a child node of this node.
+*/
 ```
 ```rust
 pub fn getAChild(self: NoSubstitutionTemplateLiteral) -> *Node;
 ```
 ## NoSubstitutionTemplateLiteral::getParent
 
-```rust
+```java
 /**
-     * Gets the parent node of this node.
-     */
+* Gets the parent node of this node.
+*/
 ```
 ```rust
 pub fn getParent(self: NoSubstitutionTemplateLiteral) -> Node;
 ```
 ## NoSubstitutionTemplateLiteral::getChildCount
 
-```rust
+```java
 /**
-     * Gets the number of child nodes.
-     */
+* Gets the number of child nodes.
+*/
 ```
 ```rust
 pub fn getChildCount(self: NoSubstitutionTemplateLiteral) -> int;
 ```
 ## NoSubstitutionTemplateLiteral::getRoot
 
-```rust
+```java
 /**
-     * Gets the root top-level of this node. 
-     */
+* Gets the root top-level of this node. 
+*/
 ```
 ```rust
 pub fn getRoot(self: NoSubstitutionTemplateLiteral) -> TopLevelDO;
 ```
 ## NoSubstitutionTemplateLiteral::getDecorator
 
-```rust
+```java
 /**
-     * Gets the `i`th decorator.
-     */
+* Gets the `i`th decorator.
+*/
 ```
 ```rust
 pub fn getDecorator(self: NoSubstitutionTemplateLiteral, i: int) -> Decorator;
 ```
 ## NoSubstitutionTemplateLiteral::getKind
 
-```rust
+```java
 /**
-     * Get the syntax kind of this node
-     */
+* Get the syntax kind of this node
+*/
 ```
 ```rust
 pub fn getKind(self: NoSubstitutionTemplateLiteral) -> int;
@@ -164,20 +164,20 @@ pub fn getStartColumnNumber(self: NoSubstitutionTemplateLiteral) -> int;
 ```
 ## NoSubstitutionTemplateLiteral::getAModifier
 
-```rust
+```java
 /**
-     * Gets a modifier.
-     */
+* Gets a modifier.
+*/
 ```
 ```rust
 pub fn getAModifier(self: NoSubstitutionTemplateLiteral) -> *Modifier;
 ```
 ## NoSubstitutionTemplateLiteral::getChild
 
-```rust
+```java
 /**
-     * Gets the `i`th child of this node.
-     */
+* Gets the `i`th child of this node.
+*/
 ```
 ```rust
 pub fn getChild(self: NoSubstitutionTemplateLiteral, i: int) -> Node;
@@ -189,52 +189,52 @@ pub fn getStartLineNumber(self: NoSubstitutionTemplateLiteral) -> int;
 ```
 ## NoSubstitutionTemplateLiteral::getADescendantByLevel
 
-```rust
+```java
 /**
-     * Gets a descendant of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets a descendant of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getADescendantByLevel(self: NoSubstitutionTemplateLiteral, level: int) -> *Node;
 ```
 ## NoSubstitutionTemplateLiteral::getAnAncestorEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets an ancestor enclosing function of it
-     */
+* Gets an ancestor enclosing function of it
+*/
 ```
 ```rust
 pub fn getAnAncestorEnclosingFunction(self: NoSubstitutionTemplateLiteral) -> *FunctionLikeDeclaration;
 ```
 ## NoSubstitutionTemplateLiteral::getALeadingComment
 
-```rust
+```java
 /**
-     * Gets the leading comments of it
-     */
+* Gets the leading comments of it
+*/
 ```
 ```rust
 pub fn getALeadingComment(self: NoSubstitutionTemplateLiteral) -> *Comment;
 ```
 ## NoSubstitutionTemplateLiteral::getATrailingComment
 
-```rust
+```java
 /**
-     * Gets the trailing comments of it
-     */
+* Gets the trailing comments of it
+*/
 ```
 ```rust
 pub fn getATrailingComment(self: NoSubstitutionTemplateLiteral) -> *Comment;
 ```
 ## NoSubstitutionTemplateLiteral::getEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets the enclosing function of it
-     */
+* Gets the enclosing function of it
+*/
 ```
 ```rust
 pub fn getEnclosingFunction(self: NoSubstitutionTemplateLiteral) -> FunctionLikeDeclaration;
@@ -246,32 +246,32 @@ pub fn getEndColumnNumber(self: NoSubstitutionTemplateLiteral) -> int;
 ```
 ## NoSubstitutionTemplateLiteral::getFile
 
-```rust
+```java
 /**
-     * Gets the file of this node.
-     */
+* Gets the file of this node.
+*/
 ```
 ```rust
 pub fn getFile(self: NoSubstitutionTemplateLiteral) -> File;
 ```
 ## NoSubstitutionTemplateLiteral::getAnAncestorByLevel
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets an ancestor of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getAnAncestorByLevel(self: NoSubstitutionTemplateLiteral, level: int) -> Node;
 ```
 ## NoSubstitutionTemplateLiteral::getParentOid
 
-```rust
+```java
 /**
-     * Gets the parent oid of this node.
-     */
+* Gets the parent oid of this node.
+*/
 ```
 ```rust
 pub fn getParentOid(self: NoSubstitutionTemplateLiteral) -> int;
@@ -283,6 +283,8 @@ pub fn getIndex(self: NoSubstitutionTemplateLiteral) -> int;
 ```
 ## NoSubstitutionTemplateLiteral::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavascriptDB) -> *NoSubstitutionTemplateLiteral;
 ```
@@ -293,10 +295,10 @@ pub fn getExpression(self: NoSubstitutionTemplateLiteral) -> Expression;
 ```
 ## NoSubstitutionTemplateLiteral::getRelativePath
 
-```rust
+```java
 /**
-     * Gets the relative path of this node.
-     */
+* Gets the relative path of this node.
+*/
 ```
 ```rust
 pub fn getRelativePath(self: NoSubstitutionTemplateLiteral) -> string;
@@ -308,36 +310,11 @@ pub fn getEndLineNumber(self: NoSubstitutionTemplateLiteral) -> int;
 ```
 ## NoSubstitutionTemplateLiteral::getADescendant
 
-```rust
+```java
 /**
-     * Gets a descendant of this node. 
-     */
+* Gets a descendant of this node. 
+*/
 ```
 ```rust
 pub fn getADescendant(self: NoSubstitutionTemplateLiteral) -> *Node;
-```
-## NoSubstitutionTemplateLiteral::is\<T\>
-
-```rust
-pub fn is<T>(self: NoSubstitutionTemplateLiteral) -> bool;
-```
-## NoSubstitutionTemplateLiteral::to\<T\>
-
-```rust
-pub fn to<T>(self: NoSubstitutionTemplateLiteral) -> <any>;
-```
-## NoSubstitutionTemplateLiteral::key\_neq
-
-```rust
-pub fn key_neq(self: NoSubstitutionTemplateLiteral, object: <any>) -> bool;
-```
-## NoSubstitutionTemplateLiteral::key\_eq
-
-```rust
-pub fn key_eq(self: NoSubstitutionTemplateLiteral, object: <any>) -> bool;
-```
-## NoSubstitutionTemplateLiteral::to\_set
-
-```rust
-pub fn to_set(self: NoSubstitutionTemplateLiteral) -> *NoSubstitutionTemplateLiteral;
 ```

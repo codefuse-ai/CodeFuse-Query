@@ -30,9 +30,6 @@ pub fn getChildCount(self: Writable) -> int;
 ## Writable::getBelongsFile
 
 ```rust
-// root node
-```
-```rust
 pub fn getBelongsFile(self: Writable) -> File;
 ```
 ## Writable::isRootNode
@@ -77,6 +74,8 @@ pub fn getAWriteSource(self: Writable) -> *Node;
 ```
 ## Writable::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: GoDB) -> *Writable;
 ```
@@ -102,7 +101,7 @@ pub fn getTextStartOffset(self: Writable) -> int;
 ```
 ## Writable::getText
 
-```rust
+```java
 // getText Extract the text associated with a specific node in a file
 ```
 ```rust
@@ -122,29 +121,4 @@ pub fn getAWrite(self: Writable) -> *Node;
 
 ```rust
 pub fn getAWriteDist(self: Writable) -> *Node;
-```
-## Writable::is\<T\>
-
-```rust
-pub fn is<T>(self: Writable) -> bool;
-```
-## Writable::to\<T\>
-
-```rust
-pub fn to<T>(self: Writable) -> <any>;
-```
-## Writable::key\_neq
-
-```rust
-pub fn key_neq(self: Writable, object: <any>) -> bool;
-```
-## Writable::key\_eq
-
-```rust
-pub fn key_eq(self: Writable, object: <any>) -> bool;
-```
-## Writable::to\_set
-
-```rust
-pub fn to_set(self: Writable) -> *Writable;
 ```

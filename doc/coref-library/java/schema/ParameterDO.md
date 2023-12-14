@@ -15,97 +15,74 @@ schema ParameterDO {
 ```
 ## ParameterDO::getPrintableText
 
-```rust
+```java
 /**
-     * @brief gets a printed representation of this element, including its structure where applicable.
-     * @return string.
-     */
+* @brief gets a printed representation of this element, including its structure where applicable.
+* @return string.
+*/
 ```
 ```rust
 pub fn getPrintableText(self: ParameterDO) -> string;
 ```
 ## ParameterDO::getLocationHashId
 
-```rust
+```java
 /**
-     * @brief gets the location hash id of this element.
-     * @return int
-     */
+* @brief gets the location hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getLocationHashId(self: ParameterDO) -> int;
 ```
 ## ParameterDO::getIndex
 
-```rust
+```java
 /**
-     * @brief gets the index order of this element.
-     * @return int
-     */
+* @brief gets the index order of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getIndex(self: ParameterDO) -> int;
 ```
 ## ParameterDO::getParentHashId
 
-```rust
+```java
 /**
-     * @brief gets the parent hash id of this element.
-     * @return int
-     */
+* @brief gets the parent hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getParentHashId(self: ParameterDO) -> int;
 ```
 ## ParameterDO::getName
 
-```rust
+```java
 /**
-     * @brief gets the name of this element.
-     * @return string
-     */
+* @brief gets the name of this element.
+* @return string
+*/
 ```
 ```rust
 pub fn getName(self: ParameterDO) -> string;
 ```
 ## ParameterDO::getTypeHashId
 
-```rust
+```java
 /**
-     * @brief gets the type hash id of this element.
-     * @return int
-     */
+* @brief gets the type hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getTypeHashId(self: ParameterDO) -> int;
 ```
 ## ParameterDO::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavaDB) -> *ParameterDO;
-```
-## ParameterDO::is\<T\>
-
-```rust
-pub fn is<T>(self: ParameterDO) -> bool;
-```
-## ParameterDO::to\<T\>
-
-```rust
-pub fn to<T>(self: ParameterDO) -> <any>;
-```
-## ParameterDO::key\_neq
-
-```rust
-pub fn key_neq(self: ParameterDO, object: <any>) -> bool;
-```
-## ParameterDO::key\_eq
-
-```rust
-pub fn key_eq(self: ParameterDO, object: <any>) -> bool;
-```
-## ParameterDO::to\_set
-
-```rust
-pub fn to_set(self: ParameterDO) -> *ParameterDO;
 ```

@@ -14,152 +14,129 @@ schema ThisAccessExpression {
 ```
 ## ThisAccessExpression::getAnAncestor
 
-```rust
+```java
 /**
-     * @brief gets an ancestor of the element.
-     * @return ElementParent 
-     */
+* @brief gets an ancestor of the element.
+* @return ElementParent 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: ThisAccessExpression) -> *ElementParent;
 ```
 ## ThisAccessExpression::getEnclosingStatement
 
-```rust
+```java
 /**
-     * @brief gets the statement which encloses the expression.
-     * @return Statement 
-     */
+* @brief gets the statement which encloses the expression.
+* @return Statement 
+*/
 ```
 ```rust
 pub fn getEnclosingStatement(self: ThisAccessExpression) -> Statement;
 ```
 ## ThisAccessExpression::getParentHashId
 
-```rust
+```java
 /**
-     * @brief gets the parent hash id of this element.
-     * @return int
-     */
+* @brief gets the parent hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getParentHashId(self: ThisAccessExpression) -> int;
 ```
 ## ThisAccessExpression::getParent
 
-```rust
+```java
 /**
-     * @brief gets the parent of the expression.
-     * @return ElementParent 
-     */
+* @brief gets the parent of the expression.
+* @return ElementParent 
+*/
 ```
 ```rust
 pub fn getParent(self: ThisAccessExpression) -> ElementParent;
 ```
 ## ThisAccessExpression::getSize
 
-```rust
+```java
 /**
-     * @brief gets the size information for the element.
-     * @return NumberOfLines
-     */
+* @brief gets the size information for the element.
+* @return NumberOfLines
+*/
 ```
 ```rust
 pub fn getSize(self: ThisAccessExpression) -> NumberOfLines;
 ```
 ## ThisAccessExpression::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavaDB) -> *ThisAccessExpression;
 ```
 ## ThisAccessExpression::getLocationHashId
 
-```rust
+```java
 /**
-     * @brief gets the location hash id of this element.
-     * @return int
-     */
+* @brief gets the location hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getLocationHashId(self: ThisAccessExpression) -> int;
 ```
 ## ThisAccessExpression::getLocation
 
-```rust
+```java
 /**
-     * @brief gets the location for the element.
-     * @return Location
-     */
+* @brief gets the location for the element.
+* @return Location
+*/
 ```
 ```rust
 pub fn getLocation(self: ThisAccessExpression) -> Location;
 ```
 ## ThisAccessExpression::getEnclosingCallable
 
-```rust
+```java
 /**
-     * @brief gets the callable in which this expression occurs.
-     * @return Callable 
-     */
+* @brief gets the callable in which this expression occurs.
+* @return Callable 
+*/
 ```
 ```rust
 pub fn getEnclosingCallable(self: ThisAccessExpression) -> Callable;
 ```
 ## ThisAccessExpression::getIndex
 
-```rust
+```java
 /**
-     * @brief gets the index order of this element.
-     * @return int
-     */
+* @brief gets the index order of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getIndex(self: ThisAccessExpression) -> int;
 ```
 ## ThisAccessExpression::getPrintableText
 
-```rust
+```java
 /**
-     * @brief gets a printed representation of this element, including its structure where applicable.
-     * @return string.
-     */
+* @brief gets a printed representation of this element, including its structure where applicable.
+* @return string.
+*/
 ```
 ```rust
 pub fn getPrintableText(self: ThisAccessExpression) -> string;
 ```
 ## ThisAccessExpression::getType
 
-```rust
+```java
 /**
-     * @brief gets the type of this element.
-     * @return string
-     */
+* @brief gets the type of this element.
+* @return string
+*/
 ```
 ```rust
 pub fn getType(self: ThisAccessExpression) -> string;
-```
-## ThisAccessExpression::is\<T\>
-
-```rust
-pub fn is<T>(self: ThisAccessExpression) -> bool;
-```
-## ThisAccessExpression::to\<T\>
-
-```rust
-pub fn to<T>(self: ThisAccessExpression) -> <any>;
-```
-## ThisAccessExpression::key\_neq
-
-```rust
-pub fn key_neq(self: ThisAccessExpression, object: <any>) -> bool;
-```
-## ThisAccessExpression::key\_eq
-
-```rust
-pub fn key_eq(self: ThisAccessExpression, object: <any>) -> bool;
-```
-## ThisAccessExpression::to\_set
-
-```rust
-pub fn to_set(self: ThisAccessExpression) -> *ThisAccessExpression;
 ```

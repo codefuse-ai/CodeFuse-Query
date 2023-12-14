@@ -14,11 +14,11 @@ schema DefaultSwitchLabelStatement {
 ```
 ## DefaultSwitchLabelStatement::getSelector
 
-```rust
+```java
 /**
-     * @brief gets the expression of the surrounding switch that this case is compared against.
-     * @return ExpressionListElement 
-     */
+* @brief gets the expression of the surrounding switch that this case is compared against.
+* @return ExpressionListElement 
+*/
 ```
 ```rust
 pub fn getSelector(self: DefaultSwitchLabelStatement) -> ExpressionListElement;
@@ -30,99 +30,99 @@ pub fn getStatement(self: DefaultSwitchLabelStatement, index: int) -> Statement;
 ```
 ## DefaultSwitchLabelStatement::getType
 
-```rust
+```java
 /**
-     * @brief gets the type of this element.
-     * @return string
-     */
+* @brief gets the type of this element.
+* @return string
+*/
 ```
 ```rust
 pub fn getType(self: DefaultSwitchLabelStatement) -> string;
 ```
 ## DefaultSwitchLabelStatement::getDefault
 
-```rust
+```java
 /**
-     * @brief get the default label statement.
-     * @return SwitchLabelStatement
-     */
+* @brief get the default label statement.
+* @return SwitchLabelStatement
+*/
 ```
 ```rust
 pub fn getDefault(self: DefaultSwitchLabelStatement) -> SwitchLabelStatement;
 ```
 ## DefaultSwitchLabelStatement::getNext
 
-```rust
+```java
 /**
-     * @brief the element represents a default section or not, 1 means true.
-     * @return int 
-     */
+* @brief the element represents a default section or not, 1 means true.
+* @return int 
+*/
 ```
 ```rust
 pub fn getNext(self: DefaultSwitchLabelStatement) -> int;
 ```
 ## DefaultSwitchLabelStatement::isDefaultValue
 
-```rust
+```java
 /**
-     * @brief the element represents a default section or not, 1 means true.
-     * @return int 
-     */
+* @brief the element represents a default section or not, 1 means true.
+* @return int 
+*/
 ```
 ```rust
 pub fn isDefaultValue(self: DefaultSwitchLabelStatement) -> int;
 ```
 ## DefaultSwitchLabelStatement::getEnclosingSwitchBlock
 
-```rust
+```java
 /**
-     * @brief gets the enclosing switch statement of this case.
-     * @return SwitchStatement 
-     */
+* @brief gets the enclosing switch statement of this case.
+* @return SwitchStatement 
+*/
 ```
 ```rust
 pub fn getEnclosingSwitchBlock(self: DefaultSwitchLabelStatement) -> SwitchStatement;
 ```
 ## DefaultSwitchLabelStatement::getParentHashId
 
-```rust
+```java
 /**
-     * @brief gets the parent hash id of this element.
-     * @return int
-     */
+* @brief gets the parent hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getParentHashId(self: DefaultSwitchLabelStatement) -> int;
 ```
 ## DefaultSwitchLabelStatement::getParent
 
-```rust
+```java
 /**
-     * @brief gets the parent element of the statement
-     * @return StatementParent 
-     */
+* @brief gets the parent element of the statement
+* @return StatementParent 
+*/
 ```
 ```rust
 pub fn getParent(self: DefaultSwitchLabelStatement) -> ElementParent;
 ```
 ## DefaultSwitchLabelStatement::getAEnclosingStatement
 
-```rust
+```java
 /**
-     * @brief gets the transitive statement containing this statement.
-     * @return Statement 
-     */
+* @brief gets the transitive statement containing this statement.
+* @return Statement 
+*/
 ```
 ```rust
 pub fn getAEnclosingStatement(self: DefaultSwitchLabelStatement) -> *Statement;
 ```
 ## DefaultSwitchLabelStatement::getEnclosingStatement
 
-```rust
+```java
 /**
-     * @brief gets the statement containing this statement.
-     * @return Statement 
-     */
+* @brief gets the statement containing this statement.
+* @return Statement 
+*/
 ```
 ```rust
 pub fn getEnclosingStatement(self: DefaultSwitchLabelStatement) -> Statement;
@@ -134,22 +134,22 @@ pub fn getNextSwitchCaseStatement(self: DefaultSwitchLabelStatement) -> SwitchLa
 ```
 ## DefaultSwitchLabelStatement::getAnAncestor
 
-```rust
+```java
 /**
-     * @brief gets an ancestor of the element.
-     * @return ElementParent 
-     */
+* @brief gets an ancestor of the element.
+* @return ElementParent 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: DefaultSwitchLabelStatement) -> *ElementParent;
 ```
 ## DefaultSwitchLabelStatement::getAChild
 
-```rust
+```java
 /**
-     * @brief gets a child of this statement.
-     * @return Statement 
-     */
+* @brief gets a child of this statement.
+* @return Statement 
+*/
 ```
 ```rust
 pub fn getAChild(self: DefaultSwitchLabelStatement) -> *Statement;
@@ -161,97 +161,74 @@ pub fn getExecutionStatement(self: DefaultSwitchLabelStatement) -> *Statement;
 ```
 ## DefaultSwitchLabelStatement::getIndex
 
-```rust
+```java
 /**
-     * @brief gets the index order of this element.
-     * @return int
-     */
+* @brief gets the index order of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getIndex(self: DefaultSwitchLabelStatement) -> int;
 ```
 ## DefaultSwitchLabelStatement::getEnclosingCallable
 
-```rust
+```java
 /**
-     * @brief gets the immediately enclosing callable (method or constructor) whose body contains this statement.
-     * @return Callable 
-     */
+* @brief gets the immediately enclosing callable (method or constructor) whose body contains this statement.
+* @return Callable 
+*/
 ```
 ```rust
 pub fn getEnclosingCallable(self: DefaultSwitchLabelStatement) -> Callable;
 ```
 ## DefaultSwitchLabelStatement::getPrintableText
 
-```rust
+```java
 /**
-     * @brief gets a printed representation of this element, including its structure where applicable.
-     * @return string.
-     */
+* @brief gets a printed representation of this element, including its structure where applicable.
+* @return string.
+*/
 ```
 ```rust
 pub fn getPrintableText(self: DefaultSwitchLabelStatement) -> string;
 ```
 ## DefaultSwitchLabelStatement::getSize
 
-```rust
+```java
 /**
-     * @brief gets the size information for the element.
-     * @return NumberOfLines
-     */
+* @brief gets the size information for the element.
+* @return NumberOfLines
+*/
 ```
 ```rust
 pub fn getSize(self: DefaultSwitchLabelStatement) -> NumberOfLines;
 ```
 ## DefaultSwitchLabelStatement::getLocationHashId
 
-```rust
+```java
 /**
-     * @brief gets the location hash id of this element.
-     * @return int
-     */
+* @brief gets the location hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getLocationHashId(self: DefaultSwitchLabelStatement) -> int;
 ```
 ## DefaultSwitchLabelStatement::getLocation
 
-```rust
+```java
 /**
-      * @brief gets the location for the element.
-      * @return Location
-      */
+* @brief gets the location for the element.
+* @return Location
+*/
 ```
 ```rust
 pub fn getLocation(self: DefaultSwitchLabelStatement) -> Location;
 ```
 ## DefaultSwitchLabelStatement::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavaDB) -> *DefaultSwitchLabelStatement;
-```
-## DefaultSwitchLabelStatement::is\<T\>
-
-```rust
-pub fn is<T>(self: DefaultSwitchLabelStatement) -> bool;
-```
-## DefaultSwitchLabelStatement::to\<T\>
-
-```rust
-pub fn to<T>(self: DefaultSwitchLabelStatement) -> <any>;
-```
-## DefaultSwitchLabelStatement::key\_neq
-
-```rust
-pub fn key_neq(self: DefaultSwitchLabelStatement, object: <any>) -> bool;
-```
-## DefaultSwitchLabelStatement::key\_eq
-
-```rust
-pub fn key_eq(self: DefaultSwitchLabelStatement, object: <any>) -> bool;
-```
-## DefaultSwitchLabelStatement::to\_set
-
-```rust
-pub fn to_set(self: DefaultSwitchLabelStatement) -> *DefaultSwitchLabelStatement;
 ```

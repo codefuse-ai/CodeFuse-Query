@@ -9,10 +9,10 @@ schema ShiftExpression {
 ```
 ## ShiftExpression::getParentOid
 
-```rust
+```java
 /**
-     * Gets the parent oid of this node.
-     */
+* Gets the parent oid of this node.
+*/
 ```
 ```rust
 pub fn getParentOid(self: ShiftExpression) -> int;
@@ -24,70 +24,70 @@ pub fn getEndColumnNumber(self: ShiftExpression) -> int;
 ```
 ## ShiftExpression::getLastChild
 
-```rust
+```java
 /**
-     * Gets the last child of this node parent.
-     */
+* Gets the last child of this node parent.
+*/
 ```
 ```rust
 pub fn getLastChild(self: ShiftExpression) -> Node;
 ```
 ## ShiftExpression::getEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets the enclosing function of it
-     */
+* Gets the enclosing function of it
+*/
 ```
 ```rust
 pub fn getEnclosingFunction(self: ShiftExpression) -> FunctionLikeDeclaration;
 ```
 ## ShiftExpression::getLeft
 
-```rust
+```java
 /**
-     * Get the left operand of this binary expression. An alias of `getLeftOperand`.
-     */
+* Get the left operand of this binary expression. An alias of `getLeftOperand`.
+*/
 ```
 ```rust
 pub fn getLeft(self: ShiftExpression) -> Expression;
 ```
 ## ShiftExpression::getADescendant
 
-```rust
+```java
 /**
-     * Gets a descendant of this node. 
-     */
+* Gets a descendant of this node. 
+*/
 ```
 ```rust
 pub fn getADescendant(self: ShiftExpression) -> *Node;
 ```
 ## ShiftExpression::getOperator
 
-```rust
+```java
 /**
-     * Get the operator of this binary expression.
-     */
+* Get the operator of this binary expression.
+*/
 ```
 ```rust
 pub fn getOperator(self: ShiftExpression) -> BinaryOperator;
 ```
 ## ShiftExpression::getLocation
 
-```rust
+```java
 /**
-     * Gets the location of this node.
-     */
+* Gets the location of this node.
+*/
 ```
 ```rust
 pub fn getLocation(self: ShiftExpression) -> Location;
 ```
 ## ShiftExpression::getRight
 
-```rust
+```java
 /**
-     * Get the right operand of this binary expression. An alias of `getRightOperand`
-     */
+* Get the right operand of this binary expression. An alias of `getRightOperand`
+*/
 ```
 ```rust
 pub fn getRight(self: ShiftExpression) -> Expression;
@@ -104,40 +104,40 @@ pub fn getAnOperand(self: ShiftExpression) -> *Expression;
 ```
 ## ShiftExpression::getRightOperand
 
-```rust
+```java
 /**
-     * Get the right operand of this binary expression.
-     */
+* Get the right operand of this binary expression.
+*/
 ```
 ```rust
 pub fn getRightOperand(self: ShiftExpression) -> Expression;
 ```
 ## ShiftExpression::getModifier
 
-```rust
+```java
 /**
-     * Gets the `i`th modifier.
-     */
+* Gets the `i`th modifier.
+*/
 ```
 ```rust
 pub fn getModifier(self: ShiftExpression, i: int) -> Modifier;
 ```
 ## ShiftExpression::getText
 
-```rust
+```java
 /**
-     * Gets the text of this node.
-     */
+* Gets the text of this node.
+*/
 ```
 ```rust
 pub fn getText(self: ShiftExpression) -> string;
 ```
 ## ShiftExpression::getRelativePath
 
-```rust
+```java
 /**
-     * Gets the relative path of this node.
-     */
+* Gets the relative path of this node.
+*/
 ```
 ```rust
 pub fn getRelativePath(self: ShiftExpression) -> string;
@@ -149,74 +149,74 @@ pub fn getEndLineNumber(self: ShiftExpression) -> int;
 ```
 ## ShiftExpression::getFile
 
-```rust
+```java
 /**
-     * Gets the file of this node.
-     */
+* Gets the file of this node.
+*/
 ```
 ```rust
 pub fn getFile(self: ShiftExpression) -> File;
 ```
 ## ShiftExpression::getAnAncestorByLevel
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets an ancestor of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getAnAncestorByLevel(self: ShiftExpression, level: int) -> Node;
 ```
 ## ShiftExpression::getLeftOperand
 
-```rust
+```java
 /**
-     * Get the left operand of this binary expression.
-     */
+* Get the left operand of this binary expression.
+*/
 ```
 ```rust
 pub fn getLeftOperand(self: ShiftExpression) -> Expression;
 ```
 ## ShiftExpression::getAnAncestorEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets an ancestor enclosing function of it
-     */
+* Gets an ancestor enclosing function of it
+*/
 ```
 ```rust
 pub fn getAnAncestorEnclosingFunction(self: ShiftExpression) -> *FunctionLikeDeclaration;
 ```
 ## ShiftExpression::getADescendantByLevel
 
-```rust
+```java
 /**
-     * Gets a descendant of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets a descendant of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getADescendantByLevel(self: ShiftExpression, level: int) -> *Node;
 ```
 ## ShiftExpression::getKind
 
-```rust
+```java
 /**
-     * Get the syntax kind of this node
-     */
+* Get the syntax kind of this node
+*/
 ```
 ```rust
 pub fn getKind(self: ShiftExpression) -> int;
 ```
 ## ShiftExpression::getAModifier
 
-```rust
+```java
 /**
-     * Gets a modifier.
-     */
+* Gets a modifier.
+*/
 ```
 ```rust
 pub fn getAModifier(self: ShiftExpression) -> *Modifier;
@@ -233,151 +233,128 @@ pub fn getStartLineNumber(self: ShiftExpression) -> int;
 ```
 ## ShiftExpression::getChild
 
-```rust
+```java
 /**
-     * Gets the `i`th child of this node.
-     */
+* Gets the `i`th child of this node.
+*/
 ```
 ```rust
 pub fn getChild(self: ShiftExpression, i: int) -> Node;
 ```
 ## ShiftExpression::getRoot
 
-```rust
+```java
 /**
-     * Gets the root top-level of this node. 
-     */
+* Gets the root top-level of this node. 
+*/
 ```
 ```rust
 pub fn getRoot(self: ShiftExpression) -> TopLevelDO;
 ```
 ## ShiftExpression::getDecorator
 
-```rust
+```java
 /**
-     * Gets the `i`th decorator.
-     */
+* Gets the `i`th decorator.
+*/
 ```
 ```rust
 pub fn getDecorator(self: ShiftExpression, i: int) -> Decorator;
 ```
 ## ShiftExpression::getAChild
 
-```rust
+```java
 /**
-     * Gets a child node of this node.
-     */
+* Gets a child node of this node.
+*/
 ```
 ```rust
 pub fn getAChild(self: ShiftExpression) -> *Node;
 ```
 ## ShiftExpression::getParent
 
-```rust
+```java
 /**
-     * Gets the parent node of this node.
-     */
+* Gets the parent node of this node.
+*/
 ```
 ```rust
 pub fn getParent(self: ShiftExpression) -> Node;
 ```
 ## ShiftExpression::getALeadingComment
 
-```rust
+```java
 /**
-     * Gets the leading comments of it
-     */
+* Gets the leading comments of it
+*/
 ```
 ```rust
 pub fn getALeadingComment(self: ShiftExpression) -> *Comment;
 ```
 ## ShiftExpression::getATrailingComment
 
-```rust
+```java
 /**
-     * Gets the trailing comments of it
-     */
+* Gets the trailing comments of it
+*/
 ```
 ```rust
 pub fn getATrailingComment(self: ShiftExpression) -> *Comment;
 ```
 ## ShiftExpression::getChildCount
 
-```rust
+```java
 /**
-     * Gets the number of child nodes.
-     */
+* Gets the number of child nodes.
+*/
 ```
 ```rust
 pub fn getChildCount(self: ShiftExpression) -> int;
 ```
 ## ShiftExpression::getAnAncestor
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node. 
-     */
+* Gets an ancestor of this node. 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: ShiftExpression) -> *Node;
 ```
 ## ShiftExpression::getAComment
 
-```rust
+```java
 /**
-     * Gets the comments related to it
-     */
+* Gets the comments related to it
+*/
 ```
 ```rust
 pub fn getAComment(self: ShiftExpression) -> *Comment;
 ```
 ## ShiftExpression::getADecorator
 
-```rust
+```java
 /**
-     * Gets a decorator.
-     */
+* Gets a decorator.
+*/
 ```
 ```rust
 pub fn getADecorator(self: ShiftExpression) -> *Decorator;
 ```
 ## ShiftExpression::getSymbol
 
-```rust
+```java
 /**
-     * Gets the symbol associated with this node.
-     */
+* Gets the symbol associated with this node.
+*/
 ```
 ```rust
 pub fn getSymbol(self: ShiftExpression) -> Symbol;
 ```
 ## ShiftExpression::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavascriptDB) -> *ShiftExpression;
-```
-## ShiftExpression::is\<T\>
-
-```rust
-pub fn is<T>(self: ShiftExpression) -> bool;
-```
-## ShiftExpression::to\<T\>
-
-```rust
-pub fn to<T>(self: ShiftExpression) -> <any>;
-```
-## ShiftExpression::key\_neq
-
-```rust
-pub fn key_neq(self: ShiftExpression, object: <any>) -> bool;
-```
-## ShiftExpression::key\_eq
-
-```rust
-pub fn key_eq(self: ShiftExpression, object: <any>) -> bool;
-```
-## ShiftExpression::to\_set
-
-```rust
-pub fn to_set(self: ShiftExpression) -> *ShiftExpression;
 ```

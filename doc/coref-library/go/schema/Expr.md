@@ -30,9 +30,6 @@ pub fn getChildCount(self: Expr) -> int;
 ## Expr::getBelongsFile
 
 ```rust
-// root node
-```
-```rust
 pub fn getBelongsFile(self: Expr) -> File;
 ```
 ## Expr::getAnAncestor
@@ -67,7 +64,7 @@ pub fn isSendchantypeExpr(self: Expr) -> bool;
 ```
 ## Expr::getText
 
-```rust
+```java
 // getText Extract the text associated with a specific node in a file
 ```
 ```rust
@@ -225,8 +222,8 @@ pub fn isAddressExpr(self: Expr) -> bool;
 ```
 ## Expr::isBinaryExpr
 
-```rust
-// Check if the expression is a binary expression.
+```java
+// Any of ['||', '&&', '==', '!=', '<', '<=', '>', '+', '-', '|', '^', '*', '/', '%', '<<', '>>', '&', '&^' ]
 ```
 ```rust
 pub fn isBinaryExpr(self: Expr) -> bool;
@@ -288,8 +285,8 @@ pub fn isSelectorExpr(self: Expr) -> bool;
 ```
 ## Expr::isUnaryExpr
 
-```rust
-// Check if the given expression is a unary expression.
+```java
+// Any of ['+','-','!','^','*','&','->' ]
 ```
 ```rust
 pub fn isUnaryExpr(self: Expr) -> bool;
@@ -381,8 +378,8 @@ pub fn isSliceExpr(self: Expr) -> bool;
 ```
 ## Expr::isControlExpr
 
-```rust
-// Check if the expression is a control expression.
+```java
+// Any of ['||', '&&']
 ```
 ```rust
 pub fn isControlExpr(self: Expr) -> bool;
@@ -429,6 +426,8 @@ pub fn isRemExpr(self: Expr) -> bool;
 ```
 ## Expr::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: GoDB) -> *Expr;
 ```
@@ -451,29 +450,4 @@ pub fn getIdx(self: Expr) -> int;
 
 ```rust
 pub fn isNotExpr(self: Expr) -> bool;
-```
-## Expr::is\<T\>
-
-```rust
-pub fn is<T>(self: Expr) -> bool;
-```
-## Expr::to\<T\>
-
-```rust
-pub fn to<T>(self: Expr) -> <any>;
-```
-## Expr::key\_neq
-
-```rust
-pub fn key_neq(self: Expr, object: <any>) -> bool;
-```
-## Expr::key\_eq
-
-```rust
-pub fn key_eq(self: Expr, object: <any>) -> bool;
-```
-## Expr::to\_set
-
-```rust
-pub fn to_set(self: Expr) -> *Expr;
 ```

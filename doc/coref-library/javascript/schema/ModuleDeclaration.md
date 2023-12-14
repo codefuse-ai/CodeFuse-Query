@@ -9,10 +9,10 @@ schema ModuleDeclaration {
 ```
 ## ModuleDeclaration::getADescendant
 
-```rust
+```java
 /**
-     * Gets a descendant of this node. 
-     */
+* Gets a descendant of this node. 
+*/
 ```
 ```rust
 pub fn getADescendant(self: ModuleDeclaration) -> *Node;
@@ -24,10 +24,10 @@ pub fn getIndex(self: ModuleDeclaration) -> int;
 ```
 ## ModuleDeclaration::getParentOid
 
-```rust
+```java
 /**
-     * Gets the parent oid of this node.
-     */
+* Gets the parent oid of this node.
+*/
 ```
 ```rust
 pub fn getParentOid(self: ModuleDeclaration) -> int;
@@ -39,62 +39,62 @@ pub fn getEndColumnNumber(self: ModuleDeclaration) -> int;
 ```
 ## ModuleDeclaration::getEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets the enclosing function of it
-     */
+* Gets the enclosing function of it
+*/
 ```
 ```rust
 pub fn getEnclosingFunction(self: ModuleDeclaration) -> FunctionLikeDeclaration;
 ```
 ## ModuleDeclaration::getLastChild
 
-```rust
+```java
 /**
-     * Gets the last child of this node parent.
-     */
+* Gets the last child of this node parent.
+*/
 ```
 ```rust
 pub fn getLastChild(self: ModuleDeclaration) -> Node;
 ```
 ## ModuleDeclaration::getATrailingComment
 
-```rust
+```java
 /**
-     * Gets the trailing comments of it
-     */
+* Gets the trailing comments of it
+*/
 ```
 ```rust
 pub fn getATrailingComment(self: ModuleDeclaration) -> *Comment;
 ```
 ## ModuleDeclaration::getALeadingComment
 
-```rust
+```java
 /**
-     * Gets the leading comments of it
-     */
+* Gets the leading comments of it
+*/
 ```
 ```rust
 pub fn getALeadingComment(self: ModuleDeclaration) -> *Comment;
 ```
 ## ModuleDeclaration::getFile
 
-```rust
+```java
 /**
-     * Gets the file of this node.
-     */
+* Gets the file of this node.
+*/
 ```
 ```rust
 pub fn getFile(self: ModuleDeclaration) -> File;
 ```
 ## ModuleDeclaration::getAnAncestorByLevel
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets an ancestor of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getAnAncestorByLevel(self: ModuleDeclaration, level: int) -> Node;
@@ -106,52 +106,52 @@ pub fn getEndLineNumber(self: ModuleDeclaration) -> int;
 ```
 ## ModuleDeclaration::getRelativePath
 
-```rust
+```java
 /**
-     * Gets the relative path of this node.
-     */
+* Gets the relative path of this node.
+*/
 ```
 ```rust
 pub fn getRelativePath(self: ModuleDeclaration) -> string;
 ```
 ## ModuleDeclaration::getAnAncestorEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets an ancestor enclosing function of it
-     */
+* Gets an ancestor enclosing function of it
+*/
 ```
 ```rust
 pub fn getAnAncestorEnclosingFunction(self: ModuleDeclaration) -> *FunctionLikeDeclaration;
 ```
 ## ModuleDeclaration::getADescendantByLevel
 
-```rust
+```java
 /**
-     * Gets a descendant of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets a descendant of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getADescendantByLevel(self: ModuleDeclaration, level: int) -> *Node;
 ```
 ## ModuleDeclaration::getKind
 
-```rust
+```java
 /**
-     * Get the syntax kind of this node
-     */
+* Get the syntax kind of this node
+*/
 ```
 ```rust
 pub fn getKind(self: ModuleDeclaration) -> int;
 ```
 ## ModuleDeclaration::getAModifier
 
-```rust
+```java
 /**
-     * Gets a modifier.
-     */
+* Gets a modifier.
+*/
 ```
 ```rust
 pub fn getAModifier(self: ModuleDeclaration) -> *Modifier;
@@ -168,161 +168,138 @@ pub fn getStartLineNumber(self: ModuleDeclaration) -> int;
 ```
 ## ModuleDeclaration::getChild
 
-```rust
+```java
 /**
-     * Gets the `i`th child of this node.
-     */
+* Gets the `i`th child of this node.
+*/
 ```
 ```rust
 pub fn getChild(self: ModuleDeclaration, i: int) -> Node;
 ```
 ## ModuleDeclaration::getDecorator
 
-```rust
+```java
 /**
-     * Gets the `i`th decorator.
-     */
+* Gets the `i`th decorator.
+*/
 ```
 ```rust
 pub fn getDecorator(self: ModuleDeclaration, i: int) -> Decorator;
 ```
 ## ModuleDeclaration::getRoot
 
-```rust
+```java
 /**
-     * Gets the root top-level of this node. 
-     */
+* Gets the root top-level of this node. 
+*/
 ```
 ```rust
 pub fn getRoot(self: ModuleDeclaration) -> TopLevelDO;
 ```
 ## ModuleDeclaration::getChildCount
 
-```rust
+```java
 /**
-     * Gets the number of child nodes.
-     */
+* Gets the number of child nodes.
+*/
 ```
 ```rust
 pub fn getChildCount(self: ModuleDeclaration) -> int;
 ```
 ## ModuleDeclaration::getParent
 
-```rust
+```java
 /**
-     * Gets the parent node of this node.
-     */
+* Gets the parent node of this node.
+*/
 ```
 ```rust
 pub fn getParent(self: ModuleDeclaration) -> Node;
 ```
 ## ModuleDeclaration::getAChild
 
-```rust
+```java
 /**
-     * Gets a child node of this node.
-     */
+* Gets a child node of this node.
+*/
 ```
 ```rust
 pub fn getAChild(self: ModuleDeclaration) -> *Node;
 ```
 ## ModuleDeclaration::getAnAncestor
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node. 
-     */
+* Gets an ancestor of this node. 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: ModuleDeclaration) -> *Node;
 ```
 ## ModuleDeclaration::getAComment
 
-```rust
+```java
 /**
-     * Gets the comments related to it
-     */
+* Gets the comments related to it
+*/
 ```
 ```rust
 pub fn getAComment(self: ModuleDeclaration) -> *Comment;
 ```
 ## ModuleDeclaration::getSymbol
 
-```rust
+```java
 /**
-     * Gets the symbol associated with this node.
-     */
+* Gets the symbol associated with this node.
+*/
 ```
 ```rust
 pub fn getSymbol(self: ModuleDeclaration) -> Symbol;
 ```
 ## ModuleDeclaration::getADecorator
 
-```rust
+```java
 /**
-     * Gets a decorator.
-     */
+* Gets a decorator.
+*/
 ```
 ```rust
 pub fn getADecorator(self: ModuleDeclaration) -> *Decorator;
 ```
 ## ModuleDeclaration::getModifier
 
-```rust
+```java
 /**
-     * Gets the `i`th modifier.
-     */
+* Gets the `i`th modifier.
+*/
 ```
 ```rust
 pub fn getModifier(self: ModuleDeclaration, i: int) -> Modifier;
 ```
 ## ModuleDeclaration::getText
 
-```rust
+```java
 /**
-     * Gets the text of this node.
-     */
+* Gets the text of this node.
+*/
 ```
 ```rust
 pub fn getText(self: ModuleDeclaration) -> string;
 ```
 ## ModuleDeclaration::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavascriptDB) -> *ModuleDeclaration;
 ```
 ## ModuleDeclaration::getLocation
 
-```rust
+```java
 /**
-     * Gets the location of this node.
-     */
+* Gets the location of this node.
+*/
 ```
 ```rust
 pub fn getLocation(self: ModuleDeclaration) -> Location;
-```
-## ModuleDeclaration::is\<T\>
-
-```rust
-pub fn is<T>(self: ModuleDeclaration) -> bool;
-```
-## ModuleDeclaration::to\<T\>
-
-```rust
-pub fn to<T>(self: ModuleDeclaration) -> <any>;
-```
-## ModuleDeclaration::key\_neq
-
-```rust
-pub fn key_neq(self: ModuleDeclaration, object: <any>) -> bool;
-```
-## ModuleDeclaration::key\_eq
-
-```rust
-pub fn key_eq(self: ModuleDeclaration, object: <any>) -> bool;
-```
-## ModuleDeclaration::to\_set
-
-```rust
-pub fn to_set(self: ModuleDeclaration) -> *ModuleDeclaration;
 ```

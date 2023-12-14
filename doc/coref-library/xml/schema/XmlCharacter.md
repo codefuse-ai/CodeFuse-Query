@@ -14,108 +14,85 @@ schema XmlCharacter {
 ```
 ## XmlCharacter::getText
 
-```rust
+```java
 /**
-     * @brief gets the text of the element.
-     * @return string 
-     */
+* @brief gets the text of the element.
+* @return string 
+*/
 ```
 ```rust
 pub fn getText(self: XmlCharacter) -> string;
 ```
 ## XmlCharacter::getIndex
 
-```rust
+```java
 /**
-     * @brief gets the index of the element.
-     * @return int 
-     */
+* @brief gets the index of the element.
+* @return int 
+*/
 ```
 ```rust
 pub fn getIndex(self: XmlCharacter) -> int;
 ```
 ## XmlCharacter::getParentid
 
-```rust
+```java
 /**
-     * @brief gets the parent id of the element.
-     * @return int
-     */
+* @brief gets the parent id of the element.
+* @return int
+*/
 ```
 ```rust
 pub fn getParentid(self: XmlCharacter) -> int;
 ```
 ## XmlCharacter::isCdata
 
-```rust
+```java
 /**
-     * @brief check whether the element is Cdata or not.
-     * @return int 
-     */
+* @brief check whether the element is Cdata or not.
+* @return int 
+*/
 ```
 ```rust
 pub fn isCdata(self: XmlCharacter) -> int;
 ```
 ## XmlCharacter::getLocation
 
-```rust
+```java
 /**
-     * @brief gets the location for the element.
-     * @return Location
-     */
+* @brief gets the location for the element.
+* @return Location
+*/
 ```
 ```rust
 pub fn getLocation(self: XmlCharacter) -> Location;
 ```
 ## XmlCharacter::getBelongedElement
 
-```rust
+```java
 /**
-     * @brief gets the belonged xml element of this xml character.
-     * @return XmlElement 
-     */
+* @brief gets the belonged xml element of this xml character.
+* @return XmlElement 
+*/
 ```
 ```rust
 pub fn getBelongedElement(self: XmlCharacter) -> XmlElement;
 ```
 ## XmlCharacter::getLocationId
 
-```rust
+```java
 /**
-     * @brief gets the location id of this element.
-     * @return int
-     */
+* @brief gets the location id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getLocationId(self: XmlCharacter) -> int;
 ```
 ## XmlCharacter::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: XmlDB) -> *XmlCharacter;
-```
-## XmlCharacter::is\<T\>
-
-```rust
-pub fn is<T>(self: XmlCharacter) -> bool;
-```
-## XmlCharacter::to\<T\>
-
-```rust
-pub fn to<T>(self: XmlCharacter) -> <any>;
-```
-## XmlCharacter::key\_neq
-
-```rust
-pub fn key_neq(self: XmlCharacter, object: <any>) -> bool;
-```
-## XmlCharacter::key\_eq
-
-```rust
-pub fn key_eq(self: XmlCharacter, object: <any>) -> bool;
-```
-## XmlCharacter::to\_set
-
-```rust
-pub fn to_set(self: XmlCharacter) -> *XmlCharacter;
 ```

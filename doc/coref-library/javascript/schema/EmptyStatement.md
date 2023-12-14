@@ -9,140 +9,140 @@ schema EmptyStatement {
 ```
 ## EmptyStatement::getLocation
 
-```rust
+```java
 /**
-     * Gets the location of this node.
-     */
+* Gets the location of this node.
+*/
 ```
 ```rust
 pub fn getLocation(self: EmptyStatement) -> Location;
 ```
 ## EmptyStatement::getSymbol
 
-```rust
+```java
 /**
-     * Gets the symbol associated with this node.
-     */
+* Gets the symbol associated with this node.
+*/
 ```
 ```rust
 pub fn getSymbol(self: EmptyStatement) -> Symbol;
 ```
 ## EmptyStatement::getADecorator
 
-```rust
+```java
 /**
-     * Gets a decorator.
-     */
+* Gets a decorator.
+*/
 ```
 ```rust
 pub fn getADecorator(self: EmptyStatement) -> *Decorator;
 ```
 ## EmptyStatement::getText
 
-```rust
+```java
 /**
-     * Gets the text of this node.
-     */
+* Gets the text of this node.
+*/
 ```
 ```rust
 pub fn getText(self: EmptyStatement) -> string;
 ```
 ## EmptyStatement::getModifier
 
-```rust
+```java
 /**
-     * Gets the `i`th modifier.
-     */
+* Gets the `i`th modifier.
+*/
 ```
 ```rust
 pub fn getModifier(self: EmptyStatement, i: int) -> Modifier;
 ```
 ## EmptyStatement::getAComment
 
-```rust
+```java
 /**
-     * Gets the comments related to it
-     */
+* Gets the comments related to it
+*/
 ```
 ```rust
 pub fn getAComment(self: EmptyStatement) -> *Comment;
 ```
 ## EmptyStatement::getAnAncestor
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node. 
-     */
+* Gets an ancestor of this node. 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: EmptyStatement) -> *Node;
 ```
 ## EmptyStatement::getAChild
 
-```rust
+```java
 /**
-     * Gets a child node of this node.
-     */
+* Gets a child node of this node.
+*/
 ```
 ```rust
 pub fn getAChild(self: EmptyStatement) -> *Node;
 ```
 ## EmptyStatement::getParent
 
-```rust
+```java
 /**
-     * Gets the parent node of this node.
-     */
+* Gets the parent node of this node.
+*/
 ```
 ```rust
 pub fn getParent(self: EmptyStatement) -> Node;
 ```
 ## EmptyStatement::getChildCount
 
-```rust
+```java
 /**
-     * Gets the number of child nodes.
-     */
+* Gets the number of child nodes.
+*/
 ```
 ```rust
 pub fn getChildCount(self: EmptyStatement) -> int;
 ```
 ## EmptyStatement::getRoot
 
-```rust
+```java
 /**
-     * Gets the root top-level of this node. 
-     */
+* Gets the root top-level of this node. 
+*/
 ```
 ```rust
 pub fn getRoot(self: EmptyStatement) -> TopLevelDO;
 ```
 ## EmptyStatement::getDecorator
 
-```rust
+```java
 /**
-     * Gets the `i`th decorator.
-     */
+* Gets the `i`th decorator.
+*/
 ```
 ```rust
 pub fn getDecorator(self: EmptyStatement, i: int) -> Decorator;
 ```
 ## EmptyStatement::getKind
 
-```rust
+```java
 /**
-     * Get the syntax kind of this node
-     */
+* Get the syntax kind of this node
+*/
 ```
 ```rust
 pub fn getKind(self: EmptyStatement) -> int;
 ```
 ## EmptyStatement::getAModifier
 
-```rust
+```java
 /**
-     * Gets a modifier.
-     */
+* Gets a modifier.
+*/
 ```
 ```rust
 pub fn getAModifier(self: EmptyStatement) -> *Modifier;
@@ -154,10 +154,10 @@ pub fn getStartColumnNumber(self: EmptyStatement) -> int;
 ```
 ## EmptyStatement::getChild
 
-```rust
+```java
 /**
-     * Gets the `i`th child of this node.
-     */
+* Gets the `i`th child of this node.
+*/
 ```
 ```rust
 pub fn getChild(self: EmptyStatement, i: int) -> Node;
@@ -169,22 +169,22 @@ pub fn getStartLineNumber(self: EmptyStatement) -> int;
 ```
 ## EmptyStatement::getAnAncestorEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets an ancestor enclosing function of it
-     */
+* Gets an ancestor enclosing function of it
+*/
 ```
 ```rust
 pub fn getAnAncestorEnclosingFunction(self: EmptyStatement) -> *FunctionLikeDeclaration;
 ```
 ## EmptyStatement::getADescendantByLevel
 
-```rust
+```java
 /**
-     * Gets a descendant of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets a descendant of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getADescendantByLevel(self: EmptyStatement, level: int) -> *Node;
@@ -196,72 +196,72 @@ pub fn getEndLineNumber(self: EmptyStatement) -> int;
 ```
 ## EmptyStatement::getRelativePath
 
-```rust
+```java
 /**
-     * Gets the relative path of this node.
-     */
+* Gets the relative path of this node.
+*/
 ```
 ```rust
 pub fn getRelativePath(self: EmptyStatement) -> string;
 ```
 ## EmptyStatement::getAnAncestorByLevel
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets an ancestor of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getAnAncestorByLevel(self: EmptyStatement, level: int) -> Node;
 ```
 ## EmptyStatement::getFile
 
-```rust
+```java
 /**
-     * Gets the file of this node.
-     */
+* Gets the file of this node.
+*/
 ```
 ```rust
 pub fn getFile(self: EmptyStatement) -> File;
 ```
 ## EmptyStatement::getALeadingComment
 
-```rust
+```java
 /**
-     * Gets the leading comments of it
-     */
+* Gets the leading comments of it
+*/
 ```
 ```rust
 pub fn getALeadingComment(self: EmptyStatement) -> *Comment;
 ```
 ## EmptyStatement::getATrailingComment
 
-```rust
+```java
 /**
-     * Gets the trailing comments of it
-     */
+* Gets the trailing comments of it
+*/
 ```
 ```rust
 pub fn getATrailingComment(self: EmptyStatement) -> *Comment;
 ```
 ## EmptyStatement::getLastChild
 
-```rust
+```java
 /**
-     * Gets the last child of this node parent.
-     */
+* Gets the last child of this node parent.
+*/
 ```
 ```rust
 pub fn getLastChild(self: EmptyStatement) -> Node;
 ```
 ## EmptyStatement::getEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets the enclosing function of it
-     */
+* Gets the enclosing function of it
+*/
 ```
 ```rust
 pub fn getEnclosingFunction(self: EmptyStatement) -> FunctionLikeDeclaration;
@@ -273,10 +273,10 @@ pub fn getEndColumnNumber(self: EmptyStatement) -> int;
 ```
 ## EmptyStatement::getParentOid
 
-```rust
+```java
 /**
-     * Gets the parent oid of this node.
-     */
+* Gets the parent oid of this node.
+*/
 ```
 ```rust
 pub fn getParentOid(self: EmptyStatement) -> int;
@@ -288,41 +288,18 @@ pub fn getIndex(self: EmptyStatement) -> int;
 ```
 ## EmptyStatement::getADescendant
 
-```rust
+```java
 /**
-     * Gets a descendant of this node. 
-     */
+* Gets a descendant of this node. 
+*/
 ```
 ```rust
 pub fn getADescendant(self: EmptyStatement) -> *Node;
 ```
 ## EmptyStatement::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavascriptDB) -> *EmptyStatement;
-```
-## EmptyStatement::is\<T\>
-
-```rust
-pub fn is<T>(self: EmptyStatement) -> bool;
-```
-## EmptyStatement::to\<T\>
-
-```rust
-pub fn to<T>(self: EmptyStatement) -> <any>;
-```
-## EmptyStatement::key\_neq
-
-```rust
-pub fn key_neq(self: EmptyStatement, object: <any>) -> bool;
-```
-## EmptyStatement::key\_eq
-
-```rust
-pub fn key_eq(self: EmptyStatement, object: <any>) -> bool;
-```
-## EmptyStatement::to\_set
-
-```rust
-pub fn to_set(self: EmptyStatement) -> *EmptyStatement;
 ```

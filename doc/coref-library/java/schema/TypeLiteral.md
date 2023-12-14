@@ -14,174 +14,151 @@ schema TypeLiteral {
 ```
 ## TypeLiteral::getPrintableText
 
-```rust
+```java
 /**
-     * @brief gets a printed representation of this element, including its structure where applicable.
-     * @return string.
-     */
+* @brief gets a printed representation of this element, including its structure where applicable.
+* @return string.
+*/
 ```
 ```rust
 pub fn getPrintableText(self: TypeLiteral) -> string;
 ```
 ## TypeLiteral::getEnclosingStatement
 
-```rust
+```java
 /**
-     * @brief gets the statement which encloses the expression.
-     * @return Statement 
-     */
+* @brief gets the statement which encloses the expression.
+* @return Statement 
+*/
 ```
 ```rust
 pub fn getEnclosingStatement(self: TypeLiteral) -> Statement;
 ```
 ## TypeLiteral::getSize
 
-```rust
+```java
 /**
-     * @brief gets the size information for the element.
-     * @return NumberOfLines
-     */
+* @brief gets the size information for the element.
+* @return NumberOfLines
+*/
 ```
 ```rust
 pub fn getSize(self: TypeLiteral) -> NumberOfLines;
 ```
 ## TypeLiteral::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavaDB) -> *TypeLiteral;
 ```
 ## TypeLiteral::getLocation
 
-```rust
+```java
 /**
-     * @brief gets the location for the element.
-     * @return Location
-     */
+* @brief gets the location for the element.
+* @return Location
+*/
 ```
 ```rust
 pub fn getLocation(self: TypeLiteral) -> Location;
 ```
 ## TypeLiteral::getLocationHashId
 
-```rust
+```java
 /**
-     * @brief gets the location hash id of this element.
-     * @return int
-     */
+* @brief gets the location hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getLocationHashId(self: TypeLiteral) -> int;
 ```
 ## TypeLiteral::getParent
 
-```rust
+```java
 /**
-     * @brief gets the parent of the expression.
-     * @return ElementParent 
-     */
+* @brief gets the parent of the expression.
+* @return ElementParent 
+*/
 ```
 ```rust
 pub fn getParent(self: TypeLiteral) -> ElementParent;
 ```
 ## TypeLiteral::getParentHashId
 
-```rust
+```java
 /**
-     * @brief gets the parent hash id of this element.
-     * @return int
-     */
+* @brief gets the parent hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getParentHashId(self: TypeLiteral) -> int;
 ```
 ## TypeLiteral::getEnclosingCallable
 
-```rust
+```java
 /**
-     * @brief gets the callable in which this expression occurs.
-     * @return Callable 
-     */
+* @brief gets the callable in which this expression occurs.
+* @return Callable 
+*/
 ```
 ```rust
 pub fn getEnclosingCallable(self: TypeLiteral) -> Callable;
 ```
 ## TypeLiteral::getIndex
 
-```rust
+```java
 /**
-     * @brief gets the index order of this element.
-     * @return int
-     */
+* @brief gets the index order of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getIndex(self: TypeLiteral) -> int;
 ```
 ## TypeLiteral::getValue
 
-```rust
+```java
 /**
-     * @brief gets the value of the element.
-     * @return string 
-     */
+* @brief gets the value of the element.
+* @return string 
+*/
 ```
 ```rust
 pub fn getValue(self: TypeLiteral) -> string;
 ```
 ## TypeLiteral::getType
 
-```rust
+```java
 /**
-     * @brief gets the reference type of the element.
-     * @return Type 
-     */
+* @brief gets the reference type of the element.
+* @return Type 
+*/
 ```
 ```rust
 pub fn getType(self: TypeLiteral) -> Type;
 ```
 ## TypeLiteral::getAnAncestor
 
-```rust
+```java
 /**
-     * @brief gets an ancestor of the element.
-     * @return ElementParent 
-     */
+* @brief gets an ancestor of the element.
+* @return ElementParent 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: TypeLiteral) -> *ElementParent;
 ```
 ## TypeLiteral::getTypeElement
 
-```rust
+```java
 /**
-     * @brief gets the type element of the element.
-     * @return TypeElement 
-     */
+* @brief gets the type element of the element.
+* @return TypeElement 
+*/
 ```
 ```rust
 pub fn getTypeElement(self: TypeLiteral) -> TypeElement;
-```
-## TypeLiteral::is\<T\>
-
-```rust
-pub fn is<T>(self: TypeLiteral) -> bool;
-```
-## TypeLiteral::to\<T\>
-
-```rust
-pub fn to<T>(self: TypeLiteral) -> <any>;
-```
-## TypeLiteral::key\_neq
-
-```rust
-pub fn key_neq(self: TypeLiteral, object: <any>) -> bool;
-```
-## TypeLiteral::key\_eq
-
-```rust
-pub fn key_eq(self: TypeLiteral, object: <any>) -> bool;
-```
-## TypeLiteral::to\_set
-
-```rust
-pub fn to_set(self: TypeLiteral) -> *TypeLiteral;
 ```

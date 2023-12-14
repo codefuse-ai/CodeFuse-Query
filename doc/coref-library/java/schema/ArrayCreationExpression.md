@@ -14,207 +14,184 @@ schema ArrayCreationExpression {
 ```
 ## ArrayCreationExpression::getPrintableText
 
-```rust
+```java
 /**
-     * @brief gets a printed representation of this element, including its structure where applicable.
-     * @return string.
-     */
+* @brief gets a printed representation of this element, including its structure where applicable.
+* @return string.
+*/
 ```
 ```rust
 pub fn getPrintableText(self: ArrayCreationExpression) -> string;
 ```
 ## ArrayCreationExpression::getEnclosingStatement
 
-```rust
+```java
 /**
-     * @brief gets the statement which encloses the expression.
-     * @return Statement 
-     */
+* @brief gets the statement which encloses the expression.
+* @return Statement 
+*/
 ```
 ```rust
 pub fn getEnclosingStatement(self: ArrayCreationExpression) -> Statement;
 ```
 ## ArrayCreationExpression::getParentHashId
 
-```rust
+```java
 /**
-     * @brief gets the parent hash id of this element.
-     * @return int
-     */
+* @brief gets the parent hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getParentHashId(self: ArrayCreationExpression) -> int;
 ```
 ## ArrayCreationExpression::getParent
 
-```rust
+```java
 /**
-     * @brief gets the parent of the expression.
-     * @return ElementParent 
-     */
+* @brief gets the parent of the expression.
+* @return ElementParent 
+*/
 ```
 ```rust
 pub fn getParent(self: ArrayCreationExpression) -> ElementParent;
 ```
 ## ArrayCreationExpression::getSize
 
-```rust
+```java
 /**
-     * @brief gets the size information for the element.
-     * @return NumberOfLines
-     */
+* @brief gets the size information for the element.
+* @return NumberOfLines
+*/
 ```
 ```rust
 pub fn getSize(self: ArrayCreationExpression) -> NumberOfLines;
 ```
 ## ArrayCreationExpression::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavaDB) -> *ArrayCreationExpression;
 ```
 ## ArrayCreationExpression::getLocation
 
-```rust
+```java
 /**
-     * @brief gets the location for the element.
-     * @return Location
-     */
+* @brief gets the location for the element.
+* @return Location
+*/
 ```
 ```rust
 pub fn getLocation(self: ArrayCreationExpression) -> Location;
 ```
 ## ArrayCreationExpression::getLocationHashId
 
-```rust
+```java
 /**
-     * @brief gets the location hash id of this element.
-     * @return int
-     */
+* @brief gets the location hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getLocationHashId(self: ArrayCreationExpression) -> int;
 ```
 ## ArrayCreationExpression::getType
 
-```rust
+```java
 /**
-     * @brief gets the type for the element.
-     * @return Type
-     */
+* @brief gets the type for the element.
+* @return Type
+*/
 ```
 ```rust
 pub fn getType(self: ArrayCreationExpression) -> Type;
 ```
 ## ArrayCreationExpression::getInitializerExpression
 
-```rust
+```java
 /**
-     * @brief gets the initializer expression of the array creation expression.
-     * @return ArrayInitializerExpression
-     */
+* @brief gets the initializer expression of the array creation expression.
+* @return ArrayInitializerExpression
+*/
 ```
 ```rust
 pub fn getInitializerExpression(self: ArrayCreationExpression) -> ArrayInitializerExpression;
 ```
 ## ArrayCreationExpression::getIndex
 
-```rust
+```java
 /**
-     * @brief gets the index order of this element.
-     * @return int
-     */
+* @brief gets the index order of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getIndex(self: ArrayCreationExpression) -> int;
 ```
 ## ArrayCreationExpression::getEnclosingCallable
 
-```rust
+```java
 /**
-     * @brief gets the callable in which this expression occurs.
-     * @return Callable 
-     */
+* @brief gets the callable in which this expression occurs.
+* @return Callable 
+*/
 ```
 ```rust
 pub fn getEnclosingCallable(self: ArrayCreationExpression) -> Callable;
 ```
 ## ArrayCreationExpression::getAnInitializer
 
-```rust
+```java
 /**
-     * @brief gets the initializer of the array creation expression.
-     * @return ArrayInitializer
-     */
+* @brief gets the initializer of the array creation expression.
+* @return ArrayInitializer
+*/
 ```
 ```rust
 pub fn getAnInitializer(self: ArrayCreationExpression) -> *ArrayInitializer;
 ```
 ## ArrayCreationExpression::getDimension
 
-```rust
+```java
 /**
-     * @brief gets the dimension of the array creation expression.
-     * @return Expression 
-     */
+* @brief gets the dimension of the array creation expression.
+* @return Expression 
+*/
 ```
 ```rust
 pub fn getDimension(self: ArrayCreationExpression, idx: int) -> Expression;
 ```
 ## ArrayCreationExpression::getAnAncestor
 
-```rust
+```java
 /**
-     * @brief gets an ancestor of the element.
-     * @return ElementParent 
-     */
+* @brief gets an ancestor of the element.
+* @return ElementParent 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: ArrayCreationExpression) -> *ElementParent;
 ```
 ## ArrayCreationExpression::countArrayDimension
 
-```rust
+```java
 /**
-     * @brief counts the number of the array dimension of the array creation expression, 0 means it is an empty array.
-     * @return int 
-     */
+* @brief counts the number of the array dimension of the array creation expression, 0 means it is an empty array.
+* @return int 
+*/
 ```
 ```rust
 pub fn countArrayDimension(self: ArrayCreationExpression) -> int;
 ```
 ## ArrayCreationExpression::getADimension
 
-```rust
+```java
 /**
-     * @brief gets a dimension of the array creation expression.
-     * @return Expression 
-     */
+* @brief gets a dimension of the array creation expression.
+* @return Expression 
+*/
 ```
 ```rust
 pub fn getADimension(self: ArrayCreationExpression) -> *Expression;
-```
-## ArrayCreationExpression::is\<T\>
-
-```rust
-pub fn is<T>(self: ArrayCreationExpression) -> bool;
-```
-## ArrayCreationExpression::to\<T\>
-
-```rust
-pub fn to<T>(self: ArrayCreationExpression) -> <any>;
-```
-## ArrayCreationExpression::key\_neq
-
-```rust
-pub fn key_neq(self: ArrayCreationExpression, object: <any>) -> bool;
-```
-## ArrayCreationExpression::key\_eq
-
-```rust
-pub fn key_eq(self: ArrayCreationExpression, object: <any>) -> bool;
-```
-## ArrayCreationExpression::to\_set
-
-```rust
-pub fn to_set(self: ArrayCreationExpression) -> *ArrayCreationExpression;
 ```

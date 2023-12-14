@@ -9,120 +9,120 @@ schema PropertyAssignment {
 ```
 ## PropertyAssignment::getAComment
 
-```rust
+```java
 /**
-     * Gets the comments related to it
-     */
+* Gets the comments related to it
+*/
 ```
 ```rust
 pub fn getAComment(self: PropertyAssignment) -> *Comment;
 ```
 ## PropertyAssignment::getAnAncestor
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node. 
-     */
+* Gets an ancestor of this node. 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: PropertyAssignment) -> *Node;
 ```
 ## PropertyAssignment::getLocation
 
-```rust
+```java
 /**
-     * Gets the location of this node.
-     */
+* Gets the location of this node.
+*/
 ```
 ```rust
 pub fn getLocation(self: PropertyAssignment) -> Location;
 ```
 ## PropertyAssignment::getSymbol
 
-```rust
+```java
 /**
-     * Gets the symbol associated with this node.
-     */
+* Gets the symbol associated with this node.
+*/
 ```
 ```rust
 pub fn getSymbol(self: PropertyAssignment) -> Symbol;
 ```
 ## PropertyAssignment::getADecorator
 
-```rust
+```java
 /**
-     * Gets a decorator.
-     */
+* Gets a decorator.
+*/
 ```
 ```rust
 pub fn getADecorator(self: PropertyAssignment) -> *Decorator;
 ```
 ## PropertyAssignment::getText
 
-```rust
+```java
 /**
-     * Gets the text of this node.
-     */
+* Gets the text of this node.
+*/
 ```
 ```rust
 pub fn getText(self: PropertyAssignment) -> string;
 ```
 ## PropertyAssignment::getModifier
 
-```rust
+```java
 /**
-     * Gets the `i`th modifier.
-     */
+* Gets the `i`th modifier.
+*/
 ```
 ```rust
 pub fn getModifier(self: PropertyAssignment, i: int) -> Modifier;
 ```
 ## PropertyAssignment::getALeadingComment
 
-```rust
+```java
 /**
-     * Gets the leading comments of it
-     */
+* Gets the leading comments of it
+*/
 ```
 ```rust
 pub fn getALeadingComment(self: PropertyAssignment) -> *Comment;
 ```
 ## PropertyAssignment::getATrailingComment
 
-```rust
+```java
 /**
-     * Gets the trailing comments of it
-     */
+* Gets the trailing comments of it
+*/
 ```
 ```rust
 pub fn getATrailingComment(self: PropertyAssignment) -> *Comment;
 ```
 ## PropertyAssignment::getDecorator
 
-```rust
+```java
 /**
-     * Gets the `i`th decorator.
-     */
+* Gets the `i`th decorator.
+*/
 ```
 ```rust
 pub fn getDecorator(self: PropertyAssignment, i: int) -> Decorator;
 ```
 ## PropertyAssignment::getRoot
 
-```rust
+```java
 /**
-     * Gets the root top-level of this node. 
-     */
+* Gets the root top-level of this node. 
+*/
 ```
 ```rust
 pub fn getRoot(self: PropertyAssignment) -> TopLevelDO;
 ```
 ## PropertyAssignment::getChild
 
-```rust
+```java
 /**
-     * Gets the `i`th child of this node.
-     */
+* Gets the `i`th child of this node.
+*/
 ```
 ```rust
 pub fn getChild(self: PropertyAssignment, i: int) -> Node;
@@ -139,42 +139,42 @@ pub fn getStartColumnNumber(self: PropertyAssignment) -> int;
 ```
 ## PropertyAssignment::getKind
 
-```rust
+```java
 /**
-     * Get the syntax kind of this node
-     */
+* Get the syntax kind of this node
+*/
 ```
 ```rust
 pub fn getKind(self: PropertyAssignment) -> int;
 ```
 ## PropertyAssignment::getAModifier
 
-```rust
+```java
 /**
-     * Gets a modifier.
-     */
+* Gets a modifier.
+*/
 ```
 ```rust
 pub fn getAModifier(self: PropertyAssignment) -> *Modifier;
 ```
 ## PropertyAssignment::getAnAncestorEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets an ancestor enclosing function of it
-     */
+* Gets an ancestor enclosing function of it
+*/
 ```
 ```rust
 pub fn getAnAncestorEnclosingFunction(self: PropertyAssignment) -> *FunctionLikeDeclaration;
 ```
 ## PropertyAssignment::getADescendantByLevel
 
-```rust
+```java
 /**
-     * Gets a descendant of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets a descendant of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getADescendantByLevel(self: PropertyAssignment, level: int) -> *Node;
@@ -191,22 +191,22 @@ pub fn getEndLineNumber(self: PropertyAssignment) -> int;
 ```
 ## PropertyAssignment::getRelativePath
 
-```rust
+```java
 /**
-     * Gets the relative path of this node.
-     */
+* Gets the relative path of this node.
+*/
 ```
 ```rust
 pub fn getRelativePath(self: PropertyAssignment) -> string;
 ```
 ## PropertyAssignment::getAnAncestorByLevel
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets an ancestor of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getAnAncestorByLevel(self: PropertyAssignment, level: int) -> Node;
@@ -218,30 +218,30 @@ pub fn getNameNode(self: PropertyAssignment) -> PropertyName;
 ```
 ## PropertyAssignment::getFile
 
-```rust
+```java
 /**
-     * Gets the file of this node.
-     */
+* Gets the file of this node.
+*/
 ```
 ```rust
 pub fn getFile(self: PropertyAssignment) -> File;
 ```
 ## PropertyAssignment::getEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets the enclosing function of it
-     */
+* Gets the enclosing function of it
+*/
 ```
 ```rust
 pub fn getEnclosingFunction(self: PropertyAssignment) -> FunctionLikeDeclaration;
 ```
 ## PropertyAssignment::getAChild
 
-```rust
+```java
 /**
-     * Gets a child node of this node.
-     */
+* Gets a child node of this node.
+*/
 ```
 ```rust
 pub fn getAChild(self: PropertyAssignment) -> *Node;
@@ -258,10 +258,10 @@ pub fn getEndColumnNumber(self: PropertyAssignment) -> int;
 ```
 ## PropertyAssignment::getLastChild
 
-```rust
+```java
 /**
-     * Gets the last child of this node parent.
-     */
+* Gets the last child of this node parent.
+*/
 ```
 ```rust
 pub fn getLastChild(self: PropertyAssignment) -> Node;
@@ -273,10 +273,10 @@ pub fn getIndex(self: PropertyAssignment) -> int;
 ```
 ## PropertyAssignment::getChildCount
 
-```rust
+```java
 /**
-     * Gets the number of child nodes.
-     */
+* Gets the number of child nodes.
+*/
 ```
 ```rust
 pub fn getChildCount(self: PropertyAssignment) -> int;
@@ -288,20 +288,20 @@ pub fn getName(self: PropertyAssignment) -> string;
 ```
 ## PropertyAssignment::getADescendant
 
-```rust
+```java
 /**
-     * Gets a descendant of this node. 
-     */
+* Gets a descendant of this node. 
+*/
 ```
 ```rust
 pub fn getADescendant(self: PropertyAssignment) -> *Node;
 ```
 ## PropertyAssignment::getParentOid
 
-```rust
+```java
 /**
-     * Gets the parent oid of this node.
-     */
+* Gets the parent oid of this node.
+*/
 ```
 ```rust
 pub fn getParentOid(self: PropertyAssignment) -> int;
@@ -313,31 +313,8 @@ pub fn getPropertyName(self: PropertyAssignment) -> PropertyName;
 ```
 ## PropertyAssignment::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavascriptDB) -> *PropertyAssignment;
-```
-## PropertyAssignment::is\<T\>
-
-```rust
-pub fn is<T>(self: PropertyAssignment) -> bool;
-```
-## PropertyAssignment::to\<T\>
-
-```rust
-pub fn to<T>(self: PropertyAssignment) -> <any>;
-```
-## PropertyAssignment::key\_neq
-
-```rust
-pub fn key_neq(self: PropertyAssignment, object: <any>) -> bool;
-```
-## PropertyAssignment::key\_eq
-
-```rust
-pub fn key_eq(self: PropertyAssignment, object: <any>) -> bool;
-```
-## PropertyAssignment::to\_set
-
-```rust
-pub fn to_set(self: PropertyAssignment) -> *PropertyAssignment;
 ```

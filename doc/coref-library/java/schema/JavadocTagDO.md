@@ -14,86 +14,63 @@ schema JavadocTagDO {
 ```
 ## JavadocTagDO::getLocationHashId
 
-```rust
+```java
 /**
-     * @brief gets the location hash id of this element.
-     * @return int
-     */
+* @brief gets the location hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getLocationHashId(self: JavadocTagDO) -> int;
 ```
 ## JavadocTagDO::getIndex
 
-```rust
+```java
 /**
-     * @brief gets the index order of this element.
-     * @return int
-     */
+* @brief gets the index order of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getIndex(self: JavadocTagDO) -> int;
 ```
 ## JavadocTagDO::getContainingCommentHashId
 
-```rust
+```java
 /**
-     * @brief gets the containing comment hash id of this element.
-     * @return int
-     */
+* @brief gets the containing comment hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getContainingCommentHashId(self: JavadocTagDO) -> int;
 ```
 ## JavadocTagDO::getValue
 
-```rust
+```java
 /**
-     * @brief gets the value of this element.
-     * @return string
-     */
+* @brief gets the value of this element.
+* @return string
+*/
 ```
 ```rust
 pub fn getValue(self: JavadocTagDO) -> string;
 ```
 ## JavadocTagDO::getName
 
-```rust
+```java
 /**
-     * @brief gets the name of this element.
-     * @return string
-     */
+* @brief gets the name of this element.
+* @return string
+*/
 ```
 ```rust
 pub fn getName(self: JavadocTagDO) -> string;
 ```
 ## JavadocTagDO::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavaDB) -> *JavadocTagDO;
-```
-## JavadocTagDO::is\<T\>
-
-```rust
-pub fn is<T>(self: JavadocTagDO) -> bool;
-```
-## JavadocTagDO::to\<T\>
-
-```rust
-pub fn to<T>(self: JavadocTagDO) -> <any>;
-```
-## JavadocTagDO::key\_neq
-
-```rust
-pub fn key_neq(self: JavadocTagDO, object: <any>) -> bool;
-```
-## JavadocTagDO::key\_eq
-
-```rust
-pub fn key_eq(self: JavadocTagDO, object: <any>) -> bool;
-```
-## JavadocTagDO::to\_set
-
-```rust
-pub fn to_set(self: JavadocTagDO) -> *JavadocTagDO;
 ```

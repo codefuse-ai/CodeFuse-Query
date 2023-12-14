@@ -14,185 +14,162 @@ schema ReturnStatement {
 ```
 ## ReturnStatement::getSize
 
-```rust
+```java
 /**
-     * @brief gets the size information for the element.
-     * @return NumberOfLines
-     */
+* @brief gets the size information for the element.
+* @return NumberOfLines
+*/
 ```
 ```rust
 pub fn getSize(self: ReturnStatement) -> NumberOfLines;
 ```
 ## ReturnStatement::getParent
 
-```rust
+```java
 /**
-     * @brief gets the parent element of the statement
-     * @return StatementParent 
-     */
+* @brief gets the parent element of the statement
+* @return StatementParent 
+*/
 ```
 ```rust
 pub fn getParent(self: ReturnStatement) -> ElementParent;
 ```
 ## ReturnStatement::getParentHashId
 
-```rust
+```java
 /**
-     * @brief gets the parent hash id of this element.
-     * @return int
-     */
+* @brief gets the parent hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getParentHashId(self: ReturnStatement) -> int;
 ```
 ## ReturnStatement::getIndex
 
-```rust
+```java
 /**
-     * @brief gets the index order of this element.
-     * @return int
-     */
+* @brief gets the index order of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getIndex(self: ReturnStatement) -> int;
 ```
 ## ReturnStatement::getEnclosingCallable
 
-```rust
+```java
 /**
-     * @brief gets the immediately enclosing callable (method or constructor) whose body contains this statement.
-     * @return Callable 
-     */
+* @brief gets the immediately enclosing callable (method or constructor) whose body contains this statement.
+* @return Callable 
+*/
 ```
 ```rust
 pub fn getEnclosingCallable(self: ReturnStatement) -> Callable;
 ```
 ## ReturnStatement::getResult
 
-```rust
+```java
 /**
-     * @brief gets the return result of the statement.
-     * @return Expression 
-     */
+* @brief gets the return result of the statement.
+* @return Expression 
+*/
 ```
 ```rust
 pub fn getResult(self: ReturnStatement) -> Expression;
 ```
 ## ReturnStatement::getPrintableText
 
-```rust
+```java
 /**
-     * @brief gets a printed representation of this element, including its structure where applicable.
-     * @return string.
-     */
+* @brief gets a printed representation of this element, including its structure where applicable.
+* @return string.
+*/
 ```
 ```rust
 pub fn getPrintableText(self: ReturnStatement) -> string;
 ```
 ## ReturnStatement::getAChild
 
-```rust
+```java
 /**
-     * @brief gets a child of this statement.
-     * @return Statement 
-     */
+* @brief gets a child of this statement.
+* @return Statement 
+*/
 ```
 ```rust
 pub fn getAChild(self: ReturnStatement) -> *Statement;
 ```
 ## ReturnStatement::getAnAncestor
 
-```rust
+```java
 /**
-     * @brief gets an ancestor of the element.
-     * @return ElementParent 
-     */
+* @brief gets an ancestor of the element.
+* @return ElementParent 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: ReturnStatement) -> *ElementParent;
 ```
 ## ReturnStatement::getEnclosingStatement
 
-```rust
+```java
 /**
-     * @brief gets the statement containing this statement.
-     * @return Statement 
-     */
+* @brief gets the statement containing this statement.
+* @return Statement 
+*/
 ```
 ```rust
 pub fn getEnclosingStatement(self: ReturnStatement) -> Statement;
 ```
 ## ReturnStatement::getAEnclosingStatement
 
-```rust
+```java
 /**
-     * @brief gets the transitive statement containing this statement.
-     * @return Statement 
-     */
+* @brief gets the transitive statement containing this statement.
+* @return Statement 
+*/
 ```
 ```rust
 pub fn getAEnclosingStatement(self: ReturnStatement) -> *Statement;
 ```
 ## ReturnStatement::getType
 
-```rust
+```java
 /**
-     * @brief gets the type of this element.
-     * @return string
-     */
+* @brief gets the type of this element.
+* @return string
+*/
 ```
 ```rust
 pub fn getType(self: ReturnStatement) -> string;
 ```
 ## ReturnStatement::getLocation
 
-```rust
+```java
 /**
-      * @brief gets the location for the element.
-      * @return Location
-      */
+* @brief gets the location for the element.
+* @return Location
+*/
 ```
 ```rust
 pub fn getLocation(self: ReturnStatement) -> Location;
 ```
 ## ReturnStatement::getLocationHashId
 
-```rust
+```java
 /**
-     * @brief gets the location hash id of this element.
-     * @return int
-     */
+* @brief gets the location hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getLocationHashId(self: ReturnStatement) -> int;
 ```
 ## ReturnStatement::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavaDB) -> *ReturnStatement;
-```
-## ReturnStatement::is\<T\>
-
-```rust
-pub fn is<T>(self: ReturnStatement) -> bool;
-```
-## ReturnStatement::to\<T\>
-
-```rust
-pub fn to<T>(self: ReturnStatement) -> <any>;
-```
-## ReturnStatement::key\_neq
-
-```rust
-pub fn key_neq(self: ReturnStatement, object: <any>) -> bool;
-```
-## ReturnStatement::key\_eq
-
-```rust
-pub fn key_eq(self: ReturnStatement, object: <any>) -> bool;
-```
-## ReturnStatement::to\_set
-
-```rust
-pub fn to_set(self: ReturnStatement) -> *ReturnStatement;
 ```

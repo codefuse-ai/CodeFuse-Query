@@ -59,7 +59,7 @@ pub fn isRootNode(self: VarDecl) -> bool;
 ```
 ## VarDecl::getText
 
-```rust
+```java
 // getText Extract the text associated with a specific node in a file
 ```
 ```rust
@@ -91,6 +91,8 @@ pub fn countAssociatedComment(self: VarDecl) -> int;
 pub fn isImportDecl(self: VarDecl) -> bool;
 ```
 ## VarDecl::\_\_all\_\_
+
+Data constraint method.
 
 ```rust
 pub fn __all__(db: GoDB) -> *VarDecl;
@@ -148,33 +150,5 @@ pub fn getTextSize(self: VarDecl) -> int;
 ## VarDecl::getBelongsFile
 
 ```rust
-// root node
-```
-```rust
 pub fn getBelongsFile(self: VarDecl) -> File;
-```
-## VarDecl::is\<T\>
-
-```rust
-pub fn is<T>(self: VarDecl) -> bool;
-```
-## VarDecl::to\<T\>
-
-```rust
-pub fn to<T>(self: VarDecl) -> <any>;
-```
-## VarDecl::key\_neq
-
-```rust
-pub fn key_neq(self: VarDecl, object: <any>) -> bool;
-```
-## VarDecl::key\_eq
-
-```rust
-pub fn key_eq(self: VarDecl, object: <any>) -> bool;
-```
-## VarDecl::to\_set
-
-```rust
-pub fn to_set(self: VarDecl) -> *VarDecl;
 ```

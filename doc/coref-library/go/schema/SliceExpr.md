@@ -64,8 +64,8 @@ pub fn isCompositeLit(self: SliceExpr) -> bool;
 ```
 ## SliceExpr::isControlExpr
 
-```rust
-// Check if the expression is a control expression.
+```java
+// Any of ['||', '&&']
 ```
 ```rust
 pub fn isControlExpr(self: SliceExpr) -> bool;
@@ -152,8 +152,8 @@ pub fn isLssExpr(self: SliceExpr) -> bool;
 ```
 ## SliceExpr::isUnaryExpr
 
-```rust
-// Check if the given expression is a unary expression.
+```java
+// Any of ['+','-','!','^','*','&','->' ]
 ```
 ```rust
 pub fn isUnaryExpr(self: SliceExpr) -> bool;
@@ -215,8 +215,8 @@ pub fn isInterfacetypeExpr(self: SliceExpr) -> bool;
 ```
 ## SliceExpr::isBinaryExpr
 
-```rust
-// Check if the expression is a binary expression.
+```java
+// Any of ['||', '&&', '==', '!=', '<', '<=', '>', '+', '-', '|', '^', '*', '/', '%', '<<', '>>', '&', '&^' ]
 ```
 ```rust
 pub fn isBinaryExpr(self: SliceExpr) -> bool;
@@ -333,7 +333,7 @@ pub fn isQuoExpr(self: SliceExpr) -> bool;
 ```
 ## SliceExpr::getText
 
-```rust
+```java
 // getText Extract the text associated with a specific node in a file
 ```
 ```rust
@@ -441,6 +441,8 @@ pub fn isRemExpr(self: SliceExpr) -> bool;
 ```
 ## SliceExpr::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: GoDB) -> *SliceExpr;
 ```
@@ -467,33 +469,5 @@ pub fn getHigh(self: SliceExpr) -> Node;
 ## SliceExpr::getBelongsFile
 
 ```rust
-// root node
-```
-```rust
 pub fn getBelongsFile(self: SliceExpr) -> File;
-```
-## SliceExpr::is\<T\>
-
-```rust
-pub fn is<T>(self: SliceExpr) -> bool;
-```
-## SliceExpr::to\<T\>
-
-```rust
-pub fn to<T>(self: SliceExpr) -> <any>;
-```
-## SliceExpr::key\_neq
-
-```rust
-pub fn key_neq(self: SliceExpr, object: <any>) -> bool;
-```
-## SliceExpr::key\_eq
-
-```rust
-pub fn key_eq(self: SliceExpr, object: <any>) -> bool;
-```
-## SliceExpr::to\_set
-
-```rust
-pub fn to_set(self: SliceExpr) -> *SliceExpr;
 ```

@@ -9,120 +9,120 @@ schema LogicalOrExpression {
 ```
 ## LogicalOrExpression::getSymbol
 
-```rust
+```java
 /**
-     * Gets the symbol associated with this node.
-     */
+* Gets the symbol associated with this node.
+*/
 ```
 ```rust
 pub fn getSymbol(self: LogicalOrExpression) -> Symbol;
 ```
 ## LogicalOrExpression::getADecorator
 
-```rust
+```java
 /**
-     * Gets a decorator.
-     */
+* Gets a decorator.
+*/
 ```
 ```rust
 pub fn getADecorator(self: LogicalOrExpression) -> *Decorator;
 ```
 ## LogicalOrExpression::getAComment
 
-```rust
+```java
 /**
-     * Gets the comments related to it
-     */
+* Gets the comments related to it
+*/
 ```
 ```rust
 pub fn getAComment(self: LogicalOrExpression) -> *Comment;
 ```
 ## LogicalOrExpression::getAnAncestor
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node. 
-     */
+* Gets an ancestor of this node. 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: LogicalOrExpression) -> *Node;
 ```
 ## LogicalOrExpression::getChildCount
 
-```rust
+```java
 /**
-     * Gets the number of child nodes.
-     */
+* Gets the number of child nodes.
+*/
 ```
 ```rust
 pub fn getChildCount(self: LogicalOrExpression) -> int;
 ```
 ## LogicalOrExpression::getATrailingComment
 
-```rust
+```java
 /**
-     * Gets the trailing comments of it
-     */
+* Gets the trailing comments of it
+*/
 ```
 ```rust
 pub fn getATrailingComment(self: LogicalOrExpression) -> *Comment;
 ```
 ## LogicalOrExpression::getALeadingComment
 
-```rust
+```java
 /**
-     * Gets the leading comments of it
-     */
+* Gets the leading comments of it
+*/
 ```
 ```rust
 pub fn getALeadingComment(self: LogicalOrExpression) -> *Comment;
 ```
 ## LogicalOrExpression::getParent
 
-```rust
+```java
 /**
-     * Gets the parent node of this node.
-     */
+* Gets the parent node of this node.
+*/
 ```
 ```rust
 pub fn getParent(self: LogicalOrExpression) -> Node;
 ```
 ## LogicalOrExpression::getAChild
 
-```rust
+```java
 /**
-     * Gets a child node of this node.
-     */
+* Gets a child node of this node.
+*/
 ```
 ```rust
 pub fn getAChild(self: LogicalOrExpression) -> *Node;
 ```
 ## LogicalOrExpression::getDecorator
 
-```rust
+```java
 /**
-     * Gets the `i`th decorator.
-     */
+* Gets the `i`th decorator.
+*/
 ```
 ```rust
 pub fn getDecorator(self: LogicalOrExpression, i: int) -> Decorator;
 ```
 ## LogicalOrExpression::getRoot
 
-```rust
+```java
 /**
-     * Gets the root top-level of this node. 
-     */
+* Gets the root top-level of this node. 
+*/
 ```
 ```rust
 pub fn getRoot(self: LogicalOrExpression) -> TopLevelDO;
 ```
 ## LogicalOrExpression::getChild
 
-```rust
+```java
 /**
-     * Gets the `i`th child of this node.
-     */
+* Gets the `i`th child of this node.
+*/
 ```
 ```rust
 pub fn getChild(self: LogicalOrExpression, i: int) -> Node;
@@ -134,64 +134,64 @@ pub fn getStartLineNumber(self: LogicalOrExpression) -> int;
 ```
 ## LogicalOrExpression::getADescendantByLevel
 
-```rust
+```java
 /**
-     * Gets a descendant of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets a descendant of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getADescendantByLevel(self: LogicalOrExpression, level: int) -> *Node;
 ```
 ## LogicalOrExpression::getAnAncestorEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets an ancestor enclosing function of it
-     */
+* Gets an ancestor enclosing function of it
+*/
 ```
 ```rust
 pub fn getAnAncestorEnclosingFunction(self: LogicalOrExpression) -> *FunctionLikeDeclaration;
 ```
 ## LogicalOrExpression::getLeftOperand
 
-```rust
+```java
 /**
-     * Get the left operand of this binary expression.
-     */
+* Get the left operand of this binary expression.
+*/
 ```
 ```rust
 pub fn getLeftOperand(self: LogicalOrExpression) -> Expression;
 ```
 ## LogicalOrExpression::getAnAncestorByLevel
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets an ancestor of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getAnAncestorByLevel(self: LogicalOrExpression, level: int) -> Node;
 ```
 ## LogicalOrExpression::getFile
 
-```rust
+```java
 /**
-     * Gets the file of this node.
-     */
+* Gets the file of this node.
+*/
 ```
 ```rust
 pub fn getFile(self: LogicalOrExpression) -> File;
 ```
 ## LogicalOrExpression::getText
 
-```rust
+```java
 /**
-     * Gets the text of this node.
-     */
+* Gets the text of this node.
+*/
 ```
 ```rust
 pub fn getText(self: LogicalOrExpression) -> string;
@@ -203,20 +203,20 @@ pub fn getAnOperand(self: LogicalOrExpression) -> *Expression;
 ```
 ## LogicalOrExpression::getModifier
 
-```rust
+```java
 /**
-     * Gets the `i`th modifier.
-     */
+* Gets the `i`th modifier.
+*/
 ```
 ```rust
 pub fn getModifier(self: LogicalOrExpression, i: int) -> Modifier;
 ```
 ## LogicalOrExpression::getRightOperand
 
-```rust
+```java
 /**
-     * Get the right operand of this binary expression.
-     */
+* Get the right operand of this binary expression.
+*/
 ```
 ```rust
 pub fn getRightOperand(self: LogicalOrExpression) -> Expression;
@@ -228,55 +228,57 @@ pub fn getEndLineNumber(self: LogicalOrExpression) -> int;
 ```
 ## LogicalOrExpression::getRelativePath
 
-```rust
+```java
 /**
-     * Gets the relative path of this node.
-     */
+* Gets the relative path of this node.
+*/
 ```
 ```rust
 pub fn getRelativePath(self: LogicalOrExpression) -> string;
 ```
 ## LogicalOrExpression::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavascriptDB) -> *LogicalOrExpression;
 ```
 ## LogicalOrExpression::getLocation
 
-```rust
+```java
 /**
-     * Gets the location of this node.
-     */
+* Gets the location of this node.
+*/
 ```
 ```rust
 pub fn getLocation(self: LogicalOrExpression) -> Location;
 ```
 ## LogicalOrExpression::getOperator
 
-```rust
+```java
 /**
-     * Get the operator of this binary expression.
-     */
+* Get the operator of this binary expression.
+*/
 ```
 ```rust
 pub fn getOperator(self: LogicalOrExpression) -> BinaryOperator;
 ```
 ## LogicalOrExpression::getADescendant
 
-```rust
+```java
 /**
-     * Gets a descendant of this node. 
-     */
+* Gets a descendant of this node. 
+*/
 ```
 ```rust
 pub fn getADescendant(self: LogicalOrExpression) -> *Node;
 ```
 ## LogicalOrExpression::getLeft
 
-```rust
+```java
 /**
-     * Get the left operand of this binary expression. An alias of `getLeftOperand`.
-     */
+* Get the left operand of this binary expression. An alias of `getLeftOperand`.
+*/
 ```
 ```rust
 pub fn getLeft(self: LogicalOrExpression) -> Expression;
@@ -288,40 +290,40 @@ pub fn getStartColumnNumber(self: LogicalOrExpression) -> int;
 ```
 ## LogicalOrExpression::getAModifier
 
-```rust
+```java
 /**
-     * Gets a modifier.
-     */
+* Gets a modifier.
+*/
 ```
 ```rust
 pub fn getAModifier(self: LogicalOrExpression) -> *Modifier;
 ```
 ## LogicalOrExpression::getKind
 
-```rust
+```java
 /**
-     * Get the syntax kind of this node
-     */
+* Get the syntax kind of this node
+*/
 ```
 ```rust
 pub fn getKind(self: LogicalOrExpression) -> int;
 ```
 ## LogicalOrExpression::getLastChild
 
-```rust
+```java
 /**
-     * Gets the last child of this node parent.
-     */
+* Gets the last child of this node parent.
+*/
 ```
 ```rust
 pub fn getLastChild(self: LogicalOrExpression) -> Node;
 ```
 ## LogicalOrExpression::getEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets the enclosing function of it
-     */
+* Gets the enclosing function of it
+*/
 ```
 ```rust
 pub fn getEnclosingFunction(self: LogicalOrExpression) -> FunctionLikeDeclaration;
@@ -333,10 +335,10 @@ pub fn getEndColumnNumber(self: LogicalOrExpression) -> int;
 ```
 ## LogicalOrExpression::getParentOid
 
-```rust
+```java
 /**
-     * Gets the parent oid of this node.
-     */
+* Gets the parent oid of this node.
+*/
 ```
 ```rust
 pub fn getParentOid(self: LogicalOrExpression) -> int;
@@ -348,36 +350,11 @@ pub fn getIndex(self: LogicalOrExpression) -> int;
 ```
 ## LogicalOrExpression::getRight
 
-```rust
+```java
 /**
-     * Get the right operand of this binary expression. An alias of `getRightOperand`
-     */
+* Get the right operand of this binary expression. An alias of `getRightOperand`
+*/
 ```
 ```rust
 pub fn getRight(self: LogicalOrExpression) -> Expression;
-```
-## LogicalOrExpression::is\<T\>
-
-```rust
-pub fn is<T>(self: LogicalOrExpression) -> bool;
-```
-## LogicalOrExpression::to\<T\>
-
-```rust
-pub fn to<T>(self: LogicalOrExpression) -> <any>;
-```
-## LogicalOrExpression::key\_neq
-
-```rust
-pub fn key_neq(self: LogicalOrExpression, object: <any>) -> bool;
-```
-## LogicalOrExpression::key\_eq
-
-```rust
-pub fn key_eq(self: LogicalOrExpression, object: <any>) -> bool;
-```
-## LogicalOrExpression::to\_set
-
-```rust
-pub fn to_set(self: LogicalOrExpression) -> *LogicalOrExpression;
 ```

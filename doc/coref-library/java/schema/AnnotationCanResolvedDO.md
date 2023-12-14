@@ -14,86 +14,63 @@ schema AnnotationCanResolvedDO {
 ```
 ## AnnotationCanResolvedDO::getParentHashId
 
-```rust
+```java
 /**
-     * @brief gets the parent hash id of this element.
-     * @return int
-     */
+* @brief gets the parent hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getParentHashId(self: AnnotationCanResolvedDO) -> int;
 ```
 ## AnnotationCanResolvedDO::getPrintableText
 
-```rust
+```java
 /**
-     * @brief gets a printed representation of this element, including its structure where applicable.
-     * @return string.
-     */
+* @brief gets a printed representation of this element, including its structure where applicable.
+* @return string.
+*/
 ```
 ```rust
 pub fn getPrintableText(self: AnnotationCanResolvedDO) -> string;
 ```
 ## AnnotationCanResolvedDO::getLocationHashId
 
-```rust
+```java
 /**
-     * @brief gets the location hash id of this element.
-     * @return int
-     */
+* @brief gets the location hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getLocationHashId(self: AnnotationCanResolvedDO) -> int;
 ```
 ## AnnotationCanResolvedDO::getAnnotationDeclarationHashId
 
-```rust
+```java
 /**
-     * @brief gets the annotation declaration hash id of this element.
-     * @return int
-     */
+* @brief gets the annotation declaration hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getAnnotationDeclarationHashId(self: AnnotationCanResolvedDO) -> int;
 ```
 ## AnnotationCanResolvedDO::getName
 
-```rust
+```java
 /**
-     * @brief gets the name of this element.
-     * @return string
-     */
+* @brief gets the name of this element.
+* @return string
+*/
 ```
 ```rust
 pub fn getName(self: AnnotationCanResolvedDO) -> string;
 ```
 ## AnnotationCanResolvedDO::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavaDB) -> *AnnotationCanResolvedDO;
-```
-## AnnotationCanResolvedDO::is\<T\>
-
-```rust
-pub fn is<T>(self: AnnotationCanResolvedDO) -> bool;
-```
-## AnnotationCanResolvedDO::to\<T\>
-
-```rust
-pub fn to<T>(self: AnnotationCanResolvedDO) -> <any>;
-```
-## AnnotationCanResolvedDO::key\_neq
-
-```rust
-pub fn key_neq(self: AnnotationCanResolvedDO, object: <any>) -> bool;
-```
-## AnnotationCanResolvedDO::key\_eq
-
-```rust
-pub fn key_eq(self: AnnotationCanResolvedDO, object: <any>) -> bool;
-```
-## AnnotationCanResolvedDO::to\_set
-
-```rust
-pub fn to_set(self: AnnotationCanResolvedDO) -> *AnnotationCanResolvedDO;
 ```

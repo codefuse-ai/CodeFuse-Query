@@ -11,86 +11,63 @@ schema DeclaredElement {
 ```
 ## DeclaredElement::getIndex
 
-```rust
+```java
 /**
-     * @brief gets the index order of this element.
-     * @return int
-     */
+* @brief gets the index order of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getIndex(self: DeclaredElement) -> int;
 ```
 ## DeclaredElement::getParent
 
-```rust
+```java
 /**
-     * @brief gets the declaration statement of the element
-     * @return Statement 
-     */
+* @brief gets the declaration statement of the element
+* @return Statement 
+*/
 ```
 ```rust
 pub fn getParent(self: DeclaredElement) -> ElementParent;
 ```
 ## DeclaredElement::getDeclarationStatementHashId
 
-```rust
+```java
 /**
-     * @brief gets the declaration statement hash id of this element.
-     * @return int
-     */
+* @brief gets the declaration statement hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getDeclarationStatementHashId(self: DeclaredElement) -> int;
 ```
 ## DeclaredElement::getStatement
 
-```rust
+```java
 /**
-     * @brief gets the declaration statement of the element
-     * @return Statement 
-     */
+* @brief gets the declaration statement of the element
+* @return Statement 
+*/
 ```
 ```rust
 pub fn getStatement(self: DeclaredElement) -> Statement;
 ```
 ## DeclaredElement::getAnAncestor
 
-```rust
+```java
 /**
-     * @brief gets an ancestor of the element.
-     * @return ElementParent 
-     */
+* @brief gets an ancestor of the element.
+* @return ElementParent 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: DeclaredElement) -> *ElementParent;
 ```
 ## DeclaredElement::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavaDB) -> *DeclaredElement;
-```
-## DeclaredElement::is\<T\>
-
-```rust
-pub fn is<T>(self: DeclaredElement) -> bool;
-```
-## DeclaredElement::to\<T\>
-
-```rust
-pub fn to<T>(self: DeclaredElement) -> <any>;
-```
-## DeclaredElement::key\_neq
-
-```rust
-pub fn key_neq(self: DeclaredElement, object: <any>) -> bool;
-```
-## DeclaredElement::key\_eq
-
-```rust
-pub fn key_eq(self: DeclaredElement, object: <any>) -> bool;
-```
-## DeclaredElement::to\_set
-
-```rust
-pub fn to_set(self: DeclaredElement) -> *DeclaredElement;
 ```

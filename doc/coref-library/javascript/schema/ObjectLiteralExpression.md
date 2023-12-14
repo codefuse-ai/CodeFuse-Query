@@ -9,10 +9,10 @@ schema ObjectLiteralExpression {
 ```
 ## ObjectLiteralExpression::getADescendant
 
-```rust
+```java
 /**
-     * Gets a descendant of this node. 
-     */
+* Gets a descendant of this node. 
+*/
 ```
 ```rust
 pub fn getADescendant(self: ObjectLiteralExpression) -> *Node;
@@ -24,10 +24,10 @@ pub fn getEndLineNumber(self: ObjectLiteralExpression) -> int;
 ```
 ## ObjectLiteralExpression::getRelativePath
 
-```rust
+```java
 /**
-     * Gets the relative path of this node.
-     */
+* Gets the relative path of this node.
+*/
 ```
 ```rust
 pub fn getRelativePath(self: ObjectLiteralExpression) -> string;
@@ -44,32 +44,32 @@ pub fn getIndex(self: ObjectLiteralExpression) -> int;
 ```
 ## ObjectLiteralExpression::getParentOid
 
-```rust
+```java
 /**
-     * Gets the parent oid of this node.
-     */
+* Gets the parent oid of this node.
+*/
 ```
 ```rust
 pub fn getParentOid(self: ObjectLiteralExpression) -> int;
 ```
 ## ObjectLiteralExpression::getAnAncestorByLevel
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets an ancestor of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getAnAncestorByLevel(self: ObjectLiteralExpression, level: int) -> Node;
 ```
 ## ObjectLiteralExpression::getFile
 
-```rust
+```java
 /**
-     * Gets the file of this node.
-     */
+* Gets the file of this node.
+*/
 ```
 ```rust
 pub fn getFile(self: ObjectLiteralExpression) -> File;
@@ -81,52 +81,52 @@ pub fn getEndColumnNumber(self: ObjectLiteralExpression) -> int;
 ```
 ## ObjectLiteralExpression::getEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets the enclosing function of it
-     */
+* Gets the enclosing function of it
+*/
 ```
 ```rust
 pub fn getEnclosingFunction(self: ObjectLiteralExpression) -> FunctionLikeDeclaration;
 ```
 ## ObjectLiteralExpression::getATrailingComment
 
-```rust
+```java
 /**
-     * Gets the trailing comments of it
-     */
+* Gets the trailing comments of it
+*/
 ```
 ```rust
 pub fn getATrailingComment(self: ObjectLiteralExpression) -> *Comment;
 ```
 ## ObjectLiteralExpression::getALeadingComment
 
-```rust
+```java
 /**
-     * Gets the leading comments of it
-     */
+* Gets the leading comments of it
+*/
 ```
 ```rust
 pub fn getALeadingComment(self: ObjectLiteralExpression) -> *Comment;
 ```
 ## ObjectLiteralExpression::getAnAncestorEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets an ancestor enclosing function of it
-     */
+* Gets an ancestor enclosing function of it
+*/
 ```
 ```rust
 pub fn getAnAncestorEnclosingFunction(self: ObjectLiteralExpression) -> *FunctionLikeDeclaration;
 ```
 ## ObjectLiteralExpression::getADescendantByLevel
 
-```rust
+```java
 /**
-     * Gets a descendant of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets a descendant of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getADescendantByLevel(self: ObjectLiteralExpression, level: int) -> *Node;
@@ -138,30 +138,30 @@ pub fn getStartLineNumber(self: ObjectLiteralExpression) -> int;
 ```
 ## ObjectLiteralExpression::getPropertyAssignmentByName
 
-```rust
+```java
 /**
-     * Get the PropertyAssignment of this ObjectLiteralExpression by name.
-     */
+* Get the PropertyAssignment of this ObjectLiteralExpression by name.
+*/
 ```
 ```rust
 pub fn getPropertyAssignmentByName(self: ObjectLiteralExpression, name: string) -> PropertyAssignment;
 ```
 ## ObjectLiteralExpression::getKind
 
-```rust
+```java
 /**
-     * Get the syntax kind of this node
-     */
+* Get the syntax kind of this node
+*/
 ```
 ```rust
 pub fn getKind(self: ObjectLiteralExpression) -> int;
 ```
 ## ObjectLiteralExpression::getAModifier
 
-```rust
+```java
 /**
-     * Gets a modifier.
-     */
+* Gets a modifier.
+*/
 ```
 ```rust
 pub fn getAModifier(self: ObjectLiteralExpression) -> *Modifier;
@@ -173,211 +173,188 @@ pub fn getStartColumnNumber(self: ObjectLiteralExpression) -> int;
 ```
 ## ObjectLiteralExpression::getChild
 
-```rust
+```java
 /**
-     * Gets the `i`th child of this node.
-     */
+* Gets the `i`th child of this node.
+*/
 ```
 ```rust
 pub fn getChild(self: ObjectLiteralExpression, i: int) -> Node;
 ```
 ## ObjectLiteralExpression::getRoot
 
-```rust
+```java
 /**
-     * Gets the root top-level of this node. 
-     */
+* Gets the root top-level of this node. 
+*/
 ```
 ```rust
 pub fn getRoot(self: ObjectLiteralExpression) -> TopLevelDO;
 ```
 ## ObjectLiteralExpression::getDecorator
 
-```rust
+```java
 /**
-     * Gets the `i`th decorator.
-     */
+* Gets the `i`th decorator.
+*/
 ```
 ```rust
 pub fn getDecorator(self: ObjectLiteralExpression, i: int) -> Decorator;
 ```
 ## ObjectLiteralExpression::getLastChild
 
-```rust
+```java
 /**
-     * Gets the last child of this node parent.
-     */
+* Gets the last child of this node parent.
+*/
 ```
 ```rust
 pub fn getLastChild(self: ObjectLiteralExpression) -> Node;
 ```
 ## ObjectLiteralExpression::getParent
 
-```rust
+```java
 /**
-     * Gets the parent node of this node.
-     */
+* Gets the parent node of this node.
+*/
 ```
 ```rust
 pub fn getParent(self: ObjectLiteralExpression) -> Node;
 ```
 ## ObjectLiteralExpression::getAChild
 
-```rust
+```java
 /**
-     * Gets a child node of this node.
-     */
+* Gets a child node of this node.
+*/
 ```
 ```rust
 pub fn getAChild(self: ObjectLiteralExpression) -> *Node;
 ```
 ## ObjectLiteralExpression::getAnAncestor
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node. 
-     */
+* Gets an ancestor of this node. 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: ObjectLiteralExpression) -> *Node;
 ```
 ## ObjectLiteralExpression::getAComment
 
-```rust
+```java
 /**
-     * Gets the comments related to it
-     */
+* Gets the comments related to it
+*/
 ```
 ```rust
 pub fn getAComment(self: ObjectLiteralExpression) -> *Comment;
 ```
 ## ObjectLiteralExpression::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavascriptDB) -> *ObjectLiteralExpression;
 ```
 ## ObjectLiteralExpression::getLocation
 
-```rust
+```java
 /**
-     * Gets the location of this node.
-     */
+* Gets the location of this node.
+*/
 ```
 ```rust
 pub fn getLocation(self: ObjectLiteralExpression) -> Location;
 ```
 ## ObjectLiteralExpression::getPropertyByName
 
-```rust
+```java
 /**
-     * Get the property of this ObjectLiteralExpression by name.
-     */
+* Get the property of this ObjectLiteralExpression by name.
+*/
 ```
 ```rust
 pub fn getPropertyByName(self: ObjectLiteralExpression, name: string) -> ObjectLiteralElement;
 ```
 ## ObjectLiteralExpression::getSymbol
 
-```rust
+```java
 /**
-     * Gets the symbol associated with this node.
-     */
+* Gets the symbol associated with this node.
+*/
 ```
 ```rust
 pub fn getSymbol(self: ObjectLiteralExpression) -> Symbol;
 ```
 ## ObjectLiteralExpression::getADecorator
 
-```rust
+```java
 /**
-     * Gets a decorator.
-     */
+* Gets a decorator.
+*/
 ```
 ```rust
 pub fn getADecorator(self: ObjectLiteralExpression) -> *Decorator;
 ```
 ## ObjectLiteralExpression::hasProperty
 
-```rust
+```java
 /**
-     * Determine whether this ObjectLiteralExpression has a property with the specified name.
-     */
+* Determine whether this ObjectLiteralExpression has a property with the specified name.
+*/
 ```
 ```rust
 pub fn hasProperty(self: ObjectLiteralExpression, name: string) -> bool;
 ```
 ## ObjectLiteralExpression::getModifier
 
-```rust
+```java
 /**
-     * Gets the `i`th modifier.
-     */
+* Gets the `i`th modifier.
+*/
 ```
 ```rust
 pub fn getModifier(self: ObjectLiteralExpression, i: int) -> Modifier;
 ```
 ## ObjectLiteralExpression::getText
 
-```rust
+```java
 /**
-     * Gets the text of this node.
-     */
+* Gets the text of this node.
+*/
 ```
 ```rust
 pub fn getText(self: ObjectLiteralExpression) -> string;
 ```
 ## ObjectLiteralExpression::getChildCount
 
-```rust
+```java
 /**
-     * Gets the number of child nodes.
-     */
+* Gets the number of child nodes.
+*/
 ```
 ```rust
 pub fn getChildCount(self: ObjectLiteralExpression) -> int;
 ```
 ## ObjectLiteralExpression::getProperty
 
-```rust
+```java
 /**
-     * Get the `i`th property.
-     */
+* Get the `i`th property.
+*/
 ```
 ```rust
 pub fn getProperty(self: ObjectLiteralExpression, i: int) -> ObjectLiteralElement;
 ```
 ## ObjectLiteralExpression::getAProperty
 
-```rust
+```java
 /**
-     * Get a property, which is an ObjectLiteralElement.
-     */
+* Get a property, which is an ObjectLiteralElement.
+*/
 ```
 ```rust
 pub fn getAProperty(self: ObjectLiteralExpression) -> *ObjectLiteralElement;
-```
-## ObjectLiteralExpression::is\<T\>
-
-```rust
-pub fn is<T>(self: ObjectLiteralExpression) -> bool;
-```
-## ObjectLiteralExpression::to\<T\>
-
-```rust
-pub fn to<T>(self: ObjectLiteralExpression) -> <any>;
-```
-## ObjectLiteralExpression::key\_neq
-
-```rust
-pub fn key_neq(self: ObjectLiteralExpression, object: <any>) -> bool;
-```
-## ObjectLiteralExpression::key\_eq
-
-```rust
-pub fn key_eq(self: ObjectLiteralExpression, object: <any>) -> bool;
-```
-## ObjectLiteralExpression::to\_set
-
-```rust
-pub fn to_set(self: ObjectLiteralExpression) -> *ObjectLiteralExpression;
 ```

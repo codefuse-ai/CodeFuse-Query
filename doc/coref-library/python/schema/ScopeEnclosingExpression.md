@@ -10,97 +10,74 @@ schema ScopeEnclosingExpression {
 ```
 ## ScopeEnclosingExpression::getEnclosingScope
 
-```rust
+```java
 /**
-     * @brief gets the direct enclosed scope in the relation.
-     * @return Scope 
-     */
+* @brief gets the direct enclosed scope in the relation.
+* @return Scope 
+*/
 ```
 ```rust
 pub fn getEnclosingScope(self: ScopeEnclosingExpression) -> Scope;
 ```
 ## ScopeEnclosingExpression::getScopeOid
 
-```rust
+```java
 /**
-     * @brief gets the scope oid of this element.
-     * @return int
-     */
+* @brief gets the scope oid of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getScopeOid(self: ScopeEnclosingExpression) -> int;
 ```
 ## ScopeEnclosingExpression::getFunction
 
-```rust
+```java
 /**
-     * @brief gets the enclosed function in the relation.
-     * @return Function 
-     */
+* @brief gets the enclosed function in the relation.
+* @return Function 
+*/
 ```
 ```rust
 pub fn getFunction(self: ScopeEnclosingExpression) -> Function;
 ```
 ## ScopeEnclosingExpression::getModule
 
-```rust
+```java
 /**
-     * @brief gets the enclosed module in the relation.
-     * @return module 
-     */
+* @brief gets the enclosed module in the relation.
+* @return module 
+*/
 ```
 ```rust
 pub fn getModule(self: ScopeEnclosingExpression) -> Module;
 ```
 ## ScopeEnclosingExpression::getClass
 
-```rust
+```java
 /**
-     * @brief gets the enclosed class in the relation.
-     * @return Class 
-     */
+* @brief gets the enclosed class in the relation.
+* @return Class 
+*/
 ```
 ```rust
 pub fn getClass(self: ScopeEnclosingExpression) -> Class;
 ```
 ## ScopeEnclosingExpression::getExpression
 
-```rust
+```java
 /**
-     * @brief gets the enclosing expression in the relation.
-     * @return Expression 
-     */
+* @brief gets the enclosing expression in the relation.
+* @return Expression 
+*/
 ```
 ```rust
 pub fn getExpression(self: ScopeEnclosingExpression) -> Expression;
 ```
 ## ScopeEnclosingExpression::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: PythonDB) -> *ScopeEnclosingExpression;
-```
-## ScopeEnclosingExpression::is\<T\>
-
-```rust
-pub fn is<T>(self: ScopeEnclosingExpression) -> bool;
-```
-## ScopeEnclosingExpression::to\<T\>
-
-```rust
-pub fn to<T>(self: ScopeEnclosingExpression) -> <any>;
-```
-## ScopeEnclosingExpression::key\_neq
-
-```rust
-pub fn key_neq(self: ScopeEnclosingExpression, object: <any>) -> bool;
-```
-## ScopeEnclosingExpression::key\_eq
-
-```rust
-pub fn key_eq(self: ScopeEnclosingExpression, object: <any>) -> bool;
-```
-## ScopeEnclosingExpression::to\_set
-
-```rust
-pub fn to_set(self: ScopeEnclosingExpression) -> *ScopeEnclosingExpression;
 ```

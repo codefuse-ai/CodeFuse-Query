@@ -105,9 +105,6 @@ pub fn isSelectStmt(self: Statement) -> bool;
 ## Statement::getBelongsFile
 
 ```rust
-// root node
-```
-```rust
 pub fn getBelongsFile(self: Statement) -> File;
 ```
 ## Statement::isCommClause
@@ -237,6 +234,8 @@ pub fn isSubassignStmt(self: Statement) -> bool;
 ```
 ## Statement::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: GoDB) -> *Statement;
 ```
@@ -252,7 +251,7 @@ pub fn isSendStmt(self: Statement) -> bool;
 ```
 ## Statement::getText
 
-```rust
+```java
 // getText Extract the text associated with a specific node in a file
 ```
 ```rust
@@ -307,29 +306,4 @@ pub fn isBlockStmt(self: Statement) -> bool;
 
 ```rust
 pub fn getKind(self: Statement) -> int;
-```
-## Statement::is\<T\>
-
-```rust
-pub fn is<T>(self: Statement) -> bool;
-```
-## Statement::to\<T\>
-
-```rust
-pub fn to<T>(self: Statement) -> <any>;
-```
-## Statement::key\_neq
-
-```rust
-pub fn key_neq(self: Statement, object: <any>) -> bool;
-```
-## Statement::key\_eq
-
-```rust
-pub fn key_eq(self: Statement, object: <any>) -> bool;
-```
-## Statement::to\_set
-
-```rust
-pub fn to_set(self: Statement) -> *Statement;
 ```

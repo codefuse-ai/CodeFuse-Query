@@ -9,10 +9,10 @@ schema PropertyName {
 ```
 ## PropertyName::getADescendant
 
-```rust
+```java
 /**
-     * Gets a descendant of this node. 
-     */
+* Gets a descendant of this node. 
+*/
 ```
 ```rust
 pub fn getADescendant(self: PropertyName) -> *Node;
@@ -24,10 +24,10 @@ pub fn getIndex(self: PropertyName) -> int;
 ```
 ## PropertyName::getParentOid
 
-```rust
+```java
 /**
-     * Gets the parent oid of this node.
-     */
+* Gets the parent oid of this node.
+*/
 ```
 ```rust
 pub fn getParentOid(self: PropertyName) -> int;
@@ -39,52 +39,52 @@ pub fn getEndColumnNumber(self: PropertyName) -> int;
 ```
 ## PropertyName::getLastChild
 
-```rust
+```java
 /**
-     * Gets the last child of this node parent.
-     */
+* Gets the last child of this node parent.
+*/
 ```
 ```rust
 pub fn getLastChild(self: PropertyName) -> Node;
 ```
 ## PropertyName::getEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets the enclosing function of it
-     */
+* Gets the enclosing function of it
+*/
 ```
 ```rust
 pub fn getEnclosingFunction(self: PropertyName) -> FunctionLikeDeclaration;
 ```
 ## PropertyName::getFile
 
-```rust
+```java
 /**
-     * Gets the file of this node.
-     */
+* Gets the file of this node.
+*/
 ```
 ```rust
 pub fn getFile(self: PropertyName) -> File;
 ```
 ## PropertyName::getAnAncestorByLevel
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets an ancestor of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getAnAncestorByLevel(self: PropertyName, level: int) -> Node;
 ```
 ## PropertyName::getRelativePath
 
-```rust
+```java
 /**
-     * Gets the relative path of this node.
-     */
+* Gets the relative path of this node.
+*/
 ```
 ```rust
 pub fn getRelativePath(self: PropertyName) -> string;
@@ -96,42 +96,42 @@ pub fn getEndLineNumber(self: PropertyName) -> int;
 ```
 ## PropertyName::getAnAncestorEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets an ancestor enclosing function of it
-     */
+* Gets an ancestor enclosing function of it
+*/
 ```
 ```rust
 pub fn getAnAncestorEnclosingFunction(self: PropertyName) -> *FunctionLikeDeclaration;
 ```
 ## PropertyName::getADescendantByLevel
 
-```rust
+```java
 /**
-     * Gets a descendant of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets a descendant of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getADescendantByLevel(self: PropertyName, level: int) -> *Node;
 ```
 ## PropertyName::getKind
 
-```rust
+```java
 /**
-     * Get the syntax kind of this node
-     */
+* Get the syntax kind of this node
+*/
 ```
 ```rust
 pub fn getKind(self: PropertyName) -> int;
 ```
 ## PropertyName::getAModifier
 
-```rust
+```java
 /**
-     * Gets a modifier.
-     */
+* Gets a modifier.
+*/
 ```
 ```rust
 pub fn getAModifier(self: PropertyName) -> *Modifier;
@@ -148,193 +148,170 @@ pub fn getStartLineNumber(self: PropertyName) -> int;
 ```
 ## PropertyName::getChild
 
-```rust
+```java
 /**
-     * Gets the `i`th child of this node.
-     */
+* Gets the `i`th child of this node.
+*/
 ```
 ```rust
 pub fn getChild(self: PropertyName, i: int) -> Node;
 ```
 ## PropertyName::getRoot
 
-```rust
+```java
 /**
-     * Gets the root top-level of this node. 
-     */
+* Gets the root top-level of this node. 
+*/
 ```
 ```rust
 pub fn getRoot(self: PropertyName) -> TopLevelDO;
 ```
 ## PropertyName::getDecorator
 
-```rust
+```java
 /**
-     * Gets the `i`th decorator.
-     */
+* Gets the `i`th decorator.
+*/
 ```
 ```rust
 pub fn getDecorator(self: PropertyName, i: int) -> Decorator;
 ```
 ## PropertyName::getName
 
-```rust
+```java
 /**
-     * Gets the name of this PropertyName.
-     *
-     * If this PropertyName is a ComputedPropertyName, it doesn't have a name
-     */
+* Gets the name of this PropertyName.
+*
+* If this PropertyName is a ComputedPropertyName, it doesn't have a name
+*/
 ```
 ```rust
 pub fn getName(self: PropertyName) -> string;
 ```
 ## PropertyName::getChildCount
 
-```rust
+```java
 /**
-     * Gets the number of child nodes.
-     */
+* Gets the number of child nodes.
+*/
 ```
 ```rust
 pub fn getChildCount(self: PropertyName) -> int;
 ```
 ## PropertyName::getATrailingComment
 
-```rust
+```java
 /**
-     * Gets the trailing comments of it
-     */
+* Gets the trailing comments of it
+*/
 ```
 ```rust
 pub fn getATrailingComment(self: PropertyName) -> *Comment;
 ```
 ## PropertyName::getALeadingComment
 
-```rust
+```java
 /**
-     * Gets the leading comments of it
-     */
+* Gets the leading comments of it
+*/
 ```
 ```rust
 pub fn getALeadingComment(self: PropertyName) -> *Comment;
 ```
 ## PropertyName::getAChild
 
-```rust
+```java
 /**
-     * Gets a child node of this node.
-     */
+* Gets a child node of this node.
+*/
 ```
 ```rust
 pub fn getAChild(self: PropertyName) -> *Node;
 ```
 ## PropertyName::getParent
 
-```rust
+```java
 /**
-     * Gets the parent node of this node.
-     */
+* Gets the parent node of this node.
+*/
 ```
 ```rust
 pub fn getParent(self: PropertyName) -> Node;
 ```
 ## PropertyName::getModifier
 
-```rust
+```java
 /**
-     * Gets the `i`th modifier.
-     */
+* Gets the `i`th modifier.
+*/
 ```
 ```rust
 pub fn getModifier(self: PropertyName, i: int) -> Modifier;
 ```
 ## PropertyName::getText
 
-```rust
+```java
 /**
-     * Gets the text of this node.
-     */
+* Gets the text of this node.
+*/
 ```
 ```rust
 pub fn getText(self: PropertyName) -> string;
 ```
 ## PropertyName::getADecorator
 
-```rust
+```java
 /**
-     * Gets a decorator.
-     */
+* Gets a decorator.
+*/
 ```
 ```rust
 pub fn getADecorator(self: PropertyName) -> *Decorator;
 ```
 ## PropertyName::getSymbol
 
-```rust
+```java
 /**
-     * Gets the symbol associated with this node.
-     */
+* Gets the symbol associated with this node.
+*/
 ```
 ```rust
 pub fn getSymbol(self: PropertyName) -> Symbol;
 ```
 ## PropertyName::getLocation
 
-```rust
+```java
 /**
-     * Gets the location of this node.
-     */
+* Gets the location of this node.
+*/
 ```
 ```rust
 pub fn getLocation(self: PropertyName) -> Location;
 ```
 ## PropertyName::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavascriptDB) -> *PropertyName;
 ```
 ## PropertyName::getAnAncestor
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node. 
-     */
+* Gets an ancestor of this node. 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: PropertyName) -> *Node;
 ```
 ## PropertyName::getAComment
 
-```rust
+```java
 /**
-     * Gets the comments related to it
-     */
+* Gets the comments related to it
+*/
 ```
 ```rust
 pub fn getAComment(self: PropertyName) -> *Comment;
-```
-## PropertyName::is\<T\>
-
-```rust
-pub fn is<T>(self: PropertyName) -> bool;
-```
-## PropertyName::to\<T\>
-
-```rust
-pub fn to<T>(self: PropertyName) -> <any>;
-```
-## PropertyName::key\_neq
-
-```rust
-pub fn key_neq(self: PropertyName, object: <any>) -> bool;
-```
-## PropertyName::key\_eq
-
-```rust
-pub fn key_eq(self: PropertyName, object: <any>) -> bool;
-```
-## PropertyName::to\_set
-
-```rust
-pub fn to_set(self: PropertyName) -> *PropertyName;
 ```

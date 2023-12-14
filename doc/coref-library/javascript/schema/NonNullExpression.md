@@ -9,10 +9,10 @@ schema NonNullExpression {
 ```
 ## NonNullExpression::getADescendant
 
-```rust
+```java
 /**
-     * Gets a descendant of this node. 
-     */
+* Gets a descendant of this node. 
+*/
 ```
 ```rust
 pub fn getADescendant(self: NonNullExpression) -> *Node;
@@ -24,32 +24,32 @@ pub fn getIndex(self: NonNullExpression) -> int;
 ```
 ## NonNullExpression::getParentOid
 
-```rust
+```java
 /**
-     * Gets the parent oid of this node.
-     */
+* Gets the parent oid of this node.
+*/
 ```
 ```rust
 pub fn getParentOid(self: NonNullExpression) -> int;
 ```
 ## NonNullExpression::getAnAncestorByLevel
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets an ancestor of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getAnAncestorByLevel(self: NonNullExpression, level: int) -> Node;
 ```
 ## NonNullExpression::getFile
 
-```rust
+```java
 /**
-     * Gets the file of this node.
-     */
+* Gets the file of this node.
+*/
 ```
 ```rust
 pub fn getFile(self: NonNullExpression) -> File;
@@ -61,72 +61,72 @@ pub fn getEndColumnNumber(self: NonNullExpression) -> int;
 ```
 ## NonNullExpression::getEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets the enclosing function of it
-     */
+* Gets the enclosing function of it
+*/
 ```
 ```rust
 pub fn getEnclosingFunction(self: NonNullExpression) -> FunctionLikeDeclaration;
 ```
 ## NonNullExpression::getATrailingComment
 
-```rust
+```java
 /**
-     * Gets the trailing comments of it
-     */
+* Gets the trailing comments of it
+*/
 ```
 ```rust
 pub fn getATrailingComment(self: NonNullExpression) -> *Comment;
 ```
 ## NonNullExpression::getALeadingComment
 
-```rust
+```java
 /**
-     * Gets the leading comments of it
-     */
+* Gets the leading comments of it
+*/
 ```
 ```rust
 pub fn getALeadingComment(self: NonNullExpression) -> *Comment;
 ```
 ## NonNullExpression::getAnAncestorEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets an ancestor enclosing function of it
-     */
+* Gets an ancestor enclosing function of it
+*/
 ```
 ```rust
 pub fn getAnAncestorEnclosingFunction(self: NonNullExpression) -> *FunctionLikeDeclaration;
 ```
 ## NonNullExpression::getADescendantByLevel
 
-```rust
+```java
 /**
-     * Gets a descendant of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets a descendant of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getADescendantByLevel(self: NonNullExpression, level: int) -> *Node;
 ```
 ## NonNullExpression::getKind
 
-```rust
+```java
 /**
-     * Get the syntax kind of this node
-     */
+* Get the syntax kind of this node
+*/
 ```
 ```rust
 pub fn getKind(self: NonNullExpression) -> int;
 ```
 ## NonNullExpression::getAModifier
 
-```rust
+```java
 /**
-     * Gets a modifier.
-     */
+* Gets a modifier.
+*/
 ```
 ```rust
 pub fn getAModifier(self: NonNullExpression) -> *Modifier;
@@ -143,100 +143,100 @@ pub fn getStartLineNumber(self: NonNullExpression) -> int;
 ```
 ## NonNullExpression::getChild
 
-```rust
+```java
 /**
-     * Gets the `i`th child of this node.
-     */
+* Gets the `i`th child of this node.
+*/
 ```
 ```rust
 pub fn getChild(self: NonNullExpression, i: int) -> Node;
 ```
 ## NonNullExpression::getDecorator
 
-```rust
+```java
 /**
-     * Gets the `i`th decorator.
-     */
+* Gets the `i`th decorator.
+*/
 ```
 ```rust
 pub fn getDecorator(self: NonNullExpression, i: int) -> Decorator;
 ```
 ## NonNullExpression::getRoot
 
-```rust
+```java
 /**
-     * Gets the root top-level of this node. 
-     */
+* Gets the root top-level of this node. 
+*/
 ```
 ```rust
 pub fn getRoot(self: NonNullExpression) -> TopLevelDO;
 ```
 ## NonNullExpression::getChildCount
 
-```rust
+```java
 /**
-     * Gets the number of child nodes.
-     */
+* Gets the number of child nodes.
+*/
 ```
 ```rust
 pub fn getChildCount(self: NonNullExpression) -> int;
 ```
 ## NonNullExpression::getParent
 
-```rust
+```java
 /**
-     * Gets the parent node of this node.
-     */
+* Gets the parent node of this node.
+*/
 ```
 ```rust
 pub fn getParent(self: NonNullExpression) -> Node;
 ```
 ## NonNullExpression::getAChild
 
-```rust
+```java
 /**
-     * Gets a child node of this node.
-     */
+* Gets a child node of this node.
+*/
 ```
 ```rust
 pub fn getAChild(self: NonNullExpression) -> *Node;
 ```
 ## NonNullExpression::getAnAncestor
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node. 
-     */
+* Gets an ancestor of this node. 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: NonNullExpression) -> *Node;
 ```
 ## NonNullExpression::getAComment
 
-```rust
+```java
 /**
-     * Gets the comments related to it
-     */
+* Gets the comments related to it
+*/
 ```
 ```rust
 pub fn getAComment(self: NonNullExpression) -> *Comment;
 ```
 ## NonNullExpression::getSymbol
 
-```rust
+```java
 /**
-     * Gets the symbol associated with this node.
-     */
+* Gets the symbol associated with this node.
+*/
 ```
 ```rust
 pub fn getSymbol(self: NonNullExpression) -> Symbol;
 ```
 ## NonNullExpression::getADecorator
 
-```rust
+```java
 /**
-     * Gets a decorator.
-     */
+* Gets a decorator.
+*/
 ```
 ```rust
 pub fn getADecorator(self: NonNullExpression) -> *Decorator;
@@ -248,10 +248,10 @@ pub fn getEndLineNumber(self: NonNullExpression) -> int;
 ```
 ## NonNullExpression::getRelativePath
 
-```rust
+```java
 /**
-     * Gets the relative path of this node.
-     */
+* Gets the relative path of this node.
+*/
 ```
 ```rust
 pub fn getRelativePath(self: NonNullExpression) -> string;
@@ -263,71 +263,48 @@ pub fn getExpression(self: NonNullExpression) -> Expression;
 ```
 ## NonNullExpression::getLocation
 
-```rust
+```java
 /**
-     * Gets the location of this node.
-     */
+* Gets the location of this node.
+*/
 ```
 ```rust
 pub fn getLocation(self: NonNullExpression) -> Location;
 ```
 ## NonNullExpression::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavascriptDB) -> *NonNullExpression;
 ```
 ## NonNullExpression::getModifier
 
-```rust
+```java
 /**
-     * Gets the `i`th modifier.
-     */
+* Gets the `i`th modifier.
+*/
 ```
 ```rust
 pub fn getModifier(self: NonNullExpression, i: int) -> Modifier;
 ```
 ## NonNullExpression::getText
 
-```rust
+```java
 /**
-     * Gets the text of this node.
-     */
+* Gets the text of this node.
+*/
 ```
 ```rust
 pub fn getText(self: NonNullExpression) -> string;
 ```
 ## NonNullExpression::getLastChild
 
-```rust
+```java
 /**
-     * Gets the last child of this node parent.
-     */
+* Gets the last child of this node parent.
+*/
 ```
 ```rust
 pub fn getLastChild(self: NonNullExpression) -> Node;
-```
-## NonNullExpression::is\<T\>
-
-```rust
-pub fn is<T>(self: NonNullExpression) -> bool;
-```
-## NonNullExpression::to\<T\>
-
-```rust
-pub fn to<T>(self: NonNullExpression) -> <any>;
-```
-## NonNullExpression::key\_neq
-
-```rust
-pub fn key_neq(self: NonNullExpression, object: <any>) -> bool;
-```
-## NonNullExpression::key\_eq
-
-```rust
-pub fn key_eq(self: NonNullExpression, object: <any>) -> bool;
-```
-## NonNullExpression::to\_set
-
-```rust
-pub fn to_set(self: NonNullExpression) -> *NonNullExpression;
 ```

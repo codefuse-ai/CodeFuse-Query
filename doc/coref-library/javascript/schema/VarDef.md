@@ -9,10 +9,10 @@ schema VarDef {
 ```
 ## VarDef::getRelativePath
 
-```rust
+```java
 /**
-     * Get the relative path of this control flow node.
-     */
+* Get the relative path of this control flow node.
+*/
 ```
 ```rust
 pub fn getRelativePath(self: VarDef) -> string;
@@ -24,84 +24,84 @@ pub fn isEntryNode(self: VarDef) -> bool;
 ```
 ## VarDef::getASuccessor
 
-```rust
+```java
 /**
-     * Get an immediate successor of this node.
-     */
+* Get an immediate successor of this node.
+*/
 ```
 ```rust
 pub fn getASuccessor(self: VarDef) -> *ControlFlowNode;
 ```
 ## VarDef::getEnclosingFunction
 
-```rust
+```java
 /**
-     * Get the enclosing function of node.
-     * CfgEntryNode or CfgExitNode return belongs to function.
-     */
+* Get the enclosing function of node.
+* CfgEntryNode or CfgExitNode return belongs to function.
+*/
 ```
 ```rust
 pub fn getEnclosingFunction(self: VarDef) -> FunctionLikeDeclaration;
 ```
 ## VarDef::getKindName
 
-```rust
+```java
 /**
-     * Get the kind name of node.
-     * If node is ast node, just return ast node kind name; otherwise
-     * return node name as CfgEntryNode or CfgExitNode.
-     */
+* Get the kind name of node.
+* If node is ast node, just return ast node kind name; otherwise
+* return node name as CfgEntryNode or CfgExitNode.
+*/
 ```
 ```rust
 pub fn getKindName(self: VarDef) -> string;
 ```
 ## VarDef::getBasicBlock
 
-```rust
+```java
 /**
-     * Get the basic block that contains this node.
-     */
+* Get the basic block that contains this node.
+*/
 ```
 ```rust
 pub fn getBasicBlock(self: VarDef) -> BasicBlock;
 ```
 ## VarDef::getASuccessorWithCompletion
 
-```rust
+```java
 /**
-     * Get an immediate successor of this node with the given
-     * type of Completion.
-     */
+* Get an immediate successor of this node with the given
+* type of Completion.
+*/
 ```
 ```rust
 pub fn getASuccessorWithCompletion(self: VarDef, c: Completion) -> *ControlFlowNode;
 ```
 ## VarDef::getText
 
-```rust
+```java
 /**
-     * Get the text of this control flow node.
-     */
+* Get the text of this control flow node.
+*/
 ```
 ```rust
 pub fn getText(self: VarDef) -> string;
 ```
 ## VarDef::getAPredecessor
 
-```rust
+```java
 /**
-     * Get an immediate predecessor of this node.
-     */
+* Get an immediate predecessor of this node.
+*/
 ```
 ```rust
 pub fn getAPredecessor(self: VarDef) -> *ControlFlowNode;
 ```
 ## VarDef::getLocation
 
-```rust
+```java
 /**
-     * Get the location of this control flow node.
-     */
+* Get the location of this control flow node.
+*/
 ```
 ```rust
 pub fn getLocation(self: VarDef) -> Location;
@@ -113,15 +113,17 @@ pub fn isAstNode(self: VarDef) -> bool;
 ```
 ## VarDef::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavascriptDB) -> *VarDef;
 ```
 ## VarDef::getAUse
 
-```rust
+```java
 /**
-     * Gets the RValue that are defined by this node.
-     */
+* Gets the RValue that are defined by this node.
+*/
 ```
 ```rust
 pub fn getAUse(self: VarDef) -> *VarUse;
@@ -133,30 +135,30 @@ pub fn isSyntheticNode(self: VarDef) -> bool;
 ```
 ## VarDef::getFile
 
-```rust
+```java
 /**
-     * Get the file of this control flow node.
-     */
+* Get the file of this control flow node.
+*/
 ```
 ```rust
 pub fn getFile(self: VarDef) -> File;
 ```
 ## VarDef::getPredecessorCount
 
-```rust
+```java
 /**
-     * Get the count of immediate predecessor nodes/
-     */
+* Get the count of immediate predecessor nodes/
+*/
 ```
 ```rust
 pub fn getPredecessorCount(self: VarDef) -> int;
 ```
 ## VarDef::getATarget
 
-```rust
+```java
 /**
-     * Gets the target of VarDef, maybe the type of target is LValue?
-     */
+* Gets the target of VarDef, maybe the type of target is LValue?
+*/
 ```
 ```rust
 pub fn getATarget(self: VarDef) -> *LValue;
@@ -168,56 +170,31 @@ pub fn isExitNode(self: VarDef) -> bool;
 ```
 ## VarDef::getSource
 
-```rust
+```java
 /**
-     * Get the data source of this variable definition.
-     */
+* Get the data source of this variable definition.
+*/
 ```
 ```rust
 pub fn getSource(self: VarDef) -> Expression;
 ```
 ## VarDef::getASuccessorRecursive
 
-```rust
+```java
 /**
-     * Gets the successor of this node, and query successors recursively
-     */
+* Gets the successor of this node, and query successors recursively
+*/
 ```
 ```rust
 pub fn getASuccessorRecursive(self: VarDef) -> *ControlFlowNode;
 ```
 ## VarDef::getSuccessorCount
 
-```rust
+```java
 /**
-     * Get the count of immediate successor nodes.
-     */
+* Get the count of immediate successor nodes.
+*/
 ```
 ```rust
 pub fn getSuccessorCount(self: VarDef) -> int;
-```
-## VarDef::is\<T\>
-
-```rust
-pub fn is<T>(self: VarDef) -> bool;
-```
-## VarDef::to\<T\>
-
-```rust
-pub fn to<T>(self: VarDef) -> <any>;
-```
-## VarDef::key\_neq
-
-```rust
-pub fn key_neq(self: VarDef, object: <any>) -> bool;
-```
-## VarDef::key\_eq
-
-```rust
-pub fn key_eq(self: VarDef, object: <any>) -> bool;
-```
-## VarDef::to\_set
-
-```rust
-pub fn to_set(self: VarDef) -> *VarDef;
 ```

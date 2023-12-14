@@ -14,141 +14,118 @@ schema OrLogicalExpression {
 ```
 ## OrLogicalExpression::getType
 
-```rust
+```java
 /**
-     * @brief gets the type of the expression.
-     * @return string
-     */
+* @brief gets the type of the expression.
+* @return string
+*/
 ```
 ```rust
 pub fn getType(self: OrLogicalExpression) -> string;
 ```
 ## OrLogicalExpression::getSize
 
-```rust
+```java
 /**
-     * @brief gets the size information for the element.
-     * @return int
-     */
+* @brief gets the size information for the element.
+* @return int
+*/
 ```
 ```rust
 pub fn getSize(self: OrLogicalExpression) -> int;
 ```
 ## OrLogicalExpression::getElementIndex
 
-```rust
+```java
 /**
-     * @brief gets the element index of this element.
-     * @return int
-     */
+* @brief gets the element index of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getElementIndex(self: OrLogicalExpression) -> int;
 ```
 ## OrLogicalExpression::getParentOid
 
-```rust
+```java
 /**
-     * @brief gets the parent oid of this element.
-     * @return int
-     */
+* @brief gets the parent oid of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getParentOid(self: OrLogicalExpression) -> int;
 ```
 ## OrLogicalExpression::getPrintableText
 
-```rust
+```java
 /**
-     * @brief gets the printable text of this element.
-     * @return string
-     */
+* @brief gets the printable text of this element.
+* @return string
+*/
 ```
 ```rust
 pub fn getPrintableText(self: OrLogicalExpression) -> string;
 ```
 ## OrLogicalExpression::getEnclosingScope
 
-```rust
+```java
 /**
-     * @brief gets the immediately enclosing scope (module, function or class) whose body contains this statement.
-     * @return Scope 
-     */
+* @brief gets the immediately enclosing scope (module, function or class) whose body contains this statement.
+* @return Scope 
+*/
 ```
 ```rust
 pub fn getEnclosingScope(self: OrLogicalExpression) -> Scope;
 ```
 ## OrLogicalExpression::getParent
 
-```rust
+```java
 /**
-     * @brief gets the parent of the expression.
-     * @return CombineElement 
-     */
+* @brief gets the parent of the expression.
+* @return CombineElement 
+*/
 ```
 ```rust
 pub fn getParent(self: OrLogicalExpression) -> CombineElement;
 ```
 ## OrLogicalExpression::getLocationOid
 
-```rust
+```java
 /**
-     * @brief gets the location oid of this element.
-     * @return int
-     */
+* @brief gets the location oid of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getLocationOid(self: OrLogicalExpression) -> int;
 ```
 ## OrLogicalExpression::getLocation
 
-```rust
+```java
 /**
-     * @brief gets the location for the element.
-     * @return Location
-     */
+* @brief gets the location for the element.
+* @return Location
+*/
 ```
 ```rust
 pub fn getLocation(self: OrLogicalExpression) -> Location;
 ```
 ## OrLogicalExpression::getAnAncestor
 
-```rust
+```java
 /**
-     * @brief gets an ancestor of the element.
-     * @return CombineElement 
-     */
+* @brief gets an ancestor of the element.
+* @return CombineElement 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: OrLogicalExpression) -> *CombineElement;
 ```
 ## OrLogicalExpression::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: PythonDB) -> *OrLogicalExpression;
-```
-## OrLogicalExpression::is\<T\>
-
-```rust
-pub fn is<T>(self: OrLogicalExpression) -> bool;
-```
-## OrLogicalExpression::to\<T\>
-
-```rust
-pub fn to<T>(self: OrLogicalExpression) -> <any>;
-```
-## OrLogicalExpression::key\_neq
-
-```rust
-pub fn key_neq(self: OrLogicalExpression, object: <any>) -> bool;
-```
-## OrLogicalExpression::key\_eq
-
-```rust
-pub fn key_eq(self: OrLogicalExpression, object: <any>) -> bool;
-```
-## OrLogicalExpression::to\_set
-
-```rust
-pub fn to_set(self: OrLogicalExpression) -> *OrLogicalExpression;
 ```

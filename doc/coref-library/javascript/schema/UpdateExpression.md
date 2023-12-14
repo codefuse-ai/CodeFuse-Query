@@ -9,10 +9,10 @@ schema UpdateExpression {
 ```
 ## UpdateExpression::getADescendant
 
-```rust
+```java
 /**
-     * Gets a descendant of this node. 
-     */
+* Gets a descendant of this node. 
+*/
 ```
 ```rust
 pub fn getADescendant(self: UpdateExpression) -> *Node;
@@ -24,10 +24,10 @@ pub fn getEndLineNumber(self: UpdateExpression) -> int;
 ```
 ## UpdateExpression::getRelativePath
 
-```rust
+```java
 /**
-     * Gets the relative path of this node.
-     */
+* Gets the relative path of this node.
+*/
 ```
 ```rust
 pub fn getRelativePath(self: UpdateExpression) -> string;
@@ -44,42 +44,42 @@ pub fn getIndex(self: UpdateExpression) -> int;
 ```
 ## UpdateExpression::getParentOid
 
-```rust
+```java
 /**
-     * Gets the parent oid of this node.
-     */
+* Gets the parent oid of this node.
+*/
 ```
 ```rust
 pub fn getParentOid(self: UpdateExpression) -> int;
 ```
 ## UpdateExpression::getAnAncestorByLevel
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets an ancestor of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getAnAncestorByLevel(self: UpdateExpression, level: int) -> Node;
 ```
 ## UpdateExpression::getFile
 
-```rust
+```java
 /**
-     * Gets the file of this node.
-     */
+* Gets the file of this node.
+*/
 ```
 ```rust
 pub fn getFile(self: UpdateExpression) -> File;
 ```
 ## UpdateExpression::getEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets the enclosing function of it
-     */
+* Gets the enclosing function of it
+*/
 ```
 ```rust
 pub fn getEnclosingFunction(self: UpdateExpression) -> FunctionLikeDeclaration;
@@ -91,62 +91,62 @@ pub fn getEndColumnNumber(self: UpdateExpression) -> int;
 ```
 ## UpdateExpression::getATrailingComment
 
-```rust
+```java
 /**
-     * Gets the trailing comments of it
-     */
+* Gets the trailing comments of it
+*/
 ```
 ```rust
 pub fn getATrailingComment(self: UpdateExpression) -> *Comment;
 ```
 ## UpdateExpression::getALeadingComment
 
-```rust
+```java
 /**
-     * Gets the leading comments of it
-     */
+* Gets the leading comments of it
+*/
 ```
 ```rust
 pub fn getALeadingComment(self: UpdateExpression) -> *Comment;
 ```
 ## UpdateExpression::getAnAncestorEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets an ancestor enclosing function of it
-     */
+* Gets an ancestor enclosing function of it
+*/
 ```
 ```rust
 pub fn getAnAncestorEnclosingFunction(self: UpdateExpression) -> *FunctionLikeDeclaration;
 ```
 ## UpdateExpression::getADescendantByLevel
 
-```rust
+```java
 /**
-     * Gets a descendant of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets a descendant of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getADescendantByLevel(self: UpdateExpression, level: int) -> *Node;
 ```
 ## UpdateExpression::getKind
 
-```rust
+```java
 /**
-     * Get the syntax kind of this node
-     */
+* Get the syntax kind of this node
+*/
 ```
 ```rust
 pub fn getKind(self: UpdateExpression) -> int;
 ```
 ## UpdateExpression::getAModifier
 
-```rust
+```java
 /**
-     * Gets a modifier.
-     */
+* Gets a modifier.
+*/
 ```
 ```rust
 pub fn getAModifier(self: UpdateExpression) -> *Modifier;
@@ -163,171 +163,148 @@ pub fn getStartLineNumber(self: UpdateExpression) -> int;
 ```
 ## UpdateExpression::getChild
 
-```rust
+```java
 /**
-     * Gets the `i`th child of this node.
-     */
+* Gets the `i`th child of this node.
+*/
 ```
 ```rust
 pub fn getChild(self: UpdateExpression, i: int) -> Node;
 ```
 ## UpdateExpression::getDecorator
 
-```rust
+```java
 /**
-     * Gets the `i`th decorator.
-     */
+* Gets the `i`th decorator.
+*/
 ```
 ```rust
 pub fn getDecorator(self: UpdateExpression, i: int) -> Decorator;
 ```
 ## UpdateExpression::getRoot
 
-```rust
+```java
 /**
-     * Gets the root top-level of this node. 
-     */
+* Gets the root top-level of this node. 
+*/
 ```
 ```rust
 pub fn getRoot(self: UpdateExpression) -> TopLevelDO;
 ```
 ## UpdateExpression::getChildCount
 
-```rust
+```java
 /**
-     * Gets the number of child nodes.
-     */
+* Gets the number of child nodes.
+*/
 ```
 ```rust
 pub fn getChildCount(self: UpdateExpression) -> int;
 ```
 ## UpdateExpression::getLastChild
 
-```rust
+```java
 /**
-     * Gets the last child of this node parent.
-     */
+* Gets the last child of this node parent.
+*/
 ```
 ```rust
 pub fn getLastChild(self: UpdateExpression) -> Node;
 ```
 ## UpdateExpression::getParent
 
-```rust
+```java
 /**
-     * Gets the parent node of this node.
-     */
+* Gets the parent node of this node.
+*/
 ```
 ```rust
 pub fn getParent(self: UpdateExpression) -> Node;
 ```
 ## UpdateExpression::getAChild
 
-```rust
+```java
 /**
-     * Gets a child node of this node.
-     */
+* Gets a child node of this node.
+*/
 ```
 ```rust
 pub fn getAChild(self: UpdateExpression) -> *Node;
 ```
 ## UpdateExpression::getAnAncestor
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node. 
-     */
+* Gets an ancestor of this node. 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: UpdateExpression) -> *Node;
 ```
 ## UpdateExpression::getAComment
 
-```rust
+```java
 /**
-     * Gets the comments related to it
-     */
+* Gets the comments related to it
+*/
 ```
 ```rust
 pub fn getAComment(self: UpdateExpression) -> *Comment;
 ```
 ## UpdateExpression::getSymbol
 
-```rust
+```java
 /**
-     * Gets the symbol associated with this node.
-     */
+* Gets the symbol associated with this node.
+*/
 ```
 ```rust
 pub fn getSymbol(self: UpdateExpression) -> Symbol;
 ```
 ## UpdateExpression::getADecorator
 
-```rust
+```java
 /**
-     * Gets a decorator.
-     */
+* Gets a decorator.
+*/
 ```
 ```rust
 pub fn getADecorator(self: UpdateExpression) -> *Decorator;
 ```
 ## UpdateExpression::getModifier
 
-```rust
+```java
 /**
-     * Gets the `i`th modifier.
-     */
+* Gets the `i`th modifier.
+*/
 ```
 ```rust
 pub fn getModifier(self: UpdateExpression, i: int) -> Modifier;
 ```
 ## UpdateExpression::getText
 
-```rust
+```java
 /**
-     * Gets the text of this node.
-     */
+* Gets the text of this node.
+*/
 ```
 ```rust
 pub fn getText(self: UpdateExpression) -> string;
 ```
 ## UpdateExpression::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavascriptDB) -> *UpdateExpression;
 ```
 ## UpdateExpression::getLocation
 
-```rust
+```java
 /**
-     * Gets the location of this node.
-     */
+* Gets the location of this node.
+*/
 ```
 ```rust
 pub fn getLocation(self: UpdateExpression) -> Location;
-```
-## UpdateExpression::is\<T\>
-
-```rust
-pub fn is<T>(self: UpdateExpression) -> bool;
-```
-## UpdateExpression::to\<T\>
-
-```rust
-pub fn to<T>(self: UpdateExpression) -> <any>;
-```
-## UpdateExpression::key\_neq
-
-```rust
-pub fn key_neq(self: UpdateExpression, object: <any>) -> bool;
-```
-## UpdateExpression::key\_eq
-
-```rust
-pub fn key_eq(self: UpdateExpression, object: <any>) -> bool;
-```
-## UpdateExpression::to\_set
-
-```rust
-pub fn to_set(self: UpdateExpression) -> *UpdateExpression;
 ```

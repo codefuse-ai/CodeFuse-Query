@@ -49,7 +49,7 @@ pub fn isCaseClause(self: ReturnStmt) -> bool;
 ```
 ## ReturnStmt::getText
 
-```rust
+```java
 // getText Extract the text associated with a specific node in a file
 ```
 ```rust
@@ -173,9 +173,6 @@ pub fn countAssociatedComment(self: ReturnStmt) -> int;
 ## ReturnStmt::getBelongsFile
 
 ```rust
-// root node
-```
-```rust
 pub fn getBelongsFile(self: ReturnStmt) -> File;
 ```
 ## ReturnStmt::isCommClause
@@ -214,6 +211,8 @@ pub fn getTextStartOffset(self: ReturnStmt) -> int;
 pub fn isOrassignStmt(self: ReturnStmt) -> bool;
 ```
 ## ReturnStmt::\_\_all\_\_
+
+Data constraint method.
 
 ```rust
 pub fn __all__(db: GoDB) -> *ReturnStmt;
@@ -322,29 +321,4 @@ pub fn getTextSize(self: ReturnStmt) -> int;
 
 ```rust
 pub fn getAReturnFieldByIndex(self: ReturnStmt, index: int) -> *Node;
-```
-## ReturnStmt::is\<T\>
-
-```rust
-pub fn is<T>(self: ReturnStmt) -> bool;
-```
-## ReturnStmt::to\<T\>
-
-```rust
-pub fn to<T>(self: ReturnStmt) -> <any>;
-```
-## ReturnStmt::key\_neq
-
-```rust
-pub fn key_neq(self: ReturnStmt, object: <any>) -> bool;
-```
-## ReturnStmt::key\_eq
-
-```rust
-pub fn key_eq(self: ReturnStmt, object: <any>) -> bool;
-```
-## ReturnStmt::to\_set
-
-```rust
-pub fn to_set(self: ReturnStmt) -> *ReturnStmt;
 ```

@@ -11,86 +11,63 @@ schema DocstringComment {
 ```
 ## DocstringComment::getText
 
-```rust
+```java
 /**
-     * @brief gets the text of this element.
-     * @return string
-     */
+* @brief gets the text of this element.
+* @return string
+*/
 ```
 ```rust
 pub fn getText(self: DocstringComment) -> string;
 ```
 ## DocstringComment::getDocumentedElementOid
 
-```rust
+```java
 /**
-     * @brief gets the documented element oid of this element.
-     * @return int
-     */
+* @brief gets the documented element oid of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getDocumentedElementOid(self: DocstringComment) -> int;
 ```
 ## DocstringComment::getParent
 
-```rust
+```java
 /**
-     * @brief gets the parent element of the element
-     * @return CombineElement 
-     */
+* @brief gets the parent element of the element
+* @return CombineElement 
+*/
 ```
 ```rust
 pub fn getParent(self: DocstringComment) -> CombineElement;
 ```
 ## DocstringComment::getDocumentableElement
 
-```rust
+```java
 /**
-     * @brief gets the documentable element id of the docstring comment, maybe a callable, field, enumconstant, class or interface.
-     * @return CombineElement 
-     */
+* @brief gets the documentable element id of the docstring comment, maybe a callable, field, enumconstant, class or interface.
+* @return CombineElement 
+*/
 ```
 ```rust
 pub fn getDocumentableElement(self: DocstringComment) -> CombineElement;
 ```
 ## DocstringComment::getAnAncestor
 
-```rust
+```java
 /**
-     * @brief gets an ancestor of the element.
-     * @return CombineElement 
-     */
+* @brief gets an ancestor of the element.
+* @return CombineElement 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: DocstringComment) -> *CombineElement;
 ```
 ## DocstringComment::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: PythonDB) -> *DocstringComment;
-```
-## DocstringComment::is\<T\>
-
-```rust
-pub fn is<T>(self: DocstringComment) -> bool;
-```
-## DocstringComment::to\<T\>
-
-```rust
-pub fn to<T>(self: DocstringComment) -> <any>;
-```
-## DocstringComment::key\_neq
-
-```rust
-pub fn key_neq(self: DocstringComment, object: <any>) -> bool;
-```
-## DocstringComment::key\_eq
-
-```rust
-pub fn key_eq(self: DocstringComment, object: <any>) -> bool;
-```
-## DocstringComment::to\_set
-
-```rust
-pub fn to_set(self: DocstringComment) -> *DocstringComment;
 ```

@@ -14,50 +14,50 @@ pub fn isSyntheticNode(self: PostOrderNode) -> bool;
 ```
 ## PostOrderNode::getBasicBlock
 
-```rust
+```java
 /**
-     * Get the basic block that contains this node.
-     */
+* Get the basic block that contains this node.
+*/
 ```
 ```rust
 pub fn getBasicBlock(self: PostOrderNode) -> BasicBlock;
 ```
 ## PostOrderNode::getFile
 
-```rust
+```java
 /**
-     * Get the file of this control flow node.
-     */
+* Get the file of this control flow node.
+*/
 ```
 ```rust
 pub fn getFile(self: PostOrderNode) -> File;
 ```
 ## PostOrderNode::getPredecessorCount
 
-```rust
+```java
 /**
-     * Get the count of immediate predecessor nodes/
-     */
+* Get the count of immediate predecessor nodes/
+*/
 ```
 ```rust
 pub fn getPredecessorCount(self: PostOrderNode) -> int;
 ```
 ## PostOrderNode::mayCompleteNormally
 
-```rust
+```java
 /**
-     * Holds whether this node can finish with a normalCompletion.
-     */
+* Holds whether this node can finish with a normalCompletion.
+*/
 ```
 ```rust
 pub fn mayCompleteNormally(self: PostOrderNode) -> bool;
 ```
 ## PostOrderNode::getRelativePath
 
-```rust
+```java
 /**
-     * Get the relative path of this control flow node.
-     */
+* Get the relative path of this control flow node.
+*/
 ```
 ```rust
 pub fn getRelativePath(self: PostOrderNode) -> string;
@@ -69,30 +69,30 @@ pub fn isEntryNode(self: PostOrderNode) -> bool;
 ```
 ## PostOrderNode::firstChild
 
-```rust
+```java
 /**
-     * Gets the first child of this node.
-     */
+* Gets the first child of this node.
+*/
 ```
 ```rust
 pub fn firstChild(self: PostOrderNode) -> ControlFlowNode;
 ```
 ## PostOrderNode::getASuccessorRecursive
 
-```rust
+```java
 /**
-     * Gets the successor of this node, and query successors recursively
-     */
+* Gets the successor of this node, and query successors recursively
+*/
 ```
 ```rust
 pub fn getASuccessorRecursive(self: PostOrderNode) -> *ControlFlowNode;
 ```
 ## PostOrderNode::getASuccessor
 
-```rust
+```java
 /**
-     * Get an immediate successor of this node.
-     */
+* Get an immediate successor of this node.
+*/
 ```
 ```rust
 pub fn getASuccessor(self: PostOrderNode) -> *ControlFlowNode;
@@ -104,94 +104,94 @@ pub fn isExitNode(self: PostOrderNode) -> bool;
 ```
 ## PostOrderNode::isLeafNode
 
-```rust
+```java
 /**
-     * Hold whether this node is leaf node.
-     */
+* Hold whether this node is leaf node.
+*/
 ```
 ```rust
 pub fn isLeafNode(self: PostOrderNode) -> bool;
 ```
 ## PostOrderNode::getEnclosingFunction
 
-```rust
+```java
 /**
-     * Get the enclosing function of node.
-     * CfgEntryNode or CfgExitNode return belongs to function.
-     */
+* Get the enclosing function of node.
+* CfgEntryNode or CfgExitNode return belongs to function.
+*/
 ```
 ```rust
 pub fn getEnclosingFunction(self: PostOrderNode) -> FunctionLikeDeclaration;
 ```
 ## PostOrderNode::getKindName
 
-```rust
+```java
 /**
-     * Get the kind name of node.
-     * If node is ast node, just return ast node kind name; otherwise
-     * return node name as CfgEntryNode or CfgExitNode.
-     */
+* Get the kind name of node.
+* If node is ast node, just return ast node kind name; otherwise
+* return node name as CfgEntryNode or CfgExitNode.
+*/
 ```
 ```rust
 pub fn getKindName(self: PostOrderNode) -> string;
 ```
 ## PostOrderNode::getAPredecessor
 
-```rust
+```java
 /**
-     * Get an immediate predecessor of this node.
-     */
+* Get an immediate predecessor of this node.
+*/
 ```
 ```rust
 pub fn getAPredecessor(self: PostOrderNode) -> *ControlFlowNode;
 ```
 ## PostOrderNode::getText
 
-```rust
+```java
 /**
-     * Get the text of this control flow node.
-     */
+* Get the text of this control flow node.
+*/
 ```
 ```rust
 pub fn getText(self: PostOrderNode) -> string;
 ```
 ## PostOrderNode::getASuccessorWithCompletion
 
-```rust
+```java
 /**
-     * Get an immediate successor of this node with the given
-     * type of Completion.
-     */
+* Get an immediate successor of this node with the given
+* type of Completion.
+*/
 ```
 ```rust
 pub fn getASuccessorWithCompletion(self: PostOrderNode, c: Completion) -> *ControlFlowNode;
 ```
 ## PostOrderNode::getSuccessorCount
 
-```rust
+```java
 /**
-     * Get the count of immediate successor nodes.
-     */
+* Get the count of immediate successor nodes.
+*/
 ```
 ```rust
 pub fn getSuccessorCount(self: PostOrderNode) -> int;
 ```
 ## PostOrderNode::getChildCount
 
-```rust
+```java
 /**
-     * Gets the count of the children.
-     */
+* Gets the count of the children.
+*/
 ```
 ```rust
 pub fn getChildCount(self: PostOrderNode) -> int;
 ```
 ## PostOrderNode::getChildNode
 
-```rust
+```java
 /**
-     * Gets child node with index, start from 0.
-     */
+* Gets child node with index, start from 0.
+*/
 ```
 ```rust
 pub fn getChildNode(self: PostOrderNode, index: int) -> ControlFlowNode;
@@ -203,10 +203,10 @@ pub fn getAllChild(self: PostOrderNode) -> *ControlFlowNode;
 ```
 ## PostOrderNode::getLocation
 
-```rust
+```java
 /**
-     * Get the location of this control flow node.
-     */
+* Get the location of this control flow node.
+*/
 ```
 ```rust
 pub fn getLocation(self: PostOrderNode) -> Location;
@@ -218,31 +218,8 @@ pub fn isAstNode(self: PostOrderNode) -> bool;
 ```
 ## PostOrderNode::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavascriptDB) -> *PostOrderNode;
-```
-## PostOrderNode::is\<T\>
-
-```rust
-pub fn is<T>(self: PostOrderNode) -> bool;
-```
-## PostOrderNode::to\<T\>
-
-```rust
-pub fn to<T>(self: PostOrderNode) -> <any>;
-```
-## PostOrderNode::key\_neq
-
-```rust
-pub fn key_neq(self: PostOrderNode, object: <any>) -> bool;
-```
-## PostOrderNode::key\_eq
-
-```rust
-pub fn key_eq(self: PostOrderNode, object: <any>) -> bool;
-```
-## PostOrderNode::to\_set
-
-```rust
-pub fn to_set(self: PostOrderNode) -> *PostOrderNode;
 ```

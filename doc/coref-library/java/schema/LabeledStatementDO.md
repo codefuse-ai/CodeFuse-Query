@@ -11,53 +11,30 @@ schema LabeledStatementDO {
 ```
 ## LabeledStatementDO::getLabeledHashIdentifierHashId
 
-```rust
+```java
 /**
-     * @brief gets the labeled hash identifier hash id of this element.
-     * @return int
-     */
+* @brief gets the labeled hash identifier hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getLabeledHashIdentifierHashId(self: LabeledStatementDO) -> int;
 ```
 ## LabeledStatementDO::getStatementHashId
 
-```rust
+```java
 /**
-     * @brief gets the statement hash id of this element.
-     * @return int
-     */
+* @brief gets the statement hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getStatementHashId(self: LabeledStatementDO) -> int;
 ```
 ## LabeledStatementDO::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavaDB) -> *LabeledStatementDO;
-```
-## LabeledStatementDO::is\<T\>
-
-```rust
-pub fn is<T>(self: LabeledStatementDO) -> bool;
-```
-## LabeledStatementDO::to\<T\>
-
-```rust
-pub fn to<T>(self: LabeledStatementDO) -> <any>;
-```
-## LabeledStatementDO::key\_neq
-
-```rust
-pub fn key_neq(self: LabeledStatementDO, object: <any>) -> bool;
-```
-## LabeledStatementDO::key\_eq
-
-```rust
-pub fn key_eq(self: LabeledStatementDO, object: <any>) -> bool;
-```
-## LabeledStatementDO::to\_set
-
-```rust
-pub fn to_set(self: LabeledStatementDO) -> *LabeledStatementDO;
 ```

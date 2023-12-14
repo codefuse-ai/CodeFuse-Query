@@ -13,75 +13,52 @@ schema ForStatementDO {
 ```
 ## ForStatementDO::getUpdateHashId
 
-```rust
+```java
 /**
-     * @brief gets the update hash id of this element.
-     * @return int
-     */
+* @brief gets the update hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getUpdateHashId(self: ForStatementDO) -> int;
 ```
 ## ForStatementDO::getConditionHashId
 
-```rust
+```java
 /**
-     * @brief gets the condition hash id of this element.
-     * @return int
-     */
+* @brief gets the condition hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getConditionHashId(self: ForStatementDO) -> int;
 ```
 ## ForStatementDO::getInitializationHashId
 
-```rust
+```java
 /**
-     * @brief gets the initialization hash id of this element.
-     * @return int
-     */
+* @brief gets the initialization hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getInitializationHashId(self: ForStatementDO) -> int;
 ```
 ## ForStatementDO::getBodyHashId
 
-```rust
+```java
 /**
-     * @brief gets the body hash id of this element.
-     * @return int
-     */
+* @brief gets the body hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getBodyHashId(self: ForStatementDO) -> int;
 ```
 ## ForStatementDO::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavaDB) -> *ForStatementDO;
-```
-## ForStatementDO::is\<T\>
-
-```rust
-pub fn is<T>(self: ForStatementDO) -> bool;
-```
-## ForStatementDO::to\<T\>
-
-```rust
-pub fn to<T>(self: ForStatementDO) -> <any>;
-```
-## ForStatementDO::key\_neq
-
-```rust
-pub fn key_neq(self: ForStatementDO, object: <any>) -> bool;
-```
-## ForStatementDO::key\_eq
-
-```rust
-pub fn key_eq(self: ForStatementDO, object: <any>) -> bool;
-```
-## ForStatementDO::to\_set
-
-```rust
-pub fn to_set(self: ForStatementDO) -> *ForStatementDO;
 ```

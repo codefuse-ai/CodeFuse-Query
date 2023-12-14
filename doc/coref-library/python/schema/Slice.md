@@ -14,119 +14,96 @@ schema Slice {
 ```
 ## Slice::getElementIndex
 
-```rust
+```java
 /**
-     * @brief gets the element index of this element.
-     * @return int
-     */
+* @brief gets the element index of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getElementIndex(self: Slice) -> int;
 ```
 ## Slice::getPrintableText
 
-```rust
+```java
 /**
-     * @brief gets the printable text of this element.
-     * @return string
-     */
+* @brief gets the printable text of this element.
+* @return string
+*/
 ```
 ```rust
 pub fn getPrintableText(self: Slice) -> string;
 ```
 ## Slice::getParentOid
 
-```rust
+```java
 /**
-     * @brief gets the parent oid of this element.
-     * @return int
-     */
+* @brief gets the parent oid of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getParentOid(self: Slice) -> int;
 ```
 ## Slice::getLocation
 
-```rust
+```java
 /**
-     * @brief gets the location for the element.
-     * @return Location
-     */
+* @brief gets the location for the element.
+* @return Location
+*/
 ```
 ```rust
 pub fn getLocation(self: Slice) -> Location;
 ```
 ## Slice::getLocationOid
 
-```rust
+```java
 /**
-     * @brief gets the location oid of this element.
-     * @return int
-     */
+* @brief gets the location oid of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getLocationOid(self: Slice) -> int;
 ```
 ## Slice::getParent
 
-```rust
+```java
 /**
-     * @brief gets the parent element of the element
-     * @return CombineElement 
-     */
+* @brief gets the parent element of the element
+* @return CombineElement 
+*/
 ```
 ```rust
 pub fn getParent(self: Slice) -> CombineElement;
 ```
 ## Slice::getHasStep
 
-```rust
+```java
 /**
-     * @brief gets the has step of this element.
-     * @return int
-     */
+* @brief gets the has step of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getHasStep(self: Slice) -> int;
 ```
 ## Slice::getAnAncestor
 
-```rust
+```java
 /**
-     * @brief gets an ancestor of the element.
-     * @return CombineElement 
-     */
+* @brief gets an ancestor of the element.
+* @return CombineElement 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: Slice) -> *CombineElement;
 ```
 ## Slice::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: PythonDB) -> *Slice;
-```
-## Slice::is\<T\>
-
-```rust
-pub fn is<T>(self: Slice) -> bool;
-```
-## Slice::to\<T\>
-
-```rust
-pub fn to<T>(self: Slice) -> <any>;
-```
-## Slice::key\_neq
-
-```rust
-pub fn key_neq(self: Slice, object: <any>) -> bool;
-```
-## Slice::key\_eq
-
-```rust
-pub fn key_eq(self: Slice, object: <any>) -> bool;
-```
-## Slice::to\_set
-
-```rust
-pub fn to_set(self: Slice) -> *Slice;
 ```

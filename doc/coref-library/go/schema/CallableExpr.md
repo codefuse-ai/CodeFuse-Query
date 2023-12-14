@@ -64,8 +64,8 @@ pub fn isCompositeLit(self: CallableExpr) -> bool;
 ```
 ## CallableExpr::isControlExpr
 
-```rust
-// Check if the expression is a control expression.
+```java
+// Any of ['||', '&&']
 ```
 ```rust
 pub fn isControlExpr(self: CallableExpr) -> bool;
@@ -157,8 +157,8 @@ pub fn isLssExpr(self: CallableExpr) -> bool;
 ```
 ## CallableExpr::isUnaryExpr
 
-```rust
-// Check if the given expression is a unary expression.
+```java
+// Any of ['+','-','!','^','*','&','->' ]
 ```
 ```rust
 pub fn isUnaryExpr(self: CallableExpr) -> bool;
@@ -210,8 +210,8 @@ pub fn isInterfacetypeExpr(self: CallableExpr) -> bool;
 ```
 ## CallableExpr::isBinaryExpr
 
-```rust
-// Check if the expression is a binary expression.
+```java
+// Any of ['||', '&&', '==', '!=', '<', '<=', '>', '+', '-', '|', '^', '*', '/', '%', '<<', '>>', '&', '&^' ]
 ```
 ```rust
 pub fn isBinaryExpr(self: CallableExpr) -> bool;
@@ -253,9 +253,6 @@ pub fn isComplementExpr(self: CallableExpr) -> bool;
 ```
 ## CallableExpr::getCallee
 
-```rust
-// find for Call expr and get its associated Callee
-```
 ```rust
 pub fn getCallee(self: CallableExpr) -> *Node;
 ```
@@ -366,7 +363,7 @@ pub fn isQuoExpr(self: CallableExpr) -> bool;
 ```
 ## CallableExpr::getText
 
-```rust
+```java
 // getText Extract the text associated with a specific node in a file
 ```
 ```rust
@@ -378,6 +375,8 @@ pub fn getText(self: CallableExpr) -> string;
 pub fn isRemExpr(self: CallableExpr) -> bool;
 ```
 ## CallableExpr::\_\_all\_\_
+
+Data constraint method.
 
 ```rust
 pub fn __all__(db: GoDB) -> *CallableExpr;
@@ -419,9 +418,6 @@ pub fn getCalleeSignature(self: CallableExpr) -> *string;
 ```
 ## CallableExpr::getBelongsFile
 
-```rust
-// root node
-```
 ```rust
 pub fn getBelongsFile(self: CallableExpr) -> File;
 ```
@@ -467,7 +463,7 @@ pub fn getCalleeGlobalSignature(self: CallableExpr) -> *string;
 ```
 ## CallableExpr::getAParameter
 
-```rust
+```java
 // For callExpr's parameter
 ```
 ```rust
@@ -482,29 +478,4 @@ pub fn isRecvchantypeExpr(self: CallableExpr) -> bool;
 
 ```rust
 pub fn countAssociatedComment(self: CallableExpr) -> int;
-```
-## CallableExpr::is\<T\>
-
-```rust
-pub fn is<T>(self: CallableExpr) -> bool;
-```
-## CallableExpr::to\<T\>
-
-```rust
-pub fn to<T>(self: CallableExpr) -> <any>;
-```
-## CallableExpr::key\_neq
-
-```rust
-pub fn key_neq(self: CallableExpr, object: <any>) -> bool;
-```
-## CallableExpr::key\_eq
-
-```rust
-pub fn key_eq(self: CallableExpr, object: <any>) -> bool;
-```
-## CallableExpr::to\_set
-
-```rust
-pub fn to_set(self: CallableExpr) -> *CallableExpr;
 ```

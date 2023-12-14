@@ -9,120 +9,120 @@ schema LessThanEqualsExpression {
 ```
 ## LessThanEqualsExpression::getSymbol
 
-```rust
+```java
 /**
-     * Gets the symbol associated with this node.
-     */
+* Gets the symbol associated with this node.
+*/
 ```
 ```rust
 pub fn getSymbol(self: LessThanEqualsExpression) -> Symbol;
 ```
 ## LessThanEqualsExpression::getADecorator
 
-```rust
+```java
 /**
-     * Gets a decorator.
-     */
+* Gets a decorator.
+*/
 ```
 ```rust
 pub fn getADecorator(self: LessThanEqualsExpression) -> *Decorator;
 ```
 ## LessThanEqualsExpression::getAComment
 
-```rust
+```java
 /**
-     * Gets the comments related to it
-     */
+* Gets the comments related to it
+*/
 ```
 ```rust
 pub fn getAComment(self: LessThanEqualsExpression) -> *Comment;
 ```
 ## LessThanEqualsExpression::getAnAncestor
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node. 
-     */
+* Gets an ancestor of this node. 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: LessThanEqualsExpression) -> *Node;
 ```
 ## LessThanEqualsExpression::getChildCount
 
-```rust
+```java
 /**
-     * Gets the number of child nodes.
-     */
+* Gets the number of child nodes.
+*/
 ```
 ```rust
 pub fn getChildCount(self: LessThanEqualsExpression) -> int;
 ```
 ## LessThanEqualsExpression::getATrailingComment
 
-```rust
+```java
 /**
-     * Gets the trailing comments of it
-     */
+* Gets the trailing comments of it
+*/
 ```
 ```rust
 pub fn getATrailingComment(self: LessThanEqualsExpression) -> *Comment;
 ```
 ## LessThanEqualsExpression::getALeadingComment
 
-```rust
+```java
 /**
-     * Gets the leading comments of it
-     */
+* Gets the leading comments of it
+*/
 ```
 ```rust
 pub fn getALeadingComment(self: LessThanEqualsExpression) -> *Comment;
 ```
 ## LessThanEqualsExpression::getParent
 
-```rust
+```java
 /**
-     * Gets the parent node of this node.
-     */
+* Gets the parent node of this node.
+*/
 ```
 ```rust
 pub fn getParent(self: LessThanEqualsExpression) -> Node;
 ```
 ## LessThanEqualsExpression::getAChild
 
-```rust
+```java
 /**
-     * Gets a child node of this node.
-     */
+* Gets a child node of this node.
+*/
 ```
 ```rust
 pub fn getAChild(self: LessThanEqualsExpression) -> *Node;
 ```
 ## LessThanEqualsExpression::getDecorator
 
-```rust
+```java
 /**
-     * Gets the `i`th decorator.
-     */
+* Gets the `i`th decorator.
+*/
 ```
 ```rust
 pub fn getDecorator(self: LessThanEqualsExpression, i: int) -> Decorator;
 ```
 ## LessThanEqualsExpression::getRoot
 
-```rust
+```java
 /**
-     * Gets the root top-level of this node. 
-     */
+* Gets the root top-level of this node. 
+*/
 ```
 ```rust
 pub fn getRoot(self: LessThanEqualsExpression) -> TopLevelDO;
 ```
 ## LessThanEqualsExpression::getChild
 
-```rust
+```java
 /**
-     * Gets the `i`th child of this node.
-     */
+* Gets the `i`th child of this node.
+*/
 ```
 ```rust
 pub fn getChild(self: LessThanEqualsExpression, i: int) -> Node;
@@ -134,64 +134,64 @@ pub fn getStartLineNumber(self: LessThanEqualsExpression) -> int;
 ```
 ## LessThanEqualsExpression::getADescendantByLevel
 
-```rust
+```java
 /**
-     * Gets a descendant of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets a descendant of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getADescendantByLevel(self: LessThanEqualsExpression, level: int) -> *Node;
 ```
 ## LessThanEqualsExpression::getAnAncestorEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets an ancestor enclosing function of it
-     */
+* Gets an ancestor enclosing function of it
+*/
 ```
 ```rust
 pub fn getAnAncestorEnclosingFunction(self: LessThanEqualsExpression) -> *FunctionLikeDeclaration;
 ```
 ## LessThanEqualsExpression::getLeftOperand
 
-```rust
+```java
 /**
-     * Get the left operand of this binary expression.
-     */
+* Get the left operand of this binary expression.
+*/
 ```
 ```rust
 pub fn getLeftOperand(self: LessThanEqualsExpression) -> Expression;
 ```
 ## LessThanEqualsExpression::getAnAncestorByLevel
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets an ancestor of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getAnAncestorByLevel(self: LessThanEqualsExpression, level: int) -> Node;
 ```
 ## LessThanEqualsExpression::getFile
 
-```rust
+```java
 /**
-     * Gets the file of this node.
-     */
+* Gets the file of this node.
+*/
 ```
 ```rust
 pub fn getFile(self: LessThanEqualsExpression) -> File;
 ```
 ## LessThanEqualsExpression::getText
 
-```rust
+```java
 /**
-     * Gets the text of this node.
-     */
+* Gets the text of this node.
+*/
 ```
 ```rust
 pub fn getText(self: LessThanEqualsExpression) -> string;
@@ -203,20 +203,20 @@ pub fn getAnOperand(self: LessThanEqualsExpression) -> *Expression;
 ```
 ## LessThanEqualsExpression::getModifier
 
-```rust
+```java
 /**
-     * Gets the `i`th modifier.
-     */
+* Gets the `i`th modifier.
+*/
 ```
 ```rust
 pub fn getModifier(self: LessThanEqualsExpression, i: int) -> Modifier;
 ```
 ## LessThanEqualsExpression::getRightOperand
 
-```rust
+```java
 /**
-     * Get the right operand of this binary expression.
-     */
+* Get the right operand of this binary expression.
+*/
 ```
 ```rust
 pub fn getRightOperand(self: LessThanEqualsExpression) -> Expression;
@@ -228,55 +228,57 @@ pub fn getEndLineNumber(self: LessThanEqualsExpression) -> int;
 ```
 ## LessThanEqualsExpression::getRelativePath
 
-```rust
+```java
 /**
-     * Gets the relative path of this node.
-     */
+* Gets the relative path of this node.
+*/
 ```
 ```rust
 pub fn getRelativePath(self: LessThanEqualsExpression) -> string;
 ```
 ## LessThanEqualsExpression::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavascriptDB) -> *LessThanEqualsExpression;
 ```
 ## LessThanEqualsExpression::getLocation
 
-```rust
+```java
 /**
-     * Gets the location of this node.
-     */
+* Gets the location of this node.
+*/
 ```
 ```rust
 pub fn getLocation(self: LessThanEqualsExpression) -> Location;
 ```
 ## LessThanEqualsExpression::getOperator
 
-```rust
+```java
 /**
-     * Get the operator of this binary expression.
-     */
+* Get the operator of this binary expression.
+*/
 ```
 ```rust
 pub fn getOperator(self: LessThanEqualsExpression) -> BinaryOperator;
 ```
 ## LessThanEqualsExpression::getADescendant
 
-```rust
+```java
 /**
-     * Gets a descendant of this node. 
-     */
+* Gets a descendant of this node. 
+*/
 ```
 ```rust
 pub fn getADescendant(self: LessThanEqualsExpression) -> *Node;
 ```
 ## LessThanEqualsExpression::getLeft
 
-```rust
+```java
 /**
-     * Get the left operand of this binary expression. An alias of `getLeftOperand`.
-     */
+* Get the left operand of this binary expression. An alias of `getLeftOperand`.
+*/
 ```
 ```rust
 pub fn getLeft(self: LessThanEqualsExpression) -> Expression;
@@ -288,40 +290,40 @@ pub fn getStartColumnNumber(self: LessThanEqualsExpression) -> int;
 ```
 ## LessThanEqualsExpression::getAModifier
 
-```rust
+```java
 /**
-     * Gets a modifier.
-     */
+* Gets a modifier.
+*/
 ```
 ```rust
 pub fn getAModifier(self: LessThanEqualsExpression) -> *Modifier;
 ```
 ## LessThanEqualsExpression::getKind
 
-```rust
+```java
 /**
-     * Get the syntax kind of this node
-     */
+* Get the syntax kind of this node
+*/
 ```
 ```rust
 pub fn getKind(self: LessThanEqualsExpression) -> int;
 ```
 ## LessThanEqualsExpression::getLastChild
 
-```rust
+```java
 /**
-     * Gets the last child of this node parent.
-     */
+* Gets the last child of this node parent.
+*/
 ```
 ```rust
 pub fn getLastChild(self: LessThanEqualsExpression) -> Node;
 ```
 ## LessThanEqualsExpression::getEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets the enclosing function of it
-     */
+* Gets the enclosing function of it
+*/
 ```
 ```rust
 pub fn getEnclosingFunction(self: LessThanEqualsExpression) -> FunctionLikeDeclaration;
@@ -333,10 +335,10 @@ pub fn getEndColumnNumber(self: LessThanEqualsExpression) -> int;
 ```
 ## LessThanEqualsExpression::getParentOid
 
-```rust
+```java
 /**
-     * Gets the parent oid of this node.
-     */
+* Gets the parent oid of this node.
+*/
 ```
 ```rust
 pub fn getParentOid(self: LessThanEqualsExpression) -> int;
@@ -348,36 +350,11 @@ pub fn getIndex(self: LessThanEqualsExpression) -> int;
 ```
 ## LessThanEqualsExpression::getRight
 
-```rust
+```java
 /**
-     * Get the right operand of this binary expression. An alias of `getRightOperand`
-     */
+* Get the right operand of this binary expression. An alias of `getRightOperand`
+*/
 ```
 ```rust
 pub fn getRight(self: LessThanEqualsExpression) -> Expression;
-```
-## LessThanEqualsExpression::is\<T\>
-
-```rust
-pub fn is<T>(self: LessThanEqualsExpression) -> bool;
-```
-## LessThanEqualsExpression::to\<T\>
-
-```rust
-pub fn to<T>(self: LessThanEqualsExpression) -> <any>;
-```
-## LessThanEqualsExpression::key\_neq
-
-```rust
-pub fn key_neq(self: LessThanEqualsExpression, object: <any>) -> bool;
-```
-## LessThanEqualsExpression::key\_eq
-
-```rust
-pub fn key_eq(self: LessThanEqualsExpression, object: <any>) -> bool;
-```
-## LessThanEqualsExpression::to\_set
-
-```rust
-pub fn to_set(self: LessThanEqualsExpression) -> *LessThanEqualsExpression;
 ```

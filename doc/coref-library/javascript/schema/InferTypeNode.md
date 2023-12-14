@@ -9,140 +9,140 @@ schema InferTypeNode {
 ```
 ## InferTypeNode::getLocation
 
-```rust
+```java
 /**
-     * Gets the location of this node.
-     */
+* Gets the location of this node.
+*/
 ```
 ```rust
 pub fn getLocation(self: InferTypeNode) -> Location;
 ```
 ## InferTypeNode::getSymbol
 
-```rust
+```java
 /**
-     * Gets the symbol associated with this node.
-     */
+* Gets the symbol associated with this node.
+*/
 ```
 ```rust
 pub fn getSymbol(self: InferTypeNode) -> Symbol;
 ```
 ## InferTypeNode::getADecorator
 
-```rust
+```java
 /**
-     * Gets a decorator.
-     */
+* Gets a decorator.
+*/
 ```
 ```rust
 pub fn getADecorator(self: InferTypeNode) -> *Decorator;
 ```
 ## InferTypeNode::getText
 
-```rust
+```java
 /**
-     * Gets the text of this node.
-     */
+* Gets the text of this node.
+*/
 ```
 ```rust
 pub fn getText(self: InferTypeNode) -> string;
 ```
 ## InferTypeNode::getModifier
 
-```rust
+```java
 /**
-     * Gets the `i`th modifier.
-     */
+* Gets the `i`th modifier.
+*/
 ```
 ```rust
 pub fn getModifier(self: InferTypeNode, i: int) -> Modifier;
 ```
 ## InferTypeNode::getAComment
 
-```rust
+```java
 /**
-     * Gets the comments related to it
-     */
+* Gets the comments related to it
+*/
 ```
 ```rust
 pub fn getAComment(self: InferTypeNode) -> *Comment;
 ```
 ## InferTypeNode::getAnAncestor
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node. 
-     */
+* Gets an ancestor of this node. 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: InferTypeNode) -> *Node;
 ```
 ## InferTypeNode::getAChild
 
-```rust
+```java
 /**
-     * Gets a child node of this node.
-     */
+* Gets a child node of this node.
+*/
 ```
 ```rust
 pub fn getAChild(self: InferTypeNode) -> *Node;
 ```
 ## InferTypeNode::getParent
 
-```rust
+```java
 /**
-     * Gets the parent node of this node.
-     */
+* Gets the parent node of this node.
+*/
 ```
 ```rust
 pub fn getParent(self: InferTypeNode) -> Node;
 ```
 ## InferTypeNode::getChildCount
 
-```rust
+```java
 /**
-     * Gets the number of child nodes.
-     */
+* Gets the number of child nodes.
+*/
 ```
 ```rust
 pub fn getChildCount(self: InferTypeNode) -> int;
 ```
 ## InferTypeNode::getRoot
 
-```rust
+```java
 /**
-     * Gets the root top-level of this node. 
-     */
+* Gets the root top-level of this node. 
+*/
 ```
 ```rust
 pub fn getRoot(self: InferTypeNode) -> TopLevelDO;
 ```
 ## InferTypeNode::getDecorator
 
-```rust
+```java
 /**
-     * Gets the `i`th decorator.
-     */
+* Gets the `i`th decorator.
+*/
 ```
 ```rust
 pub fn getDecorator(self: InferTypeNode, i: int) -> Decorator;
 ```
 ## InferTypeNode::getKind
 
-```rust
+```java
 /**
-     * Get the syntax kind of this node
-     */
+* Get the syntax kind of this node
+*/
 ```
 ```rust
 pub fn getKind(self: InferTypeNode) -> int;
 ```
 ## InferTypeNode::getAModifier
 
-```rust
+```java
 /**
-     * Gets a modifier.
-     */
+* Gets a modifier.
+*/
 ```
 ```rust
 pub fn getAModifier(self: InferTypeNode) -> *Modifier;
@@ -154,10 +154,10 @@ pub fn getStartColumnNumber(self: InferTypeNode) -> int;
 ```
 ## InferTypeNode::getChild
 
-```rust
+```java
 /**
-     * Gets the `i`th child of this node.
-     */
+* Gets the `i`th child of this node.
+*/
 ```
 ```rust
 pub fn getChild(self: InferTypeNode, i: int) -> Node;
@@ -169,22 +169,22 @@ pub fn getStartLineNumber(self: InferTypeNode) -> int;
 ```
 ## InferTypeNode::getAnAncestorEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets an ancestor enclosing function of it
-     */
+* Gets an ancestor enclosing function of it
+*/
 ```
 ```rust
 pub fn getAnAncestorEnclosingFunction(self: InferTypeNode) -> *FunctionLikeDeclaration;
 ```
 ## InferTypeNode::getADescendantByLevel
 
-```rust
+```java
 /**
-     * Gets a descendant of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets a descendant of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getADescendantByLevel(self: InferTypeNode, level: int) -> *Node;
@@ -196,72 +196,72 @@ pub fn getEndLineNumber(self: InferTypeNode) -> int;
 ```
 ## InferTypeNode::getRelativePath
 
-```rust
+```java
 /**
-     * Gets the relative path of this node.
-     */
+* Gets the relative path of this node.
+*/
 ```
 ```rust
 pub fn getRelativePath(self: InferTypeNode) -> string;
 ```
 ## InferTypeNode::getAnAncestorByLevel
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets an ancestor of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getAnAncestorByLevel(self: InferTypeNode, level: int) -> Node;
 ```
 ## InferTypeNode::getFile
 
-```rust
+```java
 /**
-     * Gets the file of this node.
-     */
+* Gets the file of this node.
+*/
 ```
 ```rust
 pub fn getFile(self: InferTypeNode) -> File;
 ```
 ## InferTypeNode::getALeadingComment
 
-```rust
+```java
 /**
-     * Gets the leading comments of it
-     */
+* Gets the leading comments of it
+*/
 ```
 ```rust
 pub fn getALeadingComment(self: InferTypeNode) -> *Comment;
 ```
 ## InferTypeNode::getATrailingComment
 
-```rust
+```java
 /**
-     * Gets the trailing comments of it
-     */
+* Gets the trailing comments of it
+*/
 ```
 ```rust
 pub fn getATrailingComment(self: InferTypeNode) -> *Comment;
 ```
 ## InferTypeNode::getLastChild
 
-```rust
+```java
 /**
-     * Gets the last child of this node parent.
-     */
+* Gets the last child of this node parent.
+*/
 ```
 ```rust
 pub fn getLastChild(self: InferTypeNode) -> Node;
 ```
 ## InferTypeNode::getEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets the enclosing function of it
-     */
+* Gets the enclosing function of it
+*/
 ```
 ```rust
 pub fn getEnclosingFunction(self: InferTypeNode) -> FunctionLikeDeclaration;
@@ -273,10 +273,10 @@ pub fn getEndColumnNumber(self: InferTypeNode) -> int;
 ```
 ## InferTypeNode::getParentOid
 
-```rust
+```java
 /**
-     * Gets the parent oid of this node.
-     */
+* Gets the parent oid of this node.
+*/
 ```
 ```rust
 pub fn getParentOid(self: InferTypeNode) -> int;
@@ -288,41 +288,18 @@ pub fn getIndex(self: InferTypeNode) -> int;
 ```
 ## InferTypeNode::getADescendant
 
-```rust
+```java
 /**
-     * Gets a descendant of this node. 
-     */
+* Gets a descendant of this node. 
+*/
 ```
 ```rust
 pub fn getADescendant(self: InferTypeNode) -> *Node;
 ```
 ## InferTypeNode::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavascriptDB) -> *InferTypeNode;
-```
-## InferTypeNode::is\<T\>
-
-```rust
-pub fn is<T>(self: InferTypeNode) -> bool;
-```
-## InferTypeNode::to\<T\>
-
-```rust
-pub fn to<T>(self: InferTypeNode) -> <any>;
-```
-## InferTypeNode::key\_neq
-
-```rust
-pub fn key_neq(self: InferTypeNode, object: <any>) -> bool;
-```
-## InferTypeNode::key\_eq
-
-```rust
-pub fn key_eq(self: InferTypeNode, object: <any>) -> bool;
-```
-## InferTypeNode::to\_set
-
-```rust
-pub fn to_set(self: InferTypeNode) -> *InferTypeNode;
 ```

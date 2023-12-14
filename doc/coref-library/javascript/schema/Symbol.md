@@ -11,10 +11,10 @@ schema Symbol {
 ```
 ## Symbol::getANode
 
-```rust
+```java
 /**
-     * Gets a node associated with this symbol.
-     */
+* Gets a node associated with this symbol.
+*/
 ```
 ```rust
 pub fn getANode(self: Symbol) -> *Node;
@@ -31,31 +31,8 @@ pub fn getDescription(self: Symbol) -> string;
 ```
 ## Symbol::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavascriptDB) -> *Symbol;
-```
-## Symbol::is\<T\>
-
-```rust
-pub fn is<T>(self: Symbol) -> bool;
-```
-## Symbol::to\<T\>
-
-```rust
-pub fn to<T>(self: Symbol) -> <any>;
-```
-## Symbol::key\_neq
-
-```rust
-pub fn key_neq(self: Symbol, object: <any>) -> bool;
-```
-## Symbol::key\_eq
-
-```rust
-pub fn key_eq(self: Symbol, object: <any>) -> bool;
-```
-## Symbol::to\_set
-
-```rust
-pub fn to_set(self: Symbol) -> *Symbol;
 ```

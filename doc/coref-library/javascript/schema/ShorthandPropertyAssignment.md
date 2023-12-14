@@ -9,120 +9,120 @@ schema ShorthandPropertyAssignment {
 ```
 ## ShorthandPropertyAssignment::getAComment
 
-```rust
+```java
 /**
-     * Gets the comments related to it
-     */
+* Gets the comments related to it
+*/
 ```
 ```rust
 pub fn getAComment(self: ShorthandPropertyAssignment) -> *Comment;
 ```
 ## ShorthandPropertyAssignment::getAnAncestor
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node. 
-     */
+* Gets an ancestor of this node. 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: ShorthandPropertyAssignment) -> *Node;
 ```
 ## ShorthandPropertyAssignment::getLocation
 
-```rust
+```java
 /**
-     * Gets the location of this node.
-     */
+* Gets the location of this node.
+*/
 ```
 ```rust
 pub fn getLocation(self: ShorthandPropertyAssignment) -> Location;
 ```
 ## ShorthandPropertyAssignment::getSymbol
 
-```rust
+```java
 /**
-     * Gets the symbol associated with this node.
-     */
+* Gets the symbol associated with this node.
+*/
 ```
 ```rust
 pub fn getSymbol(self: ShorthandPropertyAssignment) -> Symbol;
 ```
 ## ShorthandPropertyAssignment::getADecorator
 
-```rust
+```java
 /**
-     * Gets a decorator.
-     */
+* Gets a decorator.
+*/
 ```
 ```rust
 pub fn getADecorator(self: ShorthandPropertyAssignment) -> *Decorator;
 ```
 ## ShorthandPropertyAssignment::getText
 
-```rust
+```java
 /**
-     * Gets the text of this node.
-     */
+* Gets the text of this node.
+*/
 ```
 ```rust
 pub fn getText(self: ShorthandPropertyAssignment) -> string;
 ```
 ## ShorthandPropertyAssignment::getModifier
 
-```rust
+```java
 /**
-     * Gets the `i`th modifier.
-     */
+* Gets the `i`th modifier.
+*/
 ```
 ```rust
 pub fn getModifier(self: ShorthandPropertyAssignment, i: int) -> Modifier;
 ```
 ## ShorthandPropertyAssignment::getALeadingComment
 
-```rust
+```java
 /**
-     * Gets the leading comments of it
-     */
+* Gets the leading comments of it
+*/
 ```
 ```rust
 pub fn getALeadingComment(self: ShorthandPropertyAssignment) -> *Comment;
 ```
 ## ShorthandPropertyAssignment::getATrailingComment
 
-```rust
+```java
 /**
-     * Gets the trailing comments of it
-     */
+* Gets the trailing comments of it
+*/
 ```
 ```rust
 pub fn getATrailingComment(self: ShorthandPropertyAssignment) -> *Comment;
 ```
 ## ShorthandPropertyAssignment::getDecorator
 
-```rust
+```java
 /**
-     * Gets the `i`th decorator.
-     */
+* Gets the `i`th decorator.
+*/
 ```
 ```rust
 pub fn getDecorator(self: ShorthandPropertyAssignment, i: int) -> Decorator;
 ```
 ## ShorthandPropertyAssignment::getRoot
 
-```rust
+```java
 /**
-     * Gets the root top-level of this node. 
-     */
+* Gets the root top-level of this node. 
+*/
 ```
 ```rust
 pub fn getRoot(self: ShorthandPropertyAssignment) -> TopLevelDO;
 ```
 ## ShorthandPropertyAssignment::getChild
 
-```rust
+```java
 /**
-     * Gets the `i`th child of this node.
-     */
+* Gets the `i`th child of this node.
+*/
 ```
 ```rust
 pub fn getChild(self: ShorthandPropertyAssignment, i: int) -> Node;
@@ -139,42 +139,42 @@ pub fn getStartColumnNumber(self: ShorthandPropertyAssignment) -> int;
 ```
 ## ShorthandPropertyAssignment::getKind
 
-```rust
+```java
 /**
-     * Get the syntax kind of this node
-     */
+* Get the syntax kind of this node
+*/
 ```
 ```rust
 pub fn getKind(self: ShorthandPropertyAssignment) -> int;
 ```
 ## ShorthandPropertyAssignment::getAModifier
 
-```rust
+```java
 /**
-     * Gets a modifier.
-     */
+* Gets a modifier.
+*/
 ```
 ```rust
 pub fn getAModifier(self: ShorthandPropertyAssignment) -> *Modifier;
 ```
 ## ShorthandPropertyAssignment::getAnAncestorEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets an ancestor enclosing function of it
-     */
+* Gets an ancestor enclosing function of it
+*/
 ```
 ```rust
 pub fn getAnAncestorEnclosingFunction(self: ShorthandPropertyAssignment) -> *FunctionLikeDeclaration;
 ```
 ## ShorthandPropertyAssignment::getADescendantByLevel
 
-```rust
+```java
 /**
-     * Gets a descendant of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets a descendant of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getADescendantByLevel(self: ShorthandPropertyAssignment, level: int) -> *Node;
@@ -186,22 +186,22 @@ pub fn getEndLineNumber(self: ShorthandPropertyAssignment) -> int;
 ```
 ## ShorthandPropertyAssignment::getRelativePath
 
-```rust
+```java
 /**
-     * Gets the relative path of this node.
-     */
+* Gets the relative path of this node.
+*/
 ```
 ```rust
 pub fn getRelativePath(self: ShorthandPropertyAssignment) -> string;
 ```
 ## ShorthandPropertyAssignment::getAnAncestorByLevel
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets an ancestor of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getAnAncestorByLevel(self: ShorthandPropertyAssignment, level: int) -> Node;
@@ -213,30 +213,30 @@ pub fn getNameNode(self: ShorthandPropertyAssignment) -> Identifier;
 ```
 ## ShorthandPropertyAssignment::getFile
 
-```rust
+```java
 /**
-     * Gets the file of this node.
-     */
+* Gets the file of this node.
+*/
 ```
 ```rust
 pub fn getFile(self: ShorthandPropertyAssignment) -> File;
 ```
 ## ShorthandPropertyAssignment::getEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets the enclosing function of it
-     */
+* Gets the enclosing function of it
+*/
 ```
 ```rust
 pub fn getEnclosingFunction(self: ShorthandPropertyAssignment) -> FunctionLikeDeclaration;
 ```
 ## ShorthandPropertyAssignment::getAChild
 
-```rust
+```java
 /**
-     * Gets a child node of this node.
-     */
+* Gets a child node of this node.
+*/
 ```
 ```rust
 pub fn getAChild(self: ShorthandPropertyAssignment) -> *Node;
@@ -248,10 +248,10 @@ pub fn getParent(self: ShorthandPropertyAssignment) -> ObjectLiteralExpression;
 ```
 ## ShorthandPropertyAssignment::getLastChild
 
-```rust
+```java
 /**
-     * Gets the last child of this node parent.
-     */
+* Gets the last child of this node parent.
+*/
 ```
 ```rust
 pub fn getLastChild(self: ShorthandPropertyAssignment) -> Node;
@@ -268,10 +268,10 @@ pub fn getIdentifier(self: ShorthandPropertyAssignment) -> Identifier;
 ```
 ## ShorthandPropertyAssignment::getParentOid
 
-```rust
+```java
 /**
-     * Gets the parent oid of this node.
-     */
+* Gets the parent oid of this node.
+*/
 ```
 ```rust
 pub fn getParentOid(self: ShorthandPropertyAssignment) -> int;
@@ -283,10 +283,10 @@ pub fn getIndex(self: ShorthandPropertyAssignment) -> int;
 ```
 ## ShorthandPropertyAssignment::getChildCount
 
-```rust
+```java
 /**
-     * Gets the number of child nodes.
-     */
+* Gets the number of child nodes.
+*/
 ```
 ```rust
 pub fn getChildCount(self: ShorthandPropertyAssignment) -> int;
@@ -298,51 +298,28 @@ pub fn getName(self: ShorthandPropertyAssignment) -> string;
 ```
 ## ShorthandPropertyAssignment::getADescendant
 
-```rust
+```java
 /**
-     * Gets a descendant of this node. 
-     */
+* Gets a descendant of this node. 
+*/
 ```
 ```rust
 pub fn getADescendant(self: ShorthandPropertyAssignment) -> *Node;
 ```
 ## ShorthandPropertyAssignment::getValueSymbol
 
-```rust
+```java
 /**
-     * Gets the value symbol associated with this shorthand property assignment.
-     */
+* Gets the value symbol associated with this shorthand property assignment.
+*/
 ```
 ```rust
 pub fn getValueSymbol(self: ShorthandPropertyAssignment) -> Symbol;
 ```
 ## ShorthandPropertyAssignment::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavascriptDB) -> *ShorthandPropertyAssignment;
-```
-## ShorthandPropertyAssignment::is\<T\>
-
-```rust
-pub fn is<T>(self: ShorthandPropertyAssignment) -> bool;
-```
-## ShorthandPropertyAssignment::to\<T\>
-
-```rust
-pub fn to<T>(self: ShorthandPropertyAssignment) -> <any>;
-```
-## ShorthandPropertyAssignment::key\_neq
-
-```rust
-pub fn key_neq(self: ShorthandPropertyAssignment, object: <any>) -> bool;
-```
-## ShorthandPropertyAssignment::key\_eq
-
-```rust
-pub fn key_eq(self: ShorthandPropertyAssignment, object: <any>) -> bool;
-```
-## ShorthandPropertyAssignment::to\_set
-
-```rust
-pub fn to_set(self: ShorthandPropertyAssignment) -> *ShorthandPropertyAssignment;
 ```

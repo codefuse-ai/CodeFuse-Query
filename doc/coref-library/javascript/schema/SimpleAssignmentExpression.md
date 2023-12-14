@@ -9,120 +9,120 @@ schema SimpleAssignmentExpression {
 ```
 ## SimpleAssignmentExpression::getSymbol
 
-```rust
+```java
 /**
-     * Gets the symbol associated with this node.
-     */
+* Gets the symbol associated with this node.
+*/
 ```
 ```rust
 pub fn getSymbol(self: SimpleAssignmentExpression) -> Symbol;
 ```
 ## SimpleAssignmentExpression::getADecorator
 
-```rust
+```java
 /**
-     * Gets a decorator.
-     */
+* Gets a decorator.
+*/
 ```
 ```rust
 pub fn getADecorator(self: SimpleAssignmentExpression) -> *Decorator;
 ```
 ## SimpleAssignmentExpression::getAComment
 
-```rust
+```java
 /**
-     * Gets the comments related to it
-     */
+* Gets the comments related to it
+*/
 ```
 ```rust
 pub fn getAComment(self: SimpleAssignmentExpression) -> *Comment;
 ```
 ## SimpleAssignmentExpression::getAnAncestor
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node. 
-     */
+* Gets an ancestor of this node. 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: SimpleAssignmentExpression) -> *Node;
 ```
 ## SimpleAssignmentExpression::getChildCount
 
-```rust
+```java
 /**
-     * Gets the number of child nodes.
-     */
+* Gets the number of child nodes.
+*/
 ```
 ```rust
 pub fn getChildCount(self: SimpleAssignmentExpression) -> int;
 ```
 ## SimpleAssignmentExpression::getATrailingComment
 
-```rust
+```java
 /**
-     * Gets the trailing comments of it
-     */
+* Gets the trailing comments of it
+*/
 ```
 ```rust
 pub fn getATrailingComment(self: SimpleAssignmentExpression) -> *Comment;
 ```
 ## SimpleAssignmentExpression::getALeadingComment
 
-```rust
+```java
 /**
-     * Gets the leading comments of it
-     */
+* Gets the leading comments of it
+*/
 ```
 ```rust
 pub fn getALeadingComment(self: SimpleAssignmentExpression) -> *Comment;
 ```
 ## SimpleAssignmentExpression::getParent
 
-```rust
+```java
 /**
-     * Gets the parent node of this node.
-     */
+* Gets the parent node of this node.
+*/
 ```
 ```rust
 pub fn getParent(self: SimpleAssignmentExpression) -> Node;
 ```
 ## SimpleAssignmentExpression::getAChild
 
-```rust
+```java
 /**
-     * Gets a child node of this node.
-     */
+* Gets a child node of this node.
+*/
 ```
 ```rust
 pub fn getAChild(self: SimpleAssignmentExpression) -> *Node;
 ```
 ## SimpleAssignmentExpression::getDecorator
 
-```rust
+```java
 /**
-     * Gets the `i`th decorator.
-     */
+* Gets the `i`th decorator.
+*/
 ```
 ```rust
 pub fn getDecorator(self: SimpleAssignmentExpression, i: int) -> Decorator;
 ```
 ## SimpleAssignmentExpression::getRoot
 
-```rust
+```java
 /**
-     * Gets the root top-level of this node. 
-     */
+* Gets the root top-level of this node. 
+*/
 ```
 ```rust
 pub fn getRoot(self: SimpleAssignmentExpression) -> TopLevelDO;
 ```
 ## SimpleAssignmentExpression::getChild
 
-```rust
+```java
 /**
-     * Gets the `i`th child of this node.
-     */
+* Gets the `i`th child of this node.
+*/
 ```
 ```rust
 pub fn getChild(self: SimpleAssignmentExpression, i: int) -> Node;
@@ -134,64 +134,64 @@ pub fn getStartLineNumber(self: SimpleAssignmentExpression) -> int;
 ```
 ## SimpleAssignmentExpression::getADescendantByLevel
 
-```rust
+```java
 /**
-     * Gets a descendant of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets a descendant of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getADescendantByLevel(self: SimpleAssignmentExpression, level: int) -> *Node;
 ```
 ## SimpleAssignmentExpression::getAnAncestorEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets an ancestor enclosing function of it
-     */
+* Gets an ancestor enclosing function of it
+*/
 ```
 ```rust
 pub fn getAnAncestorEnclosingFunction(self: SimpleAssignmentExpression) -> *FunctionLikeDeclaration;
 ```
 ## SimpleAssignmentExpression::getLeftOperand
 
-```rust
+```java
 /**
-     * Get the left operand of this binary expression.
-     */
+* Get the left operand of this binary expression.
+*/
 ```
 ```rust
 pub fn getLeftOperand(self: SimpleAssignmentExpression) -> Expression;
 ```
 ## SimpleAssignmentExpression::getAnAncestorByLevel
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets an ancestor of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getAnAncestorByLevel(self: SimpleAssignmentExpression, level: int) -> Node;
 ```
 ## SimpleAssignmentExpression::getFile
 
-```rust
+```java
 /**
-     * Gets the file of this node.
-     */
+* Gets the file of this node.
+*/
 ```
 ```rust
 pub fn getFile(self: SimpleAssignmentExpression) -> File;
 ```
 ## SimpleAssignmentExpression::getText
 
-```rust
+```java
 /**
-     * Gets the text of this node.
-     */
+* Gets the text of this node.
+*/
 ```
 ```rust
 pub fn getText(self: SimpleAssignmentExpression) -> string;
@@ -203,20 +203,20 @@ pub fn getAnOperand(self: SimpleAssignmentExpression) -> *Expression;
 ```
 ## SimpleAssignmentExpression::getModifier
 
-```rust
+```java
 /**
-     * Gets the `i`th modifier.
-     */
+* Gets the `i`th modifier.
+*/
 ```
 ```rust
 pub fn getModifier(self: SimpleAssignmentExpression, i: int) -> Modifier;
 ```
 ## SimpleAssignmentExpression::getRightOperand
 
-```rust
+```java
 /**
-     * Get the right operand of this binary expression.
-     */
+* Get the right operand of this binary expression.
+*/
 ```
 ```rust
 pub fn getRightOperand(self: SimpleAssignmentExpression) -> Expression;
@@ -228,55 +228,57 @@ pub fn getEndLineNumber(self: SimpleAssignmentExpression) -> int;
 ```
 ## SimpleAssignmentExpression::getRelativePath
 
-```rust
+```java
 /**
-     * Gets the relative path of this node.
-     */
+* Gets the relative path of this node.
+*/
 ```
 ```rust
 pub fn getRelativePath(self: SimpleAssignmentExpression) -> string;
 ```
 ## SimpleAssignmentExpression::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavascriptDB) -> *SimpleAssignmentExpression;
 ```
 ## SimpleAssignmentExpression::getLocation
 
-```rust
+```java
 /**
-     * Gets the location of this node.
-     */
+* Gets the location of this node.
+*/
 ```
 ```rust
 pub fn getLocation(self: SimpleAssignmentExpression) -> Location;
 ```
 ## SimpleAssignmentExpression::getOperator
 
-```rust
+```java
 /**
-     * Get the operator of this binary expression.
-     */
+* Get the operator of this binary expression.
+*/
 ```
 ```rust
 pub fn getOperator(self: SimpleAssignmentExpression) -> BinaryOperator;
 ```
 ## SimpleAssignmentExpression::getADescendant
 
-```rust
+```java
 /**
-     * Gets a descendant of this node. 
-     */
+* Gets a descendant of this node. 
+*/
 ```
 ```rust
 pub fn getADescendant(self: SimpleAssignmentExpression) -> *Node;
 ```
 ## SimpleAssignmentExpression::getLeft
 
-```rust
+```java
 /**
-     * Get the left operand of this binary expression. An alias of `getLeftOperand`.
-     */
+* Get the left operand of this binary expression. An alias of `getLeftOperand`.
+*/
 ```
 ```rust
 pub fn getLeft(self: SimpleAssignmentExpression) -> Expression;
@@ -288,40 +290,40 @@ pub fn getStartColumnNumber(self: SimpleAssignmentExpression) -> int;
 ```
 ## SimpleAssignmentExpression::getAModifier
 
-```rust
+```java
 /**
-     * Gets a modifier.
-     */
+* Gets a modifier.
+*/
 ```
 ```rust
 pub fn getAModifier(self: SimpleAssignmentExpression) -> *Modifier;
 ```
 ## SimpleAssignmentExpression::getKind
 
-```rust
+```java
 /**
-     * Get the syntax kind of this node
-     */
+* Get the syntax kind of this node
+*/
 ```
 ```rust
 pub fn getKind(self: SimpleAssignmentExpression) -> int;
 ```
 ## SimpleAssignmentExpression::getLastChild
 
-```rust
+```java
 /**
-     * Gets the last child of this node parent.
-     */
+* Gets the last child of this node parent.
+*/
 ```
 ```rust
 pub fn getLastChild(self: SimpleAssignmentExpression) -> Node;
 ```
 ## SimpleAssignmentExpression::getEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets the enclosing function of it
-     */
+* Gets the enclosing function of it
+*/
 ```
 ```rust
 pub fn getEnclosingFunction(self: SimpleAssignmentExpression) -> FunctionLikeDeclaration;
@@ -333,10 +335,10 @@ pub fn getEndColumnNumber(self: SimpleAssignmentExpression) -> int;
 ```
 ## SimpleAssignmentExpression::getParentOid
 
-```rust
+```java
 /**
-     * Gets the parent oid of this node.
-     */
+* Gets the parent oid of this node.
+*/
 ```
 ```rust
 pub fn getParentOid(self: SimpleAssignmentExpression) -> int;
@@ -348,36 +350,11 @@ pub fn getIndex(self: SimpleAssignmentExpression) -> int;
 ```
 ## SimpleAssignmentExpression::getRight
 
-```rust
+```java
 /**
-     * Get the right operand of this binary expression. An alias of `getRightOperand`
-     */
+* Get the right operand of this binary expression. An alias of `getRightOperand`
+*/
 ```
 ```rust
 pub fn getRight(self: SimpleAssignmentExpression) -> Expression;
-```
-## SimpleAssignmentExpression::is\<T\>
-
-```rust
-pub fn is<T>(self: SimpleAssignmentExpression) -> bool;
-```
-## SimpleAssignmentExpression::to\<T\>
-
-```rust
-pub fn to<T>(self: SimpleAssignmentExpression) -> <any>;
-```
-## SimpleAssignmentExpression::key\_neq
-
-```rust
-pub fn key_neq(self: SimpleAssignmentExpression, object: <any>) -> bool;
-```
-## SimpleAssignmentExpression::key\_eq
-
-```rust
-pub fn key_eq(self: SimpleAssignmentExpression, object: <any>) -> bool;
-```
-## SimpleAssignmentExpression::to\_set
-
-```rust
-pub fn to_set(self: SimpleAssignmentExpression) -> *SimpleAssignmentExpression;
 ```

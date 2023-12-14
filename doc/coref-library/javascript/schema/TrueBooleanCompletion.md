@@ -35,31 +35,8 @@ pub fn getName(self: TrueBooleanCompletion) -> string;
 ```
 ## TrueBooleanCompletion::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__() -> *TrueBooleanCompletion;
-```
-## TrueBooleanCompletion::is\<T\>
-
-```rust
-pub fn is<T>(self: TrueBooleanCompletion) -> bool;
-```
-## TrueBooleanCompletion::to\<T\>
-
-```rust
-pub fn to<T>(self: TrueBooleanCompletion) -> <any>;
-```
-## TrueBooleanCompletion::key\_neq
-
-```rust
-pub fn key_neq(self: TrueBooleanCompletion, object: <any>) -> bool;
-```
-## TrueBooleanCompletion::key\_eq
-
-```rust
-pub fn key_eq(self: TrueBooleanCompletion, object: <any>) -> bool;
-```
-## TrueBooleanCompletion::to\_set
-
-```rust
-pub fn to_set(self: TrueBooleanCompletion) -> *TrueBooleanCompletion;
 ```

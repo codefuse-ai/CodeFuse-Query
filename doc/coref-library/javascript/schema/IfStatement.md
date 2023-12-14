@@ -9,160 +9,160 @@ schema IfStatement {
 ```
 ## IfStatement::getLocation
 
-```rust
+```java
 /**
-     * Gets the location of this node.
-     */
+* Gets the location of this node.
+*/
 ```
 ```rust
 pub fn getLocation(self: IfStatement) -> Location;
 ```
 ## IfStatement::getSymbol
 
-```rust
+```java
 /**
-     * Gets the symbol associated with this node.
-     */
+* Gets the symbol associated with this node.
+*/
 ```
 ```rust
 pub fn getSymbol(self: IfStatement) -> Symbol;
 ```
 ## IfStatement::getADecorator
 
-```rust
+```java
 /**
-     * Gets a decorator.
-     */
+* Gets a decorator.
+*/
 ```
 ```rust
 pub fn getADecorator(self: IfStatement) -> *Decorator;
 ```
 ## IfStatement::getText
 
-```rust
+```java
 /**
-     * Gets the text of this node.
-     */
+* Gets the text of this node.
+*/
 ```
 ```rust
 pub fn getText(self: IfStatement) -> string;
 ```
 ## IfStatement::getModifier
 
-```rust
+```java
 /**
-     * Gets the `i`th modifier.
-     */
+* Gets the `i`th modifier.
+*/
 ```
 ```rust
 pub fn getModifier(self: IfStatement, i: int) -> Modifier;
 ```
 ## IfStatement::getAComment
 
-```rust
+```java
 /**
-     * Gets the comments related to it
-     */
+* Gets the comments related to it
+*/
 ```
 ```rust
 pub fn getAComment(self: IfStatement) -> *Comment;
 ```
 ## IfStatement::getAnAncestor
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node. 
-     */
+* Gets an ancestor of this node. 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: IfStatement) -> *Node;
 ```
 ## IfStatement::getAChild
 
-```rust
+```java
 /**
-     * Gets a child node of this node.
-     */
+* Gets a child node of this node.
+*/
 ```
 ```rust
 pub fn getAChild(self: IfStatement) -> *Node;
 ```
 ## IfStatement::getParent
 
-```rust
+```java
 /**
-     * Gets the parent node of this node.
-     */
+* Gets the parent node of this node.
+*/
 ```
 ```rust
 pub fn getParent(self: IfStatement) -> Node;
 ```
 ## IfStatement::getALeadingComment
 
-```rust
+```java
 /**
-     * Gets the leading comments of it
-     */
+* Gets the leading comments of it
+*/
 ```
 ```rust
 pub fn getALeadingComment(self: IfStatement) -> *Comment;
 ```
 ## IfStatement::getATrailingComment
 
-```rust
+```java
 /**
-     * Gets the trailing comments of it
-     */
+* Gets the trailing comments of it
+*/
 ```
 ```rust
 pub fn getATrailingComment(self: IfStatement) -> *Comment;
 ```
 ## IfStatement::getChildCount
 
-```rust
+```java
 /**
-     * Gets the number of child nodes.
-     */
+* Gets the number of child nodes.
+*/
 ```
 ```rust
 pub fn getChildCount(self: IfStatement) -> int;
 ```
 ## IfStatement::getRoot
 
-```rust
+```java
 /**
-     * Gets the root top-level of this node. 
-     */
+* Gets the root top-level of this node. 
+*/
 ```
 ```rust
 pub fn getRoot(self: IfStatement) -> TopLevelDO;
 ```
 ## IfStatement::getDecorator
 
-```rust
+```java
 /**
-     * Gets the `i`th decorator.
-     */
+* Gets the `i`th decorator.
+*/
 ```
 ```rust
 pub fn getDecorator(self: IfStatement, i: int) -> Decorator;
 ```
 ## IfStatement::getKind
 
-```rust
+```java
 /**
-     * Get the syntax kind of this node
-     */
+* Get the syntax kind of this node
+*/
 ```
 ```rust
 pub fn getKind(self: IfStatement) -> int;
 ```
 ## IfStatement::getAModifier
 
-```rust
+```java
 /**
-     * Gets a modifier.
-     */
+* Gets a modifier.
+*/
 ```
 ```rust
 pub fn getAModifier(self: IfStatement) -> *Modifier;
@@ -174,20 +174,20 @@ pub fn getStartColumnNumber(self: IfStatement) -> int;
 ```
 ## IfStatement::getChild
 
-```rust
+```java
 /**
-     * Gets the `i`th child of this node.
-     */
+* Gets the `i`th child of this node.
+*/
 ```
 ```rust
 pub fn getChild(self: IfStatement, i: int) -> Node;
 ```
 ## IfStatement::getCondition
 
-```rust
+```java
 /**
-     * Gets the condition of this `if` statement.
-     */
+* Gets the condition of this `if` statement.
+*/
 ```
 ```rust
 pub fn getCondition(self: IfStatement) -> Expression;
@@ -199,32 +199,32 @@ pub fn getStartLineNumber(self: IfStatement) -> int;
 ```
 ## IfStatement::getAnAncestorEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets an ancestor enclosing function of it
-     */
+* Gets an ancestor enclosing function of it
+*/
 ```
 ```rust
 pub fn getAnAncestorEnclosingFunction(self: IfStatement) -> *FunctionLikeDeclaration;
 ```
 ## IfStatement::getADescendantByLevel
 
-```rust
+```java
 /**
-     * Gets a descendant of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets a descendant of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getADescendantByLevel(self: IfStatement, level: int) -> *Node;
 ```
 ## IfStatement::getElse
 
-```rust
+```java
 /**
-     * Gets the "else" branch of this `if` statement, if any.
-     */
+* Gets the "else" branch of this `if` statement, if any.
+*/
 ```
 ```rust
 pub fn getElse(self: IfStatement) -> Statement;
@@ -236,10 +236,10 @@ pub fn getEndLineNumber(self: IfStatement) -> int;
 ```
 ## IfStatement::getRelativePath
 
-```rust
+```java
 /**
-     * Gets the relative path of this node.
-     */
+* Gets the relative path of this node.
+*/
 ```
 ```rust
 pub fn getRelativePath(self: IfStatement) -> string;
@@ -251,20 +251,20 @@ pub fn getEndColumnNumber(self: IfStatement) -> int;
 ```
 ## IfStatement::getEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets the enclosing function of it
-     */
+* Gets the enclosing function of it
+*/
 ```
 ```rust
 pub fn getEnclosingFunction(self: IfStatement) -> FunctionLikeDeclaration;
 ```
 ## IfStatement::getLastChild
 
-```rust
+```java
 /**
-     * Gets the last child of this node parent.
-     */
+* Gets the last child of this node parent.
+*/
 ```
 ```rust
 pub fn getLastChild(self: IfStatement) -> Node;
@@ -276,93 +276,70 @@ pub fn getIndex(self: IfStatement) -> int;
 ```
 ## IfStatement::getADescendant
 
-```rust
+```java
 /**
-     * Gets a descendant of this node. 
-     */
+* Gets a descendant of this node. 
+*/
 ```
 ```rust
 pub fn getADescendant(self: IfStatement) -> *Node;
 ```
 ## IfStatement::hasElse
 
-```rust
+```java
 /**
-     * Determine this IfStatement has else expr.
-     */
+* Determine this IfStatement has else expr.
+*/
 ```
 ```rust
 pub fn hasElse(self: IfStatement) -> bool;
 ```
 ## IfStatement::getAnAncestorByLevel
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets an ancestor of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getAnAncestorByLevel(self: IfStatement, level: int) -> Node;
 ```
 ## IfStatement::getFile
 
-```rust
+```java
 /**
-     * Gets the file of this node.
-     */
+* Gets the file of this node.
+*/
 ```
 ```rust
 pub fn getFile(self: IfStatement) -> File;
 ```
 ## IfStatement::getThen
 
-```rust
+```java
 /**
-     * Gets the "then" branch of this `if` statement.
-     */
+* Gets the "then" branch of this `if` statement.
+*/
 ```
 ```rust
 pub fn getThen(self: IfStatement) -> Statement;
 ```
 ## IfStatement::getParentOid
 
-```rust
+```java
 /**
-     * Gets the parent oid of this node.
-     */
+* Gets the parent oid of this node.
+*/
 ```
 ```rust
 pub fn getParentOid(self: IfStatement) -> int;
 ```
 ## IfStatement::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavascriptDB) -> *IfStatement;
-```
-## IfStatement::is\<T\>
-
-```rust
-pub fn is<T>(self: IfStatement) -> bool;
-```
-## IfStatement::to\<T\>
-
-```rust
-pub fn to<T>(self: IfStatement) -> <any>;
-```
-## IfStatement::key\_neq
-
-```rust
-pub fn key_neq(self: IfStatement, object: <any>) -> bool;
-```
-## IfStatement::key\_eq
-
-```rust
-pub fn key_eq(self: IfStatement, object: <any>) -> bool;
-```
-## IfStatement::to\_set
-
-```rust
-pub fn to_set(self: IfStatement) -> *IfStatement;
 ```

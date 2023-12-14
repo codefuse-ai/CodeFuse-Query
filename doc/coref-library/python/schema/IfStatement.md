@@ -14,163 +14,140 @@ schema IfStatement {
 ```
 ## IfStatement::getSize
 
-```rust
+```java
 /**
-     * @brief gets the size information for the element.
-     * @return NumberOfLines
-     */
+* @brief gets the size information for the element.
+* @return NumberOfLines
+*/
 ```
 ```rust
 pub fn getSize(self: IfStatement) -> NumberOfLines;
 ```
 ## IfStatement::getParent
 
-```rust
+```java
 /**
-     * @brief gets the parent element of the statement
-     * @return CombineElement 
-     */
+* @brief gets the parent element of the statement
+* @return CombineElement 
+*/
 ```
 ```rust
 pub fn getParent(self: IfStatement) -> CombineElement;
 ```
 ## IfStatement::getLocationOid
 
-```rust
+```java
 /**
-     * @brief gets the location oid of this element.
-     * @return int
-     */
+* @brief gets the location oid of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getLocationOid(self: IfStatement) -> int;
 ```
 ## IfStatement::getEnclosingScope
 
-```rust
+```java
 /**
-     * @brief gets the immediately enclosing scope (module, function or class) whose body contains this statement.
-     * @return Scope 
-     */
+* @brief gets the immediately enclosing scope (module, function or class) whose body contains this statement.
+* @return Scope 
+*/
 ```
 ```rust
 pub fn getEnclosingScope(self: IfStatement) -> Scope;
 ```
 ## IfStatement::getPrintableText
 
-```rust
+```java
 /**
-     * @brief gets the printable text of this element.
-     * @return string
-     */
+* @brief gets the printable text of this element.
+* @return string
+*/
 ```
 ```rust
 pub fn getPrintableText(self: IfStatement) -> string;
 ```
 ## IfStatement::getParentOid
 
-```rust
+```java
 /**
-     * @brief gets the parent oid of this element.
-     * @return int
-     */
+* @brief gets the parent oid of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getParentOid(self: IfStatement) -> int;
 ```
 ## IfStatement::getAnAncestor
 
-```rust
+```java
 /**
-     * @brief gets an ancestor of the element.
-     * @return CombineElement 
-     */
+* @brief gets an ancestor of the element.
+* @return CombineElement 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: IfStatement) -> *CombineElement;
 ```
 ## IfStatement::getAChild
 
-```rust
+```java
 /**
-     * @brief gets a child of this statement.
-     * @return Statement 
-     */
+* @brief gets a child of this statement.
+* @return Statement 
+*/
 ```
 ```rust
 pub fn getAChild(self: IfStatement) -> *Statement;
 ```
 ## IfStatement::getEnclosingStatement
 
-```rust
+```java
 /**
-     * @brief gets the statement containing this statement.
-     * @return Statement 
-     */
+* @brief gets the statement containing this statement.
+* @return Statement 
+*/
 ```
 ```rust
 pub fn getEnclosingStatement(self: IfStatement) -> Statement;
 ```
 ## IfStatement::getElementIndex
 
-```rust
+```java
 /**
-     * @brief gets the element index of this element.
-     * @return int
-     */
+* @brief gets the element index of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getElementIndex(self: IfStatement) -> int;
 ```
 ## IfStatement::getType
 
-```rust
+```java
 /**
-     * @brief gets the type of this element.
-     * @return string
-     */
+* @brief gets the type of this element.
+* @return string
+*/
 ```
 ```rust
 pub fn getType(self: IfStatement) -> string;
 ```
 ## IfStatement::getLocation
 
-```rust
+```java
 /**
-     * @brief gets the location for the element.
-     * @return Location
-     */
+* @brief gets the location for the element.
+* @return Location
+*/
 ```
 ```rust
 pub fn getLocation(self: IfStatement) -> Location;
 ```
 ## IfStatement::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: PythonDB) -> *IfStatement;
-```
-## IfStatement::is\<T\>
-
-```rust
-pub fn is<T>(self: IfStatement) -> bool;
-```
-## IfStatement::to\<T\>
-
-```rust
-pub fn to<T>(self: IfStatement) -> <any>;
-```
-## IfStatement::key\_neq
-
-```rust
-pub fn key_neq(self: IfStatement, object: <any>) -> bool;
-```
-## IfStatement::key\_eq
-
-```rust
-pub fn key_eq(self: IfStatement, object: <any>) -> bool;
-```
-## IfStatement::to\_set
-
-```rust
-pub fn to_set(self: IfStatement) -> *IfStatement;
 ```

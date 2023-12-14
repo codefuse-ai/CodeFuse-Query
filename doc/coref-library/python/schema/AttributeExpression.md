@@ -14,141 +14,118 @@ schema AttributeExpression {
 ```
 ## AttributeExpression::getAnAncestor
 
-```rust
+```java
 /**
-     * @brief gets an ancestor of the element.
-     * @return CombineElement 
-     */
+* @brief gets an ancestor of the element.
+* @return CombineElement 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: AttributeExpression) -> *CombineElement;
 ```
 ## AttributeExpression::getSize
 
-```rust
+```java
 /**
-     * @brief gets the size information for the element.
-     * @return NumberOfLines
-     */
+* @brief gets the size information for the element.
+* @return NumberOfLines
+*/
 ```
 ```rust
 pub fn getSize(self: AttributeExpression) -> NumberOfLines;
 ```
 ## AttributeExpression::getElementIndex
 
-```rust
+```java
 /**
-     * @brief gets the element index of this element.
-     * @return int
-     */
+* @brief gets the element index of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getElementIndex(self: AttributeExpression) -> int;
 ```
 ## AttributeExpression::getParent
 
-```rust
+```java
 /**
-     * @brief gets the parent of the expression.
-     * @return CombineElement 
-     */
+* @brief gets the parent of the expression.
+* @return CombineElement 
+*/
 ```
 ```rust
 pub fn getParent(self: AttributeExpression) -> CombineElement;
 ```
 ## AttributeExpression::getLocationOid
 
-```rust
+```java
 /**
-     * @brief gets the location oid of this element.
-     * @return int
-     */
+* @brief gets the location oid of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getLocationOid(self: AttributeExpression) -> int;
 ```
 ## AttributeExpression::getLocation
 
-```rust
+```java
 /**
-     * @brief gets the location for the element.
-     * @return Location
-     */
+* @brief gets the location for the element.
+* @return Location
+*/
 ```
 ```rust
 pub fn getLocation(self: AttributeExpression) -> Location;
 ```
 ## AttributeExpression::getEnclosingScope
 
-```rust
+```java
 /**
-     * @brief gets the immediately enclosing scope (module, function or class) whose body contains this statement.
-     * @return Scope 
-     */
+* @brief gets the immediately enclosing scope (module, function or class) whose body contains this statement.
+* @return Scope 
+*/
 ```
 ```rust
 pub fn getEnclosingScope(self: AttributeExpression) -> Scope;
 ```
 ## AttributeExpression::getPrintableText
 
-```rust
+```java
 /**
-     * @brief gets the printable text of this element.
-     * @return string
-     */
+* @brief gets the printable text of this element.
+* @return string
+*/
 ```
 ```rust
 pub fn getPrintableText(self: AttributeExpression) -> string;
 ```
 ## AttributeExpression::getParentOid
 
-```rust
+```java
 /**
-     * @brief gets the parent oid of this element.
-     * @return int
-     */
+* @brief gets the parent oid of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getParentOid(self: AttributeExpression) -> int;
 ```
 ## AttributeExpression::getType
 
-```rust
+```java
 /**
-     * @brief gets the type of this element.
-     * @return string
-     */
+* @brief gets the type of this element.
+* @return string
+*/
 ```
 ```rust
 pub fn getType(self: AttributeExpression) -> string;
 ```
 ## AttributeExpression::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: PythonDB) -> *AttributeExpression;
-```
-## AttributeExpression::is\<T\>
-
-```rust
-pub fn is<T>(self: AttributeExpression) -> bool;
-```
-## AttributeExpression::to\<T\>
-
-```rust
-pub fn to<T>(self: AttributeExpression) -> <any>;
-```
-## AttributeExpression::key\_neq
-
-```rust
-pub fn key_neq(self: AttributeExpression, object: <any>) -> bool;
-```
-## AttributeExpression::key\_eq
-
-```rust
-pub fn key_eq(self: AttributeExpression, object: <any>) -> bool;
-```
-## AttributeExpression::to\_set
-
-```rust
-pub fn to_set(self: AttributeExpression) -> *AttributeExpression;
 ```

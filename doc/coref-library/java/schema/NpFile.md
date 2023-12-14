@@ -12,75 +12,52 @@ schema NpFile {
 ```
 ## NpFile::getQualifiedName
 
-```rust
+```java
 /**
-     * @brief gets the qualified name of this element.
-     * @return string
-     */
+* @brief gets the qualified name of this element.
+* @return string
+*/
 ```
 ```rust
 pub fn getQualifiedName(self: NpFile) -> string;
 ```
 ## NpFile::getProjectHashId
 
-```rust
+```java
 /**
-     * @brief gets the project hash id of this element.
-     * @return int
-     */
+* @brief gets the project hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getProjectHashId(self: NpFile) -> int;
 ```
 ## NpFile::getNpProject
 
-```rust
+```java
 /**
-     * @brief gets the np_project of this file.
-     * @return ElementParent
-     */
+* @brief gets the np_project of this file.
+* @return ElementParent
+*/
 ```
 ```rust
 pub fn getNpProject(self: NpFile) -> NpProject;
 ```
 ## NpFile::getName
 
-```rust
+```java
 /**
-     * @brief gets the name of this element.
-     * @return string
-     */
+* @brief gets the name of this element.
+* @return string
+*/
 ```
 ```rust
 pub fn getName(self: NpFile) -> string;
 ```
 ## NpFile::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavaDB) -> *NpFile;
-```
-## NpFile::is\<T\>
-
-```rust
-pub fn is<T>(self: NpFile) -> bool;
-```
-## NpFile::to\<T\>
-
-```rust
-pub fn to<T>(self: NpFile) -> <any>;
-```
-## NpFile::key\_neq
-
-```rust
-pub fn key_neq(self: NpFile, object: <any>) -> bool;
-```
-## NpFile::key\_eq
-
-```rust
-pub fn key_eq(self: NpFile, object: <any>) -> bool;
-```
-## NpFile::to\_set
-
-```rust
-pub fn to_set(self: NpFile) -> *NpFile;
 ```

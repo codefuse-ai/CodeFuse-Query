@@ -27,31 +27,8 @@ pub fn getCodeLines(self: NumberOfLines) -> int;
 ```
 ## NumberOfLines::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavascriptDB) -> *NumberOfLines;
-```
-## NumberOfLines::is\<T\>
-
-```rust
-pub fn is<T>(self: NumberOfLines) -> bool;
-```
-## NumberOfLines::to\<T\>
-
-```rust
-pub fn to<T>(self: NumberOfLines) -> <any>;
-```
-## NumberOfLines::key\_neq
-
-```rust
-pub fn key_neq(self: NumberOfLines, object: <any>) -> bool;
-```
-## NumberOfLines::key\_eq
-
-```rust
-pub fn key_eq(self: NumberOfLines, object: <any>) -> bool;
-```
-## NumberOfLines::to\_set
-
-```rust
-pub fn to_set(self: NumberOfLines) -> *NumberOfLines;
 ```

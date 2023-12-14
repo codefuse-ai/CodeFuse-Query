@@ -25,6 +25,8 @@ pub fn getEndColumnNumber(self: LocationDO) -> int;
 ```
 ## LocationDO::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavascriptDB) -> *LocationDO;
 ```
@@ -47,29 +49,4 @@ pub fn getStartLineNumber(self: LocationDO) -> int;
 
 ```rust
 pub fn getFileOid(self: LocationDO) -> int;
-```
-## LocationDO::is\<T\>
-
-```rust
-pub fn is<T>(self: LocationDO) -> bool;
-```
-## LocationDO::to\<T\>
-
-```rust
-pub fn to<T>(self: LocationDO) -> <any>;
-```
-## LocationDO::key\_neq
-
-```rust
-pub fn key_neq(self: LocationDO, object: <any>) -> bool;
-```
-## LocationDO::key\_eq
-
-```rust
-pub fn key_eq(self: LocationDO, object: <any>) -> bool;
-```
-## LocationDO::to\_set
-
-```rust
-pub fn to_set(self: LocationDO) -> *LocationDO;
 ```

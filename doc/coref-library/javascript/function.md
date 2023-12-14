@@ -2,563 +2,563 @@
 
 ## isOverrideKeyword
 
-```rust
+```java
 /**
- * Determines whether a node is an `override` keyword.
- */
+* Determines whether a node is an `override` keyword.
+*/
 ```
 ```rust
 pub fn isOverrideKeyword(node: Node) -> bool;
 ```
 ## isReadonlyKeyword
 
-```rust
+```java
 /**
- * Determines whether a node is a `readonly` keyword.
- */
+* Determines whether a node is a `readonly` keyword.
+*/
 ```
 ```rust
 pub fn isReadonlyKeyword(node: Node) -> bool;
 ```
 ## isDeclareKeyword
 
-```rust
+```java
 /**
- * Determines whether a node is a `declare` keyword.
- */
+* Determines whether a node is a `declare` keyword.
+*/
 ```
 ```rust
 pub fn isDeclareKeyword(node: Node) -> bool;
 ```
 ## isStaticKeyword
 
-```rust
+```java
 /**
- * Determines whether a node is a `static` keyword.
- */
+* Determines whether a node is a `static` keyword.
+*/
 ```
 ```rust
 pub fn isStaticKeyword(node: Node) -> bool;
 ```
 ## isPrivateKeyword
 
-```rust
+```java
 /**
- * Determines whether a node is a `private` keyword.
- */
+* Determines whether a node is a `private` keyword.
+*/
 ```
 ```rust
 pub fn isPrivateKeyword(node: Node) -> bool;
 ```
 ## isExportKeyword
 
-```rust
+```java
 /**
- * Determines whether a node is an `export` keyword.
- */
+* Determines whether a node is an `export` keyword.
+*/
 ```
 ```rust
 pub fn isExportKeyword(node: Node) -> bool;
 ```
 ## isDefaultKeyword
 
-```rust
+```java
 /**
- * Determines whether a node is a `default` keyword.
- */
+* Determines whether a node is a `default` keyword.
+*/
 ```
 ```rust
 pub fn isDefaultKeyword(node: Node) -> bool;
 ```
 ## isConstKeyword
 
-```rust
+```java
 /**
- * Determines whether a node is a `const` keyword.
- */
+* Determines whether a node is a `const` keyword.
+*/
 ```
 ```rust
 pub fn isConstKeyword(node: Node) -> bool;
 ```
 ## isModifier
 
-```rust
+```java
 /**
- * Determines whether a node is a modifier.
- */
+* Determines whether a node is a modifier.
+*/
 ```
 ```rust
 pub fn isModifier(node: Node) -> bool;
 ```
 ## isJsxExpression
 
-```rust
+```java
 /**
- * Determines whether a node is a JSX closing fragment.
- */
+* Determines whether a node is a JSX closing fragment.
+*/
 ```
 ```rust
 pub fn isJsxExpression(node: Node) -> bool;
 ```
 ## isJsxSpreadAttribute
 
-```rust
+```java
 /**
- * Determines whether a node is a JSX spread attribute.
- */
+* Determines whether a node is a JSX spread attribute.
+*/
 ```
 ```rust
 pub fn isJsxSpreadAttribute(node: Node) -> bool;
 ```
 ## isJsxAttributes
 
-```rust
+```java
 /**
- * Determines whether a node is a JSX attributes.
- */
+* Determines whether a node is a JSX attributes.
+*/
 ```
 ```rust
 pub fn isJsxAttributes(node: Node) -> bool;
 ```
 ## isJsxAttribute
 
-```rust
+```java
 /**
- * Determines whether a node is a JSX attribute.
- */
+* Determines whether a node is a JSX attribute.
+*/
 ```
 ```rust
 pub fn isJsxAttribute(node: Node) -> bool;
 ```
 ## isJsxClosingFragment
 
-```rust
+```java
 /**
- * Determines whether a node is a JSX closing fragment.
- */
+* Determines whether a node is a JSX closing fragment.
+*/
 ```
 ```rust
 pub fn isJsxClosingFragment(node: Node) -> bool;
 ```
 ## isJsxOpeningFragment
 
-```rust
+```java
 /**
- * Determines whether a node is a JSX opening fragment.
- */
+* Determines whether a node is a JSX opening fragment.
+*/
 ```
 ```rust
 pub fn isJsxOpeningFragment(node: Node) -> bool;
 ```
 ## isJsxFragment
 
-```rust
+```java
 /**
- * Determines whether a node is a JSX fragment.
- */
+* Determines whether a node is a JSX fragment.
+*/
 ```
 ```rust
 pub fn isJsxFragment(node: Node) -> bool;
 ```
 ## isJsxClosingElement
 
-```rust
+```java
 /**
- * Determines whether a node is a JSX closing element.
- */
+* Determines whether a node is a JSX closing element.
+*/
 ```
 ```rust
 pub fn isJsxClosingElement(node: Node) -> bool;
 ```
 ## isJsxElement
 
-```rust
+```java
 /**
- * Determines whether a node is a JSX element.
- */
+* Determines whether a node is a JSX element.
+*/
 ```
 ```rust
 pub fn isJsxElement(node: Node) -> bool;
 ```
 ## isPropertyName
 
-```rust
+```java
 /**
- * Determines whether a node is a property name.
- */
+* Determines whether a node is a property name.
+*/
 ```
 ```rust
 pub fn isPropertyName(node: Node) -> bool;
 ```
 ## isComputedPropertyName
 
-```rust
+```java
 /**
- * Determines whether a node is a computed property name.
- */
+* Determines whether a node is a computed property name.
+*/
 ```
 ```rust
 pub fn isComputedPropertyName(node: Node) -> bool;
 ```
 ## isObjectLiteralElement
 
-```rust
+```java
 /**
- * Determines whether a node is an object literal element.
- */
+* Determines whether a node is an object literal element.
+*/
 ```
 ```rust
 pub fn isObjectLiteralElement(node: Node) -> bool;
 ```
 ## isSpreadAssignment
 
-```rust
+```java
 /**
- * Determines whether a node is a spread assignment.
- */
+* Determines whether a node is a spread assignment.
+*/
 ```
 ```rust
 pub fn isSpreadAssignment(node: Node) -> bool;
 ```
 ## isShorthandPropertyAssignment
 
-```rust
+```java
 /**
- * Determines whether a node is a shorthand property assignment.
- */
+* Determines whether a node is a shorthand property assignment.
+*/
 ```
 ```rust
 pub fn isShorthandPropertyAssignment(node: Node) -> bool;
 ```
 ## isStatementKindButNotDeclarationKind
 
-```rust
+```java
 /**
- * Determines whether a node kind is a statement kind, but not a declaration kind
- */
+* Determines whether a node kind is a statement kind, but not a declaration kind
+*/
 ```
 ```rust
 pub fn isStatementKindButNotDeclarationKind(kind: int) -> bool;
 ```
 ## isIterationStatementKind
 
-```rust
+```java
 /**
- * Determines whether a node kind is an iteration statement kind,
- * including `while`, `do`-`while`, `for` and enhanced `for` (`for`-`in`, `for`-`of`) statements.
- */
+* Determines whether a node kind is an iteration statement kind,
+* including `while`, `do`-`while`, `for` and enhanced `for` (`for`-`in`, `for`-`of`) statements.
+*/
 ```
 ```rust
 pub fn isIterationStatementKind(kind: int) -> bool;
 ```
 ## isEndOfDeclarationMarker
 
-```rust
+```java
 /**
- * Determines whether a node is an end-of-declaration marker.
- */
+* Determines whether a node is an end-of-declaration marker.
+*/
 ```
 ```rust
 pub fn isEndOfDeclarationMarker(node: Node) -> bool;
 ```
 ## isMergeDeclarationMarker
 
-```rust
+```java
 /**
- * Determines whether a node is a merge-declaration marker.
- */
+* Determines whether a node is a merge-declaration marker.
+*/
 ```
 ```rust
 pub fn isMergeDeclarationMarker(node: Node) -> bool;
 ```
 ## isNotEmittedStatement
 
-```rust
+```java
 /**
- * Determines whether a node is a not-emmitted statement.
- */
+* Determines whether a node is a not-emmitted statement.
+*/
 ```
 ```rust
 pub fn isNotEmittedStatement(node: Node) -> bool;
 ```
 ## isDebuggerStatement
 
-```rust
+```java
 /**
- * Determines whether a node is a `debugger` statement.
- */
+* Determines whether a node is a `debugger` statement.
+*/
 ```
 ```rust
 pub fn isDebuggerStatement(node: Node) -> bool;
 ```
 ## isThrowStatement
 
-```rust
+```java
 /**
- * Determines whether a node is a `throw` statement
- */
+* Determines whether a node is a `throw` statement
+*/
 ```
 ```rust
 pub fn isThrowStatement(node: Node) -> bool;
 ```
 ## isSwitchStatement
 
-```rust
+```java
 /**
- * Determines whether a node is an `switch` statement
- */
+* Determines whether a node is an `switch` statement
+*/
 ```
 ```rust
 pub fn isSwitchStatement(node: Node) -> bool;
 ```
 ## isCaseBlock
 
-```rust
+```java
 /**
- * Determines whether a node is a `switch`-`case` block.
- */
+* Determines whether a node is a `switch`-`case` block.
+*/
 ```
 ```rust
 pub fn isCaseBlock(node: Node) -> bool;
 ```
 ## isCatchClause
 
-```rust
+```java
 /**
- * Determines whether a node is an `catch` clause
- */
+* Determines whether a node is an `catch` clause
+*/
 ```
 ```rust
 pub fn isCatchClause(node: Node) -> bool;
 ```
 ## isDefaultClause
 
-```rust
+```java
 /**
- * Determines whether a node is an `default` clause
- */
+* Determines whether a node is an `default` clause
+*/
 ```
 ```rust
 pub fn isDefaultClause(node: Node) -> bool;
 ```
 ## isCaseClause
 
-```rust
+```java
 /**
- * Determines whether a node is an `case` clause
- */
+* Determines whether a node is an `case` clause
+*/
 ```
 ```rust
 pub fn isCaseClause(node: Node) -> bool;
 ```
 ## isMissingDeclaration
 
-```rust
+```java
 /**
- * Determines whether a node is a missing declaration.
- */
+* Determines whether a node is a missing declaration.
+*/
 ```
 ```rust
 pub fn isMissingDeclaration(node: Node) -> bool;
 ```
 ## isExportDeclaration
 
-```rust
+```java
 /**
- * Determines whether a node is an export declaration.
- */
+* Determines whether a node is an export declaration.
+*/
 ```
 ```rust
 pub fn isExportDeclaration(node: Node) -> bool;
 ```
 ## isModuleDeclaration
 
-```rust
+```java
 /**
- * Determines whether a node is a module declaration.
- */
+* Determines whether a node is a module declaration.
+*/
 ```
 ```rust
 pub fn isModuleDeclaration(node: Node) -> bool;
 ```
 ## isFunctionDeclaration
 
-```rust
+```java
 /**
- * Determines whether a node is a function declaration.
- */
+* Determines whether a node is a function declaration.
+*/
 ```
 ```rust
 pub fn isFunctionDeclaration(node: Node) -> bool;
 ```
 ## isWithStatement
 
-```rust
+```java
 /**
- * Determines whether a node is a `with` statement
- */
+* Determines whether a node is a `with` statement
+*/
 ```
 ```rust
 pub fn isWithStatement(node: Node) -> bool;
 ```
 ## isReturnStatement
 
-```rust
+```java
 /**
- * Determines whether a node is a `return` statement
- */
+* Determines whether a node is a `return` statement
+*/
 ```
 ```rust
 pub fn isReturnStatement(node: Node) -> bool;
 ```
 ## isEnhancedForStatement
 
-```rust
+```java
 /**
- * Determines whether a node is a `for`-`in` or `for`-`of` statement
- */
+* Determines whether a node is a `for`-`in` or `for`-`of` statement
+*/
 ```
 ```rust
 pub fn isEnhancedForStatement(node: Node) -> bool;
 ```
 ## isForInitializer
 
-```rust
+```java
 /**
- * Determines whether a node is a initializer of for statement or enhanced for statement.
- */
+* Determines whether a node is a initializer of for statement or enhanced for statement.
+*/
 ```
 ```rust
 pub fn isForInitializer(node: Node) -> bool;
 ```
 ## isRelationalOperator
 
-```rust
+```java
 /**
- * Determines whether a node is a relational operator `<`, `<=`, `>`, `>=`, `instanceof` or `in`.
- */
+* Determines whether a node is a relational operator `<`, `<=`, `>`, `>=`, `instanceof` or `in`.
+*/
 ```
 ```rust
 pub fn isRelationalOperator(node: Node) -> bool;
 ```
 ## postDominanceFrontier
 
-```rust
+```java
 /**
- * Hold bb's post dominance frontier.
- * bb post dominates at least one of pdf's successor,
- * but bb don't strictly post dominates pdf.
- */
+* Hold bb's post dominance frontier.
+* bb post dominates at least one of pdf's successor,
+* but bb don't strictly post dominates pdf.
+*/
 ```
 ```rust
 pub fn postDominanceFrontier(bb: BasicBlock, pdf: BasicBlock) -> bool;
 ```
 ## isForStatement
 
-```rust
+```java
 /**
- * Determines whether a node is a `for` statement
- */
+* Determines whether a node is a `for` statement
+*/
 ```
 ```rust
 pub fn isForStatement(node: Node) -> bool;
 ```
 ## isDoWhileStatement
 
-```rust
+```java
 /**
- * Determines whether a node is a `do`-`while` statement
- */
+* Determines whether a node is a `do`-`while` statement
+*/
 ```
 ```rust
 pub fn isDoWhileStatement(node: Node) -> bool;
 ```
 ## isIfStatement
 
-```rust
+```java
 /**
- * Determines whether a node is an `if` statement
- */
+* Determines whether a node is an `if` statement
+*/
 ```
 ```rust
 pub fn isIfStatement(node: Node) -> bool;
 ```
 ## isExpressionStatement
 
-```rust
+```java
 /**
- * Determines whether a node is an expression statement
- */
+* Determines whether a node is an expression statement
+*/
 ```
 ```rust
 pub fn isExpressionStatement(node: Node) -> bool;
 ```
 ## isStatement
 
-```rust
+```java
 /**
- * Determines whether a node is a statement
- */
+* Determines whether a node is a statement
+*/
 ```
 ```rust
 pub fn isStatement(node: Node) -> bool;
 ```
 ## isStatementButNotDeclaration
 
-```rust
+```java
 /**
- * Determines whether a node is a statement, but not a declaration
- */
+* Determines whether a node is a statement, but not a declaration
+*/
 ```
 ```rust
 pub fn isStatementButNotDeclaration(node: Node) -> bool;
 ```
 ## isBitwiseOrAssignmentExpression
 
-```rust
+```java
 /**
- * Determines whether a node is a bitwise OR assignment expression using `|=`.
- */
+* Determines whether a node is a bitwise OR assignment expression using `|=`.
+*/
 ```
 ```rust
 pub fn isBitwiseOrAssignmentExpression(node: Node) -> bool;
 ```
 ## isDeclarationStatement
 
-```rust
+```java
 /**
- * Determines whether a node is a declaration statement
- */
+* Determines whether a node is a declaration statement
+*/
 ```
 ```rust
 pub fn isDeclarationStatement(node: Node) -> bool;
 ```
 ## isRelationalOperatorOrHigher
 
-```rust
+```java
 /**
- * Determines whether a node is a relational operator or higher.
- */
+* Determines whether a node is a relational operator or higher.
+*/
 ```
 ```rust
 pub fn isRelationalOperatorOrHigher(node: Node) -> bool;
 ```
 ## isAnyKeyword
 
-```rust
+```java
 /**
- * Determines whether a node is an `any` keyword.
- */
+* Determines whether a node is an `any` keyword.
+*/
 ```
 ```rust
 pub fn isAnyKeyword(node: Node) -> bool;
 ```
 ## isAmpersandToken
 
-```rust
+```java
 /**
- * Determines whether a node is a `&` token.
- */
+* Determines whether a node is a `&` token.
+*/
 ```
 ```rust
 pub fn isAmpersandToken(node: Node) -> bool;
@@ -570,160 +570,160 @@ pub fn lvalueFlowEdge(predecessor: DataFlowNode, successor: DataFlowNode) -> boo
 ```
 ## isSlashToken
 
-```rust
+```java
 /**
- * Determines whether a node is a `/` token.
- */
+* Determines whether a node is a `/` token.
+*/
 ```
 ```rust
 pub fn isSlashToken(node: Node) -> bool;
 ```
 ## isBigIntLiteral
 
-```rust
+```java
 /**
- * Determines whether a node is a big-int literal.
- */
+* Determines whether a node is a big-int literal.
+*/
 ```
 ```rust
 pub fn isBigIntLiteral(node: Node) -> bool;
 ```
 ## defLValue
 
-```rust
+```java
 /**
- * The relation of definitions and lvalues
- */
+* The relation of definitions and lvalues
+*/
 ```
 ```rust
 pub fn defLValue(def: ControlFlowNode, lValue: RefExpr) -> bool;
 ```
 ## isImportClause
 
-```rust
+```java
 /**
- * Determines whether a node is an import clause.
- */
+* Determines whether a node is an import clause.
+*/
 ```
 ```rust
 pub fn isImportClause(node: Node) -> bool;
 ```
 ## isBindingName
 
-```rust
+```java
 /**
- * Determines whether a node is a binding name.
- */
+* Determines whether a node is a binding name.
+*/
 ```
 ```rust
 pub fn isBindingName(node: Node) -> bool;
 ```
 ## isArrayBindingElement
 
-```rust
+```java
 /**
- * Determines whether a node is an array binding element.
- */
+* Determines whether a node is an array binding element.
+*/
 ```
 ```rust
 pub fn isArrayBindingElement(node: Node) -> bool;
 ```
 ## isExpressionWithTypeArguments
 
-```rust
+```java
 /**
- * Determines whether a node is an expression with type arguments.
- */
+* Determines whether a node is an expression with type arguments.
+*/
 ```
 ```rust
 pub fn isExpressionWithTypeArguments(node: Node) -> bool;
 ```
 ## isBindingElement
 
-```rust
+```java
 /**
- * Determines whether a node is a binding element.
- */
+* Determines whether a node is a binding element.
+*/
 ```
 ```rust
 pub fn isBindingElement(node: Node) -> bool;
 ```
 ## isMemberName
 
-```rust
+```java
 /**
- * Determines whether a node is a member name.
- */
+* Determines whether a node is a member name.
+*/
 ```
 ```rust
 pub fn isMemberName(node: Node) -> bool;
 ```
 ## isVariableDeclaration
 
-```rust
+```java
 /**
- * Determines whether a node is a variable declaration
- */
+* Determines whether a node is a variable declaration
+*/
 ```
 ```rust
 pub fn isVariableDeclaration(node: Node) -> bool;
 ```
 ## isParameter
 
-```rust
+```java
 /**
- * Determines whether a node kind is a parameter.
- */
+* Determines whether a node kind is a parameter.
+*/
 ```
 ```rust
 pub fn isParameter(node: Node) -> bool;
 ```
 ## isTypeParameter
 
-```rust
+```java
 /**
- * Determines whether a node is a type parameter.
- */
+* Determines whether a node is a type parameter.
+*/
 ```
 ```rust
 pub fn isTypeParameter(node: Node) -> bool;
 ```
 ## isVariableDeclarationListKind
 
-```rust
+```java
 /**
- * Determines whether a node kind is a variable declaration list kind
- */
+* Determines whether a node kind is a variable declaration list kind
+*/
 ```
 ```rust
 pub fn isVariableDeclarationListKind(kind: int) -> bool;
 ```
 ## isObjectKeyword
 
-```rust
+```java
 /**
- * Determines whether a node is an `object` keyword.
- */
+* Determines whether a node is an `object` keyword.
+*/
 ```
 ```rust
 pub fn isObjectKeyword(node: Node) -> bool;
 ```
 ## isExternalModuleReference
 
-```rust
+```java
 /**
- * Determines whether a node is an external module reference.
- */
+* Determines whether a node is an external module reference.
+*/
 ```
 ```rust
 pub fn isExternalModuleReference(node: Node) -> bool;
 ```
 ## isNamedExports
 
-```rust
+```java
 /**
- * Determines whether a node is a named exports.
- */
+* Determines whether a node is a named exports.
+*/
 ```
 ```rust
 pub fn isNamedExports(node: Node) -> bool;
@@ -735,90 +735,90 @@ pub fn immediateFlowEdge(predecessor: DataFlowNode, successor: DataFlowNode) -> 
 ```
 ## isLiteralType
 
-```rust
+```java
 /**
- * Determines whether a node is a literal type.
- */
+* Determines whether a node is a literal type.
+*/
 ```
 ```rust
 pub fn isLiteralType(node: Node) -> bool;
 ```
 ## isImportSpecifier
 
-```rust
+```java
 /**
- * Determines whether a node is an import specifier.
- */
+* Determines whether a node is an import specifier.
+*/
 ```
 ```rust
 pub fn isImportSpecifier(node: Node) -> bool;
 ```
 ## isNamespaceImport
 
-```rust
+```java
 /**
- * Determines whether a node is a namespace import.
- */
+* Determines whether a node is a namespace import.
+*/
 ```
 ```rust
 pub fn isNamespaceImport(node: Node) -> bool;
 ```
 ## isTypeNode
 
-```rust
+```java
 /**
- * Determines whether a node is a type node.
- */
+* Determines whether a node is a type node.
+*/
 ```
 ```rust
 pub fn isTypeNode(node: Node) -> bool;
 ```
 ## isMetaProperty
 
-```rust
+```java
 /**
- * Determines whether a node is a meta property.
- */
+* Determines whether a node is a meta property.
+*/
 ```
 ```rust
 pub fn isMetaProperty(node: Node) -> bool;
 ```
 ## isQualifiedName
 
-```rust
+```java
 /**
- * Determines whether a node is a qualified name.
- */
+* Determines whether a node is a qualified name.
+*/
 ```
 ```rust
 pub fn isQualifiedName(node: Node) -> bool;
 ```
 ## isObjectLiteralExpression
 
-```rust
+```java
 /**
- * Determines whether a node is an object literal expression.
- */
+* Determines whether a node is an object literal expression.
+*/
 ```
 ```rust
 pub fn isObjectLiteralExpression(node: Node) -> bool;
 ```
 ## isTemplateLiteralLikeNode
 
-```rust
+```java
 /**
- * Determines whether a node is a template literal-like node, which is a no-substitution template literal, template head, template middle or template tail.
- */
+* Determines whether a node is a template literal-like node, which is a no-substitution template literal, template head, template middle or template tail.
+*/
 ```
 ```rust
 pub fn isTemplateLiteralLikeNode(node: Node) -> bool;
 ```
 ## isFunctionLikeKind
 
-```rust
+```java
 /**
- * Determines whether a node kind is a FunctionLike kind
- */
+* Determines whether a node kind is a FunctionLike kind
+*/
 ```
 ```rust
 pub fn isFunctionLikeKind(kind: int) -> bool;
@@ -830,20 +830,20 @@ pub fn completion(id: int, name: string) -> bool;
 ```
 ## isFalseKeyword
 
-```rust
+```java
 /**
- * Determines whether a node is a `false` keyword.
- */
+* Determines whether a node is a `false` keyword.
+*/
 ```
 ```rust
 pub fn isFalseKeyword(node: Node) -> bool;
 ```
 ## isBlockStatement
 
-```rust
+```java
 /**
- * Determines whether a node is a block statement
- */
+* Determines whether a node is a block statement
+*/
 ```
 ```rust
 pub fn isBlockStatement(node: Node) -> bool;
@@ -860,20 +860,20 @@ pub fn isYieldCompletion(c: Completion) -> bool;
 ```
 ## isEqualityOperator
 
-```rust
+```java
 /**
- * Determines whether a node is an equality operator `==`, `!=`, `===` or `!==`.
- */
+* Determines whether a node is an equality operator `==`, `!=`, `===` or `!==`.
+*/
 ```
 ```rust
 pub fn isEqualityOperator(node: Node) -> bool;
 ```
 ## isUpdateOperator
 
-```rust
+```java
 /**
- * Determines whether a node is an update operator.
- */
+* Determines whether a node is an update operator.
+*/
 ```
 ```rust
 pub fn isUpdateOperator(node: Node) -> bool;
@@ -890,244 +890,244 @@ pub fn isNormalCompletion(c: Completion) -> bool;
 ```
 ## bbNotPostDominates
 
-```rust
+```java
 /**
- * Hold if npdomBB don't post dominates bb.
- * the relation is same as not dominates relation but apply to Reverse-CFG.
- */
+* Hold if npdomBB don't post dominates bb.
+* the relation is same as not dominates relation but apply to Reverse-CFG.
+*/
 ```
 ```rust
 pub fn bbNotPostDominates(npdomBB: BasicBlock, bb: BasicBlock) -> bool;
 ```
 ## bbStrictDominates
 
-```rust
+```java
 /**
- * Hold if sdomBB strictly dominates bb.
- */
+* Hold if sdomBB strictly dominates bb.
+*/
 ```
 ```rust
 pub fn bbStrictDominates(sdomBB: BasicBlock, bb: BasicBlock) -> bool;
 ```
 ## bbDominates
 
-```rust
+```java
 /**
- * Hold if domBB dominates bb.
- */
+* Hold if domBB dominates bb.
+*/
 ```
 ```rust
 pub fn bbDominates(domBB: BasicBlock, bb: BasicBlock) -> bool;
 ```
 ## bbNotDominates
 
-```rust
+```java
 /**
- * Hold if ndomBB don't dominates bb.
- */
+* Hold if ndomBB don't dominates bb.
+*/
 ```
 ```rust
 pub fn bbNotDominates(ndomBB: BasicBlock, bb: BasicBlock) -> bool;
 ```
 ## entryBBReachableBB
 
-```rust
+```java
 /**
- * Hold the entry BB and it's all reachable BBs.
- */
+* Hold the entry BB and it's all reachable BBs.
+*/
 ```
 ```rust
 pub fn entryBBReachableBB(entryBB: BasicBlock, reachableBB: BasicBlock) -> bool;
 ```
 ## isForOfStatement
 
-```rust
+```java
 /**
- * Determines whether a node is a `for`-`of` statement
- */
+* Determines whether a node is a `for`-`of` statement
+*/
 ```
 ```rust
 pub fn isForOfStatement(node: Node) -> bool;
 ```
 ## bbStrictPostDominates
 
-```rust
+```java
 /**
- * Hold if spdom strictly post dominates bb.
- */
+* Hold if spdom strictly post dominates bb.
+*/
 ```
 ```rust
 pub fn bbStrictPostDominates(spdomBB: BasicBlock, bb: BasicBlock) -> bool;
 ```
 ## nodeInSameCFG
 
-```rust
+```java
 /**
- * Hold if two control flow nodes are in same CFG.
- */
+* Hold if two control flow nodes are in same CFG.
+*/
 ```
 ```rust
 pub fn nodeInSameCFG(cfn1: ControlFlowNode, cfn2: ControlFlowNode) -> bool;
 ```
 ## isStrictInequalityExpression
 
-```rust
+```java
 /**
- * Determines whether a node is a strict inequality expression using `!==`.
- */
+* Determines whether a node is a strict inequality expression using `!==`.
+*/
 ```
 ```rust
 pub fn isStrictInequalityExpression(node: Node) -> bool;
 ```
 ## isConditionalExpression
 
-```rust
+```java
 /**
- * Determines whether a node is a conditional expression.
- */
+* Determines whether a node is a conditional expression.
+*/
 ```
 ```rust
 pub fn isConditionalExpression(node: Node) -> bool;
 ```
 ## isExportSpecifier
 
-```rust
+```java
 /**
- * Determines whether a node is an export specifier.
- */
+* Determines whether a node is an export specifier.
+*/
 ```
 ```rust
 pub fn isExportSpecifier(node: Node) -> bool;
 ```
 ## isLogicalAndAssignmentExpression
 
-```rust
+```java
 /**
- * Determines whether a node is a logical AND assignment expression using `&&=`.
- */
+* Determines whether a node is a logical AND assignment expression using `&&=`.
+*/
 ```
 ```rust
 pub fn isLogicalAndAssignmentExpression(node: Node) -> bool;
 ```
 ## isPublicKeyword
 
-```rust
+```java
 /**
- * Determines whether a node is a `public` keyword.
- */
+* Determines whether a node is a `public` keyword.
+*/
 ```
 ```rust
 pub fn isPublicKeyword(node: Node) -> bool;
 ```
 ## isClassElementKind
 
-```rust
+```java
 /**
- * Determines whether a node kind is a ClassElement kind
- */
+* Determines whether a node kind is a ClassElement kind
+*/
 ```
 ```rust
 pub fn isClassElementKind(kind: int) -> bool;
 ```
 ## isClassLikeDeclarationKind
 
-```rust
+```java
 /**
- * Determines whether a node kind is a ClassLikeDeclaration kind
- */
+* Determines whether a node kind is a ClassLikeDeclaration kind
+*/
 ```
 ```rust
 pub fn isClassLikeDeclarationKind(kind: int) -> bool;
 ```
 ## isClassLikeDeclaration
 
-```rust
+```java
 /**
- * Determines whether a node is a ClassLikeDeclaration
- */
+* Determines whether a node is a ClassLikeDeclaration
+*/
 ```
 ```rust
 pub fn isClassLikeDeclaration(node: Node) -> bool;
 ```
 ## isMappedType
 
-```rust
+```java
 /**
- * Determines whether a node is a mapped type.
- */
+* Determines whether a node is a mapped type.
+*/
 ```
 ```rust
 pub fn isMappedType(node: Node) -> bool;
 ```
 ## isSameRefExpr
 
-```rust
+```java
 /**
- * Determine whether 2 RefExpr with same "symbol".
- * Actually we want to determine 2 written locations have alias.
- * Current we depend on symbol information calculated by tsc, should
- * improve this predicated if needed.
- */
+* Determine whether 2 RefExpr with same "symbol".
+* Actually we want to determine 2 written locations have alias.
+* Current we depend on symbol information calculated by tsc, should
+* improve this predicated if needed.
+*/
 ```
 ```rust
 pub fn isSameRefExpr(refExpr1: RefExpr, refExpr2: RefExpr) -> bool;
 ```
 ## defLiveAtBBExit
 
-```rust
+```java
 /**
- * Gets the LValue nodes live at the exit of BB.
- */
+* Gets the LValue nodes live at the exit of BB.
+*/
 ```
 ```rust
 pub fn defLiveAtBBExit(bb: BasicBlock) -> LValue;
 ```
 ## defLiveAtBBEntry
 
-```rust
+```java
 /**
- * Gets the LValue nodes live at the entry of BB.
- */
+* Gets the LValue nodes live at the entry of BB.
+*/
 ```
 ```rust
 pub fn defLiveAtBBEntry(bb: BasicBlock) -> LValue;
 ```
 ## killedByBB
 
-```rust
+```java
 /**
- * Determine whether the lvalue is killed by bb.
- */
+* Determine whether the lvalue is killed by bb.
+*/
 ```
 ```rust
 pub fn killedByBB(bb: BasicBlock, lvalue: LValue) -> bool;
 ```
 ## killedByBBWithKiller
 
-```rust
+```java
 /**
- * Gets the killers in BB that kill the given lvalue, with BB index.
- */
+* Gets the killers in BB that kill the given lvalue, with BB index.
+*/
 ```
 ```rust
 pub fn killedByBBWithKiller(bb: BasicBlock, lvalue: LValue, killer: LValue, index: int) -> bool;
 ```
 ## useAtBB
 
-```rust
+```java
 /**
- * Gets the VarUse used in bb, with bb index
- */
+* Gets the VarUse used in bb, with bb index
+*/
 ```
 ```rust
 pub fn useAtBB(bb: BasicBlock, varUse: VarUse, index: int) -> bool;
 ```
 ## defAtBB
 
-```rust
+```java
 /**
- * Gets the lvalue defined in bb, with bb index
- */
+* Gets the lvalue defined in bb, with bb index
+*/
 ```
 ```rust
 pub fn defAtBB(bb: BasicBlock, lvalue: LValue, index: int) -> bool;
@@ -1139,414 +1139,414 @@ pub fn defnWithRhs(def: ControlFlowNode, lhs: Expression, rhs: Expression) -> bo
 ```
 ## isMayInvokeExpression
 
-```rust
+```java
 /**
- * Determines whether a node is a CallLikeExpression or AccessExpression that may invoke a FunctionLikeDeclaration.
- */
+* Determines whether a node is a CallLikeExpression or AccessExpression that may invoke a FunctionLikeDeclaration.
+*/
 ```
 ```rust
 pub fn isMayInvokeExpression(node: Node) -> bool;
 ```
 ## isNamedImports
 
-```rust
+```java
 /**
- * Determines whether a node is a named imports.
- */
+* Determines whether a node is a named imports.
+*/
 ```
 ```rust
 pub fn isNamedImports(node: Node) -> bool;
 ```
 ## isDecorator
 
-```rust
+```java
 /**
- * Determines whether a node is a decorator.
- */
+* Determines whether a node is a decorator.
+*/
 ```
 ```rust
 pub fn isDecorator(node: Node) -> bool;
 ```
 ## isDecrementExpression
 
-```rust
+```java
 /**
- * Determines whether a node is a decrement expression using `--`.
- */
+* Determines whether a node is a decrement expression using `--`.
+*/
 ```
 ```rust
 pub fn isDecrementExpression(node: Node) -> bool;
 ```
 ## isIncrementExpression
 
-```rust
+```java
 /**
- * Determines whether a node is an increment expression using `++`.
- */
+* Determines whether a node is an increment expression using `++`.
+*/
 ```
 ```rust
 pub fn isIncrementExpression(node: Node) -> bool;
 ```
 ## isPostfixIncrementExpression
 
-```rust
+```java
 /**
- * Determines whether a node is a postfix increment expression using `++`.
- */
+* Determines whether a node is a postfix increment expression using `++`.
+*/
 ```
 ```rust
 pub fn isPostfixIncrementExpression(node: Node) -> bool;
 ```
 ## isLogicalNotExpression
 
-```rust
+```java
 /**
- * Determines whether a node is a logical NOT expression using `!`.
- */
+* Determines whether a node is a logical NOT expression using `!`.
+*/
 ```
 ```rust
 pub fn isLogicalNotExpression(node: Node) -> bool;
 ```
 ## postDominates
 
-```rust
+```java
 /**
- * Hold if pdom post dominates cfn.
- */
+* Hold if pdom post dominates cfn.
+*/
 ```
 ```rust
 pub fn postDominates(pdom: ControlFlowNode, cfn: ControlFlowNode) -> bool;
 ```
 ## isUnaryMinusExpression
 
-```rust
+```java
 /**
- * Determines whether a node is an unary minus (also known as negation) expression using `-`.
- */
+* Determines whether a node is an unary minus (also known as negation) expression using `-`.
+*/
 ```
 ```rust
 pub fn isUnaryMinusExpression(node: Node) -> bool;
 ```
 ## isUnaryPlusExpression
 
-```rust
+```java
 /**
- * Determines whether a node is an unary plus expression using `+`.
- */
+* Determines whether a node is an unary plus expression using `+`.
+*/
 ```
 ```rust
 pub fn isUnaryPlusExpression(node: Node) -> bool;
 ```
 ## isPrefixIncrementExpression
 
-```rust
+```java
 /**
- * Determines whether a node is a prefix increment expression using `++`.
- */
+* Determines whether a node is a prefix increment expression using `++`.
+*/
 ```
 ```rust
 pub fn isPrefixIncrementExpression(node: Node) -> bool;
 ```
 ## succ
 
-```rust
+```java
 /**
- * Gets the control flow successor node of a control flow node,
- * and with the Completion information.
- */
+* Gets the control flow successor node of a control flow node,
+* and with the Completion information.
+*/
 ```
 ```rust
 pub fn succ(n: ControlFlowNode, c: Completion) -> *ControlFlowNode;
 ```
 ## isRightShiftAssignmentExpression
 
-```rust
+```java
 /**
- * Determines whether a node is a right shift assignment expression using `>>=`.
- */
+* Determines whether a node is a right shift assignment expression using `>>=`.
+*/
 ```
 ```rust
 pub fn isRightShiftAssignmentExpression(node: Node) -> bool;
 ```
 ## isBitwiseXorAssignmentExpression
 
-```rust
+```java
 /**
- * Determines whether a node is a bitwise XOR assignment expression using `^=`.
- */
+* Determines whether a node is a bitwise XOR assignment expression using `^=`.
+*/
 ```
 ```rust
 pub fn isBitwiseXorAssignmentExpression(node: Node) -> bool;
 ```
 ## isBitwiseNotExpression
 
-```rust
+```java
 /**
- * Determines whether a node is a bitwise NOT expression using `~`.
- */
+* Determines whether a node is a bitwise NOT expression using `~`.
+*/
 ```
 ```rust
 pub fn isBitwiseNotExpression(node: Node) -> bool;
 ```
 ## isDivisionAssignmentExpression
 
-```rust
+```java
 /**
- * Determines whether a node is a division assignment expression using `/=`.
- */
+* Determines whether a node is a division assignment expression using `/=`.
+*/
 ```
 ```rust
 pub fn isDivisionAssignmentExpression(node: Node) -> bool;
 ```
 ## isMultiplicationAssignmentExpression
 
-```rust
+```java
 /**
- * Determines whether a node is a multiplication assignment expression using `*=`.
- */
+* Determines whether a node is a multiplication assignment expression using `*=`.
+*/
 ```
 ```rust
 pub fn isMultiplicationAssignmentExpression(node: Node) -> bool;
 ```
 ## isExponentiationAssignmentExpression
 
-```rust
+```java
 /**
- * Determines whether a node is an exponentiation assignment expression using `**=`.
- */
+* Determines whether a node is an exponentiation assignment expression using `**=`.
+*/
 ```
 ```rust
 pub fn isExponentiationAssignmentExpression(node: Node) -> bool;
 ```
 ## isEmptyStatement
 
-```rust
+```java
 /**
- * Determines whether a node is an empty statement.
- */
+* Determines whether a node is an empty statement.
+*/
 ```
 ```rust
 pub fn isEmptyStatement(node: Node) -> bool;
 ```
 ## isSubtractionAssignmentExpression
 
-```rust
+```java
 /**
- * Determines whether a node is a subtraction assignment expression using `-=`.
- */
+* Determines whether a node is a subtraction assignment expression using `-=`.
+*/
 ```
 ```rust
 pub fn isSubtractionAssignmentExpression(node: Node) -> bool;
 ```
 ## isAdditionAssignmentExpression
 
-```rust
+```java
 /**
- * Determines whether a node is an addition assignment expression using `+=`.
- */
+* Determines whether a node is an addition assignment expression using `+=`.
+*/
 ```
 ```rust
 pub fn isAdditionAssignmentExpression(node: Node) -> bool;
 ```
 ## isRightShiftExpression
 
-```rust
+```java
 /**
- * Determines whether a node is a signed right-shift expression using `>>`.
- */
+* Determines whether a node is a signed right-shift expression using `>>`.
+*/
 ```
 ```rust
 pub fn isRightShiftExpression(node: Node) -> bool;
 ```
 ## isAssignmentExpression
 
-```rust
+```java
 /**
- * Determines whether a node is an assignment expression, either compound or simple.
- */
+* Determines whether a node is an assignment expression, either compound or simple.
+*/
 ```
 ```rust
 pub fn isAssignmentExpression(node: Node) -> bool;
 ```
 ## isNullishCoalescingExpression
 
-```rust
+```java
 /**
- * Determines whether a node is a nullish coalescing expression using `??`.
- */
+* Determines whether a node is a nullish coalescing expression using `??`.
+*/
 ```
 ```rust
 pub fn isNullishCoalescingExpression(node: Node) -> bool;
 ```
 ## isLogicalOrExpression
 
-```rust
+```java
 /**
- * Determines whether a node is a logical OR expression using `||`.
- */
+* Determines whether a node is a logical OR expression using `||`.
+*/
 ```
 ```rust
 pub fn isLogicalOrExpression(node: Node) -> bool;
 ```
 ## isLogicalAndExpression
 
-```rust
+```java
 /**
- * Determines whether a node is a logical AND expression using `&&`.
- */
+* Determines whether a node is a logical AND expression using `&&`.
+*/
 ```
 ```rust
 pub fn isLogicalAndExpression(node: Node) -> bool;
 ```
 ## continues
 
-```rust
+```java
 /**
- * If the body of loop finishes with completion,
- * the loop will continue executing.
- */
+* If the body of loop finishes with completion,
+* the loop will continue executing.
+*/
 ```
 ```rust
 pub fn continues(c: Completion, loop: IterationStatement) -> bool;
 ```
 ## isBinaryLogicalExpression
 
-```rust
+```java
 /**
- * Determines whether a node is a binary logical expression using
- * `&&`, `||` or `??`.
- */
+* Determines whether a node is a binary logical expression using
+* `&&`, `||` or `??`.
+*/
 ```
 ```rust
 pub fn isBinaryLogicalExpression(node: Node) -> bool;
 ```
 ## isBitwiseXorExpression
 
-```rust
+```java
 /**
- * Determines whether a node is a bitwise XOR expression using `^`.
- */
+* Determines whether a node is a bitwise XOR expression using `^`.
+*/
 ```
 ```rust
 pub fn isBitwiseXorExpression(node: Node) -> bool;
 ```
 ## isBitwiseAndExpression
 
-```rust
+```java
 /**
- * Determines whether a node is a bitwise AND expression using `&`.
- */
+* Determines whether a node is a bitwise AND expression using `&`.
+*/
 ```
 ```rust
 pub fn isBitwiseAndExpression(node: Node) -> bool;
 ```
 ## isNonStrictEqualityTestExpression
 
-```rust
+```java
 /**
- * Determines whether a node is a non-strict equality test expression using
- * `==` or `!=`.
- */
+* Determines whether a node is a non-strict equality test expression using
+* `==` or `!=`.
+*/
 ```
 ```rust
 pub fn isNonStrictEqualityTestExpression(node: Node) -> bool;
 ```
 ## isInequalityExpression
 
-```rust
+```java
 /**
- * Determines whether a node is an inequality expression using `!=`.
- */
+* Determines whether a node is an inequality expression using `!=`.
+*/
 ```
 ```rust
 pub fn isInequalityExpression(node: Node) -> bool;
 ```
 ## isEqualityExpression
 
-```rust
+```java
 /**
- * Determines whether a node is an equality expression using `==`.
- */
+* Determines whether a node is an equality expression using `==`.
+*/
 ```
 ```rust
 pub fn isEqualityExpression(node: Node) -> bool;
 ```
 ## isGreaterThanEqualsToken
 
-```rust
+```java
 /**
- * Determines whether a node is a `>=` token.
- */
+* Determines whether a node is a `>=` token.
+*/
 ```
 ```rust
 pub fn isGreaterThanEqualsToken(node: Node) -> bool;
 ```
 ## isInstanceOfExpression
 
-```rust
+```java
 /**
- * Determines whether a node is an `instanceof` expression.
- */
+* Determines whether a node is an `instanceof` expression.
+*/
 ```
 ```rust
 pub fn isInstanceOfExpression(node: Node) -> bool;
 ```
 ## isClassElement
 
-```rust
+```java
 /**
- * Determines whether a node is a ClassElement
- */
+* Determines whether a node is a ClassElement
+*/
 ```
 ```rust
 pub fn isClassElement(node: Node) -> bool;
 ```
 ## isPostfixUnaryOperator
 
-```rust
+```java
 /**
- * Determines whether a node is a postfix unary operator.
- */
+* Determines whether a node is a postfix unary operator.
+*/
 ```
 ```rust
 pub fn isPostfixUnaryOperator(node: Node) -> bool;
 ```
 ## isLessThanExpression
 
-```rust
+```java
 /**
- * Determines whether a node is a less-than expression using `<`.
- */
+* Determines whether a node is a less-than expression using `<`.
+*/
 ```
 ```rust
 pub fn isLessThanExpression(node: Node) -> bool;
 ```
 ## isRelationalExpression
 
-```rust
+```java
 /**
- * Determines whether a node is a relational expression using `<`, `<=`, `>`, `>=`, `instanceof` or `in`.
- */
+* Determines whether a node is a relational expression using `<`, `<=`, `>`, `>=`, `instanceof` or `in`.
+*/
 ```
 ```rust
 pub fn isRelationalExpression(node: Node) -> bool;
 ```
 ## isUnsignedRightShiftAssignmentExpression
 
-```rust
+```java
 /**
- * Determines whether a node is an unsigned right shift assignment expression using `>>>=`.
- */
+* Determines whether a node is an unsigned right shift assignment expression using `>>>=`.
+*/
 ```
 ```rust
 pub fn isUnsignedRightShiftAssignmentExpression(node: Node) -> bool;
 ```
 ## isShiftExpression
 
-```rust
+```java
 /**
- * Determines whether a node is a shift expression using `<<`, `>>` or `>>>`.
- */
+* Determines whether a node is a shift expression using `<<`, `>>` or `>>>`.
+*/
 ```
 ```rust
 pub fn isShiftExpression(node: Node) -> bool;
@@ -1558,423 +1558,423 @@ pub fn defn(def: ControlFlowNode, lhs: Expression) -> bool;
 ```
 ## isSubtractionExpression
 
-```rust
+```java
 /**
- * Determines whether a node is a subtraction expression using `-`.
- */
+* Determines whether a node is a subtraction expression using `-`.
+*/
 ```
 ```rust
 pub fn isSubtractionExpression(node: Node) -> bool;
 ```
 ## isAwaitKeyword
 
-```rust
+```java
 /**
- * Determines whether a node is an `await` keyword.
- */
+* Determines whether a node is an `await` keyword.
+*/
 ```
 ```rust
 pub fn isAwaitKeyword(node: Node) -> bool;
 ```
 ## isAdditionExpression
 
-```rust
+```java
 /**
- * Determines whether a node is an addition expression using `+`.
- */
+* Determines whether a node is an addition expression using `+`.
+*/
 ```
 ```rust
 pub fn isAdditionExpression(node: Node) -> bool;
 ```
 ## dominates
 
-```rust
+```java
 /**
- * Hold if dom dominates cfn.
- */
+* Hold if dom dominates cfn.
+*/
 ```
 ```rust
 pub fn dominates(dom: ControlFlowNode, cfn: ControlFlowNode) -> bool;
 ```
 ## isDivisionExpression
 
-```rust
+```java
 /**
- * Determines whether a node is a division expression using `/`.
- */
+* Determines whether a node is a division expression using `/`.
+*/
 ```
 ```rust
 pub fn isDivisionExpression(node: Node) -> bool;
 ```
 ## isMultiplicationExpression
 
-```rust
+```java
 /**
- * Determines whether a node is a multiplication expression using `*`.
- */
+* Determines whether a node is a multiplication expression using `*`.
+*/
 ```
 ```rust
 pub fn isMultiplicationExpression(node: Node) -> bool;
 ```
 ## isMultiplicativeExpression
 
-```rust
+```java
 /**
- * Determines whether a node is a multiplicative expression using `*`, `/` or `%`.
- */
+* Determines whether a node is a multiplicative expression using `*`, `/` or `%`.
+*/
 ```
 ```rust
 pub fn isMultiplicativeExpression(node: Node) -> bool;
 ```
 ## isNullishAssignmentExpression
 
-```rust
+```java
 /**
- * Determines whether a node is a nullish assignment expression using `??=`.
- */
+* Determines whether a node is a nullish assignment expression using `??=`.
+*/
 ```
 ```rust
 pub fn isNullishAssignmentExpression(node: Node) -> bool;
 ```
 ## isPrimaryExpression
 
-```rust
+```java
 /**
- * Determines whether a node is a primary expression.
- */
+* Determines whether a node is a primary expression.
+*/
 ```
 ```rust
 pub fn isPrimaryExpression(node: Node) -> bool;
 ```
 ## isImportExpression
 
-```rust
+```java
 /**
- * Determines whether a node is an `import` expression.
- */
+* Determines whether a node is an `import` expression.
+*/
 ```
 ```rust
 pub fn isImportExpression(node: Node) -> bool;
 ```
 ## isCommaListExpression
 
-```rust
+```java
 /**
- * Determines whether a node is a comma list expression.
- */
+* Determines whether a node is a comma list expression.
+*/
 ```
 ```rust
 pub fn isCommaListExpression(node: Node) -> bool;
 ```
 ## isNonNullExpression
 
-```rust
+```java
 /**
- * Determines whether a node is a non-null expression.
- */
+* Determines whether a node is a non-null expression.
+*/
 ```
 ```rust
 pub fn isNonNullExpression(node: Node) -> bool;
 ```
 ## isEqualsEqualsToken
 
-```rust
+```java
 /**
- * Determines whether a node is an `==` token.
- */
+* Determines whether a node is an `==` token.
+*/
 ```
 ```rust
 pub fn isEqualsEqualsToken(node: Node) -> bool;
 ```
 ## isLeftHandSideExpression
 
-```rust
+```java
 /**
- * Determines whether a node is a left-hand-side expression.
- */
+* Determines whether a node is a left-hand-side expression.
+*/
 ```
 ```rust
 pub fn isLeftHandSideExpression(node: Node) -> bool;
 ```
 ## isCommaToken
 
-```rust
+```java
 /**
- * Determines whether a node is a `,` token.
- */
+* Determines whether a node is a `,` token.
+*/
 ```
 ```rust
 pub fn isCommaToken(node: Node) -> bool;
 ```
 ## isSpreadElement
 
-```rust
+```java
 /**
- * Determines whether a node is a spread element.
- */
+* Determines whether a node is a spread element.
+*/
 ```
 ```rust
 pub fn isSpreadElement(node: Node) -> bool;
 ```
 ## first
 
-```rust
+```java
 /**
- * Get the node that should be visited first,
- * selected from the node and it's descendants.
- * Every control flow node must have and only have 1 first node.
- */
+* Get the node that should be visited first,
+* selected from the node and it's descendants.
+* Every control flow node must have and only have 1 first node.
+*/
 ```
 ```rust
 pub fn first(n: ControlFlowNode) -> ControlFlowNode;
 ```
 ## isAsExpression
 
-```rust
+```java
 /**
- * Determines whether a node is an `as` expression.
- */
+* Determines whether a node is an `as` expression.
+*/
 ```
 ```rust
 pub fn isAsExpression(node: Node) -> bool;
 ```
 ## isPrefixUnaryExpression
 
-```rust
+```java
 /**
- * Determines whether a node is a prefix unary expression.
- */
+* Determines whether a node is a prefix unary expression.
+*/
 ```
 ```rust
 pub fn isPrefixUnaryExpression(node: Node) -> bool;
 ```
 ## isVoidExpression
 
-```rust
+```java
 /**
- * Determines whether a node is a `void` expression.
- */
+* Determines whether a node is a `void` expression.
+*/
 ```
 ```rust
 pub fn isVoidExpression(node: Node) -> bool;
 ```
 ## isTemplateSpan
 
-```rust
+```java
 /**
- * Determines whether a node is a template span.
- */
+* Determines whether a node is a template span.
+*/
 ```
 ```rust
 pub fn isTemplateSpan(node: Node) -> bool;
 ```
 ## isTypeOfExpression
 
-```rust
+```java
 /**
- * Determines whether a node is a `typeof` expression.
- */
+* Determines whether a node is a `typeof` expression.
+*/
 ```
 ```rust
 pub fn isTypeOfExpression(node: Node) -> bool;
 ```
 ## isArrowFunction
 
-```rust
+```java
 /**
- * Determines whether a node is an arrow function
- */
+* Determines whether a node is an arrow function
+*/
 ```
 ```rust
 pub fn isArrowFunction(node: Node) -> bool;
 ```
 ## isParenthesizedExpression
 
-```rust
+```java
 /**
- * Determines whether a node is a parenthesized expression.
- */
+* Determines whether a node is a parenthesized expression.
+*/
 ```
 ```rust
 pub fn isParenthesizedExpression(node: Node) -> bool;
 ```
 ## isBinaryBitwiseExpression
 
-```rust
+```java
 /**
- * Determines whether a node is a binary bitwise expression using
- * `&`, `|` or `^`.
- */
+* Determines whether a node is a binary bitwise expression using
+* `&`, `|` or `^`.
+*/
 ```
 ```rust
 pub fn isBinaryBitwiseExpression(node: Node) -> bool;
 ```
 ## isNewExpression
 
-```rust
+```java
 /**
- * Determines whether a node is a new expression.
- */
+* Determines whether a node is a new expression.
+*/
 ```
 ```rust
 pub fn isNewExpression(node: Node) -> bool;
 ```
 ## isPropertyAssignment
 
-```rust
+```java
 /**
- * Determines whether a node is a property assignment.
- */
+* Determines whether a node is a property assignment.
+*/
 ```
 ```rust
 pub fn isPropertyAssignment(node: Node) -> bool;
 ```
 ## isCallExpression
 
-```rust
+```java
 /**
- * Determines whether a node is a call expression.
- */
+* Determines whether a node is a call expression.
+*/
 ```
 ```rust
 pub fn isCallExpression(node: Node) -> bool;
 ```
 ## isElementAccessExpression
 
-```rust
+```java
 /**
- * Determines whether a node is an element access expression.
- */
+* Determines whether a node is an element access expression.
+*/
 ```
 ```rust
 pub fn isElementAccessExpression(node: Node) -> bool;
 ```
 ## isPercentEqualsToken
 
-```rust
+```java
 /**
- * Determines whether a node is a `%=` token.
- */
+* Determines whether a node is a `%=` token.
+*/
 ```
 ```rust
 pub fn isPercentEqualsToken(node: Node) -> bool;
 ```
 ## isTaggedTemplateExpression
 
-```rust
+```java
 /**
- * Determines whether a node is a tagged template expression.
- */
+* Determines whether a node is a tagged template expression.
+*/
 ```
 ```rust
 pub fn isTaggedTemplateExpression(node: Node) -> bool;
 ```
 ## isBooleanLiteral
 
-```rust
+```java
 /**
- * Determines whether a node is a boolean literal.
- */
+* Determines whether a node is a boolean literal.
+*/
 ```
 ```rust
 pub fn isBooleanLiteral(node: Node) -> bool;
 ```
 ## isArrayLiteralExpression
 
-```rust
+```java
 /**
- * Determines whether a node is an array literal expression.
- */
+* Determines whether a node is an array literal expression.
+*/
 ```
 ```rust
 pub fn isArrayLiteralExpression(node: Node) -> bool;
 ```
 ## isNoSubstitutionTemplateLiteral
 
-```rust
+```java
 /**
- * Determines whether a node is a no-substitution template literal.
- */
+* Determines whether a node is a no-substitution template literal.
+*/
 ```
 ```rust
 pub fn isNoSubstitutionTemplateLiteral(node: Node) -> bool;
 ```
 ## isFunctionTypeOrSignatureKind
 
-```rust
+```java
 /**
- * Determines whether a node kind is a FunctionTypeOrSignature kind
- */
+* Determines whether a node kind is a FunctionTypeOrSignature kind
+*/
 ```
 ```rust
 pub fn isFunctionTypeOrSignatureKind(kind: int) -> bool;
 ```
 ## isThisType
 
-```rust
+```java
 /**
- * Determines whether a node is a this type.
- */
+* Determines whether a node is a this type.
+*/
 ```
 ```rust
 pub fn isThisType(node: Node) -> bool;
 ```
 ## isLessThanEqualsExpression
 
-```rust
+```java
 /**
- * Determines whether a node is a less-than-or-equal expression using `<=`.
- */
+* Determines whether a node is a less-than-or-equal expression using `<=`.
+*/
 ```
 ```rust
 pub fn isLessThanEqualsExpression(node: Node) -> bool;
 ```
 ## isTypeReference
 
-```rust
+```java
 /**
- * Determines whether a node is a type reference.
- */
+* Determines whether a node is a type reference.
+*/
 ```
 ```rust
 pub fn isTypeReference(node: Node) -> bool;
 ```
 ## isVariableDeclarationList
 
-```rust
+```java
 /**
- * Determines whether a node is a variable declaration list
- */
+* Determines whether a node is a variable declaration list
+*/
 ```
 ```rust
 pub fn isVariableDeclarationList(node: Node) -> bool;
 ```
 ## isGreaterThanEqualsExpression
 
-```rust
+```java
 /**
- * Determines whether a node is a greater-than-or-equal expression using `>=`.
- */
+* Determines whether a node is a greater-than-or-equal expression using `>=`.
+*/
 ```
 ```rust
 pub fn isGreaterThanEqualsExpression(node: Node) -> bool;
 ```
 ## isAccessExpression
 
-```rust
+```java
 /**
- * Determines whether a node is an access expression.
- */
+* Determines whether a node is an access expression.
+*/
 ```
 ```rust
 pub fn isAccessExpression(node: Node) -> bool;
 ```
 ## isPrefixUnaryOperator
 
-```rust
+```java
 /**
- * Determines whether a node is a prefix unary operator.
- */
+* Determines whether a node is a prefix unary operator.
+*/
 ```
 ```rust
 pub fn isPrefixUnaryOperator(node: Node) -> bool;
@@ -1986,270 +1986,270 @@ pub fn isReturnCompletion(c: Completion) -> bool;
 ```
 ## isObjectBindingPattern
 
-```rust
+```java
 /**
- * Determines whether a node is an object binding pattern.
- */
+* Determines whether a node is an object binding pattern.
+*/
 ```
 ```rust
 pub fn isObjectBindingPattern(node: Node) -> bool;
 ```
 ## isUpdateExpression
 
-```rust
+```java
 /**
- * Determines whether a node is an update expression.
- */
+* Determines whether a node is an update expression.
+*/
 ```
 ```rust
 pub fn isUpdateExpression(node: Node) -> bool;
 ```
 ## isPostfixUnaryExpression
 
-```rust
+```java
 /**
- * Determines whether a node is a postfix unary expression.
- */
+* Determines whether a node is a postfix unary expression.
+*/
 ```
 ```rust
 pub fn isPostfixUnaryExpression(node: Node) -> bool;
 ```
 ## isBarBarToken
 
-```rust
+```java
 /**
- * Determines whether a node is a `||` token.
- */
+* Determines whether a node is a `||` token.
+*/
 ```
 ```rust
 pub fn isBarBarToken(node: Node) -> bool;
 ```
 ## isUnknownKeyword
 
-```rust
+```java
 /**
- * Determines whether a node is an `unknown` keyword.
- */
+* Determines whether a node is an `unknown` keyword.
+*/
 ```
 ```rust
 pub fn isUnknownKeyword(node: Node) -> bool;
 ```
 ## isControlNode
 
-```rust
+```java
 /**
- * Determines whether a node is a control Node
- */
+* Determines whether a node is a control Node
+*/
 ```
 ```rust
 pub fn isControlNode(node: Node) -> bool;
 ```
 ## isGreaterThanGreaterThanGreaterThanToken
 
-```rust
+```java
 /**
- * Determines whether a node is a `>>>` token.
- */
+* Determines whether a node is a `>>>` token.
+*/
 ```
 ```rust
 pub fn isGreaterThanGreaterThanGreaterThanToken(node: Node) -> bool;
 ```
 ## isPostfixDecrementExpression
 
-```rust
+```java
 /**
- * Determines whether a node is a postfix decrement expression using `--`.
- */
+* Determines whether a node is a postfix decrement expression using `--`.
+*/
 ```
 ```rust
 pub fn isPostfixDecrementExpression(node: Node) -> bool;
 ```
 ## isLessThanToken
 
-```rust
+```java
 /**
- * Determines whether a node is a `<` token.
- */
+* Determines whether a node is a `<` token.
+*/
 ```
 ```rust
 pub fn isLessThanToken(node: Node) -> bool;
 ```
 ## isAccessor
 
-```rust
+```java
 /**
- * Determines whether a node is an Accessor
- */
+* Determines whether a node is an Accessor
+*/
 ```
 ```rust
 pub fn isAccessor(node: Node) -> bool;
 ```
 ## isDeclarationStatementKind
 
-```rust
+```java
 /**
- * Determines whether a node kind is a declaration statement kind
- */
+* Determines whether a node kind is a declaration statement kind
+*/
 ```
 ```rust
 pub fn isDeclarationStatementKind(kind: int) -> bool;
 ```
 ## isSuperKeyword
 
-```rust
+```java
 /**
- * Determines whether a node is a `super` keyword.
- */
+* Determines whether a node is a `super` keyword.
+*/
 ```
 ```rust
 pub fn isSuperKeyword(node: Node) -> bool;
 ```
 ## isStringLiteral
 
-```rust
+```java
 /**
- * Determines whether a node is a string literal.
- */
+* Determines whether a node is a string literal.
+*/
 ```
 ```rust
 pub fn isStringLiteral(node: Node) -> bool;
 ```
 ## isMultiplicativeOperatorOrHigher
 
-```rust
+```java
 /**
- * Determines whether a node is a multiplicative operator or higher.
- */
+* Determines whether a node is a multiplicative operator or higher.
+*/
 ```
 ```rust
 pub fn isMultiplicativeOperatorOrHigher(node: Node) -> bool;
 ```
 ## isGetAccessor
 
-```rust
+```java
 /**
- * Determines whether a node is a `get` accessor
- */
+* Determines whether a node is a `get` accessor
+*/
 ```
 ```rust
 pub fn isGetAccessor(node: Node) -> bool;
 ```
 ## isBinaryBitwiseOperator
 
-```rust
+```java
 /**
- * Determines whether a node is a binary bitwise operator `&`, `|` or `^`.
- */
+* Determines whether a node is a binary bitwise operator `&`, `|` or `^`.
+*/
 ```
 ```rust
 pub fn isBinaryBitwiseOperator(node: Node) -> bool;
 ```
 ## isTemplateMiddle
 
-```rust
+```java
 /**
- * Determines whether a node is a template middle.
- */
+* Determines whether a node is a template middle.
+*/
 ```
 ```rust
 pub fn isTemplateMiddle(node: Node) -> bool;
 ```
 ## isBigIntKeyword
 
-```rust
+```java
 /**
- * Determines whether a node is a `bigint` keyword.
- */
+* Determines whether a node is a `bigint` keyword.
+*/
 ```
 ```rust
 pub fn isBigIntKeyword(node: Node) -> bool;
 ```
 ## isSyntheticReferenceExpression
 
-```rust
+```java
 /**
- * Determines whether a node is a synthetic reference expression.
- */
+* Determines whether a node is a synthetic reference expression.
+*/
 ```
 ```rust
 pub fn isSyntheticReferenceExpression(node: Node) -> bool;
 ```
 ## isStrictEqualityExpression
 
-```rust
+```java
 /**
- * Determines whether a node is a strict equality expression using `===`.
- */
+* Determines whether a node is a strict equality expression using `===`.
+*/
 ```
 ```rust
 pub fn isStrictEqualityExpression(node: Node) -> bool;
 ```
 ## inBooleanContext
 
-```rust
+```java
 /**
- * a node that occur in a context in which their value affect control flow.
- */
+* a node that occur in a context in which their value affect control flow.
+*/
 ```
 ```rust
 pub fn inBooleanContext(n: ControlFlowNode) -> bool;
 ```
 ## isTypeLiteral
 
-```rust
+```java
 /**
- * Determines whether a node is a type literal.
- */
+* Determines whether a node is a type literal.
+*/
 ```
 ```rust
 pub fn isTypeLiteral(node: Node) -> bool;
 ```
 ## isToken
 
-```rust
+```java
 /**
- * Determines whether a node is a token.
- */
+* Determines whether a node is a token.
+*/
 ```
 ```rust
 pub fn isToken(node: Node) -> bool;
 ```
 ## isAsyncKeyword
 
-```rust
+```java
 /**
- * Determines whether a node is an `async` keyword.
- */
+* Determines whether a node is an `async` keyword.
+*/
 ```
 ```rust
 pub fn isAsyncKeyword(node: Node) -> bool;
 ```
 ## isStringKeyword
 
-```rust
+```java
 /**
- * Determines whether a node is a `string` keyword.
- */
+* Determines whether a node is a `string` keyword.
+*/
 ```
 ```rust
 pub fn isStringKeyword(node: Node) -> bool;
 ```
 ## isLiteralExpression
 
-```rust
+```java
 /**
- * Determines whether a node is a literal expression.
- */
+* Determines whether a node is a literal expression.
+*/
 ```
 ```rust
 pub fn isLiteralExpression(node: Node) -> bool;
 ```
 ## isMethodSignature
 
-```rust
+```java
 /**
- * Determines whether a node is a method signature.
- */
+* Determines whether a node is a method signature.
+*/
 ```
 ```rust
 pub fn isMethodSignature(node: Node) -> bool;
@@ -2261,161 +2261,161 @@ pub fn isPropertyExpressionInAccessExpression(propertyExpression: Expression) ->
 ```
 ## isNodeWithTypeArguments
 
-```rust
+```java
 /**
- * Determines whether a node is a node with type arguments.
- */
+* Determines whether a node is a node with type arguments.
+*/
 ```
 ```rust
 pub fn isNodeWithTypeArguments(node: Node) -> bool;
 ```
 ## isAssignmentOperatorOrHigher
 
-```rust
+```java
 /**
- * Determines whether a node is an assignment operator or higher.
- */
+* Determines whether a node is an assignment operator or higher.
+*/
 ```
 ```rust
 pub fn isAssignmentOperatorOrHigher(node: Node) -> bool;
 ```
 ## isAssignmentOperator
 
-```rust
+```java
 /**
- * Determines whether a node is a simple assignment operator `=` or a compound
- * assignment operator.
- */
+* Determines whether a node is a simple assignment operator `=` or a compound
+* assignment operator.
+*/
 ```
 ```rust
 pub fn isAssignmentOperator(node: Node) -> bool;
 ```
 ## isBinaryLogicalOperatorOrHigher
 
-```rust
+```java
 /**
- * Determines whether a node is a logical operator or higher.
- */
+* Determines whether a node is a logical operator or higher.
+*/
 ```
 ```rust
 pub fn isBinaryLogicalOperatorOrHigher(node: Node) -> bool;
 ```
 ## isEqualityOperatorOrHigher
 
-```rust
+```java
 /**
- * Determines whether a node is an equality operator or higher.
- */
+* Determines whether a node is an equality operator or higher.
+*/
 ```
 ```rust
 pub fn isEqualityOperatorOrHigher(node: Node) -> bool;
 ```
 ## isShiftOperatorOrHigher
 
-```rust
+```java
 /**
- * Determines whether a node is a shift operator or higher.
- */
+* Determines whether a node is a shift operator or higher.
+*/
 ```
 ```rust
 pub fn isShiftOperatorOrHigher(node: Node) -> bool;
 ```
 ## isShiftOperator
 
-```rust
+```java
 /**
- * Determines whether a node is a shift operator `<<`, `>>` or `>>>`.
- */
+* Determines whether a node is a shift operator `<<`, `>>` or `>>>`.
+*/
 ```
 ```rust
 pub fn isShiftOperator(node: Node) -> bool;
 ```
 ## isAdditiveOperatorOrHigher
 
-```rust
+```java
 /**
- * Determines whether a node is an additive operator or higher.
- */
+* Determines whether a node is an additive operator or higher.
+*/
 ```
 ```rust
 pub fn isAdditiveOperatorOrHigher(node: Node) -> bool;
 ```
 ## isPropertyAccessExpression
 
-```rust
+```java
 /**
- * Determines whether a node is a property access expression.
- */
+* Determines whether a node is a property access expression.
+*/
 ```
 ```rust
 pub fn isPropertyAccessExpression(node: Node) -> bool;
 ```
 ## isAdditiveOperator
 
-```rust
+```java
 /**
- * Determines whether a node is an additive operator `+` or `-`.
- */
+* Determines whether a node is an additive operator `+` or `-`.
+*/
 ```
 ```rust
 pub fn isAdditiveOperator(node: Node) -> bool;
 ```
 ## isTemplateTail
 
-```rust
+```java
 /**
- * Determines whether a node is a template tail.
- */
+* Determines whether a node is a template tail.
+*/
 ```
 ```rust
 pub fn isTemplateTail(node: Node) -> bool;
 ```
 ## isTypeElement
 
-```rust
+```java
 /**
- * Determines whether a node is a type element.
- */
+* Determines whether a node is a type element.
+*/
 ```
 ```rust
 pub fn isTypeElement(node: Node) -> bool;
 ```
 ## isExponentiationOperator
 
-```rust
+```java
 /**
- * Determines whether a node is an exponentiation operator `**`.
- */
+* Determines whether a node is an exponentiation operator `**`.
+*/
 ```
 ```rust
 pub fn isExponentiationOperator(node: Node) -> bool;
 ```
 ## isLeftShiftAssignmentExpression
 
-```rust
+```java
 /**
- * Determines whether a node is a left shift assignment expression using `<<=`.
- */
+* Determines whether a node is a left shift assignment expression using `<<=`.
+*/
 ```
 ```rust
 pub fn isLeftShiftAssignmentExpression(node: Node) -> bool;
 ```
 ## isAdditiveExpression
 
-```rust
+```java
 /**
- * Determines whether a node is an additive expression using `+` or `-`.
- */
+* Determines whether a node is an additive expression using `+` or `-`.
+*/
 ```
 ```rust
 pub fn isAdditiveExpression(node: Node) -> bool;
 ```
 ## isExponentiationExpression
 
-```rust
+```java
 /**
- * Determines whether a node is a exponentiation expression using `**`.
- */
+* Determines whether a node is a exponentiation expression using `**`.
+*/
 ```
 ```rust
 pub fn isExponentiationExpression(node: Node) -> bool;
@@ -2427,608 +2427,608 @@ pub fn isRValue(refExpr: RefExpr) -> bool;
 ```
 ## isYieldExpression
 
-```rust
+```java
 /**
- * Determines whether a node is a yield expression.
- */
+* Determines whether a node is a yield expression.
+*/
 ```
 ```rust
 pub fn isYieldExpression(node: Node) -> bool;
 ```
 ## isTryStatement
 
-```rust
+```java
 /**
- * Determines whether a node is a `try` statement
- */
+* Determines whether a node is a `try` statement
+*/
 ```
 ```rust
 pub fn isTryStatement(node: Node) -> bool;
 ```
 ## isCompoundAssignmentOperator
 
-```rust
+```java
 /**
- * Determines whether a node is a compound assignment operator
- * `+=`, `-=`, `**=`, `*=`, `/=`, `%=`, `&=`, `|=`, `^=`, `<<=`, `>>=`, `>>>=`,
- * `&&=`, `||=` or `??=`.
- */
+* Determines whether a node is a compound assignment operator
+* `+=`, `-=`, `**=`, `*=`, `/=`, `%=`, `&=`, `|=`, `^=`, `<<=`, `>>=`, `>>>=`,
+* `&&=`, `||=` or `??=`.
+*/
 ```
 ```rust
 pub fn isCompoundAssignmentOperator(node: Node) -> bool;
 ```
 ## isFunctionLikeDeclaration
 
-```rust
+```java
 /**
- * Determines whether a node is a function-like declaration, including:
- *  - MethodDeclaration,
- *  - Constructor,
- *  - GetAccessor,
- *  - SetAccessor,
- *  - FunctionExpression,
- *  - ArrowFunction,
- *  - FunctionDeclaration,
- */
+* Determines whether a node is a function-like declaration, including:
+*  - MethodDeclaration,
+*  - Constructor,
+*  - GetAccessor,
+*  - SetAccessor,
+*  - FunctionExpression,
+*  - ArrowFunction,
+*  - FunctionDeclaration,
+*/
 ```
 ```rust
 pub fn isFunctionLikeDeclaration(node: Node) -> bool;
 ```
 ## isPlusPlusToken
 
-```rust
+```java
 /**
- * Determines whether a node is a `++` token.
- */
+* Determines whether a node is a `++` token.
+*/
 ```
 ```rust
 pub fn isPlusPlusToken(node: Node) -> bool;
 ```
 ## isNumberKeyword
 
-```rust
+```java
 /**
- * Determines whether a node is a `number` keyword.
- */
+* Determines whether a node is a `number` keyword.
+*/
 ```
 ```rust
 pub fn isNumberKeyword(node: Node) -> bool;
 ```
 ## isBitwiseOrExpression
 
-```rust
+```java
 /**
- * Determines whether a node is a bitwise OR expression using `|`.
- */
+* Determines whether a node is a bitwise OR expression using `|`.
+*/
 ```
 ```rust
 pub fn isBitwiseOrExpression(node: Node) -> bool;
 ```
 ## isNeverKeyword
 
-```rust
+```java
 /**
- * Determines whether a node is a `never` keyword.
- */
+* Determines whether a node is a `never` keyword.
+*/
 ```
 ```rust
 pub fn isNeverKeyword(node: Node) -> bool;
 ```
 ## isAsteriskAsteriskToken
 
-```rust
+```java
 /**
- * Determines whether a node is a `**` token.
- */
+* Determines whether a node is a `**` token.
+*/
 ```
 ```rust
 pub fn isAsteriskAsteriskToken(node: Node) -> bool;
 ```
 ## isMultiplicativeOperator
 
-```rust
+```java
 /**
- * Determines whether a node is a multiplicative operator `*`, `/` or `%`.
- */
+* Determines whether a node is a multiplicative operator `*`, `/` or `%`.
+*/
 ```
 ```rust
 pub fn isMultiplicativeOperator(node: Node) -> bool;
 ```
 ## isRemainderAssignmentExpression
 
-```rust
+```java
 /**
- * Determines whether a node is a remainder assignment expression using `%=`.
- */
+* Determines whether a node is a remainder assignment expression using `%=`.
+*/
 ```
 ```rust
 pub fn isRemainderAssignmentExpression(node: Node) -> bool;
 ```
 ## isAmpersandAmpersandEqualsToken
 
-```rust
+```java
 /**
- * Determines whether a node is an `&&=` token.
- */
+* Determines whether a node is an `&&=` token.
+*/
 ```
 ```rust
 pub fn isAmpersandAmpersandEqualsToken(node: Node) -> bool;
 ```
 ## isImplementsKeyword
 
-```rust
+```java
 /**
- * Determines whether a node is an `implements` keyword.
- */
+* Determines whether a node is an `implements` keyword.
+*/
 ```
 ```rust
 pub fn isImplementsKeyword(node: Node) -> bool;
 ```
 ## isQuestionToken
 
-```rust
+```java
 /**
- * Determines whether a node is a `?` token.
- */
+* Determines whether a node is a `?` token.
+*/
 ```
 ```rust
 pub fn isQuestionToken(node: Node) -> bool;
 ```
 ## isModifierKind
 
-```rust
+```java
 /**
- * Determines whether a node kind is a modifier kind.
- */
+* Determines whether a node kind is a modifier kind.
+*/
 ```
 ```rust
 pub fn isModifierKind(kind: int) -> bool;
 ```
 ## isThisKeyword
 
-```rust
+```java
 /**
- * Determines whether a node is a `this` keyword.
- */
+* Determines whether a node is a `this` keyword.
+*/
 ```
 ```rust
 pub fn isThisKeyword(node: Node) -> bool;
 ```
 ## isNullKeyword
 
-```rust
+```java
 /**
- * Determines whether a node is a `null` keyword.
- */
+* Determines whether a node is a `null` keyword.
+*/
 ```
 ```rust
 pub fn isNullKeyword(node: Node) -> bool;
 ```
 ## isInstanceOfKeyword
 
-```rust
+```java
 /**
- * Determines whether a node is an `instanceof` keyword.
- */
+* Determines whether a node is an `instanceof` keyword.
+*/
 ```
 ```rust
 pub fn isInstanceOfKeyword(node: Node) -> bool;
 ```
 ## isInKeyword
 
-```rust
+```java
 /**
- * Determines whether a node is an `in` keyword.
- */
+* Determines whether a node is an `in` keyword.
+*/
 ```
 ```rust
 pub fn isInKeyword(node: Node) -> bool;
 ```
 ## isTemplateHead
 
-```rust
+```java
 /**
- * Determines whether a node is a template head.
- */
+* Determines whether a node is a template head.
+*/
 ```
 ```rust
 pub fn isTemplateHead(node: Node) -> bool;
 ```
 ## bbIDominates
 
-```rust
+```java
 /**
- * Hold if idomBB immediately dominates bb.
- * idomBB is the closest strict dominator of bb, fit the following conditions:
- * 1. idomBB strictly dominates bb
- * 2. idomBB can't dominate any other bb's strict dominator
- */
+* Hold if idomBB immediately dominates bb.
+* idomBB is the closest strict dominator of bb, fit the following conditions:
+* 1. idomBB strictly dominates bb
+* 2. idomBB can't dominate any other bb's strict dominator
+*/
 ```
 ```rust
 pub fn bbIDominates(idomBB: BasicBlock, bb: BasicBlock) -> bool;
 ```
 ## isIdentifier
 
-```rust
+```java
 /**
- * Determines whether a node is an identifier.
- */
+* Determines whether a node is an identifier.
+*/
 ```
 ```rust
 pub fn isIdentifier(node: Node) -> bool;
 ```
 ## isTokenKind
 
-```rust
+```java
 /**
- * Determines whether a node kind is a token kind.
- */
+* Determines whether a node kind is a token kind.
+*/
 ```
 ```rust
 pub fn isTokenKind(kind: int) -> bool;
 ```
 ## isExclamationEqualsToken
 
-```rust
+```java
 /**
- * Determines whether a node is a `!=` token.
- */
+* Determines whether a node is a `!=` token.
+*/
 ```
 ```rust
 pub fn isExclamationEqualsToken(node: Node) -> bool;
 ```
 ## isGreaterThanGreaterThanEqualsToken
 
-```rust
+```java
 /**
- * Determines whether a node is a `>>=` token.
- */
+* Determines whether a node is a `>>=` token.
+*/
 ```
 ```rust
 pub fn isGreaterThanGreaterThanEqualsToken(node: Node) -> bool;
 ```
 ## isBinaryOperator
 
-```rust
+```java
 /**
- * Determines whether a node is a binary operator.
- */
+* Determines whether a node is a binary operator.
+*/
 ```
 ```rust
 pub fn isBinaryOperator(node: Node) -> bool;
 ```
 ## isAwaitExpression
 
-```rust
+```java
 /**
- * Determines whether a node is an `await` expression.
- */
+* Determines whether a node is an `await` expression.
+*/
 ```
 ```rust
 pub fn isAwaitExpression(node: Node) -> bool;
 ```
 ## isAsteriskEqualsToken
 
-```rust
+```java
 /**
- * Determines whether a node is an `*=` token.
- */
+* Determines whether a node is an `*=` token.
+*/
 ```
 ```rust
 pub fn isAsteriskEqualsToken(node: Node) -> bool;
 ```
 ## isMinusEqualsToken
 
-```rust
+```java
 /**
- * Determines whether a node is a `-=` token.
- */
+* Determines whether a node is a `-=` token.
+*/
 ```
 ```rust
 pub fn isMinusEqualsToken(node: Node) -> bool;
 ```
 ## isQuestionQuestionToken
 
-```rust
+```java
 /**
- * Determines whether a node is a `??` token.
- */
+* Determines whether a node is a `??` token.
+*/
 ```
 ```rust
 pub fn isQuestionQuestionToken(node: Node) -> bool;
 ```
 ## controlDependencies
 
-```rust
+```java
 /**
- * Hold bb's control dependencies.
- * same with postDominanceFrontier+.
- */
+* Hold bb's control dependencies.
+* same with postDominanceFrontier+.
+*/
 ```
 ```rust
 pub fn controlDependencies(bb: BasicBlock, controlDependencyBB: BasicBlock) -> bool;
 ```
 ## isAmpersandAmpersandToken
 
-```rust
+```java
 /**
- * Determines whether a node is an `&&` token.
- */
+* Determines whether a node is an `&&` token.
+*/
 ```
 ```rust
 pub fn isAmpersandAmpersandToken(node: Node) -> bool;
 ```
 ## isBreakStatement
 
-```rust
+```java
 /**
- * Determines whether a node is a `break` statement
- */
+* Determines whether a node is a `break` statement
+*/
 ```
 ```rust
 pub fn isBreakStatement(node: Node) -> bool;
 ```
 ## isImportKeyword
 
-```rust
+```java
 /**
- * Determines whether a node is an `import` keyword.
- */
+* Determines whether a node is an `import` keyword.
+*/
 ```
 ```rust
 pub fn isImportKeyword(node: Node) -> bool;
 ```
 ## isTildeToken
 
-```rust
+```java
 /**
- * Determines whether a node is a `~` token.
- */
+* Determines whether a node is a `~` token.
+*/
 ```
 ```rust
 pub fn isTildeToken(node: Node) -> bool;
 ```
 ## getSymbol
 
-```rust
+```java
 /**
- * Get the corresponding symbol of a RefExpr.
- * It also gets the value symbol of a ShorthandPropertyAssignment or the name node (Identifier) of it.
- */
+* Get the corresponding symbol of a RefExpr.
+* It also gets the value symbol of a ShorthandPropertyAssignment or the name node (Identifier) of it.
+*/
 ```
 ```rust
 pub fn getSymbol(refExpr: RefExpr) -> Symbol;
 ```
 ## isExclamationToken
 
-```rust
+```java
 /**
- * Determines whether a node is an `!` token.
- */
+* Determines whether a node is an `!` token.
+*/
 ```
 ```rust
 pub fn isExclamationToken(node: Node) -> bool;
 ```
 ## isGreaterThanGreaterThanToken
 
-```rust
+```java
 /**
- * Determines whether a node is a `>>` token.
- */
+* Determines whether a node is a `>>` token.
+*/
 ```
 ```rust
 pub fn isGreaterThanGreaterThanToken(node: Node) -> bool;
 ```
 ## isArrayBindingPattern
 
-```rust
+```java
 /**
- * Determines whether a node is an array binding pattern.
- */
+* Determines whether a node is an array binding pattern.
+*/
 ```
 ```rust
 pub fn isArrayBindingPattern(node: Node) -> bool;
 ```
 ## isFunctionExpression
 
-```rust
+```java
 /**
- * Determines whether a node is a function expression
- */
+* Determines whether a node is a function expression
+*/
 ```
 ```rust
 pub fn isFunctionExpression(node: Node) -> bool;
 ```
 ## isPercentToken
 
-```rust
+```java
 /**
- * Determines whether a node is a `%` token.
- */
+* Determines whether a node is a `%` token.
+*/
 ```
 ```rust
 pub fn isPercentToken(node: Node) -> bool;
 ```
 ## isAsteriskToken
 
-```rust
+```java
 /**
- * Determines whether a node is a `*` token.
- */
+* Determines whether a node is a `*` token.
+*/
 ```
 ```rust
 pub fn isAsteriskToken(node: Node) -> bool;
 ```
 ## isMinusToken
 
-```rust
+```java
 /**
- * Determines whether a node is a `-` token.
- */
+* Determines whether a node is a `-` token.
+*/
 ```
 ```rust
 pub fn isMinusToken(node: Node) -> bool;
 ```
 ## isLessThanLessThanEqualsToken
 
-```rust
+```java
 /**
- * Determines whether a node is a `<<=` token.
- */
+* Determines whether a node is a `<<=` token.
+*/
 ```
 ```rust
 pub fn isLessThanLessThanEqualsToken(node: Node) -> bool;
 ```
 ## last
 
-```rust
+```java
 /**
- * Get the node that should be visited last,
- * selected from the node and it's descendants.
- * Every control flow node must have at least 1 last node.
- */
+* Get the node that should be visited last,
+* selected from the node and it's descendants.
+* Every control flow node must have at least 1 last node.
+*/
 ```
 ```rust
 pub fn last(n: ControlFlowNode, ln: ControlFlowNode, c: Completion) -> bool;
 ```
 ## isPlusToken
 
-```rust
+```java
 /**
- * Determines whether a node is a `+` token.
- */
+* Determines whether a node is a `+` token.
+*/
 ```
 ```rust
 pub fn isPlusToken(node: Node) -> bool;
 ```
 ## isCommaExpression
 
-```rust
+```java
 /**
- * Determines whether a node is a comma expression using `,`.
- */
+* Determines whether a node is a comma expression using `,`.
+*/
 ```
 ```rust
 pub fn isCommaExpression(node: Node) -> bool;
 ```
 ## isGreaterThanToken
 
-```rust
+```java
 /**
- * Determines whether a node is a `>` token.
- */
+* Determines whether a node is a `>` token.
+*/
 ```
 ```rust
 pub fn isGreaterThanToken(node: Node) -> bool;
 ```
 ## isExclamationEqualsEqualsToken
 
-```rust
+```java
 /**
- * Determines whether a node is a `!==` token.
- */
+* Determines whether a node is a `!==` token.
+*/
 ```
 ```rust
 pub fn isExclamationEqualsEqualsToken(node: Node) -> bool;
 ```
 ## isEqualsEqualsEqualsToken
 
-```rust
+```java
 /**
- * Determines whether a node is an `===` token.
- */
+* Determines whether a node is an `===` token.
+*/
 ```
 ```rust
 pub fn isEqualsEqualsEqualsToken(node: Node) -> bool;
 ```
 ## isBarBarEqualsToken
 
-```rust
+```java
 /**
- * Determines whether a node is a `||=` token.
- */
+* Determines whether a node is a `||=` token.
+*/
 ```
 ```rust
 pub fn isBarBarEqualsToken(node: Node) -> bool;
 ```
 ## isExtendsKeyword
 
-```rust
+```java
 /**
- * Determines whether a node is an `extends` keyword.
- */
+* Determines whether a node is an `extends` keyword.
+*/
 ```
 ```rust
 pub fn isExtendsKeyword(node: Node) -> bool;
 ```
 ## isDotDotDotToken
 
-```rust
+```java
 /**
- * Determines whether a node is a `...` token.
- */
+* Determines whether a node is a `...` token.
+*/
 ```
 ```rust
 pub fn isDotDotDotToken(node: Node) -> bool;
 ```
 ## isClassDeclaration
 
-```rust
+```java
 /**
- * Determines whether a node is a class declaration.
- */
+* Determines whether a node is a class declaration.
+*/
 ```
 ```rust
 pub fn isClassDeclaration(node: Node) -> bool;
 ```
 ## isIterationStatement
 
-```rust
+```java
 /**
- * Determine whether a node is an iteration statement, including `while`, `do`-`while`,
- * `for` and enhanced `for` (`for`-`in`, `for`-`of`) statements.
- */
+* Determine whether a node is an iteration statement, including `while`, `do`-`while`,
+* `for` and enhanced `for` (`for`-`in`, `for`-`of`) statements.
+*/
 ```
 ```rust
 pub fn isIterationStatement(node: Node) -> bool;
 ```
 ## isJsxSelfClosingElement
 
-```rust
+```java
 /**
- * Determines whether a node is a JSX self closing element.
- */
+* Determines whether a node is a JSX self closing element.
+*/
 ```
 ```rust
 pub fn isJsxSelfClosingElement(node: Node) -> bool;
 ```
 ## mayThrow
 
-```rust
+```java
 /**
- * Determine whether a control flow node throws
- * an exception.
- */
+* Determine whether a control flow node throws
+* an exception.
+*/
 ```
 ```rust
 pub fn mayThrow(cfn: ControlFlowNode) -> bool;
 ```
 ## isClassExpression
 
-```rust
+```java
 /**
- * Determines whether a node is a class expression.
- */
+* Determines whether a node is a class expression.
+*/
 ```
 ```rust
 pub fn isClassExpression(node: Node) -> bool;
 ```
 ## isRegularExpressionLiteral
 
-```rust
+```java
 /**
- * Determines whether a node is a regular expression literal.
- */
+* Determines whether a node is a regular expression literal.
+*/
 ```
 ```rust
 pub fn isRegularExpressionLiteral(node: Node) -> bool;
@@ -3040,160 +3040,160 @@ pub fn isDataFlowNode(node: Node) -> bool;
 ```
 ## isLessThanEqualsToken
 
-```rust
+```java
 /**
- * Determines whether a node is a `<=` token.
- */
+* Determines whether a node is a `<=` token.
+*/
 ```
 ```rust
 pub fn isLessThanEqualsToken(node: Node) -> bool;
 ```
 ## isNumericLiteral
 
-```rust
+```java
 /**
- * Determines whether a node is a numeric literal.
- */
+* Determines whether a node is a numeric literal.
+*/
 ```
 ```rust
 pub fn isNumericLiteral(node: Node) -> bool;
 ```
 ## isBarEqualsToken
 
-```rust
+```java
 /**
- * Determines whether a node is a `|=` token.
- */
+* Determines whether a node is a `|=` token.
+*/
 ```
 ```rust
 pub fn isBarEqualsToken(node: Node) -> bool;
 ```
 ## isEndOfFileToken
 
-```rust
+```java
 /**
- * Determines whether a node is an end-of-file token.
- */
+* Determines whether a node is an end-of-file token.
+*/
 ```
 ```rust
 pub fn isEndOfFileToken(node: Node) -> bool;
 ```
 ## isIntrinsicKeyword
 
-```rust
+```java
 /**
- * Determines whether a node is an `intrinsic` keyword.
- */
+* Determines whether a node is an `intrinsic` keyword.
+*/
 ```
 ```rust
 pub fn isIntrinsicKeyword(node: Node) -> bool;
 ```
 ## isUnknown
 
-```rust
+```java
 /**
- * Determines whether a node is an unknown token.
- */
+* Determines whether a node is an unknown token.
+*/
 ```
 ```rust
 pub fn isUnknown(node: Node) -> bool;
 ```
 ## isCaretToken
 
-```rust
+```java
 /**
- * Determines whether a node is a `^` token.
- */
+* Determines whether a node is a `^` token.
+*/
 ```
 ```rust
 pub fn isCaretToken(node: Node) -> bool;
 ```
 ## isForInStatement
 
-```rust
+```java
 /**
- * Determines whether a node is a `for`-`in` statement
- */
+* Determines whether a node is a `for`-`in` statement
+*/
 ```
 ```rust
 pub fn isForInStatement(node: Node) -> bool;
 ```
 ## isJsxOpeningElement
 
-```rust
+```java
 /**
- * Determines whether a node is a JSX opening element.
- */
+* Determines whether a node is a JSX opening element.
+*/
 ```
 ```rust
 pub fn isJsxOpeningElement(node: Node) -> bool;
 ```
 ## isKeywordToken
 
-```rust
+```java
 /**
- * Determines whether a node is a keyword token.
- */
+* Determines whether a node is a keyword token.
+*/
 ```
 ```rust
 pub fn isKeywordToken(node: Node) -> bool;
 ```
 ## isAmpersandEqualsToken
 
-```rust
+```java
 /**
- * Determines whether a node is an `&=` token.
- */
+* Determines whether a node is an `&=` token.
+*/
 ```
 ```rust
 pub fn isAmpersandEqualsToken(node: Node) -> bool;
 ```
 ## isLeftShiftExpression
 
-```rust
+```java
 /**
- * Determines whether a node is a left-shift expression using `<<`.
- */
+* Determines whether a node is a left-shift expression using `<<`.
+*/
 ```
 ```rust
 pub fn isLeftShiftExpression(node: Node) -> bool;
 ```
 ## isAbstractKeyword
 
-```rust
+```java
 /**
- * Determines whether a node is an `abstract` keyword.
- */
+* Determines whether a node is an `abstract` keyword.
+*/
 ```
 ```rust
 pub fn isAbstractKeyword(node: Node) -> bool;
 ```
 ## isInferType
 
-```rust
+```java
 /**
- * Determines whether a node is an infer type.
- */
+* Determines whether a node is an infer type.
+*/
 ```
 ```rust
 pub fn isInferType(node: Node) -> bool;
 ```
 ## isAsteriskAsteriskEqualsToken
 
-```rust
+```java
 /**
- * Determines whether a node is an `**=` token.
- */
+* Determines whether a node is an `**=` token.
+*/
 ```
 ```rust
 pub fn isAsteriskAsteriskEqualsToken(node: Node) -> bool;
 ```
 ## isGreaterThanGreaterThanGreaterThanEqualsToken
 
-```rust
+```java
 /**
- * Determines whether a node is a `>>>=` token.
- */
+* Determines whether a node is a `>>>=` token.
+*/
 ```
 ```rust
 pub fn isGreaterThanGreaterThanGreaterThanEqualsToken(node: Node) -> bool;
@@ -3210,30 +3210,30 @@ pub fn isThrowCompletion(c: Completion) -> bool;
 ```
 ## isArrayType
 
-```rust
+```java
 /**
- * Determines whether a node is an array type.
- */
+* Determines whether a node is an array type.
+*/
 ```
 ```rust
 pub fn isArrayType(node: Node) -> bool;
 ```
 ## isMethodDeclaration
 
-```rust
+```java
 /**
- * Determines whether a node is a MethodDeclaration
- */
+* Determines whether a node is a MethodDeclaration
+*/
 ```
 ```rust
 pub fn isMethodDeclaration(node: Node) -> bool;
 ```
 ## isPropertySignature
 
-```rust
+```java
 /**
- * Determines whether a node is a property signature.
- */
+* Determines whether a node is a property signature.
+*/
 ```
 ```rust
 pub fn isPropertySignature(node: Node) -> bool;
@@ -3245,162 +3245,162 @@ pub fn flowTo(source: Node, sink: Node) -> bool;
 ```
 ## isNamespaceExport
 
-```rust
+```java
 /**
- * Determines whether a node is a namespace export.
- */
+* Determines whether a node is a namespace export.
+*/
 ```
 ```rust
 pub fn isNamespaceExport(node: Node) -> bool;
 ```
 ## isUnsignedRightShiftExpression
 
-```rust
+```java
 /**
- * Determines whether a node is a unsigned right-shift expression using `>>>`.
- */
+* Determines whether a node is a unsigned right-shift expression using `>>>`.
+*/
 ```
 ```rust
 pub fn isUnsignedRightShiftExpression(node: Node) -> bool;
 ```
 ## isBinaryExpression
 
-```rust
+```java
 /**
- * Determines whether a node is a binary expression
- */
+* Determines whether a node is a binary expression
+*/
 ```
 ```rust
 pub fn isBinaryExpression(node: Node) -> bool;
 ```
 ## isSuperExpression
 
-```rust
+```java
 /**
- * Determines whether a node is a `super` expression.
- */
+* Determines whether a node is a `super` expression.
+*/
 ```
 ```rust
 pub fn isSuperExpression(node: Node) -> bool;
 ```
 ## isSlashEqualsToken
 
-```rust
+```java
 /**
- * Determines whether a node is a `/=` token.
- */
+* Determines whether a node is a `/=` token.
+*/
 ```
 ```rust
 pub fn isSlashEqualsToken(node: Node) -> bool;
 ```
 ## isRemainderExpression
 
-```rust
+```java
 /**
- * Determines whether a node is a remainder expression using `%`.
- */
+* Determines whether a node is a remainder expression using `%`.
+*/
 ```
 ```rust
 pub fn isRemainderExpression(node: Node) -> bool;
 ```
 ## isAccessorKind
 
-```rust
+```java
 /**
- * Determines whether a node kind is an Accessor kind
- */
+* Determines whether a node kind is an Accessor kind
+*/
 ```
 ```rust
 pub fn isAccessorKind(kind: int) -> bool;
 ```
 ## isHeritageClause
 
-```rust
+```java
 /**
- * Determines whether a node is a heritage clause.
- */
+* Determines whether a node is a heritage clause.
+*/
 ```
 ```rust
 pub fn isHeritageClause(node: Node) -> bool;
 ```
 ## isVariableDeclarationKind
 
-```rust
+```java
 /**
- * Determines whether a node kind is a variable declaration kind
- */
+* Determines whether a node kind is a variable declaration kind
+*/
 ```
 ```rust
 pub fn isVariableDeclarationKind(kind: int) -> bool;
 ```
 ## isCompoundAssignmentExpression
 
-```rust
+```java
 /**
- * Determines whether a node is a compound assignment expression using
- * `+=`, `-=`, `**=`, `*=`, `/=`, `%=`, `&=`, `|=`, `^=`, `<<=`, `>>=`, `>>>=`,
- * `&&=`, `||=` or `??=`.
- */
+* Determines whether a node is a compound assignment expression using
+* `+=`, `-=`, `**=`, `*=`, `/=`, `%=`, `&=`, `|=`, `^=`, `<<=`, `>>=`, `>>>=`,
+* `&&=`, `||=` or `??=`.
+*/
 ```
 ```rust
 pub fn isCompoundAssignmentExpression(node: Node) -> bool;
 ```
 ## isLessThanLessThanToken
 
-```rust
+```java
 /**
- * Determines whether a node is a `<<` token.
- */
+* Determines whether a node is a `<<` token.
+*/
 ```
 ```rust
 pub fn isLessThanLessThanToken(node: Node) -> bool;
 ```
 ## isProtectedKeyword
 
-```rust
+```java
 /**
- * Determines whether a node is a `protected` keyword.
- */
+* Determines whether a node is a `protected` keyword.
+*/
 ```
 ```rust
 pub fn isProtectedKeyword(node: Node) -> bool;
 ```
 ## isPlusEqualsToken
 
-```rust
+```java
 /**
- * Determines whether a node is a `+=` token.
- */
+* Determines whether a node is a `+=` token.
+*/
 ```
 ```rust
 pub fn isPlusEqualsToken(node: Node) -> bool;
 ```
 ## isBinaryLogicalOperator
 
-```rust
+```java
 /**
- * Determines whether a node is a logical operator `&&`, `||` or `??`.
- */
+* Determines whether a node is a logical operator `&&`, `||` or `??`.
+*/
 ```
 ```rust
 pub fn isBinaryLogicalOperator(node: Node) -> bool;
 ```
 ## isTypeAliasDeclaration
 
-```rust
+```java
 /**
- * Determines whether a node is a type alias declaration.
- */
+* Determines whether a node is a type alias declaration.
+*/
 ```
 ```rust
 pub fn isTypeAliasDeclaration(node: Node) -> bool;
 ```
 ## isFunctionLikeDeclarationKind
 
-```rust
+```java
 /**
- * Determines whether a node kind is a FunctionLikeDeclaration kind
- */
+* Determines whether a node kind is a FunctionLikeDeclaration kind
+*/
 ```
 ```rust
 pub fn isFunctionLikeDeclarationKind(kind: int) -> bool;
@@ -3412,260 +3412,260 @@ pub fn indirectFlowEdge(predecessor: DataFlowNode, successor: DataFlowNode) -> b
 ```
 ## isTrueKeyword
 
-```rust
+```java
 /**
- * Determines whether a node is a `true` keyword.
- */
+* Determines whether a node is a `true` keyword.
+*/
 ```
 ```rust
 pub fn isTrueKeyword(node: Node) -> bool;
 ```
 ## isMemberExpression
 
-```rust
+```java
 /**
- * Determines whether a node is a member expression.
- */
+* Determines whether a node is a member expression.
+*/
 ```
 ```rust
 pub fn isMemberExpression(node: Node) -> bool;
 ```
 ## isSimpleAssignmentExpression
 
-```rust
+```java
 /**
- * Determines whether a node is a simple assignment expression using `=`.
- */
+* Determines whether a node is a simple assignment expression using `=`.
+*/
 ```
 ```rust
 pub fn isSimpleAssignmentExpression(node: Node) -> bool;
 ```
 ## isQuestionQuestionEqualsToken
 
-```rust
+```java
 /**
- * Determines whether a node is a `??=` token.
- */
+* Determines whether a node is a `??=` token.
+*/
 ```
 ```rust
 pub fn isQuestionQuestionEqualsToken(node: Node) -> bool;
 ```
 ## isCallLikeExpression
 
-```rust
+```java
 /**
- * Determines whether a node is a call-like expression.
- */
+* Determines whether a node is a call-like expression.
+*/
 ```
 ```rust
 pub fn isCallLikeExpression(node: Node) -> bool;
 ```
 ## syntaxKind
 
-```rust
+```java
 /**
- * The predict for the value and name pairs of SyntaxKinds
- */
+* The predict for the value and name pairs of SyntaxKinds
+*/
 ```
 ```rust
 pub fn syntaxKind(kind: int, name: string) -> bool;
 ```
 ## isIndexSignature
 
-```rust
+```java
 /**
- * Determines whether a node is an index signature.
- */
+* Determines whether a node is an index signature.
+*/
 ```
 ```rust
 pub fn isIndexSignature(node: Node) -> bool;
 ```
 ## isCaretEqualsToken
 
-```rust
+```java
 /**
- * Determines whether a node is a `^=` token.
- */
+* Determines whether a node is a `^=` token.
+*/
 ```
 ```rust
 pub fn isCaretEqualsToken(node: Node) -> bool;
 ```
 ## isUnionType
 
-```rust
+```java
 /**
- * Determines whether a node is an union type.
- */
+* Determines whether a node is an union type.
+*/
 ```
 ```rust
 pub fn isUnionType(node: Node) -> bool;
 ```
 ## isConstructSignature
 
-```rust
+```java
 /**
- * Determines whether a node is a construct signature.
- */
+* Determines whether a node is a construct signature.
+*/
 ```
 ```rust
 pub fn isConstructSignature(node: Node) -> bool;
 ```
 ## isCallSignature
 
-```rust
+```java
 /**
- * Determines whether a node is a call signature.
- */
+* Determines whether a node is a call signature.
+*/
 ```
 ```rust
 pub fn isCallSignature(node: Node) -> bool;
 ```
 ## isFirstOfBasicBlock
 
-```rust
+```java
 /**
- * Hold if the node is the first node of a basic block.
- */
+* Hold if the node is the first node of a basic block.
+*/
 ```
 ```rust
 pub fn isFirstOfBasicBlock(cfn: ControlFlowNode) -> bool;
 ```
 ## isUnaryExpression
 
-```rust
+```java
 /**
- * Determines whether a node is an unary expression.
- */
+* Determines whether a node is an unary expression.
+*/
 ```
 ```rust
 pub fn isUnaryExpression(node: Node) -> bool;
 ```
 ## isImportType
 
-```rust
+```java
 /**
- * Determines whether a node is an import type.
- */
+* Determines whether a node is an import type.
+*/
 ```
 ```rust
 pub fn isImportType(node: Node) -> bool;
 ```
 ## isTemplateLiteralTypeSpan
 
-```rust
+```java
 /**
- * Determines whether a node is a template literal type span.
- */
+* Determines whether a node is a template literal type span.
+*/
 ```
 ```rust
 pub fn isTemplateLiteralTypeSpan(node: Node) -> bool;
 ```
 ## isNamedTupleMember
 
-```rust
+```java
 /**
- * Determines whether a node is a named tuple member.
- */
+* Determines whether a node is a named tuple member.
+*/
 ```
 ```rust
 pub fn isNamedTupleMember(node: Node) -> bool;
 ```
 ## isQuestionDotToken
 
-```rust
+```java
 /**
- * Determines whether a node is a `?.` token.
- */
+* Determines whether a node is a `?.` token.
+*/
 ```
 ```rust
 pub fn isQuestionDotToken(node: Node) -> bool;
 ```
 ## isNamespaceExportDeclaration
 
-```rust
+```java
 /**
- * Determines whether a node is a namespace export declaration.
- */
+* Determines whether a node is a namespace export declaration.
+*/
 ```
 ```rust
 pub fn isNamespaceExportDeclaration(node: Node) -> bool;
 ```
 ## isLogicalOrAssignmentExpression
 
-```rust
+```java
 /**
- * Determines whether a node is a logical OR assignment expression using `||=`.
- */
+* Determines whether a node is a logical OR assignment expression using `||=`.
+*/
 ```
 ```rust
 pub fn isLogicalOrAssignmentExpression(node: Node) -> bool;
 ```
 ## isTypeOperator
 
-```rust
+```java
 /**
- * Determines whether a node is a type operator.
- */
+* Determines whether a node is a type operator.
+*/
 ```
 ```rust
 pub fn isTypeOperator(node: Node) -> bool;
 ```
 ## isInExpression
 
-```rust
+```java
 /**
- * Determines whether a node is an `in` expression.
- */
+* Determines whether a node is an `in` expression.
+*/
 ```
 ```rust
 pub fn isInExpression(node: Node) -> bool;
 ```
 ## isSymbolKeyword
 
-```rust
+```java
 /**
- * Determines whether a node is a `symbol` keyword.
- */
+* Determines whether a node is a `symbol` keyword.
+*/
 ```
 ```rust
 pub fn isSymbolKeyword(node: Node) -> bool;
 ```
 ## isConditionalType
 
-```rust
+```java
 /**
- * Determines whether a node is a conditional type.
- */
+* Determines whether a node is a conditional type.
+*/
 ```
 ```rust
 pub fn isConditionalType(node: Node) -> bool;
 ```
 ## isPrivateIdentifier
 
-```rust
+```java
 /**
- * Determines whether a node is a private identifier.
- */
+* Determines whether a node is a private identifier.
+*/
 ```
 ```rust
 pub fn isPrivateIdentifier(node: Node) -> bool;
 ```
 ## isIntersectionType
 
-```rust
+```java
 /**
- * Determines whether a node is an intersection type.
- */
+* Determines whether a node is an intersection type.
+*/
 ```
 ```rust
 pub fn isIntersectionType(node: Node) -> bool;
 ```
 ## isTypeAssertionExpression
 
-```rust
+```java
 /**
- * Determines whether a node is a type assertion expression.
- */
+* Determines whether a node is a type assertion expression.
+*/
 ```
 ```rust
 pub fn isTypeAssertionExpression(node: Node) -> bool;
@@ -3677,81 +3677,81 @@ pub fn pageRouterRule(fromPage: PageObject, toPage: PageObject, kind: RouterKind
 ```
 ## isPostOrderNode
 
-```rust
+```java
 /**
- * Determine whether a control flow node is a post order node.
- */
+* Determine whether a control flow node is a post order node.
+*/
 ```
 ```rust
 pub fn isPostOrderNode(controlFlowNode: ControlFlowNode) -> bool;
 ```
 ## isRestType
 
-```rust
+```java
 /**
- * Determines whether a node is a rest type.
- */
+* Determines whether a node is a rest type.
+*/
 ```
 ```rust
 pub fn isRestType(node: Node) -> bool;
 ```
 ## isOptionalType
 
-```rust
+```java
 /**
- * Determines whether a node is an optional type.
- */
+* Determines whether a node is an optional type.
+*/
 ```
 ```rust
 pub fn isOptionalType(node: Node) -> bool;
 ```
 ## isBitwiseAndAssignmentExpression
 
-```rust
+```java
 /**
- * Determines whether a node is a bitwise AND assignment expression using `&=`.
- */
+* Determines whether a node is a bitwise AND assignment expression using `&=`.
+*/
 ```
 ```rust
 pub fn isBitwiseAndAssignmentExpression(node: Node) -> bool;
 ```
 ## isEqualityTestExpression
 
-```rust
+```java
 /**
- * Determines whether a node is an equality test expression using `==`, `!=`,
- * `===` or `!==`.
- */
+* Determines whether a node is an equality test expression using `==`, `!=`,
+* `===` or `!==`.
+*/
 ```
 ```rust
 pub fn isEqualityTestExpression(node: Node) -> bool;
 ```
 ## isBooleanKeyword
 
-```rust
+```java
 /**
- * Determines whether a node is a `boolean` keyword.
- */
+* Determines whether a node is a `boolean` keyword.
+*/
 ```
 ```rust
 pub fn isBooleanKeyword(node: Node) -> bool;
 ```
 ## isConstructor
 
-```rust
+```java
 /**
- * Determines whether a node is a Constructor
- */
+* Determines whether a node is a Constructor
+*/
 ```
 ```rust
 pub fn isConstructor(node: Node) -> bool;
 ```
 ## isTupleType
 
-```rust
+```java
 /**
- * Determines whether a node is a tuple type.
- */
+* Determines whether a node is a tuple type.
+*/
 ```
 ```rust
 pub fn isTupleType(node: Node) -> bool;
@@ -3763,60 +3763,60 @@ pub fn routerKindInit(id: int, name: string) -> bool;
 ```
 ## isTypeQuery
 
-```rust
+```java
 /**
- * Determines whether a node is a type query.
- */
+* Determines whether a node is a type query.
+*/
 ```
 ```rust
 pub fn isTypeQuery(node: Node) -> bool;
 ```
 ## isTypePredicate
 
-```rust
+```java
 /**
- * Determines whether a node is a type predicate.
- */
+* Determines whether a node is a type predicate.
+*/
 ```
 ```rust
 pub fn isTypePredicate(node: Node) -> bool;
 ```
 ## isConstructorType
 
-```rust
+```java
 /**
- * Determines whether a node is a constructor type.
- */
+* Determines whether a node is a constructor type.
+*/
 ```
 ```rust
 pub fn isConstructorType(node: Node) -> bool;
 ```
 ## isExportAssignment
 
-```rust
+```java
 /**
- * Determines whether a node is an export assignment.
- */
+* Determines whether a node is an export assignment.
+*/
 ```
 ```rust
 pub fn isExportAssignment(node: Node) -> bool;
 ```
 ## isPartiallyEmittedExpression
 
-```rust
+```java
 /**
- * Determines whether a node is a partially emitted expression.
- */
+* Determines whether a node is a partially emitted expression.
+*/
 ```
 ```rust
 pub fn isPartiallyEmittedExpression(node: Node) -> bool;
 ```
 ## isInterfaceDeclaration
 
-```rust
+```java
 /**
- * Determines whether a node is an interface declaration.
- */
+* Determines whether a node is an interface declaration.
+*/
 ```
 ```rust
 pub fn isInterfaceDeclaration(node: Node) -> bool;
@@ -3828,80 +3828,80 @@ pub fn isLValue(refExpr: RefExpr) -> bool;
 ```
 ## isImportEqualsDeclaration
 
-```rust
+```java
 /**
- * Determines whether a node is an import-equals declaration.
- */
+* Determines whether a node is an import-equals declaration.
+*/
 ```
 ```rust
 pub fn isImportEqualsDeclaration(node: Node) -> bool;
 ```
 ## isWhileStatement
 
-```rust
+```java
 /**
- * Determines whether a node is a `while` statement
- */
+* Determines whether a node is a `while` statement
+*/
 ```
 ```rust
 pub fn isWhileStatement(node: Node) -> bool;
 ```
 ## isGreaterThanExpression
 
-```rust
+```java
 /**
- * Determines whether a node is a greater-than expression using `>`.
- */
+* Determines whether a node is a greater-than expression using `>`.
+*/
 ```
 ```rust
 pub fn isGreaterThanExpression(node: Node) -> bool;
 ```
 ## isNullLiteral
 
-```rust
+```java
 /**
- * Determines whether a node is a null literal.
- */
+* Determines whether a node is a null literal.
+*/
 ```
 ```rust
 pub fn isNullLiteral(node: Node) -> bool;
 ```
 ## isVariableStatement
 
-```rust
+```java
 /**
- * Determines whether a node is a variable statement
- */
+* Determines whether a node is a variable statement
+*/
 ```
 ```rust
 pub fn isVariableStatement(node: Node) -> bool;
 ```
 ## isImportDeclaration
 
-```rust
+```java
 /**
- * Determines whether a node is an import declaration.
- */
+* Determines whether a node is an import declaration.
+*/
 ```
 ```rust
 pub fn isImportDeclaration(node: Node) -> bool;
 ```
 ## isMinusMinusToken
 
-```rust
+```java
 /**
- * Determines whether a node is a `--` token.
- */
+* Determines whether a node is a `--` token.
+*/
 ```
 ```rust
 pub fn isMinusMinusToken(node: Node) -> bool;
 ```
 ## isContinueStatement
 
-```rust
+```java
 /**
- * Determines whether a node is a `continue` statement
- */
+* Determines whether a node is a `continue` statement
+*/
 ```
 ```rust
 pub fn isContinueStatement(node: Node) -> bool;
@@ -3913,40 +3913,40 @@ pub fn localFlowEdge(predecessor: DataFlowNode, successor: DataFlowNode) -> bool
 ```
 ## isFunctionType
 
-```rust
+```java
 /**
- * Determines whether a node is a function type.
- */
+* Determines whether a node is a function type.
+*/
 ```
 ```rust
 pub fn isFunctionType(node: Node) -> bool;
 ```
 ## isTemplateExpression
 
-```rust
+```java
 /**
- * Determines whether a node is a template expression.
- */
+* Determines whether a node is a template expression.
+*/
 ```
 ```rust
 pub fn isTemplateExpression(node: Node) -> bool;
 ```
 ## isJsxText
 
-```rust
+```java
 /**
- * Determines whether a node is a JSX text.
- */
+* Determines whether a node is a JSX text.
+*/
 ```
 ```rust
 pub fn isJsxText(node: Node) -> bool;
 ```
 ## isParenthesizedType
 
-```rust
+```java
 /**
- * Determines whether a node is a parenthesized type.
- */
+* Determines whether a node is a parenthesized type.
+*/
 ```
 ```rust
 pub fn isParenthesizedType(node: Node) -> bool;
@@ -3958,233 +3958,233 @@ pub fn isBooleanCompletion(c: Completion) -> bool;
 ```
 ## bbPostDominates
 
-```rust
+```java
 /**
- * Hold if pdomBB post dominates bb.
- */
+* Hold if pdomBB post dominates bb.
+*/
 ```
 ```rust
 pub fn bbPostDominates(pdomBB: BasicBlock, bb: BasicBlock) -> bool;
 ```
 ## isEnumDeclaration
 
-```rust
+```java
 /**
- * Determines whether a node is an enum declaration.
- */
+* Determines whether a node is an enum declaration.
+*/
 ```
 ```rust
 pub fn isEnumDeclaration(node: Node) -> bool;
 ```
 ## isPropertyNameInPropertyAssignment
 
-```rust
+```java
 /**
- * Determine a PropertyName expr exists in a PropertyAssignment expr.
- */
+* Determine a PropertyName expr exists in a PropertyAssignment expr.
+*/
 ```
 ```rust
 pub fn isPropertyNameInPropertyAssignment(propertyName: PropertyName) -> bool;
 ```
 ## isBindingPattern
 
-```rust
+```java
 /**
- * Determines whether a node is a binding pattern.
- */
+* Determines whether a node is a binding pattern.
+*/
 ```
 ```rust
 pub fn isBindingPattern(node: Node) -> bool;
 ```
 ## bbInSameCFG
 
-```rust
+```java
 /**
- * Hold if two bb are in same CFG.
- */
+* Hold if two bb are in same CFG.
+*/
 ```
 ```rust
 pub fn bbInSameCFG(bb1: BasicBlock, bb2: BasicBlock) -> bool;
 ```
 ## isOmittedExpression
 
-```rust
+```java
 /**
- * Determines whether a node is an omitted expression.
- */
+* Determines whether a node is an omitted expression.
+*/
 ```
 ```rust
 pub fn isOmittedExpression(node: Node) -> bool;
 ```
 ## isBinaryBitwiseOperatorOrHigher
 
-```rust
+```java
 /**
- * Determines whether a node is a binary bitwise operator or higher.
- */
+* Determines whether a node is a binary bitwise operator or higher.
+*/
 ```
 ```rust
 pub fn isBinaryBitwiseOperatorOrHigher(node: Node) -> bool;
 ```
 ## isFunctionLike
 
-```rust
+```java
 /**
- * Determines whether a node is a FunctionLike
- */
+* Determines whether a node is a FunctionLike
+*/
 ```
 ```rust
 pub fn isFunctionLike(node: Node) -> bool;
 ```
 ## isSetAccessor
 
-```rust
+```java
 /**
- * Determines whether a node is a `set` accessor
- */
+* Determines whether a node is a `set` accessor
+*/
 ```
 ```rust
 pub fn isSetAccessor(node: Node) -> bool;
 ```
 ## dominanceFrontier
 
-```rust
+```java
 /**
- * Hold bb's dominance frontier.
- * bb dominates at least one of df's predecessor,
- * but bb don't strictly dominates df.
- */
+* Hold bb's dominance frontier.
+* bb dominates at least one of df's predecessor,
+* but bb don't strictly dominates df.
+*/
 ```
 ```rust
 pub fn dominanceFrontier(bb: BasicBlock, df: BasicBlock) -> bool;
 ```
 ## isTemplateLiteralType
 
-```rust
+```java
 /**
- * Determines whether a node is a template literal type.
- */
+* Determines whether a node is a template literal type.
+*/
 ```
 ```rust
 pub fn isTemplateLiteralType(node: Node) -> bool;
 ```
 ## isHeritageToken
 
-```rust
+```java
 /**
- * Determines whether a node is a heritage token, that is an `extends` or `implements` keyword.
- */
+* Determines whether a node is a heritage token, that is an `extends` or `implements` keyword.
+*/
 ```
 ```rust
 pub fn isHeritageToken(node: Node) -> bool;
 ```
 ## isBarToken
 
-```rust
+```java
 /**
- * Determines whether a node is a `|` token.
- */
+* Determines whether a node is a `|` token.
+*/
 ```
 ```rust
 pub fn isBarToken(node: Node) -> bool;
 ```
 ## isPrefixDecrementExpression
 
-```rust
+```java
 /**
- * Determines whether a node is a prefix decrement expression using `--`.
- */
+* Determines whether a node is a prefix decrement expression using `--`.
+*/
 ```
 ```rust
 pub fn isPrefixDecrementExpression(node: Node) -> bool;
 ```
 ## isEnumMember
 
-```rust
+```java
 /**
- * Determines whether a node is an enum member.
- */
+* Determines whether a node is an enum member.
+*/
 ```
 ```rust
 pub fn isEnumMember(node: Node) -> bool;
 ```
 ## isDeleteExpression
 
-```rust
+```java
 /**
- * Determines whether a node is a `delete` expression.
- */
+* Determines whether a node is a `delete` expression.
+*/
 ```
 ```rust
 pub fn isDeleteExpression(node: Node) -> bool;
 ```
 ## isIndexedAccessType
 
-```rust
+```java
 /**
- * Determines whether a node is an indexed access type.
- */
+* Determines whether a node is an indexed access type.
+*/
 ```
 ```rust
 pub fn isIndexedAccessType(node: Node) -> bool;
 ```
 ## isVoidKeyword
 
-```rust
+```java
 /**
- * Determines whether a node is a `void` keyword.
- */
+* Determines whether a node is a `void` keyword.
+*/
 ```
 ```rust
 pub fn isVoidKeyword(node: Node) -> bool;
 ```
 ## isSyntheticExpression
 
-```rust
+```java
 /**
- * Determines whether a node is a synthetic expression.
- */
+* Determines whether a node is a synthetic expression.
+*/
 ```
 ```rust
 pub fn isSyntheticExpression(node: Node) -> bool;
 ```
 ## isKeywordTypeNode
 
-```rust
+```java
 /**
- * Determines whether a node is a keyword type node.
- */
+* Determines whether a node is a keyword type node.
+*/
 ```
 ```rust
 pub fn isKeywordTypeNode(node: Node) -> bool;
 ```
 ## isFunctionBlock
 
-```rust
+```java
 /**
- * Determines whether a node is a FunctionBlock
- */
+* Determines whether a node is a FunctionBlock
+*/
 ```
 ```rust
 pub fn isFunctionBlock(node: Node) -> bool;
 ```
 ## isExpression
 
-```rust
+```java
 /**
- * Determines whether a node is an expression.
- */
+* Determines whether a node is an expression.
+*/
 ```
 ```rust
 pub fn isExpression(node: Node) -> bool;
 ```
 ## isStrictEqualityTestExpression
 
-```rust
+```java
 /**
- * Determines whether a node is a strict equality test expression using
- * `===` or `!==`.
- */
+* Determines whether a node is a strict equality test expression using
+* `===` or `!==`.
+*/
 ```
 ```rust
 pub fn isStrictEqualityTestExpression(node: Node) -> bool;
@@ -4196,30 +4196,30 @@ pub fn isBreakCompletion(c: Completion) -> bool;
 ```
 ## isEqualsToken
 
-```rust
+```java
 /**
- * Determines whether a node is an `=` token.
- */
+* Determines whether a node is an `=` token.
+*/
 ```
 ```rust
 pub fn isEqualsToken(node: Node) -> bool;
 ```
 ## isThisExpression
 
-```rust
+```java
 /**
- * Determines whether a node is a `this` expression.
- */
+* Determines whether a node is a `this` expression.
+*/
 ```
 ```rust
 pub fn isThisExpression(node: Node) -> bool;
 ```
 ## isUndefinedKeyword
 
-```rust
+```java
 /**
- * Determines whether a node is an `undefined` keyword.
- */
+* Determines whether a node is an `undefined` keyword.
+*/
 ```
 ```rust
 pub fn isUndefinedKeyword(node: Node) -> bool;

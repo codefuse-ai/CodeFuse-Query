@@ -9,7 +9,7 @@ schema Node {
 ```
 ## Node::getText
 
-```rust
+```java
 // getText Extract the text associated with a specific node in a file
 ```
 ```rust
@@ -36,6 +36,8 @@ pub fn getAssociatedCommentString(self: Node) -> string;
 pub fn getAchildNode(self: Node) -> *Node;
 ```
 ## Node::\_\_all\_\_
+
+Data constraint method.
 
 ```rust
 pub fn __all__(db: GoDB) -> *Node;
@@ -83,9 +85,6 @@ pub fn isRootNode(self: Node) -> bool;
 ## Node::getBelongsFile
 
 ```rust
-// root node
-```
-```rust
 pub fn getBelongsFile(self: Node) -> File;
 ```
 ## Node::getChildCount
@@ -107,29 +106,4 @@ pub fn getTextSize(self: Node) -> int;
 
 ```rust
 pub fn getAnAncestorForIndex(self: Node, index: int) -> Node;
-```
-## Node::is\<T\>
-
-```rust
-pub fn is<T>(self: Node) -> bool;
-```
-## Node::to\<T\>
-
-```rust
-pub fn to<T>(self: Node) -> <any>;
-```
-## Node::key\_neq
-
-```rust
-pub fn key_neq(self: Node, object: <any>) -> bool;
-```
-## Node::key\_eq
-
-```rust
-pub fn key_eq(self: Node, object: <any>) -> bool;
-```
-## Node::to\_set
-
-```rust
-pub fn to_set(self: Node) -> *Node;
 ```

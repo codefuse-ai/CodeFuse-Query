@@ -14,163 +14,140 @@ schema SuperExpressionWithQualifier {
 ```
 ## SuperExpressionWithQualifier::getPrintableText
 
-```rust
+```java
 /**
-     * @brief gets a printed representation of this element, including its structure where applicable.
-     * @return string.
-     */
+* @brief gets a printed representation of this element, including its structure where applicable.
+* @return string.
+*/
 ```
 ```rust
 pub fn getPrintableText(self: SuperExpressionWithQualifier) -> string;
 ```
 ## SuperExpressionWithQualifier::getIndex
 
-```rust
+```java
 /**
-     * @brief gets the index order of this element.
-     * @return int
-     */
+* @brief gets the index order of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getIndex(self: SuperExpressionWithQualifier) -> int;
 ```
 ## SuperExpressionWithQualifier::getEnclosingCallable
 
-```rust
+```java
 /**
-     * @brief gets the callable in which this expression occurs.
-     * @return Callable 
-     */
+* @brief gets the callable in which this expression occurs.
+* @return Callable 
+*/
 ```
 ```rust
 pub fn getEnclosingCallable(self: SuperExpressionWithQualifier) -> Callable;
 ```
 ## SuperExpressionWithQualifier::getSize
 
-```rust
+```java
 /**
-     * @brief gets the size information for the element.
-     * @return NumberOfLines
-     */
+* @brief gets the size information for the element.
+* @return NumberOfLines
+*/
 ```
 ```rust
 pub fn getSize(self: SuperExpressionWithQualifier) -> NumberOfLines;
 ```
 ## SuperExpressionWithQualifier::getParentHashId
 
-```rust
+```java
 /**
-     * @brief gets the parent hash id of this element.
-     * @return int
-     */
+* @brief gets the parent hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getParentHashId(self: SuperExpressionWithQualifier) -> int;
 ```
 ## SuperExpressionWithQualifier::getParent
 
-```rust
+```java
 /**
-     * @brief gets the parent of the expression.
-     * @return ElementParent 
-     */
+* @brief gets the parent of the expression.
+* @return ElementParent 
+*/
 ```
 ```rust
 pub fn getParent(self: SuperExpressionWithQualifier) -> ElementParent;
 ```
 ## SuperExpressionWithQualifier::getEnclosingStatement
 
-```rust
+```java
 /**
-     * @brief gets the statement which encloses the expression.
-     * @return Statement 
-     */
+* @brief gets the statement which encloses the expression.
+* @return Statement 
+*/
 ```
 ```rust
 pub fn getEnclosingStatement(self: SuperExpressionWithQualifier) -> Statement;
 ```
 ## SuperExpressionWithQualifier::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavaDB) -> *SuperExpressionWithQualifier;
 ```
 ## SuperExpressionWithQualifier::getLocation
 
-```rust
+```java
 /**
-     * @brief gets the location for the element.
-     * @return Location
-     */
+* @brief gets the location for the element.
+* @return Location
+*/
 ```
 ```rust
 pub fn getLocation(self: SuperExpressionWithQualifier) -> Location;
 ```
 ## SuperExpressionWithQualifier::getLocationHashId
 
-```rust
+```java
 /**
-     * @brief gets the location hash id of this element.
-     * @return int
-     */
+* @brief gets the location hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getLocationHashId(self: SuperExpressionWithQualifier) -> int;
 ```
 ## SuperExpressionWithQualifier::getType
 
-```rust
+```java
 /**
-     * @brief gets the type of this element.
-     * @return string
-     */
+* @brief gets the type of this element.
+* @return string
+*/
 ```
 ```rust
 pub fn getType(self: SuperExpressionWithQualifier) -> string;
 ```
 ## SuperExpressionWithQualifier::getQualifier
 
-```rust
+```java
 /**
-     * @brief gets the Qualifier of the expression, if any.
-     * @return ReferenceElement 
-     */
+* @brief gets the Qualifier of the expression, if any.
+* @return ReferenceElement 
+*/
 ```
 ```rust
 pub fn getQualifier(self: SuperExpressionWithQualifier) -> ReferenceElement;
 ```
 ## SuperExpressionWithQualifier::getAnAncestor
 
-```rust
+```java
 /**
-     * @brief gets an ancestor of the element.
-     * @return ElementParent 
-     */
+* @brief gets an ancestor of the element.
+* @return ElementParent 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: SuperExpressionWithQualifier) -> *ElementParent;
-```
-## SuperExpressionWithQualifier::is\<T\>
-
-```rust
-pub fn is<T>(self: SuperExpressionWithQualifier) -> bool;
-```
-## SuperExpressionWithQualifier::to\<T\>
-
-```rust
-pub fn to<T>(self: SuperExpressionWithQualifier) -> <any>;
-```
-## SuperExpressionWithQualifier::key\_neq
-
-```rust
-pub fn key_neq(self: SuperExpressionWithQualifier, object: <any>) -> bool;
-```
-## SuperExpressionWithQualifier::key\_eq
-
-```rust
-pub fn key_eq(self: SuperExpressionWithQualifier, object: <any>) -> bool;
-```
-## SuperExpressionWithQualifier::to\_set
-
-```rust
-pub fn to_set(self: SuperExpressionWithQualifier) -> *SuperExpressionWithQualifier;
 ```

@@ -9,33 +9,33 @@ schema ForOfStatement {
 ```
 ## ForOfStatement::getInitializerIndex
 
-```rust
+```java
 /**
-     * Gets the iterator index of this loop.
-     *
-     * In a `for`-`in` loop, the index is always 0.
-     * In a `for`-`of` loop, the index is 1 if it is a `for`-`await`-`of`, otherwise, the index is 0.
-     */
+* Gets the iterator index of this loop.
+*
+* In a `for`-`in` loop, the index is always 0.
+* In a `for`-`of` loop, the index is 1 if it is a `for`-`await`-`of`, otherwise, the index is 0.
+*/
 ```
 ```rust
 pub fn getInitializerIndex(self: ForOfStatement) -> int;
 ```
 ## ForOfStatement::getParentOid
 
-```rust
+```java
 /**
-     * Gets the parent oid of this node.
-     */
+* Gets the parent oid of this node.
+*/
 ```
 ```rust
 pub fn getParentOid(self: ForOfStatement) -> int;
 ```
 ## ForOfStatement::getADescendant
 
-```rust
+```java
 /**
-     * Gets a descendant of this node. 
-     */
+* Gets a descendant of this node. 
+*/
 ```
 ```rust
 pub fn getADescendant(self: ForOfStatement) -> *Node;
@@ -47,20 +47,20 @@ pub fn getIndex(self: ForOfStatement) -> int;
 ```
 ## ForOfStatement::getLastChild
 
-```rust
+```java
 /**
-     * Gets the last child of this node parent.
-     */
+* Gets the last child of this node parent.
+*/
 ```
 ```rust
 pub fn getLastChild(self: ForOfStatement) -> Node;
 ```
 ## ForOfStatement::getEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets the enclosing function of it
-     */
+* Gets the enclosing function of it
+*/
 ```
 ```rust
 pub fn getEnclosingFunction(self: ForOfStatement) -> FunctionLikeDeclaration;
@@ -72,32 +72,32 @@ pub fn getEndColumnNumber(self: ForOfStatement) -> int;
 ```
 ## ForOfStatement::getFile
 
-```rust
+```java
 /**
-     * Gets the file of this node.
-     */
+* Gets the file of this node.
+*/
 ```
 ```rust
 pub fn getFile(self: ForOfStatement) -> File;
 ```
 ## ForOfStatement::getAnAncestorByLevel
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets an ancestor of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getAnAncestorByLevel(self: ForOfStatement, level: int) -> Node;
 ```
 ## ForOfStatement::getRelativePath
 
-```rust
+```java
 /**
-     * Gets the relative path of this node.
-     */
+* Gets the relative path of this node.
+*/
 ```
 ```rust
 pub fn getRelativePath(self: ForOfStatement) -> string;
@@ -109,40 +109,40 @@ pub fn getEndLineNumber(self: ForOfStatement) -> int;
 ```
 ## ForOfStatement::getInitializer
 
-```rust
+```java
 /**
-     * Gets the iterator of this `for`-`in` or `for`-`of` loop.
-     */
+* Gets the iterator of this `for`-`in` or `for`-`of` loop.
+*/
 ```
 ```rust
 pub fn getInitializer(self: ForOfStatement) -> ForInitializer;
 ```
 ## ForOfStatement::getExpression
 
-```rust
+```java
 /**
-     * Gets the expression over which this `for`-`in` or `for`-`of` loop iterates.
-     */
+* Gets the expression over which this `for`-`in` or `for`-`of` loop iterates.
+*/
 ```
 ```rust
 pub fn getExpression(self: ForOfStatement) -> Expression;
 ```
 ## ForOfStatement::getKind
 
-```rust
+```java
 /**
-     * Get the syntax kind of this node
-     */
+* Get the syntax kind of this node
+*/
 ```
 ```rust
 pub fn getKind(self: ForOfStatement) -> int;
 ```
 ## ForOfStatement::getAModifier
 
-```rust
+```java
 /**
-     * Gets a modifier.
-     */
+* Gets a modifier.
+*/
 ```
 ```rust
 pub fn getAModifier(self: ForOfStatement) -> *Modifier;
@@ -154,32 +154,32 @@ pub fn getStartColumnNumber(self: ForOfStatement) -> int;
 ```
 ## ForOfStatement::getADescendantByLevel
 
-```rust
+```java
 /**
-     * Gets a descendant of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets a descendant of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getADescendantByLevel(self: ForOfStatement, level: int) -> *Node;
 ```
 ## ForOfStatement::getBody
 
-```rust
+```java
 /**
-     * Gets the body of this `for`-`in` or `for`-`of` loop.
-     */
+* Gets the body of this `for`-`in` or `for`-`of` loop.
+*/
 ```
 ```rust
 pub fn getBody(self: ForOfStatement) -> Statement;
 ```
 ## ForOfStatement::getAnAncestorEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets an ancestor enclosing function of it
-     */
+* Gets an ancestor enclosing function of it
+*/
 ```
 ```rust
 pub fn getAnAncestorEnclosingFunction(self: ForOfStatement) -> *FunctionLikeDeclaration;
@@ -191,191 +191,168 @@ pub fn getStartLineNumber(self: ForOfStatement) -> int;
 ```
 ## ForOfStatement::getChild
 
-```rust
+```java
 /**
-     * Gets the `i`th child of this node.
-     */
+* Gets the `i`th child of this node.
+*/
 ```
 ```rust
 pub fn getChild(self: ForOfStatement, i: int) -> Node;
 ```
 ## ForOfStatement::getDecorator
 
-```rust
+```java
 /**
-     * Gets the `i`th decorator.
-     */
+* Gets the `i`th decorator.
+*/
 ```
 ```rust
 pub fn getDecorator(self: ForOfStatement, i: int) -> Decorator;
 ```
 ## ForOfStatement::getRoot
 
-```rust
+```java
 /**
-     * Gets the root top-level of this node. 
-     */
+* Gets the root top-level of this node. 
+*/
 ```
 ```rust
 pub fn getRoot(self: ForOfStatement) -> TopLevelDO;
 ```
 ## ForOfStatement::getChildCount
 
-```rust
+```java
 /**
-     * Gets the number of child nodes.
-     */
+* Gets the number of child nodes.
+*/
 ```
 ```rust
 pub fn getChildCount(self: ForOfStatement) -> int;
 ```
 ## ForOfStatement::getALeadingComment
 
-```rust
+```java
 /**
-     * Gets the leading comments of it
-     */
+* Gets the leading comments of it
+*/
 ```
 ```rust
 pub fn getALeadingComment(self: ForOfStatement) -> *Comment;
 ```
 ## ForOfStatement::getATrailingComment
 
-```rust
+```java
 /**
-     * Gets the trailing comments of it
-     */
+* Gets the trailing comments of it
+*/
 ```
 ```rust
 pub fn getATrailingComment(self: ForOfStatement) -> *Comment;
 ```
 ## ForOfStatement::isAwait
 
-```rust
+```java
 /**
-     * Determines whether the `for`-`of` loop is a `for`-`await`-`of` loop
-     */
+* Determines whether the `for`-`of` loop is a `for`-`await`-`of` loop
+*/
 ```
 ```rust
 pub fn isAwait(self: ForOfStatement) -> bool;
 ```
 ## ForOfStatement::getParent
 
-```rust
+```java
 /**
-     * Gets the parent node of this node.
-     */
+* Gets the parent node of this node.
+*/
 ```
 ```rust
 pub fn getParent(self: ForOfStatement) -> Node;
 ```
 ## ForOfStatement::getAChild
 
-```rust
+```java
 /**
-     * Gets a child node of this node.
-     */
+* Gets a child node of this node.
+*/
 ```
 ```rust
 pub fn getAChild(self: ForOfStatement) -> *Node;
 ```
 ## ForOfStatement::getAnAncestor
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node. 
-     */
+* Gets an ancestor of this node. 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: ForOfStatement) -> *Node;
 ```
 ## ForOfStatement::getAComment
 
-```rust
+```java
 /**
-     * Gets the comments related to it
-     */
+* Gets the comments related to it
+*/
 ```
 ```rust
 pub fn getAComment(self: ForOfStatement) -> *Comment;
 ```
 ## ForOfStatement::getSymbol
 
-```rust
+```java
 /**
-     * Gets the symbol associated with this node.
-     */
+* Gets the symbol associated with this node.
+*/
 ```
 ```rust
 pub fn getSymbol(self: ForOfStatement) -> Symbol;
 ```
 ## ForOfStatement::getADecorator
 
-```rust
+```java
 /**
-     * Gets a decorator.
-     */
+* Gets a decorator.
+*/
 ```
 ```rust
 pub fn getADecorator(self: ForOfStatement) -> *Decorator;
 ```
 ## ForOfStatement::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavascriptDB) -> *ForOfStatement;
 ```
 ## ForOfStatement::getLocation
 
-```rust
+```java
 /**
-     * Gets the location of this node.
-     */
+* Gets the location of this node.
+*/
 ```
 ```rust
 pub fn getLocation(self: ForOfStatement) -> Location;
 ```
 ## ForOfStatement::getText
 
-```rust
+```java
 /**
-     * Gets the text of this node.
-     */
+* Gets the text of this node.
+*/
 ```
 ```rust
 pub fn getText(self: ForOfStatement) -> string;
 ```
 ## ForOfStatement::getModifier
 
-```rust
+```java
 /**
-     * Gets the `i`th modifier.
-     */
+* Gets the `i`th modifier.
+*/
 ```
 ```rust
 pub fn getModifier(self: ForOfStatement, i: int) -> Modifier;
-```
-## ForOfStatement::is\<T\>
-
-```rust
-pub fn is<T>(self: ForOfStatement) -> bool;
-```
-## ForOfStatement::to\<T\>
-
-```rust
-pub fn to<T>(self: ForOfStatement) -> <any>;
-```
-## ForOfStatement::key\_neq
-
-```rust
-pub fn key_neq(self: ForOfStatement, object: <any>) -> bool;
-```
-## ForOfStatement::key\_eq
-
-```rust
-pub fn key_eq(self: ForOfStatement, object: <any>) -> bool;
-```
-## ForOfStatement::to\_set
-
-```rust
-pub fn to_set(self: ForOfStatement) -> *ForOfStatement;
 ```

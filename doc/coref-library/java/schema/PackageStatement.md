@@ -13,130 +13,107 @@ schema PackageStatement {
 ```
 ## PackageStatement::getLocationHashId
 
-```rust
+```java
 /**
-     * @brief gets the location hash id of this element.
-     * @return int
-     */
+* @brief gets the location hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getLocationHashId(self: PackageStatement) -> int;
 ```
 ## PackageStatement::getContainingFile
 
-```rust
+```java
 /**
-     * @brief gets the containing file for the element.
-     * @return File
-     */
+* @brief gets the containing file for the element.
+* @return File
+*/
 ```
 ```rust
 pub fn getContainingFile(self: PackageStatement) -> File;
 ```
 ## PackageStatement::getQualifiedName
 
-```rust
+```java
 /**
-     * @brief gets the qualified name of this element.
-     * @return string
-     */
+* @brief gets the qualified name of this element.
+* @return string
+*/
 ```
 ```rust
 pub fn getQualifiedName(self: PackageStatement) -> string;
 ```
 ## PackageStatement::getParent
 
-```rust
+```java
 /**
-     * @brief gets the declaration statement of the element
-     * @return Statement 
-     */
+* @brief gets the declaration statement of the element
+* @return Statement 
+*/
 ```
 ```rust
 pub fn getParent(self: PackageStatement) -> ElementParent;
 ```
 ## PackageStatement::getParentHashId
 
-```rust
+```java
 /**
-     * @brief gets the parent hash id of this element.
-     * @return int
-     */
+* @brief gets the parent hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getParentHashId(self: PackageStatement) -> int;
 ```
 ## PackageStatement::getLocation
 
-```rust
+```java
 /**
-     * @brief gets the location for the element.
-     * @return Location
-     */
+* @brief gets the location for the element.
+* @return Location
+*/
 ```
 ```rust
 pub fn getLocation(self: PackageStatement) -> Location;
 ```
 ## PackageStatement::getPackageHashId
 
-```rust
+```java
 /**
-     * @brief gets the package hash id of this element.
-     * @return int
-     */
+* @brief gets the package hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getPackageHashId(self: PackageStatement) -> int;
 ```
 ## PackageStatement::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavaDB) -> *PackageStatement;
 ```
 ## PackageStatement::getPackage
 
-```rust
+```java
 /**
-     * @brief gets the resolved package for the project.
-     * @return Package 
-     */
+* @brief gets the resolved package for the project.
+* @return Package 
+*/
 ```
 ```rust
 pub fn getPackage(self: PackageStatement) -> Package;
 ```
 ## PackageStatement::getAnAncestor
 
-```rust
+```java
 /**
-     * @brief gets an ancestor of the element.
-     * @return ElementParent 
-     */
+* @brief gets an ancestor of the element.
+* @return ElementParent 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: PackageStatement) -> *ElementParent;
-```
-## PackageStatement::is\<T\>
-
-```rust
-pub fn is<T>(self: PackageStatement) -> bool;
-```
-## PackageStatement::to\<T\>
-
-```rust
-pub fn to<T>(self: PackageStatement) -> <any>;
-```
-## PackageStatement::key\_neq
-
-```rust
-pub fn key_neq(self: PackageStatement, object: <any>) -> bool;
-```
-## PackageStatement::key\_eq
-
-```rust
-pub fn key_eq(self: PackageStatement, object: <any>) -> bool;
-```
-## PackageStatement::to\_set
-
-```rust
-pub fn to_set(self: PackageStatement) -> *PackageStatement;
 ```

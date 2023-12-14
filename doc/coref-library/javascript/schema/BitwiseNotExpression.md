@@ -9,10 +9,10 @@ schema BitwiseNotExpression {
 ```
 ## BitwiseNotExpression::getParentOid
 
-```rust
+```java
 /**
-     * Gets the parent oid of this node.
-     */
+* Gets the parent oid of this node.
+*/
 ```
 ```rust
 pub fn getParentOid(self: BitwiseNotExpression) -> int;
@@ -29,10 +29,10 @@ pub fn getIndex(self: BitwiseNotExpression) -> int;
 ```
 ## BitwiseNotExpression::getADescendant
 
-```rust
+```java
 /**
-     * Gets a descendant of this node. 
-     */
+* Gets a descendant of this node. 
+*/
 ```
 ```rust
 pub fn getADescendant(self: BitwiseNotExpression) -> *Node;
@@ -44,20 +44,20 @@ pub fn getOperator(self: BitwiseNotExpression) -> PrefixUnaryOperator;
 ```
 ## BitwiseNotExpression::getLocation
 
-```rust
+```java
 /**
-     * Gets the location of this node.
-     */
+* Gets the location of this node.
+*/
 ```
 ```rust
 pub fn getLocation(self: BitwiseNotExpression) -> Location;
 ```
 ## BitwiseNotExpression::getRelativePath
 
-```rust
+```java
 /**
-     * Gets the relative path of this node.
-     */
+* Gets the relative path of this node.
+*/
 ```
 ```rust
 pub fn getRelativePath(self: BitwiseNotExpression) -> string;
@@ -74,94 +74,94 @@ pub fn getEndLineNumber(self: BitwiseNotExpression) -> int;
 ```
 ## BitwiseNotExpression::getFile
 
-```rust
+```java
 /**
-     * Gets the file of this node.
-     */
+* Gets the file of this node.
+*/
 ```
 ```rust
 pub fn getFile(self: BitwiseNotExpression) -> File;
 ```
 ## BitwiseNotExpression::getAnAncestorByLevel
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets an ancestor of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getAnAncestorByLevel(self: BitwiseNotExpression, level: int) -> Node;
 ```
 ## BitwiseNotExpression::getEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets the enclosing function of it
-     */
+* Gets the enclosing function of it
+*/
 ```
 ```rust
 pub fn getEnclosingFunction(self: BitwiseNotExpression) -> FunctionLikeDeclaration;
 ```
 ## BitwiseNotExpression::getATrailingComment
 
-```rust
+```java
 /**
-     * Gets the trailing comments of it
-     */
+* Gets the trailing comments of it
+*/
 ```
 ```rust
 pub fn getATrailingComment(self: BitwiseNotExpression) -> *Comment;
 ```
 ## BitwiseNotExpression::getALeadingComment
 
-```rust
+```java
 /**
-     * Gets the leading comments of it
-     */
+* Gets the leading comments of it
+*/
 ```
 ```rust
 pub fn getALeadingComment(self: BitwiseNotExpression) -> *Comment;
 ```
 ## BitwiseNotExpression::getAnAncestorEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets an ancestor enclosing function of it
-     */
+* Gets an ancestor enclosing function of it
+*/
 ```
 ```rust
 pub fn getAnAncestorEnclosingFunction(self: BitwiseNotExpression) -> *FunctionLikeDeclaration;
 ```
 ## BitwiseNotExpression::getADescendantByLevel
 
-```rust
+```java
 /**
-     * Gets a descendant of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets a descendant of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getADescendantByLevel(self: BitwiseNotExpression, level: int) -> *Node;
 ```
 ## BitwiseNotExpression::getKind
 
-```rust
+```java
 /**
-     * Get the syntax kind of this node
-     */
+* Get the syntax kind of this node
+*/
 ```
 ```rust
 pub fn getKind(self: BitwiseNotExpression) -> int;
 ```
 ## BitwiseNotExpression::getAModifier
 
-```rust
+```java
 /**
-     * Gets a modifier.
-     */
+* Gets a modifier.
+*/
 ```
 ```rust
 pub fn getAModifier(self: BitwiseNotExpression) -> *Modifier;
@@ -178,30 +178,30 @@ pub fn getStartLineNumber(self: BitwiseNotExpression) -> int;
 ```
 ## BitwiseNotExpression::getChild
 
-```rust
+```java
 /**
-     * Gets the `i`th child of this node.
-     */
+* Gets the `i`th child of this node.
+*/
 ```
 ```rust
 pub fn getChild(self: BitwiseNotExpression, i: int) -> Node;
 ```
 ## BitwiseNotExpression::getRoot
 
-```rust
+```java
 /**
-     * Gets the root top-level of this node. 
-     */
+* Gets the root top-level of this node. 
+*/
 ```
 ```rust
 pub fn getRoot(self: BitwiseNotExpression) -> TopLevelDO;
 ```
 ## BitwiseNotExpression::getDecorator
 
-```rust
+```java
 /**
-     * Gets the `i`th decorator.
-     */
+* Gets the `i`th decorator.
+*/
 ```
 ```rust
 pub fn getDecorator(self: BitwiseNotExpression, i: int) -> Decorator;
@@ -213,131 +213,108 @@ pub fn getEndColumnNumber(self: BitwiseNotExpression) -> int;
 ```
 ## BitwiseNotExpression::getAChild
 
-```rust
+```java
 /**
-     * Gets a child node of this node.
-     */
+* Gets a child node of this node.
+*/
 ```
 ```rust
 pub fn getAChild(self: BitwiseNotExpression) -> *Node;
 ```
 ## BitwiseNotExpression::getParent
 
-```rust
+```java
 /**
-     * Gets the parent node of this node.
-     */
+* Gets the parent node of this node.
+*/
 ```
 ```rust
 pub fn getParent(self: BitwiseNotExpression) -> Node;
 ```
 ## BitwiseNotExpression::getLastChild
 
-```rust
+```java
 /**
-     * Gets the last child of this node parent.
-     */
+* Gets the last child of this node parent.
+*/
 ```
 ```rust
 pub fn getLastChild(self: BitwiseNotExpression) -> Node;
 ```
 ## BitwiseNotExpression::getChildCount
 
-```rust
+```java
 /**
-     * Gets the number of child nodes.
-     */
+* Gets the number of child nodes.
+*/
 ```
 ```rust
 pub fn getChildCount(self: BitwiseNotExpression) -> int;
 ```
 ## BitwiseNotExpression::getAnAncestor
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node. 
-     */
+* Gets an ancestor of this node. 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: BitwiseNotExpression) -> *Node;
 ```
 ## BitwiseNotExpression::getAComment
 
-```rust
+```java
 /**
-     * Gets the comments related to it
-     */
+* Gets the comments related to it
+*/
 ```
 ```rust
 pub fn getAComment(self: BitwiseNotExpression) -> *Comment;
 ```
 ## BitwiseNotExpression::getSymbol
 
-```rust
+```java
 /**
-     * Gets the symbol associated with this node.
-     */
+* Gets the symbol associated with this node.
+*/
 ```
 ```rust
 pub fn getSymbol(self: BitwiseNotExpression) -> Symbol;
 ```
 ## BitwiseNotExpression::getADecorator
 
-```rust
+```java
 /**
-     * Gets a decorator.
-     */
+* Gets a decorator.
+*/
 ```
 ```rust
 pub fn getADecorator(self: BitwiseNotExpression) -> *Decorator;
 ```
 ## BitwiseNotExpression::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavascriptDB) -> *BitwiseNotExpression;
 ```
 ## BitwiseNotExpression::getModifier
 
-```rust
+```java
 /**
-     * Gets the `i`th modifier.
-     */
+* Gets the `i`th modifier.
+*/
 ```
 ```rust
 pub fn getModifier(self: BitwiseNotExpression, i: int) -> Modifier;
 ```
 ## BitwiseNotExpression::getText
 
-```rust
+```java
 /**
-     * Gets the text of this node.
-     */
+* Gets the text of this node.
+*/
 ```
 ```rust
 pub fn getText(self: BitwiseNotExpression) -> string;
-```
-## BitwiseNotExpression::is\<T\>
-
-```rust
-pub fn is<T>(self: BitwiseNotExpression) -> bool;
-```
-## BitwiseNotExpression::to\<T\>
-
-```rust
-pub fn to<T>(self: BitwiseNotExpression) -> <any>;
-```
-## BitwiseNotExpression::key\_neq
-
-```rust
-pub fn key_neq(self: BitwiseNotExpression, object: <any>) -> bool;
-```
-## BitwiseNotExpression::key\_eq
-
-```rust
-pub fn key_eq(self: BitwiseNotExpression, object: <any>) -> bool;
-```
-## BitwiseNotExpression::to\_set
-
-```rust
-pub fn to_set(self: BitwiseNotExpression) -> *BitwiseNotExpression;
 ```

@@ -9,10 +9,10 @@ schema RelationalExpression {
 ```
 ## RelationalExpression::getParentOid
 
-```rust
+```java
 /**
-     * Gets the parent oid of this node.
-     */
+* Gets the parent oid of this node.
+*/
 ```
 ```rust
 pub fn getParentOid(self: RelationalExpression) -> int;
@@ -24,70 +24,70 @@ pub fn getEndColumnNumber(self: RelationalExpression) -> int;
 ```
 ## RelationalExpression::getLastChild
 
-```rust
+```java
 /**
-     * Gets the last child of this node parent.
-     */
+* Gets the last child of this node parent.
+*/
 ```
 ```rust
 pub fn getLastChild(self: RelationalExpression) -> Node;
 ```
 ## RelationalExpression::getEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets the enclosing function of it
-     */
+* Gets the enclosing function of it
+*/
 ```
 ```rust
 pub fn getEnclosingFunction(self: RelationalExpression) -> FunctionLikeDeclaration;
 ```
 ## RelationalExpression::getLeft
 
-```rust
+```java
 /**
-     * Get the left operand of this binary expression. An alias of `getLeftOperand`.
-     */
+* Get the left operand of this binary expression. An alias of `getLeftOperand`.
+*/
 ```
 ```rust
 pub fn getLeft(self: RelationalExpression) -> Expression;
 ```
 ## RelationalExpression::getADescendant
 
-```rust
+```java
 /**
-     * Gets a descendant of this node. 
-     */
+* Gets a descendant of this node. 
+*/
 ```
 ```rust
 pub fn getADescendant(self: RelationalExpression) -> *Node;
 ```
 ## RelationalExpression::getOperator
 
-```rust
+```java
 /**
-     * Get the operator of this binary expression.
-     */
+* Get the operator of this binary expression.
+*/
 ```
 ```rust
 pub fn getOperator(self: RelationalExpression) -> BinaryOperator;
 ```
 ## RelationalExpression::getLocation
 
-```rust
+```java
 /**
-     * Gets the location of this node.
-     */
+* Gets the location of this node.
+*/
 ```
 ```rust
 pub fn getLocation(self: RelationalExpression) -> Location;
 ```
 ## RelationalExpression::getRight
 
-```rust
+```java
 /**
-     * Get the right operand of this binary expression. An alias of `getRightOperand`
-     */
+* Get the right operand of this binary expression. An alias of `getRightOperand`
+*/
 ```
 ```rust
 pub fn getRight(self: RelationalExpression) -> Expression;
@@ -104,40 +104,40 @@ pub fn getAnOperand(self: RelationalExpression) -> *Expression;
 ```
 ## RelationalExpression::getRightOperand
 
-```rust
+```java
 /**
-     * Get the right operand of this binary expression.
-     */
+* Get the right operand of this binary expression.
+*/
 ```
 ```rust
 pub fn getRightOperand(self: RelationalExpression) -> Expression;
 ```
 ## RelationalExpression::getModifier
 
-```rust
+```java
 /**
-     * Gets the `i`th modifier.
-     */
+* Gets the `i`th modifier.
+*/
 ```
 ```rust
 pub fn getModifier(self: RelationalExpression, i: int) -> Modifier;
 ```
 ## RelationalExpression::getText
 
-```rust
+```java
 /**
-     * Gets the text of this node.
-     */
+* Gets the text of this node.
+*/
 ```
 ```rust
 pub fn getText(self: RelationalExpression) -> string;
 ```
 ## RelationalExpression::getRelativePath
 
-```rust
+```java
 /**
-     * Gets the relative path of this node.
-     */
+* Gets the relative path of this node.
+*/
 ```
 ```rust
 pub fn getRelativePath(self: RelationalExpression) -> string;
@@ -149,74 +149,74 @@ pub fn getEndLineNumber(self: RelationalExpression) -> int;
 ```
 ## RelationalExpression::getFile
 
-```rust
+```java
 /**
-     * Gets the file of this node.
-     */
+* Gets the file of this node.
+*/
 ```
 ```rust
 pub fn getFile(self: RelationalExpression) -> File;
 ```
 ## RelationalExpression::getAnAncestorByLevel
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets an ancestor of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getAnAncestorByLevel(self: RelationalExpression, level: int) -> Node;
 ```
 ## RelationalExpression::getLeftOperand
 
-```rust
+```java
 /**
-     * Get the left operand of this binary expression.
-     */
+* Get the left operand of this binary expression.
+*/
 ```
 ```rust
 pub fn getLeftOperand(self: RelationalExpression) -> Expression;
 ```
 ## RelationalExpression::getAnAncestorEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets an ancestor enclosing function of it
-     */
+* Gets an ancestor enclosing function of it
+*/
 ```
 ```rust
 pub fn getAnAncestorEnclosingFunction(self: RelationalExpression) -> *FunctionLikeDeclaration;
 ```
 ## RelationalExpression::getADescendantByLevel
 
-```rust
+```java
 /**
-     * Gets a descendant of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets a descendant of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getADescendantByLevel(self: RelationalExpression, level: int) -> *Node;
 ```
 ## RelationalExpression::getKind
 
-```rust
+```java
 /**
-     * Get the syntax kind of this node
-     */
+* Get the syntax kind of this node
+*/
 ```
 ```rust
 pub fn getKind(self: RelationalExpression) -> int;
 ```
 ## RelationalExpression::getAModifier
 
-```rust
+```java
 /**
-     * Gets a modifier.
-     */
+* Gets a modifier.
+*/
 ```
 ```rust
 pub fn getAModifier(self: RelationalExpression) -> *Modifier;
@@ -233,151 +233,128 @@ pub fn getStartLineNumber(self: RelationalExpression) -> int;
 ```
 ## RelationalExpression::getChild
 
-```rust
+```java
 /**
-     * Gets the `i`th child of this node.
-     */
+* Gets the `i`th child of this node.
+*/
 ```
 ```rust
 pub fn getChild(self: RelationalExpression, i: int) -> Node;
 ```
 ## RelationalExpression::getRoot
 
-```rust
+```java
 /**
-     * Gets the root top-level of this node. 
-     */
+* Gets the root top-level of this node. 
+*/
 ```
 ```rust
 pub fn getRoot(self: RelationalExpression) -> TopLevelDO;
 ```
 ## RelationalExpression::getDecorator
 
-```rust
+```java
 /**
-     * Gets the `i`th decorator.
-     */
+* Gets the `i`th decorator.
+*/
 ```
 ```rust
 pub fn getDecorator(self: RelationalExpression, i: int) -> Decorator;
 ```
 ## RelationalExpression::getAChild
 
-```rust
+```java
 /**
-     * Gets a child node of this node.
-     */
+* Gets a child node of this node.
+*/
 ```
 ```rust
 pub fn getAChild(self: RelationalExpression) -> *Node;
 ```
 ## RelationalExpression::getParent
 
-```rust
+```java
 /**
-     * Gets the parent node of this node.
-     */
+* Gets the parent node of this node.
+*/
 ```
 ```rust
 pub fn getParent(self: RelationalExpression) -> Node;
 ```
 ## RelationalExpression::getALeadingComment
 
-```rust
+```java
 /**
-     * Gets the leading comments of it
-     */
+* Gets the leading comments of it
+*/
 ```
 ```rust
 pub fn getALeadingComment(self: RelationalExpression) -> *Comment;
 ```
 ## RelationalExpression::getATrailingComment
 
-```rust
+```java
 /**
-     * Gets the trailing comments of it
-     */
+* Gets the trailing comments of it
+*/
 ```
 ```rust
 pub fn getATrailingComment(self: RelationalExpression) -> *Comment;
 ```
 ## RelationalExpression::getChildCount
 
-```rust
+```java
 /**
-     * Gets the number of child nodes.
-     */
+* Gets the number of child nodes.
+*/
 ```
 ```rust
 pub fn getChildCount(self: RelationalExpression) -> int;
 ```
 ## RelationalExpression::getAnAncestor
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node. 
-     */
+* Gets an ancestor of this node. 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: RelationalExpression) -> *Node;
 ```
 ## RelationalExpression::getAComment
 
-```rust
+```java
 /**
-     * Gets the comments related to it
-     */
+* Gets the comments related to it
+*/
 ```
 ```rust
 pub fn getAComment(self: RelationalExpression) -> *Comment;
 ```
 ## RelationalExpression::getADecorator
 
-```rust
+```java
 /**
-     * Gets a decorator.
-     */
+* Gets a decorator.
+*/
 ```
 ```rust
 pub fn getADecorator(self: RelationalExpression) -> *Decorator;
 ```
 ## RelationalExpression::getSymbol
 
-```rust
+```java
 /**
-     * Gets the symbol associated with this node.
-     */
+* Gets the symbol associated with this node.
+*/
 ```
 ```rust
 pub fn getSymbol(self: RelationalExpression) -> Symbol;
 ```
 ## RelationalExpression::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavascriptDB) -> *RelationalExpression;
-```
-## RelationalExpression::is\<T\>
-
-```rust
-pub fn is<T>(self: RelationalExpression) -> bool;
-```
-## RelationalExpression::to\<T\>
-
-```rust
-pub fn to<T>(self: RelationalExpression) -> <any>;
-```
-## RelationalExpression::key\_neq
-
-```rust
-pub fn key_neq(self: RelationalExpression, object: <any>) -> bool;
-```
-## RelationalExpression::key\_eq
-
-```rust
-pub fn key_eq(self: RelationalExpression, object: <any>) -> bool;
-```
-## RelationalExpression::to\_set
-
-```rust
-pub fn to_set(self: RelationalExpression) -> *RelationalExpression;
 ```

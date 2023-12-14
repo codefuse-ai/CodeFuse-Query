@@ -11,53 +11,30 @@ schema SwitchStatementDO {
 ```
 ## SwitchStatementDO::getDiscriminantHashId
 
-```rust
+```java
 /**
-     * @brief gets the discriminant hash id of this element.
-     * @return int
-     */
+* @brief gets the discriminant hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getDiscriminantHashId(self: SwitchStatementDO) -> int;
 ```
 ## SwitchStatementDO::getBodyDeclarationHashId
 
-```rust
+```java
 /**
-     * @brief gets the body declaration hash id of this element.
-     * @return int
-     */
+* @brief gets the body declaration hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getBodyDeclarationHashId(self: SwitchStatementDO) -> int;
 ```
 ## SwitchStatementDO::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavaDB) -> *SwitchStatementDO;
-```
-## SwitchStatementDO::is\<T\>
-
-```rust
-pub fn is<T>(self: SwitchStatementDO) -> bool;
-```
-## SwitchStatementDO::to\<T\>
-
-```rust
-pub fn to<T>(self: SwitchStatementDO) -> <any>;
-```
-## SwitchStatementDO::key\_neq
-
-```rust
-pub fn key_neq(self: SwitchStatementDO, object: <any>) -> bool;
-```
-## SwitchStatementDO::key\_eq
-
-```rust
-pub fn key_eq(self: SwitchStatementDO, object: <any>) -> bool;
-```
-## SwitchStatementDO::to\_set
-
-```rust
-pub fn to_set(self: SwitchStatementDO) -> *SwitchStatementDO;
 ```

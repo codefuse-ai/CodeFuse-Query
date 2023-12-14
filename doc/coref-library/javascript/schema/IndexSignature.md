@@ -9,140 +9,140 @@ schema IndexSignature {
 ```
 ## IndexSignature::getLocation
 
-```rust
+```java
 /**
-     * Gets the location of this node.
-     */
+* Gets the location of this node.
+*/
 ```
 ```rust
 pub fn getLocation(self: IndexSignature) -> Location;
 ```
 ## IndexSignature::getSymbol
 
-```rust
+```java
 /**
-     * Gets the symbol associated with this node.
-     */
+* Gets the symbol associated with this node.
+*/
 ```
 ```rust
 pub fn getSymbol(self: IndexSignature) -> Symbol;
 ```
 ## IndexSignature::getADecorator
 
-```rust
+```java
 /**
-     * Gets a decorator.
-     */
+* Gets a decorator.
+*/
 ```
 ```rust
 pub fn getADecorator(self: IndexSignature) -> *Decorator;
 ```
 ## IndexSignature::getText
 
-```rust
+```java
 /**
-     * Gets the text of this node.
-     */
+* Gets the text of this node.
+*/
 ```
 ```rust
 pub fn getText(self: IndexSignature) -> string;
 ```
 ## IndexSignature::getModifier
 
-```rust
+```java
 /**
-     * Gets the `i`th modifier.
-     */
+* Gets the `i`th modifier.
+*/
 ```
 ```rust
 pub fn getModifier(self: IndexSignature, i: int) -> Modifier;
 ```
 ## IndexSignature::getAComment
 
-```rust
+```java
 /**
-     * Gets the comments related to it
-     */
+* Gets the comments related to it
+*/
 ```
 ```rust
 pub fn getAComment(self: IndexSignature) -> *Comment;
 ```
 ## IndexSignature::getAnAncestor
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node. 
-     */
+* Gets an ancestor of this node. 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: IndexSignature) -> *Node;
 ```
 ## IndexSignature::getAChild
 
-```rust
+```java
 /**
-     * Gets a child node of this node.
-     */
+* Gets a child node of this node.
+*/
 ```
 ```rust
 pub fn getAChild(self: IndexSignature) -> *Node;
 ```
 ## IndexSignature::getParent
 
-```rust
+```java
 /**
-     * Gets the parent node of this node.
-     */
+* Gets the parent node of this node.
+*/
 ```
 ```rust
 pub fn getParent(self: IndexSignature) -> Node;
 ```
 ## IndexSignature::getChildCount
 
-```rust
+```java
 /**
-     * Gets the number of child nodes.
-     */
+* Gets the number of child nodes.
+*/
 ```
 ```rust
 pub fn getChildCount(self: IndexSignature) -> int;
 ```
 ## IndexSignature::getRoot
 
-```rust
+```java
 /**
-     * Gets the root top-level of this node. 
-     */
+* Gets the root top-level of this node. 
+*/
 ```
 ```rust
 pub fn getRoot(self: IndexSignature) -> TopLevelDO;
 ```
 ## IndexSignature::getDecorator
 
-```rust
+```java
 /**
-     * Gets the `i`th decorator.
-     */
+* Gets the `i`th decorator.
+*/
 ```
 ```rust
 pub fn getDecorator(self: IndexSignature, i: int) -> Decorator;
 ```
 ## IndexSignature::getKind
 
-```rust
+```java
 /**
-     * Get the syntax kind of this node
-     */
+* Get the syntax kind of this node
+*/
 ```
 ```rust
 pub fn getKind(self: IndexSignature) -> int;
 ```
 ## IndexSignature::getAModifier
 
-```rust
+```java
 /**
-     * Gets a modifier.
-     */
+* Gets a modifier.
+*/
 ```
 ```rust
 pub fn getAModifier(self: IndexSignature) -> *Modifier;
@@ -154,10 +154,10 @@ pub fn getStartColumnNumber(self: IndexSignature) -> int;
 ```
 ## IndexSignature::getChild
 
-```rust
+```java
 /**
-     * Gets the `i`th child of this node.
-     */
+* Gets the `i`th child of this node.
+*/
 ```
 ```rust
 pub fn getChild(self: IndexSignature, i: int) -> Node;
@@ -169,22 +169,22 @@ pub fn getStartLineNumber(self: IndexSignature) -> int;
 ```
 ## IndexSignature::getAnAncestorEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets an ancestor enclosing function of it
-     */
+* Gets an ancestor enclosing function of it
+*/
 ```
 ```rust
 pub fn getAnAncestorEnclosingFunction(self: IndexSignature) -> *FunctionLikeDeclaration;
 ```
 ## IndexSignature::getADescendantByLevel
 
-```rust
+```java
 /**
-     * Gets a descendant of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets a descendant of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getADescendantByLevel(self: IndexSignature, level: int) -> *Node;
@@ -196,72 +196,72 @@ pub fn getEndLineNumber(self: IndexSignature) -> int;
 ```
 ## IndexSignature::getRelativePath
 
-```rust
+```java
 /**
-     * Gets the relative path of this node.
-     */
+* Gets the relative path of this node.
+*/
 ```
 ```rust
 pub fn getRelativePath(self: IndexSignature) -> string;
 ```
 ## IndexSignature::getAnAncestorByLevel
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets an ancestor of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getAnAncestorByLevel(self: IndexSignature, level: int) -> Node;
 ```
 ## IndexSignature::getFile
 
-```rust
+```java
 /**
-     * Gets the file of this node.
-     */
+* Gets the file of this node.
+*/
 ```
 ```rust
 pub fn getFile(self: IndexSignature) -> File;
 ```
 ## IndexSignature::getALeadingComment
 
-```rust
+```java
 /**
-     * Gets the leading comments of it
-     */
+* Gets the leading comments of it
+*/
 ```
 ```rust
 pub fn getALeadingComment(self: IndexSignature) -> *Comment;
 ```
 ## IndexSignature::getATrailingComment
 
-```rust
+```java
 /**
-     * Gets the trailing comments of it
-     */
+* Gets the trailing comments of it
+*/
 ```
 ```rust
 pub fn getATrailingComment(self: IndexSignature) -> *Comment;
 ```
 ## IndexSignature::getLastChild
 
-```rust
+```java
 /**
-     * Gets the last child of this node parent.
-     */
+* Gets the last child of this node parent.
+*/
 ```
 ```rust
 pub fn getLastChild(self: IndexSignature) -> Node;
 ```
 ## IndexSignature::getEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets the enclosing function of it
-     */
+* Gets the enclosing function of it
+*/
 ```
 ```rust
 pub fn getEnclosingFunction(self: IndexSignature) -> FunctionLikeDeclaration;
@@ -273,10 +273,10 @@ pub fn getEndColumnNumber(self: IndexSignature) -> int;
 ```
 ## IndexSignature::getParentOid
 
-```rust
+```java
 /**
-     * Gets the parent oid of this node.
-     */
+* Gets the parent oid of this node.
+*/
 ```
 ```rust
 pub fn getParentOid(self: IndexSignature) -> int;
@@ -288,41 +288,18 @@ pub fn getIndex(self: IndexSignature) -> int;
 ```
 ## IndexSignature::getADescendant
 
-```rust
+```java
 /**
-     * Gets a descendant of this node. 
-     */
+* Gets a descendant of this node. 
+*/
 ```
 ```rust
 pub fn getADescendant(self: IndexSignature) -> *Node;
 ```
 ## IndexSignature::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavascriptDB) -> *IndexSignature;
-```
-## IndexSignature::is\<T\>
-
-```rust
-pub fn is<T>(self: IndexSignature) -> bool;
-```
-## IndexSignature::to\<T\>
-
-```rust
-pub fn to<T>(self: IndexSignature) -> <any>;
-```
-## IndexSignature::key\_neq
-
-```rust
-pub fn key_neq(self: IndexSignature, object: <any>) -> bool;
-```
-## IndexSignature::key\_eq
-
-```rust
-pub fn key_eq(self: IndexSignature, object: <any>) -> bool;
-```
-## IndexSignature::to\_set
-
-```rust
-pub fn to_set(self: IndexSignature) -> *IndexSignature;
 ```

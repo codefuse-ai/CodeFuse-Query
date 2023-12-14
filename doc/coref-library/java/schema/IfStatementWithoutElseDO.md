@@ -11,53 +11,30 @@ schema IfStatementWithoutElseDO {
 ```
 ## IfStatementWithoutElseDO::getConditionHashId
 
-```rust
+```java
 /**
-     * @brief gets the condition hash id of this element.
-     * @return int
-     */
+* @brief gets the condition hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getConditionHashId(self: IfStatementWithoutElseDO) -> int;
 ```
 ## IfStatementWithoutElseDO::getConsequentHashId
 
-```rust
+```java
 /**
-     * @brief gets the consequent hash id of this element.
-     * @return int
-     */
+* @brief gets the consequent hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getConsequentHashId(self: IfStatementWithoutElseDO) -> int;
 ```
 ## IfStatementWithoutElseDO::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavaDB) -> *IfStatementWithoutElseDO;
-```
-## IfStatementWithoutElseDO::is\<T\>
-
-```rust
-pub fn is<T>(self: IfStatementWithoutElseDO) -> bool;
-```
-## IfStatementWithoutElseDO::to\<T\>
-
-```rust
-pub fn to<T>(self: IfStatementWithoutElseDO) -> <any>;
-```
-## IfStatementWithoutElseDO::key\_neq
-
-```rust
-pub fn key_neq(self: IfStatementWithoutElseDO, object: <any>) -> bool;
-```
-## IfStatementWithoutElseDO::key\_eq
-
-```rust
-pub fn key_eq(self: IfStatementWithoutElseDO, object: <any>) -> bool;
-```
-## IfStatementWithoutElseDO::to\_set
-
-```rust
-pub fn to_set(self: IfStatementWithoutElseDO) -> *IfStatementWithoutElseDO;
 ```

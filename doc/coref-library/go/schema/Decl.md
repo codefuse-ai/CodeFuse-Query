@@ -20,9 +20,6 @@ pub fn getParentNode(self: Decl) -> Node;
 ## Decl::getBelongsFile
 
 ```rust
-// root node
-```
-```rust
 pub fn getBelongsFile(self: Decl) -> File;
 ```
 ## Decl::getAnAncestor
@@ -41,6 +38,8 @@ pub fn getDepthFromRoot(self: Decl) -> int;
 pub fn hasLocation(self: Decl) -> bool;
 ```
 ## Decl::\_\_all\_\_
+
+Data constraint method.
 
 ```rust
 pub fn __all__(db: GoDB) -> *Decl;
@@ -72,7 +71,7 @@ pub fn isRootNode(self: Decl) -> bool;
 ```
 ## Decl::getText
 
-```rust
+```java
 // getText Extract the text associated with a specific node in a file
 ```
 ```rust
@@ -147,29 +146,4 @@ pub fn getBelongsFunction(self: Decl) -> Function;
 
 ```rust
 pub fn getLocation(self: Decl) -> Location;
-```
-## Decl::is\<T\>
-
-```rust
-pub fn is<T>(self: Decl) -> bool;
-```
-## Decl::to\<T\>
-
-```rust
-pub fn to<T>(self: Decl) -> <any>;
-```
-## Decl::key\_neq
-
-```rust
-pub fn key_neq(self: Decl, object: <any>) -> bool;
-```
-## Decl::key\_eq
-
-```rust
-pub fn key_eq(self: Decl, object: <any>) -> bool;
-```
-## Decl::to\_set
-
-```rust
-pub fn to_set(self: Decl) -> *Decl;
 ```

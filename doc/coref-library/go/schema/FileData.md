@@ -12,22 +12,22 @@ schema FileData {
 ```
 ## FileData::getFileId
 
-```rust
+```java
 /**
-     * @brief gets the file id of this element.
-     * @return int
-     */
+* @brief gets the file id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getFileId(self: FileData) -> int;
 ```
 ## FileData::getContent
 
-```rust
+```java
 /**
-     * @brief gets the content of this element.
-     * @return string
-     */
+* @brief gets the content of this element.
+* @return string
+*/
 ```
 ```rust
 pub fn getContent(self: FileData) -> string;
@@ -39,42 +39,19 @@ pub fn getFile(self: FileData) -> File;
 ```
 ## FileData::getType
 
-```rust
+```java
 /**
-     * @brief gets the type of this element.
-     * @return int
-     */
+* @brief gets the type of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getType(self: FileData) -> int;
 ```
 ## FileData::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: GoDB) -> *FileData;
-```
-## FileData::is\<T\>
-
-```rust
-pub fn is<T>(self: FileData) -> bool;
-```
-## FileData::to\<T\>
-
-```rust
-pub fn to<T>(self: FileData) -> <any>;
-```
-## FileData::key\_neq
-
-```rust
-pub fn key_neq(self: FileData, object: <any>) -> bool;
-```
-## FileData::key\_eq
-
-```rust
-pub fn key_eq(self: FileData, object: <any>) -> bool;
-```
-## FileData::to\_set
-
-```rust
-pub fn to_set(self: FileData) -> *FileData;
 ```

@@ -9,120 +9,120 @@ schema LogicalAndExpression {
 ```
 ## LogicalAndExpression::getSymbol
 
-```rust
+```java
 /**
-     * Gets the symbol associated with this node.
-     */
+* Gets the symbol associated with this node.
+*/
 ```
 ```rust
 pub fn getSymbol(self: LogicalAndExpression) -> Symbol;
 ```
 ## LogicalAndExpression::getADecorator
 
-```rust
+```java
 /**
-     * Gets a decorator.
-     */
+* Gets a decorator.
+*/
 ```
 ```rust
 pub fn getADecorator(self: LogicalAndExpression) -> *Decorator;
 ```
 ## LogicalAndExpression::getAComment
 
-```rust
+```java
 /**
-     * Gets the comments related to it
-     */
+* Gets the comments related to it
+*/
 ```
 ```rust
 pub fn getAComment(self: LogicalAndExpression) -> *Comment;
 ```
 ## LogicalAndExpression::getAnAncestor
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node. 
-     */
+* Gets an ancestor of this node. 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: LogicalAndExpression) -> *Node;
 ```
 ## LogicalAndExpression::getChildCount
 
-```rust
+```java
 /**
-     * Gets the number of child nodes.
-     */
+* Gets the number of child nodes.
+*/
 ```
 ```rust
 pub fn getChildCount(self: LogicalAndExpression) -> int;
 ```
 ## LogicalAndExpression::getATrailingComment
 
-```rust
+```java
 /**
-     * Gets the trailing comments of it
-     */
+* Gets the trailing comments of it
+*/
 ```
 ```rust
 pub fn getATrailingComment(self: LogicalAndExpression) -> *Comment;
 ```
 ## LogicalAndExpression::getALeadingComment
 
-```rust
+```java
 /**
-     * Gets the leading comments of it
-     */
+* Gets the leading comments of it
+*/
 ```
 ```rust
 pub fn getALeadingComment(self: LogicalAndExpression) -> *Comment;
 ```
 ## LogicalAndExpression::getParent
 
-```rust
+```java
 /**
-     * Gets the parent node of this node.
-     */
+* Gets the parent node of this node.
+*/
 ```
 ```rust
 pub fn getParent(self: LogicalAndExpression) -> Node;
 ```
 ## LogicalAndExpression::getAChild
 
-```rust
+```java
 /**
-     * Gets a child node of this node.
-     */
+* Gets a child node of this node.
+*/
 ```
 ```rust
 pub fn getAChild(self: LogicalAndExpression) -> *Node;
 ```
 ## LogicalAndExpression::getDecorator
 
-```rust
+```java
 /**
-     * Gets the `i`th decorator.
-     */
+* Gets the `i`th decorator.
+*/
 ```
 ```rust
 pub fn getDecorator(self: LogicalAndExpression, i: int) -> Decorator;
 ```
 ## LogicalAndExpression::getRoot
 
-```rust
+```java
 /**
-     * Gets the root top-level of this node. 
-     */
+* Gets the root top-level of this node. 
+*/
 ```
 ```rust
 pub fn getRoot(self: LogicalAndExpression) -> TopLevelDO;
 ```
 ## LogicalAndExpression::getChild
 
-```rust
+```java
 /**
-     * Gets the `i`th child of this node.
-     */
+* Gets the `i`th child of this node.
+*/
 ```
 ```rust
 pub fn getChild(self: LogicalAndExpression, i: int) -> Node;
@@ -134,64 +134,64 @@ pub fn getStartLineNumber(self: LogicalAndExpression) -> int;
 ```
 ## LogicalAndExpression::getADescendantByLevel
 
-```rust
+```java
 /**
-     * Gets a descendant of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets a descendant of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getADescendantByLevel(self: LogicalAndExpression, level: int) -> *Node;
 ```
 ## LogicalAndExpression::getAnAncestorEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets an ancestor enclosing function of it
-     */
+* Gets an ancestor enclosing function of it
+*/
 ```
 ```rust
 pub fn getAnAncestorEnclosingFunction(self: LogicalAndExpression) -> *FunctionLikeDeclaration;
 ```
 ## LogicalAndExpression::getLeftOperand
 
-```rust
+```java
 /**
-     * Get the left operand of this binary expression.
-     */
+* Get the left operand of this binary expression.
+*/
 ```
 ```rust
 pub fn getLeftOperand(self: LogicalAndExpression) -> Expression;
 ```
 ## LogicalAndExpression::getAnAncestorByLevel
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets an ancestor of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getAnAncestorByLevel(self: LogicalAndExpression, level: int) -> Node;
 ```
 ## LogicalAndExpression::getFile
 
-```rust
+```java
 /**
-     * Gets the file of this node.
-     */
+* Gets the file of this node.
+*/
 ```
 ```rust
 pub fn getFile(self: LogicalAndExpression) -> File;
 ```
 ## LogicalAndExpression::getText
 
-```rust
+```java
 /**
-     * Gets the text of this node.
-     */
+* Gets the text of this node.
+*/
 ```
 ```rust
 pub fn getText(self: LogicalAndExpression) -> string;
@@ -203,20 +203,20 @@ pub fn getAnOperand(self: LogicalAndExpression) -> *Expression;
 ```
 ## LogicalAndExpression::getModifier
 
-```rust
+```java
 /**
-     * Gets the `i`th modifier.
-     */
+* Gets the `i`th modifier.
+*/
 ```
 ```rust
 pub fn getModifier(self: LogicalAndExpression, i: int) -> Modifier;
 ```
 ## LogicalAndExpression::getRightOperand
 
-```rust
+```java
 /**
-     * Get the right operand of this binary expression.
-     */
+* Get the right operand of this binary expression.
+*/
 ```
 ```rust
 pub fn getRightOperand(self: LogicalAndExpression) -> Expression;
@@ -228,55 +228,57 @@ pub fn getEndLineNumber(self: LogicalAndExpression) -> int;
 ```
 ## LogicalAndExpression::getRelativePath
 
-```rust
+```java
 /**
-     * Gets the relative path of this node.
-     */
+* Gets the relative path of this node.
+*/
 ```
 ```rust
 pub fn getRelativePath(self: LogicalAndExpression) -> string;
 ```
 ## LogicalAndExpression::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavascriptDB) -> *LogicalAndExpression;
 ```
 ## LogicalAndExpression::getLocation
 
-```rust
+```java
 /**
-     * Gets the location of this node.
-     */
+* Gets the location of this node.
+*/
 ```
 ```rust
 pub fn getLocation(self: LogicalAndExpression) -> Location;
 ```
 ## LogicalAndExpression::getOperator
 
-```rust
+```java
 /**
-     * Get the operator of this binary expression.
-     */
+* Get the operator of this binary expression.
+*/
 ```
 ```rust
 pub fn getOperator(self: LogicalAndExpression) -> BinaryOperator;
 ```
 ## LogicalAndExpression::getADescendant
 
-```rust
+```java
 /**
-     * Gets a descendant of this node. 
-     */
+* Gets a descendant of this node. 
+*/
 ```
 ```rust
 pub fn getADescendant(self: LogicalAndExpression) -> *Node;
 ```
 ## LogicalAndExpression::getLeft
 
-```rust
+```java
 /**
-     * Get the left operand of this binary expression. An alias of `getLeftOperand`.
-     */
+* Get the left operand of this binary expression. An alias of `getLeftOperand`.
+*/
 ```
 ```rust
 pub fn getLeft(self: LogicalAndExpression) -> Expression;
@@ -288,40 +290,40 @@ pub fn getStartColumnNumber(self: LogicalAndExpression) -> int;
 ```
 ## LogicalAndExpression::getAModifier
 
-```rust
+```java
 /**
-     * Gets a modifier.
-     */
+* Gets a modifier.
+*/
 ```
 ```rust
 pub fn getAModifier(self: LogicalAndExpression) -> *Modifier;
 ```
 ## LogicalAndExpression::getKind
 
-```rust
+```java
 /**
-     * Get the syntax kind of this node
-     */
+* Get the syntax kind of this node
+*/
 ```
 ```rust
 pub fn getKind(self: LogicalAndExpression) -> int;
 ```
 ## LogicalAndExpression::getLastChild
 
-```rust
+```java
 /**
-     * Gets the last child of this node parent.
-     */
+* Gets the last child of this node parent.
+*/
 ```
 ```rust
 pub fn getLastChild(self: LogicalAndExpression) -> Node;
 ```
 ## LogicalAndExpression::getEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets the enclosing function of it
-     */
+* Gets the enclosing function of it
+*/
 ```
 ```rust
 pub fn getEnclosingFunction(self: LogicalAndExpression) -> FunctionLikeDeclaration;
@@ -333,10 +335,10 @@ pub fn getEndColumnNumber(self: LogicalAndExpression) -> int;
 ```
 ## LogicalAndExpression::getParentOid
 
-```rust
+```java
 /**
-     * Gets the parent oid of this node.
-     */
+* Gets the parent oid of this node.
+*/
 ```
 ```rust
 pub fn getParentOid(self: LogicalAndExpression) -> int;
@@ -348,36 +350,11 @@ pub fn getIndex(self: LogicalAndExpression) -> int;
 ```
 ## LogicalAndExpression::getRight
 
-```rust
+```java
 /**
-     * Get the right operand of this binary expression. An alias of `getRightOperand`
-     */
+* Get the right operand of this binary expression. An alias of `getRightOperand`
+*/
 ```
 ```rust
 pub fn getRight(self: LogicalAndExpression) -> Expression;
-```
-## LogicalAndExpression::is\<T\>
-
-```rust
-pub fn is<T>(self: LogicalAndExpression) -> bool;
-```
-## LogicalAndExpression::to\<T\>
-
-```rust
-pub fn to<T>(self: LogicalAndExpression) -> <any>;
-```
-## LogicalAndExpression::key\_neq
-
-```rust
-pub fn key_neq(self: LogicalAndExpression, object: <any>) -> bool;
-```
-## LogicalAndExpression::key\_eq
-
-```rust
-pub fn key_eq(self: LogicalAndExpression, object: <any>) -> bool;
-```
-## LogicalAndExpression::to\_set
-
-```rust
-pub fn to_set(self: LogicalAndExpression) -> *LogicalAndExpression;
 ```

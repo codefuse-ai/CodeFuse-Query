@@ -64,8 +64,8 @@ pub fn isCompositeLit(self: Selector) -> bool;
 ```
 ## Selector::isControlExpr
 
-```rust
-// Check if the expression is a control expression.
+```java
+// Any of ['||', '&&']
 ```
 ```rust
 pub fn isControlExpr(self: Selector) -> bool;
@@ -157,8 +157,8 @@ pub fn isLssExpr(self: Selector) -> bool;
 ```
 ## Selector::isUnaryExpr
 
-```rust
-// Check if the given expression is a unary expression.
+```java
+// Any of ['+','-','!','^','*','&','->' ]
 ```
 ```rust
 pub fn isUnaryExpr(self: Selector) -> bool;
@@ -215,8 +215,8 @@ pub fn isGenerictypeinstantiationExpr(self: Selector) -> bool;
 ```
 ## Selector::isBinaryExpr
 
-```rust
-// Check if the expression is a binary expression.
+```java
+// Any of ['||', '&&', '==', '!=', '<', '<=', '>', '+', '-', '|', '^', '*', '/', '%', '<<', '>>', '&', '&^' ]
 ```
 ```rust
 pub fn isBinaryExpr(self: Selector) -> bool;
@@ -348,7 +348,7 @@ pub fn isQuoExpr(self: Selector) -> bool;
 ```
 ## Selector::getText
 
-```rust
+```java
 // getText Extract the text associated with a specific node in a file
 ```
 ```rust
@@ -407,9 +407,6 @@ pub fn getAnAncestor(self: Selector) -> *Node;
 ## Selector::getBelongsFile
 
 ```rust
-// root node
-```
-```rust
 pub fn getBelongsFile(self: Selector) -> File;
 ```
 ## Selector::isSendchantypeExpr
@@ -434,6 +431,8 @@ pub fn isRemExpr(self: Selector) -> bool;
 ```
 ## Selector::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: GoDB) -> *Selector;
 ```
@@ -456,29 +455,4 @@ pub fn getTextSize(self: Selector) -> int;
 
 ```rust
 pub fn getAnAncestorForIndex(self: Selector, index: int) -> Node;
-```
-## Selector::is\<T\>
-
-```rust
-pub fn is<T>(self: Selector) -> bool;
-```
-## Selector::to\<T\>
-
-```rust
-pub fn to<T>(self: Selector) -> <any>;
-```
-## Selector::key\_neq
-
-```rust
-pub fn key_neq(self: Selector, object: <any>) -> bool;
-```
-## Selector::key\_eq
-
-```rust
-pub fn key_eq(self: Selector, object: <any>) -> bool;
-```
-## Selector::to\_set
-
-```rust
-pub fn to_set(self: Selector) -> *Selector;
 ```

@@ -9,140 +9,140 @@ schema RestTypeNode {
 ```
 ## RestTypeNode::getLocation
 
-```rust
+```java
 /**
-     * Gets the location of this node.
-     */
+* Gets the location of this node.
+*/
 ```
 ```rust
 pub fn getLocation(self: RestTypeNode) -> Location;
 ```
 ## RestTypeNode::getSymbol
 
-```rust
+```java
 /**
-     * Gets the symbol associated with this node.
-     */
+* Gets the symbol associated with this node.
+*/
 ```
 ```rust
 pub fn getSymbol(self: RestTypeNode) -> Symbol;
 ```
 ## RestTypeNode::getADecorator
 
-```rust
+```java
 /**
-     * Gets a decorator.
-     */
+* Gets a decorator.
+*/
 ```
 ```rust
 pub fn getADecorator(self: RestTypeNode) -> *Decorator;
 ```
 ## RestTypeNode::getText
 
-```rust
+```java
 /**
-     * Gets the text of this node.
-     */
+* Gets the text of this node.
+*/
 ```
 ```rust
 pub fn getText(self: RestTypeNode) -> string;
 ```
 ## RestTypeNode::getModifier
 
-```rust
+```java
 /**
-     * Gets the `i`th modifier.
-     */
+* Gets the `i`th modifier.
+*/
 ```
 ```rust
 pub fn getModifier(self: RestTypeNode, i: int) -> Modifier;
 ```
 ## RestTypeNode::getAComment
 
-```rust
+```java
 /**
-     * Gets the comments related to it
-     */
+* Gets the comments related to it
+*/
 ```
 ```rust
 pub fn getAComment(self: RestTypeNode) -> *Comment;
 ```
 ## RestTypeNode::getAnAncestor
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node. 
-     */
+* Gets an ancestor of this node. 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: RestTypeNode) -> *Node;
 ```
 ## RestTypeNode::getAChild
 
-```rust
+```java
 /**
-     * Gets a child node of this node.
-     */
+* Gets a child node of this node.
+*/
 ```
 ```rust
 pub fn getAChild(self: RestTypeNode) -> *Node;
 ```
 ## RestTypeNode::getParent
 
-```rust
+```java
 /**
-     * Gets the parent node of this node.
-     */
+* Gets the parent node of this node.
+*/
 ```
 ```rust
 pub fn getParent(self: RestTypeNode) -> Node;
 ```
 ## RestTypeNode::getChildCount
 
-```rust
+```java
 /**
-     * Gets the number of child nodes.
-     */
+* Gets the number of child nodes.
+*/
 ```
 ```rust
 pub fn getChildCount(self: RestTypeNode) -> int;
 ```
 ## RestTypeNode::getRoot
 
-```rust
+```java
 /**
-     * Gets the root top-level of this node. 
-     */
+* Gets the root top-level of this node. 
+*/
 ```
 ```rust
 pub fn getRoot(self: RestTypeNode) -> TopLevelDO;
 ```
 ## RestTypeNode::getDecorator
 
-```rust
+```java
 /**
-     * Gets the `i`th decorator.
-     */
+* Gets the `i`th decorator.
+*/
 ```
 ```rust
 pub fn getDecorator(self: RestTypeNode, i: int) -> Decorator;
 ```
 ## RestTypeNode::getKind
 
-```rust
+```java
 /**
-     * Get the syntax kind of this node
-     */
+* Get the syntax kind of this node
+*/
 ```
 ```rust
 pub fn getKind(self: RestTypeNode) -> int;
 ```
 ## RestTypeNode::getAModifier
 
-```rust
+```java
 /**
-     * Gets a modifier.
-     */
+* Gets a modifier.
+*/
 ```
 ```rust
 pub fn getAModifier(self: RestTypeNode) -> *Modifier;
@@ -154,10 +154,10 @@ pub fn getStartColumnNumber(self: RestTypeNode) -> int;
 ```
 ## RestTypeNode::getChild
 
-```rust
+```java
 /**
-     * Gets the `i`th child of this node.
-     */
+* Gets the `i`th child of this node.
+*/
 ```
 ```rust
 pub fn getChild(self: RestTypeNode, i: int) -> Node;
@@ -169,22 +169,22 @@ pub fn getStartLineNumber(self: RestTypeNode) -> int;
 ```
 ## RestTypeNode::getAnAncestorEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets an ancestor enclosing function of it
-     */
+* Gets an ancestor enclosing function of it
+*/
 ```
 ```rust
 pub fn getAnAncestorEnclosingFunction(self: RestTypeNode) -> *FunctionLikeDeclaration;
 ```
 ## RestTypeNode::getADescendantByLevel
 
-```rust
+```java
 /**
-     * Gets a descendant of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets a descendant of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getADescendantByLevel(self: RestTypeNode, level: int) -> *Node;
@@ -196,72 +196,72 @@ pub fn getEndLineNumber(self: RestTypeNode) -> int;
 ```
 ## RestTypeNode::getRelativePath
 
-```rust
+```java
 /**
-     * Gets the relative path of this node.
-     */
+* Gets the relative path of this node.
+*/
 ```
 ```rust
 pub fn getRelativePath(self: RestTypeNode) -> string;
 ```
 ## RestTypeNode::getAnAncestorByLevel
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets an ancestor of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getAnAncestorByLevel(self: RestTypeNode, level: int) -> Node;
 ```
 ## RestTypeNode::getFile
 
-```rust
+```java
 /**
-     * Gets the file of this node.
-     */
+* Gets the file of this node.
+*/
 ```
 ```rust
 pub fn getFile(self: RestTypeNode) -> File;
 ```
 ## RestTypeNode::getALeadingComment
 
-```rust
+```java
 /**
-     * Gets the leading comments of it
-     */
+* Gets the leading comments of it
+*/
 ```
 ```rust
 pub fn getALeadingComment(self: RestTypeNode) -> *Comment;
 ```
 ## RestTypeNode::getATrailingComment
 
-```rust
+```java
 /**
-     * Gets the trailing comments of it
-     */
+* Gets the trailing comments of it
+*/
 ```
 ```rust
 pub fn getATrailingComment(self: RestTypeNode) -> *Comment;
 ```
 ## RestTypeNode::getLastChild
 
-```rust
+```java
 /**
-     * Gets the last child of this node parent.
-     */
+* Gets the last child of this node parent.
+*/
 ```
 ```rust
 pub fn getLastChild(self: RestTypeNode) -> Node;
 ```
 ## RestTypeNode::getEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets the enclosing function of it
-     */
+* Gets the enclosing function of it
+*/
 ```
 ```rust
 pub fn getEnclosingFunction(self: RestTypeNode) -> FunctionLikeDeclaration;
@@ -273,10 +273,10 @@ pub fn getEndColumnNumber(self: RestTypeNode) -> int;
 ```
 ## RestTypeNode::getParentOid
 
-```rust
+```java
 /**
-     * Gets the parent oid of this node.
-     */
+* Gets the parent oid of this node.
+*/
 ```
 ```rust
 pub fn getParentOid(self: RestTypeNode) -> int;
@@ -288,41 +288,18 @@ pub fn getIndex(self: RestTypeNode) -> int;
 ```
 ## RestTypeNode::getADescendant
 
-```rust
+```java
 /**
-     * Gets a descendant of this node. 
-     */
+* Gets a descendant of this node. 
+*/
 ```
 ```rust
 pub fn getADescendant(self: RestTypeNode) -> *Node;
 ```
 ## RestTypeNode::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavascriptDB) -> *RestTypeNode;
-```
-## RestTypeNode::is\<T\>
-
-```rust
-pub fn is<T>(self: RestTypeNode) -> bool;
-```
-## RestTypeNode::to\<T\>
-
-```rust
-pub fn to<T>(self: RestTypeNode) -> <any>;
-```
-## RestTypeNode::key\_neq
-
-```rust
-pub fn key_neq(self: RestTypeNode, object: <any>) -> bool;
-```
-## RestTypeNode::key\_eq
-
-```rust
-pub fn key_eq(self: RestTypeNode, object: <any>) -> bool;
-```
-## RestTypeNode::to\_set
-
-```rust
-pub fn to_set(self: RestTypeNode) -> *RestTypeNode;
 ```

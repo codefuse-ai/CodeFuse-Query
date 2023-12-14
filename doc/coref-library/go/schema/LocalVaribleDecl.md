@@ -54,7 +54,7 @@ pub fn isLocalVaribleDecl(self: LocalVaribleDecl) -> bool;
 ```
 ## LocalVaribleDecl::getText
 
-```rust
+```java
 // getText Extract the text associated with a specific node in a file
 ```
 ```rust
@@ -76,6 +76,8 @@ pub fn isTypeDecl(self: LocalVaribleDecl) -> bool;
 pub fn countAssociatedComment(self: LocalVaribleDecl) -> int;
 ```
 ## LocalVaribleDecl::\_\_all\_\_
+
+Data constraint method.
 
 ```rust
 pub fn __all__(db: GoDB) -> *LocalVaribleDecl;
@@ -118,9 +120,6 @@ pub fn getDepthFromRoot(self: LocalVaribleDecl) -> int;
 ## LocalVaribleDecl::getBelongsFile
 
 ```rust
-// root node
-```
-```rust
 pub fn getBelongsFile(self: LocalVaribleDecl) -> File;
 ```
 ## LocalVaribleDecl::getKind
@@ -162,29 +161,4 @@ pub fn getChildCount(self: LocalVaribleDecl) -> int;
 
 ```rust
 pub fn getName(self: LocalVaribleDecl) -> *string;
-```
-## LocalVaribleDecl::is\<T\>
-
-```rust
-pub fn is<T>(self: LocalVaribleDecl) -> bool;
-```
-## LocalVaribleDecl::to\<T\>
-
-```rust
-pub fn to<T>(self: LocalVaribleDecl) -> <any>;
-```
-## LocalVaribleDecl::key\_neq
-
-```rust
-pub fn key_neq(self: LocalVaribleDecl, object: <any>) -> bool;
-```
-## LocalVaribleDecl::key\_eq
-
-```rust
-pub fn key_eq(self: LocalVaribleDecl, object: <any>) -> bool;
-```
-## LocalVaribleDecl::to\_set
-
-```rust
-pub fn to_set(self: LocalVaribleDecl) -> *LocalVaribleDecl;
 ```

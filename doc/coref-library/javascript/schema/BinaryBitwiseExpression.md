@@ -9,10 +9,10 @@ schema BinaryBitwiseExpression {
 ```
 ## BinaryBitwiseExpression::getParentOid
 
-```rust
+```java
 /**
-     * Gets the parent oid of this node.
-     */
+* Gets the parent oid of this node.
+*/
 ```
 ```rust
 pub fn getParentOid(self: BinaryBitwiseExpression) -> int;
@@ -24,70 +24,70 @@ pub fn getEndColumnNumber(self: BinaryBitwiseExpression) -> int;
 ```
 ## BinaryBitwiseExpression::getLastChild
 
-```rust
+```java
 /**
-     * Gets the last child of this node parent.
-     */
+* Gets the last child of this node parent.
+*/
 ```
 ```rust
 pub fn getLastChild(self: BinaryBitwiseExpression) -> Node;
 ```
 ## BinaryBitwiseExpression::getEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets the enclosing function of it
-     */
+* Gets the enclosing function of it
+*/
 ```
 ```rust
 pub fn getEnclosingFunction(self: BinaryBitwiseExpression) -> FunctionLikeDeclaration;
 ```
 ## BinaryBitwiseExpression::getLeft
 
-```rust
+```java
 /**
-     * Get the left operand of this binary expression. An alias of `getLeftOperand`.
-     */
+* Get the left operand of this binary expression. An alias of `getLeftOperand`.
+*/
 ```
 ```rust
 pub fn getLeft(self: BinaryBitwiseExpression) -> Expression;
 ```
 ## BinaryBitwiseExpression::getADescendant
 
-```rust
+```java
 /**
-     * Gets a descendant of this node. 
-     */
+* Gets a descendant of this node. 
+*/
 ```
 ```rust
 pub fn getADescendant(self: BinaryBitwiseExpression) -> *Node;
 ```
 ## BinaryBitwiseExpression::getOperator
 
-```rust
+```java
 /**
-     * Get the operator of this binary expression.
-     */
+* Get the operator of this binary expression.
+*/
 ```
 ```rust
 pub fn getOperator(self: BinaryBitwiseExpression) -> BinaryOperator;
 ```
 ## BinaryBitwiseExpression::getLocation
 
-```rust
+```java
 /**
-     * Gets the location of this node.
-     */
+* Gets the location of this node.
+*/
 ```
 ```rust
 pub fn getLocation(self: BinaryBitwiseExpression) -> Location;
 ```
 ## BinaryBitwiseExpression::getRight
 
-```rust
+```java
 /**
-     * Get the right operand of this binary expression. An alias of `getRightOperand`
-     */
+* Get the right operand of this binary expression. An alias of `getRightOperand`
+*/
 ```
 ```rust
 pub fn getRight(self: BinaryBitwiseExpression) -> Expression;
@@ -104,40 +104,40 @@ pub fn getAnOperand(self: BinaryBitwiseExpression) -> *Expression;
 ```
 ## BinaryBitwiseExpression::getRightOperand
 
-```rust
+```java
 /**
-     * Get the right operand of this binary expression.
-     */
+* Get the right operand of this binary expression.
+*/
 ```
 ```rust
 pub fn getRightOperand(self: BinaryBitwiseExpression) -> Expression;
 ```
 ## BinaryBitwiseExpression::getModifier
 
-```rust
+```java
 /**
-     * Gets the `i`th modifier.
-     */
+* Gets the `i`th modifier.
+*/
 ```
 ```rust
 pub fn getModifier(self: BinaryBitwiseExpression, i: int) -> Modifier;
 ```
 ## BinaryBitwiseExpression::getText
 
-```rust
+```java
 /**
-     * Gets the text of this node.
-     */
+* Gets the text of this node.
+*/
 ```
 ```rust
 pub fn getText(self: BinaryBitwiseExpression) -> string;
 ```
 ## BinaryBitwiseExpression::getRelativePath
 
-```rust
+```java
 /**
-     * Gets the relative path of this node.
-     */
+* Gets the relative path of this node.
+*/
 ```
 ```rust
 pub fn getRelativePath(self: BinaryBitwiseExpression) -> string;
@@ -149,74 +149,74 @@ pub fn getEndLineNumber(self: BinaryBitwiseExpression) -> int;
 ```
 ## BinaryBitwiseExpression::getFile
 
-```rust
+```java
 /**
-     * Gets the file of this node.
-     */
+* Gets the file of this node.
+*/
 ```
 ```rust
 pub fn getFile(self: BinaryBitwiseExpression) -> File;
 ```
 ## BinaryBitwiseExpression::getAnAncestorByLevel
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets an ancestor of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getAnAncestorByLevel(self: BinaryBitwiseExpression, level: int) -> Node;
 ```
 ## BinaryBitwiseExpression::getLeftOperand
 
-```rust
+```java
 /**
-     * Get the left operand of this binary expression.
-     */
+* Get the left operand of this binary expression.
+*/
 ```
 ```rust
 pub fn getLeftOperand(self: BinaryBitwiseExpression) -> Expression;
 ```
 ## BinaryBitwiseExpression::getAnAncestorEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets an ancestor enclosing function of it
-     */
+* Gets an ancestor enclosing function of it
+*/
 ```
 ```rust
 pub fn getAnAncestorEnclosingFunction(self: BinaryBitwiseExpression) -> *FunctionLikeDeclaration;
 ```
 ## BinaryBitwiseExpression::getADescendantByLevel
 
-```rust
+```java
 /**
-     * Gets a descendant of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets a descendant of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getADescendantByLevel(self: BinaryBitwiseExpression, level: int) -> *Node;
 ```
 ## BinaryBitwiseExpression::getKind
 
-```rust
+```java
 /**
-     * Get the syntax kind of this node
-     */
+* Get the syntax kind of this node
+*/
 ```
 ```rust
 pub fn getKind(self: BinaryBitwiseExpression) -> int;
 ```
 ## BinaryBitwiseExpression::getAModifier
 
-```rust
+```java
 /**
-     * Gets a modifier.
-     */
+* Gets a modifier.
+*/
 ```
 ```rust
 pub fn getAModifier(self: BinaryBitwiseExpression) -> *Modifier;
@@ -233,151 +233,128 @@ pub fn getStartLineNumber(self: BinaryBitwiseExpression) -> int;
 ```
 ## BinaryBitwiseExpression::getChild
 
-```rust
+```java
 /**
-     * Gets the `i`th child of this node.
-     */
+* Gets the `i`th child of this node.
+*/
 ```
 ```rust
 pub fn getChild(self: BinaryBitwiseExpression, i: int) -> Node;
 ```
 ## BinaryBitwiseExpression::getRoot
 
-```rust
+```java
 /**
-     * Gets the root top-level of this node. 
-     */
+* Gets the root top-level of this node. 
+*/
 ```
 ```rust
 pub fn getRoot(self: BinaryBitwiseExpression) -> TopLevelDO;
 ```
 ## BinaryBitwiseExpression::getDecorator
 
-```rust
+```java
 /**
-     * Gets the `i`th decorator.
-     */
+* Gets the `i`th decorator.
+*/
 ```
 ```rust
 pub fn getDecorator(self: BinaryBitwiseExpression, i: int) -> Decorator;
 ```
 ## BinaryBitwiseExpression::getAChild
 
-```rust
+```java
 /**
-     * Gets a child node of this node.
-     */
+* Gets a child node of this node.
+*/
 ```
 ```rust
 pub fn getAChild(self: BinaryBitwiseExpression) -> *Node;
 ```
 ## BinaryBitwiseExpression::getParent
 
-```rust
+```java
 /**
-     * Gets the parent node of this node.
-     */
+* Gets the parent node of this node.
+*/
 ```
 ```rust
 pub fn getParent(self: BinaryBitwiseExpression) -> Node;
 ```
 ## BinaryBitwiseExpression::getALeadingComment
 
-```rust
+```java
 /**
-     * Gets the leading comments of it
-     */
+* Gets the leading comments of it
+*/
 ```
 ```rust
 pub fn getALeadingComment(self: BinaryBitwiseExpression) -> *Comment;
 ```
 ## BinaryBitwiseExpression::getATrailingComment
 
-```rust
+```java
 /**
-     * Gets the trailing comments of it
-     */
+* Gets the trailing comments of it
+*/
 ```
 ```rust
 pub fn getATrailingComment(self: BinaryBitwiseExpression) -> *Comment;
 ```
 ## BinaryBitwiseExpression::getChildCount
 
-```rust
+```java
 /**
-     * Gets the number of child nodes.
-     */
+* Gets the number of child nodes.
+*/
 ```
 ```rust
 pub fn getChildCount(self: BinaryBitwiseExpression) -> int;
 ```
 ## BinaryBitwiseExpression::getAnAncestor
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node. 
-     */
+* Gets an ancestor of this node. 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: BinaryBitwiseExpression) -> *Node;
 ```
 ## BinaryBitwiseExpression::getAComment
 
-```rust
+```java
 /**
-     * Gets the comments related to it
-     */
+* Gets the comments related to it
+*/
 ```
 ```rust
 pub fn getAComment(self: BinaryBitwiseExpression) -> *Comment;
 ```
 ## BinaryBitwiseExpression::getADecorator
 
-```rust
+```java
 /**
-     * Gets a decorator.
-     */
+* Gets a decorator.
+*/
 ```
 ```rust
 pub fn getADecorator(self: BinaryBitwiseExpression) -> *Decorator;
 ```
 ## BinaryBitwiseExpression::getSymbol
 
-```rust
+```java
 /**
-     * Gets the symbol associated with this node.
-     */
+* Gets the symbol associated with this node.
+*/
 ```
 ```rust
 pub fn getSymbol(self: BinaryBitwiseExpression) -> Symbol;
 ```
 ## BinaryBitwiseExpression::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavascriptDB) -> *BinaryBitwiseExpression;
-```
-## BinaryBitwiseExpression::is\<T\>
-
-```rust
-pub fn is<T>(self: BinaryBitwiseExpression) -> bool;
-```
-## BinaryBitwiseExpression::to\<T\>
-
-```rust
-pub fn to<T>(self: BinaryBitwiseExpression) -> <any>;
-```
-## BinaryBitwiseExpression::key\_neq
-
-```rust
-pub fn key_neq(self: BinaryBitwiseExpression, object: <any>) -> bool;
-```
-## BinaryBitwiseExpression::key\_eq
-
-```rust
-pub fn key_eq(self: BinaryBitwiseExpression, object: <any>) -> bool;
-```
-## BinaryBitwiseExpression::to\_set
-
-```rust
-pub fn to_set(self: BinaryBitwiseExpression) -> *BinaryBitwiseExpression;
 ```

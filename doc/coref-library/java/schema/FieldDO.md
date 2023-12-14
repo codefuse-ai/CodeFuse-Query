@@ -13,75 +13,52 @@ schema FieldDO {
 ```
 ## FieldDO::getLocationHashId
 
-```rust
+```java
 /**
-     * @brief gets the location hash id of this element.
-     * @return int
-     */
+* @brief gets the location hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getLocationHashId(self: FieldDO) -> int;
 ```
 ## FieldDO::getPrintableText
 
-```rust
+```java
 /**
-     * @brief gets a printed representation of this element, including its structure where applicable.
-     * @return string.
-     */
+* @brief gets a printed representation of this element, including its structure where applicable.
+* @return string.
+*/
 ```
 ```rust
 pub fn getPrintableText(self: FieldDO) -> string;
 ```
 ## FieldDO::getParentHashId
 
-```rust
+```java
 /**
-     * @brief gets the parent hash id of this element.
-     * @return int
-     */
+* @brief gets the parent hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getParentHashId(self: FieldDO) -> int;
 ```
 ## FieldDO::getName
 
-```rust
+```java
 /**
-     * @brief gets the name of this element.
-     * @return string
-     */
+* @brief gets the name of this element.
+* @return string
+*/
 ```
 ```rust
 pub fn getName(self: FieldDO) -> string;
 ```
 ## FieldDO::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavaDB) -> *FieldDO;
-```
-## FieldDO::is\<T\>
-
-```rust
-pub fn is<T>(self: FieldDO) -> bool;
-```
-## FieldDO::to\<T\>
-
-```rust
-pub fn to<T>(self: FieldDO) -> <any>;
-```
-## FieldDO::key\_neq
-
-```rust
-pub fn key_neq(self: FieldDO, object: <any>) -> bool;
-```
-## FieldDO::key\_eq
-
-```rust
-pub fn key_eq(self: FieldDO, object: <any>) -> bool;
-```
-## FieldDO::to\_set
-
-```rust
-pub fn to_set(self: FieldDO) -> *FieldDO;
 ```

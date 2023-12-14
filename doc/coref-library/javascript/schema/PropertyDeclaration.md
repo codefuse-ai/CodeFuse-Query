@@ -9,90 +9,90 @@ schema PropertyDeclaration {
 ```
 ## PropertyDeclaration::getLocation
 
-```rust
+```java
 /**
-     * Gets the location of this node.
-     */
+* Gets the location of this node.
+*/
 ```
 ```rust
 pub fn getLocation(self: PropertyDeclaration) -> Location;
 ```
 ## PropertyDeclaration::getAComment
 
-```rust
+```java
 /**
-     * Gets the comments related to it
-     */
+* Gets the comments related to it
+*/
 ```
 ```rust
 pub fn getAComment(self: PropertyDeclaration) -> *Comment;
 ```
 ## PropertyDeclaration::getAnAncestor
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node. 
-     */
+* Gets an ancestor of this node. 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: PropertyDeclaration) -> *Node;
 ```
 ## PropertyDeclaration::getAChild
 
-```rust
+```java
 /**
-     * Gets a child node of this node.
-     */
+* Gets a child node of this node.
+*/
 ```
 ```rust
 pub fn getAChild(self: PropertyDeclaration) -> *Node;
 ```
 ## PropertyDeclaration::getParent
 
-```rust
+```java
 /**
-     * Gets the parent node of this node.
-     */
+* Gets the parent node of this node.
+*/
 ```
 ```rust
 pub fn getParent(self: PropertyDeclaration) -> Node;
 ```
 ## PropertyDeclaration::getALeadingComment
 
-```rust
+```java
 /**
-     * Gets the leading comments of it
-     */
+* Gets the leading comments of it
+*/
 ```
 ```rust
 pub fn getALeadingComment(self: PropertyDeclaration) -> *Comment;
 ```
 ## PropertyDeclaration::getATrailingComment
 
-```rust
+```java
 /**
-     * Gets the trailing comments of it
-     */
+* Gets the trailing comments of it
+*/
 ```
 ```rust
 pub fn getATrailingComment(self: PropertyDeclaration) -> *Comment;
 ```
 ## PropertyDeclaration::getChildCount
 
-```rust
+```java
 /**
-     * Gets the number of child nodes.
-     */
+* Gets the number of child nodes.
+*/
 ```
 ```rust
 pub fn getChildCount(self: PropertyDeclaration) -> int;
 ```
 ## PropertyDeclaration::getChild
 
-```rust
+```java
 /**
-     * Gets the `i`th child of this node.
-     */
+* Gets the `i`th child of this node.
+*/
 ```
 ```rust
 pub fn getChild(self: PropertyDeclaration, i: int) -> Node;
@@ -109,92 +109,92 @@ pub fn getEndLineNumber(self: PropertyDeclaration) -> int;
 ```
 ## PropertyDeclaration::getInitializer
 
-```rust
+```java
 /**
-     * Gets the initializer expression.
-     */
+* Gets the initializer expression.
+*/
 ```
 ```rust
 pub fn getInitializer(self: PropertyDeclaration) -> Expression;
 ```
 ## PropertyDeclaration::getRelativePath
 
-```rust
+```java
 /**
-     * Gets the relative path of this node.
-     */
+* Gets the relative path of this node.
+*/
 ```
 ```rust
 pub fn getRelativePath(self: PropertyDeclaration) -> string;
 ```
 ## PropertyDeclaration::getAnAncestorByLevel
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets an ancestor of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getAnAncestorByLevel(self: PropertyDeclaration, level: int) -> Node;
 ```
 ## PropertyDeclaration::getExclamationToken
 
-```rust
+```java
 /**
-     * Gets the `!` token. (Optional)
-     */
+* Gets the `!` token. (Optional)
+*/
 ```
 ```rust
 pub fn getExclamationToken(self: PropertyDeclaration) -> ExclamationToken;
 ```
 ## PropertyDeclaration::getNameNode
 
-```rust
+```java
 /**
-     * Gets the name node, which is a PropertyName.
-     */
+* Gets the name node, which is a PropertyName.
+*/
 ```
 ```rust
 pub fn getNameNode(self: PropertyDeclaration) -> PropertyName;
 ```
 ## PropertyDeclaration::getFile
 
-```rust
+```java
 /**
-     * Gets the file of this node.
-     */
+* Gets the file of this node.
+*/
 ```
 ```rust
 pub fn getFile(self: PropertyDeclaration) -> File;
 ```
 ## PropertyDeclaration::getEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets the enclosing function of it
-     */
+* Gets the enclosing function of it
+*/
 ```
 ```rust
 pub fn getEnclosingFunction(self: PropertyDeclaration) -> FunctionLikeDeclaration;
 ```
 ## PropertyDeclaration::getLastChild
 
-```rust
+```java
 /**
-     * Gets the last child of this node parent.
-     */
+* Gets the last child of this node parent.
+*/
 ```
 ```rust
 pub fn getLastChild(self: PropertyDeclaration) -> Node;
 ```
 ## PropertyDeclaration::getNameNodeIndex
 
-```rust
+```java
 /**
-     * Get the index of name node.
-     */
+* Get the index of name node.
+*/
 ```
 ```rust
 pub fn getNameNodeIndex(self: PropertyDeclaration) -> int;
@@ -206,20 +206,20 @@ pub fn getEndColumnNumber(self: PropertyDeclaration) -> int;
 ```
 ## PropertyDeclaration::getParentOid
 
-```rust
+```java
 /**
-     * Gets the parent oid of this node.
-     */
+* Gets the parent oid of this node.
+*/
 ```
 ```rust
 pub fn getParentOid(self: PropertyDeclaration) -> int;
 ```
 ## PropertyDeclaration::getModifierCount
 
-```rust
+```java
 /**
-     * Gets the number of modifiers.
-     */
+* Gets the number of modifiers.
+*/
 ```
 ```rust
 pub fn getModifierCount(self: PropertyDeclaration) -> int;
@@ -231,42 +231,42 @@ pub fn getIndex(self: PropertyDeclaration) -> int;
 ```
 ## PropertyDeclaration::getADescendant
 
-```rust
+```java
 /**
-     * Gets a descendant of this node. 
-     */
+* Gets a descendant of this node. 
+*/
 ```
 ```rust
 pub fn getADescendant(self: PropertyDeclaration) -> *Node;
 ```
 ## PropertyDeclaration::getADescendantByLevel
 
-```rust
+```java
 /**
-     * Gets a descendant of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets a descendant of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getADescendantByLevel(self: PropertyDeclaration, level: int) -> *Node;
 ```
 ## PropertyDeclaration::getAnAncestorEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets an ancestor enclosing function of it
-     */
+* Gets an ancestor enclosing function of it
+*/
 ```
 ```rust
 pub fn getAnAncestorEnclosingFunction(self: PropertyDeclaration) -> *FunctionLikeDeclaration;
 ```
 ## PropertyDeclaration::getDecoratorCount
 
-```rust
+```java
 /**
-     * Gets the number of decorators.
-     */
+* Gets the number of decorators.
+*/
 ```
 ```rust
 pub fn getDecoratorCount(self: PropertyDeclaration) -> int;
@@ -278,131 +278,108 @@ pub fn getStartColumnNumber(self: PropertyDeclaration) -> int;
 ```
 ## PropertyDeclaration::getKind
 
-```rust
+```java
 /**
-     * Get the syntax kind of this node
-     */
+* Get the syntax kind of this node
+*/
 ```
 ```rust
 pub fn getKind(self: PropertyDeclaration) -> int;
 ```
 ## PropertyDeclaration::getAModifier
 
-```rust
+```java
 /**
-     * Gets a modifier.
-     */
+* Gets a modifier.
+*/
 ```
 ```rust
 pub fn getAModifier(self: PropertyDeclaration) -> *Modifier;
 ```
 ## PropertyDeclaration::getQuestionToken
 
-```rust
+```java
 /**
-     * Gets the `?` token. (Optional)
-     */
+* Gets the `?` token. (Optional)
+*/
 ```
 ```rust
 pub fn getQuestionToken(self: PropertyDeclaration) -> QuestionToken;
 ```
 ## PropertyDeclaration::getSymbol
 
-```rust
+```java
 /**
-     * Gets the symbol associated with this node.
-     */
+* Gets the symbol associated with this node.
+*/
 ```
 ```rust
 pub fn getSymbol(self: PropertyDeclaration) -> Symbol;
 ```
 ## PropertyDeclaration::getADecorator
 
-```rust
+```java
 /**
-     * Gets a decorator.
-     */
+* Gets a decorator.
+*/
 ```
 ```rust
 pub fn getADecorator(self: PropertyDeclaration) -> *Decorator;
 ```
 ## PropertyDeclaration::getRoot
 
-```rust
+```java
 /**
-     * Gets the root top-level of this node. 
-     */
+* Gets the root top-level of this node. 
+*/
 ```
 ```rust
 pub fn getRoot(self: PropertyDeclaration) -> TopLevelDO;
 ```
 ## PropertyDeclaration::getDecorator
 
-```rust
+```java
 /**
-     * Gets the `i`th decorator.
-     */
+* Gets the `i`th decorator.
+*/
 ```
 ```rust
 pub fn getDecorator(self: PropertyDeclaration, i: int) -> Decorator;
 ```
 ## PropertyDeclaration::getTypeNode
 
-```rust
+```java
 /**
-     * Gets the type node. (Optional)
-     */
+* Gets the type node. (Optional)
+*/
 ```
 ```rust
 pub fn getTypeNode(self: PropertyDeclaration) -> TypeNode;
 ```
 ## PropertyDeclaration::getText
 
-```rust
+```java
 /**
-     * Gets the text of this node.
-     */
+* Gets the text of this node.
+*/
 ```
 ```rust
 pub fn getText(self: PropertyDeclaration) -> string;
 ```
 ## PropertyDeclaration::getModifier
 
-```rust
+```java
 /**
-     * Gets the `i`th modifier.
-     */
+* Gets the `i`th modifier.
+*/
 ```
 ```rust
 pub fn getModifier(self: PropertyDeclaration, i: int) -> Modifier;
 ```
 ## PropertyDeclaration::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavascriptDB) -> *PropertyDeclaration;
-```
-## PropertyDeclaration::is\<T\>
-
-```rust
-pub fn is<T>(self: PropertyDeclaration) -> bool;
-```
-## PropertyDeclaration::to\<T\>
-
-```rust
-pub fn to<T>(self: PropertyDeclaration) -> <any>;
-```
-## PropertyDeclaration::key\_neq
-
-```rust
-pub fn key_neq(self: PropertyDeclaration, object: <any>) -> bool;
-```
-## PropertyDeclaration::key\_eq
-
-```rust
-pub fn key_eq(self: PropertyDeclaration, object: <any>) -> bool;
-```
-## PropertyDeclaration::to\_set
-
-```rust
-pub fn to_set(self: PropertyDeclaration) -> *PropertyDeclaration;
 ```

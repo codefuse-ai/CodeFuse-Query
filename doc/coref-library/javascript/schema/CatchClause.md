@@ -9,140 +9,140 @@ schema CatchClause {
 ```
 ## CatchClause::getLocation
 
-```rust
+```java
 /**
-     * Gets the location of this node.
-     */
+* Gets the location of this node.
+*/
 ```
 ```rust
 pub fn getLocation(self: CatchClause) -> Location;
 ```
 ## CatchClause::getSymbol
 
-```rust
+```java
 /**
-     * Gets the symbol associated with this node.
-     */
+* Gets the symbol associated with this node.
+*/
 ```
 ```rust
 pub fn getSymbol(self: CatchClause) -> Symbol;
 ```
 ## CatchClause::getADecorator
 
-```rust
+```java
 /**
-     * Gets a decorator.
-     */
+* Gets a decorator.
+*/
 ```
 ```rust
 pub fn getADecorator(self: CatchClause) -> *Decorator;
 ```
 ## CatchClause::getText
 
-```rust
+```java
 /**
-     * Gets the text of this node.
-     */
+* Gets the text of this node.
+*/
 ```
 ```rust
 pub fn getText(self: CatchClause) -> string;
 ```
 ## CatchClause::getModifier
 
-```rust
+```java
 /**
-     * Gets the `i`th modifier.
-     */
+* Gets the `i`th modifier.
+*/
 ```
 ```rust
 pub fn getModifier(self: CatchClause, i: int) -> Modifier;
 ```
 ## CatchClause::getAComment
 
-```rust
+```java
 /**
-     * Gets the comments related to it
-     */
+* Gets the comments related to it
+*/
 ```
 ```rust
 pub fn getAComment(self: CatchClause) -> *Comment;
 ```
 ## CatchClause::getAnAncestor
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node. 
-     */
+* Gets an ancestor of this node. 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: CatchClause) -> *Node;
 ```
 ## CatchClause::getALeadingComment
 
-```rust
+```java
 /**
-     * Gets the leading comments of it
-     */
+* Gets the leading comments of it
+*/
 ```
 ```rust
 pub fn getALeadingComment(self: CatchClause) -> *Comment;
 ```
 ## CatchClause::getATrailingComment
 
-```rust
+```java
 /**
-     * Gets the trailing comments of it
-     */
+* Gets the trailing comments of it
+*/
 ```
 ```rust
 pub fn getATrailingComment(self: CatchClause) -> *Comment;
 ```
 ## CatchClause::getChildCount
 
-```rust
+```java
 /**
-     * Gets the number of child nodes.
-     */
+* Gets the number of child nodes.
+*/
 ```
 ```rust
 pub fn getChildCount(self: CatchClause) -> int;
 ```
 ## CatchClause::getDecorator
 
-```rust
+```java
 /**
-     * Gets the `i`th decorator.
-     */
+* Gets the `i`th decorator.
+*/
 ```
 ```rust
 pub fn getDecorator(self: CatchClause, i: int) -> Decorator;
 ```
 ## CatchClause::getRoot
 
-```rust
+```java
 /**
-     * Gets the root top-level of this node. 
-     */
+* Gets the root top-level of this node. 
+*/
 ```
 ```rust
 pub fn getRoot(self: CatchClause) -> TopLevelDO;
 ```
 ## CatchClause::getKind
 
-```rust
+```java
 /**
-     * Get the syntax kind of this node
-     */
+* Get the syntax kind of this node
+*/
 ```
 ```rust
 pub fn getKind(self: CatchClause) -> int;
 ```
 ## CatchClause::getAModifier
 
-```rust
+```java
 /**
-     * Gets a modifier.
-     */
+* Gets a modifier.
+*/
 ```
 ```rust
 pub fn getAModifier(self: CatchClause) -> *Modifier;
@@ -154,20 +154,20 @@ pub fn getStartColumnNumber(self: CatchClause) -> int;
 ```
 ## CatchClause::getChild
 
-```rust
+```java
 /**
-     * Gets the `i`th child of this node.
-     */
+* Gets the `i`th child of this node.
+*/
 ```
 ```rust
 pub fn getChild(self: CatchClause, i: int) -> Node;
 ```
 ## CatchClause::getVariableDeclaration
 
-```rust
+```java
 /**
-     * Gets the variable declaration of this CatchClause.
-     */
+* Gets the variable declaration of this CatchClause.
+*/
 ```
 ```rust
 pub fn getVariableDeclaration(self: CatchClause) -> VariableDeclaration;
@@ -179,22 +179,22 @@ pub fn getStartLineNumber(self: CatchClause) -> int;
 ```
 ## CatchClause::getAnAncestorEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets an ancestor enclosing function of it
-     */
+* Gets an ancestor enclosing function of it
+*/
 ```
 ```rust
 pub fn getAnAncestorEnclosingFunction(self: CatchClause) -> *FunctionLikeDeclaration;
 ```
 ## CatchClause::getADescendantByLevel
 
-```rust
+```java
 /**
-     * Gets a descendant of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets a descendant of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getADescendantByLevel(self: CatchClause, level: int) -> *Node;
@@ -206,72 +206,72 @@ pub fn getEndLineNumber(self: CatchClause) -> int;
 ```
 ## CatchClause::getRelativePath
 
-```rust
+```java
 /**
-     * Gets the relative path of this node.
-     */
+* Gets the relative path of this node.
+*/
 ```
 ```rust
 pub fn getRelativePath(self: CatchClause) -> string;
 ```
 ## CatchClause::getAnAncestorByLevel
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets an ancestor of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getAnAncestorByLevel(self: CatchClause, level: int) -> Node;
 ```
 ## CatchClause::getADescendant
 
-```rust
+```java
 /**
-     * Gets a descendant of this node. 
-     */
+* Gets a descendant of this node. 
+*/
 ```
 ```rust
 pub fn getADescendant(self: CatchClause) -> *Node;
 ```
 ## CatchClause::getBlock
 
-```rust
+```java
 /**
-     * Gets the catch block of this CatchClause.
-     */
+* Gets the catch block of this CatchClause.
+*/
 ```
 ```rust
 pub fn getBlock(self: CatchClause) -> BlockStatement;
 ```
 ## CatchClause::getFile
 
-```rust
+```java
 /**
-     * Gets the file of this node.
-     */
+* Gets the file of this node.
+*/
 ```
 ```rust
 pub fn getFile(self: CatchClause) -> File;
 ```
 ## CatchClause::getLastChild
 
-```rust
+```java
 /**
-     * Gets the last child of this node parent.
-     */
+* Gets the last child of this node parent.
+*/
 ```
 ```rust
 pub fn getLastChild(self: CatchClause) -> Node;
 ```
 ## CatchClause::getEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets the enclosing function of it
-     */
+* Gets the enclosing function of it
+*/
 ```
 ```rust
 pub fn getEnclosingFunction(self: CatchClause) -> FunctionLikeDeclaration;
@@ -283,10 +283,10 @@ pub fn getEndColumnNumber(self: CatchClause) -> int;
 ```
 ## CatchClause::getParentOid
 
-```rust
+```java
 /**
-     * Gets the parent oid of this node.
-     */
+* Gets the parent oid of this node.
+*/
 ```
 ```rust
 pub fn getParentOid(self: CatchClause) -> int;
@@ -298,61 +298,38 @@ pub fn getIndex(self: CatchClause) -> int;
 ```
 ## CatchClause::getAChild
 
-```rust
+```java
 /**
-     * Gets a child node of this node.
-     */
+* Gets a child node of this node.
+*/
 ```
 ```rust
 pub fn getAChild(self: CatchClause) -> *Node;
 ```
 ## CatchClause::getParent
 
-```rust
+```java
 /**
-     * Gets the parent node of this node.
-     */
+* Gets the parent node of this node.
+*/
 ```
 ```rust
 pub fn getParent(self: CatchClause) -> Node;
 ```
 ## CatchClause::haveVariableDeclaration
 
-```rust
+```java
 /**
-     * Determine this CatchClause has variable declaration or not.
-     */
+* Determine this CatchClause has variable declaration or not.
+*/
 ```
 ```rust
 pub fn haveVariableDeclaration(self: CatchClause) -> bool;
 ```
 ## CatchClause::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavascriptDB) -> *CatchClause;
-```
-## CatchClause::is\<T\>
-
-```rust
-pub fn is<T>(self: CatchClause) -> bool;
-```
-## CatchClause::to\<T\>
-
-```rust
-pub fn to<T>(self: CatchClause) -> <any>;
-```
-## CatchClause::key\_neq
-
-```rust
-pub fn key_neq(self: CatchClause, object: <any>) -> bool;
-```
-## CatchClause::key\_eq
-
-```rust
-pub fn key_eq(self: CatchClause, object: <any>) -> bool;
-```
-## CatchClause::to\_set
-
-```rust
-pub fn to_set(self: CatchClause) -> *CatchClause;
 ```

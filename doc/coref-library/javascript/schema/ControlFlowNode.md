@@ -9,78 +9,80 @@ schema ControlFlowNode {
 ```
 ## ControlFlowNode::getSuccessorCount
 
-```rust
+```java
 /**
-     * Get the count of immediate successor nodes.
-     */
+* Get the count of immediate successor nodes.
+*/
 ```
 ```rust
 pub fn getSuccessorCount(self: ControlFlowNode) -> int;
 ```
 ## ControlFlowNode::getAPredecessor
 
-```rust
+```java
 /**
-     * Get an immediate predecessor of this node.
-     */
+* Get an immediate predecessor of this node.
+*/
 ```
 ```rust
 pub fn getAPredecessor(self: ControlFlowNode) -> *ControlFlowNode;
 ```
 ## ControlFlowNode::getASuccessorRecursive
 
-```rust
+```java
 /**
-     * Gets the successor of this node, and query successors recursively
-     */
+* Gets the successor of this node, and query successors recursively
+*/
 ```
 ```rust
 pub fn getASuccessorRecursive(self: ControlFlowNode) -> *ControlFlowNode;
 ```
 ## ControlFlowNode::getBasicBlock
 
-```rust
+```java
 /**
-     * Get the basic block that contains this node.
-     */
+* Get the basic block that contains this node.
+*/
 ```
 ```rust
 pub fn getBasicBlock(self: ControlFlowNode) -> BasicBlock;
 ```
 ## ControlFlowNode::getASuccessorWithCompletion
 
-```rust
+```java
 /**
-     * Get an immediate successor of this node with the given
-     * type of Completion.
-     */
+* Get an immediate successor of this node with the given
+* type of Completion.
+*/
 ```
 ```rust
 pub fn getASuccessorWithCompletion(self: ControlFlowNode, c: Completion) -> *ControlFlowNode;
 ```
 ## ControlFlowNode::getText
 
-```rust
+```java
 /**
-     * Get the text of this control flow node.
-     */
+* Get the text of this control flow node.
+*/
 ```
 ```rust
 pub fn getText(self: ControlFlowNode) -> string;
 ```
 ## ControlFlowNode::getKindName
 
-```rust
+```java
 /**
-     * Get the kind name of node.
-     * If node is ast node, just return ast node kind name; otherwise
-     * return node name as CfgEntryNode or CfgExitNode.
-     */
+* Get the kind name of node.
+* If node is ast node, just return ast node kind name; otherwise
+* return node name as CfgEntryNode or CfgExitNode.
+*/
 ```
 ```rust
 pub fn getKindName(self: ControlFlowNode) -> string;
 ```
 ## ControlFlowNode::\_\_all\_\_
+
+Data constraint method.
 
 ```rust
 pub fn __all__(db: JavascriptDB) -> *ControlFlowNode;
@@ -92,21 +94,21 @@ pub fn isAstNode(self: ControlFlowNode) -> bool;
 ```
 ## ControlFlowNode::getLocation
 
-```rust
+```java
 /**
-     * Get the location of this control flow node.
-     */
+* Get the location of this control flow node.
+*/
 ```
 ```rust
 pub fn getLocation(self: ControlFlowNode) -> Location;
 ```
 ## ControlFlowNode::getEnclosingFunction
 
-```rust
+```java
 /**
-     * Get the enclosing function of node.
-     * CfgEntryNode or CfgExitNode return belongs to function.
-     */
+* Get the enclosing function of node.
+* CfgEntryNode or CfgExitNode return belongs to function.
+*/
 ```
 ```rust
 pub fn getEnclosingFunction(self: ControlFlowNode) -> FunctionLikeDeclaration;
@@ -118,10 +120,10 @@ pub fn isExitNode(self: ControlFlowNode) -> bool;
 ```
 ## ControlFlowNode::getASuccessor
 
-```rust
+```java
 /**
-     * Get an immediate successor of this node.
-     */
+* Get an immediate successor of this node.
+*/
 ```
 ```rust
 pub fn getASuccessor(self: ControlFlowNode) -> *ControlFlowNode;
@@ -133,30 +135,30 @@ pub fn isEntryNode(self: ControlFlowNode) -> bool;
 ```
 ## ControlFlowNode::getRelativePath
 
-```rust
+```java
 /**
-     * Get the relative path of this control flow node.
-     */
+* Get the relative path of this control flow node.
+*/
 ```
 ```rust
 pub fn getRelativePath(self: ControlFlowNode) -> string;
 ```
 ## ControlFlowNode::getPredecessorCount
 
-```rust
+```java
 /**
-     * Get the count of immediate predecessor nodes/
-     */
+* Get the count of immediate predecessor nodes/
+*/
 ```
 ```rust
 pub fn getPredecessorCount(self: ControlFlowNode) -> int;
 ```
 ## ControlFlowNode::getFile
 
-```rust
+```java
 /**
-     * Get the file of this control flow node.
-     */
+* Get the file of this control flow node.
+*/
 ```
 ```rust
 pub fn getFile(self: ControlFlowNode) -> File;
@@ -165,29 +167,4 @@ pub fn getFile(self: ControlFlowNode) -> File;
 
 ```rust
 pub fn isSyntheticNode(self: ControlFlowNode) -> bool;
-```
-## ControlFlowNode::is\<T\>
-
-```rust
-pub fn is<T>(self: ControlFlowNode) -> bool;
-```
-## ControlFlowNode::to\<T\>
-
-```rust
-pub fn to<T>(self: ControlFlowNode) -> <any>;
-```
-## ControlFlowNode::key\_neq
-
-```rust
-pub fn key_neq(self: ControlFlowNode, object: <any>) -> bool;
-```
-## ControlFlowNode::key\_eq
-
-```rust
-pub fn key_eq(self: ControlFlowNode, object: <any>) -> bool;
-```
-## ControlFlowNode::to\_set
-
-```rust
-pub fn to_set(self: ControlFlowNode) -> *ControlFlowNode;
 ```

@@ -9,10 +9,10 @@ schema NamespaceExport {
 ```
 ## NamespaceExport::getADescendant
 
-```rust
+```java
 /**
-     * Gets a descendant of this node. 
-     */
+* Gets a descendant of this node. 
+*/
 ```
 ```rust
 pub fn getADescendant(self: NamespaceExport) -> *Node;
@@ -24,10 +24,10 @@ pub fn getIndex(self: NamespaceExport) -> int;
 ```
 ## NamespaceExport::getParentOid
 
-```rust
+```java
 /**
-     * Gets the parent oid of this node.
-     */
+* Gets the parent oid of this node.
+*/
 ```
 ```rust
 pub fn getParentOid(self: NamespaceExport) -> int;
@@ -39,52 +39,52 @@ pub fn getEndColumnNumber(self: NamespaceExport) -> int;
 ```
 ## NamespaceExport::getLastChild
 
-```rust
+```java
 /**
-     * Gets the last child of this node parent.
-     */
+* Gets the last child of this node parent.
+*/
 ```
 ```rust
 pub fn getLastChild(self: NamespaceExport) -> Node;
 ```
 ## NamespaceExport::getEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets the enclosing function of it
-     */
+* Gets the enclosing function of it
+*/
 ```
 ```rust
 pub fn getEnclosingFunction(self: NamespaceExport) -> FunctionLikeDeclaration;
 ```
 ## NamespaceExport::getFile
 
-```rust
+```java
 /**
-     * Gets the file of this node.
-     */
+* Gets the file of this node.
+*/
 ```
 ```rust
 pub fn getFile(self: NamespaceExport) -> File;
 ```
 ## NamespaceExport::getAnAncestorByLevel
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets an ancestor of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getAnAncestorByLevel(self: NamespaceExport, level: int) -> Node;
 ```
 ## NamespaceExport::getRelativePath
 
-```rust
+```java
 /**
-     * Gets the relative path of this node.
-     */
+* Gets the relative path of this node.
+*/
 ```
 ```rust
 pub fn getRelativePath(self: NamespaceExport) -> string;
@@ -96,42 +96,42 @@ pub fn getEndLineNumber(self: NamespaceExport) -> int;
 ```
 ## NamespaceExport::getAnAncestorEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets an ancestor enclosing function of it
-     */
+* Gets an ancestor enclosing function of it
+*/
 ```
 ```rust
 pub fn getAnAncestorEnclosingFunction(self: NamespaceExport) -> *FunctionLikeDeclaration;
 ```
 ## NamespaceExport::getADescendantByLevel
 
-```rust
+```java
 /**
-     * Gets a descendant of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets a descendant of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getADescendantByLevel(self: NamespaceExport, level: int) -> *Node;
 ```
 ## NamespaceExport::getKind
 
-```rust
+```java
 /**
-     * Get the syntax kind of this node
-     */
+* Get the syntax kind of this node
+*/
 ```
 ```rust
 pub fn getKind(self: NamespaceExport) -> int;
 ```
 ## NamespaceExport::getAModifier
 
-```rust
+```java
 /**
-     * Gets a modifier.
-     */
+* Gets a modifier.
+*/
 ```
 ```rust
 pub fn getAModifier(self: NamespaceExport) -> *Modifier;
@@ -148,181 +148,158 @@ pub fn getStartLineNumber(self: NamespaceExport) -> int;
 ```
 ## NamespaceExport::getChild
 
-```rust
+```java
 /**
-     * Gets the `i`th child of this node.
-     */
+* Gets the `i`th child of this node.
+*/
 ```
 ```rust
 pub fn getChild(self: NamespaceExport, i: int) -> Node;
 ```
 ## NamespaceExport::getDecorator
 
-```rust
+```java
 /**
-     * Gets the `i`th decorator.
-     */
+* Gets the `i`th decorator.
+*/
 ```
 ```rust
 pub fn getDecorator(self: NamespaceExport, i: int) -> Decorator;
 ```
 ## NamespaceExport::getRoot
 
-```rust
+```java
 /**
-     * Gets the root top-level of this node. 
-     */
+* Gets the root top-level of this node. 
+*/
 ```
 ```rust
 pub fn getRoot(self: NamespaceExport) -> TopLevelDO;
 ```
 ## NamespaceExport::getChildCount
 
-```rust
+```java
 /**
-     * Gets the number of child nodes.
-     */
+* Gets the number of child nodes.
+*/
 ```
 ```rust
 pub fn getChildCount(self: NamespaceExport) -> int;
 ```
 ## NamespaceExport::getATrailingComment
 
-```rust
+```java
 /**
-     * Gets the trailing comments of it
-     */
+* Gets the trailing comments of it
+*/
 ```
 ```rust
 pub fn getATrailingComment(self: NamespaceExport) -> *Comment;
 ```
 ## NamespaceExport::getALeadingComment
 
-```rust
+```java
 /**
-     * Gets the leading comments of it
-     */
+* Gets the leading comments of it
+*/
 ```
 ```rust
 pub fn getALeadingComment(self: NamespaceExport) -> *Comment;
 ```
 ## NamespaceExport::getParent
 
-```rust
+```java
 /**
-     * Gets the parent node of this node.
-     */
+* Gets the parent node of this node.
+*/
 ```
 ```rust
 pub fn getParent(self: NamespaceExport) -> Node;
 ```
 ## NamespaceExport::getAChild
 
-```rust
+```java
 /**
-     * Gets a child node of this node.
-     */
+* Gets a child node of this node.
+*/
 ```
 ```rust
 pub fn getAChild(self: NamespaceExport) -> *Node;
 ```
 ## NamespaceExport::getAnAncestor
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node. 
-     */
+* Gets an ancestor of this node. 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: NamespaceExport) -> *Node;
 ```
 ## NamespaceExport::getAComment
 
-```rust
+```java
 /**
-     * Gets the comments related to it
-     */
+* Gets the comments related to it
+*/
 ```
 ```rust
 pub fn getAComment(self: NamespaceExport) -> *Comment;
 ```
 ## NamespaceExport::getModifier
 
-```rust
+```java
 /**
-     * Gets the `i`th modifier.
-     */
+* Gets the `i`th modifier.
+*/
 ```
 ```rust
 pub fn getModifier(self: NamespaceExport, i: int) -> Modifier;
 ```
 ## NamespaceExport::getText
 
-```rust
+```java
 /**
-     * Gets the text of this node.
-     */
+* Gets the text of this node.
+*/
 ```
 ```rust
 pub fn getText(self: NamespaceExport) -> string;
 ```
 ## NamespaceExport::getADecorator
 
-```rust
+```java
 /**
-     * Gets a decorator.
-     */
+* Gets a decorator.
+*/
 ```
 ```rust
 pub fn getADecorator(self: NamespaceExport) -> *Decorator;
 ```
 ## NamespaceExport::getSymbol
 
-```rust
+```java
 /**
-     * Gets the symbol associated with this node.
-     */
+* Gets the symbol associated with this node.
+*/
 ```
 ```rust
 pub fn getSymbol(self: NamespaceExport) -> Symbol;
 ```
 ## NamespaceExport::getLocation
 
-```rust
+```java
 /**
-     * Gets the location of this node.
-     */
+* Gets the location of this node.
+*/
 ```
 ```rust
 pub fn getLocation(self: NamespaceExport) -> Location;
 ```
 ## NamespaceExport::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavascriptDB) -> *NamespaceExport;
-```
-## NamespaceExport::is\<T\>
-
-```rust
-pub fn is<T>(self: NamespaceExport) -> bool;
-```
-## NamespaceExport::to\<T\>
-
-```rust
-pub fn to<T>(self: NamespaceExport) -> <any>;
-```
-## NamespaceExport::key\_neq
-
-```rust
-pub fn key_neq(self: NamespaceExport, object: <any>) -> bool;
-```
-## NamespaceExport::key\_eq
-
-```rust
-pub fn key_eq(self: NamespaceExport, object: <any>) -> bool;
-```
-## NamespaceExport::to\_set
-
-```rust
-pub fn to_set(self: NamespaceExport) -> *NamespaceExport;
 ```

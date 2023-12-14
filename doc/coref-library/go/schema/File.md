@@ -25,9 +25,6 @@ pub fn getParentNode(self: File) -> Node;
 ## File::getBelongsFile
 
 ```rust
-// root node
-```
-```rust
 pub fn getBelongsFile(self: File) -> File;
 ```
 ## File::print
@@ -36,6 +33,8 @@ pub fn getBelongsFile(self: File) -> File;
 pub fn print(self: File) -> *string;
 ```
 ## File::\_\_all\_\_
+
+Data constraint method.
 
 ```rust
 pub fn __all__(db: GoDB) -> *File;
@@ -102,10 +101,10 @@ pub fn getPkgLoc(self: File) -> Location;
 ```
 ## File::getFunctionCount
 
-```rust
+```java
 /**
-     * 获取每个文件包含的函数
-     */
+* 获取每个文件包含的函数
+*/
 ```
 ```rust
 pub fn getFunctionCount(self: File) -> int;
@@ -137,7 +136,7 @@ pub fn isRootNode(self: File) -> bool;
 ```
 ## File::getText
 
-```rust
+```java
 // getText Extract the text associated with a specific node in a file
 ```
 ```rust
@@ -167,29 +166,4 @@ pub fn isModFile(self: File) -> bool;
 
 ```rust
 pub fn getMd5Sum(self: File) -> string;
-```
-## File::is\<T\>
-
-```rust
-pub fn is<T>(self: File) -> bool;
-```
-## File::to\<T\>
-
-```rust
-pub fn to<T>(self: File) -> <any>;
-```
-## File::key\_neq
-
-```rust
-pub fn key_neq(self: File, object: <any>) -> bool;
-```
-## File::key\_eq
-
-```rust
-pub fn key_eq(self: File, object: <any>) -> bool;
-```
-## File::to\_set
-
-```rust
-pub fn to_set(self: File) -> *File;
 ```

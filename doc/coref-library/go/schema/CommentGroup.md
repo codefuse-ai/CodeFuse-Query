@@ -30,9 +30,6 @@ pub fn getChildCount(self: CommentGroup) -> int;
 ## CommentGroup::getBelongsFile
 
 ```rust
-// root node
-```
-```rust
 pub fn getBelongsFile(self: CommentGroup) -> File;
 ```
 ## CommentGroup::isRootNode
@@ -67,6 +64,8 @@ pub fn hasLocation(self: CommentGroup) -> bool;
 ```
 ## CommentGroup::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: GoDB) -> *CommentGroup;
 ```
@@ -97,7 +96,7 @@ pub fn getTextStartOffset(self: CommentGroup) -> int;
 ```
 ## CommentGroup::getText
 
-```rust
+```java
 // getText Extract the text associated with a specific node in a file
 ```
 ```rust
@@ -107,29 +106,4 @@ pub fn getText(self: CommentGroup) -> string;
 
 ```rust
 pub fn countAssociatedComment(self: CommentGroup) -> int;
-```
-## CommentGroup::is\<T\>
-
-```rust
-pub fn is<T>(self: CommentGroup) -> bool;
-```
-## CommentGroup::to\<T\>
-
-```rust
-pub fn to<T>(self: CommentGroup) -> <any>;
-```
-## CommentGroup::key\_neq
-
-```rust
-pub fn key_neq(self: CommentGroup, object: <any>) -> bool;
-```
-## CommentGroup::key\_eq
-
-```rust
-pub fn key_eq(self: CommentGroup, object: <any>) -> bool;
-```
-## CommentGroup::to\_set
-
-```rust
-pub fn to_set(self: CommentGroup) -> *CommentGroup;
 ```

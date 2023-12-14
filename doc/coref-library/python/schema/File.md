@@ -13,97 +13,74 @@ schema File {
 ```
 ## File::getName
 
-```rust
+```java
 /**
-     * @brief gets the name of this element.
-     * @return string
-     */
+* @brief gets the name of this element.
+* @return string
+*/
 ```
 ```rust
 pub fn getName(self: File) -> string;
 ```
 ## File::getNumberOfLinesOid
 
-```rust
+```java
 /**
-     * @brief gets the number of lines oid of this element.
-     * @return int
-     */
+* @brief gets the number of lines oid of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getNumberOfLinesOid(self: File) -> int;
 ```
 ## File::getExtension
 
-```rust
+```java
 /**
-     * @brief gets the extension of this element.
-     * @return string
-     */
+* @brief gets the extension of this element.
+* @return string
+*/
 ```
 ```rust
 pub fn getExtension(self: File) -> string;
 ```
 ## File::getRelativePath
 
-```rust
+```java
 /**
-     * @brief gets the relative path of this element.
-     * @return string
-     */
+* @brief gets the relative path of this element.
+* @return string
+*/
 ```
 ```rust
 pub fn getRelativePath(self: File) -> string;
 ```
 ## File::getBelongedFolder
 
-```rust
+```java
 /**
-     * @brief gets the folder which contains the file, if any.
-     * @return Folder 
-     */
+* @brief gets the folder which contains the file, if any.
+* @return Folder 
+*/
 ```
 ```rust
 pub fn getBelongedFolder(self: File) -> Folder;
 ```
 ## File::getSize
 
-```rust
+```java
 /**
-     * @brief gets the size information for the element.
-     * @return NumberOfLines
-     */
+* @brief gets the size information for the element.
+* @return NumberOfLines
+*/
 ```
 ```rust
 pub fn getSize(self: File) -> NumberOfLines;
 ```
 ## File::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: PythonDB) -> *File;
-```
-## File::is\<T\>
-
-```rust
-pub fn is<T>(self: File) -> bool;
-```
-## File::to\<T\>
-
-```rust
-pub fn to<T>(self: File) -> <any>;
-```
-## File::key\_neq
-
-```rust
-pub fn key_neq(self: File, object: <any>) -> bool;
-```
-## File::key\_eq
-
-```rust
-pub fn key_eq(self: File, object: <any>) -> bool;
-```
-## File::to\_set
-
-```rust
-pub fn to_set(self: File) -> *File;
 ```

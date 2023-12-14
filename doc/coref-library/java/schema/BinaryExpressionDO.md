@@ -12,64 +12,41 @@ schema BinaryExpressionDO {
 ```
 ## BinaryExpressionDO::getOpcode
 
-```rust
+```java
 /**
-     * @brief gets the opcode of this element.
-     * @return string
-     */
+* @brief gets the opcode of this element.
+* @return string
+*/
 ```
 ```rust
 pub fn getOpcode(self: BinaryExpressionDO) -> string;
 ```
 ## BinaryExpressionDO::getRhsHashId
 
-```rust
+```java
 /**
-     * @brief gets the rhs hash id of this element.
-     * @return int
-     */
+* @brief gets the rhs hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getRhsHashId(self: BinaryExpressionDO) -> int;
 ```
 ## BinaryExpressionDO::getLhsHashId
 
-```rust
+```java
 /**
-     * @brief gets the lhs hash id of this element.
-     * @return int
-     */
+* @brief gets the lhs hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getLhsHashId(self: BinaryExpressionDO) -> int;
 ```
 ## BinaryExpressionDO::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavaDB) -> *BinaryExpressionDO;
-```
-## BinaryExpressionDO::is\<T\>
-
-```rust
-pub fn is<T>(self: BinaryExpressionDO) -> bool;
-```
-## BinaryExpressionDO::to\<T\>
-
-```rust
-pub fn to<T>(self: BinaryExpressionDO) -> <any>;
-```
-## BinaryExpressionDO::key\_neq
-
-```rust
-pub fn key_neq(self: BinaryExpressionDO, object: <any>) -> bool;
-```
-## BinaryExpressionDO::key\_eq
-
-```rust
-pub fn key_eq(self: BinaryExpressionDO, object: <any>) -> bool;
-```
-## BinaryExpressionDO::to\_set
-
-```rust
-pub fn to_set(self: BinaryExpressionDO) -> *BinaryExpressionDO;
 ```

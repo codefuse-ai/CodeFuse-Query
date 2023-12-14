@@ -9,20 +9,20 @@ schema SetAccessor {
 ```
 ## SetAccessor::getModifier
 
-```rust
+```java
 /**
-     * Gets the `i`th modifier of this FunctionLikeDeclaration.
-     */
+* Gets the `i`th modifier of this FunctionLikeDeclaration.
+*/
 ```
 ```rust
 pub fn getModifier(self: SetAccessor, i: int) -> Modifier;
 ```
 ## SetAccessor::getKind
 
-```rust
+```java
 /**
-     * Get the syntax kind of this node
-     */
+* Get the syntax kind of this node
+*/
 ```
 ```rust
 pub fn getKind(self: SetAccessor) -> int;
@@ -34,50 +34,50 @@ pub fn getStartColumnNumber(self: SetAccessor) -> int;
 ```
 ## SetAccessor::getTypeParameter
 
-```rust
+```java
 /**
-     * Gets the `i`th type parameter.
-     */
+* Gets the `i`th type parameter.
+*/
 ```
 ```rust
 pub fn getTypeParameter(self: SetAccessor, i: int) -> TypeParameter;
 ```
 ## SetAccessor::getATrailingComment
 
-```rust
+```java
 /**
-     * Gets the trailing comments of it
-     */
+* Gets the trailing comments of it
+*/
 ```
 ```rust
 pub fn getATrailingComment(self: SetAccessor) -> *Comment;
 ```
 ## SetAccessor::getBody
 
-```rust
+```java
 /**
-     * Gets the body of this function-like declaration
-     */
+* Gets the body of this function-like declaration
+*/
 ```
 ```rust
 pub fn getBody(self: SetAccessor) -> BlockStatement;
 ```
 ## SetAccessor::getDecoratorCount
 
-```rust
+```java
 /**
-     * Gets the number of decorators of this FunctionLikeDeclaration.
-     */
+* Gets the number of decorators of this FunctionLikeDeclaration.
+*/
 ```
 ```rust
 pub fn getDecoratorCount(self: SetAccessor) -> int;
 ```
 ## SetAccessor::getAModifier
 
-```rust
+```java
 /**
-     * Gets a modifier of this FunctionLikeDeclaration.
-     */
+* Gets a modifier of this FunctionLikeDeclaration.
+*/
 ```
 ```rust
 pub fn getAModifier(self: SetAccessor) -> *Modifier;
@@ -89,40 +89,40 @@ pub fn getAReturnStatement(self: SetAccessor) -> *ReturnStatement;
 ```
 ## SetAccessor::getDecorator
 
-```rust
+```java
 /**
-     * Gets the `i`th decorator of this FunctionLikeDeclaration.
-     */
+* Gets the `i`th decorator of this FunctionLikeDeclaration.
+*/
 ```
 ```rust
 pub fn getDecorator(self: SetAccessor, i: int) -> Decorator;
 ```
 ## SetAccessor::getADecorator
 
-```rust
+```java
 /**
-     * Gets a decorator of this FunctionLikeDeclaration.
-     */
+* Gets a decorator of this FunctionLikeDeclaration.
+*/
 ```
 ```rust
 pub fn getADecorator(self: SetAccessor) -> *Decorator;
 ```
 ## SetAccessor::getCyclomaticComplexity
 
-```rust
+```java
 /**
-     * Gets the cyclomatic complexity of this function-like declaration
-     */
+* Gets the cyclomatic complexity of this function-like declaration
+*/
 ```
 ```rust
 pub fn getCyclomaticComplexity(self: SetAccessor) -> int;
 ```
 ## SetAccessor::getRoot
 
-```rust
+```java
 /**
-     * Gets the root top-level of this node. 
-     */
+* Gets the root top-level of this node. 
+*/
 ```
 ```rust
 pub fn getRoot(self: SetAccessor) -> TopLevelDO;
@@ -130,107 +130,104 @@ pub fn getRoot(self: SetAccessor) -> TopLevelDO;
 ## SetAccessor::getAReturnedExpression
 
 ```rust
-// TODO: the body of an ArrowFunction is the returned expression if it is an expression
-```
-```rust
 pub fn getAReturnedExpression(self: SetAccessor) -> *Expression;
 ```
 ## SetAccessor::getChild
 
-```rust
+```java
 /**
-     * Gets the `i`th child of this node.
-     */
+* Gets the `i`th child of this node.
+*/
 ```
 ```rust
 pub fn getChild(self: SetAccessor, i: int) -> Node;
 ```
 ## SetAccessor::isGenerator
 
-```rust
+```java
 /**
-     * Determines whether this FunctionLikeDeclaration is a generator.
-     */
+* Determines whether this FunctionLikeDeclaration is a generator.
+*/
 ```
 ```rust
 pub fn isGenerator(self: SetAccessor) -> bool;
 ```
 ## SetAccessor::getParameterCount
 
-```rust
+```java
 /**
-     * Gets the count of parameters.
-     */
+* Gets the count of parameters.
+*/
 ```
 ```rust
 pub fn getParameterCount(self: SetAccessor) -> int;
 ```
 ## SetAccessor::getAParameter
 
-```rust
+```java
 /**
-     * Gets a parameter.
-     */
+* Gets a parameter.
+*/
 ```
 ```rust
 pub fn getAParameter(self: SetAccessor) -> *Parameter;
 ```
 ## SetAccessor::getNameNode
 
-```rust
+```java
 /**
-     * Gets the name node, which is a PropertyName.
-     */
+* Gets the name node, which is a PropertyName.
+*/
 ```
 ```rust
 pub fn getNameNode(self: SetAccessor) -> PropertyName;
 ```
 ## SetAccessor::getFile
 
-```rust
+```java
 /**
-     * Gets the file of this node.
-     */
+* Gets the file of this node.
+*/
 ```
 ```rust
 pub fn getFile(self: SetAccessor) -> File;
 ```
 ## SetAccessor::hasParameter
 
-```rust
+```java
 /**
-     * Determine this FunctionLikeDeclaration contains any parameter.
-     */
+* Determine this FunctionLikeDeclaration contains any parameter.
+*/
 ```
 ```rust
 pub fn hasParameter(self: SetAccessor) -> bool;
 ```
 ## SetAccessor::getTypeParameterCount
 
-```rust
+```java
 /**
-     * Gets the count of type parameters.
-     */
+* Gets the count of type parameters.
+*/
 ```
 ```rust
 pub fn getTypeParameterCount(self: SetAccessor) -> int;
 ```
 ## SetAccessor::getACallSite
 
-```rust
+```java
 /**
-     * Gets a call site of this function-like declaration
-     */
+* Gets a call site of this function-like declaration
+*/
 ```
 ```rust
 pub fn getACallSite(self: SetAccessor) -> *MayInvokeExpression;
 ```
 ## SetAccessor::getName
 
-```rust
+```java
 /**
-     * Gets the name of this function-like declaration
-     */
+* Gets the name of this function-like declaration
+*/
 ```
 ```rust
 pub fn getName(self: SetAccessor) -> string;
@@ -247,10 +244,10 @@ pub fn getParameterFirstIndex(self: SetAccessor) -> int;
 ```
 ## SetAccessor::getParentOid
 
-```rust
+```java
 /**
-     * Gets the parent oid of this node.
-     */
+* Gets the parent oid of this node.
+*/
 ```
 ```rust
 pub fn getParentOid(self: SetAccessor) -> int;
@@ -262,84 +259,84 @@ pub fn getEndColumnNumber(self: SetAccessor) -> int;
 ```
 ## SetAccessor::getText
 
-```rust
+```java
 /**
-     * Gets the text of this node.
-     */
+* Gets the text of this node.
+*/
 ```
 ```rust
 pub fn getText(self: SetAccessor) -> string;
 ```
 ## SetAccessor::getParameter
 
-```rust
+```java
 /**
-     * Gets the `i`th parameter.
-     */
+* Gets the `i`th parameter.
+*/
 ```
 ```rust
 pub fn getParameter(self: SetAccessor, i: int) -> Parameter;
 ```
 ## SetAccessor::getLastChild
 
-```rust
+```java
 /**
-     * Gets the last child of this node parent.
-     */
+* Gets the last child of this node parent.
+*/
 ```
 ```rust
 pub fn getLastChild(self: SetAccessor) -> Node;
 ```
 ## SetAccessor::getChildCount
 
-```rust
+```java
 /**
-     * Gets the number of child nodes.
-     */
+* Gets the number of child nodes.
+*/
 ```
 ```rust
 pub fn getChildCount(self: SetAccessor) -> int;
 ```
 ## SetAccessor::getATypeParameter
 
-```rust
+```java
 /**
-     * Gets a type parameter.
-     */
+* Gets a type parameter.
+*/
 ```
 ```rust
 pub fn getATypeParameter(self: SetAccessor) -> *TypeParameter;
 ```
 ## SetAccessor::getAnAncestorByLevel
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets an ancestor of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getAnAncestorByLevel(self: SetAccessor, level: int) -> Node;
 ```
 ## SetAccessor::getTypeNode
 
-```rust
+```java
 /**
-     * Gets the type node.
-     */
+* Gets the type node.
+*/
 ```
 ```rust
 pub fn getTypeNode(self: SetAccessor) -> TypeNode;
 ```
 ## SetAccessor::getADescendantByLevel
 
-```rust
+```java
 /**
-     * Gets a descendant of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets a descendant of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getADescendantByLevel(self: SetAccessor, level: int) -> *Node;
@@ -351,20 +348,20 @@ pub fn getEndLineNumber(self: SetAccessor) -> int;
 ```
 ## SetAccessor::getRelativePath
 
-```rust
+```java
 /**
-     * Gets the relative path of this node.
-     */
+* Gets the relative path of this node.
+*/
 ```
 ```rust
 pub fn getRelativePath(self: SetAccessor) -> string;
 ```
 ## SetAccessor::getAnAncestorEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets an ancestor enclosing function of it
-     */
+* Gets an ancestor enclosing function of it
+*/
 ```
 ```rust
 pub fn getAnAncestorEnclosingFunction(self: SetAccessor) -> *FunctionLikeDeclaration;
@@ -376,10 +373,10 @@ pub fn getStartLineNumber(self: SetAccessor) -> int;
 ```
 ## SetAccessor::getModifierCount
 
-```rust
+```java
 /**
-     * Gets the number of modifiers of this FunctionLikeDeclaration.
-     */
+* Gets the number of modifiers of this FunctionLikeDeclaration.
+*/
 ```
 ```rust
 pub fn getModifierCount(self: SetAccessor) -> int;
@@ -391,121 +388,98 @@ pub fn getIndex(self: SetAccessor) -> int;
 ```
 ## SetAccessor::getALeadingComment
 
-```rust
+```java
 /**
-     * Gets the leading comments of it
-     */
+* Gets the leading comments of it
+*/
 ```
 ```rust
 pub fn getALeadingComment(self: SetAccessor) -> *Comment;
 ```
 ## SetAccessor::getEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets the enclosing function of it
-     */
+* Gets the enclosing function of it
+*/
 ```
 ```rust
 pub fn getEnclosingFunction(self: SetAccessor) -> FunctionLikeDeclaration;
 ```
 ## SetAccessor::getSymbol
 
-```rust
+```java
 /**
-     * Gets the symbol associated with this node.
-     */
+* Gets the symbol associated with this node.
+*/
 ```
 ```rust
 pub fn getSymbol(self: SetAccessor) -> Symbol;
 ```
 ## SetAccessor::getAChild
 
-```rust
+```java
 /**
-     * Gets a child node of this node.
-     */
+* Gets a child node of this node.
+*/
 ```
 ```rust
 pub fn getAChild(self: SetAccessor) -> *Node;
 ```
 ## SetAccessor::getParent
 
-```rust
+```java
 /**
-     * Gets the parent node of this node.
-     */
+* Gets the parent node of this node.
+*/
 ```
 ```rust
 pub fn getParent(self: SetAccessor) -> Node;
 ```
 ## SetAccessor::getAnAncestor
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node. 
-     */
+* Gets an ancestor of this node. 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: SetAccessor) -> *Node;
 ```
 ## SetAccessor::getAComment
 
-```rust
+```java
 /**
-     * Gets the comments related to it
-     */
+* Gets the comments related to it
+*/
 ```
 ```rust
 pub fn getAComment(self: SetAccessor) -> *Comment;
 ```
 ## SetAccessor::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavascriptDB) -> *SetAccessor;
 ```
 ## SetAccessor::getLocation
 
-```rust
+```java
 /**
-     * Gets the location of this node.
-     */
+* Gets the location of this node.
+*/
 ```
 ```rust
 pub fn getLocation(self: SetAccessor) -> Location;
 ```
 ## SetAccessor::getADescendant
 
-```rust
+```java
 /**
-     * Gets a descendant of this node. 
-     */
+* Gets a descendant of this node. 
+*/
 ```
 ```rust
 pub fn getADescendant(self: SetAccessor) -> *Node;
-```
-## SetAccessor::is\<T\>
-
-```rust
-pub fn is<T>(self: SetAccessor) -> bool;
-```
-## SetAccessor::to\<T\>
-
-```rust
-pub fn to<T>(self: SetAccessor) -> <any>;
-```
-## SetAccessor::key\_neq
-
-```rust
-pub fn key_neq(self: SetAccessor, object: <any>) -> bool;
-```
-## SetAccessor::key\_eq
-
-```rust
-pub fn key_eq(self: SetAccessor, object: <any>) -> bool;
-```
-## SetAccessor::to\_set
-
-```rust
-pub fn to_set(self: SetAccessor) -> *SetAccessor;
 ```

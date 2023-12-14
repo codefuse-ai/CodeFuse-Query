@@ -14,86 +14,63 @@ schema XmlCharacterDO {
 ```
 ## XmlCharacterDO::isCdata
 
-```rust
+```java
 /**
-     * @brief check whether the element is Cdata or not.
-     * @return int 
-     */
+* @brief check whether the element is Cdata or not.
+* @return int 
+*/
 ```
 ```rust
 pub fn isCdata(self: XmlCharacterDO) -> int;
 ```
 ## XmlCharacterDO::getParentid
 
-```rust
+```java
 /**
-     * @brief gets the parent id of the element.
-     * @return int
-     */
+* @brief gets the parent id of the element.
+* @return int
+*/
 ```
 ```rust
 pub fn getParentid(self: XmlCharacterDO) -> int;
 ```
 ## XmlCharacterDO::getIndex
 
-```rust
+```java
 /**
-     * @brief gets the index of the element.
-     * @return int 
-     */
+* @brief gets the index of the element.
+* @return int 
+*/
 ```
 ```rust
 pub fn getIndex(self: XmlCharacterDO) -> int;
 ```
 ## XmlCharacterDO::getText
 
-```rust
+```java
 /**
-     * @brief gets the text of the element.
-     * @return string 
-     */
+* @brief gets the text of the element.
+* @return string 
+*/
 ```
 ```rust
 pub fn getText(self: XmlCharacterDO) -> string;
 ```
 ## XmlCharacterDO::getLocationId
 
-```rust
+```java
 /**
-     * @brief gets the location id of this element.
-     * @return int
-     */
+* @brief gets the location id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getLocationId(self: XmlCharacterDO) -> int;
 ```
 ## XmlCharacterDO::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: XmlDB) -> *XmlCharacterDO;
-```
-## XmlCharacterDO::is\<T\>
-
-```rust
-pub fn is<T>(self: XmlCharacterDO) -> bool;
-```
-## XmlCharacterDO::to\<T\>
-
-```rust
-pub fn to<T>(self: XmlCharacterDO) -> <any>;
-```
-## XmlCharacterDO::key\_neq
-
-```rust
-pub fn key_neq(self: XmlCharacterDO, object: <any>) -> bool;
-```
-## XmlCharacterDO::key\_eq
-
-```rust
-pub fn key_eq(self: XmlCharacterDO, object: <any>) -> bool;
-```
-## XmlCharacterDO::to\_set
-
-```rust
-pub fn to_set(self: XmlCharacterDO) -> *XmlCharacterDO;
 ```

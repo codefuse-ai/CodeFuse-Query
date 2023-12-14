@@ -9,10 +9,10 @@ schema BitwiseXorAssignmentExpression {
 ```
 ## BitwiseXorAssignmentExpression::getRight
 
-```rust
+```java
 /**
-     * Get the right operand of this binary expression. An alias of `getRightOperand`
-     */
+* Get the right operand of this binary expression. An alias of `getRightOperand`
+*/
 ```
 ```rust
 pub fn getRight(self: BitwiseXorAssignmentExpression) -> Expression;
@@ -24,10 +24,10 @@ pub fn getIndex(self: BitwiseXorAssignmentExpression) -> int;
 ```
 ## BitwiseXorAssignmentExpression::getParentOid
 
-```rust
+```java
 /**
-     * Gets the parent oid of this node.
-     */
+* Gets the parent oid of this node.
+*/
 ```
 ```rust
 pub fn getParentOid(self: BitwiseXorAssignmentExpression) -> int;
@@ -39,40 +39,40 @@ pub fn getEndColumnNumber(self: BitwiseXorAssignmentExpression) -> int;
 ```
 ## BitwiseXorAssignmentExpression::getEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets the enclosing function of it
-     */
+* Gets the enclosing function of it
+*/
 ```
 ```rust
 pub fn getEnclosingFunction(self: BitwiseXorAssignmentExpression) -> FunctionLikeDeclaration;
 ```
 ## BitwiseXorAssignmentExpression::getLastChild
 
-```rust
+```java
 /**
-     * Gets the last child of this node parent.
-     */
+* Gets the last child of this node parent.
+*/
 ```
 ```rust
 pub fn getLastChild(self: BitwiseXorAssignmentExpression) -> Node;
 ```
 ## BitwiseXorAssignmentExpression::getKind
 
-```rust
+```java
 /**
-     * Get the syntax kind of this node
-     */
+* Get the syntax kind of this node
+*/
 ```
 ```rust
 pub fn getKind(self: BitwiseXorAssignmentExpression) -> int;
 ```
 ## BitwiseXorAssignmentExpression::getAModifier
 
-```rust
+```java
 /**
-     * Gets a modifier.
-     */
+* Gets a modifier.
+*/
 ```
 ```rust
 pub fn getAModifier(self: BitwiseXorAssignmentExpression) -> *Modifier;
@@ -84,50 +84,50 @@ pub fn getStartColumnNumber(self: BitwiseXorAssignmentExpression) -> int;
 ```
 ## BitwiseXorAssignmentExpression::getLeft
 
-```rust
+```java
 /**
-     * Get the left operand of this binary expression. An alias of `getLeftOperand`.
-     */
+* Get the left operand of this binary expression. An alias of `getLeftOperand`.
+*/
 ```
 ```rust
 pub fn getLeft(self: BitwiseXorAssignmentExpression) -> Expression;
 ```
 ## BitwiseXorAssignmentExpression::getADescendant
 
-```rust
+```java
 /**
-     * Gets a descendant of this node. 
-     */
+* Gets a descendant of this node. 
+*/
 ```
 ```rust
 pub fn getADescendant(self: BitwiseXorAssignmentExpression) -> *Node;
 ```
 ## BitwiseXorAssignmentExpression::getOperator
 
-```rust
+```java
 /**
-     * Get the operator of this binary expression.
-     */
+* Get the operator of this binary expression.
+*/
 ```
 ```rust
 pub fn getOperator(self: BitwiseXorAssignmentExpression) -> BinaryOperator;
 ```
 ## BitwiseXorAssignmentExpression::getLocation
 
-```rust
+```java
 /**
-     * Gets the location of this node.
-     */
+* Gets the location of this node.
+*/
 ```
 ```rust
 pub fn getLocation(self: BitwiseXorAssignmentExpression) -> Location;
 ```
 ## BitwiseXorAssignmentExpression::getRelativePath
 
-```rust
+```java
 /**
-     * Gets the relative path of this node.
-     */
+* Gets the relative path of this node.
+*/
 ```
 ```rust
 pub fn getRelativePath(self: BitwiseXorAssignmentExpression) -> string;
@@ -144,84 +144,84 @@ pub fn getAnOperand(self: BitwiseXorAssignmentExpression) -> *Expression;
 ```
 ## BitwiseXorAssignmentExpression::getRightOperand
 
-```rust
+```java
 /**
-     * Get the right operand of this binary expression.
-     */
+* Get the right operand of this binary expression.
+*/
 ```
 ```rust
 pub fn getRightOperand(self: BitwiseXorAssignmentExpression) -> Expression;
 ```
 ## BitwiseXorAssignmentExpression::getModifier
 
-```rust
+```java
 /**
-     * Gets the `i`th modifier.
-     */
+* Gets the `i`th modifier.
+*/
 ```
 ```rust
 pub fn getModifier(self: BitwiseXorAssignmentExpression, i: int) -> Modifier;
 ```
 ## BitwiseXorAssignmentExpression::getText
 
-```rust
+```java
 /**
-     * Gets the text of this node.
-     */
+* Gets the text of this node.
+*/
 ```
 ```rust
 pub fn getText(self: BitwiseXorAssignmentExpression) -> string;
 ```
 ## BitwiseXorAssignmentExpression::getFile
 
-```rust
+```java
 /**
-     * Gets the file of this node.
-     */
+* Gets the file of this node.
+*/
 ```
 ```rust
 pub fn getFile(self: BitwiseXorAssignmentExpression) -> File;
 ```
 ## BitwiseXorAssignmentExpression::getAnAncestorByLevel
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets an ancestor of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getAnAncestorByLevel(self: BitwiseXorAssignmentExpression, level: int) -> Node;
 ```
 ## BitwiseXorAssignmentExpression::getLeftOperand
 
-```rust
+```java
 /**
-     * Get the left operand of this binary expression.
-     */
+* Get the left operand of this binary expression.
+*/
 ```
 ```rust
 pub fn getLeftOperand(self: BitwiseXorAssignmentExpression) -> Expression;
 ```
 ## BitwiseXorAssignmentExpression::getADescendantByLevel
 
-```rust
+```java
 /**
-     * Gets a descendant of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets a descendant of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getADescendantByLevel(self: BitwiseXorAssignmentExpression, level: int) -> *Node;
 ```
 ## BitwiseXorAssignmentExpression::getAnAncestorEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets an ancestor enclosing function of it
-     */
+* Gets an ancestor enclosing function of it
+*/
 ```
 ```rust
 pub fn getAnAncestorEnclosingFunction(self: BitwiseXorAssignmentExpression) -> *FunctionLikeDeclaration;
@@ -233,151 +233,128 @@ pub fn getStartLineNumber(self: BitwiseXorAssignmentExpression) -> int;
 ```
 ## BitwiseXorAssignmentExpression::getChild
 
-```rust
+```java
 /**
-     * Gets the `i`th child of this node.
-     */
+* Gets the `i`th child of this node.
+*/
 ```
 ```rust
 pub fn getChild(self: BitwiseXorAssignmentExpression, i: int) -> Node;
 ```
 ## BitwiseXorAssignmentExpression::getRoot
 
-```rust
+```java
 /**
-     * Gets the root top-level of this node. 
-     */
+* Gets the root top-level of this node. 
+*/
 ```
 ```rust
 pub fn getRoot(self: BitwiseXorAssignmentExpression) -> TopLevelDO;
 ```
 ## BitwiseXorAssignmentExpression::getDecorator
 
-```rust
+```java
 /**
-     * Gets the `i`th decorator.
-     */
+* Gets the `i`th decorator.
+*/
 ```
 ```rust
 pub fn getDecorator(self: BitwiseXorAssignmentExpression, i: int) -> Decorator;
 ```
 ## BitwiseXorAssignmentExpression::getAnAncestor
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node. 
-     */
+* Gets an ancestor of this node. 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: BitwiseXorAssignmentExpression) -> *Node;
 ```
 ## BitwiseXorAssignmentExpression::getAComment
 
-```rust
+```java
 /**
-     * Gets the comments related to it
-     */
+* Gets the comments related to it
+*/
 ```
 ```rust
 pub fn getAComment(self: BitwiseXorAssignmentExpression) -> *Comment;
 ```
 ## BitwiseXorAssignmentExpression::getParent
 
-```rust
+```java
 /**
-     * Gets the parent node of this node.
-     */
+* Gets the parent node of this node.
+*/
 ```
 ```rust
 pub fn getParent(self: BitwiseXorAssignmentExpression) -> Node;
 ```
 ## BitwiseXorAssignmentExpression::getAChild
 
-```rust
+```java
 /**
-     * Gets a child node of this node.
-     */
+* Gets a child node of this node.
+*/
 ```
 ```rust
 pub fn getAChild(self: BitwiseXorAssignmentExpression) -> *Node;
 ```
 ## BitwiseXorAssignmentExpression::getALeadingComment
 
-```rust
+```java
 /**
-     * Gets the leading comments of it
-     */
+* Gets the leading comments of it
+*/
 ```
 ```rust
 pub fn getALeadingComment(self: BitwiseXorAssignmentExpression) -> *Comment;
 ```
 ## BitwiseXorAssignmentExpression::getATrailingComment
 
-```rust
+```java
 /**
-     * Gets the trailing comments of it
-     */
+* Gets the trailing comments of it
+*/
 ```
 ```rust
 pub fn getATrailingComment(self: BitwiseXorAssignmentExpression) -> *Comment;
 ```
 ## BitwiseXorAssignmentExpression::getChildCount
 
-```rust
+```java
 /**
-     * Gets the number of child nodes.
-     */
+* Gets the number of child nodes.
+*/
 ```
 ```rust
 pub fn getChildCount(self: BitwiseXorAssignmentExpression) -> int;
 ```
 ## BitwiseXorAssignmentExpression::getADecorator
 
-```rust
+```java
 /**
-     * Gets a decorator.
-     */
+* Gets a decorator.
+*/
 ```
 ```rust
 pub fn getADecorator(self: BitwiseXorAssignmentExpression) -> *Decorator;
 ```
 ## BitwiseXorAssignmentExpression::getSymbol
 
-```rust
+```java
 /**
-     * Gets the symbol associated with this node.
-     */
+* Gets the symbol associated with this node.
+*/
 ```
 ```rust
 pub fn getSymbol(self: BitwiseXorAssignmentExpression) -> Symbol;
 ```
 ## BitwiseXorAssignmentExpression::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavascriptDB) -> *BitwiseXorAssignmentExpression;
-```
-## BitwiseXorAssignmentExpression::is\<T\>
-
-```rust
-pub fn is<T>(self: BitwiseXorAssignmentExpression) -> bool;
-```
-## BitwiseXorAssignmentExpression::to\<T\>
-
-```rust
-pub fn to<T>(self: BitwiseXorAssignmentExpression) -> <any>;
-```
-## BitwiseXorAssignmentExpression::key\_neq
-
-```rust
-pub fn key_neq(self: BitwiseXorAssignmentExpression, object: <any>) -> bool;
-```
-## BitwiseXorAssignmentExpression::key\_eq
-
-```rust
-pub fn key_eq(self: BitwiseXorAssignmentExpression, object: <any>) -> bool;
-```
-## BitwiseXorAssignmentExpression::to\_set
-
-```rust
-pub fn to_set(self: BitwiseXorAssignmentExpression) -> *BitwiseXorAssignmentExpression;
 ```

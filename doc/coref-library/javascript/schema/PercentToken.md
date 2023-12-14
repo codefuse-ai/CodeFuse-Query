@@ -9,140 +9,140 @@ schema PercentToken {
 ```
 ## PercentToken::getLocation
 
-```rust
+```java
 /**
-     * Gets the location of this node.
-     */
+* Gets the location of this node.
+*/
 ```
 ```rust
 pub fn getLocation(self: PercentToken) -> Location;
 ```
 ## PercentToken::getSymbol
 
-```rust
+```java
 /**
-     * Gets the symbol associated with this node.
-     */
+* Gets the symbol associated with this node.
+*/
 ```
 ```rust
 pub fn getSymbol(self: PercentToken) -> Symbol;
 ```
 ## PercentToken::getADecorator
 
-```rust
+```java
 /**
-     * Gets a decorator.
-     */
+* Gets a decorator.
+*/
 ```
 ```rust
 pub fn getADecorator(self: PercentToken) -> *Decorator;
 ```
 ## PercentToken::getText
 
-```rust
+```java
 /**
-     * Gets the text of this node.
-     */
+* Gets the text of this node.
+*/
 ```
 ```rust
 pub fn getText(self: PercentToken) -> string;
 ```
 ## PercentToken::getModifier
 
-```rust
+```java
 /**
-     * Gets the `i`th modifier.
-     */
+* Gets the `i`th modifier.
+*/
 ```
 ```rust
 pub fn getModifier(self: PercentToken, i: int) -> Modifier;
 ```
 ## PercentToken::getAComment
 
-```rust
+```java
 /**
-     * Gets the comments related to it
-     */
+* Gets the comments related to it
+*/
 ```
 ```rust
 pub fn getAComment(self: PercentToken) -> *Comment;
 ```
 ## PercentToken::getAnAncestor
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node. 
-     */
+* Gets an ancestor of this node. 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: PercentToken) -> *Node;
 ```
 ## PercentToken::getAChild
 
-```rust
+```java
 /**
-     * Gets a child node of this node.
-     */
+* Gets a child node of this node.
+*/
 ```
 ```rust
 pub fn getAChild(self: PercentToken) -> *Node;
 ```
 ## PercentToken::getParent
 
-```rust
+```java
 /**
-     * Gets the parent node of this node.
-     */
+* Gets the parent node of this node.
+*/
 ```
 ```rust
 pub fn getParent(self: PercentToken) -> Node;
 ```
 ## PercentToken::getChildCount
 
-```rust
+```java
 /**
-     * Gets the number of child nodes.
-     */
+* Gets the number of child nodes.
+*/
 ```
 ```rust
 pub fn getChildCount(self: PercentToken) -> int;
 ```
 ## PercentToken::getRoot
 
-```rust
+```java
 /**
-     * Gets the root top-level of this node. 
-     */
+* Gets the root top-level of this node. 
+*/
 ```
 ```rust
 pub fn getRoot(self: PercentToken) -> TopLevelDO;
 ```
 ## PercentToken::getDecorator
 
-```rust
+```java
 /**
-     * Gets the `i`th decorator.
-     */
+* Gets the `i`th decorator.
+*/
 ```
 ```rust
 pub fn getDecorator(self: PercentToken, i: int) -> Decorator;
 ```
 ## PercentToken::getKind
 
-```rust
+```java
 /**
-     * Get the syntax kind of this node
-     */
+* Get the syntax kind of this node
+*/
 ```
 ```rust
 pub fn getKind(self: PercentToken) -> int;
 ```
 ## PercentToken::getAModifier
 
-```rust
+```java
 /**
-     * Gets a modifier.
-     */
+* Gets a modifier.
+*/
 ```
 ```rust
 pub fn getAModifier(self: PercentToken) -> *Modifier;
@@ -154,10 +154,10 @@ pub fn getStartColumnNumber(self: PercentToken) -> int;
 ```
 ## PercentToken::getChild
 
-```rust
+```java
 /**
-     * Gets the `i`th child of this node.
-     */
+* Gets the `i`th child of this node.
+*/
 ```
 ```rust
 pub fn getChild(self: PercentToken, i: int) -> Node;
@@ -169,22 +169,22 @@ pub fn getStartLineNumber(self: PercentToken) -> int;
 ```
 ## PercentToken::getAnAncestorEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets an ancestor enclosing function of it
-     */
+* Gets an ancestor enclosing function of it
+*/
 ```
 ```rust
 pub fn getAnAncestorEnclosingFunction(self: PercentToken) -> *FunctionLikeDeclaration;
 ```
 ## PercentToken::getADescendantByLevel
 
-```rust
+```java
 /**
-     * Gets a descendant of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets a descendant of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getADescendantByLevel(self: PercentToken, level: int) -> *Node;
@@ -196,72 +196,72 @@ pub fn getEndLineNumber(self: PercentToken) -> int;
 ```
 ## PercentToken::getRelativePath
 
-```rust
+```java
 /**
-     * Gets the relative path of this node.
-     */
+* Gets the relative path of this node.
+*/
 ```
 ```rust
 pub fn getRelativePath(self: PercentToken) -> string;
 ```
 ## PercentToken::getAnAncestorByLevel
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets an ancestor of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getAnAncestorByLevel(self: PercentToken, level: int) -> Node;
 ```
 ## PercentToken::getFile
 
-```rust
+```java
 /**
-     * Gets the file of this node.
-     */
+* Gets the file of this node.
+*/
 ```
 ```rust
 pub fn getFile(self: PercentToken) -> File;
 ```
 ## PercentToken::getALeadingComment
 
-```rust
+```java
 /**
-     * Gets the leading comments of it
-     */
+* Gets the leading comments of it
+*/
 ```
 ```rust
 pub fn getALeadingComment(self: PercentToken) -> *Comment;
 ```
 ## PercentToken::getATrailingComment
 
-```rust
+```java
 /**
-     * Gets the trailing comments of it
-     */
+* Gets the trailing comments of it
+*/
 ```
 ```rust
 pub fn getATrailingComment(self: PercentToken) -> *Comment;
 ```
 ## PercentToken::getLastChild
 
-```rust
+```java
 /**
-     * Gets the last child of this node parent.
-     */
+* Gets the last child of this node parent.
+*/
 ```
 ```rust
 pub fn getLastChild(self: PercentToken) -> Node;
 ```
 ## PercentToken::getEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets the enclosing function of it
-     */
+* Gets the enclosing function of it
+*/
 ```
 ```rust
 pub fn getEnclosingFunction(self: PercentToken) -> FunctionLikeDeclaration;
@@ -273,10 +273,10 @@ pub fn getEndColumnNumber(self: PercentToken) -> int;
 ```
 ## PercentToken::getParentOid
 
-```rust
+```java
 /**
-     * Gets the parent oid of this node.
-     */
+* Gets the parent oid of this node.
+*/
 ```
 ```rust
 pub fn getParentOid(self: PercentToken) -> int;
@@ -288,41 +288,18 @@ pub fn getIndex(self: PercentToken) -> int;
 ```
 ## PercentToken::getADescendant
 
-```rust
+```java
 /**
-     * Gets a descendant of this node. 
-     */
+* Gets a descendant of this node. 
+*/
 ```
 ```rust
 pub fn getADescendant(self: PercentToken) -> *Node;
 ```
 ## PercentToken::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavascriptDB) -> *PercentToken;
-```
-## PercentToken::is\<T\>
-
-```rust
-pub fn is<T>(self: PercentToken) -> bool;
-```
-## PercentToken::to\<T\>
-
-```rust
-pub fn to<T>(self: PercentToken) -> <any>;
-```
-## PercentToken::key\_neq
-
-```rust
-pub fn key_neq(self: PercentToken, object: <any>) -> bool;
-```
-## PercentToken::key\_eq
-
-```rust
-pub fn key_eq(self: PercentToken, object: <any>) -> bool;
-```
-## PercentToken::to\_set
-
-```rust
-pub fn to_set(self: PercentToken) -> *PercentToken;
 ```

@@ -9,10 +9,10 @@ schema LogicalNotExpression {
 ```
 ## LogicalNotExpression::getParentOid
 
-```rust
+```java
 /**
-     * Gets the parent oid of this node.
-     */
+* Gets the parent oid of this node.
+*/
 ```
 ```rust
 pub fn getParentOid(self: LogicalNotExpression) -> int;
@@ -29,10 +29,10 @@ pub fn getIndex(self: LogicalNotExpression) -> int;
 ```
 ## LogicalNotExpression::getADescendant
 
-```rust
+```java
 /**
-     * Gets a descendant of this node. 
-     */
+* Gets a descendant of this node. 
+*/
 ```
 ```rust
 pub fn getADescendant(self: LogicalNotExpression) -> *Node;
@@ -44,20 +44,20 @@ pub fn getOperator(self: LogicalNotExpression) -> PrefixUnaryOperator;
 ```
 ## LogicalNotExpression::getLocation
 
-```rust
+```java
 /**
-     * Gets the location of this node.
-     */
+* Gets the location of this node.
+*/
 ```
 ```rust
 pub fn getLocation(self: LogicalNotExpression) -> Location;
 ```
 ## LogicalNotExpression::getRelativePath
 
-```rust
+```java
 /**
-     * Gets the relative path of this node.
-     */
+* Gets the relative path of this node.
+*/
 ```
 ```rust
 pub fn getRelativePath(self: LogicalNotExpression) -> string;
@@ -74,94 +74,94 @@ pub fn getEndLineNumber(self: LogicalNotExpression) -> int;
 ```
 ## LogicalNotExpression::getFile
 
-```rust
+```java
 /**
-     * Gets the file of this node.
-     */
+* Gets the file of this node.
+*/
 ```
 ```rust
 pub fn getFile(self: LogicalNotExpression) -> File;
 ```
 ## LogicalNotExpression::getAnAncestorByLevel
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets an ancestor of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getAnAncestorByLevel(self: LogicalNotExpression, level: int) -> Node;
 ```
 ## LogicalNotExpression::getEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets the enclosing function of it
-     */
+* Gets the enclosing function of it
+*/
 ```
 ```rust
 pub fn getEnclosingFunction(self: LogicalNotExpression) -> FunctionLikeDeclaration;
 ```
 ## LogicalNotExpression::getATrailingComment
 
-```rust
+```java
 /**
-     * Gets the trailing comments of it
-     */
+* Gets the trailing comments of it
+*/
 ```
 ```rust
 pub fn getATrailingComment(self: LogicalNotExpression) -> *Comment;
 ```
 ## LogicalNotExpression::getALeadingComment
 
-```rust
+```java
 /**
-     * Gets the leading comments of it
-     */
+* Gets the leading comments of it
+*/
 ```
 ```rust
 pub fn getALeadingComment(self: LogicalNotExpression) -> *Comment;
 ```
 ## LogicalNotExpression::getAnAncestorEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets an ancestor enclosing function of it
-     */
+* Gets an ancestor enclosing function of it
+*/
 ```
 ```rust
 pub fn getAnAncestorEnclosingFunction(self: LogicalNotExpression) -> *FunctionLikeDeclaration;
 ```
 ## LogicalNotExpression::getADescendantByLevel
 
-```rust
+```java
 /**
-     * Gets a descendant of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets a descendant of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getADescendantByLevel(self: LogicalNotExpression, level: int) -> *Node;
 ```
 ## LogicalNotExpression::getKind
 
-```rust
+```java
 /**
-     * Get the syntax kind of this node
-     */
+* Get the syntax kind of this node
+*/
 ```
 ```rust
 pub fn getKind(self: LogicalNotExpression) -> int;
 ```
 ## LogicalNotExpression::getAModifier
 
-```rust
+```java
 /**
-     * Gets a modifier.
-     */
+* Gets a modifier.
+*/
 ```
 ```rust
 pub fn getAModifier(self: LogicalNotExpression) -> *Modifier;
@@ -178,30 +178,30 @@ pub fn getStartLineNumber(self: LogicalNotExpression) -> int;
 ```
 ## LogicalNotExpression::getChild
 
-```rust
+```java
 /**
-     * Gets the `i`th child of this node.
-     */
+* Gets the `i`th child of this node.
+*/
 ```
 ```rust
 pub fn getChild(self: LogicalNotExpression, i: int) -> Node;
 ```
 ## LogicalNotExpression::getRoot
 
-```rust
+```java
 /**
-     * Gets the root top-level of this node. 
-     */
+* Gets the root top-level of this node. 
+*/
 ```
 ```rust
 pub fn getRoot(self: LogicalNotExpression) -> TopLevelDO;
 ```
 ## LogicalNotExpression::getDecorator
 
-```rust
+```java
 /**
-     * Gets the `i`th decorator.
-     */
+* Gets the `i`th decorator.
+*/
 ```
 ```rust
 pub fn getDecorator(self: LogicalNotExpression, i: int) -> Decorator;
@@ -213,131 +213,108 @@ pub fn getEndColumnNumber(self: LogicalNotExpression) -> int;
 ```
 ## LogicalNotExpression::getAChild
 
-```rust
+```java
 /**
-     * Gets a child node of this node.
-     */
+* Gets a child node of this node.
+*/
 ```
 ```rust
 pub fn getAChild(self: LogicalNotExpression) -> *Node;
 ```
 ## LogicalNotExpression::getParent
 
-```rust
+```java
 /**
-     * Gets the parent node of this node.
-     */
+* Gets the parent node of this node.
+*/
 ```
 ```rust
 pub fn getParent(self: LogicalNotExpression) -> Node;
 ```
 ## LogicalNotExpression::getLastChild
 
-```rust
+```java
 /**
-     * Gets the last child of this node parent.
-     */
+* Gets the last child of this node parent.
+*/
 ```
 ```rust
 pub fn getLastChild(self: LogicalNotExpression) -> Node;
 ```
 ## LogicalNotExpression::getChildCount
 
-```rust
+```java
 /**
-     * Gets the number of child nodes.
-     */
+* Gets the number of child nodes.
+*/
 ```
 ```rust
 pub fn getChildCount(self: LogicalNotExpression) -> int;
 ```
 ## LogicalNotExpression::getAnAncestor
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node. 
-     */
+* Gets an ancestor of this node. 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: LogicalNotExpression) -> *Node;
 ```
 ## LogicalNotExpression::getAComment
 
-```rust
+```java
 /**
-     * Gets the comments related to it
-     */
+* Gets the comments related to it
+*/
 ```
 ```rust
 pub fn getAComment(self: LogicalNotExpression) -> *Comment;
 ```
 ## LogicalNotExpression::getSymbol
 
-```rust
+```java
 /**
-     * Gets the symbol associated with this node.
-     */
+* Gets the symbol associated with this node.
+*/
 ```
 ```rust
 pub fn getSymbol(self: LogicalNotExpression) -> Symbol;
 ```
 ## LogicalNotExpression::getADecorator
 
-```rust
+```java
 /**
-     * Gets a decorator.
-     */
+* Gets a decorator.
+*/
 ```
 ```rust
 pub fn getADecorator(self: LogicalNotExpression) -> *Decorator;
 ```
 ## LogicalNotExpression::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavascriptDB) -> *LogicalNotExpression;
 ```
 ## LogicalNotExpression::getModifier
 
-```rust
+```java
 /**
-     * Gets the `i`th modifier.
-     */
+* Gets the `i`th modifier.
+*/
 ```
 ```rust
 pub fn getModifier(self: LogicalNotExpression, i: int) -> Modifier;
 ```
 ## LogicalNotExpression::getText
 
-```rust
+```java
 /**
-     * Gets the text of this node.
-     */
+* Gets the text of this node.
+*/
 ```
 ```rust
 pub fn getText(self: LogicalNotExpression) -> string;
-```
-## LogicalNotExpression::is\<T\>
-
-```rust
-pub fn is<T>(self: LogicalNotExpression) -> bool;
-```
-## LogicalNotExpression::to\<T\>
-
-```rust
-pub fn to<T>(self: LogicalNotExpression) -> <any>;
-```
-## LogicalNotExpression::key\_neq
-
-```rust
-pub fn key_neq(self: LogicalNotExpression, object: <any>) -> bool;
-```
-## LogicalNotExpression::key\_eq
-
-```rust
-pub fn key_eq(self: LogicalNotExpression, object: <any>) -> bool;
-```
-## LogicalNotExpression::to\_set
-
-```rust
-pub fn to_set(self: LogicalNotExpression) -> *LogicalNotExpression;
 ```

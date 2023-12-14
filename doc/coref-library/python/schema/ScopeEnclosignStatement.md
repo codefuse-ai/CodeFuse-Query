@@ -10,97 +10,74 @@ schema ScopeEnclosignStatement {
 ```
 ## ScopeEnclosignStatement::getEnclosingScope
 
-```rust
+```java
 /**
-     * @brief gets the direct enclosed scope in the relation.
-     * @return Scope 
-     */
+* @brief gets the direct enclosed scope in the relation.
+* @return Scope 
+*/
 ```
 ```rust
 pub fn getEnclosingScope(self: ScopeEnclosignStatement) -> Scope;
 ```
 ## ScopeEnclosignStatement::getScopeOid
 
-```rust
+```java
 /**
-     * @brief gets the scope oid of this element.
-     * @return int
-     */
+* @brief gets the scope oid of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getScopeOid(self: ScopeEnclosignStatement) -> int;
 ```
 ## ScopeEnclosignStatement::getStatement
 
-```rust
+```java
 /**
-     * @brief gets the enclosing statement in the relation.
-     * @return Statement 
-     */
+* @brief gets the enclosing statement in the relation.
+* @return Statement 
+*/
 ```
 ```rust
 pub fn getStatement(self: ScopeEnclosignStatement) -> Statement;
 ```
 ## ScopeEnclosignStatement::getFunction
 
-```rust
+```java
 /**
-     * @brief gets the enclosed function in the relation.
-     * @return Function 
-     */
+* @brief gets the enclosed function in the relation.
+* @return Function 
+*/
 ```
 ```rust
 pub fn getFunction(self: ScopeEnclosignStatement) -> Function;
 ```
 ## ScopeEnclosignStatement::getModule
 
-```rust
+```java
 /**
-     * @brief gets the enclosed module in the relation.
-     * @return module 
-     */
+* @brief gets the enclosed module in the relation.
+* @return module 
+*/
 ```
 ```rust
 pub fn getModule(self: ScopeEnclosignStatement) -> Module;
 ```
 ## ScopeEnclosignStatement::getClass
 
-```rust
+```java
 /**
-     * @brief gets the enclosed class in the relation.
-     * @return Class 
-     */
+* @brief gets the enclosed class in the relation.
+* @return Class 
+*/
 ```
 ```rust
 pub fn getClass(self: ScopeEnclosignStatement) -> Class;
 ```
 ## ScopeEnclosignStatement::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: PythonDB) -> *ScopeEnclosignStatement;
-```
-## ScopeEnclosignStatement::is\<T\>
-
-```rust
-pub fn is<T>(self: ScopeEnclosignStatement) -> bool;
-```
-## ScopeEnclosignStatement::to\<T\>
-
-```rust
-pub fn to<T>(self: ScopeEnclosignStatement) -> <any>;
-```
-## ScopeEnclosignStatement::key\_neq
-
-```rust
-pub fn key_neq(self: ScopeEnclosignStatement, object: <any>) -> bool;
-```
-## ScopeEnclosignStatement::key\_eq
-
-```rust
-pub fn key_eq(self: ScopeEnclosignStatement, object: <any>) -> bool;
-```
-## ScopeEnclosignStatement::to\_set
-
-```rust
-pub fn to_set(self: ScopeEnclosignStatement) -> *ScopeEnclosignStatement;
 ```

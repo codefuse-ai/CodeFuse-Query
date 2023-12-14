@@ -74,6 +74,8 @@ pub fn getBelongsFunction(self: TypeSpec) -> Function;
 ```
 ## TypeSpec::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: GoDB) -> *TypeSpec;
 ```
@@ -119,7 +121,7 @@ pub fn isRootNode(self: TypeSpec) -> bool;
 ```
 ## TypeSpec::getText
 
-```rust
+```java
 // getText Extract the text associated with a specific node in a file
 ```
 ```rust
@@ -127,9 +129,6 @@ pub fn getText(self: TypeSpec) -> string;
 ```
 ## TypeSpec::getBelongsFile
 
-```rust
-// root node
-```
 ```rust
 pub fn getBelongsFile(self: TypeSpec) -> File;
 ```
@@ -147,29 +146,4 @@ pub fn getAnAncestorForIndex(self: TypeSpec, index: int) -> Node;
 
 ```rust
 pub fn getTypeSpecName(self: TypeSpec) -> string;
-```
-## TypeSpec::is\<T\>
-
-```rust
-pub fn is<T>(self: TypeSpec) -> bool;
-```
-## TypeSpec::to\<T\>
-
-```rust
-pub fn to<T>(self: TypeSpec) -> <any>;
-```
-## TypeSpec::key\_neq
-
-```rust
-pub fn key_neq(self: TypeSpec, object: <any>) -> bool;
-```
-## TypeSpec::key\_eq
-
-```rust
-pub fn key_eq(self: TypeSpec, object: <any>) -> bool;
-```
-## TypeSpec::to\_set
-
-```rust
-pub fn to_set(self: TypeSpec) -> *TypeSpec;
 ```

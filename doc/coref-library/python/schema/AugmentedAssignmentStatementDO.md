@@ -12,64 +12,41 @@ schema AugmentedAssignmentStatementDO {
 ```
 ## AugmentedAssignmentStatementDO::getTargetExprOid
 
-```rust
+```java
 /**
-     * @brief gets the target expr oid of this element.
-     * @return int
-     */
+* @brief gets the target expr oid of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getTargetExprOid(self: AugmentedAssignmentStatementDO) -> int;
 ```
 ## AugmentedAssignmentStatementDO::getOpCode
 
-```rust
+```java
 /**
-     * @brief gets the op code of this element.
-     * @return string
-     */
+* @brief gets the op code of this element.
+* @return string
+*/
 ```
 ```rust
 pub fn getOpCode(self: AugmentedAssignmentStatementDO) -> string;
 ```
 ## AugmentedAssignmentStatementDO::getValueExprOid
 
-```rust
+```java
 /**
-     * @brief gets the value expr oid of this element.
-     * @return int
-     */
+* @brief gets the value expr oid of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getValueExprOid(self: AugmentedAssignmentStatementDO) -> int;
 ```
 ## AugmentedAssignmentStatementDO::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: PythonDB) -> *AugmentedAssignmentStatementDO;
-```
-## AugmentedAssignmentStatementDO::is\<T\>
-
-```rust
-pub fn is<T>(self: AugmentedAssignmentStatementDO) -> bool;
-```
-## AugmentedAssignmentStatementDO::to\<T\>
-
-```rust
-pub fn to<T>(self: AugmentedAssignmentStatementDO) -> <any>;
-```
-## AugmentedAssignmentStatementDO::key\_neq
-
-```rust
-pub fn key_neq(self: AugmentedAssignmentStatementDO, object: <any>) -> bool;
-```
-## AugmentedAssignmentStatementDO::key\_eq
-
-```rust
-pub fn key_eq(self: AugmentedAssignmentStatementDO, object: <any>) -> bool;
-```
-## AugmentedAssignmentStatementDO::to\_set
-
-```rust
-pub fn to_set(self: AugmentedAssignmentStatementDO) -> *AugmentedAssignmentStatementDO;
 ```

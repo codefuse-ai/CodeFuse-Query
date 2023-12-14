@@ -11,53 +11,30 @@ schema MethodAccessExpressionWithoutTypeDO {
 ```
 ## MethodAccessExpressionWithoutTypeDO::getArgumentListHashId
 
-```rust
+```java
 /**
-     * @brief gets the argument list hash id of this element.
-     * @return int
-     */
+* @brief gets the argument list hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getArgumentListHashId(self: MethodAccessExpressionWithoutTypeDO) -> int;
 ```
 ## MethodAccessExpressionWithoutTypeDO::getReferenMethodHashId
 
-```rust
+```java
 /**
-     * @brief gets the referen method hash id of this element.
-     * @return int
-     */
+* @brief gets the referen method hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getReferenMethodHashId(self: MethodAccessExpressionWithoutTypeDO) -> int;
 ```
 ## MethodAccessExpressionWithoutTypeDO::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavaDB) -> *MethodAccessExpressionWithoutTypeDO;
-```
-## MethodAccessExpressionWithoutTypeDO::is\<T\>
-
-```rust
-pub fn is<T>(self: MethodAccessExpressionWithoutTypeDO) -> bool;
-```
-## MethodAccessExpressionWithoutTypeDO::to\<T\>
-
-```rust
-pub fn to<T>(self: MethodAccessExpressionWithoutTypeDO) -> <any>;
-```
-## MethodAccessExpressionWithoutTypeDO::key\_neq
-
-```rust
-pub fn key_neq(self: MethodAccessExpressionWithoutTypeDO, object: <any>) -> bool;
-```
-## MethodAccessExpressionWithoutTypeDO::key\_eq
-
-```rust
-pub fn key_eq(self: MethodAccessExpressionWithoutTypeDO, object: <any>) -> bool;
-```
-## MethodAccessExpressionWithoutTypeDO::to\_set
-
-```rust
-pub fn to_set(self: MethodAccessExpressionWithoutTypeDO) -> *MethodAccessExpressionWithoutTypeDO;
 ```

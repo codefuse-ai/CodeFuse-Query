@@ -11,53 +11,30 @@ schema SynchronizedStatementDO {
 ```
 ## SynchronizedStatementDO::getLockExpressionHashId
 
-```rust
+```java
 /**
-     * @brief gets the lock expression hash id of this element.
-     * @return int
-     */
+* @brief gets the lock expression hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getLockExpressionHashId(self: SynchronizedStatementDO) -> int;
 ```
 ## SynchronizedStatementDO::getBodyDeclarationHashId
 
-```rust
+```java
 /**
-     * @brief gets the body declaration hash id of this element.
-     * @return int
-     */
+* @brief gets the body declaration hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getBodyDeclarationHashId(self: SynchronizedStatementDO) -> int;
 ```
 ## SynchronizedStatementDO::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavaDB) -> *SynchronizedStatementDO;
-```
-## SynchronizedStatementDO::is\<T\>
-
-```rust
-pub fn is<T>(self: SynchronizedStatementDO) -> bool;
-```
-## SynchronizedStatementDO::to\<T\>
-
-```rust
-pub fn to<T>(self: SynchronizedStatementDO) -> <any>;
-```
-## SynchronizedStatementDO::key\_neq
-
-```rust
-pub fn key_neq(self: SynchronizedStatementDO, object: <any>) -> bool;
-```
-## SynchronizedStatementDO::key\_eq
-
-```rust
-pub fn key_eq(self: SynchronizedStatementDO, object: <any>) -> bool;
-```
-## SynchronizedStatementDO::to\_set
-
-```rust
-pub fn to_set(self: SynchronizedStatementDO) -> *SynchronizedStatementDO;
 ```

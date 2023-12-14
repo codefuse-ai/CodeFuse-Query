@@ -10,64 +10,41 @@ schema CallableBinding {
 ```
 ## CallableBinding::getCalleeHashId
 
-```rust
+```java
 /**
-     * @brief gets the target callable id of this call.
-     * @return int 
-     */
+* @brief gets the target callable id of this call.
+* @return int 
+*/
 ```
 ```rust
 pub fn getCalleeHashId(self: CallableBinding) -> int;
 ```
 ## CallableBinding::getCallee
 
-```rust
+```java
 /**
-     * @brief gets the callee of the method access expression.
-     * @return Method 
-     */
+* @brief gets the callee of the method access expression.
+* @return Method 
+*/
 ```
 ```rust
 pub fn getCallee(self: CallableBinding) -> Callable;
 ```
 ## CallableBinding::getCaller
 
-```rust
+```java
 /**
-     * @brief gets the caller expression.
-     * @return CallExpression 
-     */
+* @brief gets the caller expression.
+* @return CallExpression 
+*/
 ```
 ```rust
 pub fn getCaller(self: CallableBinding) -> CallExpression;
 ```
 ## CallableBinding::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavaDB) -> *CallableBinding;
-```
-## CallableBinding::is\<T\>
-
-```rust
-pub fn is<T>(self: CallableBinding) -> bool;
-```
-## CallableBinding::to\<T\>
-
-```rust
-pub fn to<T>(self: CallableBinding) -> <any>;
-```
-## CallableBinding::key\_neq
-
-```rust
-pub fn key_neq(self: CallableBinding, object: <any>) -> bool;
-```
-## CallableBinding::key\_eq
-
-```rust
-pub fn key_eq(self: CallableBinding, object: <any>) -> bool;
-```
-## CallableBinding::to\_set
-
-```rust
-pub fn to_set(self: CallableBinding) -> *CallableBinding;
 ```

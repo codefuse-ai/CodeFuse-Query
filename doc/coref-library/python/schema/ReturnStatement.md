@@ -14,163 +14,140 @@ schema ReturnStatement {
 ```
 ## ReturnStatement::getSize
 
-```rust
+```java
 /**
-     * @brief gets the size information for the element.
-     * @return NumberOfLines
-     */
+* @brief gets the size information for the element.
+* @return NumberOfLines
+*/
 ```
 ```rust
 pub fn getSize(self: ReturnStatement) -> NumberOfLines;
 ```
 ## ReturnStatement::getParent
 
-```rust
+```java
 /**
-     * @brief gets the parent element of the statement
-     * @return CombineElement 
-     */
+* @brief gets the parent element of the statement
+* @return CombineElement 
+*/
 ```
 ```rust
 pub fn getParent(self: ReturnStatement) -> CombineElement;
 ```
 ## ReturnStatement::getLocationOid
 
-```rust
+```java
 /**
-     * @brief gets the location oid of this element.
-     * @return int
-     */
+* @brief gets the location oid of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getLocationOid(self: ReturnStatement) -> int;
 ```
 ## ReturnStatement::getEnclosingScope
 
-```rust
+```java
 /**
-     * @brief gets the immediately enclosing scope (module, function or class) whose body contains this statement.
-     * @return Scope 
-     */
+* @brief gets the immediately enclosing scope (module, function or class) whose body contains this statement.
+* @return Scope 
+*/
 ```
 ```rust
 pub fn getEnclosingScope(self: ReturnStatement) -> Scope;
 ```
 ## ReturnStatement::getPrintableText
 
-```rust
+```java
 /**
-     * @brief gets the printable text of this element.
-     * @return string
-     */
+* @brief gets the printable text of this element.
+* @return string
+*/
 ```
 ```rust
 pub fn getPrintableText(self: ReturnStatement) -> string;
 ```
 ## ReturnStatement::getParentOid
 
-```rust
+```java
 /**
-     * @brief gets the parent oid of this element.
-     * @return int
-     */
+* @brief gets the parent oid of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getParentOid(self: ReturnStatement) -> int;
 ```
 ## ReturnStatement::getAnAncestor
 
-```rust
+```java
 /**
-     * @brief gets an ancestor of the element.
-     * @return CombineElement 
-     */
+* @brief gets an ancestor of the element.
+* @return CombineElement 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: ReturnStatement) -> *CombineElement;
 ```
 ## ReturnStatement::getAChild
 
-```rust
+```java
 /**
-     * @brief gets a child of this statement.
-     * @return Statement 
-     */
+* @brief gets a child of this statement.
+* @return Statement 
+*/
 ```
 ```rust
 pub fn getAChild(self: ReturnStatement) -> *Statement;
 ```
 ## ReturnStatement::getEnclosingStatement
 
-```rust
+```java
 /**
-     * @brief gets the statement containing this statement.
-     * @return Statement 
-     */
+* @brief gets the statement containing this statement.
+* @return Statement 
+*/
 ```
 ```rust
 pub fn getEnclosingStatement(self: ReturnStatement) -> Statement;
 ```
 ## ReturnStatement::getElementIndex
 
-```rust
+```java
 /**
-     * @brief gets the element index of this element.
-     * @return int
-     */
+* @brief gets the element index of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getElementIndex(self: ReturnStatement) -> int;
 ```
 ## ReturnStatement::getType
 
-```rust
+```java
 /**
-     * @brief gets the type of this element.
-     * @return string
-     */
+* @brief gets the type of this element.
+* @return string
+*/
 ```
 ```rust
 pub fn getType(self: ReturnStatement) -> string;
 ```
 ## ReturnStatement::getLocation
 
-```rust
+```java
 /**
-     * @brief gets the location for the element.
-     * @return Location
-     */
+* @brief gets the location for the element.
+* @return Location
+*/
 ```
 ```rust
 pub fn getLocation(self: ReturnStatement) -> Location;
 ```
 ## ReturnStatement::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: PythonDB) -> *ReturnStatement;
-```
-## ReturnStatement::is\<T\>
-
-```rust
-pub fn is<T>(self: ReturnStatement) -> bool;
-```
-## ReturnStatement::to\<T\>
-
-```rust
-pub fn to<T>(self: ReturnStatement) -> <any>;
-```
-## ReturnStatement::key\_neq
-
-```rust
-pub fn key_neq(self: ReturnStatement, object: <any>) -> bool;
-```
-## ReturnStatement::key\_eq
-
-```rust
-pub fn key_eq(self: ReturnStatement, object: <any>) -> bool;
-```
-## ReturnStatement::to\_set
-
-```rust
-pub fn to_set(self: ReturnStatement) -> *ReturnStatement;
 ```

@@ -69,7 +69,7 @@ pub fn isRootNode(self: ConstDecl) -> bool;
 ```
 ## ConstDecl::getText
 
-```rust
+```java
 // getText Extract the text associated with a specific node in a file
 ```
 ```rust
@@ -101,6 +101,8 @@ pub fn countAssociatedComment(self: ConstDecl) -> int;
 pub fn isImportDecl(self: ConstDecl) -> bool;
 ```
 ## ConstDecl::\_\_all\_\_
+
+Data constraint method.
 
 ```rust
 pub fn __all__(db: GoDB) -> *ConstDecl;
@@ -143,33 +145,5 @@ pub fn getAnAncestor(self: ConstDecl) -> *Node;
 ## ConstDecl::getBelongsFile
 
 ```rust
-// root node
-```
-```rust
 pub fn getBelongsFile(self: ConstDecl) -> File;
-```
-## ConstDecl::is\<T\>
-
-```rust
-pub fn is<T>(self: ConstDecl) -> bool;
-```
-## ConstDecl::to\<T\>
-
-```rust
-pub fn to<T>(self: ConstDecl) -> <any>;
-```
-## ConstDecl::key\_neq
-
-```rust
-pub fn key_neq(self: ConstDecl, object: <any>) -> bool;
-```
-## ConstDecl::key\_eq
-
-```rust
-pub fn key_eq(self: ConstDecl, object: <any>) -> bool;
-```
-## ConstDecl::to\_set
-
-```rust
-pub fn to_set(self: ConstDecl) -> *ConstDecl;
 ```

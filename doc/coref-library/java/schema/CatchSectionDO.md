@@ -15,97 +15,74 @@ schema CatchSectionDO {
 ```
 ## CatchSectionDO::getIndex
 
-```rust
+```java
 /**
-     * @brief gets the index order of this element.
-     * @return int
-     */
+* @brief gets the index order of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getIndex(self: CatchSectionDO) -> int;
 ```
 ## CatchSectionDO::getTryStatementHashId
 
-```rust
+```java
 /**
-     * @brief gets the try statement hash id of this element.
-     * @return int
-     */
+* @brief gets the try statement hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getTryStatementHashId(self: CatchSectionDO) -> int;
 ```
 ## CatchSectionDO::getLocationHashId
 
-```rust
+```java
 /**
-     * @brief gets the location hash id of this element.
-     * @return int
-     */
+* @brief gets the location hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getLocationHashId(self: CatchSectionDO) -> int;
 ```
 ## CatchSectionDO::getPrintableText
 
-```rust
+```java
 /**
-     * @brief gets a printed representation of this element, including its structure where applicable.
-     * @return string.
-     */
+* @brief gets a printed representation of this element, including its structure where applicable.
+* @return string.
+*/
 ```
 ```rust
 pub fn getPrintableText(self: CatchSectionDO) -> string;
 ```
 ## CatchSectionDO::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavaDB) -> *CatchSectionDO;
 ```
 ## CatchSectionDO::getTypeHashId
 
-```rust
+```java
 /**
-     * @brief gets the type hash id of this element.
-     * @return int
-     */
+* @brief gets the type hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getTypeHashId(self: CatchSectionDO) -> int;
 ```
 ## CatchSectionDO::getParameterHashId
 
-```rust
+```java
 /**
-     * @brief gets the parameter hash id of this element.
-     * @return int
-     */
+* @brief gets the parameter hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getParameterHashId(self: CatchSectionDO) -> int;
-```
-## CatchSectionDO::is\<T\>
-
-```rust
-pub fn is<T>(self: CatchSectionDO) -> bool;
-```
-## CatchSectionDO::to\<T\>
-
-```rust
-pub fn to<T>(self: CatchSectionDO) -> <any>;
-```
-## CatchSectionDO::key\_neq
-
-```rust
-pub fn key_neq(self: CatchSectionDO, object: <any>) -> bool;
-```
-## CatchSectionDO::key\_eq
-
-```rust
-pub fn key_eq(self: CatchSectionDO, object: <any>) -> bool;
-```
-## CatchSectionDO::to\_set
-
-```rust
-pub fn to_set(self: CatchSectionDO) -> *CatchSectionDO;
 ```

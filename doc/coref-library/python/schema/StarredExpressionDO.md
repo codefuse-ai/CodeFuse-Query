@@ -10,42 +10,19 @@ schema StarredExpressionDO {
 ```
 ## StarredExpressionDO::getCtx
 
-```rust
+```java
 /**
-     * @brief gets the ctx of this element.
-     * @return string
-     */
+* @brief gets the ctx of this element.
+* @return string
+*/
 ```
 ```rust
 pub fn getCtx(self: StarredExpressionDO) -> string;
 ```
 ## StarredExpressionDO::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: PythonDB) -> *StarredExpressionDO;
-```
-## StarredExpressionDO::is\<T\>
-
-```rust
-pub fn is<T>(self: StarredExpressionDO) -> bool;
-```
-## StarredExpressionDO::to\<T\>
-
-```rust
-pub fn to<T>(self: StarredExpressionDO) -> <any>;
-```
-## StarredExpressionDO::key\_neq
-
-```rust
-pub fn key_neq(self: StarredExpressionDO, object: <any>) -> bool;
-```
-## StarredExpressionDO::key\_eq
-
-```rust
-pub fn key_eq(self: StarredExpressionDO, object: <any>) -> bool;
-```
-## StarredExpressionDO::to\_set
-
-```rust
-pub fn to_set(self: StarredExpressionDO) -> *StarredExpressionDO;
 ```

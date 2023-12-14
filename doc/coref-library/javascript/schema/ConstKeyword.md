@@ -9,10 +9,10 @@ schema ConstKeyword {
 ```
 ## ConstKeyword::getADescendant
 
-```rust
+```java
 /**
-     * Gets a descendant of this node. 
-     */
+* Gets a descendant of this node. 
+*/
 ```
 ```rust
 pub fn getADescendant(self: ConstKeyword) -> *Node;
@@ -24,10 +24,10 @@ pub fn getIndex(self: ConstKeyword) -> int;
 ```
 ## ConstKeyword::getParentOid
 
-```rust
+```java
 /**
-     * Gets the parent oid of this node.
-     */
+* Gets the parent oid of this node.
+*/
 ```
 ```rust
 pub fn getParentOid(self: ConstKeyword) -> int;
@@ -39,62 +39,62 @@ pub fn getEndColumnNumber(self: ConstKeyword) -> int;
 ```
 ## ConstKeyword::getEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets the enclosing function of it
-     */
+* Gets the enclosing function of it
+*/
 ```
 ```rust
 pub fn getEnclosingFunction(self: ConstKeyword) -> FunctionLikeDeclaration;
 ```
 ## ConstKeyword::getLastChild
 
-```rust
+```java
 /**
-     * Gets the last child of this node parent.
-     */
+* Gets the last child of this node parent.
+*/
 ```
 ```rust
 pub fn getLastChild(self: ConstKeyword) -> Node;
 ```
 ## ConstKeyword::getATrailingComment
 
-```rust
+```java
 /**
-     * Gets the trailing comments of it
-     */
+* Gets the trailing comments of it
+*/
 ```
 ```rust
 pub fn getATrailingComment(self: ConstKeyword) -> *Comment;
 ```
 ## ConstKeyword::getALeadingComment
 
-```rust
+```java
 /**
-     * Gets the leading comments of it
-     */
+* Gets the leading comments of it
+*/
 ```
 ```rust
 pub fn getALeadingComment(self: ConstKeyword) -> *Comment;
 ```
 ## ConstKeyword::getFile
 
-```rust
+```java
 /**
-     * Gets the file of this node.
-     */
+* Gets the file of this node.
+*/
 ```
 ```rust
 pub fn getFile(self: ConstKeyword) -> File;
 ```
 ## ConstKeyword::getAnAncestorByLevel
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets an ancestor of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getAnAncestorByLevel(self: ConstKeyword, level: int) -> Node;
@@ -106,52 +106,52 @@ pub fn getEndLineNumber(self: ConstKeyword) -> int;
 ```
 ## ConstKeyword::getRelativePath
 
-```rust
+```java
 /**
-     * Gets the relative path of this node.
-     */
+* Gets the relative path of this node.
+*/
 ```
 ```rust
 pub fn getRelativePath(self: ConstKeyword) -> string;
 ```
 ## ConstKeyword::getAnAncestorEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets an ancestor enclosing function of it
-     */
+* Gets an ancestor enclosing function of it
+*/
 ```
 ```rust
 pub fn getAnAncestorEnclosingFunction(self: ConstKeyword) -> *FunctionLikeDeclaration;
 ```
 ## ConstKeyword::getADescendantByLevel
 
-```rust
+```java
 /**
-     * Gets a descendant of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets a descendant of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getADescendantByLevel(self: ConstKeyword, level: int) -> *Node;
 ```
 ## ConstKeyword::getKind
 
-```rust
+```java
 /**
-     * Get the syntax kind of this node
-     */
+* Get the syntax kind of this node
+*/
 ```
 ```rust
 pub fn getKind(self: ConstKeyword) -> int;
 ```
 ## ConstKeyword::getAModifier
 
-```rust
+```java
 /**
-     * Gets a modifier.
-     */
+* Gets a modifier.
+*/
 ```
 ```rust
 pub fn getAModifier(self: ConstKeyword) -> *Modifier;
@@ -168,161 +168,138 @@ pub fn getStartLineNumber(self: ConstKeyword) -> int;
 ```
 ## ConstKeyword::getChild
 
-```rust
+```java
 /**
-     * Gets the `i`th child of this node.
-     */
+* Gets the `i`th child of this node.
+*/
 ```
 ```rust
 pub fn getChild(self: ConstKeyword, i: int) -> Node;
 ```
 ## ConstKeyword::getDecorator
 
-```rust
+```java
 /**
-     * Gets the `i`th decorator.
-     */
+* Gets the `i`th decorator.
+*/
 ```
 ```rust
 pub fn getDecorator(self: ConstKeyword, i: int) -> Decorator;
 ```
 ## ConstKeyword::getRoot
 
-```rust
+```java
 /**
-     * Gets the root top-level of this node. 
-     */
+* Gets the root top-level of this node. 
+*/
 ```
 ```rust
 pub fn getRoot(self: ConstKeyword) -> TopLevelDO;
 ```
 ## ConstKeyword::getChildCount
 
-```rust
+```java
 /**
-     * Gets the number of child nodes.
-     */
+* Gets the number of child nodes.
+*/
 ```
 ```rust
 pub fn getChildCount(self: ConstKeyword) -> int;
 ```
 ## ConstKeyword::getParent
 
-```rust
+```java
 /**
-     * Gets the parent node of this node.
-     */
+* Gets the parent node of this node.
+*/
 ```
 ```rust
 pub fn getParent(self: ConstKeyword) -> Node;
 ```
 ## ConstKeyword::getAChild
 
-```rust
+```java
 /**
-     * Gets a child node of this node.
-     */
+* Gets a child node of this node.
+*/
 ```
 ```rust
 pub fn getAChild(self: ConstKeyword) -> *Node;
 ```
 ## ConstKeyword::getAnAncestor
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node. 
-     */
+* Gets an ancestor of this node. 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: ConstKeyword) -> *Node;
 ```
 ## ConstKeyword::getAComment
 
-```rust
+```java
 /**
-     * Gets the comments related to it
-     */
+* Gets the comments related to it
+*/
 ```
 ```rust
 pub fn getAComment(self: ConstKeyword) -> *Comment;
 ```
 ## ConstKeyword::getSymbol
 
-```rust
+```java
 /**
-     * Gets the symbol associated with this node.
-     */
+* Gets the symbol associated with this node.
+*/
 ```
 ```rust
 pub fn getSymbol(self: ConstKeyword) -> Symbol;
 ```
 ## ConstKeyword::getADecorator
 
-```rust
+```java
 /**
-     * Gets a decorator.
-     */
+* Gets a decorator.
+*/
 ```
 ```rust
 pub fn getADecorator(self: ConstKeyword) -> *Decorator;
 ```
 ## ConstKeyword::getModifier
 
-```rust
+```java
 /**
-     * Gets the `i`th modifier.
-     */
+* Gets the `i`th modifier.
+*/
 ```
 ```rust
 pub fn getModifier(self: ConstKeyword, i: int) -> Modifier;
 ```
 ## ConstKeyword::getText
 
-```rust
+```java
 /**
-     * Gets the text of this node.
-     */
+* Gets the text of this node.
+*/
 ```
 ```rust
 pub fn getText(self: ConstKeyword) -> string;
 ```
 ## ConstKeyword::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavascriptDB) -> *ConstKeyword;
 ```
 ## ConstKeyword::getLocation
 
-```rust
+```java
 /**
-     * Gets the location of this node.
-     */
+* Gets the location of this node.
+*/
 ```
 ```rust
 pub fn getLocation(self: ConstKeyword) -> Location;
-```
-## ConstKeyword::is\<T\>
-
-```rust
-pub fn is<T>(self: ConstKeyword) -> bool;
-```
-## ConstKeyword::to\<T\>
-
-```rust
-pub fn to<T>(self: ConstKeyword) -> <any>;
-```
-## ConstKeyword::key\_neq
-
-```rust
-pub fn key_neq(self: ConstKeyword, object: <any>) -> bool;
-```
-## ConstKeyword::key\_eq
-
-```rust
-pub fn key_eq(self: ConstKeyword, object: <any>) -> bool;
-```
-## ConstKeyword::to\_set
-
-```rust
-pub fn to_set(self: ConstKeyword) -> *ConstKeyword;
 ```

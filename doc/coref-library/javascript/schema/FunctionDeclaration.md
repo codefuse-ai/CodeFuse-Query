@@ -9,20 +9,20 @@ schema FunctionDeclaration {
 ```
 ## FunctionDeclaration::getModifier
 
-```rust
+```java
 /**
-     * Gets the `i`th modifier of this FunctionLikeDeclaration.
-     */
+* Gets the `i`th modifier of this FunctionLikeDeclaration.
+*/
 ```
 ```rust
 pub fn getModifier(self: FunctionDeclaration, i: int) -> Modifier;
 ```
 ## FunctionDeclaration::getKind
 
-```rust
+```java
 /**
-     * Get the syntax kind of this node
-     */
+* Get the syntax kind of this node
+*/
 ```
 ```rust
 pub fn getKind(self: FunctionDeclaration) -> int;
@@ -34,50 +34,50 @@ pub fn getStartColumnNumber(self: FunctionDeclaration) -> int;
 ```
 ## FunctionDeclaration::getTypeParameter
 
-```rust
+```java
 /**
-     * Gets the `i`th type parameter.
-     */
+* Gets the `i`th type parameter.
+*/
 ```
 ```rust
 pub fn getTypeParameter(self: FunctionDeclaration, i: int) -> TypeParameter;
 ```
 ## FunctionDeclaration::getATrailingComment
 
-```rust
+```java
 /**
-     * Gets the trailing comments of it
-     */
+* Gets the trailing comments of it
+*/
 ```
 ```rust
 pub fn getATrailingComment(self: FunctionDeclaration) -> *Comment;
 ```
 ## FunctionDeclaration::getBody
 
-```rust
+```java
 /**
-     * Gets the body of this function-like declaration
-     */
+* Gets the body of this function-like declaration
+*/
 ```
 ```rust
 pub fn getBody(self: FunctionDeclaration) -> BlockStatement;
 ```
 ## FunctionDeclaration::getDecoratorCount
 
-```rust
+```java
 /**
-     * Gets the number of decorators of this FunctionLikeDeclaration.
-     */
+* Gets the number of decorators of this FunctionLikeDeclaration.
+*/
 ```
 ```rust
 pub fn getDecoratorCount(self: FunctionDeclaration) -> int;
 ```
 ## FunctionDeclaration::getAModifier
 
-```rust
+```java
 /**
-     * Gets a modifier of this FunctionLikeDeclaration.
-     */
+* Gets a modifier of this FunctionLikeDeclaration.
+*/
 ```
 ```rust
 pub fn getAModifier(self: FunctionDeclaration) -> *Modifier;
@@ -89,40 +89,40 @@ pub fn getAReturnStatement(self: FunctionDeclaration) -> *ReturnStatement;
 ```
 ## FunctionDeclaration::getDecorator
 
-```rust
+```java
 /**
-     * Gets the `i`th decorator of this FunctionLikeDeclaration.
-     */
+* Gets the `i`th decorator of this FunctionLikeDeclaration.
+*/
 ```
 ```rust
 pub fn getDecorator(self: FunctionDeclaration, i: int) -> Decorator;
 ```
 ## FunctionDeclaration::getADecorator
 
-```rust
+```java
 /**
-     * Gets a decorator of this FunctionLikeDeclaration.
-     */
+* Gets a decorator of this FunctionLikeDeclaration.
+*/
 ```
 ```rust
 pub fn getADecorator(self: FunctionDeclaration) -> *Decorator;
 ```
 ## FunctionDeclaration::getCyclomaticComplexity
 
-```rust
+```java
 /**
-     * Gets the cyclomatic complexity of this function-like declaration
-     */
+* Gets the cyclomatic complexity of this function-like declaration
+*/
 ```
 ```rust
 pub fn getCyclomaticComplexity(self: FunctionDeclaration) -> int;
 ```
 ## FunctionDeclaration::getRoot
 
-```rust
+```java
 /**
-     * Gets the root top-level of this node. 
-     */
+* Gets the root top-level of this node. 
+*/
 ```
 ```rust
 pub fn getRoot(self: FunctionDeclaration) -> TopLevelDO;
@@ -130,107 +130,104 @@ pub fn getRoot(self: FunctionDeclaration) -> TopLevelDO;
 ## FunctionDeclaration::getAReturnedExpression
 
 ```rust
-// TODO: the body of an ArrowFunction is the returned expression if it is an expression
-```
-```rust
 pub fn getAReturnedExpression(self: FunctionDeclaration) -> *Expression;
 ```
 ## FunctionDeclaration::getChild
 
-```rust
+```java
 /**
-     * Gets the `i`th child of this node.
-     */
+* Gets the `i`th child of this node.
+*/
 ```
 ```rust
 pub fn getChild(self: FunctionDeclaration, i: int) -> Node;
 ```
 ## FunctionDeclaration::isGenerator
 
-```rust
+```java
 /**
-     * Determines whether this FunctionLikeDeclaration is a generator.
-     */
+* Determines whether this FunctionLikeDeclaration is a generator.
+*/
 ```
 ```rust
 pub fn isGenerator(self: FunctionDeclaration) -> bool;
 ```
 ## FunctionDeclaration::getParameterCount
 
-```rust
+```java
 /**
-     * Gets the count of parameters.
-     */
+* Gets the count of parameters.
+*/
 ```
 ```rust
 pub fn getParameterCount(self: FunctionDeclaration) -> int;
 ```
 ## FunctionDeclaration::getAParameter
 
-```rust
+```java
 /**
-     * Gets a parameter.
-     */
+* Gets a parameter.
+*/
 ```
 ```rust
 pub fn getAParameter(self: FunctionDeclaration) -> *Parameter;
 ```
 ## FunctionDeclaration::getNameNode
 
-```rust
+```java
 /**
-     * Gets the name node, which is a PropertyName.
-     */
+* Gets the name node, which is a PropertyName.
+*/
 ```
 ```rust
 pub fn getNameNode(self: FunctionDeclaration) -> PropertyName;
 ```
 ## FunctionDeclaration::getFile
 
-```rust
+```java
 /**
-     * Gets the file of this node.
-     */
+* Gets the file of this node.
+*/
 ```
 ```rust
 pub fn getFile(self: FunctionDeclaration) -> File;
 ```
 ## FunctionDeclaration::hasParameter
 
-```rust
+```java
 /**
-     * Determine this FunctionLikeDeclaration contains any parameter.
-     */
+* Determine this FunctionLikeDeclaration contains any parameter.
+*/
 ```
 ```rust
 pub fn hasParameter(self: FunctionDeclaration) -> bool;
 ```
 ## FunctionDeclaration::getTypeParameterCount
 
-```rust
+```java
 /**
-     * Gets the count of type parameters.
-     */
+* Gets the count of type parameters.
+*/
 ```
 ```rust
 pub fn getTypeParameterCount(self: FunctionDeclaration) -> int;
 ```
 ## FunctionDeclaration::getACallSite
 
-```rust
+```java
 /**
-     * Gets a call site of this function-like declaration
-     */
+* Gets a call site of this function-like declaration
+*/
 ```
 ```rust
 pub fn getACallSite(self: FunctionDeclaration) -> *MayInvokeExpression;
 ```
 ## FunctionDeclaration::getName
 
-```rust
+```java
 /**
-     * Gets the name of this function-like declaration
-     */
+* Gets the name of this function-like declaration
+*/
 ```
 ```rust
 pub fn getName(self: FunctionDeclaration) -> string;
@@ -247,10 +244,10 @@ pub fn getParameterFirstIndex(self: FunctionDeclaration) -> int;
 ```
 ## FunctionDeclaration::getParentOid
 
-```rust
+```java
 /**
-     * Gets the parent oid of this node.
-     */
+* Gets the parent oid of this node.
+*/
 ```
 ```rust
 pub fn getParentOid(self: FunctionDeclaration) -> int;
@@ -262,84 +259,84 @@ pub fn getEndColumnNumber(self: FunctionDeclaration) -> int;
 ```
 ## FunctionDeclaration::getText
 
-```rust
+```java
 /**
-     * Gets the text of this node.
-     */
+* Gets the text of this node.
+*/
 ```
 ```rust
 pub fn getText(self: FunctionDeclaration) -> string;
 ```
 ## FunctionDeclaration::getParameter
 
-```rust
+```java
 /**
-     * Gets the `i`th parameter.
-     */
+* Gets the `i`th parameter.
+*/
 ```
 ```rust
 pub fn getParameter(self: FunctionDeclaration, i: int) -> Parameter;
 ```
 ## FunctionDeclaration::getLastChild
 
-```rust
+```java
 /**
-     * Gets the last child of this node parent.
-     */
+* Gets the last child of this node parent.
+*/
 ```
 ```rust
 pub fn getLastChild(self: FunctionDeclaration) -> Node;
 ```
 ## FunctionDeclaration::getChildCount
 
-```rust
+```java
 /**
-     * Gets the number of child nodes.
-     */
+* Gets the number of child nodes.
+*/
 ```
 ```rust
 pub fn getChildCount(self: FunctionDeclaration) -> int;
 ```
 ## FunctionDeclaration::getATypeParameter
 
-```rust
+```java
 /**
-     * Gets a type parameter.
-     */
+* Gets a type parameter.
+*/
 ```
 ```rust
 pub fn getATypeParameter(self: FunctionDeclaration) -> *TypeParameter;
 ```
 ## FunctionDeclaration::getAnAncestorByLevel
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets an ancestor of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getAnAncestorByLevel(self: FunctionDeclaration, level: int) -> Node;
 ```
 ## FunctionDeclaration::getTypeNode
 
-```rust
+```java
 /**
-     * Gets the type node.
-     */
+* Gets the type node.
+*/
 ```
 ```rust
 pub fn getTypeNode(self: FunctionDeclaration) -> TypeNode;
 ```
 ## FunctionDeclaration::getADescendantByLevel
 
-```rust
+```java
 /**
-     * Gets a descendant of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets a descendant of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getADescendantByLevel(self: FunctionDeclaration, level: int) -> *Node;
@@ -351,20 +348,20 @@ pub fn getEndLineNumber(self: FunctionDeclaration) -> int;
 ```
 ## FunctionDeclaration::getRelativePath
 
-```rust
+```java
 /**
-     * Gets the relative path of this node.
-     */
+* Gets the relative path of this node.
+*/
 ```
 ```rust
 pub fn getRelativePath(self: FunctionDeclaration) -> string;
 ```
 ## FunctionDeclaration::getAnAncestorEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets an ancestor enclosing function of it
-     */
+* Gets an ancestor enclosing function of it
+*/
 ```
 ```rust
 pub fn getAnAncestorEnclosingFunction(self: FunctionDeclaration) -> *FunctionLikeDeclaration;
@@ -376,10 +373,10 @@ pub fn getStartLineNumber(self: FunctionDeclaration) -> int;
 ```
 ## FunctionDeclaration::getModifierCount
 
-```rust
+```java
 /**
-     * Gets the number of modifiers of this FunctionLikeDeclaration.
-     */
+* Gets the number of modifiers of this FunctionLikeDeclaration.
+*/
 ```
 ```rust
 pub fn getModifierCount(self: FunctionDeclaration) -> int;
@@ -391,121 +388,98 @@ pub fn getIndex(self: FunctionDeclaration) -> int;
 ```
 ## FunctionDeclaration::getALeadingComment
 
-```rust
+```java
 /**
-     * Gets the leading comments of it
-     */
+* Gets the leading comments of it
+*/
 ```
 ```rust
 pub fn getALeadingComment(self: FunctionDeclaration) -> *Comment;
 ```
 ## FunctionDeclaration::getEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets the enclosing function of it
-     */
+* Gets the enclosing function of it
+*/
 ```
 ```rust
 pub fn getEnclosingFunction(self: FunctionDeclaration) -> FunctionLikeDeclaration;
 ```
 ## FunctionDeclaration::getSymbol
 
-```rust
+```java
 /**
-     * Gets the symbol associated with this node.
-     */
+* Gets the symbol associated with this node.
+*/
 ```
 ```rust
 pub fn getSymbol(self: FunctionDeclaration) -> Symbol;
 ```
 ## FunctionDeclaration::getAChild
 
-```rust
+```java
 /**
-     * Gets a child node of this node.
-     */
+* Gets a child node of this node.
+*/
 ```
 ```rust
 pub fn getAChild(self: FunctionDeclaration) -> *Node;
 ```
 ## FunctionDeclaration::getParent
 
-```rust
+```java
 /**
-     * Gets the parent node of this node.
-     */
+* Gets the parent node of this node.
+*/
 ```
 ```rust
 pub fn getParent(self: FunctionDeclaration) -> Node;
 ```
 ## FunctionDeclaration::getAnAncestor
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node. 
-     */
+* Gets an ancestor of this node. 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: FunctionDeclaration) -> *Node;
 ```
 ## FunctionDeclaration::getAComment
 
-```rust
+```java
 /**
-     * Gets the comments related to it
-     */
+* Gets the comments related to it
+*/
 ```
 ```rust
 pub fn getAComment(self: FunctionDeclaration) -> *Comment;
 ```
 ## FunctionDeclaration::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavascriptDB) -> *FunctionDeclaration;
 ```
 ## FunctionDeclaration::getLocation
 
-```rust
+```java
 /**
-     * Gets the location of this node.
-     */
+* Gets the location of this node.
+*/
 ```
 ```rust
 pub fn getLocation(self: FunctionDeclaration) -> Location;
 ```
 ## FunctionDeclaration::getADescendant
 
-```rust
+```java
 /**
-     * Gets a descendant of this node. 
-     */
+* Gets a descendant of this node. 
+*/
 ```
 ```rust
 pub fn getADescendant(self: FunctionDeclaration) -> *Node;
-```
-## FunctionDeclaration::is\<T\>
-
-```rust
-pub fn is<T>(self: FunctionDeclaration) -> bool;
-```
-## FunctionDeclaration::to\<T\>
-
-```rust
-pub fn to<T>(self: FunctionDeclaration) -> <any>;
-```
-## FunctionDeclaration::key\_neq
-
-```rust
-pub fn key_neq(self: FunctionDeclaration, object: <any>) -> bool;
-```
-## FunctionDeclaration::key\_eq
-
-```rust
-pub fn key_eq(self: FunctionDeclaration, object: <any>) -> bool;
-```
-## FunctionDeclaration::to\_set
-
-```rust
-pub fn to_set(self: FunctionDeclaration) -> *FunctionDeclaration;
 ```

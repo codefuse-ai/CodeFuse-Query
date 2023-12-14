@@ -9,140 +9,140 @@ schema TildeToken {
 ```
 ## TildeToken::getLocation
 
-```rust
+```java
 /**
-     * Gets the location of this node.
-     */
+* Gets the location of this node.
+*/
 ```
 ```rust
 pub fn getLocation(self: TildeToken) -> Location;
 ```
 ## TildeToken::getSymbol
 
-```rust
+```java
 /**
-     * Gets the symbol associated with this node.
-     */
+* Gets the symbol associated with this node.
+*/
 ```
 ```rust
 pub fn getSymbol(self: TildeToken) -> Symbol;
 ```
 ## TildeToken::getADecorator
 
-```rust
+```java
 /**
-     * Gets a decorator.
-     */
+* Gets a decorator.
+*/
 ```
 ```rust
 pub fn getADecorator(self: TildeToken) -> *Decorator;
 ```
 ## TildeToken::getText
 
-```rust
+```java
 /**
-     * Gets the text of this node.
-     */
+* Gets the text of this node.
+*/
 ```
 ```rust
 pub fn getText(self: TildeToken) -> string;
 ```
 ## TildeToken::getModifier
 
-```rust
+```java
 /**
-     * Gets the `i`th modifier.
-     */
+* Gets the `i`th modifier.
+*/
 ```
 ```rust
 pub fn getModifier(self: TildeToken, i: int) -> Modifier;
 ```
 ## TildeToken::getAComment
 
-```rust
+```java
 /**
-     * Gets the comments related to it
-     */
+* Gets the comments related to it
+*/
 ```
 ```rust
 pub fn getAComment(self: TildeToken) -> *Comment;
 ```
 ## TildeToken::getAnAncestor
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node. 
-     */
+* Gets an ancestor of this node. 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: TildeToken) -> *Node;
 ```
 ## TildeToken::getAChild
 
-```rust
+```java
 /**
-     * Gets a child node of this node.
-     */
+* Gets a child node of this node.
+*/
 ```
 ```rust
 pub fn getAChild(self: TildeToken) -> *Node;
 ```
 ## TildeToken::getParent
 
-```rust
+```java
 /**
-     * Gets the parent node of this node.
-     */
+* Gets the parent node of this node.
+*/
 ```
 ```rust
 pub fn getParent(self: TildeToken) -> Node;
 ```
 ## TildeToken::getChildCount
 
-```rust
+```java
 /**
-     * Gets the number of child nodes.
-     */
+* Gets the number of child nodes.
+*/
 ```
 ```rust
 pub fn getChildCount(self: TildeToken) -> int;
 ```
 ## TildeToken::getRoot
 
-```rust
+```java
 /**
-     * Gets the root top-level of this node. 
-     */
+* Gets the root top-level of this node. 
+*/
 ```
 ```rust
 pub fn getRoot(self: TildeToken) -> TopLevelDO;
 ```
 ## TildeToken::getDecorator
 
-```rust
+```java
 /**
-     * Gets the `i`th decorator.
-     */
+* Gets the `i`th decorator.
+*/
 ```
 ```rust
 pub fn getDecorator(self: TildeToken, i: int) -> Decorator;
 ```
 ## TildeToken::getKind
 
-```rust
+```java
 /**
-     * Get the syntax kind of this node
-     */
+* Get the syntax kind of this node
+*/
 ```
 ```rust
 pub fn getKind(self: TildeToken) -> int;
 ```
 ## TildeToken::getAModifier
 
-```rust
+```java
 /**
-     * Gets a modifier.
-     */
+* Gets a modifier.
+*/
 ```
 ```rust
 pub fn getAModifier(self: TildeToken) -> *Modifier;
@@ -154,10 +154,10 @@ pub fn getStartColumnNumber(self: TildeToken) -> int;
 ```
 ## TildeToken::getChild
 
-```rust
+```java
 /**
-     * Gets the `i`th child of this node.
-     */
+* Gets the `i`th child of this node.
+*/
 ```
 ```rust
 pub fn getChild(self: TildeToken, i: int) -> Node;
@@ -169,22 +169,22 @@ pub fn getStartLineNumber(self: TildeToken) -> int;
 ```
 ## TildeToken::getAnAncestorEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets an ancestor enclosing function of it
-     */
+* Gets an ancestor enclosing function of it
+*/
 ```
 ```rust
 pub fn getAnAncestorEnclosingFunction(self: TildeToken) -> *FunctionLikeDeclaration;
 ```
 ## TildeToken::getADescendantByLevel
 
-```rust
+```java
 /**
-     * Gets a descendant of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets a descendant of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getADescendantByLevel(self: TildeToken, level: int) -> *Node;
@@ -196,72 +196,72 @@ pub fn getEndLineNumber(self: TildeToken) -> int;
 ```
 ## TildeToken::getRelativePath
 
-```rust
+```java
 /**
-     * Gets the relative path of this node.
-     */
+* Gets the relative path of this node.
+*/
 ```
 ```rust
 pub fn getRelativePath(self: TildeToken) -> string;
 ```
 ## TildeToken::getAnAncestorByLevel
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets an ancestor of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getAnAncestorByLevel(self: TildeToken, level: int) -> Node;
 ```
 ## TildeToken::getFile
 
-```rust
+```java
 /**
-     * Gets the file of this node.
-     */
+* Gets the file of this node.
+*/
 ```
 ```rust
 pub fn getFile(self: TildeToken) -> File;
 ```
 ## TildeToken::getALeadingComment
 
-```rust
+```java
 /**
-     * Gets the leading comments of it
-     */
+* Gets the leading comments of it
+*/
 ```
 ```rust
 pub fn getALeadingComment(self: TildeToken) -> *Comment;
 ```
 ## TildeToken::getATrailingComment
 
-```rust
+```java
 /**
-     * Gets the trailing comments of it
-     */
+* Gets the trailing comments of it
+*/
 ```
 ```rust
 pub fn getATrailingComment(self: TildeToken) -> *Comment;
 ```
 ## TildeToken::getLastChild
 
-```rust
+```java
 /**
-     * Gets the last child of this node parent.
-     */
+* Gets the last child of this node parent.
+*/
 ```
 ```rust
 pub fn getLastChild(self: TildeToken) -> Node;
 ```
 ## TildeToken::getEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets the enclosing function of it
-     */
+* Gets the enclosing function of it
+*/
 ```
 ```rust
 pub fn getEnclosingFunction(self: TildeToken) -> FunctionLikeDeclaration;
@@ -273,10 +273,10 @@ pub fn getEndColumnNumber(self: TildeToken) -> int;
 ```
 ## TildeToken::getParentOid
 
-```rust
+```java
 /**
-     * Gets the parent oid of this node.
-     */
+* Gets the parent oid of this node.
+*/
 ```
 ```rust
 pub fn getParentOid(self: TildeToken) -> int;
@@ -288,41 +288,18 @@ pub fn getIndex(self: TildeToken) -> int;
 ```
 ## TildeToken::getADescendant
 
-```rust
+```java
 /**
-     * Gets a descendant of this node. 
-     */
+* Gets a descendant of this node. 
+*/
 ```
 ```rust
 pub fn getADescendant(self: TildeToken) -> *Node;
 ```
 ## TildeToken::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavascriptDB) -> *TildeToken;
-```
-## TildeToken::is\<T\>
-
-```rust
-pub fn is<T>(self: TildeToken) -> bool;
-```
-## TildeToken::to\<T\>
-
-```rust
-pub fn to<T>(self: TildeToken) -> <any>;
-```
-## TildeToken::key\_neq
-
-```rust
-pub fn key_neq(self: TildeToken, object: <any>) -> bool;
-```
-## TildeToken::key\_eq
-
-```rust
-pub fn key_eq(self: TildeToken, object: <any>) -> bool;
-```
-## TildeToken::to\_set
-
-```rust
-pub fn to_set(self: TildeToken) -> *TildeToken;
 ```

@@ -14,30 +14,30 @@ pub fn isSyntheticNode(self: VarUse) -> bool;
 ```
 ## VarUse::getPredecessorCount
 
-```rust
+```java
 /**
-     * Get the count of immediate predecessor nodes/
-     */
+* Get the count of immediate predecessor nodes/
+*/
 ```
 ```rust
 pub fn getPredecessorCount(self: VarUse) -> int;
 ```
 ## VarUse::getRelativePath
 
-```rust
+```java
 /**
-     * Get the relative path of this control flow node.
-     */
+* Get the relative path of this control flow node.
+*/
 ```
 ```rust
 pub fn getRelativePath(self: VarUse) -> string;
 ```
 ## VarUse::getDefinedByLValue
 
-```rust
+```java
 /**
-     * Gets the LValue nodes that can define this use node.
-     */
+* Gets the LValue nodes that can define this use node.
+*/
 ```
 ```rust
 pub fn getDefinedByLValue(self: VarUse) -> *LValue;
@@ -49,84 +49,84 @@ pub fn isEntryNode(self: VarUse) -> bool;
 ```
 ## VarUse::getASuccessorRecursive
 
-```rust
+```java
 /**
-     * Gets the successor of this node, and query successors recursively
-     */
+* Gets the successor of this node, and query successors recursively
+*/
 ```
 ```rust
 pub fn getASuccessorRecursive(self: VarUse) -> *ControlFlowNode;
 ```
 ## VarUse::getASuccessor
 
-```rust
+```java
 /**
-     * Get an immediate successor of this node.
-     */
+* Get an immediate successor of this node.
+*/
 ```
 ```rust
 pub fn getASuccessor(self: VarUse) -> *ControlFlowNode;
 ```
 ## VarUse::getEnclosingFunction
 
-```rust
+```java
 /**
-     * Get the enclosing function of node.
-     * CfgEntryNode or CfgExitNode return belongs to function.
-     */
+* Get the enclosing function of node.
+* CfgEntryNode or CfgExitNode return belongs to function.
+*/
 ```
 ```rust
 pub fn getEnclosingFunction(self: VarUse) -> FunctionLikeDeclaration;
 ```
 ## VarUse::getKindName
 
-```rust
+```java
 /**
-     * Get the kind name of node.
-     * If node is ast node, just return ast node kind name; otherwise
-     * return node name as CfgEntryNode or CfgExitNode.
-     */
+* Get the kind name of node.
+* If node is ast node, just return ast node kind name; otherwise
+* return node name as CfgEntryNode or CfgExitNode.
+*/
 ```
 ```rust
 pub fn getKindName(self: VarUse) -> string;
 ```
 ## VarUse::getText
 
-```rust
+```java
 /**
-     * Get the text of this control flow node.
-     */
+* Get the text of this control flow node.
+*/
 ```
 ```rust
 pub fn getText(self: VarUse) -> string;
 ```
 ## VarUse::getASuccessorWithCompletion
 
-```rust
+```java
 /**
-     * Get an immediate successor of this node with the given
-     * type of Completion.
-     */
+* Get an immediate successor of this node with the given
+* type of Completion.
+*/
 ```
 ```rust
 pub fn getASuccessorWithCompletion(self: VarUse, c: Completion) -> *ControlFlowNode;
 ```
 ## VarUse::getFile
 
-```rust
+```java
 /**
-     * Get the file of this control flow node.
-     */
+* Get the file of this control flow node.
+*/
 ```
 ```rust
 pub fn getFile(self: VarUse) -> File;
 ```
 ## VarUse::getBasicBlock
 
-```rust
+```java
 /**
-     * Get the basic block that contains this node.
-     */
+* Get the basic block that contains this node.
+*/
 ```
 ```rust
 pub fn getBasicBlock(self: VarUse) -> BasicBlock;
@@ -138,10 +138,10 @@ pub fn isExitNode(self: VarUse) -> bool;
 ```
 ## VarUse::nearestLocalDefinedLValue
 
-```rust
+```java
 /**
-     * Gets the neareast LValue that defines current use node in same BB.
-     */
+* Gets the neareast LValue that defines current use node in same BB.
+*/
 ```
 ```rust
 pub fn nearestLocalDefinedLValue(self: VarUse) -> LValue;
@@ -158,30 +158,30 @@ pub fn getADefRecursive(self: VarUse) -> *ControlFlowNode;
 ```
 ## VarUse::getAPredecessor
 
-```rust
+```java
 /**
-     * Get an immediate predecessor of this node.
-     */
+* Get an immediate predecessor of this node.
+*/
 ```
 ```rust
 pub fn getAPredecessor(self: VarUse) -> *ControlFlowNode;
 ```
 ## VarUse::getADef
 
-```rust
+```java
 /**
-     * Gets VarDef site.
-     */
+* Gets VarDef site.
+*/
 ```
 ```rust
 pub fn getADef(self: VarUse) -> *ControlFlowNode;
 ```
 ## VarUse::getSuccessorCount
 
-```rust
+```java
 /**
-     * Get the count of immediate successor nodes.
-     */
+* Get the count of immediate successor nodes.
+*/
 ```
 ```rust
 pub fn getSuccessorCount(self: VarUse) -> int;
@@ -193,51 +193,28 @@ pub fn getDefinedByLValueRecursive(self: VarUse) -> *LValue;
 ```
 ## VarUse::existNearestLocalDefinedLValue
 
-```rust
+```java
 /**
-     * Determine whether there exists a neareast LValue that defines current use node in same BB.
-     */
+* Determine whether there exists a neareast LValue that defines current use node in same BB.
+*/
 ```
 ```rust
 pub fn existNearestLocalDefinedLValue(self: VarUse) -> bool;
 ```
 ## VarUse::getLocation
 
-```rust
+```java
 /**
-     * Get the location of this control flow node.
-     */
+* Get the location of this control flow node.
+*/
 ```
 ```rust
 pub fn getLocation(self: VarUse) -> Location;
 ```
 ## VarUse::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavascriptDB) -> *VarUse;
-```
-## VarUse::is\<T\>
-
-```rust
-pub fn is<T>(self: VarUse) -> bool;
-```
-## VarUse::to\<T\>
-
-```rust
-pub fn to<T>(self: VarUse) -> <any>;
-```
-## VarUse::key\_neq
-
-```rust
-pub fn key_neq(self: VarUse, object: <any>) -> bool;
-```
-## VarUse::key\_eq
-
-```rust
-pub fn key_eq(self: VarUse, object: <any>) -> bool;
-```
-## VarUse::to\_set
-
-```rust
-pub fn to_set(self: VarUse) -> *VarUse;
 ```

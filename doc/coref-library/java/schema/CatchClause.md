@@ -15,174 +15,151 @@ schema CatchClause {
 ```
 ## CatchClause::getPrintableText
 
-```rust
+```java
 /**
-     * @brief gets a printed representation of this element, including its structure where applicable.
-     * @return string.
-     */
+* @brief gets a printed representation of this element, including its structure where applicable.
+* @return string.
+*/
 ```
 ```rust
 pub fn getPrintableText(self: CatchClause) -> string;
 ```
 ## CatchClause::getParameterHashId
 
-```rust
+```java
 /**
-     * @brief gets the parameter hash id of this element.
-     * @return int
-     */
+* @brief gets the parameter hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getParameterHashId(self: CatchClause) -> int;
 ```
 ## CatchClause::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavaDB) -> *CatchClause;
 ```
 ## CatchClause::getLocation
 
-```rust
+```java
 /**
-     * @brief gets the location for the element.
-     * @return Location
-     */
+* @brief gets the location for the element.
+* @return Location
+*/
 ```
 ```rust
 pub fn getLocation(self: CatchClause) -> Location;
 ```
 ## CatchClause::getLocationHashId
 
-```rust
+```java
 /**
-     * @brief gets the location hash id of this element.
-     * @return int
-     */
+* @brief gets the location hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getLocationHashId(self: CatchClause) -> int;
 ```
 ## CatchClause::getTryStatementHashId
 
-```rust
+```java
 /**
-     * @brief gets the try statement hash id of this element.
-     * @return int
-     */
+* @brief gets the try statement hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getTryStatementHashId(self: CatchClause) -> int;
 ```
 ## CatchClause::getIndex
 
-```rust
+```java
 /**
-     * @brief gets the index order of this element.
-     * @return int
-     */
+* @brief gets the index order of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getIndex(self: CatchClause) -> int;
 ```
 ## CatchClause::getTypeHashId
 
-```rust
+```java
 /**
-     * @brief gets the type hash id of this element.
-     * @return int
-     */
+* @brief gets the type hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getTypeHashId(self: CatchClause) -> int;
 ```
 ## CatchClause::getBlock
 
-```rust
+```java
 /**
-     * @brief gets the block of this catch clause
-     * @return CodeBlock 
-     */
+* @brief gets the block of this catch clause
+* @return CodeBlock 
+*/
 ```
 ```rust
 pub fn getBlock(self: CatchClause) -> CodeBlock;
 ```
 ## CatchClause::getType
 
-```rust
+```java
 /**
-     * @brief gets the type for the element.
-     * @return Type
-     */
+* @brief gets the type for the element.
+* @return Type
+*/
 ```
 ```rust
 pub fn getType(self: CatchClause) -> Type;
 ```
 ## CatchClause::getParameter
 
-```rust
+```java
 /**
-     * @brief gets the parameter of this catch clause.
-     * @return Parameter 
-     */
+* @brief gets the parameter of this catch clause.
+* @return Parameter 
+*/
 ```
 ```rust
 pub fn getParameter(self: CatchClause) -> Parameter;
 ```
 ## CatchClause::getTryStatement
 
-```rust
+```java
 /**
-     * @brief get the try statement in which this catch clause occurs.
-     * @return TryStatement 
-     */
+* @brief get the try statement in which this catch clause occurs.
+* @return TryStatement 
+*/
 ```
 ```rust
 pub fn getTryStatement(self: CatchClause) -> TryStatement;
 ```
 ## CatchClause::getParent
 
-```rust
+```java
 /**
-     * @brief gets the ast element parent of the element.
-     * @return ElementParent 
-     */
+* @brief gets the ast element parent of the element.
+* @return ElementParent 
+*/
 ```
 ```rust
 pub fn getParent(self: CatchClause) -> ElementParent;
 ```
 ## CatchClause::getAnAncestor
 
-```rust
+```java
 /**
-     * @brief gets an ancestor of the element.
-     * @return ElementParent 
-     */
+* @brief gets an ancestor of the element.
+* @return ElementParent 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: CatchClause) -> *ElementParent;
-```
-## CatchClause::is\<T\>
-
-```rust
-pub fn is<T>(self: CatchClause) -> bool;
-```
-## CatchClause::to\<T\>
-
-```rust
-pub fn to<T>(self: CatchClause) -> <any>;
-```
-## CatchClause::key\_neq
-
-```rust
-pub fn key_neq(self: CatchClause, object: <any>) -> bool;
-```
-## CatchClause::key\_eq
-
-```rust
-pub fn key_eq(self: CatchClause, object: <any>) -> bool;
-```
-## CatchClause::to\_set
-
-```rust
-pub fn to_set(self: CatchClause) -> *CatchClause;
 ```

@@ -9,140 +9,140 @@ schema BinaryExpression {
 ```
 ## BinaryExpression::getSymbol
 
-```rust
+```java
 /**
-     * Gets the symbol associated with this node.
-     */
+* Gets the symbol associated with this node.
+*/
 ```
 ```rust
 pub fn getSymbol(self: BinaryExpression) -> Symbol;
 ```
 ## BinaryExpression::getADecorator
 
-```rust
+```java
 /**
-     * Gets a decorator.
-     */
+* Gets a decorator.
+*/
 ```
 ```rust
 pub fn getADecorator(self: BinaryExpression) -> *Decorator;
 ```
 ## BinaryExpression::getAComment
 
-```rust
+```java
 /**
-     * Gets the comments related to it
-     */
+* Gets the comments related to it
+*/
 ```
 ```rust
 pub fn getAComment(self: BinaryExpression) -> *Comment;
 ```
 ## BinaryExpression::getAnAncestor
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node. 
-     */
+* Gets an ancestor of this node. 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: BinaryExpression) -> *Node;
 ```
 ## BinaryExpression::getAChild
 
-```rust
+```java
 /**
-     * Gets a child node of this node.
-     */
+* Gets a child node of this node.
+*/
 ```
 ```rust
 pub fn getAChild(self: BinaryExpression) -> *Node;
 ```
 ## BinaryExpression::getParent
 
-```rust
+```java
 /**
-     * Gets the parent node of this node.
-     */
+* Gets the parent node of this node.
+*/
 ```
 ```rust
 pub fn getParent(self: BinaryExpression) -> Node;
 ```
 ## BinaryExpression::getALeadingComment
 
-```rust
+```java
 /**
-     * Gets the leading comments of it
-     */
+* Gets the leading comments of it
+*/
 ```
 ```rust
 pub fn getALeadingComment(self: BinaryExpression) -> *Comment;
 ```
 ## BinaryExpression::getATrailingComment
 
-```rust
+```java
 /**
-     * Gets the trailing comments of it
-     */
+* Gets the trailing comments of it
+*/
 ```
 ```rust
 pub fn getATrailingComment(self: BinaryExpression) -> *Comment;
 ```
 ## BinaryExpression::getChildCount
 
-```rust
+```java
 /**
-     * Gets the number of child nodes.
-     */
+* Gets the number of child nodes.
+*/
 ```
 ```rust
 pub fn getChildCount(self: BinaryExpression) -> int;
 ```
 ## BinaryExpression::getRoot
 
-```rust
+```java
 /**
-     * Gets the root top-level of this node. 
-     */
+* Gets the root top-level of this node. 
+*/
 ```
 ```rust
 pub fn getRoot(self: BinaryExpression) -> TopLevelDO;
 ```
 ## BinaryExpression::getDecorator
 
-```rust
+```java
 /**
-     * Gets the `i`th decorator.
-     */
+* Gets the `i`th decorator.
+*/
 ```
 ```rust
 pub fn getDecorator(self: BinaryExpression, i: int) -> Decorator;
 ```
 ## BinaryExpression::getChild
 
-```rust
+```java
 /**
-     * Gets the `i`th child of this node.
-     */
+* Gets the `i`th child of this node.
+*/
 ```
 ```rust
 pub fn getChild(self: BinaryExpression, i: int) -> Node;
 ```
 ## BinaryExpression::getKind
 
-```rust
+```java
 /**
-     * Get the syntax kind of this node
-     */
+* Get the syntax kind of this node
+*/
 ```
 ```rust
 pub fn getKind(self: BinaryExpression) -> int;
 ```
 ## BinaryExpression::getAModifier
 
-```rust
+```java
 /**
-     * Gets a modifier.
-     */
+* Gets a modifier.
+*/
 ```
 ```rust
 pub fn getAModifier(self: BinaryExpression) -> *Modifier;
@@ -159,54 +159,54 @@ pub fn getStartLineNumber(self: BinaryExpression) -> int;
 ```
 ## BinaryExpression::getADescendantByLevel
 
-```rust
+```java
 /**
-     * Gets a descendant of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets a descendant of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getADescendantByLevel(self: BinaryExpression, level: int) -> *Node;
 ```
 ## BinaryExpression::getAnAncestorEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets an ancestor enclosing function of it
-     */
+* Gets an ancestor enclosing function of it
+*/
 ```
 ```rust
 pub fn getAnAncestorEnclosingFunction(self: BinaryExpression) -> *FunctionLikeDeclaration;
 ```
 ## BinaryExpression::getLeftOperand
 
-```rust
+```java
 /**
-     * Get the left operand of this binary expression.
-     */
+* Get the left operand of this binary expression.
+*/
 ```
 ```rust
 pub fn getLeftOperand(self: BinaryExpression) -> Expression;
 ```
 ## BinaryExpression::getAnAncestorByLevel
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets an ancestor of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getAnAncestorByLevel(self: BinaryExpression, level: int) -> Node;
 ```
 ## BinaryExpression::getFile
 
-```rust
+```java
 /**
-     * Gets the file of this node.
-     */
+* Gets the file of this node.
+*/
 ```
 ```rust
 pub fn getFile(self: BinaryExpression) -> File;
@@ -218,40 +218,40 @@ pub fn getEndLineNumber(self: BinaryExpression) -> int;
 ```
 ## BinaryExpression::getRelativePath
 
-```rust
+```java
 /**
-     * Gets the relative path of this node.
-     */
+* Gets the relative path of this node.
+*/
 ```
 ```rust
 pub fn getRelativePath(self: BinaryExpression) -> string;
 ```
 ## BinaryExpression::getText
 
-```rust
+```java
 /**
-     * Gets the text of this node.
-     */
+* Gets the text of this node.
+*/
 ```
 ```rust
 pub fn getText(self: BinaryExpression) -> string;
 ```
 ## BinaryExpression::getModifier
 
-```rust
+```java
 /**
-     * Gets the `i`th modifier.
-     */
+* Gets the `i`th modifier.
+*/
 ```
 ```rust
 pub fn getModifier(self: BinaryExpression, i: int) -> Modifier;
 ```
 ## BinaryExpression::getRightOperand
 
-```rust
+```java
 /**
-     * Get the right operand of this binary expression.
-     */
+* Get the right operand of this binary expression.
+*/
 ```
 ```rust
 pub fn getRightOperand(self: BinaryExpression) -> Expression;
@@ -268,70 +268,70 @@ pub fn getIndex(self: BinaryExpression) -> int;
 ```
 ## BinaryExpression::getRight
 
-```rust
+```java
 /**
-     * Get the right operand of this binary expression. An alias of `getRightOperand`
-     */
+* Get the right operand of this binary expression. An alias of `getRightOperand`
+*/
 ```
 ```rust
 pub fn getRight(self: BinaryExpression) -> Expression;
 ```
 ## BinaryExpression::getLocation
 
-```rust
+```java
 /**
-     * Gets the location of this node.
-     */
+* Gets the location of this node.
+*/
 ```
 ```rust
 pub fn getLocation(self: BinaryExpression) -> Location;
 ```
 ## BinaryExpression::getOperator
 
-```rust
+```java
 /**
-     * Get the operator of this binary expression.
-     */
+* Get the operator of this binary expression.
+*/
 ```
 ```rust
 pub fn getOperator(self: BinaryExpression) -> BinaryOperator;
 ```
 ## BinaryExpression::getADescendant
 
-```rust
+```java
 /**
-     * Gets a descendant of this node. 
-     */
+* Gets a descendant of this node. 
+*/
 ```
 ```rust
 pub fn getADescendant(self: BinaryExpression) -> *Node;
 ```
 ## BinaryExpression::getLeft
 
-```rust
+```java
 /**
-     * Get the left operand of this binary expression. An alias of `getLeftOperand`.
-     */
+* Get the left operand of this binary expression. An alias of `getLeftOperand`.
+*/
 ```
 ```rust
 pub fn getLeft(self: BinaryExpression) -> Expression;
 ```
 ## BinaryExpression::getEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets the enclosing function of it
-     */
+* Gets the enclosing function of it
+*/
 ```
 ```rust
 pub fn getEnclosingFunction(self: BinaryExpression) -> FunctionLikeDeclaration;
 ```
 ## BinaryExpression::getLastChild
 
-```rust
+```java
 /**
-     * Gets the last child of this node parent.
-     */
+* Gets the last child of this node parent.
+*/
 ```
 ```rust
 pub fn getLastChild(self: BinaryExpression) -> Node;
@@ -343,41 +343,18 @@ pub fn getEndColumnNumber(self: BinaryExpression) -> int;
 ```
 ## BinaryExpression::getParentOid
 
-```rust
+```java
 /**
-     * Gets the parent oid of this node.
-     */
+* Gets the parent oid of this node.
+*/
 ```
 ```rust
 pub fn getParentOid(self: BinaryExpression) -> int;
 ```
 ## BinaryExpression::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavascriptDB) -> *BinaryExpression;
-```
-## BinaryExpression::is\<T\>
-
-```rust
-pub fn is<T>(self: BinaryExpression) -> bool;
-```
-## BinaryExpression::to\<T\>
-
-```rust
-pub fn to<T>(self: BinaryExpression) -> <any>;
-```
-## BinaryExpression::key\_neq
-
-```rust
-pub fn key_neq(self: BinaryExpression, object: <any>) -> bool;
-```
-## BinaryExpression::key\_eq
-
-```rust
-pub fn key_eq(self: BinaryExpression, object: <any>) -> bool;
-```
-## BinaryExpression::to\_set
-
-```rust
-pub fn to_set(self: BinaryExpression) -> *BinaryExpression;
 ```

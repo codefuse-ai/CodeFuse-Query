@@ -11,53 +11,30 @@ schema MethodHostDO {
 ```
 ## MethodHostDO::getHost
 
-```rust
+```java
 /**
-     * @brief gets the host of this element.
-     * @return int
-     */
+* @brief gets the host of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getHost(self: MethodHostDO) -> int;
 ```
 ## MethodHostDO::getMethod
 
-```rust
+```java
 /**
-     * @brief gets the method of this element.
-     * @return int
-     */
+* @brief gets the method of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getMethod(self: MethodHostDO) -> int;
 ```
 ## MethodHostDO::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: GoDB) -> *MethodHostDO;
-```
-## MethodHostDO::is\<T\>
-
-```rust
-pub fn is<T>(self: MethodHostDO) -> bool;
-```
-## MethodHostDO::to\<T\>
-
-```rust
-pub fn to<T>(self: MethodHostDO) -> <any>;
-```
-## MethodHostDO::key\_neq
-
-```rust
-pub fn key_neq(self: MethodHostDO, object: <any>) -> bool;
-```
-## MethodHostDO::key\_eq
-
-```rust
-pub fn key_eq(self: MethodHostDO, object: <any>) -> bool;
-```
-## MethodHostDO::to\_set
-
-```rust
-pub fn to_set(self: MethodHostDO) -> *MethodHostDO;
 ```

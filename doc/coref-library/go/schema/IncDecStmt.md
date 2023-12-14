@@ -59,7 +59,7 @@ pub fn isCaseClause(self: IncDecStmt) -> bool;
 ```
 ## IncDecStmt::getText
 
-```rust
+```java
 // getText Extract the text associated with a specific node in a file
 ```
 ```rust
@@ -183,9 +183,6 @@ pub fn isCommClause(self: IncDecStmt) -> bool;
 ## IncDecStmt::getBelongsFile
 
 ```rust
-// root node
-```
-```rust
 pub fn getBelongsFile(self: IncDecStmt) -> File;
 ```
 ## IncDecStmt::isQuoassignStmt
@@ -224,6 +221,8 @@ pub fn isSubassignStmt(self: IncDecStmt) -> bool;
 pub fn getType(self: IncDecStmt) -> string;
 ```
 ## IncDecStmt::\_\_all\_\_
+
+Data constraint method.
 
 ```rust
 pub fn __all__(db: GoDB) -> *IncDecStmt;
@@ -307,29 +306,4 @@ pub fn getTextSize(self: IncDecStmt) -> int;
 
 ```rust
 pub fn hasLocation(self: IncDecStmt) -> bool;
-```
-## IncDecStmt::is\<T\>
-
-```rust
-pub fn is<T>(self: IncDecStmt) -> bool;
-```
-## IncDecStmt::to\<T\>
-
-```rust
-pub fn to<T>(self: IncDecStmt) -> <any>;
-```
-## IncDecStmt::key\_neq
-
-```rust
-pub fn key_neq(self: IncDecStmt, object: <any>) -> bool;
-```
-## IncDecStmt::key\_eq
-
-```rust
-pub fn key_eq(self: IncDecStmt, object: <any>) -> bool;
-```
-## IncDecStmt::to\_set
-
-```rust
-pub fn to_set(self: IncDecStmt) -> *IncDecStmt;
 ```

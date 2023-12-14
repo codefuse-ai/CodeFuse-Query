@@ -11,53 +11,30 @@ schema YieldStatementDO {
 ```
 ## YieldStatementDO::getEnclosingExpressionHashId
 
-```rust
+```java
 /**
-     * @brief gets the enclosing expression hash id of this element.
-     * @return int
-     */
+* @brief gets the enclosing expression hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getEnclosingExpressionHashId(self: YieldStatementDO) -> int;
 ```
 ## YieldStatementDO::getExpressionHashId
 
-```rust
+```java
 /**
-     * @brief gets the expression hash id of this element.
-     * @return int
-     */
+* @brief gets the expression hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getExpressionHashId(self: YieldStatementDO) -> int;
 ```
 ## YieldStatementDO::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavaDB) -> *YieldStatementDO;
-```
-## YieldStatementDO::is\<T\>
-
-```rust
-pub fn is<T>(self: YieldStatementDO) -> bool;
-```
-## YieldStatementDO::to\<T\>
-
-```rust
-pub fn to<T>(self: YieldStatementDO) -> <any>;
-```
-## YieldStatementDO::key\_neq
-
-```rust
-pub fn key_neq(self: YieldStatementDO, object: <any>) -> bool;
-```
-## YieldStatementDO::key\_eq
-
-```rust
-pub fn key_eq(self: YieldStatementDO, object: <any>) -> bool;
-```
-## YieldStatementDO::to\_set
-
-```rust
-pub fn to_set(self: YieldStatementDO) -> *YieldStatementDO;
 ```

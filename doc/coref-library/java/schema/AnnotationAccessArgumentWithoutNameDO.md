@@ -14,86 +14,63 @@ schema AnnotationAccessArgumentWithoutNameDO {
 ```
 ## AnnotationAccessArgumentWithoutNameDO::getPrintableText
 
-```rust
+```java
 /**
-     * @brief gets a printed representation of this element, including its structure where applicable.
-     * @return string.
-     */
+* @brief gets a printed representation of this element, including its structure where applicable.
+* @return string.
+*/
 ```
 ```rust
 pub fn getPrintableText(self: AnnotationAccessArgumentWithoutNameDO) -> string;
 ```
 ## AnnotationAccessArgumentWithoutNameDO::getIndex
 
-```rust
+```java
 /**
-     * @brief gets the index order of this element.
-     * @return int
-     */
+* @brief gets the index order of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getIndex(self: AnnotationAccessArgumentWithoutNameDO) -> int;
 ```
 ## AnnotationAccessArgumentWithoutNameDO::getLocationHashId
 
-```rust
+```java
 /**
-     * @brief gets the location hash id of this element.
-     * @return int
-     */
+* @brief gets the location hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getLocationHashId(self: AnnotationAccessArgumentWithoutNameDO) -> int;
 ```
 ## AnnotationAccessArgumentWithoutNameDO::getArgumentValueHashId
 
-```rust
+```java
 /**
-     * @brief gets the argument value hash id of this element.
-     * @return int
-     */
+* @brief gets the argument value hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getArgumentValueHashId(self: AnnotationAccessArgumentWithoutNameDO) -> int;
 ```
 ## AnnotationAccessArgumentWithoutNameDO::getAnnotationAccessHashId
 
-```rust
+```java
 /**
-     * @brief gets the annotation access hash id of this element.
-     * @return int
-     */
+* @brief gets the annotation access hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getAnnotationAccessHashId(self: AnnotationAccessArgumentWithoutNameDO) -> int;
 ```
 ## AnnotationAccessArgumentWithoutNameDO::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavaDB) -> *AnnotationAccessArgumentWithoutNameDO;
-```
-## AnnotationAccessArgumentWithoutNameDO::is\<T\>
-
-```rust
-pub fn is<T>(self: AnnotationAccessArgumentWithoutNameDO) -> bool;
-```
-## AnnotationAccessArgumentWithoutNameDO::to\<T\>
-
-```rust
-pub fn to<T>(self: AnnotationAccessArgumentWithoutNameDO) -> <any>;
-```
-## AnnotationAccessArgumentWithoutNameDO::key\_neq
-
-```rust
-pub fn key_neq(self: AnnotationAccessArgumentWithoutNameDO, object: <any>) -> bool;
-```
-## AnnotationAccessArgumentWithoutNameDO::key\_eq
-
-```rust
-pub fn key_eq(self: AnnotationAccessArgumentWithoutNameDO, object: <any>) -> bool;
-```
-## AnnotationAccessArgumentWithoutNameDO::to\_set
-
-```rust
-pub fn to_set(self: AnnotationAccessArgumentWithoutNameDO) -> *AnnotationAccessArgumentWithoutNameDO;
 ```

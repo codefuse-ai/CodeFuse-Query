@@ -9,140 +9,140 @@ schema PropertySignature {
 ```
 ## PropertySignature::getLocation
 
-```rust
+```java
 /**
-     * Gets the location of this node.
-     */
+* Gets the location of this node.
+*/
 ```
 ```rust
 pub fn getLocation(self: PropertySignature) -> Location;
 ```
 ## PropertySignature::getSymbol
 
-```rust
+```java
 /**
-     * Gets the symbol associated with this node.
-     */
+* Gets the symbol associated with this node.
+*/
 ```
 ```rust
 pub fn getSymbol(self: PropertySignature) -> Symbol;
 ```
 ## PropertySignature::getADecorator
 
-```rust
+```java
 /**
-     * Gets a decorator.
-     */
+* Gets a decorator.
+*/
 ```
 ```rust
 pub fn getADecorator(self: PropertySignature) -> *Decorator;
 ```
 ## PropertySignature::getText
 
-```rust
+```java
 /**
-     * Gets the text of this node.
-     */
+* Gets the text of this node.
+*/
 ```
 ```rust
 pub fn getText(self: PropertySignature) -> string;
 ```
 ## PropertySignature::getModifier
 
-```rust
+```java
 /**
-     * Gets the `i`th modifier.
-     */
+* Gets the `i`th modifier.
+*/
 ```
 ```rust
 pub fn getModifier(self: PropertySignature, i: int) -> Modifier;
 ```
 ## PropertySignature::getAComment
 
-```rust
+```java
 /**
-     * Gets the comments related to it
-     */
+* Gets the comments related to it
+*/
 ```
 ```rust
 pub fn getAComment(self: PropertySignature) -> *Comment;
 ```
 ## PropertySignature::getAnAncestor
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node. 
-     */
+* Gets an ancestor of this node. 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: PropertySignature) -> *Node;
 ```
 ## PropertySignature::getAChild
 
-```rust
+```java
 /**
-     * Gets a child node of this node.
-     */
+* Gets a child node of this node.
+*/
 ```
 ```rust
 pub fn getAChild(self: PropertySignature) -> *Node;
 ```
 ## PropertySignature::getParent
 
-```rust
+```java
 /**
-     * Gets the parent node of this node.
-     */
+* Gets the parent node of this node.
+*/
 ```
 ```rust
 pub fn getParent(self: PropertySignature) -> Node;
 ```
 ## PropertySignature::getChildCount
 
-```rust
+```java
 /**
-     * Gets the number of child nodes.
-     */
+* Gets the number of child nodes.
+*/
 ```
 ```rust
 pub fn getChildCount(self: PropertySignature) -> int;
 ```
 ## PropertySignature::getRoot
 
-```rust
+```java
 /**
-     * Gets the root top-level of this node. 
-     */
+* Gets the root top-level of this node. 
+*/
 ```
 ```rust
 pub fn getRoot(self: PropertySignature) -> TopLevelDO;
 ```
 ## PropertySignature::getDecorator
 
-```rust
+```java
 /**
-     * Gets the `i`th decorator.
-     */
+* Gets the `i`th decorator.
+*/
 ```
 ```rust
 pub fn getDecorator(self: PropertySignature, i: int) -> Decorator;
 ```
 ## PropertySignature::getKind
 
-```rust
+```java
 /**
-     * Get the syntax kind of this node
-     */
+* Get the syntax kind of this node
+*/
 ```
 ```rust
 pub fn getKind(self: PropertySignature) -> int;
 ```
 ## PropertySignature::getAModifier
 
-```rust
+```java
 /**
-     * Gets a modifier.
-     */
+* Gets a modifier.
+*/
 ```
 ```rust
 pub fn getAModifier(self: PropertySignature) -> *Modifier;
@@ -154,10 +154,10 @@ pub fn getStartColumnNumber(self: PropertySignature) -> int;
 ```
 ## PropertySignature::getChild
 
-```rust
+```java
 /**
-     * Gets the `i`th child of this node.
-     */
+* Gets the `i`th child of this node.
+*/
 ```
 ```rust
 pub fn getChild(self: PropertySignature, i: int) -> Node;
@@ -169,22 +169,22 @@ pub fn getStartLineNumber(self: PropertySignature) -> int;
 ```
 ## PropertySignature::getAnAncestorEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets an ancestor enclosing function of it
-     */
+* Gets an ancestor enclosing function of it
+*/
 ```
 ```rust
 pub fn getAnAncestorEnclosingFunction(self: PropertySignature) -> *FunctionLikeDeclaration;
 ```
 ## PropertySignature::getADescendantByLevel
 
-```rust
+```java
 /**
-     * Gets a descendant of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets a descendant of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getADescendantByLevel(self: PropertySignature, level: int) -> *Node;
@@ -196,72 +196,72 @@ pub fn getEndLineNumber(self: PropertySignature) -> int;
 ```
 ## PropertySignature::getRelativePath
 
-```rust
+```java
 /**
-     * Gets the relative path of this node.
-     */
+* Gets the relative path of this node.
+*/
 ```
 ```rust
 pub fn getRelativePath(self: PropertySignature) -> string;
 ```
 ## PropertySignature::getAnAncestorByLevel
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets an ancestor of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getAnAncestorByLevel(self: PropertySignature, level: int) -> Node;
 ```
 ## PropertySignature::getFile
 
-```rust
+```java
 /**
-     * Gets the file of this node.
-     */
+* Gets the file of this node.
+*/
 ```
 ```rust
 pub fn getFile(self: PropertySignature) -> File;
 ```
 ## PropertySignature::getALeadingComment
 
-```rust
+```java
 /**
-     * Gets the leading comments of it
-     */
+* Gets the leading comments of it
+*/
 ```
 ```rust
 pub fn getALeadingComment(self: PropertySignature) -> *Comment;
 ```
 ## PropertySignature::getATrailingComment
 
-```rust
+```java
 /**
-     * Gets the trailing comments of it
-     */
+* Gets the trailing comments of it
+*/
 ```
 ```rust
 pub fn getATrailingComment(self: PropertySignature) -> *Comment;
 ```
 ## PropertySignature::getLastChild
 
-```rust
+```java
 /**
-     * Gets the last child of this node parent.
-     */
+* Gets the last child of this node parent.
+*/
 ```
 ```rust
 pub fn getLastChild(self: PropertySignature) -> Node;
 ```
 ## PropertySignature::getEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets the enclosing function of it
-     */
+* Gets the enclosing function of it
+*/
 ```
 ```rust
 pub fn getEnclosingFunction(self: PropertySignature) -> FunctionLikeDeclaration;
@@ -273,10 +273,10 @@ pub fn getEndColumnNumber(self: PropertySignature) -> int;
 ```
 ## PropertySignature::getParentOid
 
-```rust
+```java
 /**
-     * Gets the parent oid of this node.
-     */
+* Gets the parent oid of this node.
+*/
 ```
 ```rust
 pub fn getParentOid(self: PropertySignature) -> int;
@@ -288,41 +288,18 @@ pub fn getIndex(self: PropertySignature) -> int;
 ```
 ## PropertySignature::getADescendant
 
-```rust
+```java
 /**
-     * Gets a descendant of this node. 
-     */
+* Gets a descendant of this node. 
+*/
 ```
 ```rust
 pub fn getADescendant(self: PropertySignature) -> *Node;
 ```
 ## PropertySignature::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavascriptDB) -> *PropertySignature;
-```
-## PropertySignature::is\<T\>
-
-```rust
-pub fn is<T>(self: PropertySignature) -> bool;
-```
-## PropertySignature::to\<T\>
-
-```rust
-pub fn to<T>(self: PropertySignature) -> <any>;
-```
-## PropertySignature::key\_neq
-
-```rust
-pub fn key_neq(self: PropertySignature, object: <any>) -> bool;
-```
-## PropertySignature::key\_eq
-
-```rust
-pub fn key_eq(self: PropertySignature, object: <any>) -> bool;
-```
-## PropertySignature::to\_set
-
-```rust
-pub fn to_set(self: PropertySignature) -> *PropertySignature;
 ```

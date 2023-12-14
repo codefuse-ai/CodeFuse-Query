@@ -89,7 +89,7 @@ pub fn isPublicFunction(self: Method) -> bool;
 ```
 ## Method::getText
 
-```rust
+```java
 // getText Extract the text associated with a specific node in a file
 ```
 ```rust
@@ -127,9 +127,6 @@ pub fn getBelongsFunction(self: Method) -> Function;
 ```
 ## Method::getBelongsFile
 
-```rust
-// root node
-```
 ```rust
 pub fn getBelongsFile(self: Method) -> File;
 ```
@@ -175,6 +172,8 @@ pub fn getType(self: Method) -> string;
 ```
 ## Method::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: GoDB) -> *Method;
 ```
@@ -207,29 +206,4 @@ pub fn getMethodReceiverType(self: Method) -> string;
 
 ```rust
 pub fn getIdx(self: Method) -> int;
-```
-## Method::is\<T\>
-
-```rust
-pub fn is<T>(self: Method) -> bool;
-```
-## Method::to\<T\>
-
-```rust
-pub fn to<T>(self: Method) -> <any>;
-```
-## Method::key\_neq
-
-```rust
-pub fn key_neq(self: Method, object: <any>) -> bool;
-```
-## Method::key\_eq
-
-```rust
-pub fn key_eq(self: Method, object: <any>) -> bool;
-```
-## Method::to\_set
-
-```rust
-pub fn to_set(self: Method) -> *Method;
 ```

@@ -35,31 +35,8 @@ pub fn isFalse(self: BooleanCompletion) -> bool;
 ```
 ## BooleanCompletion::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__() -> *BooleanCompletion;
-```
-## BooleanCompletion::is\<T\>
-
-```rust
-pub fn is<T>(self: BooleanCompletion) -> bool;
-```
-## BooleanCompletion::to\<T\>
-
-```rust
-pub fn to<T>(self: BooleanCompletion) -> <any>;
-```
-## BooleanCompletion::key\_neq
-
-```rust
-pub fn key_neq(self: BooleanCompletion, object: <any>) -> bool;
-```
-## BooleanCompletion::key\_eq
-
-```rust
-pub fn key_eq(self: BooleanCompletion, object: <any>) -> bool;
-```
-## BooleanCompletion::to\_set
-
-```rust
-pub fn to_set(self: BooleanCompletion) -> *BooleanCompletion;
 ```

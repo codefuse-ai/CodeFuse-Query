@@ -10,64 +10,41 @@ schema ClassHierarchy {
 ```
 ## ClassHierarchy::getInterface
 
-```rust
+```java
 /**
-     * @brief gets the implements interface of the class.
-     * @return Interface 
-     */
+* @brief gets the implements interface of the class.
+* @return Interface 
+*/
 ```
 ```rust
 pub fn getInterface(self: ClassHierarchy) -> *Interface;
 ```
 ## ClassHierarchy::getSuperClass
 
-```rust
+```java
 /**
-     * @brief gets the superclass of the class.
-     * @return Class 
-     */
+* @brief gets the superclass of the class.
+* @return Class 
+*/
 ```
 ```rust
 pub fn getSuperClass(self: ClassHierarchy) -> Class;
 ```
 ## ClassHierarchy::getParentHashId
 
-```rust
+```java
 /**
-     * @brief gets the parent hash id of this element.
-     * @return int
-     */
+* @brief gets the parent hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getParentHashId(self: ClassHierarchy) -> int;
 ```
 ## ClassHierarchy::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavaDB) -> *ClassHierarchy;
-```
-## ClassHierarchy::is\<T\>
-
-```rust
-pub fn is<T>(self: ClassHierarchy) -> bool;
-```
-## ClassHierarchy::to\<T\>
-
-```rust
-pub fn to<T>(self: ClassHierarchy) -> <any>;
-```
-## ClassHierarchy::key\_neq
-
-```rust
-pub fn key_neq(self: ClassHierarchy, object: <any>) -> bool;
-```
-## ClassHierarchy::key\_eq
-
-```rust
-pub fn key_eq(self: ClassHierarchy, object: <any>) -> bool;
-```
-## ClassHierarchy::to\_set
-
-```rust
-pub fn to_set(self: ClassHierarchy) -> *ClassHierarchy;
 ```

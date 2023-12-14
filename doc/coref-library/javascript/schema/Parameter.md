@@ -9,10 +9,10 @@ schema Parameter {
 ```
 ## Parameter::getADescendant
 
-```rust
+```java
 /**
-     * Gets a descendant of this node. 
-     */
+* Gets a descendant of this node. 
+*/
 ```
 ```rust
 pub fn getADescendant(self: Parameter) -> *Node;
@@ -24,10 +24,10 @@ pub fn getIndex(self: Parameter) -> int;
 ```
 ## Parameter::getParentOid
 
-```rust
+```java
 /**
-     * Gets the parent oid of this node.
-     */
+* Gets the parent oid of this node.
+*/
 ```
 ```rust
 pub fn getParentOid(self: Parameter) -> int;
@@ -39,42 +39,42 @@ pub fn getEndColumnNumber(self: Parameter) -> int;
 ```
 ## Parameter::getLastChild
 
-```rust
+```java
 /**
-     * Gets the last child of this node parent.
-     */
+* Gets the last child of this node parent.
+*/
 ```
 ```rust
 pub fn getLastChild(self: Parameter) -> Node;
 ```
 ## Parameter::getEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets the enclosing function of it
-     */
+* Gets the enclosing function of it
+*/
 ```
 ```rust
 pub fn getEnclosingFunction(self: Parameter) -> FunctionLikeDeclaration;
 ```
 ## Parameter::getAnAncestorByLevel
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets an ancestor of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getAnAncestorByLevel(self: Parameter, level: int) -> Node;
 ```
 ## Parameter::getLocation
 
-```rust
+```java
 /**
-     * Gets the location of this node.
-     */
+* Gets the location of this node.
+*/
 ```
 ```rust
 pub fn getLocation(self: Parameter) -> Location;
@@ -86,32 +86,32 @@ pub fn getStartLineNumber(self: Parameter) -> int;
 ```
 ## Parameter::getChild
 
-```rust
+```java
 /**
-     * Gets the `i`th child of this node.
-     */
+* Gets the `i`th child of this node.
+*/
 ```
 ```rust
 pub fn getChild(self: Parameter, i: int) -> Node;
 ```
 ## Parameter::getAnAncestorEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets an ancestor enclosing function of it
-     */
+* Gets an ancestor enclosing function of it
+*/
 ```
 ```rust
 pub fn getAnAncestorEnclosingFunction(self: Parameter) -> *FunctionLikeDeclaration;
 ```
 ## Parameter::getADescendantByLevel
 
-```rust
+```java
 /**
-     * Gets a descendant of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets a descendant of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getADescendantByLevel(self: Parameter, level: int) -> *Node;
@@ -123,225 +123,227 @@ pub fn getStartColumnNumber(self: Parameter) -> int;
 ```
 ## Parameter::getKind
 
-```rust
+```java
 /**
-     * Get the syntax kind of this node
-     */
+* Get the syntax kind of this node
+*/
 ```
 ```rust
 pub fn getKind(self: Parameter) -> int;
 ```
 ## Parameter::getQuestionToken
 
-```rust
+```java
 /**
-     * Gets the `?` token of this parameter declaration.
-     */
+* Gets the `?` token of this parameter declaration.
+*/
 ```
 ```rust
 pub fn getQuestionToken(self: Parameter) -> QuestionToken;
 ```
 ## Parameter::getAModifier
 
-```rust
+```java
 /**
-     * Gets a modifier.
-     */
+* Gets a modifier.
+*/
 ```
 ```rust
 pub fn getAModifier(self: Parameter) -> *Modifier;
 ```
 ## Parameter::getChildCount
 
-```rust
+```java
 /**
-     * Gets the number of child nodes.
-     */
+* Gets the number of child nodes.
+*/
 ```
 ```rust
 pub fn getChildCount(self: Parameter) -> int;
 ```
 ## Parameter::isRestParameter
 
-```rust
+```java
 /**
-     * Determines whether this parameter declaration is a rest parameter.
-     */
+* Determines whether this parameter declaration is a rest parameter.
+*/
 ```
 ```rust
 pub fn isRestParameter(self: Parameter) -> bool;
 ```
 ## Parameter::getRoot
 
-```rust
+```java
 /**
-     * Gets the root top-level of this node. 
-     */
+* Gets the root top-level of this node. 
+*/
 ```
 ```rust
 pub fn getRoot(self: Parameter) -> TopLevelDO;
 ```
 ## Parameter::getDecorator
 
-```rust
+```java
 /**
-     * Gets the `i`th decorator.
-     */
+* Gets the `i`th decorator.
+*/
 ```
 ```rust
 pub fn getDecorator(self: Parameter, i: int) -> Decorator;
 ```
 ## Parameter::getATrailingComment
 
-```rust
+```java
 /**
-     * Gets the trailing comments of it
-     */
+* Gets the trailing comments of it
+*/
 ```
 ```rust
 pub fn getATrailingComment(self: Parameter) -> *Comment;
 ```
 ## Parameter::getALeadingComment
 
-```rust
+```java
 /**
-     * Gets the leading comments of it
-     */
+* Gets the leading comments of it
+*/
 ```
 ```rust
 pub fn getALeadingComment(self: Parameter) -> *Comment;
 ```
 ## Parameter::getParent
 
-```rust
+```java
 /**
-     * Gets the parent node of this node.
-     */
+* Gets the parent node of this node.
+*/
 ```
 ```rust
 pub fn getParent(self: Parameter) -> Node;
 ```
 ## Parameter::getAChild
 
-```rust
+```java
 /**
-     * Gets a child node of this node.
-     */
+* Gets a child node of this node.
+*/
 ```
 ```rust
 pub fn getAChild(self: Parameter) -> *Node;
 ```
 ## Parameter::getAnAncestor
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node. 
-     */
+* Gets an ancestor of this node. 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: Parameter) -> *Node;
 ```
 ## Parameter::getAComment
 
-```rust
+```java
 /**
-     * Gets the comments related to it
-     */
+* Gets the comments related to it
+*/
 ```
 ```rust
 pub fn getAComment(self: Parameter) -> *Comment;
 ```
 ## Parameter::getText
 
-```rust
+```java
 /**
-     * Gets the text of this node.
-     */
+* Gets the text of this node.
+*/
 ```
 ```rust
 pub fn getText(self: Parameter) -> string;
 ```
 ## Parameter::getModifier
 
-```rust
+```java
 /**
-     * Gets the `i`th modifier.
-     */
+* Gets the `i`th modifier.
+*/
 ```
 ```rust
 pub fn getModifier(self: Parameter, i: int) -> Modifier;
 ```
 ## Parameter::getSymbol
 
-```rust
+```java
 /**
-     * Gets the symbol associated with this node.
-     */
+* Gets the symbol associated with this node.
+*/
 ```
 ```rust
 pub fn getSymbol(self: Parameter) -> Symbol;
 ```
 ## Parameter::getADecorator
 
-```rust
+```java
 /**
-     * Gets a decorator.
-     */
+* Gets a decorator.
+*/
 ```
 ```rust
 pub fn getADecorator(self: Parameter) -> *Decorator;
 ```
 ## Parameter::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavascriptDB) -> *Parameter;
 ```
 ## Parameter::getType
 
-```rust
+```java
 /**
-     * Gets the type node of this parameter.
-     */
+* Gets the type node of this parameter.
+*/
 ```
 ```rust
 pub fn getType(self: Parameter) -> TypeNode;
 ```
 ## Parameter::hasInitializer
 
-```rust
+```java
 /**
-     * Determines whether this parameter has the initializer.
-     */
+* Determines whether this parameter has the initializer.
+*/
 ```
 ```rust
 pub fn hasInitializer(self: Parameter) -> bool;
 ```
 ## Parameter::getFile
 
-```rust
+```java
 /**
-     * Gets the file of this node.
-     */
+* Gets the file of this node.
+*/
 ```
 ```rust
 pub fn getFile(self: Parameter) -> File;
 ```
 ## Parameter::getNameNode
 
-```rust
+```java
 /**
-     * Gets the name of this parameter declaration.
-     */
+* Gets the name of this parameter declaration.
+*/
 ```
 ```rust
 pub fn getNameNode(self: Parameter) -> BindingName;
 ```
 ## Parameter::getRelativePath
 
-```rust
+```java
 /**
-     * Gets the relative path of this node.
-     */
+* Gets the relative path of this node.
+*/
 ```
 ```rust
 pub fn getRelativePath(self: Parameter) -> string;
@@ -353,56 +355,31 @@ pub fn getEndLineNumber(self: Parameter) -> int;
 ```
 ## Parameter::getInitializer
 
-```rust
+```java
 /**
-     * Gets the initializer expression of this parameter.
-     */
+* Gets the initializer expression of this parameter.
+*/
 ```
 ```rust
 pub fn getInitializer(self: Parameter) -> Expression;
 ```
 ## Parameter::isOptionalParameter
 
-```rust
+```java
 /**
-     * Determines whether this parameter declaration is an optional parameter, which means it has a `?` token.
-     */
+* Determines whether this parameter declaration is an optional parameter, which means it has a `?` token.
+*/
 ```
 ```rust
 pub fn isOptionalParameter(self: Parameter) -> bool;
 ```
 ## Parameter::getDotDotDotToken
 
-```rust
+```java
 /**
-     * Gets the `...` token of this parameter declaration.
-     */
+* Gets the `...` token of this parameter declaration.
+*/
 ```
 ```rust
 pub fn getDotDotDotToken(self: Parameter) -> DotDotDotToken;
-```
-## Parameter::is\<T\>
-
-```rust
-pub fn is<T>(self: Parameter) -> bool;
-```
-## Parameter::to\<T\>
-
-```rust
-pub fn to<T>(self: Parameter) -> <any>;
-```
-## Parameter::key\_neq
-
-```rust
-pub fn key_neq(self: Parameter, object: <any>) -> bool;
-```
-## Parameter::key\_eq
-
-```rust
-pub fn key_eq(self: Parameter, object: <any>) -> bool;
-```
-## Parameter::to\_set
-
-```rust
-pub fn to_set(self: Parameter) -> *Parameter;
 ```

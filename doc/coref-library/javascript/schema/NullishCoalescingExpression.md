@@ -9,120 +9,120 @@ schema NullishCoalescingExpression {
 ```
 ## NullishCoalescingExpression::getSymbol
 
-```rust
+```java
 /**
-     * Gets the symbol associated with this node.
-     */
+* Gets the symbol associated with this node.
+*/
 ```
 ```rust
 pub fn getSymbol(self: NullishCoalescingExpression) -> Symbol;
 ```
 ## NullishCoalescingExpression::getADecorator
 
-```rust
+```java
 /**
-     * Gets a decorator.
-     */
+* Gets a decorator.
+*/
 ```
 ```rust
 pub fn getADecorator(self: NullishCoalescingExpression) -> *Decorator;
 ```
 ## NullishCoalescingExpression::getAComment
 
-```rust
+```java
 /**
-     * Gets the comments related to it
-     */
+* Gets the comments related to it
+*/
 ```
 ```rust
 pub fn getAComment(self: NullishCoalescingExpression) -> *Comment;
 ```
 ## NullishCoalescingExpression::getAnAncestor
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node. 
-     */
+* Gets an ancestor of this node. 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: NullishCoalescingExpression) -> *Node;
 ```
 ## NullishCoalescingExpression::getChildCount
 
-```rust
+```java
 /**
-     * Gets the number of child nodes.
-     */
+* Gets the number of child nodes.
+*/
 ```
 ```rust
 pub fn getChildCount(self: NullishCoalescingExpression) -> int;
 ```
 ## NullishCoalescingExpression::getATrailingComment
 
-```rust
+```java
 /**
-     * Gets the trailing comments of it
-     */
+* Gets the trailing comments of it
+*/
 ```
 ```rust
 pub fn getATrailingComment(self: NullishCoalescingExpression) -> *Comment;
 ```
 ## NullishCoalescingExpression::getALeadingComment
 
-```rust
+```java
 /**
-     * Gets the leading comments of it
-     */
+* Gets the leading comments of it
+*/
 ```
 ```rust
 pub fn getALeadingComment(self: NullishCoalescingExpression) -> *Comment;
 ```
 ## NullishCoalescingExpression::getParent
 
-```rust
+```java
 /**
-     * Gets the parent node of this node.
-     */
+* Gets the parent node of this node.
+*/
 ```
 ```rust
 pub fn getParent(self: NullishCoalescingExpression) -> Node;
 ```
 ## NullishCoalescingExpression::getAChild
 
-```rust
+```java
 /**
-     * Gets a child node of this node.
-     */
+* Gets a child node of this node.
+*/
 ```
 ```rust
 pub fn getAChild(self: NullishCoalescingExpression) -> *Node;
 ```
 ## NullishCoalescingExpression::getDecorator
 
-```rust
+```java
 /**
-     * Gets the `i`th decorator.
-     */
+* Gets the `i`th decorator.
+*/
 ```
 ```rust
 pub fn getDecorator(self: NullishCoalescingExpression, i: int) -> Decorator;
 ```
 ## NullishCoalescingExpression::getRoot
 
-```rust
+```java
 /**
-     * Gets the root top-level of this node. 
-     */
+* Gets the root top-level of this node. 
+*/
 ```
 ```rust
 pub fn getRoot(self: NullishCoalescingExpression) -> TopLevelDO;
 ```
 ## NullishCoalescingExpression::getChild
 
-```rust
+```java
 /**
-     * Gets the `i`th child of this node.
-     */
+* Gets the `i`th child of this node.
+*/
 ```
 ```rust
 pub fn getChild(self: NullishCoalescingExpression, i: int) -> Node;
@@ -134,64 +134,64 @@ pub fn getStartLineNumber(self: NullishCoalescingExpression) -> int;
 ```
 ## NullishCoalescingExpression::getADescendantByLevel
 
-```rust
+```java
 /**
-     * Gets a descendant of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets a descendant of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getADescendantByLevel(self: NullishCoalescingExpression, level: int) -> *Node;
 ```
 ## NullishCoalescingExpression::getAnAncestorEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets an ancestor enclosing function of it
-     */
+* Gets an ancestor enclosing function of it
+*/
 ```
 ```rust
 pub fn getAnAncestorEnclosingFunction(self: NullishCoalescingExpression) -> *FunctionLikeDeclaration;
 ```
 ## NullishCoalescingExpression::getLeftOperand
 
-```rust
+```java
 /**
-     * Get the left operand of this binary expression.
-     */
+* Get the left operand of this binary expression.
+*/
 ```
 ```rust
 pub fn getLeftOperand(self: NullishCoalescingExpression) -> Expression;
 ```
 ## NullishCoalescingExpression::getAnAncestorByLevel
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets an ancestor of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getAnAncestorByLevel(self: NullishCoalescingExpression, level: int) -> Node;
 ```
 ## NullishCoalescingExpression::getFile
 
-```rust
+```java
 /**
-     * Gets the file of this node.
-     */
+* Gets the file of this node.
+*/
 ```
 ```rust
 pub fn getFile(self: NullishCoalescingExpression) -> File;
 ```
 ## NullishCoalescingExpression::getText
 
-```rust
+```java
 /**
-     * Gets the text of this node.
-     */
+* Gets the text of this node.
+*/
 ```
 ```rust
 pub fn getText(self: NullishCoalescingExpression) -> string;
@@ -203,20 +203,20 @@ pub fn getAnOperand(self: NullishCoalescingExpression) -> *Expression;
 ```
 ## NullishCoalescingExpression::getModifier
 
-```rust
+```java
 /**
-     * Gets the `i`th modifier.
-     */
+* Gets the `i`th modifier.
+*/
 ```
 ```rust
 pub fn getModifier(self: NullishCoalescingExpression, i: int) -> Modifier;
 ```
 ## NullishCoalescingExpression::getRightOperand
 
-```rust
+```java
 /**
-     * Get the right operand of this binary expression.
-     */
+* Get the right operand of this binary expression.
+*/
 ```
 ```rust
 pub fn getRightOperand(self: NullishCoalescingExpression) -> Expression;
@@ -228,55 +228,57 @@ pub fn getEndLineNumber(self: NullishCoalescingExpression) -> int;
 ```
 ## NullishCoalescingExpression::getRelativePath
 
-```rust
+```java
 /**
-     * Gets the relative path of this node.
-     */
+* Gets the relative path of this node.
+*/
 ```
 ```rust
 pub fn getRelativePath(self: NullishCoalescingExpression) -> string;
 ```
 ## NullishCoalescingExpression::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavascriptDB) -> *NullishCoalescingExpression;
 ```
 ## NullishCoalescingExpression::getLocation
 
-```rust
+```java
 /**
-     * Gets the location of this node.
-     */
+* Gets the location of this node.
+*/
 ```
 ```rust
 pub fn getLocation(self: NullishCoalescingExpression) -> Location;
 ```
 ## NullishCoalescingExpression::getOperator
 
-```rust
+```java
 /**
-     * Get the operator of this binary expression.
-     */
+* Get the operator of this binary expression.
+*/
 ```
 ```rust
 pub fn getOperator(self: NullishCoalescingExpression) -> BinaryOperator;
 ```
 ## NullishCoalescingExpression::getADescendant
 
-```rust
+```java
 /**
-     * Gets a descendant of this node. 
-     */
+* Gets a descendant of this node. 
+*/
 ```
 ```rust
 pub fn getADescendant(self: NullishCoalescingExpression) -> *Node;
 ```
 ## NullishCoalescingExpression::getLeft
 
-```rust
+```java
 /**
-     * Get the left operand of this binary expression. An alias of `getLeftOperand`.
-     */
+* Get the left operand of this binary expression. An alias of `getLeftOperand`.
+*/
 ```
 ```rust
 pub fn getLeft(self: NullishCoalescingExpression) -> Expression;
@@ -288,40 +290,40 @@ pub fn getStartColumnNumber(self: NullishCoalescingExpression) -> int;
 ```
 ## NullishCoalescingExpression::getAModifier
 
-```rust
+```java
 /**
-     * Gets a modifier.
-     */
+* Gets a modifier.
+*/
 ```
 ```rust
 pub fn getAModifier(self: NullishCoalescingExpression) -> *Modifier;
 ```
 ## NullishCoalescingExpression::getKind
 
-```rust
+```java
 /**
-     * Get the syntax kind of this node
-     */
+* Get the syntax kind of this node
+*/
 ```
 ```rust
 pub fn getKind(self: NullishCoalescingExpression) -> int;
 ```
 ## NullishCoalescingExpression::getLastChild
 
-```rust
+```java
 /**
-     * Gets the last child of this node parent.
-     */
+* Gets the last child of this node parent.
+*/
 ```
 ```rust
 pub fn getLastChild(self: NullishCoalescingExpression) -> Node;
 ```
 ## NullishCoalescingExpression::getEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets the enclosing function of it
-     */
+* Gets the enclosing function of it
+*/
 ```
 ```rust
 pub fn getEnclosingFunction(self: NullishCoalescingExpression) -> FunctionLikeDeclaration;
@@ -333,10 +335,10 @@ pub fn getEndColumnNumber(self: NullishCoalescingExpression) -> int;
 ```
 ## NullishCoalescingExpression::getParentOid
 
-```rust
+```java
 /**
-     * Gets the parent oid of this node.
-     */
+* Gets the parent oid of this node.
+*/
 ```
 ```rust
 pub fn getParentOid(self: NullishCoalescingExpression) -> int;
@@ -348,36 +350,11 @@ pub fn getIndex(self: NullishCoalescingExpression) -> int;
 ```
 ## NullishCoalescingExpression::getRight
 
-```rust
+```java
 /**
-     * Get the right operand of this binary expression. An alias of `getRightOperand`
-     */
+* Get the right operand of this binary expression. An alias of `getRightOperand`
+*/
 ```
 ```rust
 pub fn getRight(self: NullishCoalescingExpression) -> Expression;
-```
-## NullishCoalescingExpression::is\<T\>
-
-```rust
-pub fn is<T>(self: NullishCoalescingExpression) -> bool;
-```
-## NullishCoalescingExpression::to\<T\>
-
-```rust
-pub fn to<T>(self: NullishCoalescingExpression) -> <any>;
-```
-## NullishCoalescingExpression::key\_neq
-
-```rust
-pub fn key_neq(self: NullishCoalescingExpression, object: <any>) -> bool;
-```
-## NullishCoalescingExpression::key\_eq
-
-```rust
-pub fn key_eq(self: NullishCoalescingExpression, object: <any>) -> bool;
-```
-## NullishCoalescingExpression::to\_set
-
-```rust
-pub fn to_set(self: NullishCoalescingExpression) -> *NullishCoalescingExpression;
 ```

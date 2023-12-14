@@ -9,140 +9,140 @@ schema TemplateLiteralTypeNode {
 ```
 ## TemplateLiteralTypeNode::getLocation
 
-```rust
+```java
 /**
-     * Gets the location of this node.
-     */
+* Gets the location of this node.
+*/
 ```
 ```rust
 pub fn getLocation(self: TemplateLiteralTypeNode) -> Location;
 ```
 ## TemplateLiteralTypeNode::getText
 
-```rust
+```java
 /**
-     * Gets the text of this node.
-     */
+* Gets the text of this node.
+*/
 ```
 ```rust
 pub fn getText(self: TemplateLiteralTypeNode) -> string;
 ```
 ## TemplateLiteralTypeNode::getModifier
 
-```rust
+```java
 /**
-     * Gets the `i`th modifier.
-     */
+* Gets the `i`th modifier.
+*/
 ```
 ```rust
 pub fn getModifier(self: TemplateLiteralTypeNode, i: int) -> Modifier;
 ```
 ## TemplateLiteralTypeNode::getAComment
 
-```rust
+```java
 /**
-     * Gets the comments related to it
-     */
+* Gets the comments related to it
+*/
 ```
 ```rust
 pub fn getAComment(self: TemplateLiteralTypeNode) -> *Comment;
 ```
 ## TemplateLiteralTypeNode::getAnAncestor
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node. 
-     */
+* Gets an ancestor of this node. 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: TemplateLiteralTypeNode) -> *Node;
 ```
 ## TemplateLiteralTypeNode::getAChild
 
-```rust
+```java
 /**
-     * Gets a child node of this node.
-     */
+* Gets a child node of this node.
+*/
 ```
 ```rust
 pub fn getAChild(self: TemplateLiteralTypeNode) -> *Node;
 ```
 ## TemplateLiteralTypeNode::getParent
 
-```rust
+```java
 /**
-     * Gets the parent node of this node.
-     */
+* Gets the parent node of this node.
+*/
 ```
 ```rust
 pub fn getParent(self: TemplateLiteralTypeNode) -> Node;
 ```
 ## TemplateLiteralTypeNode::getALeadingComment
 
-```rust
+```java
 /**
-     * Gets the leading comments of it
-     */
+* Gets the leading comments of it
+*/
 ```
 ```rust
 pub fn getALeadingComment(self: TemplateLiteralTypeNode) -> *Comment;
 ```
 ## TemplateLiteralTypeNode::getATrailingComment
 
-```rust
+```java
 /**
-     * Gets the trailing comments of it
-     */
+* Gets the trailing comments of it
+*/
 ```
 ```rust
 pub fn getATrailingComment(self: TemplateLiteralTypeNode) -> *Comment;
 ```
 ## TemplateLiteralTypeNode::getChildCount
 
-```rust
+```java
 /**
-     * Gets the number of child nodes.
-     */
+* Gets the number of child nodes.
+*/
 ```
 ```rust
 pub fn getChildCount(self: TemplateLiteralTypeNode) -> int;
 ```
 ## TemplateLiteralTypeNode::getDecorator
 
-```rust
+```java
 /**
-     * Gets the `i`th decorator.
-     */
+* Gets the `i`th decorator.
+*/
 ```
 ```rust
 pub fn getDecorator(self: TemplateLiteralTypeNode, i: int) -> Decorator;
 ```
 ## TemplateLiteralTypeNode::getRoot
 
-```rust
+```java
 /**
-     * Gets the root top-level of this node. 
-     */
+* Gets the root top-level of this node. 
+*/
 ```
 ```rust
 pub fn getRoot(self: TemplateLiteralTypeNode) -> TopLevelDO;
 ```
 ## TemplateLiteralTypeNode::getKind
 
-```rust
+```java
 /**
-     * Get the syntax kind of this node
-     */
+* Get the syntax kind of this node
+*/
 ```
 ```rust
 pub fn getKind(self: TemplateLiteralTypeNode) -> int;
 ```
 ## TemplateLiteralTypeNode::getAModifier
 
-```rust
+```java
 /**
-     * Gets a modifier.
-     */
+* Gets a modifier.
+*/
 ```
 ```rust
 pub fn getAModifier(self: TemplateLiteralTypeNode) -> *Modifier;
@@ -154,10 +154,10 @@ pub fn getStartColumnNumber(self: TemplateLiteralTypeNode) -> int;
 ```
 ## TemplateLiteralTypeNode::getChild
 
-```rust
+```java
 /**
-     * Gets the `i`th child of this node.
-     */
+* Gets the `i`th child of this node.
+*/
 ```
 ```rust
 pub fn getChild(self: TemplateLiteralTypeNode, i: int) -> Node;
@@ -169,64 +169,64 @@ pub fn getStartLineNumber(self: TemplateLiteralTypeNode) -> int;
 ```
 ## TemplateLiteralTypeNode::getADescendantByLevel
 
-```rust
+```java
 /**
-     * Gets a descendant of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets a descendant of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getADescendantByLevel(self: TemplateLiteralTypeNode, level: int) -> *Node;
 ```
 ## TemplateLiteralTypeNode::getAnAncestorEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets an ancestor enclosing function of it
-     */
+* Gets an ancestor enclosing function of it
+*/
 ```
 ```rust
 pub fn getAnAncestorEnclosingFunction(self: TemplateLiteralTypeNode) -> *FunctionLikeDeclaration;
 ```
 ## TemplateLiteralTypeNode::getAnAncestorByLevel
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets an ancestor of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getAnAncestorByLevel(self: TemplateLiteralTypeNode, level: int) -> Node;
 ```
 ## TemplateLiteralTypeNode::getFile
 
-```rust
+```java
 /**
-     * Gets the file of this node.
-     */
+* Gets the file of this node.
+*/
 ```
 ```rust
 pub fn getFile(self: TemplateLiteralTypeNode) -> File;
 ```
 ## TemplateLiteralTypeNode::getLastChild
 
-```rust
+```java
 /**
-     * Gets the last child of this node parent.
-     */
+* Gets the last child of this node parent.
+*/
 ```
 ```rust
 pub fn getLastChild(self: TemplateLiteralTypeNode) -> Node;
 ```
 ## TemplateLiteralTypeNode::getEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets the enclosing function of it
-     */
+* Gets the enclosing function of it
+*/
 ```
 ```rust
 pub fn getEnclosingFunction(self: TemplateLiteralTypeNode) -> FunctionLikeDeclaration;
@@ -238,10 +238,10 @@ pub fn getEndColumnNumber(self: TemplateLiteralTypeNode) -> int;
 ```
 ## TemplateLiteralTypeNode::getParentOid
 
-```rust
+```java
 /**
-     * Gets the parent oid of this node.
-     */
+* Gets the parent oid of this node.
+*/
 ```
 ```rust
 pub fn getParentOid(self: TemplateLiteralTypeNode) -> int;
@@ -252,6 +252,8 @@ pub fn getParentOid(self: TemplateLiteralTypeNode) -> int;
 pub fn getIndex(self: TemplateLiteralTypeNode) -> int;
 ```
 ## TemplateLiteralTypeNode::\_\_all\_\_
+
+Data constraint method.
 
 ```rust
 pub fn __all__(db: JavascriptDB) -> *TemplateLiteralTypeNode;
@@ -268,30 +270,30 @@ pub fn getEndLineNumber(self: TemplateLiteralTypeNode) -> int;
 ```
 ## TemplateLiteralTypeNode::getRelativePath
 
-```rust
+```java
 /**
-     * Gets the relative path of this node.
-     */
+* Gets the relative path of this node.
+*/
 ```
 ```rust
 pub fn getRelativePath(self: TemplateLiteralTypeNode) -> string;
 ```
 ## TemplateLiteralTypeNode::getSymbol
 
-```rust
+```java
 /**
-     * Gets the symbol associated with this node.
-     */
+* Gets the symbol associated with this node.
+*/
 ```
 ```rust
 pub fn getSymbol(self: TemplateLiteralTypeNode) -> Symbol;
 ```
 ## TemplateLiteralTypeNode::getADecorator
 
-```rust
+```java
 /**
-     * Gets a decorator.
-     */
+* Gets a decorator.
+*/
 ```
 ```rust
 pub fn getADecorator(self: TemplateLiteralTypeNode) -> *Decorator;
@@ -303,10 +305,10 @@ pub fn getHead(self: TemplateLiteralTypeNode) -> TemplateHead;
 ```
 ## TemplateLiteralTypeNode::getADescendant
 
-```rust
+```java
 /**
-     * Gets a descendant of this node. 
-     */
+* Gets a descendant of this node. 
+*/
 ```
 ```rust
 pub fn getADescendant(self: TemplateLiteralTypeNode) -> *Node;
@@ -315,29 +317,4 @@ pub fn getADescendant(self: TemplateLiteralTypeNode) -> *Node;
 
 ```rust
 pub fn getATemplateSpan(self: TemplateLiteralTypeNode) -> *TemplateLiteralTypeSpan;
-```
-## TemplateLiteralTypeNode::is\<T\>
-
-```rust
-pub fn is<T>(self: TemplateLiteralTypeNode) -> bool;
-```
-## TemplateLiteralTypeNode::to\<T\>
-
-```rust
-pub fn to<T>(self: TemplateLiteralTypeNode) -> <any>;
-```
-## TemplateLiteralTypeNode::key\_neq
-
-```rust
-pub fn key_neq(self: TemplateLiteralTypeNode, object: <any>) -> bool;
-```
-## TemplateLiteralTypeNode::key\_eq
-
-```rust
-pub fn key_eq(self: TemplateLiteralTypeNode, object: <any>) -> bool;
-```
-## TemplateLiteralTypeNode::to\_set
-
-```rust
-pub fn to_set(self: TemplateLiteralTypeNode) -> *TemplateLiteralTypeNode;
 ```

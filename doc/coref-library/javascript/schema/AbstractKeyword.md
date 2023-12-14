@@ -9,10 +9,10 @@ schema AbstractKeyword {
 ```
 ## AbstractKeyword::getADescendant
 
-```rust
+```java
 /**
-     * Gets a descendant of this node. 
-     */
+* Gets a descendant of this node. 
+*/
 ```
 ```rust
 pub fn getADescendant(self: AbstractKeyword) -> *Node;
@@ -24,10 +24,10 @@ pub fn getIndex(self: AbstractKeyword) -> int;
 ```
 ## AbstractKeyword::getParentOid
 
-```rust
+```java
 /**
-     * Gets the parent oid of this node.
-     */
+* Gets the parent oid of this node.
+*/
 ```
 ```rust
 pub fn getParentOid(self: AbstractKeyword) -> int;
@@ -39,62 +39,62 @@ pub fn getEndColumnNumber(self: AbstractKeyword) -> int;
 ```
 ## AbstractKeyword::getEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets the enclosing function of it
-     */
+* Gets the enclosing function of it
+*/
 ```
 ```rust
 pub fn getEnclosingFunction(self: AbstractKeyword) -> FunctionLikeDeclaration;
 ```
 ## AbstractKeyword::getLastChild
 
-```rust
+```java
 /**
-     * Gets the last child of this node parent.
-     */
+* Gets the last child of this node parent.
+*/
 ```
 ```rust
 pub fn getLastChild(self: AbstractKeyword) -> Node;
 ```
 ## AbstractKeyword::getATrailingComment
 
-```rust
+```java
 /**
-     * Gets the trailing comments of it
-     */
+* Gets the trailing comments of it
+*/
 ```
 ```rust
 pub fn getATrailingComment(self: AbstractKeyword) -> *Comment;
 ```
 ## AbstractKeyword::getALeadingComment
 
-```rust
+```java
 /**
-     * Gets the leading comments of it
-     */
+* Gets the leading comments of it
+*/
 ```
 ```rust
 pub fn getALeadingComment(self: AbstractKeyword) -> *Comment;
 ```
 ## AbstractKeyword::getFile
 
-```rust
+```java
 /**
-     * Gets the file of this node.
-     */
+* Gets the file of this node.
+*/
 ```
 ```rust
 pub fn getFile(self: AbstractKeyword) -> File;
 ```
 ## AbstractKeyword::getAnAncestorByLevel
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets an ancestor of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getAnAncestorByLevel(self: AbstractKeyword, level: int) -> Node;
@@ -106,52 +106,52 @@ pub fn getEndLineNumber(self: AbstractKeyword) -> int;
 ```
 ## AbstractKeyword::getRelativePath
 
-```rust
+```java
 /**
-     * Gets the relative path of this node.
-     */
+* Gets the relative path of this node.
+*/
 ```
 ```rust
 pub fn getRelativePath(self: AbstractKeyword) -> string;
 ```
 ## AbstractKeyword::getAnAncestorEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets an ancestor enclosing function of it
-     */
+* Gets an ancestor enclosing function of it
+*/
 ```
 ```rust
 pub fn getAnAncestorEnclosingFunction(self: AbstractKeyword) -> *FunctionLikeDeclaration;
 ```
 ## AbstractKeyword::getADescendantByLevel
 
-```rust
+```java
 /**
-     * Gets a descendant of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets a descendant of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getADescendantByLevel(self: AbstractKeyword, level: int) -> *Node;
 ```
 ## AbstractKeyword::getKind
 
-```rust
+```java
 /**
-     * Get the syntax kind of this node
-     */
+* Get the syntax kind of this node
+*/
 ```
 ```rust
 pub fn getKind(self: AbstractKeyword) -> int;
 ```
 ## AbstractKeyword::getAModifier
 
-```rust
+```java
 /**
-     * Gets a modifier.
-     */
+* Gets a modifier.
+*/
 ```
 ```rust
 pub fn getAModifier(self: AbstractKeyword) -> *Modifier;
@@ -168,161 +168,138 @@ pub fn getStartLineNumber(self: AbstractKeyword) -> int;
 ```
 ## AbstractKeyword::getChild
 
-```rust
+```java
 /**
-     * Gets the `i`th child of this node.
-     */
+* Gets the `i`th child of this node.
+*/
 ```
 ```rust
 pub fn getChild(self: AbstractKeyword, i: int) -> Node;
 ```
 ## AbstractKeyword::getDecorator
 
-```rust
+```java
 /**
-     * Gets the `i`th decorator.
-     */
+* Gets the `i`th decorator.
+*/
 ```
 ```rust
 pub fn getDecorator(self: AbstractKeyword, i: int) -> Decorator;
 ```
 ## AbstractKeyword::getRoot
 
-```rust
+```java
 /**
-     * Gets the root top-level of this node. 
-     */
+* Gets the root top-level of this node. 
+*/
 ```
 ```rust
 pub fn getRoot(self: AbstractKeyword) -> TopLevelDO;
 ```
 ## AbstractKeyword::getChildCount
 
-```rust
+```java
 /**
-     * Gets the number of child nodes.
-     */
+* Gets the number of child nodes.
+*/
 ```
 ```rust
 pub fn getChildCount(self: AbstractKeyword) -> int;
 ```
 ## AbstractKeyword::getParent
 
-```rust
+```java
 /**
-     * Gets the parent node of this node.
-     */
+* Gets the parent node of this node.
+*/
 ```
 ```rust
 pub fn getParent(self: AbstractKeyword) -> Node;
 ```
 ## AbstractKeyword::getAChild
 
-```rust
+```java
 /**
-     * Gets a child node of this node.
-     */
+* Gets a child node of this node.
+*/
 ```
 ```rust
 pub fn getAChild(self: AbstractKeyword) -> *Node;
 ```
 ## AbstractKeyword::getAnAncestor
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node. 
-     */
+* Gets an ancestor of this node. 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: AbstractKeyword) -> *Node;
 ```
 ## AbstractKeyword::getAComment
 
-```rust
+```java
 /**
-     * Gets the comments related to it
-     */
+* Gets the comments related to it
+*/
 ```
 ```rust
 pub fn getAComment(self: AbstractKeyword) -> *Comment;
 ```
 ## AbstractKeyword::getSymbol
 
-```rust
+```java
 /**
-     * Gets the symbol associated with this node.
-     */
+* Gets the symbol associated with this node.
+*/
 ```
 ```rust
 pub fn getSymbol(self: AbstractKeyword) -> Symbol;
 ```
 ## AbstractKeyword::getADecorator
 
-```rust
+```java
 /**
-     * Gets a decorator.
-     */
+* Gets a decorator.
+*/
 ```
 ```rust
 pub fn getADecorator(self: AbstractKeyword) -> *Decorator;
 ```
 ## AbstractKeyword::getModifier
 
-```rust
+```java
 /**
-     * Gets the `i`th modifier.
-     */
+* Gets the `i`th modifier.
+*/
 ```
 ```rust
 pub fn getModifier(self: AbstractKeyword, i: int) -> Modifier;
 ```
 ## AbstractKeyword::getText
 
-```rust
+```java
 /**
-     * Gets the text of this node.
-     */
+* Gets the text of this node.
+*/
 ```
 ```rust
 pub fn getText(self: AbstractKeyword) -> string;
 ```
 ## AbstractKeyword::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavascriptDB) -> *AbstractKeyword;
 ```
 ## AbstractKeyword::getLocation
 
-```rust
+```java
 /**
-     * Gets the location of this node.
-     */
+* Gets the location of this node.
+*/
 ```
 ```rust
 pub fn getLocation(self: AbstractKeyword) -> Location;
-```
-## AbstractKeyword::is\<T\>
-
-```rust
-pub fn is<T>(self: AbstractKeyword) -> bool;
-```
-## AbstractKeyword::to\<T\>
-
-```rust
-pub fn to<T>(self: AbstractKeyword) -> <any>;
-```
-## AbstractKeyword::key\_neq
-
-```rust
-pub fn key_neq(self: AbstractKeyword, object: <any>) -> bool;
-```
-## AbstractKeyword::key\_eq
-
-```rust
-pub fn key_eq(self: AbstractKeyword, object: <any>) -> bool;
-```
-## AbstractKeyword::to\_set
-
-```rust
-pub fn to_set(self: AbstractKeyword) -> *AbstractKeyword;
 ```

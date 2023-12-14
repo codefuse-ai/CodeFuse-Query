@@ -20,9 +20,6 @@ pub fn getTextSize(self: Function) -> int;
 ## Function::getBelongsFile
 
 ```rust
-// root node
-```
-```rust
 pub fn getBelongsFile(self: Function) -> File;
 ```
 ## Function::print
@@ -72,7 +69,7 @@ pub fn isRootNode(self: Function) -> bool;
 ```
 ## Function::getText
 
-```rust
+```java
 // getText Extract the text associated with a specific node in a file
 ```
 ```rust
@@ -190,31 +187,8 @@ pub fn getTextStartOffset(self: Function) -> int;
 ```
 ## Function::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: GoDB) -> *Function;
-```
-## Function::is\<T\>
-
-```rust
-pub fn is<T>(self: Function) -> bool;
-```
-## Function::to\<T\>
-
-```rust
-pub fn to<T>(self: Function) -> <any>;
-```
-## Function::key\_neq
-
-```rust
-pub fn key_neq(self: Function, object: <any>) -> bool;
-```
-## Function::key\_eq
-
-```rust
-pub fn key_eq(self: Function, object: <any>) -> bool;
-```
-## Function::to\_set
-
-```rust
-pub fn to_set(self: Function) -> *Function;
 ```

@@ -12,64 +12,41 @@ schema ForeachStatementDO {
 ```
 ## ForeachStatementDO::getIterationParameterHashId
 
-```rust
+```java
 /**
-     * @brief gets the iteration parameter hash id of this element.
-     * @return int
-     */
+* @brief gets the iteration parameter hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getIterationParameterHashId(self: ForeachStatementDO) -> int;
 ```
 ## ForeachStatementDO::getIteratedValueHashId
 
-```rust
+```java
 /**
-     * @brief gets the iterated value hash id of this element.
-     * @return int
-     */
+* @brief gets the iterated value hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getIteratedValueHashId(self: ForeachStatementDO) -> int;
 ```
 ## ForeachStatementDO::getBodyHashId
 
-```rust
+```java
 /**
-     * @brief gets the body hash id of this element.
-     * @return int
-     */
+* @brief gets the body hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getBodyHashId(self: ForeachStatementDO) -> int;
 ```
 ## ForeachStatementDO::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavaDB) -> *ForeachStatementDO;
-```
-## ForeachStatementDO::is\<T\>
-
-```rust
-pub fn is<T>(self: ForeachStatementDO) -> bool;
-```
-## ForeachStatementDO::to\<T\>
-
-```rust
-pub fn to<T>(self: ForeachStatementDO) -> <any>;
-```
-## ForeachStatementDO::key\_neq
-
-```rust
-pub fn key_neq(self: ForeachStatementDO, object: <any>) -> bool;
-```
-## ForeachStatementDO::key\_eq
-
-```rust
-pub fn key_eq(self: ForeachStatementDO, object: <any>) -> bool;
-```
-## ForeachStatementDO::to\_set
-
-```rust
-pub fn to_set(self: ForeachStatementDO) -> *ForeachStatementDO;
 ```

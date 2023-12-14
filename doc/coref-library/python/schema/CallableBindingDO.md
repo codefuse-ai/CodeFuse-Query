@@ -10,42 +10,19 @@ schema CallableBindingDO {
 ```
 ## CallableBindingDO::getCalleeOid
 
-```rust
+```java
 /**
-     * @brief gets the callee oid of this element.
-     * @return int
-     */
+* @brief gets the callee oid of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getCalleeOid(self: CallableBindingDO) -> int;
 ```
 ## CallableBindingDO::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: PythonDB) -> *CallableBindingDO;
-```
-## CallableBindingDO::is\<T\>
-
-```rust
-pub fn is<T>(self: CallableBindingDO) -> bool;
-```
-## CallableBindingDO::to\<T\>
-
-```rust
-pub fn to<T>(self: CallableBindingDO) -> <any>;
-```
-## CallableBindingDO::key\_neq
-
-```rust
-pub fn key_neq(self: CallableBindingDO, object: <any>) -> bool;
-```
-## CallableBindingDO::key\_eq
-
-```rust
-pub fn key_eq(self: CallableBindingDO, object: <any>) -> bool;
-```
-## CallableBindingDO::to\_set
-
-```rust
-pub fn to_set(self: CallableBindingDO) -> *CallableBindingDO;
 ```

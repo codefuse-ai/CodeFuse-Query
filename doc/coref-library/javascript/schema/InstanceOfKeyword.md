@@ -9,140 +9,140 @@ schema InstanceOfKeyword {
 ```
 ## InstanceOfKeyword::getLocation
 
-```rust
+```java
 /**
-     * Gets the location of this node.
-     */
+* Gets the location of this node.
+*/
 ```
 ```rust
 pub fn getLocation(self: InstanceOfKeyword) -> Location;
 ```
 ## InstanceOfKeyword::getSymbol
 
-```rust
+```java
 /**
-     * Gets the symbol associated with this node.
-     */
+* Gets the symbol associated with this node.
+*/
 ```
 ```rust
 pub fn getSymbol(self: InstanceOfKeyword) -> Symbol;
 ```
 ## InstanceOfKeyword::getADecorator
 
-```rust
+```java
 /**
-     * Gets a decorator.
-     */
+* Gets a decorator.
+*/
 ```
 ```rust
 pub fn getADecorator(self: InstanceOfKeyword) -> *Decorator;
 ```
 ## InstanceOfKeyword::getText
 
-```rust
+```java
 /**
-     * Gets the text of this node.
-     */
+* Gets the text of this node.
+*/
 ```
 ```rust
 pub fn getText(self: InstanceOfKeyword) -> string;
 ```
 ## InstanceOfKeyword::getModifier
 
-```rust
+```java
 /**
-     * Gets the `i`th modifier.
-     */
+* Gets the `i`th modifier.
+*/
 ```
 ```rust
 pub fn getModifier(self: InstanceOfKeyword, i: int) -> Modifier;
 ```
 ## InstanceOfKeyword::getAComment
 
-```rust
+```java
 /**
-     * Gets the comments related to it
-     */
+* Gets the comments related to it
+*/
 ```
 ```rust
 pub fn getAComment(self: InstanceOfKeyword) -> *Comment;
 ```
 ## InstanceOfKeyword::getAnAncestor
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node. 
-     */
+* Gets an ancestor of this node. 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: InstanceOfKeyword) -> *Node;
 ```
 ## InstanceOfKeyword::getAChild
 
-```rust
+```java
 /**
-     * Gets a child node of this node.
-     */
+* Gets a child node of this node.
+*/
 ```
 ```rust
 pub fn getAChild(self: InstanceOfKeyword) -> *Node;
 ```
 ## InstanceOfKeyword::getParent
 
-```rust
+```java
 /**
-     * Gets the parent node of this node.
-     */
+* Gets the parent node of this node.
+*/
 ```
 ```rust
 pub fn getParent(self: InstanceOfKeyword) -> Node;
 ```
 ## InstanceOfKeyword::getChildCount
 
-```rust
+```java
 /**
-     * Gets the number of child nodes.
-     */
+* Gets the number of child nodes.
+*/
 ```
 ```rust
 pub fn getChildCount(self: InstanceOfKeyword) -> int;
 ```
 ## InstanceOfKeyword::getRoot
 
-```rust
+```java
 /**
-     * Gets the root top-level of this node. 
-     */
+* Gets the root top-level of this node. 
+*/
 ```
 ```rust
 pub fn getRoot(self: InstanceOfKeyword) -> TopLevelDO;
 ```
 ## InstanceOfKeyword::getDecorator
 
-```rust
+```java
 /**
-     * Gets the `i`th decorator.
-     */
+* Gets the `i`th decorator.
+*/
 ```
 ```rust
 pub fn getDecorator(self: InstanceOfKeyword, i: int) -> Decorator;
 ```
 ## InstanceOfKeyword::getKind
 
-```rust
+```java
 /**
-     * Get the syntax kind of this node
-     */
+* Get the syntax kind of this node
+*/
 ```
 ```rust
 pub fn getKind(self: InstanceOfKeyword) -> int;
 ```
 ## InstanceOfKeyword::getAModifier
 
-```rust
+```java
 /**
-     * Gets a modifier.
-     */
+* Gets a modifier.
+*/
 ```
 ```rust
 pub fn getAModifier(self: InstanceOfKeyword) -> *Modifier;
@@ -154,10 +154,10 @@ pub fn getStartColumnNumber(self: InstanceOfKeyword) -> int;
 ```
 ## InstanceOfKeyword::getChild
 
-```rust
+```java
 /**
-     * Gets the `i`th child of this node.
-     */
+* Gets the `i`th child of this node.
+*/
 ```
 ```rust
 pub fn getChild(self: InstanceOfKeyword, i: int) -> Node;
@@ -169,22 +169,22 @@ pub fn getStartLineNumber(self: InstanceOfKeyword) -> int;
 ```
 ## InstanceOfKeyword::getAnAncestorEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets an ancestor enclosing function of it
-     */
+* Gets an ancestor enclosing function of it
+*/
 ```
 ```rust
 pub fn getAnAncestorEnclosingFunction(self: InstanceOfKeyword) -> *FunctionLikeDeclaration;
 ```
 ## InstanceOfKeyword::getADescendantByLevel
 
-```rust
+```java
 /**
-     * Gets a descendant of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets a descendant of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getADescendantByLevel(self: InstanceOfKeyword, level: int) -> *Node;
@@ -196,72 +196,72 @@ pub fn getEndLineNumber(self: InstanceOfKeyword) -> int;
 ```
 ## InstanceOfKeyword::getRelativePath
 
-```rust
+```java
 /**
-     * Gets the relative path of this node.
-     */
+* Gets the relative path of this node.
+*/
 ```
 ```rust
 pub fn getRelativePath(self: InstanceOfKeyword) -> string;
 ```
 ## InstanceOfKeyword::getAnAncestorByLevel
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets an ancestor of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getAnAncestorByLevel(self: InstanceOfKeyword, level: int) -> Node;
 ```
 ## InstanceOfKeyword::getFile
 
-```rust
+```java
 /**
-     * Gets the file of this node.
-     */
+* Gets the file of this node.
+*/
 ```
 ```rust
 pub fn getFile(self: InstanceOfKeyword) -> File;
 ```
 ## InstanceOfKeyword::getALeadingComment
 
-```rust
+```java
 /**
-     * Gets the leading comments of it
-     */
+* Gets the leading comments of it
+*/
 ```
 ```rust
 pub fn getALeadingComment(self: InstanceOfKeyword) -> *Comment;
 ```
 ## InstanceOfKeyword::getATrailingComment
 
-```rust
+```java
 /**
-     * Gets the trailing comments of it
-     */
+* Gets the trailing comments of it
+*/
 ```
 ```rust
 pub fn getATrailingComment(self: InstanceOfKeyword) -> *Comment;
 ```
 ## InstanceOfKeyword::getLastChild
 
-```rust
+```java
 /**
-     * Gets the last child of this node parent.
-     */
+* Gets the last child of this node parent.
+*/
 ```
 ```rust
 pub fn getLastChild(self: InstanceOfKeyword) -> Node;
 ```
 ## InstanceOfKeyword::getEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets the enclosing function of it
-     */
+* Gets the enclosing function of it
+*/
 ```
 ```rust
 pub fn getEnclosingFunction(self: InstanceOfKeyword) -> FunctionLikeDeclaration;
@@ -273,10 +273,10 @@ pub fn getEndColumnNumber(self: InstanceOfKeyword) -> int;
 ```
 ## InstanceOfKeyword::getParentOid
 
-```rust
+```java
 /**
-     * Gets the parent oid of this node.
-     */
+* Gets the parent oid of this node.
+*/
 ```
 ```rust
 pub fn getParentOid(self: InstanceOfKeyword) -> int;
@@ -288,41 +288,18 @@ pub fn getIndex(self: InstanceOfKeyword) -> int;
 ```
 ## InstanceOfKeyword::getADescendant
 
-```rust
+```java
 /**
-     * Gets a descendant of this node. 
-     */
+* Gets a descendant of this node. 
+*/
 ```
 ```rust
 pub fn getADescendant(self: InstanceOfKeyword) -> *Node;
 ```
 ## InstanceOfKeyword::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavascriptDB) -> *InstanceOfKeyword;
-```
-## InstanceOfKeyword::is\<T\>
-
-```rust
-pub fn is<T>(self: InstanceOfKeyword) -> bool;
-```
-## InstanceOfKeyword::to\<T\>
-
-```rust
-pub fn to<T>(self: InstanceOfKeyword) -> <any>;
-```
-## InstanceOfKeyword::key\_neq
-
-```rust
-pub fn key_neq(self: InstanceOfKeyword, object: <any>) -> bool;
-```
-## InstanceOfKeyword::key\_eq
-
-```rust
-pub fn key_eq(self: InstanceOfKeyword, object: <any>) -> bool;
-```
-## InstanceOfKeyword::to\_set
-
-```rust
-pub fn to_set(self: InstanceOfKeyword) -> *InstanceOfKeyword;
 ```

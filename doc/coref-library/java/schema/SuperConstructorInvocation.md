@@ -14,115 +14,117 @@ schema SuperConstructorInvocation {
 ```
 ## SuperConstructorInvocation::getAnAncestor
 
-```rust
+```java
 /**
-     * @brief gets an ancestor of the element.
-     * @return ElementParent 
-     */
+* @brief gets an ancestor of the element.
+* @return ElementParent 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: SuperConstructorInvocation) -> *ElementParent;
 ```
 ## SuperConstructorInvocation::getPrintableText
 
-```rust
+```java
 /**
-     * @brief gets a printed representation of this element, including its structure where applicable.
-     * @return string.
-     */
+* @brief gets a printed representation of this element, including its structure where applicable.
+* @return string.
+*/
 ```
 ```rust
 pub fn getPrintableText(self: SuperConstructorInvocation) -> string;
 ```
 ## SuperConstructorInvocation::getEnclosingStatement
 
-```rust
+```java
 /**
-     * @brief gets the statement which encloses the expression.
-     * @return Statement 
-     */
+* @brief gets the statement which encloses the expression.
+* @return Statement 
+*/
 ```
 ```rust
 pub fn getEnclosingStatement(self: SuperConstructorInvocation) -> Statement;
 ```
 ## SuperConstructorInvocation::getParentHashId
 
-```rust
+```java
 /**
-     * @brief gets the parent hash id of this element.
-     * @return int
-     */
+* @brief gets the parent hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getParentHashId(self: SuperConstructorInvocation) -> int;
 ```
 ## SuperConstructorInvocation::getParent
 
-```rust
+```java
 /**
-     * @brief gets the parent of the expression.
-     * @return ElementParent 
-     */
+* @brief gets the parent of the expression.
+* @return ElementParent 
+*/
 ```
 ```rust
 pub fn getParent(self: SuperConstructorInvocation) -> ElementParent;
 ```
 ## SuperConstructorInvocation::getSize
 
-```rust
+```java
 /**
-     * @brief gets the size information for the element.
-     * @return NumberOfLines
-     */
+* @brief gets the size information for the element.
+* @return NumberOfLines
+*/
 ```
 ```rust
 pub fn getSize(self: SuperConstructorInvocation) -> NumberOfLines;
 ```
 ## SuperConstructorInvocation::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavaDB) -> *SuperConstructorInvocation;
 ```
 ## SuperConstructorInvocation::getLocationHashId
 
-```rust
+```java
 /**
-     * @brief gets the location hash id of this element.
-     * @return int
-     */
+* @brief gets the location hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getLocationHashId(self: SuperConstructorInvocation) -> int;
 ```
 ## SuperConstructorInvocation::getLocation
 
-```rust
+```java
 /**
-     * @brief gets the location for the element.
-     * @return Location
-     */
+* @brief gets the location for the element.
+* @return Location
+*/
 ```
 ```rust
 pub fn getLocation(self: SuperConstructorInvocation) -> Location;
 ```
 ## SuperConstructorInvocation::getEnclosingCallable
 
-```rust
+```java
 /**
-     * @brief gets the callable in which this expression occurs.
-     * @return Callable 
-     */
+* @brief gets the callable in which this expression occurs.
+* @return Callable 
+*/
 ```
 ```rust
 pub fn getEnclosingCallable(self: SuperConstructorInvocation) -> Callable;
 ```
 ## SuperConstructorInvocation::getIndex
 
-```rust
+```java
 /**
-     * @brief gets the index order of this element.
-     * @return int
-     */
+* @brief gets the index order of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getIndex(self: SuperConstructorInvocation) -> int;
@@ -134,37 +136,12 @@ pub fn getConstructor(self: SuperConstructorInvocation) -> Constructor;
 ```
 ## SuperConstructorInvocation::getType
 
-```rust
+```java
 /**
-     * @brief gets the type of this element.
-     * @return string
-     */
+* @brief gets the type of this element.
+* @return string
+*/
 ```
 ```rust
 pub fn getType(self: SuperConstructorInvocation) -> string;
-```
-## SuperConstructorInvocation::is\<T\>
-
-```rust
-pub fn is<T>(self: SuperConstructorInvocation) -> bool;
-```
-## SuperConstructorInvocation::to\<T\>
-
-```rust
-pub fn to<T>(self: SuperConstructorInvocation) -> <any>;
-```
-## SuperConstructorInvocation::key\_neq
-
-```rust
-pub fn key_neq(self: SuperConstructorInvocation, object: <any>) -> bool;
-```
-## SuperConstructorInvocation::key\_eq
-
-```rust
-pub fn key_eq(self: SuperConstructorInvocation, object: <any>) -> bool;
-```
-## SuperConstructorInvocation::to\_set
-
-```rust
-pub fn to_set(self: SuperConstructorInvocation) -> *SuperConstructorInvocation;
 ```

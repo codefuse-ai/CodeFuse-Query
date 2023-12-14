@@ -12,64 +12,41 @@ schema ClassInitializerDO {
 ```
 ## ClassInitializerDO::getLocationHashId
 
-```rust
+```java
 /**
-     * @brief gets the location hash id of this element.
-     * @return int
-     */
+* @brief gets the location hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getLocationHashId(self: ClassInitializerDO) -> int;
 ```
 ## ClassInitializerDO::getPrintableText
 
-```rust
+```java
 /**
-     * @brief gets a printed representation of this element, including its structure where applicable.
-     * @return string.
-     */
+* @brief gets a printed representation of this element, including its structure where applicable.
+* @return string.
+*/
 ```
 ```rust
 pub fn getPrintableText(self: ClassInitializerDO) -> string;
 ```
 ## ClassInitializerDO::getParentHashId
 
-```rust
+```java
 /**
-     * @brief gets the parent hash id of this element.
-     * @return int
-     */
+* @brief gets the parent hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getParentHashId(self: ClassInitializerDO) -> int;
 ```
 ## ClassInitializerDO::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavaDB) -> *ClassInitializerDO;
-```
-## ClassInitializerDO::is\<T\>
-
-```rust
-pub fn is<T>(self: ClassInitializerDO) -> bool;
-```
-## ClassInitializerDO::to\<T\>
-
-```rust
-pub fn to<T>(self: ClassInitializerDO) -> <any>;
-```
-## ClassInitializerDO::key\_neq
-
-```rust
-pub fn key_neq(self: ClassInitializerDO, object: <any>) -> bool;
-```
-## ClassInitializerDO::key\_eq
-
-```rust
-pub fn key_eq(self: ClassInitializerDO, object: <any>) -> bool;
-```
-## ClassInitializerDO::to\_set
-
-```rust
-pub fn to_set(self: ClassInitializerDO) -> *ClassInitializerDO;
 ```

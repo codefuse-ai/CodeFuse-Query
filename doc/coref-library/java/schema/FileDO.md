@@ -13,75 +13,52 @@ schema FileDO {
 ```
 ## FileDO::getNumberOfLinesHashId
 
-```rust
+```java
 /**
-     * @brief gets the number of lines hash id of this element.
-     * @return int
-     */
+* @brief gets the number of lines hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getNumberOfLinesHashId(self: FileDO) -> int;
 ```
 ## FileDO::getExtension
 
-```rust
+```java
 /**
-     * @brief gets the extension of this element.
-     * @return string
-     */
+* @brief gets the extension of this element.
+* @return string
+*/
 ```
 ```rust
 pub fn getExtension(self: FileDO) -> string;
 ```
 ## FileDO::getRelativePath
 
-```rust
+```java
 /**
-     * @brief gets the relative path  of this element.
-     * @return string
-     */
+* @brief gets the relative path  of this element.
+* @return string
+*/
 ```
 ```rust
 pub fn getRelativePath(self: FileDO) -> string;
 ```
 ## FileDO::getName
 
-```rust
+```java
 /**
-     * @brief gets the name of this element.
-     * @return string
-     */
+* @brief gets the name of this element.
+* @return string
+*/
 ```
 ```rust
 pub fn getName(self: FileDO) -> string;
 ```
 ## FileDO::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavaDB) -> *FileDO;
-```
-## FileDO::is\<T\>
-
-```rust
-pub fn is<T>(self: FileDO) -> bool;
-```
-## FileDO::to\<T\>
-
-```rust
-pub fn to<T>(self: FileDO) -> <any>;
-```
-## FileDO::key\_neq
-
-```rust
-pub fn key_neq(self: FileDO, object: <any>) -> bool;
-```
-## FileDO::key\_eq
-
-```rust
-pub fn key_eq(self: FileDO, object: <any>) -> bool;
-```
-## FileDO::to\_set
-
-```rust
-pub fn to_set(self: FileDO) -> *FileDO;
 ```

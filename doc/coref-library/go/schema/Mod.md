@@ -12,11 +12,11 @@ schema Mod {
 ```
 ## Mod::getName
 
-```rust
+```java
 /**
-     * @brief gets the name of this element.
-     * @return string
-     */
+* @brief gets the name of this element.
+* @return string
+*/
 ```
 ```rust
 pub fn getName(self: Mod) -> string;
@@ -28,22 +28,22 @@ pub fn getModDepsCount(self: Mod) -> int;
 ```
 ## Mod::getPath
 
-```rust
+```java
 /**
-     * @brief gets the path of this element.
-     * @return string
-     */
+* @brief gets the path of this element.
+* @return string
+*/
 ```
 ```rust
 pub fn getPath(self: Mod) -> string;
 ```
 ## Mod::getGoVersion
 
-```rust
+```java
 /**
-     * @brief gets the go version of this element.
-     * @return string
-     */
+* @brief gets the go version of this element.
+* @return string
+*/
 ```
 ```rust
 pub fn getGoVersion(self: Mod) -> string;
@@ -55,31 +55,8 @@ pub fn getARequire(self: Mod) -> string;
 ```
 ## Mod::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: GoDB) -> *Mod;
-```
-## Mod::is\<T\>
-
-```rust
-pub fn is<T>(self: Mod) -> bool;
-```
-## Mod::to\<T\>
-
-```rust
-pub fn to<T>(self: Mod) -> <any>;
-```
-## Mod::key\_neq
-
-```rust
-pub fn key_neq(self: Mod, object: <any>) -> bool;
-```
-## Mod::key\_eq
-
-```rust
-pub fn key_eq(self: Mod, object: <any>) -> bool;
-```
-## Mod::to\_set
-
-```rust
-pub fn to_set(self: Mod) -> *Mod;
 ```

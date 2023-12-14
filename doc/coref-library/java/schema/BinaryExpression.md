@@ -14,196 +14,173 @@ schema BinaryExpression {
 ```
 ## BinaryExpression::getAnAncestor
 
-```rust
+```java
 /**
-     * @brief gets an ancestor of the element.
-     * @return ElementParent 
-     */
+* @brief gets an ancestor of the element.
+* @return ElementParent 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: BinaryExpression) -> *ElementParent;
 ```
 ## BinaryExpression::getPrintableText
 
-```rust
+```java
 /**
-     * @brief gets a printed representation of this element, including its structure where applicable.
-     * @return string.
-     */
+* @brief gets a printed representation of this element, including its structure where applicable.
+* @return string.
+*/
 ```
 ```rust
 pub fn getPrintableText(self: BinaryExpression) -> string;
 ```
 ## BinaryExpression::getParentHashId
 
-```rust
+```java
 /**
-     * @brief gets the parent hash id of this element.
-     * @return int
-     */
+* @brief gets the parent hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getParentHashId(self: BinaryExpression) -> int;
 ```
 ## BinaryExpression::getParent
 
-```rust
+```java
 /**
-     * @brief gets the parent of the expression.
-     * @return ElementParent 
-     */
+* @brief gets the parent of the expression.
+* @return ElementParent 
+*/
 ```
 ```rust
 pub fn getParent(self: BinaryExpression) -> ElementParent;
 ```
 ## BinaryExpression::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavaDB) -> *BinaryExpression;
 ```
 ## BinaryExpression::getLocationHashId
 
-```rust
+```java
 /**
-     * @brief gets the location hash id of this element.
-     * @return int
-     */
+* @brief gets the location hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getLocationHashId(self: BinaryExpression) -> int;
 ```
 ## BinaryExpression::getLocation
 
-```rust
+```java
 /**
-     * @brief gets the location for the element.
-     * @return Location
-     */
+* @brief gets the location for the element.
+* @return Location
+*/
 ```
 ```rust
 pub fn getLocation(self: BinaryExpression) -> Location;
 ```
 ## BinaryExpression::getIndex
 
-```rust
+```java
 /**
-     * @brief gets the index order of this element.
-     * @return int
-     */
+* @brief gets the index order of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getIndex(self: BinaryExpression) -> int;
 ```
 ## BinaryExpression::getEnclosingCallable
 
-```rust
+```java
 /**
-     * @brief gets the callable in which this expression occurs.
-     * @return Callable 
-     */
+* @brief gets the callable in which this expression occurs.
+* @return Callable 
+*/
 ```
 ```rust
 pub fn getEnclosingCallable(self: BinaryExpression) -> Callable;
 ```
 ## BinaryExpression::getOpcode
 
-```rust
+```java
 /**
-     * @brief gets the opcode of the binary expression
-     * @return string 
-     */
+* @brief gets the opcode of the binary expression
+* @return string 
+*/
 ```
 ```rust
 pub fn getOpcode(self: BinaryExpression) -> string;
 ```
 ## BinaryExpression::getSize
 
-```rust
+```java
 /**
-     * @brief gets the size information for the element.
-     * @return NumberOfLines
-     */
+* @brief gets the size information for the element.
+* @return NumberOfLines
+*/
 ```
 ```rust
 pub fn getSize(self: BinaryExpression) -> NumberOfLines;
 ```
 ## BinaryExpression::getLeftOperandExpression
 
-```rust
+```java
 /**
-     * @brief gets the operand on the left-hand side of the binary expression.
-     * @return Expression 
-     */
+* @brief gets the operand on the left-hand side of the binary expression.
+* @return Expression 
+*/
 ```
 ```rust
 pub fn getLeftOperandExpression(self: BinaryExpression) -> Expression;
 ```
 ## BinaryExpression::getType
 
-```rust
+```java
 /**
-     * @brief gets the type of this element.
-     * @return string
-     */
+* @brief gets the type of this element.
+* @return string
+*/
 ```
 ```rust
 pub fn getType(self: BinaryExpression) -> string;
 ```
 ## BinaryExpression::getRightOperandExpression
 
-```rust
+```java
 /**
-     * @brief gets the operand on the right-hand side of the binary expression.
-     * @return Expression 
-     */
+* @brief gets the operand on the right-hand side of the binary expression.
+* @return Expression 
+*/
 ```
 ```rust
 pub fn getRightOperandExpression(self: BinaryExpression) -> Expression;
 ```
 ## BinaryExpression::getEnclosingStatement
 
-```rust
+```java
 /**
-     * @brief gets the statement which encloses the expression.
-     * @return Statement 
-     */
+* @brief gets the statement which encloses the expression.
+* @return Statement 
+*/
 ```
 ```rust
 pub fn getEnclosingStatement(self: BinaryExpression) -> Statement;
 ```
 ## BinaryExpression::getOperand
 
-```rust
+```java
 /**
-     * @brief gets an operand of the binary expression.
-     * @return Expression 
-     */
+* @brief gets an operand of the binary expression.
+* @return Expression 
+*/
 ```
 ```rust
 pub fn getOperand(self: BinaryExpression) -> *Expression;
-```
-## BinaryExpression::is\<T\>
-
-```rust
-pub fn is<T>(self: BinaryExpression) -> bool;
-```
-## BinaryExpression::to\<T\>
-
-```rust
-pub fn to<T>(self: BinaryExpression) -> <any>;
-```
-## BinaryExpression::key\_neq
-
-```rust
-pub fn key_neq(self: BinaryExpression, object: <any>) -> bool;
-```
-## BinaryExpression::key\_eq
-
-```rust
-pub fn key_eq(self: BinaryExpression, object: <any>) -> bool;
-```
-## BinaryExpression::to\_set
-
-```rust
-pub fn to_set(self: BinaryExpression) -> *BinaryExpression;
 ```

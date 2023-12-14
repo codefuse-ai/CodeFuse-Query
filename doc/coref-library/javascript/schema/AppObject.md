@@ -9,190 +9,190 @@ schema AppObject {
 ```
 ## AppObject::getAProperty
 
-```rust
+```java
 /**
-     * Get a property, which is an ObjectLiteralElement.
-     */
+* Get a property, which is an ObjectLiteralElement.
+*/
 ```
 ```rust
 pub fn getAProperty(self: AppObject) -> *ObjectLiteralElement;
 ```
 ## AppObject::getProperty
 
-```rust
+```java
 /**
-     * Get the `i`th property.
-     */
+* Get the `i`th property.
+*/
 ```
 ```rust
 pub fn getProperty(self: AppObject, i: int) -> ObjectLiteralElement;
 ```
 ## AppObject::getChildCount
 
-```rust
+```java
 /**
-     * Gets the number of child nodes.
-     */
+* Gets the number of child nodes.
+*/
 ```
 ```rust
 pub fn getChildCount(self: AppObject) -> int;
 ```
 ## AppObject::getText
 
-```rust
+```java
 /**
-     * Gets the text of this node.
-     */
+* Gets the text of this node.
+*/
 ```
 ```rust
 pub fn getText(self: AppObject) -> string;
 ```
 ## AppObject::getModifier
 
-```rust
+```java
 /**
-     * Gets the `i`th modifier.
-     */
+* Gets the `i`th modifier.
+*/
 ```
 ```rust
 pub fn getModifier(self: AppObject, i: int) -> Modifier;
 ```
 ## AppObject::hasProperty
 
-```rust
+```java
 /**
-     * Determine whether this ObjectLiteralExpression has a property with the specified name.
-     */
+* Determine whether this ObjectLiteralExpression has a property with the specified name.
+*/
 ```
 ```rust
 pub fn hasProperty(self: AppObject, name: string) -> bool;
 ```
 ## AppObject::getADecorator
 
-```rust
+```java
 /**
-     * Gets a decorator.
-     */
+* Gets a decorator.
+*/
 ```
 ```rust
 pub fn getADecorator(self: AppObject) -> *Decorator;
 ```
 ## AppObject::getSymbol
 
-```rust
+```java
 /**
-     * Gets the symbol associated with this node.
-     */
+* Gets the symbol associated with this node.
+*/
 ```
 ```rust
 pub fn getSymbol(self: AppObject) -> Symbol;
 ```
 ## AppObject::getPropertyByName
 
-```rust
+```java
 /**
-     * Get the property of this ObjectLiteralExpression by name.
-     */
+* Get the property of this ObjectLiteralExpression by name.
+*/
 ```
 ```rust
 pub fn getPropertyByName(self: AppObject, name: string) -> ObjectLiteralElement;
 ```
 ## AppObject::getLocation
 
-```rust
+```java
 /**
-     * Gets the location of this node.
-     */
+* Gets the location of this node.
+*/
 ```
 ```rust
 pub fn getLocation(self: AppObject) -> Location;
 ```
 ## AppObject::getAComment
 
-```rust
+```java
 /**
-     * Gets the comments related to it
-     */
+* Gets the comments related to it
+*/
 ```
 ```rust
 pub fn getAComment(self: AppObject) -> *Comment;
 ```
 ## AppObject::getAnAncestor
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node. 
-     */
+* Gets an ancestor of this node. 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: AppObject) -> *Node;
 ```
 ## AppObject::getAChild
 
-```rust
+```java
 /**
-     * Gets a child node of this node.
-     */
+* Gets a child node of this node.
+*/
 ```
 ```rust
 pub fn getAChild(self: AppObject) -> *Node;
 ```
 ## AppObject::getParent
 
-```rust
+```java
 /**
-     * Gets the parent node of this node.
-     */
+* Gets the parent node of this node.
+*/
 ```
 ```rust
 pub fn getParent(self: AppObject) -> Node;
 ```
 ## AppObject::getLastChild
 
-```rust
+```java
 /**
-     * Gets the last child of this node parent.
-     */
+* Gets the last child of this node parent.
+*/
 ```
 ```rust
 pub fn getLastChild(self: AppObject) -> Node;
 ```
 ## AppObject::getDecorator
 
-```rust
+```java
 /**
-     * Gets the `i`th decorator.
-     */
+* Gets the `i`th decorator.
+*/
 ```
 ```rust
 pub fn getDecorator(self: AppObject, i: int) -> Decorator;
 ```
 ## AppObject::getRoot
 
-```rust
+```java
 /**
-     * Gets the root top-level of this node. 
-     */
+* Gets the root top-level of this node. 
+*/
 ```
 ```rust
 pub fn getRoot(self: AppObject) -> TopLevelDO;
 ```
 ## AppObject::getKind
 
-```rust
+```java
 /**
-     * Get the syntax kind of this node
-     */
+* Get the syntax kind of this node
+*/
 ```
 ```rust
 pub fn getKind(self: AppObject) -> int;
 ```
 ## AppObject::getAModifier
 
-```rust
+```java
 /**
-     * Gets a modifier.
-     */
+* Gets a modifier.
+*/
 ```
 ```rust
 pub fn getAModifier(self: AppObject) -> *Modifier;
@@ -204,20 +204,20 @@ pub fn getStartColumnNumber(self: AppObject) -> int;
 ```
 ## AppObject::getPropertyAssignmentByName
 
-```rust
+```java
 /**
-     * Get the PropertyAssignment of this ObjectLiteralExpression by name.
-     */
+* Get the PropertyAssignment of this ObjectLiteralExpression by name.
+*/
 ```
 ```rust
 pub fn getPropertyAssignmentByName(self: AppObject, name: string) -> PropertyAssignment;
 ```
 ## AppObject::getChild
 
-```rust
+```java
 /**
-     * Gets the `i`th child of this node.
-     */
+* Gets the `i`th child of this node.
+*/
 ```
 ```rust
 pub fn getChild(self: AppObject, i: int) -> Node;
@@ -229,52 +229,52 @@ pub fn getStartLineNumber(self: AppObject) -> int;
 ```
 ## AppObject::getADescendantByLevel
 
-```rust
+```java
 /**
-     * Gets a descendant of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets a descendant of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getADescendantByLevel(self: AppObject, level: int) -> *Node;
 ```
 ## AppObject::getAnAncestorEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets an ancestor enclosing function of it
-     */
+* Gets an ancestor enclosing function of it
+*/
 ```
 ```rust
 pub fn getAnAncestorEnclosingFunction(self: AppObject) -> *FunctionLikeDeclaration;
 ```
 ## AppObject::getALeadingComment
 
-```rust
+```java
 /**
-     * Gets the leading comments of it
-     */
+* Gets the leading comments of it
+*/
 ```
 ```rust
 pub fn getALeadingComment(self: AppObject) -> *Comment;
 ```
 ## AppObject::getATrailingComment
 
-```rust
+```java
 /**
-     * Gets the trailing comments of it
-     */
+* Gets the trailing comments of it
+*/
 ```
 ```rust
 pub fn getATrailingComment(self: AppObject) -> *Comment;
 ```
 ## AppObject::getEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets the enclosing function of it
-     */
+* Gets the enclosing function of it
+*/
 ```
 ```rust
 pub fn getEnclosingFunction(self: AppObject) -> FunctionLikeDeclaration;
@@ -286,32 +286,32 @@ pub fn getEndColumnNumber(self: AppObject) -> int;
 ```
 ## AppObject::getFile
 
-```rust
+```java
 /**
-     * Gets the file of this node.
-     */
+* Gets the file of this node.
+*/
 ```
 ```rust
 pub fn getFile(self: AppObject) -> File;
 ```
 ## AppObject::getAnAncestorByLevel
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets an ancestor of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getAnAncestorByLevel(self: AppObject, level: int) -> Node;
 ```
 ## AppObject::getParentOid
 
-```rust
+```java
 /**
-     * Gets the parent oid of this node.
-     */
+* Gets the parent oid of this node.
+*/
 ```
 ```rust
 pub fn getParentOid(self: AppObject) -> int;
@@ -323,6 +323,8 @@ pub fn getIndex(self: AppObject) -> int;
 ```
 ## AppObject::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavascriptDB) -> *AppObject;
 ```
@@ -333,10 +335,10 @@ pub fn getExpression(self: AppObject) -> Expression;
 ```
 ## AppObject::getRelativePath
 
-```rust
+```java
 /**
-     * Gets the relative path of this node.
-     */
+* Gets the relative path of this node.
+*/
 ```
 ```rust
 pub fn getRelativePath(self: AppObject) -> string;
@@ -348,36 +350,11 @@ pub fn getEndLineNumber(self: AppObject) -> int;
 ```
 ## AppObject::getADescendant
 
-```rust
+```java
 /**
-     * Gets a descendant of this node. 
-     */
+* Gets a descendant of this node. 
+*/
 ```
 ```rust
 pub fn getADescendant(self: AppObject) -> *Node;
-```
-## AppObject::is\<T\>
-
-```rust
-pub fn is<T>(self: AppObject) -> bool;
-```
-## AppObject::to\<T\>
-
-```rust
-pub fn to<T>(self: AppObject) -> <any>;
-```
-## AppObject::key\_neq
-
-```rust
-pub fn key_neq(self: AppObject, object: <any>) -> bool;
-```
-## AppObject::key\_eq
-
-```rust
-pub fn key_eq(self: AppObject, object: <any>) -> bool;
-```
-## AppObject::to\_set
-
-```rust
-pub fn to_set(self: AppObject) -> *AppObject;
 ```

@@ -14,86 +14,63 @@ schema CommentDO {
 ```
 ## CommentDO::getDebugInfo
 
-```rust
+```java
 /**
-     * @brief gets the debug info of this element.
-     * @return string
-     */
+* @brief gets the debug info of this element.
+* @return string
+*/
 ```
 ```rust
 pub fn getDebugInfo(self: CommentDO) -> string;
 ```
 ## CommentDO::getIndex
 
-```rust
+```java
 /**
-     * @brief gets the index of this element.
-     * @return int
-     */
+* @brief gets the index of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getIndex(self: CommentDO) -> int;
 ```
 ## CommentDO::getParent
 
-```rust
+```java
 /**
-     * @brief gets the parent of this element.
-     * @return int
-     */
+* @brief gets the parent of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getParent(self: CommentDO) -> int;
 ```
 ## CommentDO::getCommentType
 
-```rust
+```java
 /**
-     * @brief gets the comment type of this element.
-     * @return int
-     */
+* @brief gets the comment type of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getCommentType(self: CommentDO) -> int;
 ```
 ## CommentDO::getFileId
 
-```rust
+```java
 /**
-     * @brief gets the file id of this element.
-     * @return int
-     */
+* @brief gets the file id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getFileId(self: CommentDO) -> int;
 ```
 ## CommentDO::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: GoDB) -> *CommentDO;
-```
-## CommentDO::is\<T\>
-
-```rust
-pub fn is<T>(self: CommentDO) -> bool;
-```
-## CommentDO::to\<T\>
-
-```rust
-pub fn to<T>(self: CommentDO) -> <any>;
-```
-## CommentDO::key\_neq
-
-```rust
-pub fn key_neq(self: CommentDO, object: <any>) -> bool;
-```
-## CommentDO::key\_eq
-
-```rust
-pub fn key_eq(self: CommentDO, object: <any>) -> bool;
-```
-## CommentDO::to\_set
-
-```rust
-pub fn to_set(self: CommentDO) -> *CommentDO;
 ```

@@ -12,75 +12,52 @@ schema NpClass {
 ```
 ## NpClass::getQualifiedName
 
-```rust
+```java
 /**
-     * @brief gets the qualified name of this element.
-     * @return string
-     */
+* @brief gets the qualified name of this element.
+* @return string
+*/
 ```
 ```rust
 pub fn getQualifiedName(self: NpClass) -> string;
 ```
 ## NpClass::getParent
 
-```rust
+```java
 /**
-     * @brief gets the parent of this element.
-     * @return ElementParent
-     */
+* @brief gets the parent of this element.
+* @return ElementParent
+*/
 ```
 ```rust
 pub fn getParent(self: NpClass) -> ElementParent;
 ```
 ## NpClass::getName
 
-```rust
+```java
 /**
-     * @brief gets the name of this element.
-     * @return string
-     */
+* @brief gets the name of this element.
+* @return string
+*/
 ```
 ```rust
 pub fn getName(self: NpClass) -> string;
 ```
 ## NpClass::getParentHashId
 
-```rust
+```java
 /**
-     * @brief gets the parent hash id of this element.
-     * @return int
-     */
+* @brief gets the parent hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getParentHashId(self: NpClass) -> int;
 ```
 ## NpClass::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavaDB) -> *NpClass;
-```
-## NpClass::is\<T\>
-
-```rust
-pub fn is<T>(self: NpClass) -> bool;
-```
-## NpClass::to\<T\>
-
-```rust
-pub fn to<T>(self: NpClass) -> <any>;
-```
-## NpClass::key\_neq
-
-```rust
-pub fn key_neq(self: NpClass, object: <any>) -> bool;
-```
-## NpClass::key\_eq
-
-```rust
-pub fn key_eq(self: NpClass, object: <any>) -> bool;
-```
-## NpClass::to\_set
-
-```rust
-pub fn to_set(self: NpClass) -> *NpClass;
 ```

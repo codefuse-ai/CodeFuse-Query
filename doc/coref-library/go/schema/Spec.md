@@ -25,14 +25,11 @@ pub fn getParentNode(self: Spec) -> Node;
 ## Spec::getBelongsFile
 
 ```rust
-// root node
-```
-```rust
 pub fn getBelongsFile(self: Spec) -> File;
 ```
 ## Spec::getText
 
-```rust
+```java
 // getText Extract the text associated with a specific node in a file
 ```
 ```rust
@@ -64,6 +61,8 @@ pub fn getChildCount(self: Spec) -> int;
 pub fn getAssociatedCommentString(self: Spec) -> string;
 ```
 ## Spec::\_\_all\_\_
+
+Data constraint method.
 
 ```rust
 pub fn __all__(db: GoDB) -> *Spec;
@@ -142,29 +141,4 @@ pub fn getIdx(self: Spec) -> int;
 
 ```rust
 pub fn getKind(self: Spec) -> int;
-```
-## Spec::is\<T\>
-
-```rust
-pub fn is<T>(self: Spec) -> bool;
-```
-## Spec::to\<T\>
-
-```rust
-pub fn to<T>(self: Spec) -> <any>;
-```
-## Spec::key\_neq
-
-```rust
-pub fn key_neq(self: Spec, object: <any>) -> bool;
-```
-## Spec::key\_eq
-
-```rust
-pub fn key_eq(self: Spec, object: <any>) -> bool;
-```
-## Spec::to\_set
-
-```rust
-pub fn to_set(self: Spec) -> *Spec;
 ```

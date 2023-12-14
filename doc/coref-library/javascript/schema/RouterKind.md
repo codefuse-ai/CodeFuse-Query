@@ -45,31 +45,8 @@ pub fn getName(self: RouterKind) -> string;
 ```
 ## RouterKind::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__() -> *RouterKind;
-```
-## RouterKind::is\<T\>
-
-```rust
-pub fn is<T>(self: RouterKind) -> bool;
-```
-## RouterKind::to\<T\>
-
-```rust
-pub fn to<T>(self: RouterKind) -> <any>;
-```
-## RouterKind::key\_neq
-
-```rust
-pub fn key_neq(self: RouterKind, object: <any>) -> bool;
-```
-## RouterKind::key\_eq
-
-```rust
-pub fn key_eq(self: RouterKind, object: <any>) -> bool;
-```
-## RouterKind::to\_set
-
-```rust
-pub fn to_set(self: RouterKind) -> *RouterKind;
 ```

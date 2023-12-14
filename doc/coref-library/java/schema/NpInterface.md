@@ -12,75 +12,52 @@ schema NpInterface {
 ```
 ## NpInterface::getQualifiedName
 
-```rust
+```java
 /**
-     * @brief gets the qualified name of this element.
-     * @return string
-     */
+* @brief gets the qualified name of this element.
+* @return string
+*/
 ```
 ```rust
 pub fn getQualifiedName(self: NpInterface) -> string;
 ```
 ## NpInterface::getParent
 
-```rust
+```java
 /**
-     * @brief gets the parent of this element.
-     * @return ElementParent
-     */
+* @brief gets the parent of this element.
+* @return ElementParent
+*/
 ```
 ```rust
 pub fn getParent(self: NpInterface) -> ElementParent;
 ```
 ## NpInterface::getName
 
-```rust
+```java
 /**
-     * @brief gets the name of this element.
-     * @return string
-     */
+* @brief gets the name of this element.
+* @return string
+*/
 ```
 ```rust
 pub fn getName(self: NpInterface) -> string;
 ```
 ## NpInterface::getParentHashId
 
-```rust
+```java
 /**
-     * @brief gets the parent hash id of this element.
-     * @return int
-     */
+* @brief gets the parent hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getParentHashId(self: NpInterface) -> int;
 ```
 ## NpInterface::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavaDB) -> *NpInterface;
-```
-## NpInterface::is\<T\>
-
-```rust
-pub fn is<T>(self: NpInterface) -> bool;
-```
-## NpInterface::to\<T\>
-
-```rust
-pub fn to<T>(self: NpInterface) -> <any>;
-```
-## NpInterface::key\_neq
-
-```rust
-pub fn key_neq(self: NpInterface, object: <any>) -> bool;
-```
-## NpInterface::key\_eq
-
-```rust
-pub fn key_eq(self: NpInterface, object: <any>) -> bool;
-```
-## NpInterface::to\_set
-
-```rust
-pub fn to_set(self: NpInterface) -> *NpInterface;
 ```

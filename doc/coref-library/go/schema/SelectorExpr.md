@@ -64,8 +64,8 @@ pub fn isCompositeLit(self: SelectorExpr) -> bool;
 ```
 ## SelectorExpr::isControlExpr
 
-```rust
-// Check if the expression is a control expression.
+```java
+// Any of ['||', '&&']
 ```
 ```rust
 pub fn isControlExpr(self: SelectorExpr) -> bool;
@@ -152,8 +152,8 @@ pub fn isLssExpr(self: SelectorExpr) -> bool;
 ```
 ## SelectorExpr::isUnaryExpr
 
-```rust
-// Check if the given expression is a unary expression.
+```java
+// Any of ['+','-','!','^','*','&','->' ]
 ```
 ```rust
 pub fn isUnaryExpr(self: SelectorExpr) -> bool;
@@ -215,8 +215,8 @@ pub fn isInterfacetypeExpr(self: SelectorExpr) -> bool;
 ```
 ## SelectorExpr::isBinaryExpr
 
-```rust
-// Check if the expression is a binary expression.
+```java
+// Any of ['||', '&&', '==', '!=', '<', '<=', '>', '+', '-', '|', '^', '*', '/', '%', '<<', '>>', '&', '&^' ]
 ```
 ```rust
 pub fn isBinaryExpr(self: SelectorExpr) -> bool;
@@ -343,7 +343,7 @@ pub fn isQuoExpr(self: SelectorExpr) -> bool;
 ```
 ## SelectorExpr::getText
 
-```rust
+```java
 // getText Extract the text associated with a specific node in a file
 ```
 ```rust
@@ -366,6 +366,8 @@ pub fn isRemExpr(self: SelectorExpr) -> bool;
 ```
 ## SelectorExpr::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: GoDB) -> *SelectorExpr;
 ```
@@ -386,9 +388,6 @@ pub fn getAnAncestor(self: SelectorExpr) -> *Node;
 ```
 ## SelectorExpr::getBelongsFile
 
-```rust
-// root node
-```
 ```rust
 pub fn getBelongsFile(self: SelectorExpr) -> File;
 ```
@@ -461,29 +460,4 @@ pub fn isMinusExpr(self: SelectorExpr) -> bool;
 
 ```rust
 pub fn isOrExpr(self: SelectorExpr) -> bool;
-```
-## SelectorExpr::is\<T\>
-
-```rust
-pub fn is<T>(self: SelectorExpr) -> bool;
-```
-## SelectorExpr::to\<T\>
-
-```rust
-pub fn to<T>(self: SelectorExpr) -> <any>;
-```
-## SelectorExpr::key\_neq
-
-```rust
-pub fn key_neq(self: SelectorExpr, object: <any>) -> bool;
-```
-## SelectorExpr::key\_eq
-
-```rust
-pub fn key_eq(self: SelectorExpr, object: <any>) -> bool;
-```
-## SelectorExpr::to\_set
-
-```rust
-pub fn to_set(self: SelectorExpr) -> *SelectorExpr;
 ```

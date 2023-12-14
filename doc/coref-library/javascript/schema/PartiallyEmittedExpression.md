@@ -9,10 +9,10 @@ schema PartiallyEmittedExpression {
 ```
 ## PartiallyEmittedExpression::getADescendant
 
-```rust
+```java
 /**
-     * Gets a descendant of this node. 
-     */
+* Gets a descendant of this node. 
+*/
 ```
 ```rust
 pub fn getADescendant(self: PartiallyEmittedExpression) -> *Node;
@@ -24,32 +24,32 @@ pub fn getIndex(self: PartiallyEmittedExpression) -> int;
 ```
 ## PartiallyEmittedExpression::getParentOid
 
-```rust
+```java
 /**
-     * Gets the parent oid of this node.
-     */
+* Gets the parent oid of this node.
+*/
 ```
 ```rust
 pub fn getParentOid(self: PartiallyEmittedExpression) -> int;
 ```
 ## PartiallyEmittedExpression::getAnAncestorByLevel
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets an ancestor of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getAnAncestorByLevel(self: PartiallyEmittedExpression, level: int) -> Node;
 ```
 ## PartiallyEmittedExpression::getFile
 
-```rust
+```java
 /**
-     * Gets the file of this node.
-     */
+* Gets the file of this node.
+*/
 ```
 ```rust
 pub fn getFile(self: PartiallyEmittedExpression) -> File;
@@ -61,72 +61,72 @@ pub fn getEndColumnNumber(self: PartiallyEmittedExpression) -> int;
 ```
 ## PartiallyEmittedExpression::getEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets the enclosing function of it
-     */
+* Gets the enclosing function of it
+*/
 ```
 ```rust
 pub fn getEnclosingFunction(self: PartiallyEmittedExpression) -> FunctionLikeDeclaration;
 ```
 ## PartiallyEmittedExpression::getATrailingComment
 
-```rust
+```java
 /**
-     * Gets the trailing comments of it
-     */
+* Gets the trailing comments of it
+*/
 ```
 ```rust
 pub fn getATrailingComment(self: PartiallyEmittedExpression) -> *Comment;
 ```
 ## PartiallyEmittedExpression::getALeadingComment
 
-```rust
+```java
 /**
-     * Gets the leading comments of it
-     */
+* Gets the leading comments of it
+*/
 ```
 ```rust
 pub fn getALeadingComment(self: PartiallyEmittedExpression) -> *Comment;
 ```
 ## PartiallyEmittedExpression::getAnAncestorEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets an ancestor enclosing function of it
-     */
+* Gets an ancestor enclosing function of it
+*/
 ```
 ```rust
 pub fn getAnAncestorEnclosingFunction(self: PartiallyEmittedExpression) -> *FunctionLikeDeclaration;
 ```
 ## PartiallyEmittedExpression::getADescendantByLevel
 
-```rust
+```java
 /**
-     * Gets a descendant of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets a descendant of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getADescendantByLevel(self: PartiallyEmittedExpression, level: int) -> *Node;
 ```
 ## PartiallyEmittedExpression::getKind
 
-```rust
+```java
 /**
-     * Get the syntax kind of this node
-     */
+* Get the syntax kind of this node
+*/
 ```
 ```rust
 pub fn getKind(self: PartiallyEmittedExpression) -> int;
 ```
 ## PartiallyEmittedExpression::getAModifier
 
-```rust
+```java
 /**
-     * Gets a modifier.
-     */
+* Gets a modifier.
+*/
 ```
 ```rust
 pub fn getAModifier(self: PartiallyEmittedExpression) -> *Modifier;
@@ -143,100 +143,100 @@ pub fn getStartLineNumber(self: PartiallyEmittedExpression) -> int;
 ```
 ## PartiallyEmittedExpression::getChild
 
-```rust
+```java
 /**
-     * Gets the `i`th child of this node.
-     */
+* Gets the `i`th child of this node.
+*/
 ```
 ```rust
 pub fn getChild(self: PartiallyEmittedExpression, i: int) -> Node;
 ```
 ## PartiallyEmittedExpression::getDecorator
 
-```rust
+```java
 /**
-     * Gets the `i`th decorator.
-     */
+* Gets the `i`th decorator.
+*/
 ```
 ```rust
 pub fn getDecorator(self: PartiallyEmittedExpression, i: int) -> Decorator;
 ```
 ## PartiallyEmittedExpression::getRoot
 
-```rust
+```java
 /**
-     * Gets the root top-level of this node. 
-     */
+* Gets the root top-level of this node. 
+*/
 ```
 ```rust
 pub fn getRoot(self: PartiallyEmittedExpression) -> TopLevelDO;
 ```
 ## PartiallyEmittedExpression::getChildCount
 
-```rust
+```java
 /**
-     * Gets the number of child nodes.
-     */
+* Gets the number of child nodes.
+*/
 ```
 ```rust
 pub fn getChildCount(self: PartiallyEmittedExpression) -> int;
 ```
 ## PartiallyEmittedExpression::getParent
 
-```rust
+```java
 /**
-     * Gets the parent node of this node.
-     */
+* Gets the parent node of this node.
+*/
 ```
 ```rust
 pub fn getParent(self: PartiallyEmittedExpression) -> Node;
 ```
 ## PartiallyEmittedExpression::getAChild
 
-```rust
+```java
 /**
-     * Gets a child node of this node.
-     */
+* Gets a child node of this node.
+*/
 ```
 ```rust
 pub fn getAChild(self: PartiallyEmittedExpression) -> *Node;
 ```
 ## PartiallyEmittedExpression::getAnAncestor
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node. 
-     */
+* Gets an ancestor of this node. 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: PartiallyEmittedExpression) -> *Node;
 ```
 ## PartiallyEmittedExpression::getAComment
 
-```rust
+```java
 /**
-     * Gets the comments related to it
-     */
+* Gets the comments related to it
+*/
 ```
 ```rust
 pub fn getAComment(self: PartiallyEmittedExpression) -> *Comment;
 ```
 ## PartiallyEmittedExpression::getSymbol
 
-```rust
+```java
 /**
-     * Gets the symbol associated with this node.
-     */
+* Gets the symbol associated with this node.
+*/
 ```
 ```rust
 pub fn getSymbol(self: PartiallyEmittedExpression) -> Symbol;
 ```
 ## PartiallyEmittedExpression::getADecorator
 
-```rust
+```java
 /**
-     * Gets a decorator.
-     */
+* Gets a decorator.
+*/
 ```
 ```rust
 pub fn getADecorator(self: PartiallyEmittedExpression) -> *Decorator;
@@ -248,10 +248,10 @@ pub fn getEndLineNumber(self: PartiallyEmittedExpression) -> int;
 ```
 ## PartiallyEmittedExpression::getRelativePath
 
-```rust
+```java
 /**
-     * Gets the relative path of this node.
-     */
+* Gets the relative path of this node.
+*/
 ```
 ```rust
 pub fn getRelativePath(self: PartiallyEmittedExpression) -> string;
@@ -263,71 +263,48 @@ pub fn getExpression(self: PartiallyEmittedExpression) -> Expression;
 ```
 ## PartiallyEmittedExpression::getLocation
 
-```rust
+```java
 /**
-     * Gets the location of this node.
-     */
+* Gets the location of this node.
+*/
 ```
 ```rust
 pub fn getLocation(self: PartiallyEmittedExpression) -> Location;
 ```
 ## PartiallyEmittedExpression::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavascriptDB) -> *PartiallyEmittedExpression;
 ```
 ## PartiallyEmittedExpression::getModifier
 
-```rust
+```java
 /**
-     * Gets the `i`th modifier.
-     */
+* Gets the `i`th modifier.
+*/
 ```
 ```rust
 pub fn getModifier(self: PartiallyEmittedExpression, i: int) -> Modifier;
 ```
 ## PartiallyEmittedExpression::getText
 
-```rust
+```java
 /**
-     * Gets the text of this node.
-     */
+* Gets the text of this node.
+*/
 ```
 ```rust
 pub fn getText(self: PartiallyEmittedExpression) -> string;
 ```
 ## PartiallyEmittedExpression::getLastChild
 
-```rust
+```java
 /**
-     * Gets the last child of this node parent.
-     */
+* Gets the last child of this node parent.
+*/
 ```
 ```rust
 pub fn getLastChild(self: PartiallyEmittedExpression) -> Node;
-```
-## PartiallyEmittedExpression::is\<T\>
-
-```rust
-pub fn is<T>(self: PartiallyEmittedExpression) -> bool;
-```
-## PartiallyEmittedExpression::to\<T\>
-
-```rust
-pub fn to<T>(self: PartiallyEmittedExpression) -> <any>;
-```
-## PartiallyEmittedExpression::key\_neq
-
-```rust
-pub fn key_neq(self: PartiallyEmittedExpression, object: <any>) -> bool;
-```
-## PartiallyEmittedExpression::key\_eq
-
-```rust
-pub fn key_eq(self: PartiallyEmittedExpression, object: <any>) -> bool;
-```
-## PartiallyEmittedExpression::to\_set
-
-```rust
-pub fn to_set(self: PartiallyEmittedExpression) -> *PartiallyEmittedExpression;
 ```

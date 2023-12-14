@@ -9,150 +9,150 @@ schema NumericLiteral {
 ```
 ## NumericLiteral::getLastChild
 
-```rust
+```java
 /**
-     * Gets the last child of this node parent.
-     */
+* Gets the last child of this node parent.
+*/
 ```
 ```rust
 pub fn getLastChild(self: NumericLiteral) -> Node;
 ```
 ## NumericLiteral::getText
 
-```rust
+```java
 /**
-     * Gets the text of this node.
-     */
+* Gets the text of this node.
+*/
 ```
 ```rust
 pub fn getText(self: NumericLiteral) -> string;
 ```
 ## NumericLiteral::getModifier
 
-```rust
+```java
 /**
-     * Gets the `i`th modifier.
-     */
+* Gets the `i`th modifier.
+*/
 ```
 ```rust
 pub fn getModifier(self: NumericLiteral, i: int) -> Modifier;
 ```
 ## NumericLiteral::getLocation
 
-```rust
+```java
 /**
-     * Gets the location of this node.
-     */
+* Gets the location of this node.
+*/
 ```
 ```rust
 pub fn getLocation(self: NumericLiteral) -> Location;
 ```
 ## NumericLiteral::getADecorator
 
-```rust
+```java
 /**
-     * Gets a decorator.
-     */
+* Gets a decorator.
+*/
 ```
 ```rust
 pub fn getADecorator(self: NumericLiteral) -> *Decorator;
 ```
 ## NumericLiteral::getSymbol
 
-```rust
+```java
 /**
-     * Gets the symbol associated with this node.
-     */
+* Gets the symbol associated with this node.
+*/
 ```
 ```rust
 pub fn getSymbol(self: NumericLiteral) -> Symbol;
 ```
 ## NumericLiteral::getAComment
 
-```rust
+```java
 /**
-     * Gets the comments related to it
-     */
+* Gets the comments related to it
+*/
 ```
 ```rust
 pub fn getAComment(self: NumericLiteral) -> *Comment;
 ```
 ## NumericLiteral::getAnAncestor
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node. 
-     */
+* Gets an ancestor of this node. 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: NumericLiteral) -> *Node;
 ```
 ## NumericLiteral::getValue
 
-```rust
+```java
 /**
-     * Gets the value of this literal, as a string.
-     */
+* Gets the value of this literal, as a string.
+*/
 ```
 ```rust
 pub fn getValue(self: NumericLiteral) -> string;
 ```
 ## NumericLiteral::getAChild
 
-```rust
+```java
 /**
-     * Gets a child node of this node.
-     */
+* Gets a child node of this node.
+*/
 ```
 ```rust
 pub fn getAChild(self: NumericLiteral) -> *Node;
 ```
 ## NumericLiteral::getParent
 
-```rust
+```java
 /**
-     * Gets the parent node of this node.
-     */
+* Gets the parent node of this node.
+*/
 ```
 ```rust
 pub fn getParent(self: NumericLiteral) -> Node;
 ```
 ## NumericLiteral::getChildCount
 
-```rust
+```java
 /**
-     * Gets the number of child nodes.
-     */
+* Gets the number of child nodes.
+*/
 ```
 ```rust
 pub fn getChildCount(self: NumericLiteral) -> int;
 ```
 ## NumericLiteral::getRoot
 
-```rust
+```java
 /**
-     * Gets the root top-level of this node. 
-     */
+* Gets the root top-level of this node. 
+*/
 ```
 ```rust
 pub fn getRoot(self: NumericLiteral) -> TopLevelDO;
 ```
 ## NumericLiteral::getDecorator
 
-```rust
+```java
 /**
-     * Gets the `i`th decorator.
-     */
+* Gets the `i`th decorator.
+*/
 ```
 ```rust
 pub fn getDecorator(self: NumericLiteral, i: int) -> Decorator;
 ```
 ## NumericLiteral::getKind
 
-```rust
+```java
 /**
-     * Get the syntax kind of this node
-     */
+* Get the syntax kind of this node
+*/
 ```
 ```rust
 pub fn getKind(self: NumericLiteral) -> int;
@@ -164,20 +164,20 @@ pub fn getStartColumnNumber(self: NumericLiteral) -> int;
 ```
 ## NumericLiteral::getAModifier
 
-```rust
+```java
 /**
-     * Gets a modifier.
-     */
+* Gets a modifier.
+*/
 ```
 ```rust
 pub fn getAModifier(self: NumericLiteral) -> *Modifier;
 ```
 ## NumericLiteral::getChild
 
-```rust
+```java
 /**
-     * Gets the `i`th child of this node.
-     */
+* Gets the `i`th child of this node.
+*/
 ```
 ```rust
 pub fn getChild(self: NumericLiteral, i: int) -> Node;
@@ -189,52 +189,52 @@ pub fn getStartLineNumber(self: NumericLiteral) -> int;
 ```
 ## NumericLiteral::getADescendantByLevel
 
-```rust
+```java
 /**
-     * Gets a descendant of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets a descendant of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getADescendantByLevel(self: NumericLiteral, level: int) -> *Node;
 ```
 ## NumericLiteral::getAnAncestorEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets an ancestor enclosing function of it
-     */
+* Gets an ancestor enclosing function of it
+*/
 ```
 ```rust
 pub fn getAnAncestorEnclosingFunction(self: NumericLiteral) -> *FunctionLikeDeclaration;
 ```
 ## NumericLiteral::getALeadingComment
 
-```rust
+```java
 /**
-     * Gets the leading comments of it
-     */
+* Gets the leading comments of it
+*/
 ```
 ```rust
 pub fn getALeadingComment(self: NumericLiteral) -> *Comment;
 ```
 ## NumericLiteral::getATrailingComment
 
-```rust
+```java
 /**
-     * Gets the trailing comments of it
-     */
+* Gets the trailing comments of it
+*/
 ```
 ```rust
 pub fn getATrailingComment(self: NumericLiteral) -> *Comment;
 ```
 ## NumericLiteral::getEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets the enclosing function of it
-     */
+* Gets the enclosing function of it
+*/
 ```
 ```rust
 pub fn getEnclosingFunction(self: NumericLiteral) -> FunctionLikeDeclaration;
@@ -246,32 +246,32 @@ pub fn getEndColumnNumber(self: NumericLiteral) -> int;
 ```
 ## NumericLiteral::getFile
 
-```rust
+```java
 /**
-     * Gets the file of this node.
-     */
+* Gets the file of this node.
+*/
 ```
 ```rust
 pub fn getFile(self: NumericLiteral) -> File;
 ```
 ## NumericLiteral::getAnAncestorByLevel
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets an ancestor of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getAnAncestorByLevel(self: NumericLiteral, level: int) -> Node;
 ```
 ## NumericLiteral::getParentOid
 
-```rust
+```java
 /**
-     * Gets the parent oid of this node.
-     */
+* Gets the parent oid of this node.
+*/
 ```
 ```rust
 pub fn getParentOid(self: NumericLiteral) -> int;
@@ -283,6 +283,8 @@ pub fn getIndex(self: NumericLiteral) -> int;
 ```
 ## NumericLiteral::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavascriptDB) -> *NumericLiteral;
 ```
@@ -293,10 +295,10 @@ pub fn getExpression(self: NumericLiteral) -> Expression;
 ```
 ## NumericLiteral::getRelativePath
 
-```rust
+```java
 /**
-     * Gets the relative path of this node.
-     */
+* Gets the relative path of this node.
+*/
 ```
 ```rust
 pub fn getRelativePath(self: NumericLiteral) -> string;
@@ -308,36 +310,11 @@ pub fn getEndLineNumber(self: NumericLiteral) -> int;
 ```
 ## NumericLiteral::getADescendant
 
-```rust
+```java
 /**
-     * Gets a descendant of this node. 
-     */
+* Gets a descendant of this node. 
+*/
 ```
 ```rust
 pub fn getADescendant(self: NumericLiteral) -> *Node;
-```
-## NumericLiteral::is\<T\>
-
-```rust
-pub fn is<T>(self: NumericLiteral) -> bool;
-```
-## NumericLiteral::to\<T\>
-
-```rust
-pub fn to<T>(self: NumericLiteral) -> <any>;
-```
-## NumericLiteral::key\_neq
-
-```rust
-pub fn key_neq(self: NumericLiteral, object: <any>) -> bool;
-```
-## NumericLiteral::key\_eq
-
-```rust
-pub fn key_eq(self: NumericLiteral, object: <any>) -> bool;
-```
-## NumericLiteral::to\_set
-
-```rust
-pub fn to_set(self: NumericLiteral) -> *NumericLiteral;
 ```

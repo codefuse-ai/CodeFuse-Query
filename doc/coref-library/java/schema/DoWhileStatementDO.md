@@ -12,64 +12,41 @@ schema DoWhileStatementDO {
 ```
 ## DoWhileStatementDO::getConditionHashId
 
-```rust
+```java
 /**
-     * @brief gets the condition hash id of this element.
-     * @return int
-     */
+* @brief gets the condition hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getConditionHashId(self: DoWhileStatementDO) -> int;
 ```
 ## DoWhileStatementDO::getKeyword
 
-```rust
+```java
 /**
-     * @brief gets the keyword of this element.
-     * @return string
-     */
+* @brief gets the keyword of this element.
+* @return string
+*/
 ```
 ```rust
 pub fn getKeyword(self: DoWhileStatementDO) -> string;
 ```
 ## DoWhileStatementDO::getBodyDeclarationHashId
 
-```rust
+```java
 /**
-     * @brief gets the body declaration hash id of this element.
-     * @return int
-     */
+* @brief gets the body declaration hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getBodyDeclarationHashId(self: DoWhileStatementDO) -> int;
 ```
 ## DoWhileStatementDO::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavaDB) -> *DoWhileStatementDO;
-```
-## DoWhileStatementDO::is\<T\>
-
-```rust
-pub fn is<T>(self: DoWhileStatementDO) -> bool;
-```
-## DoWhileStatementDO::to\<T\>
-
-```rust
-pub fn to<T>(self: DoWhileStatementDO) -> <any>;
-```
-## DoWhileStatementDO::key\_neq
-
-```rust
-pub fn key_neq(self: DoWhileStatementDO, object: <any>) -> bool;
-```
-## DoWhileStatementDO::key\_eq
-
-```rust
-pub fn key_eq(self: DoWhileStatementDO, object: <any>) -> bool;
-```
-## DoWhileStatementDO::to\_set
-
-```rust
-pub fn to_set(self: DoWhileStatementDO) -> *DoWhileStatementDO;
 ```

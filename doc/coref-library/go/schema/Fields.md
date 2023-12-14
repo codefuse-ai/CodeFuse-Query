@@ -25,9 +25,6 @@ pub fn getParentNode(self: Fields) -> Node;
 ## Fields::getBelongsFile
 
 ```rust
-// root node
-```
-```rust
 pub fn getBelongsFile(self: Fields) -> File;
 ```
 ## Fields::print
@@ -77,6 +74,8 @@ pub fn getType(self: Fields) -> string;
 ```
 ## Fields::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: GoDB) -> *Fields;
 ```
@@ -97,7 +96,7 @@ pub fn isRootNode(self: Fields) -> bool;
 ```
 ## Fields::getText
 
-```rust
+```java
 // getText Extract the text associated with a specific node in a file
 ```
 ```rust
@@ -105,9 +104,6 @@ pub fn getText(self: Fields) -> string;
 ```
 ## Fields::makeFieldStringForFunctionSignature
 
-```rust
-// has both Name:Type
-```
 ```rust
 pub fn makeFieldStringForFunctionSignature(self: Fields) -> *string;
 ```
@@ -160,29 +156,4 @@ pub fn getKind(self: Fields) -> int;
 
 ```rust
 pub fn isFuncParamsFields(self: Fields) -> bool;
-```
-## Fields::is\<T\>
-
-```rust
-pub fn is<T>(self: Fields) -> bool;
-```
-## Fields::to\<T\>
-
-```rust
-pub fn to<T>(self: Fields) -> <any>;
-```
-## Fields::key\_neq
-
-```rust
-pub fn key_neq(self: Fields, object: <any>) -> bool;
-```
-## Fields::key\_eq
-
-```rust
-pub fn key_eq(self: Fields, object: <any>) -> bool;
-```
-## Fields::to\_set
-
-```rust
-pub fn to_set(self: Fields) -> *Fields;
 ```

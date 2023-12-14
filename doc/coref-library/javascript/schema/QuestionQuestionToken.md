@@ -9,140 +9,140 @@ schema QuestionQuestionToken {
 ```
 ## QuestionQuestionToken::getLocation
 
-```rust
+```java
 /**
-     * Gets the location of this node.
-     */
+* Gets the location of this node.
+*/
 ```
 ```rust
 pub fn getLocation(self: QuestionQuestionToken) -> Location;
 ```
 ## QuestionQuestionToken::getSymbol
 
-```rust
+```java
 /**
-     * Gets the symbol associated with this node.
-     */
+* Gets the symbol associated with this node.
+*/
 ```
 ```rust
 pub fn getSymbol(self: QuestionQuestionToken) -> Symbol;
 ```
 ## QuestionQuestionToken::getADecorator
 
-```rust
+```java
 /**
-     * Gets a decorator.
-     */
+* Gets a decorator.
+*/
 ```
 ```rust
 pub fn getADecorator(self: QuestionQuestionToken) -> *Decorator;
 ```
 ## QuestionQuestionToken::getText
 
-```rust
+```java
 /**
-     * Gets the text of this node.
-     */
+* Gets the text of this node.
+*/
 ```
 ```rust
 pub fn getText(self: QuestionQuestionToken) -> string;
 ```
 ## QuestionQuestionToken::getModifier
 
-```rust
+```java
 /**
-     * Gets the `i`th modifier.
-     */
+* Gets the `i`th modifier.
+*/
 ```
 ```rust
 pub fn getModifier(self: QuestionQuestionToken, i: int) -> Modifier;
 ```
 ## QuestionQuestionToken::getAComment
 
-```rust
+```java
 /**
-     * Gets the comments related to it
-     */
+* Gets the comments related to it
+*/
 ```
 ```rust
 pub fn getAComment(self: QuestionQuestionToken) -> *Comment;
 ```
 ## QuestionQuestionToken::getAnAncestor
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node. 
-     */
+* Gets an ancestor of this node. 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: QuestionQuestionToken) -> *Node;
 ```
 ## QuestionQuestionToken::getAChild
 
-```rust
+```java
 /**
-     * Gets a child node of this node.
-     */
+* Gets a child node of this node.
+*/
 ```
 ```rust
 pub fn getAChild(self: QuestionQuestionToken) -> *Node;
 ```
 ## QuestionQuestionToken::getParent
 
-```rust
+```java
 /**
-     * Gets the parent node of this node.
-     */
+* Gets the parent node of this node.
+*/
 ```
 ```rust
 pub fn getParent(self: QuestionQuestionToken) -> Node;
 ```
 ## QuestionQuestionToken::getChildCount
 
-```rust
+```java
 /**
-     * Gets the number of child nodes.
-     */
+* Gets the number of child nodes.
+*/
 ```
 ```rust
 pub fn getChildCount(self: QuestionQuestionToken) -> int;
 ```
 ## QuestionQuestionToken::getRoot
 
-```rust
+```java
 /**
-     * Gets the root top-level of this node. 
-     */
+* Gets the root top-level of this node. 
+*/
 ```
 ```rust
 pub fn getRoot(self: QuestionQuestionToken) -> TopLevelDO;
 ```
 ## QuestionQuestionToken::getDecorator
 
-```rust
+```java
 /**
-     * Gets the `i`th decorator.
-     */
+* Gets the `i`th decorator.
+*/
 ```
 ```rust
 pub fn getDecorator(self: QuestionQuestionToken, i: int) -> Decorator;
 ```
 ## QuestionQuestionToken::getKind
 
-```rust
+```java
 /**
-     * Get the syntax kind of this node
-     */
+* Get the syntax kind of this node
+*/
 ```
 ```rust
 pub fn getKind(self: QuestionQuestionToken) -> int;
 ```
 ## QuestionQuestionToken::getAModifier
 
-```rust
+```java
 /**
-     * Gets a modifier.
-     */
+* Gets a modifier.
+*/
 ```
 ```rust
 pub fn getAModifier(self: QuestionQuestionToken) -> *Modifier;
@@ -154,10 +154,10 @@ pub fn getStartColumnNumber(self: QuestionQuestionToken) -> int;
 ```
 ## QuestionQuestionToken::getChild
 
-```rust
+```java
 /**
-     * Gets the `i`th child of this node.
-     */
+* Gets the `i`th child of this node.
+*/
 ```
 ```rust
 pub fn getChild(self: QuestionQuestionToken, i: int) -> Node;
@@ -169,22 +169,22 @@ pub fn getStartLineNumber(self: QuestionQuestionToken) -> int;
 ```
 ## QuestionQuestionToken::getAnAncestorEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets an ancestor enclosing function of it
-     */
+* Gets an ancestor enclosing function of it
+*/
 ```
 ```rust
 pub fn getAnAncestorEnclosingFunction(self: QuestionQuestionToken) -> *FunctionLikeDeclaration;
 ```
 ## QuestionQuestionToken::getADescendantByLevel
 
-```rust
+```java
 /**
-     * Gets a descendant of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets a descendant of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getADescendantByLevel(self: QuestionQuestionToken, level: int) -> *Node;
@@ -196,72 +196,72 @@ pub fn getEndLineNumber(self: QuestionQuestionToken) -> int;
 ```
 ## QuestionQuestionToken::getRelativePath
 
-```rust
+```java
 /**
-     * Gets the relative path of this node.
-     */
+* Gets the relative path of this node.
+*/
 ```
 ```rust
 pub fn getRelativePath(self: QuestionQuestionToken) -> string;
 ```
 ## QuestionQuestionToken::getAnAncestorByLevel
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets an ancestor of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getAnAncestorByLevel(self: QuestionQuestionToken, level: int) -> Node;
 ```
 ## QuestionQuestionToken::getFile
 
-```rust
+```java
 /**
-     * Gets the file of this node.
-     */
+* Gets the file of this node.
+*/
 ```
 ```rust
 pub fn getFile(self: QuestionQuestionToken) -> File;
 ```
 ## QuestionQuestionToken::getALeadingComment
 
-```rust
+```java
 /**
-     * Gets the leading comments of it
-     */
+* Gets the leading comments of it
+*/
 ```
 ```rust
 pub fn getALeadingComment(self: QuestionQuestionToken) -> *Comment;
 ```
 ## QuestionQuestionToken::getATrailingComment
 
-```rust
+```java
 /**
-     * Gets the trailing comments of it
-     */
+* Gets the trailing comments of it
+*/
 ```
 ```rust
 pub fn getATrailingComment(self: QuestionQuestionToken) -> *Comment;
 ```
 ## QuestionQuestionToken::getLastChild
 
-```rust
+```java
 /**
-     * Gets the last child of this node parent.
-     */
+* Gets the last child of this node parent.
+*/
 ```
 ```rust
 pub fn getLastChild(self: QuestionQuestionToken) -> Node;
 ```
 ## QuestionQuestionToken::getEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets the enclosing function of it
-     */
+* Gets the enclosing function of it
+*/
 ```
 ```rust
 pub fn getEnclosingFunction(self: QuestionQuestionToken) -> FunctionLikeDeclaration;
@@ -273,10 +273,10 @@ pub fn getEndColumnNumber(self: QuestionQuestionToken) -> int;
 ```
 ## QuestionQuestionToken::getParentOid
 
-```rust
+```java
 /**
-     * Gets the parent oid of this node.
-     */
+* Gets the parent oid of this node.
+*/
 ```
 ```rust
 pub fn getParentOid(self: QuestionQuestionToken) -> int;
@@ -288,41 +288,18 @@ pub fn getIndex(self: QuestionQuestionToken) -> int;
 ```
 ## QuestionQuestionToken::getADescendant
 
-```rust
+```java
 /**
-     * Gets a descendant of this node. 
-     */
+* Gets a descendant of this node. 
+*/
 ```
 ```rust
 pub fn getADescendant(self: QuestionQuestionToken) -> *Node;
 ```
 ## QuestionQuestionToken::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavascriptDB) -> *QuestionQuestionToken;
-```
-## QuestionQuestionToken::is\<T\>
-
-```rust
-pub fn is<T>(self: QuestionQuestionToken) -> bool;
-```
-## QuestionQuestionToken::to\<T\>
-
-```rust
-pub fn to<T>(self: QuestionQuestionToken) -> <any>;
-```
-## QuestionQuestionToken::key\_neq
-
-```rust
-pub fn key_neq(self: QuestionQuestionToken, object: <any>) -> bool;
-```
-## QuestionQuestionToken::key\_eq
-
-```rust
-pub fn key_eq(self: QuestionQuestionToken, object: <any>) -> bool;
-```
-## QuestionQuestionToken::to\_set
-
-```rust
-pub fn to_set(self: QuestionQuestionToken) -> *QuestionQuestionToken;
 ```

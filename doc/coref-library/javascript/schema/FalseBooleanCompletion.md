@@ -35,31 +35,8 @@ pub fn getName(self: FalseBooleanCompletion) -> string;
 ```
 ## FalseBooleanCompletion::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__() -> *FalseBooleanCompletion;
-```
-## FalseBooleanCompletion::is\<T\>
-
-```rust
-pub fn is<T>(self: FalseBooleanCompletion) -> bool;
-```
-## FalseBooleanCompletion::to\<T\>
-
-```rust
-pub fn to<T>(self: FalseBooleanCompletion) -> <any>;
-```
-## FalseBooleanCompletion::key\_neq
-
-```rust
-pub fn key_neq(self: FalseBooleanCompletion, object: <any>) -> bool;
-```
-## FalseBooleanCompletion::key\_eq
-
-```rust
-pub fn key_eq(self: FalseBooleanCompletion, object: <any>) -> bool;
-```
-## FalseBooleanCompletion::to\_set
-
-```rust
-pub fn to_set(self: FalseBooleanCompletion) -> *FalseBooleanCompletion;
 ```

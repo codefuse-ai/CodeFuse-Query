@@ -10,42 +10,19 @@ schema ClassDefStatementDO {
 ```
 ## ClassDefStatementDO::getName
 
-```rust
+```java
 /**
-     * @brief gets the name of this element.
-     * @return string
-     */
+* @brief gets the name of this element.
+* @return string
+*/
 ```
 ```rust
 pub fn getName(self: ClassDefStatementDO) -> string;
 ```
 ## ClassDefStatementDO::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: PythonDB) -> *ClassDefStatementDO;
-```
-## ClassDefStatementDO::is\<T\>
-
-```rust
-pub fn is<T>(self: ClassDefStatementDO) -> bool;
-```
-## ClassDefStatementDO::to\<T\>
-
-```rust
-pub fn to<T>(self: ClassDefStatementDO) -> <any>;
-```
-## ClassDefStatementDO::key\_neq
-
-```rust
-pub fn key_neq(self: ClassDefStatementDO, object: <any>) -> bool;
-```
-## ClassDefStatementDO::key\_eq
-
-```rust
-pub fn key_eq(self: ClassDefStatementDO, object: <any>) -> bool;
-```
-## ClassDefStatementDO::to\_set
-
-```rust
-pub fn to_set(self: ClassDefStatementDO) -> *ClassDefStatementDO;
 ```

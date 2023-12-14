@@ -9,10 +9,10 @@ schema NewExpression {
 ```
 ## NewExpression::getADescendant
 
-```rust
+```java
 /**
-     * Gets a descendant of this node. 
-     */
+* Gets a descendant of this node. 
+*/
 ```
 ```rust
 pub fn getADescendant(self: NewExpression) -> *Node;
@@ -24,32 +24,32 @@ pub fn getIndex(self: NewExpression) -> int;
 ```
 ## NewExpression::getParentOid
 
-```rust
+```java
 /**
-     * Gets the parent oid of this node.
-     */
+* Gets the parent oid of this node.
+*/
 ```
 ```rust
 pub fn getParentOid(self: NewExpression) -> int;
 ```
 ## NewExpression::getAnAncestorByLevel
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets an ancestor of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getAnAncestorByLevel(self: NewExpression, level: int) -> Node;
 ```
 ## NewExpression::getFile
 
-```rust
+```java
 /**
-     * Gets the file of this node.
-     */
+* Gets the file of this node.
+*/
 ```
 ```rust
 pub fn getFile(self: NewExpression) -> File;
@@ -61,30 +61,30 @@ pub fn getEndColumnNumber(self: NewExpression) -> int;
 ```
 ## NewExpression::getEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets the enclosing function of it
-     */
+* Gets the enclosing function of it
+*/
 ```
 ```rust
 pub fn getEnclosingFunction(self: NewExpression) -> FunctionLikeDeclaration;
 ```
 ## NewExpression::getATrailingComment
 
-```rust
+```java
 /**
-     * Gets the trailing comments of it
-     */
+* Gets the trailing comments of it
+*/
 ```
 ```rust
 pub fn getATrailingComment(self: NewExpression) -> *Comment;
 ```
 ## NewExpression::getALeadingComment
 
-```rust
+```java
 /**
-     * Gets the leading comments of it
-     */
+* Gets the leading comments of it
+*/
 ```
 ```rust
 pub fn getALeadingComment(self: NewExpression) -> *Comment;
@@ -96,223 +96,223 @@ pub fn getStartLineNumber(self: NewExpression) -> int;
 ```
 ## NewExpression::getDecorator
 
-```rust
+```java
 /**
-     * Gets the `i`th decorator.
-     */
+* Gets the `i`th decorator.
+*/
 ```
 ```rust
 pub fn getDecorator(self: NewExpression, i: int) -> Decorator;
 ```
 ## NewExpression::getRoot
 
-```rust
+```java
 /**
-     * Gets the root top-level of this node. 
-     */
+* Gets the root top-level of this node. 
+*/
 ```
 ```rust
 pub fn getRoot(self: NewExpression) -> TopLevelDO;
 ```
 ## NewExpression::getChildCount
 
-```rust
+```java
 /**
-     * Gets the number of child nodes.
-     */
+* Gets the number of child nodes.
+*/
 ```
 ```rust
 pub fn getChildCount(self: NewExpression) -> int;
 ```
 ## NewExpression::getParent
 
-```rust
+```java
 /**
-     * Gets the parent node of this node.
-     */
+* Gets the parent node of this node.
+*/
 ```
 ```rust
 pub fn getParent(self: NewExpression) -> Node;
 ```
 ## NewExpression::getAChild
 
-```rust
+```java
 /**
-     * Gets a child node of this node.
-     */
+* Gets a child node of this node.
+*/
 ```
 ```rust
 pub fn getAChild(self: NewExpression) -> *Node;
 ```
 ## NewExpression::getTypeArgument
 
-```rust
+```java
 /**
-     * Gets the `i`th type argument of this new expression.
-     */
+* Gets the `i`th type argument of this new expression.
+*/
 ```
 ```rust
 pub fn getTypeArgument(self: NewExpression, i: int) -> TypeNode;
 ```
 ## NewExpression::getAnAncestor
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node. 
-     */
+* Gets an ancestor of this node. 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: NewExpression) -> *Node;
 ```
 ## NewExpression::getAComment
 
-```rust
+```java
 /**
-     * Gets the comments related to it
-     */
+* Gets the comments related to it
+*/
 ```
 ```rust
 pub fn getAComment(self: NewExpression) -> *Comment;
 ```
 ## NewExpression::getSymbol
 
-```rust
+```java
 /**
-     * Gets the symbol associated with this node.
-     */
+* Gets the symbol associated with this node.
+*/
 ```
 ```rust
 pub fn getSymbol(self: NewExpression) -> Symbol;
 ```
 ## NewExpression::getADecorator
 
-```rust
+```java
 /**
-     * Gets a decorator.
-     */
+* Gets a decorator.
+*/
 ```
 ```rust
 pub fn getADecorator(self: NewExpression) -> *Decorator;
 ```
 ## NewExpression::getModifier
 
-```rust
+```java
 /**
-     * Gets the `i`th modifier.
-     */
+* Gets the `i`th modifier.
+*/
 ```
 ```rust
 pub fn getModifier(self: NewExpression, i: int) -> Modifier;
 ```
 ## NewExpression::getText
 
-```rust
+```java
 /**
-     * Gets the text of this node.
-     */
+* Gets the text of this node.
+*/
 ```
 ```rust
 pub fn getText(self: NewExpression) -> string;
 ```
 ## NewExpression::getArgumentCount
 
-```rust
+```java
 /**
-     * Gets the count of the arguments.
-     */
+* Gets the count of the arguments.
+*/
 ```
 ```rust
 pub fn getArgumentCount(self: NewExpression) -> int;
 ```
 ## NewExpression::getATypeArgument
 
-```rust
+```java
 /**
-     * Gets a type argument of this new expression.
-     */
+* Gets a type argument of this new expression.
+*/
 ```
 ```rust
 pub fn getATypeArgument(self: NewExpression) -> *TypeNode;
 ```
 ## NewExpression::getAnAncestorEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets an ancestor enclosing function of it
-     */
+* Gets an ancestor enclosing function of it
+*/
 ```
 ```rust
 pub fn getAnAncestorEnclosingFunction(self: NewExpression) -> *FunctionLikeDeclaration;
 ```
 ## NewExpression::getADescendantByLevel
 
-```rust
+```java
 /**
-     * Gets a descendant of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets a descendant of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getADescendantByLevel(self: NewExpression, level: int) -> *Node;
 ```
 ## NewExpression::getTypeArgumentCount
 
-```rust
+```java
 /**
-     * Gets the count of the type arguments.
-     */
+* Gets the count of the type arguments.
+*/
 ```
 ```rust
 pub fn getTypeArgumentCount(self: NewExpression) -> int;
 ```
 ## NewExpression::getCallee
 
-```rust
+```java
 /**
-     * Gets the callee of this new expression.
-     */
+* Gets the callee of this new expression.
+*/
 ```
 ```rust
 pub fn getCallee(self: NewExpression) -> FunctionLikeDeclaration;
 ```
 ## NewExpression::getChild
 
-```rust
+```java
 /**
-     * Gets the `i`th child of this node.
-     */
+* Gets the `i`th child of this node.
+*/
 ```
 ```rust
 pub fn getChild(self: NewExpression, i: int) -> Node;
 ```
 ## NewExpression::getAnArgument
 
-```rust
+```java
 /**
-     * Gets an argument of this new expression.
-     */
+* Gets an argument of this new expression.
+*/
 ```
 ```rust
 pub fn getAnArgument(self: NewExpression) -> *Expression;
 ```
 ## NewExpression::getArgument
 
-```rust
+```java
 /**
-     * Gets the `i`th argument of this new expression.
-     * index starts from 0
-     */
+* Gets the `i`th argument of this new expression.
+* index starts from 0
+*/
 ```
 ```rust
 pub fn getArgument(self: NewExpression, i: int) -> Expression;
 ```
 ## NewExpression::getLocation
 
-```rust
+```java
 /**
-     * Gets the location of this node.
-     */
+* Gets the location of this node.
+*/
 ```
 ```rust
 pub fn getLocation(self: NewExpression) -> Location;
@@ -324,10 +324,10 @@ pub fn getEndLineNumber(self: NewExpression) -> int;
 ```
 ## NewExpression::getRelativePath
 
-```rust
+```java
 /**
-     * Gets the relative path of this node.
-     */
+* Gets the relative path of this node.
+*/
 ```
 ```rust
 pub fn getRelativePath(self: NewExpression) -> string;
@@ -339,6 +339,8 @@ pub fn getExpression(self: NewExpression) -> LeftHandSideExpression;
 ```
 ## NewExpression::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavascriptDB) -> *NewExpression;
 ```
@@ -349,56 +351,31 @@ pub fn getStartColumnNumber(self: NewExpression) -> int;
 ```
 ## NewExpression::getAModifier
 
-```rust
+```java
 /**
-     * Gets a modifier.
-     */
+* Gets a modifier.
+*/
 ```
 ```rust
 pub fn getAModifier(self: NewExpression) -> *Modifier;
 ```
 ## NewExpression::getKind
 
-```rust
+```java
 /**
-     * Get the syntax kind of this node
-     */
+* Get the syntax kind of this node
+*/
 ```
 ```rust
 pub fn getKind(self: NewExpression) -> int;
 ```
 ## NewExpression::getLastChild
 
-```rust
+```java
 /**
-     * Gets the last child of this node parent.
-     */
+* Gets the last child of this node parent.
+*/
 ```
 ```rust
 pub fn getLastChild(self: NewExpression) -> Node;
-```
-## NewExpression::is\<T\>
-
-```rust
-pub fn is<T>(self: NewExpression) -> bool;
-```
-## NewExpression::to\<T\>
-
-```rust
-pub fn to<T>(self: NewExpression) -> <any>;
-```
-## NewExpression::key\_neq
-
-```rust
-pub fn key_neq(self: NewExpression, object: <any>) -> bool;
-```
-## NewExpression::key\_eq
-
-```rust
-pub fn key_eq(self: NewExpression, object: <any>) -> bool;
-```
-## NewExpression::to\_set
-
-```rust
-pub fn to_set(self: NewExpression) -> *NewExpression;
 ```

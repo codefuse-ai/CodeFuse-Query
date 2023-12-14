@@ -14,86 +14,63 @@ schema AnnotationDeclarationParameterDO {
 ```
 ## AnnotationDeclarationParameterDO::getPrintableText
 
-```rust
+```java
 /**
-     * @brief gets a printed representation of this element, including its structure where applicable.
-     * @return string.
-     */
+* @brief gets a printed representation of this element, including its structure where applicable.
+* @return string.
+*/
 ```
 ```rust
 pub fn getPrintableText(self: AnnotationDeclarationParameterDO) -> string;
 ```
 ## AnnotationDeclarationParameterDO::getLocationHashId
 
-```rust
+```java
 /**
-     * @brief gets the location hash id of this element.
-     * @return int
-     */
+* @brief gets the location hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getLocationHashId(self: AnnotationDeclarationParameterDO) -> int;
 ```
 ## AnnotationDeclarationParameterDO::getParameterValueHashId
 
-```rust
+```java
 /**
-     * @brief gets the parameter value hash id of this element.
-     * @return int
-     */
+* @brief gets the parameter value hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getParameterValueHashId(self: AnnotationDeclarationParameterDO) -> int;
 ```
 ## AnnotationDeclarationParameterDO::getAnnotationDeclarationHashId
 
-```rust
+```java
 /**
-     * @brief gets the annotation declaration hash id of this element.
-     * @return int
-     */
+* @brief gets the annotation declaration hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getAnnotationDeclarationHashId(self: AnnotationDeclarationParameterDO) -> int;
 ```
 ## AnnotationDeclarationParameterDO::getTypeHashId
 
-```rust
+```java
 /**
-     * @brief gets the type hash id of this element.
-     * @return int
-     */
+* @brief gets the type hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getTypeHashId(self: AnnotationDeclarationParameterDO) -> int;
 ```
 ## AnnotationDeclarationParameterDO::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavaDB) -> *AnnotationDeclarationParameterDO;
-```
-## AnnotationDeclarationParameterDO::is\<T\>
-
-```rust
-pub fn is<T>(self: AnnotationDeclarationParameterDO) -> bool;
-```
-## AnnotationDeclarationParameterDO::to\<T\>
-
-```rust
-pub fn to<T>(self: AnnotationDeclarationParameterDO) -> <any>;
-```
-## AnnotationDeclarationParameterDO::key\_neq
-
-```rust
-pub fn key_neq(self: AnnotationDeclarationParameterDO, object: <any>) -> bool;
-```
-## AnnotationDeclarationParameterDO::key\_eq
-
-```rust
-pub fn key_eq(self: AnnotationDeclarationParameterDO, object: <any>) -> bool;
-```
-## AnnotationDeclarationParameterDO::to\_set
-
-```rust
-pub fn to_set(self: AnnotationDeclarationParameterDO) -> *AnnotationDeclarationParameterDO;
 ```

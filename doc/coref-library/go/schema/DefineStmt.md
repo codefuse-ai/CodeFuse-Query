@@ -59,7 +59,7 @@ pub fn isCaseClause(self: DefineStmt) -> bool;
 ```
 ## DefineStmt::getText
 
-```rust
+```java
 // getText Extract the text associated with a specific node in a file
 ```
 ```rust
@@ -183,9 +183,6 @@ pub fn countAssociatedComment(self: DefineStmt) -> int;
 ## DefineStmt::getBelongsFile
 
 ```rust
-// root node
-```
-```rust
 pub fn getBelongsFile(self: DefineStmt) -> File;
 ```
 ## DefineStmt::isCommClause
@@ -219,6 +216,8 @@ pub fn getTextStartOffset(self: DefineStmt) -> int;
 pub fn isOrassignStmt(self: DefineStmt) -> bool;
 ```
 ## DefineStmt::\_\_all\_\_
+
+Data constraint method.
 
 ```rust
 pub fn __all__(db: GoDB) -> *DefineStmt;
@@ -322,29 +321,4 @@ pub fn getVaribleName(self: DefineStmt) -> *string;
 
 ```rust
 pub fn getTextSize(self: DefineStmt) -> int;
-```
-## DefineStmt::is\<T\>
-
-```rust
-pub fn is<T>(self: DefineStmt) -> bool;
-```
-## DefineStmt::to\<T\>
-
-```rust
-pub fn to<T>(self: DefineStmt) -> <any>;
-```
-## DefineStmt::key\_neq
-
-```rust
-pub fn key_neq(self: DefineStmt, object: <any>) -> bool;
-```
-## DefineStmt::key\_eq
-
-```rust
-pub fn key_eq(self: DefineStmt, object: <any>) -> bool;
-```
-## DefineStmt::to\_set
-
-```rust
-pub fn to_set(self: DefineStmt) -> *DefineStmt;
 ```

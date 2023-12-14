@@ -14,174 +14,151 @@ schema NullLiteral {
 ```
 ## NullLiteral::getType
 
-```rust
+```java
 /**
-     * @brief gets the type of this element.
-     * @return string
-     */
+* @brief gets the type of this element.
+* @return string
+*/
 ```
 ```rust
 pub fn getType(self: NullLiteral) -> string;
 ```
 ## NullLiteral::getValue
 
-```rust
+```java
 /**
-     * @brief gets the value of the Literal.
-     * @return string
-     */
+* @brief gets the value of the Literal.
+* @return string
+*/
 ```
 ```rust
 pub fn getValue(self: NullLiteral) -> string;
 ```
 ## NullLiteral::getValueType
 
-```rust
+```java
 /**
-     * @brief gets the type of the Literal value.
-     * @return string
-     */
+* @brief gets the type of the Literal value.
+* @return string
+*/
 ```
 ```rust
 pub fn getValueType(self: NullLiteral) -> Type;
 ```
 ## NullLiteral::getEnclosingCallable
 
-```rust
+```java
 /**
-     * @brief gets the callable in which this expression occurs.
-     * @return Callable 
-     */
+* @brief gets the callable in which this expression occurs.
+* @return Callable 
+*/
 ```
 ```rust
 pub fn getEnclosingCallable(self: NullLiteral) -> Callable;
 ```
 ## NullLiteral::getIndex
 
-```rust
+```java
 /**
-     * @brief gets the index order of this element.
-     * @return int
-     */
+* @brief gets the index order of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getIndex(self: NullLiteral) -> int;
 ```
 ## NullLiteral::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavaDB) -> *NullLiteral;
 ```
 ## NullLiteral::getLocationHashId
 
-```rust
+```java
 /**
-     * @brief gets the location hash id of this element.
-     * @return int
-     */
+* @brief gets the location hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getLocationHashId(self: NullLiteral) -> int;
 ```
 ## NullLiteral::getLocation
 
-```rust
+```java
 /**
-     * @brief gets the location for the element.
-     * @return Location
-     */
+* @brief gets the location for the element.
+* @return Location
+*/
 ```
 ```rust
 pub fn getLocation(self: NullLiteral) -> Location;
 ```
 ## NullLiteral::getParentHashId
 
-```rust
+```java
 /**
-     * @brief gets the parent hash id of this element.
-     * @return int
-     */
+* @brief gets the parent hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getParentHashId(self: NullLiteral) -> int;
 ```
 ## NullLiteral::getParent
 
-```rust
+```java
 /**
-     * @brief gets the parent of the expression.
-     * @return ElementParent 
-     */
+* @brief gets the parent of the expression.
+* @return ElementParent 
+*/
 ```
 ```rust
 pub fn getParent(self: NullLiteral) -> ElementParent;
 ```
 ## NullLiteral::getEnclosingStatement
 
-```rust
+```java
 /**
-     * @brief gets the statement which encloses the expression.
-     * @return Statement 
-     */
+* @brief gets the statement which encloses the expression.
+* @return Statement 
+*/
 ```
 ```rust
 pub fn getEnclosingStatement(self: NullLiteral) -> Statement;
 ```
 ## NullLiteral::getPrintableText
 
-```rust
+```java
 /**
-     * @brief gets a printed representation of this element, including its structure where applicable.
-     * @return string.
-     */
+* @brief gets a printed representation of this element, including its structure where applicable.
+* @return string.
+*/
 ```
 ```rust
 pub fn getPrintableText(self: NullLiteral) -> string;
 ```
 ## NullLiteral::getSize
 
-```rust
+```java
 /**
-     * @brief gets the size information for the element.
-     * @return NumberOfLines
-     */
+* @brief gets the size information for the element.
+* @return NumberOfLines
+*/
 ```
 ```rust
 pub fn getSize(self: NullLiteral) -> NumberOfLines;
 ```
 ## NullLiteral::getAnAncestor
 
-```rust
+```java
 /**
-     * @brief gets an ancestor of the element.
-     * @return ElementParent 
-     */
+* @brief gets an ancestor of the element.
+* @return ElementParent 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: NullLiteral) -> *ElementParent;
-```
-## NullLiteral::is\<T\>
-
-```rust
-pub fn is<T>(self: NullLiteral) -> bool;
-```
-## NullLiteral::to\<T\>
-
-```rust
-pub fn to<T>(self: NullLiteral) -> <any>;
-```
-## NullLiteral::key\_neq
-
-```rust
-pub fn key_neq(self: NullLiteral, object: <any>) -> bool;
-```
-## NullLiteral::key\_eq
-
-```rust
-pub fn key_eq(self: NullLiteral, object: <any>) -> bool;
-```
-## NullLiteral::to\_set
-
-```rust
-pub fn to_set(self: NullLiteral) -> *NullLiteral;
 ```

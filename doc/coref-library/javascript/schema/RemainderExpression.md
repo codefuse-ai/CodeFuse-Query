@@ -9,120 +9,120 @@ schema RemainderExpression {
 ```
 ## RemainderExpression::getSymbol
 
-```rust
+```java
 /**
-     * Gets the symbol associated with this node.
-     */
+* Gets the symbol associated with this node.
+*/
 ```
 ```rust
 pub fn getSymbol(self: RemainderExpression) -> Symbol;
 ```
 ## RemainderExpression::getADecorator
 
-```rust
+```java
 /**
-     * Gets a decorator.
-     */
+* Gets a decorator.
+*/
 ```
 ```rust
 pub fn getADecorator(self: RemainderExpression) -> *Decorator;
 ```
 ## RemainderExpression::getAComment
 
-```rust
+```java
 /**
-     * Gets the comments related to it
-     */
+* Gets the comments related to it
+*/
 ```
 ```rust
 pub fn getAComment(self: RemainderExpression) -> *Comment;
 ```
 ## RemainderExpression::getAnAncestor
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node. 
-     */
+* Gets an ancestor of this node. 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: RemainderExpression) -> *Node;
 ```
 ## RemainderExpression::getChildCount
 
-```rust
+```java
 /**
-     * Gets the number of child nodes.
-     */
+* Gets the number of child nodes.
+*/
 ```
 ```rust
 pub fn getChildCount(self: RemainderExpression) -> int;
 ```
 ## RemainderExpression::getATrailingComment
 
-```rust
+```java
 /**
-     * Gets the trailing comments of it
-     */
+* Gets the trailing comments of it
+*/
 ```
 ```rust
 pub fn getATrailingComment(self: RemainderExpression) -> *Comment;
 ```
 ## RemainderExpression::getALeadingComment
 
-```rust
+```java
 /**
-     * Gets the leading comments of it
-     */
+* Gets the leading comments of it
+*/
 ```
 ```rust
 pub fn getALeadingComment(self: RemainderExpression) -> *Comment;
 ```
 ## RemainderExpression::getParent
 
-```rust
+```java
 /**
-     * Gets the parent node of this node.
-     */
+* Gets the parent node of this node.
+*/
 ```
 ```rust
 pub fn getParent(self: RemainderExpression) -> Node;
 ```
 ## RemainderExpression::getAChild
 
-```rust
+```java
 /**
-     * Gets a child node of this node.
-     */
+* Gets a child node of this node.
+*/
 ```
 ```rust
 pub fn getAChild(self: RemainderExpression) -> *Node;
 ```
 ## RemainderExpression::getDecorator
 
-```rust
+```java
 /**
-     * Gets the `i`th decorator.
-     */
+* Gets the `i`th decorator.
+*/
 ```
 ```rust
 pub fn getDecorator(self: RemainderExpression, i: int) -> Decorator;
 ```
 ## RemainderExpression::getRoot
 
-```rust
+```java
 /**
-     * Gets the root top-level of this node. 
-     */
+* Gets the root top-level of this node. 
+*/
 ```
 ```rust
 pub fn getRoot(self: RemainderExpression) -> TopLevelDO;
 ```
 ## RemainderExpression::getChild
 
-```rust
+```java
 /**
-     * Gets the `i`th child of this node.
-     */
+* Gets the `i`th child of this node.
+*/
 ```
 ```rust
 pub fn getChild(self: RemainderExpression, i: int) -> Node;
@@ -134,64 +134,64 @@ pub fn getStartLineNumber(self: RemainderExpression) -> int;
 ```
 ## RemainderExpression::getADescendantByLevel
 
-```rust
+```java
 /**
-     * Gets a descendant of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets a descendant of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getADescendantByLevel(self: RemainderExpression, level: int) -> *Node;
 ```
 ## RemainderExpression::getAnAncestorEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets an ancestor enclosing function of it
-     */
+* Gets an ancestor enclosing function of it
+*/
 ```
 ```rust
 pub fn getAnAncestorEnclosingFunction(self: RemainderExpression) -> *FunctionLikeDeclaration;
 ```
 ## RemainderExpression::getLeftOperand
 
-```rust
+```java
 /**
-     * Get the left operand of this binary expression.
-     */
+* Get the left operand of this binary expression.
+*/
 ```
 ```rust
 pub fn getLeftOperand(self: RemainderExpression) -> Expression;
 ```
 ## RemainderExpression::getAnAncestorByLevel
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets an ancestor of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getAnAncestorByLevel(self: RemainderExpression, level: int) -> Node;
 ```
 ## RemainderExpression::getFile
 
-```rust
+```java
 /**
-     * Gets the file of this node.
-     */
+* Gets the file of this node.
+*/
 ```
 ```rust
 pub fn getFile(self: RemainderExpression) -> File;
 ```
 ## RemainderExpression::getText
 
-```rust
+```java
 /**
-     * Gets the text of this node.
-     */
+* Gets the text of this node.
+*/
 ```
 ```rust
 pub fn getText(self: RemainderExpression) -> string;
@@ -203,20 +203,20 @@ pub fn getAnOperand(self: RemainderExpression) -> *Expression;
 ```
 ## RemainderExpression::getModifier
 
-```rust
+```java
 /**
-     * Gets the `i`th modifier.
-     */
+* Gets the `i`th modifier.
+*/
 ```
 ```rust
 pub fn getModifier(self: RemainderExpression, i: int) -> Modifier;
 ```
 ## RemainderExpression::getRightOperand
 
-```rust
+```java
 /**
-     * Get the right operand of this binary expression.
-     */
+* Get the right operand of this binary expression.
+*/
 ```
 ```rust
 pub fn getRightOperand(self: RemainderExpression) -> Expression;
@@ -228,55 +228,57 @@ pub fn getEndLineNumber(self: RemainderExpression) -> int;
 ```
 ## RemainderExpression::getRelativePath
 
-```rust
+```java
 /**
-     * Gets the relative path of this node.
-     */
+* Gets the relative path of this node.
+*/
 ```
 ```rust
 pub fn getRelativePath(self: RemainderExpression) -> string;
 ```
 ## RemainderExpression::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavascriptDB) -> *RemainderExpression;
 ```
 ## RemainderExpression::getLocation
 
-```rust
+```java
 /**
-     * Gets the location of this node.
-     */
+* Gets the location of this node.
+*/
 ```
 ```rust
 pub fn getLocation(self: RemainderExpression) -> Location;
 ```
 ## RemainderExpression::getOperator
 
-```rust
+```java
 /**
-     * Get the operator of this binary expression.
-     */
+* Get the operator of this binary expression.
+*/
 ```
 ```rust
 pub fn getOperator(self: RemainderExpression) -> BinaryOperator;
 ```
 ## RemainderExpression::getADescendant
 
-```rust
+```java
 /**
-     * Gets a descendant of this node. 
-     */
+* Gets a descendant of this node. 
+*/
 ```
 ```rust
 pub fn getADescendant(self: RemainderExpression) -> *Node;
 ```
 ## RemainderExpression::getLeft
 
-```rust
+```java
 /**
-     * Get the left operand of this binary expression. An alias of `getLeftOperand`.
-     */
+* Get the left operand of this binary expression. An alias of `getLeftOperand`.
+*/
 ```
 ```rust
 pub fn getLeft(self: RemainderExpression) -> Expression;
@@ -288,40 +290,40 @@ pub fn getStartColumnNumber(self: RemainderExpression) -> int;
 ```
 ## RemainderExpression::getAModifier
 
-```rust
+```java
 /**
-     * Gets a modifier.
-     */
+* Gets a modifier.
+*/
 ```
 ```rust
 pub fn getAModifier(self: RemainderExpression) -> *Modifier;
 ```
 ## RemainderExpression::getKind
 
-```rust
+```java
 /**
-     * Get the syntax kind of this node
-     */
+* Get the syntax kind of this node
+*/
 ```
 ```rust
 pub fn getKind(self: RemainderExpression) -> int;
 ```
 ## RemainderExpression::getLastChild
 
-```rust
+```java
 /**
-     * Gets the last child of this node parent.
-     */
+* Gets the last child of this node parent.
+*/
 ```
 ```rust
 pub fn getLastChild(self: RemainderExpression) -> Node;
 ```
 ## RemainderExpression::getEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets the enclosing function of it
-     */
+* Gets the enclosing function of it
+*/
 ```
 ```rust
 pub fn getEnclosingFunction(self: RemainderExpression) -> FunctionLikeDeclaration;
@@ -333,10 +335,10 @@ pub fn getEndColumnNumber(self: RemainderExpression) -> int;
 ```
 ## RemainderExpression::getParentOid
 
-```rust
+```java
 /**
-     * Gets the parent oid of this node.
-     */
+* Gets the parent oid of this node.
+*/
 ```
 ```rust
 pub fn getParentOid(self: RemainderExpression) -> int;
@@ -348,36 +350,11 @@ pub fn getIndex(self: RemainderExpression) -> int;
 ```
 ## RemainderExpression::getRight
 
-```rust
+```java
 /**
-     * Get the right operand of this binary expression. An alias of `getRightOperand`
-     */
+* Get the right operand of this binary expression. An alias of `getRightOperand`
+*/
 ```
 ```rust
 pub fn getRight(self: RemainderExpression) -> Expression;
-```
-## RemainderExpression::is\<T\>
-
-```rust
-pub fn is<T>(self: RemainderExpression) -> bool;
-```
-## RemainderExpression::to\<T\>
-
-```rust
-pub fn to<T>(self: RemainderExpression) -> <any>;
-```
-## RemainderExpression::key\_neq
-
-```rust
-pub fn key_neq(self: RemainderExpression, object: <any>) -> bool;
-```
-## RemainderExpression::key\_eq
-
-```rust
-pub fn key_eq(self: RemainderExpression, object: <any>) -> bool;
-```
-## RemainderExpression::to\_set
-
-```rust
-pub fn to_set(self: RemainderExpression) -> *RemainderExpression;
 ```

@@ -34,7 +34,7 @@ pub fn isGoFile(self: GoFile) -> bool;
 ```
 ## GoFile::getText
 
-```rust
+```java
 // getText Extract the text associated with a specific node in a file
 ```
 ```rust
@@ -92,7 +92,7 @@ pub fn getName(self: GoFile) -> string;
 ```
 ## GoFile::filterByKeyWords
 
-```rust
+```java
 // filterByKeyWords
 ```
 ```rust
@@ -120,10 +120,10 @@ pub fn getSha256Sum(self: GoFile) -> string;
 ```
 ## GoFile::getFunctionCount
 
-```rust
+```java
 /**
-     * 获取每个文件包含的函数
-     */
+* 获取每个文件包含的函数
+*/
 ```
 ```rust
 pub fn getFunctionCount(self: GoFile) -> int;
@@ -134,6 +134,8 @@ pub fn getFunctionCount(self: GoFile) -> int;
 pub fn getLineInfo(self: GoFile) -> NumberOfLineDO;
 ```
 ## GoFile::\_\_all\_\_
+
+Data constraint method.
 
 ```rust
 pub fn __all__(db: GoDB) -> *GoFile;
@@ -151,9 +153,6 @@ pub fn getType(self: GoFile) -> string;
 ## GoFile::getBelongsFile
 
 ```rust
-// root node
-```
-```rust
 pub fn getBelongsFile(self: GoFile) -> File;
 ```
 ## GoFile::getParentNode
@@ -168,7 +167,7 @@ pub fn isAutoGenereatedFile(self: GoFile) -> bool;
 ```
 ## GoFile::filterByFolderNames
 
-```rust
+```java
 // filterByFolderNames
 ```
 ```rust
@@ -188,29 +187,4 @@ pub fn getAnAncestorForIndex(self: GoFile, index: int) -> Node;
 
 ```rust
 pub fn getTextSize(self: GoFile) -> int;
-```
-## GoFile::is\<T\>
-
-```rust
-pub fn is<T>(self: GoFile) -> bool;
-```
-## GoFile::to\<T\>
-
-```rust
-pub fn to<T>(self: GoFile) -> <any>;
-```
-## GoFile::key\_neq
-
-```rust
-pub fn key_neq(self: GoFile, object: <any>) -> bool;
-```
-## GoFile::key\_eq
-
-```rust
-pub fn key_eq(self: GoFile, object: <any>) -> bool;
-```
-## GoFile::to\_set
-
-```rust
-pub fn to_set(self: GoFile) -> *GoFile;
 ```

@@ -9,140 +9,140 @@ schema SpreadElement {
 ```
 ## SpreadElement::getLocation
 
-```rust
+```java
 /**
-     * Gets the location of this node.
-     */
+* Gets the location of this node.
+*/
 ```
 ```rust
 pub fn getLocation(self: SpreadElement) -> Location;
 ```
 ## SpreadElement::getSymbol
 
-```rust
+```java
 /**
-     * Gets the symbol associated with this node.
-     */
+* Gets the symbol associated with this node.
+*/
 ```
 ```rust
 pub fn getSymbol(self: SpreadElement) -> Symbol;
 ```
 ## SpreadElement::getADecorator
 
-```rust
+```java
 /**
-     * Gets a decorator.
-     */
+* Gets a decorator.
+*/
 ```
 ```rust
 pub fn getADecorator(self: SpreadElement) -> *Decorator;
 ```
 ## SpreadElement::getText
 
-```rust
+```java
 /**
-     * Gets the text of this node.
-     */
+* Gets the text of this node.
+*/
 ```
 ```rust
 pub fn getText(self: SpreadElement) -> string;
 ```
 ## SpreadElement::getModifier
 
-```rust
+```java
 /**
-     * Gets the `i`th modifier.
-     */
+* Gets the `i`th modifier.
+*/
 ```
 ```rust
 pub fn getModifier(self: SpreadElement, i: int) -> Modifier;
 ```
 ## SpreadElement::getAComment
 
-```rust
+```java
 /**
-     * Gets the comments related to it
-     */
+* Gets the comments related to it
+*/
 ```
 ```rust
 pub fn getAComment(self: SpreadElement) -> *Comment;
 ```
 ## SpreadElement::getAnAncestor
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node. 
-     */
+* Gets an ancestor of this node. 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: SpreadElement) -> *Node;
 ```
 ## SpreadElement::getAChild
 
-```rust
+```java
 /**
-     * Gets a child node of this node.
-     */
+* Gets a child node of this node.
+*/
 ```
 ```rust
 pub fn getAChild(self: SpreadElement) -> *Node;
 ```
 ## SpreadElement::getParent
 
-```rust
+```java
 /**
-     * Gets the parent node of this node.
-     */
+* Gets the parent node of this node.
+*/
 ```
 ```rust
 pub fn getParent(self: SpreadElement) -> Node;
 ```
 ## SpreadElement::getChildCount
 
-```rust
+```java
 /**
-     * Gets the number of child nodes.
-     */
+* Gets the number of child nodes.
+*/
 ```
 ```rust
 pub fn getChildCount(self: SpreadElement) -> int;
 ```
 ## SpreadElement::getRoot
 
-```rust
+```java
 /**
-     * Gets the root top-level of this node. 
-     */
+* Gets the root top-level of this node. 
+*/
 ```
 ```rust
 pub fn getRoot(self: SpreadElement) -> TopLevelDO;
 ```
 ## SpreadElement::getDecorator
 
-```rust
+```java
 /**
-     * Gets the `i`th decorator.
-     */
+* Gets the `i`th decorator.
+*/
 ```
 ```rust
 pub fn getDecorator(self: SpreadElement, i: int) -> Decorator;
 ```
 ## SpreadElement::getKind
 
-```rust
+```java
 /**
-     * Get the syntax kind of this node
-     */
+* Get the syntax kind of this node
+*/
 ```
 ```rust
 pub fn getKind(self: SpreadElement) -> int;
 ```
 ## SpreadElement::getAModifier
 
-```rust
+```java
 /**
-     * Gets a modifier.
-     */
+* Gets a modifier.
+*/
 ```
 ```rust
 pub fn getAModifier(self: SpreadElement) -> *Modifier;
@@ -154,10 +154,10 @@ pub fn getStartColumnNumber(self: SpreadElement) -> int;
 ```
 ## SpreadElement::getChild
 
-```rust
+```java
 /**
-     * Gets the `i`th child of this node.
-     */
+* Gets the `i`th child of this node.
+*/
 ```
 ```rust
 pub fn getChild(self: SpreadElement, i: int) -> Node;
@@ -169,52 +169,52 @@ pub fn getStartLineNumber(self: SpreadElement) -> int;
 ```
 ## SpreadElement::getADescendantByLevel
 
-```rust
+```java
 /**
-     * Gets a descendant of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets a descendant of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getADescendantByLevel(self: SpreadElement, level: int) -> *Node;
 ```
 ## SpreadElement::getAnAncestorEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets an ancestor enclosing function of it
-     */
+* Gets an ancestor enclosing function of it
+*/
 ```
 ```rust
 pub fn getAnAncestorEnclosingFunction(self: SpreadElement) -> *FunctionLikeDeclaration;
 ```
 ## SpreadElement::getALeadingComment
 
-```rust
+```java
 /**
-     * Gets the leading comments of it
-     */
+* Gets the leading comments of it
+*/
 ```
 ```rust
 pub fn getALeadingComment(self: SpreadElement) -> *Comment;
 ```
 ## SpreadElement::getATrailingComment
 
-```rust
+```java
 /**
-     * Gets the trailing comments of it
-     */
+* Gets the trailing comments of it
+*/
 ```
 ```rust
 pub fn getATrailingComment(self: SpreadElement) -> *Comment;
 ```
 ## SpreadElement::getLastChild
 
-```rust
+```java
 /**
-     * Gets the last child of this node parent.
-     */
+* Gets the last child of this node parent.
+*/
 ```
 ```rust
 pub fn getLastChild(self: SpreadElement) -> Node;
@@ -226,42 +226,42 @@ pub fn getEndColumnNumber(self: SpreadElement) -> int;
 ```
 ## SpreadElement::getEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets the enclosing function of it
-     */
+* Gets the enclosing function of it
+*/
 ```
 ```rust
 pub fn getEnclosingFunction(self: SpreadElement) -> FunctionLikeDeclaration;
 ```
 ## SpreadElement::getFile
 
-```rust
+```java
 /**
-     * Gets the file of this node.
-     */
+* Gets the file of this node.
+*/
 ```
 ```rust
 pub fn getFile(self: SpreadElement) -> File;
 ```
 ## SpreadElement::getAnAncestorByLevel
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets an ancestor of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getAnAncestorByLevel(self: SpreadElement, level: int) -> Node;
 ```
 ## SpreadElement::getParentOid
 
-```rust
+```java
 /**
-     * Gets the parent oid of this node.
-     */
+* Gets the parent oid of this node.
+*/
 ```
 ```rust
 pub fn getParentOid(self: SpreadElement) -> int;
@@ -278,10 +278,10 @@ pub fn getExpression(self: SpreadElement) -> Expression;
 ```
 ## SpreadElement::getRelativePath
 
-```rust
+```java
 /**
-     * Gets the relative path of this node.
-     */
+* Gets the relative path of this node.
+*/
 ```
 ```rust
 pub fn getRelativePath(self: SpreadElement) -> string;
@@ -293,41 +293,18 @@ pub fn getEndLineNumber(self: SpreadElement) -> int;
 ```
 ## SpreadElement::getADescendant
 
-```rust
+```java
 /**
-     * Gets a descendant of this node. 
-     */
+* Gets a descendant of this node. 
+*/
 ```
 ```rust
 pub fn getADescendant(self: SpreadElement) -> *Node;
 ```
 ## SpreadElement::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavascriptDB) -> *SpreadElement;
-```
-## SpreadElement::is\<T\>
-
-```rust
-pub fn is<T>(self: SpreadElement) -> bool;
-```
-## SpreadElement::to\<T\>
-
-```rust
-pub fn to<T>(self: SpreadElement) -> <any>;
-```
-## SpreadElement::key\_neq
-
-```rust
-pub fn key_neq(self: SpreadElement, object: <any>) -> bool;
-```
-## SpreadElement::key\_eq
-
-```rust
-pub fn key_eq(self: SpreadElement, object: <any>) -> bool;
-```
-## SpreadElement::to\_set
-
-```rust
-pub fn to_set(self: SpreadElement) -> *SpreadElement;
 ```

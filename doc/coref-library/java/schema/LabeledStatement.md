@@ -14,207 +14,184 @@ schema LabeledStatement {
 ```
 ## LabeledStatement::getSize
 
-```rust
+```java
 /**
-     * @brief gets the size information for the element.
-     * @return NumberOfLines
-     */
+* @brief gets the size information for the element.
+* @return NumberOfLines
+*/
 ```
 ```rust
 pub fn getSize(self: LabeledStatement) -> NumberOfLines;
 ```
 ## LabeledStatement::getParent
 
-```rust
+```java
 /**
-     * @brief gets the parent element of the statement
-     * @return StatementParent 
-     */
+* @brief gets the parent element of the statement
+* @return StatementParent 
+*/
 ```
 ```rust
 pub fn getParent(self: LabeledStatement) -> ElementParent;
 ```
 ## LabeledStatement::getParentHashId
 
-```rust
+```java
 /**
-     * @brief gets the parent hash id of this element.
-     * @return int
-     */
+* @brief gets the parent hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getParentHashId(self: LabeledStatement) -> int;
 ```
 ## LabeledStatement::getEnclosingCallable
 
-```rust
+```java
 /**
-     * @brief gets the immediately enclosing callable (method or constructor) whose body contains this statement.
-     * @return Callable 
-     */
+* @brief gets the immediately enclosing callable (method or constructor) whose body contains this statement.
+* @return Callable 
+*/
 ```
 ```rust
 pub fn getEnclosingCallable(self: LabeledStatement) -> Callable;
 ```
 ## LabeledStatement::getIndex
 
-```rust
+```java
 /**
-     * @brief gets the index order of this element.
-     * @return int
-     */
+* @brief gets the index order of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getIndex(self: LabeledStatement) -> int;
 ```
 ## LabeledStatement::getAnAncestor
 
-```rust
+```java
 /**
-     * @brief gets an ancestor of the element.
-     * @return ElementParent 
-     */
+* @brief gets an ancestor of the element.
+* @return ElementParent 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: LabeledStatement) -> *ElementParent;
 ```
 ## LabeledStatement::getAChild
 
-```rust
+```java
 /**
-     * @brief gets a child of this statement.
-     * @return Statement 
-     */
+* @brief gets a child of this statement.
+* @return Statement 
+*/
 ```
 ```rust
 pub fn getAChild(self: LabeledStatement) -> *Statement;
 ```
 ## LabeledStatement::getEnclosingStatement
 
-```rust
+```java
 /**
-     * @brief gets the statement containing this statement.
-     * @return Statement 
-     */
+* @brief gets the statement containing this statement.
+* @return Statement 
+*/
 ```
 ```rust
 pub fn getEnclosingStatement(self: LabeledStatement) -> Statement;
 ```
 ## LabeledStatement::getAEnclosingStatement
 
-```rust
+```java
 /**
-     * @brief gets the transitive statement containing this statement.
-     * @return Statement 
-     */
+* @brief gets the transitive statement containing this statement.
+* @return Statement 
+*/
 ```
 ```rust
 pub fn getAEnclosingStatement(self: LabeledStatement) -> *Statement;
 ```
 ## LabeledStatement::getType
 
-```rust
+```java
 /**
-     * @brief gets the type of this element.
-     * @return string
-     */
+* @brief gets the type of this element.
+* @return string
+*/
 ```
 ```rust
 pub fn getType(self: LabeledStatement) -> string;
 ```
 ## LabeledStatement::getStatement
 
-```rust
+```java
 /**
-     * @brief gets the labeled statement.
-     * @return Statement 
-     */
+* @brief gets the labeled statement.
+* @return Statement 
+*/
 ```
 ```rust
 pub fn getStatement(self: LabeledStatement) -> Statement;
 ```
 ## LabeledStatement::getLabel
 
-```rust
+```java
 /**
-     * @brief gets the label name of the statement.
-     * @return string 
-     */
+* @brief gets the label name of the statement.
+* @return string 
+*/
 ```
 ```rust
 pub fn getLabel(self: LabeledStatement) -> string;
 ```
 ## LabeledStatement::getPrintableText
 
-```rust
+```java
 /**
-     * @brief gets a printed representation of this element, including its structure where applicable.
-     * @return string.
-     */
+* @brief gets a printed representation of this element, including its structure where applicable.
+* @return string.
+*/
 ```
 ```rust
 pub fn getPrintableText(self: LabeledStatement) -> string;
 ```
 ## LabeledStatement::getStatementLabel
 
-```rust
+```java
 /**
-     * @brief gets the identifier of the element's label.
-     * @return Identifier 
-     */
+* @brief gets the identifier of the element's label.
+* @return Identifier 
+*/
 ```
 ```rust
 pub fn getStatementLabel(self: LabeledStatement) -> Identifier;
 ```
 ## LabeledStatement::getLocation
 
-```rust
+```java
 /**
-      * @brief gets the location for the element.
-      * @return Location
-      */
+* @brief gets the location for the element.
+* @return Location
+*/
 ```
 ```rust
 pub fn getLocation(self: LabeledStatement) -> Location;
 ```
 ## LabeledStatement::getLocationHashId
 
-```rust
+```java
 /**
-     * @brief gets the location hash id of this element.
-     * @return int
-     */
+* @brief gets the location hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getLocationHashId(self: LabeledStatement) -> int;
 ```
 ## LabeledStatement::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavaDB) -> *LabeledStatement;
-```
-## LabeledStatement::is\<T\>
-
-```rust
-pub fn is<T>(self: LabeledStatement) -> bool;
-```
-## LabeledStatement::to\<T\>
-
-```rust
-pub fn to<T>(self: LabeledStatement) -> <any>;
-```
-## LabeledStatement::key\_neq
-
-```rust
-pub fn key_neq(self: LabeledStatement, object: <any>) -> bool;
-```
-## LabeledStatement::key\_eq
-
-```rust
-pub fn key_eq(self: LabeledStatement, object: <any>) -> bool;
-```
-## LabeledStatement::to\_set
-
-```rust
-pub fn to_set(self: LabeledStatement) -> *LabeledStatement;
 ```

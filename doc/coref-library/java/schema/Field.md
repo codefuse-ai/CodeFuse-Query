@@ -13,185 +13,162 @@ schema Field {
 ```
 ## Field::getName
 
-```rust
+```java
 /**
-     * @brief gets the name of this element.
-     * @return string
-     */
+* @brief gets the name of this element.
+* @return string
+*/
 ```
 ```rust
 pub fn getName(self: Field) -> string;
 ```
 ## Field::getPrintableText
 
-```rust
+```java
 /**
-     * @brief gets a printed representation of this element, including its structure where applicable.
-     * @return string.
-     */
+* @brief gets a printed representation of this element, including its structure where applicable.
+* @return string.
+*/
 ```
 ```rust
 pub fn getPrintableText(self: Field) -> string;
 ```
 ## Field::getTypeElement
 
-```rust
+```java
 /**
-     * @brief gets the type element for the element.
-     * @return TypeElement
-     */
+* @brief gets the type element for the element.
+* @return TypeElement
+*/
 ```
 ```rust
 pub fn getTypeElement(self: Field) -> TypeElement;
 ```
 ## Field::getAnAncestor
 
-```rust
+```java
 /**
-     * @brief gets an ancestor of the element.
-     * @return ElementParent 
-     */
+* @brief gets an ancestor of the element.
+* @return ElementParent 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: Field) -> *ElementParent;
 ```
 ## Field::getDefaultValue
 
-```rust
+```java
 /**
-     * @brief gets the default value of the element, if any.
-     * @return string 
-     */
+* @brief gets the default value of the element, if any.
+* @return string 
+*/
 ```
 ```rust
 pub fn getDefaultValue(self: Field) -> string;
 ```
 ## Field::getParentHashId
 
-```rust
+```java
 /**
-     * @brief gets the parent hash id of this element.
-     * @return int
-     */
+* @brief gets the parent hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getParentHashId(self: Field) -> int;
 ```
 ## Field::getParent
 
-```rust
+```java
 /**
-     * @brief gets the parent of the constructor.
-     * @return ClassOrInterface 
-     */
+* @brief gets the parent of the constructor.
+* @return ClassOrInterface 
+*/
 ```
 ```rust
 pub fn getParent(self: Field) -> ClassOrInterface;
 ```
 ## Field::getLocationHashId
 
-```rust
+```java
 /**
-     * @brief gets the location hash id of this element.
-     * @return int
-     */
+* @brief gets the location hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getLocationHashId(self: Field) -> int;
 ```
 ## Field::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavaDB) -> *Field;
 ```
 ## Field::getLocation
 
-```rust
+```java
 /**
-     * @brief gets the location of the element.
-     * @return Location 
-     */
+* @brief gets the location of the element.
+* @return Location 
+*/
 ```
 ```rust
 pub fn getLocation(self: Field) -> Location;
 ```
 ## Field::getIdentifier
 
-```rust
+```java
 /**
-     * @brief gets the identifier of the element.
-     * @return Identifier 
-     */
+* @brief gets the identifier of the element.
+* @return Identifier 
+*/
 ```
 ```rust
 pub fn getIdentifier(self: Field) -> Identifier;
 ```
 ## Field::getAnnotation
 
-```rust
+```java
 /**
-     * @brief gets the annotation of the field, if any.
-     * @return Annotation 
-     */
+* @brief gets the annotation of the field, if any.
+* @return Annotation 
+*/
 ```
 ```rust
 pub fn getAnnotation(self: Field) -> *Annotation;
 ```
 ## Field::getBelongedClass
 
-```rust
+```java
 /**
-     * @brief gets the contained class of the field.
-     * @return Class 
-     */
+* @brief gets the contained class of the field.
+* @return Class 
+*/
 ```
 ```rust
 pub fn getBelongedClass(self: Field) -> Class;
 ```
 ## Field::getType
 
-```rust
+```java
 /**
-     * @brief gets the type for the element.
-     * @return Type
-     */
+* @brief gets the type for the element.
+* @return Type
+*/
 ```
 ```rust
 pub fn getType(self: Field) -> Type;
 ```
 ## Field::getModifier
 
-```rust
+```java
 /**
-     * @brief gets the modifier of the constructor
-     * @return Modifier 
-     */
+* @brief gets the modifier of the constructor
+* @return Modifier 
+*/
 ```
 ```rust
 pub fn getModifier(self: Field) -> *Modifier;
-```
-## Field::is\<T\>
-
-```rust
-pub fn is<T>(self: Field) -> bool;
-```
-## Field::to\<T\>
-
-```rust
-pub fn to<T>(self: Field) -> <any>;
-```
-## Field::key\_neq
-
-```rust
-pub fn key_neq(self: Field, object: <any>) -> bool;
-```
-## Field::key\_eq
-
-```rust
-pub fn key_eq(self: Field, object: <any>) -> bool;
-```
-## Field::to\_set
-
-```rust
-pub fn to_set(self: Field) -> *Field;
 ```

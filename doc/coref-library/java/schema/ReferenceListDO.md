@@ -13,75 +13,52 @@ schema ReferenceListDO {
 ```
 ## ReferenceListDO::getPrintableText
 
-```rust
+```java
 /**
-     * @brief gets a printed representation of this element, including its structure where applicable.
-     * @return string.
-     */
+* @brief gets a printed representation of this element, including its structure where applicable.
+* @return string.
+*/
 ```
 ```rust
 pub fn getPrintableText(self: ReferenceListDO) -> string;
 ```
 ## ReferenceListDO::getLocationHashId
 
-```rust
+```java
 /**
-     * @brief gets the location hash id of this element.
-     * @return int
-     */
+* @brief gets the location hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getLocationHashId(self: ReferenceListDO) -> int;
 ```
 ## ReferenceListDO::getRole
 
-```rust
+```java
 /**
-     * @brief gets the role of this element.
-     * @return string
-     */
+* @brief gets the role of this element.
+* @return string
+*/
 ```
 ```rust
 pub fn getRole(self: ReferenceListDO) -> string;
 ```
 ## ReferenceListDO::getParentHashId
 
-```rust
+```java
 /**
-     * @brief gets the parent hash id of this element.
-     * @return int
-     */
+* @brief gets the parent hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getParentHashId(self: ReferenceListDO) -> int;
 ```
 ## ReferenceListDO::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavaDB) -> *ReferenceListDO;
-```
-## ReferenceListDO::is\<T\>
-
-```rust
-pub fn is<T>(self: ReferenceListDO) -> bool;
-```
-## ReferenceListDO::to\<T\>
-
-```rust
-pub fn to<T>(self: ReferenceListDO) -> <any>;
-```
-## ReferenceListDO::key\_neq
-
-```rust
-pub fn key_neq(self: ReferenceListDO, object: <any>) -> bool;
-```
-## ReferenceListDO::key\_eq
-
-```rust
-pub fn key_eq(self: ReferenceListDO, object: <any>) -> bool;
-```
-## ReferenceListDO::to\_set
-
-```rust
-pub fn to_set(self: ReferenceListDO) -> *ReferenceListDO;
 ```

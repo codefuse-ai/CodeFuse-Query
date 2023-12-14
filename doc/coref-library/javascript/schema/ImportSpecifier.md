@@ -9,10 +9,10 @@ schema ImportSpecifier {
 ```
 ## ImportSpecifier::getADescendant
 
-```rust
+```java
 /**
-     * Gets a descendant of this node. 
-     */
+* Gets a descendant of this node. 
+*/
 ```
 ```rust
 pub fn getADescendant(self: ImportSpecifier) -> *Node;
@@ -24,10 +24,10 @@ pub fn getIndex(self: ImportSpecifier) -> int;
 ```
 ## ImportSpecifier::getParentOid
 
-```rust
+```java
 /**
-     * Gets the parent oid of this node.
-     */
+* Gets the parent oid of this node.
+*/
 ```
 ```rust
 pub fn getParentOid(self: ImportSpecifier) -> int;
@@ -39,52 +39,52 @@ pub fn getEndColumnNumber(self: ImportSpecifier) -> int;
 ```
 ## ImportSpecifier::getLastChild
 
-```rust
+```java
 /**
-     * Gets the last child of this node parent.
-     */
+* Gets the last child of this node parent.
+*/
 ```
 ```rust
 pub fn getLastChild(self: ImportSpecifier) -> Node;
 ```
 ## ImportSpecifier::getEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets the enclosing function of it
-     */
+* Gets the enclosing function of it
+*/
 ```
 ```rust
 pub fn getEnclosingFunction(self: ImportSpecifier) -> FunctionLikeDeclaration;
 ```
 ## ImportSpecifier::getFile
 
-```rust
+```java
 /**
-     * Gets the file of this node.
-     */
+* Gets the file of this node.
+*/
 ```
 ```rust
 pub fn getFile(self: ImportSpecifier) -> File;
 ```
 ## ImportSpecifier::getAnAncestorByLevel
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets an ancestor of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getAnAncestorByLevel(self: ImportSpecifier, level: int) -> Node;
 ```
 ## ImportSpecifier::getRelativePath
 
-```rust
+```java
 /**
-     * Gets the relative path of this node.
-     */
+* Gets the relative path of this node.
+*/
 ```
 ```rust
 pub fn getRelativePath(self: ImportSpecifier) -> string;
@@ -96,42 +96,42 @@ pub fn getEndLineNumber(self: ImportSpecifier) -> int;
 ```
 ## ImportSpecifier::getAnAncestorEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets an ancestor enclosing function of it
-     */
+* Gets an ancestor enclosing function of it
+*/
 ```
 ```rust
 pub fn getAnAncestorEnclosingFunction(self: ImportSpecifier) -> *FunctionLikeDeclaration;
 ```
 ## ImportSpecifier::getADescendantByLevel
 
-```rust
+```java
 /**
-     * Gets a descendant of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets a descendant of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getADescendantByLevel(self: ImportSpecifier, level: int) -> *Node;
 ```
 ## ImportSpecifier::getKind
 
-```rust
+```java
 /**
-     * Get the syntax kind of this node
-     */
+* Get the syntax kind of this node
+*/
 ```
 ```rust
 pub fn getKind(self: ImportSpecifier) -> int;
 ```
 ## ImportSpecifier::getAModifier
 
-```rust
+```java
 /**
-     * Gets a modifier.
-     */
+* Gets a modifier.
+*/
 ```
 ```rust
 pub fn getAModifier(self: ImportSpecifier) -> *Modifier;
@@ -148,181 +148,158 @@ pub fn getStartLineNumber(self: ImportSpecifier) -> int;
 ```
 ## ImportSpecifier::getChild
 
-```rust
+```java
 /**
-     * Gets the `i`th child of this node.
-     */
+* Gets the `i`th child of this node.
+*/
 ```
 ```rust
 pub fn getChild(self: ImportSpecifier, i: int) -> Node;
 ```
 ## ImportSpecifier::getDecorator
 
-```rust
+```java
 /**
-     * Gets the `i`th decorator.
-     */
+* Gets the `i`th decorator.
+*/
 ```
 ```rust
 pub fn getDecorator(self: ImportSpecifier, i: int) -> Decorator;
 ```
 ## ImportSpecifier::getRoot
 
-```rust
+```java
 /**
-     * Gets the root top-level of this node. 
-     */
+* Gets the root top-level of this node. 
+*/
 ```
 ```rust
 pub fn getRoot(self: ImportSpecifier) -> TopLevelDO;
 ```
 ## ImportSpecifier::getChildCount
 
-```rust
+```java
 /**
-     * Gets the number of child nodes.
-     */
+* Gets the number of child nodes.
+*/
 ```
 ```rust
 pub fn getChildCount(self: ImportSpecifier) -> int;
 ```
 ## ImportSpecifier::getATrailingComment
 
-```rust
+```java
 /**
-     * Gets the trailing comments of it
-     */
+* Gets the trailing comments of it
+*/
 ```
 ```rust
 pub fn getATrailingComment(self: ImportSpecifier) -> *Comment;
 ```
 ## ImportSpecifier::getALeadingComment
 
-```rust
+```java
 /**
-     * Gets the leading comments of it
-     */
+* Gets the leading comments of it
+*/
 ```
 ```rust
 pub fn getALeadingComment(self: ImportSpecifier) -> *Comment;
 ```
 ## ImportSpecifier::getParent
 
-```rust
+```java
 /**
-     * Gets the parent node of this node.
-     */
+* Gets the parent node of this node.
+*/
 ```
 ```rust
 pub fn getParent(self: ImportSpecifier) -> Node;
 ```
 ## ImportSpecifier::getAChild
 
-```rust
+```java
 /**
-     * Gets a child node of this node.
-     */
+* Gets a child node of this node.
+*/
 ```
 ```rust
 pub fn getAChild(self: ImportSpecifier) -> *Node;
 ```
 ## ImportSpecifier::getAnAncestor
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node. 
-     */
+* Gets an ancestor of this node. 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: ImportSpecifier) -> *Node;
 ```
 ## ImportSpecifier::getAComment
 
-```rust
+```java
 /**
-     * Gets the comments related to it
-     */
+* Gets the comments related to it
+*/
 ```
 ```rust
 pub fn getAComment(self: ImportSpecifier) -> *Comment;
 ```
 ## ImportSpecifier::getModifier
 
-```rust
+```java
 /**
-     * Gets the `i`th modifier.
-     */
+* Gets the `i`th modifier.
+*/
 ```
 ```rust
 pub fn getModifier(self: ImportSpecifier, i: int) -> Modifier;
 ```
 ## ImportSpecifier::getText
 
-```rust
+```java
 /**
-     * Gets the text of this node.
-     */
+* Gets the text of this node.
+*/
 ```
 ```rust
 pub fn getText(self: ImportSpecifier) -> string;
 ```
 ## ImportSpecifier::getADecorator
 
-```rust
+```java
 /**
-     * Gets a decorator.
-     */
+* Gets a decorator.
+*/
 ```
 ```rust
 pub fn getADecorator(self: ImportSpecifier) -> *Decorator;
 ```
 ## ImportSpecifier::getSymbol
 
-```rust
+```java
 /**
-     * Gets the symbol associated with this node.
-     */
+* Gets the symbol associated with this node.
+*/
 ```
 ```rust
 pub fn getSymbol(self: ImportSpecifier) -> Symbol;
 ```
 ## ImportSpecifier::getLocation
 
-```rust
+```java
 /**
-     * Gets the location of this node.
-     */
+* Gets the location of this node.
+*/
 ```
 ```rust
 pub fn getLocation(self: ImportSpecifier) -> Location;
 ```
 ## ImportSpecifier::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavascriptDB) -> *ImportSpecifier;
-```
-## ImportSpecifier::is\<T\>
-
-```rust
-pub fn is<T>(self: ImportSpecifier) -> bool;
-```
-## ImportSpecifier::to\<T\>
-
-```rust
-pub fn to<T>(self: ImportSpecifier) -> <any>;
-```
-## ImportSpecifier::key\_neq
-
-```rust
-pub fn key_neq(self: ImportSpecifier, object: <any>) -> bool;
-```
-## ImportSpecifier::key\_eq
-
-```rust
-pub fn key_eq(self: ImportSpecifier, object: <any>) -> bool;
-```
-## ImportSpecifier::to\_set
-
-```rust
-pub fn to_set(self: ImportSpecifier) -> *ImportSpecifier;
 ```

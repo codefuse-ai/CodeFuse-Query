@@ -9,160 +9,160 @@ schema IntersectionTypeNode {
 ```
 ## IntersectionTypeNode::getLocation
 
-```rust
+```java
 /**
-     * Gets the location of this node.
-     */
+* Gets the location of this node.
+*/
 ```
 ```rust
 pub fn getLocation(self: IntersectionTypeNode) -> Location;
 ```
 ## IntersectionTypeNode::getSymbol
 
-```rust
+```java
 /**
-     * Gets the symbol associated with this node.
-     */
+* Gets the symbol associated with this node.
+*/
 ```
 ```rust
 pub fn getSymbol(self: IntersectionTypeNode) -> Symbol;
 ```
 ## IntersectionTypeNode::getADecorator
 
-```rust
+```java
 /**
-     * Gets a decorator.
-     */
+* Gets a decorator.
+*/
 ```
 ```rust
 pub fn getADecorator(self: IntersectionTypeNode) -> *Decorator;
 ```
 ## IntersectionTypeNode::getText
 
-```rust
+```java
 /**
-     * Gets the text of this node.
-     */
+* Gets the text of this node.
+*/
 ```
 ```rust
 pub fn getText(self: IntersectionTypeNode) -> string;
 ```
 ## IntersectionTypeNode::getModifier
 
-```rust
+```java
 /**
-     * Gets the `i`th modifier.
-     */
+* Gets the `i`th modifier.
+*/
 ```
 ```rust
 pub fn getModifier(self: IntersectionTypeNode, i: int) -> Modifier;
 ```
 ## IntersectionTypeNode::getAComment
 
-```rust
+```java
 /**
-     * Gets the comments related to it
-     */
+* Gets the comments related to it
+*/
 ```
 ```rust
 pub fn getAComment(self: IntersectionTypeNode) -> *Comment;
 ```
 ## IntersectionTypeNode::getAnAncestor
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node. 
-     */
+* Gets an ancestor of this node. 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: IntersectionTypeNode) -> *Node;
 ```
 ## IntersectionTypeNode::getAChild
 
-```rust
+```java
 /**
-     * Gets a child node of this node.
-     */
+* Gets a child node of this node.
+*/
 ```
 ```rust
 pub fn getAChild(self: IntersectionTypeNode) -> *Node;
 ```
 ## IntersectionTypeNode::getParent
 
-```rust
+```java
 /**
-     * Gets the parent node of this node.
-     */
+* Gets the parent node of this node.
+*/
 ```
 ```rust
 pub fn getParent(self: IntersectionTypeNode) -> Node;
 ```
 ## IntersectionTypeNode::getALeadingComment
 
-```rust
+```java
 /**
-     * Gets the leading comments of it
-     */
+* Gets the leading comments of it
+*/
 ```
 ```rust
 pub fn getALeadingComment(self: IntersectionTypeNode) -> *Comment;
 ```
 ## IntersectionTypeNode::getATrailingComment
 
-```rust
+```java
 /**
-     * Gets the trailing comments of it
-     */
+* Gets the trailing comments of it
+*/
 ```
 ```rust
 pub fn getATrailingComment(self: IntersectionTypeNode) -> *Comment;
 ```
 ## IntersectionTypeNode::getChildCount
 
-```rust
+```java
 /**
-     * Gets the number of child nodes.
-     */
+* Gets the number of child nodes.
+*/
 ```
 ```rust
 pub fn getChildCount(self: IntersectionTypeNode) -> int;
 ```
 ## IntersectionTypeNode::getRoot
 
-```rust
+```java
 /**
-     * Gets the root top-level of this node. 
-     */
+* Gets the root top-level of this node. 
+*/
 ```
 ```rust
 pub fn getRoot(self: IntersectionTypeNode) -> TopLevelDO;
 ```
 ## IntersectionTypeNode::getDecorator
 
-```rust
+```java
 /**
-     * Gets the `i`th decorator.
-     */
+* Gets the `i`th decorator.
+*/
 ```
 ```rust
 pub fn getDecorator(self: IntersectionTypeNode, i: int) -> Decorator;
 ```
 ## IntersectionTypeNode::getKind
 
-```rust
+```java
 /**
-     * Get the syntax kind of this node
-     */
+* Get the syntax kind of this node
+*/
 ```
 ```rust
 pub fn getKind(self: IntersectionTypeNode) -> int;
 ```
 ## IntersectionTypeNode::getAModifier
 
-```rust
+```java
 /**
-     * Gets a modifier.
-     */
+* Gets a modifier.
+*/
 ```
 ```rust
 pub fn getAModifier(self: IntersectionTypeNode) -> *Modifier;
@@ -174,10 +174,10 @@ pub fn getStartColumnNumber(self: IntersectionTypeNode) -> int;
 ```
 ## IntersectionTypeNode::getChild
 
-```rust
+```java
 /**
-     * Gets the `i`th child of this node.
-     */
+* Gets the `i`th child of this node.
+*/
 ```
 ```rust
 pub fn getChild(self: IntersectionTypeNode, i: int) -> Node;
@@ -189,22 +189,22 @@ pub fn getStartLineNumber(self: IntersectionTypeNode) -> int;
 ```
 ## IntersectionTypeNode::getAnAncestorEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets an ancestor enclosing function of it
-     */
+* Gets an ancestor enclosing function of it
+*/
 ```
 ```rust
 pub fn getAnAncestorEnclosingFunction(self: IntersectionTypeNode) -> *FunctionLikeDeclaration;
 ```
 ## IntersectionTypeNode::getADescendantByLevel
 
-```rust
+```java
 /**
-     * Gets a descendant of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets a descendant of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getADescendantByLevel(self: IntersectionTypeNode, level: int) -> *Node;
@@ -216,42 +216,42 @@ pub fn getEndLineNumber(self: IntersectionTypeNode) -> int;
 ```
 ## IntersectionTypeNode::getRelativePath
 
-```rust
+```java
 /**
-     * Gets the relative path of this node.
-     */
+* Gets the relative path of this node.
+*/
 ```
 ```rust
 pub fn getRelativePath(self: IntersectionTypeNode) -> string;
 ```
 ## IntersectionTypeNode::getFile
 
-```rust
+```java
 /**
-     * Gets the file of this node.
-     */
+* Gets the file of this node.
+*/
 ```
 ```rust
 pub fn getFile(self: IntersectionTypeNode) -> File;
 ```
 ## IntersectionTypeNode::getAnAncestorByLevel
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets an ancestor of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getAnAncestorByLevel(self: IntersectionTypeNode, level: int) -> Node;
 ```
 ## IntersectionTypeNode::getEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets the enclosing function of it
-     */
+* Gets the enclosing function of it
+*/
 ```
 ```rust
 pub fn getEnclosingFunction(self: IntersectionTypeNode) -> FunctionLikeDeclaration;
@@ -263,10 +263,10 @@ pub fn getAType(self: IntersectionTypeNode) -> *TypeNode;
 ```
 ## IntersectionTypeNode::getLastChild
 
-```rust
+```java
 /**
-     * Gets the last child of this node parent.
-     */
+* Gets the last child of this node parent.
+*/
 ```
 ```rust
 pub fn getLastChild(self: IntersectionTypeNode) -> Node;
@@ -278,10 +278,10 @@ pub fn getEndColumnNumber(self: IntersectionTypeNode) -> int;
 ```
 ## IntersectionTypeNode::getParentOid
 
-```rust
+```java
 /**
-     * Gets the parent oid of this node.
-     */
+* Gets the parent oid of this node.
+*/
 ```
 ```rust
 pub fn getParentOid(self: IntersectionTypeNode) -> int;
@@ -293,10 +293,10 @@ pub fn getIndex(self: IntersectionTypeNode) -> int;
 ```
 ## IntersectionTypeNode::getADescendant
 
-```rust
+```java
 /**
-     * Gets a descendant of this node. 
-     */
+* Gets a descendant of this node. 
+*/
 ```
 ```rust
 pub fn getADescendant(self: IntersectionTypeNode) -> *Node;
@@ -308,31 +308,8 @@ pub fn getType(self: IntersectionTypeNode, i: int) -> TypeNode;
 ```
 ## IntersectionTypeNode::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavascriptDB) -> *IntersectionTypeNode;
-```
-## IntersectionTypeNode::is\<T\>
-
-```rust
-pub fn is<T>(self: IntersectionTypeNode) -> bool;
-```
-## IntersectionTypeNode::to\<T\>
-
-```rust
-pub fn to<T>(self: IntersectionTypeNode) -> <any>;
-```
-## IntersectionTypeNode::key\_neq
-
-```rust
-pub fn key_neq(self: IntersectionTypeNode, object: <any>) -> bool;
-```
-## IntersectionTypeNode::key\_eq
-
-```rust
-pub fn key_eq(self: IntersectionTypeNode, object: <any>) -> bool;
-```
-## IntersectionTypeNode::to\_set
-
-```rust
-pub fn to_set(self: IntersectionTypeNode) -> *IntersectionTypeNode;
 ```

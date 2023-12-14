@@ -9,10 +9,10 @@ schema ProtectedKeyword {
 ```
 ## ProtectedKeyword::getADescendant
 
-```rust
+```java
 /**
-     * Gets a descendant of this node. 
-     */
+* Gets a descendant of this node. 
+*/
 ```
 ```rust
 pub fn getADescendant(self: ProtectedKeyword) -> *Node;
@@ -24,10 +24,10 @@ pub fn getIndex(self: ProtectedKeyword) -> int;
 ```
 ## ProtectedKeyword::getParentOid
 
-```rust
+```java
 /**
-     * Gets the parent oid of this node.
-     */
+* Gets the parent oid of this node.
+*/
 ```
 ```rust
 pub fn getParentOid(self: ProtectedKeyword) -> int;
@@ -39,62 +39,62 @@ pub fn getEndColumnNumber(self: ProtectedKeyword) -> int;
 ```
 ## ProtectedKeyword::getEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets the enclosing function of it
-     */
+* Gets the enclosing function of it
+*/
 ```
 ```rust
 pub fn getEnclosingFunction(self: ProtectedKeyword) -> FunctionLikeDeclaration;
 ```
 ## ProtectedKeyword::getLastChild
 
-```rust
+```java
 /**
-     * Gets the last child of this node parent.
-     */
+* Gets the last child of this node parent.
+*/
 ```
 ```rust
 pub fn getLastChild(self: ProtectedKeyword) -> Node;
 ```
 ## ProtectedKeyword::getATrailingComment
 
-```rust
+```java
 /**
-     * Gets the trailing comments of it
-     */
+* Gets the trailing comments of it
+*/
 ```
 ```rust
 pub fn getATrailingComment(self: ProtectedKeyword) -> *Comment;
 ```
 ## ProtectedKeyword::getALeadingComment
 
-```rust
+```java
 /**
-     * Gets the leading comments of it
-     */
+* Gets the leading comments of it
+*/
 ```
 ```rust
 pub fn getALeadingComment(self: ProtectedKeyword) -> *Comment;
 ```
 ## ProtectedKeyword::getFile
 
-```rust
+```java
 /**
-     * Gets the file of this node.
-     */
+* Gets the file of this node.
+*/
 ```
 ```rust
 pub fn getFile(self: ProtectedKeyword) -> File;
 ```
 ## ProtectedKeyword::getAnAncestorByLevel
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets an ancestor of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getAnAncestorByLevel(self: ProtectedKeyword, level: int) -> Node;
@@ -106,52 +106,52 @@ pub fn getEndLineNumber(self: ProtectedKeyword) -> int;
 ```
 ## ProtectedKeyword::getRelativePath
 
-```rust
+```java
 /**
-     * Gets the relative path of this node.
-     */
+* Gets the relative path of this node.
+*/
 ```
 ```rust
 pub fn getRelativePath(self: ProtectedKeyword) -> string;
 ```
 ## ProtectedKeyword::getAnAncestorEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets an ancestor enclosing function of it
-     */
+* Gets an ancestor enclosing function of it
+*/
 ```
 ```rust
 pub fn getAnAncestorEnclosingFunction(self: ProtectedKeyword) -> *FunctionLikeDeclaration;
 ```
 ## ProtectedKeyword::getADescendantByLevel
 
-```rust
+```java
 /**
-     * Gets a descendant of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets a descendant of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getADescendantByLevel(self: ProtectedKeyword, level: int) -> *Node;
 ```
 ## ProtectedKeyword::getKind
 
-```rust
+```java
 /**
-     * Get the syntax kind of this node
-     */
+* Get the syntax kind of this node
+*/
 ```
 ```rust
 pub fn getKind(self: ProtectedKeyword) -> int;
 ```
 ## ProtectedKeyword::getAModifier
 
-```rust
+```java
 /**
-     * Gets a modifier.
-     */
+* Gets a modifier.
+*/
 ```
 ```rust
 pub fn getAModifier(self: ProtectedKeyword) -> *Modifier;
@@ -168,161 +168,138 @@ pub fn getStartLineNumber(self: ProtectedKeyword) -> int;
 ```
 ## ProtectedKeyword::getChild
 
-```rust
+```java
 /**
-     * Gets the `i`th child of this node.
-     */
+* Gets the `i`th child of this node.
+*/
 ```
 ```rust
 pub fn getChild(self: ProtectedKeyword, i: int) -> Node;
 ```
 ## ProtectedKeyword::getDecorator
 
-```rust
+```java
 /**
-     * Gets the `i`th decorator.
-     */
+* Gets the `i`th decorator.
+*/
 ```
 ```rust
 pub fn getDecorator(self: ProtectedKeyword, i: int) -> Decorator;
 ```
 ## ProtectedKeyword::getRoot
 
-```rust
+```java
 /**
-     * Gets the root top-level of this node. 
-     */
+* Gets the root top-level of this node. 
+*/
 ```
 ```rust
 pub fn getRoot(self: ProtectedKeyword) -> TopLevelDO;
 ```
 ## ProtectedKeyword::getChildCount
 
-```rust
+```java
 /**
-     * Gets the number of child nodes.
-     */
+* Gets the number of child nodes.
+*/
 ```
 ```rust
 pub fn getChildCount(self: ProtectedKeyword) -> int;
 ```
 ## ProtectedKeyword::getParent
 
-```rust
+```java
 /**
-     * Gets the parent node of this node.
-     */
+* Gets the parent node of this node.
+*/
 ```
 ```rust
 pub fn getParent(self: ProtectedKeyword) -> Node;
 ```
 ## ProtectedKeyword::getAChild
 
-```rust
+```java
 /**
-     * Gets a child node of this node.
-     */
+* Gets a child node of this node.
+*/
 ```
 ```rust
 pub fn getAChild(self: ProtectedKeyword) -> *Node;
 ```
 ## ProtectedKeyword::getAnAncestor
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node. 
-     */
+* Gets an ancestor of this node. 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: ProtectedKeyword) -> *Node;
 ```
 ## ProtectedKeyword::getAComment
 
-```rust
+```java
 /**
-     * Gets the comments related to it
-     */
+* Gets the comments related to it
+*/
 ```
 ```rust
 pub fn getAComment(self: ProtectedKeyword) -> *Comment;
 ```
 ## ProtectedKeyword::getSymbol
 
-```rust
+```java
 /**
-     * Gets the symbol associated with this node.
-     */
+* Gets the symbol associated with this node.
+*/
 ```
 ```rust
 pub fn getSymbol(self: ProtectedKeyword) -> Symbol;
 ```
 ## ProtectedKeyword::getADecorator
 
-```rust
+```java
 /**
-     * Gets a decorator.
-     */
+* Gets a decorator.
+*/
 ```
 ```rust
 pub fn getADecorator(self: ProtectedKeyword) -> *Decorator;
 ```
 ## ProtectedKeyword::getModifier
 
-```rust
+```java
 /**
-     * Gets the `i`th modifier.
-     */
+* Gets the `i`th modifier.
+*/
 ```
 ```rust
 pub fn getModifier(self: ProtectedKeyword, i: int) -> Modifier;
 ```
 ## ProtectedKeyword::getText
 
-```rust
+```java
 /**
-     * Gets the text of this node.
-     */
+* Gets the text of this node.
+*/
 ```
 ```rust
 pub fn getText(self: ProtectedKeyword) -> string;
 ```
 ## ProtectedKeyword::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavascriptDB) -> *ProtectedKeyword;
 ```
 ## ProtectedKeyword::getLocation
 
-```rust
+```java
 /**
-     * Gets the location of this node.
-     */
+* Gets the location of this node.
+*/
 ```
 ```rust
 pub fn getLocation(self: ProtectedKeyword) -> Location;
-```
-## ProtectedKeyword::is\<T\>
-
-```rust
-pub fn is<T>(self: ProtectedKeyword) -> bool;
-```
-## ProtectedKeyword::to\<T\>
-
-```rust
-pub fn to<T>(self: ProtectedKeyword) -> <any>;
-```
-## ProtectedKeyword::key\_neq
-
-```rust
-pub fn key_neq(self: ProtectedKeyword, object: <any>) -> bool;
-```
-## ProtectedKeyword::key\_eq
-
-```rust
-pub fn key_eq(self: ProtectedKeyword, object: <any>) -> bool;
-```
-## ProtectedKeyword::to\_set
-
-```rust
-pub fn to_set(self: ProtectedKeyword) -> *ProtectedKeyword;
 ```

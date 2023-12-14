@@ -9,10 +9,10 @@ schema ForInitializer {
 ```
 ## ForInitializer::getADescendant
 
-```rust
+```java
 /**
-     * Gets a descendant of this node. 
-     */
+* Gets a descendant of this node. 
+*/
 ```
 ```rust
 pub fn getADescendant(self: ForInitializer) -> *Node;
@@ -24,10 +24,10 @@ pub fn getIndex(self: ForInitializer) -> int;
 ```
 ## ForInitializer::getParentOid
 
-```rust
+```java
 /**
-     * Gets the parent oid of this node.
-     */
+* Gets the parent oid of this node.
+*/
 ```
 ```rust
 pub fn getParentOid(self: ForInitializer) -> int;
@@ -39,52 +39,52 @@ pub fn getEndColumnNumber(self: ForInitializer) -> int;
 ```
 ## ForInitializer::getLastChild
 
-```rust
+```java
 /**
-     * Gets the last child of this node parent.
-     */
+* Gets the last child of this node parent.
+*/
 ```
 ```rust
 pub fn getLastChild(self: ForInitializer) -> Node;
 ```
 ## ForInitializer::getEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets the enclosing function of it
-     */
+* Gets the enclosing function of it
+*/
 ```
 ```rust
 pub fn getEnclosingFunction(self: ForInitializer) -> FunctionLikeDeclaration;
 ```
 ## ForInitializer::getFile
 
-```rust
+```java
 /**
-     * Gets the file of this node.
-     */
+* Gets the file of this node.
+*/
 ```
 ```rust
 pub fn getFile(self: ForInitializer) -> File;
 ```
 ## ForInitializer::getAnAncestorByLevel
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets an ancestor of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getAnAncestorByLevel(self: ForInitializer, level: int) -> Node;
 ```
 ## ForInitializer::getRelativePath
 
-```rust
+```java
 /**
-     * Gets the relative path of this node.
-     */
+* Gets the relative path of this node.
+*/
 ```
 ```rust
 pub fn getRelativePath(self: ForInitializer) -> string;
@@ -96,42 +96,42 @@ pub fn getEndLineNumber(self: ForInitializer) -> int;
 ```
 ## ForInitializer::getAnAncestorEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets an ancestor enclosing function of it
-     */
+* Gets an ancestor enclosing function of it
+*/
 ```
 ```rust
 pub fn getAnAncestorEnclosingFunction(self: ForInitializer) -> *FunctionLikeDeclaration;
 ```
 ## ForInitializer::getADescendantByLevel
 
-```rust
+```java
 /**
-     * Gets a descendant of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets a descendant of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getADescendantByLevel(self: ForInitializer, level: int) -> *Node;
 ```
 ## ForInitializer::getKind
 
-```rust
+```java
 /**
-     * Get the syntax kind of this node
-     */
+* Get the syntax kind of this node
+*/
 ```
 ```rust
 pub fn getKind(self: ForInitializer) -> int;
 ```
 ## ForInitializer::getAModifier
 
-```rust
+```java
 /**
-     * Gets a modifier.
-     */
+* Gets a modifier.
+*/
 ```
 ```rust
 pub fn getAModifier(self: ForInitializer) -> *Modifier;
@@ -148,181 +148,158 @@ pub fn getStartLineNumber(self: ForInitializer) -> int;
 ```
 ## ForInitializer::getChild
 
-```rust
+```java
 /**
-     * Gets the `i`th child of this node.
-     */
+* Gets the `i`th child of this node.
+*/
 ```
 ```rust
 pub fn getChild(self: ForInitializer, i: int) -> Node;
 ```
 ## ForInitializer::getDecorator
 
-```rust
+```java
 /**
-     * Gets the `i`th decorator.
-     */
+* Gets the `i`th decorator.
+*/
 ```
 ```rust
 pub fn getDecorator(self: ForInitializer, i: int) -> Decorator;
 ```
 ## ForInitializer::getRoot
 
-```rust
+```java
 /**
-     * Gets the root top-level of this node. 
-     */
+* Gets the root top-level of this node. 
+*/
 ```
 ```rust
 pub fn getRoot(self: ForInitializer) -> TopLevelDO;
 ```
 ## ForInitializer::getChildCount
 
-```rust
+```java
 /**
-     * Gets the number of child nodes.
-     */
+* Gets the number of child nodes.
+*/
 ```
 ```rust
 pub fn getChildCount(self: ForInitializer) -> int;
 ```
 ## ForInitializer::getATrailingComment
 
-```rust
+```java
 /**
-     * Gets the trailing comments of it
-     */
+* Gets the trailing comments of it
+*/
 ```
 ```rust
 pub fn getATrailingComment(self: ForInitializer) -> *Comment;
 ```
 ## ForInitializer::getALeadingComment
 
-```rust
+```java
 /**
-     * Gets the leading comments of it
-     */
+* Gets the leading comments of it
+*/
 ```
 ```rust
 pub fn getALeadingComment(self: ForInitializer) -> *Comment;
 ```
 ## ForInitializer::getParent
 
-```rust
+```java
 /**
-     * Gets the parent node of this node.
-     */
+* Gets the parent node of this node.
+*/
 ```
 ```rust
 pub fn getParent(self: ForInitializer) -> Node;
 ```
 ## ForInitializer::getAChild
 
-```rust
+```java
 /**
-     * Gets a child node of this node.
-     */
+* Gets a child node of this node.
+*/
 ```
 ```rust
 pub fn getAChild(self: ForInitializer) -> *Node;
 ```
 ## ForInitializer::getAnAncestor
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node. 
-     */
+* Gets an ancestor of this node. 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: ForInitializer) -> *Node;
 ```
 ## ForInitializer::getAComment
 
-```rust
+```java
 /**
-     * Gets the comments related to it
-     */
+* Gets the comments related to it
+*/
 ```
 ```rust
 pub fn getAComment(self: ForInitializer) -> *Comment;
 ```
 ## ForInitializer::getModifier
 
-```rust
+```java
 /**
-     * Gets the `i`th modifier.
-     */
+* Gets the `i`th modifier.
+*/
 ```
 ```rust
 pub fn getModifier(self: ForInitializer, i: int) -> Modifier;
 ```
 ## ForInitializer::getText
 
-```rust
+```java
 /**
-     * Gets the text of this node.
-     */
+* Gets the text of this node.
+*/
 ```
 ```rust
 pub fn getText(self: ForInitializer) -> string;
 ```
 ## ForInitializer::getADecorator
 
-```rust
+```java
 /**
-     * Gets a decorator.
-     */
+* Gets a decorator.
+*/
 ```
 ```rust
 pub fn getADecorator(self: ForInitializer) -> *Decorator;
 ```
 ## ForInitializer::getSymbol
 
-```rust
+```java
 /**
-     * Gets the symbol associated with this node.
-     */
+* Gets the symbol associated with this node.
+*/
 ```
 ```rust
 pub fn getSymbol(self: ForInitializer) -> Symbol;
 ```
 ## ForInitializer::getLocation
 
-```rust
+```java
 /**
-     * Gets the location of this node.
-     */
+* Gets the location of this node.
+*/
 ```
 ```rust
 pub fn getLocation(self: ForInitializer) -> Location;
 ```
 ## ForInitializer::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavascriptDB) -> *ForInitializer;
-```
-## ForInitializer::is\<T\>
-
-```rust
-pub fn is<T>(self: ForInitializer) -> bool;
-```
-## ForInitializer::to\<T\>
-
-```rust
-pub fn to<T>(self: ForInitializer) -> <any>;
-```
-## ForInitializer::key\_neq
-
-```rust
-pub fn key_neq(self: ForInitializer, object: <any>) -> bool;
-```
-## ForInitializer::key\_eq
-
-```rust
-pub fn key_eq(self: ForInitializer, object: <any>) -> bool;
-```
-## ForInitializer::to\_set
-
-```rust
-pub fn to_set(self: ForInitializer) -> *ForInitializer;
 ```

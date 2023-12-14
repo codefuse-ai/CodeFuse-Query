@@ -21,31 +21,8 @@ pub fn getMessage(self: JsParseErrorDO) -> string;
 ```
 ## JsParseErrorDO::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavascriptDB) -> *JsParseErrorDO;
-```
-## JsParseErrorDO::is\<T\>
-
-```rust
-pub fn is<T>(self: JsParseErrorDO) -> bool;
-```
-## JsParseErrorDO::to\<T\>
-
-```rust
-pub fn to<T>(self: JsParseErrorDO) -> <any>;
-```
-## JsParseErrorDO::key\_neq
-
-```rust
-pub fn key_neq(self: JsParseErrorDO, object: <any>) -> bool;
-```
-## JsParseErrorDO::key\_eq
-
-```rust
-pub fn key_eq(self: JsParseErrorDO, object: <any>) -> bool;
-```
-## JsParseErrorDO::to\_set
-
-```rust
-pub fn to_set(self: JsParseErrorDO) -> *JsParseErrorDO;
 ```

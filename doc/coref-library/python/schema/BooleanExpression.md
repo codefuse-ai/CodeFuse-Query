@@ -14,141 +14,118 @@ schema BooleanExpression {
 ```
 ## BooleanExpression::getAnAncestor
 
-```rust
+```java
 /**
-     * @brief gets an ancestor of the element.
-     * @return CombineElement 
-     */
+* @brief gets an ancestor of the element.
+* @return CombineElement 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: BooleanExpression) -> *CombineElement;
 ```
 ## BooleanExpression::getParent
 
-```rust
+```java
 /**
-     * @brief gets the parent of the expression.
-     * @return CombineElement 
-     */
+* @brief gets the parent of the expression.
+* @return CombineElement 
+*/
 ```
 ```rust
 pub fn getParent(self: BooleanExpression) -> CombineElement;
 ```
 ## BooleanExpression::getLocationOid
 
-```rust
+```java
 /**
-     * @brief gets the location oid of this element.
-     * @return int
-     */
+* @brief gets the location oid of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getLocationOid(self: BooleanExpression) -> int;
 ```
 ## BooleanExpression::getLocation
 
-```rust
+```java
 /**
-     * @brief gets the location for the element.
-     * @return Location
-     */
+* @brief gets the location for the element.
+* @return Location
+*/
 ```
 ```rust
 pub fn getLocation(self: BooleanExpression) -> Location;
 ```
 ## BooleanExpression::getEnclosingScope
 
-```rust
+```java
 /**
-     * @brief gets the immediately enclosing scope (module, function or class) whose body contains this statement.
-     * @return Scope 
-     */
+* @brief gets the immediately enclosing scope (module, function or class) whose body contains this statement.
+* @return Scope 
+*/
 ```
 ```rust
 pub fn getEnclosingScope(self: BooleanExpression) -> Scope;
 ```
 ## BooleanExpression::getPrintableText
 
-```rust
+```java
 /**
-     * @brief gets the printable text of this element.
-     * @return string
-     */
+* @brief gets the printable text of this element.
+* @return string
+*/
 ```
 ```rust
 pub fn getPrintableText(self: BooleanExpression) -> string;
 ```
 ## BooleanExpression::getParentOid
 
-```rust
+```java
 /**
-     * @brief gets the parent oid of this element.
-     * @return int
-     */
+* @brief gets the parent oid of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getParentOid(self: BooleanExpression) -> int;
 ```
 ## BooleanExpression::getElementIndex
 
-```rust
+```java
 /**
-     * @brief gets the element index of this element.
-     * @return int
-     */
+* @brief gets the element index of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getElementIndex(self: BooleanExpression) -> int;
 ```
 ## BooleanExpression::getSize
 
-```rust
+```java
 /**
-     * @brief gets the size information for the element.
-     * @return int
-     */
+* @brief gets the size information for the element.
+* @return int
+*/
 ```
 ```rust
 pub fn getSize(self: BooleanExpression) -> int;
 ```
 ## BooleanExpression::getType
 
-```rust
+```java
 /**
-     * @brief gets the type of the expression.
-     * @return string
-     */
+* @brief gets the type of the expression.
+* @return string
+*/
 ```
 ```rust
 pub fn getType(self: BooleanExpression) -> string;
 ```
 ## BooleanExpression::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: PythonDB) -> *BooleanExpression;
-```
-## BooleanExpression::is\<T\>
-
-```rust
-pub fn is<T>(self: BooleanExpression) -> bool;
-```
-## BooleanExpression::to\<T\>
-
-```rust
-pub fn to<T>(self: BooleanExpression) -> <any>;
-```
-## BooleanExpression::key\_neq
-
-```rust
-pub fn key_neq(self: BooleanExpression, object: <any>) -> bool;
-```
-## BooleanExpression::key\_eq
-
-```rust
-pub fn key_eq(self: BooleanExpression, object: <any>) -> bool;
-```
-## BooleanExpression::to\_set
-
-```rust
-pub fn to_set(self: BooleanExpression) -> *BooleanExpression;
 ```

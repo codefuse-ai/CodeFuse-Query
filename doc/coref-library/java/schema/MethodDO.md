@@ -20,86 +20,63 @@ pub fn getDefinitionBody(self: MethodDO) -> string;
 ```
 ## MethodDO::getLocationHashId
 
-```rust
+```java
 /**
-     * @brief gets the location hash id of this element.
-     * @return int
-     */
+* @brief gets the location hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getLocationHashId(self: MethodDO) -> int;
 ```
 ## MethodDO::getSignature
 
-```rust
+```java
 /**
-     * @brief gets the signature of this element.
-     * @return string
-     */
+* @brief gets the signature of this element.
+* @return string
+*/
 ```
 ```rust
 pub fn getSignature(self: MethodDO) -> string;
 ```
 ## MethodDO::getParentHashId
 
-```rust
+```java
 /**
-     * @brief gets the parent hash id of this element.
-     * @return int
-     */
+* @brief gets the parent hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getParentHashId(self: MethodDO) -> int;
 ```
 ## MethodDO::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavaDB) -> *MethodDO;
 ```
 ## MethodDO::getTypeHashId
 
-```rust
+```java
 /**
-     * @brief gets the type hash id of this element.
-     * @return int
-     */
+* @brief gets the type hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getTypeHashId(self: MethodDO) -> int;
 ```
 ## MethodDO::getName
 
-```rust
+```java
 /**
-     * @brief gets the name of this element.
-     * @return string
-     */
+* @brief gets the name of this element.
+* @return string
+*/
 ```
 ```rust
 pub fn getName(self: MethodDO) -> string;
-```
-## MethodDO::is\<T\>
-
-```rust
-pub fn is<T>(self: MethodDO) -> bool;
-```
-## MethodDO::to\<T\>
-
-```rust
-pub fn to<T>(self: MethodDO) -> <any>;
-```
-## MethodDO::key\_neq
-
-```rust
-pub fn key_neq(self: MethodDO, object: <any>) -> bool;
-```
-## MethodDO::key\_eq
-
-```rust
-pub fn key_eq(self: MethodDO, object: <any>) -> bool;
-```
-## MethodDO::to\_set
-
-```rust
-pub fn to_set(self: MethodDO) -> *MethodDO;
 ```

@@ -12,64 +12,41 @@ schema NpInterfaceDO {
 ```
 ## NpInterfaceDO::getQualifiedName
 
-```rust
+```java
 /**
-     * @brief gets the qualified name of this element.
-     * @return string
-     */
+* @brief gets the qualified name of this element.
+* @return string
+*/
 ```
 ```rust
 pub fn getQualifiedName(self: NpInterfaceDO) -> string;
 ```
 ## NpInterfaceDO::getParentHashId
 
-```rust
+```java
 /**
-     * @brief gets the parent hash id of this element.
-     * @return int
-     */
+* @brief gets the parent hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getParentHashId(self: NpInterfaceDO) -> int;
 ```
 ## NpInterfaceDO::getName
 
-```rust
+```java
 /**
-     * @brief gets the name of this element.
-     * @return string
-     */
+* @brief gets the name of this element.
+* @return string
+*/
 ```
 ```rust
 pub fn getName(self: NpInterfaceDO) -> string;
 ```
 ## NpInterfaceDO::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavaDB) -> *NpInterfaceDO;
-```
-## NpInterfaceDO::is\<T\>
-
-```rust
-pub fn is<T>(self: NpInterfaceDO) -> bool;
-```
-## NpInterfaceDO::to\<T\>
-
-```rust
-pub fn to<T>(self: NpInterfaceDO) -> <any>;
-```
-## NpInterfaceDO::key\_neq
-
-```rust
-pub fn key_neq(self: NpInterfaceDO, object: <any>) -> bool;
-```
-## NpInterfaceDO::key\_eq
-
-```rust
-pub fn key_eq(self: NpInterfaceDO, object: <any>) -> bool;
-```
-## NpInterfaceDO::to\_set
-
-```rust
-pub fn to_set(self: NpInterfaceDO) -> *NpInterfaceDO;
 ```

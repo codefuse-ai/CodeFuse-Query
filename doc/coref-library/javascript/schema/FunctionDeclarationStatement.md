@@ -9,10 +9,10 @@ schema FunctionDeclarationStatement {
 ```
 ## FunctionDeclarationStatement::getADescendant
 
-```rust
+```java
 /**
-     * Gets a descendant of this node. 
-     */
+* Gets a descendant of this node. 
+*/
 ```
 ```rust
 pub fn getADescendant(self: FunctionDeclarationStatement) -> *Node;
@@ -24,10 +24,10 @@ pub fn getIndex(self: FunctionDeclarationStatement) -> int;
 ```
 ## FunctionDeclarationStatement::getParentOid
 
-```rust
+```java
 /**
-     * Gets the parent oid of this node.
-     */
+* Gets the parent oid of this node.
+*/
 ```
 ```rust
 pub fn getParentOid(self: FunctionDeclarationStatement) -> int;
@@ -39,62 +39,62 @@ pub fn getEndColumnNumber(self: FunctionDeclarationStatement) -> int;
 ```
 ## FunctionDeclarationStatement::getEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets the enclosing function of it
-     */
+* Gets the enclosing function of it
+*/
 ```
 ```rust
 pub fn getEnclosingFunction(self: FunctionDeclarationStatement) -> FunctionLikeDeclaration;
 ```
 ## FunctionDeclarationStatement::getLastChild
 
-```rust
+```java
 /**
-     * Gets the last child of this node parent.
-     */
+* Gets the last child of this node parent.
+*/
 ```
 ```rust
 pub fn getLastChild(self: FunctionDeclarationStatement) -> Node;
 ```
 ## FunctionDeclarationStatement::getATrailingComment
 
-```rust
+```java
 /**
-     * Gets the trailing comments of it
-     */
+* Gets the trailing comments of it
+*/
 ```
 ```rust
 pub fn getATrailingComment(self: FunctionDeclarationStatement) -> *Comment;
 ```
 ## FunctionDeclarationStatement::getALeadingComment
 
-```rust
+```java
 /**
-     * Gets the leading comments of it
-     */
+* Gets the leading comments of it
+*/
 ```
 ```rust
 pub fn getALeadingComment(self: FunctionDeclarationStatement) -> *Comment;
 ```
 ## FunctionDeclarationStatement::getFile
 
-```rust
+```java
 /**
-     * Gets the file of this node.
-     */
+* Gets the file of this node.
+*/
 ```
 ```rust
 pub fn getFile(self: FunctionDeclarationStatement) -> File;
 ```
 ## FunctionDeclarationStatement::getAnAncestorByLevel
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets an ancestor of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getAnAncestorByLevel(self: FunctionDeclarationStatement, level: int) -> Node;
@@ -106,52 +106,52 @@ pub fn getEndLineNumber(self: FunctionDeclarationStatement) -> int;
 ```
 ## FunctionDeclarationStatement::getRelativePath
 
-```rust
+```java
 /**
-     * Gets the relative path of this node.
-     */
+* Gets the relative path of this node.
+*/
 ```
 ```rust
 pub fn getRelativePath(self: FunctionDeclarationStatement) -> string;
 ```
 ## FunctionDeclarationStatement::getAnAncestorEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets an ancestor enclosing function of it
-     */
+* Gets an ancestor enclosing function of it
+*/
 ```
 ```rust
 pub fn getAnAncestorEnclosingFunction(self: FunctionDeclarationStatement) -> *FunctionLikeDeclaration;
 ```
 ## FunctionDeclarationStatement::getADescendantByLevel
 
-```rust
+```java
 /**
-     * Gets a descendant of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets a descendant of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getADescendantByLevel(self: FunctionDeclarationStatement, level: int) -> *Node;
 ```
 ## FunctionDeclarationStatement::getKind
 
-```rust
+```java
 /**
-     * Get the syntax kind of this node
-     */
+* Get the syntax kind of this node
+*/
 ```
 ```rust
 pub fn getKind(self: FunctionDeclarationStatement) -> int;
 ```
 ## FunctionDeclarationStatement::getAModifier
 
-```rust
+```java
 /**
-     * Gets a modifier.
-     */
+* Gets a modifier.
+*/
 ```
 ```rust
 pub fn getAModifier(self: FunctionDeclarationStatement) -> *Modifier;
@@ -168,161 +168,138 @@ pub fn getStartLineNumber(self: FunctionDeclarationStatement) -> int;
 ```
 ## FunctionDeclarationStatement::getChild
 
-```rust
+```java
 /**
-     * Gets the `i`th child of this node.
-     */
+* Gets the `i`th child of this node.
+*/
 ```
 ```rust
 pub fn getChild(self: FunctionDeclarationStatement, i: int) -> Node;
 ```
 ## FunctionDeclarationStatement::getDecorator
 
-```rust
+```java
 /**
-     * Gets the `i`th decorator.
-     */
+* Gets the `i`th decorator.
+*/
 ```
 ```rust
 pub fn getDecorator(self: FunctionDeclarationStatement, i: int) -> Decorator;
 ```
 ## FunctionDeclarationStatement::getRoot
 
-```rust
+```java
 /**
-     * Gets the root top-level of this node. 
-     */
+* Gets the root top-level of this node. 
+*/
 ```
 ```rust
 pub fn getRoot(self: FunctionDeclarationStatement) -> TopLevelDO;
 ```
 ## FunctionDeclarationStatement::getChildCount
 
-```rust
+```java
 /**
-     * Gets the number of child nodes.
-     */
+* Gets the number of child nodes.
+*/
 ```
 ```rust
 pub fn getChildCount(self: FunctionDeclarationStatement) -> int;
 ```
 ## FunctionDeclarationStatement::getParent
 
-```rust
+```java
 /**
-     * Gets the parent node of this node.
-     */
+* Gets the parent node of this node.
+*/
 ```
 ```rust
 pub fn getParent(self: FunctionDeclarationStatement) -> Node;
 ```
 ## FunctionDeclarationStatement::getAChild
 
-```rust
+```java
 /**
-     * Gets a child node of this node.
-     */
+* Gets a child node of this node.
+*/
 ```
 ```rust
 pub fn getAChild(self: FunctionDeclarationStatement) -> *Node;
 ```
 ## FunctionDeclarationStatement::getAnAncestor
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node. 
-     */
+* Gets an ancestor of this node. 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: FunctionDeclarationStatement) -> *Node;
 ```
 ## FunctionDeclarationStatement::getAComment
 
-```rust
+```java
 /**
-     * Gets the comments related to it
-     */
+* Gets the comments related to it
+*/
 ```
 ```rust
 pub fn getAComment(self: FunctionDeclarationStatement) -> *Comment;
 ```
 ## FunctionDeclarationStatement::getSymbol
 
-```rust
+```java
 /**
-     * Gets the symbol associated with this node.
-     */
+* Gets the symbol associated with this node.
+*/
 ```
 ```rust
 pub fn getSymbol(self: FunctionDeclarationStatement) -> Symbol;
 ```
 ## FunctionDeclarationStatement::getADecorator
 
-```rust
+```java
 /**
-     * Gets a decorator.
-     */
+* Gets a decorator.
+*/
 ```
 ```rust
 pub fn getADecorator(self: FunctionDeclarationStatement) -> *Decorator;
 ```
 ## FunctionDeclarationStatement::getModifier
 
-```rust
+```java
 /**
-     * Gets the `i`th modifier.
-     */
+* Gets the `i`th modifier.
+*/
 ```
 ```rust
 pub fn getModifier(self: FunctionDeclarationStatement, i: int) -> Modifier;
 ```
 ## FunctionDeclarationStatement::getText
 
-```rust
+```java
 /**
-     * Gets the text of this node.
-     */
+* Gets the text of this node.
+*/
 ```
 ```rust
 pub fn getText(self: FunctionDeclarationStatement) -> string;
 ```
 ## FunctionDeclarationStatement::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavascriptDB) -> *FunctionDeclarationStatement;
 ```
 ## FunctionDeclarationStatement::getLocation
 
-```rust
+```java
 /**
-     * Gets the location of this node.
-     */
+* Gets the location of this node.
+*/
 ```
 ```rust
 pub fn getLocation(self: FunctionDeclarationStatement) -> Location;
-```
-## FunctionDeclarationStatement::is\<T\>
-
-```rust
-pub fn is<T>(self: FunctionDeclarationStatement) -> bool;
-```
-## FunctionDeclarationStatement::to\<T\>
-
-```rust
-pub fn to<T>(self: FunctionDeclarationStatement) -> <any>;
-```
-## FunctionDeclarationStatement::key\_neq
-
-```rust
-pub fn key_neq(self: FunctionDeclarationStatement, object: <any>) -> bool;
-```
-## FunctionDeclarationStatement::key\_eq
-
-```rust
-pub fn key_eq(self: FunctionDeclarationStatement, object: <any>) -> bool;
-```
-## FunctionDeclarationStatement::to\_set
-
-```rust
-pub fn to_set(self: FunctionDeclarationStatement) -> *FunctionDeclarationStatement;
 ```

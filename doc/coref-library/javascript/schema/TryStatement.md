@@ -9,140 +9,140 @@ schema TryStatement {
 ```
 ## TryStatement::getLocation
 
-```rust
+```java
 /**
-     * Gets the location of this node.
-     */
+* Gets the location of this node.
+*/
 ```
 ```rust
 pub fn getLocation(self: TryStatement) -> Location;
 ```
 ## TryStatement::getSymbol
 
-```rust
+```java
 /**
-     * Gets the symbol associated with this node.
-     */
+* Gets the symbol associated with this node.
+*/
 ```
 ```rust
 pub fn getSymbol(self: TryStatement) -> Symbol;
 ```
 ## TryStatement::getADecorator
 
-```rust
+```java
 /**
-     * Gets a decorator.
-     */
+* Gets a decorator.
+*/
 ```
 ```rust
 pub fn getADecorator(self: TryStatement) -> *Decorator;
 ```
 ## TryStatement::getText
 
-```rust
+```java
 /**
-     * Gets the text of this node.
-     */
+* Gets the text of this node.
+*/
 ```
 ```rust
 pub fn getText(self: TryStatement) -> string;
 ```
 ## TryStatement::getModifier
 
-```rust
+```java
 /**
-     * Gets the `i`th modifier.
-     */
+* Gets the `i`th modifier.
+*/
 ```
 ```rust
 pub fn getModifier(self: TryStatement, i: int) -> Modifier;
 ```
 ## TryStatement::getAComment
 
-```rust
+```java
 /**
-     * Gets the comments related to it
-     */
+* Gets the comments related to it
+*/
 ```
 ```rust
 pub fn getAComment(self: TryStatement) -> *Comment;
 ```
 ## TryStatement::getAnAncestor
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node. 
-     */
+* Gets an ancestor of this node. 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: TryStatement) -> *Node;
 ```
 ## TryStatement::getALeadingComment
 
-```rust
+```java
 /**
-     * Gets the leading comments of it
-     */
+* Gets the leading comments of it
+*/
 ```
 ```rust
 pub fn getALeadingComment(self: TryStatement) -> *Comment;
 ```
 ## TryStatement::getATrailingComment
 
-```rust
+```java
 /**
-     * Gets the trailing comments of it
-     */
+* Gets the trailing comments of it
+*/
 ```
 ```rust
 pub fn getATrailingComment(self: TryStatement) -> *Comment;
 ```
 ## TryStatement::getChildCount
 
-```rust
+```java
 /**
-     * Gets the number of child nodes.
-     */
+* Gets the number of child nodes.
+*/
 ```
 ```rust
 pub fn getChildCount(self: TryStatement) -> int;
 ```
 ## TryStatement::getRoot
 
-```rust
+```java
 /**
-     * Gets the root top-level of this node. 
-     */
+* Gets the root top-level of this node. 
+*/
 ```
 ```rust
 pub fn getRoot(self: TryStatement) -> TopLevelDO;
 ```
 ## TryStatement::getDecorator
 
-```rust
+```java
 /**
-     * Gets the `i`th decorator.
-     */
+* Gets the `i`th decorator.
+*/
 ```
 ```rust
 pub fn getDecorator(self: TryStatement, i: int) -> Decorator;
 ```
 ## TryStatement::getKind
 
-```rust
+```java
 /**
-     * Get the syntax kind of this node
-     */
+* Get the syntax kind of this node
+*/
 ```
 ```rust
 pub fn getKind(self: TryStatement) -> int;
 ```
 ## TryStatement::getAModifier
 
-```rust
+```java
 /**
-     * Gets a modifier.
-     */
+* Gets a modifier.
+*/
 ```
 ```rust
 pub fn getAModifier(self: TryStatement) -> *Modifier;
@@ -154,10 +154,10 @@ pub fn getStartColumnNumber(self: TryStatement) -> int;
 ```
 ## TryStatement::getChild
 
-```rust
+```java
 /**
-     * Gets the `i`th child of this node.
-     */
+* Gets the `i`th child of this node.
+*/
 ```
 ```rust
 pub fn getChild(self: TryStatement, i: int) -> Node;
@@ -169,32 +169,32 @@ pub fn getStartLineNumber(self: TryStatement) -> int;
 ```
 ## TryStatement::getAnAncestorEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets an ancestor enclosing function of it
-     */
+* Gets an ancestor enclosing function of it
+*/
 ```
 ```rust
 pub fn getAnAncestorEnclosingFunction(self: TryStatement) -> *FunctionLikeDeclaration;
 ```
 ## TryStatement::getADescendantByLevel
 
-```rust
+```java
 /**
-     * Gets a descendant of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets a descendant of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getADescendantByLevel(self: TryStatement, level: int) -> *Node;
 ```
 ## TryStatement::getTryBlock
 
-```rust
+```java
 /** 
-     * Gets the body of this `try` statement. 
-     */
+* Gets the body of this `try` statement. 
+*/
 ```
 ```rust
 pub fn getTryBlock(self: TryStatement) -> BlockStatement;
@@ -206,32 +206,32 @@ pub fn getEndLineNumber(self: TryStatement) -> int;
 ```
 ## TryStatement::getRelativePath
 
-```rust
+```java
 /**
-     * Gets the relative path of this node.
-     */
+* Gets the relative path of this node.
+*/
 ```
 ```rust
 pub fn getRelativePath(self: TryStatement) -> string;
 ```
 ## TryStatement::getAnAncestorByLevel
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets an ancestor of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getAnAncestorByLevel(self: TryStatement, level: int) -> Node;
 ```
 ## TryStatement::getFile
 
-```rust
+```java
 /**
-     * Gets the file of this node.
-     */
+* Gets the file of this node.
+*/
 ```
 ```rust
 pub fn getFile(self: TryStatement) -> File;
@@ -243,85 +243,87 @@ pub fn getEndColumnNumber(self: TryStatement) -> int;
 ```
 ## TryStatement::getLastChild
 
-```rust
+```java
 /**
-     * Gets the last child of this node parent.
-     */
+* Gets the last child of this node parent.
+*/
 ```
 ```rust
 pub fn getLastChild(self: TryStatement) -> Node;
 ```
 ## TryStatement::getEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets the enclosing function of it
-     */
+* Gets the enclosing function of it
+*/
 ```
 ```rust
 pub fn getEnclosingFunction(self: TryStatement) -> FunctionLikeDeclaration;
 ```
 ## TryStatement::haveFinallyBlock
 
-```rust
+```java
 /**
-     * Determine whether this TryStatement has finally block or not.
-     */
+* Determine whether this TryStatement has finally block or not.
+*/
 ```
 ```rust
 pub fn haveFinallyBlock(self: TryStatement) -> bool;
 ```
 ## TryStatement::getADescendant
 
-```rust
+```java
 /**
-     * Gets a descendant of this node. 
-     */
+* Gets a descendant of this node. 
+*/
 ```
 ```rust
 pub fn getADescendant(self: TryStatement) -> *Node;
 ```
 ## TryStatement::getCatchClause
 
-```rust
+```java
 /** 
-     * Gets the `catch` clause of this `try` statement, if any. 
-     */
+* Gets the `catch` clause of this `try` statement, if any. 
+*/
 ```
 ```rust
 pub fn getCatchClause(self: TryStatement) -> CatchClause;
 ```
 ## TryStatement::getAChild
 
-```rust
+```java
 /**
-     * Gets a child node of this node.
-     */
+* Gets a child node of this node.
+*/
 ```
 ```rust
 pub fn getAChild(self: TryStatement) -> *Node;
 ```
 ## TryStatement::getParent
 
-```rust
+```java
 /**
-     * Gets the parent node of this node.
-     */
+* Gets the parent node of this node.
+*/
 ```
 ```rust
 pub fn getParent(self: TryStatement) -> Node;
 ```
 ## TryStatement::getFinallyBlock
 
-```rust
+```java
 /** 
-     * Gets the `finally` block of this `try` statement, if any. 
-     */
+* Gets the `finally` block of this `try` statement, if any. 
+*/
 ```
 ```rust
 pub fn getFinallyBlock(self: TryStatement) -> BlockStatement;
 ```
 ## TryStatement::\_\_all\_\_
+
+Data constraint method.
 
 ```rust
 pub fn __all__(db: JavascriptDB) -> *TryStatement;
@@ -333,36 +335,11 @@ pub fn getIndex(self: TryStatement) -> int;
 ```
 ## TryStatement::getParentOid
 
-```rust
+```java
 /**
-     * Gets the parent oid of this node.
-     */
+* Gets the parent oid of this node.
+*/
 ```
 ```rust
 pub fn getParentOid(self: TryStatement) -> int;
-```
-## TryStatement::is\<T\>
-
-```rust
-pub fn is<T>(self: TryStatement) -> bool;
-```
-## TryStatement::to\<T\>
-
-```rust
-pub fn to<T>(self: TryStatement) -> <any>;
-```
-## TryStatement::key\_neq
-
-```rust
-pub fn key_neq(self: TryStatement, object: <any>) -> bool;
-```
-## TryStatement::key\_eq
-
-```rust
-pub fn key_eq(self: TryStatement, object: <any>) -> bool;
-```
-## TryStatement::to\_set
-
-```rust
-pub fn to_set(self: TryStatement) -> *TryStatement;
 ```

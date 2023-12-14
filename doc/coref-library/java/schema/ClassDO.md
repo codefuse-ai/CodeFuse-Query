@@ -13,75 +13,52 @@ schema ClassDO {
 ```
 ## ClassDO::getIdentifierHashId
 
-```rust
+```java
 /**
-     * @brief gets the identifier hash id of this element.
-     * @return int
-     */
+* @brief gets the identifier hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getIdentifierHashId(self: ClassDO) -> int;
 ```
 ## ClassDO::getLocationHashId
 
-```rust
+```java
 /**
-     * @brief gets the location hash id of this element.
-     * @return int
-     */
+* @brief gets the location hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getLocationHashId(self: ClassDO) -> int;
 ```
 ## ClassDO::getQualifiedName
 
-```rust
+```java
 /**
-     * @brief gets the qualified name of this element.
-     * @return string
-     */
+* @brief gets the qualified name of this element.
+* @return string
+*/
 ```
 ```rust
 pub fn getQualifiedName(self: ClassDO) -> string;
 ```
 ## ClassDO::getParentHashId
 
-```rust
+```java
 /**
-     * @brief gets the parent hash id of this element.
-     * @return int
-     */
+* @brief gets the parent hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getParentHashId(self: ClassDO) -> int;
 ```
 ## ClassDO::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavaDB) -> *ClassDO;
-```
-## ClassDO::is\<T\>
-
-```rust
-pub fn is<T>(self: ClassDO) -> bool;
-```
-## ClassDO::to\<T\>
-
-```rust
-pub fn to<T>(self: ClassDO) -> <any>;
-```
-## ClassDO::key\_neq
-
-```rust
-pub fn key_neq(self: ClassDO, object: <any>) -> bool;
-```
-## ClassDO::key\_eq
-
-```rust
-pub fn key_eq(self: ClassDO, object: <any>) -> bool;
-```
-## ClassDO::to\_set
-
-```rust
-pub fn to_set(self: ClassDO) -> *ClassDO;
 ```

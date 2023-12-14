@@ -9,10 +9,10 @@ schema BindingPattern {
 ```
 ## BindingPattern::getADescendant
 
-```rust
+```java
 /**
-     * Gets a descendant of this node. 
-     */
+* Gets a descendant of this node. 
+*/
 ```
 ```rust
 pub fn getADescendant(self: BindingPattern) -> *Node;
@@ -24,10 +24,10 @@ pub fn getIndex(self: BindingPattern) -> int;
 ```
 ## BindingPattern::getParentOid
 
-```rust
+```java
 /**
-     * Gets the parent oid of this node.
-     */
+* Gets the parent oid of this node.
+*/
 ```
 ```rust
 pub fn getParentOid(self: BindingPattern) -> int;
@@ -39,42 +39,42 @@ pub fn getEndColumnNumber(self: BindingPattern) -> int;
 ```
 ## BindingPattern::getEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets the enclosing function of it
-     */
+* Gets the enclosing function of it
+*/
 ```
 ```rust
 pub fn getEnclosingFunction(self: BindingPattern) -> FunctionLikeDeclaration;
 ```
 ## BindingPattern::getFile
 
-```rust
+```java
 /**
-     * Gets the file of this node.
-     */
+* Gets the file of this node.
+*/
 ```
 ```rust
 pub fn getFile(self: BindingPattern) -> File;
 ```
 ## BindingPattern::getAnAncestorByLevel
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets an ancestor of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getAnAncestorByLevel(self: BindingPattern, level: int) -> Node;
 ```
 ## BindingPattern::getRelativePath
 
-```rust
+```java
 /**
-     * Gets the relative path of this node.
-     */
+* Gets the relative path of this node.
+*/
 ```
 ```rust
 pub fn getRelativePath(self: BindingPattern) -> string;
@@ -86,52 +86,52 @@ pub fn getEndLineNumber(self: BindingPattern) -> int;
 ```
 ## BindingPattern::getLocation
 
-```rust
+```java
 /**
-     * Gets the location of this node.
-     */
+* Gets the location of this node.
+*/
 ```
 ```rust
 pub fn getLocation(self: BindingPattern) -> Location;
 ```
 ## BindingPattern::getAnAncestorEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets an ancestor enclosing function of it
-     */
+* Gets an ancestor enclosing function of it
+*/
 ```
 ```rust
 pub fn getAnAncestorEnclosingFunction(self: BindingPattern) -> *FunctionLikeDeclaration;
 ```
 ## BindingPattern::getADescendantByLevel
 
-```rust
+```java
 /**
-     * Gets a descendant of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets a descendant of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getADescendantByLevel(self: BindingPattern, level: int) -> *Node;
 ```
 ## BindingPattern::getKind
 
-```rust
+```java
 /**
-     * Get the syntax kind of this node
-     */
+* Get the syntax kind of this node
+*/
 ```
 ```rust
 pub fn getKind(self: BindingPattern) -> int;
 ```
 ## BindingPattern::getAModifier
 
-```rust
+```java
 /**
-     * Gets a modifier.
-     */
+* Gets a modifier.
+*/
 ```
 ```rust
 pub fn getAModifier(self: BindingPattern) -> *Modifier;
@@ -148,40 +148,40 @@ pub fn getStartLineNumber(self: BindingPattern) -> int;
 ```
 ## BindingPattern::getChild
 
-```rust
+```java
 /**
-     * Gets the `i`th child of this node.
-     */
+* Gets the `i`th child of this node.
+*/
 ```
 ```rust
 pub fn getChild(self: BindingPattern, i: int) -> Node;
 ```
 ## BindingPattern::getChildCount
 
-```rust
+```java
 /**
-     * Gets the number of child nodes.
-     */
+* Gets the number of child nodes.
+*/
 ```
 ```rust
 pub fn getChildCount(self: BindingPattern) -> int;
 ```
 ## BindingPattern::getDecorator
 
-```rust
+```java
 /**
-     * Gets the `i`th decorator.
-     */
+* Gets the `i`th decorator.
+*/
 ```
 ```rust
 pub fn getDecorator(self: BindingPattern, i: int) -> Decorator;
 ```
 ## BindingPattern::getRoot
 
-```rust
+```java
 /**
-     * Gets the root top-level of this node. 
-     */
+* Gets the root top-level of this node. 
+*/
 ```
 ```rust
 pub fn getRoot(self: BindingPattern) -> TopLevelDO;
@@ -193,10 +193,10 @@ pub fn getElement(self: BindingPattern, i: int) -> ArrayBindingElement;
 ```
 ## BindingPattern::getLastChild
 
-```rust
+```java
 /**
-     * Gets the last child of this node parent.
-     */
+* Gets the last child of this node parent.
+*/
 ```
 ```rust
 pub fn getLastChild(self: BindingPattern) -> Node;
@@ -208,131 +208,108 @@ pub fn getAnElement(self: BindingPattern) -> *ArrayBindingElement;
 ```
 ## BindingPattern::getATrailingComment
 
-```rust
+```java
 /**
-     * Gets the trailing comments of it
-     */
+* Gets the trailing comments of it
+*/
 ```
 ```rust
 pub fn getATrailingComment(self: BindingPattern) -> *Comment;
 ```
 ## BindingPattern::getALeadingComment
 
-```rust
+```java
 /**
-     * Gets the leading comments of it
-     */
+* Gets the leading comments of it
+*/
 ```
 ```rust
 pub fn getALeadingComment(self: BindingPattern) -> *Comment;
 ```
 ## BindingPattern::getParent
 
-```rust
+```java
 /**
-     * Gets the parent node of this node.
-     */
+* Gets the parent node of this node.
+*/
 ```
 ```rust
 pub fn getParent(self: BindingPattern) -> Node;
 ```
 ## BindingPattern::getAChild
 
-```rust
+```java
 /**
-     * Gets a child node of this node.
-     */
+* Gets a child node of this node.
+*/
 ```
 ```rust
 pub fn getAChild(self: BindingPattern) -> *Node;
 ```
 ## BindingPattern::getAnAncestor
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node. 
-     */
+* Gets an ancestor of this node. 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: BindingPattern) -> *Node;
 ```
 ## BindingPattern::getAComment
 
-```rust
+```java
 /**
-     * Gets the comments related to it
-     */
+* Gets the comments related to it
+*/
 ```
 ```rust
 pub fn getAComment(self: BindingPattern) -> *Comment;
 ```
 ## BindingPattern::getModifier
 
-```rust
+```java
 /**
-     * Gets the `i`th modifier.
-     */
+* Gets the `i`th modifier.
+*/
 ```
 ```rust
 pub fn getModifier(self: BindingPattern, i: int) -> Modifier;
 ```
 ## BindingPattern::getText
 
-```rust
+```java
 /**
-     * Gets the text of this node.
-     */
+* Gets the text of this node.
+*/
 ```
 ```rust
 pub fn getText(self: BindingPattern) -> string;
 ```
 ## BindingPattern::getSymbol
 
-```rust
+```java
 /**
-     * Gets the symbol associated with this node.
-     */
+* Gets the symbol associated with this node.
+*/
 ```
 ```rust
 pub fn getSymbol(self: BindingPattern) -> Symbol;
 ```
 ## BindingPattern::getADecorator
 
-```rust
+```java
 /**
-     * Gets a decorator.
-     */
+* Gets a decorator.
+*/
 ```
 ```rust
 pub fn getADecorator(self: BindingPattern) -> *Decorator;
 ```
 ## BindingPattern::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavascriptDB) -> *BindingPattern;
-```
-## BindingPattern::is\<T\>
-
-```rust
-pub fn is<T>(self: BindingPattern) -> bool;
-```
-## BindingPattern::to\<T\>
-
-```rust
-pub fn to<T>(self: BindingPattern) -> <any>;
-```
-## BindingPattern::key\_neq
-
-```rust
-pub fn key_neq(self: BindingPattern, object: <any>) -> bool;
-```
-## BindingPattern::key\_eq
-
-```rust
-pub fn key_eq(self: BindingPattern, object: <any>) -> bool;
-```
-## BindingPattern::to\_set
-
-```rust
-pub fn to_set(self: BindingPattern) -> *BindingPattern;
 ```

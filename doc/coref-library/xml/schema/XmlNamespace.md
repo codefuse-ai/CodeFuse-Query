@@ -12,97 +12,74 @@ schema XmlNamespace {
 ```
 ## XmlNamespace::getPrefixName
 
-```rust
+```java
 /**
-     * @brief gets the prefix name of the element.
-     * @return string 
-     */
+* @brief gets the prefix name of the element.
+* @return string 
+*/
 ```
 ```rust
 pub fn getPrefixName(self: XmlNamespace) -> string;
 ```
 ## XmlNamespace::getUrl
 
-```rust
+```java
 /**
-     * @brief gets the url of the element.
-     * @return string 
-     */
+* @brief gets the url of the element.
+* @return string 
+*/
 ```
 ```rust
 pub fn getUrl(self: XmlNamespace) -> string;
 ```
 ## XmlNamespace::getLocation
 
-```rust
+```java
 /**
-     * @brief gets the location for the element.
-     * @return Location
-     */
+* @brief gets the location for the element.
+* @return Location
+*/
 ```
 ```rust
 pub fn getLocation(self: XmlNamespace) -> Location;
 ```
 ## XmlNamespace::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: XmlDB) -> *XmlNamespace;
 ```
 ## XmlNamespace::getLocationId
 
-```rust
+```java
 /**
-     * @brief gets the location id of this element.
-     * @return int
-     */
+* @brief gets the location id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getLocationId(self: XmlNamespace) -> int;
 ```
 ## XmlNamespace::getXmlElement
 
-```rust
+```java
 /**
-     * @brief gets the belonged xml element of the element.
-     * @return XmlElement 
-     */
+* @brief gets the belonged xml element of the element.
+* @return XmlElement 
+*/
 ```
 ```rust
 pub fn getXmlElement(self: XmlNamespace) -> XmlElement;
 ```
 ## XmlNamespace::getName
 
-```rust
+```java
 /**
-     * @brief gets the name for the element.
-     * @return string
-     */
+* @brief gets the name for the element.
+* @return string
+*/
 ```
 ```rust
 pub fn getName(self: XmlNamespace) -> string;
-```
-## XmlNamespace::is\<T\>
-
-```rust
-pub fn is<T>(self: XmlNamespace) -> bool;
-```
-## XmlNamespace::to\<T\>
-
-```rust
-pub fn to<T>(self: XmlNamespace) -> <any>;
-```
-## XmlNamespace::key\_neq
-
-```rust
-pub fn key_neq(self: XmlNamespace, object: <any>) -> bool;
-```
-## XmlNamespace::key\_eq
-
-```rust
-pub fn key_eq(self: XmlNamespace, object: <any>) -> bool;
-```
-## XmlNamespace::to\_set
-
-```rust
-pub fn to_set(self: XmlNamespace) -> *XmlNamespace;
 ```

@@ -14,174 +14,151 @@ schema IntegerLiteral {
 ```
 ## IntegerLiteral::getType
 
-```rust
+```java
 /**
-     * @brief gets the type of this element.
-     * @return string
-     */
+* @brief gets the type of this element.
+* @return string
+*/
 ```
 ```rust
 pub fn getType(self: IntegerLiteral) -> string;
 ```
 ## IntegerLiteral::getValue
 
-```rust
+```java
 /**
-     * @brief gets the value of the Literal.
-     * @return string
-     */
+* @brief gets the value of the Literal.
+* @return string
+*/
 ```
 ```rust
 pub fn getValue(self: IntegerLiteral) -> string;
 ```
 ## IntegerLiteral::getValueType
 
-```rust
+```java
 /**
-     * @brief gets the type of the Literal value.
-     * @return string
-     */
+* @brief gets the type of the Literal value.
+* @return string
+*/
 ```
 ```rust
 pub fn getValueType(self: IntegerLiteral) -> Type;
 ```
 ## IntegerLiteral::getEnclosingCallable
 
-```rust
+```java
 /**
-     * @brief gets the callable in which this expression occurs.
-     * @return Callable 
-     */
+* @brief gets the callable in which this expression occurs.
+* @return Callable 
+*/
 ```
 ```rust
 pub fn getEnclosingCallable(self: IntegerLiteral) -> Callable;
 ```
 ## IntegerLiteral::getIndex
 
-```rust
+```java
 /**
-     * @brief gets the index order of this element.
-     * @return int
-     */
+* @brief gets the index order of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getIndex(self: IntegerLiteral) -> int;
 ```
 ## IntegerLiteral::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavaDB) -> *IntegerLiteral;
 ```
 ## IntegerLiteral::getLocationHashId
 
-```rust
+```java
 /**
-     * @brief gets the location hash id of this element.
-     * @return int
-     */
+* @brief gets the location hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getLocationHashId(self: IntegerLiteral) -> int;
 ```
 ## IntegerLiteral::getLocation
 
-```rust
+```java
 /**
-     * @brief gets the location for the element.
-     * @return Location
-     */
+* @brief gets the location for the element.
+* @return Location
+*/
 ```
 ```rust
 pub fn getLocation(self: IntegerLiteral) -> Location;
 ```
 ## IntegerLiteral::getParentHashId
 
-```rust
+```java
 /**
-     * @brief gets the parent hash id of this element.
-     * @return int
-     */
+* @brief gets the parent hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getParentHashId(self: IntegerLiteral) -> int;
 ```
 ## IntegerLiteral::getParent
 
-```rust
+```java
 /**
-     * @brief gets the parent of the expression.
-     * @return ElementParent 
-     */
+* @brief gets the parent of the expression.
+* @return ElementParent 
+*/
 ```
 ```rust
 pub fn getParent(self: IntegerLiteral) -> ElementParent;
 ```
 ## IntegerLiteral::getEnclosingStatement
 
-```rust
+```java
 /**
-     * @brief gets the statement which encloses the expression.
-     * @return Statement 
-     */
+* @brief gets the statement which encloses the expression.
+* @return Statement 
+*/
 ```
 ```rust
 pub fn getEnclosingStatement(self: IntegerLiteral) -> Statement;
 ```
 ## IntegerLiteral::getPrintableText
 
-```rust
+```java
 /**
-     * @brief gets a printed representation of this element, including its structure where applicable.
-     * @return string.
-     */
+* @brief gets a printed representation of this element, including its structure where applicable.
+* @return string.
+*/
 ```
 ```rust
 pub fn getPrintableText(self: IntegerLiteral) -> string;
 ```
 ## IntegerLiteral::getSize
 
-```rust
+```java
 /**
-     * @brief gets the size information for the element.
-     * @return NumberOfLines
-     */
+* @brief gets the size information for the element.
+* @return NumberOfLines
+*/
 ```
 ```rust
 pub fn getSize(self: IntegerLiteral) -> NumberOfLines;
 ```
 ## IntegerLiteral::getAnAncestor
 
-```rust
+```java
 /**
-     * @brief gets an ancestor of the element.
-     * @return ElementParent 
-     */
+* @brief gets an ancestor of the element.
+* @return ElementParent 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: IntegerLiteral) -> *ElementParent;
-```
-## IntegerLiteral::is\<T\>
-
-```rust
-pub fn is<T>(self: IntegerLiteral) -> bool;
-```
-## IntegerLiteral::to\<T\>
-
-```rust
-pub fn to<T>(self: IntegerLiteral) -> <any>;
-```
-## IntegerLiteral::key\_neq
-
-```rust
-pub fn key_neq(self: IntegerLiteral, object: <any>) -> bool;
-```
-## IntegerLiteral::key\_eq
-
-```rust
-pub fn key_eq(self: IntegerLiteral, object: <any>) -> bool;
-```
-## IntegerLiteral::to\_set
-
-```rust
-pub fn to_set(self: IntegerLiteral) -> *IntegerLiteral;
 ```

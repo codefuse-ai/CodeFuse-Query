@@ -9,120 +9,120 @@ schema MultiplicationExpression {
 ```
 ## MultiplicationExpression::getSymbol
 
-```rust
+```java
 /**
-     * Gets the symbol associated with this node.
-     */
+* Gets the symbol associated with this node.
+*/
 ```
 ```rust
 pub fn getSymbol(self: MultiplicationExpression) -> Symbol;
 ```
 ## MultiplicationExpression::getADecorator
 
-```rust
+```java
 /**
-     * Gets a decorator.
-     */
+* Gets a decorator.
+*/
 ```
 ```rust
 pub fn getADecorator(self: MultiplicationExpression) -> *Decorator;
 ```
 ## MultiplicationExpression::getAComment
 
-```rust
+```java
 /**
-     * Gets the comments related to it
-     */
+* Gets the comments related to it
+*/
 ```
 ```rust
 pub fn getAComment(self: MultiplicationExpression) -> *Comment;
 ```
 ## MultiplicationExpression::getAnAncestor
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node. 
-     */
+* Gets an ancestor of this node. 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: MultiplicationExpression) -> *Node;
 ```
 ## MultiplicationExpression::getChildCount
 
-```rust
+```java
 /**
-     * Gets the number of child nodes.
-     */
+* Gets the number of child nodes.
+*/
 ```
 ```rust
 pub fn getChildCount(self: MultiplicationExpression) -> int;
 ```
 ## MultiplicationExpression::getATrailingComment
 
-```rust
+```java
 /**
-     * Gets the trailing comments of it
-     */
+* Gets the trailing comments of it
+*/
 ```
 ```rust
 pub fn getATrailingComment(self: MultiplicationExpression) -> *Comment;
 ```
 ## MultiplicationExpression::getALeadingComment
 
-```rust
+```java
 /**
-     * Gets the leading comments of it
-     */
+* Gets the leading comments of it
+*/
 ```
 ```rust
 pub fn getALeadingComment(self: MultiplicationExpression) -> *Comment;
 ```
 ## MultiplicationExpression::getParent
 
-```rust
+```java
 /**
-     * Gets the parent node of this node.
-     */
+* Gets the parent node of this node.
+*/
 ```
 ```rust
 pub fn getParent(self: MultiplicationExpression) -> Node;
 ```
 ## MultiplicationExpression::getAChild
 
-```rust
+```java
 /**
-     * Gets a child node of this node.
-     */
+* Gets a child node of this node.
+*/
 ```
 ```rust
 pub fn getAChild(self: MultiplicationExpression) -> *Node;
 ```
 ## MultiplicationExpression::getDecorator
 
-```rust
+```java
 /**
-     * Gets the `i`th decorator.
-     */
+* Gets the `i`th decorator.
+*/
 ```
 ```rust
 pub fn getDecorator(self: MultiplicationExpression, i: int) -> Decorator;
 ```
 ## MultiplicationExpression::getRoot
 
-```rust
+```java
 /**
-     * Gets the root top-level of this node. 
-     */
+* Gets the root top-level of this node. 
+*/
 ```
 ```rust
 pub fn getRoot(self: MultiplicationExpression) -> TopLevelDO;
 ```
 ## MultiplicationExpression::getChild
 
-```rust
+```java
 /**
-     * Gets the `i`th child of this node.
-     */
+* Gets the `i`th child of this node.
+*/
 ```
 ```rust
 pub fn getChild(self: MultiplicationExpression, i: int) -> Node;
@@ -134,64 +134,64 @@ pub fn getStartLineNumber(self: MultiplicationExpression) -> int;
 ```
 ## MultiplicationExpression::getADescendantByLevel
 
-```rust
+```java
 /**
-     * Gets a descendant of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets a descendant of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getADescendantByLevel(self: MultiplicationExpression, level: int) -> *Node;
 ```
 ## MultiplicationExpression::getAnAncestorEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets an ancestor enclosing function of it
-     */
+* Gets an ancestor enclosing function of it
+*/
 ```
 ```rust
 pub fn getAnAncestorEnclosingFunction(self: MultiplicationExpression) -> *FunctionLikeDeclaration;
 ```
 ## MultiplicationExpression::getLeftOperand
 
-```rust
+```java
 /**
-     * Get the left operand of this binary expression.
-     */
+* Get the left operand of this binary expression.
+*/
 ```
 ```rust
 pub fn getLeftOperand(self: MultiplicationExpression) -> Expression;
 ```
 ## MultiplicationExpression::getAnAncestorByLevel
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets an ancestor of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getAnAncestorByLevel(self: MultiplicationExpression, level: int) -> Node;
 ```
 ## MultiplicationExpression::getFile
 
-```rust
+```java
 /**
-     * Gets the file of this node.
-     */
+* Gets the file of this node.
+*/
 ```
 ```rust
 pub fn getFile(self: MultiplicationExpression) -> File;
 ```
 ## MultiplicationExpression::getText
 
-```rust
+```java
 /**
-     * Gets the text of this node.
-     */
+* Gets the text of this node.
+*/
 ```
 ```rust
 pub fn getText(self: MultiplicationExpression) -> string;
@@ -203,20 +203,20 @@ pub fn getAnOperand(self: MultiplicationExpression) -> *Expression;
 ```
 ## MultiplicationExpression::getModifier
 
-```rust
+```java
 /**
-     * Gets the `i`th modifier.
-     */
+* Gets the `i`th modifier.
+*/
 ```
 ```rust
 pub fn getModifier(self: MultiplicationExpression, i: int) -> Modifier;
 ```
 ## MultiplicationExpression::getRightOperand
 
-```rust
+```java
 /**
-     * Get the right operand of this binary expression.
-     */
+* Get the right operand of this binary expression.
+*/
 ```
 ```rust
 pub fn getRightOperand(self: MultiplicationExpression) -> Expression;
@@ -228,55 +228,57 @@ pub fn getEndLineNumber(self: MultiplicationExpression) -> int;
 ```
 ## MultiplicationExpression::getRelativePath
 
-```rust
+```java
 /**
-     * Gets the relative path of this node.
-     */
+* Gets the relative path of this node.
+*/
 ```
 ```rust
 pub fn getRelativePath(self: MultiplicationExpression) -> string;
 ```
 ## MultiplicationExpression::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavascriptDB) -> *MultiplicationExpression;
 ```
 ## MultiplicationExpression::getLocation
 
-```rust
+```java
 /**
-     * Gets the location of this node.
-     */
+* Gets the location of this node.
+*/
 ```
 ```rust
 pub fn getLocation(self: MultiplicationExpression) -> Location;
 ```
 ## MultiplicationExpression::getOperator
 
-```rust
+```java
 /**
-     * Get the operator of this binary expression.
-     */
+* Get the operator of this binary expression.
+*/
 ```
 ```rust
 pub fn getOperator(self: MultiplicationExpression) -> BinaryOperator;
 ```
 ## MultiplicationExpression::getADescendant
 
-```rust
+```java
 /**
-     * Gets a descendant of this node. 
-     */
+* Gets a descendant of this node. 
+*/
 ```
 ```rust
 pub fn getADescendant(self: MultiplicationExpression) -> *Node;
 ```
 ## MultiplicationExpression::getLeft
 
-```rust
+```java
 /**
-     * Get the left operand of this binary expression. An alias of `getLeftOperand`.
-     */
+* Get the left operand of this binary expression. An alias of `getLeftOperand`.
+*/
 ```
 ```rust
 pub fn getLeft(self: MultiplicationExpression) -> Expression;
@@ -288,40 +290,40 @@ pub fn getStartColumnNumber(self: MultiplicationExpression) -> int;
 ```
 ## MultiplicationExpression::getAModifier
 
-```rust
+```java
 /**
-     * Gets a modifier.
-     */
+* Gets a modifier.
+*/
 ```
 ```rust
 pub fn getAModifier(self: MultiplicationExpression) -> *Modifier;
 ```
 ## MultiplicationExpression::getKind
 
-```rust
+```java
 /**
-     * Get the syntax kind of this node
-     */
+* Get the syntax kind of this node
+*/
 ```
 ```rust
 pub fn getKind(self: MultiplicationExpression) -> int;
 ```
 ## MultiplicationExpression::getLastChild
 
-```rust
+```java
 /**
-     * Gets the last child of this node parent.
-     */
+* Gets the last child of this node parent.
+*/
 ```
 ```rust
 pub fn getLastChild(self: MultiplicationExpression) -> Node;
 ```
 ## MultiplicationExpression::getEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets the enclosing function of it
-     */
+* Gets the enclosing function of it
+*/
 ```
 ```rust
 pub fn getEnclosingFunction(self: MultiplicationExpression) -> FunctionLikeDeclaration;
@@ -333,10 +335,10 @@ pub fn getEndColumnNumber(self: MultiplicationExpression) -> int;
 ```
 ## MultiplicationExpression::getParentOid
 
-```rust
+```java
 /**
-     * Gets the parent oid of this node.
-     */
+* Gets the parent oid of this node.
+*/
 ```
 ```rust
 pub fn getParentOid(self: MultiplicationExpression) -> int;
@@ -348,36 +350,11 @@ pub fn getIndex(self: MultiplicationExpression) -> int;
 ```
 ## MultiplicationExpression::getRight
 
-```rust
+```java
 /**
-     * Get the right operand of this binary expression. An alias of `getRightOperand`
-     */
+* Get the right operand of this binary expression. An alias of `getRightOperand`
+*/
 ```
 ```rust
 pub fn getRight(self: MultiplicationExpression) -> Expression;
-```
-## MultiplicationExpression::is\<T\>
-
-```rust
-pub fn is<T>(self: MultiplicationExpression) -> bool;
-```
-## MultiplicationExpression::to\<T\>
-
-```rust
-pub fn to<T>(self: MultiplicationExpression) -> <any>;
-```
-## MultiplicationExpression::key\_neq
-
-```rust
-pub fn key_neq(self: MultiplicationExpression, object: <any>) -> bool;
-```
-## MultiplicationExpression::key\_eq
-
-```rust
-pub fn key_eq(self: MultiplicationExpression, object: <any>) -> bool;
-```
-## MultiplicationExpression::to\_set
-
-```rust
-pub fn to_set(self: MultiplicationExpression) -> *MultiplicationExpression;
 ```

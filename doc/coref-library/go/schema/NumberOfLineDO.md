@@ -12,64 +12,41 @@ schema NumberOfLineDO {
 ```
 ## NumberOfLineDO::getNumberOfCommentLines
 
-```rust
+```java
 /**
-     * @brief gets the number of comment lines of this element.
-     * @return int
-     */
+* @brief gets the number of comment lines of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getNumberOfCommentLines(self: NumberOfLineDO) -> int;
 ```
 ## NumberOfLineDO::getNumberOfCodeLines
 
-```rust
+```java
 /**
-     * @brief gets the number of code lines of this element.
-     * @return int
-     */
+* @brief gets the number of code lines of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getNumberOfCodeLines(self: NumberOfLineDO) -> int;
 ```
 ## NumberOfLineDO::getNumberOfTotalLines
 
-```rust
+```java
 /**
-     * @brief gets the number of total lines of this element.
-     * @return int
-     */
+* @brief gets the number of total lines of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getNumberOfTotalLines(self: NumberOfLineDO) -> int;
 ```
 ## NumberOfLineDO::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: GoDB) -> *NumberOfLineDO;
-```
-## NumberOfLineDO::is\<T\>
-
-```rust
-pub fn is<T>(self: NumberOfLineDO) -> bool;
-```
-## NumberOfLineDO::to\<T\>
-
-```rust
-pub fn to<T>(self: NumberOfLineDO) -> <any>;
-```
-## NumberOfLineDO::key\_neq
-
-```rust
-pub fn key_neq(self: NumberOfLineDO, object: <any>) -> bool;
-```
-## NumberOfLineDO::key\_eq
-
-```rust
-pub fn key_eq(self: NumberOfLineDO, object: <any>) -> bool;
-```
-## NumberOfLineDO::to\_set
-
-```rust
-pub fn to_set(self: NumberOfLineDO) -> *NumberOfLineDO;
 ```

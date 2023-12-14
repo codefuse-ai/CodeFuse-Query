@@ -10,42 +10,19 @@ schema ExpressionStatementDO {
 ```
 ## ExpressionStatementDO::getExpressionHashId
 
-```rust
+```java
 /**
-     * @brief gets the expression hash id of this element.
-     * @return int
-     */
+* @brief gets the expression hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getExpressionHashId(self: ExpressionStatementDO) -> int;
 ```
 ## ExpressionStatementDO::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavaDB) -> *ExpressionStatementDO;
-```
-## ExpressionStatementDO::is\<T\>
-
-```rust
-pub fn is<T>(self: ExpressionStatementDO) -> bool;
-```
-## ExpressionStatementDO::to\<T\>
-
-```rust
-pub fn to<T>(self: ExpressionStatementDO) -> <any>;
-```
-## ExpressionStatementDO::key\_neq
-
-```rust
-pub fn key_neq(self: ExpressionStatementDO, object: <any>) -> bool;
-```
-## ExpressionStatementDO::key\_eq
-
-```rust
-pub fn key_eq(self: ExpressionStatementDO, object: <any>) -> bool;
-```
-## ExpressionStatementDO::to\_set
-
-```rust
-pub fn to_set(self: ExpressionStatementDO) -> *ExpressionStatementDO;
 ```

@@ -13,185 +13,162 @@ schema Interface {
 ```
 ## Interface::getQualifiedName
 
-```rust
+```java
 /**
-     * @brief gets the qualified name of this element.
-     * @return string
-     */
+* @brief gets the qualified name of this element.
+* @return string
+*/
 ```
 ```rust
 pub fn getQualifiedName(self: Interface) -> string;
 ```
 ## Interface::getIdentifierHashId
 
-```rust
+```java
 /**
-     * @brief gets the identifier hash id of this element.
-     * @return int
-     */
+* @brief gets the identifier hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getIdentifierHashId(self: Interface) -> int;
 ```
 ## Interface::getMethod
 
-```rust
+```java
 /**
-     * @brief gets all methods of the class element.
-     * @return Method 
-     */
+* @brief gets all methods of the class element.
+* @return Method 
+*/
 ```
 ```rust
 pub fn getMethod(self: Interface) -> *Method;
 ```
 ## Interface::getAnAncestor
 
-```rust
+```java
 /**
-     * @brief gets an ancestor of the element.
-     * @return ElementParent 
-     */
+* @brief gets an ancestor of the element.
+* @return ElementParent 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: Interface) -> *ElementParent;
 ```
 ## Interface::getParentHashId
 
-```rust
+```java
 /**
-     * @brief gets the parent hash id of this element.
-     * @return int
-     */
+* @brief gets the parent hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getParentHashId(self: Interface) -> int;
 ```
 ## Interface::getSuperInterface
 
-```rust
+```java
 /**
-     * @brief gets the extends interface of the element.
-     * @return Interface
-     */
+* @brief gets the extends interface of the element.
+* @return Interface
+*/
 ```
 ```rust
 pub fn getSuperInterface(self: Interface) -> *Interface;
 ```
 ## Interface::getField
 
-```rust
+```java
 /**
-     * @brief gets all fields of the class.
-     * @return Field 
-     */
+* @brief gets all fields of the class.
+* @return Field 
+*/
 ```
 ```rust
 pub fn getField(self: Interface) -> *Field;
 ```
 ## Interface::getParent
 
-```rust
+```java
 /**
-     * @brief gets the parent of the method.
-     * @return ClassOrInterface 
-     */
+* @brief gets the parent of the method.
+* @return ClassOrInterface 
+*/
 ```
 ```rust
 pub fn getParent(self: Interface) -> ElementParent;
 ```
 ## Interface::getLocationHashId
 
-```rust
+```java
 /**
-     * @brief gets the location hash id of this element.
-     * @return int
-     */
+* @brief gets the location hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getLocationHashId(self: Interface) -> int;
 ```
 ## Interface::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavaDB) -> *Interface;
 ```
 ## Interface::getLocation
 
-```rust
+```java
 /**
-     * @brief gets the location for the element.
-     * @return Location
-     */
+* @brief gets the location for the element.
+* @return Location
+*/
 ```
 ```rust
 pub fn getLocation(self: Interface) -> Location;
 ```
 ## Interface::getAnAncestorInterface
 
-```rust
+```java
 /**
-     * @brief gets all ancestor classes of the element.
-     * @return Interface
-     */
+* @brief gets all ancestor classes of the element.
+* @return Interface
+*/
 ```
 ```rust
 pub fn getAnAncestorInterface(self: Interface) -> *Interface;
 ```
 ## Interface::getAnnotation
 
-```rust
+```java
 /**
-     * @brief gets the annotation of the class, if any.
-     * @return Annotation 
-     */
+* @brief gets the annotation of the class, if any.
+* @return Annotation 
+*/
 ```
 ```rust
 pub fn getAnnotation(self: Interface) -> *Annotation;
 ```
 ## Interface::getIdentifier
 
-```rust
+```java
 /**
-     * @brief gets the identifier of the element.
-     * @return Identifier 
-     */
+* @brief gets the identifier of the element.
+* @return Identifier 
+*/
 ```
 ```rust
 pub fn getIdentifier(self: Interface) -> Identifier;
 ```
 ## Interface::getName
 
-```rust
+```java
 /**
-     * @brief gets the name of the interface.
-     * @return string 
-     */
+* @brief gets the name of the interface.
+* @return string 
+*/
 ```
 ```rust
 pub fn getName(self: Interface) -> string;
-```
-## Interface::is\<T\>
-
-```rust
-pub fn is<T>(self: Interface) -> bool;
-```
-## Interface::to\<T\>
-
-```rust
-pub fn to<T>(self: Interface) -> <any>;
-```
-## Interface::key\_neq
-
-```rust
-pub fn key_neq(self: Interface, object: <any>) -> bool;
-```
-## Interface::key\_eq
-
-```rust
-pub fn key_eq(self: Interface, object: <any>) -> bool;
-```
-## Interface::to\_set
-
-```rust
-pub fn to_set(self: Interface) -> *Interface;
 ```

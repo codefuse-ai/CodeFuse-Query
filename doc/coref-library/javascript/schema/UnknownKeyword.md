@@ -9,140 +9,140 @@ schema UnknownKeyword {
 ```
 ## UnknownKeyword::getLocation
 
-```rust
+```java
 /**
-     * Gets the location of this node.
-     */
+* Gets the location of this node.
+*/
 ```
 ```rust
 pub fn getLocation(self: UnknownKeyword) -> Location;
 ```
 ## UnknownKeyword::getSymbol
 
-```rust
+```java
 /**
-     * Gets the symbol associated with this node.
-     */
+* Gets the symbol associated with this node.
+*/
 ```
 ```rust
 pub fn getSymbol(self: UnknownKeyword) -> Symbol;
 ```
 ## UnknownKeyword::getADecorator
 
-```rust
+```java
 /**
-     * Gets a decorator.
-     */
+* Gets a decorator.
+*/
 ```
 ```rust
 pub fn getADecorator(self: UnknownKeyword) -> *Decorator;
 ```
 ## UnknownKeyword::getText
 
-```rust
+```java
 /**
-     * Gets the text of this node.
-     */
+* Gets the text of this node.
+*/
 ```
 ```rust
 pub fn getText(self: UnknownKeyword) -> string;
 ```
 ## UnknownKeyword::getModifier
 
-```rust
+```java
 /**
-     * Gets the `i`th modifier.
-     */
+* Gets the `i`th modifier.
+*/
 ```
 ```rust
 pub fn getModifier(self: UnknownKeyword, i: int) -> Modifier;
 ```
 ## UnknownKeyword::getAComment
 
-```rust
+```java
 /**
-     * Gets the comments related to it
-     */
+* Gets the comments related to it
+*/
 ```
 ```rust
 pub fn getAComment(self: UnknownKeyword) -> *Comment;
 ```
 ## UnknownKeyword::getAnAncestor
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node. 
-     */
+* Gets an ancestor of this node. 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: UnknownKeyword) -> *Node;
 ```
 ## UnknownKeyword::getAChild
 
-```rust
+```java
 /**
-     * Gets a child node of this node.
-     */
+* Gets a child node of this node.
+*/
 ```
 ```rust
 pub fn getAChild(self: UnknownKeyword) -> *Node;
 ```
 ## UnknownKeyword::getParent
 
-```rust
+```java
 /**
-     * Gets the parent node of this node.
-     */
+* Gets the parent node of this node.
+*/
 ```
 ```rust
 pub fn getParent(self: UnknownKeyword) -> Node;
 ```
 ## UnknownKeyword::getChildCount
 
-```rust
+```java
 /**
-     * Gets the number of child nodes.
-     */
+* Gets the number of child nodes.
+*/
 ```
 ```rust
 pub fn getChildCount(self: UnknownKeyword) -> int;
 ```
 ## UnknownKeyword::getRoot
 
-```rust
+```java
 /**
-     * Gets the root top-level of this node. 
-     */
+* Gets the root top-level of this node. 
+*/
 ```
 ```rust
 pub fn getRoot(self: UnknownKeyword) -> TopLevelDO;
 ```
 ## UnknownKeyword::getDecorator
 
-```rust
+```java
 /**
-     * Gets the `i`th decorator.
-     */
+* Gets the `i`th decorator.
+*/
 ```
 ```rust
 pub fn getDecorator(self: UnknownKeyword, i: int) -> Decorator;
 ```
 ## UnknownKeyword::getKind
 
-```rust
+```java
 /**
-     * Get the syntax kind of this node
-     */
+* Get the syntax kind of this node
+*/
 ```
 ```rust
 pub fn getKind(self: UnknownKeyword) -> int;
 ```
 ## UnknownKeyword::getAModifier
 
-```rust
+```java
 /**
-     * Gets a modifier.
-     */
+* Gets a modifier.
+*/
 ```
 ```rust
 pub fn getAModifier(self: UnknownKeyword) -> *Modifier;
@@ -154,10 +154,10 @@ pub fn getStartColumnNumber(self: UnknownKeyword) -> int;
 ```
 ## UnknownKeyword::getChild
 
-```rust
+```java
 /**
-     * Gets the `i`th child of this node.
-     */
+* Gets the `i`th child of this node.
+*/
 ```
 ```rust
 pub fn getChild(self: UnknownKeyword, i: int) -> Node;
@@ -169,22 +169,22 @@ pub fn getStartLineNumber(self: UnknownKeyword) -> int;
 ```
 ## UnknownKeyword::getAnAncestorEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets an ancestor enclosing function of it
-     */
+* Gets an ancestor enclosing function of it
+*/
 ```
 ```rust
 pub fn getAnAncestorEnclosingFunction(self: UnknownKeyword) -> *FunctionLikeDeclaration;
 ```
 ## UnknownKeyword::getADescendantByLevel
 
-```rust
+```java
 /**
-     * Gets a descendant of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets a descendant of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getADescendantByLevel(self: UnknownKeyword, level: int) -> *Node;
@@ -196,72 +196,72 @@ pub fn getEndLineNumber(self: UnknownKeyword) -> int;
 ```
 ## UnknownKeyword::getRelativePath
 
-```rust
+```java
 /**
-     * Gets the relative path of this node.
-     */
+* Gets the relative path of this node.
+*/
 ```
 ```rust
 pub fn getRelativePath(self: UnknownKeyword) -> string;
 ```
 ## UnknownKeyword::getAnAncestorByLevel
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets an ancestor of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getAnAncestorByLevel(self: UnknownKeyword, level: int) -> Node;
 ```
 ## UnknownKeyword::getFile
 
-```rust
+```java
 /**
-     * Gets the file of this node.
-     */
+* Gets the file of this node.
+*/
 ```
 ```rust
 pub fn getFile(self: UnknownKeyword) -> File;
 ```
 ## UnknownKeyword::getALeadingComment
 
-```rust
+```java
 /**
-     * Gets the leading comments of it
-     */
+* Gets the leading comments of it
+*/
 ```
 ```rust
 pub fn getALeadingComment(self: UnknownKeyword) -> *Comment;
 ```
 ## UnknownKeyword::getATrailingComment
 
-```rust
+```java
 /**
-     * Gets the trailing comments of it
-     */
+* Gets the trailing comments of it
+*/
 ```
 ```rust
 pub fn getATrailingComment(self: UnknownKeyword) -> *Comment;
 ```
 ## UnknownKeyword::getLastChild
 
-```rust
+```java
 /**
-     * Gets the last child of this node parent.
-     */
+* Gets the last child of this node parent.
+*/
 ```
 ```rust
 pub fn getLastChild(self: UnknownKeyword) -> Node;
 ```
 ## UnknownKeyword::getEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets the enclosing function of it
-     */
+* Gets the enclosing function of it
+*/
 ```
 ```rust
 pub fn getEnclosingFunction(self: UnknownKeyword) -> FunctionLikeDeclaration;
@@ -273,10 +273,10 @@ pub fn getEndColumnNumber(self: UnknownKeyword) -> int;
 ```
 ## UnknownKeyword::getParentOid
 
-```rust
+```java
 /**
-     * Gets the parent oid of this node.
-     */
+* Gets the parent oid of this node.
+*/
 ```
 ```rust
 pub fn getParentOid(self: UnknownKeyword) -> int;
@@ -288,41 +288,18 @@ pub fn getIndex(self: UnknownKeyword) -> int;
 ```
 ## UnknownKeyword::getADescendant
 
-```rust
+```java
 /**
-     * Gets a descendant of this node. 
-     */
+* Gets a descendant of this node. 
+*/
 ```
 ```rust
 pub fn getADescendant(self: UnknownKeyword) -> *Node;
 ```
 ## UnknownKeyword::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavascriptDB) -> *UnknownKeyword;
-```
-## UnknownKeyword::is\<T\>
-
-```rust
-pub fn is<T>(self: UnknownKeyword) -> bool;
-```
-## UnknownKeyword::to\<T\>
-
-```rust
-pub fn to<T>(self: UnknownKeyword) -> <any>;
-```
-## UnknownKeyword::key\_neq
-
-```rust
-pub fn key_neq(self: UnknownKeyword, object: <any>) -> bool;
-```
-## UnknownKeyword::key\_eq
-
-```rust
-pub fn key_eq(self: UnknownKeyword, object: <any>) -> bool;
-```
-## UnknownKeyword::to\_set
-
-```rust
-pub fn to_set(self: UnknownKeyword) -> *UnknownKeyword;
 ```

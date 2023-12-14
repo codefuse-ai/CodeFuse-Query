@@ -12,174 +12,151 @@ schema XmlElement {
 ```
 ## XmlElement::getParentId
 
-```rust
+```java
 /**
-     * @brief gets the parent id of the element.
-     * @return int
-     */
+* @brief gets the parent id of the element.
+* @return int
+*/
 ```
 ```rust
 pub fn getParentId(self: XmlElement) -> int;
 ```
 ## XmlElement::getIndex
 
-```rust
+```java
 /**
-     * @brief gets the index of the element.
-     * @return int 
-     */
+* @brief gets the index of the element.
+* @return int 
+*/
 ```
 ```rust
 pub fn getIndex(self: XmlElement) -> int;
 ```
 ## XmlElement::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: XmlDB) -> *XmlElement;
 ```
 ## XmlElement::getLocation
 
-```rust
+```java
 /**
-     * @brief gets the location for the element.
-     * @return Location
-     */
+* @brief gets the location for the element.
+* @return Location
+*/
 ```
 ```rust
 pub fn getLocation(self: XmlElement) -> Location;
 ```
 ## XmlElement::getCharacter
 
-```rust
+```java
 /**
-     * @brief gets the xml character of the element, if any.
-     * @return XmlCharacter 
-     */
+* @brief gets the xml character of the element, if any.
+* @return XmlCharacter 
+*/
 ```
 ```rust
 pub fn getCharacter(self: XmlElement) -> *XmlCharacter;
 ```
 ## XmlElement::getName
 
-```rust
+```java
 /**
-     * @brief gets the element's name with the prefix.
-     * @return string 
-     */
+* @brief gets the element's name with the prefix.
+* @return string 
+*/
 ```
 ```rust
 pub fn getName(self: XmlElement) -> string;
 ```
 ## XmlElement::getValueByAttributeName
 
-```rust
+```java
 /**
-     * @brief gets the attribute's value by a given attribute name.
-     * @return string
-     */
+* @brief gets the attribute's value by a given attribute name.
+* @return string
+*/
 ```
 ```rust
 pub fn getValueByAttributeName(self: XmlElement, name: string) -> *string;
 ```
 ## XmlElement::getElementPrefix
 
-```rust
+```java
 /**
-     * @brief gets the prefix of the element
-     * @return string 
-     */
+* @brief gets the prefix of the element
+* @return string 
+*/
 ```
 ```rust
 pub fn getElementPrefix(self: XmlElement) -> string;
 ```
 ## XmlElement::getAttribute
 
-```rust
+```java
 /**
-     * @brief gets the attribute of the element, if any.
-     * @return XmlAttribute 
-     */
+* @brief gets the attribute of the element, if any.
+* @return XmlAttribute 
+*/
 ```
 ```rust
 pub fn getAttribute(self: XmlElement) -> *XmlAttribute;
 ```
 ## XmlElement::getElementName
 
-```rust
+```java
 /**
-     * @brief gets the element name.
-     * @return string 
-     */
+* @brief gets the element name.
+* @return string 
+*/
 ```
 ```rust
 pub fn getElementName(self: XmlElement) -> string;
 ```
 ## XmlElement::getLocationId
 
-```rust
+```java
 /**
-     * @brief gets the location id of this element.
-     * @return int
-     */
+* @brief gets the location id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getLocationId(self: XmlElement) -> int;
 ```
 ## XmlElement::getAnAncestor
 
-```rust
+```java
 /**
-     * @brief gets an ancestor of the element.
-     * @return XmlElement 
-     */
+* @brief gets an ancestor of the element.
+* @return XmlElement 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: XmlElement) -> *XmlElement;
 ```
 ## XmlElement::getAChild
 
-```rust
+```java
 /**
-     * @brief gets a child element of the element.
-     * @return XmlElement 
-     */
+* @brief gets a child element of the element.
+* @return XmlElement 
+*/
 ```
 ```rust
 pub fn getAChild(self: XmlElement) -> *XmlElement;
 ```
 ## XmlElement::getParent
 
-```rust
+```java
 /**
-     * @brief gets the parent of the element.
-     * @return XmlElement 
-     */
+* @brief gets the parent of the element.
+* @return XmlElement 
+*/
 ```
 ```rust
 pub fn getParent(self: XmlElement) -> XmlElement;
-```
-## XmlElement::is\<T\>
-
-```rust
-pub fn is<T>(self: XmlElement) -> bool;
-```
-## XmlElement::to\<T\>
-
-```rust
-pub fn to<T>(self: XmlElement) -> <any>;
-```
-## XmlElement::key\_neq
-
-```rust
-pub fn key_neq(self: XmlElement, object: <any>) -> bool;
-```
-## XmlElement::key\_eq
-
-```rust
-pub fn key_eq(self: XmlElement, object: <any>) -> bool;
-```
-## XmlElement::to\_set
-
-```rust
-pub fn to_set(self: XmlElement) -> *XmlElement;
 ```

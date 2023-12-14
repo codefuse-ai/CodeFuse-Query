@@ -9,10 +9,10 @@ schema UnaryPlusExpression {
 ```
 ## UnaryPlusExpression::getParentOid
 
-```rust
+```java
 /**
-     * Gets the parent oid of this node.
-     */
+* Gets the parent oid of this node.
+*/
 ```
 ```rust
 pub fn getParentOid(self: UnaryPlusExpression) -> int;
@@ -29,10 +29,10 @@ pub fn getIndex(self: UnaryPlusExpression) -> int;
 ```
 ## UnaryPlusExpression::getADescendant
 
-```rust
+```java
 /**
-     * Gets a descendant of this node. 
-     */
+* Gets a descendant of this node. 
+*/
 ```
 ```rust
 pub fn getADescendant(self: UnaryPlusExpression) -> *Node;
@@ -44,20 +44,20 @@ pub fn getOperator(self: UnaryPlusExpression) -> PrefixUnaryOperator;
 ```
 ## UnaryPlusExpression::getLocation
 
-```rust
+```java
 /**
-     * Gets the location of this node.
-     */
+* Gets the location of this node.
+*/
 ```
 ```rust
 pub fn getLocation(self: UnaryPlusExpression) -> Location;
 ```
 ## UnaryPlusExpression::getRelativePath
 
-```rust
+```java
 /**
-     * Gets the relative path of this node.
-     */
+* Gets the relative path of this node.
+*/
 ```
 ```rust
 pub fn getRelativePath(self: UnaryPlusExpression) -> string;
@@ -74,94 +74,94 @@ pub fn getEndLineNumber(self: UnaryPlusExpression) -> int;
 ```
 ## UnaryPlusExpression::getFile
 
-```rust
+```java
 /**
-     * Gets the file of this node.
-     */
+* Gets the file of this node.
+*/
 ```
 ```rust
 pub fn getFile(self: UnaryPlusExpression) -> File;
 ```
 ## UnaryPlusExpression::getAnAncestorByLevel
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets an ancestor of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getAnAncestorByLevel(self: UnaryPlusExpression, level: int) -> Node;
 ```
 ## UnaryPlusExpression::getEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets the enclosing function of it
-     */
+* Gets the enclosing function of it
+*/
 ```
 ```rust
 pub fn getEnclosingFunction(self: UnaryPlusExpression) -> FunctionLikeDeclaration;
 ```
 ## UnaryPlusExpression::getATrailingComment
 
-```rust
+```java
 /**
-     * Gets the trailing comments of it
-     */
+* Gets the trailing comments of it
+*/
 ```
 ```rust
 pub fn getATrailingComment(self: UnaryPlusExpression) -> *Comment;
 ```
 ## UnaryPlusExpression::getALeadingComment
 
-```rust
+```java
 /**
-     * Gets the leading comments of it
-     */
+* Gets the leading comments of it
+*/
 ```
 ```rust
 pub fn getALeadingComment(self: UnaryPlusExpression) -> *Comment;
 ```
 ## UnaryPlusExpression::getAnAncestorEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets an ancestor enclosing function of it
-     */
+* Gets an ancestor enclosing function of it
+*/
 ```
 ```rust
 pub fn getAnAncestorEnclosingFunction(self: UnaryPlusExpression) -> *FunctionLikeDeclaration;
 ```
 ## UnaryPlusExpression::getADescendantByLevel
 
-```rust
+```java
 /**
-     * Gets a descendant of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets a descendant of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getADescendantByLevel(self: UnaryPlusExpression, level: int) -> *Node;
 ```
 ## UnaryPlusExpression::getKind
 
-```rust
+```java
 /**
-     * Get the syntax kind of this node
-     */
+* Get the syntax kind of this node
+*/
 ```
 ```rust
 pub fn getKind(self: UnaryPlusExpression) -> int;
 ```
 ## UnaryPlusExpression::getAModifier
 
-```rust
+```java
 /**
-     * Gets a modifier.
-     */
+* Gets a modifier.
+*/
 ```
 ```rust
 pub fn getAModifier(self: UnaryPlusExpression) -> *Modifier;
@@ -178,30 +178,30 @@ pub fn getStartLineNumber(self: UnaryPlusExpression) -> int;
 ```
 ## UnaryPlusExpression::getChild
 
-```rust
+```java
 /**
-     * Gets the `i`th child of this node.
-     */
+* Gets the `i`th child of this node.
+*/
 ```
 ```rust
 pub fn getChild(self: UnaryPlusExpression, i: int) -> Node;
 ```
 ## UnaryPlusExpression::getRoot
 
-```rust
+```java
 /**
-     * Gets the root top-level of this node. 
-     */
+* Gets the root top-level of this node. 
+*/
 ```
 ```rust
 pub fn getRoot(self: UnaryPlusExpression) -> TopLevelDO;
 ```
 ## UnaryPlusExpression::getDecorator
 
-```rust
+```java
 /**
-     * Gets the `i`th decorator.
-     */
+* Gets the `i`th decorator.
+*/
 ```
 ```rust
 pub fn getDecorator(self: UnaryPlusExpression, i: int) -> Decorator;
@@ -213,131 +213,108 @@ pub fn getEndColumnNumber(self: UnaryPlusExpression) -> int;
 ```
 ## UnaryPlusExpression::getAChild
 
-```rust
+```java
 /**
-     * Gets a child node of this node.
-     */
+* Gets a child node of this node.
+*/
 ```
 ```rust
 pub fn getAChild(self: UnaryPlusExpression) -> *Node;
 ```
 ## UnaryPlusExpression::getParent
 
-```rust
+```java
 /**
-     * Gets the parent node of this node.
-     */
+* Gets the parent node of this node.
+*/
 ```
 ```rust
 pub fn getParent(self: UnaryPlusExpression) -> Node;
 ```
 ## UnaryPlusExpression::getLastChild
 
-```rust
+```java
 /**
-     * Gets the last child of this node parent.
-     */
+* Gets the last child of this node parent.
+*/
 ```
 ```rust
 pub fn getLastChild(self: UnaryPlusExpression) -> Node;
 ```
 ## UnaryPlusExpression::getChildCount
 
-```rust
+```java
 /**
-     * Gets the number of child nodes.
-     */
+* Gets the number of child nodes.
+*/
 ```
 ```rust
 pub fn getChildCount(self: UnaryPlusExpression) -> int;
 ```
 ## UnaryPlusExpression::getAnAncestor
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node. 
-     */
+* Gets an ancestor of this node. 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: UnaryPlusExpression) -> *Node;
 ```
 ## UnaryPlusExpression::getAComment
 
-```rust
+```java
 /**
-     * Gets the comments related to it
-     */
+* Gets the comments related to it
+*/
 ```
 ```rust
 pub fn getAComment(self: UnaryPlusExpression) -> *Comment;
 ```
 ## UnaryPlusExpression::getSymbol
 
-```rust
+```java
 /**
-     * Gets the symbol associated with this node.
-     */
+* Gets the symbol associated with this node.
+*/
 ```
 ```rust
 pub fn getSymbol(self: UnaryPlusExpression) -> Symbol;
 ```
 ## UnaryPlusExpression::getADecorator
 
-```rust
+```java
 /**
-     * Gets a decorator.
-     */
+* Gets a decorator.
+*/
 ```
 ```rust
 pub fn getADecorator(self: UnaryPlusExpression) -> *Decorator;
 ```
 ## UnaryPlusExpression::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavascriptDB) -> *UnaryPlusExpression;
 ```
 ## UnaryPlusExpression::getModifier
 
-```rust
+```java
 /**
-     * Gets the `i`th modifier.
-     */
+* Gets the `i`th modifier.
+*/
 ```
 ```rust
 pub fn getModifier(self: UnaryPlusExpression, i: int) -> Modifier;
 ```
 ## UnaryPlusExpression::getText
 
-```rust
+```java
 /**
-     * Gets the text of this node.
-     */
+* Gets the text of this node.
+*/
 ```
 ```rust
 pub fn getText(self: UnaryPlusExpression) -> string;
-```
-## UnaryPlusExpression::is\<T\>
-
-```rust
-pub fn is<T>(self: UnaryPlusExpression) -> bool;
-```
-## UnaryPlusExpression::to\<T\>
-
-```rust
-pub fn to<T>(self: UnaryPlusExpression) -> <any>;
-```
-## UnaryPlusExpression::key\_neq
-
-```rust
-pub fn key_neq(self: UnaryPlusExpression, object: <any>) -> bool;
-```
-## UnaryPlusExpression::key\_eq
-
-```rust
-pub fn key_eq(self: UnaryPlusExpression, object: <any>) -> bool;
-```
-## UnaryPlusExpression::to\_set
-
-```rust
-pub fn to_set(self: UnaryPlusExpression) -> *UnaryPlusExpression;
 ```

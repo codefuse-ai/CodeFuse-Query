@@ -35,21 +35,21 @@ pub fn getText(self: Location) -> string;
 ```
 ## Location::getFile
 
-```rust
+```java
 /**
-     * Gets the file of this location
-     * @return File 
-     */
+* Gets the file of this location
+* @return File 
+*/
 ```
 ```rust
 pub fn getFile(self: Location) -> File;
 ```
 ## Location::getRelativePath
 
-```rust
+```java
 /**
-     * Gets the file relative path of this location
-     */
+* Gets the file relative path of this location
+*/
 ```
 ```rust
 pub fn getRelativePath(self: Location) -> string;
@@ -66,31 +66,8 @@ pub fn getEndLineNumber(self: Location) -> int;
 ```
 ## Location::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavascriptDB) -> *Location;
-```
-## Location::is\<T\>
-
-```rust
-pub fn is<T>(self: Location) -> bool;
-```
-## Location::to\<T\>
-
-```rust
-pub fn to<T>(self: Location) -> <any>;
-```
-## Location::key\_neq
-
-```rust
-pub fn key_neq(self: Location, object: <any>) -> bool;
-```
-## Location::key\_eq
-
-```rust
-pub fn key_eq(self: Location, object: <any>) -> bool;
-```
-## Location::to\_set
-
-```rust
-pub fn to_set(self: Location) -> *Location;
 ```

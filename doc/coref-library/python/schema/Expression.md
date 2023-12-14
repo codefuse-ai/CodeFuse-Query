@@ -14,141 +14,118 @@ schema Expression {
 ```
 ## Expression::getType
 
-```rust
+```java
 /**
-     * @brief gets the type of this element.
-     * @return string
-     */
+* @brief gets the type of this element.
+* @return string
+*/
 ```
 ```rust
 pub fn getType(self: Expression) -> string;
 ```
 ## Expression::getParentOid
 
-```rust
+```java
 /**
-     * @brief gets the parent oid of this element.
-     * @return int
-     */
+* @brief gets the parent oid of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getParentOid(self: Expression) -> int;
 ```
 ## Expression::getPrintableText
 
-```rust
+```java
 /**
-     * @brief gets the printable text of this element.
-     * @return string
-     */
+* @brief gets the printable text of this element.
+* @return string
+*/
 ```
 ```rust
 pub fn getPrintableText(self: Expression) -> string;
 ```
 ## Expression::getEnclosingScope
 
-```rust
+```java
 /**
-     * @brief gets the immediately enclosing scope (module, function or class) whose body contains this statement.
-     * @return Scope 
-     */
+* @brief gets the immediately enclosing scope (module, function or class) whose body contains this statement.
+* @return Scope 
+*/
 ```
 ```rust
 pub fn getEnclosingScope(self: Expression) -> Scope;
 ```
 ## Expression::getLocation
 
-```rust
+```java
 /**
-     * @brief gets the location for the element.
-     * @return Location
-     */
+* @brief gets the location for the element.
+* @return Location
+*/
 ```
 ```rust
 pub fn getLocation(self: Expression) -> Location;
 ```
 ## Expression::getLocationOid
 
-```rust
+```java
 /**
-     * @brief gets the location oid of this element.
-     * @return int
-     */
+* @brief gets the location oid of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getLocationOid(self: Expression) -> int;
 ```
 ## Expression::getParent
 
-```rust
+```java
 /**
-     * @brief gets the parent of the expression.
-     * @return CombineElement 
-     */
+* @brief gets the parent of the expression.
+* @return CombineElement 
+*/
 ```
 ```rust
 pub fn getParent(self: Expression) -> CombineElement;
 ```
 ## Expression::getElementIndex
 
-```rust
+```java
 /**
-     * @brief gets the element index of this element.
-     * @return int
-     */
+* @brief gets the element index of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getElementIndex(self: Expression) -> int;
 ```
 ## Expression::getSize
 
-```rust
+```java
 /**
-     * @brief gets the size information for the element.
-     * @return NumberOfLines
-     */
+* @brief gets the size information for the element.
+* @return NumberOfLines
+*/
 ```
 ```rust
 pub fn getSize(self: Expression) -> NumberOfLines;
 ```
 ## Expression::getAnAncestor
 
-```rust
+```java
 /**
-     * @brief gets an ancestor of the element.
-     * @return CombineElement 
-     */
+* @brief gets an ancestor of the element.
+* @return CombineElement 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: Expression) -> *CombineElement;
 ```
 ## Expression::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: PythonDB) -> *Expression;
-```
-## Expression::is\<T\>
-
-```rust
-pub fn is<T>(self: Expression) -> bool;
-```
-## Expression::to\<T\>
-
-```rust
-pub fn to<T>(self: Expression) -> <any>;
-```
-## Expression::key\_neq
-
-```rust
-pub fn key_neq(self: Expression, object: <any>) -> bool;
-```
-## Expression::key\_eq
-
-```rust
-pub fn key_eq(self: Expression, object: <any>) -> bool;
-```
-## Expression::to\_set
-
-```rust
-pub fn to_set(self: Expression) -> *Expression;
 ```

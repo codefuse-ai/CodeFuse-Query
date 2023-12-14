@@ -13,86 +13,63 @@ schema XmlDtd {
 ```
 ## XmlDtd::getRoot
 
-```rust
+```java
 /**
-     * @brief gets the root of the element.
-     * @return string 
-     */
+* @brief gets the root of the element.
+* @return string 
+*/
 ```
 ```rust
 pub fn getRoot(self: XmlDtd) -> string;
 ```
 ## XmlDtd::getPublicId
 
-```rust
+```java
 /**
-     * @brief gets the public id (which is a string) of the element.
-     * @return string 
-     */
+* @brief gets the public id (which is a string) of the element.
+* @return string 
+*/
 ```
 ```rust
 pub fn getPublicId(self: XmlDtd) -> string;
 ```
 ## XmlDtd::getLocation
 
-```rust
+```java
 /**
-     * @brief gets the location for the element.
-     * @return Location
-     */
+* @brief gets the location for the element.
+* @return Location
+*/
 ```
 ```rust
 pub fn getLocation(self: XmlDtd) -> Location;
 ```
 ## XmlDtd::getSystemId
 
-```rust
+```java
 /**
-     * @brief gets the system id (which is a string) of the element.
-     * @return string 
-     */
+* @brief gets the system id (which is a string) of the element.
+* @return string 
+*/
 ```
 ```rust
 pub fn getSystemId(self: XmlDtd) -> string;
 ```
 ## XmlDtd::getLocationId
 
-```rust
+```java
 /**
-     * @brief gets the location id of this element.
-     * @return int
-     */
+* @brief gets the location id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getLocationId(self: XmlDtd) -> int;
 ```
 ## XmlDtd::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: XmlDB) -> *XmlDtd;
-```
-## XmlDtd::is\<T\>
-
-```rust
-pub fn is<T>(self: XmlDtd) -> bool;
-```
-## XmlDtd::to\<T\>
-
-```rust
-pub fn to<T>(self: XmlDtd) -> <any>;
-```
-## XmlDtd::key\_neq
-
-```rust
-pub fn key_neq(self: XmlDtd, object: <any>) -> bool;
-```
-## XmlDtd::key\_eq
-
-```rust
-pub fn key_eq(self: XmlDtd, object: <any>) -> bool;
-```
-## XmlDtd::to\_set
-
-```rust
-pub fn to_set(self: XmlDtd) -> *XmlDtd;
 ```

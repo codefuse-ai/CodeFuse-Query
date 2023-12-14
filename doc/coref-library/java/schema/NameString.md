@@ -11,75 +11,52 @@ schema NameString {
 ```
 ## NameString::getNameElementHashId
 
-```rust
+```java
 /**
-     * @brief gets the name element hash id of this element.
-     * @return int
-     */
+* @brief gets the name element hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getNameElementHashId(self: NameString) -> int;
 ```
 ## NameString::getValueElementHashId
 
-```rust
+```java
 /**
-     * @brief gets the value element hash id of this element.
-     * @return int
-     */
+* @brief gets the value element hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getValueElementHashId(self: NameString) -> int;
 ```
 ## NameString::getValue
 
-```rust
+```java
 /**
-     * @brief get the referenced statement.
-     * @return Statement 
-     */
+* @brief get the referenced statement.
+* @return Statement 
+*/
 ```
 ```rust
 pub fn getValue(self: NameString) -> Statement;
 ```
 ## NameString::getName
 
-```rust
+```java
 /**
-     * @brief get the identifier of the element.
-     * @return Identifier 
-     */
+* @brief get the identifier of the element.
+* @return Identifier 
+*/
 ```
 ```rust
 pub fn getName(self: NameString) -> Identifier;
 ```
 ## NameString::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavaDB) -> *NameString;
-```
-## NameString::is\<T\>
-
-```rust
-pub fn is<T>(self: NameString) -> bool;
-```
-## NameString::to\<T\>
-
-```rust
-pub fn to<T>(self: NameString) -> <any>;
-```
-## NameString::key\_neq
-
-```rust
-pub fn key_neq(self: NameString, object: <any>) -> bool;
-```
-## NameString::key\_eq
-
-```rust
-pub fn key_eq(self: NameString, object: <any>) -> bool;
-```
-## NameString::to\_set
-
-```rust
-pub fn to_set(self: NameString) -> *NameString;
 ```

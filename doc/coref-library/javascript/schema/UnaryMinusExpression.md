@@ -9,10 +9,10 @@ schema UnaryMinusExpression {
 ```
 ## UnaryMinusExpression::getParentOid
 
-```rust
+```java
 /**
-     * Gets the parent oid of this node.
-     */
+* Gets the parent oid of this node.
+*/
 ```
 ```rust
 pub fn getParentOid(self: UnaryMinusExpression) -> int;
@@ -29,10 +29,10 @@ pub fn getIndex(self: UnaryMinusExpression) -> int;
 ```
 ## UnaryMinusExpression::getADescendant
 
-```rust
+```java
 /**
-     * Gets a descendant of this node. 
-     */
+* Gets a descendant of this node. 
+*/
 ```
 ```rust
 pub fn getADescendant(self: UnaryMinusExpression) -> *Node;
@@ -44,20 +44,20 @@ pub fn getOperator(self: UnaryMinusExpression) -> PrefixUnaryOperator;
 ```
 ## UnaryMinusExpression::getLocation
 
-```rust
+```java
 /**
-     * Gets the location of this node.
-     */
+* Gets the location of this node.
+*/
 ```
 ```rust
 pub fn getLocation(self: UnaryMinusExpression) -> Location;
 ```
 ## UnaryMinusExpression::getRelativePath
 
-```rust
+```java
 /**
-     * Gets the relative path of this node.
-     */
+* Gets the relative path of this node.
+*/
 ```
 ```rust
 pub fn getRelativePath(self: UnaryMinusExpression) -> string;
@@ -74,94 +74,94 @@ pub fn getEndLineNumber(self: UnaryMinusExpression) -> int;
 ```
 ## UnaryMinusExpression::getFile
 
-```rust
+```java
 /**
-     * Gets the file of this node.
-     */
+* Gets the file of this node.
+*/
 ```
 ```rust
 pub fn getFile(self: UnaryMinusExpression) -> File;
 ```
 ## UnaryMinusExpression::getAnAncestorByLevel
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets an ancestor of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getAnAncestorByLevel(self: UnaryMinusExpression, level: int) -> Node;
 ```
 ## UnaryMinusExpression::getEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets the enclosing function of it
-     */
+* Gets the enclosing function of it
+*/
 ```
 ```rust
 pub fn getEnclosingFunction(self: UnaryMinusExpression) -> FunctionLikeDeclaration;
 ```
 ## UnaryMinusExpression::getATrailingComment
 
-```rust
+```java
 /**
-     * Gets the trailing comments of it
-     */
+* Gets the trailing comments of it
+*/
 ```
 ```rust
 pub fn getATrailingComment(self: UnaryMinusExpression) -> *Comment;
 ```
 ## UnaryMinusExpression::getALeadingComment
 
-```rust
+```java
 /**
-     * Gets the leading comments of it
-     */
+* Gets the leading comments of it
+*/
 ```
 ```rust
 pub fn getALeadingComment(self: UnaryMinusExpression) -> *Comment;
 ```
 ## UnaryMinusExpression::getAnAncestorEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets an ancestor enclosing function of it
-     */
+* Gets an ancestor enclosing function of it
+*/
 ```
 ```rust
 pub fn getAnAncestorEnclosingFunction(self: UnaryMinusExpression) -> *FunctionLikeDeclaration;
 ```
 ## UnaryMinusExpression::getADescendantByLevel
 
-```rust
+```java
 /**
-     * Gets a descendant of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets a descendant of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getADescendantByLevel(self: UnaryMinusExpression, level: int) -> *Node;
 ```
 ## UnaryMinusExpression::getKind
 
-```rust
+```java
 /**
-     * Get the syntax kind of this node
-     */
+* Get the syntax kind of this node
+*/
 ```
 ```rust
 pub fn getKind(self: UnaryMinusExpression) -> int;
 ```
 ## UnaryMinusExpression::getAModifier
 
-```rust
+```java
 /**
-     * Gets a modifier.
-     */
+* Gets a modifier.
+*/
 ```
 ```rust
 pub fn getAModifier(self: UnaryMinusExpression) -> *Modifier;
@@ -178,30 +178,30 @@ pub fn getStartLineNumber(self: UnaryMinusExpression) -> int;
 ```
 ## UnaryMinusExpression::getChild
 
-```rust
+```java
 /**
-     * Gets the `i`th child of this node.
-     */
+* Gets the `i`th child of this node.
+*/
 ```
 ```rust
 pub fn getChild(self: UnaryMinusExpression, i: int) -> Node;
 ```
 ## UnaryMinusExpression::getRoot
 
-```rust
+```java
 /**
-     * Gets the root top-level of this node. 
-     */
+* Gets the root top-level of this node. 
+*/
 ```
 ```rust
 pub fn getRoot(self: UnaryMinusExpression) -> TopLevelDO;
 ```
 ## UnaryMinusExpression::getDecorator
 
-```rust
+```java
 /**
-     * Gets the `i`th decorator.
-     */
+* Gets the `i`th decorator.
+*/
 ```
 ```rust
 pub fn getDecorator(self: UnaryMinusExpression, i: int) -> Decorator;
@@ -213,131 +213,108 @@ pub fn getEndColumnNumber(self: UnaryMinusExpression) -> int;
 ```
 ## UnaryMinusExpression::getAChild
 
-```rust
+```java
 /**
-     * Gets a child node of this node.
-     */
+* Gets a child node of this node.
+*/
 ```
 ```rust
 pub fn getAChild(self: UnaryMinusExpression) -> *Node;
 ```
 ## UnaryMinusExpression::getParent
 
-```rust
+```java
 /**
-     * Gets the parent node of this node.
-     */
+* Gets the parent node of this node.
+*/
 ```
 ```rust
 pub fn getParent(self: UnaryMinusExpression) -> Node;
 ```
 ## UnaryMinusExpression::getLastChild
 
-```rust
+```java
 /**
-     * Gets the last child of this node parent.
-     */
+* Gets the last child of this node parent.
+*/
 ```
 ```rust
 pub fn getLastChild(self: UnaryMinusExpression) -> Node;
 ```
 ## UnaryMinusExpression::getChildCount
 
-```rust
+```java
 /**
-     * Gets the number of child nodes.
-     */
+* Gets the number of child nodes.
+*/
 ```
 ```rust
 pub fn getChildCount(self: UnaryMinusExpression) -> int;
 ```
 ## UnaryMinusExpression::getAnAncestor
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node. 
-     */
+* Gets an ancestor of this node. 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: UnaryMinusExpression) -> *Node;
 ```
 ## UnaryMinusExpression::getAComment
 
-```rust
+```java
 /**
-     * Gets the comments related to it
-     */
+* Gets the comments related to it
+*/
 ```
 ```rust
 pub fn getAComment(self: UnaryMinusExpression) -> *Comment;
 ```
 ## UnaryMinusExpression::getSymbol
 
-```rust
+```java
 /**
-     * Gets the symbol associated with this node.
-     */
+* Gets the symbol associated with this node.
+*/
 ```
 ```rust
 pub fn getSymbol(self: UnaryMinusExpression) -> Symbol;
 ```
 ## UnaryMinusExpression::getADecorator
 
-```rust
+```java
 /**
-     * Gets a decorator.
-     */
+* Gets a decorator.
+*/
 ```
 ```rust
 pub fn getADecorator(self: UnaryMinusExpression) -> *Decorator;
 ```
 ## UnaryMinusExpression::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavascriptDB) -> *UnaryMinusExpression;
 ```
 ## UnaryMinusExpression::getModifier
 
-```rust
+```java
 /**
-     * Gets the `i`th modifier.
-     */
+* Gets the `i`th modifier.
+*/
 ```
 ```rust
 pub fn getModifier(self: UnaryMinusExpression, i: int) -> Modifier;
 ```
 ## UnaryMinusExpression::getText
 
-```rust
+```java
 /**
-     * Gets the text of this node.
-     */
+* Gets the text of this node.
+*/
 ```
 ```rust
 pub fn getText(self: UnaryMinusExpression) -> string;
-```
-## UnaryMinusExpression::is\<T\>
-
-```rust
-pub fn is<T>(self: UnaryMinusExpression) -> bool;
-```
-## UnaryMinusExpression::to\<T\>
-
-```rust
-pub fn to<T>(self: UnaryMinusExpression) -> <any>;
-```
-## UnaryMinusExpression::key\_neq
-
-```rust
-pub fn key_neq(self: UnaryMinusExpression, object: <any>) -> bool;
-```
-## UnaryMinusExpression::key\_eq
-
-```rust
-pub fn key_eq(self: UnaryMinusExpression, object: <any>) -> bool;
-```
-## UnaryMinusExpression::to\_set
-
-```rust
-pub fn to_set(self: UnaryMinusExpression) -> *UnaryMinusExpression;
 ```

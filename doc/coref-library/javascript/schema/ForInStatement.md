@@ -9,33 +9,33 @@ schema ForInStatement {
 ```
 ## ForInStatement::getInitializerIndex
 
-```rust
+```java
 /**
-     * Gets the iterator index of this loop.
-     *
-     * In a `for`-`in` loop, the index is always 0.
-     * In a `for`-`of` loop, the index is 1 if it is a `for`-`await`-`of`, otherwise, the index is 0.
-     */
+* Gets the iterator index of this loop.
+*
+* In a `for`-`in` loop, the index is always 0.
+* In a `for`-`of` loop, the index is 1 if it is a `for`-`await`-`of`, otherwise, the index is 0.
+*/
 ```
 ```rust
 pub fn getInitializerIndex(self: ForInStatement) -> int;
 ```
 ## ForInStatement::getParentOid
 
-```rust
+```java
 /**
-     * Gets the parent oid of this node.
-     */
+* Gets the parent oid of this node.
+*/
 ```
 ```rust
 pub fn getParentOid(self: ForInStatement) -> int;
 ```
 ## ForInStatement::getADescendant
 
-```rust
+```java
 /**
-     * Gets a descendant of this node. 
-     */
+* Gets a descendant of this node. 
+*/
 ```
 ```rust
 pub fn getADescendant(self: ForInStatement) -> *Node;
@@ -47,20 +47,20 @@ pub fn getIndex(self: ForInStatement) -> int;
 ```
 ## ForInStatement::getLastChild
 
-```rust
+```java
 /**
-     * Gets the last child of this node parent.
-     */
+* Gets the last child of this node parent.
+*/
 ```
 ```rust
 pub fn getLastChild(self: ForInStatement) -> Node;
 ```
 ## ForInStatement::getEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets the enclosing function of it
-     */
+* Gets the enclosing function of it
+*/
 ```
 ```rust
 pub fn getEnclosingFunction(self: ForInStatement) -> FunctionLikeDeclaration;
@@ -72,32 +72,32 @@ pub fn getEndColumnNumber(self: ForInStatement) -> int;
 ```
 ## ForInStatement::getFile
 
-```rust
+```java
 /**
-     * Gets the file of this node.
-     */
+* Gets the file of this node.
+*/
 ```
 ```rust
 pub fn getFile(self: ForInStatement) -> File;
 ```
 ## ForInStatement::getAnAncestorByLevel
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets an ancestor of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getAnAncestorByLevel(self: ForInStatement, level: int) -> Node;
 ```
 ## ForInStatement::getRelativePath
 
-```rust
+```java
 /**
-     * Gets the relative path of this node.
-     */
+* Gets the relative path of this node.
+*/
 ```
 ```rust
 pub fn getRelativePath(self: ForInStatement) -> string;
@@ -109,72 +109,72 @@ pub fn getEndLineNumber(self: ForInStatement) -> int;
 ```
 ## ForInStatement::getInitializer
 
-```rust
+```java
 /**
-     * Gets the iterator of this `for`-`in` or `for`-`of` loop.
-     */
+* Gets the iterator of this `for`-`in` or `for`-`of` loop.
+*/
 ```
 ```rust
 pub fn getInitializer(self: ForInStatement) -> ForInitializer;
 ```
 ## ForInStatement::getExpression
 
-```rust
+```java
 /**
-     * Gets the expression over which this `for`-`in` or `for`-`of` loop iterates.
-     */
+* Gets the expression over which this `for`-`in` or `for`-`of` loop iterates.
+*/
 ```
 ```rust
 pub fn getExpression(self: ForInStatement) -> Expression;
 ```
 ## ForInStatement::getBody
 
-```rust
+```java
 /**
-     * Gets the body of this `for`-`in` or `for`-`of` loop.
-     */
+* Gets the body of this `for`-`in` or `for`-`of` loop.
+*/
 ```
 ```rust
 pub fn getBody(self: ForInStatement) -> Statement;
 ```
 ## ForInStatement::getAnAncestorEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets an ancestor enclosing function of it
-     */
+* Gets an ancestor enclosing function of it
+*/
 ```
 ```rust
 pub fn getAnAncestorEnclosingFunction(self: ForInStatement) -> *FunctionLikeDeclaration;
 ```
 ## ForInStatement::getADescendantByLevel
 
-```rust
+```java
 /**
-     * Gets a descendant of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets a descendant of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getADescendantByLevel(self: ForInStatement, level: int) -> *Node;
 ```
 ## ForInStatement::getKind
 
-```rust
+```java
 /**
-     * Get the syntax kind of this node
-     */
+* Get the syntax kind of this node
+*/
 ```
 ```rust
 pub fn getKind(self: ForInStatement) -> int;
 ```
 ## ForInStatement::getAModifier
 
-```rust
+```java
 /**
-     * Gets a modifier.
-     */
+* Gets a modifier.
+*/
 ```
 ```rust
 pub fn getAModifier(self: ForInStatement) -> *Modifier;
@@ -191,181 +191,158 @@ pub fn getStartLineNumber(self: ForInStatement) -> int;
 ```
 ## ForInStatement::getChild
 
-```rust
+```java
 /**
-     * Gets the `i`th child of this node.
-     */
+* Gets the `i`th child of this node.
+*/
 ```
 ```rust
 pub fn getChild(self: ForInStatement, i: int) -> Node;
 ```
 ## ForInStatement::getDecorator
 
-```rust
+```java
 /**
-     * Gets the `i`th decorator.
-     */
+* Gets the `i`th decorator.
+*/
 ```
 ```rust
 pub fn getDecorator(self: ForInStatement, i: int) -> Decorator;
 ```
 ## ForInStatement::getRoot
 
-```rust
+```java
 /**
-     * Gets the root top-level of this node. 
-     */
+* Gets the root top-level of this node. 
+*/
 ```
 ```rust
 pub fn getRoot(self: ForInStatement) -> TopLevelDO;
 ```
 ## ForInStatement::getChildCount
 
-```rust
+```java
 /**
-     * Gets the number of child nodes.
-     */
+* Gets the number of child nodes.
+*/
 ```
 ```rust
 pub fn getChildCount(self: ForInStatement) -> int;
 ```
 ## ForInStatement::getALeadingComment
 
-```rust
+```java
 /**
-     * Gets the leading comments of it
-     */
+* Gets the leading comments of it
+*/
 ```
 ```rust
 pub fn getALeadingComment(self: ForInStatement) -> *Comment;
 ```
 ## ForInStatement::getATrailingComment
 
-```rust
+```java
 /**
-     * Gets the trailing comments of it
-     */
+* Gets the trailing comments of it
+*/
 ```
 ```rust
 pub fn getATrailingComment(self: ForInStatement) -> *Comment;
 ```
 ## ForInStatement::getParent
 
-```rust
+```java
 /**
-     * Gets the parent node of this node.
-     */
+* Gets the parent node of this node.
+*/
 ```
 ```rust
 pub fn getParent(self: ForInStatement) -> Node;
 ```
 ## ForInStatement::getAChild
 
-```rust
+```java
 /**
-     * Gets a child node of this node.
-     */
+* Gets a child node of this node.
+*/
 ```
 ```rust
 pub fn getAChild(self: ForInStatement) -> *Node;
 ```
 ## ForInStatement::getAnAncestor
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node. 
-     */
+* Gets an ancestor of this node. 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: ForInStatement) -> *Node;
 ```
 ## ForInStatement::getAComment
 
-```rust
+```java
 /**
-     * Gets the comments related to it
-     */
+* Gets the comments related to it
+*/
 ```
 ```rust
 pub fn getAComment(self: ForInStatement) -> *Comment;
 ```
 ## ForInStatement::getSymbol
 
-```rust
+```java
 /**
-     * Gets the symbol associated with this node.
-     */
+* Gets the symbol associated with this node.
+*/
 ```
 ```rust
 pub fn getSymbol(self: ForInStatement) -> Symbol;
 ```
 ## ForInStatement::getADecorator
 
-```rust
+```java
 /**
-     * Gets a decorator.
-     */
+* Gets a decorator.
+*/
 ```
 ```rust
 pub fn getADecorator(self: ForInStatement) -> *Decorator;
 ```
 ## ForInStatement::getModifier
 
-```rust
+```java
 /**
-     * Gets the `i`th modifier.
-     */
+* Gets the `i`th modifier.
+*/
 ```
 ```rust
 pub fn getModifier(self: ForInStatement, i: int) -> Modifier;
 ```
 ## ForInStatement::getText
 
-```rust
+```java
 /**
-     * Gets the text of this node.
-     */
+* Gets the text of this node.
+*/
 ```
 ```rust
 pub fn getText(self: ForInStatement) -> string;
 ```
 ## ForInStatement::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavascriptDB) -> *ForInStatement;
 ```
 ## ForInStatement::getLocation
 
-```rust
+```java
 /**
-     * Gets the location of this node.
-     */
+* Gets the location of this node.
+*/
 ```
 ```rust
 pub fn getLocation(self: ForInStatement) -> Location;
-```
-## ForInStatement::is\<T\>
-
-```rust
-pub fn is<T>(self: ForInStatement) -> bool;
-```
-## ForInStatement::to\<T\>
-
-```rust
-pub fn to<T>(self: ForInStatement) -> <any>;
-```
-## ForInStatement::key\_neq
-
-```rust
-pub fn key_neq(self: ForInStatement, object: <any>) -> bool;
-```
-## ForInStatement::key\_eq
-
-```rust
-pub fn key_eq(self: ForInStatement, object: <any>) -> bool;
-```
-## ForInStatement::to\_set
-
-```rust
-pub fn to_set(self: ForInStatement) -> *ForInStatement;
 ```

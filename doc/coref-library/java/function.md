@@ -7,7 +7,7 @@ pub fn isBlock(s: Statement) -> bool;
 ```
 ## lowerToUpper
 
-```rust
+```java
 // util function, convert letters to upper and lower case
 ```
 ```rust

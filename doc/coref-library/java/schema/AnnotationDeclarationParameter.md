@@ -14,130 +14,107 @@ schema AnnotationDeclarationParameter {
 ```
 ## AnnotationDeclarationParameter::getAnnotationDeclarationHashId
 
-```rust
+```java
 /**
-     * @brief gets the annotation declaration hash id of this element.
-     * @return int
-     */
+* @brief gets the annotation declaration hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getAnnotationDeclarationHashId(self: AnnotationDeclarationParameter) -> int;
 ```
 ## AnnotationDeclarationParameter::getParameterValueHashId
 
-```rust
+```java
 /**
-     * @brief gets the parameter value hash id of this element.
-     * @return int
-     */
+* @brief gets the parameter value hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getParameterValueHashId(self: AnnotationDeclarationParameter) -> int;
 ```
 ## AnnotationDeclarationParameter::getPrintableText
 
-```rust
+```java
 /**
-     * @brief gets a printed representation of this element, including its structure where applicable.
-     * @return string.
-     */
+* @brief gets a printed representation of this element, including its structure where applicable.
+* @return string.
+*/
 ```
 ```rust
 pub fn getPrintableText(self: AnnotationDeclarationParameter) -> string;
 ```
 ## AnnotationDeclarationParameter::getLocation
 
-```rust
+```java
 /**
-     * @brief gets the location for the element.
-     * @return Location
-     */
+* @brief gets the location for the element.
+* @return Location
+*/
 ```
 ```rust
 pub fn getLocation(self: AnnotationDeclarationParameter) -> Location;
 ```
 ## AnnotationDeclarationParameter::getLocationHashId
 
-```rust
+```java
 /**
-     * @brief gets the location hash id of this element.
-     * @return int
-     */
+* @brief gets the location hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getLocationHashId(self: AnnotationDeclarationParameter) -> int;
 ```
 ## AnnotationDeclarationParameter::getIdentifier
 
-```rust
+```java
 /**
-     * @brief gets the Identifier for this element.
-     * @return Identifier 
-     */
+* @brief gets the Identifier for this element.
+* @return Identifier 
+*/
 ```
 ```rust
 pub fn getIdentifier(self: AnnotationDeclarationParameter) -> Identifier;
 ```
 ## AnnotationDeclarationParameter::getAnnotationDeclaration
 
-```rust
+```java
 /**
-     * @brief gets the annotation declaration.
-     * @return AnnotationDeclaration 
-     */
+* @brief gets the annotation declaration.
+* @return AnnotationDeclaration 
+*/
 ```
 ```rust
 pub fn getAnnotationDeclaration(self: AnnotationDeclarationParameter) -> AnnotationDeclaration;
 ```
 ## AnnotationDeclarationParameter::getType
 
-```rust
+```java
 /**
-     * @brief gets the reference type for the element.
-     * @return Type
-     */
+* @brief gets the reference type for the element.
+* @return Type
+*/
 ```
 ```rust
 pub fn getType(self: AnnotationDeclarationParameter) -> Type;
 ```
 ## AnnotationDeclarationParameter::getTypeHashId
 
-```rust
+```java
 /**
-     * @brief gets the type hash id of this element.
-     * @return int
-     */
+* @brief gets the type hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getTypeHashId(self: AnnotationDeclarationParameter) -> int;
 ```
 ## AnnotationDeclarationParameter::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavaDB) -> *AnnotationDeclarationParameter;
-```
-## AnnotationDeclarationParameter::is\<T\>
-
-```rust
-pub fn is<T>(self: AnnotationDeclarationParameter) -> bool;
-```
-## AnnotationDeclarationParameter::to\<T\>
-
-```rust
-pub fn to<T>(self: AnnotationDeclarationParameter) -> <any>;
-```
-## AnnotationDeclarationParameter::key\_neq
-
-```rust
-pub fn key_neq(self: AnnotationDeclarationParameter, object: <any>) -> bool;
-```
-## AnnotationDeclarationParameter::key\_eq
-
-```rust
-pub fn key_eq(self: AnnotationDeclarationParameter, object: <any>) -> bool;
-```
-## AnnotationDeclarationParameter::to\_set
-
-```rust
-pub fn to_set(self: AnnotationDeclarationParameter) -> *AnnotationDeclarationParameter;
 ```

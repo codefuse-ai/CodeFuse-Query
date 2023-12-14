@@ -9,140 +9,140 @@ schema BarBarToken {
 ```
 ## BarBarToken::getLocation
 
-```rust
+```java
 /**
-     * Gets the location of this node.
-     */
+* Gets the location of this node.
+*/
 ```
 ```rust
 pub fn getLocation(self: BarBarToken) -> Location;
 ```
 ## BarBarToken::getSymbol
 
-```rust
+```java
 /**
-     * Gets the symbol associated with this node.
-     */
+* Gets the symbol associated with this node.
+*/
 ```
 ```rust
 pub fn getSymbol(self: BarBarToken) -> Symbol;
 ```
 ## BarBarToken::getADecorator
 
-```rust
+```java
 /**
-     * Gets a decorator.
-     */
+* Gets a decorator.
+*/
 ```
 ```rust
 pub fn getADecorator(self: BarBarToken) -> *Decorator;
 ```
 ## BarBarToken::getText
 
-```rust
+```java
 /**
-     * Gets the text of this node.
-     */
+* Gets the text of this node.
+*/
 ```
 ```rust
 pub fn getText(self: BarBarToken) -> string;
 ```
 ## BarBarToken::getModifier
 
-```rust
+```java
 /**
-     * Gets the `i`th modifier.
-     */
+* Gets the `i`th modifier.
+*/
 ```
 ```rust
 pub fn getModifier(self: BarBarToken, i: int) -> Modifier;
 ```
 ## BarBarToken::getAComment
 
-```rust
+```java
 /**
-     * Gets the comments related to it
-     */
+* Gets the comments related to it
+*/
 ```
 ```rust
 pub fn getAComment(self: BarBarToken) -> *Comment;
 ```
 ## BarBarToken::getAnAncestor
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node. 
-     */
+* Gets an ancestor of this node. 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: BarBarToken) -> *Node;
 ```
 ## BarBarToken::getAChild
 
-```rust
+```java
 /**
-     * Gets a child node of this node.
-     */
+* Gets a child node of this node.
+*/
 ```
 ```rust
 pub fn getAChild(self: BarBarToken) -> *Node;
 ```
 ## BarBarToken::getParent
 
-```rust
+```java
 /**
-     * Gets the parent node of this node.
-     */
+* Gets the parent node of this node.
+*/
 ```
 ```rust
 pub fn getParent(self: BarBarToken) -> Node;
 ```
 ## BarBarToken::getChildCount
 
-```rust
+```java
 /**
-     * Gets the number of child nodes.
-     */
+* Gets the number of child nodes.
+*/
 ```
 ```rust
 pub fn getChildCount(self: BarBarToken) -> int;
 ```
 ## BarBarToken::getRoot
 
-```rust
+```java
 /**
-     * Gets the root top-level of this node. 
-     */
+* Gets the root top-level of this node. 
+*/
 ```
 ```rust
 pub fn getRoot(self: BarBarToken) -> TopLevelDO;
 ```
 ## BarBarToken::getDecorator
 
-```rust
+```java
 /**
-     * Gets the `i`th decorator.
-     */
+* Gets the `i`th decorator.
+*/
 ```
 ```rust
 pub fn getDecorator(self: BarBarToken, i: int) -> Decorator;
 ```
 ## BarBarToken::getKind
 
-```rust
+```java
 /**
-     * Get the syntax kind of this node
-     */
+* Get the syntax kind of this node
+*/
 ```
 ```rust
 pub fn getKind(self: BarBarToken) -> int;
 ```
 ## BarBarToken::getAModifier
 
-```rust
+```java
 /**
-     * Gets a modifier.
-     */
+* Gets a modifier.
+*/
 ```
 ```rust
 pub fn getAModifier(self: BarBarToken) -> *Modifier;
@@ -154,10 +154,10 @@ pub fn getStartColumnNumber(self: BarBarToken) -> int;
 ```
 ## BarBarToken::getChild
 
-```rust
+```java
 /**
-     * Gets the `i`th child of this node.
-     */
+* Gets the `i`th child of this node.
+*/
 ```
 ```rust
 pub fn getChild(self: BarBarToken, i: int) -> Node;
@@ -169,22 +169,22 @@ pub fn getStartLineNumber(self: BarBarToken) -> int;
 ```
 ## BarBarToken::getAnAncestorEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets an ancestor enclosing function of it
-     */
+* Gets an ancestor enclosing function of it
+*/
 ```
 ```rust
 pub fn getAnAncestorEnclosingFunction(self: BarBarToken) -> *FunctionLikeDeclaration;
 ```
 ## BarBarToken::getADescendantByLevel
 
-```rust
+```java
 /**
-     * Gets a descendant of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets a descendant of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getADescendantByLevel(self: BarBarToken, level: int) -> *Node;
@@ -196,72 +196,72 @@ pub fn getEndLineNumber(self: BarBarToken) -> int;
 ```
 ## BarBarToken::getRelativePath
 
-```rust
+```java
 /**
-     * Gets the relative path of this node.
-     */
+* Gets the relative path of this node.
+*/
 ```
 ```rust
 pub fn getRelativePath(self: BarBarToken) -> string;
 ```
 ## BarBarToken::getAnAncestorByLevel
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets an ancestor of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getAnAncestorByLevel(self: BarBarToken, level: int) -> Node;
 ```
 ## BarBarToken::getFile
 
-```rust
+```java
 /**
-     * Gets the file of this node.
-     */
+* Gets the file of this node.
+*/
 ```
 ```rust
 pub fn getFile(self: BarBarToken) -> File;
 ```
 ## BarBarToken::getALeadingComment
 
-```rust
+```java
 /**
-     * Gets the leading comments of it
-     */
+* Gets the leading comments of it
+*/
 ```
 ```rust
 pub fn getALeadingComment(self: BarBarToken) -> *Comment;
 ```
 ## BarBarToken::getATrailingComment
 
-```rust
+```java
 /**
-     * Gets the trailing comments of it
-     */
+* Gets the trailing comments of it
+*/
 ```
 ```rust
 pub fn getATrailingComment(self: BarBarToken) -> *Comment;
 ```
 ## BarBarToken::getLastChild
 
-```rust
+```java
 /**
-     * Gets the last child of this node parent.
-     */
+* Gets the last child of this node parent.
+*/
 ```
 ```rust
 pub fn getLastChild(self: BarBarToken) -> Node;
 ```
 ## BarBarToken::getEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets the enclosing function of it
-     */
+* Gets the enclosing function of it
+*/
 ```
 ```rust
 pub fn getEnclosingFunction(self: BarBarToken) -> FunctionLikeDeclaration;
@@ -273,10 +273,10 @@ pub fn getEndColumnNumber(self: BarBarToken) -> int;
 ```
 ## BarBarToken::getParentOid
 
-```rust
+```java
 /**
-     * Gets the parent oid of this node.
-     */
+* Gets the parent oid of this node.
+*/
 ```
 ```rust
 pub fn getParentOid(self: BarBarToken) -> int;
@@ -288,41 +288,18 @@ pub fn getIndex(self: BarBarToken) -> int;
 ```
 ## BarBarToken::getADescendant
 
-```rust
+```java
 /**
-     * Gets a descendant of this node. 
-     */
+* Gets a descendant of this node. 
+*/
 ```
 ```rust
 pub fn getADescendant(self: BarBarToken) -> *Node;
 ```
 ## BarBarToken::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavascriptDB) -> *BarBarToken;
-```
-## BarBarToken::is\<T\>
-
-```rust
-pub fn is<T>(self: BarBarToken) -> bool;
-```
-## BarBarToken::to\<T\>
-
-```rust
-pub fn to<T>(self: BarBarToken) -> <any>;
-```
-## BarBarToken::key\_neq
-
-```rust
-pub fn key_neq(self: BarBarToken, object: <any>) -> bool;
-```
-## BarBarToken::key\_eq
-
-```rust
-pub fn key_eq(self: BarBarToken, object: <any>) -> bool;
-```
-## BarBarToken::to\_set
-
-```rust
-pub fn to_set(self: BarBarToken) -> *BarBarToken;
 ```

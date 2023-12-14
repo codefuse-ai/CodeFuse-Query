@@ -30,9 +30,6 @@ pub fn getChildCount(self: DocComment) -> int;
 ## DocComment::getBelongsFile
 
 ```rust
-// root node
-```
-```rust
 pub fn getBelongsFile(self: DocComment) -> File;
 ```
 ## DocComment::getBelongsFunction
@@ -62,6 +59,8 @@ pub fn hasLocation(self: DocComment) -> bool;
 ```
 ## DocComment::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: GoDB) -> *DocComment;
 ```
@@ -82,7 +81,7 @@ pub fn getAssociatedCommentString(self: DocComment) -> string;
 ```
 ## DocComment::getText
 
-```rust
+```java
 // getText Extract the text associated with a specific node in a file
 ```
 ```rust
@@ -117,29 +116,4 @@ pub fn getAssociateObj(self: DocComment) -> Node;
 
 ```rust
 pub fn countAssociatedComment(self: DocComment) -> int;
-```
-## DocComment::is\<T\>
-
-```rust
-pub fn is<T>(self: DocComment) -> bool;
-```
-## DocComment::to\<T\>
-
-```rust
-pub fn to<T>(self: DocComment) -> <any>;
-```
-## DocComment::key\_neq
-
-```rust
-pub fn key_neq(self: DocComment, object: <any>) -> bool;
-```
-## DocComment::key\_eq
-
-```rust
-pub fn key_eq(self: DocComment, object: <any>) -> bool;
-```
-## DocComment::to\_set
-
-```rust
-pub fn to_set(self: DocComment) -> *DocComment;
 ```

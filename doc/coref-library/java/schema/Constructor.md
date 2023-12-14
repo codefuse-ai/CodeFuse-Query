@@ -14,11 +14,11 @@ schema Constructor {
 ```
 ## Constructor::getName
 
-```rust
+```java
 /**
-     * @brief gets the name of this element.
-     * @return string
-     */
+* @brief gets the name of this element.
+* @return string
+*/
 ```
 ```rust
 pub fn getName(self: Constructor) -> string;
@@ -30,174 +30,151 @@ pub fn getDefinitionBody(self: Constructor) -> string;
 ```
 ## Constructor::getSignature
 
-```rust
+```java
 /**
-     * @brief gets the signature of this element.
-     * @return string
-     */
+* @brief gets the signature of this element.
+* @return string
+*/
 ```
 ```rust
 pub fn getSignature(self: Constructor) -> string;
 ```
 ## Constructor::getAnnotation
 
-```rust
+```java
 /**
-     * @brief gets the annotation of the class, if any.
-     * @return Annotation 
-     */
+* @brief gets the annotation of the class, if any.
+* @return Annotation 
+*/
 ```
 ```rust
 pub fn getAnnotation(self: Constructor) -> Annotation;
 ```
 ## Constructor::getBody
 
-```rust
+```java
 /**
-     * @brief gets the body of the constructor.
-     * @return CodeBlock 
-     */
+* @brief gets the body of the constructor.
+* @return CodeBlock 
+*/
 ```
 ```rust
 pub fn getBody(self: Constructor) -> CodeBlock;
 ```
 ## Constructor::getType
 
-```rust
+```java
 /**
-     * @brief gets the return type of the constructor, which should be null.
-     * @return Type 
-     */
+* @brief gets the return type of the constructor, which should be null.
+* @return Type 
+*/
 ```
 ```rust
 pub fn getType(self: Constructor) -> Type;
 ```
 ## Constructor::getParentHashId
 
-```rust
+```java
 /**
-     * @brief gets the parent hash id of this element.
-     * @return int
-     */
+* @brief gets the parent hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getParentHashId(self: Constructor) -> int;
 ```
 ## Constructor::getParent
 
-```rust
+```java
 /**
-     * @brief gets the parent of the constructor.
-     * @return ClassOrInterface 
-     */
+* @brief gets the parent of the constructor.
+* @return ClassOrInterface 
+*/
 ```
 ```rust
 pub fn getParent(self: Constructor) -> ClassOrInterface;
 ```
 ## Constructor::getSize
 
-```rust
+```java
 /**
-     * @brief gets the size information for the element.
-     * @return NumberOfLines
-     */
+* @brief gets the size information for the element.
+* @return NumberOfLines
+*/
 ```
 ```rust
 pub fn getSize(self: Constructor) -> NumberOfLines;
 ```
 ## Constructor::getAnAncestor
 
-```rust
+```java
 /**
-     * @brief gets an ancestor of the element.
-     * @return ElementParent 
-     */
+* @brief gets an ancestor of the element.
+* @return ElementParent 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: Constructor) -> *ElementParent;
 ```
 ## Constructor::getMatchedFieldByIndex
 
-```rust
+```java
 /**
-     * @brief gets the matched field of the constructor for a given parameter index.
-     * @return Field 
-     */
+* @brief gets the matched field of the constructor for a given parameter index.
+* @return Field 
+*/
 ```
 ```rust
 pub fn getMatchedFieldByIndex(self: Constructor, i: int) -> Field;
 ```
 ## Constructor::getLocationHashId
 
-```rust
+```java
 /**
-     * @brief gets the location hash id of this element.
-     * @return int
-     */
+* @brief gets the location hash id of this element.
+* @return int
+*/
 ```
 ```rust
 pub fn getLocationHashId(self: Constructor) -> int;
 ```
 ## Constructor::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavaDB) -> *Constructor;
 ```
 ## Constructor::getLocation
 
-```rust
+```java
 /**
-     * @brief gets the location for the element.
-     * @return Location
-     */
+* @brief gets the location for the element.
+* @return Location
+*/
 ```
 ```rust
 pub fn getLocation(self: Constructor) -> Location;
 ```
 ## Constructor::getParameter
 
-```rust
+```java
 /**
-     * @brief gets the parameter of the constructor.
-     * @return Parameter 
-     */
+* @brief gets the parameter of the constructor.
+* @return Parameter 
+*/
 ```
 ```rust
 pub fn getParameter(self: Constructor) -> *Parameter;
 ```
 ## Constructor::getModifier
 
-```rust
+```java
 /**
-     * @brief gets the modifier of the constructor
-     * @return Modifier 
-     */
+* @brief gets the modifier of the constructor
+* @return Modifier 
+*/
 ```
 ```rust
 pub fn getModifier(self: Constructor) -> Modifier;
-```
-## Constructor::is\<T\>
-
-```rust
-pub fn is<T>(self: Constructor) -> bool;
-```
-## Constructor::to\<T\>
-
-```rust
-pub fn to<T>(self: Constructor) -> <any>;
-```
-## Constructor::key\_neq
-
-```rust
-pub fn key_neq(self: Constructor, object: <any>) -> bool;
-```
-## Constructor::key\_eq
-
-```rust
-pub fn key_eq(self: Constructor, object: <any>) -> bool;
-```
-## Constructor::to\_set
-
-```rust
-pub fn to_set(self: Constructor) -> *Constructor;
 ```

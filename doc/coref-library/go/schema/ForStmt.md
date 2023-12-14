@@ -59,7 +59,7 @@ pub fn isCaseClause(self: ForStmt) -> bool;
 ```
 ## ForStmt::getText
 
-```rust
+```java
 // getText Extract the text associated with a specific node in a file
 ```
 ```rust
@@ -198,9 +198,6 @@ pub fn countAssociatedComment(self: ForStmt) -> int;
 ## ForStmt::getBelongsFile
 
 ```rust
-// root node
-```
-```rust
 pub fn getBelongsFile(self: ForStmt) -> File;
 ```
 ## ForStmt::isCommClause
@@ -239,6 +236,8 @@ pub fn isOrassignStmt(self: ForStmt) -> bool;
 pub fn isQuoassignStmt(self: ForStmt) -> bool;
 ```
 ## ForStmt::\_\_all\_\_
+
+Data constraint method.
 
 ```rust
 pub fn __all__(db: GoDB) -> *ForStmt;
@@ -327,29 +326,4 @@ pub fn getPostStmt(self: ForStmt) -> Statement;
 
 ```rust
 pub fn getTextSize(self: ForStmt) -> int;
-```
-## ForStmt::is\<T\>
-
-```rust
-pub fn is<T>(self: ForStmt) -> bool;
-```
-## ForStmt::to\<T\>
-
-```rust
-pub fn to<T>(self: ForStmt) -> <any>;
-```
-## ForStmt::key\_neq
-
-```rust
-pub fn key_neq(self: ForStmt, object: <any>) -> bool;
-```
-## ForStmt::key\_eq
-
-```rust
-pub fn key_eq(self: ForStmt, object: <any>) -> bool;
-```
-## ForStmt::to\_set
-
-```rust
-pub fn to_set(self: ForStmt) -> *ForStmt;
 ```

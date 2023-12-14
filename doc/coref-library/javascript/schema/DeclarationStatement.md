@@ -9,140 +9,140 @@ schema DeclarationStatement {
 ```
 ## DeclarationStatement::getLocation
 
-```rust
+```java
 /**
-     * Gets the location of this node.
-     */
+* Gets the location of this node.
+*/
 ```
 ```rust
 pub fn getLocation(self: DeclarationStatement) -> Location;
 ```
 ## DeclarationStatement::getSymbol
 
-```rust
+```java
 /**
-     * Gets the symbol associated with this node.
-     */
+* Gets the symbol associated with this node.
+*/
 ```
 ```rust
 pub fn getSymbol(self: DeclarationStatement) -> Symbol;
 ```
 ## DeclarationStatement::getADecorator
 
-```rust
+```java
 /**
-     * Gets a decorator.
-     */
+* Gets a decorator.
+*/
 ```
 ```rust
 pub fn getADecorator(self: DeclarationStatement) -> *Decorator;
 ```
 ## DeclarationStatement::getText
 
-```rust
+```java
 /**
-     * Gets the text of this node.
-     */
+* Gets the text of this node.
+*/
 ```
 ```rust
 pub fn getText(self: DeclarationStatement) -> string;
 ```
 ## DeclarationStatement::getModifier
 
-```rust
+```java
 /**
-     * Gets the `i`th modifier.
-     */
+* Gets the `i`th modifier.
+*/
 ```
 ```rust
 pub fn getModifier(self: DeclarationStatement, i: int) -> Modifier;
 ```
 ## DeclarationStatement::getAComment
 
-```rust
+```java
 /**
-     * Gets the comments related to it
-     */
+* Gets the comments related to it
+*/
 ```
 ```rust
 pub fn getAComment(self: DeclarationStatement) -> *Comment;
 ```
 ## DeclarationStatement::getAnAncestor
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node. 
-     */
+* Gets an ancestor of this node. 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: DeclarationStatement) -> *Node;
 ```
 ## DeclarationStatement::getAChild
 
-```rust
+```java
 /**
-     * Gets a child node of this node.
-     */
+* Gets a child node of this node.
+*/
 ```
 ```rust
 pub fn getAChild(self: DeclarationStatement) -> *Node;
 ```
 ## DeclarationStatement::getParent
 
-```rust
+```java
 /**
-     * Gets the parent node of this node.
-     */
+* Gets the parent node of this node.
+*/
 ```
 ```rust
 pub fn getParent(self: DeclarationStatement) -> Node;
 ```
 ## DeclarationStatement::getChildCount
 
-```rust
+```java
 /**
-     * Gets the number of child nodes.
-     */
+* Gets the number of child nodes.
+*/
 ```
 ```rust
 pub fn getChildCount(self: DeclarationStatement) -> int;
 ```
 ## DeclarationStatement::getRoot
 
-```rust
+```java
 /**
-     * Gets the root top-level of this node. 
-     */
+* Gets the root top-level of this node. 
+*/
 ```
 ```rust
 pub fn getRoot(self: DeclarationStatement) -> TopLevelDO;
 ```
 ## DeclarationStatement::getDecorator
 
-```rust
+```java
 /**
-     * Gets the `i`th decorator.
-     */
+* Gets the `i`th decorator.
+*/
 ```
 ```rust
 pub fn getDecorator(self: DeclarationStatement, i: int) -> Decorator;
 ```
 ## DeclarationStatement::getKind
 
-```rust
+```java
 /**
-     * Get the syntax kind of this node
-     */
+* Get the syntax kind of this node
+*/
 ```
 ```rust
 pub fn getKind(self: DeclarationStatement) -> int;
 ```
 ## DeclarationStatement::getAModifier
 
-```rust
+```java
 /**
-     * Gets a modifier.
-     */
+* Gets a modifier.
+*/
 ```
 ```rust
 pub fn getAModifier(self: DeclarationStatement) -> *Modifier;
@@ -154,10 +154,10 @@ pub fn getStartColumnNumber(self: DeclarationStatement) -> int;
 ```
 ## DeclarationStatement::getChild
 
-```rust
+```java
 /**
-     * Gets the `i`th child of this node.
-     */
+* Gets the `i`th child of this node.
+*/
 ```
 ```rust
 pub fn getChild(self: DeclarationStatement, i: int) -> Node;
@@ -169,22 +169,22 @@ pub fn getStartLineNumber(self: DeclarationStatement) -> int;
 ```
 ## DeclarationStatement::getAnAncestorEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets an ancestor enclosing function of it
-     */
+* Gets an ancestor enclosing function of it
+*/
 ```
 ```rust
 pub fn getAnAncestorEnclosingFunction(self: DeclarationStatement) -> *FunctionLikeDeclaration;
 ```
 ## DeclarationStatement::getADescendantByLevel
 
-```rust
+```java
 /**
-     * Gets a descendant of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets a descendant of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getADescendantByLevel(self: DeclarationStatement, level: int) -> *Node;
@@ -196,72 +196,72 @@ pub fn getEndLineNumber(self: DeclarationStatement) -> int;
 ```
 ## DeclarationStatement::getRelativePath
 
-```rust
+```java
 /**
-     * Gets the relative path of this node.
-     */
+* Gets the relative path of this node.
+*/
 ```
 ```rust
 pub fn getRelativePath(self: DeclarationStatement) -> string;
 ```
 ## DeclarationStatement::getAnAncestorByLevel
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets an ancestor of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getAnAncestorByLevel(self: DeclarationStatement, level: int) -> Node;
 ```
 ## DeclarationStatement::getFile
 
-```rust
+```java
 /**
-     * Gets the file of this node.
-     */
+* Gets the file of this node.
+*/
 ```
 ```rust
 pub fn getFile(self: DeclarationStatement) -> File;
 ```
 ## DeclarationStatement::getALeadingComment
 
-```rust
+```java
 /**
-     * Gets the leading comments of it
-     */
+* Gets the leading comments of it
+*/
 ```
 ```rust
 pub fn getALeadingComment(self: DeclarationStatement) -> *Comment;
 ```
 ## DeclarationStatement::getATrailingComment
 
-```rust
+```java
 /**
-     * Gets the trailing comments of it
-     */
+* Gets the trailing comments of it
+*/
 ```
 ```rust
 pub fn getATrailingComment(self: DeclarationStatement) -> *Comment;
 ```
 ## DeclarationStatement::getLastChild
 
-```rust
+```java
 /**
-     * Gets the last child of this node parent.
-     */
+* Gets the last child of this node parent.
+*/
 ```
 ```rust
 pub fn getLastChild(self: DeclarationStatement) -> Node;
 ```
 ## DeclarationStatement::getEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets the enclosing function of it
-     */
+* Gets the enclosing function of it
+*/
 ```
 ```rust
 pub fn getEnclosingFunction(self: DeclarationStatement) -> FunctionLikeDeclaration;
@@ -273,10 +273,10 @@ pub fn getEndColumnNumber(self: DeclarationStatement) -> int;
 ```
 ## DeclarationStatement::getParentOid
 
-```rust
+```java
 /**
-     * Gets the parent oid of this node.
-     */
+* Gets the parent oid of this node.
+*/
 ```
 ```rust
 pub fn getParentOid(self: DeclarationStatement) -> int;
@@ -288,41 +288,18 @@ pub fn getIndex(self: DeclarationStatement) -> int;
 ```
 ## DeclarationStatement::getADescendant
 
-```rust
+```java
 /**
-     * Gets a descendant of this node. 
-     */
+* Gets a descendant of this node. 
+*/
 ```
 ```rust
 pub fn getADescendant(self: DeclarationStatement) -> *Node;
 ```
 ## DeclarationStatement::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavascriptDB) -> *DeclarationStatement;
-```
-## DeclarationStatement::is\<T\>
-
-```rust
-pub fn is<T>(self: DeclarationStatement) -> bool;
-```
-## DeclarationStatement::to\<T\>
-
-```rust
-pub fn to<T>(self: DeclarationStatement) -> <any>;
-```
-## DeclarationStatement::key\_neq
-
-```rust
-pub fn key_neq(self: DeclarationStatement, object: <any>) -> bool;
-```
-## DeclarationStatement::key\_eq
-
-```rust
-pub fn key_eq(self: DeclarationStatement, object: <any>) -> bool;
-```
-## DeclarationStatement::to\_set
-
-```rust
-pub fn to_set(self: DeclarationStatement) -> *DeclarationStatement;
 ```

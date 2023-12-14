@@ -9,140 +9,140 @@ schema ConstructorTypeNode {
 ```
 ## ConstructorTypeNode::getLocation
 
-```rust
+```java
 /**
-     * Gets the location of this node.
-     */
+* Gets the location of this node.
+*/
 ```
 ```rust
 pub fn getLocation(self: ConstructorTypeNode) -> Location;
 ```
 ## ConstructorTypeNode::getSymbol
 
-```rust
+```java
 /**
-     * Gets the symbol associated with this node.
-     */
+* Gets the symbol associated with this node.
+*/
 ```
 ```rust
 pub fn getSymbol(self: ConstructorTypeNode) -> Symbol;
 ```
 ## ConstructorTypeNode::getADecorator
 
-```rust
+```java
 /**
-     * Gets a decorator.
-     */
+* Gets a decorator.
+*/
 ```
 ```rust
 pub fn getADecorator(self: ConstructorTypeNode) -> *Decorator;
 ```
 ## ConstructorTypeNode::getText
 
-```rust
+```java
 /**
-     * Gets the text of this node.
-     */
+* Gets the text of this node.
+*/
 ```
 ```rust
 pub fn getText(self: ConstructorTypeNode) -> string;
 ```
 ## ConstructorTypeNode::getModifier
 
-```rust
+```java
 /**
-     * Gets the `i`th modifier.
-     */
+* Gets the `i`th modifier.
+*/
 ```
 ```rust
 pub fn getModifier(self: ConstructorTypeNode, i: int) -> Modifier;
 ```
 ## ConstructorTypeNode::getAComment
 
-```rust
+```java
 /**
-     * Gets the comments related to it
-     */
+* Gets the comments related to it
+*/
 ```
 ```rust
 pub fn getAComment(self: ConstructorTypeNode) -> *Comment;
 ```
 ## ConstructorTypeNode::getAnAncestor
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node. 
-     */
+* Gets an ancestor of this node. 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: ConstructorTypeNode) -> *Node;
 ```
 ## ConstructorTypeNode::getAChild
 
-```rust
+```java
 /**
-     * Gets a child node of this node.
-     */
+* Gets a child node of this node.
+*/
 ```
 ```rust
 pub fn getAChild(self: ConstructorTypeNode) -> *Node;
 ```
 ## ConstructorTypeNode::getParent
 
-```rust
+```java
 /**
-     * Gets the parent node of this node.
-     */
+* Gets the parent node of this node.
+*/
 ```
 ```rust
 pub fn getParent(self: ConstructorTypeNode) -> Node;
 ```
 ## ConstructorTypeNode::getChildCount
 
-```rust
+```java
 /**
-     * Gets the number of child nodes.
-     */
+* Gets the number of child nodes.
+*/
 ```
 ```rust
 pub fn getChildCount(self: ConstructorTypeNode) -> int;
 ```
 ## ConstructorTypeNode::getRoot
 
-```rust
+```java
 /**
-     * Gets the root top-level of this node. 
-     */
+* Gets the root top-level of this node. 
+*/
 ```
 ```rust
 pub fn getRoot(self: ConstructorTypeNode) -> TopLevelDO;
 ```
 ## ConstructorTypeNode::getDecorator
 
-```rust
+```java
 /**
-     * Gets the `i`th decorator.
-     */
+* Gets the `i`th decorator.
+*/
 ```
 ```rust
 pub fn getDecorator(self: ConstructorTypeNode, i: int) -> Decorator;
 ```
 ## ConstructorTypeNode::getKind
 
-```rust
+```java
 /**
-     * Get the syntax kind of this node
-     */
+* Get the syntax kind of this node
+*/
 ```
 ```rust
 pub fn getKind(self: ConstructorTypeNode) -> int;
 ```
 ## ConstructorTypeNode::getAModifier
 
-```rust
+```java
 /**
-     * Gets a modifier.
-     */
+* Gets a modifier.
+*/
 ```
 ```rust
 pub fn getAModifier(self: ConstructorTypeNode) -> *Modifier;
@@ -154,10 +154,10 @@ pub fn getStartColumnNumber(self: ConstructorTypeNode) -> int;
 ```
 ## ConstructorTypeNode::getChild
 
-```rust
+```java
 /**
-     * Gets the `i`th child of this node.
-     */
+* Gets the `i`th child of this node.
+*/
 ```
 ```rust
 pub fn getChild(self: ConstructorTypeNode, i: int) -> Node;
@@ -169,22 +169,22 @@ pub fn getStartLineNumber(self: ConstructorTypeNode) -> int;
 ```
 ## ConstructorTypeNode::getAnAncestorEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets an ancestor enclosing function of it
-     */
+* Gets an ancestor enclosing function of it
+*/
 ```
 ```rust
 pub fn getAnAncestorEnclosingFunction(self: ConstructorTypeNode) -> *FunctionLikeDeclaration;
 ```
 ## ConstructorTypeNode::getADescendantByLevel
 
-```rust
+```java
 /**
-     * Gets a descendant of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets a descendant of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getADescendantByLevel(self: ConstructorTypeNode, level: int) -> *Node;
@@ -196,72 +196,72 @@ pub fn getEndLineNumber(self: ConstructorTypeNode) -> int;
 ```
 ## ConstructorTypeNode::getRelativePath
 
-```rust
+```java
 /**
-     * Gets the relative path of this node.
-     */
+* Gets the relative path of this node.
+*/
 ```
 ```rust
 pub fn getRelativePath(self: ConstructorTypeNode) -> string;
 ```
 ## ConstructorTypeNode::getAnAncestorByLevel
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets an ancestor of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getAnAncestorByLevel(self: ConstructorTypeNode, level: int) -> Node;
 ```
 ## ConstructorTypeNode::getFile
 
-```rust
+```java
 /**
-     * Gets the file of this node.
-     */
+* Gets the file of this node.
+*/
 ```
 ```rust
 pub fn getFile(self: ConstructorTypeNode) -> File;
 ```
 ## ConstructorTypeNode::getALeadingComment
 
-```rust
+```java
 /**
-     * Gets the leading comments of it
-     */
+* Gets the leading comments of it
+*/
 ```
 ```rust
 pub fn getALeadingComment(self: ConstructorTypeNode) -> *Comment;
 ```
 ## ConstructorTypeNode::getATrailingComment
 
-```rust
+```java
 /**
-     * Gets the trailing comments of it
-     */
+* Gets the trailing comments of it
+*/
 ```
 ```rust
 pub fn getATrailingComment(self: ConstructorTypeNode) -> *Comment;
 ```
 ## ConstructorTypeNode::getLastChild
 
-```rust
+```java
 /**
-     * Gets the last child of this node parent.
-     */
+* Gets the last child of this node parent.
+*/
 ```
 ```rust
 pub fn getLastChild(self: ConstructorTypeNode) -> Node;
 ```
 ## ConstructorTypeNode::getEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets the enclosing function of it
-     */
+* Gets the enclosing function of it
+*/
 ```
 ```rust
 pub fn getEnclosingFunction(self: ConstructorTypeNode) -> FunctionLikeDeclaration;
@@ -273,10 +273,10 @@ pub fn getEndColumnNumber(self: ConstructorTypeNode) -> int;
 ```
 ## ConstructorTypeNode::getParentOid
 
-```rust
+```java
 /**
-     * Gets the parent oid of this node.
-     */
+* Gets the parent oid of this node.
+*/
 ```
 ```rust
 pub fn getParentOid(self: ConstructorTypeNode) -> int;
@@ -288,41 +288,18 @@ pub fn getIndex(self: ConstructorTypeNode) -> int;
 ```
 ## ConstructorTypeNode::getADescendant
 
-```rust
+```java
 /**
-     * Gets a descendant of this node. 
-     */
+* Gets a descendant of this node. 
+*/
 ```
 ```rust
 pub fn getADescendant(self: ConstructorTypeNode) -> *Node;
 ```
 ## ConstructorTypeNode::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavascriptDB) -> *ConstructorTypeNode;
-```
-## ConstructorTypeNode::is\<T\>
-
-```rust
-pub fn is<T>(self: ConstructorTypeNode) -> bool;
-```
-## ConstructorTypeNode::to\<T\>
-
-```rust
-pub fn to<T>(self: ConstructorTypeNode) -> <any>;
-```
-## ConstructorTypeNode::key\_neq
-
-```rust
-pub fn key_neq(self: ConstructorTypeNode, object: <any>) -> bool;
-```
-## ConstructorTypeNode::key\_eq
-
-```rust
-pub fn key_eq(self: ConstructorTypeNode, object: <any>) -> bool;
-```
-## ConstructorTypeNode::to\_set
-
-```rust
-pub fn to_set(self: ConstructorTypeNode) -> *ConstructorTypeNode;
 ```

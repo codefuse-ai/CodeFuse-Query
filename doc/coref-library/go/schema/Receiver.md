@@ -70,9 +70,6 @@ pub fn getAnAncestorForIndex(self: Receiver, index: int) -> Node;
 ## Receiver::getBelongsFile
 
 ```rust
-// root node
-```
-```rust
 pub fn getBelongsFile(self: Receiver) -> File;
 ```
 ## Receiver::getAchildNode
@@ -97,7 +94,7 @@ pub fn isMethod(self: Receiver) -> bool;
 ```
 ## Receiver::getText
 
-```rust
+```java
 // getText Extract the text associated with a specific node in a file
 ```
 ```rust
@@ -215,31 +212,8 @@ pub fn getTextStartOffset(self: Receiver) -> int;
 ```
 ## Receiver::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: GoDB) -> *Receiver;
-```
-## Receiver::is\<T\>
-
-```rust
-pub fn is<T>(self: Receiver) -> bool;
-```
-## Receiver::to\<T\>
-
-```rust
-pub fn to<T>(self: Receiver) -> <any>;
-```
-## Receiver::key\_neq
-
-```rust
-pub fn key_neq(self: Receiver, object: <any>) -> bool;
-```
-## Receiver::key\_eq
-
-```rust
-pub fn key_eq(self: Receiver, object: <any>) -> bool;
-```
-## Receiver::to\_set
-
-```rust
-pub fn to_set(self: Receiver) -> *Receiver;
 ```

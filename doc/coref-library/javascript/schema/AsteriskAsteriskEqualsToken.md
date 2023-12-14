@@ -9,140 +9,140 @@ schema AsteriskAsteriskEqualsToken {
 ```
 ## AsteriskAsteriskEqualsToken::getLocation
 
-```rust
+```java
 /**
-     * Gets the location of this node.
-     */
+* Gets the location of this node.
+*/
 ```
 ```rust
 pub fn getLocation(self: AsteriskAsteriskEqualsToken) -> Location;
 ```
 ## AsteriskAsteriskEqualsToken::getSymbol
 
-```rust
+```java
 /**
-     * Gets the symbol associated with this node.
-     */
+* Gets the symbol associated with this node.
+*/
 ```
 ```rust
 pub fn getSymbol(self: AsteriskAsteriskEqualsToken) -> Symbol;
 ```
 ## AsteriskAsteriskEqualsToken::getADecorator
 
-```rust
+```java
 /**
-     * Gets a decorator.
-     */
+* Gets a decorator.
+*/
 ```
 ```rust
 pub fn getADecorator(self: AsteriskAsteriskEqualsToken) -> *Decorator;
 ```
 ## AsteriskAsteriskEqualsToken::getText
 
-```rust
+```java
 /**
-     * Gets the text of this node.
-     */
+* Gets the text of this node.
+*/
 ```
 ```rust
 pub fn getText(self: AsteriskAsteriskEqualsToken) -> string;
 ```
 ## AsteriskAsteriskEqualsToken::getModifier
 
-```rust
+```java
 /**
-     * Gets the `i`th modifier.
-     */
+* Gets the `i`th modifier.
+*/
 ```
 ```rust
 pub fn getModifier(self: AsteriskAsteriskEqualsToken, i: int) -> Modifier;
 ```
 ## AsteriskAsteriskEqualsToken::getAComment
 
-```rust
+```java
 /**
-     * Gets the comments related to it
-     */
+* Gets the comments related to it
+*/
 ```
 ```rust
 pub fn getAComment(self: AsteriskAsteriskEqualsToken) -> *Comment;
 ```
 ## AsteriskAsteriskEqualsToken::getAnAncestor
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node. 
-     */
+* Gets an ancestor of this node. 
+*/
 ```
 ```rust
 pub fn getAnAncestor(self: AsteriskAsteriskEqualsToken) -> *Node;
 ```
 ## AsteriskAsteriskEqualsToken::getAChild
 
-```rust
+```java
 /**
-     * Gets a child node of this node.
-     */
+* Gets a child node of this node.
+*/
 ```
 ```rust
 pub fn getAChild(self: AsteriskAsteriskEqualsToken) -> *Node;
 ```
 ## AsteriskAsteriskEqualsToken::getParent
 
-```rust
+```java
 /**
-     * Gets the parent node of this node.
-     */
+* Gets the parent node of this node.
+*/
 ```
 ```rust
 pub fn getParent(self: AsteriskAsteriskEqualsToken) -> Node;
 ```
 ## AsteriskAsteriskEqualsToken::getChildCount
 
-```rust
+```java
 /**
-     * Gets the number of child nodes.
-     */
+* Gets the number of child nodes.
+*/
 ```
 ```rust
 pub fn getChildCount(self: AsteriskAsteriskEqualsToken) -> int;
 ```
 ## AsteriskAsteriskEqualsToken::getRoot
 
-```rust
+```java
 /**
-     * Gets the root top-level of this node. 
-     */
+* Gets the root top-level of this node. 
+*/
 ```
 ```rust
 pub fn getRoot(self: AsteriskAsteriskEqualsToken) -> TopLevelDO;
 ```
 ## AsteriskAsteriskEqualsToken::getDecorator
 
-```rust
+```java
 /**
-     * Gets the `i`th decorator.
-     */
+* Gets the `i`th decorator.
+*/
 ```
 ```rust
 pub fn getDecorator(self: AsteriskAsteriskEqualsToken, i: int) -> Decorator;
 ```
 ## AsteriskAsteriskEqualsToken::getKind
 
-```rust
+```java
 /**
-     * Get the syntax kind of this node
-     */
+* Get the syntax kind of this node
+*/
 ```
 ```rust
 pub fn getKind(self: AsteriskAsteriskEqualsToken) -> int;
 ```
 ## AsteriskAsteriskEqualsToken::getAModifier
 
-```rust
+```java
 /**
-     * Gets a modifier.
-     */
+* Gets a modifier.
+*/
 ```
 ```rust
 pub fn getAModifier(self: AsteriskAsteriskEqualsToken) -> *Modifier;
@@ -154,10 +154,10 @@ pub fn getStartColumnNumber(self: AsteriskAsteriskEqualsToken) -> int;
 ```
 ## AsteriskAsteriskEqualsToken::getChild
 
-```rust
+```java
 /**
-     * Gets the `i`th child of this node.
-     */
+* Gets the `i`th child of this node.
+*/
 ```
 ```rust
 pub fn getChild(self: AsteriskAsteriskEqualsToken, i: int) -> Node;
@@ -169,22 +169,22 @@ pub fn getStartLineNumber(self: AsteriskAsteriskEqualsToken) -> int;
 ```
 ## AsteriskAsteriskEqualsToken::getAnAncestorEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets an ancestor enclosing function of it
-     */
+* Gets an ancestor enclosing function of it
+*/
 ```
 ```rust
 pub fn getAnAncestorEnclosingFunction(self: AsteriskAsteriskEqualsToken) -> *FunctionLikeDeclaration;
 ```
 ## AsteriskAsteriskEqualsToken::getADescendantByLevel
 
-```rust
+```java
 /**
-     * Gets a descendant of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets a descendant of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getADescendantByLevel(self: AsteriskAsteriskEqualsToken, level: int) -> *Node;
@@ -196,72 +196,72 @@ pub fn getEndLineNumber(self: AsteriskAsteriskEqualsToken) -> int;
 ```
 ## AsteriskAsteriskEqualsToken::getRelativePath
 
-```rust
+```java
 /**
-     * Gets the relative path of this node.
-     */
+* Gets the relative path of this node.
+*/
 ```
 ```rust
 pub fn getRelativePath(self: AsteriskAsteriskEqualsToken) -> string;
 ```
 ## AsteriskAsteriskEqualsToken::getAnAncestorByLevel
 
-```rust
+```java
 /**
-     * Gets an ancestor of this node by the level of the hierarchy.
-     *
-     * @param level: the number of levels to go up in the hierarchy.
-     */
+* Gets an ancestor of this node by the level of the hierarchy.
+*
+* @param level: the number of levels to go up in the hierarchy.
+*/
 ```
 ```rust
 pub fn getAnAncestorByLevel(self: AsteriskAsteriskEqualsToken, level: int) -> Node;
 ```
 ## AsteriskAsteriskEqualsToken::getFile
 
-```rust
+```java
 /**
-     * Gets the file of this node.
-     */
+* Gets the file of this node.
+*/
 ```
 ```rust
 pub fn getFile(self: AsteriskAsteriskEqualsToken) -> File;
 ```
 ## AsteriskAsteriskEqualsToken::getALeadingComment
 
-```rust
+```java
 /**
-     * Gets the leading comments of it
-     */
+* Gets the leading comments of it
+*/
 ```
 ```rust
 pub fn getALeadingComment(self: AsteriskAsteriskEqualsToken) -> *Comment;
 ```
 ## AsteriskAsteriskEqualsToken::getATrailingComment
 
-```rust
+```java
 /**
-     * Gets the trailing comments of it
-     */
+* Gets the trailing comments of it
+*/
 ```
 ```rust
 pub fn getATrailingComment(self: AsteriskAsteriskEqualsToken) -> *Comment;
 ```
 ## AsteriskAsteriskEqualsToken::getLastChild
 
-```rust
+```java
 /**
-     * Gets the last child of this node parent.
-     */
+* Gets the last child of this node parent.
+*/
 ```
 ```rust
 pub fn getLastChild(self: AsteriskAsteriskEqualsToken) -> Node;
 ```
 ## AsteriskAsteriskEqualsToken::getEnclosingFunction
 
-```rust
+```java
 /**
-     * Gets the enclosing function of it
-     */
+* Gets the enclosing function of it
+*/
 ```
 ```rust
 pub fn getEnclosingFunction(self: AsteriskAsteriskEqualsToken) -> FunctionLikeDeclaration;
@@ -273,10 +273,10 @@ pub fn getEndColumnNumber(self: AsteriskAsteriskEqualsToken) -> int;
 ```
 ## AsteriskAsteriskEqualsToken::getParentOid
 
-```rust
+```java
 /**
-     * Gets the parent oid of this node.
-     */
+* Gets the parent oid of this node.
+*/
 ```
 ```rust
 pub fn getParentOid(self: AsteriskAsteriskEqualsToken) -> int;
@@ -288,41 +288,18 @@ pub fn getIndex(self: AsteriskAsteriskEqualsToken) -> int;
 ```
 ## AsteriskAsteriskEqualsToken::getADescendant
 
-```rust
+```java
 /**
-     * Gets a descendant of this node. 
-     */
+* Gets a descendant of this node. 
+*/
 ```
 ```rust
 pub fn getADescendant(self: AsteriskAsteriskEqualsToken) -> *Node;
 ```
 ## AsteriskAsteriskEqualsToken::\_\_all\_\_
 
+Data constraint method.
+
 ```rust
 pub fn __all__(db: JavascriptDB) -> *AsteriskAsteriskEqualsToken;
-```
-## AsteriskAsteriskEqualsToken::is\<T\>
-
-```rust
-pub fn is<T>(self: AsteriskAsteriskEqualsToken) -> bool;
-```
-## AsteriskAsteriskEqualsToken::to\<T\>
-
-```rust
-pub fn to<T>(self: AsteriskAsteriskEqualsToken) -> <any>;
-```
-## AsteriskAsteriskEqualsToken::key\_neq
-
-```rust
-pub fn key_neq(self: AsteriskAsteriskEqualsToken, object: <any>) -> bool;
-```
-## AsteriskAsteriskEqualsToken::key\_eq
-
-```rust
-pub fn key_eq(self: AsteriskAsteriskEqualsToken, object: <any>) -> bool;
-```
-## AsteriskAsteriskEqualsToken::to\_set
-
-```rust
-pub fn to_set(self: AsteriskAsteriskEqualsToken) -> *AsteriskAsteriskEqualsToken;
 ```
