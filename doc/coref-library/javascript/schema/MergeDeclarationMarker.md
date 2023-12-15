@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema MergeDeclarationMarker extends Statement {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## MergeDeclarationMarker::getLocation

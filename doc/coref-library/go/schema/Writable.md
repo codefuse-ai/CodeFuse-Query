@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema Writable extends Node {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## Writable::getAnAncestorForIndex

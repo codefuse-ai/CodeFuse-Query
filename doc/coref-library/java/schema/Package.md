@@ -5,7 +5,7 @@ Primary key: `id: int`
 ```rust
 schema Package {
   qualified_name: string,
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## Package::getPackageName

@@ -10,7 +10,7 @@ schema AliasDO {
   parent_oid: int,
   asname: string,
   name: string,
-  @primary element_oid: int,
+  @primary element_oid: int
 }
 ```
 ## AliasDO::getLocationOid

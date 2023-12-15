@@ -6,7 +6,7 @@ Primary key: `oid: int`
 schema UnExtractedDO {
   name: string,
   type: int,
-  @primary oid: int,
+  @primary oid: int
 }
 ```
 ## UnExtractedDO::getName

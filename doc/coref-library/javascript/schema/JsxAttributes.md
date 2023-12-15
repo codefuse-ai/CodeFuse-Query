@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema JsxAttributes extends PrimaryExpression {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## JsxAttributes::getADescendant

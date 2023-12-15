@@ -5,7 +5,7 @@ Primary key: `id: int`
 ```rust
 schema SyntaxKind {
   name: string,
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## SyntaxKind::getName

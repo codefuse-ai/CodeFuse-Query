@@ -12,7 +12,7 @@ schema Alias extends AliasDO {
   parent_oid: int,
   element_index: int,
   location_oid: int,
-  printable_text: string,
+  printable_text: string
 }
 ```
 ## Alias::getName

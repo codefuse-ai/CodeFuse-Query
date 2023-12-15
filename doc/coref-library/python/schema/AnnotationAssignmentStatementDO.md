@@ -7,7 +7,7 @@ schema AnnotationAssignmentStatementDO {
   target_oid: int,
   is_simple: int,
   annotation_oid: int,
-  @primary element_oid: int,
+  @primary element_oid: int
 }
 ```
 ## AnnotationAssignmentStatementDO::getIsSimple

@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema UnaryExpression extends Expression {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## UnaryExpression::getLocation

@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema ForInitializer extends Node {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## ForInitializer::getADescendant

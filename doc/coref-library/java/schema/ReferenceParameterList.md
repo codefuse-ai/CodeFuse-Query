@@ -4,7 +4,7 @@ Primary key: `id: int`
 
 ```rust
 schema ReferenceParameterList {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## ReferenceParameterList::getAnAncestor

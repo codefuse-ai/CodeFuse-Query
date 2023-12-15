@@ -9,7 +9,7 @@ schema IOTALiteral extends Literal {
   value: string,
   raw: string,
   expr: int,
-  @primary oid: int,
+  @primary oid: int
 }
 ```
 ## IOTALiteral::getRaw

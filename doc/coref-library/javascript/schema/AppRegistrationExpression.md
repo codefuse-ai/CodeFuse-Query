@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema AppRegistrationExpression extends CallExpression {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## AppRegistrationExpression::getLastChild

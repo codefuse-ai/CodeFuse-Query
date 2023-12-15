@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema PostfixDecrementExpression extends PostfixUnaryExpression {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## PostfixDecrementExpression::getParentOid

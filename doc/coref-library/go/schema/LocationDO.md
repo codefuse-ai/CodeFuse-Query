@@ -10,7 +10,7 @@ schema LocationDO {
   end_column_number: int,
   end_line_number: int,
   start_column_number: int,
-  @primary oid: int,
+  @primary oid: int
 }
 ```
 ## LocationDO::getTokenEndOffset

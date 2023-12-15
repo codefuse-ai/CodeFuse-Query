@@ -11,7 +11,7 @@ schema CodeBlock extends CodeBlockDO {
   number_of_statement: int,
   parent_hash_id: int,
   is_empty: int,
-  printable_text: string,
+  printable_text: string
 }
 ```
 ## CodeBlock::getNumberOfStatement

@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema TildeToken extends Token {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## TildeToken::getLocation

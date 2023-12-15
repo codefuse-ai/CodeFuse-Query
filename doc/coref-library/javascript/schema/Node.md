@@ -4,7 +4,7 @@ Primary key: `id: int`
 
 ```rust
 schema Node {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## Node::getADecorator

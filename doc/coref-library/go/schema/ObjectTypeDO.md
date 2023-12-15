@@ -5,7 +5,7 @@ Primary key: `object: int`
 ```rust
 schema ObjectTypeDO {
   tp: int,
-  @primary object: int,
+  @primary object: int
 }
 ```
 ## ObjectTypeDO::getTp

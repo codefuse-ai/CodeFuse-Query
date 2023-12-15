@@ -6,7 +6,7 @@ Primary key: `oid: int`
 schema DefDO {
   object: int,
   ident: int,
-  @primary oid: int,
+  @primary oid: int
 }
 ```
 ## DefDO::getObject

@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema VoidExpression extends UnaryExpression {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## VoidExpression::getADescendant

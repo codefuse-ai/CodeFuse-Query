@@ -5,7 +5,7 @@ Primary key: `element_oid: int`
 ```rust
 schema CallExpressionDO {
   expr_func_oid: int,
-  @primary element_oid: int,
+  @primary element_oid: int
 }
 ```
 ## CallExpressionDO::getExprFuncOid

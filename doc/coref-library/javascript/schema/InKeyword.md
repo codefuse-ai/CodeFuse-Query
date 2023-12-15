@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema InKeyword extends Token {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## InKeyword::getLocation

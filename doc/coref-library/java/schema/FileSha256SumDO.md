@@ -5,7 +5,7 @@ Primary key: `file_hash_id: int`
 ```rust
 schema FileSha256SumDO {
   value: string,
-  @primary file_hash_id: int,
+  @primary file_hash_id: int
 }
 ```
 ## FileSha256SumDO::getValue

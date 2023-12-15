@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema UpdateOperator extends Token {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## UpdateOperator::getLocation

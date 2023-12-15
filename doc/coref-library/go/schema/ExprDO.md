@@ -9,7 +9,7 @@ schema ExprDO {
   debug_info: string,
   file_id: int,
   idx: int,
-  @primary oid: int,
+  @primary oid: int
 }
 ```
 ## ExprDO::getDebugInfo

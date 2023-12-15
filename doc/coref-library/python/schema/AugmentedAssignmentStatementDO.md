@@ -7,7 +7,7 @@ schema AugmentedAssignmentStatementDO {
   value_expr_oid: int,
   target_expr_oid: int,
   op_code: string,
-  @primary element_oid: int,
+  @primary element_oid: int
 }
 ```
 ## AugmentedAssignmentStatementDO::getTargetExprOid

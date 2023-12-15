@@ -6,7 +6,7 @@ Primary key: `oid: int`
 schema DocCommentDO {
   comment_group_id: int,
   associate_obj: int,
-  @primary oid: int,
+  @primary oid: int
 }
 ```
 ## DocCommentDO::getCommentGroupId

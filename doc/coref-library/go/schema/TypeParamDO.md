@@ -9,7 +9,7 @@ schema TypeParamDO {
   tp: int,
   bound: int,
   name: string,
-  @primary oid: int,
+  @primary oid: int
 }
 ```
 ## TypeParamDO::getBound

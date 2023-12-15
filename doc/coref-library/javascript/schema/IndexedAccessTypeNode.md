@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema IndexedAccessTypeNode extends TypeNode {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## IndexedAccessTypeNode::getLocation

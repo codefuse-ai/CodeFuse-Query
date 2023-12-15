@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema ImportEqualsDeclaration extends DeclarationStatement {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## ImportEqualsDeclaration::getADescendant

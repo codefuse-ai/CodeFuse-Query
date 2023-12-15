@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema FalseKeyword extends Token {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## FalseKeyword::getLocation

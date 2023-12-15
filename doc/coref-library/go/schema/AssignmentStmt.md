@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema AssignmentStmt extends Statement {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## AssignmentStmt::getKind

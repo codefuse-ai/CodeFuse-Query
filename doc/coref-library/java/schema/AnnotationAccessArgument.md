@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema AnnotationAccessArgument extends AnnotationAccessArgumentDO {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## AnnotationAccessArgument::getArgumentValueHashId

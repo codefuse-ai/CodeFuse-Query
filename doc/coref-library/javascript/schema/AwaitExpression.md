@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema AwaitExpression extends UnaryExpression {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## AwaitExpression::getADescendant

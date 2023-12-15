@@ -8,7 +8,7 @@ schema ReferenceListDO {
   parent_hash_id: int,
   role: string,
   location_hash_id: int,
-  @primary element_hash_id: int,
+  @primary element_hash_id: int
 }
 ```
 ## ReferenceListDO::getPrintableText

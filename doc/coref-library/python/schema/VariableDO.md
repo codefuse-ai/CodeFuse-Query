@@ -8,7 +8,7 @@ schema VariableDO {
   location_oid: int,
   name: string,
   parent_oid: int,
-  @primary element_oid: int,
+  @primary element_oid: int
 }
 ```
 ## VariableDO::getPrintableText

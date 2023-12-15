@@ -5,7 +5,7 @@ Primary key: `oid: int`
 ```rust
 schema TypeObjectDO {
   object: int,
-  @primary oid: int,
+  @primary oid: int
 }
 ```
 ## TypeObjectDO::getObject

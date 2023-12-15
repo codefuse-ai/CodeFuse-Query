@@ -10,7 +10,7 @@ schema KeywordDO {
   element_index: int,
   value_oid: int,
   arg_value: string,
-  @primary element_oid: int,
+  @primary element_oid: int
 }
 ```
 ## KeywordDO::getLocationOid

@@ -4,7 +4,7 @@ Primary key: `id: int`
 
 ```rust
 schema IfStatementDO {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## IfStatementDO::getAlternateHashId

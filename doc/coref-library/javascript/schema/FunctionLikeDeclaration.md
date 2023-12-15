@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema FunctionLikeDeclaration extends FunctionLike {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## FunctionLikeDeclaration::getLocation

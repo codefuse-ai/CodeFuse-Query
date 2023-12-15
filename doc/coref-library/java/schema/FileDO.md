@@ -8,7 +8,7 @@ schema FileDO {
   extension: string,
   name: string,
   qualified_name: string,
-  @primary element_hash_id: int,
+  @primary element_hash_id: int
 }
 ```
 ## FileDO::getNumberOfLinesHashId

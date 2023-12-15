@@ -10,7 +10,7 @@ schema AnonymousClass extends AnonymousClassDO {
   location_hash_id: int,
   base_class_reference_hash_id: int,
   base_class_type_hash_id: int,
-  parent_hash_id: int,
+  parent_hash_id: int
 }
 ```
 ## AnonymousClass::getBaseClassReferenceHashId

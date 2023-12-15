@@ -7,7 +7,7 @@ schema CommentDO {
   location_oid: int,
   parent_oid: int,
   text: string,
-  @primary element_oid: int,
+  @primary element_oid: int
 }
 ```
 ## CommentDO::getLocationOid

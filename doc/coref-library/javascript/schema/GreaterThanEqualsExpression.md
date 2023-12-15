@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema GreaterThanEqualsExpression extends RelationalExpression {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## GreaterThanEqualsExpression::getSymbol

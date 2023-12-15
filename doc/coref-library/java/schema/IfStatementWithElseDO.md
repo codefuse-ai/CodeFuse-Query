@@ -7,7 +7,7 @@ schema IfStatementWithElseDO {
   alternate_hash_id: int,
   consequent_hash_id: int,
   condition_hash_id: int,
-  @primary element_hash_id: int,
+  @primary element_hash_id: int
 }
 ```
 ## IfStatementWithElseDO::getAlternateHashId

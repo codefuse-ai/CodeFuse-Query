@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema FalseLiteral extends PrimaryExpression {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## FalseLiteral::getADescendant

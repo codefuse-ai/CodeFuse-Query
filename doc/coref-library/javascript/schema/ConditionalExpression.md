@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema ConditionalExpression extends Expression {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## ConditionalExpression::getLocation

@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema CompoundAssignmentOperator extends Token {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## CompoundAssignmentOperator::getLocation

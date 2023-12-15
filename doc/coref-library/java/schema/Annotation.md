@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema Annotation extends AnnotationDo {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## Annotation::getName

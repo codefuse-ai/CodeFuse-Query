@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema ExportSpecifier extends Node {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## ExportSpecifier::getADescendant

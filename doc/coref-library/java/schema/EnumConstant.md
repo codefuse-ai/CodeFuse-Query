@@ -10,7 +10,7 @@ schema EnumConstant extends EnumConstantDO {
   name: string,
   location_hash_id: int,
   parent_hash_id: int,
-  printable_text: string,
+  printable_text: string
 }
 ```
 ## EnumConstant::getName

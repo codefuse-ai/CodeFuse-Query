@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema NoSubstitutionTemplateLiteral extends LiteralExpression {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## NoSubstitutionTemplateLiteral::getLastChild

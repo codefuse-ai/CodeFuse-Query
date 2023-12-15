@@ -6,7 +6,7 @@ Primary key: `oid: int`
 schema MethodHostDO {
   method: int,
   host: int,
-  @primary oid: int,
+  @primary oid: int
 }
 ```
 ## MethodHostDO::getHost

@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema OmittedExpression extends Expression {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## OmittedExpression::getLocation

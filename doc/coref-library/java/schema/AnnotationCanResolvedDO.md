@@ -9,7 +9,7 @@ schema AnnotationCanResolvedDO {
   @primary element_hash_id: int,
   name: string,
   location_hash_id: int,
-  annotation_declaration_hash_id: int,
+  annotation_declaration_hash_id: int
 }
 ```
 ## AnnotationCanResolvedDO::getParentHashId

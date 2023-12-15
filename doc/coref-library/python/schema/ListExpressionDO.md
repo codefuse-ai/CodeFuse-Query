@@ -6,7 +6,7 @@ Primary key: `element_oid: int`
 schema ListExpressionDO {
   ctx: string,
   elt_size: int,
-  @primary element_oid: int,
+  @primary element_oid: int
 }
 ```
 ## ListExpressionDO::getCtx

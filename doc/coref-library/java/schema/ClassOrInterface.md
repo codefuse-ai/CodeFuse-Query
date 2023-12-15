@@ -4,7 +4,7 @@ Primary key: `id: int`
 
 ```rust
 schema ClassOrInterface {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## ClassOrInterface::getImplementsList

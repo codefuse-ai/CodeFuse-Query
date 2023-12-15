@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema ImportTypeNode extends NodeWithTypeArguments {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## ImportTypeNode::getADescendant

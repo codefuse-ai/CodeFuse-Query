@@ -5,7 +5,7 @@ Primary key: `oid: int`
 ```rust
 schema TypeiadicDO {
   association_obj_id: int,
-  @primary oid: int,
+  @primary oid: int
 }
 ```
 ## TypeiadicDO::getAssociationObjId

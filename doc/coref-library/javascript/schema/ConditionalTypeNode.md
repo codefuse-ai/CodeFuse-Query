@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema ConditionalTypeNode extends TypeNode {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## ConditionalTypeNode::getLocation

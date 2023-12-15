@@ -11,7 +11,7 @@ schema Location extends LocationDO {
   end_line_number: int,
   end_column_number: int,
   start_line_number: int,
-  start_column_number: int,
+  start_column_number: int
 }
 ```
 ## Location::getFileHashId

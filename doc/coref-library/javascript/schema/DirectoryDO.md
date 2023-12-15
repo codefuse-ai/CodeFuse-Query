@@ -7,7 +7,7 @@ schema DirectoryDO {
   location_oid: int,
   relative_path: string,
   name: string,
-  @primary oid: int,
+  @primary oid: int
 }
 ```
 ## DirectoryDO::getLocationOid

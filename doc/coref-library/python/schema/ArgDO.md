@@ -9,7 +9,7 @@ schema ArgDO {
   parent_oid: int,
   element_index: int,
   annotation: int,
-  @primary element_oid: int,
+  @primary element_oid: int
 }
 ```
 ## ArgDO::getLocationOid

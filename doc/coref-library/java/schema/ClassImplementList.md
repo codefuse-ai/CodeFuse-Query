@@ -7,7 +7,7 @@ Primary key: `element_hash_id: int`
 ```rust
 schema ClassImplementList extends ClassImplementListDO {
   @primary element_hash_id: int,
-  implemented_element_hash_id: int,
+  implemented_element_hash_id: int
 }
 ```
 ## ClassImplementList::getImplementedElementHashId

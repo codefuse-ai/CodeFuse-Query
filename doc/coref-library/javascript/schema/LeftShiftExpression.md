@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema LeftShiftExpression extends ShiftExpression {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## LeftShiftExpression::getSymbol

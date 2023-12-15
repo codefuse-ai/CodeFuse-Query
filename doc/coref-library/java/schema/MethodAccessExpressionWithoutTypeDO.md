@@ -6,7 +6,7 @@ Primary key: `element_hash_id: int`
 schema MethodAccessExpressionWithoutTypeDO {
   argument_list_hash_id: int,
   referen_method_hash_id: int,
-  @primary element_hash_id: int,
+  @primary element_hash_id: int
 }
 ```
 ## MethodAccessExpressionWithoutTypeDO::getArgumentListHashId

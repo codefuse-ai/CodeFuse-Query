@@ -5,7 +5,7 @@ Primary key: `element_oid: int`
 ```rust
 schema CompareExpressionDO {
   left_expr_oid: int,
-  @primary element_oid: int,
+  @primary element_oid: int
 }
 ```
 ## CompareExpressionDO::getLeftExprOid

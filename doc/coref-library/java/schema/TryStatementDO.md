@@ -4,7 +4,7 @@ Primary key: `id: int`
 
 ```rust
 schema TryStatementDO {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## TryStatementDO::getFinallyBlockHashId

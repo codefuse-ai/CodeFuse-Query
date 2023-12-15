@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema PrefixUnaryExpression extends UpdateExpression {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## PrefixUnaryExpression::getText

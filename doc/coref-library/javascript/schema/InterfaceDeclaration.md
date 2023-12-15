@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema InterfaceDeclaration extends DeclarationStatement {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## InterfaceDeclaration::getADescendant

@@ -9,7 +9,7 @@ schema NpFile extends NpFileDO {
   @primary element_hash_id: int,
   qualified_name: string,
   name: string,
-  project_hash_id: int,
+  project_hash_id: int
 }
 ```
 ## NpFile::getQualifiedName

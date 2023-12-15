@@ -8,7 +8,7 @@ schema NodeDO {
   index: int,
   parent_oid: int,
   kind: int,
-  @primary oid: int,
+  @primary oid: int
 }
 ```
 ## NodeDO::getLocationOid

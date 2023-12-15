@@ -5,7 +5,7 @@ Primary key: `element_hash_id: int`
 ```rust
 schema AnnotationDeclarationDO {
   qualified_name: string,
-  @primary element_hash_id: int,
+  @primary element_hash_id: int
 }
 ```
 ## AnnotationDeclarationDO::getQualifiedName

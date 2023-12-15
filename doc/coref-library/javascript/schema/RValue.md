@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema RValue extends RefExpr {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## RValue::getRefName

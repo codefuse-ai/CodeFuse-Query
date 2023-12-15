@@ -9,7 +9,7 @@ schema DeclDO {
   debug_info: string,
   file_id: int,
   idx: int,
-  @primary oid: int,
+  @primary oid: int
 }
 ```
 ## DeclDO::getDebugInfo

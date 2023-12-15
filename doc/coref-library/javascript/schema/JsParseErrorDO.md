@@ -6,7 +6,7 @@ Primary key: `oid: int`
 schema JsParseErrorDO {
   line: string,
   message: string,
-  @primary oid: int,
+  @primary oid: int
 }
 ```
 ## JsParseErrorDO::getLine

@@ -8,7 +8,7 @@ schema FileDO {
   relative_path: string,
   name: string,
   extension: string,
-  @primary oid: int,
+  @primary oid: int
 }
 ```
 ## FileDO::getLocationOid

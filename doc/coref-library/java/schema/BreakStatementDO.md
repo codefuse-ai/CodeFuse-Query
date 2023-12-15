@@ -5,7 +5,7 @@ Primary key: `element_hash_id: int`
 ```rust
 schema BreakStatementDO {
   exited_statement_hash_id: int,
-  @primary element_hash_id: int,
+  @primary element_hash_id: int
 }
 ```
 ## BreakStatementDO::getExitedStatementHashId

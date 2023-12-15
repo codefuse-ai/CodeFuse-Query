@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema Identifier extends PrimaryExpression {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## Identifier::getADescendant

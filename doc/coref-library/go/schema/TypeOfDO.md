@@ -6,7 +6,7 @@ Primary key: `oid: int`
 schema TypeOfDO {
   tp: int,
   expr: int,
-  @primary oid: int,
+  @primary oid: int
 }
 ```
 ## TypeOfDO::getTp

@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema Spec extends Node {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## Spec::getAnAncestorForIndex

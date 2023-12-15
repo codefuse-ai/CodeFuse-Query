@@ -11,7 +11,7 @@ schema ConstSwitchLabelStatement extends SwitchLabelStatement {
   parent_hash_id: int,
   index_order: int,
   printable_text: string,
-  type: string,
+  type: string
 }
 ```
 ## ConstSwitchLabelStatement::getSelector

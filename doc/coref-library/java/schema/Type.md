@@ -4,7 +4,7 @@ Primary key: `id: int`
 
 ```rust
 schema Type {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## Type::getQualifiedName

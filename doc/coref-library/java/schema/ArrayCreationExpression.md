@@ -11,7 +11,7 @@ schema ArrayCreationExpression extends Expression {
   parent_hash_id: int,
   location_hash_id: int,
   name: string,
-  @primary element_hash_id: int,
+  @primary element_hash_id: int
 }
 ```
 ## ArrayCreationExpression::getPrintableText

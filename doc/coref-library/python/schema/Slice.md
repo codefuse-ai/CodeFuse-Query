@@ -11,7 +11,7 @@ schema Slice extends SliceDO {
   element_index: int,
   location_oid: int,
   printable_text: string,
-  has_step: int,
+  has_step: int
 }
 ```
 ## Slice::getElementIndex

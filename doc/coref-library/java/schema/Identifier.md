@@ -9,7 +9,7 @@ schema Identifier extends IdentifierDO {
   @primary element_hash_id: int,
   location_hash_id: int,
   name: string,
-  parent_hash_id: int,
+  parent_hash_id: int
 }
 ```
 ## Identifier::getName

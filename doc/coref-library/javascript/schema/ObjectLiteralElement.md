@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema ObjectLiteralElement extends Node {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## ObjectLiteralElement::getADescendant

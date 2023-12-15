@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema JsxText extends Node {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## JsxText::getADescendant

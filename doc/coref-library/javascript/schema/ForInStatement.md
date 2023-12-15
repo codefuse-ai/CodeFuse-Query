@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema ForInStatement extends EnhancedForStatement {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## ForInStatement::getInitializerIndex

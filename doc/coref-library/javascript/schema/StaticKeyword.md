@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema StaticKeyword extends Modifier {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## StaticKeyword::getADescendant

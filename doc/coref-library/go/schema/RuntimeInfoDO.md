@@ -8,7 +8,7 @@ schema RuntimeInfoDO {
   extractor_info: string,
   go_os: string,
   build_version: string,
-  @primary oid: int,
+  @primary oid: int
 }
 ```
 ## RuntimeInfoDO::getGoArch

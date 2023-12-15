@@ -9,7 +9,7 @@ schema DiagnosticDO {
   error_message: string,
   error_tag: string,
   severity: int,
-  @primary oid: int,
+  @primary oid: int
 }
 ```
 ## DiagnosticDO::getErrorMessage

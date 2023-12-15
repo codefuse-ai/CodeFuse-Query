@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema KeywordTypeNode extends TypeNode {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## KeywordTypeNode::getLocation

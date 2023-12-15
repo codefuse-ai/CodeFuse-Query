@@ -9,7 +9,7 @@ schema ParseErrorFile extends ParseErrorFileDO {
   @primary element_oid: int,
   error_message: string,
   relative_path: string,
-  error_text: string,
+  error_text: string
 }
 ```
 ## ParseErrorFile::getRelativePath

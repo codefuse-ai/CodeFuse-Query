@@ -7,7 +7,7 @@ schema DiagnosticForDO {
   file_number: int,
   file_number_diagnostic_number: int,
   compilation: int,
-  @primary diagnostic: int,
+  @primary diagnostic: int
 }
 ```
 ## DiagnosticForDO::getFileNumberDiagnosticNumber

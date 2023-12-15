@@ -7,7 +7,7 @@ schema ExceptionDO {
   type_hash_id: int,
   name: string,
   callable_hash_id: int,
-  @primary element_hash_id: int,
+  @primary element_hash_id: int
 }
 ```
 ## ExceptionDO::getCallableHashId

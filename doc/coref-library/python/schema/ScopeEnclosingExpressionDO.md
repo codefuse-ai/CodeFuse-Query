@@ -5,7 +5,7 @@ Primary key: `expression_oid: int`
 ```rust
 schema ScopeEnclosingExpressionDO {
   scope_oid: int,
-  @primary expression_oid: int,
+  @primary expression_oid: int
 }
 ```
 ## ScopeEnclosingExpressionDO::getScopeOid

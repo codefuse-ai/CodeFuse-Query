@@ -6,7 +6,7 @@ Primary key: `oid: int`
 schema MethodReceiverDO {
   receiver: int,
   method: int,
-  @primary oid: int,
+  @primary oid: int
 }
 ```
 ## MethodReceiverDO::getReceiver

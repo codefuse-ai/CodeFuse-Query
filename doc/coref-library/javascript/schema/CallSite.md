@@ -7,7 +7,7 @@ Primary key: `invoke_expression_oid: int`
 ```rust
 schema CallSite extends CallSiteDO {
   @primary invoke_expression_oid: int,
-  callee_oid: int,
+  callee_oid: int
 }
 ```
 ## CallSite::getCalleeOid

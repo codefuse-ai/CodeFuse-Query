@@ -8,7 +8,7 @@ schema PackageStatementDO {
   package_hash_id: int,
   location_hash_id: int,
   qualified_name: string,
-  @primary element_hash_id: int,
+  @primary element_hash_id: int
 }
 ```
 ## PackageStatementDO::getPackageHashId

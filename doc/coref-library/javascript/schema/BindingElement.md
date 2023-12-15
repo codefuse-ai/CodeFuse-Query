@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema BindingElement extends Node {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## BindingElement::getADescendant

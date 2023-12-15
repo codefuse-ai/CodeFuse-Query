@@ -6,7 +6,7 @@ Primary key: `oid: int`
 schema UnderlyingTypeDO {
   tp: int,
   named: int,
-  @primary oid: int,
+  @primary oid: int
 }
 ```
 ## UnderlyingTypeDO::getTp

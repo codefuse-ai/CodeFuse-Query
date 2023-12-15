@@ -11,7 +11,7 @@ schema Constructor extends ConstructorDO {
   location_hash_id: int,
   parent_hash_id: int,
   signature: string,
-  definition_body: string,
+  definition_body: string
 }
 ```
 ## Constructor::getName

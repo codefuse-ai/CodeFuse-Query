@@ -6,7 +6,7 @@ Primary key: `oid: int`
 schema SymbolDO {
   description: string,
   name: string,
-  @primary oid: int,
+  @primary oid: int
 }
 ```
 ## SymbolDO::getDescription

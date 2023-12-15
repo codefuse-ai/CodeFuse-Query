@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema FunctionLike extends Node {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## FunctionLike::getADescendant

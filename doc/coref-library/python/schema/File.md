@@ -10,7 +10,7 @@ schema File extends FileDO {
   relative_path: string,
   extension: string,
   name: string,
-  number_of_lines_oid: int,
+  number_of_lines_oid: int
 }
 ```
 ## File::getName

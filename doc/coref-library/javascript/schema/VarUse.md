@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema VarUse extends ControlFlowNode {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## VarUse::isSyntheticNode

@@ -4,7 +4,7 @@ Primary key: `element_oid: int`
 
 ```rust
 schema YieldExpressionDO {
-  @primary element_oid: int,
+  @primary element_oid: int
 }
 ```
 ## YieldExpressionDO::\_\_all\_\_

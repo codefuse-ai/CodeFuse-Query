@@ -8,7 +8,7 @@ Primary key: `id: int`
 schema XmlFile extends XmlFileDO {
   @primary id: int,
   file_name: string,
-  relative_path: string,
+  relative_path: string
 }
 ```
 ## XmlFile::getFileName

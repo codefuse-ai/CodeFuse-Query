@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema ProtectedKeyword extends Modifier {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## ProtectedKeyword::getADescendant

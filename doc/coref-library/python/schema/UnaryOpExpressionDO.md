@@ -6,7 +6,7 @@ Primary key: `element_oid: int`
 schema UnaryOpExpressionDO {
   operand_oid: int,
   op_code: string,
-  @primary element_oid: int,
+  @primary element_oid: int
 }
 ```
 ## UnaryOpExpressionDO::getOperandOid

@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema Selector extends Expr {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## Selector::isNotExpr

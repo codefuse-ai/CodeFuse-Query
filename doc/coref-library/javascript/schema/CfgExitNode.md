@@ -7,7 +7,7 @@ Primary key: `oid: int`
 ```rust
 schema CfgExitNode extends CfgExitNodeDO {
   @primary oid: int,
-  ast_node_oid: int,
+  ast_node_oid: int
 }
 ```
 ## CfgExitNode::getAstNodeOid

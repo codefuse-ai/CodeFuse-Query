@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema EnumMember extends Node {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## EnumMember::getADescendant

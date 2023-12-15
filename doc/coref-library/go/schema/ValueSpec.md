@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema ValueSpec extends Spec {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## ValueSpec::getKind

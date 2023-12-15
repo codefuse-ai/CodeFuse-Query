@@ -5,7 +5,7 @@ Primary key: `oid: int`
 ```rust
 schema VariadicDO {
   associated_node: int,
-  @primary oid: int,
+  @primary oid: int
 }
 ```
 ## VariadicDO::getAssociatedNode

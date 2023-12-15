@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema ThisExpression extends PrimaryExpression {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## ThisExpression::getADescendant

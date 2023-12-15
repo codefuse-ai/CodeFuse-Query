@@ -5,7 +5,7 @@ Primary key: `file_hash_id: int`
 ```rust
 schema CupackageDO {
   package_hash_id: int,
-  @primary file_hash_id: int,
+  @primary file_hash_id: int
 }
 ```
 ## CupackageDO::getPackageHashId

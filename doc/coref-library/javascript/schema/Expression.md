@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema Expression extends Node {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## Expression::getADescendant

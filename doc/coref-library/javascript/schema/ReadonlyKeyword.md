@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema ReadonlyKeyword extends Modifier {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## ReadonlyKeyword::getADescendant

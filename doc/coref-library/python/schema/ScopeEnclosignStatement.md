@@ -7,7 +7,7 @@ Primary key: `statement_oid: int`
 ```rust
 schema ScopeEnclosignStatement extends ScopeEnclosingStatementDO {
   @primary statement_oid: int,
-  scope_oid: int,
+  scope_oid: int
 }
 ```
 ## ScopeEnclosignStatement::getEnclosingScope

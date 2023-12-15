@@ -6,7 +6,7 @@ Primary key: `expression_hash_id: int`
 schema ExpressionListExpressionRelationDO {
   position: int,
   @primary expression_hash_id: int,
-  expression_list_hash_id: int,
+  expression_list_hash_id: int
 }
 ```
 ## ExpressionListExpressionRelationDO::getPosition

@@ -9,7 +9,7 @@ schema XmlElementPrefix extends XmlElementPrefixDO {
   name: string,
   @primary id: int,
   location_id: int,
-  parent_id: int,
+  parent_id: int
 }
 ```
 ## XmlElementPrefix::getName

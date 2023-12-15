@@ -12,7 +12,7 @@ schema TypeParameter extends TypeParameterDO {
   printable_text: string,
   index_order: int,
   extends_list_hash_id: int,
-  parent_hash_id: int,
+  parent_hash_id: int
 }
 ```
 ## TypeParameter::getPrintableText

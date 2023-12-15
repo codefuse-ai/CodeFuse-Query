@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema JsxExpression extends Expression {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## JsxExpression::getLocation

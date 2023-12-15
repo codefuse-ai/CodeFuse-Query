@@ -7,7 +7,7 @@ schema ParseErrorFileDO {
   error_text: string,
   relative_path: string,
   error_message: string,
-  @primary element_oid: int,
+  @primary element_oid: int
 }
 ```
 ## ParseErrorFileDO::getErrorMessage

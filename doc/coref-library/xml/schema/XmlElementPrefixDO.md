@@ -7,7 +7,7 @@ schema XmlElementPrefixDO {
   parent_id: int,
   location_id: int,
   @primary id: int,
-  name: string,
+  name: string
 }
 ```
 ## XmlElementPrefixDO::getLocationId

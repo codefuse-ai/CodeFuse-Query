@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema ConstructSignatureDeclaration extends TypeElement {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## ConstructSignatureDeclaration::getLocation

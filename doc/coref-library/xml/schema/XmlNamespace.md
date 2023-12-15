@@ -9,7 +9,7 @@ schema XmlNamespace extends XmlNamespaceDO {
   @primary id: int,
   url: string,
   location_id: int,
-  prefix_name: string,
+  prefix_name: string
 }
 ```
 ## XmlNamespace::getPrefixName

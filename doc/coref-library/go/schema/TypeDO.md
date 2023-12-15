@@ -7,7 +7,7 @@ schema TypeDO {
   format_string: string,
   raw_string: string,
   kind: int,
-  @primary oid: int,
+  @primary oid: int
 }
 ```
 ## TypeDO::getFormatString

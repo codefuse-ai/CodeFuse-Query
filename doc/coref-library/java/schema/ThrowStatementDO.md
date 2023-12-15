@@ -6,7 +6,7 @@ Primary key: `element_hash_id: int`
 schema ThrowStatementDO {
   block_hash_id: int,
   exception_hash_id: int,
-  @primary element_hash_id: int,
+  @primary element_hash_id: int
 }
 ```
 ## ThrowStatementDO::getExceptionHashId

@@ -5,7 +5,7 @@ Primary key: `element_oid: int`
 ```rust
 schema SetExpressionDO {
   elt_size: int,
-  @primary element_oid: int,
+  @primary element_oid: int
 }
 ```
 ## SetExpressionDO::getEltSize

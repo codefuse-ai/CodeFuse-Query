@@ -6,7 +6,7 @@ Primary key: `element_oid: int`
 schema AssignmentStatementDO {
   targets_size: int,
   value_oid: int,
-  @primary element_oid: int,
+  @primary element_oid: int
 }
 ```
 ## AssignmentStatementDO::getTargetsSize

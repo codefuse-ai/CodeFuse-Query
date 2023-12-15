@@ -5,7 +5,7 @@ Primary key: `element_oid: int`
 ```rust
 schema MatchStatementDO {
   subject_oid: int,
-  @primary element_oid: int,
+  @primary element_oid: int
 }
 ```
 ## MatchStatementDO::getSubjectOid

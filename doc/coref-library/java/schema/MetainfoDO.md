@@ -7,7 +7,7 @@ schema MetainfoDO {
   value: string,
   program_hash_id: int,
   kind: string,
-  @primary oid: int,
+  @primary oid: int
 }
 ```
 ## MetainfoDO::getValue

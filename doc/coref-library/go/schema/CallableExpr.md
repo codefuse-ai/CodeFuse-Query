@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema CallableExpr extends Expr {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## CallableExpr::isNotExpr

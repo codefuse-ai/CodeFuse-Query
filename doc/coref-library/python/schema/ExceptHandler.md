@@ -10,7 +10,7 @@ schema ExceptHandler extends ExceptHandlerDO {
   element_index: int,
   parent_oid: int,
   location_oid: int,
-  printable_text: string,
+  printable_text: string
 }
 ```
 ## ExceptHandler::getElementIndex

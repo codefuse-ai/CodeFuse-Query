@@ -6,7 +6,7 @@ Primary key: `oid: int`
 schema ObjectScopeDO {
   scope: int,
   object: int,
-  @primary oid: int,
+  @primary oid: int
 }
 ```
 ## ObjectScopeDO::getScope

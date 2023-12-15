@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema IntersectionTypeNode extends TypeNode {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## IntersectionTypeNode::getLocation

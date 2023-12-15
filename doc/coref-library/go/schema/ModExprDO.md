@@ -7,7 +7,7 @@ schema ModExprDO {
   kind: int,
   idx: int,
   parent: int,
-  @primary oid: int,
+  @primary oid: int
 }
 ```
 ## ModExprDO::getIdx

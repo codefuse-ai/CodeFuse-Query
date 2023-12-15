@@ -7,7 +7,7 @@ schema XmlNamespaceDO {
   prefix_name: string,
   location_id: int,
   url: string,
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## XmlNamespaceDO::getLocationId

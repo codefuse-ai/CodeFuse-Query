@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema Function extends Node {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## Function::getAnAncestorForIndex

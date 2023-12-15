@@ -5,7 +5,7 @@ Primary key: `element_hash_id: int`
 ```rust
 schema ConstructorInvocationDO {
   class_reference_hash_id: int,
-  @primary element_hash_id: int,
+  @primary element_hash_id: int
 }
 ```
 ## ConstructorInvocationDO::getClassReferenceHashId

@@ -9,7 +9,7 @@ schema Modifier extends ModifierDO {
   @primary element_hash_id: int,
   name: string,
   location_hash_id: int,
-  parent_hash_id: int,
+  parent_hash_id: int
 }
 ```
 ## Modifier::getName

@@ -6,7 +6,7 @@ Primary key: `oid: int`
 schema CompilationCompilingFileDO {
   file: int,
   num: int,
-  @primary oid: int,
+  @primary oid: int
 }
 ```
 ## CompilationCompilingFileDO::getFile

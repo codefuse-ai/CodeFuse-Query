@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema JsxClosingFragment extends Expression {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## JsxClosingFragment::getLocation

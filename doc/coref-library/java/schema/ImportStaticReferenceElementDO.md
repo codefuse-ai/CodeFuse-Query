@@ -7,7 +7,7 @@ schema ImportStaticReferenceElementDO {
   parent_hash_id: int,
   printable_text: string,
   location_hash_id: int,
-  @primary element_hash_id: int,
+  @primary element_hash_id: int
 }
 ```
 ## ImportStaticReferenceElementDO::getLocationHashId

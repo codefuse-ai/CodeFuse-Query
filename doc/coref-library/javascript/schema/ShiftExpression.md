@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema ShiftExpression extends BinaryExpression {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## ShiftExpression::getParentOid

@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema JsxFragment extends PrimaryExpression {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## JsxFragment::getADescendant

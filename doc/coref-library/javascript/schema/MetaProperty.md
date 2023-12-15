@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema MetaProperty extends PrimaryExpression {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## MetaProperty::getADescendant

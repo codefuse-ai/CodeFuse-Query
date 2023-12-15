@@ -5,7 +5,7 @@ Primary key: `element_oid: int`
 ```rust
 schema NonLocalStatementDO {
   names: int,
-  @primary element_oid: int,
+  @primary element_oid: int
 }
 ```
 ## NonLocalStatementDO::getNames

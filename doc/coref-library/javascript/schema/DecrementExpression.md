@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema DecrementExpression extends UpdateExpression {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## DecrementExpression::getLocation

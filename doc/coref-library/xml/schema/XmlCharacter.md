@@ -11,7 +11,7 @@ schema XmlCharacter extends XmlCharacterDO {
   parentid: int,
   is_cdata: int,
   index_order: int,
-  location_id: int,
+  location_id: int
 }
 ```
 ## XmlCharacter::getText

@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema HeritageClause extends Node {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## HeritageClause::getADescendant

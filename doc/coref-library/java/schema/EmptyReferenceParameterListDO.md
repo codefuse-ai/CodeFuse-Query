@@ -7,7 +7,7 @@ schema EmptyReferenceParameterListDO {
   location_hash_id: int,
   printable_text: string,
   parent_hash_id: int,
-  @primary list_hash_id: int,
+  @primary list_hash_id: int
 }
 ```
 ## EmptyReferenceParameterListDO::getLocationHashId

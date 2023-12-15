@@ -5,7 +5,7 @@ Primary key: `oid: int`
 ```rust
 schema LiteralDO {
   value: string,
-  @primary oid: int,
+  @primary oid: int
 }
 ```
 ## LiteralDO::getValue

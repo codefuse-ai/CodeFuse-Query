@@ -7,7 +7,7 @@ schema InstanceofExpressionDO {
   pattern_hash_id: int,
   check_type_hash_id: int,
   operand_hash_id: int,
-  @primary element_hash_id: int,
+  @primary element_hash_id: int
 }
 ```
 ## InstanceofExpressionDO::getCheckTypeHashId

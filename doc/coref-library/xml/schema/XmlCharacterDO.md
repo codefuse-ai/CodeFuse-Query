@@ -9,7 +9,7 @@ schema XmlCharacterDO {
   is_cdata: int,
   parentid: int,
   text: string,
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## XmlCharacterDO::isCdata

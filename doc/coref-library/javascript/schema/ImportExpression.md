@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema ImportExpression extends PrimaryExpression {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## ImportExpression::getADescendant

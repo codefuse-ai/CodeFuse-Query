@@ -8,7 +8,7 @@ schema ExpressionListDO {
   size: int,
   parent_hash_id: int,
   location_hash_id: int,
-  @primary element_hash_id: int,
+  @primary element_hash_id: int
 }
 ```
 ## ExpressionListDO::getPrintableText

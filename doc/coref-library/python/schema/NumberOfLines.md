@@ -9,7 +9,7 @@ schema NumberOfLines extends NumberOfLinesDO {
   @primary element_oid: int,
   number_of_valid_lines: int,
   number_of_total_lines: int,
-  number_of_comment_lines: int,
+  number_of_comment_lines: int
 }
 ```
 ## NumberOfLines::getNumberOfValidLines

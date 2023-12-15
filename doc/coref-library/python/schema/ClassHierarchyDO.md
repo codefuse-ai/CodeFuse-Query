@@ -5,7 +5,7 @@ Primary key: `base_oid: int`
 ```rust
 schema ClassHierarchyDO {
   class_oid: int,
-  @primary base_oid: int,
+  @primary base_oid: int
 }
 ```
 ## ClassHierarchyDO::getClassOid

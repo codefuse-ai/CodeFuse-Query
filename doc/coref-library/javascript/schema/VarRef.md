@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema VarRef extends BindingName {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## VarRef::getAComment

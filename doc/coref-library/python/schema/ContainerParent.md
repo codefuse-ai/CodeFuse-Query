@@ -7,7 +7,7 @@ Primary key: `child_oid: int`
 ```rust
 schema ContainerParent extends ContainerParentDO {
   @primary child_oid: int,
-  parent_oid: int,
+  parent_oid: int
 }
 ```
 ## ContainerParent::getParentOid

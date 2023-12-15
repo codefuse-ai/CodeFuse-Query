@@ -10,7 +10,7 @@ schema Field extends FieldDO {
   name: string,
   location_hash_id: int,
   parent_hash_id: int,
-  printable_text: string,
+  printable_text: string
 }
 ```
 ## Field::getName

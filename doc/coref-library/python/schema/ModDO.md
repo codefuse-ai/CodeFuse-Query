@@ -6,7 +6,7 @@ Primary key: `element_oid: int`
 schema ModDO {
   location_oid: int,
   type: string,
-  @primary element_oid: int,
+  @primary element_oid: int
 }
 ```
 ## ModDO::getLocationOid

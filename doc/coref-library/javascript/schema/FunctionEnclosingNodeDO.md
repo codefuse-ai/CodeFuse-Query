@@ -5,7 +5,7 @@ Primary key: `node_oid: int`
 ```rust
 schema FunctionEnclosingNodeDO {
   function_oid: int,
-  @primary node_oid: int,
+  @primary node_oid: int
 }
 ```
 ## FunctionEnclosingNodeDO::getFunctionOid

@@ -10,7 +10,7 @@ schema XmlDtd extends XmlDtdDO {
   location_id: int,
   root: string,
   public_id: string,
-  system_id: string,
+  system_id: string
 }
 ```
 ## XmlDtd::getRoot

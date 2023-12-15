@@ -4,7 +4,7 @@ Primary key: `element_oid: int`
 
 ```rust
 schema AsyncWithStatementDO {
-  @primary element_oid: int,
+  @primary element_oid: int
 }
 ```
 ## AsyncWithStatementDO::\_\_all\_\_

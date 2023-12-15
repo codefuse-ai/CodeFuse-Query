@@ -7,7 +7,7 @@ Primary key: `expression_hash_id: int`
 ```rust
 schema StatementEnclosingExpression extends StatementEnclosingExpressionDO {
   @primary expression_hash_id: int,
-  statement_hash_id: int,
+  statement_hash_id: int
 }
 ```
 ## StatementEnclosingExpression::getStatement

@@ -8,7 +8,7 @@ Primary key: `element_oid: int`
 schema DocstringComment extends DocstringCommentDO {
   @primary element_oid: int,
   text: string,
-  documented_element_oid: int,
+  documented_element_oid: int
 }
 ```
 ## DocstringComment::getText

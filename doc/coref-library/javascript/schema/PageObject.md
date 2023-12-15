@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema PageObject extends ObjectLiteralExpression {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## PageObject::getAProperty

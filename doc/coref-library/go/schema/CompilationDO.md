@@ -5,7 +5,7 @@ Primary key: `oid: int`
 ```rust
 schema CompilationDO {
   cwd: string,
-  @primary oid: int,
+  @primary oid: int
 }
 ```
 ## CompilationDO::getCwd

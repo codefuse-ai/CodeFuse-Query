@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema TupleTypeNode extends TypeNode {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## TupleTypeNode::getLocation

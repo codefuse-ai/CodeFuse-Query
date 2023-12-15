@@ -7,7 +7,7 @@ schema XmlHasNamespaceDO {
   container_id: int,
   namespace_id: int,
   element_id: int,
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## XmlHasNamespaceDO::getNamespaceId

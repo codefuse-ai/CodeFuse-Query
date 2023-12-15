@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema MemberExpression extends LeftHandSideExpression {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## MemberExpression::getADescendant

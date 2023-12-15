@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema CommaListExpression extends Expression {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## CommaListExpression::getLocation

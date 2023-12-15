@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema JsxSelfClosingElement extends PrimaryExpression {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## JsxSelfClosingElement::getADescendant

@@ -8,7 +8,7 @@ Primary key: `oid: int`
 schema Symbol extends SymbolDO {
   @primary oid: int,
   name: string,
-  description: string,
+  description: string
 }
 ```
 ## Symbol::getANode

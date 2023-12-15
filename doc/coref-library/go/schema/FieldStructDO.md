@@ -5,7 +5,7 @@ Primary key: `oid: int`
 ```rust
 schema FieldStructDO {
   struct: int,
-  @primary oid: int,
+  @primary oid: int
 }
 ```
 ## FieldStructDO::getStruct

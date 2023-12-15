@@ -7,7 +7,7 @@ schema DoWhileStatementDO {
   condition_hash_id: int,
   keyword: string,
   body_declaration_hash_id: int,
-  @primary element_hash_id: int,
+  @primary element_hash_id: int
 }
 ```
 ## DoWhileStatementDO::getConditionHashId

@@ -5,7 +5,7 @@ Primary key: `id: int`
 ```rust
 schema XmlEncodingDO {
   encoding: string,
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## XmlEncodingDO::getEncoding

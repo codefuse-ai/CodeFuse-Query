@@ -7,7 +7,7 @@ schema FieldsDO {
   kind: int,
   parent_id: int,
   idx: int,
-  @primary oid: int,
+  @primary oid: int
 }
 ```
 ## FieldsDO::getKind

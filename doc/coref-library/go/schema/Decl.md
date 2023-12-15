@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema Decl extends Node {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## Decl::getTextSize

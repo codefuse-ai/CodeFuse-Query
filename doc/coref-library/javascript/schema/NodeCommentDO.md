@@ -7,7 +7,7 @@ schema NodeCommentDO {
   type: int,
   comment_oid: int,
   node_oid: int,
-  @primary oid: int,
+  @primary oid: int
 }
 ```
 ## NodeCommentDO::getType

@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema PropertyDeclaration extends ClassElement {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## PropertyDeclaration::getLocation

@@ -6,7 +6,7 @@ Primary key: `oid: int`
 schema FunctionLikeDeclarationDO {
   name: string,
   kind: int,
-  @primary oid: int,
+  @primary oid: int
 }
 ```
 ## FunctionLikeDeclarationDO::getKind

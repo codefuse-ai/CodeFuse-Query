@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema ObjectBindingPattern extends BindingPattern {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## ObjectBindingPattern::getADecorator

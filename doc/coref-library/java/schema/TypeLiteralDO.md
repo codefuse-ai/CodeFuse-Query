@@ -6,7 +6,7 @@ Primary key: `element_hash_id: int`
 schema TypeLiteralDO {
   type_hash_id: int,
   type_element_hash_id: int,
-  @primary element_hash_id: int,
+  @primary element_hash_id: int
 }
 ```
 ## TypeLiteralDO::getTypeElementHashId

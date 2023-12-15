@@ -9,7 +9,7 @@ schema WithItem extends WithItemDO {
   @primary element_oid: int,
   printable_text: string,
   element_index: int,
-  parent_oid: int,
+  parent_oid: int
 }
 ```
 ## WithItem::getElementIndex

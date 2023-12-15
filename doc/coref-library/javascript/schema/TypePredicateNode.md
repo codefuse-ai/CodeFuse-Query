@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema TypePredicateNode extends TypeNode {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## TypePredicateNode::getLocation

@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema DoWhileStatement extends Statement {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## DoWhileStatement::getLocation

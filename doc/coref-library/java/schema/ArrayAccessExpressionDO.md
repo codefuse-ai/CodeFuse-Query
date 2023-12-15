@@ -6,7 +6,7 @@ Primary key: `element_hash_id: int`
 schema ArrayAccessExpressionDO {
   array_expression_hash_id: int,
   index_expression_hash_id: int,
-  @primary element_hash_id: int,
+  @primary element_hash_id: int
 }
 ```
 ## ArrayAccessExpressionDO::getIndexExpressionHashId

@@ -10,7 +10,7 @@ schema JavadocDataToken extends JavadocDataTokenDO {
   value: string,
   location_hash_id: int,
   parent_hash_id: int,
-  index_order: int,
+  index_order: int
 }
 ```
 ## JavadocDataToken::getLocationHashId

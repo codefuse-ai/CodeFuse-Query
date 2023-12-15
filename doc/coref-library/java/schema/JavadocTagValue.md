@@ -9,7 +9,7 @@ schema JavadocTagValue extends JavadocTagValueDO {
   @primary element_hash_id: int,
   value: string,
   location_hash_id: int,
-  parent_hash_id: int,
+  parent_hash_id: int
 }
 ```
 ## JavadocTagValue::getLocationHashId

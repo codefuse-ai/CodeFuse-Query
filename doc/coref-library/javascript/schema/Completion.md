@@ -5,7 +5,7 @@ Primary key: `id: int`
 ```rust
 schema Completion {
   name: string,
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## Completion::getValue

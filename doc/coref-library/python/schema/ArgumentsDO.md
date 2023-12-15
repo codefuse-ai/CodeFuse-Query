@@ -6,7 +6,7 @@ Primary key: `element_oid: int`
 schema ArgumentsDO {
   printable_text: string,
   parent_oid: int,
-  @primary element_oid: int,
+  @primary element_oid: int
 }
 ```
 ## ArgumentsDO::getPrintableText

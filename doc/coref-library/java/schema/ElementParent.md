@@ -4,7 +4,7 @@ Primary key: `id: int`
 
 ```rust
 schema ElementParent {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## ElementParent::getType

@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema LogicalNotExpression extends PrefixUnaryExpression {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## LogicalNotExpression::getParentOid

@@ -12,7 +12,7 @@ schema Location extends LocationDO {
   start_line_number: int,
   end_column_number: int,
   token_start_offset: int,
-  token_end_offset: int,
+  token_end_offset: int
 }
 ```
 ## Location::getStartLineNumber

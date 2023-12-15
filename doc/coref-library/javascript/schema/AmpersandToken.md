@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema AmpersandToken extends Token {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## AmpersandToken::getLocation

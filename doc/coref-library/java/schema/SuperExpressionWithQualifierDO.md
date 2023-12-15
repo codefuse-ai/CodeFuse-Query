@@ -5,7 +5,7 @@ Primary key: `element_hash_id: int`
 ```rust
 schema SuperExpressionWithQualifierDO {
   qualifier_hash_id: int,
-  @primary element_hash_id: int,
+  @primary element_hash_id: int
 }
 ```
 ## SuperExpressionWithQualifierDO::getQualifierHashId

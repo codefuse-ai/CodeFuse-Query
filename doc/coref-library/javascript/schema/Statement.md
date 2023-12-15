@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema Statement extends Node {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## Statement::getADescendant

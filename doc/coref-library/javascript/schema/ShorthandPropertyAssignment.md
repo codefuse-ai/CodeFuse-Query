@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema ShorthandPropertyAssignment extends ObjectLiteralElement {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## ShorthandPropertyAssignment::getAComment

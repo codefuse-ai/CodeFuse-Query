@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema AccessExpression extends MemberExpression {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## AccessExpression::getText

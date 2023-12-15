@@ -5,7 +5,7 @@ Primary key: `element_oid: int`
 ```rust
 schema FunctionDefStatementDO {
   name: string,
-  @primary element_oid: int,
+  @primary element_oid: int
 }
 ```
 ## FunctionDefStatementDO::getName

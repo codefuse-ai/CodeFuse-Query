@@ -5,7 +5,7 @@ Primary key: `element_oid: int`
 ```rust
 schema ConstantDO {
   value: string,
-  @primary element_oid: int,
+  @primary element_oid: int
 }
 ```
 ## ConstantDO::getValue

@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema SlashToken extends Token {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## SlashToken::getLocation

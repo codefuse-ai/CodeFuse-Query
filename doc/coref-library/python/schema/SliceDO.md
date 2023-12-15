@@ -9,7 +9,7 @@ schema SliceDO {
   location_oid: int,
   parent_oid: int,
   element_index: int,
-  @primary element_oid: int,
+  @primary element_oid: int
 }
 ```
 ## SliceDO::getHasStep

@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema Token extends Node {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## Token::getADescendant

@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema ClassDeclarationStatement extends DeclarationStatement {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## ClassDeclarationStatement::getADescendant

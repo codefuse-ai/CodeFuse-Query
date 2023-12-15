@@ -9,7 +9,7 @@ schema Literal extends LiteralDO {
   @primary oid: int,
   expr: int,
   raw: string,
-  value: string,
+  value: string
 }
 ```
 ## Literal::getExpr

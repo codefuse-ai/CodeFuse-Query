@@ -6,7 +6,7 @@ Primary key: `oid: int`
 schema UsesDO {
   object: int,
   ident: int,
-  @primary oid: int,
+  @primary oid: int
 }
 ```
 ## UsesDO::getObject

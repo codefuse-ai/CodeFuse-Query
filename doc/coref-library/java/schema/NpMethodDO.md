@@ -8,7 +8,7 @@ schema NpMethodDO {
   type_hash_id: int,
   signature: string,
   name: string,
-  @primary element_hash_id: int,
+  @primary element_hash_id: int
 }
 ```
 ## NpMethodDO::getSignature

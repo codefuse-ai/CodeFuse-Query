@@ -6,7 +6,7 @@ Primary key: `element_hash_id: int`
 schema IfStatementWithoutElseDO {
   consequent_hash_id: int,
   condition_hash_id: int,
-  @primary element_hash_id: int,
+  @primary element_hash_id: int
 }
 ```
 ## IfStatementWithoutElseDO::getConditionHashId

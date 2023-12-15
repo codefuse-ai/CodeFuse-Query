@@ -6,7 +6,7 @@ Primary key: `oid: int`
 schema ElementTypeDO {
   tp: int,
   container: int,
-  @primary oid: int,
+  @primary oid: int
 }
 ```
 ## ElementTypeDO::getTp

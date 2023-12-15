@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema ExternalModuleReference extends Node {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## ExternalModuleReference::getADescendant

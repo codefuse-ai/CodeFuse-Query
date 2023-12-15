@@ -7,7 +7,7 @@ schema PkgDO {
   scope: int,
   name: string,
   path: string,
-  @primary oid: int,
+  @primary oid: int
 }
 ```
 ## PkgDO::getScope

@@ -5,7 +5,7 @@ Primary key: `reference_element_oid: int`
 ```rust
 schema ReferenceRelationDO {
   definition_element_oid: int,
-  @primary reference_element_oid: int,
+  @primary reference_element_oid: int
 }
 ```
 ## ReferenceRelationDO::getDefinitionElementOid

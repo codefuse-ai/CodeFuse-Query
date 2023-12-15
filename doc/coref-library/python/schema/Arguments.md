@@ -8,7 +8,7 @@ Primary key: `element_oid: int`
 schema Arguments extends ArgumentsDO {
   @primary element_oid: int,
   parent_oid: int,
-  printable_text: string,
+  printable_text: string
 }
 ```
 ## Arguments::getParentOid

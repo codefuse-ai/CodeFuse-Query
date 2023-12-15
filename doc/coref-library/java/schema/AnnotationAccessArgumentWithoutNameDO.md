@@ -9,7 +9,7 @@ schema AnnotationAccessArgumentWithoutNameDO {
   argument_value_hash_id: int,
   @primary element_hash_id: int,
   location_hash_id: int,
-  annotation_access_hash_id: int,
+  annotation_access_hash_id: int
 }
 ```
 ## AnnotationAccessArgumentWithoutNameDO::getPrintableText

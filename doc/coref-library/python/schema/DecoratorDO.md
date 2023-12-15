@@ -6,7 +6,7 @@ Primary key: `element_oid: int`
 schema DecoratorDO {
   printable_text: string,
   type: string,
-  @primary element_oid: int,
+  @primary element_oid: int
 }
 ```
 ## DecoratorDO::getPrintableText

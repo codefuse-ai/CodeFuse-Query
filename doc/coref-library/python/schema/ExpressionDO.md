@@ -9,7 +9,7 @@ schema ExpressionDO {
   element_index: int,
   location_oid: int,
   type: string,
-  @primary element_oid: int,
+  @primary element_oid: int
 }
 ```
 ## ExpressionDO::getLocationOid

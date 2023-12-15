@@ -5,7 +5,7 @@ Primary key: `statement_oid: int`
 ```rust
 schema ScopeEnclosingStatementDO {
   scope_oid: int,
-  @primary statement_oid: int,
+  @primary statement_oid: int
 }
 ```
 ## ScopeEnclosingStatementDO::getScopeOid

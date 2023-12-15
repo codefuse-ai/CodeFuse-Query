@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema HeritageToken extends Node {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## HeritageToken::getADescendant

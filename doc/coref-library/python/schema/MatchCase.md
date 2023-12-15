@@ -12,7 +12,7 @@ schema MatchCase extends MatchCaseDO {
   element_index: int,
   location_oid: int,
   printable_text: string,
-  is_default: int,
+  is_default: int
 }
 ```
 ## MatchCase::getElementIndex

@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema PostOrderNode extends ControlFlowNode {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## PostOrderNode::isSyntheticNode

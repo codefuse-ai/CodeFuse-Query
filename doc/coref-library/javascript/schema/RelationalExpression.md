@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema RelationalExpression extends BinaryExpression {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## RelationalExpression::getParentOid

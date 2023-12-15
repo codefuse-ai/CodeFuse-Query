@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema ForStmt extends Statement {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## ForStmt::getKind

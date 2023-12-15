@@ -10,7 +10,7 @@ schema RuntimeInfo extends RuntimeInfoDO {
   build_version: string,
   go_os: string,
   extractor_info: string,
-  go_arch: string,
+  go_arch: string
 }
 ```
 ## RuntimeInfo::getExtractorInfo

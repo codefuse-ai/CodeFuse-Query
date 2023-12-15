@@ -8,7 +8,7 @@ Primary key: `oid: int`
 schema Comment extends CommentDO {
   @primary oid: int,
   kind: int,
-  location_oid: int,
+  location_oid: int
 }
 ```
 ## Comment::getKind

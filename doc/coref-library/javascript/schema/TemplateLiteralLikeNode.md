@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema TemplateLiteralLikeNode extends Node {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## TemplateLiteralLikeNode::getADescendant

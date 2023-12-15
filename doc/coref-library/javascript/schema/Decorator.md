@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema Decorator extends Node {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## Decorator::getADescendant

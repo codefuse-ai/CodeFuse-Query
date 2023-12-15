@@ -8,7 +8,7 @@ Primary key: `element_hash_id: int`
 schema DeclaredElement extends DeclarationElementDO {
   @primary element_hash_id: int,
   index_order: int,
-  declaration_statement_hash_id: int,
+  declaration_statement_hash_id: int
 }
 ```
 ## DeclaredElement::getIndex

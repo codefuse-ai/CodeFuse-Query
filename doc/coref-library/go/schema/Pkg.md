@@ -9,7 +9,7 @@ schema Pkg extends PkgDO {
   @primary oid: int,
   path: string,
   name: string,
-  scope: int,
+  scope: int
 }
 ```
 ## Pkg::getPath

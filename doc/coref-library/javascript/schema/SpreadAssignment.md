@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema SpreadAssignment extends ObjectLiteralElement {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## SpreadAssignment::getAComment

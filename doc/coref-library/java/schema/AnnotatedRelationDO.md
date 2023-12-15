@@ -5,7 +5,7 @@ Primary key: `annotation_hash_id: int`
 ```rust
 schema AnnotatedRelationDO {
   annotated_item_hash_id: int,
-  @primary annotation_hash_id: int,
+  @primary annotation_hash_id: int
 }
 ```
 ## AnnotatedRelationDO::getAnnotatedItemHashId

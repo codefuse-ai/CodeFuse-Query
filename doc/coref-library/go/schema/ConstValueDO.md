@@ -7,7 +7,7 @@ schema ConstValueDO {
   exact: string,
   value: string,
   expr: int,
-  @primary oid: int,
+  @primary oid: int
 }
 ```
 ## ConstValueDO::getValue

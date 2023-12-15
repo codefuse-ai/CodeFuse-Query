@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema ArrowFunction extends FunctionLikeDeclaration {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## ArrowFunction::getModifier

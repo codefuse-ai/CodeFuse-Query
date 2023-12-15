@@ -7,7 +7,7 @@ Primary key: `id: int`
 ```rust
 schema BreakCompletion extends Completion {
   @primary id: int,
-  name: string,
+  name: string
 }
 ```
 ## BreakCompletion::getValue

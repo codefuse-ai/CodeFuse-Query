@@ -7,7 +7,7 @@ schema ForeachStatementDO {
   iteration_parameter_hash_id: int,
   iterated_value_hash_id: int,
   body_hash_id: int,
-  @primary element_hash_id: int,
+  @primary element_hash_id: int
 }
 ```
 ## ForeachStatementDO::getIterationParameterHashId

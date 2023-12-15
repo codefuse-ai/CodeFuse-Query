@@ -7,7 +7,7 @@ schema ModFileDO {
   go_version: string,
   name: string,
   path: string,
-  @primary oid: int,
+  @primary oid: int
 }
 ```
 ## ModFileDO::getGoVersion

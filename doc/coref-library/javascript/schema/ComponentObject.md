@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema ComponentObject extends ObjectLiteralExpression {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## ComponentObject::getAProperty

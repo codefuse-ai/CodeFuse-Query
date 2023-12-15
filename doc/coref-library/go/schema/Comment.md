@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema Comment extends Node {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## Comment::getAnAncestorForIndex

@@ -7,7 +7,7 @@ Primary key: `oid: int`
 ```rust
 schema TypeName extends TypeNameDO {
   @primary oid: int,
-  name: string,
+  name: string
 }
 ```
 ## TypeName::getName

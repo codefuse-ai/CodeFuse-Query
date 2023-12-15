@@ -7,7 +7,7 @@ schema IgnoredPathDO {
   ignore_kind: int,
   path: string,
   path_kind: int,
-  @primary oid: int,
+  @primary oid: int
 }
 ```
 ## IgnoredPathDO::getIgnoreKind

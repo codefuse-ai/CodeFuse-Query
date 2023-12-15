@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema LessThanToken extends Token {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## LessThanToken::getLocation

@@ -7,7 +7,7 @@ Primary key: `element_oid: int`
 ```rust
 schema Modified2To3File extends Modified2To3FileDO {
   @primary element_oid: int,
-  relative_path: string,
+  relative_path: string
 }
 ```
 ## Modified2To3File::getRelativePath

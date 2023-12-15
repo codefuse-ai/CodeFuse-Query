@@ -7,7 +7,7 @@ schema ArrayLengthDO {
   len: int,
   file_id: int,
   tp: int,
-  @primary oid: int,
+  @primary oid: int
 }
 ```
 ## ArrayLengthDO::getLen

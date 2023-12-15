@@ -10,7 +10,7 @@ schema ImportStaticStatement extends ImportStaticStatementDO {
   name: string,
   location_hash_id: int,
   reference_hash_id: int,
-  parent_hash_id: int,
+  parent_hash_id: int
 }
 ```
 ## ImportStaticStatement::getReferenceHashId

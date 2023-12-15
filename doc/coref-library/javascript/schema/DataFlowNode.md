@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema DataFlowNode extends Node {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## DataFlowNode::getADescendant

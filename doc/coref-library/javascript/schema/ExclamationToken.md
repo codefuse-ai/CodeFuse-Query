@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema ExclamationToken extends Token {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## ExclamationToken::getLocation

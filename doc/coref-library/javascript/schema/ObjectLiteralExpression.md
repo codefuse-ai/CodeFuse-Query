@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema ObjectLiteralExpression extends PrimaryExpression {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## ObjectLiteralExpression::getADescendant

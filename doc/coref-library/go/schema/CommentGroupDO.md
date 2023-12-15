@@ -7,7 +7,7 @@ schema CommentGroupDO {
   file_id: int,
   idx: int,
   parent: int,
-  @primary oid: int,
+  @primary oid: int
 }
 ```
 ## CommentGroupDO::getIdx

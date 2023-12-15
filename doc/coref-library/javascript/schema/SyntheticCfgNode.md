@@ -4,7 +4,7 @@ Primary key: `id: int`
 
 ```rust
 schema SyntheticCfgNode {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## SyntheticCfgNode::getAstNode

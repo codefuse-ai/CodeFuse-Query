@@ -10,7 +10,7 @@ schema Comment extends CommentDO {
   text: string,
   location_hash_id: int,
   parent_hash_id: int,
-  comment_type: string,
+  comment_type: string
 }
 ```
 ## Comment::getLocationHashId

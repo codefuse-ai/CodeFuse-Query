@@ -6,7 +6,7 @@ Primary key: `oid: int`
 schema ScopeDO {
   debug_info: string,
   kind: int,
-  @primary oid: int,
+  @primary oid: int
 }
 ```
 ## ScopeDO::getDebugInfo

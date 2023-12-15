@@ -8,7 +8,7 @@ Primary key: `oid: int`
 schema ReferenceType extends ReferenceTypeDO {
   @primary oid: int,
   name: string,
-  qualified_name: string,
+  qualified_name: string
 }
 ```
 ## ReferenceType::getQualifiedName

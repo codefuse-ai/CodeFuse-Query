@@ -4,7 +4,7 @@ Primary key: `id: int`
 
 ```rust
 schema Callable {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## Callable::getAnAncestorCallee

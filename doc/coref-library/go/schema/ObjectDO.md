@@ -7,7 +7,7 @@ schema ObjectDO {
   debug_info: string,
   name: string,
   kind: int,
-  @primary oid: int,
+  @primary oid: int
 }
 ```
 ## ObjectDO::getDebugInfo

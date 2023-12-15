@@ -6,7 +6,7 @@ Primary key: `oid: int`
 schema ContainerParentDO {
   child: int,
   parent: int,
-  @primary oid: int,
+  @primary oid: int
 }
 ```
 ## ContainerParentDO::getParent

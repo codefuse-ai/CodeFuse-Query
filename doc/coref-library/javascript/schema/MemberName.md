@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema MemberName extends Node {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## MemberName::getADescendant

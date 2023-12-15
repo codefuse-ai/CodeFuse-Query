@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema StatementParent extends ElementParent {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## StatementParent::getAnAncestor

@@ -8,7 +8,7 @@ schema FileDO {
   name: string,
   extension: string,
   relative_path: string,
-  @primary element_oid: int,
+  @primary element_oid: int
 }
 ```
 ## FileDO::getNumberOfLinesOid

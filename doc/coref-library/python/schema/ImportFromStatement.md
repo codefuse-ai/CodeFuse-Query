@@ -11,7 +11,7 @@ schema ImportFromStatement extends Statement {
   type: string,
   parent_oid: int,
   element_index: int,
-  @primary element_oid: int,
+  @primary element_oid: int
 }
 ```
 ## ImportFromStatement::getSize

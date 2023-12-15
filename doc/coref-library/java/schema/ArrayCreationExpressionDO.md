@@ -6,7 +6,7 @@ Primary key: `element_hash_id: int`
 schema ArrayCreationExpressionDO {
   type_hash_id: int,
   number_of_array_dimension: int,
-  @primary element_hash_id: int,
+  @primary element_hash_id: int
 }
 ```
 ## ArrayCreationExpressionDO::getNumberOfArrayDimension

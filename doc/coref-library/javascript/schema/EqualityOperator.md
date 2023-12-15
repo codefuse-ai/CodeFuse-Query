@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema EqualityOperator extends Token {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## EqualityOperator::getLocation

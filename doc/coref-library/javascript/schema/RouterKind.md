@@ -5,7 +5,7 @@ Primary key: `id: int`
 ```rust
 schema RouterKind {
   name: string,
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## RouterKind::isNavigateTo

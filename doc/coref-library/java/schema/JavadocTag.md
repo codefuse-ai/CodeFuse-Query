@@ -11,7 +11,7 @@ schema JavadocTag extends JavadocTagDO {
   name: string,
   @primary element_hash_id: int,
   location_hash_id: int,
-  index_order: int,
+  index_order: int
 }
 ```
 ## JavadocTag::getName

@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema ImportSpec extends Spec {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## ImportSpec::getKind

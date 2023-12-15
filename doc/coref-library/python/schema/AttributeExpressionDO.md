@@ -6,7 +6,7 @@ Primary key: `element_oid: int`
 schema AttributeExpressionDO {
   ctx_type: string,
   value_oid: int,
-  @primary element_oid: int,
+  @primary element_oid: int
 }
 ```
 ## AttributeExpressionDO::getCtxType

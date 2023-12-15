@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema BinaryExpression extends Expression {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## BinaryExpression::getSymbol

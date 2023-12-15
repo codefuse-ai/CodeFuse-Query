@@ -9,7 +9,7 @@ schema JavadocTagDO {
   @primary element_hash_id: int,
   name: string,
   containing_comment_hash_id: int,
-  value: string,
+  value: string
 }
 ```
 ## JavadocTagDO::getLocationHashId

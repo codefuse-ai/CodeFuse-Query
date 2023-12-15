@@ -11,7 +11,7 @@ schema BooleanLiteral extends Literal {
   location_hash_id: int,
   parent_hash_id: int,
   index_order: int,
-  printable_text: string,
+  printable_text: string
 }
 ```
 ## BooleanLiteral::getType

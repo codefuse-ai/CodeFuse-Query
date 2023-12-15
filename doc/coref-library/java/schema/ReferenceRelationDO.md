@@ -5,7 +5,7 @@ Primary key: `reference_element_hash_id: int`
 ```rust
 schema ReferenceRelationDO {
   definition_element_hash_id: int,
-  @primary reference_element_hash_id: int,
+  @primary reference_element_hash_id: int
 }
 ```
 ## ReferenceRelationDO::getSourceId

@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema BitwiseNotExpression extends PrefixUnaryExpression {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## BitwiseNotExpression::getParentOid

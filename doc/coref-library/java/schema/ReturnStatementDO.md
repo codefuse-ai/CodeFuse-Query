@@ -5,7 +5,7 @@ Primary key: `element_hash_id: int`
 ```rust
 schema ReturnStatementDO {
   return_expression_hash_id: int,
-  @primary element_hash_id: int,
+  @primary element_hash_id: int
 }
 ```
 ## ReturnStatementDO::getReturnExpressionHashId

@@ -6,7 +6,7 @@ Primary key: `oid: int`
 schema CompilationArgsDO {
   arg: string,
   num: int,
-  @primary oid: int,
+  @primary oid: int
 }
 ```
 ## CompilationArgsDO::getArg

@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema SetAccessorElement extends AccessorElement {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## SetAccessorElement::getADescendant

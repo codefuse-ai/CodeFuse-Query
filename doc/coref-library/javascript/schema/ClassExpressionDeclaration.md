@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema ClassExpressionDeclaration extends ClassLikeDeclaration {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## ClassExpressionDeclaration::getLocation

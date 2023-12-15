@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema PageRegistrationExpression extends CallExpression {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## PageRegistrationExpression::getLastChild

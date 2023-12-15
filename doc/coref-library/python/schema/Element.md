@@ -9,7 +9,7 @@ schema Element extends ElementDO {
   @primary oid: int,
   value: string,
   parent_oid: int,
-  type: string,
+  type: string
 }
 ```
 ## Element::getType

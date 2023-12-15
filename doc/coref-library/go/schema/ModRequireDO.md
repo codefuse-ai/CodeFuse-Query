@@ -6,7 +6,7 @@ Primary key: `oid: int`
 schema ModRequireDO {
   require: string,
   mod_id: int,
-  @primary oid: int,
+  @primary oid: int
 }
 ```
 ## ModRequireDO::getRequire

@@ -9,7 +9,7 @@ schema ReferenceParameterListDO {
   parent_hash_id: int,
   location_hash_id: int,
   @primary list_hash_id: int,
-  type_element_hash_id: int,
+  type_element_hash_id: int
 }
 ```
 ## ReferenceParameterListDO::getPrintableText

@@ -8,7 +8,7 @@ schema ForStatementDO {
   initialization_hash_id: int,
   body_hash_id: int,
   update_hash_id: int,
-  @primary element_hash_id: int,
+  @primary element_hash_id: int
 }
 ```
 ## ForStatementDO::getUpdateHashId

@@ -7,7 +7,7 @@ schema ElementDO {
   type: string,
   parent_oid: int,
   value: string,
-  @primary oid: int,
+  @primary oid: int
 }
 ```
 ## ElementDO::getParentOid

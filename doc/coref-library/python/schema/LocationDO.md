@@ -9,7 +9,7 @@ schema LocationDO {
   end_column_number: int,
   start_line_number: int,
   file_oid: int,
-  @primary element_oid: int,
+  @primary element_oid: int
 }
 ```
 ## LocationDO::getEndColumnNumber

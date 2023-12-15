@@ -9,7 +9,7 @@ schema XmlAttributeDO {
   name: string,
   index_order: int,
   location_id: int,
-  element_id: int,
+  element_id: int
 }
 ```
 ## XmlAttributeDO::getElementId

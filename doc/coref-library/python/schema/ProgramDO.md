@@ -5,7 +5,7 @@ Primary key: `program_oid: int`
 ```rust
 schema ProgramDO {
   absolute_prefix_path: string,
-  @primary program_oid: int,
+  @primary program_oid: int
 }
 ```
 ## ProgramDO::getAbsolutePrefixPath

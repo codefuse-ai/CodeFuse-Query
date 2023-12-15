@@ -11,7 +11,7 @@ schema Class extends ClassDefStatement {
   parent_oid: int,
   type: string,
   location_oid: int,
-  printable_text: string,
+  printable_text: string
 }
 ```
 ## Class::getType

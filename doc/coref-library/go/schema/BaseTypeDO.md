@@ -6,7 +6,7 @@ Primary key: `oid: int`
 schema BaseTypeDO {
   tp: int,
   ptr: int,
-  @primary oid: int,
+  @primary oid: int
 }
 ```
 ## BaseTypeDO::getTp

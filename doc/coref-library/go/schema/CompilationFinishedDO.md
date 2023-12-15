@@ -6,7 +6,7 @@ Primary key: `oid: int`
 schema CompilationFinishedDO {
   cpu_seconds: int,
   elapsed_seconds: int,
-  @primary oid: int,
+  @primary oid: int
 }
 ```
 ## CompilationFinishedDO::getElapsedSeconds

@@ -7,7 +7,7 @@ schema OperatorDO {
   parent_oid: int,
   printable_text: string,
   location_oid: int,
-  @primary element_oid: int,
+  @primary element_oid: int
 }
 ```
 ## OperatorDO::getPrintableText

@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema TemplateExpression extends PrimaryExpression {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## TemplateExpression::getADescendant

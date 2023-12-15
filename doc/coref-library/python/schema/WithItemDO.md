@@ -7,7 +7,7 @@ schema WithItemDO {
   parent_oid: int,
   element_index: int,
   printable_text: string,
-  @primary element_oid: int,
+  @primary element_oid: int
 }
 ```
 ## WithItemDO::getParentOid

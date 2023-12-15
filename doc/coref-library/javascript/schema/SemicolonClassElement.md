@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema SemicolonClassElement extends ClassElement {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## SemicolonClassElement::getLocation

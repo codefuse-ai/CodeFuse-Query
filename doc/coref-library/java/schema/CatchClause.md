@@ -12,7 +12,7 @@ schema CatchClause extends CatchSectionDO {
   parameter_hash_id: int,
   type_hash_id: int,
   try_statement_hash_id: int,
-  index_order: int,
+  index_order: int
 }
 ```
 ## CatchClause::getPrintableText

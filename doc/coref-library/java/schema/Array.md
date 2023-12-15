@@ -7,7 +7,7 @@ Primary key: `element_hash_id: int`
 ```rust
 schema Array extends ArrayDO {
   @primary element_hash_id: int,
-  name: string,
+  name: string
 }
 ```
 ## Array::getName

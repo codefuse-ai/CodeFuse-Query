@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema TypeParameter extends Node {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## TypeParameter::getADescendant

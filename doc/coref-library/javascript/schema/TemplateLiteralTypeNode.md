@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema TemplateLiteralTypeNode extends TypeNode {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## TemplateLiteralTypeNode::getLocation

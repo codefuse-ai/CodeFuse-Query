@@ -7,7 +7,7 @@ schema XmlElementDO {
   index_order: int,
   parent_id: int,
   location_id: int,
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## XmlElementDO::getLocationId

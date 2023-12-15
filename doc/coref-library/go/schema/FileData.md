@@ -9,7 +9,7 @@ schema FileData extends FileDataDO {
   @primary oid: int,
   file_id: int,
   type: int,
-  content: string,
+  content: string
 }
 ```
 ## FileData::getFileId

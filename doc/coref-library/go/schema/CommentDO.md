@@ -9,7 +9,7 @@ schema CommentDO {
   index: int,
   debug_info: string,
   file_id: int,
-  @primary oid: int,
+  @primary oid: int
 }
 ```
 ## CommentDO::getDebugInfo

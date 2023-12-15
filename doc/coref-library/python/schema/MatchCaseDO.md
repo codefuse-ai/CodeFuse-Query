@@ -10,7 +10,7 @@ schema MatchCaseDO {
   element_index: int,
   location_oid: int,
   pattern_oid: int,
-  @primary element_oid: int,
+  @primary element_oid: int
 }
 ```
 ## MatchCaseDO::getIsDefault

@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema SubtractionExpression extends AdditiveExpression {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## SubtractionExpression::getSymbol

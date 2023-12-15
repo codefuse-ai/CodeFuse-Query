@@ -7,7 +7,7 @@ Primary key: `program_hash_id: int`
 ```rust
 schema Program extends ProgramDO {
   @primary program_hash_id: int,
-  absolute_prefix_path: string,
+  absolute_prefix_path: string
 }
 ```
 ## Program::getAbsolutePrefixPath

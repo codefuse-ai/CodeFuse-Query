@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema KeywordToken extends Token {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## KeywordToken::getLocation

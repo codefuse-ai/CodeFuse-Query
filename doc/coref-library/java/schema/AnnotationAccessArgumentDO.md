@@ -4,7 +4,7 @@ Primary key: `id: int`
 
 ```rust
 schema AnnotationAccessArgumentDO {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## AnnotationAccessArgumentDO::getAnAncestor

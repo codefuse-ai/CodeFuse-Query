@@ -10,7 +10,7 @@ schema StaticNestedClass extends NestedClass {
   qualified_name: string,
   location_hash_id: int,
   identifier_hash_id: int,
-  parent_hash_id: int,
+  parent_hash_id: int
 }
 ```
 ## StaticNestedClass::getAllFields

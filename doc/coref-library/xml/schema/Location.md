@@ -11,7 +11,7 @@ schema Location extends LocationDO {
   end_column_number: int,
   start_column_number: int,
   end_line_number: int,
-  file_id: int,
+  file_id: int
 }
 ```
 ## Location::getStartLineNumber

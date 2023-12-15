@@ -12,7 +12,7 @@ schema Parameter extends ParameterDO {
   parent_hash_id: int,
   index_order: int,
   printable_text: string,
-  type_hash_id: int,
+  type_hash_id: int
 }
 ```
 ## Parameter::getTypeHashId

@@ -7,7 +7,7 @@ schema ElementDO {
   parent_type: string,
   parent_id: int,
   type: string,
-  @primary element_hash_id: int,
+  @primary element_hash_id: int
 }
 ```
 ## ElementDO::getParentType

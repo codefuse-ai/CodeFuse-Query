@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema ImportClause extends Node {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## ImportClause::getADescendant

@@ -7,7 +7,7 @@ schema FileDataDO {
   content: string,
   type: int,
   file_id: int,
-  @primary oid: int,
+  @primary oid: int
 }
 ```
 ## FileDataDO::getContent

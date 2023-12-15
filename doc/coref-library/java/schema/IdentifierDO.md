@@ -7,7 +7,7 @@ schema IdentifierDO {
   parent_hash_id: int,
   name: string,
   location_hash_id: int,
-  @primary element_hash_id: int,
+  @primary element_hash_id: int
 }
 ```
 ## IdentifierDO::getLocationHashId

@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema RefExpr extends Node {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## RefExpr::getADescendant

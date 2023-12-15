@@ -11,7 +11,7 @@ schema LocalVariable extends LocalVariableDO {
   name: string,
   parent_hash_id: int,
   printable_text: string,
-  index_order: int,
+  index_order: int
 }
 ```
 ## LocalVariable::getName

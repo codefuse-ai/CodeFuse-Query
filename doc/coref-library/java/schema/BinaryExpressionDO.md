@@ -7,7 +7,7 @@ schema BinaryExpressionDO {
   opcode: string,
   rhs_hash_id: int,
   lhs_hash_id: int,
-  @primary element_hash_id: int,
+  @primary element_hash_id: int
 }
 ```
 ## BinaryExpressionDO::getOpcode

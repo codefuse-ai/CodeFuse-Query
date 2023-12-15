@@ -5,7 +5,7 @@ Primary key: `oid: int`
 ```rust
 schema FolderDO {
   name: string,
-  @primary oid: int,
+  @primary oid: int
 }
 ```
 ## FolderDO::getName

@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema ClassStaticBlockElement extends ClassElement {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## ClassStaticBlockElement::getLocation

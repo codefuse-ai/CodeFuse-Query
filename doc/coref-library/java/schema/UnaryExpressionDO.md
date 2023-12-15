@@ -7,7 +7,7 @@ schema UnaryExpressionDO {
   opcode: string,
   is_postfix: int,
   operand_hash_id: int,
-  @primary element_hash_id: int,
+  @primary element_hash_id: int
 }
 ```
 ## UnaryExpressionDO::getOpcode

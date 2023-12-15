@@ -7,7 +7,7 @@ schema SwitchLabelStatementDO {
   get_next_switch_case: int,
   enclosing_switch_block_hash_id: int,
   case_value_hash_id: int,
-  @primary element_hash_id: int,
+  @primary element_hash_id: int
 }
 ```
 ## SwitchLabelStatementDO::getNext

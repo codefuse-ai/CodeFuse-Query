@@ -10,7 +10,7 @@ schema File extends FileDO {
   qualified_name: string,
   name: string,
   extension: string,
-  number_of_lines_hash_id: int,
+  number_of_lines_hash_id: int
 }
 ```
 ## File::getName

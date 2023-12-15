@@ -9,7 +9,7 @@ schema NumberOfLines extends NumberOfLinesDO {
   @primary location_oid: int,
   comment_lines: int,
   lines: int,
-  code_lines: int,
+  code_lines: int
 }
 ```
 ## NumberOfLines::getCommentLines

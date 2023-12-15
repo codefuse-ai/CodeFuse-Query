@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema CaseClause extends Statement {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## CaseClause::getLocation

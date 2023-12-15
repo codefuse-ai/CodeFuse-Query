@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema TaggedTemplateExpression extends MemberExpression {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## TaggedTemplateExpression::getText

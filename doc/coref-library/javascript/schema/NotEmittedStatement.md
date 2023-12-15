@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema NotEmittedStatement extends Statement {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## NotEmittedStatement::getLocation

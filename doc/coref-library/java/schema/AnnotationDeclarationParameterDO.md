@@ -9,7 +9,7 @@ schema AnnotationDeclarationParameterDO {
   location_hash_id: int,
   printable_text: string,
   parameter_value_hash_id: int,
-  annotation_declaration_hash_id: int,
+  annotation_declaration_hash_id: int
 }
 ```
 ## AnnotationDeclarationParameterDO::getPrintableText

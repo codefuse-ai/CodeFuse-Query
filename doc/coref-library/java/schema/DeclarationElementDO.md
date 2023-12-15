@@ -6,7 +6,7 @@ Primary key: `element_hash_id: int`
 schema DeclarationElementDO {
   declaration_statement_hash_id: int,
   index_order: int,
-  @primary element_hash_id: int,
+  @primary element_hash_id: int
 }
 ```
 ## DeclarationElementDO::getDeclarationStatementHashId

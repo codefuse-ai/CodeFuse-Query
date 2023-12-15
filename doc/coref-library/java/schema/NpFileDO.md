@@ -7,7 +7,7 @@ schema NpFileDO {
   project_hash_id: int,
   name: string,
   qualified_name: string,
-  @primary element_hash_id: int,
+  @primary element_hash_id: int
 }
 ```
 ## NpFileDO::getProjectHashId

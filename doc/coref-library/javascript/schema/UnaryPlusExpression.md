@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema UnaryPlusExpression extends PrefixUnaryExpression {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## UnaryPlusExpression::getParentOid

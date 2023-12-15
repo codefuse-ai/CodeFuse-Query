@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema TemplateHead extends TemplateLiteralLikeNode {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## TemplateHead::getLocation

@@ -7,7 +7,7 @@ schema NpInterfaceDO {
   parent_hash_id: int,
   qualified_name: string,
   name: string,
-  @primary element_hash_id: int,
+  @primary element_hash_id: int
 }
 ```
 ## NpInterfaceDO::getQualifiedName

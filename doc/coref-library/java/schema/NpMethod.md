@@ -10,7 +10,7 @@ schema NpMethod extends NpMethodDO {
   name: string,
   signature: string,
   type_hash_id: int,
-  parent_hash_id: int,
+  parent_hash_id: int
 }
 ```
 ## NpMethod::getName

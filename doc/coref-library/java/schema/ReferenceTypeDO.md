@@ -6,7 +6,7 @@ Primary key: `oid: int`
 schema ReferenceTypeDO {
   qualified_name: string,
   name: string,
-  @primary oid: int,
+  @primary oid: int
 }
 ```
 ## ReferenceTypeDO::getQualifiedName

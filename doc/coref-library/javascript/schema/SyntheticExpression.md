@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema SyntheticExpression extends Expression {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## SyntheticExpression::getLocation

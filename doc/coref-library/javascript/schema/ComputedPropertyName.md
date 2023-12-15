@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema ComputedPropertyName extends Node {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## ComputedPropertyName::getADescendant

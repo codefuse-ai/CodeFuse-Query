@@ -10,7 +10,7 @@ schema JavadocComment extends JavadocCommentDO {
   text: string,
   location_hash_id: int,
   documentable_hash_id: int,
-  parent_hash_id: int,
+  parent_hash_id: int
 }
 ```
 ## JavadocComment::getDocumentableHashId

@@ -9,7 +9,7 @@ schema XmlElement extends XmlElementDO {
   @primary id: int,
   location_id: int,
   parent_id: int,
-  index_order: int,
+  index_order: int
 }
 ```
 ## XmlElement::getParentId

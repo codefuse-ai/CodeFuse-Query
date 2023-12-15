@@ -7,7 +7,7 @@ schema AssignmentExpressionDO {
   opcode: string,
   rhs_hash_id: int,
   lhs_hash_id: int,
-  @primary element_hash_id: int,
+  @primary element_hash_id: int
 }
 ```
 ## AssignmentExpressionDO::getOpcode

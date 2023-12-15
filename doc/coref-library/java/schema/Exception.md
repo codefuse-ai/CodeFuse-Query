@@ -9,7 +9,7 @@ schema Exception extends ExceptionDO {
   @primary element_hash_id: int,
   callable_hash_id: int,
   name: string,
-  type_hash_id: int,
+  type_hash_id: int
 }
 ```
 ## Exception::getType

@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema CommentGroup extends Node {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## CommentGroup::getAnAncestorForIndex

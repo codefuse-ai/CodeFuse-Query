@@ -11,7 +11,7 @@ schema CallExpression extends Expression {
   type: string,
   parent_oid: int,
   element_index: int,
-  @primary element_oid: int,
+  @primary element_oid: int
 }
 ```
 ## CallExpression::getAnAncestor

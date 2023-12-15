@@ -7,7 +7,7 @@ schema ConditionalExpressionDO {
   then_part_hash_id: int,
   else_part_hash_id: int,
   condition_expression_hash_id: int,
-  @primary element_hash_id: int,
+  @primary element_hash_id: int
 }
 ```
 ## ConditionalExpressionDO::getElsePartHashId

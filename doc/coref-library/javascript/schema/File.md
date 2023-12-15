@@ -10,7 +10,7 @@ schema File extends FileDO {
   extension: string,
   name: string,
   relative_path: string,
-  location_oid: int,
+  location_oid: int
 }
 ```
 ## File::getExtension

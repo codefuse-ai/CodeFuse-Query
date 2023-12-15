@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema MultiplicationExpression extends MultiplicativeExpression {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## MultiplicationExpression::getSymbol

@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema RelationalOperator extends Token {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## RelationalOperator::getLocation

@@ -5,7 +5,7 @@ Primary key: `decorator_oid: int`
 ```rust
 schema DecoratedRelationDO {
   decorated_element_oid: int,
-  @primary decorator_oid: int,
+  @primary decorator_oid: int
 }
 ```
 ## DecoratedRelationDO::getDecoratedElementOid

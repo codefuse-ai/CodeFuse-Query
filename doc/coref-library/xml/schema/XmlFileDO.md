@@ -6,7 +6,7 @@ Primary key: `id: int`
 schema XmlFileDO {
   relative_path: string,
   file_name: string,
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## XmlFileDO::getRelativePath

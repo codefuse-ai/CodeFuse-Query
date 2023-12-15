@@ -11,7 +11,7 @@ schema XmlAttribute extends XmlAttributeDO {
   @primary id: int,
   value: string,
   element_id: int,
-  location_id: int,
+  location_id: int
 }
 ```
 ## XmlAttribute::getName

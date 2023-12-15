@@ -7,7 +7,7 @@ schema CmpopDO {
   location_oid: int,
   parent_oid: int,
   value: int,
-  @primary element_oid: int,
+  @primary element_oid: int
 }
 ```
 ## CmpopDO::getParentOid

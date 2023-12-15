@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema ModuleDeclaration extends DeclarationStatement {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## ModuleDeclaration::getADescendant

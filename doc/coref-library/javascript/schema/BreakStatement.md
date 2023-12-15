@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema BreakStatement extends Statement {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## BreakStatement::getLocation

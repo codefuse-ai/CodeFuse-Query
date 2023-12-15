@@ -8,7 +8,7 @@ schema SpecDO {
   parent_id: int,
   kind: int,
   idx: int,
-  @primary oid: int,
+  @primary oid: int
 }
 ```
 ## SpecDO::getIdx

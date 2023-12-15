@@ -6,7 +6,7 @@ Primary key: `oid: int`
 schema ScopeNestingDO {
   outer: int,
   inner: int,
-  @primary oid: int,
+  @primary oid: int
 }
 ```
 ## ScopeNestingDO::getOuter

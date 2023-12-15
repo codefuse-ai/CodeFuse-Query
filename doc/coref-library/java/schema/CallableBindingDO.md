@@ -5,7 +5,7 @@ Primary key: `caller_hash_id: int`
 ```rust
 schema CallableBindingDO {
   callee_hash_id: int,
-  @primary caller_hash_id: int,
+  @primary caller_hash_id: int
 }
 ```
 ## CallableBindingDO::getCalleeHashId

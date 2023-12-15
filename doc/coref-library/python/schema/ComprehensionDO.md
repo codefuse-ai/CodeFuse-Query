@@ -9,7 +9,7 @@ schema ComprehensionDO {
   printable_text: string,
   iter_expr_oid: int,
   target_expr_oid: int,
-  @primary element_oid: int,
+  @primary element_oid: int
 }
 ```
 ## ComprehensionDO::getPrintableText

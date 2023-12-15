@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema NamespaceImport extends Node {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## NamespaceImport::getADescendant

@@ -8,7 +8,7 @@ schema XmlDtdDO {
   public_id: string,
   root: string,
   location_id: int,
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## XmlDtdDO::getLocationId

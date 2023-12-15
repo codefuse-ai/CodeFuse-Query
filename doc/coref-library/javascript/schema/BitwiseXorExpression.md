@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema BitwiseXorExpression extends BinaryBitwiseExpression {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## BitwiseXorExpression::getSymbol

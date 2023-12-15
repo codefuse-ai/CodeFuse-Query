@@ -6,7 +6,7 @@ Primary key: `element_hash_id: int`
 schema AssertStatementDO {
   assert_description_hash_id: int,
   assert_condition_hash_id: int,
-  @primary element_hash_id: int,
+  @primary element_hash_id: int
 }
 ```
 ## AssertStatementDO::getAssertConditionHashId

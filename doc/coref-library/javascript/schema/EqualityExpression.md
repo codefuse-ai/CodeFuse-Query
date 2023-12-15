@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema EqualityExpression extends EqualityTestExpression {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## EqualityExpression::getSymbol

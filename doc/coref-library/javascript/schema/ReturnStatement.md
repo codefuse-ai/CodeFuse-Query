@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema ReturnStatement extends Statement {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## ReturnStatement::getLocation

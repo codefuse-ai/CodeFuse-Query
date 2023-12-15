@@ -10,7 +10,7 @@ schema PackageStatement extends PackageStatementDO {
   qualified_name: string,
   location_hash_id: int,
   package_hash_id: int,
-  parent_hash_id: int,
+  parent_hash_id: int
 }
 ```
 ## PackageStatement::getLocationHashId

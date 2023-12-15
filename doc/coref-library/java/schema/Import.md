@@ -11,7 +11,7 @@ schema Import extends ImportDO {
   location_hash_id: int,
   reference_hash_id: int,
   parent_hash_id: int,
-  is_foreign_import: int,
+  is_foreign_import: int
 }
 ```
 ## Import::getParentHashId

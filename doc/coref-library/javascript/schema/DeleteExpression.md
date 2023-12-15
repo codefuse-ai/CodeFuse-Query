@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema DeleteExpression extends UnaryExpression {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## DeleteExpression::getADescendant

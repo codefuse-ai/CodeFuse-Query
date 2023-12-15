@@ -7,7 +7,7 @@ schema FolderDO {
   parent_oid: int,
   name: string,
   qualified_name: string,
-  @primary element_oid: int,
+  @primary element_oid: int
 }
 ```
 ## FolderDO::getParentOid

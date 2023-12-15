@@ -5,7 +5,7 @@ Primary key: `child_oid: int`
 ```rust
 schema DirectoryHierarchyDO {
   @primary child_oid: int,
-  parent_oid: int,
+  parent_oid: int
 }
 ```
 ## DirectoryHierarchyDO::getParentOid

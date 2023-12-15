@@ -5,7 +5,7 @@ Primary key: `element_oid: int`
 ```rust
 schema GlobalStatementDO {
   names: string,
-  @primary element_oid: int,
+  @primary element_oid: int
 }
 ```
 ## GlobalStatementDO::getNames

@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema AwaitKeyword extends Token {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## AwaitKeyword::getLocation

@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema BinaryOperator extends Token {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## BinaryOperator::getLocation

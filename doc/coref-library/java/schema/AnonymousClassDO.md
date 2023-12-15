@@ -8,7 +8,7 @@ schema AnonymousClassDO {
   base_class_type_hash_id: int,
   base_class_reference_hash_id: int,
   location_hash_id: int,
-  @primary element_hash_id: int,
+  @primary element_hash_id: int
 }
 ```
 ## AnonymousClassDO::getLocationHashId

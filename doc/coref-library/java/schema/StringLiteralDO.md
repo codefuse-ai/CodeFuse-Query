@@ -5,7 +5,7 @@ Primary key: `element_hash_id: int`
 ```rust
 schema StringLiteralDO {
   value: string,
-  @primary element_hash_id: int,
+  @primary element_hash_id: int
 }
 ```
 ## StringLiteralDO::getValue

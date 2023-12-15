@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema TypeAliasDeclaration extends DeclarationStatement {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## TypeAliasDeclaration::getADescendant

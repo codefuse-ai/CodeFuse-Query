@@ -8,7 +8,7 @@ schema ComponentTypeDO {
   name: string,
   index: int,
   parent: int,
-  @primary oid: int,
+  @primary oid: int
 }
 ```
 ## ComponentTypeDO::getIndex

@@ -6,7 +6,7 @@ Primary key: `oid: int`
 schema TypeParamDeclsDO {
   index: int,
   parent: int,
-  @primary oid: int,
+  @primary oid: int
 }
 ```
 ## TypeParamDeclsDO::getIndex

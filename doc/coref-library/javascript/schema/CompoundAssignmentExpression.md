@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema CompoundAssignmentExpression extends AssignmentExpression {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## CompoundAssignmentExpression::getSymbol

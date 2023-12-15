@@ -12,7 +12,7 @@ schema KeywordWithoutName extends Keyword {
   element_index: int,
   value_oid: int,
   arg_value: string,
-  @primary element_oid: int,
+  @primary element_oid: int
 }
 ```
 ## KeywordWithoutName::getAnAncestor

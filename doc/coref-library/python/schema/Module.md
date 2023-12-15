@@ -9,7 +9,7 @@ schema Module extends ModuleDO {
   @primary element_oid: int,
   file_oid: int,
   name: string,
-  location_oid: int,
+  location_oid: int
 }
 ```
 ## Module::getName

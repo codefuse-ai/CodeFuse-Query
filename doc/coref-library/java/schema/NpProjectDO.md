@@ -6,7 +6,7 @@ Primary key: `element_hash_id: int`
 schema NpProjectDO {
   extension: string,
   name: string,
-  @primary element_hash_id: int,
+  @primary element_hash_id: int
 }
 ```
 ## NpProjectDO::getExtension

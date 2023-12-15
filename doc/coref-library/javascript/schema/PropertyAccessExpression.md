@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema PropertyAccessExpression extends AccessExpression {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## PropertyAccessExpression::getCallee

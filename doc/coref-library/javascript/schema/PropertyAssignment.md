@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema PropertyAssignment extends ObjectLiteralElement {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## PropertyAssignment::getAComment

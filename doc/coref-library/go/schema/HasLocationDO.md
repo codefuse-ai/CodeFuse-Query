@@ -6,7 +6,7 @@ Primary key: `oid: int`
 schema HasLocationDO {
   location_id: int,
   location_obj: int,
-  @primary oid: int,
+  @primary oid: int
 }
 ```
 ## HasLocationDO::getLocationId

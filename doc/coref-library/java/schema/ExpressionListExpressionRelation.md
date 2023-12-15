@@ -8,7 +8,7 @@ Primary key: `expression_hash_id: int`
 schema ExpressionListExpressionRelation extends ExpressionListExpressionRelationDO {
   expression_list_hash_id: int,
   @primary expression_hash_id: int,
-  position: int,
+  position: int
 }
 ```
 ## ExpressionListExpressionRelation::getExpressionHashId

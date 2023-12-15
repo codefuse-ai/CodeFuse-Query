@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema NonNullExpression extends LeftHandSideExpression {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## NonNullExpression::getADescendant

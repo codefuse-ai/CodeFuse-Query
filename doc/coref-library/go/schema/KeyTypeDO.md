@@ -6,7 +6,7 @@ Primary key: `oid: int`
 schema KeyTypeDO {
   tp: int,
   map: int,
-  @primary oid: int,
+  @primary oid: int
 }
 ```
 ## KeyTypeDO::getTp

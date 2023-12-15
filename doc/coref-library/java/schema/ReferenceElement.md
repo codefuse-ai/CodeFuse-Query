@@ -9,7 +9,7 @@ schema ReferenceElement extends ReferenceElementDO {
   @primary element_hash_id: int,
   location_hash_id: int,
   printable_text: string,
-  parent_hash_id: int,
+  parent_hash_id: int
 }
 ```
 ## ReferenceElement::getPrintableText

@@ -6,7 +6,7 @@ Primary key: `element_oid: int`
 schema DocstringCommentDO {
   documented_element_oid: int,
   text: string,
-  @primary element_oid: int,
+  @primary element_oid: int
 }
 ```
 ## DocstringCommentDO::getDocumentedElementOid

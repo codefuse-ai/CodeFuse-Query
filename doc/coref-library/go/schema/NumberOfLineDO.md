@@ -7,7 +7,7 @@ schema NumberOfLineDO {
   number_of_comment_lines: int,
   number_of_code_lines: int,
   number_of_total_lines: int,
-  @primary oid: int,
+  @primary oid: int
 }
 ```
 ## NumberOfLineDO::getNumberOfCommentLines

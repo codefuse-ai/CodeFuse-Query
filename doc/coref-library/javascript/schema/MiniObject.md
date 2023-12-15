@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema MiniObject extends ObjectLiteralExpression {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## MiniObject::getAProperty

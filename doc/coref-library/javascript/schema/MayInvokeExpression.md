@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema MayInvokeExpression extends Expression {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## MayInvokeExpression::getLocation

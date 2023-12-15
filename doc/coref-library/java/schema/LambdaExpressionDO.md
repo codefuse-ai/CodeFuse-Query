@@ -8,7 +8,7 @@ schema LambdaExpressionDO {
   is_void_compatible: int,
   parameter_list_hash_id: int,
   body_hash_id: int,
-  @primary element_hash_id: int,
+  @primary element_hash_id: int
 }
 ```
 ## LambdaExpressionDO::getIsVoidCompatible

@@ -6,7 +6,7 @@ Primary key: `element_oid: int`
 schema NamedExpressionDO {
   value_oid: int,
   target_oid: int,
-  @primary element_oid: int,
+  @primary element_oid: int
 }
 ```
 ## NamedExpressionDO::getValueOid

@@ -7,7 +7,7 @@ schema UnaryOpDO {
   parent_oid: int,
   location_oid: int,
   type: string,
-  @primary element_oid: int,
+  @primary element_oid: int
 }
 ```
 ## UnaryOpDO::getParentOid

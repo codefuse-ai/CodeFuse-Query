@@ -4,7 +4,7 @@ Primary key: `element_oid: int`
 
 ```rust
 schema LambdaExpressionDO {
-  @primary element_oid: int,
+  @primary element_oid: int
 }
 ```
 ## LambdaExpressionDO::\_\_all\_\_

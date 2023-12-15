@@ -4,7 +4,7 @@ Primary key: `id: int`
 
 ```rust
 schema DeclarationStatementDO {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## DeclarationStatementDO::\_\_all\_\_

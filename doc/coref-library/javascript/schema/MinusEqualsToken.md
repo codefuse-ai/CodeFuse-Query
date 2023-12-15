@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema MinusEqualsToken extends Token {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## MinusEqualsToken::getLocation

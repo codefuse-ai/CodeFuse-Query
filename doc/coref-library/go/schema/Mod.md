@@ -9,7 +9,7 @@ schema Mod extends ModFileDO {
   @primary oid: int,
   path: string,
   name: string,
-  go_version: string,
+  go_version: string
 }
 ```
 ## Mod::getName

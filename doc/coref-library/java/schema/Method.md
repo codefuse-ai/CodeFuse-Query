@@ -12,7 +12,7 @@ schema Method extends MethodDO {
   signature: string,
   type_hash_id: int,
   parent_hash_id: int,
-  definition_body: string,
+  definition_body: string
 }
 ```
 ## Method::getName

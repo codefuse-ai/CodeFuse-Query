@@ -8,7 +8,7 @@ schema LocalClassDO {
   printable_text: string,
   location_hash_id: int,
   name: string,
-  @primary element_hash_id: int,
+  @primary element_hash_id: int
 }
 ```
 ## LocalClassDO::getLocationHashId

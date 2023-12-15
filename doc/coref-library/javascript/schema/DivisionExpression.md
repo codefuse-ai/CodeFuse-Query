@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema DivisionExpression extends MultiplicativeExpression {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## DivisionExpression::getSymbol

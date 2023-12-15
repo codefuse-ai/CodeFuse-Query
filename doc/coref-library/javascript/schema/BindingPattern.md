@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema BindingPattern extends Node {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## BindingPattern::getADescendant

@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema BasicBlock extends ControlFlowNode {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## BasicBlock::isSyntheticNode

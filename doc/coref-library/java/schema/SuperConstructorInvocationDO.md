@@ -4,7 +4,7 @@ Primary key: `element_hash_id: int`
 
 ```rust
 schema SuperConstructorInvocationDO {
-  @primary element_hash_id: int,
+  @primary element_hash_id: int
 }
 ```
 ## SuperConstructorInvocationDO::\_\_all\_\_

@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema ParenthesizedTypeNode extends TypeNode {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## ParenthesizedTypeNode::getLocation

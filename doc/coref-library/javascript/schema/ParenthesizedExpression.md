@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema ParenthesizedExpression extends PrimaryExpression {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## ParenthesizedExpression::getADescendant

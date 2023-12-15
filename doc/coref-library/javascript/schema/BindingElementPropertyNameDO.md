@@ -5,7 +5,7 @@ Primary key: `oid: int`
 ```rust
 schema BindingElementPropertyNameDO {
   property_name_oid: int,
-  @primary oid: int,
+  @primary oid: int
 }
 ```
 ## BindingElementPropertyNameDO::getPropertyNameOid

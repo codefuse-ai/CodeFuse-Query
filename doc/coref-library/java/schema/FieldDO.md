@@ -8,7 +8,7 @@ schema FieldDO {
   parent_hash_id: int,
   location_hash_id: int,
   name: string,
-  @primary element_hash_id: int,
+  @primary element_hash_id: int
 }
 ```
 ## FieldDO::getLocationHashId

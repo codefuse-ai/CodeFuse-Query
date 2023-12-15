@@ -7,7 +7,7 @@ schema NumberOfLinesDO {
   code_lines: int,
   lines: int,
   comment_lines: int,
-  @primary location_oid: int,
+  @primary location_oid: int
 }
 ```
 ## NumberOfLinesDO::getCommentLines

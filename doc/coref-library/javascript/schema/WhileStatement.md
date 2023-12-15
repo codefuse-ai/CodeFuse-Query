@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema WhileStatement extends Statement {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## WhileStatement::getLocation

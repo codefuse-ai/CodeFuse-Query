@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema PlusPlusToken extends Token {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## PlusPlusToken::getLocation

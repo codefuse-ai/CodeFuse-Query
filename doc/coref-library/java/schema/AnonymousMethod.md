@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema AnonymousMethod extends Callable {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## AnonymousMethod::getLocation

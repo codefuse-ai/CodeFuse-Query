@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema EndOfDeclarationMarker extends Statement {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## EndOfDeclarationMarker::getLocation

@@ -6,7 +6,7 @@ Primary key: `oid: int`
 schema TopLevelDO {
   location_oid: int,
   kind: int,
-  @primary oid: int,
+  @primary oid: int
 }
 ```
 ## TopLevelDO::getLocationOid

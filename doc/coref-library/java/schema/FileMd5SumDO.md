@@ -5,7 +5,7 @@ Primary key: `file_hash_id: int`
 ```rust
 schema FileMd5SumDO {
   value: string,
-  @primary file_hash_id: int,
+  @primary file_hash_id: int
 }
 ```
 ## FileMd5SumDO::getValue

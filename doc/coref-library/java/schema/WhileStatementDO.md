@@ -6,7 +6,7 @@ Primary key: `element_hash_id: int`
 schema WhileStatementDO {
   condition_hash_id: int,
   body_declaration_hash_id: int,
-  @primary element_hash_id: int,
+  @primary element_hash_id: int
 }
 ```
 ## WhileStatementDO::getConditionHashId

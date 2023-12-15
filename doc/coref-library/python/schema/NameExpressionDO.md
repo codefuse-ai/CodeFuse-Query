@@ -5,7 +5,7 @@ Primary key: `element_oid: int`
 ```rust
 schema NameExpressionDO {
   ctx_type: string,
-  @primary element_oid: int,
+  @primary element_oid: int
 }
 ```
 ## NameExpressionDO::getCtxType

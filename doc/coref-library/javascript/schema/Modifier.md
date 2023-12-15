@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema Modifier extends Token {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## Modifier::getLocation

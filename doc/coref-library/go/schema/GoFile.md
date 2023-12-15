@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema GoFile extends File {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## GoFile::getMd5Sum

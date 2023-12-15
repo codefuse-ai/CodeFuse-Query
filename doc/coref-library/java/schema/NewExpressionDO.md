@@ -6,7 +6,7 @@ Primary key: `element_hash_id: int`
 schema NewExpressionDO {
   type_hash_id: int,
   reference_hash_id: int,
-  @primary element_hash_id: int,
+  @primary element_hash_id: int
 }
 ```
 ## NewExpressionDO::getReferenceHashId

@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema TemplateTailToken extends Token {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## TemplateTailToken::getLocation

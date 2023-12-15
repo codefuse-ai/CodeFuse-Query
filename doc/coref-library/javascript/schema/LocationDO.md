@@ -10,7 +10,7 @@ schema LocationDO {
   end_column_number: int,
   start_line_number: int,
   file_oid: int,
-  @primary oid: int,
+  @primary oid: int
 }
 ```
 ## LocationDO::getText

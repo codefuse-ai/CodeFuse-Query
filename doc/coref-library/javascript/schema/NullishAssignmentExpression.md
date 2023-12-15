@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema NullishAssignmentExpression extends CompoundAssignmentExpression {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## NullishAssignmentExpression::getRight

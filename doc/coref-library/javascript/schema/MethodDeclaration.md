@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema MethodDeclaration extends FunctionLikeDeclaration {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## MethodDeclaration::getModifier

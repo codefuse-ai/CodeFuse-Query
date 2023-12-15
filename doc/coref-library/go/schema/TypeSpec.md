@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema TypeSpec extends Spec {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## TypeSpec::getKind

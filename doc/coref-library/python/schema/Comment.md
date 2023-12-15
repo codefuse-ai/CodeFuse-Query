@@ -9,7 +9,7 @@ schema Comment extends CommentDO {
   @primary element_oid: int,
   text: string,
   parent_oid: int,
-  location_oid: int,
+  location_oid: int
 }
 ```
 ## Comment::getText

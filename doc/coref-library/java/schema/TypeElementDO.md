@@ -8,7 +8,7 @@ schema TypeElementDO {
   printable_text: string,
   location_hash_id: int,
   reference_type_hash_id: int,
-  @primary element_hash_id: int,
+  @primary element_hash_id: int
 }
 ```
 ## TypeElementDO::getLocationHashId

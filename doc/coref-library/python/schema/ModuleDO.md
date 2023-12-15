@@ -7,7 +7,7 @@ schema ModuleDO {
   location_oid: int,
   name: string,
   file_oid: int,
-  @primary element_oid: int,
+  @primary element_oid: int
 }
 ```
 ## ModuleDO::getLocationOid

@@ -11,7 +11,7 @@ schema Statement extends StatementDO {
   parent_oid: int,
   type: string,
   location_oid: int,
-  printable_text: string,
+  printable_text: string
 }
 ```
 ## Statement::getType

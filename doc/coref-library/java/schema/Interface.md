@@ -10,7 +10,7 @@ schema Interface extends InterfaceDO {
   qualified_name: string,
   location_hash_id: int,
   identifier_hash_id: int,
-  parent_hash_id: int,
+  parent_hash_id: int
 }
 ```
 ## Interface::getQualifiedName

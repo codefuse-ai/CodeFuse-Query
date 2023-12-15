@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema MetricCallable extends Callable {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## MetricCallable::getLocation

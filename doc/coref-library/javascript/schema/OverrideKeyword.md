@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema OverrideKeyword extends Modifier {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## OverrideKeyword::getADescendant

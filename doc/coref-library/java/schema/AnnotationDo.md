@@ -4,7 +4,7 @@ Primary key: `id: int`
 
 ```rust
 schema AnnotationDo {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## AnnotationDo::getAnnotationDeclaration

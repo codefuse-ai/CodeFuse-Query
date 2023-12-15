@@ -5,7 +5,7 @@ Primary key: `element_oid: int`
 ```rust
 schema ReturnStatementDO {
   is_return_empty: int,
-  @primary element_oid: int,
+  @primary element_oid: int
 }
 ```
 ## ReturnStatementDO::getIsReturnEmpty

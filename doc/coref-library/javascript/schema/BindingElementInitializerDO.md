@@ -5,7 +5,7 @@ Primary key: `oid: int`
 ```rust
 schema BindingElementInitializerDO {
   initializer_oid: int,
-  @primary oid: int,
+  @primary oid: int
 }
 ```
 ## BindingElementInitializerDO::getInitializerOid

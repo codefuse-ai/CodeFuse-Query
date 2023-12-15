@@ -6,7 +6,7 @@ Primary key: `element_hash_id: int`
 schema LabeledStatementDO {
   statement_hash_id: int,
   labeled_hash_identifier_hash_id: int,
-  @primary element_hash_id: int,
+  @primary element_hash_id: int
 }
 ```
 ## LabeledStatementDO::getLabeledHashIdentifierHashId

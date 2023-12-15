@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema SymbolKeyword extends Token {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## SymbolKeyword::getLocation

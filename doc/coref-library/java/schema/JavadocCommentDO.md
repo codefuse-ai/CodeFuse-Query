@@ -8,7 +8,7 @@ schema JavadocCommentDO {
   documentable_hash_id: int,
   location_hash_id: int,
   text: string,
-  @primary element_hash_id: int,
+  @primary element_hash_id: int
 }
 ```
 ## JavadocCommentDO::getLocationHashId

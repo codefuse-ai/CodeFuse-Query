@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema TemplateMiddleToken extends Token {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## TemplateMiddleToken::getLocation

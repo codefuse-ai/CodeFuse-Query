@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema Unknown extends Token {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## Unknown::getLocation

@@ -6,7 +6,7 @@ Primary key: `element_hash_id: int`
 schema YieldStatementDO {
   enclosing_expression_hash_id: int,
   expression_hash_id: int,
-  @primary element_hash_id: int,
+  @primary element_hash_id: int
 }
 ```
 ## YieldStatementDO::getEnclosingExpressionHashId

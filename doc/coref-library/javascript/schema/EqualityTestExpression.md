@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema EqualityTestExpression extends BinaryExpression {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## EqualityTestExpression::getParentOid

@@ -9,7 +9,7 @@ schema XmlComment extends XmlCommentDO {
   @primary id: int,
   location_id: int,
   text: string,
-  parent_id: int,
+  parent_id: int
 }
 ```
 ## XmlComment::getText

@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema AsteriskEqualsToken extends Token {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## AsteriskEqualsToken::getLocation

@@ -7,7 +7,7 @@ schema MethodAccessExpressionWithTypeDO {
   argument_list_hash_id: int,
   referen_method_hash_id: int,
   type_hash_id: int,
-  @primary element_hash_id: int,
+  @primary element_hash_id: int
 }
 ```
 ## MethodAccessExpressionWithTypeDO::getArgumentListHashId

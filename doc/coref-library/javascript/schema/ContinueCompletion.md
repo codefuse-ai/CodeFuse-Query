@@ -7,7 +7,7 @@ Primary key: `id: int`
 ```rust
 schema ContinueCompletion extends Completion {
   @primary id: int,
-  name: string,
+  name: string
 }
 ```
 ## ContinueCompletion::getValue

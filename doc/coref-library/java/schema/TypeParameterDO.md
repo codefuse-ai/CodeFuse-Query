@@ -10,7 +10,7 @@ schema TypeParameterDO {
   printable_text: string,
   owner_hash_id: int,
   location_hash_id: int,
-  @primary element_hash_id: int,
+  @primary element_hash_id: int
 }
 ```
 ## TypeParameterDO::getLocationHashId

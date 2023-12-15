@@ -4,7 +4,7 @@ Primary key: `id: int`
 
 ```rust
 schema WritesField {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## WritesField::getBaseName

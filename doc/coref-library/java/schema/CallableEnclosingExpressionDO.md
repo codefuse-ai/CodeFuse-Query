@@ -5,7 +5,7 @@ Primary key: `expression_hash_id: int`
 ```rust
 schema CallableEnclosingExpressionDO {
   callable_hash_id: int,
-  @primary expression_hash_id: int,
+  @primary expression_hash_id: int
 }
 ```
 ## CallableEnclosingExpressionDO::getCallableHashId

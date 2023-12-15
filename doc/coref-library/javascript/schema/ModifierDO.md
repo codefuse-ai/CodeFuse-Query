@@ -5,7 +5,7 @@ Primary key: `oid: int`
 ```rust
 schema ModifierDO {
   index: int,
-  @primary oid: int,
+  @primary oid: int
 }
 ```
 ## ModifierDO::getIndex

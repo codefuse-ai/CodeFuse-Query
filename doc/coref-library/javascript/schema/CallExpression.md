@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema CallExpression extends LeftHandSideExpression {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## CallExpression::getADescendant

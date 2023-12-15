@@ -6,7 +6,7 @@ Primary key: `element_hash_id: int`
 schema PolyadicExpressionDO {
   opcode: string,
   size: int,
-  @primary element_hash_id: int,
+  @primary element_hash_id: int
 }
 ```
 ## PolyadicExpressionDO::getOpcode

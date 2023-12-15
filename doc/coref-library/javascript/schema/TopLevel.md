@@ -8,7 +8,7 @@ Primary key: `oid: int`
 schema TopLevel extends TopLevelDO {
   @primary oid: int,
   kind: int,
-  location_oid: int,
+  location_oid: int
 }
 ```
 ## TopLevel::getKind

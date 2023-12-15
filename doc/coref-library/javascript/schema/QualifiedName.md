@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema QualifiedName extends Node {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## QualifiedName::getADescendant

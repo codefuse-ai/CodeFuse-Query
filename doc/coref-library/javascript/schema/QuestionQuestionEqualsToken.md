@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema QuestionQuestionEqualsToken extends Token {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## QuestionQuestionEqualsToken::getLocation

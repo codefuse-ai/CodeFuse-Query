@@ -5,7 +5,7 @@ Primary key: `parent_hash_id: int`
 ```rust
 schema ParentDO {
   parent_type: string,
-  @primary parent_hash_id: int,
+  @primary parent_hash_id: int
 }
 ```
 ## ParentDO::getParentType

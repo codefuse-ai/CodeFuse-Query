@@ -9,7 +9,7 @@ schema XmlHasNamespace extends XmlHasNamespaceDO {
   @primary id: int,
   element_id: int,
   namespace_id: int,
-  container_id: int,
+  container_id: int
 }
 ```
 ## XmlHasNamespace::getElementId

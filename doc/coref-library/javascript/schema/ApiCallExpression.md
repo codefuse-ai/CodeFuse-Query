@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema ApiCallExpression extends CallExpression {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## ApiCallExpression::getLastChild

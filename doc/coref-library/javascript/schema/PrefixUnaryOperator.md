@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema PrefixUnaryOperator extends Token {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## PrefixUnaryOperator::getLocation

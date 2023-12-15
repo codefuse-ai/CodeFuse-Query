@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema NoSubstitutionTemplateLiteralToken extends Token {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## NoSubstitutionTemplateLiteralToken::getLocation

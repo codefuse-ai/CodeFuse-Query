@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema VarDef extends ControlFlowNode {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## VarDef::getRelativePath

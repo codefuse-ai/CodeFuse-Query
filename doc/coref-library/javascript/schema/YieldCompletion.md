@@ -7,7 +7,7 @@ Primary key: `id: int`
 ```rust
 schema YieldCompletion extends Completion {
   @primary id: int,
-  name: string,
+  name: string
 }
 ```
 ## YieldCompletion::getValue

@@ -7,7 +7,7 @@ schema TokenDO {
   location_oid: int,
   parent_oid: int,
   value: string,
-  @primary element_oid: int,
+  @primary element_oid: int
 }
 ```
 ## TokenDO::getParentOid

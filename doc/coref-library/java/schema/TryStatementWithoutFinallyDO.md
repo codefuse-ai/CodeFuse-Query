@@ -5,7 +5,7 @@ Primary key: `element_hash_id: int`
 ```rust
 schema TryStatementWithoutFinallyDO {
   try_block_hash_id: int,
-  @primary element_hash_id: int,
+  @primary element_hash_id: int
 }
 ```
 ## TryStatementWithoutFinallyDO::getTryBlockHashId

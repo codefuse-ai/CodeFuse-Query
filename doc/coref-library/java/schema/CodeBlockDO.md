@@ -9,7 +9,7 @@ schema CodeBlockDO {
   parent_hash_id: int,
   number_of_statement: int,
   location_hash_id: int,
-  @primary element_hash_id: int,
+  @primary element_hash_id: int
 }
 ```
 ## CodeBlockDO::getLocationHashId

@@ -8,7 +8,7 @@ schema FileDO {
   md5_sum: string,
   name: string,
   pkg_oid: int,
-  @primary oid: int,
+  @primary oid: int
 }
 ```
 ## FileDO::getSha256Sum

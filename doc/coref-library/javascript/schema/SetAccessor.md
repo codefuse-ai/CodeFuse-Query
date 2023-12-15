@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema SetAccessor extends FunctionLikeDeclaration {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## SetAccessor::getModifier

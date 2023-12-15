@@ -5,7 +5,7 @@ Primary key: `node_oid: int`
 ```rust
 schema NodeSymbolDO {
   symbol_oid: int,
-  @primary node_oid: int,
+  @primary node_oid: int
 }
 ```
 ## NodeSymbolDO::getSymbolOid

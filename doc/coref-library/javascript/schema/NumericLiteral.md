@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema NumericLiteral extends LiteralExpression {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## NumericLiteral::getLastChild

@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema SliceExpr extends Expr {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## SliceExpr::isNotExpr

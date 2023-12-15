@@ -7,7 +7,7 @@ Primary key: `element_hash_id: int`
 ```rust
 schema AnnotationDeclarationParameterDefaultValue extends AnnotationDeclarationParameterDefaultValueDO {
   @primary element_hash_id: int,
-  default_value: string,
+  default_value: string
 }
 ```
 ## AnnotationDeclarationParameterDefaultValue::getDefaultValue

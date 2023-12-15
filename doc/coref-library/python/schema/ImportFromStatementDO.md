@@ -6,7 +6,7 @@ Primary key: `element_oid: int`
 schema ImportFromStatementDO {
   module: string,
   level: int,
-  @primary element_oid: int,
+  @primary element_oid: int
 }
 ```
 ## ImportFromStatementDO::getLevel

@@ -4,7 +4,7 @@ Primary key: `element_oid: int`
 
 ```rust
 schema ContinueStatementDO {
-  @primary element_oid: int,
+  @primary element_oid: int
 }
 ```
 ## ContinueStatementDO::\_\_all\_\_

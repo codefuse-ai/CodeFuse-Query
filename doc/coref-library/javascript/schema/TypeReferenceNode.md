@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema TypeReferenceNode extends NodeWithTypeArguments {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## TypeReferenceNode::getADescendant

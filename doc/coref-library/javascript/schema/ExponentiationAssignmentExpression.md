@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema ExponentiationAssignmentExpression extends CompoundAssignmentExpression {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## ExponentiationAssignmentExpression::getRight

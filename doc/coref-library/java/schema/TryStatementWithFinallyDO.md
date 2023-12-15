@@ -6,7 +6,7 @@ Primary key: `element_hash_id: int`
 schema TryStatementWithFinallyDO {
   try_block_hash_id: int,
   finally_block_hash_id: int,
-  @primary element_hash_id: int,
+  @primary element_hash_id: int
 }
 ```
 ## TryStatementWithFinallyDO::getFinallyBlockHashId

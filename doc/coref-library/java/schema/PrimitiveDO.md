@@ -5,7 +5,7 @@ Primary key: `oid: int`
 ```rust
 schema PrimitiveDO {
   name: string,
-  @primary oid: int,
+  @primary oid: int
 }
 ```
 ## PrimitiveDO::getName

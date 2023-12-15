@@ -9,7 +9,7 @@ schema Folder extends FolderDO {
   @primary element_oid: int,
   qualified_name: string,
   name: string,
-  parent_oid: int,
+  parent_oid: int
 }
 ```
 ## Folder::getName

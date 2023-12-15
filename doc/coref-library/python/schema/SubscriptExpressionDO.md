@@ -7,7 +7,7 @@ schema SubscriptExpressionDO {
   ctx: string,
   slice_oid: int,
   value_oid: int,
-  @primary element_oid: int,
+  @primary element_oid: int
 }
 ```
 ## SubscriptExpressionDO::getSliceOid

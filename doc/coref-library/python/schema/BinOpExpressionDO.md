@@ -7,7 +7,7 @@ schema BinOpExpressionDO {
   right_expr_oid: int,
   opcode: int,
   left_expr_oid: int,
-  @primary element_oid: int,
+  @primary element_oid: int
 }
 ```
 ## BinOpExpressionDO::getRightExprOid

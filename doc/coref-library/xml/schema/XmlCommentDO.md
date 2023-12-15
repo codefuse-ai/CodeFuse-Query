@@ -7,7 +7,7 @@ schema XmlCommentDO {
   parent_id: int,
   text: string,
   location_id: int,
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## XmlCommentDO::getParentId

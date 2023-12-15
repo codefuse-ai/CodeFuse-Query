@@ -11,7 +11,7 @@ schema SwitchStatement extends Statement {
   index_order: int,
   parent_hash_id: int,
   location_hash_id: int,
-  @primary element_hash_id: int,
+  @primary element_hash_id: int
 }
 ```
 ## SwitchStatement::getSize

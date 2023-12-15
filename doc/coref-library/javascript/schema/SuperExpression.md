@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema SuperExpression extends PrimaryExpression {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## SuperExpression::getADescendant

@@ -7,7 +7,7 @@ schema NumberOfLinesDO {
   number_of_valid_lines: int,
   number_of_total_lines: int,
   number_of_comment_lines: int,
-  @primary element_hash_id: int,
+  @primary element_hash_id: int
 }
 ```
 ## NumberOfLinesDO::getNumberOfLinesOfCode

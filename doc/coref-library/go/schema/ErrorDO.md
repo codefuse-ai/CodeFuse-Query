@@ -12,7 +12,7 @@ schema ErrorDO {
   kind: int,
   line: int,
   msg: string,
-  @primary oid: int,
+  @primary oid: int
 }
 ```
 ## ErrorDO::getIdx

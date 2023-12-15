@@ -5,7 +5,7 @@ Primary key: `caller_oid: int`
 ```rust
 schema CallableBindingDO {
   callee_oid: int,
-  @primary caller_oid: int,
+  @primary caller_oid: int
 }
 ```
 ## CallableBindingDO::getCalleeOid

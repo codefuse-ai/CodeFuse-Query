@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema ClassElement extends Node {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## ClassElement::getADescendant

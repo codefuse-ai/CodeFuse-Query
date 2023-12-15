@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema Scope extends CombineElement {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## Scope::getAnAncestor

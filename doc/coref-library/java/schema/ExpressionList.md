@@ -10,7 +10,7 @@ schema ExpressionList extends ExpressionListDO {
   location_hash_id: int,
   parent_hash_id: int,
   size: int,
-  printable_text: string,
+  printable_text: string
 }
 ```
 ## ExpressionList::getSize

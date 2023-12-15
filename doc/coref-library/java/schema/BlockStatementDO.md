@@ -5,7 +5,7 @@ Primary key: `element_hash_id: int`
 ```rust
 schema BlockStatementDO {
   code_block_hash_id: int,
-  @primary element_hash_id: int,
+  @primary element_hash_id: int
 }
 ```
 ## BlockStatementDO::getCodeBlockHashId

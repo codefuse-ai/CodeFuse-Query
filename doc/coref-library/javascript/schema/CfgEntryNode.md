@@ -7,7 +7,7 @@ Primary key: `oid: int`
 ```rust
 schema CfgEntryNode extends CfgEntryNodeDO {
   @primary oid: int,
-  ast_node_oid: int,
+  ast_node_oid: int
 }
 ```
 ## CfgEntryNode::getAstNodeOid

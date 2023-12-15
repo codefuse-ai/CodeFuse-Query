@@ -8,7 +8,7 @@ Primary key: `element_hash_id: int`
 schema ModifierList extends ModifierListDO {
   @primary element_hash_id: int,
   location_hash_id: int,
-  parent_hash_id: int,
+  parent_hash_id: int
 }
 ```
 ## ModifierList::getLocationHashId

@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema BinaryBitwiseExpression extends BinaryExpression {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## BinaryBitwiseExpression::getParentOid

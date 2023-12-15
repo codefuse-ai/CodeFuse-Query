@@ -5,7 +5,7 @@ Primary key: `statement_hash_id: int`
 ```rust
 schema CallableEnclosingStatementDO {
   callable_hash_id: int,
-  @primary statement_hash_id: int,
+  @primary statement_hash_id: int
 }
 ```
 ## CallableEnclosingStatementDO::getCallableHashId

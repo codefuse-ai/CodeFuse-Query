@@ -11,7 +11,7 @@ schema Comprehension extends ComprehensionDO {
   iter_expr_oid: int,
   printable_text: string,
   element_index: int,
-  parent_oid: int,
+  parent_oid: int
 }
 ```
 ## Comprehension::getTargetExprOid

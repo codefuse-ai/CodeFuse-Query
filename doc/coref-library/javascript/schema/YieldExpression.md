@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema YieldExpression extends Expression {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## YieldExpression::getLocation

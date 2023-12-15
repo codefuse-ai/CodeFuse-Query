@@ -6,7 +6,7 @@ Primary key: `element_oid: int`
 schema SetCompExpressionDO {
   elt_oid: int,
   generator_size: int,
-  @primary element_oid: int,
+  @primary element_oid: int
 }
 ```
 ## SetCompExpressionDO::getGeneratorSize

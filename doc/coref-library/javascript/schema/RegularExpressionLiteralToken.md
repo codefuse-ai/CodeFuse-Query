@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema RegularExpressionLiteralToken extends Token {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## RegularExpressionLiteralToken::getLocation

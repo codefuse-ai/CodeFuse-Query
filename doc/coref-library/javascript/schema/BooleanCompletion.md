@@ -7,7 +7,7 @@ Primary key: `id: int`
 ```rust
 schema BooleanCompletion extends Completion {
   @primary id: int,
-  name: string,
+  name: string
 }
 ```
 ## BooleanCompletion::getValue

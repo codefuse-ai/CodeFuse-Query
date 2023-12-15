@@ -4,7 +4,7 @@ Primary key: `id: int`
 
 ```rust
 schema Variable {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## Variable::getDirectUsage

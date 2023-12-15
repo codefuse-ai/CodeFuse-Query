@@ -5,7 +5,7 @@ Primary key: `element_oid: int`
 ```rust
 schema AssertStatementDO {
   assert_condition_oid: int,
-  @primary element_oid: int,
+  @primary element_oid: int
 }
 ```
 ## AssertStatementDO::getAssertConditionOid

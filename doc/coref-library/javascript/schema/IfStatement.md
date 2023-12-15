@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema IfStatement extends Statement {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## IfStatement::getLocation

@@ -6,7 +6,7 @@ Primary key: `oid: int`
 schema MetadataDO {
   created_time: string,
   version: string,
-  @primary oid: int,
+  @primary oid: int
 }
 ```
 ## MetadataDO::getCreatedTime

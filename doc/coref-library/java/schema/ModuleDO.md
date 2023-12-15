@@ -5,7 +5,7 @@ Primary key: `element_hash_id: int`
 ```rust
 schema ModuleDO {
   name: string,
-  @primary element_hash_id: int,
+  @primary element_hash_id: int
 }
 ```
 ## ModuleDO::getName

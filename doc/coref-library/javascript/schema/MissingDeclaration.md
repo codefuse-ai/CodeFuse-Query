@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema MissingDeclaration extends DeclarationStatement {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## MissingDeclaration::getADescendant

@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema ContinueStatement extends Statement {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## ContinueStatement::getLocation

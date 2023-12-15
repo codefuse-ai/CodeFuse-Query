@@ -9,7 +9,7 @@ schema NpClass extends NpClassDO {
   @primary element_hash_id: int,
   name: string,
   qualified_name: string,
-  parent_hash_id: int,
+  parent_hash_id: int
 }
 ```
 ## NpClass::getQualifiedName

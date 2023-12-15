@@ -5,7 +5,7 @@ Primary key: `oid: int`
 ```rust
 schema HasEllipsisDO {
   call_or_conversion_expr_id: int,
-  @primary oid: int,
+  @primary oid: int
 }
 ```
 ## HasEllipsisDO::getCallOrConversionExprId

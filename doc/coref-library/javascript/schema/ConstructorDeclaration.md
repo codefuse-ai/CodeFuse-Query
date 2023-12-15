@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema ConstructorDeclaration extends FunctionLikeDeclaration {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## ConstructorDeclaration::getModifier

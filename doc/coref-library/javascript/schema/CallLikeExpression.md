@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema CallLikeExpression extends Expression {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## CallLikeExpression::getLocation

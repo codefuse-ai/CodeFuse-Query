@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema NullishCoalescingExpression extends BinaryLogicalExpression {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## NullishCoalescingExpression::getSymbol

@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema EnumDeclaration extends DeclarationStatement {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## EnumDeclaration::getADescendant

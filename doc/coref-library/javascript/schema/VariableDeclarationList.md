@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema VariableDeclarationList extends Node {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## VariableDeclarationList::getADescendant

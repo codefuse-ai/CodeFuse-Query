@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema MethodElement extends ClassElement {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## MethodElement::getLocation

@@ -5,7 +5,7 @@ Primary key: `node_oid: int`
 ```rust
 schema ShorthandAssignmentValueSymbolDO {
   symbol_oid: int,
-  @primary node_oid: int,
+  @primary node_oid: int
 }
 ```
 ## ShorthandAssignmentValueSymbolDO::getSymbolOid

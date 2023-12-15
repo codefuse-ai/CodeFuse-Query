@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema Receiver extends Method {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## Receiver::getIdx

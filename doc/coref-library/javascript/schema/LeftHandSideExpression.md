@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema LeftHandSideExpression extends UpdateExpression {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## LeftHandSideExpression::getLocation

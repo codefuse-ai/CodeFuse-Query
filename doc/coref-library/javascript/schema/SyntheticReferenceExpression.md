@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema SyntheticReferenceExpression extends LeftHandSideExpression {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## SyntheticReferenceExpression::getADescendant

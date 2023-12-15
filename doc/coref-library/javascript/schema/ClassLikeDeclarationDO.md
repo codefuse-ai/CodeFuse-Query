@@ -6,7 +6,7 @@ Primary key: `oid: int`
 schema ClassLikeDeclarationDO {
   name: string,
   kind: int,
-  @primary oid: int,
+  @primary oid: int
 }
 ```
 ## ClassLikeDeclarationDO::getKind

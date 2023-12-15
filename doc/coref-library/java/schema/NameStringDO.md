@@ -6,7 +6,7 @@ Primary key: `parent_hash_id: int`
 schema NameStringDO {
   name_element_hash_id: int,
   value_element_hash_id: int,
-  @primary parent_hash_id: int,
+  @primary parent_hash_id: int
 }
 ```
 ## NameStringDO::getValueElementHashId

@@ -6,7 +6,7 @@ Primary key: `id: int`
 
 ```rust
 schema VarDecl extends Decl {
-  @primary id: int,
+  @primary id: int
 }
 ```
 ## VarDecl::getLocation

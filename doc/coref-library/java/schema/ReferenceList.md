@@ -10,7 +10,7 @@ schema ReferenceList extends ReferenceListDO {
   location_hash_id: int,
   role: string,
   parent_hash_id: int,
-  printable_text: string,
+  printable_text: string
 }
 ```
 ## ReferenceList::getRole

@@ -9,7 +9,7 @@ schema Type extends TypeDO {
   @primary oid: int,
   kind: int,
   raw_string: string,
-  format_string: string,
+  format_string: string
 }
 ```
 ## Type::isNamedType

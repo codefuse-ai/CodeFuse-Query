@@ -6,7 +6,7 @@ Primary key: `oid: int`
 schema ScopeNodeDO {
   scope: int,
   node: int,
-  @primary oid: int,
+  @primary oid: int
 }
 ```
 ## ScopeNodeDO::getScope

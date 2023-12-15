@@ -7,7 +7,7 @@ schema ModTokenDO {
   token: string,
   idx: int,
   parent: int,
-  @primary oid: int,
+  @primary oid: int
 }
 ```
 ## ModTokenDO::getIdx
