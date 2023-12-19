@@ -1,9 +1,3 @@
----
-title: "开发插件 (VSCode)"
-layout: default
-nav_order: 6
----
-
 # 开发插件(VSCode)
 ## 安装
 

@@ -216,6 +216,22 @@ for file in input_file_list:
         continue
     semantic_dict[file["name"]] = result.stdout.decode("utf-8")
 
+def dump_reference_main_doc():
+    output_file_path = markdown_output_path + "/coref_library_reference.md"
+    output_data = "---\n"
+    output_data += "title: \"COREF Library Reference\"\n"
+    output_data += "layout: default\n"
+    output_data += "nav_order: 2\n"
+    output_data += "has_children: true\n"
+    output_data += "---\n\n"
+    output_data += "# COREF Library Reference\n\n"
+    for file in input_file_list:
+        output_data += "* [coref::" + name_mapper[file["name"]] + "]"
+        output_data += "(./" + name_mapper[file["name"]] + "/reference.html)\n"
+    open(output_file_path, "w").write(output_data)
+
+dump_reference_main_doc()
+
 for file in input_file_list:
     file_full_path = file["path"] + "/" + file["name"]
     print("Generate markdown for " + file_full_path)
