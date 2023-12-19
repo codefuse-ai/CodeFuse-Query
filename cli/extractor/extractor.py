@@ -31,11 +31,11 @@ class Extractor:
 
 
 def cfamily_extractor_cmd(source_root, database, options):
-    cmd = list()
-    cmd += [str(Extractor.cfamily_extractor)]
-    cmd += ["--compile-commands=", str(source_root)]
-    cmd += ["--output-db-path=", str(database)]
-    return cmd
+    return [
+        str(Extractor.cfamily_extractor),
+        f"--compile-commands={source_root}",
+        f"--output-db-path={database}"
+    ]
 
 
 def go_extractor_cmd(source_root, database, options):
