@@ -1,3 +1,9 @@
+---
+title: "GödelScript 查询语言"
+layout: default
+nav_order: 5
+---
+
 # GödelScript 查询语言
 
 ## GödelScript 基本概念和语法
