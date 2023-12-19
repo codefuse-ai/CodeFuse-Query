@@ -85,5 +85,7 @@ code --install-extension [扩展vsix文件路径]
 -  `godelScript.libraryDirectoryPath` 
    -  用于指定 GödelScript 的库文件夹路径，默认为空。需要时请替换为 GödelScript 库文件夹绝对路径。 
    -  如果已经下载 Sparrow CLI ，则库文件夹路径为 `[sparrow cli root]/lib-1.0`。 
-#  智能助手
+
+# 智能助手
+
 待开放，尽情期待！
