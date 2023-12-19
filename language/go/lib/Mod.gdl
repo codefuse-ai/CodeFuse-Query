@@ -4,7 +4,7 @@ schema Mod extends ModFileDO {
 impl Mod {
     @data_constraint
     @inline
-    fn __all__(db: GoDB) -> *Mod {
+    pub fn __all__(db: GoDB) -> *Mod {
         for (tmp in ModFileDO(db)) {
             yield Mod {
                 oid : tmp.oid,

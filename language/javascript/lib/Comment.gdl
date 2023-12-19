@@ -13,7 +13,7 @@ schema Comment extends CommentDO {
 impl Comment {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *Comment {
+    pub fn __all__(db: JavascriptDB) -> *Comment {
         for (tmp in CommentDO(db)) {
             yield Comment {
                 oid : tmp.oid,

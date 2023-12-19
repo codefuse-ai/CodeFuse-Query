@@ -7,7 +7,7 @@ schema Statement extends StatementDO {
 impl Statement {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *Statement {
+    pub fn __all__(db: JavaDB) -> *Statement {
         for (tmp in StatementDO(db)) {
             yield Statement {
                 element_hash_id : tmp.element_hash_id,
@@ -127,7 +127,7 @@ schema CallableEnclosingStatement extends CallableEnclosingStatementDO {
 impl CallableEnclosingStatement {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *CallableEnclosingStatement {
+    pub fn __all__(db: JavaDB) -> *CallableEnclosingStatement {
         for (tmp in CallableEnclosingStatementDO(db)) {
             yield CallableEnclosingStatement {
                 statement_hash_id : tmp.statement_hash_id,
@@ -156,7 +156,7 @@ schema BlockStatement extends Statement {
 impl BlockStatement {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *BlockStatement {
+    pub fn __all__(db: JavaDB) -> *BlockStatement {
         for (tmp in Statement(db)) {
             for (bs in BlockStatementDO(db)) {
                 if (tmp.key_eq(bs)) {
@@ -240,7 +240,7 @@ schema CodeBlock extends CodeBlockDO {
 impl CodeBlock {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *CodeBlock {
+    pub fn __all__(db: JavaDB) -> *CodeBlock {
         for (tmp in CodeBlockDO(db)) {
             yield CodeBlock {
                 element_hash_id : tmp.element_hash_id,
@@ -319,7 +319,7 @@ schema AssertStatement extends Statement {
 impl AssertStatement {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *AssertStatement {
+    pub fn __all__(db: JavaDB) -> *AssertStatement {
         for (tmp in Statement(db)) {
             for (s in AssertStatementDO(db)) {
                 if (tmp.key_eq(s)) {
@@ -373,7 +373,7 @@ schema PackageStatement extends PackageStatementDO {
 impl PackageStatement {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *PackageStatement {
+    pub fn __all__(db: JavaDB) -> *PackageStatement {
         for (tmp in PackageStatementDO(db)) {
             yield PackageStatement {
                 element_hash_id : tmp.element_hash_id,
@@ -449,7 +449,7 @@ schema LocalClass extends LocalClassDO {
 impl LocalClass {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *LocalClass {
+    pub fn __all__(db: JavaDB) -> *LocalClass {
         for (tmp in LocalClassDO(db)) {
             yield LocalClass {
                 element_hash_id : tmp.element_hash_id,
@@ -503,7 +503,7 @@ schema EmptyStatement extends Statement {
 impl EmptyStatement {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *EmptyStatement {
+    pub fn __all__(db: JavaDB) -> *EmptyStatement {
         for (tmp in Statement(db)) {
             for (s in EmptyStatementDO(db)) {
                 if (tmp.key_eq(s)) {
@@ -529,7 +529,7 @@ schema ReturnStatement extends Statement {
 impl ReturnStatement {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *ReturnStatement {
+    pub fn __all__(db: JavaDB) -> *ReturnStatement {
         for (tmp in Statement(db)) {
             for (ret in ReturnStatementDO(db)) {
                 if (tmp.key_eq(ret)) {
@@ -569,7 +569,7 @@ schema DeclarationStatementDO {
 impl DeclarationStatementDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *DeclarationStatementDO {
+    pub fn __all__(db: JavaDB) -> *DeclarationStatementDO {
     	for (tmp: DeclarationElementDO in db.declaration_element) {
     		yield DeclarationStatementDO { id: tmp.declaration_statement_hash_id }
     	}
@@ -584,7 +584,7 @@ schema DeclarationStatement extends Statement {
 impl DeclarationStatement {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *DeclarationStatement {
+    pub fn __all__(db: JavaDB) -> *DeclarationStatement {
         for (tmp in Statement(db)) {
             for (dsr in DeclarationStatementDO(db)) {
                 if (tmp.key_eq(dsr)) {
@@ -640,7 +640,7 @@ schema DeclaredElement extends DeclarationElementDO {
 impl DeclaredElement {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *DeclaredElement {
+    pub fn __all__(db: JavaDB) -> *DeclaredElement {
         for (tmp in DeclarationElementDO(db)) {
             yield DeclaredElement {
                 element_hash_id : tmp.element_hash_id,
@@ -692,7 +692,7 @@ schema ThrowStatement extends Statement {
 impl ThrowStatement {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *ThrowStatement {
+    pub fn __all__(db: JavaDB) -> *ThrowStatement {
         for (tmp in Statement(db)) {
             for (ths in ThrowStatementDO(db)) {
                 if (tmp.key_eq(ths)) {
@@ -760,7 +760,7 @@ schema LabeledStatement extends Statement {
 impl LabeledStatement {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *LabeledStatement {
+    pub fn __all__(db: JavaDB) -> *LabeledStatement {
         for (tmp in Statement(db)) {
             for (ls in LabeledStatementDO(db)) {
                 if (tmp.key_eq(ls)) {
@@ -821,7 +821,7 @@ schema ContinueStatement extends Statement {
 impl ContinueStatement {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *ContinueStatement {
+    pub fn __all__(db: JavaDB) -> *ContinueStatement {
         for (tmp in Statement(db)) {
             for (cs in ContinueStatementDO(db)) {
                 if (tmp.key_eq(cs)) {
@@ -861,7 +861,7 @@ schema YieldStatement extends Statement {
 impl YieldStatement {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *YieldStatement {
+    pub fn __all__(db: JavaDB) -> *YieldStatement {
         for (tmp in Statement(db)) {
             for (ys in YieldStatementDO(db)) {
                 if (tmp.key_eq(ys)) {
@@ -887,7 +887,7 @@ schema ExpressionStatement extends Statement {
 impl ExpressionStatement {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *ExpressionStatement {
+    pub fn __all__(db: JavaDB) -> *ExpressionStatement {
         for (tmp in Statement(db)) {
             for (es in ExpressionStatementDO(db)) {
                 if (tmp.key_eq(es)) {
@@ -924,7 +924,7 @@ schema JumpStatement extends Statement {
 impl JumpStatement {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *JumpStatement {
+    pub fn __all__(db: JavaDB) -> *JumpStatement {
         for (tmp in Statement(db)) {
             for (bStmt in BreakStatement(db)) {
                 if (tmp.key_eq(bStmt)) {
@@ -1039,7 +1039,7 @@ schema NameString extends NameStringDO {
 impl NameString {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *NameString {
+    pub fn __all__(db: JavaDB) -> *NameString {
         for (tmp in NameStringDO(db)) {
             yield NameString {
                 parent_hash_id : tmp.parent_hash_id,
@@ -1077,7 +1077,7 @@ schema TryStatementDO {
 impl TryStatementDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *TryStatementDO {
+    pub fn __all__(db: JavaDB) -> *TryStatementDO {
         for (t in TryStatementWithFinallyDO(db)) {
             yield TryStatementDO {id : t.element_hash_id}
         }
@@ -1118,7 +1118,7 @@ schema TryStatement extends Statement {
 impl TryStatement {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *TryStatement {
+    pub fn __all__(db: JavaDB) -> *TryStatement {
         for (tmp in Statement(db)) {
             for (ts in TryStatementDO(db)) {
                 if (tmp.key_eq(ts)) {
@@ -1216,7 +1216,7 @@ schema CatchClause extends CatchSectionDO {
 impl CatchClause {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *CatchClause {
+    pub fn __all__(db: JavaDB) -> *CatchClause {
         for (tmp in CatchSectionDO(db)) {
             yield CatchClause {
                 element_hash_id : tmp.element_hash_id,
@@ -1316,7 +1316,7 @@ schema BreakStatement extends Statement {
 impl BreakStatement {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *BreakStatement {
+    pub fn __all__(db: JavaDB) -> *BreakStatement {
         for (tmp in Statement(db)) {
             for (bs in BreakStatementDO(db)) {
                 if (tmp.key_eq(bs)) {
@@ -1356,7 +1356,7 @@ schema ConditionalStatement extends Statement {
 impl ConditionalStatement {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *ConditionalStatement {
+    pub fn __all__(db: JavaDB) -> *ConditionalStatement {
         for (tmp in Statement(db)) {
             for (ifs in IfStatement(db)) {
                 if (tmp.key_eq(ifs)) {
@@ -1451,7 +1451,7 @@ schema IfStatementDO {
 impl IfStatementDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *IfStatementDO {
+    pub fn __all__(db: JavaDB) -> *IfStatementDO {
         for (i in IfStatementWithElseDO(db)) {
             yield IfStatementDO {id : i.element_hash_id}
         }
@@ -1500,7 +1500,7 @@ schema IfStatement extends Statement {
 impl IfStatement {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *IfStatement {
+    pub fn __all__(db: JavaDB) -> *IfStatement {
         for (tmp in Statement(db)) {
             for (ifs in IfStatementDO(db)) {
                 if (tmp.key_eq(ifs)) {
@@ -1568,7 +1568,7 @@ schema ForStatement extends Statement {
 impl ForStatement {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *ForStatement {
+    pub fn __all__(db: JavaDB) -> *ForStatement {
         for (tmp in Statement(db)) {
             for (fs in ForStatementDO(db)) {
                 if (tmp.key_eq(fs)) {
@@ -1657,7 +1657,7 @@ schema ForeachStatement extends Statement {
 impl ForeachStatement {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *ForeachStatement {
+    pub fn __all__(db: JavaDB) -> *ForeachStatement {
         for (tmp in Statement(db)) {
             for (fs in ForeachStatementDO(db)) {
                 if (tmp.key_eq(fs)) {
@@ -1725,7 +1725,7 @@ schema WhileStatement extends Statement {
 impl WhileStatement {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *WhileStatement {
+    pub fn __all__(db: JavaDB) -> *WhileStatement {
         for (tmp in Statement(db)) {
             for (ws in WhileStatementDO(db)) {
                 if (tmp.key_eq(ws)) {
@@ -1779,7 +1779,7 @@ schema DoWhileStatement extends Statement {
 impl DoWhileStatement {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *DoWhileStatement {
+    pub fn __all__(db: JavaDB) -> *DoWhileStatement {
         for (tmp in Statement(db)) {
             for (dw in DoWhileStatementDO(db)) {
                 if (tmp.key_eq(dw)) {
@@ -1833,7 +1833,7 @@ schema LoopStatement extends Statement {
 impl LoopStatement {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *LoopStatement {
+    pub fn __all__(db: JavaDB) -> *LoopStatement {
         for (tmp in Statement(db)) {
             for (fs in ForStatement(db)) {
                 if (tmp.key_eq(fs)) {
@@ -1895,7 +1895,7 @@ schema SwitchStatement extends Statement {
 impl SwitchStatement {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *SwitchStatement {
+    pub fn __all__(db: JavaDB) -> *SwitchStatement {
         for (tmp in Statement(db)) {
             for (ss in SwitchStatementDO(db)) {
                 if (tmp.key_eq(ss)) {
@@ -1989,7 +1989,7 @@ schema SwitchLabelStatement extends Statement {
 impl SwitchLabelStatement {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *SwitchLabelStatement {
+    pub fn __all__(db: JavaDB) -> *SwitchLabelStatement {
         for (tmp in Statement(db)) {
             for (sl in SwitchLabelStatementDO(db)) {
                 if (tmp.key_eq(sl)) {
@@ -2124,7 +2124,7 @@ schema DefaultSwitchLabelStatement extends SwitchLabelStatement {
 impl DefaultSwitchLabelStatement {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *DefaultSwitchLabelStatement {
+    pub fn __all__(db: JavaDB) -> *DefaultSwitchLabelStatement {
         for (tmp in SwitchLabelStatement(db)) {
             if (tmp.isDefaultValue() = -1) {
                 yield DefaultSwitchLabelStatement {
@@ -2145,7 +2145,7 @@ schema ConstSwitchLabelStatement extends SwitchLabelStatement {
 impl ConstSwitchLabelStatement {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *ConstSwitchLabelStatement {
+    pub fn __all__(db: JavaDB) -> *ConstSwitchLabelStatement {
         for (tmp in SwitchLabelStatement(db)) {
             for (ss in SwitchLabelStatement(db)) {
                 if (tmp = ss) {
@@ -2173,7 +2173,7 @@ schema SynchronizedStatement extends Statement {
 impl SynchronizedStatement {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *SynchronizedStatement {
+    pub fn __all__(db: JavaDB) -> *SynchronizedStatement {
         for (tmp in Statement(db)) {
             for (ss in SynchronizedStatementDO(db)) {
                 if (tmp.key_eq(ss)) {

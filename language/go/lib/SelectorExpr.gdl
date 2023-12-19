@@ -4,7 +4,7 @@ schema Selector extends Expr {
 impl Selector {
     @data_constraint
     @inline
-    fn __all__(db: GoDB) -> *Selector {
+    pub fn __all__(db: GoDB) -> *Selector {
         for (tmp in Expr(db)) {
             yield Selector {
                 id : tmp.id
@@ -32,7 +32,7 @@ schema SelectorExpr extends Expr {
 impl SelectorExpr {
     @data_constraint
     @inline
-    fn __all__(db: GoDB) -> *SelectorExpr {
+    pub fn __all__(db: GoDB) -> *SelectorExpr {
         for (e in Expr(db)) {
             if (e.isSelectorExpr()) {
                 yield SelectorExpr {

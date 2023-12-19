@@ -9,7 +9,7 @@ schema Scope extends CombineElement {
 impl Scope {
     @data_constraint
     @inline
-    fn __all__(db: PythonDB) -> *Scope {
+    pub fn __all__(db: PythonDB) -> *Scope {
         for (tmp in CombineElement(db)) {
             for (m in Module(db)) {
                 if (tmp.key_eq(m)) {

@@ -7,7 +7,7 @@ schema Identifier extends IdentifierDO {
 impl Identifier {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *Identifier {
+    pub fn __all__(db: JavaDB) -> *Identifier {
         for (tmp in IdentifierDO(db)) {
             yield Identifier {
                 element_hash_id : tmp.element_hash_id,

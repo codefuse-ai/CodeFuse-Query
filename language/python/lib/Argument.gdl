@@ -7,7 +7,7 @@ schema Arg extends ArgDO {
 impl Arg {
     @data_constraint
     @inline
-    fn __all__(db: PythonDB) -> *Arg {
+    pub fn __all__(db: PythonDB) -> *Arg {
         for (tmp in ArgDO(db)) {
             yield Arg {
                 element_oid : tmp.element_oid,
@@ -73,7 +73,7 @@ schema Arguments extends ArgumentsDO {
 impl Arguments {
     @data_constraint
     @inline
-    fn __all__(db: PythonDB) -> *Arguments {
+    pub fn __all__(db: PythonDB) -> *Arguments {
         for (tmp in ArgumentsDO(db)) {
             yield Arguments {
                 element_oid : tmp.element_oid,

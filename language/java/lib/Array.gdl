@@ -14,7 +14,7 @@ schema ArrayCreationExpression extends Expression {
 impl ArrayCreationExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *ArrayCreationExpression {
+    pub fn __all__(db: JavaDB) -> *ArrayCreationExpression {
         for (tmp in Expression(db)) {
             for (ace in ArrayCreationExpressionDO(db)) {
                 if (tmp.key_eq(ace)) {
@@ -123,7 +123,7 @@ schema ArrayInitializerExpression extends Expression {
 impl ArrayInitializerExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *ArrayInitializerExpression {
+    pub fn __all__(db: JavaDB) -> *ArrayInitializerExpression {
         for (tmp in Expression(db)) {
             for (e in ArrayInitializerExpressionDO(db)) {
                 if (tmp.key_eq(e)) {
@@ -193,7 +193,7 @@ schema ArrayAccessExpression extends Expression {
 impl ArrayAccessExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *ArrayAccessExpression {
+    pub fn __all__(db: JavaDB) -> *ArrayAccessExpression {
         for (tmp in Expression(db)) {
             for (aae in ArrayAccessExpressionDO(db)) {
                 if (tmp.key_eq(aae)) {
@@ -248,7 +248,7 @@ schema Array extends ArrayDO {
 impl Array {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *Array {
+    pub fn __all__(db: JavaDB) -> *Array {
         for (tmp in ArrayDO(db)) {
             yield Array {
                 element_hash_id : tmp.element_hash_id,

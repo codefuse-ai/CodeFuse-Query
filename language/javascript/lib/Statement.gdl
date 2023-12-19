@@ -12,7 +12,7 @@ schema Statement extends Node {
 impl Statement {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *Statement {
+    pub fn __all__(db: JavascriptDB) -> *Statement {
         for (tmp in Node(db)) {
             if (isStatement(tmp)) {
                 yield Statement {
@@ -32,7 +32,7 @@ schema DeclarationStatement extends Statement {
 impl DeclarationStatement {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *DeclarationStatement {
+    pub fn __all__(db: JavascriptDB) -> *DeclarationStatement {
         for (tmp in Statement(db)) {
             if (isDeclarationStatement(Node {id: tmp.id})) {
                 yield DeclarationStatement {
@@ -52,7 +52,7 @@ schema StatementButNotDeclaration extends Statement {
 impl StatementButNotDeclaration {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *StatementButNotDeclaration {
+    pub fn __all__(db: JavascriptDB) -> *StatementButNotDeclaration {
         for (tmp in Statement(db)) {
             if (isStatementButNotDeclaration(Node {id: tmp.id})) {
                 yield StatementButNotDeclaration {
@@ -72,7 +72,7 @@ schema BlockStatement extends Statement {
 impl BlockStatement {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *BlockStatement {
+    pub fn __all__(db: JavascriptDB) -> *BlockStatement {
         for (tmp in Statement(db)) {
             if (isBlockStatement(Node {id: tmp.id})) {
                 yield BlockStatement {
@@ -123,7 +123,7 @@ schema EmptyStatement extends Statement {
 impl EmptyStatement {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *EmptyStatement {
+    pub fn __all__(db: JavascriptDB) -> *EmptyStatement {
         for (tmp in Statement(db)) {
             if (tmp.getKind() = 235) {
                 yield EmptyStatement {
@@ -143,7 +143,7 @@ schema VariableStatement extends Statement {
 impl VariableStatement {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *VariableStatement {
+    pub fn __all__(db: JavascriptDB) -> *VariableStatement {
         for (tmp in Statement(db)) {
             if (isVariableStatement(Node {id: tmp.id})) {
                 yield VariableStatement {
@@ -176,7 +176,7 @@ schema ExpressionStatement extends Statement {
 impl ExpressionStatement {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *ExpressionStatement {
+    pub fn __all__(db: JavascriptDB) -> *ExpressionStatement {
         for (tmp in Statement(db)) {
             if (isExpressionStatement(Node {id: tmp.id})) {
                 yield ExpressionStatement {
@@ -206,7 +206,7 @@ schema IfStatement extends Statement {
 impl IfStatement {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *IfStatement {
+    pub fn __all__(db: JavascriptDB) -> *IfStatement {
         for (tmp in Statement(db)) {
             if (isIfStatement(Node {id: tmp.id})) {
                 yield IfStatement {
@@ -270,7 +270,7 @@ schema DoWhileStatement extends Statement {
 impl DoWhileStatement {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *DoWhileStatement {
+    pub fn __all__(db: JavascriptDB) -> *DoWhileStatement {
         for (tmp in Statement(db)) {
             if (isDoWhileStatement(Node {id: tmp.id})) {
                 yield DoWhileStatement {
@@ -312,7 +312,7 @@ schema WhileStatement extends Statement {
 impl WhileStatement {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *WhileStatement {
+    pub fn __all__(db: JavascriptDB) -> *WhileStatement {
         for (tmp in Statement(db)) {
             if (isWhileStatement(Node {id: tmp.id})) {
                 yield WhileStatement {
@@ -354,7 +354,7 @@ schema ForInitializer extends Node {
 impl ForInitializer {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *ForInitializer {
+    pub fn __all__(db: JavascriptDB) -> *ForInitializer {
         for (tmp in Node(db)) {
             if (isForInitializer(tmp)) {
                 yield ForInitializer {
@@ -374,7 +374,7 @@ schema ForStatement extends Statement {
 impl ForStatement {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *ForStatement {
+    pub fn __all__(db: JavascriptDB) -> *ForStatement {
         for (tmp in Statement(db)) {
             if (isForStatement(Node {id: tmp.id})) {
                 yield ForStatement {
@@ -480,7 +480,7 @@ schema EnhancedForStatement extends Statement {
 impl EnhancedForStatement {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *EnhancedForStatement {
+    pub fn __all__(db: JavascriptDB) -> *EnhancedForStatement {
         for (tmp in Statement(db)) {
             if (isEnhancedForStatement(Node {id: tmp.id})) {
                 yield EnhancedForStatement {
@@ -567,7 +567,7 @@ schema ForInStatement extends EnhancedForStatement {
 impl ForInStatement {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *ForInStatement {
+    pub fn __all__(db: JavascriptDB) -> *ForInStatement {
         for (tmp in EnhancedForStatement(db)) {
             if (isForInStatement(Node {id: tmp.id})) {
                 yield ForInStatement {
@@ -587,7 +587,7 @@ schema ForOfStatement extends EnhancedForStatement {
 impl ForOfStatement {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *ForOfStatement {
+    pub fn __all__(db: JavascriptDB) -> *ForOfStatement {
         for (tmp in EnhancedForStatement(db)) {
             if (isForOfStatement(Node {id: tmp.id})) {
                 yield ForOfStatement {
@@ -619,7 +619,7 @@ schema IterationStatement extends Statement {
 impl IterationStatement {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *IterationStatement {
+    pub fn __all__(db: JavascriptDB) -> *IterationStatement {
         for (tmp in Statement(db)) {
             if (isIterationStatement(Node {id: tmp.id})) {
                 yield IterationStatement {
@@ -701,7 +701,7 @@ schema ContinueStatement extends Statement {
 impl ContinueStatement {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *ContinueStatement {
+    pub fn __all__(db: JavascriptDB) -> *ContinueStatement {
         for (tmp in Statement(db)) {
             if (isContinueStatement(Node {id: tmp.id})) {
                 yield ContinueStatement {
@@ -721,7 +721,7 @@ schema BreakStatement extends Statement {
 impl BreakStatement {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *BreakStatement {
+    pub fn __all__(db: JavascriptDB) -> *BreakStatement {
         for (tmp in Statement(db)) {
             if (isBreakStatement(Node {id: tmp.id})) {
                 yield BreakStatement {
@@ -741,7 +741,7 @@ schema ReturnStatement extends Statement {
 impl ReturnStatement {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *ReturnStatement {
+    pub fn __all__(db: JavascriptDB) -> *ReturnStatement {
         for (tmp in Statement(db)) {
             if (isReturnStatement(Node {id: tmp.id})) {
                 yield ReturnStatement {
@@ -772,7 +772,7 @@ schema WithStatement extends Statement {
 impl WithStatement {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *WithStatement {
+    pub fn __all__(db: JavascriptDB) -> *WithStatement {
         for (tmp in Statement(db)) {
             if (isWithStatement(Node {id: tmp.id})) {
                 yield WithStatement {
@@ -817,7 +817,7 @@ schema FunctionDeclarationStatement extends DeclarationStatement {
 impl FunctionDeclarationStatement {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *FunctionDeclarationStatement {
+    pub fn __all__(db: JavascriptDB) -> *FunctionDeclarationStatement {
         for (tmp in DeclarationStatement(db)) {
             if (isFunctionDeclaration(Node {id: tmp.id})) {
                 yield FunctionDeclarationStatement {
@@ -837,7 +837,7 @@ schema ClassDeclarationStatement extends DeclarationStatement {
 impl ClassDeclarationStatement {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *ClassDeclarationStatement {
+    pub fn __all__(db: JavascriptDB) -> *ClassDeclarationStatement {
         for (tmp in DeclarationStatement(db)) {
             if (isClassDeclaration(Node {id: tmp.id})) {
                 yield ClassDeclarationStatement {
@@ -857,7 +857,7 @@ schema InterfaceDeclaration extends DeclarationStatement {
 impl InterfaceDeclaration {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *InterfaceDeclaration {
+    pub fn __all__(db: JavascriptDB) -> *InterfaceDeclaration {
         for (tmp in DeclarationStatement(db)) {
             if (isInterfaceDeclaration(Node {id: tmp.id})) {
                 yield InterfaceDeclaration {
@@ -877,7 +877,7 @@ schema TypeAliasDeclaration extends DeclarationStatement {
 impl TypeAliasDeclaration {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *TypeAliasDeclaration {
+    pub fn __all__(db: JavascriptDB) -> *TypeAliasDeclaration {
         for (tmp in DeclarationStatement(db)) {
             if (isTypeAliasDeclaration(Node {id: tmp.id})) {
                 yield TypeAliasDeclaration {
@@ -897,7 +897,7 @@ schema EnumDeclaration extends DeclarationStatement {
 impl EnumDeclaration {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *EnumDeclaration {
+    pub fn __all__(db: JavascriptDB) -> *EnumDeclaration {
         for (tmp in DeclarationStatement(db)) {
             if (isEnumDeclaration(Node {id: tmp.id})) {
                 yield EnumDeclaration {
@@ -961,7 +961,7 @@ schema ModuleDeclaration extends DeclarationStatement {
 impl ModuleDeclaration {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *ModuleDeclaration {
+    pub fn __all__(db: JavascriptDB) -> *ModuleDeclaration {
         for (tmp in DeclarationStatement(db)) {
             if (isModuleDeclaration(Node {id: tmp.id})) {
                 yield ModuleDeclaration {
@@ -981,7 +981,7 @@ schema NamespaceExportDeclaration extends DeclarationStatement {
 impl NamespaceExportDeclaration {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *NamespaceExportDeclaration {
+    pub fn __all__(db: JavascriptDB) -> *NamespaceExportDeclaration {
         for (tmp in DeclarationStatement(db)) {
             if (isNamespaceExportDeclaration(Node {id: tmp.id})) {
                 yield NamespaceExportDeclaration {
@@ -1001,7 +1001,7 @@ schema ImportEqualsDeclaration extends DeclarationStatement {
 impl ImportEqualsDeclaration {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *ImportEqualsDeclaration {
+    pub fn __all__(db: JavascriptDB) -> *ImportEqualsDeclaration {
         for (tmp in DeclarationStatement(db)) {
             if (isImportEqualsDeclaration(Node {id: tmp.id})) {
                 yield ImportEqualsDeclaration {
@@ -1021,7 +1021,7 @@ schema ImportDeclaration extends DeclarationStatement {
 impl ImportDeclaration {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *ImportDeclaration {
+    pub fn __all__(db: JavascriptDB) -> *ImportDeclaration {
         for (tmp in DeclarationStatement(db)) {
             if (isImportDeclaration(Node {id: tmp.id})) {
                 yield ImportDeclaration {
@@ -1041,7 +1041,7 @@ schema ExportAssignment extends DeclarationStatement {
 impl ExportAssignment {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *ExportAssignment {
+    pub fn __all__(db: JavascriptDB) -> *ExportAssignment {
         for (tmp in DeclarationStatement(db)) {
             if (isExportAssignment(Node {id: tmp.id})) {
                 yield ExportAssignment {
@@ -1061,7 +1061,7 @@ schema ExportDeclaration extends DeclarationStatement {
 impl ExportDeclaration {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *ExportDeclaration {
+    pub fn __all__(db: JavascriptDB) -> *ExportDeclaration {
         for (tmp in DeclarationStatement(db)) {
             if (isExportDeclaration(Node {id: tmp.id})) {
                 yield ExportDeclaration {
@@ -1081,7 +1081,7 @@ schema MissingDeclaration extends DeclarationStatement {
 impl MissingDeclaration {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *MissingDeclaration {
+    pub fn __all__(db: JavascriptDB) -> *MissingDeclaration {
         for (tmp in DeclarationStatement(db)) {
             if (isMissingDeclaration(Node {id: tmp.id})) {
                 yield MissingDeclaration {
@@ -1117,7 +1117,7 @@ schema CaseClause extends Statement {
 impl CaseClause {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *CaseClause {
+    pub fn __all__(db: JavascriptDB) -> *CaseClause {
         for (tmp in Statement(db)) {
             if (isCaseClause(Node {id: tmp.id})) {
                 yield CaseClause {
@@ -1172,7 +1172,7 @@ schema DefaultClause extends Statement {
 impl DefaultClause {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *DefaultClause {
+    pub fn __all__(db: JavascriptDB) -> *DefaultClause {
         for (tmp in Statement(db)) {
             if (isDefaultClause(Node {id: tmp.id})) {
                 yield DefaultClause {
@@ -1215,7 +1215,7 @@ schema CatchClause extends Statement {
 impl CatchClause {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *CatchClause {
+    pub fn __all__(db: JavascriptDB) -> *CatchClause {
         for (tmp in Statement(db)) {
             if (isCatchClause(Node {id: tmp.id})) {
                 yield CatchClause {
@@ -1268,7 +1268,7 @@ schema CaseBlock extends Statement {
 impl CaseBlock {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *CaseBlock {
+    pub fn __all__(db: JavascriptDB) -> *CaseBlock {
         for (tmp in Statement(db)) {
             if (isCaseBlock(Node {id: tmp.id})) {
                 yield CaseBlock {
@@ -1384,7 +1384,7 @@ schema SwitchStatement extends Statement {
 impl SwitchStatement {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *SwitchStatement {
+    pub fn __all__(db: JavascriptDB) -> *SwitchStatement {
         for (tmp in Statement(db)) {
             if (isSwitchStatement(Node {id: tmp.id})) {
                 yield SwitchStatement {
@@ -1420,7 +1420,7 @@ schema ThrowStatement extends Statement {
 impl ThrowStatement {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *ThrowStatement {
+    pub fn __all__(db: JavascriptDB) -> *ThrowStatement {
         for (tmp in Statement(db)) {
             if (isThrowStatement(Node {id: tmp.id})) {
                 yield ThrowStatement {
@@ -1451,7 +1451,7 @@ schema TryStatement extends Statement {
 impl TryStatement {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *TryStatement {
+    pub fn __all__(db: JavascriptDB) -> *TryStatement {
         for (tmp in Statement(db)) {
             if (isTryStatement(Node {id: tmp.id})) {
                 yield TryStatement {
@@ -1521,7 +1521,7 @@ schema DebuggerStatement extends Statement {
 impl DebuggerStatement {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *DebuggerStatement {
+    pub fn __all__(db: JavascriptDB) -> *DebuggerStatement {
         for (tmp in Statement(db)) {
             if (isDebuggerStatement(Node {id: tmp.id})) {
                 yield DebuggerStatement {
@@ -1542,7 +1542,7 @@ schema NotEmittedStatement extends Statement {
 impl NotEmittedStatement {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *NotEmittedStatement {
+    pub fn __all__(db: JavascriptDB) -> *NotEmittedStatement {
         for (tmp in Statement(db)) {
             if (isNotEmittedStatement(Node {id: tmp.id})) {
                 yield NotEmittedStatement {
@@ -1563,7 +1563,7 @@ schema MergeDeclarationMarker extends Statement {
 impl MergeDeclarationMarker {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *MergeDeclarationMarker {
+    pub fn __all__(db: JavascriptDB) -> *MergeDeclarationMarker {
         for (tmp in Statement(db)) {
             if (isMergeDeclarationMarker(Node {id: tmp.id})) {
                 yield MergeDeclarationMarker {
@@ -1584,7 +1584,7 @@ schema EndOfDeclarationMarker extends Statement {
 impl EndOfDeclarationMarker {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *EndOfDeclarationMarker {
+    pub fn __all__(db: JavascriptDB) -> *EndOfDeclarationMarker {
         for (tmp in Statement(db)) {
             if (isEndOfDeclarationMarker(Node {id: tmp.id})) {
                 yield EndOfDeclarationMarker {

@@ -12,7 +12,7 @@ schema FunctionLike extends Node {
 impl FunctionLike {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *FunctionLike {
+    pub fn __all__(db: JavascriptDB) -> *FunctionLike {
         for (tmp in Node(db)) {
             if (isFunctionLike(tmp)) {
                 yield FunctionLike {
@@ -34,7 +34,7 @@ schema CallSite extends CallSiteDO {
 impl CallSite {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *CallSite {
+    pub fn __all__(db: JavascriptDB) -> *CallSite {
         for (tmp in CallSiteDO(db)) {
             yield CallSite {
                 invoke_expression_oid : tmp.invoke_expression_oid,
@@ -67,7 +67,7 @@ schema FunctionLikeDeclaration extends FunctionLike {
 impl FunctionLikeDeclaration {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *FunctionLikeDeclaration {
+    pub fn __all__(db: JavascriptDB) -> *FunctionLikeDeclaration {
         for (tmp in FunctionLike(db)) {
             if (isFunctionLikeDeclaration(Node {id: tmp.id})) {
                 yield FunctionLikeDeclaration {
@@ -375,7 +375,7 @@ schema FunctionDeclaration extends FunctionLikeDeclaration {
 impl FunctionDeclaration {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *FunctionDeclaration {
+    pub fn __all__(db: JavascriptDB) -> *FunctionDeclaration {
         for (tmp in FunctionLikeDeclaration(db)) {
             if (isFunctionDeclaration(Node {id: tmp.id})) {
                 yield FunctionDeclaration {
@@ -395,7 +395,7 @@ schema MethodDeclaration extends FunctionLikeDeclaration {
 impl MethodDeclaration {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *MethodDeclaration {
+    pub fn __all__(db: JavascriptDB) -> *MethodDeclaration {
         for (tmp in FunctionLikeDeclaration(db)) {
             if (isMethodDeclaration(Node {id: tmp.id})) {
                 yield MethodDeclaration {
@@ -419,7 +419,7 @@ schema ConstructorDeclaration extends FunctionLikeDeclaration {
 impl ConstructorDeclaration {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *ConstructorDeclaration {
+    pub fn __all__(db: JavascriptDB) -> *ConstructorDeclaration {
         for (tmp in FunctionLikeDeclaration(db)) {
             if (isConstructor(Node {id: tmp.id})) {
                 yield ConstructorDeclaration {
@@ -439,7 +439,7 @@ schema GetAccessor extends FunctionLikeDeclaration {
 impl GetAccessor {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *GetAccessor {
+    pub fn __all__(db: JavascriptDB) -> *GetAccessor {
         for (tmp in FunctionLikeDeclaration(db)) {
             if (isGetAccessor(Node {id: tmp.id})) {
                 yield GetAccessor {
@@ -459,7 +459,7 @@ schema SetAccessor extends FunctionLikeDeclaration {
 impl SetAccessor {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *SetAccessor {
+    pub fn __all__(db: JavascriptDB) -> *SetAccessor {
         for (tmp in FunctionLikeDeclaration(db)) {
             if (isSetAccessor(Node {id: tmp.id})) {
                 yield SetAccessor {
@@ -479,7 +479,7 @@ schema FunctionExpressionDeclaration extends FunctionLikeDeclaration {
 impl FunctionExpressionDeclaration {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *FunctionExpressionDeclaration {
+    pub fn __all__(db: JavascriptDB) -> *FunctionExpressionDeclaration {
         for (tmp in FunctionLikeDeclaration(db)) {
             if (isFunctionExpression(Node {id: tmp.id})) {
                 yield FunctionExpressionDeclaration {
@@ -499,7 +499,7 @@ schema ArrowFunction extends FunctionLikeDeclaration {
 impl ArrowFunction {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *ArrowFunction {
+    pub fn __all__(db: JavascriptDB) -> *ArrowFunction {
         for (tmp in FunctionLikeDeclaration(db)) {
             if (isArrowFunction(Node {id: tmp.id})) {
                 yield ArrowFunction {

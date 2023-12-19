@@ -7,7 +7,7 @@ schema Method extends MethodDO {
 impl Method {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *Method {
+    pub fn __all__(db: JavaDB) -> *Method {
         for (tmp in MethodDO(db)) {
             yield Method {
                 element_hash_id : tmp.element_hash_id,
@@ -197,7 +197,7 @@ schema Exception extends ExceptionDO {
 impl Exception {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *Exception {
+    pub fn __all__(db: JavaDB) -> *Exception {
         for (tmp in ExceptionDO(db)) {
             yield Exception {
                 element_hash_id : tmp.element_hash_id,
@@ -250,7 +250,7 @@ schema SuperExpression extends Expression {
 impl SuperExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *SuperExpression {
+    pub fn __all__(db: JavaDB) -> *SuperExpression {
         for (tmp in Expression(db)) {
             for (s in SuperExpressionDO(db)) {
                 if (tmp.key_eq(s)) {
@@ -276,7 +276,7 @@ schema SuperExpressionWithQualifier extends SuperExpression {
 impl SuperExpressionWithQualifier {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *SuperExpressionWithQualifier {
+    pub fn __all__(db: JavaDB) -> *SuperExpressionWithQualifier {
         for (tmp in SuperExpression(db)) {
             for (s in SuperExpressionWithQualifierDO(db)) {
                 if (tmp.key_eq(s)) {
@@ -314,7 +314,7 @@ schema NpMethod extends NpMethodDO {
 impl NpMethod {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *NpMethod {
+    pub fn __all__(db: JavaDB) -> *NpMethod {
         for (tmp in NpMethodDO(db)) {
             for (m in NpMethodDO(db)) {
                 if (tmp = m) {

@@ -4,7 +4,7 @@ schema Decl extends Node {
 impl Decl {
     @data_constraint
     @inline
-    fn __all__(db: GoDB) -> *Decl {
+    pub fn __all__(db: GoDB) -> *Decl {
         for (tmp in Node(db)) {
             for (d in DeclDO(db)) {
                 if (tmp.key_eq(d)) {
@@ -107,7 +107,7 @@ schema ConstDecl extends Decl {
 impl ConstDecl {
     @data_constraint
     @inline
-    fn __all__(db: GoDB) -> *ConstDecl {
+    pub fn __all__(db: GoDB) -> *ConstDecl {
         for (tmp in Decl(db)) {
             for (d in DeclDO(db)) {
                 if (tmp.key_eq(d)) {
@@ -127,7 +127,7 @@ schema VarDecl extends Decl {
 impl VarDecl {
     @data_constraint
     @inline
-    fn __all__(db: GoDB) -> *VarDecl {
+    pub fn __all__(db: GoDB) -> *VarDecl {
         for (tmp in Decl(db)) {
             for (d in DeclDO(db)) {
                 if (tmp.key_eq(d)) {

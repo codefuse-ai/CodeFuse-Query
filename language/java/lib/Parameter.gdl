@@ -7,7 +7,7 @@ schema Parameter extends ParameterDO {
 impl Parameter {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *Parameter {
+    pub fn __all__(db: JavaDB) -> *Parameter {
         for (tmp in ParameterDO(db)) {
             yield Parameter {
                 element_hash_id : tmp.element_hash_id,
@@ -123,7 +123,7 @@ schema TypeParameter extends TypeParameterDO {
 impl TypeParameter {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *TypeParameter {
+    pub fn __all__(db: JavaDB) -> *TypeParameter {
         for (tmp in TypeParameterDO(db)) {
             yield TypeParameter {
                 element_hash_id : tmp.element_hash_id,
@@ -201,7 +201,7 @@ schema Variable {
 impl Variable {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *Variable {
+    pub fn __all__(db: JavaDB) -> *Variable {
         for (l in LocalVariable(db)) {
             yield Variable {id : l.element_hash_id}
         }

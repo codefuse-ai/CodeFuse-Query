@@ -12,7 +12,7 @@ schema TypeNode extends Node {
 impl TypeNode {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *TypeNode {
+    pub fn __all__(db: JavascriptDB) -> *TypeNode {
         for (tmp in Node(db)) {
             if (isTypeNode(tmp)) {
                 yield TypeNode {
@@ -32,7 +32,7 @@ schema KeywordTypeNode extends TypeNode {
 impl KeywordTypeNode {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *KeywordTypeNode {
+    pub fn __all__(db: JavascriptDB) -> *KeywordTypeNode {
         for (tmp in TypeNode(db)) {
             if (isKeywordTypeNode(Node {id: tmp.id})) {
                 yield KeywordTypeNode {
@@ -52,7 +52,7 @@ schema TypePredicateNode extends TypeNode {
 impl TypePredicateNode {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *TypePredicateNode {
+    pub fn __all__(db: JavascriptDB) -> *TypePredicateNode {
         for (tmp in TypeNode(db)) {
             if (isTypePredicate(Node {id: tmp.id})) {
                 yield TypePredicateNode {
@@ -72,7 +72,7 @@ schema FunctionTypeNode extends TypeNode {
 impl FunctionTypeNode {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *FunctionTypeNode {
+    pub fn __all__(db: JavascriptDB) -> *FunctionTypeNode {
         for (tmp in TypeNode(db)) {
             if (isFunctionType(Node {id: tmp.id})) {
                 yield FunctionTypeNode {
@@ -92,7 +92,7 @@ schema ConstructorTypeNode extends TypeNode {
 impl ConstructorTypeNode {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *ConstructorTypeNode {
+    pub fn __all__(db: JavascriptDB) -> *ConstructorTypeNode {
         for (tmp in TypeNode(db)) {
             if (isConstructorType(Node {id: tmp.id})) {
                 yield ConstructorTypeNode {
@@ -112,7 +112,7 @@ schema TypeQueryNode extends TypeNode {
 impl TypeQueryNode {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *TypeQueryNode {
+    pub fn __all__(db: JavascriptDB) -> *TypeQueryNode {
         for (tmp in TypeNode(db)) {
             if (isTypeQuery(Node {id: tmp.id})) {
                 yield TypeQueryNode {
@@ -132,7 +132,7 @@ schema TypeLiteralNode extends TypeNode {
 impl TypeLiteralNode {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *TypeLiteralNode {
+    pub fn __all__(db: JavascriptDB) -> *TypeLiteralNode {
         for (tmp in TypeNode(db)) {
             if (isTypeLiteral(Node {id: tmp.id})) {
                 yield TypeLiteralNode {
@@ -152,7 +152,7 @@ schema ArrayTypeNode extends TypeNode {
 impl ArrayTypeNode {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *ArrayTypeNode {
+    pub fn __all__(db: JavascriptDB) -> *ArrayTypeNode {
         for (tmp in TypeNode(db)) {
             if (isArrayType(Node {id: tmp.id})) {
                 yield ArrayTypeNode {
@@ -172,7 +172,7 @@ schema TupleTypeNode extends TypeNode {
 impl TupleTypeNode {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *TupleTypeNode {
+    pub fn __all__(db: JavascriptDB) -> *TupleTypeNode {
         for (tmp in TypeNode(db)) {
             if (isTupleType(Node {id: tmp.id})) {
                 yield TupleTypeNode {
@@ -192,7 +192,7 @@ schema OptionalTypeNode extends TypeNode {
 impl OptionalTypeNode {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *OptionalTypeNode {
+    pub fn __all__(db: JavascriptDB) -> *OptionalTypeNode {
         for (tmp in TypeNode(db)) {
             if (isOptionalType(Node {id: tmp.id})) {
                 yield OptionalTypeNode {
@@ -212,7 +212,7 @@ schema RestTypeNode extends TypeNode {
 impl RestTypeNode {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *RestTypeNode {
+    pub fn __all__(db: JavascriptDB) -> *RestTypeNode {
         for (tmp in TypeNode(db)) {
             if (isRestType(Node {id: tmp.id})) {
                 yield RestTypeNode {
@@ -232,7 +232,7 @@ schema UnionTypeNode extends TypeNode {
 impl UnionTypeNode {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *UnionTypeNode {
+    pub fn __all__(db: JavascriptDB) -> *UnionTypeNode {
         for (tmp in TypeNode(db)) {
             if (isUnionType(Node {id: tmp.id})) {
                 yield UnionTypeNode {
@@ -270,7 +270,7 @@ schema IntersectionTypeNode extends TypeNode {
 impl IntersectionTypeNode {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *IntersectionTypeNode {
+    pub fn __all__(db: JavascriptDB) -> *IntersectionTypeNode {
         for (tmp in TypeNode(db)) {
             if (isIntersectionType(Node {id: tmp.id})) {
                 yield IntersectionTypeNode {
@@ -308,7 +308,7 @@ schema ConditionalTypeNode extends TypeNode {
 impl ConditionalTypeNode {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *ConditionalTypeNode {
+    pub fn __all__(db: JavascriptDB) -> *ConditionalTypeNode {
         for (tmp in TypeNode(db)) {
             if (isConditionalType(Node {id: tmp.id})) {
                 yield ConditionalTypeNode {
@@ -360,7 +360,7 @@ schema InferTypeNode extends TypeNode {
 impl InferTypeNode {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *InferTypeNode {
+    pub fn __all__(db: JavascriptDB) -> *InferTypeNode {
         for (tmp in TypeNode(db)) {
             if (isInferType(Node {id: tmp.id})) {
                 yield InferTypeNode {
@@ -380,7 +380,7 @@ schema ParenthesizedTypeNode extends TypeNode {
 impl ParenthesizedTypeNode {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *ParenthesizedTypeNode {
+    pub fn __all__(db: JavascriptDB) -> *ParenthesizedTypeNode {
         for (tmp in TypeNode(db)) {
             if (isParenthesizedType(Node {id: tmp.id})) {
                 yield ParenthesizedTypeNode {
@@ -400,7 +400,7 @@ schema ThisTypeNode extends TypeNode {
 impl ThisTypeNode {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *ThisTypeNode {
+    pub fn __all__(db: JavascriptDB) -> *ThisTypeNode {
         for (tmp in TypeNode(db)) {
             if (isThisType(Node {id: tmp.id})) {
                 yield ThisTypeNode {
@@ -420,7 +420,7 @@ schema TypeOperatorNode extends TypeNode {
 impl TypeOperatorNode {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *TypeOperatorNode {
+    pub fn __all__(db: JavascriptDB) -> *TypeOperatorNode {
         for (tmp in TypeNode(db)) {
             if (isTypeOperator(Node {id: tmp.id})) {
                 yield TypeOperatorNode {
@@ -456,7 +456,7 @@ schema IndexedAccessTypeNode extends TypeNode {
 impl IndexedAccessTypeNode {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *IndexedAccessTypeNode {
+    pub fn __all__(db: JavascriptDB) -> *IndexedAccessTypeNode {
         for (tmp in TypeNode(db)) {
             if (isIndexedAccessType(Node {id: tmp.id})) {
                 yield IndexedAccessTypeNode {
@@ -492,7 +492,7 @@ schema MappedTypeNode extends TypeNode {
 impl MappedTypeNode {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *MappedTypeNode {
+    pub fn __all__(db: JavascriptDB) -> *MappedTypeNode {
         for (tmp in TypeNode(db)) {
             if (isMappedType(Node {id: tmp.id})) {
                 yield MappedTypeNode {
@@ -512,7 +512,7 @@ schema LiteralTypeNode extends TypeNode {
 impl LiteralTypeNode {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *LiteralTypeNode {
+    pub fn __all__(db: JavascriptDB) -> *LiteralTypeNode {
         for (tmp in TypeNode(db)) {
             if (isLiteralType(Node {id: tmp.id})) {
                 yield LiteralTypeNode {
@@ -549,7 +549,7 @@ schema NamedTupleMember extends TypeNode {
 impl NamedTupleMember {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *NamedTupleMember {
+    pub fn __all__(db: JavascriptDB) -> *NamedTupleMember {
         for (tmp in TypeNode(db)) {
             if (isNamedTupleMember(Node {id: tmp.id})) {
                 yield NamedTupleMember {
@@ -569,7 +569,7 @@ schema TemplateLiteralTypeNode extends TypeNode {
 impl TemplateLiteralTypeNode {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *TemplateLiteralTypeNode {
+    pub fn __all__(db: JavascriptDB) -> *TemplateLiteralTypeNode {
         for (tmp in TypeNode(db)) {
             if (isTemplateLiteralType(Node {id: tmp.id})) {
                 yield TemplateLiteralTypeNode {
@@ -619,7 +619,7 @@ schema TemplateLiteralTypeSpan extends TypeNode {
 impl TemplateLiteralTypeSpan {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *TemplateLiteralTypeSpan {
+    pub fn __all__(db: JavascriptDB) -> *TemplateLiteralTypeSpan {
         for (tmp in TypeNode(db)) {
             if (isTemplateLiteralTypeSpan(Node {id: tmp.id})) {
                 yield TemplateLiteralTypeSpan {
@@ -639,7 +639,7 @@ schema NodeWithTypeArguments extends TypeNode {
 impl NodeWithTypeArguments {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *NodeWithTypeArguments {
+    pub fn __all__(db: JavascriptDB) -> *NodeWithTypeArguments {
         for (tmp in TypeNode(db)) {
             if (isNodeWithTypeArguments(Node {id: tmp.id})) {
                 yield NodeWithTypeArguments {
@@ -659,7 +659,7 @@ schema TypeReferenceNode extends NodeWithTypeArguments {
 impl TypeReferenceNode {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *TypeReferenceNode {
+    pub fn __all__(db: JavascriptDB) -> *TypeReferenceNode {
         for (tmp in NodeWithTypeArguments(db)) {
             if (isTypeReference(Node {id: tmp.id})) {
                 yield TypeReferenceNode {
@@ -690,7 +690,7 @@ schema ImportTypeNode extends NodeWithTypeArguments {
 impl ImportTypeNode {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *ImportTypeNode {
+    pub fn __all__(db: JavascriptDB) -> *ImportTypeNode {
         for (tmp in NodeWithTypeArguments(db)) {
             if (isImportType(Node {id: tmp.id})) {
                 yield ImportTypeNode {
@@ -710,7 +710,7 @@ schema ExpressionWithTypeArguments extends NodeWithTypeArguments {
 impl ExpressionWithTypeArguments {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *ExpressionWithTypeArguments {
+    pub fn __all__(db: JavascriptDB) -> *ExpressionWithTypeArguments {
         for (tmp in NodeWithTypeArguments(db)) {
             if (isExpressionWithTypeArguments(Node {id: tmp.id})) {
                 yield ExpressionWithTypeArguments {
@@ -730,7 +730,7 @@ schema TypeElement extends Node {
 impl TypeElement {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *TypeElement {
+    pub fn __all__(db: JavascriptDB) -> *TypeElement {
         for (tmp in Node(db)) {
             if (isTypeElement(tmp)) {
                 yield TypeElement {
@@ -750,7 +750,7 @@ schema PropertySignature extends TypeElement {
 impl PropertySignature {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *PropertySignature {
+    pub fn __all__(db: JavascriptDB) -> *PropertySignature {
         for (tmp in TypeElement(db)) {
             if (isPropertySignature(Node {id: tmp.id})) {
                 yield PropertySignature {
@@ -770,7 +770,7 @@ schema MethodSignature extends TypeElement {
 impl MethodSignature {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *MethodSignature {
+    pub fn __all__(db: JavascriptDB) -> *MethodSignature {
         for (tmp in TypeElement(db)) {
             if (isMethodSignature(Node {id: tmp.id})) {
                 yield MethodSignature {
@@ -790,7 +790,7 @@ schema CallSignatureDeclaration extends TypeElement {
 impl CallSignatureDeclaration {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *CallSignatureDeclaration {
+    pub fn __all__(db: JavascriptDB) -> *CallSignatureDeclaration {
         for (tmp in TypeElement(db)) {
             if (isCallSignature(Node {id: tmp.id})) {
                 yield CallSignatureDeclaration {
@@ -810,7 +810,7 @@ schema ConstructSignatureDeclaration extends TypeElement {
 impl ConstructSignatureDeclaration {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *ConstructSignatureDeclaration {
+    pub fn __all__(db: JavascriptDB) -> *ConstructSignatureDeclaration {
         for (tmp in TypeElement(db)) {
             if (isConstructSignature(Node {id: tmp.id})) {
                 yield ConstructSignatureDeclaration {
@@ -830,7 +830,7 @@ schema IndexSignatureDeclaration extends TypeElement {
 impl IndexSignatureDeclaration {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *IndexSignatureDeclaration {
+    pub fn __all__(db: JavascriptDB) -> *IndexSignatureDeclaration {
         for (tmp in TypeElement(db)) {
             if (isIndexSignature(Node {id: tmp.id})) {
                 yield IndexSignatureDeclaration {

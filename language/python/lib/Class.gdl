@@ -7,7 +7,7 @@ schema Class extends ClassDefStatement {
 impl Class {
     @data_constraint
     @inline
-    fn __all__(db: PythonDB) -> *Class {
+    pub fn __all__(db: PythonDB) -> *Class {
         for (tmp in ClassDefStatement(db)) {
             yield Class {
                 element_oid : tmp.element_oid,
@@ -146,7 +146,7 @@ schema ClassHierarchy extends ClassHierarchyDO {
 impl ClassHierarchy {
     @data_constraint
     @inline
-    fn __all__(db: PythonDB) -> *ClassHierarchy {
+    pub fn __all__(db: PythonDB) -> *ClassHierarchy {
         for (tmp in ClassHierarchyDO(db)) {
             yield ClassHierarchy {
                 base_oid : tmp.base_oid,

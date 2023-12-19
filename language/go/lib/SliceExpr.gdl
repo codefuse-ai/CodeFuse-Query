@@ -4,7 +4,7 @@ schema SliceExpr extends Expr {
 impl SliceExpr {
     @data_constraint
     @inline
-    fn __all__(db: GoDB) -> *SliceExpr {
+    pub fn __all__(db: GoDB) -> *SliceExpr {
         for (e in Expr(db)) {
             if (e.isSliceExpr()) {
                 yield SliceExpr {

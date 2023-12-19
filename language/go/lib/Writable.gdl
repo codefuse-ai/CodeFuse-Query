@@ -4,7 +4,7 @@ schema IncDecStmt extends Statement {
 impl IncDecStmt {
     @data_constraint
     @inline
-    fn __all__(db: GoDB) -> *IncDecStmt {
+    pub fn __all__(db: GoDB) -> *IncDecStmt {
         for (s in Statement(db)) {
             if (s.isIncStmt()) {
                 yield IncDecStmt {
@@ -25,7 +25,7 @@ schema AssignmentStmt extends Statement {
 impl AssignmentStmt {
     @data_constraint
     @inline
-    fn __all__(db: GoDB) -> *AssignmentStmt {
+    pub fn __all__(db: GoDB) -> *AssignmentStmt {
         for (s in Statement(db)) {
             if (s.isAssignStmt()) {
                 yield AssignmentStmt {
@@ -128,7 +128,7 @@ schema Writable extends Node {
 impl Writable {
     @data_constraint
     @inline
-    fn __all__(db: GoDB) -> *Writable {
+    pub fn __all__(db: GoDB) -> *Writable {
         for (n in Node(db)) {
             for (s in IncDecStmt(db)) {
                 if (s.key_eq(n)) {
@@ -178,7 +178,7 @@ schema WritesField {
 impl WritesField {
     @data_constraint
     @inline
-    fn __all__(db: GoDB) -> *WritesField {
+    pub fn __all__(db: GoDB) -> *WritesField {
         for (e in Expr(db)) {
             if (e.isSelectorExpr()) {
                 yield WritesField {id : e.id}

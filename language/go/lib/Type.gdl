@@ -4,7 +4,7 @@ schema Type extends TypeDO {
 impl Type {
     @data_constraint
     @inline
-    fn __all__(db: GoDB) -> *Type {
+    pub fn __all__(db: GoDB) -> *Type {
         for (tmp in TypeDO(db)) {
             yield Type {
                 oid : tmp.oid,

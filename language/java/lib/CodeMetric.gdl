@@ -7,7 +7,7 @@ schema MetricCallable extends Callable {
 impl MetricCallable {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *MetricCallable {
+    pub fn __all__(db: JavaDB) -> *MetricCallable {
         for (tmp in Callable(db)) {
             yield MetricCallable {
                 id : tmp.id
