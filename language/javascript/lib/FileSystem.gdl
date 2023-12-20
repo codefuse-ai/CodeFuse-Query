@@ -12,7 +12,7 @@ schema File extends FileDO {
 impl File {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *File {
+    pub fn __all__(db: JavascriptDB) -> *File {
         for (tmp in FileDO(db)) {
             yield File {
                 oid : tmp.oid,

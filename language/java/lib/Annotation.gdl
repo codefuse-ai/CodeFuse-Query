@@ -7,7 +7,7 @@ schema AnnotatedRelation extends AnnotatedRelationDO {
 impl AnnotatedRelation {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *AnnotatedRelation {
+    pub fn __all__(db: JavaDB) -> *AnnotatedRelation {
         for (tmp in AnnotatedRelationDO(db)) {
             yield AnnotatedRelation {
                 annotation_hash_id : tmp.annotation_hash_id,
@@ -44,7 +44,7 @@ schema AnnotationDo {
 impl AnnotationDo {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *AnnotationDo {
+    pub fn __all__(db: JavaDB) -> *AnnotationDo {
         for (a in AnnotationCanResolvedDO(db)) {
             yield AnnotationDo {id : a.element_hash_id}
         }
@@ -177,7 +177,7 @@ schema Annotation extends AnnotationDo {
 impl Annotation {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *Annotation {
+    pub fn __all__(db: JavaDB) -> *Annotation {
         for (tmp in AnnotationDo(db)) {
             yield Annotation {
                 id : tmp.id
@@ -233,7 +233,7 @@ schema AnnotationAccessArgumentDO {
 impl AnnotationAccessArgumentDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *AnnotationAccessArgumentDO {
+    pub fn __all__(db: JavaDB) -> *AnnotationAccessArgumentDO {
         for (a in AnnotationAccessArgumentWithNameDO(db)) {
             yield AnnotationAccessArgumentDO {id : a.element_hash_id}
         }
@@ -379,7 +379,7 @@ schema AnnotationAccessArgument extends AnnotationAccessArgumentDO {
 impl AnnotationAccessArgument {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *AnnotationAccessArgument {
+    pub fn __all__(db: JavaDB) -> *AnnotationAccessArgument {
         for (tmp in AnnotationAccessArgumentDO(db)) {
             yield AnnotationAccessArgument {
                 id : tmp.id
@@ -524,7 +524,7 @@ schema AnnotationArrayInitializer extends AnnotationArrayInitializerDO {
 impl AnnotationArrayInitializer {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *AnnotationArrayInitializer {
+    pub fn __all__(db: JavaDB) -> *AnnotationArrayInitializer {
         for (tmp in AnnotationArrayInitializerDO(db)) {
             yield AnnotationArrayInitializer {
                 element_hash_id : tmp.element_hash_id,
@@ -588,7 +588,7 @@ schema AnnotationDeclaration extends AnnotationDeclarationDO {
 impl AnnotationDeclaration {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *AnnotationDeclaration {
+    pub fn __all__(db: JavaDB) -> *AnnotationDeclaration {
         for (tmp in AnnotationDeclarationDO(db)) {
             yield AnnotationDeclaration {
                 element_hash_id : tmp.element_hash_id,
@@ -631,7 +631,7 @@ schema AnnotationDeclarationParameter extends AnnotationDeclarationParameterDO {
 impl AnnotationDeclarationParameter {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *AnnotationDeclarationParameter {
+    pub fn __all__(db: JavaDB) -> *AnnotationDeclarationParameter {
         for (tmp in AnnotationDeclarationParameterDO(db)) {
             yield AnnotationDeclarationParameter {
                 element_hash_id : tmp.element_hash_id,
@@ -697,7 +697,7 @@ schema AnnotationDeclarationParameterDefaultValue extends AnnotationDeclarationP
 impl AnnotationDeclarationParameterDefaultValue {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *AnnotationDeclarationParameterDefaultValue {
+    pub fn __all__(db: JavaDB) -> *AnnotationDeclarationParameterDefaultValue {
         for (tmp in AnnotationDeclarationParameterDefaultValueDO(db)) {
             yield AnnotationDeclarationParameterDefaultValue {
                 element_hash_id : tmp.element_hash_id,

@@ -4,7 +4,7 @@ schema ForStmt extends Statement {
 impl ForStmt {
     @data_constraint
     @inline
-    fn __all__(db: GoDB) -> *ForStmt {
+    pub fn __all__(db: GoDB) -> *ForStmt {
         for (tmp in Statement(db)) {
             for (s in Statement(db)) {
                 if (tmp = s) {

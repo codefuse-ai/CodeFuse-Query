@@ -12,7 +12,7 @@ schema Token extends Node {
 impl Token {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *Token {
+    pub fn __all__(db: JavascriptDB) -> *Token {
         for (tmp in Node(db)) {
             if (isToken(tmp)) {
                 yield Token {
@@ -32,7 +32,7 @@ schema Unknown extends Token {
 impl Unknown {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *Unknown {
+    pub fn __all__(db: JavascriptDB) -> *Unknown {
         for (tmp in Token(db)) {
             if (isUnknown(Node {id: tmp.id})) {
                 yield Unknown {
@@ -52,7 +52,7 @@ schema EndOfFileToken extends Token {
 impl EndOfFileToken {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *EndOfFileToken {
+    pub fn __all__(db: JavascriptDB) -> *EndOfFileToken {
         for (tmp in Token(db)) {
             if (isEndOfFileToken(Node {id: tmp.id})) {
                 yield EndOfFileToken {
@@ -72,7 +72,7 @@ schema NumericLiteralToken extends Token {
 impl NumericLiteralToken {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *NumericLiteralToken {
+    pub fn __all__(db: JavascriptDB) -> *NumericLiteralToken {
         for (tmp in Token(db)) {
             if (isNumericLiteral(Node {id: tmp.id})) {
                 yield NumericLiteralToken {
@@ -92,7 +92,7 @@ schema BigIntLiteralToken extends Token {
 impl BigIntLiteralToken {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *BigIntLiteralToken {
+    pub fn __all__(db: JavascriptDB) -> *BigIntLiteralToken {
         for (tmp in Token(db)) {
             if (isBigIntLiteral(Node {id: tmp.id})) {
                 yield BigIntLiteralToken {
@@ -112,7 +112,7 @@ schema StringLiteralToken extends Token {
 impl StringLiteralToken {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *StringLiteralToken {
+    pub fn __all__(db: JavascriptDB) -> *StringLiteralToken {
         for (tmp in Token(db)) {
             if (isStringLiteral(Node {id: tmp.id})) {
                 yield StringLiteralToken {
@@ -132,7 +132,7 @@ schema JsxTextToken extends Token {
 impl JsxTextToken {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *JsxTextToken {
+    pub fn __all__(db: JavascriptDB) -> *JsxTextToken {
         for (tmp in Token(db)) {
             if (isJsxText(Node {id: tmp.id})) {
                 yield JsxTextToken {
@@ -152,7 +152,7 @@ schema RegularExpressionLiteralToken extends Token {
 impl RegularExpressionLiteralToken {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *RegularExpressionLiteralToken {
+    pub fn __all__(db: JavascriptDB) -> *RegularExpressionLiteralToken {
         for (tmp in Token(db)) {
             if (isRegularExpressionLiteral(Node {id: tmp.id})) {
                 yield RegularExpressionLiteralToken {
@@ -172,7 +172,7 @@ schema NoSubstitutionTemplateLiteralToken extends Token {
 impl NoSubstitutionTemplateLiteralToken {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *NoSubstitutionTemplateLiteralToken {
+    pub fn __all__(db: JavascriptDB) -> *NoSubstitutionTemplateLiteralToken {
         for (tmp in Token(db)) {
             if (isNoSubstitutionTemplateLiteral(Node {id: tmp.id})) {
                 yield NoSubstitutionTemplateLiteralToken {
@@ -192,7 +192,7 @@ schema TemplateHeadToken extends Token {
 impl TemplateHeadToken {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *TemplateHeadToken {
+    pub fn __all__(db: JavascriptDB) -> *TemplateHeadToken {
         for (tmp in Token(db)) {
             if (isTemplateHead(Node {id: tmp.id})) {
                 yield TemplateHeadToken {
@@ -212,7 +212,7 @@ schema TemplateMiddleToken extends Token {
 impl TemplateMiddleToken {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *TemplateMiddleToken {
+    pub fn __all__(db: JavascriptDB) -> *TemplateMiddleToken {
         for (tmp in Token(db)) {
             if (isTemplateMiddle(Node {id: tmp.id})) {
                 yield TemplateMiddleToken {
@@ -232,7 +232,7 @@ schema TemplateTailToken extends Token {
 impl TemplateTailToken {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *TemplateTailToken {
+    pub fn __all__(db: JavascriptDB) -> *TemplateTailToken {
         for (tmp in Token(db)) {
             if (isTemplateTail(Node {id: tmp.id})) {
                 yield TemplateTailToken {
@@ -252,7 +252,7 @@ schema DotDotDotToken extends Token {
 impl DotDotDotToken {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *DotDotDotToken {
+    pub fn __all__(db: JavascriptDB) -> *DotDotDotToken {
         for (tmp in Token(db)) {
             if (isDotDotDotToken(Node {id: tmp.id})) {
                 yield DotDotDotToken {
@@ -272,7 +272,7 @@ schema CommaToken extends Token {
 impl CommaToken {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *CommaToken {
+    pub fn __all__(db: JavascriptDB) -> *CommaToken {
         for (tmp in Token(db)) {
             if (isCommaToken(Node {id: tmp.id})) {
                 yield CommaToken {
@@ -292,7 +292,7 @@ schema QuestionDotToken extends Token {
 impl QuestionDotToken {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *QuestionDotToken {
+    pub fn __all__(db: JavascriptDB) -> *QuestionDotToken {
         for (tmp in Token(db)) {
             if (isQuestionDotToken(Node {id: tmp.id})) {
                 yield QuestionDotToken {
@@ -312,7 +312,7 @@ schema LessThanToken extends Token {
 impl LessThanToken {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *LessThanToken {
+    pub fn __all__(db: JavascriptDB) -> *LessThanToken {
         for (tmp in Token(db)) {
             if (isLessThanToken(Node {id: tmp.id})) {
                 yield LessThanToken {
@@ -332,7 +332,7 @@ schema GreaterThanToken extends Token {
 impl GreaterThanToken {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *GreaterThanToken {
+    pub fn __all__(db: JavascriptDB) -> *GreaterThanToken {
         for (tmp in Token(db)) {
             if (isGreaterThanToken(Node {id: tmp.id})) {
                 yield GreaterThanToken {
@@ -352,7 +352,7 @@ schema LessThanEqualsToken extends Token {
 impl LessThanEqualsToken {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *LessThanEqualsToken {
+    pub fn __all__(db: JavascriptDB) -> *LessThanEqualsToken {
         for (tmp in Token(db)) {
             if (isLessThanEqualsToken(Node {id: tmp.id})) {
                 yield LessThanEqualsToken {
@@ -372,7 +372,7 @@ schema GreaterThanEqualsToken extends Token {
 impl GreaterThanEqualsToken {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *GreaterThanEqualsToken {
+    pub fn __all__(db: JavascriptDB) -> *GreaterThanEqualsToken {
         for (tmp in Token(db)) {
             if (isGreaterThanEqualsToken(Node {id: tmp.id})) {
                 yield GreaterThanEqualsToken {
@@ -392,7 +392,7 @@ schema EqualsEqualsToken extends Token {
 impl EqualsEqualsToken {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *EqualsEqualsToken {
+    pub fn __all__(db: JavascriptDB) -> *EqualsEqualsToken {
         for (tmp in Token(db)) {
             if (isEqualsEqualsToken(Node {id: tmp.id})) {
                 yield EqualsEqualsToken {
@@ -412,7 +412,7 @@ schema ExclamationEqualsToken extends Token {
 impl ExclamationEqualsToken {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *ExclamationEqualsToken {
+    pub fn __all__(db: JavascriptDB) -> *ExclamationEqualsToken {
         for (tmp in Token(db)) {
             if (isExclamationEqualsToken(Node {id: tmp.id})) {
                 yield ExclamationEqualsToken {
@@ -432,7 +432,7 @@ schema EqualsEqualsEqualsToken extends Token {
 impl EqualsEqualsEqualsToken {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *EqualsEqualsEqualsToken {
+    pub fn __all__(db: JavascriptDB) -> *EqualsEqualsEqualsToken {
         for (tmp in Token(db)) {
             if (isEqualsEqualsEqualsToken(Node {id: tmp.id})) {
                 yield EqualsEqualsEqualsToken {
@@ -452,7 +452,7 @@ schema ExclamationEqualsEqualsToken extends Token {
 impl ExclamationEqualsEqualsToken {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *ExclamationEqualsEqualsToken {
+    pub fn __all__(db: JavascriptDB) -> *ExclamationEqualsEqualsToken {
         for (tmp in Token(db)) {
             if (isExclamationEqualsEqualsToken(Node {id: tmp.id})) {
                 yield ExclamationEqualsEqualsToken {
@@ -472,7 +472,7 @@ schema PlusToken extends Token {
 impl PlusToken {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *PlusToken {
+    pub fn __all__(db: JavascriptDB) -> *PlusToken {
         for (tmp in Token(db)) {
             if (isPlusToken(Node {id: tmp.id})) {
                 yield PlusToken {
@@ -492,7 +492,7 @@ schema MinusToken extends Token {
 impl MinusToken {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *MinusToken {
+    pub fn __all__(db: JavascriptDB) -> *MinusToken {
         for (tmp in Token(db)) {
             if (isMinusToken(Node {id: tmp.id})) {
                 yield MinusToken {
@@ -512,7 +512,7 @@ schema AsteriskToken extends Token {
 impl AsteriskToken {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *AsteriskToken {
+    pub fn __all__(db: JavascriptDB) -> *AsteriskToken {
         for (tmp in Token(db)) {
             if (isAsteriskToken(Node {id: tmp.id})) {
                 yield AsteriskToken {
@@ -532,7 +532,7 @@ schema AsteriskAsteriskToken extends Token {
 impl AsteriskAsteriskToken {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *AsteriskAsteriskToken {
+    pub fn __all__(db: JavascriptDB) -> *AsteriskAsteriskToken {
         for (tmp in Token(db)) {
             if (isAsteriskAsteriskToken(Node {id: tmp.id})) {
                 yield AsteriskAsteriskToken {
@@ -552,7 +552,7 @@ schema SlashToken extends Token {
 impl SlashToken {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *SlashToken {
+    pub fn __all__(db: JavascriptDB) -> *SlashToken {
         for (tmp in Token(db)) {
             if (isSlashToken(Node {id: tmp.id})) {
                 yield SlashToken {
@@ -572,7 +572,7 @@ schema PercentToken extends Token {
 impl PercentToken {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *PercentToken {
+    pub fn __all__(db: JavascriptDB) -> *PercentToken {
         for (tmp in Token(db)) {
             if (isPercentToken(Node {id: tmp.id})) {
                 yield PercentToken {
@@ -592,7 +592,7 @@ schema PlusPlusToken extends Token {
 impl PlusPlusToken {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *PlusPlusToken {
+    pub fn __all__(db: JavascriptDB) -> *PlusPlusToken {
         for (tmp in Token(db)) {
             if (isPlusPlusToken(Node {id: tmp.id})) {
                 yield PlusPlusToken {
@@ -612,7 +612,7 @@ schema MinusMinusToken extends Token {
 impl MinusMinusToken {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *MinusMinusToken {
+    pub fn __all__(db: JavascriptDB) -> *MinusMinusToken {
         for (tmp in Token(db)) {
             if (isMinusMinusToken(Node {id: tmp.id})) {
                 yield MinusMinusToken {
@@ -632,7 +632,7 @@ schema LessThanLessThanToken extends Token {
 impl LessThanLessThanToken {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *LessThanLessThanToken {
+    pub fn __all__(db: JavascriptDB) -> *LessThanLessThanToken {
         for (tmp in Token(db)) {
             if (isLessThanLessThanToken(Node {id: tmp.id})) {
                 yield LessThanLessThanToken {
@@ -652,7 +652,7 @@ schema GreaterThanGreaterThanToken extends Token {
 impl GreaterThanGreaterThanToken {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *GreaterThanGreaterThanToken {
+    pub fn __all__(db: JavascriptDB) -> *GreaterThanGreaterThanToken {
         for (tmp in Token(db)) {
             if (isGreaterThanGreaterThanToken(Node {id: tmp.id})) {
                 yield GreaterThanGreaterThanToken {
@@ -672,7 +672,7 @@ schema GreaterThanGreaterThanGreaterThanToken extends Token {
 impl GreaterThanGreaterThanGreaterThanToken {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *GreaterThanGreaterThanGreaterThanToken {
+    pub fn __all__(db: JavascriptDB) -> *GreaterThanGreaterThanGreaterThanToken {
         for (tmp in Token(db)) {
             if (isGreaterThanGreaterThanGreaterThanToken(Node {id: tmp.id})) {
                 yield GreaterThanGreaterThanGreaterThanToken {
@@ -692,7 +692,7 @@ schema AmpersandToken extends Token {
 impl AmpersandToken {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *AmpersandToken {
+    pub fn __all__(db: JavascriptDB) -> *AmpersandToken {
         for (tmp in Token(db)) {
             if (isAmpersandToken(Node {id: tmp.id})) {
                 yield AmpersandToken {
@@ -712,7 +712,7 @@ schema BarToken extends Token {
 impl BarToken {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *BarToken {
+    pub fn __all__(db: JavascriptDB) -> *BarToken {
         for (tmp in Token(db)) {
             if (isBarToken(Node {id: tmp.id})) {
                 yield BarToken {
@@ -732,7 +732,7 @@ schema CaretToken extends Token {
 impl CaretToken {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *CaretToken {
+    pub fn __all__(db: JavascriptDB) -> *CaretToken {
         for (tmp in Token(db)) {
             if (isCaretToken(Node {id: tmp.id})) {
                 yield CaretToken {
@@ -752,7 +752,7 @@ schema ExclamationToken extends Token {
 impl ExclamationToken {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *ExclamationToken {
+    pub fn __all__(db: JavascriptDB) -> *ExclamationToken {
         for (tmp in Token(db)) {
             if (isExclamationToken(Node {id: tmp.id})) {
                 yield ExclamationToken {
@@ -772,7 +772,7 @@ schema TildeToken extends Token {
 impl TildeToken {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *TildeToken {
+    pub fn __all__(db: JavascriptDB) -> *TildeToken {
         for (tmp in Token(db)) {
             if (isTildeToken(Node {id: tmp.id})) {
                 yield TildeToken {
@@ -792,7 +792,7 @@ schema AmpersandAmpersandToken extends Token {
 impl AmpersandAmpersandToken {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *AmpersandAmpersandToken {
+    pub fn __all__(db: JavascriptDB) -> *AmpersandAmpersandToken {
         for (tmp in Token(db)) {
             if (isAmpersandAmpersandToken(Node {id: tmp.id})) {
                 yield AmpersandAmpersandToken {
@@ -812,7 +812,7 @@ schema BarBarToken extends Token {
 impl BarBarToken {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *BarBarToken {
+    pub fn __all__(db: JavascriptDB) -> *BarBarToken {
         for (tmp in Token(db)) {
             if (isBarBarToken(Node {id: tmp.id})) {
                 yield BarBarToken {
@@ -832,7 +832,7 @@ schema QuestionToken extends Token {
 impl QuestionToken {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *QuestionToken {
+    pub fn __all__(db: JavascriptDB) -> *QuestionToken {
         for (tmp in Token(db)) {
             if (isQuestionToken(Node {id: tmp.id})) {
                 yield QuestionToken {
@@ -852,7 +852,7 @@ schema QuestionQuestionToken extends Token {
 impl QuestionQuestionToken {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *QuestionQuestionToken {
+    pub fn __all__(db: JavascriptDB) -> *QuestionQuestionToken {
         for (tmp in Token(db)) {
             if (isQuestionQuestionToken(Node {id: tmp.id})) {
                 yield QuestionQuestionToken {
@@ -872,7 +872,7 @@ schema EqualsToken extends Token {
 impl EqualsToken {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *EqualsToken {
+    pub fn __all__(db: JavascriptDB) -> *EqualsToken {
         for (tmp in Token(db)) {
             if (isEqualsToken(Node {id: tmp.id})) {
                 yield EqualsToken {
@@ -892,7 +892,7 @@ schema PlusEqualsToken extends Token {
 impl PlusEqualsToken {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *PlusEqualsToken {
+    pub fn __all__(db: JavascriptDB) -> *PlusEqualsToken {
         for (tmp in Token(db)) {
             if (isPlusEqualsToken(Node {id: tmp.id})) {
                 yield PlusEqualsToken {
@@ -912,7 +912,7 @@ schema MinusEqualsToken extends Token {
 impl MinusEqualsToken {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *MinusEqualsToken {
+    pub fn __all__(db: JavascriptDB) -> *MinusEqualsToken {
         for (tmp in Token(db)) {
             if (isMinusEqualsToken(Node {id: tmp.id})) {
                 yield MinusEqualsToken {
@@ -932,7 +932,7 @@ schema AsteriskEqualsToken extends Token {
 impl AsteriskEqualsToken {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *AsteriskEqualsToken {
+    pub fn __all__(db: JavascriptDB) -> *AsteriskEqualsToken {
         for (tmp in Token(db)) {
             if (isAsteriskEqualsToken(Node {id: tmp.id})) {
                 yield AsteriskEqualsToken {
@@ -952,7 +952,7 @@ schema AsteriskAsteriskEqualsToken extends Token {
 impl AsteriskAsteriskEqualsToken {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *AsteriskAsteriskEqualsToken {
+    pub fn __all__(db: JavascriptDB) -> *AsteriskAsteriskEqualsToken {
         for (tmp in Token(db)) {
             if (isAsteriskAsteriskEqualsToken(Node {id: tmp.id})) {
                 yield AsteriskAsteriskEqualsToken {
@@ -972,7 +972,7 @@ schema SlashEqualsToken extends Token {
 impl SlashEqualsToken {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *SlashEqualsToken {
+    pub fn __all__(db: JavascriptDB) -> *SlashEqualsToken {
         for (tmp in Token(db)) {
             if (isSlashEqualsToken(Node {id: tmp.id})) {
                 yield SlashEqualsToken {
@@ -992,7 +992,7 @@ schema PercentEqualsToken extends Token {
 impl PercentEqualsToken {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *PercentEqualsToken {
+    pub fn __all__(db: JavascriptDB) -> *PercentEqualsToken {
         for (tmp in Token(db)) {
             if (isPercentEqualsToken(Node {id: tmp.id})) {
                 yield PercentEqualsToken {
@@ -1012,7 +1012,7 @@ schema LessThanLessThanEqualsToken extends Token {
 impl LessThanLessThanEqualsToken {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *LessThanLessThanEqualsToken {
+    pub fn __all__(db: JavascriptDB) -> *LessThanLessThanEqualsToken {
         for (tmp in Token(db)) {
             if (isLessThanLessThanEqualsToken(Node {id: tmp.id})) {
                 yield LessThanLessThanEqualsToken {
@@ -1032,7 +1032,7 @@ schema GreaterThanGreaterThanEqualsToken extends Token {
 impl GreaterThanGreaterThanEqualsToken {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *GreaterThanGreaterThanEqualsToken {
+    pub fn __all__(db: JavascriptDB) -> *GreaterThanGreaterThanEqualsToken {
         for (tmp in Token(db)) {
             if (isGreaterThanGreaterThanEqualsToken(Node {id: tmp.id})) {
                 yield GreaterThanGreaterThanEqualsToken {
@@ -1052,7 +1052,7 @@ schema GreaterThanGreaterThanGreaterThanEqualsToken extends Token {
 impl GreaterThanGreaterThanGreaterThanEqualsToken {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *GreaterThanGreaterThanGreaterThanEqualsToken {
+    pub fn __all__(db: JavascriptDB) -> *GreaterThanGreaterThanGreaterThanEqualsToken {
         for (tmp in Token(db)) {
             if (isGreaterThanGreaterThanGreaterThanEqualsToken(Node {id: tmp.id})) {
                 yield GreaterThanGreaterThanGreaterThanEqualsToken {
@@ -1072,7 +1072,7 @@ schema AmpersandEqualsToken extends Token {
 impl AmpersandEqualsToken {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *AmpersandEqualsToken {
+    pub fn __all__(db: JavascriptDB) -> *AmpersandEqualsToken {
         for (tmp in Token(db)) {
             if (isAmpersandEqualsToken(Node {id: tmp.id})) {
                 yield AmpersandEqualsToken {
@@ -1092,7 +1092,7 @@ schema BarEqualsToken extends Token {
 impl BarEqualsToken {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *BarEqualsToken {
+    pub fn __all__(db: JavascriptDB) -> *BarEqualsToken {
         for (tmp in Token(db)) {
             if (isBarEqualsToken(Node {id: tmp.id})) {
                 yield BarEqualsToken {
@@ -1112,7 +1112,7 @@ schema BarBarEqualsToken extends Token {
 impl BarBarEqualsToken {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *BarBarEqualsToken {
+    pub fn __all__(db: JavascriptDB) -> *BarBarEqualsToken {
         for (tmp in Token(db)) {
             if (isBarBarEqualsToken(Node {id: tmp.id})) {
                 yield BarBarEqualsToken {
@@ -1132,7 +1132,7 @@ schema AmpersandAmpersandEqualsToken extends Token {
 impl AmpersandAmpersandEqualsToken {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *AmpersandAmpersandEqualsToken {
+    pub fn __all__(db: JavascriptDB) -> *AmpersandAmpersandEqualsToken {
         for (tmp in Token(db)) {
             if (isAmpersandAmpersandEqualsToken(Node {id: tmp.id})) {
                 yield AmpersandAmpersandEqualsToken {
@@ -1152,7 +1152,7 @@ schema QuestionQuestionEqualsToken extends Token {
 impl QuestionQuestionEqualsToken {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *QuestionQuestionEqualsToken {
+    pub fn __all__(db: JavascriptDB) -> *QuestionQuestionEqualsToken {
         for (tmp in Token(db)) {
             if (isQuestionQuestionEqualsToken(Node {id: tmp.id})) {
                 yield QuestionQuestionEqualsToken {
@@ -1172,7 +1172,7 @@ schema CaretEqualsToken extends Token {
 impl CaretEqualsToken {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *CaretEqualsToken {
+    pub fn __all__(db: JavascriptDB) -> *CaretEqualsToken {
         for (tmp in Token(db)) {
             if (isCaretEqualsToken(Node {id: tmp.id})) {
                 yield CaretEqualsToken {
@@ -1192,7 +1192,7 @@ schema IdentifierToken extends Token {
 impl IdentifierToken {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *IdentifierToken {
+    pub fn __all__(db: JavascriptDB) -> *IdentifierToken {
         for (tmp in Token(db)) {
             if (isIdentifier(Node {id: tmp.id})) {
                 yield IdentifierToken {
@@ -1212,7 +1212,7 @@ schema PrivateIdentifierToken extends Token {
 impl PrivateIdentifierToken {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *PrivateIdentifierToken {
+    pub fn __all__(db: JavascriptDB) -> *PrivateIdentifierToken {
         for (tmp in Token(db)) {
             if (isPrivateIdentifier(Node {id: tmp.id})) {
                 yield PrivateIdentifierToken {
@@ -1232,7 +1232,7 @@ schema ExtendsKeyword extends Token {
 impl ExtendsKeyword {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *ExtendsKeyword {
+    pub fn __all__(db: JavascriptDB) -> *ExtendsKeyword {
         for (tmp in Token(db)) {
             if (isExtendsKeyword(Node {id: tmp.id})) {
                 yield ExtendsKeyword {
@@ -1252,7 +1252,7 @@ schema FalseKeyword extends Token {
 impl FalseKeyword {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *FalseKeyword {
+    pub fn __all__(db: JavascriptDB) -> *FalseKeyword {
         for (tmp in Token(db)) {
             if (isFalseKeyword(Node {id: tmp.id})) {
                 yield FalseKeyword {
@@ -1272,7 +1272,7 @@ schema ImportKeyword extends Token {
 impl ImportKeyword {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *ImportKeyword {
+    pub fn __all__(db: JavascriptDB) -> *ImportKeyword {
         for (tmp in Token(db)) {
             if (isImportKeyword(Node {id: tmp.id})) {
                 yield ImportKeyword {
@@ -1292,7 +1292,7 @@ schema InKeyword extends Token {
 impl InKeyword {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *InKeyword {
+    pub fn __all__(db: JavascriptDB) -> *InKeyword {
         for (tmp in Token(db)) {
             if (isInKeyword(Node {id: tmp.id})) {
                 yield InKeyword {
@@ -1312,7 +1312,7 @@ schema InstanceOfKeyword extends Token {
 impl InstanceOfKeyword {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *InstanceOfKeyword {
+    pub fn __all__(db: JavascriptDB) -> *InstanceOfKeyword {
         for (tmp in Token(db)) {
             if (isInstanceOfKeyword(Node {id: tmp.id})) {
                 yield InstanceOfKeyword {
@@ -1332,7 +1332,7 @@ schema NullKeyword extends Token {
 impl NullKeyword {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *NullKeyword {
+    pub fn __all__(db: JavascriptDB) -> *NullKeyword {
         for (tmp in Token(db)) {
             if (isNullKeyword(Node {id: tmp.id})) {
                 yield NullKeyword {
@@ -1352,7 +1352,7 @@ schema SuperKeyword extends Token {
 impl SuperKeyword {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *SuperKeyword {
+    pub fn __all__(db: JavascriptDB) -> *SuperKeyword {
         for (tmp in Token(db)) {
             if (isSuperKeyword(Node {id: tmp.id})) {
                 yield SuperKeyword {
@@ -1372,7 +1372,7 @@ schema ThisKeyword extends Token {
 impl ThisKeyword {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *ThisKeyword {
+    pub fn __all__(db: JavascriptDB) -> *ThisKeyword {
         for (tmp in Token(db)) {
             if (isThisKeyword(Node {id: tmp.id})) {
                 yield ThisKeyword {
@@ -1392,7 +1392,7 @@ schema TrueKeyword extends Token {
 impl TrueKeyword {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *TrueKeyword {
+    pub fn __all__(db: JavascriptDB) -> *TrueKeyword {
         for (tmp in Token(db)) {
             if (isTrueKeyword(Node {id: tmp.id})) {
                 yield TrueKeyword {
@@ -1412,7 +1412,7 @@ schema VoidKeyword extends Token {
 impl VoidKeyword {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *VoidKeyword {
+    pub fn __all__(db: JavascriptDB) -> *VoidKeyword {
         for (tmp in Token(db)) {
             if (isVoidKeyword(Node {id: tmp.id})) {
                 yield VoidKeyword {
@@ -1432,7 +1432,7 @@ schema ImplementsKeyword extends Token {
 impl ImplementsKeyword {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *ImplementsKeyword {
+    pub fn __all__(db: JavascriptDB) -> *ImplementsKeyword {
         for (tmp in Token(db)) {
             if (isImplementsKeyword(Node {id: tmp.id})) {
                 yield ImplementsKeyword {
@@ -1452,7 +1452,7 @@ schema AnyKeyword extends Token {
 impl AnyKeyword {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *AnyKeyword {
+    pub fn __all__(db: JavascriptDB) -> *AnyKeyword {
         for (tmp in Token(db)) {
             if (isAnyKeyword(Node {id: tmp.id})) {
                 yield AnyKeyword {
@@ -1472,7 +1472,7 @@ schema AwaitKeyword extends Token {
 impl AwaitKeyword {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *AwaitKeyword {
+    pub fn __all__(db: JavascriptDB) -> *AwaitKeyword {
         for (tmp in Token(db)) {
             if (isAwaitKeyword(Node {id: tmp.id})) {
                 yield AwaitKeyword {
@@ -1492,7 +1492,7 @@ schema BooleanKeyword extends Token {
 impl BooleanKeyword {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *BooleanKeyword {
+    pub fn __all__(db: JavascriptDB) -> *BooleanKeyword {
         for (tmp in Token(db)) {
             if (isBooleanKeyword(Node {id: tmp.id})) {
                 yield BooleanKeyword {
@@ -1512,7 +1512,7 @@ schema IntrinsicKeyword extends Token {
 impl IntrinsicKeyword {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *IntrinsicKeyword {
+    pub fn __all__(db: JavascriptDB) -> *IntrinsicKeyword {
         for (tmp in Token(db)) {
             if (isIntrinsicKeyword(Node {id: tmp.id})) {
                 yield IntrinsicKeyword {
@@ -1532,7 +1532,7 @@ schema NeverKeyword extends Token {
 impl NeverKeyword {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *NeverKeyword {
+    pub fn __all__(db: JavascriptDB) -> *NeverKeyword {
         for (tmp in Token(db)) {
             if (isNeverKeyword(Node {id: tmp.id})) {
                 yield NeverKeyword {
@@ -1552,7 +1552,7 @@ schema NumberKeyword extends Token {
 impl NumberKeyword {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *NumberKeyword {
+    pub fn __all__(db: JavascriptDB) -> *NumberKeyword {
         for (tmp in Token(db)) {
             if (isNumberKeyword(Node {id: tmp.id})) {
                 yield NumberKeyword {
@@ -1572,7 +1572,7 @@ schema ObjectKeyword extends Token {
 impl ObjectKeyword {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *ObjectKeyword {
+    pub fn __all__(db: JavascriptDB) -> *ObjectKeyword {
         for (tmp in Token(db)) {
             if (isObjectKeyword(Node {id: tmp.id})) {
                 yield ObjectKeyword {
@@ -1592,7 +1592,7 @@ schema StringKeyword extends Token {
 impl StringKeyword {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *StringKeyword {
+    pub fn __all__(db: JavascriptDB) -> *StringKeyword {
         for (tmp in Token(db)) {
             if (isStringKeyword(Node {id: tmp.id})) {
                 yield StringKeyword {
@@ -1612,7 +1612,7 @@ schema SymbolKeyword extends Token {
 impl SymbolKeyword {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *SymbolKeyword {
+    pub fn __all__(db: JavascriptDB) -> *SymbolKeyword {
         for (tmp in Token(db)) {
             if (isSymbolKeyword(Node {id: tmp.id})) {
                 yield SymbolKeyword {
@@ -1632,7 +1632,7 @@ schema UndefinedKeyword extends Token {
 impl UndefinedKeyword {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *UndefinedKeyword {
+    pub fn __all__(db: JavascriptDB) -> *UndefinedKeyword {
         for (tmp in Token(db)) {
             if (isUndefinedKeyword(Node {id: tmp.id})) {
                 yield UndefinedKeyword {
@@ -1652,7 +1652,7 @@ schema UnknownKeyword extends Token {
 impl UnknownKeyword {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *UnknownKeyword {
+    pub fn __all__(db: JavascriptDB) -> *UnknownKeyword {
         for (tmp in Token(db)) {
             if (isUnknownKeyword(Node {id: tmp.id})) {
                 yield UnknownKeyword {
@@ -1672,7 +1672,7 @@ schema BigIntKeyword extends Token {
 impl BigIntKeyword {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *BigIntKeyword {
+    pub fn __all__(db: JavascriptDB) -> *BigIntKeyword {
         for (tmp in Token(db)) {
             if (isBigIntKeyword(Node {id: tmp.id})) {
                 yield BigIntKeyword {
@@ -1692,7 +1692,7 @@ schema PrefixUnaryOperator extends Token {
 impl PrefixUnaryOperator {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *PrefixUnaryOperator {
+    pub fn __all__(db: JavascriptDB) -> *PrefixUnaryOperator {
         for (tmp in Token(db)) {
             if (isPrefixUnaryOperator(Node {id: tmp.id})) {
                 yield PrefixUnaryOperator {
@@ -1712,7 +1712,7 @@ schema PostfixUnaryOperator extends Token {
 impl PostfixUnaryOperator {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *PostfixUnaryOperator {
+    pub fn __all__(db: JavascriptDB) -> *PostfixUnaryOperator {
         for (tmp in Token(db)) {
             if (isPostfixUnaryOperator(Node {id: tmp.id})) {
                 yield PostfixUnaryOperator {
@@ -1732,7 +1732,7 @@ schema UpdateOperator extends Token {
 impl UpdateOperator {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *UpdateOperator {
+    pub fn __all__(db: JavascriptDB) -> *UpdateOperator {
         for (tmp in Token(db)) {
             if (isUpdateOperator(Node {id: tmp.id})) {
                 yield UpdateOperator {
@@ -1752,7 +1752,7 @@ schema ExponentiationOperator extends Token {
 impl ExponentiationOperator {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *ExponentiationOperator {
+    pub fn __all__(db: JavascriptDB) -> *ExponentiationOperator {
         for (tmp in Token(db)) {
             if (isExponentiationOperator(Node {id: tmp.id})) {
                 yield ExponentiationOperator {
@@ -1772,7 +1772,7 @@ schema MultiplicativeOperator extends Token {
 impl MultiplicativeOperator {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *MultiplicativeOperator {
+    pub fn __all__(db: JavascriptDB) -> *MultiplicativeOperator {
         for (tmp in Token(db)) {
             if (isMultiplicativeOperator(Node {id: tmp.id})) {
                 yield MultiplicativeOperator {
@@ -1792,7 +1792,7 @@ schema AdditiveOperator extends Token {
 impl AdditiveOperator {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *AdditiveOperator {
+    pub fn __all__(db: JavascriptDB) -> *AdditiveOperator {
         for (tmp in Token(db)) {
             if (isAdditiveOperator(Node {id: tmp.id})) {
                 yield AdditiveOperator {
@@ -1812,7 +1812,7 @@ schema ShiftOperator extends Token {
 impl ShiftOperator {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *ShiftOperator {
+    pub fn __all__(db: JavascriptDB) -> *ShiftOperator {
         for (tmp in Token(db)) {
             if (isShiftOperator(Node {id: tmp.id})) {
                 yield ShiftOperator {
@@ -1832,7 +1832,7 @@ schema RelationalOperator extends Token {
 impl RelationalOperator {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *RelationalOperator {
+    pub fn __all__(db: JavascriptDB) -> *RelationalOperator {
         for (tmp in Token(db)) {
             if (isRelationalOperator(Node {id: tmp.id})) {
                 yield RelationalOperator {
@@ -1852,7 +1852,7 @@ schema EqualityOperator extends Token {
 impl EqualityOperator {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *EqualityOperator {
+    pub fn __all__(db: JavascriptDB) -> *EqualityOperator {
         for (tmp in Token(db)) {
             if (isEqualityOperator(Node {id: tmp.id})) {
                 yield EqualityOperator {
@@ -1872,7 +1872,7 @@ schema BinaryBitwiseOperator extends Token {
 impl BinaryBitwiseOperator {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *BinaryBitwiseOperator {
+    pub fn __all__(db: JavascriptDB) -> *BinaryBitwiseOperator {
         for (tmp in Token(db)) {
             if (isBinaryBitwiseOperator(Node {id: tmp.id})) {
                 yield BinaryBitwiseOperator {
@@ -1892,7 +1892,7 @@ schema BinaryLogicalOperator extends Token {
 impl BinaryLogicalOperator {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *BinaryLogicalOperator {
+    pub fn __all__(db: JavascriptDB) -> *BinaryLogicalOperator {
         for (tmp in Token(db)) {
             if (isBinaryLogicalOperator(Node {id: tmp.id})) {
                 yield BinaryLogicalOperator {
@@ -1914,7 +1914,7 @@ schema CompoundAssignmentOperator extends Token {
 impl CompoundAssignmentOperator {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *CompoundAssignmentOperator {
+    pub fn __all__(db: JavascriptDB) -> *CompoundAssignmentOperator {
         for (tmp in Token(db)) {
             if (isCompoundAssignmentOperator(Node {id: tmp.id})) {
                 yield CompoundAssignmentOperator {
@@ -1934,7 +1934,7 @@ schema AssignmentOperator extends Token {
 impl AssignmentOperator {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *AssignmentOperator {
+    pub fn __all__(db: JavascriptDB) -> *AssignmentOperator {
         for (tmp in Token(db)) {
             if (isAssignmentOperator(Node {id: tmp.id})) {
                 yield AssignmentOperator {
@@ -1954,7 +1954,7 @@ schema BinaryOperator extends Token {
 impl BinaryOperator {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *BinaryOperator {
+    pub fn __all__(db: JavascriptDB) -> *BinaryOperator {
         for (tmp in Token(db)) {
             if (isBinaryOperator(Node {id: tmp.id})) {
                 yield BinaryOperator {
@@ -1974,7 +1974,7 @@ schema KeywordToken extends Token {
 impl KeywordToken {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *KeywordToken {
+    pub fn __all__(db: JavascriptDB) -> *KeywordToken {
         for (tmp in Token(db)) {
             if (isKeywordToken(Node {id: tmp.id})) {
                 yield KeywordToken {

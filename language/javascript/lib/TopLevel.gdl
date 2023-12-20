@@ -9,7 +9,7 @@ schema TopLevel extends TopLevelDO {
 impl TopLevel {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *TopLevel {
+    pub fn __all__(db: JavascriptDB) -> *TopLevel {
         for (tmp in TopLevelDO(db)) {
             yield TopLevel {
                 oid : tmp.oid,

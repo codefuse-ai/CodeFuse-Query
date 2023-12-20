@@ -13,7 +13,7 @@ schema Node {
 impl Node {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *Node {
+    pub fn __all__(db: JavascriptDB) -> *Node {
         for (nodeDO in NodeDO(db)) {
             yield Node {id : nodeDO.oid}
         }

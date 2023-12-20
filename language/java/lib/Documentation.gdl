@@ -7,7 +7,7 @@ schema Comment extends CommentDO {
 impl Comment {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *Comment {
+    pub fn __all__(db: JavaDB) -> *Comment {
         for (tmp in CommentDO(db)) {
             yield Comment {
                 element_hash_id : tmp.element_hash_id,
@@ -61,7 +61,7 @@ schema JavadocComment extends JavadocCommentDO {
 impl JavadocComment {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *JavadocComment {
+    pub fn __all__(db: JavaDB) -> *JavadocComment {
         for (tmp in JavadocCommentDO(db)) {
             yield JavadocComment {
                 element_hash_id : tmp.element_hash_id,
@@ -126,7 +126,7 @@ schema JavadocTag extends JavadocTagDO {
 impl JavadocTag {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *JavadocTag {
+    pub fn __all__(db: JavaDB) -> *JavadocTag {
         for (tmp in JavadocTagDO(db)) {
             yield JavadocTag {
                 element_hash_id : tmp.element_hash_id,
@@ -192,7 +192,7 @@ schema JavadocTagValue extends JavadocTagValueDO {
 impl JavadocTagValue {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *JavadocTagValue {
+    pub fn __all__(db: JavaDB) -> *JavadocTagValue {
         for (tmp in JavadocTagValueDO(db)) {
             yield JavadocTagValue {
                 element_hash_id : tmp.element_hash_id,
@@ -245,7 +245,7 @@ schema JavadocDataToken extends JavadocDataTokenDO {
 impl JavadocDataToken {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *JavadocDataToken {
+    pub fn __all__(db: JavaDB) -> *JavadocDataToken {
         for (tmp in JavadocDataTokenDO(db)) {
             yield JavadocDataToken {
                 element_hash_id : tmp.element_hash_id,

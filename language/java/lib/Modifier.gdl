@@ -7,7 +7,7 @@ schema Modifier extends ModifierDO {
 impl Modifier {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *Modifier {
+    pub fn __all__(db: JavaDB) -> *Modifier {
         for (tmp in ModifierDO(db)) {
             yield Modifier {
                 element_hash_id : tmp.element_hash_id,
@@ -71,7 +71,7 @@ schema ModifierList extends ModifierListDO {
 impl ModifierList {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *ModifierList {
+    pub fn __all__(db: JavaDB) -> *ModifierList {
         for (tmp in ModifierListDO(db)) {
             yield ModifierList {
                 element_hash_id : tmp.element_hash_id,

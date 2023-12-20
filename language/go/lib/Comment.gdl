@@ -4,7 +4,7 @@ schema Comment extends Node {
 impl Comment {
     @data_constraint
     @inline
-    fn __all__(db: GoDB) -> *Comment {
+    pub fn __all__(db: GoDB) -> *Comment {
         for (tmp in Node(db)) {
             for (c in CommentDO(db)) {
                 if (tmp.key_eq(c)) {
@@ -22,7 +22,7 @@ schema CommentGroup extends Node {
 impl CommentGroup {
     @data_constraint
     @inline
-    fn __all__(db: GoDB) -> *CommentGroup {
+    pub fn __all__(db: GoDB) -> *CommentGroup {
         for (tmp in Node(db)) {
             for (c in CommentGroupDO(db)) {
                 if (tmp.key_eq(c)) {
@@ -40,7 +40,7 @@ schema DocComment extends Node {
 impl DocComment {
     @data_constraint
     @inline
-    fn __all__(db: GoDB) -> *DocComment {
+    pub fn __all__(db: GoDB) -> *DocComment {
         for (tmp in Node(db)) {
             for (d in DocCommentDO(db)) {
                 if (tmp.key_eq(d)) {

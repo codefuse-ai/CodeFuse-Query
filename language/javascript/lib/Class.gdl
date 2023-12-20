@@ -12,7 +12,7 @@ schema ClassLikeDeclaration extends Node {
 impl ClassLikeDeclaration {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *ClassLikeDeclaration {
+    pub fn __all__(db: JavascriptDB) -> *ClassLikeDeclaration {
         for (tmp in Node(db)) {
             if (isClassLikeDeclaration(tmp)) {
                 yield ClassLikeDeclaration {
@@ -32,7 +32,7 @@ schema ClassDeclaration extends ClassLikeDeclaration {
 impl ClassDeclaration {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *ClassDeclaration {
+    pub fn __all__(db: JavascriptDB) -> *ClassDeclaration {
         for (tmp in ClassLikeDeclaration(db)) {
             if (isClassDeclaration(Node {id: tmp.id})) {
                 yield ClassDeclaration {
@@ -52,7 +52,7 @@ schema ClassExpressionDeclaration extends ClassLikeDeclaration {
 impl ClassExpressionDeclaration {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *ClassExpressionDeclaration {
+    pub fn __all__(db: JavascriptDB) -> *ClassExpressionDeclaration {
         for (tmp in ClassLikeDeclaration(db)) {
             if (isClassExpression(Node {id: tmp.id})) {
                 yield ClassExpressionDeclaration {
@@ -72,7 +72,7 @@ schema ClassElement extends Node {
 impl ClassElement {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *ClassElement {
+    pub fn __all__(db: JavascriptDB) -> *ClassElement {
         for (tmp in Node(db)) {
             if (isClassElement(tmp)) {
                 yield ClassElement {
@@ -92,7 +92,7 @@ schema PropertyDeclaration extends ClassElement {
 impl PropertyDeclaration {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *PropertyDeclaration {
+    pub fn __all__(db: JavascriptDB) -> *PropertyDeclaration {
         for (tmp in ClassElement(db)) {
             if (tmp.getKind() = 166) {
                 yield PropertyDeclaration {
@@ -266,7 +266,7 @@ schema MethodElement extends ClassElement {
 impl MethodElement {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *MethodElement {
+    pub fn __all__(db: JavascriptDB) -> *MethodElement {
         for (tmp in ClassElement(db)) {
             if (tmp.getKind() = 168) {
                 yield MethodElement {
@@ -286,7 +286,7 @@ schema ClassStaticBlockElement extends ClassElement {
 impl ClassStaticBlockElement {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *ClassStaticBlockElement {
+    pub fn __all__(db: JavascriptDB) -> *ClassStaticBlockElement {
         for (tmp in ClassElement(db)) {
             // ClassStaticBlockDeclaration
             if (tmp.getKind() = 169) {
@@ -307,7 +307,7 @@ schema ConstructorElement extends ClassElement {
 impl ConstructorElement {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *ConstructorElement {
+    pub fn __all__(db: JavascriptDB) -> *ConstructorElement {
         for (tmp in ClassElement(db)) {
             if (tmp.getKind() = 170) {
                 yield ConstructorElement {
@@ -327,7 +327,7 @@ schema AccessorElement extends ClassElement {
 impl AccessorElement {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *AccessorElement {
+    pub fn __all__(db: JavascriptDB) -> *AccessorElement {
         for (tmp in ClassElement(db)) {
             if (isAccessor(Node {id: tmp.id})) {
                 yield AccessorElement {
@@ -347,7 +347,7 @@ schema GetAccessorElement extends AccessorElement {
 impl GetAccessorElement {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *GetAccessorElement {
+    pub fn __all__(db: JavascriptDB) -> *GetAccessorElement {
         for (tmp in AccessorElement(db)) {
             if (tmp.getKind() = 171) {
                 yield GetAccessorElement {
@@ -367,7 +367,7 @@ schema SetAccessorElement extends AccessorElement {
 impl SetAccessorElement {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *SetAccessorElement {
+    pub fn __all__(db: JavascriptDB) -> *SetAccessorElement {
         for (tmp in AccessorElement(db)) {
             if (tmp.getKind() = 172) {
                 yield SetAccessorElement {
@@ -387,7 +387,7 @@ schema IndexSignature extends ClassElement {
 impl IndexSignature {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *IndexSignature {
+    pub fn __all__(db: JavascriptDB) -> *IndexSignature {
         for (tmp in ClassElement(db)) {
             if (tmp.getKind() = 175) {
                 yield IndexSignature {
@@ -407,7 +407,7 @@ schema SemicolonClassElement extends ClassElement {
 impl SemicolonClassElement {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *SemicolonClassElement {
+    pub fn __all__(db: JavascriptDB) -> *SemicolonClassElement {
         for (tmp in ClassElement(db)) {
             if (tmp.getKind() = 233) {
                 yield SemicolonClassElement {

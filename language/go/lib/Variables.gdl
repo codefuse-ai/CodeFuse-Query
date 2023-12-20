@@ -4,7 +4,7 @@ schema Literal extends LiteralDO {
 impl Literal {
     @data_constraint
     @inline
-    fn __all__(db: GoDB) -> *Literal {
+    pub fn __all__(db: GoDB) -> *Literal {
         for (tmp in LiteralDO(db)) {
             yield Literal {
                 oid : tmp.oid,
@@ -28,7 +28,7 @@ schema Variables extends Literal {
 impl Variables {
     @data_constraint
     @inline
-    fn __all__(db: GoDB) -> *Variables {
+    pub fn __all__(db: GoDB) -> *Variables {
         for (tmp in Literal(db)) {
             yield Variables {
                 oid : tmp.oid,
@@ -72,7 +72,7 @@ schema IOTALiteral extends Literal {
 impl IOTALiteral {
     @data_constraint
     @inline
-    fn __all__(db: GoDB) -> *IOTALiteral {
+    pub fn __all__(db: GoDB) -> *IOTALiteral {
         for (tmp in Literal(db)) {
             if (tmp.getValue() = "iota") {
                 yield IOTALiteral {
@@ -91,7 +91,7 @@ schema TypeName extends TypeNameDO {
 impl TypeName {
     @data_constraint
     @inline
-    fn __all__(db: GoDB) -> *TypeName {
+    pub fn __all__(db: GoDB) -> *TypeName {
         for (tmp in TypeNameDO(db)) {
             yield TypeName {
                 oid : tmp.oid,

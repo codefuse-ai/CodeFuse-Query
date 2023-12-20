@@ -12,7 +12,7 @@ schema Expression extends Node {
 impl Expression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *Expression {
+    pub fn __all__(db: JavascriptDB) -> *Expression {
         for (tmp in Node(db)) {
             if (isExpression(tmp)) {
                 yield Expression {
@@ -32,7 +32,7 @@ schema ArrowFunctionExpression extends Expression {
 impl ArrowFunctionExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *ArrowFunctionExpression {
+    pub fn __all__(db: JavascriptDB) -> *ArrowFunctionExpression {
         for (tmp in Expression(db)) {
             if (isArrowFunction(Node {id: tmp.id})) {
                 yield ArrowFunctionExpression {
@@ -52,7 +52,7 @@ schema BinaryExpression extends Expression {
 impl BinaryExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *BinaryExpression {
+    pub fn __all__(db: JavascriptDB) -> *BinaryExpression {
         for (tmp in Expression(db)) {
             if (isBinaryExpression(Node {id: tmp.id})) {
                 yield BinaryExpression {
@@ -137,7 +137,7 @@ schema ExponentiationExpression extends BinaryExpression {
 impl ExponentiationExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *ExponentiationExpression {
+    pub fn __all__(db: JavascriptDB) -> *ExponentiationExpression {
         for (tmp in BinaryExpression(db)) {
             if (isExponentiationExpression(Node {id: tmp.id})) {
                 yield ExponentiationExpression {
@@ -157,7 +157,7 @@ schema MultiplicativeExpression extends BinaryExpression {
 impl MultiplicativeExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *MultiplicativeExpression {
+    pub fn __all__(db: JavascriptDB) -> *MultiplicativeExpression {
         for (tmp in BinaryExpression(db)) {
             if (isMultiplicativeExpression(Node {id: tmp.id})) {
                 yield MultiplicativeExpression {
@@ -177,7 +177,7 @@ schema MultiplicationExpression extends MultiplicativeExpression {
 impl MultiplicationExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *MultiplicationExpression {
+    pub fn __all__(db: JavascriptDB) -> *MultiplicationExpression {
         for (tmp in MultiplicativeExpression(db)) {
             if (isMultiplicationExpression(Node {id: tmp.id})) {
                 yield MultiplicationExpression {
@@ -197,7 +197,7 @@ schema DivisionExpression extends MultiplicativeExpression {
 impl DivisionExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *DivisionExpression {
+    pub fn __all__(db: JavascriptDB) -> *DivisionExpression {
         for (tmp in MultiplicativeExpression(db)) {
             if (isDivisionExpression(Node {id: tmp.id})) {
                 yield DivisionExpression {
@@ -217,7 +217,7 @@ schema RemainderExpression extends MultiplicativeExpression {
 impl RemainderExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *RemainderExpression {
+    pub fn __all__(db: JavascriptDB) -> *RemainderExpression {
         for (tmp in MultiplicativeExpression(db)) {
             if (isRemainderExpression(Node {id: tmp.id})) {
                 yield RemainderExpression {
@@ -237,7 +237,7 @@ schema AdditiveExpression extends BinaryExpression {
 impl AdditiveExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *AdditiveExpression {
+    pub fn __all__(db: JavascriptDB) -> *AdditiveExpression {
         for (tmp in BinaryExpression(db)) {
             if (isAdditiveExpression(Node {id: tmp.id})) {
                 yield AdditiveExpression {
@@ -257,7 +257,7 @@ schema AdditionExpression extends AdditiveExpression {
 impl AdditionExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *AdditionExpression {
+    pub fn __all__(db: JavascriptDB) -> *AdditionExpression {
         for (tmp in AdditiveExpression(db)) {
             if (isAdditionExpression(Node {id: tmp.id})) {
                 yield AdditionExpression {
@@ -277,7 +277,7 @@ schema SubtractionExpression extends AdditiveExpression {
 impl SubtractionExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *SubtractionExpression {
+    pub fn __all__(db: JavascriptDB) -> *SubtractionExpression {
         for (tmp in AdditiveExpression(db)) {
             if (isSubtractionExpression(Node {id: tmp.id})) {
                 yield SubtractionExpression {
@@ -297,7 +297,7 @@ schema ShiftExpression extends BinaryExpression {
 impl ShiftExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *ShiftExpression {
+    pub fn __all__(db: JavascriptDB) -> *ShiftExpression {
         for (tmp in BinaryExpression(db)) {
             if (isShiftExpression(Node {id: tmp.id})) {
                 yield ShiftExpression {
@@ -317,7 +317,7 @@ schema LeftShiftExpression extends ShiftExpression {
 impl LeftShiftExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *LeftShiftExpression {
+    pub fn __all__(db: JavascriptDB) -> *LeftShiftExpression {
         for (tmp in ShiftExpression(db)) {
             if (isLeftShiftExpression(Node {id: tmp.id})) {
                 yield LeftShiftExpression {
@@ -337,7 +337,7 @@ schema RightShiftExpression extends ShiftExpression {
 impl RightShiftExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *RightShiftExpression {
+    pub fn __all__(db: JavascriptDB) -> *RightShiftExpression {
         for (tmp in ShiftExpression(db)) {
             if (isRightShiftExpression(Node {id: tmp.id})) {
                 yield RightShiftExpression {
@@ -357,7 +357,7 @@ schema UnsignedRightShiftExpression extends ShiftExpression {
 impl UnsignedRightShiftExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *UnsignedRightShiftExpression {
+    pub fn __all__(db: JavascriptDB) -> *UnsignedRightShiftExpression {
         for (tmp in ShiftExpression(db)) {
             if (isUnsignedRightShiftExpression(Node {id: tmp.id})) {
                 yield UnsignedRightShiftExpression {
@@ -377,7 +377,7 @@ schema RelationalExpression extends BinaryExpression {
 impl RelationalExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *RelationalExpression {
+    pub fn __all__(db: JavascriptDB) -> *RelationalExpression {
         for (tmp in BinaryExpression(db)) {
             if (isRelationalExpression(Node {id: tmp.id})) {
                 yield RelationalExpression {
@@ -397,7 +397,7 @@ schema LessThanExpression extends RelationalExpression {
 impl LessThanExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *LessThanExpression {
+    pub fn __all__(db: JavascriptDB) -> *LessThanExpression {
         for (tmp in RelationalExpression(db)) {
             if (isLessThanExpression(Node {id: tmp.id})) {
                 yield LessThanExpression {
@@ -417,7 +417,7 @@ schema LessThanEqualsExpression extends RelationalExpression {
 impl LessThanEqualsExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *LessThanEqualsExpression {
+    pub fn __all__(db: JavascriptDB) -> *LessThanEqualsExpression {
         for (tmp in RelationalExpression(db)) {
             if (isLessThanEqualsExpression(Node {id: tmp.id})) {
                 yield LessThanEqualsExpression {
@@ -437,7 +437,7 @@ schema GreaterThanExpression extends RelationalExpression {
 impl GreaterThanExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *GreaterThanExpression {
+    pub fn __all__(db: JavascriptDB) -> *GreaterThanExpression {
         for (tmp in RelationalExpression(db)) {
             if (isGreaterThanExpression(Node {id: tmp.id})) {
                 yield GreaterThanExpression {
@@ -457,7 +457,7 @@ schema GreaterThanEqualsExpression extends RelationalExpression {
 impl GreaterThanEqualsExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *GreaterThanEqualsExpression {
+    pub fn __all__(db: JavascriptDB) -> *GreaterThanEqualsExpression {
         for (tmp in RelationalExpression(db)) {
             if (isGreaterThanEqualsExpression(Node {id: tmp.id})) {
                 yield GreaterThanEqualsExpression {
@@ -477,7 +477,7 @@ schema InstanceOfExpression extends RelationalExpression {
 impl InstanceOfExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *InstanceOfExpression {
+    pub fn __all__(db: JavascriptDB) -> *InstanceOfExpression {
         for (tmp in RelationalExpression(db)) {
             if (isInstanceOfExpression(Node {id: tmp.id})) {
                 yield InstanceOfExpression {
@@ -497,7 +497,7 @@ schema InExpression extends RelationalExpression {
 impl InExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *InExpression {
+    pub fn __all__(db: JavascriptDB) -> *InExpression {
         for (tmp in RelationalExpression(db)) {
             if (isInExpression(Node {id: tmp.id})) {
                 yield InExpression {
@@ -517,7 +517,7 @@ schema EqualityTestExpression extends BinaryExpression {
 impl EqualityTestExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *EqualityTestExpression {
+    pub fn __all__(db: JavascriptDB) -> *EqualityTestExpression {
         for (tmp in BinaryExpression(db)) {
             if (isEqualityTestExpression(Node {id: tmp.id})) {
                 yield EqualityTestExpression {
@@ -537,7 +537,7 @@ schema EqualityExpression extends EqualityTestExpression {
 impl EqualityExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *EqualityExpression {
+    pub fn __all__(db: JavascriptDB) -> *EqualityExpression {
         for (tmp in EqualityTestExpression(db)) {
             if (isEqualityExpression(Node {id: tmp.id})) {
                 yield EqualityExpression {
@@ -557,7 +557,7 @@ schema InequalityExpression extends EqualityTestExpression {
 impl InequalityExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *InequalityExpression {
+    pub fn __all__(db: JavascriptDB) -> *InequalityExpression {
         for (tmp in EqualityTestExpression(db)) {
             if (isInequalityExpression(Node {id: tmp.id})) {
                 yield InequalityExpression {
@@ -577,7 +577,7 @@ schema StrictEqualityExpression extends EqualityTestExpression {
 impl StrictEqualityExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *StrictEqualityExpression {
+    pub fn __all__(db: JavascriptDB) -> *StrictEqualityExpression {
         for (tmp in EqualityTestExpression(db)) {
             if (isStrictEqualityExpression(Node {id: tmp.id})) {
                 yield StrictEqualityExpression {
@@ -597,7 +597,7 @@ schema StrictInequalityExpression extends EqualityTestExpression {
 impl StrictInequalityExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *StrictInequalityExpression {
+    pub fn __all__(db: JavascriptDB) -> *StrictInequalityExpression {
         for (tmp in EqualityTestExpression(db)) {
             if (isStrictInequalityExpression(Node {id: tmp.id})) {
                 yield StrictInequalityExpression {
@@ -617,7 +617,7 @@ schema StrictEqualityTestExpression extends EqualityTestExpression {
 impl StrictEqualityTestExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *StrictEqualityTestExpression {
+    pub fn __all__(db: JavascriptDB) -> *StrictEqualityTestExpression {
         for (tmp in EqualityTestExpression(db)) {
             if (isStrictEqualityTestExpression(Node {id: tmp.id})) {
                 yield StrictEqualityTestExpression {
@@ -637,7 +637,7 @@ schema NonStrictEqualityTestExpression extends EqualityTestExpression {
 impl NonStrictEqualityTestExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *NonStrictEqualityTestExpression {
+    pub fn __all__(db: JavascriptDB) -> *NonStrictEqualityTestExpression {
         for (tmp in EqualityTestExpression(db)) {
             if (isNonStrictEqualityTestExpression(Node {id: tmp.id})) {
                 yield NonStrictEqualityTestExpression {
@@ -657,7 +657,7 @@ schema BinaryBitwiseExpression extends BinaryExpression {
 impl BinaryBitwiseExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *BinaryBitwiseExpression {
+    pub fn __all__(db: JavascriptDB) -> *BinaryBitwiseExpression {
         for (tmp in BinaryExpression(db)) {
             if (isBinaryBitwiseExpression(Node {id: tmp.id})) {
                 yield BinaryBitwiseExpression {
@@ -677,7 +677,7 @@ schema BitwiseAndExpression extends BinaryBitwiseExpression {
 impl BitwiseAndExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *BitwiseAndExpression {
+    pub fn __all__(db: JavascriptDB) -> *BitwiseAndExpression {
         for (tmp in BinaryBitwiseExpression(db)) {
             if (isBitwiseAndExpression(Node {id: tmp.id})) {
                 yield BitwiseAndExpression {
@@ -697,7 +697,7 @@ schema BitwiseOrExpression extends BinaryBitwiseExpression {
 impl BitwiseOrExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *BitwiseOrExpression {
+    pub fn __all__(db: JavascriptDB) -> *BitwiseOrExpression {
         for (tmp in BinaryBitwiseExpression(db)) {
             if (isBitwiseOrExpression(Node {id: tmp.id})) {
                 yield BitwiseOrExpression {
@@ -717,7 +717,7 @@ schema BitwiseXorExpression extends BinaryBitwiseExpression {
 impl BitwiseXorExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *BitwiseXorExpression {
+    pub fn __all__(db: JavascriptDB) -> *BitwiseXorExpression {
         for (tmp in BinaryBitwiseExpression(db)) {
             if (isBitwiseXorExpression(Node {id: tmp.id})) {
                 yield BitwiseXorExpression {
@@ -734,7 +734,7 @@ schema BinaryLogicalExpression extends BinaryExpression {
 impl BinaryLogicalExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *BinaryLogicalExpression {
+    pub fn __all__(db: JavascriptDB) -> *BinaryLogicalExpression {
         for (tmp in BinaryExpression(db)) {
             if (isBinaryLogicalExpression(Node {id: tmp.id})) {
                 yield BinaryLogicalExpression {
@@ -754,7 +754,7 @@ schema LogicalAndExpression extends BinaryLogicalExpression {
 impl LogicalAndExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *LogicalAndExpression {
+    pub fn __all__(db: JavascriptDB) -> *LogicalAndExpression {
         for (tmp in BinaryLogicalExpression(db)) {
             if (isLogicalAndExpression(Node {id: tmp.id})) {
                 yield LogicalAndExpression {
@@ -774,7 +774,7 @@ schema LogicalOrExpression extends BinaryLogicalExpression {
 impl LogicalOrExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *LogicalOrExpression {
+    pub fn __all__(db: JavascriptDB) -> *LogicalOrExpression {
         for (tmp in BinaryLogicalExpression(db)) {
             if (isLogicalOrExpression(Node {id: tmp.id})) {
                 yield LogicalOrExpression {
@@ -794,7 +794,7 @@ schema NullishCoalescingExpression extends BinaryLogicalExpression {
 impl NullishCoalescingExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *NullishCoalescingExpression {
+    pub fn __all__(db: JavascriptDB) -> *NullishCoalescingExpression {
         for (tmp in BinaryLogicalExpression(db)) {
             if (isNullishCoalescingExpression(Node {id: tmp.id})) {
                 yield NullishCoalescingExpression {
@@ -814,7 +814,7 @@ schema AssignmentExpression extends BinaryExpression {
 impl AssignmentExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *AssignmentExpression {
+    pub fn __all__(db: JavascriptDB) -> *AssignmentExpression {
         for (tmp in BinaryExpression(db)) {
             if (isAssignmentExpression(Node {id: tmp.id})) {
                 yield AssignmentExpression {
@@ -834,7 +834,7 @@ schema SimpleAssignmentExpression extends AssignmentExpression {
 impl SimpleAssignmentExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *SimpleAssignmentExpression {
+    pub fn __all__(db: JavascriptDB) -> *SimpleAssignmentExpression {
         for (tmp in AssignmentExpression(db)) {
             if (isSimpleAssignmentExpression(Node {id: tmp.id})) {
                 yield SimpleAssignmentExpression {
@@ -856,7 +856,7 @@ schema CompoundAssignmentExpression extends AssignmentExpression {
 impl CompoundAssignmentExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *CompoundAssignmentExpression {
+    pub fn __all__(db: JavascriptDB) -> *CompoundAssignmentExpression {
         for (tmp in AssignmentExpression(db)) {
             if (isCompoundAssignmentExpression(Node {id: tmp.id})) {
                 yield CompoundAssignmentExpression {
@@ -876,7 +876,7 @@ schema AdditionAssignmentExpression extends CompoundAssignmentExpression {
 impl AdditionAssignmentExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *AdditionAssignmentExpression {
+    pub fn __all__(db: JavascriptDB) -> *AdditionAssignmentExpression {
         for (tmp in CompoundAssignmentExpression(db)) {
             if (isAdditionAssignmentExpression(Node {id: tmp.id})) {
                 yield AdditionAssignmentExpression {
@@ -896,7 +896,7 @@ schema SubtractionAssignmentExpression extends CompoundAssignmentExpression {
 impl SubtractionAssignmentExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *SubtractionAssignmentExpression {
+    pub fn __all__(db: JavascriptDB) -> *SubtractionAssignmentExpression {
         for (tmp in CompoundAssignmentExpression(db)) {
             if (isSubtractionAssignmentExpression(Node {id: tmp.id})) {
                 yield SubtractionAssignmentExpression {
@@ -916,7 +916,7 @@ schema ExponentiationAssignmentExpression extends CompoundAssignmentExpression {
 impl ExponentiationAssignmentExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *ExponentiationAssignmentExpression {
+    pub fn __all__(db: JavascriptDB) -> *ExponentiationAssignmentExpression {
         for (tmp in CompoundAssignmentExpression(db)) {
             if (isExponentiationAssignmentExpression(Node {id: tmp.id})) {
                 yield ExponentiationAssignmentExpression {
@@ -936,7 +936,7 @@ schema MultiplicationAssignmentExpression extends CompoundAssignmentExpression {
 impl MultiplicationAssignmentExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *MultiplicationAssignmentExpression {
+    pub fn __all__(db: JavascriptDB) -> *MultiplicationAssignmentExpression {
         for (tmp in CompoundAssignmentExpression(db)) {
             if (isMultiplicationAssignmentExpression(Node {id: tmp.id})) {
                 yield MultiplicationAssignmentExpression {
@@ -956,7 +956,7 @@ schema DivisionAssignmentExpression extends CompoundAssignmentExpression {
 impl DivisionAssignmentExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *DivisionAssignmentExpression {
+    pub fn __all__(db: JavascriptDB) -> *DivisionAssignmentExpression {
         for (tmp in CompoundAssignmentExpression(db)) {
             if (isDivisionAssignmentExpression(Node {id: tmp.id})) {
                 yield DivisionAssignmentExpression {
@@ -976,7 +976,7 @@ schema RemainderAssignmentExpression extends CompoundAssignmentExpression {
 impl RemainderAssignmentExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *RemainderAssignmentExpression {
+    pub fn __all__(db: JavascriptDB) -> *RemainderAssignmentExpression {
         for (tmp in CompoundAssignmentExpression(db)) {
             if (isRemainderAssignmentExpression(Node {id: tmp.id})) {
                 yield RemainderAssignmentExpression {
@@ -996,7 +996,7 @@ schema BitwiseAndAssignmentExpression extends CompoundAssignmentExpression {
 impl BitwiseAndAssignmentExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *BitwiseAndAssignmentExpression {
+    pub fn __all__(db: JavascriptDB) -> *BitwiseAndAssignmentExpression {
         for (tmp in CompoundAssignmentExpression(db)) {
             if (isBitwiseAndAssignmentExpression(Node {id: tmp.id})) {
                 yield BitwiseAndAssignmentExpression {
@@ -1016,7 +1016,7 @@ schema BitwiseOrAssignmentExpression extends CompoundAssignmentExpression {
 impl BitwiseOrAssignmentExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *BitwiseOrAssignmentExpression {
+    pub fn __all__(db: JavascriptDB) -> *BitwiseOrAssignmentExpression {
         for (tmp in CompoundAssignmentExpression(db)) {
             if (isBitwiseOrAssignmentExpression(Node {id: tmp.id})) {
                 yield BitwiseOrAssignmentExpression {
@@ -1036,7 +1036,7 @@ schema BitwiseXorAssignmentExpression extends CompoundAssignmentExpression {
 impl BitwiseXorAssignmentExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *BitwiseXorAssignmentExpression {
+    pub fn __all__(db: JavascriptDB) -> *BitwiseXorAssignmentExpression {
         for (tmp in CompoundAssignmentExpression(db)) {
             if (isBitwiseXorAssignmentExpression(Node {id: tmp.id})) {
                 yield BitwiseXorAssignmentExpression {
@@ -1056,7 +1056,7 @@ schema LeftShiftAssignmentExpression extends CompoundAssignmentExpression {
 impl LeftShiftAssignmentExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *LeftShiftAssignmentExpression {
+    pub fn __all__(db: JavascriptDB) -> *LeftShiftAssignmentExpression {
         for (tmp in CompoundAssignmentExpression(db)) {
             if (isLeftShiftAssignmentExpression(Node {id: tmp.id})) {
                 yield LeftShiftAssignmentExpression {
@@ -1076,7 +1076,7 @@ schema RightShiftAssignmentExpression extends CompoundAssignmentExpression {
 impl RightShiftAssignmentExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *RightShiftAssignmentExpression {
+    pub fn __all__(db: JavascriptDB) -> *RightShiftAssignmentExpression {
         for (tmp in CompoundAssignmentExpression(db)) {
             if (isRightShiftAssignmentExpression(Node {id: tmp.id})) {
                 yield RightShiftAssignmentExpression {
@@ -1096,7 +1096,7 @@ schema UnsignedRightShiftAssignmentExpression extends CompoundAssignmentExpressi
 impl UnsignedRightShiftAssignmentExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *UnsignedRightShiftAssignmentExpression {
+    pub fn __all__(db: JavascriptDB) -> *UnsignedRightShiftAssignmentExpression {
         for (tmp in CompoundAssignmentExpression(db)) {
             if (isUnsignedRightShiftAssignmentExpression(Node {id: tmp.id})) {
                 yield UnsignedRightShiftAssignmentExpression {
@@ -1116,7 +1116,7 @@ schema LogicalAndAssignmentExpression extends CompoundAssignmentExpression {
 impl LogicalAndAssignmentExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *LogicalAndAssignmentExpression {
+    pub fn __all__(db: JavascriptDB) -> *LogicalAndAssignmentExpression {
         for (tmp in CompoundAssignmentExpression(db)) {
             if (isLogicalAndAssignmentExpression(Node {id: tmp.id})) {
                 yield LogicalAndAssignmentExpression {
@@ -1136,7 +1136,7 @@ schema LogicalOrAssignmentExpression extends CompoundAssignmentExpression {
 impl LogicalOrAssignmentExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *LogicalOrAssignmentExpression {
+    pub fn __all__(db: JavascriptDB) -> *LogicalOrAssignmentExpression {
         for (tmp in CompoundAssignmentExpression(db)) {
             if (isLogicalOrAssignmentExpression(Node {id: tmp.id})) {
                 yield LogicalOrAssignmentExpression {
@@ -1156,7 +1156,7 @@ schema NullishAssignmentExpression extends CompoundAssignmentExpression {
 impl NullishAssignmentExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *NullishAssignmentExpression {
+    pub fn __all__(db: JavascriptDB) -> *NullishAssignmentExpression {
         for (tmp in CompoundAssignmentExpression(db)) {
             if (isNullishAssignmentExpression(Node {id: tmp.id})) {
                 yield NullishAssignmentExpression {
@@ -1176,7 +1176,7 @@ schema CommaExpression extends BinaryExpression {
 impl CommaExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *CommaExpression {
+    pub fn __all__(db: JavascriptDB) -> *CommaExpression {
         for (tmp in BinaryExpression(db)) {
             if (isCommaExpression(Node {id: tmp.id})) {
                 yield CommaExpression {
@@ -1196,7 +1196,7 @@ schema ConditionalExpression extends Expression {
 impl ConditionalExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *ConditionalExpression {
+    pub fn __all__(db: JavascriptDB) -> *ConditionalExpression {
         for (tmp in Expression(db)) {
             if (isConditionalExpression(Node {id: tmp.id})) {
                 yield ConditionalExpression {
@@ -1245,7 +1245,7 @@ schema YieldExpression extends Expression {
 impl YieldExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *YieldExpression {
+    pub fn __all__(db: JavascriptDB) -> *YieldExpression {
         for (tmp in Expression(db)) {
             if (isYieldExpression(Node {id: tmp.id})) {
                 yield YieldExpression {
@@ -1288,7 +1288,7 @@ schema SpreadElement extends Expression {
 impl SpreadElement {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *SpreadElement {
+    pub fn __all__(db: JavascriptDB) -> *SpreadElement {
         for (tmp in Expression(db)) {
             if (isSpreadElement(Node {id: tmp.id})) {
                 yield SpreadElement {
@@ -1316,7 +1316,7 @@ schema OmittedExpression extends Expression {
 impl OmittedExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *OmittedExpression {
+    pub fn __all__(db: JavascriptDB) -> *OmittedExpression {
         for (tmp in Expression(db)) {
             if (isOmittedExpression(Node {id: tmp.id})) {
                 yield OmittedExpression {
@@ -1336,7 +1336,7 @@ schema AsExpression extends Expression {
 impl AsExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *AsExpression {
+    pub fn __all__(db: JavascriptDB) -> *AsExpression {
         for (tmp in Expression(db)) {
             if (isAsExpression(Node {id: tmp.id})) {
                 yield AsExpression {
@@ -1372,7 +1372,7 @@ schema SyntheticExpression extends Expression {
 impl SyntheticExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *SyntheticExpression {
+    pub fn __all__(db: JavascriptDB) -> *SyntheticExpression {
         for (tmp in Expression(db)) {
             if (isSyntheticExpression(Node {id: tmp.id})) {
                 yield SyntheticExpression {
@@ -1393,7 +1393,7 @@ schema CommaListExpression extends Expression {
 impl CommaListExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *CommaListExpression {
+    pub fn __all__(db: JavascriptDB) -> *CommaListExpression {
         for (tmp in Expression(db)) {
             if (isCommaListExpression(Node {id: tmp.id})) {
                 yield CommaListExpression {
@@ -1444,7 +1444,7 @@ schema UnaryExpression extends Expression {
 impl UnaryExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *UnaryExpression {
+    pub fn __all__(db: JavascriptDB) -> *UnaryExpression {
         for (tmp in Expression(db)) {
             if (isUnaryExpression(Node {id: tmp.id})) {
                 yield UnaryExpression {
@@ -1472,7 +1472,7 @@ schema TypeAssertionExpression extends UnaryExpression {
 impl TypeAssertionExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *TypeAssertionExpression {
+    pub fn __all__(db: JavascriptDB) -> *TypeAssertionExpression {
         for (tmp in UnaryExpression(db)) {
             if (isTypeAssertionExpression(Node {id: tmp.id})) {
                 yield TypeAssertionExpression {
@@ -1508,7 +1508,7 @@ schema DeleteExpression extends UnaryExpression {
 impl DeleteExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *DeleteExpression {
+    pub fn __all__(db: JavascriptDB) -> *DeleteExpression {
         for (tmp in UnaryExpression(db)) {
             if (isDeleteExpression(Node {id: tmp.id})) {
                 yield DeleteExpression {
@@ -1536,7 +1536,7 @@ schema TypeOfExpression extends UnaryExpression {
 impl TypeOfExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *TypeOfExpression {
+    pub fn __all__(db: JavascriptDB) -> *TypeOfExpression {
         for (tmp in UnaryExpression(db)) {
             if (isTypeOfExpression(Node {id: tmp.id})) {
                 yield TypeOfExpression {
@@ -1564,7 +1564,7 @@ schema VoidExpression extends UnaryExpression {
 impl VoidExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *VoidExpression {
+    pub fn __all__(db: JavascriptDB) -> *VoidExpression {
         for (tmp in UnaryExpression(db)) {
             if (isVoidExpression(Node {id: tmp.id})) {
                 yield VoidExpression {
@@ -1592,7 +1592,7 @@ schema AwaitExpression extends UnaryExpression {
 impl AwaitExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *AwaitExpression {
+    pub fn __all__(db: JavascriptDB) -> *AwaitExpression {
         for (tmp in UnaryExpression(db)) {
             if (isAwaitExpression(Node {id: tmp.id})) {
                 yield AwaitExpression {
@@ -1620,7 +1620,7 @@ schema UpdateExpression extends UnaryExpression {
 impl UpdateExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *UpdateExpression {
+    pub fn __all__(db: JavascriptDB) -> *UpdateExpression {
         for (tmp in UnaryExpression(db)) {
             if (isUpdateExpression(Node {id: tmp.id})) {
                 yield UpdateExpression {
@@ -1640,7 +1640,7 @@ schema LeftHandSideExpression extends UpdateExpression {
 impl LeftHandSideExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *LeftHandSideExpression {
+    pub fn __all__(db: JavascriptDB) -> *LeftHandSideExpression {
         for (tmp in UpdateExpression(db)) {
             if (isLeftHandSideExpression(Node {id: tmp.id})) {
                 yield LeftHandSideExpression {
@@ -1660,7 +1660,7 @@ schema PrefixUnaryExpression extends UpdateExpression {
 impl PrefixUnaryExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *PrefixUnaryExpression {
+    pub fn __all__(db: JavascriptDB) -> *PrefixUnaryExpression {
         for (tmp in UpdateExpression(db)) {
             if (isPrefixUnaryExpression(Node {id: tmp.id})) {
                 yield PrefixUnaryExpression {
@@ -1696,7 +1696,7 @@ schema PrefixIncrementExpression extends PrefixUnaryExpression {
 impl PrefixIncrementExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *PrefixIncrementExpression {
+    pub fn __all__(db: JavascriptDB) -> *PrefixIncrementExpression {
         for (tmp in PrefixUnaryExpression(db)) {
             if (isPrefixIncrementExpression(Node {id: tmp.id})) {
                 yield PrefixIncrementExpression {
@@ -1716,7 +1716,7 @@ schema PrefixDecrementExpression extends PrefixUnaryExpression {
 impl PrefixDecrementExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *PrefixDecrementExpression {
+    pub fn __all__(db: JavascriptDB) -> *PrefixDecrementExpression {
         for (tmp in PrefixUnaryExpression(db)) {
             if (isPrefixDecrementExpression(Node {id: tmp.id})) {
                 yield PrefixDecrementExpression {
@@ -1736,7 +1736,7 @@ schema UnaryPlusExpression extends PrefixUnaryExpression {
 impl UnaryPlusExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *UnaryPlusExpression {
+    pub fn __all__(db: JavascriptDB) -> *UnaryPlusExpression {
         for (tmp in PrefixUnaryExpression(db)) {
             if (isUnaryPlusExpression(Node {id: tmp.id})) {
                 yield UnaryPlusExpression {
@@ -1756,7 +1756,7 @@ schema UnaryMinusExpression extends PrefixUnaryExpression {
 impl UnaryMinusExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *UnaryMinusExpression {
+    pub fn __all__(db: JavascriptDB) -> *UnaryMinusExpression {
         for (tmp in PrefixUnaryExpression(db)) {
             if (isUnaryMinusExpression(Node {id: tmp.id})) {
                 yield UnaryMinusExpression {
@@ -1776,7 +1776,7 @@ schema BitwiseNotExpression extends PrefixUnaryExpression {
 impl BitwiseNotExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *BitwiseNotExpression {
+    pub fn __all__(db: JavascriptDB) -> *BitwiseNotExpression {
         for (tmp in PrefixUnaryExpression(db)) {
             if (isBitwiseNotExpression(Node {id: tmp.id})) {
                 yield BitwiseNotExpression {
@@ -1796,7 +1796,7 @@ schema LogicalNotExpression extends PrefixUnaryExpression {
 impl LogicalNotExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *LogicalNotExpression {
+    pub fn __all__(db: JavascriptDB) -> *LogicalNotExpression {
         for (tmp in PrefixUnaryExpression(db)) {
             if (isLogicalNotExpression(Node {id: tmp.id})) {
                 yield LogicalNotExpression {
@@ -1816,7 +1816,7 @@ schema PostfixUnaryExpression extends UpdateExpression {
 impl PostfixUnaryExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *PostfixUnaryExpression {
+    pub fn __all__(db: JavascriptDB) -> *PostfixUnaryExpression {
         for (tmp in UpdateExpression(db)) {
             if (isPostfixUnaryExpression(Node {id: tmp.id})) {
                 yield PostfixUnaryExpression {
@@ -1852,7 +1852,7 @@ schema PostfixIncrementExpression extends PostfixUnaryExpression {
 impl PostfixIncrementExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *PostfixIncrementExpression {
+    pub fn __all__(db: JavascriptDB) -> *PostfixIncrementExpression {
         for (tmp in PostfixUnaryExpression(db)) {
             if (isPostfixIncrementExpression(Node {id: tmp.id})) {
                 yield PostfixIncrementExpression {
@@ -1872,7 +1872,7 @@ schema PostfixDecrementExpression extends PostfixUnaryExpression {
 impl PostfixDecrementExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *PostfixDecrementExpression {
+    pub fn __all__(db: JavascriptDB) -> *PostfixDecrementExpression {
         for (tmp in PostfixUnaryExpression(db)) {
             if (isPostfixDecrementExpression(Node {id: tmp.id})) {
                 yield PostfixDecrementExpression {
@@ -1892,7 +1892,7 @@ schema IncrementExpression extends UpdateExpression {
 impl IncrementExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *IncrementExpression {
+    pub fn __all__(db: JavascriptDB) -> *IncrementExpression {
         for (tmp in UpdateExpression(db)) {
             if (isIncrementExpression(Node {id: tmp.id})) {
                 yield IncrementExpression {
@@ -1912,7 +1912,7 @@ schema DecrementExpression extends UpdateExpression {
 impl DecrementExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *DecrementExpression {
+    pub fn __all__(db: JavascriptDB) -> *DecrementExpression {
         for (tmp in UpdateExpression(db)) {
             if (isDecrementExpression(Node {id: tmp.id})) {
                 yield DecrementExpression {
@@ -1932,7 +1932,7 @@ schema CallExpression extends LeftHandSideExpression {
 impl CallExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *CallExpression {
+    pub fn __all__(db: JavascriptDB) -> *CallExpression {
         for (tmp in LeftHandSideExpression(db)) {
             if (isCallExpression(Node {id: tmp.id})) {
                 yield CallExpression {
@@ -2103,7 +2103,7 @@ schema NonNullExpression extends LeftHandSideExpression {
 impl NonNullExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *NonNullExpression {
+    pub fn __all__(db: JavascriptDB) -> *NonNullExpression {
         for (tmp in LeftHandSideExpression(db)) {
             if (isNonNullExpression(Node {id: tmp.id})) {
                 yield NonNullExpression {
@@ -2132,7 +2132,7 @@ schema PartiallyEmittedExpression extends LeftHandSideExpression {
 impl PartiallyEmittedExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *PartiallyEmittedExpression {
+    pub fn __all__(db: JavascriptDB) -> *PartiallyEmittedExpression {
         for (tmp in LeftHandSideExpression(db)) {
             if (isPartiallyEmittedExpression(Node {id: tmp.id})) {
                 yield PartiallyEmittedExpression {
@@ -2161,7 +2161,7 @@ schema SyntheticReferenceExpression extends LeftHandSideExpression {
 impl SyntheticReferenceExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *SyntheticReferenceExpression {
+    pub fn __all__(db: JavascriptDB) -> *SyntheticReferenceExpression {
         for (tmp in LeftHandSideExpression(db)) {
             if (isSyntheticReferenceExpression(Node {id: tmp.id})) {
                 yield SyntheticReferenceExpression {
@@ -2181,7 +2181,7 @@ schema MemberExpression extends LeftHandSideExpression {
 impl MemberExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *MemberExpression {
+    pub fn __all__(db: JavascriptDB) -> *MemberExpression {
         for (tmp in LeftHandSideExpression(db)) {
             if (isMemberExpression(Node {id: tmp.id})) {
                 yield MemberExpression {
@@ -2201,7 +2201,7 @@ schema MemberName extends Node {
 impl MemberName {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *MemberName {
+    pub fn __all__(db: JavascriptDB) -> *MemberName {
         for (tmp in Node(db)) {
             if (isMemberName(tmp)) {
                 yield MemberName {
@@ -2234,7 +2234,7 @@ schema AccessExpression extends MemberExpression {
 impl AccessExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *AccessExpression {
+    pub fn __all__(db: JavascriptDB) -> *AccessExpression {
         for (tmp in MemberExpression(db)) {
             if (isAccessExpression(Node {id: tmp.id})) {
                 yield AccessExpression {
@@ -2331,7 +2331,7 @@ schema PropertyAccessExpression extends AccessExpression {
 impl PropertyAccessExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *PropertyAccessExpression {
+    pub fn __all__(db: JavascriptDB) -> *PropertyAccessExpression {
         for (tmp in AccessExpression(db)) {
             if (isPropertyAccessExpression(Node {id: tmp.id})) {
                 yield PropertyAccessExpression {
@@ -2371,7 +2371,7 @@ schema ElementAccessExpression extends AccessExpression {
 impl ElementAccessExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *ElementAccessExpression {
+    pub fn __all__(db: JavascriptDB) -> *ElementAccessExpression {
         for (tmp in AccessExpression(db)) {
             if (isElementAccessExpression(Node {id: tmp.id})) {
                 yield ElementAccessExpression {
@@ -2411,7 +2411,7 @@ schema TaggedTemplateExpression extends MemberExpression {
 impl TaggedTemplateExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *TaggedTemplateExpression {
+    pub fn __all__(db: JavascriptDB) -> *TaggedTemplateExpression {
         for (tmp in MemberExpression(db)) {
             if (isTaggedTemplateExpression(Node {id: tmp.id})) {
                 yield TaggedTemplateExpression {
@@ -2452,7 +2452,7 @@ schema PrimaryExpression extends MemberExpression {
 impl PrimaryExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *PrimaryExpression {
+    pub fn __all__(db: JavascriptDB) -> *PrimaryExpression {
         for (tmp in MemberExpression(db)) {
             if (isPrimaryExpression(Node {id: tmp.id})) {
                 yield PrimaryExpression {
@@ -2472,7 +2472,7 @@ schema Identifier extends PrimaryExpression {
 impl Identifier {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *Identifier {
+    pub fn __all__(db: JavascriptDB) -> *Identifier {
         for (tmp in PrimaryExpression(db)) {
             if (isIdentifier(Node {id: tmp.id})) {
                 yield Identifier {
@@ -2496,7 +2496,7 @@ schema PrivateIdentifier extends PrimaryExpression {
 impl PrivateIdentifier {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *PrivateIdentifier {
+    pub fn __all__(db: JavascriptDB) -> *PrivateIdentifier {
         for (tmp in PrimaryExpression(db)) {
             if (isPrivateIdentifier(Node {id: tmp.id})) {
                 yield PrivateIdentifier {
@@ -2520,7 +2520,7 @@ schema ThisExpression extends PrimaryExpression {
 impl ThisExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *ThisExpression {
+    pub fn __all__(db: JavascriptDB) -> *ThisExpression {
         for (tmp in PrimaryExpression(db)) {
             if (isThisExpression(Node {id: tmp.id})) {
                 yield ThisExpression {
@@ -2540,7 +2540,7 @@ schema SuperExpression extends PrimaryExpression {
 impl SuperExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *SuperExpression {
+    pub fn __all__(db: JavascriptDB) -> *SuperExpression {
         for (tmp in PrimaryExpression(db)) {
             if (isSuperExpression(Node {id: tmp.id})) {
                 yield SuperExpression {
@@ -2560,7 +2560,7 @@ schema ImportExpression extends PrimaryExpression {
 impl ImportExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *ImportExpression {
+    pub fn __all__(db: JavascriptDB) -> *ImportExpression {
         for (tmp in PrimaryExpression(db)) {
             if (isImportExpression(Node {id: tmp.id})) {
                 yield ImportExpression {
@@ -2580,7 +2580,7 @@ schema ArrayLiteralExpression extends PrimaryExpression {
 impl ArrayLiteralExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *ArrayLiteralExpression {
+    pub fn __all__(db: JavascriptDB) -> *ArrayLiteralExpression {
         for (tmp in PrimaryExpression(db)) {
             if (isArrayLiteralExpression(Node {id: tmp.id})) {
                 yield ArrayLiteralExpression {
@@ -2618,7 +2618,7 @@ schema NewExpression extends PrimaryExpression {
 impl NewExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *NewExpression {
+    pub fn __all__(db: JavascriptDB) -> *NewExpression {
         for (tmp in PrimaryExpression(db)) {
             if (isNewExpression(Node {id: tmp.id})) {
                 yield NewExpression {
@@ -2740,7 +2740,7 @@ schema ParenthesizedExpression extends PrimaryExpression {
 impl ParenthesizedExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *ParenthesizedExpression {
+    pub fn __all__(db: JavascriptDB) -> *ParenthesizedExpression {
         for (tmp in PrimaryExpression(db)) {
             if (isParenthesizedExpression(Node {id: tmp.id})) {
                 yield ParenthesizedExpression {
@@ -2768,7 +2768,7 @@ schema FunctionExpression extends PrimaryExpression {
 impl FunctionExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *FunctionExpression {
+    pub fn __all__(db: JavascriptDB) -> *FunctionExpression {
         for (tmp in PrimaryExpression(db)) {
             if (isFunctionExpression(Node {id: tmp.id})) {
                 yield FunctionExpression {
@@ -2818,7 +2818,7 @@ schema TemplateExpression extends PrimaryExpression {
 impl TemplateExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *TemplateExpression {
+    pub fn __all__(db: JavascriptDB) -> *TemplateExpression {
         for (tmp in PrimaryExpression(db)) {
             if (isTemplateExpression(Node {id: tmp.id})) {
                 yield TemplateExpression {
@@ -2868,7 +2868,7 @@ schema ClassExpression extends PrimaryExpression {
 impl ClassExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *ClassExpression {
+    pub fn __all__(db: JavascriptDB) -> *ClassExpression {
         for (tmp in PrimaryExpression(db)) {
             if (isClassExpression(Node {id: tmp.id})) {
                 yield ClassExpression {
@@ -2888,7 +2888,7 @@ schema MetaProperty extends PrimaryExpression {
 impl MetaProperty {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *MetaProperty {
+    pub fn __all__(db: JavascriptDB) -> *MetaProperty {
         for (tmp in PrimaryExpression(db)) {
             if (isMetaProperty(Node {id: tmp.id})) {
                 yield MetaProperty {
@@ -2924,7 +2924,7 @@ schema LiteralExpression extends PrimaryExpression {
 impl LiteralExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *LiteralExpression {
+    pub fn __all__(db: JavascriptDB) -> *LiteralExpression {
         for (tmp in PrimaryExpression(db)) {
             if (isLiteralExpression(Node {id: tmp.id})) {
                 yield LiteralExpression {
@@ -2957,7 +2957,7 @@ schema NullLiteral extends PrimaryExpression {
 impl NullLiteral {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *NullLiteral {
+    pub fn __all__(db: JavascriptDB) -> *NullLiteral {
         for (tmp in PrimaryExpression(db)) {
             if (isNullLiteral(Node {id: tmp.id})) {
                 yield NullLiteral {
@@ -2977,7 +2977,7 @@ schema TrueLiteral extends PrimaryExpression {
 impl TrueLiteral {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *TrueLiteral {
+    pub fn __all__(db: JavascriptDB) -> *TrueLiteral {
         for (tmp in PrimaryExpression(db)) {
             if (isTrueKeyword(Node {id: tmp.id})) {
                 yield TrueLiteral {
@@ -2997,7 +2997,7 @@ schema FalseLiteral extends PrimaryExpression {
 impl FalseLiteral {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *FalseLiteral {
+    pub fn __all__(db: JavascriptDB) -> *FalseLiteral {
         for (tmp in PrimaryExpression(db)) {
             if (isFalseKeyword(Node {id: tmp.id})) {
                 yield FalseLiteral {
@@ -3017,7 +3017,7 @@ schema BooleanLiteral extends PrimaryExpression {
 impl BooleanLiteral {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *BooleanLiteral {
+    pub fn __all__(db: JavascriptDB) -> *BooleanLiteral {
         for (tmp in PrimaryExpression(db)) {
             if (isBooleanLiteral(Node {id: tmp.id})) {
                 yield BooleanLiteral {
@@ -3037,7 +3037,7 @@ schema NumericLiteral extends LiteralExpression {
 impl NumericLiteral {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *NumericLiteral {
+    pub fn __all__(db: JavascriptDB) -> *NumericLiteral {
         for (tmp in LiteralExpression(db)) {
             if (isNumericLiteral(Node {id: tmp.id})) {
                 yield NumericLiteral {
@@ -3057,7 +3057,7 @@ schema BigIntLiteral extends LiteralExpression {
 impl BigIntLiteral {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *BigIntLiteral {
+    pub fn __all__(db: JavascriptDB) -> *BigIntLiteral {
         for (tmp in LiteralExpression(db)) {
             if (isBigIntLiteral(Node {id: tmp.id})) {
                 yield BigIntLiteral {
@@ -3077,7 +3077,7 @@ schema StringLiteral extends LiteralExpression {
 impl StringLiteral {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *StringLiteral {
+    pub fn __all__(db: JavascriptDB) -> *StringLiteral {
         for (tmp in LiteralExpression(db)) {
             if (isStringLiteral(Node {id: tmp.id})) {
                 yield StringLiteral {
@@ -3101,7 +3101,7 @@ schema RegularExpressionLiteral extends LiteralExpression {
 impl RegularExpressionLiteral {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *RegularExpressionLiteral {
+    pub fn __all__(db: JavascriptDB) -> *RegularExpressionLiteral {
         for (tmp in LiteralExpression(db)) {
             if (isRegularExpressionLiteral(Node {id: tmp.id})) {
                 yield RegularExpressionLiteral {
@@ -3121,7 +3121,7 @@ schema NoSubstitutionTemplateLiteral extends LiteralExpression {
 impl NoSubstitutionTemplateLiteral {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *NoSubstitutionTemplateLiteral {
+    pub fn __all__(db: JavascriptDB) -> *NoSubstitutionTemplateLiteral {
         for (tmp in LiteralExpression(db)) {
             if (isNoSubstitutionTemplateLiteral(Node {id: tmp.id})) {
                 yield NoSubstitutionTemplateLiteral {
@@ -3141,7 +3141,7 @@ schema Decorator extends Node {
 impl Decorator {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *Decorator {
+    pub fn __all__(db: JavascriptDB) -> *Decorator {
         for (tmp in Node(db)) {
             if (isDecorator(tmp)) {
                 yield Decorator {
@@ -3185,7 +3185,7 @@ schema CallLikeExpression extends Expression {
 impl CallLikeExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *CallLikeExpression {
+    pub fn __all__(db: JavascriptDB) -> *CallLikeExpression {
         for (tmp in Expression(db)) {
             if (isCallLikeExpression(Node {id: tmp.id})) {
                 yield CallLikeExpression {
@@ -3229,7 +3229,7 @@ schema MayInvokeExpression extends Expression {
 impl MayInvokeExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *MayInvokeExpression {
+    pub fn __all__(db: JavascriptDB) -> *MayInvokeExpression {
         for (tmp in Expression(db)) {
             if (isMayInvokeExpression(Node {id: tmp.id})) {
                 yield MayInvokeExpression {

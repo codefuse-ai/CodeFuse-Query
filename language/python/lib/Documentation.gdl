@@ -7,7 +7,7 @@ schema Comment extends CommentDO {
 impl Comment {
     @data_constraint
     @inline
-    fn __all__(db: PythonDB) -> *Comment {
+    pub fn __all__(db: PythonDB) -> *Comment {
         for (tmp in CommentDO(db)) {
             yield Comment {
                 element_oid : tmp.element_oid,
@@ -110,7 +110,7 @@ schema DocstringComment extends DocstringCommentDO {
 impl DocstringComment {
     @data_constraint
     @inline
-    fn __all__(db: PythonDB) -> *DocstringComment {
+    pub fn __all__(db: PythonDB) -> *DocstringComment {
         for (tmp in DocstringCommentDO(db)) {
             yield DocstringComment {
                 element_oid : tmp.element_oid,

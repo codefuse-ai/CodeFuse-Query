@@ -7,7 +7,7 @@ schema Keyword extends KeywordDO {
 impl Keyword {
     @data_constraint
     @inline
-    fn __all__(db: PythonDB) -> *Keyword {
+    pub fn __all__(db: PythonDB) -> *Keyword {
         for (tmp in KeywordDO(db)) {
             yield Keyword {
                 element_oid : tmp.element_oid,
@@ -81,7 +81,7 @@ schema KeywordWithoutName extends Keyword {
 impl KeywordWithoutName {
     @data_constraint
     @inline
-    fn __all__(db: PythonDB) -> *KeywordWithoutName {
+    pub fn __all__(db: PythonDB) -> *KeywordWithoutName {
         for (tmp in Keyword(db)) {
             if (tmp.getArgName() = "None") {
                 yield KeywordWithoutName {

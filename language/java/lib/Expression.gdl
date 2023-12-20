@@ -7,7 +7,7 @@ schema Expression extends ExpressionDO {
 impl Expression {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *Expression {
+    pub fn __all__(db: JavaDB) -> *Expression {
         for (tmp in ExpressionDO(db)) {
             yield Expression {
                 element_hash_id : tmp.element_hash_id,
@@ -96,7 +96,7 @@ schema ArrayInitializer extends Expression {
 impl ArrayInitializer {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *ArrayInitializer {
+    pub fn __all__(db: JavaDB) -> *ArrayInitializer {
         for (tmp in Expression(db)) {
             for (ai in ArrayInitializerExpression(db)) {
                 if (ai.key_eq(tmp.getParent())) {
@@ -129,7 +129,7 @@ schema ExpressionListElement extends Expression {
 impl ExpressionListElement {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *ExpressionListElement {
+    pub fn __all__(db: JavaDB) -> *ExpressionListElement {
         for (tmp in Expression(db)) {
             for (ele in ExpressionList(db)) {
                 if (ele.key_eq(tmp.getParent())) {
@@ -162,7 +162,7 @@ schema AssignmentExpression extends Expression {
 impl AssignmentExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *AssignmentExpression {
+    pub fn __all__(db: JavaDB) -> *AssignmentExpression {
         for (tmp in Expression(db)) {
             for (ae in AssignmentExpressionDO(db)) {
                 if (tmp.key_eq(ae)) {
@@ -229,7 +229,7 @@ schema BinaryExpression extends Expression {
 impl BinaryExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *BinaryExpression {
+    pub fn __all__(db: JavaDB) -> *BinaryExpression {
         for (tmp in Expression(db)) {
             for (be in BinaryExpressionDO(db)) {
                 if (tmp.key_eq(be)) {
@@ -313,7 +313,7 @@ schema AndLogicalExpression extends BinaryExpression {
 impl AndLogicalExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *AndLogicalExpression {
+    pub fn __all__(db: JavaDB) -> *AndLogicalExpression {
         for (tmp in BinaryExpression(db)) {
             for (be in BinaryExpression(db)) {
                 if (tmp = be) {
@@ -341,7 +341,7 @@ schema OrLogicalExpression extends BinaryExpression {
 impl OrLogicalExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *OrLogicalExpression {
+    pub fn __all__(db: JavaDB) -> *OrLogicalExpression {
         for (tmp in BinaryExpression(db)) {
             for (be in BinaryExpression(db)) {
                 if (tmp = be) {
@@ -366,7 +366,7 @@ schema ConditionalPolyadicExpression extends PolyadicExpression {
 impl ConditionalPolyadicExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *ConditionalPolyadicExpression {
+    pub fn __all__(db: JavaDB) -> *ConditionalPolyadicExpression {
         for (tmp in PolyadicExpression(db)) {
             for (p in PolyadicExpression(db)) {
                 if (tmp = p) {
@@ -404,7 +404,7 @@ schema UnaryExpression extends Expression {
 impl UnaryExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *UnaryExpression {
+    pub fn __all__(db: JavaDB) -> *UnaryExpression {
         for (tmp in Expression(db)) {
             for (ue in UnaryExpressionDO(db)) {
                 if (tmp.key_eq(ue)) {
@@ -457,7 +457,7 @@ schema LogNotExpression extends UnaryExpression {
 impl LogNotExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *LogNotExpression {
+    pub fn __all__(db: JavaDB) -> *LogNotExpression {
         for (tmp in UnaryExpression(db)) {
             if (tmp.getOpcode() = "!") {
                 yield LogNotExpression {
@@ -481,7 +481,7 @@ schema LogicExpression extends Expression {
 impl LogicExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *LogicExpression {
+    pub fn __all__(db: JavaDB) -> *LogicExpression {
         for (tmp in Expression(db)) {
             for (lne in LogNotExpression(db)) {
                 if (tmp.key_eq(lne)) {
@@ -565,7 +565,7 @@ schema ConditionalExpression extends Expression {
 impl ConditionalExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *ConditionalExpression {
+    pub fn __all__(db: JavaDB) -> *ConditionalExpression {
         for (tmp in Expression(db)) {
             for (ce in ConditionalExpressionDO(db)) {
                 if (tmp.key_eq(ce)) {
@@ -633,7 +633,7 @@ schema LambdaExpression extends Expression {
 impl LambdaExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *LambdaExpression {
+    pub fn __all__(db: JavaDB) -> *LambdaExpression {
         for (tmp in Expression(db)) {
             for (le in LambdaExpressionDO(db)) {
                 if (tmp.key_eq(le)) {
@@ -684,7 +684,7 @@ schema ThisAccessExpression extends Expression {
 impl ThisAccessExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *ThisAccessExpression {
+    pub fn __all__(db: JavaDB) -> *ThisAccessExpression {
         for (tmp in Expression(db)) {
             for (tae in ThisAccessExpressionDO(db)) {
                 if (tmp.key_eq(tae)) {
@@ -710,7 +710,7 @@ schema NewExpression extends Expression {
 impl NewExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *NewExpression {
+    pub fn __all__(db: JavaDB) -> *NewExpression {
         for (tmp in Expression(db)) {
             for (ne in NewExpressionDO(db)) {
                 if (tmp.key_eq(ne)) {
@@ -778,7 +778,7 @@ schema SuperAccessExpression extends Expression {
 impl SuperAccessExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *SuperAccessExpression {
+    pub fn __all__(db: JavaDB) -> *SuperAccessExpression {
         for (tmp in Expression(db)) {
             for (sae in SuperAccessExpressionDO(db)) {
                 if (tmp.key_eq(sae)) {
@@ -817,7 +817,7 @@ schema SuperConstructorInvocation extends Expression {
 impl SuperConstructorInvocation {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *SuperConstructorInvocation {
+    pub fn __all__(db: JavaDB) -> *SuperConstructorInvocation {
         for (tmp in Expression(db)) {
             for (sci in SuperConstructorInvocationDO(db)) {
                 if (tmp.key_eq(sci)) {
@@ -856,7 +856,7 @@ schema ReferenceExpression extends Expression {
 impl ReferenceExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *ReferenceExpression {
+    pub fn __all__(db: JavaDB) -> *ReferenceExpression {
         for (tmp in Expression(db)) {
             for (re in ReferenceExpressionDO(db)) {
                 if (tmp.key_eq(re)) {
@@ -924,7 +924,7 @@ schema StatementEnclosingExpression extends StatementEnclosingExpressionDO {
 impl StatementEnclosingExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *StatementEnclosingExpression {
+    pub fn __all__(db: JavaDB) -> *StatementEnclosingExpression {
         for (tmp in StatementEnclosingExpressionDO(db)) {
             yield StatementEnclosingExpression {
                 expression_hash_id : tmp.expression_hash_id,
@@ -953,7 +953,7 @@ schema InstanceofExpression extends Expression {
 impl InstanceofExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *InstanceofExpression {
+    pub fn __all__(db: JavaDB) -> *InstanceofExpression {
         for (tmp in Expression(db)) {
             for (ioe in InstanceofExpressionDO(db)) {
                 if (tmp.key_eq(ioe)) {
@@ -1004,7 +1004,7 @@ schema MethodAccessExpressionWithType extends Expression {
 impl MethodAccessExpressionWithType {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *MethodAccessExpressionWithType {
+    pub fn __all__(db: JavaDB) -> *MethodAccessExpressionWithType {
         for (tmp in Expression(db)) {
             for (m in MethodAccessExpressionWithTypeDO(db)) {
                 if (tmp.key_eq(m)) {
@@ -1055,7 +1055,7 @@ schema MethodAccessExpressionWithoutType extends Expression {
 impl MethodAccessExpressionWithoutType {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *MethodAccessExpressionWithoutType {
+    pub fn __all__(db: JavaDB) -> *MethodAccessExpressionWithoutType {
         for (tmp in Expression(db)) {
             for (m in MethodAccessExpressionWithoutTypeDO(db)) {
                 if (tmp.key_eq(m)) {
@@ -1095,7 +1095,7 @@ schema MethodAccessExpression extends Expression {
 impl MethodAccessExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *MethodAccessExpression {
+    pub fn __all__(db: JavaDB) -> *MethodAccessExpression {
         for (tmp in Expression(db)) {
             for (mae in MethodAccessExpressionWithoutType(db)) {
                 if (tmp.key_eq(mae)) {
@@ -1235,7 +1235,7 @@ schema MethodReferenceExpression extends Expression {
 impl MethodReferenceExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *MethodReferenceExpression {
+    pub fn __all__(db: JavaDB) -> *MethodReferenceExpression {
         for (tmp in Expression(db)) {
             for (m in MethodReferenceExpressionDO(db)) {
                 if (tmp.key_eq(m)) {
@@ -1330,7 +1330,7 @@ schema ConstructorInvocation extends Expression {
 impl ConstructorInvocation {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *ConstructorInvocation {
+    pub fn __all__(db: JavaDB) -> *ConstructorInvocation {
         for (tmp in Expression(db)) {
             for (ci in ConstructorInvocationDO(db)) {
                 if (tmp.key_eq(ci)) {
@@ -1401,7 +1401,7 @@ schema ReferenceList extends ReferenceListDO {
 impl ReferenceList {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *ReferenceList {
+    pub fn __all__(db: JavaDB) -> *ReferenceList {
         for (tmp in ReferenceListDO(db)) {
             yield ReferenceList {
                 element_hash_id : tmp.element_hash_id,
@@ -1466,7 +1466,7 @@ schema TypeCastExpression extends Expression {
 impl TypeCastExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *TypeCastExpression {
+    pub fn __all__(db: JavaDB) -> *TypeCastExpression {
         for (tmp in Expression(db)) {
             for (m in TypeCastExpressionDO(db)) {
                 if (tmp.key_eq(m)) {
@@ -1514,7 +1514,7 @@ schema PolyadicExpression extends Expression {
 impl PolyadicExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *PolyadicExpression {
+    pub fn __all__(db: JavaDB) -> *PolyadicExpression {
         for (tmp in Expression(db)) {
             for (m in PolyadicExpressionDO(db)) {
                 if (tmp.key_eq(m)) {

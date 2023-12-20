@@ -7,7 +7,7 @@ schema Program extends ProgramDO {
 impl Program {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *Program {
+    pub fn __all__(db: JavaDB) -> *Program {
         for (tmp in ProgramDO(db)) {
             yield Program {
                 program_hash_id : tmp.program_hash_id,
@@ -25,7 +25,7 @@ schema File extends FileDO {
 impl File {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *File {
+    pub fn __all__(db: JavaDB) -> *File {
         for (tmp in FileDO(db)) {
             yield File {
                 element_hash_id : tmp.element_hash_id,
@@ -82,7 +82,7 @@ schema Folder extends FolderDO {
 impl Folder {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *Folder {
+    pub fn __all__(db: JavaDB) -> *Folder {
         for (tmp in FolderDO(db)) {
             yield Folder {
                 element_hash_id : tmp.element_hash_id,
@@ -137,7 +137,7 @@ schema ContainerParent extends ContainerParentDO {
 impl ContainerParent {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *ContainerParent {
+    pub fn __all__(db: JavaDB) -> *ContainerParent {
         for (tmp in ContainerParentDO(db)) {
             yield ContainerParent {
                 child_hash_id : tmp.child_hash_id,
@@ -166,7 +166,7 @@ schema Import extends ImportDO {
 impl Import {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *Import {
+    pub fn __all__(db: JavaDB) -> *Import {
         for (tmp in ImportDO(db)) {
             yield Import {
                 element_hash_id : tmp.element_hash_id,
@@ -258,7 +258,7 @@ schema Package {
 impl Package {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *Package {
+    pub fn __all__(db: JavaDB) -> *Package {
     	for (ps in db.package_statement) {
     		yield Package {
     		    id: ps.package_hash_id,
@@ -270,7 +270,7 @@ impl Package {
      * @brief gets the name of the package.
      * @return string 
      */
-    fn getPackageName(self) -> string {
+    pub fn getPackageName(self) -> string {
         return self.qualified_name
     }
 }
@@ -283,7 +283,7 @@ schema Cupackage extends CupackageDO {
 impl Cupackage {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *Cupackage {
+    pub fn __all__(db: JavaDB) -> *Cupackage {
         for (tmp in CupackageDO(db)) {
             yield Cupackage {
                 file_hash_id : tmp.file_hash_id,
@@ -324,7 +324,7 @@ schema ReferenceParameterList {
 impl ReferenceParameterList {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *ReferenceParameterList {
+    pub fn __all__(db: JavaDB) -> *ReferenceParameterList {
         for (r in ReferenceParameterListDO(db)) {
             yield ReferenceParameterList {id : r.list_hash_id}
         }
@@ -430,7 +430,7 @@ schema ImportStaticStatement extends ImportStaticStatementDO {
 impl ImportStaticStatement {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *ImportStaticStatement {
+    pub fn __all__(db: JavaDB) -> *ImportStaticStatement {
         for (tmp in ImportStaticStatementDO(db)) {
             yield ImportStaticStatement {
                 element_hash_id : tmp.element_hash_id,
@@ -508,7 +508,7 @@ schema ImportStaticReferenceElement extends ImportStaticReferenceElementDO {
 impl ImportStaticReferenceElement {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *ImportStaticReferenceElement {
+    pub fn __all__(db: JavaDB) -> *ImportStaticReferenceElement {
         for (tmp in ImportStaticReferenceElementDO(db)) {
             yield ImportStaticReferenceElement {
                 element_hash_id : tmp.element_hash_id,
@@ -561,7 +561,7 @@ schema ResourceList extends ResourceListDO {
 impl ResourceList {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *ResourceList {
+    pub fn __all__(db: JavaDB) -> *ResourceList {
         for (tmp in ResourceListDO(db)) {
             yield ResourceList {
                 element_hash_id : tmp.element_hash_id,
@@ -638,7 +638,7 @@ schema NpProject extends NpProjectDO {
 impl NpProject {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *NpProject {
+    pub fn __all__(db: JavaDB) -> *NpProject {
         for (tmp in NpProjectDO(db)) {
             for (np in NpProjectDO(db)) {
                 if (tmp = np) {
@@ -661,7 +661,7 @@ schema NpFile extends NpFileDO {
 impl NpFile {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *NpFile {
+    pub fn __all__(db: JavaDB) -> *NpFile {
         for (tmp in NpFileDO(db)) {
             for (nf in NpFileDO(db)) {
                 if (tmp = nf) {

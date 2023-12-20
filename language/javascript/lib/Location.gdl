@@ -12,7 +12,7 @@ schema Location extends LocationDO {
 impl Location {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *Location {
+    pub fn __all__(db: JavascriptDB) -> *Location {
         for (tmp in LocationDO(db)) {
             yield Location {
                 oid : tmp.oid,

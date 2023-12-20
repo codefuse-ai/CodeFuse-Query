@@ -4,7 +4,7 @@ schema Method extends Function {
 impl Method {
     @data_constraint
     @inline
-    fn __all__(db: GoDB) -> *Method {
+    pub fn __all__(db: GoDB) -> *Method {
         for (f in Function(db)) {
             if (f.isMethod()) {
                 yield Method {

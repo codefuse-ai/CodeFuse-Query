@@ -7,7 +7,7 @@ schema Function extends Statement {
 impl Function {
     @data_constraint
     @inline
-    fn __all__(db: PythonDB) -> *Function {
+    pub fn __all__(db: PythonDB) -> *Function {
         for (tmp in Statement(db)) {
             for (f in FunctionDefStatement(db)) {
                 if (tmp.key_eq(f)) {
@@ -130,7 +130,7 @@ schema InitFunction extends Function {
 impl InitFunction {
     @data_constraint
     @inline
-    fn __all__(db: PythonDB) -> *InitFunction {
+    pub fn __all__(db: PythonDB) -> *InitFunction {
         for (tmp in Function(db)) {
             if (tmp.getName() = "__init__") {
                 yield InitFunction {
