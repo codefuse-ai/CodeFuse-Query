@@ -7,7 +7,7 @@ schema WithItem extends WithItemDO {
 impl WithItem {
     @data_constraint
     @inline
-    fn __all__(db: PythonDB) -> *WithItem {
+    pub fn __all__(db: PythonDB) -> *WithItem {
         for (tmp in WithItemDO(db)) {
             yield WithItem {
                 element_oid : tmp.element_oid,

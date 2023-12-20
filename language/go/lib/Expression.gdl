@@ -4,7 +4,7 @@ schema Expr extends Node {
 impl Expr {
     @data_constraint
     @inline
-    fn __all__(db: GoDB) -> *Expr {
+    pub fn __all__(db: GoDB) -> *Expr {
         for (e in ExprDO(db)) {
             yield Expr {
                 id : e.oid

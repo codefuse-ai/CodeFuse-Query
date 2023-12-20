@@ -4,7 +4,7 @@ schema Function extends Node {
 impl Function {
     @data_constraint
     @inline
-    fn __all__(db: GoDB) -> *Function {
+    pub fn __all__(db: GoDB) -> *Function {
         for (tmp in Node(db)) {
             for (d in Decl(db)) {
                 if (d.key_eq(tmp)) {

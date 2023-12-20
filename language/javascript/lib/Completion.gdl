@@ -8,7 +8,7 @@ impl Completion {
     @inline
     pub fn __all__() -> *Completion {
         yield Completion {id: 1001, name: "NormalCompletion"}
-        yield Completion {id: 1101, name: "ReturnCompletion"}
+    	yield Completion {id: 1101, name: "ReturnCompletion"}
         // BooleanCompletion
         yield Completion {id: 1201, name: "BooleanCompletion"}
         yield Completion {id: 1202, name: "TrueBooleanCompletion"}

@@ -9,7 +9,7 @@ schema BasicBlock extends ControlFlowNode {
 impl BasicBlock {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *BasicBlock {
+    pub fn __all__(db: JavascriptDB) -> *BasicBlock {
         for (cfn in ControlFlowNode(db)) {
             // CfgEntryNode is a standalone BB
             for (cfgEntryNode in CfgEntryNode(db)) {

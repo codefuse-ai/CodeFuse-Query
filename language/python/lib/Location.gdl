@@ -7,7 +7,7 @@ schema Location extends LocationDO {
 impl Location {
     @data_constraint
     @inline
-    fn __all__(db: PythonDB) -> *Location {
+    pub fn __all__(db: PythonDB) -> *Location {
         for (tmp in LocationDO(db)) {
             yield Location {
                 element_oid : tmp.element_oid,
@@ -40,7 +40,7 @@ schema NumberOfLines extends NumberOfLinesDO {
 impl NumberOfLines {
     @data_constraint
     @inline
-    fn __all__(db: PythonDB) -> *NumberOfLines {
+    pub fn __all__(db: PythonDB) -> *NumberOfLines {
         for (tmp in NumberOfLinesDO(db)) {
             yield NumberOfLines {
                 element_oid : tmp.element_oid,

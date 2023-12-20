@@ -4,7 +4,7 @@ schema DefineStmt extends Statement {
 impl DefineStmt {
     @data_constraint
     @inline
-    fn __all__(db: GoDB) -> *DefineStmt {
+    pub fn __all__(db: GoDB) -> *DefineStmt {
         for (s in Statement(db)) {
             if (s.isDefineStmt()) {
                 yield DefineStmt {

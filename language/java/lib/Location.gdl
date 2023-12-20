@@ -7,7 +7,7 @@ schema Location extends LocationDO {
 impl Location {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *Location {
+    pub fn __all__(db: JavaDB) -> *Location {
         for (tmp in LocationDO(db)) {
             yield Location {
                 element_hash_id : tmp.element_hash_id,
@@ -40,7 +40,7 @@ schema NumberOfLines extends NumberOfLinesDO {
 impl NumberOfLines {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *NumberOfLines {
+    pub fn __all__(db: JavaDB) -> *NumberOfLines {
         for (tmp in NumberOfLinesDO(db)) {
             yield NumberOfLines {
                 element_hash_id : tmp.element_hash_id,

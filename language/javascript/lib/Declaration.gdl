@@ -12,7 +12,7 @@ schema TypeParameter extends Node {
 impl TypeParameter {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *TypeParameter {
+    pub fn __all__(db: JavascriptDB) -> *TypeParameter {
         for (tmp in Node(db)) {
             if (isTypeParameter(tmp)) {
                 yield TypeParameter {
@@ -32,7 +32,7 @@ schema Parameter extends Node {
 impl Parameter {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *Parameter {
+    pub fn __all__(db: JavascriptDB) -> *Parameter {
         for (tmp in Node(db)) {
             if (isParameter(tmp)) {
                 yield Parameter {
@@ -159,7 +159,7 @@ schema VariableDeclaration extends Node {
 impl VariableDeclaration {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *VariableDeclaration {
+    pub fn __all__(db: JavascriptDB) -> *VariableDeclaration {
         for (tmp in Node(db)) {
             if (isVariableDeclaration(tmp)) {
                 yield VariableDeclaration {
@@ -342,7 +342,7 @@ schema VariableDeclarationList extends Node {
 impl VariableDeclarationList {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *VariableDeclarationList {
+    pub fn __all__(db: JavascriptDB) -> *VariableDeclarationList {
         for (tmp in Node(db)) {
             if (isVariableDeclarationList(tmp)) {
                 yield VariableDeclarationList {
@@ -397,7 +397,7 @@ schema BindingElement extends Node {
 impl BindingElement {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *BindingElement {
+    pub fn __all__(db: JavascriptDB) -> *BindingElement {
         for (tmp in Node(db)) {
             if (isBindingElement(tmp)) {
                 yield BindingElement {
@@ -533,7 +533,7 @@ schema ArrayBindingElement extends Node {
 impl ArrayBindingElement {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *ArrayBindingElement {
+    pub fn __all__(db: JavascriptDB) -> *ArrayBindingElement {
         for (tmp in Node(db)) {
             if (isArrayBindingElement(tmp)) {
                 yield ArrayBindingElement {
@@ -553,7 +553,7 @@ schema BindingPattern extends Node {
 impl BindingPattern {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *BindingPattern {
+    pub fn __all__(db: JavascriptDB) -> *BindingPattern {
         for (tmp in Node(db)) {
             if (isBindingPattern(tmp)) {
                 yield BindingPattern {
@@ -591,7 +591,7 @@ schema BindingName extends Node {
 impl BindingName {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *BindingName {
+    pub fn __all__(db: JavascriptDB) -> *BindingName {
         for (tmp in Node(db)) {
             if (isBindingName(tmp)) {
                 yield BindingName {
@@ -621,7 +621,7 @@ schema ObjectBindingPattern extends BindingPattern {
 impl ObjectBindingPattern {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *ObjectBindingPattern {
+    pub fn __all__(db: JavascriptDB) -> *ObjectBindingPattern {
         for (tmp in BindingPattern(db)) {
             if (isObjectBindingPattern(Node {id: tmp.id})) {
                 yield ObjectBindingPattern {
@@ -688,7 +688,7 @@ schema ArrayBindingPattern extends BindingPattern {
 impl ArrayBindingPattern {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *ArrayBindingPattern {
+    pub fn __all__(db: JavascriptDB) -> *ArrayBindingPattern {
         for (tmp in BindingPattern(db)) {
             if (isArrayBindingPattern(Node {id: tmp.id})) {
                 yield ArrayBindingPattern {
@@ -739,7 +739,7 @@ schema EnumMember extends Node {
 impl EnumMember {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *EnumMember {
+    pub fn __all__(db: JavascriptDB) -> *EnumMember {
         for (tmp in Node(db)) {
             if (isEnumMember(tmp)) {
                 yield EnumMember {

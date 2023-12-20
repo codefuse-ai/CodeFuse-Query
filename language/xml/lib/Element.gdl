@@ -7,7 +7,7 @@ schema XmlAttribute extends XmlAttributeDO {
 impl XmlAttribute {
     @data_constraint
     @inline
-    fn __all__(db: XmlDB) -> *XmlAttribute {
+    pub fn __all__(db: XmlDB) -> *XmlAttribute {
         for (tmp in XmlAttributeDO(db)) {
             yield XmlAttribute {
                 id : tmp.id,
@@ -51,7 +51,7 @@ schema XmlCharacter extends XmlCharacterDO {
 impl XmlCharacter {
     @data_constraint
     @inline
-    fn __all__(db: XmlDB) -> *XmlCharacter {
+    pub fn __all__(db: XmlDB) -> *XmlCharacter {
         for (tmp in XmlCharacterDO(db)) {
             yield XmlCharacter {
                 id : tmp.id,
@@ -95,7 +95,7 @@ schema XmlComment extends XmlCommentDO {
 impl XmlComment {
     @data_constraint
     @inline
-    fn __all__(db: XmlDB) -> *XmlComment {
+    pub fn __all__(db: XmlDB) -> *XmlComment {
         for (tmp in XmlCommentDO(db)) {
             yield XmlComment {
                 id : tmp.id,
@@ -126,7 +126,7 @@ schema XmlDtd extends XmlDtdDO {
 impl XmlDtd {
     @data_constraint
     @inline
-    fn __all__(db: XmlDB) -> *XmlDtd {
+    pub fn __all__(db: XmlDB) -> *XmlDtd {
         for (tmp in XmlDtdDO(db)) {
             yield XmlDtd {
                 id : tmp.id,
@@ -158,7 +158,7 @@ schema XmlEncoding extends XmlEncodingDO {
 impl XmlEncoding {
     @data_constraint
     @inline
-    fn __all__(db: XmlDB) -> *XmlEncoding {
+    pub fn __all__(db: XmlDB) -> *XmlEncoding {
         for (tmp in XmlEncodingDO(db)) {
             yield XmlEncoding {
                 id : tmp.id,
@@ -176,7 +176,7 @@ schema XmlHasNamespace extends XmlHasNamespaceDO {
 impl XmlHasNamespace {
     @data_constraint
     @inline
-    fn __all__(db: XmlDB) -> *XmlHasNamespace {
+    pub fn __all__(db: XmlDB) -> *XmlHasNamespace {
         for (tmp in XmlHasNamespaceDO(db)) {
             yield XmlHasNamespace {
                 id : tmp.id,
@@ -229,7 +229,7 @@ schema XmlNamespace extends XmlNamespaceDO {
 impl XmlNamespace {
     @data_constraint
     @inline
-    fn __all__(db: XmlDB) -> *XmlNamespace {
+    pub fn __all__(db: XmlDB) -> *XmlNamespace {
         for (tmp in XmlNamespaceDO(db)) {
             yield XmlNamespace {
                 id : tmp.id,
@@ -288,7 +288,7 @@ schema XmlElementPrefix extends XmlElementPrefixDO {
 impl XmlElementPrefix {
     @data_constraint
     @inline
-    fn __all__(db: XmlDB) -> *XmlElementPrefix {
+    pub fn __all__(db: XmlDB) -> *XmlElementPrefix {
         for (tmp in XmlElementPrefixDO(db)) {
             yield XmlElementPrefix {
                 name : tmp.name,
@@ -330,7 +330,7 @@ schema XmlElementName extends XmlElementNameDO {
 impl XmlElementName {
     @data_constraint
     @inline
-    fn __all__(db: XmlDB) -> *XmlElementName {
+    pub fn __all__(db: XmlDB) -> *XmlElementName {
         for (tmp in XmlElementNameDO(db)) {
             yield XmlElementName {
                 name : tmp.name,
@@ -372,7 +372,7 @@ schema XmlElement extends XmlElementDO {
 impl XmlElement {
     @data_constraint
     @inline
-    fn __all__(db: XmlDB) -> *XmlElement {
+    pub fn __all__(db: XmlDB) -> *XmlElement {
         for (tmp in XmlElementDO(db)) {
             yield XmlElement {
                 id : tmp.id,
@@ -526,7 +526,7 @@ schema XmlFile extends XmlFileDO {
 impl XmlFile {
     @data_constraint
     @inline
-    fn __all__(db: XmlDB) -> *XmlFile {
+    pub fn __all__(db: XmlDB) -> *XmlFile {
         for (tmp in XmlFileDO(db)) {
             yield XmlFile {
                 id : tmp.id,
@@ -545,7 +545,7 @@ schema Location extends LocationDO {
 impl Location {
     @data_constraint
     @inline
-    fn __all__(db: XmlDB) -> *Location {
+    pub fn __all__(db: XmlDB) -> *Location {
         for (tmp in LocationDO(db)) {
             yield Location {
                 id : tmp.id,

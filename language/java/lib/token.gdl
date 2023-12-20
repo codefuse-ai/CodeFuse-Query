@@ -7,7 +7,7 @@ schema Token extends TokenDO {
 impl Token {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *Token {
+    pub fn __all__(db: JavaDB) -> *Token {
         for (tmp in TokenDO(db)) {
             yield Token {
                 element_hash_id : tmp.element_hash_id,

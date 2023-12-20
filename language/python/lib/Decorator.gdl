@@ -7,7 +7,7 @@ schema Decorator extends Expression {
 impl Decorator {
     @data_constraint
     @inline
-    fn __all__(db: PythonDB) -> *Decorator {
+    pub fn __all__(db: PythonDB) -> *Decorator {
         for (tmp in Expression(db)) {
             for (d in DecoratorDO(db)) {
                 if (tmp.key_eq(d)) {
@@ -47,7 +47,7 @@ schema DecoratedRelation extends DecoratedRelationDO {
 impl DecoratedRelation {
     @data_constraint
     @inline
-    fn __all__(db: PythonDB) -> *DecoratedRelation {
+    pub fn __all__(db: PythonDB) -> *DecoratedRelation {
         for (tmp in DecoratedRelationDO(db)) {
             yield DecoratedRelation {
                 decorator_oid : tmp.decorator_oid,

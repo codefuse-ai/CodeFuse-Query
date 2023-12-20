@@ -7,7 +7,7 @@ schema Program extends ProgramDO {
 impl Program {
     @data_constraint
     @inline
-    fn __all__(db: PythonDB) -> *Program {
+    pub fn __all__(db: PythonDB) -> *Program {
         for (tmp in ProgramDO(db)) {
             yield Program {
                 program_oid : tmp.program_oid,
@@ -25,7 +25,7 @@ schema File extends FileDO {
 impl File {
     @data_constraint
     @inline
-    fn __all__(db: PythonDB) -> *File {
+    pub fn __all__(db: PythonDB) -> *File {
         for (tmp in FileDO(db)) {
             yield File {
                 element_oid : tmp.element_oid,
@@ -71,7 +71,7 @@ schema Folder extends FolderDO {
 impl Folder {
     @data_constraint
     @inline
-    fn __all__(db: PythonDB) -> *Folder {
+    pub fn __all__(db: PythonDB) -> *Folder {
         for (tmp in FolderDO(db)) {
             yield Folder {
                 element_oid : tmp.element_oid,
@@ -116,7 +116,7 @@ schema ContainerParent extends ContainerParentDO {
 impl ContainerParent {
     @data_constraint
     @inline
-    fn __all__(db: PythonDB) -> *ContainerParent {
+    pub fn __all__(db: PythonDB) -> *ContainerParent {
         for (tmp in ContainerParentDO(db)) {
             yield ContainerParent {
                 child_oid : tmp.child_oid,
@@ -145,7 +145,7 @@ schema Module extends ModuleDO {
 impl Module {
     @data_constraint
     @inline
-    fn __all__(db: PythonDB) -> *Module {
+    pub fn __all__(db: PythonDB) -> *Module {
         for (tmp in ModuleDO(db)) {
             yield Module {
                 element_oid : tmp.element_oid,
@@ -198,7 +198,7 @@ schema Modified2To3File extends Modified2To3FileDO {
 impl Modified2To3File {
     @data_constraint
     @inline
-    fn __all__(db: PythonDB) -> *Modified2To3File {
+    pub fn __all__(db: PythonDB) -> *Modified2To3File {
         for (tmp in Modified2To3FileDO(db)) {
             yield Modified2To3File {
                 element_oid : tmp.element_oid,
@@ -216,7 +216,7 @@ schema ParseErrorFile extends ParseErrorFileDO {
 impl ParseErrorFile {
     @data_constraint
     @inline
-    fn __all__(db: PythonDB) -> *ParseErrorFile {
+    pub fn __all__(db: PythonDB) -> *ParseErrorFile {
         for (tmp in ParseErrorFileDO(db)) {
             yield ParseErrorFile {
                 element_oid : tmp.element_oid,

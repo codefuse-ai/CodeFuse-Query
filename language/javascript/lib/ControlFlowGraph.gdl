@@ -12,7 +12,7 @@ schema CfgEntryNode extends CfgEntryNodeDO {
 impl CfgEntryNode {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *CfgEntryNode {
+    pub fn __all__(db: JavascriptDB) -> *CfgEntryNode {
         for (tmp in CfgEntryNodeDO(db)) {
             for (cfgEntryNodeDO in CfgEntryNodeDO(db)) {
                 if (tmp = cfgEntryNodeDO) {
@@ -43,7 +43,7 @@ schema CfgExitNode extends CfgExitNodeDO {
 impl CfgExitNode {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *CfgExitNode {
+    pub fn __all__(db: JavascriptDB) -> *CfgExitNode {
         for (tmp in CfgExitNodeDO(db)) {
             yield CfgExitNode {
                 oid : tmp.oid,
@@ -71,7 +71,7 @@ schema SyntheticCfgNode {
 impl SyntheticCfgNode {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *SyntheticCfgNode {
+    pub fn __all__(db: JavascriptDB) -> *SyntheticCfgNode {
         for (cfgEntryNode in CfgEntryNode(db)) {
             yield SyntheticCfgNode {id : cfgEntryNode.oid}
         }
@@ -109,7 +109,7 @@ schema ControlFlowNode {
 impl ControlFlowNode {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *ControlFlowNode {
+    pub fn __all__(db: JavascriptDB) -> *ControlFlowNode {
         for (node in Node(db)) {
             yield ControlFlowNode {id : node.id}
         }
@@ -362,7 +362,7 @@ schema PostOrderNode extends ControlFlowNode {
 impl PostOrderNode {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *PostOrderNode {
+    pub fn __all__(db: JavascriptDB) -> *PostOrderNode {
         for (tmp in ControlFlowNode(db)) {
             if (isPostOrderNode(tmp)) {
                 yield PostOrderNode {

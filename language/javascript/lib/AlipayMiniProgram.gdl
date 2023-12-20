@@ -12,7 +12,7 @@ schema AppJsFile extends File {
 impl AppJsFile {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *AppJsFile {
+    pub fn __all__(db: JavascriptDB) -> *AppJsFile {
         for (tmp in File(db)) {
             if (tmp.getRelativePath() = "app.js") {
                 yield AppJsFile {
@@ -36,7 +36,7 @@ schema AppRegistrationExpression extends CallExpression {
 impl AppRegistrationExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *AppRegistrationExpression {
+    pub fn __all__(db: JavascriptDB) -> *AppRegistrationExpression {
         for (tmp in CallExpression(db)) {
             for (appIdentifier in Identifier(db),
                 location in Location(db),
@@ -66,7 +66,7 @@ schema AppObject extends ObjectLiteralExpression {
 impl AppObject {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *AppObject {
+    pub fn __all__(db: JavascriptDB) -> *AppObject {
         for (tmp in ObjectLiteralExpression(db)) {
             for (appRegistrationExpression in AppRegistrationExpression(db)) {
                 if (tmp.key_eq(appRegistrationExpression.getArgument(0))) {
@@ -88,7 +88,7 @@ schema PageRegistrationExpression extends CallExpression {
 impl PageRegistrationExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *PageRegistrationExpression {
+    pub fn __all__(db: JavascriptDB) -> *PageRegistrationExpression {
         for (tmp in CallExpression(db)) {
             for (pageIdentifier in Identifier(db)) {
                 if (pageIdentifier.key_eq(tmp.getExpression())) {
@@ -112,7 +112,7 @@ schema PageObject extends ObjectLiteralExpression {
 impl PageObject {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *PageObject {
+    pub fn __all__(db: JavascriptDB) -> *PageObject {
         for (tmp in ObjectLiteralExpression(db)) {
             for (pageRegistrationExpression in PageRegistrationExpression(db)) {
                 if (tmp.key_eq(pageRegistrationExpression.getArgument(0))) {
@@ -134,7 +134,7 @@ schema ComponentRegistrationExpression extends CallExpression {
 impl ComponentRegistrationExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *ComponentRegistrationExpression {
+    pub fn __all__(db: JavascriptDB) -> *ComponentRegistrationExpression {
         for (tmp in CallExpression(db)) {
             for (componentIdentifier in Identifier(db)) {
                 if (componentIdentifier.key_eq(tmp.getExpression())) {
@@ -158,7 +158,7 @@ schema ComponentObject extends ObjectLiteralExpression {
 impl ComponentObject {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *ComponentObject {
+    pub fn __all__(db: JavascriptDB) -> *ComponentObject {
         for (tmp in ObjectLiteralExpression(db)) {
             for (componentRegistrationExpression in ComponentRegistrationExpression(db)) {
                 if (tmp.key_eq(componentRegistrationExpression.getArgument(0))) {
@@ -180,7 +180,7 @@ schema MiniObject extends ObjectLiteralExpression {
 impl MiniObject {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *MiniObject {
+    pub fn __all__(db: JavascriptDB) -> *MiniObject {
         for (tmp in ObjectLiteralExpression(db)) {
             for (appObject in AppObject(db)) {
                 if (tmp.key_eq(appObject)) {
@@ -216,7 +216,7 @@ schema ApiCallExpression extends CallExpression {
 impl ApiCallExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *ApiCallExpression {
+    pub fn __all__(db: JavascriptDB) -> *ApiCallExpression {
         for (tmp in CallExpression(db)) {
             for (accessExpression in AccessExpression(db),
                 myIdentifier in Identifier(db)) {
@@ -243,7 +243,7 @@ schema MiniCallExpression extends CallExpression {
 impl MiniCallExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *MiniCallExpression {
+    pub fn __all__(db: JavascriptDB) -> *MiniCallExpression {
         for (tmp in CallExpression(db)) {
             yield MiniCallExpression {
                 id : tmp.id

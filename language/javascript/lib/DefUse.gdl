@@ -9,7 +9,7 @@ schema VarRef extends BindingName {
 impl VarRef {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *VarRef {
+    pub fn __all__(db: JavascriptDB) -> *VarRef {
         for (tmp in BindingName(db)) {
             yield VarRef {
                 id : tmp.id
@@ -29,7 +29,7 @@ schema RefExpr extends Node {
 impl RefExpr {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *RefExpr {
+    pub fn __all__(db: JavascriptDB) -> *RefExpr {
         for (tmp in Node(db)) {
             for (varRef in VarRef(db)) {
                 if (tmp.key_eq(varRef)) {
@@ -95,7 +95,7 @@ schema LValue extends RefExpr {
 impl LValue {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *LValue {
+    pub fn __all__(db: JavascriptDB) -> *LValue {
         for (tmp in RefExpr(db)) {
             if (isLValue(tmp)) {
                 yield LValue {
@@ -139,7 +139,7 @@ schema RValue extends RefExpr {
 impl RValue {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *RValue {
+    pub fn __all__(db: JavascriptDB) -> *RValue {
         for (tmp in RefExpr(db)) {
             if (isRValue(tmp)) {
                 yield RValue {
@@ -159,7 +159,7 @@ schema VarUse extends ControlFlowNode {
 impl VarUse {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *VarUse {
+    pub fn __all__(db: JavascriptDB) -> *VarUse {
         for (controlFlowNode in ControlFlowNode(db)) {
             if (isRValue(controlFlowNode.to<RefExpr>())) {
                 yield VarUse {
@@ -275,7 +275,7 @@ schema VarDef extends ControlFlowNode {
 impl VarDef {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *VarDef {
+    pub fn __all__(db: JavascriptDB) -> *VarDef {
         for (tmp in ControlFlowNode(db)) {
             if (defn(tmp, __all_data__)) {
                 yield VarDef {

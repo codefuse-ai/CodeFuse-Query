@@ -7,7 +7,7 @@ schema Literal extends Expression {
 impl Literal {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *Literal {
+    pub fn __all__(db: JavaDB) -> *Literal {
         for (tmp in Expression(db)) {
             for (s in StringLiteralDO(db)) {
                 if (tmp.key_eq(s)) {
@@ -243,7 +243,7 @@ schema StringLiteral extends Literal {
 impl StringLiteral {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *StringLiteral {
+    pub fn __all__(db: JavaDB) -> *StringLiteral {
         for (tmp in Literal(db)) {
             for (l in StringLiteralDO(db)) {
                 if (tmp.key_eq(l)) {
@@ -279,7 +279,7 @@ schema DoubleLiteral extends Literal {
 impl DoubleLiteral {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *DoubleLiteral {
+    pub fn __all__(db: JavaDB) -> *DoubleLiteral {
         for (tmp in Literal(db)) {
             for (l in DoubleLiteralDO(db)) {
                 if (tmp.key_eq(l)) {
@@ -305,7 +305,7 @@ schema IntegerLiteral extends Literal {
 impl IntegerLiteral {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *IntegerLiteral {
+    pub fn __all__(db: JavaDB) -> *IntegerLiteral {
         for (tmp in Literal(db)) {
             for (l in IntegerLiteralDO(db)) {
                 if (tmp.key_eq(l)) {
@@ -331,7 +331,7 @@ schema FloatingPointLiteral extends Literal {
 impl FloatingPointLiteral {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *FloatingPointLiteral {
+    pub fn __all__(db: JavaDB) -> *FloatingPointLiteral {
         for (tmp in Literal(db)) {
             for (l in FloatingPointLiteralDO(db)) {
                 if (tmp.key_eq(l)) {
@@ -357,7 +357,7 @@ schema LongLiteral extends Literal {
 impl LongLiteral {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *LongLiteral {
+    pub fn __all__(db: JavaDB) -> *LongLiteral {
         for (tmp in Literal(db)) {
             for (l in LongLiteralDO(db)) {
                 if (tmp.key_eq(l)) {
@@ -383,7 +383,7 @@ schema NullLiteral extends Literal {
 impl NullLiteral {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *NullLiteral {
+    pub fn __all__(db: JavaDB) -> *NullLiteral {
         for (tmp in Literal(db)) {
             for (l in NullLiteralDO(db)) {
                 if (tmp.key_eq(l)) {
@@ -409,7 +409,7 @@ schema CharacterLiteral extends Literal {
 impl CharacterLiteral {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *CharacterLiteral {
+    pub fn __all__(db: JavaDB) -> *CharacterLiteral {
         for (tmp in Literal(db)) {
             for (l in CharacterLiteralDO(db)) {
                 if (tmp.key_eq(l)) {
@@ -435,7 +435,7 @@ schema BooleanLiteral extends Literal {
 impl BooleanLiteral {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *BooleanLiteral {
+    pub fn __all__(db: JavaDB) -> *BooleanLiteral {
         for (tmp in Literal(db)) {
             for (l in BooleanLiteralDO(db)) {
                 if (tmp.key_eq(l)) {
@@ -461,7 +461,7 @@ schema TypeLiteral extends Expression {
 impl TypeLiteral {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *TypeLiteral {
+    pub fn __all__(db: JavaDB) -> *TypeLiteral {
         for (tmp in Expression(db)) {
             for (t in TypeLiteralDO(db)) {
                 if (tmp.key_eq(t)) {

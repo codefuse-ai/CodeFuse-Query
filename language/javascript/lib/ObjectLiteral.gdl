@@ -12,7 +12,7 @@ schema ObjectLiteralExpression extends PrimaryExpression {
 impl ObjectLiteralExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *ObjectLiteralExpression {
+    pub fn __all__(db: JavascriptDB) -> *ObjectLiteralExpression {
         for (tmp in PrimaryExpression(db)) {
             if (isObjectLiteralExpression(Node {id: tmp.id})) {
                 yield ObjectLiteralExpression {
@@ -93,7 +93,7 @@ schema ObjectLiteralElement extends Node {
 impl ObjectLiteralElement {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *ObjectLiteralElement {
+    pub fn __all__(db: JavascriptDB) -> *ObjectLiteralElement {
         for (tmp in Node(db)) {
             if (isObjectLiteralElement(tmp)) {
                 yield ObjectLiteralElement {
@@ -143,7 +143,7 @@ schema ComputedPropertyName extends Node {
 impl ComputedPropertyName {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *ComputedPropertyName {
+    pub fn __all__(db: JavascriptDB) -> *ComputedPropertyName {
         for (tmp in Node(db)) {
             if (isComputedPropertyName(tmp)) {
                 yield ComputedPropertyName {
@@ -170,7 +170,7 @@ schema PropertyName extends Node {
 impl PropertyName {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *PropertyName {
+    pub fn __all__(db: JavascriptDB) -> *PropertyName {
         for (tmp in Node(db)) {
             if (isPropertyName(tmp)) {
                 yield PropertyName {
@@ -218,7 +218,7 @@ schema PropertyAssignment extends ObjectLiteralElement {
 impl PropertyAssignment {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *PropertyAssignment {
+    pub fn __all__(db: JavascriptDB) -> *PropertyAssignment {
         for (tmp in ObjectLiteralElement(db)) {
             if (isPropertyAssignment(Node {id: tmp.id})) {
                 yield PropertyAssignment {
@@ -276,7 +276,7 @@ schema ShorthandPropertyAssignment extends ObjectLiteralElement {
 impl ShorthandPropertyAssignment {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *ShorthandPropertyAssignment {
+    pub fn __all__(db: JavascriptDB) -> *ShorthandPropertyAssignment {
         for (tmp in ObjectLiteralElement(db)) {
             if (isShorthandPropertyAssignment(Node {id: tmp.id})) {
                 yield ShorthandPropertyAssignment {
@@ -338,7 +338,7 @@ schema SpreadAssignment extends ObjectLiteralElement {
 impl SpreadAssignment {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *SpreadAssignment {
+    pub fn __all__(db: JavascriptDB) -> *SpreadAssignment {
         for (tmp in ObjectLiteralElement(db)) {
             if (isSpreadAssignment(Node {id: tmp.id})) {
                 yield SpreadAssignment {

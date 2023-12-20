@@ -7,7 +7,7 @@ schema Statement extends StatementDO {
 impl Statement {
     @data_constraint
     @inline
-    fn __all__(db: PythonDB) -> *Statement {
+    pub fn __all__(db: PythonDB) -> *Statement {
         for (tmp in StatementDO(db)) {
             yield Statement {
                 element_oid : tmp.element_oid,
@@ -109,7 +109,7 @@ schema FunctionDefStatement extends Statement {
 impl FunctionDefStatement {
     @data_constraint
     @inline
-    fn __all__(db: PythonDB) -> *FunctionDefStatement {
+    pub fn __all__(db: PythonDB) -> *FunctionDefStatement {
         for (tmp in Statement(db)) {
             for (f in FunctionDefStatementDO(db)) {
                 if (tmp.key_eq(f)) {
@@ -150,7 +150,7 @@ schema AsyncFunctionDefStatement extends Statement {
 impl AsyncFunctionDefStatement {
     @data_constraint
     @inline
-    fn __all__(db: PythonDB) -> *AsyncFunctionDefStatement {
+    pub fn __all__(db: PythonDB) -> *AsyncFunctionDefStatement {
         for (tmp in Statement(db)) {
             for (f in AsyncFunctionDefStatementDO(db)) {
                 if (tmp.key_eq(f)) {
@@ -191,7 +191,7 @@ schema ClassDefStatement extends Statement {
 impl ClassDefStatement {
     @data_constraint
     @inline
-    fn __all__(db: PythonDB) -> *ClassDefStatement {
+    pub fn __all__(db: PythonDB) -> *ClassDefStatement {
         for (tmp in Statement(db)) {
             for (f in ClassDefStatementDO(db)) {
                 if (tmp.key_eq(f)) {
@@ -232,7 +232,7 @@ schema ForStatement extends Statement {
 impl ForStatement {
     @data_constraint
     @inline
-    fn __all__(db: PythonDB) -> *ForStatement {
+    pub fn __all__(db: PythonDB) -> *ForStatement {
         for (tmp in Statement(db)) {
             for (f in ForStatementDO(db)) {
                 if (tmp.key_eq(f)) {
@@ -258,7 +258,7 @@ schema IfStatement extends Statement {
 impl IfStatement {
     @data_constraint
     @inline
-    fn __all__(db: PythonDB) -> *IfStatement {
+    pub fn __all__(db: PythonDB) -> *IfStatement {
         for (tmp in Statement(db)) {
             for (f in IfStatementDO(db)) {
                 if (tmp.key_eq(f)) {
@@ -284,7 +284,7 @@ schema WhileStatement extends Statement {
 impl WhileStatement {
     @data_constraint
     @inline
-    fn __all__(db: PythonDB) -> *WhileStatement {
+    pub fn __all__(db: PythonDB) -> *WhileStatement {
         for (tmp in Statement(db)) {
             for (f in WhileStatementDO(db)) {
                 if (tmp.key_eq(f)) {
@@ -310,7 +310,7 @@ schema TryStatement extends Statement {
 impl TryStatement {
     @data_constraint
     @inline
-    fn __all__(db: PythonDB) -> *TryStatement {
+    pub fn __all__(db: PythonDB) -> *TryStatement {
         for (tmp in Statement(db)) {
             for (f in TryStatementDO(db)) {
                 if (tmp.key_eq(f)) {
@@ -336,7 +336,7 @@ schema ExceptHandler extends ExceptHandlerDO {
 impl ExceptHandler {
     @data_constraint
     @inline
-    fn __all__(db: PythonDB) -> *ExceptHandler {
+    pub fn __all__(db: PythonDB) -> *ExceptHandler {
         for (tmp in ExceptHandlerDO(db)) {
             yield ExceptHandler {
                 element_oid : tmp.element_oid,
@@ -390,7 +390,7 @@ schema MatchStatement extends Statement {
 impl MatchStatement {
     @data_constraint
     @inline
-    fn __all__(db: PythonDB) -> *MatchStatement {
+    pub fn __all__(db: PythonDB) -> *MatchStatement {
         for (tmp in Statement(db)) {
             for (s in MatchStatementDO(db)) {
                 if (tmp.key_eq(s)) {
@@ -427,7 +427,7 @@ schema MatchCase extends MatchCaseDO {
 impl MatchCase {
     @data_constraint
     @inline
-    fn __all__(db: PythonDB) -> *MatchCase {
+    pub fn __all__(db: PythonDB) -> *MatchCase {
         for (tmp in MatchCaseDO(db)) {
             yield MatchCase {
                 element_oid : tmp.element_oid,
@@ -494,7 +494,7 @@ schema BreakStatement extends Statement {
 impl BreakStatement {
     @data_constraint
     @inline
-    fn __all__(db: PythonDB) -> *BreakStatement {
+    pub fn __all__(db: PythonDB) -> *BreakStatement {
         for (tmp in Statement(db)) {
             for (s in BreakStatementDO(db)) {
                 if (tmp.key_eq(s)) {
@@ -520,7 +520,7 @@ schema ReturnStatement extends Statement {
 impl ReturnStatement {
     @data_constraint
     @inline
-    fn __all__(db: PythonDB) -> *ReturnStatement {
+    pub fn __all__(db: PythonDB) -> *ReturnStatement {
         for (tmp in Statement(db)) {
             for (s in ReturnStatementDO(db)) {
                 if (tmp.key_eq(s)) {
@@ -546,7 +546,7 @@ schema ImportStatement extends Statement {
 impl ImportStatement {
     @data_constraint
     @inline
-    fn __all__(db: PythonDB) -> *ImportStatement {
+    pub fn __all__(db: PythonDB) -> *ImportStatement {
         for (tmp in Statement(db)) {
             for (i in ImportStatementDO(db)) {
                 if (tmp.key_eq(i)) {
@@ -583,7 +583,7 @@ schema ImportFromStatement extends Statement {
 impl ImportFromStatement {
     @data_constraint
     @inline
-    fn __all__(db: PythonDB) -> *ImportFromStatement {
+    pub fn __all__(db: PythonDB) -> *ImportFromStatement {
         for (tmp in Statement(db)) {
             for (i in ImportFromStatementDO(db)) {
                 if (tmp.key_eq(i)) {
@@ -624,7 +624,7 @@ schema WithStatement extends Statement {
 impl WithStatement {
     @data_constraint
     @inline
-    fn __all__(db: PythonDB) -> *WithStatement {
+    pub fn __all__(db: PythonDB) -> *WithStatement {
         for (tmp in Statement(db)) {
             for (w in WithStatementDO(db)) {
                 if (tmp.key_eq(w)) {

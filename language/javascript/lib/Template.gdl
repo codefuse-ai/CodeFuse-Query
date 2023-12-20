@@ -12,7 +12,7 @@ schema TemplateLiteralLikeNode extends Node {
 impl TemplateLiteralLikeNode {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *TemplateLiteralLikeNode {
+    pub fn __all__(db: JavascriptDB) -> *TemplateLiteralLikeNode {
         for (tmp in Node(db)) {
             if (isTemplateLiteralLikeNode(tmp)) {
                 yield TemplateLiteralLikeNode {
@@ -45,7 +45,7 @@ schema TemplateHead extends TemplateLiteralLikeNode {
 impl TemplateHead {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *TemplateHead {
+    pub fn __all__(db: JavascriptDB) -> *TemplateHead {
         for (tmp in TemplateLiteralLikeNode(db)) {
             if (isTemplateHead(Node {id: tmp.id})) {
                 yield TemplateHead {
@@ -65,7 +65,7 @@ schema TemplateMiddle extends TemplateLiteralLikeNode {
 impl TemplateMiddle {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *TemplateMiddle {
+    pub fn __all__(db: JavascriptDB) -> *TemplateMiddle {
         for (tmp in TemplateLiteralLikeNode(db)) {
             if (isTemplateMiddle(Node {id: tmp.id})) {
                 yield TemplateMiddle {
@@ -85,7 +85,7 @@ schema TemplateTail extends TemplateLiteralLikeNode {
 impl TemplateTail {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *TemplateTail {
+    pub fn __all__(db: JavascriptDB) -> *TemplateTail {
         for (tmp in TemplateLiteralLikeNode(db)) {
             if (isTemplateTail(Node {id: tmp.id})) {
                 yield TemplateTail {
@@ -105,7 +105,7 @@ schema TemplateSpan extends Node {
 impl TemplateSpan {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *TemplateSpan {
+    pub fn __all__(db: JavascriptDB) -> *TemplateSpan {
         for (tmp in Node(db)) {
             if (isTemplateSpan(tmp)) {
                 yield TemplateSpan {

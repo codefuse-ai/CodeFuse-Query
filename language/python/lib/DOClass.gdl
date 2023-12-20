@@ -14,7 +14,7 @@ impl AliasDO {
     @data_constraint
     @inline
     pub fn __all__(db: PythonDB) -> *AliasDO {
-        for (tmp in db.alias) {
+    	for (tmp in db.alias) {
             yield AliasDO {
                 element_oid : tmp.element_oid,
                 name : tmp.name,
@@ -24,7 +24,7 @@ impl AliasDO {
                 location_oid : tmp.location_oid,
                 printable_text : tmp.printable_text
             }
-        }
+    	}
     }
     /**
      * @brief gets the name of this element.
@@ -82,14 +82,14 @@ impl AnnotationAssignmentStatementDO {
     @data_constraint
     @inline
     pub fn __all__(db: PythonDB) -> *AnnotationAssignmentStatementDO {
-        for (tmp in db.annotation_assignment_statement) {
+    	for (tmp in db.annotation_assignment_statement) {
             yield AnnotationAssignmentStatementDO {
                 element_oid : tmp.element_oid,
                 annotation_oid : tmp.annotation_oid,
                 target_oid : tmp.target_oid,
                 is_simple : tmp.is_simple
             }
-        }
+    	}
     }
     /**
      * @brief gets the annotation oid of this element.
@@ -129,7 +129,7 @@ impl ArgDO {
     @data_constraint
     @inline
     pub fn __all__(db: PythonDB) -> *ArgDO {
-        for (tmp in db.arg) {
+    	for (tmp in db.arg) {
             yield ArgDO {
                 element_oid : tmp.element_oid,
                 annotation : tmp.annotation,
@@ -138,7 +138,7 @@ impl ArgDO {
                 location_oid : tmp.location_oid,
                 printable_text : tmp.printable_text
             }
-        }
+    	}
     }
     /**
      * @brief gets the annotation of this element.
@@ -188,13 +188,13 @@ impl ArgumentsDO {
     @data_constraint
     @inline
     pub fn __all__(db: PythonDB) -> *ArgumentsDO {
-        for (tmp in db.arguments) {
+    	for (tmp in db.arguments) {
             yield ArgumentsDO {
                 element_oid : tmp.element_oid,
                 parent_oid : tmp.parent_oid,
                 printable_text : tmp.printable_text
             }
-        }
+    	}
     }
     /**
      * @brief gets the parent oid of this element.
@@ -222,12 +222,12 @@ impl AssertStatementDO {
     @data_constraint
     @inline
     pub fn __all__(db: PythonDB) -> *AssertStatementDO {
-        for (tmp in db.assert_statement) {
+    	for (tmp in db.assert_statement) {
             yield AssertStatementDO {
                 element_oid : tmp.element_oid,
                 assert_condition_oid : tmp.assert_condition_oid
             }
-        }
+    	}
     }
     /**
      * @brief gets the assert condition oid of this element.
@@ -249,13 +249,13 @@ impl AssignmentStatementDO {
     @data_constraint
     @inline
     pub fn __all__(db: PythonDB) -> *AssignmentStatementDO {
-        for (tmp in db.assignment_statement) {
+    	for (tmp in db.assignment_statement) {
             yield AssignmentStatementDO {
                 element_oid : tmp.element_oid,
                 value_oid : tmp.value_oid,
                 targets_size : tmp.targets_size
             }
-        }
+    	}
     }
     /**
      * @brief gets the value oid of this element.
@@ -282,11 +282,11 @@ impl AsyncForStatementDO {
     @data_constraint
     @inline
     pub fn __all__(db: PythonDB) -> *AsyncForStatementDO {
-        for (tmp in db.async_for_statement) {
+    	for (tmp in db.async_for_statement) {
             yield AsyncForStatementDO {
                 element_oid : tmp.element_oid
             }
-        }
+    	}
     }
 }
 /**
@@ -300,12 +300,12 @@ impl AsyncFunctionDefStatementDO {
     @data_constraint
     @inline
     pub fn __all__(db: PythonDB) -> *AsyncFunctionDefStatementDO {
-        for (tmp in db.async_function_def_statement) {
+    	for (tmp in db.async_function_def_statement) {
             yield AsyncFunctionDefStatementDO {
                 element_oid : tmp.element_oid,
                 name : tmp.name
             }
-        }
+    	}
     }
     /**
      * @brief gets the name of this element.
@@ -325,11 +325,11 @@ impl AsyncWithStatementDO {
     @data_constraint
     @inline
     pub fn __all__(db: PythonDB) -> *AsyncWithStatementDO {
-        for (tmp in db.async_with_statement) {
+    	for (tmp in db.async_with_statement) {
             yield AsyncWithStatementDO {
                 element_oid : tmp.element_oid
             }
-        }
+    	}
     }
 }
 /**
@@ -344,13 +344,13 @@ impl AttributeExpressionDO {
     @data_constraint
     @inline
     pub fn __all__(db: PythonDB) -> *AttributeExpressionDO {
-        for (tmp in db.attribute_expression) {
+    	for (tmp in db.attribute_expression) {
             yield AttributeExpressionDO {
                 element_oid : tmp.element_oid,
                 value_oid : tmp.value_oid,
                 ctx_type : tmp.ctx_type
             }
-        }
+    	}
     }
     /**
      * @brief gets the value oid of this element.
@@ -380,14 +380,14 @@ impl AugmentedAssignmentStatementDO {
     @data_constraint
     @inline
     pub fn __all__(db: PythonDB) -> *AugmentedAssignmentStatementDO {
-        for (tmp in db.augmented_assignment_statement) {
+    	for (tmp in db.augmented_assignment_statement) {
             yield AugmentedAssignmentStatementDO {
                 element_oid : tmp.element_oid,
                 op_code : tmp.op_code,
                 target_expr_oid : tmp.target_expr_oid,
                 value_expr_oid : tmp.value_expr_oid
             }
-        }
+    	}
     }
     /**
      * @brief gets the op code of this element.
@@ -422,12 +422,12 @@ impl AwaitExpressionDO {
     @data_constraint
     @inline
     pub fn __all__(db: PythonDB) -> *AwaitExpressionDO {
-        for (tmp in db.await_expression) {
+    	for (tmp in db.await_expression) {
             yield AwaitExpressionDO {
                 element_oid : tmp.element_oid,
                 expr_value_oid : tmp.expr_value_oid
             }
-        }
+    	}
     }
     /**
      * @brief gets the expr value oid of this element.
@@ -450,14 +450,14 @@ impl BinOpExpressionDO {
     @data_constraint
     @inline
     pub fn __all__(db: PythonDB) -> *BinOpExpressionDO {
-        for (tmp in db.bin_op_expression) {
+    	for (tmp in db.bin_op_expression) {
             yield BinOpExpressionDO {
                 element_oid : tmp.element_oid,
                 left_expr_oid : tmp.left_expr_oid,
                 opcode : tmp.opcode,
                 right_expr_oid : tmp.right_expr_oid
             }
-        }
+    	}
     }
     /**
      * @brief gets the left expr oid of this element.
@@ -493,13 +493,13 @@ impl BooleanOpExpressionDO {
     @data_constraint
     @inline
     pub fn __all__(db: PythonDB) -> *BooleanOpExpressionDO {
-        for (tmp in db.boolean_op_expression) {
+    	for (tmp in db.boolean_op_expression) {
             yield BooleanOpExpressionDO {
                 element_oid : tmp.element_oid,
                 type : tmp.type,
                 size : tmp.size
             }
-        }
+    	}
     }
     /**
      * @brief gets the type of this element.
@@ -526,11 +526,11 @@ impl BreakStatementDO {
     @data_constraint
     @inline
     pub fn __all__(db: PythonDB) -> *BreakStatementDO {
-        for (tmp in db.break_statement) {
+    	for (tmp in db.break_statement) {
             yield BreakStatementDO {
                 element_oid : tmp.element_oid
             }
-        }
+    	}
     }
 }
 /**
@@ -544,12 +544,12 @@ impl CallExpressionDO {
     @data_constraint
     @inline
     pub fn __all__(db: PythonDB) -> *CallExpressionDO {
-        for (tmp in db.call_expression) {
+    	for (tmp in db.call_expression) {
             yield CallExpressionDO {
                 element_oid : tmp.element_oid,
                 expr_func_oid : tmp.expr_func_oid
             }
-        }
+    	}
     }
     /**
      * @brief gets the expr func oid of this element.
@@ -570,12 +570,12 @@ impl CallableBindingDO {
     @data_constraint
     @inline
     pub fn __all__(db: PythonDB) -> *CallableBindingDO {
-        for (tmp in db.callable_binding) {
+    	for (tmp in db.callable_binding) {
             yield CallableBindingDO {
                 caller_oid : tmp.caller_oid,
                 callee_oid : tmp.callee_oid
             }
-        }
+    	}
     }
     /**
      * @brief gets the callee oid of this element.
@@ -596,12 +596,12 @@ impl ClassDefStatementDO {
     @data_constraint
     @inline
     pub fn __all__(db: PythonDB) -> *ClassDefStatementDO {
-        for (tmp in db.class_def_statement) {
+    	for (tmp in db.class_def_statement) {
             yield ClassDefStatementDO {
                 element_oid : tmp.element_oid,
                 name : tmp.name
             }
-        }
+    	}
     }
     /**
      * @brief gets the name of this element.
@@ -622,12 +622,12 @@ impl ClassHierarchyDO {
     @data_constraint
     @inline
     pub fn __all__(db: PythonDB) -> *ClassHierarchyDO {
-        for (tmp in db.class_hierarchy) {
+    	for (tmp in db.class_hierarchy) {
             yield ClassHierarchyDO {
                 base_oid : tmp.base_oid,
                 class_oid : tmp.class_oid
             }
-        }
+    	}
     }
     /**
      * @brief gets the class oid of this element.
@@ -650,14 +650,14 @@ impl CmpopDO {
     @data_constraint
     @inline
     pub fn __all__(db: PythonDB) -> *CmpopDO {
-        for (tmp in db.cmpop) {
+    	for (tmp in db.cmpop) {
             yield CmpopDO {
                 element_oid : tmp.element_oid,
                 value : tmp.value,
                 location_oid : tmp.location_oid,
                 parent_oid : tmp.parent_oid
             }
-        }
+    	}
     }
     /**
      * @brief gets the value of this element.
@@ -694,14 +694,14 @@ impl CommentDO {
     @data_constraint
     @inline
     pub fn __all__(db: PythonDB) -> *CommentDO {
-        for (tmp in db.comment) {
+    	for (tmp in db.comment) {
             yield CommentDO {
                 element_oid : tmp.element_oid,
                 text : tmp.text,
                 parent_oid : tmp.parent_oid,
                 location_oid : tmp.location_oid
             }
-        }
+    	}
     }
     /**
      * @brief gets the text of this element.
@@ -736,12 +736,12 @@ impl CompareExpressionDO {
     @data_constraint
     @inline
     pub fn __all__(db: PythonDB) -> *CompareExpressionDO {
-        for (tmp in db.compare_expression) {
+    	for (tmp in db.compare_expression) {
             yield CompareExpressionDO {
                 element_oid : tmp.element_oid,
                 left_expr_oid : tmp.left_expr_oid
             }
-        }
+    	}
     }
     /**
      * @brief gets the left expr oid of this element.
@@ -766,7 +766,7 @@ impl ComprehensionDO {
     @data_constraint
     @inline
     pub fn __all__(db: PythonDB) -> *ComprehensionDO {
-        for (tmp in db.comprehension) {
+    	for (tmp in db.comprehension) {
             yield ComprehensionDO {
                 element_oid : tmp.element_oid,
                 target_expr_oid : tmp.target_expr_oid,
@@ -775,7 +775,7 @@ impl ComprehensionDO {
                 parent_oid : tmp.parent_oid,
                 printable_text : tmp.printable_text
             }
-        }
+    	}
     }
     /**
      * @brief gets the target expr oid of this element.
@@ -824,12 +824,12 @@ impl ConstantDO {
     @data_constraint
     @inline
     pub fn __all__(db: PythonDB) -> *ConstantDO {
-        for (tmp in db.constant) {
+    	for (tmp in db.constant) {
             yield ConstantDO {
                 element_oid : tmp.element_oid,
                 value : tmp.value
             }
-        }
+    	}
     }
     /**
      * @brief gets the value of this element.
@@ -850,12 +850,12 @@ impl ContainerParentDO {
     @data_constraint
     @inline
     pub fn __all__(db: PythonDB) -> *ContainerParentDO {
-        for (tmp in db.container_parent) {
+    	for (tmp in db.container_parent) {
             yield ContainerParentDO {
                 child_oid : tmp.child_oid,
                 parent_oid : tmp.parent_oid
             }
-        }
+    	}
     }
     /**
      * @brief gets the parent oid of this element.
@@ -875,11 +875,11 @@ impl ContinueStatementDO {
     @data_constraint
     @inline
     pub fn __all__(db: PythonDB) -> *ContinueStatementDO {
-        for (tmp in db.continue_statement) {
+    	for (tmp in db.continue_statement) {
             yield ContinueStatementDO {
                 element_oid : tmp.element_oid
             }
-        }
+    	}
     }
 }
 /**
@@ -893,12 +893,12 @@ impl DecoratedRelationDO {
     @data_constraint
     @inline
     pub fn __all__(db: PythonDB) -> *DecoratedRelationDO {
-        for (tmp in db.decorated_relation) {
+    	for (tmp in db.decorated_relation) {
             yield DecoratedRelationDO {
                 decorator_oid : tmp.decorator_oid,
                 decorated_element_oid : tmp.decorated_element_oid
             }
-        }
+    	}
     }
     /**
      * @brief gets the decorated element oid of this element.
@@ -920,13 +920,13 @@ impl DecoratorDO {
     @data_constraint
     @inline
     pub fn __all__(db: PythonDB) -> *DecoratorDO {
-        for (tmp in db.decorator) {
+    	for (tmp in db.decorator) {
             yield DecoratorDO {
                 element_oid : tmp.element_oid,
                 type : tmp.type,
                 printable_text : tmp.printable_text
             }
-        }
+    	}
     }
     /**
      * @brief gets the type of this element.
@@ -954,12 +954,12 @@ impl DeleteStatementDO {
     @data_constraint
     @inline
     pub fn __all__(db: PythonDB) -> *DeleteStatementDO {
-        for (tmp in db.delete_statement) {
+    	for (tmp in db.delete_statement) {
             yield DeleteStatementDO {
                 element_oid : tmp.element_oid,
                 targets_size : tmp.targets_size
             }
-        }
+    	}
     }
     /**
      * @brief gets the targets size of this element.
@@ -980,12 +980,12 @@ impl DictCompExpressionDO {
     @data_constraint
     @inline
     pub fn __all__(db: PythonDB) -> *DictCompExpressionDO {
-        for (tmp in db.dict_comp_expression) {
+    	for (tmp in db.dict_comp_expression) {
             yield DictCompExpressionDO {
                 element_oid : tmp.element_oid,
                 comprehension_size : tmp.comprehension_size
             }
-        }
+    	}
     }
     /**
      * @brief gets the comprehension size of this element.
@@ -1006,12 +1006,12 @@ impl DictExpressionDO {
     @data_constraint
     @inline
     pub fn __all__(db: PythonDB) -> *DictExpressionDO {
-        for (tmp in db.dict_expression) {
+    	for (tmp in db.dict_expression) {
             yield DictExpressionDO {
                 element_oid : tmp.element_oid,
                 size : tmp.size
             }
-        }
+    	}
     }
     /**
      * @brief gets the size of this element.
@@ -1033,13 +1033,13 @@ impl DocstringCommentDO {
     @data_constraint
     @inline
     pub fn __all__(db: PythonDB) -> *DocstringCommentDO {
-        for (tmp in db.docstring_comment) {
+    	for (tmp in db.docstring_comment) {
             yield DocstringCommentDO {
                 element_oid : tmp.element_oid,
                 text : tmp.text,
                 documented_element_oid : tmp.documented_element_oid
             }
-        }
+    	}
     }
     /**
      * @brief gets the text of this element.
@@ -1069,14 +1069,14 @@ impl ElementDO {
     @data_constraint
     @inline
     pub fn __all__(db: PythonDB) -> *ElementDO {
-        for (tmp in db.element) {
+    	for (tmp in db.element) {
             yield ElementDO {
                 oid : tmp.oid,
                 value : tmp.value,
                 type : tmp.type,
                 parent_oid : tmp.parent_oid
             }
-        }
+    	}
     }
     /**
      * @brief gets the value of this element.
@@ -1114,7 +1114,7 @@ impl ExceptHandlerDO {
     @data_constraint
     @inline
     pub fn __all__(db: PythonDB) -> *ExceptHandlerDO {
-        for (tmp in db.except_handler) {
+    	for (tmp in db.except_handler) {
             yield ExceptHandlerDO {
                 element_oid : tmp.element_oid,
                 element_index : tmp.element_index,
@@ -1122,7 +1122,7 @@ impl ExceptHandlerDO {
                 location_oid : tmp.location_oid,
                 printable_text : tmp.printable_text
             }
-        }
+    	}
     }
     /**
      * @brief gets the element index of this element.
@@ -1165,13 +1165,13 @@ impl ExprContextDO {
     @data_constraint
     @inline
     pub fn __all__(db: PythonDB) -> *ExprContextDO {
-        for (tmp in db.expr_context) {
+    	for (tmp in db.expr_context) {
             yield ExprContextDO {
                 element_oid : tmp.element_oid,
                 parent_oid : tmp.parent_oid,
                 printable_text : tmp.printable_text
             }
-        }
+    	}
     }
     /**
      * @brief gets the parent oid of this element.
@@ -1203,7 +1203,7 @@ impl ExpressionDO {
     @data_constraint
     @inline
     pub fn __all__(db: PythonDB) -> *ExpressionDO {
-        for (tmp in db.expression) {
+    	for (tmp in db.expression) {
             yield ExpressionDO {
                 element_oid : tmp.element_oid,
                 type : tmp.type,
@@ -1212,7 +1212,7 @@ impl ExpressionDO {
                 location_oid : tmp.location_oid,
                 printable_text : tmp.printable_text
             }
-        }
+    	}
     }
     /**
      * @brief gets the type of this element.
@@ -1261,12 +1261,12 @@ impl ExpressionStatementDO {
     @data_constraint
     @inline
     pub fn __all__(db: PythonDB) -> *ExpressionStatementDO {
-        for (tmp in db.expression_statement) {
+    	for (tmp in db.expression_statement) {
             yield ExpressionStatementDO {
                 element_oid : tmp.element_oid,
                 value_oid : tmp.value_oid
             }
-        }
+    	}
     }
     /**
      * @brief gets the value oid of this element.
@@ -1290,7 +1290,7 @@ impl FileDO {
     @data_constraint
     @inline
     pub fn __all__(db: PythonDB) -> *FileDO {
-        for (tmp in db.file) {
+    	for (tmp in db.file) {
             yield FileDO {
                 element_oid : tmp.element_oid,
                 relative_path : tmp.relative_path,
@@ -1298,7 +1298,7 @@ impl FileDO {
                 name : tmp.name,
                 number_of_lines_oid : tmp.number_of_lines_oid
             }
-        }
+    	}
     }
     /**
      * @brief gets the relative path of this element.
@@ -1340,12 +1340,12 @@ impl Modified2To3FileDO {
     @data_constraint
     @inline
     pub fn __all__(db: PythonDB) -> *Modified2To3FileDO {
-        for (tmp in db.modified_2to3_file) {
+    	for (tmp in db.modified_2to3_file) {
             yield Modified2To3FileDO {
                 element_oid : tmp.element_oid,
                 relative_path : tmp.relative_path
             }
-        }
+    	}
     }
     /**
      * @brief gets the relative path of this element.
@@ -1368,14 +1368,14 @@ impl ParseErrorFileDO {
     @data_constraint
     @inline
     pub fn __all__(db: PythonDB) -> *ParseErrorFileDO {
-        for (tmp in db.parse_error_file) {
+    	for (tmp in db.parse_error_file) {
             yield ParseErrorFileDO {
                 element_oid : tmp.element_oid,
                 relative_path : tmp.relative_path,
                 error_message : tmp.error_message,
                 error_text : tmp.error_text
             }
-        }
+    	}
     }
     /**
      * @brief gets the relative path of this element.
@@ -1410,12 +1410,12 @@ impl FileMd5SumDO {
     @data_constraint
     @inline
     pub fn __all__(db: PythonDB) -> *FileMd5SumDO {
-        for (tmp in db.file_md5_sum) {
+    	for (tmp in db.file_md5_sum) {
             yield FileMd5SumDO {
                 file_oid : tmp.file_oid,
                 value : tmp.value
             }
-        }
+    	}
     }
     /**
      * @brief gets the value of this element.
@@ -1436,12 +1436,12 @@ impl FileSha256SumDO {
     @data_constraint
     @inline
     pub fn __all__(db: PythonDB) -> *FileSha256SumDO {
-        for (tmp in db.file_sha256_sum) {
+    	for (tmp in db.file_sha256_sum) {
             yield FileSha256SumDO {
                 file_oid : tmp.file_oid,
                 value : tmp.value
             }
-        }
+    	}
     }
     /**
      * @brief gets the value of this element.
@@ -1464,14 +1464,14 @@ impl FolderDO {
     @data_constraint
     @inline
     pub fn __all__(db: PythonDB) -> *FolderDO {
-        for (tmp in db.folder) {
+    	for (tmp in db.folder) {
             yield FolderDO {
                 element_oid : tmp.element_oid,
                 qualified_name : tmp.qualified_name,
                 name : tmp.name,
                 parent_oid : tmp.parent_oid
             }
-        }
+    	}
     }
     /**
      * @brief gets the qualified name of this element.
@@ -1505,11 +1505,11 @@ impl ForStatementDO {
     @data_constraint
     @inline
     pub fn __all__(db: PythonDB) -> *ForStatementDO {
-        for (tmp in db.for_statement) {
+    	for (tmp in db.for_statement) {
             yield ForStatementDO {
                 element_oid : tmp.element_oid
             }
-        }
+    	}
     }
 }
 /**
@@ -1523,12 +1523,12 @@ impl FormattedValueExpressionDO {
     @data_constraint
     @inline
     pub fn __all__(db: PythonDB) -> *FormattedValueExpressionDO {
-        for (tmp in db.formatted_value_expression) {
+    	for (tmp in db.formatted_value_expression) {
             yield FormattedValueExpressionDO {
                 element_oid : tmp.element_oid,
                 value_oid : tmp.value_oid
             }
-        }
+    	}
     }
     /**
      * @brief gets the value oid of this element.
@@ -1549,12 +1549,12 @@ impl FunctionDefStatementDO {
     @data_constraint
     @inline
     pub fn __all__(db: PythonDB) -> *FunctionDefStatementDO {
-        for (tmp in db.function_def_statement) {
+    	for (tmp in db.function_def_statement) {
             yield FunctionDefStatementDO {
                 element_oid : tmp.element_oid,
                 name : tmp.name
             }
-        }
+    	}
     }
     /**
      * @brief gets the name of this element.
@@ -1575,12 +1575,12 @@ impl GeneratorExpressionDO {
     @data_constraint
     @inline
     pub fn __all__(db: PythonDB) -> *GeneratorExpressionDO {
-        for (tmp in db.generator_expression) {
+    	for (tmp in db.generator_expression) {
             yield GeneratorExpressionDO {
                 element_oid : tmp.element_oid,
                 elt_oid : tmp.elt_oid
             }
-        }
+    	}
     }
     /**
      * @brief gets the elt oid of this element.
@@ -1601,12 +1601,12 @@ impl GlobalStatementDO {
     @data_constraint
     @inline
     pub fn __all__(db: PythonDB) -> *GlobalStatementDO {
-        for (tmp in db.global_statement) {
+    	for (tmp in db.global_statement) {
             yield GlobalStatementDO {
                 element_oid : tmp.element_oid,
                 names : tmp.names
             }
-        }
+    	}
     }
     /**
      * @brief gets the names of this element.
@@ -1626,11 +1626,11 @@ impl IfExpressionDO {
     @data_constraint
     @inline
     pub fn __all__(db: PythonDB) -> *IfExpressionDO {
-        for (tmp in db.if_expression) {
+    	for (tmp in db.if_expression) {
             yield IfExpressionDO {
                 element_oid : tmp.element_oid
             }
-        }
+    	}
     }
 }
 /**
@@ -1643,11 +1643,11 @@ impl IfStatementDO {
     @data_constraint
     @inline
     pub fn __all__(db: PythonDB) -> *IfStatementDO {
-        for (tmp in db.if_statement) {
+    	for (tmp in db.if_statement) {
             yield IfStatementDO {
                 element_oid : tmp.element_oid
             }
-        }
+    	}
     }
 }
 /**
@@ -1662,13 +1662,13 @@ impl ImportFromStatementDO {
     @data_constraint
     @inline
     pub fn __all__(db: PythonDB) -> *ImportFromStatementDO {
-        for (tmp in db.import_from_statement) {
+    	for (tmp in db.import_from_statement) {
             yield ImportFromStatementDO {
                 element_oid : tmp.element_oid,
                 module : tmp.module,
                 level : tmp.level
             }
-        }
+    	}
     }
     /**
      * @brief gets the module of this element.
@@ -1695,11 +1695,11 @@ impl ImportStatementDO {
     @data_constraint
     @inline
     pub fn __all__(db: PythonDB) -> *ImportStatementDO {
-        for (tmp in db.import_statement) {
+    	for (tmp in db.import_statement) {
             yield ImportStatementDO {
                 element_oid : tmp.element_oid
             }
-        }
+    	}
     }
 }
 /**
@@ -1713,12 +1713,12 @@ impl JoinedStrExpressionDO {
     @data_constraint
     @inline
     pub fn __all__(db: PythonDB) -> *JoinedStrExpressionDO {
-        for (tmp in db.joined_str_expression) {
+    	for (tmp in db.joined_str_expression) {
             yield JoinedStrExpressionDO {
                 element_oid : tmp.element_oid,
                 size : tmp.size
             }
-        }
+    	}
     }
     /**
      * @brief gets the size of this element.
@@ -1744,7 +1744,7 @@ impl KeywordDO {
     @data_constraint
     @inline
     pub fn __all__(db: PythonDB) -> *KeywordDO {
-        for (tmp in db.keyword) {
+    	for (tmp in db.keyword) {
             yield KeywordDO {
                 element_oid : tmp.element_oid,
                 arg_value : tmp.arg_value,
@@ -1754,7 +1754,7 @@ impl KeywordDO {
                 location_oid : tmp.location_oid,
                 printable_text : tmp.printable_text
             }
-        }
+    	}
     }
     /**
      * @brief gets the arg value of this element.
@@ -1809,11 +1809,11 @@ impl LambdaExpressionDO {
     @data_constraint
     @inline
     pub fn __all__(db: PythonDB) -> *LambdaExpressionDO {
-        for (tmp in db.lambda_expression) {
+    	for (tmp in db.lambda_expression) {
             yield LambdaExpressionDO {
                 element_oid : tmp.element_oid
             }
-        }
+    	}
     }
 }
 /**
@@ -1828,13 +1828,13 @@ impl ListCompExpressionDO {
     @data_constraint
     @inline
     pub fn __all__(db: PythonDB) -> *ListCompExpressionDO {
-        for (tmp in db.list_comp_expression) {
+    	for (tmp in db.list_comp_expression) {
             yield ListCompExpressionDO {
                 element_oid : tmp.element_oid,
                 elt_oid : tmp.elt_oid,
                 generator_size : tmp.generator_size
             }
-        }
+    	}
     }
     /**
      * @brief gets the elt oid of this element.
@@ -1863,13 +1863,13 @@ impl ListExpressionDO {
     @data_constraint
     @inline
     pub fn __all__(db: PythonDB) -> *ListExpressionDO {
-        for (tmp in db.list_expression) {
+    	for (tmp in db.list_expression) {
             yield ListExpressionDO {
                 element_oid : tmp.element_oid,
                 elt_size : tmp.elt_size,
                 ctx : tmp.ctx
             }
-        }
+    	}
     }
     /**
      * @brief gets the elt size of this element.
@@ -1901,7 +1901,7 @@ impl LocationDO {
     @data_constraint
     @inline
     pub fn __all__(db: PythonDB) -> *LocationDO {
-        for (tmp in db.location) {
+    	for (tmp in db.location) {
             yield LocationDO {
                 element_oid : tmp.element_oid,
                 file_oid : tmp.file_oid,
@@ -1910,7 +1910,7 @@ impl LocationDO {
                 end_line_number : tmp.end_line_number,
                 end_column_number : tmp.end_column_number
             }
-        }
+    	}
     }
     /**
      * @brief gets the file oid of this element.
@@ -1964,7 +1964,7 @@ impl MatchCaseDO {
     @data_constraint
     @inline
     pub fn __all__(db: PythonDB) -> *MatchCaseDO {
-        for (tmp in db.match_case) {
+    	for (tmp in db.match_case) {
             yield MatchCaseDO {
                 element_oid : tmp.element_oid,
                 pattern_oid : tmp.pattern_oid,
@@ -1974,7 +1974,7 @@ impl MatchCaseDO {
                 printable_text : tmp.printable_text,
                 is_default : tmp.is_default
             }
-        }
+    	}
     }
     /**
      * @brief gets the pattern oid of this element.
@@ -2030,12 +2030,12 @@ impl MatchStatementDO {
     @data_constraint
     @inline
     pub fn __all__(db: PythonDB) -> *MatchStatementDO {
-        for (tmp in db.match_statement) {
+    	for (tmp in db.match_statement) {
             yield MatchStatementDO {
                 element_oid : tmp.element_oid,
                 subject_oid : tmp.subject_oid
             }
-        }
+    	}
     }
     /**
      * @brief gets the subject oid of this element.
@@ -2058,14 +2058,14 @@ impl MetainfoDO {
     @data_constraint
     @inline
     pub fn __all__(db: PythonDB) -> *MetainfoDO {
-        for (tmp in db.metainfo) {
+    	for (tmp in db.metainfo) {
             yield MetainfoDO {
                 oid : tmp.oid,
                 kind : tmp.kind,
                 value : tmp.value,
                 program_oid : tmp.program_oid
             }
-        }
+    	}
     }
     /**
      * @brief gets the kind of this element.
@@ -2101,13 +2101,13 @@ impl ModDO {
     @data_constraint
     @inline
     pub fn __all__(db: PythonDB) -> *ModDO {
-        for (tmp in db.mod) {
+    	for (tmp in db.mod) {
             yield ModDO {
                 element_oid : tmp.element_oid,
                 type : tmp.type,
                 location_oid : tmp.location_oid
             }
-        }
+    	}
     }
     /**
      * @brief gets the type of this element.
@@ -2137,14 +2137,14 @@ impl ModuleDO {
     @data_constraint
     @inline
     pub fn __all__(db: PythonDB) -> *ModuleDO {
-        for (tmp in db.module) {
+    	for (tmp in db.module) {
             yield ModuleDO {
                 element_oid : tmp.element_oid,
                 name : tmp.name,
                 file_oid : tmp.file_oid,
                 location_oid : tmp.location_oid
             }
-        }
+    	}
     }
     /**
      * @brief gets the name of this element.
@@ -2179,12 +2179,12 @@ impl ScopeEnclosingExpressionDO {
     @data_constraint
     @inline
     pub fn __all__(db: PythonDB) -> *ScopeEnclosingExpressionDO {
-        for (tmp in db.scope_enclosing_expression) {
+    	for (tmp in db.scope_enclosing_expression) {
             yield ScopeEnclosingExpressionDO {
                 expression_oid : tmp.expression_oid,
                 scope_oid : tmp.scope_oid
             }
-        }
+    	}
     }
     /**
      * @brief gets the scope oid of this element.
@@ -2205,12 +2205,12 @@ impl ScopeEnclosingStatementDO {
     @data_constraint
     @inline
     pub fn __all__(db: PythonDB) -> *ScopeEnclosingStatementDO {
-        for (tmp in db.scope_enclosing_statement) {
+    	for (tmp in db.scope_enclosing_statement) {
             yield ScopeEnclosingStatementDO {
                 statement_oid : tmp.statement_oid,
                 scope_oid : tmp.scope_oid
             }
-        }
+    	}
     }
     /**
      * @brief gets the scope oid of this element.
@@ -2231,12 +2231,12 @@ impl NameExpressionDO {
     @data_constraint
     @inline
     pub fn __all__(db: PythonDB) -> *NameExpressionDO {
-        for (tmp in db.name_expression) {
+    	for (tmp in db.name_expression) {
             yield NameExpressionDO {
                 element_oid : tmp.element_oid,
                 ctx_type : tmp.ctx_type
             }
-        }
+    	}
     }
     /**
      * @brief gets the ctx type of this element.
@@ -2258,13 +2258,13 @@ impl NamedExpressionDO {
     @data_constraint
     @inline
     pub fn __all__(db: PythonDB) -> *NamedExpressionDO {
-        for (tmp in db.named_expression) {
+    	for (tmp in db.named_expression) {
             yield NamedExpressionDO {
                 element_oid : tmp.element_oid,
                 target_oid : tmp.target_oid,
                 value_oid : tmp.value_oid
             }
-        }
+    	}
     }
     /**
      * @brief gets the target oid of this element.
@@ -2292,12 +2292,12 @@ impl NonLocalStatementDO {
     @data_constraint
     @inline
     pub fn __all__(db: PythonDB) -> *NonLocalStatementDO {
-        for (tmp in db.non_local_statement) {
+    	for (tmp in db.non_local_statement) {
             yield NonLocalStatementDO {
                 element_oid : tmp.element_oid,
                 names : tmp.names
             }
-        }
+    	}
     }
     /**
      * @brief gets the names of this element.
@@ -2320,14 +2320,14 @@ impl NumberOfLinesDO {
     @data_constraint
     @inline
     pub fn __all__(db: PythonDB) -> *NumberOfLinesDO {
-        for (tmp in db.number_of_lines) {
+    	for (tmp in db.number_of_lines) {
             yield NumberOfLinesDO {
                 element_oid : tmp.element_oid,
                 number_of_total_lines : tmp.number_of_total_lines,
                 number_of_valid_lines : tmp.number_of_valid_lines,
                 number_of_comment_lines : tmp.number_of_comment_lines
             }
-        }
+    	}
     }
     /**
      * @brief gets the number of total lines of this element.
@@ -2364,14 +2364,14 @@ impl OperatorDO {
     @data_constraint
     @inline
     pub fn __all__(db: PythonDB) -> *OperatorDO {
-        for (tmp in db.operator) {
+    	for (tmp in db.operator) {
             yield OperatorDO {
                 element_oid : tmp.element_oid,
                 location_oid : tmp.location_oid,
                 parent_oid : tmp.parent_oid,
                 printable_text : tmp.printable_text
             }
-        }
+    	}
     }
     /**
      * @brief gets the location oid of this element.
@@ -2406,12 +2406,12 @@ impl ParentDO {
     @data_constraint
     @inline
     pub fn __all__(db: PythonDB) -> *ParentDO {
-        for (tmp in db.parent) {
+    	for (tmp in db.parent) {
             yield ParentDO {
                 parent_oid : tmp.parent_oid,
                 parent_type : tmp.parent_type
             }
-        }
+    	}
     }
     /**
      * @brief gets the parent type of this element.
@@ -2431,11 +2431,11 @@ impl PassStatementDO {
     @data_constraint
     @inline
     pub fn __all__(db: PythonDB) -> *PassStatementDO {
-        for (tmp in db.pass_statement) {
+    	for (tmp in db.pass_statement) {
             yield PassStatementDO {
                 element_oid : tmp.element_oid
             }
-        }
+    	}
     }
 }
 /**
@@ -2449,12 +2449,12 @@ impl ProgramDO {
     @data_constraint
     @inline
     pub fn __all__(db: PythonDB) -> *ProgramDO {
-        for (tmp in db.program) {
+    	for (tmp in db.program) {
             yield ProgramDO {
                 program_oid : tmp.program_oid,
                 absolute_prefix_path : tmp.absolute_prefix_path
             }
-        }
+    	}
     }
     /**
      * @brief gets the absolute prefix path of this element.
@@ -2474,11 +2474,11 @@ impl RaiseStatementDO {
     @data_constraint
     @inline
     pub fn __all__(db: PythonDB) -> *RaiseStatementDO {
-        for (tmp in db.raise_statement) {
+    	for (tmp in db.raise_statement) {
             yield RaiseStatementDO {
                 element_oid : tmp.element_oid
             }
-        }
+    	}
     }
 }
 /**
@@ -2492,12 +2492,12 @@ impl ReferenceRelationDO {
     @data_constraint
     @inline
     pub fn __all__(db: PythonDB) -> *ReferenceRelationDO {
-        for (tmp in db.reference_relation) {
+    	for (tmp in db.reference_relation) {
             yield ReferenceRelationDO {
                 reference_element_oid : tmp.reference_element_oid,
                 definition_element_oid : tmp.definition_element_oid
             }
-        }
+    	}
     }
     /**
      * @brief gets the definition element oid of this element.
@@ -2518,12 +2518,12 @@ impl ReturnStatementDO {
     @data_constraint
     @inline
     pub fn __all__(db: PythonDB) -> *ReturnStatementDO {
-        for (tmp in db.return_statement) {
+    	for (tmp in db.return_statement) {
             yield ReturnStatementDO {
                 element_oid : tmp.element_oid,
                 is_return_empty : tmp.is_return_empty
             }
-        }
+    	}
     }
     /**
      * @brief gets the is return empty of this element.
@@ -2545,13 +2545,13 @@ impl SetCompExpressionDO {
     @data_constraint
     @inline
     pub fn __all__(db: PythonDB) -> *SetCompExpressionDO {
-        for (tmp in db.set_comp_expression) {
+    	for (tmp in db.set_comp_expression) {
             yield SetCompExpressionDO {
                 element_oid : tmp.element_oid,
                 elt_oid : tmp.elt_oid,
                 generator_size : tmp.generator_size
             }
-        }
+    	}
     }
     /**
      * @brief gets the elt oid of this element.
@@ -2579,12 +2579,12 @@ impl SetExpressionDO {
     @data_constraint
     @inline
     pub fn __all__(db: PythonDB) -> *SetExpressionDO {
-        for (tmp in db.set_expression) {
+    	for (tmp in db.set_expression) {
             yield SetExpressionDO {
                 element_oid : tmp.element_oid,
                 elt_size : tmp.elt_size
             }
-        }
+    	}
     }
     /**
      * @brief gets the elt size of this element.
@@ -2609,7 +2609,7 @@ impl SliceDO {
     @data_constraint
     @inline
     pub fn __all__(db: PythonDB) -> *SliceDO {
-        for (tmp in db.slice) {
+    	for (tmp in db.slice) {
             yield SliceDO {
                 element_oid : tmp.element_oid,
                 element_index : tmp.element_index,
@@ -2618,7 +2618,7 @@ impl SliceDO {
                 printable_text : tmp.printable_text,
                 has_step : tmp.has_step
             }
-        }
+    	}
     }
     /**
      * @brief gets the element index of this element.
@@ -2667,12 +2667,12 @@ impl StarredExpressionDO {
     @data_constraint
     @inline
     pub fn __all__(db: PythonDB) -> *StarredExpressionDO {
-        for (tmp in db.starred_expression) {
+    	for (tmp in db.starred_expression) {
             yield StarredExpressionDO {
                 element_oid : tmp.element_oid,
                 ctx : tmp.ctx
             }
-        }
+    	}
     }
     /**
      * @brief gets the ctx of this element.
@@ -2697,7 +2697,7 @@ impl StatementDO {
     @data_constraint
     @inline
     pub fn __all__(db: PythonDB) -> *StatementDO {
-        for (tmp in db.statement) {
+    	for (tmp in db.statement) {
             yield StatementDO {
                 element_oid : tmp.element_oid,
                 type : tmp.type,
@@ -2706,7 +2706,7 @@ impl StatementDO {
                 location_oid : tmp.location_oid,
                 printable_text : tmp.printable_text
             }
-        }
+    	}
     }
     /**
      * @brief gets the type of this element.
@@ -2757,14 +2757,14 @@ impl SubscriptExpressionDO {
     @data_constraint
     @inline
     pub fn __all__(db: PythonDB) -> *SubscriptExpressionDO {
-        for (tmp in db.subscript_expression) {
+    	for (tmp in db.subscript_expression) {
             yield SubscriptExpressionDO {
                 element_oid : tmp.element_oid,
                 value_oid : tmp.value_oid,
                 slice_oid : tmp.slice_oid,
                 ctx : tmp.ctx
             }
-        }
+    	}
     }
     /**
      * @brief gets the value oid of this element.
@@ -2801,14 +2801,14 @@ impl TokenDO {
     @data_constraint
     @inline
     pub fn __all__(db: PythonDB) -> *TokenDO {
-        for (tmp in db.token) {
+    	for (tmp in db.token) {
             yield TokenDO {
                 element_oid : tmp.element_oid,
                 value : tmp.value,
                 location_oid : tmp.location_oid,
                 parent_oid : tmp.parent_oid
             }
-        }
+    	}
     }
     /**
      * @brief gets the value of this element.
@@ -2842,11 +2842,11 @@ impl TryStatementDO {
     @data_constraint
     @inline
     pub fn __all__(db: PythonDB) -> *TryStatementDO {
-        for (tmp in db.try_statement) {
+    	for (tmp in db.try_statement) {
             yield TryStatementDO {
                 element_oid : tmp.element_oid
             }
-        }
+    	}
     }
 }
 /**
@@ -2861,13 +2861,13 @@ impl TupleExpressionDO {
     @data_constraint
     @inline
     pub fn __all__(db: PythonDB) -> *TupleExpressionDO {
-        for (tmp in db.tuple_expression) {
+    	for (tmp in db.tuple_expression) {
             yield TupleExpressionDO {
                 element_oid : tmp.element_oid,
                 elt_size : tmp.elt_size,
                 ctx : tmp.ctx
             }
-        }
+    	}
     }
     /**
      * @brief gets the elt size of this element.
@@ -2897,14 +2897,14 @@ impl UnaryOpDO {
     @data_constraint
     @inline
     pub fn __all__(db: PythonDB) -> *UnaryOpDO {
-        for (tmp in db.unary_op) {
+    	for (tmp in db.unary_op) {
             yield UnaryOpDO {
                 element_oid : tmp.element_oid,
                 type : tmp.type,
                 location_oid : tmp.location_oid,
                 parent_oid : tmp.parent_oid
             }
-        }
+    	}
     }
     /**
      * @brief gets the type of this element.
@@ -2940,13 +2940,13 @@ impl UnaryOpExpressionDO {
     @data_constraint
     @inline
     pub fn __all__(db: PythonDB) -> *UnaryOpExpressionDO {
-        for (tmp in db.unary_op_expression) {
+    	for (tmp in db.unary_op_expression) {
             yield UnaryOpExpressionDO {
                 element_oid : tmp.element_oid,
                 op_code : tmp.op_code,
                 operand_oid : tmp.operand_oid
             }
-        }
+    	}
     }
     /**
      * @brief gets the op code of this element.
@@ -2977,7 +2977,7 @@ impl VariableDO {
     @data_constraint
     @inline
     pub fn __all__(db: PythonDB) -> *VariableDO {
-        for (tmp in db.variable) {
+    	for (tmp in db.variable) {
             yield VariableDO {
                 element_oid : tmp.element_oid,
                 parent_oid : tmp.parent_oid,
@@ -2985,7 +2985,7 @@ impl VariableDO {
                 printable_text : tmp.printable_text,
                 name : tmp.name
             }
-        }
+    	}
     }
     /**
      * @brief gets the parent oid of this element.
@@ -3026,11 +3026,11 @@ impl WhileStatementDO {
     @data_constraint
     @inline
     pub fn __all__(db: PythonDB) -> *WhileStatementDO {
-        for (tmp in db.while_statement) {
+    	for (tmp in db.while_statement) {
             yield WhileStatementDO {
                 element_oid : tmp.element_oid
             }
-        }
+    	}
     }
 }
 /**
@@ -3046,14 +3046,14 @@ impl WithItemDO {
     @data_constraint
     @inline
     pub fn __all__(db: PythonDB) -> *WithItemDO {
-        for (tmp in db.with_item) {
+    	for (tmp in db.with_item) {
             yield WithItemDO {
                 element_oid : tmp.element_oid,
                 printable_text : tmp.printable_text,
                 element_index : tmp.element_index,
                 parent_oid : tmp.parent_oid
             }
-        }
+    	}
     }
     /**
      * @brief gets the printable text of this element.
@@ -3087,11 +3087,11 @@ impl WithStatementDO {
     @data_constraint
     @inline
     pub fn __all__(db: PythonDB) -> *WithStatementDO {
-        for (tmp in db.with_statement) {
+    	for (tmp in db.with_statement) {
             yield WithStatementDO {
                 element_oid : tmp.element_oid
             }
-        }
+    	}
     }
 }
 /**
@@ -3104,11 +3104,11 @@ impl YieldExpressionDO {
     @data_constraint
     @inline
     pub fn __all__(db: PythonDB) -> *YieldExpressionDO {
-        for (tmp in db.yield_expression) {
+    	for (tmp in db.yield_expression) {
             yield YieldExpressionDO {
                 element_oid : tmp.element_oid
             }
-        }
+    	}
     }
 }
 /**
@@ -3122,12 +3122,12 @@ impl YieldFromExpressionDO {
     @data_constraint
     @inline
     pub fn __all__(db: PythonDB) -> *YieldFromExpressionDO {
-        for (tmp in db.yield_from_expression) {
+    	for (tmp in db.yield_from_expression) {
             yield YieldFromExpressionDO {
                 element_oid : tmp.element_oid,
                 value : tmp.value
             }
-        }
+    	}
     }
     /**
      * @brief gets the value of this element.

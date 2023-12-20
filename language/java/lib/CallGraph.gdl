@@ -7,7 +7,7 @@ schema CallExpression extends Expression {
 impl CallExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *CallExpression {
+    pub fn __all__(db: JavaDB) -> *CallExpression {
         for (tmp in Expression(db)) {
             for (m in MethodAccessExpression(db)) {
                 if (tmp.key_eq(m)) {
@@ -144,7 +144,7 @@ schema LombokField extends Field {
 impl LombokField {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *LombokField {
+    pub fn __all__(db: JavaDB) -> *LombokField {
         for (tmp in Field(db)) {
             for (a in Annotation(db)) {
                 for (auto_tmp2 in tmp.getAnnotation()) {
@@ -246,7 +246,7 @@ schema CallableBinding extends CallableBindingDO {
 impl CallableBinding {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *CallableBinding {
+    pub fn __all__(db: JavaDB) -> *CallableBinding {
         for (tmp in CallableBindingDO(db)) {
             yield CallableBinding {
                 caller_hash_id : tmp.caller_hash_id,
@@ -282,7 +282,7 @@ schema ExpressionList extends ExpressionListDO {
 impl ExpressionList {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *ExpressionList {
+    pub fn __all__(db: JavaDB) -> *ExpressionList {
         for (tmp in ExpressionListDO(db)) {
             yield ExpressionList {
                 element_hash_id : tmp.element_hash_id,
@@ -341,7 +341,7 @@ schema ExpressionListExpressionRelation extends ExpressionListExpressionRelation
 impl ExpressionListExpressionRelation {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *ExpressionListExpressionRelation {
+    pub fn __all__(db: JavaDB) -> *ExpressionListExpressionRelation {
         for (tmp in ExpressionListExpressionRelationDO(db)) {
             yield ExpressionListExpressionRelation {
                 expression_list_hash_id : tmp.expression_list_hash_id,
@@ -370,7 +370,7 @@ schema Callable {
 impl Callable {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *Callable {
+    pub fn __all__(db: JavaDB) -> *Callable {
         for (m in Method(db)) {
             yield Callable {id : m.element_hash_id}
         }
@@ -664,7 +664,7 @@ impl Callable {
                         }
                         for (tmp in Method(__all_data__)) {
                             if (self.key_eq(tmp)) {
-                                if (output4(n, tmp)) {
+                                if (getCallerByMatchingCallsiteName(n, tmp)) {
                                     yield poly
                                 }
                             }
@@ -749,7 +749,7 @@ impl Callable {
                         }
                         for (tmp in Method(__all_data__)) {
                             if (tmp.element_hash_id = c.id) {
-                                if (output3(n, tmp)) {
+                                if (getCallerByMatchingCallsiteName(n, tmp)) {
                                     yield c
                                 }
                             }
@@ -838,7 +838,7 @@ schema CallableEnclosingExpression extends CallableEnclosingExpressionDO {
 impl CallableEnclosingExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *CallableEnclosingExpression {
+    pub fn __all__(db: JavaDB) -> *CallableEnclosingExpression {
         for (tmp in CallableEnclosingExpressionDO(db)) {
             yield CallableEnclosingExpression {
                 expression_hash_id : tmp.expression_hash_id,
@@ -874,7 +874,7 @@ schema ReferenceElement extends ReferenceElementDO {
 impl ReferenceElement {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *ReferenceElement {
+    pub fn __all__(db: JavaDB) -> *ReferenceElement {
         for (tmp in ReferenceElementDO(db)) {
             yield ReferenceElement {
                 element_hash_id : tmp.element_hash_id,
@@ -934,7 +934,7 @@ schema AnonymousMethod extends Callable {
 impl AnonymousMethod {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *AnonymousMethod {
+    pub fn __all__(db: JavaDB) -> *AnonymousMethod {
         for (tmp in Callable(db)) {
             for (c in AnonymousClass(db)) {
                 if (c.key_eq(tmp.getBelongedClass())) {
@@ -984,9 +984,7 @@ pub fn isDirectCall(e : CallExpression) -> bool {
         }
     }
 }
-pub fn output4(m : MethodAccessExpression, mm : Method) -> bool {
-    return output3(m, mm)
-}
+
 pub fn isAnonymousMethod(c : Callable) -> bool {
     for (m in AnonymousMethod(__all_data__)) {
         if (m.key_eq(c)) {
@@ -994,7 +992,7 @@ pub fn isAnonymousMethod(c : Callable) -> bool {
         }
     }
 }
-pub fn output3(m: MethodAccessExpression, tmp: Method) -> bool {
+pub fn getCallerByMatchingCallsiteName(m: MethodAccessExpression, tmp: Method) -> bool {
     let (temp3 = tmp_deal_txt(m.getPrintableText())) { 
         if (tmp.getName() = temp3.get_regex_match_result(".*\\.+(\\w+).*", 1)) {
             let (c = tmp.getBelongedClass()) {

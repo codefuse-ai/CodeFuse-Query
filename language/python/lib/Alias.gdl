@@ -7,7 +7,7 @@ schema Alias extends AliasDO {
 impl Alias {
     @data_constraint
     @inline
-    fn __all__(db: PythonDB) -> *Alias {
+    pub fn __all__(db: PythonDB) -> *Alias {
         for (tmp in AliasDO(db)) {
             yield Alias {
                 element_oid : tmp.element_oid,

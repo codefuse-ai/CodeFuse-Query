@@ -7,7 +7,7 @@ schema Type {
 impl Type {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *Type {
+    pub fn __all__(db: JavaDB) -> *Type {
         for (r in ReferenceType(db)) {
             yield Type {id : r.oid}
         }
@@ -82,7 +82,7 @@ schema ReferenceType extends ReferenceTypeDO {
 impl ReferenceType {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *ReferenceType {
+    pub fn __all__(db: JavaDB) -> *ReferenceType {
         for (tmp in ReferenceTypeDO(db)) {
             yield ReferenceType {
                 oid : tmp.oid,
@@ -101,7 +101,7 @@ schema TypeElement extends TypeElementDO {
 impl TypeElement {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *TypeElement {
+    pub fn __all__(db: JavaDB) -> *TypeElement {
         for (tmp in TypeElementDO(db)) {
             yield TypeElement {
                 element_hash_id : tmp.element_hash_id,
@@ -166,7 +166,7 @@ schema Primitive extends PrimitiveDO {
 impl Primitive {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *Primitive {
+    pub fn __all__(db: JavaDB) -> *Primitive {
         for (tmp in PrimitiveDO(db)) {
             yield Primitive {
                 oid : tmp.oid,
