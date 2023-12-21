@@ -11,7 +11,7 @@ subprocess.run([
 subprocess.run([
     "tar",
     "-xvzf",
-    "sparrow-cli-2.0.2.linux.tar.gz"
+    "sparrow-cli.tar.gz"
 ])
 print("Copy ../assets into ./doc/assets")
 subprocess.run(["cp", "-r", "../assets", "./"])
