@@ -118,6 +118,7 @@ CodeFuse-Query为CodeFuse代码大模型提供了以下数据清洗能力：
 - [安装、配置、运行](./doc/3_install_and_run.md)
 - [Gödel查询语言介绍](./doc/4_godelscript_language.md)
 - [VSCode开发插件](./doc/5_toolchain.md)
+- [COREF API](https://codefuse-ai.github.io/CodeFuse-Query/godel-api/coref_library_reference.html)
 
 ## 教程 (tutorial)
 - [在线教程](./tutorial/README.md)
