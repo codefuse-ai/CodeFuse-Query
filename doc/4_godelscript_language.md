@@ -1,5 +1,31 @@
 # GödelScript 查询语言
 
+## 目录
+
+- [GödelScript 基本概念和语法](#gödelscript-基本概念和语法)
+  - [简介](#简介)
+  - [基本程序构成](#基本程序构成)
+  - [基础类型和编译器内建函数](#基础类型和编译器内建函数)
+  - [函数](#函数)
+  - [语句](#语句)
+  - [Schema](#schema)
+  - [数据库](#数据库)
+  - [Trait](#trait)
+  - [Import](#import)
+  - [Query](#query)
+  - [Ungrounded Error: 未赋值/未绑定错误](#ungrounded-error-未赋值未绑定错误)
+- [查询示例](#查询示例)
+  - [Java](#java)
+  - [Python](#python)
+  - [JavaScript](#javascript)
+  - [XML](#xml)
+  - [Go](#go)
+- [查询调试和优化技巧](#查询调试和优化技巧)
+  - [Schema 传参导致笛卡尔积过大](#schema-传参导致笛卡尔积过大)
+  - [多层 for 导致笛卡尔积过大](#多层-for-导致笛卡尔积过大)
+  - [不要滥用`@inline`](#不要滥用inline必须用inline的优化策略)
+- [在本机使用查询脚本流程](#在本机使用查询脚本流程)
+
 ## GödelScript 基本概念和语法
 
 ### 简介
@@ -15,13 +41,13 @@ fn main() {
 }
 ```
 
-GödelScript 是 CodeQuery 用于查询和数据处理的领域专用语言 (DSL)。GödelScript 使用了类 Rust 的语法，提供了严格的类型检查、方便快捷的类型推导、智能友好的错误提示信息，使用户能够快速上手。
+GödelScript 即 Gödel 查询语言。GödelScript 是 CodeQuery 用于查询和数据处理的领域专用语言 (DSL)。GödelScript 使用了类 Rust 的语法，提供了严格的类型检查、方便快捷的类型推导、智能友好的错误提示信息，使用户能够快速上手。
 
 GödelScript 编译器主要应用场景为：
 
 1. 面向用户编写简单或复杂查询，提供更便捷的写法，提高编写查询的效率；
 2. 提供严格类型检查与类型推导，给予更智能的代码修改提示；
-3. 提供严格的 [ungrounded](#ungrounded-error) 检测，避免容易触发的 Soufflé Ungrounded Error；
+3. 提供严格的 [ungrounded(未赋值/未绑定)](#ungrounded-error-未赋值未绑定错误) 检测，避免触发 Soufflé Ungrounded Error；
 4. Language Server 以及 IDE Extension 支持。
 
 ### 基本程序构成
@@ -30,13 +56,13 @@ GödelScript 编译器主要应用场景为：
 
 GödelScript 程序可能包含:
 
-- 模块和符号[引用语句](#import)
-- Schema [类型声明](#schema)
-- 数据库[类型声明](#数据库)
-- Trait [声明](#trait)
-- [方法实现](#方法实现)
-- 函数[声明和实现](#函数)
-- Query [声明](#query)
+- [模块和符号引用](#import)
+- [Schema 类型声明](#schema)
+- [数据库类型声明](#数据库)
+- [Trait 声明](#trait)
+- [Schema 方法实现](#方法实现)
+- [函数声明和实现](#函数)
+- [Query 声明](#query)
 
 包含以上所有组成内容的样例:
 
@@ -99,17 +125,14 @@ GödelScript 采用类 C 语言的注释方式。
 /*
 * 1. 多行注释
 * 2. 多行注释
-* 3. 多行注释
 */
 ```
 
 #### `main` 函数
 
-GödelScript 查询脚本可以包含`main`函数，该函数无返回值。
+GödelScript 查询脚本可以包含`main`函数，该函数无返回值。在不实现`main`函数，且没有写 query 声明的情况下，程序不会输出。
 
-在`main`中可以多次使用`output(...)`来表明要输出多个查询结果。
-
-`main`函数只允许使用`output`，其他语句会导致编译错误。
+更多详细内容请看 [main 函数](#gödelscript-main-函数)。
 
 ```rust
 fn main() {
@@ -118,11 +141,9 @@ fn main() {
 }
 ```
 
-在不实现`main`函数，且没有写 query 声明的情况下，程序不会输出。
-
 ### 基础类型和编译器内建函数
 
-GödelScript 包含基础类型`int``string`，`bool`属于基础类型，但是不能作为值存储。
+GödelScript 包含基础类型`int` `string`，`bool`属于基础类型，但是不能作为值存储。
 
 #### `int`类型 native 函数
 
@@ -204,7 +225,7 @@ GödelScript 包含基础类型`int``string`，`bool`属于基础类型，但是
 | to<T> | (self) -> T | 转换到其他类型的 schema，采用 duck type 检测。 |
 | is<T> | (self) -> bool | 判断是否可以是其他类型的 schema，采用 duck type 检测。如果自身 schema 有主键，则底层只会通过主键判断是否可以是其他类型。 |
 | key_eq | (self, T) -> bool | 检查两个 schema 实例的主键是否相等。 |
-| key_neq | (self, T) -> bool | 检查两个 schema 实例的主键是否**不**相等。 |
+| key_neq | (self, T) -> bool | 检查两个 schema 实例的主键是否不等。 |
 
 schema native 函数实例：
 
@@ -232,42 +253,101 @@ fn convert() -> *ElementParent {
 
 ### 函数
 
-#### `main` 函数
+#### GödelScript `main` 函数
 
-在上文中已经提及，该函数是 GödelScript 中唯一不需要声明返回值的函数。
+`main`函数是 GödelScript 中唯一不声明返回值的函数。`main`函数只允许使用`output`，其他语句会导致编译错误；多次使用`output(...)`可以输出多个查询结果，查询结果会分表显示，表名即为`output`中调用的查询函数的函数名。
 
 #### 查询函数
 
 查询函数的返回值类型推荐为`bool`，需要输出查询结果时，需要使用`output()`函数。
 
+在`output()`中调用的查询函数不再是常规思路中的用传参调用函数。参数列表在此时会变化为输出表的表结构，下面是两个查询函数的应用实例：
+
+1. 单表`output`
+
+    单表`output`特指在`main`函数中，只使用一次`output`来输出。
+
+    ```rust
+    fn example(a: int, b: string) -> bool {...}
+
+    fn main() {
+        output(example()) // 此时参数列表变为输出表结构，不需要传参
+    }
+    ```
+
+    对应的输出表结构为:
+
+    ```json
+    [
+        {"a": 0, "b": "xxx"},
+        {"a": 1, "b": "xxx"}
+    ]
+    ```
+
+2. 多表`output`
+
+    多表`output`是指在`main`函数中，使用多次`output`来输出。在这种情况下，输出数据会附带对应的表名。
+
+    ```rust
+    fn example0(a: int, b: string) -> bool {...}
+    fn example1(a: string, b: int) -> bool {...}
+
+    fn main() {
+        output(example0())
+        output(example1())
+    }
+    ```
+
+    对应的输出表结构为:
+
+    ```json
+    {
+        "example0":[
+            {"a": 0, "b": "xxx"},
+            {"a": 1, "b": "xxx"}
+        ],
+        "example1":[
+            {"a": "xxx", "b": 0},
+            {"a": "xxx", "b": 1}
+        ]
+    }
+    ```
+
+下面是一个比较详细的例子，在这个例子中，我们直接构造了两组数据并输出。在下列代码中，需要注意的是：
+
+1. GödelScript 中，布尔值可以使用`true`和`false`关键字。
+
+2. `=`符号在 GödelScript 中是比较特殊的符号，不能用常规的编程语言的思路来理解。GödelScript 是一种 Datalog 语言。在这里，`=`符号同时具备两种语义，一个是 __赋值__ 一个是 __判等__。详情可看[`=`运算符](#赋值和判等运算符)。
+
+3. 在这个例子的条件语句中，`a`和`b`均使用了`=`的赋值语义，因为`int`和`string`类型参数在函数体中被认为是`ungrounded(未赋值/未绑定)`，必须要被赋值才能使用。
+
+4. `=`赋值语句的返回值是`true`。
+
 ```rust
-fn myQuery(a: int, b: string) -> bool {
-    if (a = 1 && b = "hello") {
+fn example(a: int, b: string) -> bool {
+    // = 符号同时具有赋值和比较的功能，取决于此时的左值是否已经“被赋值”
+    // 这里的 a 和 b 所用的 = 符号均是赋值语义
+    if (a = 1 && b = "1") {
+        // GödelScript 使用关键字 true 和 false 来表示布尔值
         return true
     }
-    if (...) {
-        ...
+    if (a = 2 && b = "2") {
+        return true
     }
-    ...
 }
 
 fn main() {
-    output(myQuery()) // 这里无需填写传入参数
+    output(example())
 }
 ```
 
-`output()`会根据该函数的参数列表格式来输出表结构。所以在`main`中使用时，`output()`并不需要你提供这个函数的传入参数。对应的输出表结构大致如下：
+预期的输出结果应该为：
 
-| a | b |
-| --- | --- |
-| 1 | "hello" |
-| ... | ... |
-
-GödelScript 使用`true`和`false`关键字来代表返回的`bool`类型结果：
-
-```rust
-return true
-return false
+```json
+[
+    {"a": 1, "b": "1"},
+    {"a": 2, "b": "2"}
+]
 ```
 
 #### 普通函数
@@ -352,11 +432,70 @@ if (f.getName().contains("util") || f.getName().contains("com")) {
 
 条件可以使用这些逻辑运算符进行连接：`!`取反，`||`或，`&&`与。
 
-条件中的比较运算符：`>`大于，`<`小于，`>=`大于等于，`<=`小于等于，`=`等于，`!=`不等于。
+条件中的比较运算符：`>`大于，`<`小于，`>=`大于等于，`<=`小于等于，`=`等于或者赋值，`!=`不等于。
 
 常规算术运算可以使用如下运算符：`+`加法，`-`减法/取负，`*`乘法，`/`除法。
 
-**注意：比较运算符中的**`**=**`**在左侧变量没有被绑定数据时，会执行绑定操作并返回**`**true**`**，类似于赋值操作。**
+##### 赋值和判等运算符`=`
+
+`=`符号在 GödelScript 中具有两种不同的语义：赋值和判等，具体的语义需要分情况进行讨论:
+
+1. 赋值
+
+    赋值一般出现在`int` `string`这类基础类型的变量参数上，这类变量作为函数的参数出现时，一般被认为是未赋值的。而具有这类变量的函数被调用时，传入的参数，实际上是作为筛选条件存在。
+
+    ```rust
+    fn example(a: int) -> bool {
+        // 这里比较反直觉，在过程式语言中，这里通常会被认为是判断 a == 1
+        // 但是在 datalog 方言中，datalog 的每个函数实际上都是在算一个中间表 (view)
+        // 所以这个函数本质上是生成了一个 view，数据为 [{"a": 1}]
+        return a = 1 // assign a = 1
+    }
+
+    fn test() -> bool {
+        // 这里看似是在通过传参让 a = 2，实际上并不是
+        // example() 自己会返回 view: [{"a": 1}]
+        // 然后通过 a = 2 来约束结果，可以看到，我们这里没有拿到任何结果
+        // 所以返回了 false
+        return example(2) // false
+    }
+    ```
+
+2. 判等
+
+    对于 schema 类型来说，任何一个 schema 背后都有一个全集，所以参数列表中的 schema 类型一般被认为是已经被赋值的。对于已经赋值的变量来说，`=`就是判等操作。
+
+    ```rust
+    // 声明 schema
+    schema A {...}
+
+    // 实现 schema 的成员函数
+    impl A {
+        // 这里定义了 schema A 的全集
+        @data_constraint
+        pub fn __all__() -> *A {...}
+    }
+
+    fn example(a: A) -> bool {
+        for(temp in A::__all__()) {
+            if (a = temp) {
+                return true
+            }
+        }
+    }
+    ```
+
+    同样，对于中间声明的有初始值的`int`或者`string`，`=`也是判等操作。
+
+    ```rust
+    fn example() -> bool {
+        let (a = 1) { // assign a = 1
+            if (a = 1) { // compare a = 1
+                return true
+            }
+        }
+    }
+    ```
 
 #### match 语句
 
@@ -382,9 +521,9 @@ fn a() -> int {
 }
 
 fn b() -> *int {
-	yield 1
-	yield 2
-	yield 3
+    yield 1
+    yield 2
+    yield 3
 }
 ```
 
@@ -422,9 +561,9 @@ GödelScript 使用如下方式来声明和实现`schema`的相关方法：
 impl File {
     // 静态方法
     fn f1() -> ... {...}
-	// 成员方法，第一个参数必须为 self
-	fn f2(self) -> ... {...}
-	...
+    // 成员方法，第一个参数必须为 self
+    fn f2(self) -> ... {...}
+    ...
 }
 ```
 ##### 静态方法
@@ -564,7 +703,7 @@ schema File {
 impl File {
     @data_constraint
     fn __all__() -> *File {...}
-	fn getId(self) -> int {...}
+    fn getId(self) -> int {...}
     fn staticMethod() -> string {return "File"}
 }
 
@@ -833,11 +972,11 @@ database MyDB {
 
 ```rust
 query example from
-	coref::java::Location loc in coref::java::Location(coref::java::JavaDB::load("..."))
+    coref::java::Location loc in coref::java::Location(coref::java::JavaDB::load("..."))
 where
-	...
+    ...
 select
-	...
+    ...
 ```
 
 - schema 静态方法调用
@@ -857,12 +996,12 @@ Query 用于进行一些简单的查询，编写的 query 一定会被输出，�
 
 ```rust
 query 名字 from
-	变量名 in 初始值,
+    变量名 in 初始值,
     变量名 in 初始值,
     变量名 in 初始值
 where 条件
 select 值 as 输出的列名
-	值 as 输出的列名,
+    值 as 输出的列名,
     值 as 输出的列名,
     值 as 输出的列名
 ```
@@ -873,7 +1012,7 @@ from 列表中的变量声明无需加上类型标注，编译器会进行自动
 
 ```rust
 query hello_world from
-	info in "hello world"
+    info in "hello world"
 select info as greeting
 ```
 
@@ -944,19 +1083,19 @@ fn class_method(className: string, methodName: string, methodSignature: string) 
 }
 ```
 
-### Ungrounded Error
+### Ungrounded Error: 未赋值/未绑定错误
 
-GödelScript 会将未与集合绑定的符号判定为`ungrounded`。基本判定规则为:
+GödelScript 会将未与数据绑定的符号判定为`ungrounded(未赋值/未绑定)`。基本判定规则为:
 
 - 未初始化的/未被使用的/未与集合绑定的符号
-   - 未被绑定的`int``string`参数
+   - 未被绑定的`int` `string`参数
    - 未被使用的 database 类型的参数
    - 函数体有语句，但是没有任何返回语句
 - 在取非运算块中进行绑定的符号
    - 例如 `!(__tmp = 1)`，`__tmp`会被认为是未绑定的
    - 在取非运算块中调用 inline 函数或数据构造函数
 
-#### 未使用的 database/基础类型参数
+#### 1. 未使用的 database/基础类型参数
 
 函数代码块中，如果有一个语句分支没有使用参数中的`database`或者基础类型参数，则一定会导致`ungrounded`：
 
@@ -977,7 +1116,7 @@ impl XXX {
         if (self.hasAttribute(attributeName)) {
             return self.getValueByAttributeName(attributeName)
         }
-        if (!self.hasAttribute(attributeName) {
+        if (!self.hasAttribute(attributeName)) {
             return "null"
         }
     }
@@ -990,7 +1129,7 @@ fn xxx() -> xx {
 }
 ```
 
-#### 函数体有语句的情况下无返回语句
+#### 2. 函数体有语句的情况下无返回语句
 
 GödelScript 允许一个函数体不包含任何语句，即空函数体。但是如果函数体中有其他语句，则 GödelScript 会要求必须有至少一个返回语句，否则就会出现 ungrounded error。
 
@@ -1004,7 +1143,7 @@ fn test() -> int {
 }
 ```
 
-#### 取非运算块中使用 inline 函数或数据构造函数
+#### 3. 取非运算块中使用 inline 函数或数据构造函数
 
 上文提到了可以通过`@inline`注解来规避 ungrounded error。但是如果在取非运算中使用了含有该注解的函数，则必然会导致 ungrounded error。
 
@@ -1028,7 +1167,7 @@ if (!check(for_test())) {
 }
 ```
 
-#### 对链式调用的取非运算
+#### 4. 对链式调用的取非运算
 
 GödelScript 未对该情况执行`ungrounded`检测，但是该写法会导致在 Soufflé 中报`ungrounded`错误:
 
@@ -1112,7 +1251,7 @@ fn main() {
 use coref::java::*
 
 fn default_java_db() -> JavaDB {
-	return JavaDB::load("coref_java_src.db")
+    return JavaDB::load("coref_java_src.db")
 }
 
 /**
@@ -1129,7 +1268,7 @@ fn class_hierarchy(className : string, superClassName : string) -> bool {
 }
 
 fn main() { 
-	output(class_hierarchy())
+    output(class_hierarchy())
 }
 ```
 
@@ -1140,7 +1279,7 @@ fn main() {
 use coref::java::*
 
 fn default_java_db() -> JavaDB {
-	return JavaDB::load("coref_java_src.db")
+    return JavaDB::load("coref_java_src.db")
 }
 
 // Find all methods of the class
@@ -1154,7 +1293,7 @@ fn methods(className : string, methodName : string) -> bool {
 }
 
 fn main() { 
-	output(methods())
+    output(methods())
 }
 ```
 
@@ -2077,7 +2216,7 @@ fn getByIndex(self) -> Expression {
                 return e
             }
         }
-	}
+    }
 }
 ```
 
@@ -2086,9 +2225,9 @@ e, p 的笛卡尔积就变成了 e, i 的笛卡尔积，从运算的层面来看
 ### 不要滥用`@inline`/必须用`@inline`的优化策略
 
 inline 函数的底层机制是在**调用处展开**，如果该函数不存在大量的 schema 传参，并且在很多位置都被调用，inline 可能会导致**编译结果膨胀且重复计算次数指数级增加**，有时反而不利于减少运行时间。
-如果存在必须要使用 inline 的情况 (比如规避 ungrounded)，但是使用之后反而出现运行速度变慢的情况，可以采取将内嵌语句拆分为 predicate 的方式来避免展开导致的编译结果膨胀。
+如果存在必须要使用 inline 的情况 (比如规避`ungrounded`)，但是使用之后反而出现运行速度变慢的情况，可以采取将内嵌语句拆分为 predicate 的方式来避免展开导致的编译结果膨胀。
 
-下面的例子中，`getValueByAttributeNameByDefaultValue`为了避免`attributeName`被识别为 ungrounded 所以标注 inline，后续在 if 分支中添加了一个条件语句，但是导致了执行时间从 3 秒变成 35 秒：
+下面的例子中，`getValueByAttributeNameByDefaultValue`为了避免`attributeName`被识别为`ungrounded`所以标注`inline`，后续在 if 分支中添加了一个条件语句，但是导致了执行时间从 3 秒变成 35 秒：
 
 ```rust
 impl XmlElementBase {

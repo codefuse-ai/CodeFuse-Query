@@ -7,7 +7,7 @@ schema Class extends ClassDO {
 impl Class {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *Class {
+    pub fn __all__(db: JavaDB) -> *Class {
         for (tmp in ClassDO(db)) {
             yield Class {
                 element_hash_id : tmp.element_hash_id,
@@ -226,7 +226,7 @@ schema ClassImplementList extends ClassImplementListDO {
 impl ClassImplementList {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *ClassImplementList {
+    pub fn __all__(db: JavaDB) -> *ClassImplementList {
         for (tmp in ClassImplementListDO(db)) {
             yield ClassImplementList {
                 element_hash_id : tmp.element_hash_id,
@@ -255,7 +255,7 @@ schema Constructor extends ConstructorDO {
 impl Constructor {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *Constructor {
+    pub fn __all__(db: JavaDB) -> *Constructor {
         for (tmp in ConstructorDO(db)) {
             yield Constructor {
                 element_hash_id : tmp.element_hash_id,
@@ -409,7 +409,7 @@ schema ClassHierarchy extends ClassHierarchyDO {
 impl ClassHierarchy {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *ClassHierarchy {
+    pub fn __all__(db: JavaDB) -> *ClassHierarchy {
         for (tmp in ClassHierarchyDO(db)) {
             yield ClassHierarchy {
                 child_hash_id : tmp.child_hash_id,
@@ -449,7 +449,7 @@ schema Field extends FieldDO {
 impl Field {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *Field {
+    pub fn __all__(db: JavaDB) -> *Field {
         for (tmp in FieldDO(db)) {
             yield Field {
                 element_hash_id : tmp.element_hash_id,
@@ -596,7 +596,7 @@ schema Interface extends InterfaceDO {
 impl Interface {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *Interface {
+    pub fn __all__(db: JavaDB) -> *Interface {
         for (tmp in InterfaceDO(db)) {
             yield Interface {
                 element_hash_id : tmp.element_hash_id,
@@ -728,7 +728,7 @@ schema ClassOrInterface {
 impl ClassOrInterface {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *ClassOrInterface {
+    pub fn __all__(db: JavaDB) -> *ClassOrInterface {
         for (c in Class(db)) {
             yield ClassOrInterface {id : c.element_hash_id}
         }
@@ -1068,7 +1068,7 @@ schema ReferenceRelation extends ReferenceRelationDO {
 impl ReferenceRelation {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *ReferenceRelation {
+    pub fn __all__(db: JavaDB) -> *ReferenceRelation {
         for (tmp in ReferenceRelationDO(db)) {
             yield ReferenceRelation {
                 reference_element_hash_id : tmp.reference_element_hash_id,
@@ -1130,7 +1130,7 @@ schema LocalVariable extends LocalVariableDO {
 impl LocalVariable {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *LocalVariable {
+    pub fn __all__(db: JavaDB) -> *LocalVariable {
         for (tmp in LocalVariableDO(db)) {
             yield LocalVariable {
                 element_hash_id : tmp.element_hash_id,
@@ -1254,7 +1254,7 @@ schema AnonymousClass extends AnonymousClassDO {
 impl AnonymousClass {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *AnonymousClass {
+    pub fn __all__(db: JavaDB) -> *AnonymousClass {
         for (tmp in AnonymousClassDO(db)) {
             yield AnonymousClass {
                 element_hash_id : tmp.element_hash_id,
@@ -1339,7 +1339,7 @@ schema EnumConstant extends EnumConstantDO {
 impl EnumConstant {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *EnumConstant {
+    pub fn __all__(db: JavaDB) -> *EnumConstant {
         for (tmp in EnumConstantDO(db)) {
             yield EnumConstant {
                 element_hash_id : tmp.element_hash_id,
@@ -1480,7 +1480,7 @@ schema ClassInitializer extends ClassInitializerDO {
 impl ClassInitializer {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *ClassInitializer {
+    pub fn __all__(db: JavaDB) -> *ClassInitializer {
         for (tmp in ClassInitializerDO(db)) {
             yield ClassInitializer {
                 element_hash_id : tmp.element_hash_id,
@@ -1533,7 +1533,7 @@ schema AbstractClass extends Class {
 impl AbstractClass {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *AbstractClass {
+    pub fn __all__(db: JavaDB) -> *AbstractClass {
         for (tmp in Class(db)) {
             for (m in Modifier(db)) {
                 for (auto_tmp1 in tmp.getModifier()) {
@@ -1562,7 +1562,7 @@ schema EnumClass extends Class {
 impl EnumClass {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *EnumClass {
+    pub fn __all__(db: JavaDB) -> *EnumClass {
         for (tmp in Class(db)) {
             for (m in Modifier(db)) {
                 if (tmp.key_eq(m.getParent())) {
@@ -1589,7 +1589,7 @@ schema NestedClass extends Class {
 impl NestedClass {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *NestedClass {
+    pub fn __all__(db: JavaDB) -> *NestedClass {
         for (tmp in Class(db)) {
             for (c in Class(db)) {
                 if (c.key_eq(tmp.getParent())) {
@@ -1614,7 +1614,7 @@ schema StaticNestedClass extends NestedClass {
 impl StaticNestedClass {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *StaticNestedClass {
+    pub fn __all__(db: JavaDB) -> *StaticNestedClass {
         for (tmp in NestedClass(db)) {
             for (m in Modifier(db)) {
                 for (auto_tmp2 in tmp.getModifier()) {
@@ -1643,7 +1643,7 @@ schema InnerClass extends NestedClass {
 impl InnerClass {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *InnerClass {
+    pub fn __all__(db: JavaDB) -> *InnerClass {
         for (tmp in NestedClass(db)) {
             for (c in NestedClass(db)) {
                 if (tmp = c) {
@@ -1670,7 +1670,7 @@ schema NpClass extends NpClassDO {
 impl NpClass {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *NpClass {
+    pub fn __all__(db: JavaDB) -> *NpClass {
         for (tmp in NpClassDO(db)) {
             for (c in NpClassDO(db)) {
                 if (tmp = c) {
@@ -1705,7 +1705,7 @@ schema NpInterface extends NpInterfaceDO {
 impl NpInterface {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *NpInterface {
+    pub fn __all__(db: JavaDB) -> *NpInterface {
         for (tmp in NpInterfaceDO(db)) {
             for (i in NpInterfaceDO(db)) {
                 if (tmp = i) {

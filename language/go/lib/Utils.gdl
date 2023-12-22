@@ -4,7 +4,7 @@ schema RuntimeInfo extends RuntimeInfoDO {
 impl RuntimeInfo {
     @data_constraint
     @inline
-    fn __all__(db: GoDB) -> *RuntimeInfo {
+    pub fn __all__(db: GoDB) -> *RuntimeInfo {
         for (tmp in RuntimeInfoDO(db)) {
             yield RuntimeInfo {
                 oid : tmp.oid,

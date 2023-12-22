@@ -12,7 +12,7 @@ schema Modifier extends Token {
 impl Modifier {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *Modifier {
+    pub fn __all__(db: JavascriptDB) -> *Modifier {
         for (tmp in Token(db)) {
             if (isModifier(Node {id: tmp.id})) {
                 yield Modifier {
@@ -32,7 +32,7 @@ schema ConstKeyword extends Modifier {
 impl ConstKeyword {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *ConstKeyword {
+    pub fn __all__(db: JavascriptDB) -> *ConstKeyword {
         for (tmp in Modifier(db)) {
             if (isConstKeyword(Node {id: tmp.id})) {
                 yield ConstKeyword {
@@ -52,7 +52,7 @@ schema DefaultKeyword extends Modifier {
 impl DefaultKeyword {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *DefaultKeyword {
+    pub fn __all__(db: JavascriptDB) -> *DefaultKeyword {
         for (tmp in Modifier(db)) {
             if (isDefaultKeyword(Node {id: tmp.id})) {
                 yield DefaultKeyword {
@@ -72,7 +72,7 @@ schema ExportKeyword extends Modifier {
 impl ExportKeyword {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *ExportKeyword {
+    pub fn __all__(db: JavascriptDB) -> *ExportKeyword {
         for (tmp in Modifier(db)) {
             if (isExportKeyword(Node {id: tmp.id})) {
                 yield ExportKeyword {
@@ -92,7 +92,7 @@ schema PrivateKeyword extends Modifier {
 impl PrivateKeyword {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *PrivateKeyword {
+    pub fn __all__(db: JavascriptDB) -> *PrivateKeyword {
         for (tmp in Modifier(db)) {
             if (isPrivateKeyword(Node {id: tmp.id})) {
                 yield PrivateKeyword {
@@ -112,7 +112,7 @@ schema ProtectedKeyword extends Modifier {
 impl ProtectedKeyword {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *ProtectedKeyword {
+    pub fn __all__(db: JavascriptDB) -> *ProtectedKeyword {
         for (tmp in Modifier(db)) {
             if (isProtectedKeyword(Node {id: tmp.id})) {
                 yield ProtectedKeyword {
@@ -132,7 +132,7 @@ schema PublicKeyword extends Modifier {
 impl PublicKeyword {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *PublicKeyword {
+    pub fn __all__(db: JavascriptDB) -> *PublicKeyword {
         for (tmp in Modifier(db)) {
             if (isPublicKeyword(Node {id: tmp.id})) {
                 yield PublicKeyword {
@@ -152,7 +152,7 @@ schema StaticKeyword extends Modifier {
 impl StaticKeyword {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *StaticKeyword {
+    pub fn __all__(db: JavascriptDB) -> *StaticKeyword {
         for (tmp in Modifier(db)) {
             if (isStaticKeyword(Node {id: tmp.id})) {
                 yield StaticKeyword {
@@ -172,7 +172,7 @@ schema AbstractKeyword extends Modifier {
 impl AbstractKeyword {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *AbstractKeyword {
+    pub fn __all__(db: JavascriptDB) -> *AbstractKeyword {
         for (tmp in Modifier(db)) {
             if (isAbstractKeyword(Node {id: tmp.id})) {
                 yield AbstractKeyword {
@@ -192,7 +192,7 @@ schema AsyncKeyword extends Modifier {
 impl AsyncKeyword {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *AsyncKeyword {
+    pub fn __all__(db: JavascriptDB) -> *AsyncKeyword {
         for (tmp in Modifier(db)) {
             if (isAsyncKeyword(Node {id: tmp.id})) {
                 yield AsyncKeyword {
@@ -212,7 +212,7 @@ schema DeclareKeyword extends Modifier {
 impl DeclareKeyword {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *DeclareKeyword {
+    pub fn __all__(db: JavascriptDB) -> *DeclareKeyword {
         for (tmp in Modifier(db)) {
             if (isDeclareKeyword(Node {id: tmp.id})) {
                 yield DeclareKeyword {
@@ -232,7 +232,7 @@ schema ReadonlyKeyword extends Modifier {
 impl ReadonlyKeyword {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *ReadonlyKeyword {
+    pub fn __all__(db: JavascriptDB) -> *ReadonlyKeyword {
         for (tmp in Modifier(db)) {
             if (isReadonlyKeyword(Node {id: tmp.id})) {
                 yield ReadonlyKeyword {
@@ -252,7 +252,7 @@ schema OverrideKeyword extends Modifier {
 impl OverrideKeyword {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *OverrideKeyword {
+    pub fn __all__(db: JavascriptDB) -> *OverrideKeyword {
         for (tmp in Modifier(db)) {
             if (isOverrideKeyword(Node {id: tmp.id})) {
                 yield OverrideKeyword {

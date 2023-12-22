@@ -12,7 +12,7 @@ schema NumberOfLines extends NumberOfLinesDO {
 impl NumberOfLines {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *NumberOfLines {
+    pub fn __all__(db: JavascriptDB) -> *NumberOfLines {
         for (tmp in NumberOfLinesDO(db)) {
             yield NumberOfLines {
                 location_oid : tmp.location_oid,

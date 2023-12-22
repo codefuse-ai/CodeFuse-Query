@@ -4,7 +4,7 @@ schema Node {
 impl Node {
     @data_constraint
     @inline
-    fn __all__(db: GoDB) -> *Node {
+    pub fn __all__(db: GoDB) -> *Node {
         for (d in DeclDO(db)) {
             yield Node {id : d.oid}
         }

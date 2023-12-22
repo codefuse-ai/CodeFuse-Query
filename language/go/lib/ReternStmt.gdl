@@ -4,7 +4,7 @@ schema ReturnStmt extends Statement {
 impl ReturnStmt {
     @data_constraint
     @inline
-    fn __all__(db: GoDB) -> *ReturnStmt {
+    pub fn __all__(db: GoDB) -> *ReturnStmt {
         for (s in Statement(db)) {
             if (s.isReturnStmt()) {
                 yield ReturnStmt {

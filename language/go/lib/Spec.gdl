@@ -4,7 +4,7 @@ schema Spec extends Node {
 impl Spec {
     @data_constraint
     @inline
-    fn __all__(db: GoDB) -> *Spec {
+    pub fn __all__(db: GoDB) -> *Spec {
         for (s in SpecDO(db)) {
             yield Spec {
                 id : s.oid
@@ -80,7 +80,7 @@ schema ImportSpec extends Spec {
 impl ImportSpec {
     @data_constraint
     @inline
-    fn __all__(db: GoDB) -> *ImportSpec {
+    pub fn __all__(db: GoDB) -> *ImportSpec {
         for (s in Spec(db)) {
             if (s.isImportSpec()) {
                 yield ImportSpec {
@@ -118,7 +118,7 @@ schema TypeSpec extends Spec {
 impl TypeSpec {
     @data_constraint
     @inline
-    fn __all__(db: GoDB) -> *TypeSpec {
+    pub fn __all__(db: GoDB) -> *TypeSpec {
         for (s in Spec(db)) {
             if (s.isTypedefSpec()) {
                 yield TypeSpec {
@@ -145,7 +145,7 @@ schema ValueSpec extends Spec {
 impl ValueSpec {
     @data_constraint
     @inline
-    fn __all__(db: GoDB) -> *ValueSpec {
+    pub fn __all__(db: GoDB) -> *ValueSpec {
         for (s in Spec(db)) {
             if (s.isValueSpec()) {
                 yield ValueSpec {
@@ -239,7 +239,7 @@ schema LocalVaribleDecl extends Decl {
 impl LocalVaribleDecl {
     @data_constraint
     @inline
-    fn __all__(db: GoDB) -> *LocalVaribleDecl {
+    pub fn __all__(db: GoDB) -> *LocalVaribleDecl {
         for (d in Decl(db)) {
             if (d.isLocalVaribleDecl()) {
                 yield LocalVaribleDecl {

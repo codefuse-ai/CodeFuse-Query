@@ -12,7 +12,7 @@ schema JsxText extends Node {
 impl JsxText {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *JsxText {
+    pub fn __all__(db: JavascriptDB) -> *JsxText {
         for (tmp in Node(db)) {
             if (isJsxText(tmp)) {
                 yield JsxText {
@@ -45,7 +45,7 @@ schema JsxElement extends PrimaryExpression {
 impl JsxElement {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *JsxElement {
+    pub fn __all__(db: JavascriptDB) -> *JsxElement {
         for (tmp in PrimaryExpression(db)) {
             if (isJsxElement(Node {id: tmp.id})) {
                 yield JsxElement {
@@ -65,7 +65,7 @@ schema JsxSelfClosingElement extends PrimaryExpression {
 impl JsxSelfClosingElement {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *JsxSelfClosingElement {
+    pub fn __all__(db: JavascriptDB) -> *JsxSelfClosingElement {
         for (tmp in PrimaryExpression(db)) {
             if (isJsxSelfClosingElement(Node {id: tmp.id})) {
                 yield JsxSelfClosingElement {
@@ -85,7 +85,7 @@ schema JsxOpeningElement extends Expression {
 impl JsxOpeningElement {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *JsxOpeningElement {
+    pub fn __all__(db: JavascriptDB) -> *JsxOpeningElement {
         for (tmp in Expression(db)) {
             if (isJsxOpeningElement(Node {id: tmp.id})) {
                 yield JsxOpeningElement {
@@ -126,7 +126,7 @@ schema JsxClosingElement extends Expression {
 impl JsxClosingElement {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *JsxClosingElement {
+    pub fn __all__(db: JavascriptDB) -> *JsxClosingElement {
         for (tmp in Expression(db)) {
             if (isJsxClosingElement(Node {id: tmp.id})) {
                 yield JsxClosingElement {
@@ -154,7 +154,7 @@ schema JsxFragment extends PrimaryExpression {
 impl JsxFragment {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *JsxFragment {
+    pub fn __all__(db: JavascriptDB) -> *JsxFragment {
         for (tmp in PrimaryExpression(db)) {
             if (isJsxFragment(Node {id: tmp.id})) {
                 yield JsxFragment {
@@ -174,7 +174,7 @@ schema JsxOpeningFragment extends Expression {
 impl JsxOpeningFragment {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *JsxOpeningFragment {
+    pub fn __all__(db: JavascriptDB) -> *JsxOpeningFragment {
         for (tmp in Expression(db)) {
             if (isJsxOpeningFragment(Node {id: tmp.id})) {
                 yield JsxOpeningFragment {
@@ -202,7 +202,7 @@ schema JsxClosingFragment extends Expression {
 impl JsxClosingFragment {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *JsxClosingFragment {
+    pub fn __all__(db: JavascriptDB) -> *JsxClosingFragment {
         for (tmp in Expression(db)) {
             if (isJsxClosingFragment(Node {id: tmp.id})) {
                 yield JsxClosingFragment {
@@ -230,7 +230,7 @@ schema JsxAttribute extends Node {
 impl JsxAttribute {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *JsxAttribute {
+    pub fn __all__(db: JavascriptDB) -> *JsxAttribute {
         for (tmp in Node(db)) {
             if (isJsxAttribute(tmp)) {
                 yield JsxAttribute {
@@ -274,7 +274,7 @@ schema JsxAttributes extends PrimaryExpression {
 impl JsxAttributes {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *JsxAttributes {
+    pub fn __all__(db: JavascriptDB) -> *JsxAttributes {
         for (tmp in PrimaryExpression(db)) {
             if (isJsxAttributes(Node {id: tmp.id})) {
                 yield JsxAttributes {
@@ -294,7 +294,7 @@ schema JsxSpreadAttribute extends Node {
 impl JsxSpreadAttribute {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *JsxSpreadAttribute {
+    pub fn __all__(db: JavascriptDB) -> *JsxSpreadAttribute {
         for (tmp in Node(db)) {
             if (isJsxSpreadAttribute(tmp)) {
                 yield JsxSpreadAttribute {
@@ -330,7 +330,7 @@ schema JsxExpression extends Expression {
 impl JsxExpression {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *JsxExpression {
+    pub fn __all__(db: JavascriptDB) -> *JsxExpression {
         for (tmp in Expression(db)) {
             if (isJsxExpression(Node {id: tmp.id})) {
                 yield JsxExpression {
@@ -350,7 +350,7 @@ schema JsxAttributeInitializer extends Node {
 impl JsxAttributeInitializer {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *JsxAttributeInitializer {
+    pub fn __all__(db: JavascriptDB) -> *JsxAttributeInitializer {
         for (tmp in Node(db)) {
             if (isStringLiteral(tmp)) {
                 yield JsxAttributeInitializer {

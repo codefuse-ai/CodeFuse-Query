@@ -4,7 +4,7 @@ schema Receiver extends Method {
 impl Receiver {
     @data_constraint
     @inline
-    fn __all__(db: GoDB) -> *Receiver {
+    pub fn __all__(db: GoDB) -> *Receiver {
         for (m in Method(db)) {
             yield Receiver {
                 id : m.id

@@ -4,7 +4,7 @@ schema FileData extends FileDataDO {
 impl FileData {
     @data_constraint
     @inline
-    fn __all__(db: GoDB) -> *FileData {
+    pub fn __all__(db: GoDB) -> *FileData {
         for (tmp in FileDataDO(db)) {
             yield FileData {
                 oid : tmp.oid,

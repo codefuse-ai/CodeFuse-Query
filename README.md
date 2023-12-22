@@ -16,6 +16,12 @@
     <a href="https://github.com/codefuse-ai/CodeFuse-Query/issues">
       <img alt="Open Issues" src="https://img.shields.io/github/issues-raw/codefuse-ai/CodeFuse-Query" />
     </a>
+    <a href="https://github.com/codefuse-ai/CodeFuse-Query/releases">
+      <img alt="Release Download" src="https://img.shields.io/github/downloads/codefuse-ai/CodeFuse-Query/total" />
+    </a>
+    <a href="https://marketplace.visualstudio.com/items?itemName=CodeFuse-Query.codefuse-query-extension">
+      <img alt="VSCode Plugin" src="https://img.shields.io/visual-studio-marketplace/i/CodeFuse-Query.codefuse-query-extension?style=social&logo=visualstudiocode&logoColor=%23007ACC" />
+    </a>
 </p>
 
 ## 什么是CodeFuse-Query？
@@ -54,7 +60,7 @@ CodeFuse-Query 包括**Sparrow CLI **和CodeFuse-Query**在线服务Query中心*
 注：以上语言状态的成熟程度判断标准是根据COREF包含的信息种类和实际落地情况来进行判定，除了OC/C++外，所有语言均支持了完整的AST信息和Documentation信息，以Java为例，COREF for Java还支持了ASG、Call Graph、Class Hierarchy、以及部分CFG信息。
 ## 使用场景
 ### 查询代码特征
-小开发同学想知道 Repo A 里面使用了哪些 String 型的变量，所以他写了一个 Godel 如下，交给 CodeFuse-Query 系统给他返回了结果。
+小开发同学想知道 Repo A 里面使用了哪些 String 型的变量，所以他写了一个 Gödel 如下，交给 CodeFuse-Query 系统给他返回了结果。
 ```rust
 // script
 use coref::java::*
@@ -76,7 +82,7 @@ fn main() {
 小 TL 同学发现团队总是写出很多类似的 Bug A，**他想针对 Bug A 制定一个代码规则和其检查器**，并在 CodeReview 阶段做个卡点。小 TL 通过在 CodeFuse-Query 平台上面编写了一段分析 Query，在平台上面测试符合要求，把这段分析 Query 固化下来作为一个代码规则，并上线到了 CodeReview/CI 阶段。从此这个 Bug 再也没发生过了。
 类似需求：编写静态缺陷扫描规则进行代码风险拦截。
 ### 获取统计数据
-小研究发现传统的代码复杂度指标很难准确地衡量代码的复杂情况，通过学习国际先进经验加上自我灵光一闪，设计了一套复杂度指标和算法。通过 Godel 实现出来以后，**发现不怎么优化就已经性能非常高了**，很快就应用到了 10 几种语言，11+万个仓库当中去了。马上就对代码仓库整体的复杂度有了深入的了解。相比较以前需要自己解析代码，分析语法树，对接系统，**不知道方便了多少。**
+小研究发现传统的代码复杂度指标很难准确地衡量代码的复杂情况，通过学习国际先进经验加上自我灵光一闪，设计了一套复杂度指标和算法。通过 Gödel 实现出来以后，**发现不怎么优化就已经性能非常高了**，很快就应用到了 10 几种语言，11+万个仓库当中去了。马上就对代码仓库整体的复杂度有了深入的了解。相比较以前需要自己解析代码，分析语法树，对接系统，**不知道方便了多少。**
 类似需求：代码统计，代码度量，算法设计，学术研究。
 
 ## 应用领域 
@@ -110,14 +116,18 @@ CodeFuse-Query为CodeFuse代码大模型提供了以下数据清洗能力：
 - [引言](./doc/1_abstract.md)
 - [概述](./doc/2_introduction.md)
 - [安装、配置、运行](./doc/3_install_and_run.md)
-- [Godel查询语言介绍](./doc/4_godelscript_language.md)
+- [Gödel查询语言介绍](./doc/4_godelscript_language.md)
 - [VSCode开发插件](./doc/5_toolchain.md)
+
+## 教程 (tutorial)
+- [在线教程](./tutorial/README.md)
 
 ## 目录结构说明
 - `cli`：命令行工具的入口，提供统一的命令行接口，调用其他模块完成具体功能
 - `language`：各语言的数据化核心（extractor）和数据建模（lib）。关于开放度的问题，请参见《关于开源范围的一些说明》章节
 - `doc`：参考文档
-- `examples`：Godel 查询语言示例
+- `examples`：Gödel 查询语言示例
+- `tutorial`：CodeFuse-Query 开发容器使用教程
 
 ## 关于开源范围的一些说明
 截止目前，从源码**不能**构建出可执行的程序，原因在于本次开源并没有开放所有的模块，缺少的模块会在之后的一年陆续开源。尽管如此，为保障完整的体验，我们开放了**完整的安装包**下载，请见Release页面。
@@ -134,3 +144,9 @@ CodeFuse-Query为CodeFuse代码大模型提供了以下数据清洗能力：
 | SQL | N | N | BETA |
 | Swift | N | N | BETA |
 | Properties | N | N | BETA |
+
+## 联系我们
+![微信用户群图片](./assets/wechat_qrcode_1214.JPG)
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=codefuse-ai/CodeFuse-Query&type=Date)](https://star-history.com/#codefuse-ai/CodeFuse-Query&Date)

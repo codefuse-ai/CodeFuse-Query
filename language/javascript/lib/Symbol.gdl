@@ -12,7 +12,7 @@ schema Symbol extends SymbolDO {
 impl Symbol {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *Symbol {
+    pub fn __all__(db: JavascriptDB) -> *Symbol {
         for (tmp in SymbolDO(db)) {
             yield Symbol {
                 oid : tmp.oid,

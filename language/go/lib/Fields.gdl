@@ -4,7 +4,7 @@ schema Fields extends Node {
 impl Fields {
     @data_constraint
     @inline
-    fn __all__(db: GoDB) -> *Fields {
+    pub fn __all__(db: GoDB) -> *Fields {
         for (f in FieldsDO(db)) {
             yield Fields {
                 id : f.oid

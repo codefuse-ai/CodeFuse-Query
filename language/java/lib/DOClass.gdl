@@ -8,7 +8,7 @@ schema AnnotatedRelationDO {
 impl AnnotatedRelationDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *AnnotatedRelationDO {
+    pub fn __all__(db: JavaDB) -> *AnnotatedRelationDO {
     	for (tmp in db.annotated_relation) {
             yield AnnotatedRelationDO {
                 annotation_hash_id : tmp.annotation_hash_id,
@@ -39,7 +39,7 @@ schema AnnotationAccessArgumentWithNameDO {
 impl AnnotationAccessArgumentWithNameDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *AnnotationAccessArgumentWithNameDO {
+    pub fn __all__(db: JavaDB) -> *AnnotationAccessArgumentWithNameDO {
     	for (tmp in db.annotation_access_argument_with_name) {
             yield AnnotationAccessArgumentWithNameDO {
                 element_hash_id : tmp.element_hash_id,
@@ -109,7 +109,7 @@ schema AnnotationAccessArgumentWithoutNameDO {
 impl AnnotationAccessArgumentWithoutNameDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *AnnotationAccessArgumentWithoutNameDO {
+    pub fn __all__(db: JavaDB) -> *AnnotationAccessArgumentWithoutNameDO {
     	for (tmp in db.annotation_access_argument_without_name) {
             yield AnnotationAccessArgumentWithoutNameDO {
                 element_hash_id : tmp.element_hash_id,
@@ -169,7 +169,7 @@ schema AnnotationArrayInitializerDO {
 impl AnnotationArrayInitializerDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *AnnotationArrayInitializerDO {
+    pub fn __all__(db: JavaDB) -> *AnnotationArrayInitializerDO {
     	for (tmp in db.annotation_array_initializer) {
             yield AnnotationArrayInitializerDO {
                 element_hash_id : tmp.element_hash_id,
@@ -214,7 +214,7 @@ schema AnnotationCanNotResolvedDO {
 impl AnnotationCanNotResolvedDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *AnnotationCanNotResolvedDO {
+    pub fn __all__(db: JavaDB) -> *AnnotationCanNotResolvedDO {
     	for (tmp in db.annotation_can_not_resolved) {
             yield AnnotationCanNotResolvedDO {
                 element_hash_id : tmp.element_hash_id,
@@ -268,7 +268,7 @@ schema AnnotationCanResolvedDO {
 impl AnnotationCanResolvedDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *AnnotationCanResolvedDO {
+    pub fn __all__(db: JavaDB) -> *AnnotationCanResolvedDO {
     	for (tmp in db.annotation_can_resolved) {
             yield AnnotationCanResolvedDO {
                 element_hash_id : tmp.element_hash_id,
@@ -326,7 +326,7 @@ schema AnnotationDeclarationDO {
 impl AnnotationDeclarationDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *AnnotationDeclarationDO {
+    pub fn __all__(db: JavaDB) -> *AnnotationDeclarationDO {
     	for (tmp in db.annotation_declaration) {
             yield AnnotationDeclarationDO {
                 element_hash_id : tmp.element_hash_id,
@@ -356,7 +356,7 @@ schema AnnotationDeclarationParameterDO {
 impl AnnotationDeclarationParameterDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *AnnotationDeclarationParameterDO {
+    pub fn __all__(db: JavaDB) -> *AnnotationDeclarationParameterDO {
     	for (tmp in db.annotation_declaration_parameter) {
             yield AnnotationDeclarationParameterDO {
                 element_hash_id : tmp.element_hash_id,
@@ -414,7 +414,7 @@ schema AnnotationDeclarationParameterDefaultValueDO {
 impl AnnotationDeclarationParameterDefaultValueDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *AnnotationDeclarationParameterDefaultValueDO {
+    pub fn __all__(db: JavaDB) -> *AnnotationDeclarationParameterDefaultValueDO {
     	for (tmp in db.annotation_declaration_parameter_default_value) {
             yield AnnotationDeclarationParameterDefaultValueDO {
                 element_hash_id : tmp.element_hash_id,
@@ -443,7 +443,7 @@ schema AnonymousClassDO {
 impl AnonymousClassDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *AnonymousClassDO {
+    pub fn __all__(db: JavaDB) -> *AnonymousClassDO {
     	for (tmp in db.anonymous_class) {
             yield AnonymousClassDO {
                 element_hash_id : tmp.element_hash_id,
@@ -493,7 +493,7 @@ schema ArrayDO {
 impl ArrayDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *ArrayDO {
+    pub fn __all__(db: JavaDB) -> *ArrayDO {
     	for (tmp in db.array) {
             yield ArrayDO {
                 element_hash_id : tmp.element_hash_id,
@@ -520,7 +520,7 @@ schema ArrayAccessExpressionDO {
 impl ArrayAccessExpressionDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *ArrayAccessExpressionDO {
+    pub fn __all__(db: JavaDB) -> *ArrayAccessExpressionDO {
     	for (tmp in db.array_access_expression) {
             yield ArrayAccessExpressionDO {
                 element_hash_id : tmp.element_hash_id,
@@ -563,7 +563,7 @@ schema ArrayCreationExpressionDO {
 impl ArrayCreationExpressionDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *ArrayCreationExpressionDO {
+    pub fn __all__(db: JavaDB) -> *ArrayCreationExpressionDO {
     	for (tmp in db.array_creation_expression) {
             yield ArrayCreationExpressionDO {
                 element_hash_id : tmp.element_hash_id,
@@ -597,7 +597,7 @@ schema ArrayInitializerExpressionDO {
 impl ArrayInitializerExpressionDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *ArrayInitializerExpressionDO {
+    pub fn __all__(db: JavaDB) -> *ArrayInitializerExpressionDO {
     	for (tmp in db.array_initializer_expression) {
             yield ArrayInitializerExpressionDO {
                 element_hash_id : tmp.element_hash_id,
@@ -624,7 +624,7 @@ schema AssertStatementDO {
 impl AssertStatementDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *AssertStatementDO {
+    pub fn __all__(db: JavaDB) -> *AssertStatementDO {
     	for (tmp in db.assert_statement) {
             yield AssertStatementDO {
                 element_hash_id : tmp.element_hash_id,
@@ -660,7 +660,7 @@ schema AssignmentExpressionDO {
 impl AssignmentExpressionDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *AssignmentExpressionDO {
+    pub fn __all__(db: JavaDB) -> *AssignmentExpressionDO {
     	for (tmp in db.assignment_expression) {
             yield AssignmentExpressionDO {
                 element_hash_id : tmp.element_hash_id,
@@ -704,7 +704,7 @@ schema BinaryExpressionDO {
 impl BinaryExpressionDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *BinaryExpressionDO {
+    pub fn __all__(db: JavaDB) -> *BinaryExpressionDO {
     	for (tmp in db.binary_expression) {
             yield BinaryExpressionDO {
                 element_hash_id : tmp.element_hash_id,
@@ -746,7 +746,7 @@ schema BlockStatementDO {
 impl BlockStatementDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *BlockStatementDO {
+    pub fn __all__(db: JavaDB) -> *BlockStatementDO {
     	for (tmp in db.block_statement) {
             yield BlockStatementDO {
                 element_hash_id : tmp.element_hash_id,
@@ -772,7 +772,7 @@ schema BooleanLiteralDO {
 impl BooleanLiteralDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *BooleanLiteralDO {
+    pub fn __all__(db: JavaDB) -> *BooleanLiteralDO {
     	for (tmp in db.boolean_literal) {
             yield BooleanLiteralDO {
                 element_hash_id : tmp.element_hash_id,
@@ -798,7 +798,7 @@ schema BreakStatementDO {
 impl BreakStatementDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *BreakStatementDO {
+    pub fn __all__(db: JavaDB) -> *BreakStatementDO {
     	for (tmp in db.break_statement) {
             yield BreakStatementDO {
                 element_hash_id : tmp.element_hash_id,
@@ -824,7 +824,7 @@ schema CallableBindingDO {
 impl CallableBindingDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *CallableBindingDO {
+    pub fn __all__(db: JavaDB) -> *CallableBindingDO {
     	for (tmp in db.callable_binding) {
             yield CallableBindingDO {
                 caller_hash_id : tmp.caller_hash_id,
@@ -850,7 +850,7 @@ schema CallableEnclosingExpressionDO {
 impl CallableEnclosingExpressionDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *CallableEnclosingExpressionDO {
+    pub fn __all__(db: JavaDB) -> *CallableEnclosingExpressionDO {
     	for (tmp in db.callable_enclosing_expression) {
             yield CallableEnclosingExpressionDO {
                 expression_hash_id : tmp.expression_hash_id,
@@ -876,7 +876,7 @@ schema CallableEnclosingStatementDO {
 impl CallableEnclosingStatementDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *CallableEnclosingStatementDO {
+    pub fn __all__(db: JavaDB) -> *CallableEnclosingStatementDO {
     	for (tmp in db.callable_enclosing_statement) {
             yield CallableEnclosingStatementDO {
                 statement_hash_id : tmp.statement_hash_id,
@@ -907,7 +907,7 @@ schema CatchSectionDO {
 impl CatchSectionDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *CatchSectionDO {
+    pub fn __all__(db: JavaDB) -> *CatchSectionDO {
     	for (tmp in db.catch_section) {
             yield CatchSectionDO {
                 element_hash_id : tmp.element_hash_id,
@@ -973,7 +973,7 @@ schema CharacterLiteralDO {
 impl CharacterLiteralDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *CharacterLiteralDO {
+    pub fn __all__(db: JavaDB) -> *CharacterLiteralDO {
     	for (tmp in db.character_literal) {
             yield CharacterLiteralDO {
                 element_hash_id : tmp.element_hash_id,
@@ -1002,7 +1002,7 @@ schema ClassDO {
 impl ClassDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *ClassDO {
+    pub fn __all__(db: JavaDB) -> *ClassDO {
     	for (tmp in db.class) {
             yield ClassDO {
                 element_hash_id : tmp.element_hash_id,
@@ -1052,7 +1052,7 @@ schema ClassHierarchyDO {
 impl ClassHierarchyDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *ClassHierarchyDO {
+    pub fn __all__(db: JavaDB) -> *ClassHierarchyDO {
     	for (tmp in db.class_hierarchy) {
             yield ClassHierarchyDO {
                 child_hash_id : tmp.child_hash_id,
@@ -1078,7 +1078,7 @@ schema ClassImplementListDO {
 impl ClassImplementListDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *ClassImplementListDO {
+    pub fn __all__(db: JavaDB) -> *ClassImplementListDO {
     	for (tmp in db.class_implement_list) {
             yield ClassImplementListDO {
                 element_hash_id : tmp.element_hash_id,
@@ -1106,7 +1106,7 @@ schema ClassInitializerDO {
 impl ClassInitializerDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *ClassInitializerDO {
+    pub fn __all__(db: JavaDB) -> *ClassInitializerDO {
     	for (tmp in db.class_initializer) {
             yield ClassInitializerDO {
                 element_hash_id : tmp.element_hash_id,
@@ -1152,7 +1152,7 @@ schema CodeBlockDO {
 impl CodeBlockDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *CodeBlockDO {
+    pub fn __all__(db: JavaDB) -> *CodeBlockDO {
     	for (tmp in db.code_block) {
             yield CodeBlockDO {
                 element_hash_id : tmp.element_hash_id,
@@ -1213,7 +1213,7 @@ schema CommentDO {
 impl CommentDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *CommentDO {
+    pub fn __all__(db: JavaDB) -> *CommentDO {
     	for (tmp in db.comment) {
             yield CommentDO {
                 element_hash_id : tmp.element_hash_id,
@@ -1265,7 +1265,7 @@ schema ConditionalExpressionDO {
 impl ConditionalExpressionDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *ConditionalExpressionDO {
+    pub fn __all__(db: JavaDB) -> *ConditionalExpressionDO {
     	for (tmp in db.conditional_expression) {
             yield ConditionalExpressionDO {
                 element_hash_id : tmp.element_hash_id,
@@ -1311,7 +1311,7 @@ schema ConstructorDO {
 impl ConstructorDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *ConstructorDO {
+    pub fn __all__(db: JavaDB) -> *ConstructorDO {
     	for (tmp in db.constructor) {
             yield ConstructorDO {
                 element_hash_id : tmp.element_hash_id,
@@ -1365,7 +1365,7 @@ schema ConstructorInvocationDO {
 impl ConstructorInvocationDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *ConstructorInvocationDO {
+    pub fn __all__(db: JavaDB) -> *ConstructorInvocationDO {
     	for (tmp in db.constructor_invocation) {
             yield ConstructorInvocationDO {
                 element_hash_id : tmp.element_hash_id,
@@ -1391,7 +1391,7 @@ schema ContainerParentDO {
 impl ContainerParentDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *ContainerParentDO {
+    pub fn __all__(db: JavaDB) -> *ContainerParentDO {
     	for (tmp in db.container_parent) {
             yield ContainerParentDO {
                 child_hash_id : tmp.child_hash_id,
@@ -1417,7 +1417,7 @@ schema ContinueStatementDO {
 impl ContinueStatementDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *ContinueStatementDO {
+    pub fn __all__(db: JavaDB) -> *ContinueStatementDO {
     	for (tmp in db.continue_statement) {
             yield ContinueStatementDO {
                 element_hash_id : tmp.element_hash_id,
@@ -1443,7 +1443,7 @@ schema CupackageDO {
 impl CupackageDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *CupackageDO {
+    pub fn __all__(db: JavaDB) -> *CupackageDO {
     	for (tmp in db.cupackage) {
             yield CupackageDO {
                 file_hash_id : tmp.file_hash_id,
@@ -1470,7 +1470,7 @@ schema DeclarationElementDO {
 impl DeclarationElementDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *DeclarationElementDO {
+    pub fn __all__(db: JavaDB) -> *DeclarationElementDO {
     	for (tmp in db.declaration_element) {
             yield DeclarationElementDO {
                 element_hash_id : tmp.element_hash_id,
@@ -1506,7 +1506,7 @@ schema DoWhileStatementDO {
 impl DoWhileStatementDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *DoWhileStatementDO {
+    pub fn __all__(db: JavaDB) -> *DoWhileStatementDO {
     	for (tmp in db.do_while_statement) {
             yield DoWhileStatementDO {
                 element_hash_id : tmp.element_hash_id,
@@ -1548,7 +1548,7 @@ schema DoubleLiteralDO {
 impl DoubleLiteralDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *DoubleLiteralDO {
+    pub fn __all__(db: JavaDB) -> *DoubleLiteralDO {
     	for (tmp in db.double_literal) {
             yield DoubleLiteralDO {
                 element_hash_id : tmp.element_hash_id,
@@ -1576,7 +1576,7 @@ schema ElementDO {
 impl ElementDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *ElementDO {
+    pub fn __all__(db: JavaDB) -> *ElementDO {
     	for (tmp in db.element) {
             yield ElementDO {
                 element_hash_id : tmp.element_hash_id,
@@ -1620,7 +1620,7 @@ schema EmptyReferenceParameterListDO {
 impl EmptyReferenceParameterListDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *EmptyReferenceParameterListDO {
+    pub fn __all__(db: JavaDB) -> *EmptyReferenceParameterListDO {
     	for (tmp in db.empty_reference_parameter_list) {
             yield EmptyReferenceParameterListDO {
                 list_hash_id : tmp.list_hash_id,
@@ -1661,7 +1661,7 @@ schema EmptyStatementDO {
 impl EmptyStatementDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *EmptyStatementDO {
+    pub fn __all__(db: JavaDB) -> *EmptyStatementDO {
     	for (tmp in db.empty_statement) {
             yield EmptyStatementDO {
                 element_hash_id : tmp.element_hash_id
@@ -1682,7 +1682,7 @@ schema EnumConstantDO {
 impl EnumConstantDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *EnumConstantDO {
+    pub fn __all__(db: JavaDB) -> *EnumConstantDO {
     	for (tmp in db.enum_constant) {
             yield EnumConstantDO {
                 element_hash_id : tmp.element_hash_id,
@@ -1734,7 +1734,7 @@ schema ExceptionDO {
 impl ExceptionDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *ExceptionDO {
+    pub fn __all__(db: JavaDB) -> *ExceptionDO {
     	for (tmp in db.exception) {
             yield ExceptionDO {
                 element_hash_id : tmp.element_hash_id,
@@ -1780,7 +1780,7 @@ schema ExpressionDO {
 impl ExpressionDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *ExpressionDO {
+    pub fn __all__(db: JavaDB) -> *ExpressionDO {
     	for (tmp in db.expression) {
             yield ExpressionDO {
                 element_hash_id : tmp.element_hash_id,
@@ -1841,7 +1841,7 @@ schema ExpressionListDO {
 impl ExpressionListDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *ExpressionListDO {
+    pub fn __all__(db: JavaDB) -> *ExpressionListDO {
     	for (tmp in db.expression_list) {
             yield ExpressionListDO {
                 element_hash_id : tmp.element_hash_id,
@@ -1888,7 +1888,7 @@ schema ExpressionListExpressionRelationDO {
 impl ExpressionListExpressionRelationDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *ExpressionListExpressionRelationDO {
+    pub fn __all__(db: JavaDB) -> *ExpressionListExpressionRelationDO {
     	for (tmp in db.expression_list_expression_relation) {
             yield ExpressionListExpressionRelationDO {
                 expression_list_hash_id : tmp.expression_list_hash_id,
@@ -1925,7 +1925,7 @@ schema ExpressionStatementDO {
 impl ExpressionStatementDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *ExpressionStatementDO {
+    pub fn __all__(db: JavaDB) -> *ExpressionStatementDO {
     	for (tmp in db.expression_statement) {
             yield ExpressionStatementDO {
                 element_hash_id : tmp.element_hash_id,
@@ -1954,7 +1954,7 @@ schema FieldDO {
 impl FieldDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *FieldDO {
+    pub fn __all__(db: JavaDB) -> *FieldDO {
     	for (tmp in db.field) {
             yield FieldDO {
                 element_hash_id : tmp.element_hash_id,
@@ -2007,7 +2007,7 @@ schema FileDO {
 impl FileDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *FileDO {
+    pub fn __all__(db: JavaDB) -> *FileDO {
     	for (tmp in db.file) {
             yield FileDO {
                 element_hash_id : tmp.element_hash_id,
@@ -2057,7 +2057,7 @@ schema FileMd5SumDO {
 impl FileMd5SumDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *FileMd5SumDO {
+    pub fn __all__(db: JavaDB) -> *FileMd5SumDO {
     	for (tmp in db.file_md5_sum) {
             yield FileMd5SumDO {
                 file_hash_id : tmp.file_hash_id,
@@ -2083,7 +2083,7 @@ schema FileSha256SumDO {
 impl FileSha256SumDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *FileSha256SumDO {
+    pub fn __all__(db: JavaDB) -> *FileSha256SumDO {
     	for (tmp in db.file_sha256_sum) {
             yield FileSha256SumDO {
                 file_hash_id : tmp.file_hash_id,
@@ -2109,7 +2109,7 @@ schema FloatingPointLiteralDO {
 impl FloatingPointLiteralDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *FloatingPointLiteralDO {
+    pub fn __all__(db: JavaDB) -> *FloatingPointLiteralDO {
     	for (tmp in db.floating_point_literal) {
             yield FloatingPointLiteralDO {
                 element_hash_id : tmp.element_hash_id,
@@ -2137,7 +2137,7 @@ schema FolderDO {
 impl FolderDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *FolderDO {
+    pub fn __all__(db: JavaDB) -> *FolderDO {
     	for (tmp in db.folder) {
             yield FolderDO {
                 element_hash_id : tmp.element_hash_id,
@@ -2182,7 +2182,7 @@ schema ForStatementDO {
 impl ForStatementDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *ForStatementDO {
+    pub fn __all__(db: JavaDB) -> *ForStatementDO {
     	for (tmp in db.for_statement) {
             yield ForStatementDO {
                 element_hash_id : tmp.element_hash_id,
@@ -2234,7 +2234,7 @@ schema ForeachStatementDO {
 impl ForeachStatementDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *ForeachStatementDO {
+    pub fn __all__(db: JavaDB) -> *ForeachStatementDO {
     	for (tmp in db.foreach_statement) {
             yield ForeachStatementDO {
                 element_hash_id : tmp.element_hash_id,
@@ -2278,7 +2278,7 @@ schema IdentifierDO {
 impl IdentifierDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *IdentifierDO {
+    pub fn __all__(db: JavaDB) -> *IdentifierDO {
     	for (tmp in db.identifier) {
             yield IdentifierDO {
                 element_hash_id : tmp.element_hash_id,
@@ -2322,7 +2322,7 @@ schema IfStatementWithElseDO {
 impl IfStatementWithElseDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *IfStatementWithElseDO {
+    pub fn __all__(db: JavaDB) -> *IfStatementWithElseDO {
     	for (tmp in db.if_statement_with_else) {
             yield IfStatementWithElseDO {
                 element_hash_id : tmp.element_hash_id,
@@ -2365,7 +2365,7 @@ schema IfStatementWithoutElseDO {
 impl IfStatementWithoutElseDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *IfStatementWithoutElseDO {
+    pub fn __all__(db: JavaDB) -> *IfStatementWithoutElseDO {
     	for (tmp in db.if_statement_without_else) {
             yield IfStatementWithoutElseDO {
                 element_hash_id : tmp.element_hash_id,
@@ -2403,7 +2403,7 @@ schema ImportDO {
 impl ImportDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *ImportDO {
+    pub fn __all__(db: JavaDB) -> *ImportDO {
     	for (tmp in db.import) {
             yield ImportDO {
                 element_hash_id : tmp.element_hash_id,
@@ -2463,7 +2463,7 @@ schema ImportStaticReferenceElementDO {
 impl ImportStaticReferenceElementDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *ImportStaticReferenceElementDO {
+    pub fn __all__(db: JavaDB) -> *ImportStaticReferenceElementDO {
     	for (tmp in db.import_static_reference_element) {
             yield ImportStaticReferenceElementDO {
                 element_hash_id : tmp.element_hash_id,
@@ -2508,7 +2508,7 @@ schema ImportStaticStatementDO {
 impl ImportStaticStatementDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *ImportStaticStatementDO {
+    pub fn __all__(db: JavaDB) -> *ImportStaticStatementDO {
     	for (tmp in db.import_static_statement) {
             yield ImportStaticStatementDO {
                 element_hash_id : tmp.element_hash_id,
@@ -2560,7 +2560,7 @@ schema InstanceofExpressionDO {
 impl InstanceofExpressionDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *InstanceofExpressionDO {
+    pub fn __all__(db: JavaDB) -> *InstanceofExpressionDO {
     	for (tmp in db.instanceof_expression) {
             yield InstanceofExpressionDO {
                 element_hash_id : tmp.element_hash_id,
@@ -2602,7 +2602,7 @@ schema IntegerLiteralDO {
 impl IntegerLiteralDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *IntegerLiteralDO {
+    pub fn __all__(db: JavaDB) -> *IntegerLiteralDO {
     	for (tmp in db.integer_literal) {
             yield IntegerLiteralDO {
                 element_hash_id : tmp.element_hash_id,
@@ -2631,7 +2631,7 @@ schema InterfaceDO {
 impl InterfaceDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *InterfaceDO {
+    pub fn __all__(db: JavaDB) -> *InterfaceDO {
     	for (tmp in db.interface) {
             yield InterfaceDO {
                 element_hash_id : tmp.element_hash_id,
@@ -2684,7 +2684,7 @@ schema JavadocCommentDO {
 impl JavadocCommentDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *JavadocCommentDO {
+    pub fn __all__(db: JavaDB) -> *JavadocCommentDO {
     	for (tmp in db.javadoc_comment) {
             yield JavadocCommentDO {
                 element_hash_id : tmp.element_hash_id,
@@ -2738,7 +2738,7 @@ schema JavadocTagDO {
 impl JavadocTagDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *JavadocTagDO {
+    pub fn __all__(db: JavaDB) -> *JavadocTagDO {
     	for (tmp in db.javadoc_tag) {
             yield JavadocTagDO {
                 element_hash_id : tmp.element_hash_id,
@@ -2798,7 +2798,7 @@ schema JavadocTagValueDO {
 impl JavadocTagValueDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *JavadocTagValueDO {
+    pub fn __all__(db: JavaDB) -> *JavadocTagValueDO {
     	for (tmp in db.javadoc_tag_value) {
             yield JavadocTagValueDO {
                 element_hash_id : tmp.element_hash_id,
@@ -2843,7 +2843,7 @@ schema JavadocDataTokenDO {
 impl JavadocDataTokenDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *JavadocDataTokenDO {
+    pub fn __all__(db: JavaDB) -> *JavadocDataTokenDO {
     	for (tmp in db.javadoc_data_token) {
             yield JavadocDataTokenDO {
                 element_hash_id : tmp.element_hash_id,
@@ -2894,7 +2894,7 @@ schema LabeledStatementDO {
 impl LabeledStatementDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *LabeledStatementDO {
+    pub fn __all__(db: JavaDB) -> *LabeledStatementDO {
     	for (tmp in db.labeled_statement) {
             yield LabeledStatementDO {
                 element_hash_id : tmp.element_hash_id,
@@ -2931,7 +2931,7 @@ schema LambdaExpressionDO {
 impl LambdaExpressionDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *LambdaExpressionDO {
+    pub fn __all__(db: JavaDB) -> *LambdaExpressionDO {
     	for (tmp in db.lambda_expression) {
             yield LambdaExpressionDO {
                 element_hash_id : tmp.element_hash_id,
@@ -2984,7 +2984,7 @@ schema LocalClassDO {
 impl LocalClassDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *LocalClassDO {
+    pub fn __all__(db: JavaDB) -> *LocalClassDO {
     	for (tmp in db.local_class) {
             yield LocalClassDO {
                 element_hash_id : tmp.element_hash_id,
@@ -3038,7 +3038,7 @@ schema LocalVariableDO {
 impl LocalVariableDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *LocalVariableDO {
+    pub fn __all__(db: JavaDB) -> *LocalVariableDO {
     	for (tmp in db.local_variable) {
             yield LocalVariableDO {
                 element_hash_id : tmp.element_hash_id,
@@ -3100,7 +3100,7 @@ schema LocationDO {
 impl LocationDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *LocationDO {
+    pub fn __all__(db: JavaDB) -> *LocationDO {
     	for (tmp in db.location) {
             yield LocationDO {
                 element_hash_id : tmp.element_hash_id,
@@ -3158,7 +3158,7 @@ schema LongLiteralDO {
 impl LongLiteralDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *LongLiteralDO {
+    pub fn __all__(db: JavaDB) -> *LongLiteralDO {
     	for (tmp in db.long_literal) {
             yield LongLiteralDO {
                 element_hash_id : tmp.element_hash_id,
@@ -3186,7 +3186,7 @@ schema MetainfoDO {
 impl MetainfoDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *MetainfoDO {
+    pub fn __all__(db: JavaDB) -> *MetainfoDO {
     	for (tmp in db.metainfo) {
             yield MetainfoDO {
                 oid : tmp.oid,
@@ -3233,7 +3233,7 @@ schema MethodDO {
 impl MethodDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *MethodDO {
+    pub fn __all__(db: JavaDB) -> *MethodDO {
     	for (tmp in db.method) {
             yield MethodDO {
                 element_hash_id : tmp.element_hash_id,
@@ -3297,7 +3297,7 @@ schema MethodAccessExpressionWithTypeDO {
 impl MethodAccessExpressionWithTypeDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *MethodAccessExpressionWithTypeDO {
+    pub fn __all__(db: JavaDB) -> *MethodAccessExpressionWithTypeDO {
     	for (tmp in db.method_access_expression_with_type) {
             yield MethodAccessExpressionWithTypeDO {
                 element_hash_id : tmp.element_hash_id,
@@ -3340,7 +3340,7 @@ schema MethodAccessExpressionWithoutTypeDO {
 impl MethodAccessExpressionWithoutTypeDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *MethodAccessExpressionWithoutTypeDO {
+    pub fn __all__(db: JavaDB) -> *MethodAccessExpressionWithoutTypeDO {
     	for (tmp in db.method_access_expression_without_type) {
             yield MethodAccessExpressionWithoutTypeDO {
                 element_hash_id : tmp.element_hash_id,
@@ -3374,7 +3374,7 @@ schema MethodReferenceExpressionDO {
 impl MethodReferenceExpressionDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *MethodReferenceExpressionDO {
+    pub fn __all__(db: JavaDB) -> *MethodReferenceExpressionDO {
     	for (tmp in db.method_reference_expression) {
             yield MethodReferenceExpressionDO {
                 element_hash_id : tmp.element_hash_id,
@@ -3402,7 +3402,7 @@ schema ModifierDO {
 impl ModifierDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *ModifierDO {
+    pub fn __all__(db: JavaDB) -> *ModifierDO {
     	for (tmp in db.modifier) {
             yield ModifierDO {
                 element_hash_id : tmp.element_hash_id,
@@ -3445,7 +3445,7 @@ schema ModifierListDO {
 impl ModifierListDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *ModifierListDO {
+    pub fn __all__(db: JavaDB) -> *ModifierListDO {
     	for (tmp in db.modifier_list) {
             yield ModifierListDO {
                 element_hash_id : tmp.element_hash_id,
@@ -3479,7 +3479,7 @@ schema ModuleDO {
 impl ModuleDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *ModuleDO {
+    pub fn __all__(db: JavaDB) -> *ModuleDO {
     	for (tmp in db.module) {
             yield ModuleDO {
                 element_hash_id : tmp.element_hash_id,
@@ -3506,7 +3506,7 @@ schema NameStringDO {
 impl NameStringDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *NameStringDO {
+    pub fn __all__(db: JavaDB) -> *NameStringDO {
     	for (tmp in db.name_string) {
             yield NameStringDO {
                 parent_hash_id : tmp.parent_hash_id,
@@ -3541,7 +3541,7 @@ schema NewExpressionDO {
 impl NewExpressionDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *NewExpressionDO {
+    pub fn __all__(db: JavaDB) -> *NewExpressionDO {
     	for (tmp in db.new_expression) {
             yield NewExpressionDO {
                 element_hash_id : tmp.element_hash_id,
@@ -3575,7 +3575,7 @@ schema NullLiteralDO {
 impl NullLiteralDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *NullLiteralDO {
+    pub fn __all__(db: JavaDB) -> *NullLiteralDO {
     	for (tmp in db.null_literal) {
             yield NullLiteralDO {
                 element_hash_id : tmp.element_hash_id,
@@ -3603,7 +3603,7 @@ schema NumberOfLinesDO {
 impl NumberOfLinesDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *NumberOfLinesDO {
+    pub fn __all__(db: JavaDB) -> *NumberOfLinesDO {
     	for (tmp in db.number_of_lines) {
             yield NumberOfLinesDO {
                 element_hash_id : tmp.element_hash_id,
@@ -3648,7 +3648,7 @@ schema PackageStatementDO {
 impl PackageStatementDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *PackageStatementDO {
+    pub fn __all__(db: JavaDB) -> *PackageStatementDO {
     	for (tmp in db.package_statement) {
             yield PackageStatementDO {
                 element_hash_id : tmp.element_hash_id,
@@ -3703,7 +3703,7 @@ schema ParameterDO {
 impl ParameterDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *ParameterDO {
+    pub fn __all__(db: JavaDB) -> *ParameterDO {
     	for (tmp in db.parameter) {
             yield ParameterDO {
                 element_hash_id : tmp.element_hash_id,
@@ -3769,7 +3769,7 @@ schema ParentDO {
 impl ParentDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *ParentDO {
+    pub fn __all__(db: JavaDB) -> *ParentDO {
     	for (tmp in db.parent) {
             yield ParentDO {
                 parent_hash_id : tmp.parent_hash_id,
@@ -3796,7 +3796,7 @@ schema PolyadicExpressionDO {
 impl PolyadicExpressionDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *PolyadicExpressionDO {
+    pub fn __all__(db: JavaDB) -> *PolyadicExpressionDO {
     	for (tmp in db.polyadic_expression) {
             yield PolyadicExpressionDO {
                 element_hash_id : tmp.element_hash_id,
@@ -3830,7 +3830,7 @@ schema PrimitiveDO {
 impl PrimitiveDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *PrimitiveDO {
+    pub fn __all__(db: JavaDB) -> *PrimitiveDO {
     	for (tmp in db.primitive) {
             yield PrimitiveDO {
                 oid : tmp.oid,
@@ -3856,7 +3856,7 @@ schema ProgramDO {
 impl ProgramDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *ProgramDO {
+    pub fn __all__(db: JavaDB) -> *ProgramDO {
     	for (tmp in db.program) {
             yield ProgramDO {
                 program_hash_id : tmp.program_hash_id,
@@ -3884,7 +3884,7 @@ schema ReferenceElementDO {
 impl ReferenceElementDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *ReferenceElementDO {
+    pub fn __all__(db: JavaDB) -> *ReferenceElementDO {
     	for (tmp in db.reference_element) {
             yield ReferenceElementDO {
                 element_hash_id : tmp.element_hash_id,
@@ -3925,7 +3925,7 @@ schema ReferenceExpressionDO {
 impl ReferenceExpressionDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *ReferenceExpressionDO {
+    pub fn __all__(db: JavaDB) -> *ReferenceExpressionDO {
     	for (tmp in db.reference_expression) {
             yield ReferenceExpressionDO {
                 element_hash_id : tmp.element_hash_id
@@ -3946,7 +3946,7 @@ schema ReferenceListDO {
 impl ReferenceListDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *ReferenceListDO {
+    pub fn __all__(db: JavaDB) -> *ReferenceListDO {
     	for (tmp in db.reference_list) {
             yield ReferenceListDO {
                 element_hash_id : tmp.element_hash_id,
@@ -4000,7 +4000,7 @@ schema ReferenceParameterListDO {
 impl ReferenceParameterListDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *ReferenceParameterListDO {
+    pub fn __all__(db: JavaDB) -> *ReferenceParameterListDO {
     	for (tmp in db.reference_parameter_list) {
             yield ReferenceParameterListDO {
                 type_element_hash_id : tmp.type_element_hash_id,
@@ -4065,7 +4065,7 @@ schema ReferenceRelationDO {
 impl ReferenceRelationDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *ReferenceRelationDO {
+    pub fn __all__(db: JavaDB) -> *ReferenceRelationDO {
     	for (tmp in db.reference_relation) {
             yield ReferenceRelationDO {
                 reference_element_hash_id : tmp.reference_element_hash_id,
@@ -4099,7 +4099,7 @@ schema ReferenceTypeDO {
 impl ReferenceTypeDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *ReferenceTypeDO {
+    pub fn __all__(db: JavaDB) -> *ReferenceTypeDO {
     	for (tmp in db.reference_type) {
             yield ReferenceTypeDO {
                 oid : tmp.oid,
@@ -4135,7 +4135,7 @@ schema ResourceListDO {
 impl ResourceListDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *ResourceListDO {
+    pub fn __all__(db: JavaDB) -> *ResourceListDO {
     	for (tmp in db.resource_list) {
             yield ResourceListDO {
                 element_hash_id : tmp.element_hash_id,
@@ -4177,7 +4177,7 @@ schema ReturnStatementDO {
 impl ReturnStatementDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *ReturnStatementDO {
+    pub fn __all__(db: JavaDB) -> *ReturnStatementDO {
     	for (tmp in db.return_statement) {
             yield ReturnStatementDO {
                 element_hash_id : tmp.element_hash_id,
@@ -4207,7 +4207,7 @@ schema StatementDO {
 impl StatementDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *StatementDO {
+    pub fn __all__(db: JavaDB) -> *StatementDO {
     	for (tmp in db.statement) {
             yield StatementDO {
                 element_hash_id : tmp.element_hash_id,
@@ -4265,7 +4265,7 @@ schema StatementEnclosingExpressionDO {
 impl StatementEnclosingExpressionDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *StatementEnclosingExpressionDO {
+    pub fn __all__(db: JavaDB) -> *StatementEnclosingExpressionDO {
     	for (tmp in db.statement_enclosing_expression) {
             yield StatementEnclosingExpressionDO {
                 expression_hash_id : tmp.expression_hash_id,
@@ -4291,7 +4291,7 @@ schema StringLiteralDO {
 impl StringLiteralDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *StringLiteralDO {
+    pub fn __all__(db: JavaDB) -> *StringLiteralDO {
     	for (tmp in db.string_literal) {
             yield StringLiteralDO {
                 element_hash_id : tmp.element_hash_id,
@@ -4316,7 +4316,7 @@ schema SuperAccessExpressionDO {
 impl SuperAccessExpressionDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *SuperAccessExpressionDO {
+    pub fn __all__(db: JavaDB) -> *SuperAccessExpressionDO {
     	for (tmp in db.super_access_expression) {
             yield SuperAccessExpressionDO {
                 element_hash_id : tmp.element_hash_id
@@ -4333,7 +4333,7 @@ schema SuperConstructorInvocationDO {
 impl SuperConstructorInvocationDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *SuperConstructorInvocationDO {
+    pub fn __all__(db: JavaDB) -> *SuperConstructorInvocationDO {
     	for (tmp in db.super_constructor_invocation) {
             yield SuperConstructorInvocationDO {
                 element_hash_id : tmp.element_hash_id
@@ -4350,7 +4350,7 @@ schema SuperExpressionDO {
 impl SuperExpressionDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *SuperExpressionDO {
+    pub fn __all__(db: JavaDB) -> *SuperExpressionDO {
     	for (tmp in db.super_expression) {
             yield SuperExpressionDO {
                 element_hash_id : tmp.element_hash_id
@@ -4368,7 +4368,7 @@ schema SuperExpressionWithQualifierDO {
 impl SuperExpressionWithQualifierDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *SuperExpressionWithQualifierDO {
+    pub fn __all__(db: JavaDB) -> *SuperExpressionWithQualifierDO {
     	for (tmp in db.super_expression_with_qualifier) {
             yield SuperExpressionWithQualifierDO {
                 element_hash_id : tmp.element_hash_id,
@@ -4396,7 +4396,7 @@ schema SwitchLabelStatementDO {
 impl SwitchLabelStatementDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *SwitchLabelStatementDO {
+    pub fn __all__(db: JavaDB) -> *SwitchLabelStatementDO {
     	for (tmp in db.switch_label_statement) {
             yield SwitchLabelStatementDO {
                 element_hash_id : tmp.element_hash_id,
@@ -4439,7 +4439,7 @@ schema SwitchStatementDO {
 impl SwitchStatementDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *SwitchStatementDO {
+    pub fn __all__(db: JavaDB) -> *SwitchStatementDO {
     	for (tmp in db.switch_statement) {
             yield SwitchStatementDO {
                 element_hash_id : tmp.element_hash_id,
@@ -4474,7 +4474,7 @@ schema SynchronizedStatementDO {
 impl SynchronizedStatementDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *SynchronizedStatementDO {
+    pub fn __all__(db: JavaDB) -> *SynchronizedStatementDO {
     	for (tmp in db.synchronized_statement) {
             yield SynchronizedStatementDO {
                 element_hash_id : tmp.element_hash_id,
@@ -4511,7 +4511,7 @@ schema ThisAccessExpressionDO {
 impl ThisAccessExpressionDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *ThisAccessExpressionDO {
+    pub fn __all__(db: JavaDB) -> *ThisAccessExpressionDO {
     	for (tmp in db.this_access_expression) {
             yield ThisAccessExpressionDO {
                 element_hash_id : tmp.element_hash_id
@@ -4529,7 +4529,7 @@ schema ThisExpressionWithQualifierDO {
 impl ThisExpressionWithQualifierDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *ThisExpressionWithQualifierDO {
+    pub fn __all__(db: JavaDB) -> *ThisExpressionWithQualifierDO {
     	for (tmp in db.this_expression_with_qualifier) {
             yield ThisExpressionWithQualifierDO {
                 element_hash_id : tmp.element_hash_id,
@@ -4556,7 +4556,7 @@ schema ThrowStatementDO {
 impl ThrowStatementDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *ThrowStatementDO {
+    pub fn __all__(db: JavaDB) -> *ThrowStatementDO {
     	for (tmp in db.throw_statement) {
             yield ThrowStatementDO {
                 element_hash_id : tmp.element_hash_id,
@@ -4592,7 +4592,7 @@ schema TokenDO {
 impl TokenDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *TokenDO {
+    pub fn __all__(db: JavaDB) -> *TokenDO {
     	for (tmp in db.token) {
             yield TokenDO {
                 element_hash_id : tmp.element_hash_id,
@@ -4635,7 +4635,7 @@ schema TryStatementWithFinallyDO {
 impl TryStatementWithFinallyDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *TryStatementWithFinallyDO {
+    pub fn __all__(db: JavaDB) -> *TryStatementWithFinallyDO {
     	for (tmp in db.try_statement_with_finally) {
             yield TryStatementWithFinallyDO {
                 element_hash_id : tmp.element_hash_id,
@@ -4669,7 +4669,7 @@ schema TryStatementWithoutFinallyDO {
 impl TryStatementWithoutFinallyDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *TryStatementWithoutFinallyDO {
+    pub fn __all__(db: JavaDB) -> *TryStatementWithoutFinallyDO {
     	for (tmp in db.try_statement_without_finally) {
             yield TryStatementWithoutFinallyDO {
                 element_hash_id : tmp.element_hash_id,
@@ -4695,7 +4695,7 @@ schema TypeCastExpressionDO {
 impl TypeCastExpressionDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *TypeCastExpressionDO {
+    pub fn __all__(db: JavaDB) -> *TypeCastExpressionDO {
     	for (tmp in db.type_cast_expression) {
             yield TypeCastExpressionDO {
                 element_hash_id : tmp.element_hash_id,
@@ -4724,7 +4724,7 @@ schema TypeElementDO {
 impl TypeElementDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *TypeElementDO {
+    pub fn __all__(db: JavaDB) -> *TypeElementDO {
     	for (tmp in db.type_element) {
             yield TypeElementDO {
                 element_hash_id : tmp.element_hash_id,
@@ -4775,7 +4775,7 @@ schema TypeLiteralDO {
 impl TypeLiteralDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *TypeLiteralDO {
+    pub fn __all__(db: JavaDB) -> *TypeLiteralDO {
     	for (tmp in db.type_literal) {
             yield TypeLiteralDO {
                 element_hash_id : tmp.element_hash_id,
@@ -4814,7 +4814,7 @@ schema TypeParameterDO {
 impl TypeParameterDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *TypeParameterDO {
+    pub fn __all__(db: JavaDB) -> *TypeParameterDO {
     	for (tmp in db.type_parameter) {
             yield TypeParameterDO {
                 element_hash_id : tmp.element_hash_id,
@@ -4882,7 +4882,7 @@ schema UnaryExpressionDO {
 impl UnaryExpressionDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *UnaryExpressionDO {
+    pub fn __all__(db: JavaDB) -> *UnaryExpressionDO {
     	for (tmp in db.unary_expression) {
             yield UnaryExpressionDO {
                 element_hash_id : tmp.element_hash_id,
@@ -4925,7 +4925,7 @@ schema WhileStatementDO {
 impl WhileStatementDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *WhileStatementDO {
+    pub fn __all__(db: JavaDB) -> *WhileStatementDO {
     	for (tmp in db.while_statement) {
             yield WhileStatementDO {
                 element_hash_id : tmp.element_hash_id,
@@ -4962,7 +4962,7 @@ schema YieldStatementDO {
 impl YieldStatementDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *YieldStatementDO {
+    pub fn __all__(db: JavaDB) -> *YieldStatementDO {
     	for (tmp in db.yield_statement) {
             yield YieldStatementDO {
                 element_hash_id : tmp.element_hash_id,
@@ -4997,7 +4997,7 @@ schema NpProjectDO {
 impl NpProjectDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *NpProjectDO {
+    pub fn __all__(db: JavaDB) -> *NpProjectDO {
     	for (tmp in db.np_project) {
             yield NpProjectDO {
                 element_hash_id : tmp.element_hash_id,
@@ -5033,7 +5033,7 @@ schema NpFileDO {
 impl NpFileDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *NpFileDO {
+    pub fn __all__(db: JavaDB) -> *NpFileDO {
     	for (tmp in db.np_file) {
             yield NpFileDO {
                 element_hash_id : tmp.element_hash_id,
@@ -5077,7 +5077,7 @@ schema NpClassDO {
 impl NpClassDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *NpClassDO {
+    pub fn __all__(db: JavaDB) -> *NpClassDO {
     	for (tmp in db.np_class) {
             yield NpClassDO {
                 element_hash_id : tmp.element_hash_id,
@@ -5121,7 +5121,7 @@ schema NpInterfaceDO {
 impl NpInterfaceDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *NpInterfaceDO {
+    pub fn __all__(db: JavaDB) -> *NpInterfaceDO {
     	for (tmp in db.np_interface) {
             yield NpInterfaceDO {
                 element_hash_id : tmp.element_hash_id,
@@ -5166,7 +5166,7 @@ schema NpMethodDO {
 impl NpMethodDO {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *NpMethodDO {
+    pub fn __all__(db: JavaDB) -> *NpMethodDO {
     	for (tmp in db.np_method) {
             yield NpMethodDO {
                 element_hash_id : tmp.element_hash_id,

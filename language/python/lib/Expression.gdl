@@ -7,7 +7,7 @@ schema Expression extends ExpressionDO {
 impl Expression {
     @data_constraint
     @inline
-    fn __all__(db: PythonDB) -> *Expression {
+    pub fn __all__(db: PythonDB) -> *Expression {
         for (tmp in ExpressionDO(db)) {
             yield Expression {
                 element_oid : tmp.element_oid,
@@ -87,7 +87,7 @@ schema IfExpression extends Expression {
 impl IfExpression {
     @data_constraint
     @inline
-    fn __all__(db: PythonDB) -> *IfExpression {
+    pub fn __all__(db: PythonDB) -> *IfExpression {
         for (tmp in Expression(db)) {
             for (e in IfExpressionDO(db)) {
                 if (tmp.key_eq(e)) {
@@ -113,7 +113,7 @@ schema BooleanExpression extends Expression {
 impl BooleanExpression {
     @data_constraint
     @inline
-    fn __all__(db: PythonDB) -> *BooleanExpression {
+    pub fn __all__(db: PythonDB) -> *BooleanExpression {
         for (tmp in Expression(db)) {
             for (e in BooleanOpExpressionDO(db)) {
                 if (tmp.key_eq(e)) {
@@ -161,7 +161,7 @@ schema AndLogicalExpression extends BooleanExpression {
 impl AndLogicalExpression {
     @data_constraint
     @inline
-    fn __all__(db: PythonDB) -> *AndLogicalExpression {
+    pub fn __all__(db: PythonDB) -> *AndLogicalExpression {
         for (tmp in BooleanExpression(db)) {
             if (tmp.getType() = "And") {
                 yield AndLogicalExpression {
@@ -185,7 +185,7 @@ schema OrLogicalExpression extends BooleanExpression {
 impl OrLogicalExpression {
     @data_constraint
     @inline
-    fn __all__(db: PythonDB) -> *OrLogicalExpression {
+    pub fn __all__(db: PythonDB) -> *OrLogicalExpression {
         for (tmp in BooleanExpression(db)) {
             if (tmp.getType() = "Or") {
                 yield OrLogicalExpression {
@@ -209,7 +209,7 @@ schema AttributeExpression extends Expression {
 impl AttributeExpression {
     @data_constraint
     @inline
-    fn __all__(db: PythonDB) -> *AttributeExpression {
+    pub fn __all__(db: PythonDB) -> *AttributeExpression {
         for (tmp in Expression(db)) {
             for (a in AttributeExpressionDO(db)) {
                 if (tmp.key_eq(a)) {
@@ -235,7 +235,7 @@ schema CallExpression extends Expression {
 impl CallExpression {
     @data_constraint
     @inline
-    fn __all__(db: PythonDB) -> *CallExpression {
+    pub fn __all__(db: PythonDB) -> *CallExpression {
         for (tmp in Expression(db)) {
             for (c in CallExpressionDO(db)) {
                 if (tmp.key_eq(c)) {
@@ -302,7 +302,7 @@ schema ListCompExpression extends Expression {
 impl ListCompExpression {
     @data_constraint
     @inline
-    fn __all__(db: PythonDB) -> *ListCompExpression {
+    pub fn __all__(db: PythonDB) -> *ListCompExpression {
         for (tmp in Expression(db)) {
             for (c in ListCompExpressionDO(db)) {
                 if (tmp.key_eq(c)) {

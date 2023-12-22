@@ -4,7 +4,7 @@ schema File extends Node {
 impl File {
     @data_constraint
     @inline
-    fn __all__(db: GoDB) -> *File {
+    pub fn __all__(db: GoDB) -> *File {
         for (f in FileDO(db)) {
             yield File {
                 id : f.oid
@@ -112,7 +112,7 @@ schema GoFile extends File {
 impl GoFile {
     @data_constraint
     @inline
-    fn __all__(db: GoDB) -> *GoFile {
+    pub fn __all__(db: GoDB) -> *GoFile {
         for (f in File(db)) {
             if (f.isGoFile()) {
                 yield GoFile {

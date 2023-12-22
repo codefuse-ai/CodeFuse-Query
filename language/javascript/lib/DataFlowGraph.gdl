@@ -9,7 +9,7 @@ schema DataFlowNode extends Node {
 impl DataFlowNode {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *DataFlowNode {
+    pub fn __all__(db: JavascriptDB) -> *DataFlowNode {
         for (tmp in Node(db)) {
             if (isDataFlowNode(tmp)) {
                 yield DataFlowNode {

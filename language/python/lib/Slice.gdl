@@ -7,7 +7,7 @@ schema Slice extends SliceDO {
 impl Slice {
     @data_constraint
     @inline
-    fn __all__(db: PythonDB) -> *Slice {
+    pub fn __all__(db: PythonDB) -> *Slice {
         for (tmp in SliceDO(db)) {
             yield Slice {
                 element_oid : tmp.element_oid,

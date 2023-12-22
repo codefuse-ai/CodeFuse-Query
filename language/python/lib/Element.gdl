@@ -7,7 +7,7 @@ schema CombineElement {
 impl CombineElement {
     @data_constraint
     @inline
-    fn __all__(db: PythonDB) -> *CombineElement {
+    pub fn __all__(db: PythonDB) -> *CombineElement {
         for (e in Element(db)) {
             yield CombineElement {id : e.oid}
         }
@@ -525,7 +525,7 @@ schema Element extends ElementDO {
 impl Element {
     @data_constraint
     @inline
-    fn __all__(db: PythonDB) -> *Element {
+    pub fn __all__(db: PythonDB) -> *Element {
         for (tmp in ElementDO(db)) {
             yield Element {
                 oid : tmp.oid,

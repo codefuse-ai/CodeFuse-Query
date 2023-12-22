@@ -12,7 +12,7 @@ schema QualifiedName extends Node {
 impl QualifiedName {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *QualifiedName {
+    pub fn __all__(db: JavascriptDB) -> *QualifiedName {
         for (tmp in Node(db)) {
             if (isQualifiedName(tmp)) {
                 yield QualifiedName {
@@ -32,7 +32,7 @@ schema ImportClause extends Node {
 impl ImportClause {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *ImportClause {
+    pub fn __all__(db: JavascriptDB) -> *ImportClause {
         for (tmp in Node(db)) {
             if (isImportClause(tmp)) {
                 yield ImportClause {
@@ -52,7 +52,7 @@ schema NamespaceImport extends Node {
 impl NamespaceImport {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *NamespaceImport {
+    pub fn __all__(db: JavascriptDB) -> *NamespaceImport {
         for (tmp in Node(db)) {
             if (isNamespaceImport(tmp)) {
                 yield NamespaceImport {
@@ -72,7 +72,7 @@ schema NamedImports extends Node {
 impl NamedImports {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *NamedImports {
+    pub fn __all__(db: JavascriptDB) -> *NamedImports {
         for (tmp in Node(db)) {
             if (isNamedImports(tmp)) {
                 yield NamedImports {
@@ -92,7 +92,7 @@ schema ImportSpecifier extends Node {
 impl ImportSpecifier {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *ImportSpecifier {
+    pub fn __all__(db: JavascriptDB) -> *ImportSpecifier {
         for (tmp in Node(db)) {
             if (isImportSpecifier(tmp)) {
                 yield ImportSpecifier {
@@ -112,7 +112,7 @@ schema NamedExports extends Node {
 impl NamedExports {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *NamedExports {
+    pub fn __all__(db: JavascriptDB) -> *NamedExports {
         for (tmp in Node(db)) {
             if (isNamedExports(tmp)) {
                 yield NamedExports {
@@ -132,7 +132,7 @@ schema NamespaceExport extends Node {
 impl NamespaceExport {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *NamespaceExport {
+    pub fn __all__(db: JavascriptDB) -> *NamespaceExport {
         for (tmp in Node(db)) {
             if (isNamespaceExport(tmp)) {
                 yield NamespaceExport {
@@ -152,7 +152,7 @@ schema ExportSpecifier extends Node {
 impl ExportSpecifier {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *ExportSpecifier {
+    pub fn __all__(db: JavascriptDB) -> *ExportSpecifier {
         for (tmp in Node(db)) {
             if (isExportSpecifier(tmp)) {
                 yield ExportSpecifier {
@@ -172,7 +172,7 @@ schema ExternalModuleReference extends Node {
 impl ExternalModuleReference {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *ExternalModuleReference {
+    pub fn __all__(db: JavascriptDB) -> *ExternalModuleReference {
         for (tmp in Node(db)) {
             if (isExternalModuleReference(tmp)) {
                 yield ExternalModuleReference {

@@ -7,7 +7,7 @@ schema ElementParent {
 impl ElementParent {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *ElementParent {
+    pub fn __all__(db: JavaDB) -> *ElementParent {
         for (s in Statement(db)) {
             yield ElementParent {id : s.element_hash_id}
         }
@@ -1170,7 +1170,7 @@ schema StatementParent extends ElementParent {
 impl StatementParent {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *StatementParent {
+    pub fn __all__(db: JavaDB) -> *StatementParent {
         for (tmp in ElementParent(db)) {
             for (s in Statement(db)) {
                 if (tmp = s.getParent()) {
@@ -1202,7 +1202,7 @@ schema ExpressionParent extends ElementParent {
 impl ExpressionParent {
     @data_constraint
     @inline
-    fn __all__(db: JavaDB) -> *ExpressionParent {
+    pub fn __all__(db: JavaDB) -> *ExpressionParent {
         for (tmp in ElementParent(db)) {
             for (s in Expression(db)) {
                 if (tmp = s.getParent()) {

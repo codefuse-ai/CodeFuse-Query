@@ -12,7 +12,7 @@ schema HeritageToken extends Node {
 impl HeritageToken {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *HeritageToken {
+    pub fn __all__(db: JavascriptDB) -> *HeritageToken {
         for (tmp in Node(db)) {
             if (isHeritageToken(tmp)) {
                 yield HeritageToken {
@@ -32,7 +32,7 @@ schema HeritageClause extends Node {
 impl HeritageClause {
     @data_constraint
     @inline
-    fn __all__(db: JavascriptDB) -> *HeritageClause {
+    pub fn __all__(db: JavascriptDB) -> *HeritageClause {
         for (tmp in Node(db)) {
             if (isHeritageClause(tmp)) {
                 yield HeritageClause {

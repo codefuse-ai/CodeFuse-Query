@@ -4,7 +4,7 @@ schema Pkg extends PkgDO {
 impl Pkg {
     @data_constraint
     @inline
-    fn __all__(db: GoDB) -> *Pkg {
+    pub fn __all__(db: GoDB) -> *Pkg {
         for (tmp in PkgDO(db)) {
             yield Pkg {
                 oid : tmp.oid,

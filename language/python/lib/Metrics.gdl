@@ -7,7 +7,7 @@ schema ScopeEnclosingExpression extends ScopeEnclosingExpressionDO {
 impl ScopeEnclosingExpression {
     @data_constraint
     @inline
-    fn __all__(db: PythonDB) -> *ScopeEnclosingExpression {
+    pub fn __all__(db: PythonDB) -> *ScopeEnclosingExpression {
         for (tmp in ScopeEnclosingExpressionDO(db)) {
             yield ScopeEnclosingExpression {
                 expression_oid : tmp.expression_oid,
@@ -83,7 +83,7 @@ schema ScopeEnclosignStatement extends ScopeEnclosingStatementDO {
 impl ScopeEnclosignStatement {
     @data_constraint
     @inline
-    fn __all__(db: PythonDB) -> *ScopeEnclosignStatement {
+    pub fn __all__(db: PythonDB) -> *ScopeEnclosignStatement {
         for (tmp in ScopeEnclosingStatementDO(db)) {
             yield ScopeEnclosignStatement {
                 statement_oid : tmp.statement_oid,
@@ -159,7 +159,7 @@ schema MetricFunction extends Function {
 impl MetricFunction {
     @data_constraint
     @inline
-    fn __all__(db: PythonDB) -> *MetricFunction {
+    pub fn __all__(db: PythonDB) -> *MetricFunction {
         for (tmp in Function(db)) {
             yield MetricFunction {
                 element_oid : tmp.element_oid,
