@@ -232,12 +232,16 @@ def dump_reference_main_doc():
 
 dump_reference_main_doc()
 
+assets_count = 0
+
 for file in input_file_list:
     file_full_path = file["path"] + "/" + file["name"]
     print("Generate markdown for " + file_full_path)
     semantic_info = json.loads(semantic_dict[file["name"]])
     comment_list = semantic_info["comments"]
 
+    # generate reference.md
+    assets_count += 1
     output_data = "---\n"
     output_data += "title: \"coref::" + name_mapper[file["name"]] + "\"\n"
     output_data += "layout: default\n"
@@ -251,6 +255,7 @@ for file in input_file_list:
     output_file_path = markdown_output_path + "/" + name_mapper[file["name"]] + "/reference.md"
     open(output_file_path, "w").write(output_data)
 
+    # generate database.md
     output_data = "---\n"
     output_data += "title: \"database\"\n"
     output_data += "layout: default\n"
@@ -259,13 +264,16 @@ for file in input_file_list:
     output_data += "---\n"
     output_data += "# Database of " + file["name"] + "\n\n"
     database_list = semantic_info["semantic"]["database"]
+    assets_count += 1
     for database in database_list:
         output_data += dump_database(database)
     output_file_path = markdown_output_path + "/" + name_mapper[file["name"]] + "/database.md"
     print("Generate", output_file_path)
     open(output_file_path, "w").write(output_data)
 
+    # generate function.md
     function_list = semantic_info["semantic"]["function"]
+    assets_count += 1
     output_data = "---\n"
     output_data += "title: \"function\"\n"
     output_data += "layout: default\n"
@@ -290,13 +298,17 @@ for file in input_file_list:
     print("Generate", output_file_path)
     open(output_file_path, "w").write(output_data)
 
+    # generate schema documents
     schema_list = semantic_info["semantic"]["schema"]
+    assets_count += len(schema_list)
     print("Generate schema documents for", file_full_path, ":", len(schema_list))
     for schema in schema_list:
         output_data = dump_schema(comment_list, schema)
         output_file_path = markdown_output_path + "/" + name_mapper[file["name"]] + "/schema/" + schema["name"] + ".md"
         open(output_file_path, "w").write(output_data)
     
+    # generate schema hierarchy document
+    assets_count += 1
     output_data = "---\n"
     output_data += "title: \"schema\"\n"
     output_data += "layout: default\n"
@@ -308,3 +320,5 @@ for file in input_file_list:
     output_file_path = markdown_output_path + "/" + name_mapper[file["name"]] + "/schema.md"
     open(output_file_path, "w").write(output_data)
     print("Generate schema documents for", file_full_path, ": Done")
+
+print("Generation complete, total api count:", assets_count)
