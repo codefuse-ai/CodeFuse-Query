@@ -24,6 +24,8 @@
     </a>
 </p>
 
+[English Documentation](./README.md)
+
 ## 什么是CodeFuse-Query？
 CodeFuse-Query 是一种强大的静态代码分析平台，适合大规模、复杂的代码库分析场景。它的以数据为中心的方法和高度的可扩展性使得它在现代软件开发环境中具有独特的优势。未来，随着静态代码分析技术的不断发展，CodeFuse-Query 有望在这个领域中扮演更加重要的角色。
 

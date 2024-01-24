@@ -24,6 +24,8 @@
     </a>
 </p>
 
+[中文文档](./README_zh.md)
+
 ## What is CodeFuse-Query?
 CodeFuse-Query is a powerful static code analysis platform suitable for large-scale, complex codebase analysis scenarios. Its data-centric approach and high scalability give it a unique advantage in the modern software development environment. In the future, as static code analysis technology continues to evolve, CodeFuse-Query is expected to play an even more significant role in this field.
 
