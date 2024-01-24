@@ -1,4 +1,4 @@
-# CodeFuse-Query Big Data Code Analysis Platform
+# CodeFuse-Query A Data-Centric Static Code Analysis System
 <p align="center">
   <img src="https://github.com/codefuse-ai/MFTCoder/blob/main/assets/github-codefuse-logo-update.jpg" width="50%" />
 </p>
@@ -27,9 +27,10 @@
 [中文文档](./README_zh.md)
 
 ## What is CodeFuse-Query?
-CodeFuse-Query is a powerful static code analysis platform suitable for large-scale, complex codebase analysis scenarios. Its data-centric approach and high scalability give it a unique advantage in the modern software development environment. In the future, as static code analysis technology continues to evolve, CodeFuse-Query is expected to play an even more significant role in this field.
+In the domain of large-scale software development, the demands for dynamic and multifaceted static code analysis exceed the capabilities of traditional tools. To bridge this gap, we present CodeFuse-Query, a system that redefines static code analysis through the fusion of Domain Optimized System Design and Logic Oriented Computation Design.
+CodeFuse-Query reimagines code analysis as a data computation task, support scanning over 10 billion lines of code daily and more than 300 different tasks. It optimizes resource utilization, prioritizes data reusability, applies incremental code extraction, and introduces tasks types specially for Code Change, underscoring its domain-optimized design. The system's logic-oriented facet employs Datalog, utilizing a unique two-tiered schema, COREF, to convert source code into data facts. Through Godel, a distinctive language, CodeFuse-Query enables formulation of complex tasks as logical expressions, harnessing Datalog's declarative prowess.
 
-Overall, the CodeFuse-Query code data platform is divided into three main parts: code data model, code query DSL, and platform productization services.
+Overall, the CodeFuse-Query platform is divided into three main parts: code data model, code query DSL, and platform productization services.
 ### Code Data Model: COREF
 We have defined a code data and standardization model: COREF, which requires all code to be converted to this model through various language extractors.
 COREF mainly contains the following information:
