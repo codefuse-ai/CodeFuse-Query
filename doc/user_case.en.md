@@ -1,6 +1,6 @@
 # Use Cases
 ## Querying Code Features
-Little-Developer wants to know which String type variables are used in Repo A, so he writes a Gödel script as follows and submits it to the CodeFuse-Query system for results.
+A developer wants to know which String type variables are used in Repo A, so he writes a Gödel script as follows and submits it to the CodeFuse-Query system for results.
 ```rust
 // script
 use coref::java::*
@@ -19,10 +19,10 @@ fn main() {
 ```
 Similar needs: querying for classes, functions, variables, return values, call graphs, class inheritance, etc.
 ## Code Rule Checker
-Little-TL found that the team always wrote many bugs similar to Bug A. **He wanted to establish a code rule for Bug A and its checker** and do a check at the CodeReview stage. Through writing a query analysis on the CodeFuse-Query platform, and after testing it on the platform to meet the requirements, he solidified this analysis query as a code rule and launched it to the CodeReview/CI stage. Since then, this bug has never happened again.
+A team leader found that the team always wrote many bugs similar to Bug A. **He wanted to establish a code rule for Bug A and its checker** and do a check at the CodeReview stage. Through writing a query analysis on the CodeFuse-Query platform, and after testing it on the platform to meet the requirements, he solidified this analysis query as a code rule and launched it to the CodeReview/CI stage. Since then, this bug has never happened again.
 Similar needs: writing static defect scanning rules for code risk interception.
 ## Obtaining Statistical Data
-Little-Researcher found that traditional code complexity metrics are difficult to accurately measure code complexity. By learning from international advanced experience and a stroke of genius, he designed a set of complexity metrics and algorithms. After implementing it with Gödel, **he found that without much optimization, the performance was already very high**, and it was quickly applied to more than 10 languages and over 110,000 repositories. He immediately had an in-depth understanding of the overall complexity of code repositories. Compared to the past, when he had to parse code and analyze syntax trees himself, and interface with systems, **it's hard to know how much more convenient it has become**.
+A researcher found that traditional code complexity metrics are difficult to accurately measure code complexity. By learning from international advanced experience and a stroke of genius, he designed a set of complexity metrics and algorithms. After implementing it with Gödel, **he found that without much optimization, the performance was already very high**, and it was quickly applied to more than 10 languages and over 110,000 repositories. He immediately had an in-depth understanding of the overall complexity of code repositories. Compared to the past, when he had to parse code and analyze syntax trees himself, and interface with systems, **it's hard to know how much more convenient it has become**.
 Similar needs: code statistics, code metrics, algorithm design, academic research.
 
 # Application Fields
@@ -47,4 +47,4 @@ In this process, the capabilities that CodeFuse-Query can provide mainly include
 - Analyze the affected objects based on the code changes (file + line number): methods, entry points (http entry, hsf entry), call routes (all call routes from entry to changed method), database operations (table, operation type)
 - Combined with the online dynamic call route (method route), CodeFuse-Query static analysis call route impact surface precise analysis capability, improve the effectiveness and preparation rate of change analysis impact surface
 
-Up to now, Youku has integrated all core applications through CodeFuse-Query, collected static analysis data, and built a complete server-side code knowledge base and traffic knowledge base.
+Up to now, Youku has integrated all core applications through CodeFuse-Query and has built a comprehensive server-side code knowledge base and network traffic knowledge base based on static analysis.
