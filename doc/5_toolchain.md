@@ -1,6 +1,8 @@
 # 开发插件(VSCode)
 ## 安装
-
+### 从VSCode官方插件市场安装(推荐)
+[插件地址](https://marketplace.visualstudio.com/items?itemName=CodeFuse-Query.codefuse-query-extension)
+### 使用VSIX安装包安装
 1. 下载插件
 2. 手动从 vsix 安装:
 ![image.png](../assets/toolchain01.png)

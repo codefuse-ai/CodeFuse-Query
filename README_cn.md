@@ -3,7 +3,8 @@
   <img src="https://github.com/codefuse-ai/MFTCoder/blob/main/assets/github-codefuse-logo-update.jpg" width="50%" />
 </p>
 
-<p align="center">
+<div align="center">
+  <p>
     <a href="https://github.com/codefuse-ai/CodeFuse-Query">
         <img alt="stars" src="https://img.shields.io/github/stars/codefuse-ai/CodeFuse-Query?style=social" />
     </a>
@@ -22,7 +23,11 @@
     <a href="https://marketplace.visualstudio.com/items?itemName=CodeFuse-Query.codefuse-query-extension">
       <img alt="VSCode Plugin" src="https://img.shields.io/visual-studio-marketplace/i/CodeFuse-Query.codefuse-query-extension?style=social&logo=visualstudiocode&logoColor=%23007ACC" />
     </a>
-</p>
+  </p>
+  <p>
+    [**中文**] | [English](README.md)
+  </p>
+</div>
 
 [English Documentation](./README.md)
 
