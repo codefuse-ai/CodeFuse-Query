@@ -24,9 +24,11 @@
       <img alt="VSCode Plugin" src="https://img.shields.io/visual-studio-marketplace/i/CodeFuse-Query.codefuse-query-extension?style=social&logo=visualstudiocode&logoColor=%23007ACC" />
     </a>
   </p>
-  <p>
-    [[中文]](README_cn.md) | [**English**]
-  </p>
+</div>
+
+<div align="center">
+
+  [中文](README_cn.md) | **English**
 </div>
 
 ## What is CodeFuse-Query?
