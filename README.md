@@ -1,9 +1,10 @@
-# CodeFuse-Query A Data-Centric Static Code Analysis System
-<p align="center">
+# CodeFuse-Query: A Data-Centric Static Code Analysis System
+<div align="center">
   <img src="https://github.com/codefuse-ai/MFTCoder/blob/main/assets/github-codefuse-logo-update.jpg" width="50%" />
-</p>
+</div>
 
-<p align="center">
+<div align="center">
+  <p>
     <a href="https://github.com/codefuse-ai/CodeFuse-Query">
         <img alt="stars" src="https://img.shields.io/github/stars/codefuse-ai/CodeFuse-Query?style=social" />
     </a>
@@ -22,9 +23,11 @@
     <a href="https://marketplace.visualstudio.com/items?itemName=CodeFuse-Query.codefuse-query-extension">
       <img alt="VSCode Plugin" src="https://img.shields.io/visual-studio-marketplace/i/CodeFuse-Query.codefuse-query-extension?style=social&logo=visualstudiocode&logoColor=%23007ACC" />
     </a>
-</p>
-
-[中文文档](./README_zh.md)
+  </p>
+  <p>
+    [[中文]](README_cn.md) | [**English**]
+  </p>
+</div>
 
 ## What is CodeFuse-Query?
 In the domain of large-scale software development, the demands for dynamic and multifaceted static code analysis exceed the capabilities of traditional tools. To bridge this gap, we present CodeFuse-Query, a system that redefines static code analysis through the fusion of Domain Optimized System Design and Logic Oriented Computation Design.
@@ -66,12 +69,12 @@ Note: The maturity level of the language status is determined based on the types
 [Installation, Configuration, and Running](./doc/3_install_and_run.md)
 
 ## Documentation
-- [Abstract](./doc/1_abstract.md)
-- [Introduction](./doc/2_introduction.md)
+- [Abstract](./doc/1_abstract.en.md)
+- [Introduction](./doc/2_introduction.en.md)
 - [User Case](./doc/user_case.en.md)
-- [Installation, Configuration, and Running](./doc/3_install_and_run.md)
-- [GödelScript Query Language](./doc/4_godelscript_language.md)
-- [Developing Plugins (VSCode)](./doc/5_toolchain.md)
+- [Installation, Configuration, and Running](./doc/3_install_and_run.en.md)
+- [GödelScript Query Language](./doc/4_godelscript_language.en.md)
+- [Developing Plugins (VSCode)](./doc/5_toolchain.en.md)
 - [COREF API](https://codefuse-ai.github.io/CodeFuse-Query/godel-api/coref_library_reference.html)
 
 ## Tutorial
