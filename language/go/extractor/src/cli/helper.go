@@ -1,10 +1,7 @@
 package main
 
 import (
-	"alipay.com/code_insight/coref-go-extractor/src/core"
-	"alipay.com/code_insight/coref-go-extractor/src/util"
 	"fmt"
-	"golang.org/x/mod/semver"
 	"io/ioutil"
 	"log"
 	"os"
@@ -15,6 +12,10 @@ import (
 	"runtime/pprof"
 	"strings"
 	"text/template"
+
+	"alipay.com/code_insight/coref-go-extractor/src/core"
+	"alipay.com/code_insight/coref-go-extractor/src/util"
+	"golang.org/x/mod/semver"
 )
 
 // parseExtractorRunningParams parses the command-line arguments and sets up the extraction configuration.

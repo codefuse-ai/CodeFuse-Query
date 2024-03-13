@@ -1,30 +1,43 @@
 package main
 
 import (
-	"alipay.com/code_insight/coref-go-extractor/src/config"
 	"fmt"
 	"log"
 	"os"
 	"time"
 
+	"alipay.com/code_insight/coref-go-extractor/src/config"
+
 	"alipay.com/code_insight/coref-go-extractor/src/util"
 )
 
 func usage() {
-	fmt.Fprintf(os.Stderr,
-		`%s is a wrapper script that installs dependencies and calls the extractor.
-In resource-constrained environments, the environment variable SPARROW_EXTRACTOR_GO_MAX_GOROUTINES
-(or its legacy alias MAX_GOROUTINES) can be used to limit the number of parallel goroutines
-started by the extractor, which reduces CPU and memory requirements. The default value for this
-variable is CPU Nums.
-The extractor for go tests files<*_test.go | *.test> is extracted by default.
-If you don't need extract go tests files, please add extraction flag with ' -ex noneedtests';
-however, types' info of target dependencies is not extracted by default, if you want do extraction for
-that, use flag with '-ex needdependency', see the demo below.
+	fmt.Fprintf(os.Stderr, `%[1]s is a command-line tool for extracting COREF data from Go source code.
+It handles dependency installation and initiates the extraction process.
+
+Resource Management:
+  In environments with limited resources, you can control resource utilization by setting the
+  SPARROW_EXTRACTOR_GO_MAX_GOROUTINES environment variable (or MAX_GOROUTINES for legacy support).
+  This limits the number of concurrently running goroutines to reduce CPU and memory usage.
+  By default, it is set to the number of your machine's CPU cores.
+
+Including Test Files:
+  The extractor processes Go test files by default (files ending in *_test.go or *.test).
+  If you wish to exclude test files from the extraction process, use the flag '-ex noneedtests'.
+
+Including Dependency Types:
+  Dependency type information is excluded by default. To include it in the extraction, apply the flag '-ex needdependency'.
+
+Extracting go.mod File:
+  To extract the target project's go.mod file (if present), include the '-ex needmod' flag.
+
+Usage:
+  %[1]s [<extraction flag(s)>...] [<Go build flag(s)>...] [--] <source code root directory>
+
+Examples:
+  %[1]s -o ./out/coref_go_src.db $SRC_ROOT
+  %[1]s -o ./out/coref_go_src.db -ex noneedtests -ex needscope -mod=mod $SRC_ROOT
 `, os.Args[0])
-	fmt.Fprintf(os.Stderr, "Usage:\n\n  %s [<flag for extraction>...] [<buildflag For go>...] [--] <fileRoot>\n", os.Args[0])
-	fmt.Fprintf(os.Stderr, "  Example#1: %s -o ./out/coref_go_src.db  $src_root \n", os.Args[0])
-	fmt.Fprintf(os.Stderr, "  Example#2: %s -o ./out/coref_go_src.db -ex noneedtests -ex needscope -mod=mod $src_root \n", os.Args[0])
 }
 
 type extractionConf struct {
@@ -59,8 +72,7 @@ const (
 func main() {
 	startTime := time.Now()
 
-	// os.Args
-	cfg := parseExtractorRunningParams([]string{"./extractor_cli", "-o", "./out/coref_go_src.db", "-ex", "needmodfile", "-ex", "noneedtests", "."})
+	cfg := parseExtractorRunningParams(os.Args)
 	log.Printf("ExtractorRunningParams: %+v\n", cfg)
 
 	currentDir, err := os.Getwd()

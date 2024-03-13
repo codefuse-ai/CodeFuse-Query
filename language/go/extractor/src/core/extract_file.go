@@ -713,7 +713,7 @@ func getTypeLabelKey(p *Profile, tp types.Type, lbl Label) (string, bool) {
 		for i := 0; i < tp.NumMethods(); i++ {
 			method := tp.Method(i)
 			methodLabel, _ := extractType(p, method.Type())
-			methodParts = append(methodParts, fmt.Sprint(method.Id()), methodLabel.String()))
+			methodParts = append(methodParts, fmt.Sprint(method.Id()), methodLabel.String())
 		}
 		for i := 0; i < tp.NumEmbeddeds(); i++ {
 			embeddedTypeLabel, _ := extractType(p, tp.EmbeddedType(i))
@@ -1661,7 +1661,7 @@ func extractSpec(p *Profile, spec ast.Spec, parent Label, idx int) {
 		extractExpr(p, spec.Type, lbl, 0)
 		extractExprs(p, spec.Values, lbl, 1, 1)
 		extractDoc(p, spec.Doc, lbl)
-	case *ast.TypeSpec:  
+	case *ast.TypeSpec:
 		if spec == nil {
 			return
 		}
