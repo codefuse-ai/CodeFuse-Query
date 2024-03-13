@@ -61,6 +61,3 @@ For more detail about the Go extractor, please run
 ## Contributing
 
 If you would like to contribute to the development of this extractor, please feel free to make a pull request or open an issue to discuss proposed changes.
-
-## License
-This project is licensed under the MIT License.
