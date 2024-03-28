@@ -23,6 +23,9 @@
     <a href="https://marketplace.visualstudio.com/items?itemName=CodeFuse-Query.codefuse-query-extension">
       <img alt="VSCode Plugin" src="https://img.shields.io/visual-studio-marketplace/i/CodeFuse-Query.codefuse-query-extension?style=social&logo=visualstudiocode&logoColor=%23007ACC" />
     </a>
+    <a href="https://github.com/codefuse-ai/CodeFuse-Query/actions/workflows/check_gdl_workflow.yml">
+      <img alt="GDL script file checker" src="https://github.com/codefuse-ai/CodeFuse-Query/actions/workflows/check_gdl_workflow.yml/badge.svg" />
+    </a>
   </p>
 </div>
 
