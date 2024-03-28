@@ -1,0 +1,55 @@
+name: GDL script file checker
+on:
+  push:
+    branches-ignore:
+      - 'none'  
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  checking-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repository to the runner
+        uses: actions/checkout@v4
+
+      - name: Install locales
+        run: |
+          sudo apt-get update && sudo apt-get install -y locales
+          sudo locale-gen zh_CN.UTF-8
+        env:
+          LANG: zh_CN.UTF-8
+          LANGUAGE: zh_CN:zh:en_US:en
+
+      - name: Download and extract the latest sparrow-cli release
+        run: |
+          ASSET_NAME="sparrow-cli.*.linux.tar.gz" # This pattern should match only the tar.gz file
+          mkdir -p $HOME/sparrow-cli
+      
+          # Use GitHub API to get the latest release information
+          RELEASE_INFO=$(curl -s -H "Authorization: token $GITHUB_TOKEN" "https://api.github.com/repos/codefuse-ai/CodeFuse-Query/releases/latest")
+      
+          # Extract the asset download URL for the asset name specified
+          # The test function is used to ensure we match only the tar.gz file, not the checksum file
+          ASSET_URL=$(echo "$RELEASE_INFO" | jq --arg asset_name "$ASSET_NAME" -r '.assets[] | select(.name | test($asset_name)) | select(.content_type == "application/x-gzip").browser_download_url')
+      
+          # Check if the asset URL is empty or not
+          if [ -z "$ASSET_URL" ]; then
+            echo "Error: Asset URL is empty."
+            exit 1
+          fi
+      
+          # Download and extract the asset
+          echo "Downloading $ASSET_URL to $HOME/sparrow-cli/sparrow-cli.tar.gz"
+          curl -fL --retry 5 "$ASSET_URL" | tar -xz -C $HOME/sparrow-cli
+        env:
+          # The GitHub token is needed for API requests to avoid rate limits
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set execute permissions for script
+        run: chmod +x ./tool/aci/check_gdl.sh
+        
+      - name: Run GDL script checking
+        run: ./tool/aci/check_gdl.sh .
+        env:
+          LC_ALL: zh_CN.UTF-8
