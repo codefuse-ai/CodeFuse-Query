@@ -1,0 +1,56 @@
+// script
+use coref::java::*
+
+pub fn default_java_db() -> JavaDB {
+    return JavaDB::load("coref_java_src.db")
+}
+
+pub fn specified_callable_signature(name: string) -> bool {
+    // give specified callables' signatures here
+    [
+        {"com.alipay.demo.Main.test:void()"},
+        {"xxx"},
+        {"xxx"}
+    ]
+}
+
+schema SpecifiedCallable extends Callable {}
+
+impl SpecifiedCallable {
+    @data_constraint
+    pub fn __all__(db: JavaDB) -> *Self {
+        for(c in Callable(db)) {
+            if (specified_callable_signature(c.getSignature())) {
+                yield SpecifiedCallable { id: c.id }
+            }
+        }
+    }
+}
+
+pub fn getIndirectEdges(b: Callable, c: Callable) -> bool {
+    for(a in SpecifiedCallable(default_java_db())) {
+        if (b in a.getAnAncestorCallee() && c in b.getCallee()) {
+            return true
+        }
+    }
+}
+
+pub fn getDirectEdges(b: Callable, c: Callable) -> bool {
+    for(a in SpecifiedCallable(default_java_db())) {
+        if (c in a.getCallee() && b.key_eq(a)) {
+            return true
+        }
+    }
+}
+
+pub fn output_signature(caller: string, callee: string) -> bool {
+    for(b in Callable(default_java_db()), c in Callable(default_java_db())) {
+        if (getIndirectEdges(b, c) || getDirectEdges(b, c)) {
+            return caller = b.getSignature() && callee = c.getSignature()
+        }
+    }
+}
+
+pub fn main() {
+    output(output_signature())
+}
