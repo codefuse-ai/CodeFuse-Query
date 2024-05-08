@@ -996,7 +996,7 @@ Query is used for simple queries and is guaranteed to be output even without dec
 
 ```rust
 query name from
-	variable in initial value,
+    variable in initial value,
     variable in initial value,
     variable in initial value
 where condition
@@ -1044,8 +1044,8 @@ fn db() -> JavaDB {
 }
 
 query class_method from
-    Callable m in Callable(db()),
-    Class c in Class(db())
+    m in Callable(db()),
+    c in Class(db())
 where
     c.id = m.getBelongedClass().id
 select

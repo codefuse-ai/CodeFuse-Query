@@ -1044,8 +1044,8 @@ fn db() -> JavaDB {
 }
 
 query class_method from
-    Callable m in Callable(db()),
-    Class c in Class(db())
+    m in Callable(db()),
+    c in Class(db())
 where
     c.id = m.getBelongedClass().id
 select
