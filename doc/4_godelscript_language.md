@@ -686,6 +686,7 @@ schema MyFile extends File {}
 ##### Method Override
 
 如果子类的实现中存在与父类同名的方法，则父类的方法会被子类方法**覆盖**。
+覆盖方法的参数和返回值类型没有限制，不需要与父类保持一致。
 
 ```rust
 schema File {

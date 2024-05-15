@@ -686,6 +686,7 @@ schema MyFile extends File {}
 ##### Method Override
 
 If the subclass implementation contains a method with the same name as the parent class, the parent method will be **overridden** by the subclass method.
+The overridden method can use different parameter and return type. There's no need to use the same parameter and return type of parent class method.
 
 ```rust
 schema File {
