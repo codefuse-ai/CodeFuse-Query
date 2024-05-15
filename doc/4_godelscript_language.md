@@ -10,7 +10,6 @@
   - [语句](#语句)
   - [Schema](#schema)
   - [数据库](#数据库)
-  - [Trait](#trait)
   - [Import](#import)
   - [Query](#query)
   - [Ungrounded Error: 未赋值/未绑定错误](#ungrounded-error-未赋值未绑定错误)
@@ -59,7 +58,6 @@ GödelScript 程序可能包含:
 - [模块和符号引用](#import)
 - [Schema 类型声明](#schema)
 - [数据库类型声明](#数据库)
-- [Trait 声明](#trait)
 - [Schema 方法实现](#方法实现)
 - [函数声明和实现](#函数)
 - [Query 声明](#query)
@@ -85,18 +83,6 @@ schema File {
 // database 声明
 database NewDB {
     file: *File
-}
-
-// trait 声明
-trait FileTrait {
-    fn getId(self) -> int;
-}
-
-// impl trait for
-impl FileTrait for File {
-    fn getId(self) -> int {
-        return self.id
-    }
 }
 
 // impl
@@ -781,38 +767,6 @@ fn getAnnotation() -> Annotation {
         // 直接使用 db.field 就可以拿到表数据了
         for (anno: Annotation in db.annotation) {
             ...
-        }
-    }
-}
-```
-
-### Trait
-
-#### Trait 声明
-
-`trait`声明语法如下:
-
-```rust
-trait Example {
-    fn getId(self) -> int;
-    fn getName(self) -> string;
-    fn getValueByName(self, name: string) -> string;
-}
-```
-
-#### Impl Trait
-
-写法与`impl`类似，但是必须要将`trait`中声明的所有函数都实现出来，否则无法通过编译。
-
-```rust
-impl Example for XmlElement {
-    fn getId(self) -> int {return self.id}
-    fn getName(self) -> int {return self.name}
-    fn getValueByName(self, name: string) -> int {
-        for(attr in XmlAttribute(XmlDB::load("...")) {
-            if (attr.getName() = name && attr.id = self.getAttribute().id) {
-                return attr.getValue()
-            }
         }
     }
 }

@@ -10,7 +10,6 @@
   - [Statements](#statements)
   - [Schema](#schema)
   - [Database](#database)
-  - [Trait](#trait)
   - [Import](#import)
   - [Query](#query)
   - [Ungrounded Error: Unassigned/Unbound Error](#ungrounded-error-unassignedunbound-error)
@@ -59,7 +58,6 @@ A GödelScript program may include:
 - [Module and symbol import statements](#import)
 - [Schema type declarations](#schema)
 - [Database type declarations](#database)
-- [Trait declarations](#trait)
 - [Method implementations](#method-implementation)
 - [Function declarations and implementations](#function)
 - [Query declarations](#query)
@@ -85,18 +83,6 @@ schema File {
 // Database declaration
 database NewDB {
     file: *File
-}
-
-// Trait declaration
-trait FileTrait {
-    fn getId(self) -> int;
-}
-
-// Impl trait for
-impl FileTrait for File {
-    fn getId(self) -> int {
-        return self.id
-    }
 }
 
 // Impl
@@ -781,38 +767,6 @@ fn getAnnotation() -> Annotation {
         // Directly use db.field to access the table data
         for (anno: Annotation in db.annotation) {
             ...
-        }
-    }
-}
-```
-
-### Trait
-
-#### Trait Declaration
-
-The syntax for declaring a `trait` is as follows:
-
-```rust
-trait Example {
-    fn getId(self) -> int;
-    fn getName(self) -> string;
-    fn getValueByName(self, name: string) -> string;
-}
-```
-
-#### Impl Trait
-
-The syntax is similar to `impl`, but you must implement all the functions declared in the `trait` to pass compilation.
-
-```rust
-impl Example for XmlElement {
-    fn getId(self) -> int {return self.id}
-    fn getName(self) -> int {return self.name}
-    fn getValueByName(self, name: string) -> int {
-        for(attr in XmlAttribute(XmlDB::load("...")) {
-            if (attr.getName() = name && attr.id = self.getAttribute().id) {
-                return attr.getValue()
-            }
         }
     }
 }
