@@ -639,19 +639,6 @@ fn out() -> bool {
 }
 ```
 
-##### 自定义全集方法
-
-`schema`允许使用不同于`__all__`名称的**静态方法**来表明一些集合也存在于该类型的全集中。该方法也必须包含特殊注解`@data_constraint`。该方法一般用于手动添加一些数据到该类型的全集中。
-
-```rust
-impl File {
-    @data_constraint
-    fn extend_example() -> *File {
-        yield File {id: 1234567}
-    }
-}
-```
-
 #### 构造匿名实例
 
 GödelScript 允许用一个特定语法生成匿名实例。生成匿名实例的前提是该实例存在于该`schema`的全集中，除非该用法出现在`@data_constraint`方法中，否则结果为空。

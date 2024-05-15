@@ -639,19 +639,6 @@ fn out() -> bool {
 }
 ```
 
-##### Custom Full Set Method
-
-A `schema` allows using static methods with different names than `__all__` to indicate that some sets also exist within its full set. This method must also contain the special annotation `@data_constraint`. This method is generally used to manually add some data to the full set of that type.
-
-```rust
-impl File {
-    @data_constraint
-    fn extend_example() -> *File {
-        yield File {id: 1234567}
-    }
-}
-```
-
 #### Constructing Anonymous Instances
 
 GödelScript allows for the creation of anonymous instances with a specific syntax. The creation of anonymous instances is contingent on the instance existing within the full set of the `schema`, unless this usage appears within a `@data_constraint` method, in which case the result will be empty.
