@@ -88,7 +88,7 @@ database NewDB {
 // Impl
 impl File {
     @data_constraint
-    fn all() -> *File {
+    fn __all__() -> *File {
         yield File {id: 1}
         yield File {id: 2}
     }
@@ -627,7 +627,7 @@ fn out() -> bool {
 
 #### Constructing Anonymous Instances
 
-GödelScript allows for the creation of anonymous instances with a specific syntax. The creation of anonymous instances is contingent on the instance existing within the full set of the `schema`, unless this usage appears within a `@data_constraint` method, in which case the result will be empty.
+GödelScript allows for the creation of anonymous instances with a specific syntax. The creation of anonymous instances is contingent on the instance existing within the full set of the `schema`, unless this usage appears within a `__all__` method, in which case the result will be empty.
 
 ```rust
 schema A {

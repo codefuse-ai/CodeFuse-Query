@@ -88,7 +88,7 @@ database NewDB {
 // impl
 impl File {
     @data_constraint
-    fn all() -> *File {
+    fn __all__() -> *File {
         yield File {id: 1}
         yield File {id: 2}
     }
@@ -607,7 +607,7 @@ impl File {
 
 这种方法必须包含特殊注解`@data_constraint`，表明该方法专用于加载，如果不写该注解，则该方法的返回为**空集合**。该方法返回类型必须为其本身的集合。
 
-包含了该方法的`schema`可以使用一个语法糖来获取其全集：
+包含该方法的`schema`可以使用一个语法糖来获取其全集：
 
 ```rust
 fn out() -> bool {
@@ -627,7 +627,7 @@ fn out() -> bool {
 
 #### 构造匿名实例
 
-GödelScript 允许用一个特定语法生成匿名实例。生成匿名实例的前提是该实例存在于该`schema`的全集中，除非该用法出现在`@data_constraint`方法中，否则结果为空。
+GödelScript 允许用一个特定语法生成匿名实例。生成匿名实例的前提是该实例存在于该`schema`的全集中，除非该用法出现在`__all__`方法中，否则结果为空。
 
 ```rust
 schema A {
