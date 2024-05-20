@@ -10,7 +10,6 @@
   - [Statements](#statements)
   - [Schema](#schema)
   - [Database](#database)
-  - [Trait](#trait)
   - [Import](#import)
   - [Query](#query)
   - [Ungrounded Error: Unassigned/Unbound Error](#ungrounded-error-unassignedunbound-error)
@@ -59,7 +58,6 @@ A GödelScript program may include:
 - [Module and symbol import statements](#import)
 - [Schema type declarations](#schema)
 - [Database type declarations](#database)
-- [Trait declarations](#trait)
 - [Method implementations](#method-implementation)
 - [Function declarations and implementations](#function)
 - [Query declarations](#query)
@@ -87,22 +85,10 @@ database NewDB {
     file: *File
 }
 
-// Trait declaration
-trait FileTrait {
-    fn getId(self) -> int;
-}
-
-// Impl trait for
-impl FileTrait for File {
-    fn getId(self) -> int {
-        return self.id
-    }
-}
-
 // Impl
 impl File {
     @data_constraint
-    fn all() -> *File {
+    fn __all__() -> *File {
         yield File {id: 1}
         yield File {id: 2}
     }
@@ -639,22 +625,9 @@ fn out() -> bool {
 }
 ```
 
-##### Custom Full Set Method
-
-A `schema` allows using static methods with different names than `__all__` to indicate that some sets also exist within its full set. This method must also contain the special annotation `@data_constraint`. This method is generally used to manually add some data to the full set of that type.
-
-```rust
-impl File {
-    @data_constraint
-    fn extend_example() -> *File {
-        yield File {id: 1234567}
-    }
-}
-```
-
 #### Constructing Anonymous Instances
 
-GödelScript allows for the creation of anonymous instances with a specific syntax. The creation of anonymous instances is contingent on the instance existing within the full set of the `schema`, unless this usage appears within a `@data_constraint` method, in which case the result will be empty.
+GödelScript allows for the creation of anonymous instances with a specific syntax. The creation of anonymous instances is contingent on the instance existing within the full set of the `schema`, unless this usage appears within a `__all__` method, in which case the result will be empty.
 
 ```rust
 schema A {
@@ -713,6 +686,7 @@ schema MyFile extends File {}
 ##### Method Override
 
 If the subclass implementation contains a method with the same name as the parent class, the parent method will be **overridden** by the subclass method.
+The overridden method can use different parameter and return type. There's no need to use the same parameter and return type of parent class method.
 
 ```rust
 schema File {
@@ -794,38 +768,6 @@ fn getAnnotation() -> Annotation {
         // Directly use db.field to access the table data
         for (anno: Annotation in db.annotation) {
             ...
-        }
-    }
-}
-```
-
-### Trait
-
-#### Trait Declaration
-
-The syntax for declaring a `trait` is as follows:
-
-```rust
-trait Example {
-    fn getId(self) -> int;
-    fn getName(self) -> string;
-    fn getValueByName(self, name: string) -> string;
-}
-```
-
-#### Impl Trait
-
-The syntax is similar to `impl`, but you must implement all the functions declared in the `trait` to pass compilation.
-
-```rust
-impl Example for XmlElement {
-    fn getId(self) -> int {return self.id}
-    fn getName(self) -> int {return self.name}
-    fn getValueByName(self, name: string) -> int {
-        for(attr in XmlAttribute(XmlDB::load("...")) {
-            if (attr.getName() = name && attr.id = self.getAttribute().id) {
-                return attr.getValue()
-            }
         }
     }
 }
@@ -996,7 +938,7 @@ Query is used for simple queries and is guaranteed to be output even without dec
 
 ```rust
 query name from
-	variable in initial value,
+    variable in initial value,
     variable in initial value,
     variable in initial value
 where condition
@@ -1044,8 +986,8 @@ fn db() -> JavaDB {
 }
 
 query class_method from
-    Callable m in Callable(db()),
-    Class c in Class(db())
+    m in Callable(db()),
+    c in Class(db())
 where
     c.id = m.getBelongedClass().id
 select

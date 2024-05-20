@@ -10,7 +10,6 @@
   - [语句](#语句)
   - [Schema](#schema)
   - [数据库](#数据库)
-  - [Trait](#trait)
   - [Import](#import)
   - [Query](#query)
   - [Ungrounded Error: 未赋值/未绑定错误](#ungrounded-error-未赋值未绑定错误)
@@ -59,7 +58,6 @@ GödelScript 程序可能包含:
 - [模块和符号引用](#import)
 - [Schema 类型声明](#schema)
 - [数据库类型声明](#数据库)
-- [Trait 声明](#trait)
 - [Schema 方法实现](#方法实现)
 - [函数声明和实现](#函数)
 - [Query 声明](#query)
@@ -87,22 +85,10 @@ database NewDB {
     file: *File
 }
 
-// trait 声明
-trait FileTrait {
-    fn getId(self) -> int;
-}
-
-// impl trait for
-impl FileTrait for File {
-    fn getId(self) -> int {
-        return self.id
-    }
-}
-
 // impl
 impl File {
     @data_constraint
-    fn all() -> *File {
+    fn __all__() -> *File {
         yield File {id: 1}
         yield File {id: 2}
     }
@@ -621,7 +607,7 @@ impl File {
 
 这种方法必须包含特殊注解`@data_constraint`，表明该方法专用于加载，如果不写该注解，则该方法的返回为**空集合**。该方法返回类型必须为其本身的集合。
 
-包含了该方法的`schema`可以使用一个语法糖来获取其全集：
+包含该方法的`schema`可以使用一个语法糖来获取其全集：
 
 ```rust
 fn out() -> bool {
@@ -639,22 +625,9 @@ fn out() -> bool {
 }
 ```
 
-##### 自定义全集方法
-
-`schema`允许使用不同于`__all__`名称的**静态方法**来表明一些集合也存在于该类型的全集中。该方法也必须包含特殊注解`@data_constraint`。该方法一般用于手动添加一些数据到该类型的全集中。
-
-```rust
-impl File {
-    @data_constraint
-    fn extend_example() -> *File {
-        yield File {id: 1234567}
-    }
-}
-```
-
 #### 构造匿名实例
 
-GödelScript 允许用一个特定语法生成匿名实例。生成匿名实例的前提是该实例存在于该`schema`的全集中，除非该用法出现在`@data_constraint`方法中，否则结果为空。
+GödelScript 允许用一个特定语法生成匿名实例。生成匿名实例的前提是该实例存在于该`schema`的全集中，除非该用法出现在`__all__`方法中，否则结果为空。
 
 ```rust
 schema A {
@@ -713,6 +686,7 @@ schema MyFile extends File {}
 ##### Method Override
 
 如果子类的实现中存在与父类同名的方法，则父类的方法会被子类方法**覆盖**。
+覆盖方法的参数和返回值类型没有限制，不需要与父类保持一致。
 
 ```rust
 schema File {
@@ -794,38 +768,6 @@ fn getAnnotation() -> Annotation {
         // 直接使用 db.field 就可以拿到表数据了
         for (anno: Annotation in db.annotation) {
             ...
-        }
-    }
-}
-```
-
-### Trait
-
-#### Trait 声明
-
-`trait`声明语法如下:
-
-```rust
-trait Example {
-    fn getId(self) -> int;
-    fn getName(self) -> string;
-    fn getValueByName(self, name: string) -> string;
-}
-```
-
-#### Impl Trait
-
-写法与`impl`类似，但是必须要将`trait`中声明的所有函数都实现出来，否则无法通过编译。
-
-```rust
-impl Example for XmlElement {
-    fn getId(self) -> int {return self.id}
-    fn getName(self) -> int {return self.name}
-    fn getValueByName(self, name: string) -> int {
-        for(attr in XmlAttribute(XmlDB::load("...")) {
-            if (attr.getName() = name && attr.id = self.getAttribute().id) {
-                return attr.getValue()
-            }
         }
     }
 }
@@ -1044,8 +986,8 @@ fn db() -> JavaDB {
 }
 
 query class_method from
-    Callable m in Callable(db()),
-    Class c in Class(db())
+    m in Callable(db()),
+    c in Class(db())
 where
     c.id = m.getBelongedClass().id
 select
