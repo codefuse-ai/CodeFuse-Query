@@ -24,6 +24,10 @@ func parseExtractorRunningParams(args []string) *extractionConf {
 		usage()
 		os.Exit(2)
 	}
+	if args[1] == "-h" || args[1] == "--help" {
+		usage()
+		os.Exit(0)
+	}
 
 	configArgs := strings.Split(strings.Join(args[1:], " "), " ")
 	srcPath, err := filepath.Abs(configArgs[len(configArgs)-1])
@@ -42,9 +46,6 @@ func parseExtractorRunningParams(args []string) *extractionConf {
 	for i := 0; i < len(configArgs)-1 && strings.HasPrefix(configArgs[i], "-"); i++ {
 		arg := configArgs[i]
 		switch arg {
-		case "-h", "--help":
-			usage()
-			os.Exit(0)
 		case "-exconfig", "-ex":
 			handleExtractionArg(configArgs, &i, extractionConfig)
 		case "-o", "-output", "-dbpath":
