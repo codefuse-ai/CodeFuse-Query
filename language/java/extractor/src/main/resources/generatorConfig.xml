@@ -1,0 +1,823 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+    PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+    "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<!-- 配置生成器 -->
+<generatorConfiguration>
+
+    <context id="sqlite" defaultModelType="hierarchical" targetRuntime="MyBatis3DynamicSql">
+
+        <property name="autoDelimitKeywords" value="false"/>
+        <!-- 生成的Java文件的编码 -->
+        <property name="javaFileEncoding" value="UTF-8"/>
+        <!-- 格式化java代码 -->
+        <property name="javaFormatter" value="org.mybatis.generator.api.dom.DefaultJavaFormatter"/>
+        <!-- 格式化XML代码 -->
+        <property name="xmlFormatter" value="org.mybatis.generator.api.dom.DefaultXmlFormatter"/>
+
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
+        <plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin"/>
+        <plugin type="org.mybatis.generator.plugins.ToStringPlugin"/>
+        <!--MENTION: this plugin is slow for MapperHelper initialization, but we do not need it now-->
+        <!--<plugin type="tk.mybatis.mapper.generator.MapperPlugin">-->
+        <!--    <property name="mappers" value="tk.mybatis.mapper.common.Mapper"/>-->
+        <!--    &lt;!&ndash; caseSensitive默认false，当数据库表名区分大小写时，可以将该属性设置为true &ndash;&gt;-->
+        <!--    <property name="caseSensitive" value="true"/>-->
+        <!--</plugin>-->
+
+
+        <commentGenerator>
+            <property name="suppressDate" value="true"/>
+        </commentGenerator>
+        <jdbcConnection driverClass="org.sqlite.JDBC"
+                        connectionURL="jdbc:sqlite:./src/main/resources/coref_java_src.db" userId="" password="">
+        </jdbcConnection>
+
+        <javaTypeResolver type="org.mybatis.generator.internal.types.JavaTypeResolverDefaultImpl">
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+        <javaModelGenerator targetPackage="com.sbrella.dal.mybatis.domain" targetProject="src/main/java">
+            <property name="constructorBased" value="true"/>
+            <property name="enableSubPackages" value="true"/>
+            <property name="immutable" value="false"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+
+        <sqlMapGenerator targetPackage="com.sbrella.dal.mybatis.mapper" targetProject="src/main/resources">
+            <!-- 在targetPackage的基础上，根据数据库的schema再生成一层package，最终生成的类放在这个package下，默认为false -->
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+        <javaClientGenerator targetPackage="com.sbrella.dal.mybatis.mapper" type="ANNOTATEDMAPPER"
+                             targetProject="src/main/java">
+            <!-- 在targetPackage的基础上，根据数据库的schema再生成一层package，最终生成的类放在这个package下，默认为false -->
+            <property name="enableSubPackages" value="true"/>
+            <!--            <property name="rootInterface" value="com.sbrella.dal.mybatis.BaseMapper"/>-->
+        </javaClientGenerator>
+        <table tableName="annotation">
+            <columnOverride column="id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="annotation_declaration_hash_id" javaType="java.lang.Long"
+                            jdbcType="BIGINT"/>
+        </table>
+        <table tableName="annotation_can_not_resolved">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="location_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="parent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="annotation_access_argument_with_name">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="annotation_access_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="type_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="argument_value_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="location_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="annotation_access_argument_without_name">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="annotation_access_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="argument_value_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="location_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="annotation_declaration">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="identifier_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="location_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="annotation_declaration_parameter">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="annotation_declaration_hash_id" javaType="java.lang.Long"
+                            jdbcType="BIGINT"/>
+            <columnOverride column="type_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="parameter_value_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="location_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="callable_binding">
+            <columnOverride column="caller_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="callee_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="comment">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="parent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="location_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="cupackage">
+            <columnOverride column="file_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="package_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="double_literal">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="location_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="parent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+
+        <table tableName="floating_point_literal">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="location_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="parent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="integer_literal">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="location_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="parent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="javadoc_comment">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="documentable_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="location_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="parent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="local_class">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="parent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="body_declaration_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="location_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="local_variable_declaration_expression">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="type_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="parent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="location_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="local_variable_declaration_statement">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="parent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="body_declaration_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="location_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="long_literal">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="location_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="parent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="member_reference_binding">
+            <columnOverride column="expression_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="callable_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="module">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="name_string">
+            <columnOverride column="parent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="name_element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="value_element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="null_literal">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="location_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="parent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="primitive">
+        </table>
+        <table tableName="program">
+            <columnOverride column="program_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="string_literal">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="location_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="parent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="synchronized_statement">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="lock_expression_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="parent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="body_declaration_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="location_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="type_literal">
+            <columnOverride column="type_element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="type_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="location_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="parent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="variable_access_expression">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="type_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="parent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="location_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="variable_binding">
+            <columnOverride column="variable_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="expression">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="parent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="location_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="identifier">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="location_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="parent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="package_statement">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="location_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="package_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="parent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="class_hierarchy">
+            <columnOverride column="child_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="parent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="metainfo">
+            <columnOverride column="oid" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="program_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="method">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="type_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="parent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="location_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="constructor">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="type_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="parent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="location_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="assignment_expression">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="lhs_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="rhs_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="parent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="location_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="binary_expression">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="lhs_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="rhs_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="parent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="location_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="polyadic_expression">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="parent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="location_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="unary_expression">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="operand_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="parent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="location_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="location">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="file_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="field">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="type_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="parent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="field_identifier_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="location_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="while_statement">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="condition_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="parent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="body_declaration_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="location_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="block_statement">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="code_block_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="parent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="location_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="conditional_expression">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="condition_expression_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="then_part_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="else_part_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="parent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="location_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="empty_statement">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="parent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="location_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="lambda_expression">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="parameter_list_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="body_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="parent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="location_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="this_access_expression">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="this_expression_with_qualifier">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="qualifier_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="do_while_statement">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="condition_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="parent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="body_declaration_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="location_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="switch_statement">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="parent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="discriminant_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="body_declaration_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="location_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="continue_statement">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="discriminant_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="parent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="continued_statement_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="location_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="break_statement">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="discriminant_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="parent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="exited_statement_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="location_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="try_statement_without_finally">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="try_block_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="try_statement_with_finally">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="try_block_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="finally_block_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="throw_statement">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="parent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="exception_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="block_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="location_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="folder">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="parent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="call_expression">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="type_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="callee_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="parent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="location_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="exception">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="type_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="callable_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="catch_section">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="parent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="parameter_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="type_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="location_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="try_statement_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="return_statement">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="return_expression_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="parent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="location_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="assert_statement">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="parent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="assert_condition_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="location_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="assert_description_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="array_initializer_expression">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="type_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="parent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="initializer_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="location_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="array_initializer">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="type_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="parent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="initializer_expression_hash_id" javaType="java.lang.Long"
+                            jdbcType="BIGINT"/>
+            <columnOverride column="location_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="annotation_array_initializer">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="parent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="location_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="declaration_element">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="declaration_statement_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="annotation_can_resolved">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="annotation_declaration_hash_id" javaType="java.lang.Long"
+                            jdbcType="BIGINT"/>
+            <columnOverride column="location_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="parent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="expression_statement">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="expression_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="parent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="location_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="constructor_invocation">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="class_reference_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="constructor_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="parent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="new_expression">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="reference_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="type_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="parent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="location_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="character_literal">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="location_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="parent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="reference_type">
+            <columnOverride column="oid" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="token">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="location_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="parent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="boolean_literal">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="location_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="parent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="parent">
+            <columnOverride column="parent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="type_parameter">
+            <columnOverride column="extends_list_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="owner_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="parent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="location_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="class" domainObjectName="clazz">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="identifier_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="location_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="parent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="method_access_expression_without_type">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="referen_method_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="argument_list_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="method_access_expression_with_type">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="type_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="referen_method_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="argument_list_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="method_reference_expression">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="type_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="applicable_member_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="code_block">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="parent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="location_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="class_initializer">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="parent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="location_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="labeled_statement">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="labeled_hash_identifier_hash_id" javaType="java.lang.Long"
+                            jdbcType="BIGINT"/>
+            <columnOverride column="parent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="statement_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="location_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="switch_label_statement">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="case_value_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="enclosing_switch_block_hash_id" javaType="java.lang.Long"
+                            jdbcType="BIGINT"/>
+            <columnOverride column="next_switch_case_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="parent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="file_md5_sum">
+            <columnOverride column="file_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="file_sha256_sum">
+            <columnOverride column="file_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="yield_statement">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="expression_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="enclosing_expression_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="parent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="location_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="reference_relation">
+            <columnOverride column="reference_element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="definition_element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="parameter">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="type_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="identifier_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="parent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="location_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="reference_element">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="parent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="location_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="reference_expression">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="parent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="location_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="number_of_lines">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="file">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="number_of_lines_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="import" domainObjectName="ImportInfo">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="reference_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="parent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="location_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="import" property="importName">
+            </columnOverride>
+        </table>
+        <table tableName="resource_list">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="parent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="location_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="import_static_statement">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="reference_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="parent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="location_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="import_static_reference_element">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="reference_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="parent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="location_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="anonymous_class">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="base_class_reference_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="base_class_type_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="location_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="parent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="for_statement">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="initialization_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="condition_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="update_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="body_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="parent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="location_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="super_access_expression">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="parent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="location_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="super_expression_with_qualifier">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="qualifier_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="super_expression">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="super_constructor_invocation">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="parent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="location_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="array_creation_expression">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="type_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="parent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="array_initializer_expression_hash_id" javaType="java.lang.Long"
+                            jdbcType="BIGINT"/>
+            <columnOverride column="location_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="local_variable">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="identifier_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="type_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="parent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="location_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="array">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="identifier_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="element_type_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="parent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="location_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="reference_parameter_list">
+            <columnOverride column="type_element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="list_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="parent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="location_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="empty_reference_parameter_list">
+            <columnOverride column="list_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="parent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="location_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="array_access_expression">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="index_expression_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="array_expression_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="parent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="location_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="javadoc_tag">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="containing_comment_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="location_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="javadoc_data_token">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="parent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="location_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="javadoc_tag_value">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="parent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="location_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="class_implement_list">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="implemented_element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="interface" domainObjectName="InterfaceInfo">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="identifier_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="location_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="parent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="interface" property="interfaceName"/>
+        </table>
+        <table tableName="expression_list_element">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="expression_list_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="type_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="parent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="location_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="expression_list">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="parent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="location_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="expression_list_expression_relation">
+            <columnOverride column="expression_list_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="expression_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="statement">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="parent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="enclosing_callable_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="location_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="type_element">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="reference_type_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="innermost_component_reference_element_hash_id" javaType="java.lang.Long"
+                            jdbcType="BIGINT"/>
+            <columnOverride column="parent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="location_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="annotated_relation">
+            <columnOverride column="annotation_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="annotated_item_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="container_parent">
+            <columnOverride column="child_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="parent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="modifier">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="parent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="location_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="modifier_list">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="parent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="location_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="element">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="parent_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="reference_list">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="parent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="location_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="foreach_statement">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="iterated_value_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="iteration_parameter_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="body_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="parent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="location_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="if_statement_with_else">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="condition_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="consequent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="alternate_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="if_statement_without_else">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="condition_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="consequent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="callable_enclosing_expression">
+            <columnOverride column="expression_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="callable_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="callable_enclosing_statement">
+            <columnOverride column="statement_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="callable_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="statement_enclosing_expression">
+            <columnOverride column="expression_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="statement_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="enum_constant">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="enum_constant_initializer_hash_id" javaType="java.lang.Long"
+                            jdbcType="BIGINT"/>
+            <columnOverride column="parent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="location_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="instanceof_expression">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="operand_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="check_type_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="pattern_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="parent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="location_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="annotation_declaration_parameter_default_value">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="parent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="location_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="type_cast_expression">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="cast_expression_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="np_method">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="type_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="parent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="np_class">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="parent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="np_interface">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="parent_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="np_file">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <columnOverride column="project_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+        <table tableName="np_project">
+            <columnOverride column="element_hash_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </table>
+    </context>
+
+</generatorConfiguration>
