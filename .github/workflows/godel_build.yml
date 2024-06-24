@@ -4,13 +4,19 @@ on:
   push:
     branches: [ main, lhk_dev ]
   pull_request:
-    branches: [ main, lhk_dev ]
+    branches: [ main ]
 
 jobs:
   linux-x86_64-build:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
+      with:
+        submodules: true
+    - name: Update Git Env
+      run: |
+        git config user.name "$(git log -n 1 --pretty=format:%an)"
+        git config user.email "$(git log -n 1 --pretty=format:%ae)"
     - name: Build
       run: |
         cd godel-script
