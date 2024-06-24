@@ -7,6 +7,27 @@ on:
     branches: [ main ]
 
 jobs:
+  mac-aarch64-build:
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        submodules: true
+    - name: Update Git Env
+      run: |
+        git config --global user.name "$(git log -n 1 --pretty=format:%an)"
+        git config --global user.email "$(git log -n 1 --pretty=format:%ae)"
+    - name: Build
+      run: |
+        cd godel-script
+        cd godel-backend/souffle
+        git am ../0001-init-self-used-souffle-from-public-souffle.patch
+        cd ../..
+        mkdir build
+        cd build
+        cmake ..
+        make -j4
+
   linux-x86_64-build:
     runs-on: ubuntu-latest
     steps:
