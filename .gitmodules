@@ -1,0 +1,3 @@
+[submodule "godel-script/godel-backend/souffle"]
+	path = godel-script/godel-backend/souffle
+	url = https://github.com/souffle-lang/souffle.git
