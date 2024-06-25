@@ -246,3 +246,5 @@ Usage: [Initializer List](./language-reference/functions.md#initializer-list)
 initializer = "{" [initializer_pair ","] "}";
 initializer_pair = identifier ":" or_expr;
 ```
+
+Back to [README.md](../README.md#documents)

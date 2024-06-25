@@ -34,7 +34,7 @@ pub fn hello() -> string {
     * GödelScript [Query](./docs/language-reference/queries.md)
     * GödelScript [Statement](./docs/language-reference/functions.md#statement)
     * GödelScript [Expression](./docs/language-reference/functions.md#expression)
-* GödelScript [Query Example](./example)
+* GödelScript [Query Example](../example)
 * GödelScript [Syntax Definition](./docs/syntax.md)
 
 ## Compilation
@@ -43,19 +43,38 @@ Structure of this project:
 
 ```
 .
-|-- dockerFile
-|-- docs                    godel-script documents
-|-- godel-backend           godel-script backend
-|   |-- extension           godel-script souffle extension
-|   |-- souffle             souffle source code
-|   +-- tools               souffle build tools
-+-- godel-frontend          godel-script frontend
-    +-- src                 godel-frontend source code
+|-- docs                godel-script documents
+|-- godel-backend       godel-script backend
+|   |-- extension       godel-script souffle extension
+|   |-- souffle         souffle source code
+|   +-- tools           souffle build tools
++-- godel-frontend      godel-script frontend
+    +-- src             godel-frontend source code
 ```
 
 Need C++ standard at least `-std=c++17`.
 
-### Build Godel Script
+### Apply Patch On Soufflé Submodule
+
+GödelScript uses a self-modified soufflé from a much older branch of public soufflé,
+now we use patch to make sure it could be built successfully.
+
+Use this command to apply patch:
+
+```bash
+cd souffle
+git am ../../0001-init-self-used-souffle-from-public-souffle.patch
+```
+
+Use these commands to revert:
+
+```bash
+cd souffle
+git apply -R ../0001-init-self-used-souffle-from-public-souffle.patch
+git reset HEAD~
+```
+
+### Build GödelScript
 
 Use command below:
 

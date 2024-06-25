@@ -26,7 +26,13 @@ jobs:
         mkdir build
         cd build
         cmake ..
-        make -j4
+        make -j6
+    - name: Test
+      run: |
+        cd godel-script
+        ./build/godel
+        ./build/godel --version
+        ./build/godel -h --color-off
 
   linux-x86_64-build:
     runs-on: ubuntu-latest
@@ -47,4 +53,10 @@ jobs:
         mkdir build
         cd build
         cmake ..
-        make -j4
+        make -j6
+    - name: Test
+      run: |
+        cd godel-script
+        ./build/godel
+        ./build/godel --version
+        ./build/godel -h --color-off
