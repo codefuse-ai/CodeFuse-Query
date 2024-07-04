@@ -1,0 +1,14 @@
+.DS_Store
+
+.vscode/
+.idea/
+
+node_modules/
+coverage/
+dist/
+out/
+
+bazel-*
+
+*.db
+*.db-journal

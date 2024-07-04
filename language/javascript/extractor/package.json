@@ -1,0 +1,67 @@
+{
+  "name": "coref-js-src-extractor",
+  "version": "1.0.0",
+  "description": "A COREF JavaScript source extractor",
+  "main": "dist/src/index.js",
+  "bin": "dist/src/index.js",
+  "pkg": {
+    "assets": [
+      "init.db"
+    ],
+    "scripts": [
+      "dist/src/core/worker.js"
+    ]
+  },
+  "scripts": {
+    "lint": "npx eslint . --ext .js,.jsx,.ts,.tsx",
+    "clean": "rm -rf dist",
+    "clean-all": "rm -rf node_modules dist",
+    "build": "npm run clean && npx tsc -p .",
+    "pkg": "npm run build && npx prisma db push && node scripts/fix-dot-prisma-client-package-json.js && npx pkg . -C GZip -t node18 -o coref-js-src-extractor --options max-old-space-size=7168",
+    "rebuild": "npm run clean-all && npm i && npx tsc -p .",
+    "extract-ts-node-relations": "npx ts-node src/index.ts extract-ts-node-relations",
+    "generate-model": "python3 jinja/puml_to_schema_prisma.py coref-javascript-er.puml && mv jinja/schema.prisma prisma/schema.prisma && mv jinja/*.gdl ../lib/config",
+    "update-db": "npx prisma db push",
+    "prettier": "npx prettier --write .",
+    "test": "npx jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@code.alipay.com:codeinsight_sys/coref-js-src-extractor.git"
+  },
+  "keywords": [
+    "coref",
+    "extractor"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@prisma/client": "^5.1.1",
+    "commander": "^11.0.0",
+    "ignore": "^5.2.4",
+    "lodash": "^4.17.21",
+    "shelljs": "^0.8.5",
+    "threads": "^1.7.0",
+    "typescript": "4.5.5"
+  },
+  "devDependencies": {
+    "@bazel/typescript": "^5.8.1",
+    "@types/jest": "^29.5.3",
+    "@types/lodash": "^4.14.196",
+    "@types/node": "^18.11.9",
+    "@types/shelljs": "^0.8.12",
+    "@typescript-eslint/eslint-plugin": "^6.3.0",
+    "@typescript-eslint/parser": "^6.3.0",
+    "eslint": "^8.46.0",
+    "jest": "^29.6.2",
+    "pkg": "^5.8.1",
+    "prettier": "^3.0.1",
+    "prisma": "^5.1.1",
+    "ts-jest": "^29.1.1",
+    "ts-node": "^10.9.1",
+    "typescript-latest": "npm:typescript@^5.1.6"
+  },
+  "prisma": {
+    "schema": "prisma/schema.prisma"
+  }
+}

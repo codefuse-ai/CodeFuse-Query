@@ -1,0 +1,23 @@
+/**
+ * @filename: DOCLASS
+ * @author: 张玉 <zy249870@antgroup.com>
+ * @brief: DOCLASS provides classes and predicates for working with basic model of JavaScript / TypeScript code database.
+ */
+
+package coref.javascript
+
+{% for table in table_list %}
+class {{ table.name | to_camel }}DO {
+    {{ table.name | to_camel }}DO() {
+        {{ table.name }}({{ generate_doclass_predicate_params(table) | join(", ") }})
+    }
+    {%- for column in table.column_list if not column.is_pk %}
+
+    {{ column.gdl_type }} get{{ column.name | to_camel }}() {
+        return {{ column.name | to_lower_camel }}: exists({{ column.gdl_type }} {{ column.name | to_lower_camel }}) {
+            {{ table.name }}({{ generate_doclass_predicate_params(table, column) | join(', ') }})
+        }
+    }
+    {%- endfor %}
+}
+{% endfor %}
