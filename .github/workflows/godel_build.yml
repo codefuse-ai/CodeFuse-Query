@@ -2,9 +2,12 @@ name: GodelScript Build
 
 on:
   push:
-    branches: [ main, lhk_dev ]
+    paths:
+      - godel-script/**
   pull_request:
     branches: [ main ]
+    paths:
+      - godel-script/**
 
 jobs:
   mac-aarch64-build:
