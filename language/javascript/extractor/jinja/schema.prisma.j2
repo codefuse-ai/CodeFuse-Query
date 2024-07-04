@@ -1,0 +1,19 @@
+// Generated from coref-javascript-er.puml
+
+datasource db {
+  provider = "sqlite"
+  url = "file:../init.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+  binaryTargets = ["darwin", "darwin-arm64", "debian-openssl-1.0.x", "debian-openssl-1.1.x", "debian-openssl-3.0.x", "rhel-openssl-1.0.x", "rhel-openssl-1.1.x", "rhel-openssl-3.0.x"]
+}
+
+{% for table in table_list %}
+model {{table.name}} {
+  {%- for column in table.column_list %}
+  {{ column.name }} {{column.prisma_type}}{% if column.is_pk %} @id {%- endif -%}
+  {% endfor %}
+}
+{% endfor %}

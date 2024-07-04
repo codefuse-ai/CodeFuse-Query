@@ -1,0 +1,221 @@
+@startuml
+' https://plantuml.com/ie-diagram
+
+' Location table
+entity location {
+    oid: INTEGER <<PK>>
+    file_oid: INTEGER
+    start_line_number: INTEGER
+    start_column_number: INTEGER
+    end_line_number: INTEGER
+    end_column_number: INTEGER
+    text: TEXT
+}
+
+
+' Number of lines table
+entity number_of_lines {
+    location_oid: INTEGER <<PK>>
+    lines: INTEGER
+    code_lines: INTEGER
+    comment_lines: INTEGER
+}
+
+
+entity file {
+    oid: INTEGER <<PK>>
+    name: TEXT
+    extension: TEXT
+    relative_path: TEXT
+    location_oid: INTEGER
+}
+
+entity directory {
+    oid: INTEGER <<PK>>
+    name: TEXT
+    relative_path: TEXT
+    location_oid: INTEGER
+}
+
+' parent_oid: ref directory
+' child_oid: ref directory | file
+entity directory_hierarchy {
+    parent_oid: INTEGER
+    child_oid: INTEGER <<PK>>
+}
+
+' kind:
+' enum {
+'     script = 0
+'     inline_script = 1
+'     event_handler = 2
+'     javascript_url = 3
+'     template_top_level = 4
+' }
+entity top_level {
+    oid: INTEGER <<PK>>
+    kind: INTEGER
+    location_oid: INTEGER
+}
+
+entity node {
+    oid: INTEGER <<PK>>
+    kind: INTEGER
+    parent_oid: INTEGER
+    index: INTEGER
+    location_oid: INTEGER
+}
+
+entity literal {
+    oid: INTEGER <<PK>>
+    value: TEXT
+}
+
+entity binding_element_property_name {
+    oid: INTEGER <<PK>>
+    property_name_oid: INTEGER
+}
+
+entity binding_element_name {
+    oid: INTEGER <<PK>>
+    name_oid: INTEGER
+}
+
+entity binding_element_initializer {
+    oid: INTEGER <<PK>>
+    initializer_oid: INTEGER
+}
+
+' 
+' Class declaration or expression
+'
+entity class_like_declaration {
+    oid: INTEGER <<PK>>
+    kind: INTEGER
+    name: TEXT
+}
+
+entity function_like_declaration {
+    oid: INTEGER <<PK>>
+    kind: INTEGER
+    name: TEXT
+}
+
+entity function_enclosing_node {
+    node_oid: INTEGER <<PK>>
+    function_oid: INTEGER
+}
+
+entity modifier {
+    oid: INTEGER <<PK>>
+    index: INTEGER
+}
+
+' use `symbol_` instead of `symbol` to avoid the typescript error TS2457: Type alias name cannot be 'symbol'.
+entity symbol_ {
+    oid: INTEGER <<PK>>
+    name: TEXT
+    description: TEXT
+}
+
+entity node_symbol {
+    node_oid: INTEGER <<PK>>
+    symbol_oid: INTEGER
+}
+
+entity shorthand_assignment_value_symbol {
+    node_oid: INTEGER <<PK>>
+    symbol_oid: INTEGER
+}
+
+entity call_site {
+    invoke_expression_oid: INTEGER <<PK>>
+    callee_oid: INTEGER
+}
+
+entity cfg_entry_node {
+    oid: INTEGER <<PK>>
+    ast_node_oid: INTEGER
+}
+
+entity cfg_exit_node {
+    oid: INTEGER <<PK>>
+    ast_node_oid: INTEGER
+}
+
+
+' ----
+' Type
+' ----
+
+' ' Type table
+' '
+' entity type {
+'     oid: INTEGER <<PK>>
+'     kind: INTEGER
+'     name: TEXT
+' }
+
+' ' Type hierarchy table
+' '
+' ' child_oid: ref type
+' ' parent_oid: ref type
+' ' index: the index of child type in the parent type
+' entity type_hierarchy {
+'     oid: INTEGER <<PK>>
+'     parent_oid: INTEGER
+'     child_oid: INTEGER
+'     index: INTEGER
+' }
+
+' ' Type alias table
+' '
+' ' alias_type_oid: ref type
+' ' underlying_type_oid: ref type
+' entity type_alias {
+'     alias_type_oid: INTEGER <<PK>>
+'     underlying_type_oid: INTEGER
+' }
+
+' Comment table
+entity comment {
+    oid: INTEGER <<PK>>
+    kind: INTEGER
+    location_oid: INTEGER
+}
+
+' Node comment table
+entity node_comment {
+    oid: INTEGER <<PK>>
+    node_oid: INTEGER
+    comment_oid: INTEGER
+    type: INTEGER
+}
+
+' entity token {
+'     oid: INTEGER <<PK>>
+'     kind: INTEGER
+'     location_oid: INTEGER
+' }
+
+' JS parse error table
+entity js_parse_error {
+    oid: INTEGER <<PK>>
+    message: TEXT
+    line: TEXT
+}
+
+entity metadata {
+    oid: INTEGER <<PK>>
+    version: TEXT
+    created_time: DATETIME
+}
+
+entity ignored_path {
+    oid: INTEGER <<PK>>
+    path_kind: INTEGER
+    path: TEXT
+    ignore_kind: INTEGER
+}
+
+@enduml
