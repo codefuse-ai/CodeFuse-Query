@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "target": "es2020",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "strict": true,
+    "importHelpers": true,
+    "resolveJsonModule": true,
+    "sourceMap": true,
+    "forceConsistentCasingInFileNames": true,
+    "composite": true,
+    "outDir": "dist"
+  },
+  "include": ["src/**/*", "package.json"],
+  "exclude": ["node_modules/**/*", "**/__test__/**/*"]
+}

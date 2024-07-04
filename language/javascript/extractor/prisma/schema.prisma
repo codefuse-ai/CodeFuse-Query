@@ -1,0 +1,168 @@
+// Generated from coref-javascript-er.puml
+
+datasource db {
+  provider = "sqlite"
+  url = "file:../init.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+  binaryTargets = ["darwin", "darwin-arm64", "debian-openssl-1.0.x", "debian-openssl-1.1.x", "debian-openssl-3.0.x", "rhel-openssl-1.0.x", "rhel-openssl-1.1.x", "rhel-openssl-3.0.x"]
+}
+
+
+model location {
+  oid BigInt @id
+  file_oid BigInt
+  start_line_number Int
+  start_column_number Int
+  end_line_number Int
+  end_column_number Int
+  text String
+}
+
+model number_of_lines {
+  location_oid BigInt @id
+  lines Int
+  code_lines Int
+  comment_lines Int
+}
+
+model file {
+  oid BigInt @id
+  name String
+  extension String
+  relative_path String
+  location_oid BigInt
+}
+
+model directory {
+  oid BigInt @id
+  name String
+  relative_path String
+  location_oid BigInt
+}
+
+model directory_hierarchy {
+  parent_oid BigInt
+  child_oid BigInt @id
+}
+
+model top_level {
+  oid BigInt @id
+  kind Int
+  location_oid BigInt
+}
+
+model node {
+  oid BigInt @id
+  kind Int
+  parent_oid BigInt
+  index Int
+  location_oid BigInt
+}
+
+model literal {
+  oid BigInt @id
+  value String
+}
+
+model binding_element_property_name {
+  oid BigInt @id
+  property_name_oid BigInt
+}
+
+model binding_element_name {
+  oid BigInt @id
+  name_oid BigInt
+}
+
+model binding_element_initializer {
+  oid BigInt @id
+  initializer_oid BigInt
+}
+
+model class_like_declaration {
+  oid BigInt @id
+  kind Int
+  name String
+}
+
+model function_like_declaration {
+  oid BigInt @id
+  kind Int
+  name String
+}
+
+model function_enclosing_node {
+  node_oid BigInt @id
+  function_oid BigInt
+}
+
+model modifier {
+  oid BigInt @id
+  index Int
+}
+
+model symbol_ {
+  oid BigInt @id
+  name String
+  description String
+}
+
+model node_symbol {
+  node_oid BigInt @id
+  symbol_oid BigInt
+}
+
+model shorthand_assignment_value_symbol {
+  node_oid BigInt @id
+  symbol_oid BigInt
+}
+
+model call_site {
+  invoke_expression_oid BigInt @id
+  callee_oid BigInt
+}
+
+model cfg_entry_node {
+  oid BigInt @id
+  ast_node_oid BigInt
+}
+
+model cfg_exit_node {
+  oid BigInt @id
+  ast_node_oid BigInt
+}
+
+model comment {
+  oid BigInt @id
+  kind Int
+  location_oid BigInt
+}
+
+model node_comment {
+  oid BigInt @id
+  node_oid BigInt
+  comment_oid BigInt
+  type Int
+}
+
+model js_parse_error {
+  oid BigInt @id
+  message String
+  line String
+}
+
+model metadata {
+  oid BigInt @id
+  version String
+  created_time DateTime
+}
+
+model ignored_path {
+  oid BigInt @id
+  path_kind Int
+  path String
+  ignore_kind Int
+}

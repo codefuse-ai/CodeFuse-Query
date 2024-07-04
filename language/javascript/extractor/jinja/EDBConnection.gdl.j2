@@ -1,0 +1,60 @@
+/**
+ * @filename: EDBCONNECTION
+ * @author: 张玉 <zy249870@antgroup.com>
+ * @brief: EDBCONNECTION provides predicates for working with JavaScript / TypeScript code database connections.
+ */
+
+package coref.javascript
+
+
+@builtin
+predicate input(string dbname, string name) {
+    _
+}
+
+@builtin
+string cat(string a, string b) {
+    _
+}
+
+@builtin
+string contains(string a, string b) {
+    _
+}
+
+@builtin
+string match(string a, string b) {
+    _
+}
+
+@builtin
+string to_number(string a) {
+    _
+}
+
+@builtin
+int strlen(string a) {
+    _
+}
+
+@builtin
+string substr(string a, int i, int j) {
+    _
+}
+
+@builtin
+string to_string(int s) {
+    _
+}
+
+{% for table in table_list %}
+predicate {{ table.name }} (
+    {{ table.column_list[0].gdl_type }} {{ table.column_list[0].name }}
+    {%- for column in table.column_list[1:] -%}
+    ,
+    {{ column.gdl_type }} {{ column.name -}}
+    {%- endfor -%}
+) {
+    input("coref_javascript_src.db", "{{ table.name }}")
+}
+{% endfor %}
