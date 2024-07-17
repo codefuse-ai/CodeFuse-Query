@@ -1,0 +1,11 @@
+// script
+use coref::java::*
+
+fn default_db() -> JavaDB {
+    return JavaDB::load("coref_java_src.db")
+}
+
+query getSignature from
+    c in Callable(default_db())
+select
+    c.getSignature() as signature
