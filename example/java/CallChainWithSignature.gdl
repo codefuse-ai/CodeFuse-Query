@@ -34,22 +34,12 @@ fn checkCallable(c: Callable)-> bool {
 
 
 // Do an upward search
-// Search upwards for the end condition, and restrict some properties of the end node
-fn callerLimit(c: Callable) -> bool {
-    return false
-}
 fn getAncestorCallerEndWithLimit(c: Callable) -> *Callable {
-    // If the current function has been limited
-    if (callerLimit(c)) {
-        yield c
-    }
-    if (!callerLimit(c)) {
-        // Get the calling function of the current functio
-        yield c.getCaller()
-        // The current node is multiple layers above, and recursive calls are required to obtain all calling functions
-        for (tmp in c.getCaller()) {
-            yield getAncestorCallerEndWithLimit(tmp)
-        }
+    // Get the calling function of the current functio
+    yield c.getCaller()
+    // The current node is multiple layers above, and recursive calls are required to obtain all calling functions
+    for (tmp in c.getCaller()) {
+        yield getAncestorCallerEndWithLimit(tmp)
     }
 }
 
