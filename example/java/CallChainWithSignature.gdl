@@ -1,0 +1,79 @@
+// script
+use coref::java::*
+
+fn default_java_db() -> JavaDB {
+    return JavaDB::load("coref_java_src.db")
+}
+
+// Given one or more function signatures, only one is given in the current example, which can be modified
+// signature
+fn isChecked(signature: string) -> bool {
+    [
+        {"HelloWorld.test2:void()"},
+    ]
+}
+
+// You can view the signature, line number, and file location of each callable by outputting the following function:
+fn signature_name(signature: string, line: int, fileName: string) -> bool {
+    let (db = default_java_db()){
+        for (callable in Callable(db)){
+            if (signature = callable.getSignature() && fileName = callable.getLocation().getFile().getName()
+                && line = callable.getLocation().getStartLineNumber()) {
+                return true
+            }
+        }
+    }
+}
+
+// Determine whether it is a callable corresponding to the function signature
+fn checkCallable(c: Callable)-> bool {
+    if (isChecked(c.getSignature())) {
+        return true
+    }
+}
+
+
+// Do an upward search
+fn getAncestorCallerEndWithLimit(c: Callable) -> *Callable {
+    // Get the calling function of the current functio
+    yield c.getCaller()
+    // The current node is multiple layers above, and recursive calls are required to obtain all calling functions
+    for (tmp in c.getCaller()) {
+        yield getAncestorCallerEndWithLimit(tmp)
+    }
+}
+
+fn getAllLimitedCallable(c:Callable)->*Callable{
+    yield c
+    yield getAncestorCallerEndWithLimit(c)
+}
+
+// At the same time, output the class corresponding to callable
+fn getCallGraph(callMethodName:string, callClassName: string,
+                calleeMethodName:string, calleeClassName: string) -> bool {
+    let (db = default_java_db()){
+        for (callable in Callable(db)){
+            if (checkCallable(callable)) {
+                for (call in getAllLimitedCallable(callable), callee in getAllLimitedCallable(callable)){
+                    if (call != callee && callee in call.getCallee()) {
+                        for (callMethod in Method(db), calleeMethod in Method(db)) {
+                            if (callMethod.key_eq(call) && calleeMethod.key_eq(callee)) {
+                                if (callMethodName = callMethod.getName() && callClassName = callMethod.getBelongedClass().getQualifiedName() &&
+                                    calleeMethodName = callee.getName() && calleeClassName = calleeMethod.getBelongedClass().getQualifiedName()) {
+                                    return true
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+        }
+    }
+}
+
+fn main() {
+    output(getCallGraph())
+    // If you want to see the signature in the output add the following line back
+    // output(signature_name())
+}
