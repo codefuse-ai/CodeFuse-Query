@@ -438,7 +438,11 @@ class Storage:
             object_dict.update({type_object: [object]})
 
     def commit(self):
+        batch_size = 50
         for key, value in object_dict.items():
-            session.bulk_insert_mappings(key, value)
-        session.commit()
+            # batch insert
+            for i in range(0, len(value), batch_size):
+                batch = value[i:i + batch_size]
+                session.bulk_insert_mappings(key, batch)
+            session.commit()
         object_dict.clear()
