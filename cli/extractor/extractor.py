@@ -203,5 +203,11 @@ def get_pod_memory_limit():
             memory_limit = int(f.read().strip())
     except FileNotFoundError:
         pass
+    except PermissionError:
+        logging.error("Permission denied when accessing cgroup files.")
+    except IOError as e:
+        logging.error(f"IO error occurred when accessing cgroup files: {e}")
+    except Exception as e:
+        logging.error(f"An unexpected error occurred: {e}")
     return memory_limit
 
