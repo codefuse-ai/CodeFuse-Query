@@ -35,6 +35,10 @@ def memory_statistics():
     # 获取总内存大小（以字节为单位）
     total_memory = memory.total
 
+    pod_memory_limit = get_pod_memory_limit()
+    if pod_memory_limit != 0:
+        total_memory = pod_memory_limit
+
     # 格式化内存大小
     size_units = ["B", "KB", "MB", "GB", "TB"]
     unit_index = 0
