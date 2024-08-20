@@ -1,0 +1,118 @@
+/**
+ * @date: 2022/11/11
+ * @brief: LOCATION provides classes and predicates for working with property files entry elements.
+ */
+
+/**
+ * @brief A properties comment.
+ */
+schema PropertiesComment extends PropertiesCommentDO {
+    
+}
+impl PropertiesComment {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PropertiesDB) -> *PropertiesComment {
+        for (tmp in PropertiesCommentDO(db)) {
+            yield PropertiesComment {
+                element_oid : tmp.element_oid,
+                text : tmp.text,
+                parent_oid : tmp.parent_oid,
+                location_oid : tmp.location_oid
+            }
+        }
+    }
+    /**
+     * @brief gets the location for the element.
+     * @return Location
+     */
+    pub fn getLocation(self) -> Location {
+        for (loc in Location(__all_data__)) {
+            if (loc.element_oid = self.getLocationOid()) {
+                return loc
+            }
+        }
+    }
+}
+/**
+ * @brief A properties entry.
+ */
+schema Entry extends EntryDO {
+    
+}
+impl Entry {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PropertiesDB) -> *Entry {
+        for (tmp in EntryDO(db)) {
+            yield Entry {
+                element_oid : tmp.element_oid,
+                key : tmp.key,
+                value : tmp.value,
+                printable_text : tmp.printable_text,
+                location_oid : tmp.location_oid
+            }
+        }
+    }
+    /**
+     * @brief gets the location for the element.
+     * @return Location
+     */
+    pub fn getLocation(self) -> Location {
+        for (loc in Location(__all_data__)) {
+            if (loc.element_oid = self.getLocationOid()) {
+                return loc
+            }
+        }
+    }
+}
+/**
+ * @brief A properties entry variable.
+ */
+schema Variable extends VariableDO {
+    
+}
+impl Variable {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PropertiesDB) -> *Variable {
+        for (tmp in VariableDO(db)) {
+            yield Variable {
+                element_oid : tmp.element_oid,
+                parent_oid : tmp.parent_oid,
+                start_index : tmp.start_index,
+                name : tmp.name,
+                printable_text : tmp.printable_text
+            }
+        }
+    }
+    /**
+     * @brief gets the belonged entry element of the element
+     * @return Entry 
+     */
+    pub fn getBelongedEntry(self) -> Entry {
+        for (entry in Entry(__all_data__)) {
+            if (entry.element_oid = self.getParentOid()) {
+                return entry
+            }
+        }
+    }
+    /**
+     * @brief gets the length of the variable's original text
+     * @return Entry 
+     */
+    pub fn getLengthOfPrintableText(self) -> int {
+        return self.getPrintableText().len()
+    }
+    /**
+     * @brief gets the location for the element.
+     * @return Location
+     */
+    pub fn getLocation(self) -> Location {
+        for (loc in Location(__all_data__)) {
+            if (loc.element_oid = self.getParentOid()) {
+                return loc
+            }
+        }
+    }
+}
