@@ -1,0 +1,458 @@
+/**
+ * @brief DO class: A comment.
+ */
+schema PropertiesCommentDO {
+    @primary element_oid: int,
+    text: string,
+    parent_oid: int,
+    location_oid: int
+}
+
+impl PropertiesCommentDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PropertiesDB) -> *PropertiesCommentDO {
+    	for (tmp in db.comment) {
+            yield PropertiesCommentDO {
+                element_oid : tmp.element_oid,
+                text : tmp.text,
+                parent_oid : tmp.parent_oid,
+                location_oid : tmp.location_oid
+            }
+    	}
+    }
+    /**
+     * @brief gets the text of this element.
+     * @return string
+     */
+    pub fn getText(self) -> string {
+        return self.text
+    }
+    /**
+     * @brief gets the parent oid of this element.
+     * @return int
+     */
+    pub fn getParentOid(self) -> int {
+        return self.parent_oid
+    }
+    /**
+     * @brief gets the location oid of this element.
+     * @return int
+     */
+    pub fn getLocationOid(self) -> int {
+        return self.location_oid
+    }
+}
+/**
+ * @brief DO class: A container parent.
+ */
+schema ContainerParentDO {
+    @primary child_oid: int,
+    parent_oid: int
+}
+impl ContainerParentDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PropertiesDB) -> *ContainerParentDO {
+    	for (tmp in db.container_parent) {
+            yield ContainerParentDO {
+                child_oid : tmp.child_oid,
+                parent_oid : tmp.parent_oid
+            }
+    	}
+    }
+    /**
+     * @brief gets the parent oid of this element.
+     * @return int
+     */
+    pub fn getParentOid(self) -> int {
+        return self.parent_oid
+    }
+}
+/**
+ *
+ * @brief DO class: An empty line.
+ */
+schema EmptyLineDO {
+    @primary oid: int,
+    location_oid: int,
+    file_oid: int
+}
+impl EmptyLineDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PropertiesDB) -> *EmptyLineDO {
+    	for (tmp in db.empty_line) {
+            yield EmptyLineDO {
+                oid : tmp.oid,
+                location_oid : tmp.location_oid,
+                file_oid : tmp.file_oid
+            }
+    	}
+    }
+    /**
+     * @brief gets the location oid of this element.
+     * @return int
+     */
+    pub fn getLocationOid(self) -> int {
+        return self.location_oid
+    }
+    /**
+     * @brief gets the file oid of this element.
+     * @return int
+     */
+    pub fn getFileOid(self) -> int {
+        return self.file_oid
+    }
+}
+/**
+ * @brief DO class: An entry.
+ */
+schema EntryDO {
+    @primary element_oid: int,
+    key: string,
+    value: string,
+    printable_text: string,
+    location_oid: int
+}
+impl EntryDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PropertiesDB) -> *EntryDO {
+    	for (tmp in db.entry) {
+            yield EntryDO {
+                element_oid : tmp.element_oid,
+                key : tmp.key,
+                value : tmp.value,
+                printable_text : tmp.printable_text,
+                location_oid : tmp.location_oid
+            }
+    	}
+    }
+    /**
+     * @brief gets the key of this element.
+     * @return string
+     */
+    pub fn getKey(self) -> string {
+        return self.key
+    }
+    /**
+     * @brief gets the value of this element.
+     * @return string
+     */
+    pub fn getValue(self) -> string {
+        return self.value
+    }
+    /**
+     * @brief gets the printable text of this element.
+     * @return string
+     */
+    pub fn getPrintableText(self) -> string {
+        return self.printable_text
+    }
+    /**
+     * @brief gets the location oid of this element.
+     * @return int
+     */
+    pub fn getLocationOid(self) -> int {
+        return self.location_oid
+    }
+}
+/**
+ * @brief DO class: A file.
+ */
+schema FileDO {
+    @primary element_oid: int,
+    relative_path: string,
+    extension: string,
+    name: string
+}
+impl FileDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PropertiesDB) -> *FileDO {
+    	for (tmp in db.file) {
+            yield FileDO {
+                element_oid : tmp.element_oid,
+                relative_path : tmp.relative_path,
+                extension : tmp.extension,
+                name : tmp.name
+            }
+    	}
+    }
+    /**
+     * @brief gets the relative path of this element.
+     * @return string
+     */
+    pub fn getRelativePath(self) -> string {
+        return self.relative_path
+    }
+    /**
+     * @brief gets the extension of this element.
+     * @return string
+     */
+    pub fn getExtension(self) -> string {
+        return self.extension
+    }
+    /**
+     * @brief gets the name of this element.
+     * @return string
+     */
+    pub fn getName(self) -> string {
+        return self.name
+    }
+    /**
+     * @brief gets the number of lines oid of this element.
+     * @return int
+     */
+    pub fn getNumberOfLinesOid(self) -> int {
+        return self.element_oid
+    }
+}
+/**
+ *
+ * @brief DO class: A folder.
+ */
+schema FolderDO {
+    @primary element_oid: int,
+    relative_path: string,
+    name: string,
+    parent_oid: int
+}
+impl FolderDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PropertiesDB) -> *FolderDO {
+    	for (tmp in db.folder) {
+            yield FolderDO {
+                element_oid : tmp.element_oid,
+                relative_path : tmp.relative_path,
+                name : tmp.name,
+                parent_oid : tmp.parent_oid
+            }
+    	}
+    }
+    /**
+     * @brief gets the relative path of this element.
+     * @return string
+     */
+    pub fn getRelativePath(self) -> string {
+        return self.relative_path
+    }
+    /**
+     * @brief gets the name of this element.
+     * @return string
+     */
+    pub fn getName(self) -> string {
+        return self.name
+    }
+    /**
+     * @brief gets the parent oid of this element.
+     * @return int
+     */
+    pub fn getParentOid(self) -> int {
+        return self.parent_oid
+    }
+}
+/**
+ *
+ * @brief DO class: A location.
+ */
+schema LocationDO {
+    @primary element_oid: int,
+    file_oid: int,
+    start_line_number: int,
+    start_column_number: int,
+    end_line_number: int,
+    end_column_number: int
+}
+impl LocationDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PropertiesDB) -> *LocationDO {
+    	for (tmp in db.location) {
+            yield LocationDO {
+                element_oid : tmp.element_oid,
+                file_oid : tmp.file_oid,
+                start_line_number : tmp.start_line_number,
+                start_column_number : tmp.start_column_number,
+                end_line_number : tmp.end_line_number,
+                end_column_number : tmp.end_column_number
+            }
+    	}
+    }
+    /**
+     * @brief gets the file oid of this element.
+     * @return int
+     */
+    pub fn getFileOid(self) -> int {
+        return self.file_oid
+    }
+    /**
+     * @brief gets the start line number of this element.
+     * @return int
+     */
+    pub fn getStartLineNumber(self) -> int {
+        return self.start_line_number
+    }
+    /**
+     * @brief gets the start column number of this element.
+     * @return int
+     */
+    pub fn getStartColumnNumber(self) -> int {
+        return self.start_column_number
+    }
+    /**
+     * @brief gets the end line number of this element.
+     * @return int
+     */
+    pub fn getEndLineNumber(self) -> int {
+        return self.end_line_number
+    }
+    /**
+     * @brief gets the end column number of this element.
+     * @return int
+     */
+    pub fn getEndColumnNumber(self) -> int {
+        return self.end_column_number
+    }
+}
+/**
+ *
+ * @brief DO class: A number of lines.
+ */
+schema NumberOfLinesDO {
+    @primary oid: int,
+    number_of_lines_edb: int,
+    number_of_valid_lines: int,
+    number_of_comment_lines: int
+}
+impl NumberOfLinesDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PropertiesDB) -> *NumberOfLinesDO {
+    	for (tmp in db.number_of_lines) {
+            yield NumberOfLinesDO {
+                oid : tmp.oid,
+                number_of_lines_edb : tmp.number_of_lines_edb,
+                number_of_valid_lines : tmp.number_of_valid_lines,
+                number_of_comment_lines : tmp.number_of_comment_lines
+            }
+    	}
+    }
+    /**
+     * @brief gets the number of lines of this element.
+     * @return int
+     */
+    pub fn getNumberOfLines(self) -> int {
+        return self.number_of_lines_edb
+    }
+    /**
+     * @brief gets the number of valid lines of this element.
+     * @return int
+     */
+    pub fn getNumberOfValidLines(self) -> int {
+        return self.number_of_valid_lines
+    }
+    /**
+     * @brief gets the number of comment lines of this element.
+     * @return int
+     */
+    pub fn getNumberOfCommentLines(self) -> int {
+        return self.number_of_comment_lines
+    }
+}
+/**
+ *
+ * @brief DO class: A program.
+ */
+schema ProgramDO {
+    @primary oid: int,
+    absolute_path_prefix: string
+}
+impl ProgramDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PropertiesDB) -> *ProgramDO {
+    	for (tmp in db.program) {
+            yield ProgramDO {
+                oid : tmp.oid,
+                absolute_path_prefix : tmp.absolute_path_prefix
+            }
+    	}
+    }
+    /**
+     * @brief gets the absolute path prefix of this element.
+     * @return string
+     */
+    pub fn getAbsolutePathPrefix(self) -> string {
+        return self.absolute_path_prefix
+    }
+}
+/**
+ *
+ * @brief DO class: A variable.
+ */
+schema VariableDO {
+    @primary element_oid: int,
+    parent_oid: int,
+    start_index: int,
+    name: string,
+    printable_text: string
+}
+impl VariableDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PropertiesDB) -> *VariableDO {
+    	for (tmp in db.variable) {
+            yield VariableDO {
+                element_oid : tmp.element_oid,
+                parent_oid : tmp.parent_oid,
+                start_index : tmp.start_index,
+                name : tmp.name,
+                printable_text : tmp.printable_text
+            }
+    	}
+    }
+    /**
+     * @brief gets the parent oid of this element.
+     * @return int
+     */
+    pub fn getParentOid(self) -> int {
+        return self.parent_oid
+    }
+    /**
+     * @brief gets the start index of this element.
+     * @return int
+     */
+    pub fn getStartIndex(self) -> int {
+        return self.start_index
+    }
+    /**
+     * @brief gets the name of this element.
+     * @return string
+     */
+    pub fn getName(self) -> string {
+        return self.name
+    }
+    /**
+     * @brief gets the printable text of this element.
+     * @return string
+     */
+    pub fn getPrintableText(self) -> string {
+        return self.printable_text
+    }
+}
+
+database PropertiesDB {
+    comment: *PropertiesCommentDO,
+    container_parent: *ContainerParentDO,
+    empty_line: *EmptyLineDO,
+    entry: *EntryDO,
+    file: *FileDO,
+    folder: *FolderDO,
+    location: *LocationDO,
+    number_of_lines: *NumberOfLinesDO,
+    program: *ProgramDO,
+    variable: *VariableDO,
+}

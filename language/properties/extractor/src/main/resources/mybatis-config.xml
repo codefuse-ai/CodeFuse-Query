@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+  <environments default="development">
+    <environment id="development">
+      <transactionManager type="JDBC">
+        <property name="JDBC.autoCommit" value="false"/>
+      </transactionManager>
+      <dataSource type="POOLED">
+        <property name="driver" value="${driver}"/>
+        <property name="url" value="${url}"/>
+        <property name="username" value="${username}"/>
+        <property name="password" value="${password}"/>
+        <property name="autoCommitOnClose" value="false"/>
+      </dataSource>
+    </environment>
+  </environments>
+  <mappers>
+    <!-- 自动扫描该包名下的所有Mapper -->
+    <package name="com.alipay.codequery.properties.dal.mybatis.mapper"/>
+  </mappers>
+</configuration>

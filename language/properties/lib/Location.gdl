@@ -1,0 +1,205 @@
+ /**
+ * @date: 2022/11/11
+ * @brief: LOCATION provides classes and predicates for working with property files location and container elements.
+ */
+/**
+ * @brief The location information of a locatable elements.
+ */
+schema Location extends LocationDO {
+    
+}
+impl Location {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PropertiesDB) -> *Location {
+        for (tmp in LocationDO(db)) {
+            yield Location {
+                element_oid : tmp.element_oid,
+                file_oid : tmp.file_oid,
+                start_line_number : tmp.start_line_number,
+                start_column_number : tmp.start_column_number,
+                end_line_number : tmp.end_line_number,
+                end_column_number : tmp.end_column_number
+            }
+        }
+    }
+    /**
+     * @brief gets the file information for the location
+     * @return File 
+     */
+    pub fn getFile(self) -> File {
+        for (f in File(__all_data__)) {
+            if (f.element_oid = self.getFileOid()) {
+                return f
+            }
+        }
+    }
+}
+/**
+ * @brief The number of lines for a java file.
+ */
+schema NumberOfLines extends NumberOfLinesDO {
+    
+}
+impl NumberOfLines {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PropertiesDB) -> *NumberOfLines {
+        for (tmp in NumberOfLinesDO(db)) {
+            yield NumberOfLines {
+                oid : tmp.oid,
+                number_of_lines_edb : tmp.number_of_lines_edb,
+                number_of_valid_lines : tmp.number_of_valid_lines,
+                number_of_comment_lines : tmp.number_of_comment_lines
+            }
+        }
+    }
+}
+/**
+ * @brief The root of the extracted project.
+ */
+schema Program extends ProgramDO {
+    
+}
+impl Program {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PropertiesDB) -> *Program {
+        for (tmp in ProgramDO(db)) {
+            yield Program {
+                oid : tmp.oid,
+                absolute_path_prefix : tmp.absolute_path_prefix
+            }
+        }
+    }
+}
+/**
+ * @brief A java file.
+ */
+schema File extends FileDO {
+    
+}
+impl File {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PropertiesDB) -> *File {
+        for (tmp in FileDO(db)) {
+            yield File {
+                element_oid : tmp.element_oid,
+                relative_path : tmp.relative_path,
+                extension : tmp.extension,
+                name : tmp.name
+            }
+        }
+    }
+    /**
+     * @brief gets the folder which contains the file, if any.
+     * @return Folder 
+     */
+    pub fn getBelongedFolder(self) -> Folder {
+        for (f in Folder(__all_data__),
+            container in ContainerParent(__all_data__)) {
+            if (self.key_eq(container)) {
+                if (f.element_oid = container.getParentOid()) {
+                    return f
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the size information for the element.
+     * @return NumberOfLines
+     */
+    pub fn getSize(self) -> NumberOfLines {
+        for (n in NumberOfLines(__all_data__)) {
+            if (n.oid = self.getNumberOfLinesOid()) {
+                return n
+            }
+        }
+    }
+}
+/**
+ * @brief A folder.
+ */
+schema Folder extends FolderDO {
+    
+}
+impl Folder {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PropertiesDB) -> *Folder {
+        for (tmp in FolderDO(db)) {
+            yield Folder {
+                element_oid : tmp.element_oid,
+                relative_path : tmp.relative_path,
+                name : tmp.name,
+                parent_oid : tmp.parent_oid
+            }
+        }
+    }
+    /**
+     * @brief gets all files in the folder.
+     * @return File 
+     */
+    pub fn getAllContainingFiles(self) -> *File {
+        for (f in File(__all_data__),
+            container in ContainerParent(__all_data__)) {
+            if (f.key_eq(container)) {
+                if (self.element_oid = container.getParentOid()) {
+                    yield f
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the folder which contains the element.
+     * @return Folder
+     */
+    pub fn getParent(self) -> Folder {
+        for (f in Folder(__all_data__)) {
+            if (f.element_oid = self.getParentOid()) {
+                return f
+            }
+        }
+    }
+}
+ // /**
+  //  * @brief gets an ancestor of the element.
+  //  * @return ElementParent 
+  //  */
+ // ElementParent getAnAncestor(){
+     //     return ancestor : exists(ElementParent ancestor, ElementParent temp) { this = temp and ancestor = temp.getAnAncestor() }
+ // }
+    /**
+    //  * @brief gets an ancestor of the element.
+    //  * @return ElementParent 
+    //  */
+ /**
+ * @brief Describe a file belonged to a certain folder.
+ */
+schema ContainerParent extends ContainerParentDO {
+    
+}
+impl ContainerParent {
+    @data_constraint
+    @inline
+    pub fn __all__(db: PropertiesDB) -> *ContainerParent {
+        for (tmp in ContainerParentDO(db)) {
+            yield ContainerParent {
+                child_oid : tmp.child_oid,
+                parent_oid : tmp.parent_oid
+            }
+        }
+    }
+    /**
+     * @brief gets the folder which contains the file, if any.
+     * @return Folder 
+     */
+    pub fn getBelongedFolder(self) -> Folder {
+        for (f in Folder(__all_data__)) {
+            if (f.element_oid = self.getParentOid()) {
+                return f
+            }
+        }
+    }
+}
