@@ -99,14 +99,14 @@ Regarding the openness of languages, you can refer to the table below:
 | Language | Data Modeling Open Source | Data Core Open Source | Maturity |
 | --- | --- | --- | --- |
 | Python | Y | Y | RELEASE |
-| Java | Y | N | RELEASE |
-| JavaScript | Y | N | RELEASE |
-| Go | Y | N | RELEASE |
-| XML | Y | N | RELEASE |
+| Java | Y | Y | RELEASE |
+| JavaScript | Y | Y | RELEASE |
+| Go | Y | Y | RELEASE |
+| XML | Y | Y | RELEASE |
 | Cfamily | N | N | BETA |
 | SQL | N | N | BETA |
 | Swift | N | N | BETA |
-| Properties | N | N | BETA |
+| Properties | Y | Y | BETA |
 
 ## Contact Us
 ![WeChat User Group Image](./assets/wechat_qrcode.JPG)
