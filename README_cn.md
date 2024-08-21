@@ -98,14 +98,14 @@ CodeFuse-Query 包括**Sparrow CLI **和CodeFuse-Query**在线服务Query中心*
 | 语言 | 数据建模开源 | 数据化核心开源 | 成熟度 |
 | --- | --- | --- | --- |
 | Python | Y | Y | RELEASE |
-| Java | Y | N | RELEASE |
-| JavaScript | Y | N | RELEASE |
-| Go | Y | N | RELEASE |
-| XML | Y | N | RELEASE |
+| Java | Y | Y | RELEASE |
+| JavaScript | Y | Y | RELEASE |
+| Go | Y | Y | RELEASE |
+| XML | Y | Y | RELEASE |
 | Cfamily | N | N | BETA |
 | SQL | N | N | BETA |
 | Swift | N | N | BETA |
-| Properties | N | N | BETA |
+| Properties | Y | Y | BETA |
 
 ## 联系我们
 ![微信用户群图片](./assets/wechat_qrcode.JPG)
