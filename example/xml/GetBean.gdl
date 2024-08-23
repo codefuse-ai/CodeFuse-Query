@@ -1,62 +1,6 @@
 // script
 use coref::xml::*
 
-schema BeanXmlElement extends XmlElement {}
-
-impl BeanXmlElement {
-    @data_constraint
-    pub fn __all__(db: XmlDB) -> *BeanXmlElement {
-        for (e in XmlElement(db)) {
-            let (path = e.getLocation().getFile().getRelativePath()) {
-                if (!path.contains("target") && e.getName() = "bean") {
-                    yield BeanXmlElement {
-                        id: e.id,
-                        location_id: e.location_id,
-                        parent_id: e.parent_id,
-                        index_order: e.index_order
-                    }
-                }
-            }
-        }
-    }
-}
-
-schema EntryXmlElement extends XmlElement {}
-
-impl EntryXmlElement {
-    @data_constraint
-    fn __all__(db: XmlDB) -> *EntryXmlElement {
-        for (e in XmlElement(db)) {
-            if (e.getName() = "entry") {
-                yield EntryXmlElement {
-                    id: e.id,
-                    location_id: e.location_id,
-                    parent_id: e.parent_id,
-                    index_order: e.index_order
-                }
-            }
-        }
-    }
-}
-
-schema PropertyXmlElement extends XmlElement {}
-
-impl PropertyXmlElement {
-    @data_constraint
-    fn __all__(db: XmlDB) -> *PropertyXmlElement {
-        for (e in XmlElement(db)) {
-            if (e.getName() = "property") {
-                yield PropertyXmlElement {
-                    id: e.id,
-                    location_id: e.location_id,
-                    parent_id: e.parent_id,
-                    index_order: e.index_order
-                }
-            }
-        }
-    }
-}
-
 fn default_db() -> XmlDB {
     return XmlDB::load("coref_xml_src.db")
 }
