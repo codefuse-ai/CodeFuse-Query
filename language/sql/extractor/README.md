@@ -24,6 +24,7 @@ Therefore, the development process requires modifying the relevant jinja2 templa
    # The output path must be language/sql/extractor/utils/code_generator/FindDruidSqlAstAllPublicGetterMethods.json, as step 2 will use this location by default
    sparrow query run <path-to-sparrow-cli-repo>/language/sql/extractor/utils/code_generator/FindDruidSqlAstAllPublicGetterMethods.gdl -f json -o <path-to-sparrow-cli-repo>/language/sql/extractor/utils/code_generator -d <path-to-druid-repo>/db
    ```
+   TODO: `FindDruidSqlAstAllPublicGetterMethods.gdl` is missing, to be added.
 
 2. Generate the SQL Extractor's code based on the extracted Druid AST information.
    ```bash 
@@ -45,4 +46,6 @@ sparrow database create -lang java -s . ./db
 sparrow query run <path-to-sparrow-cli-repo>/language/sql/extractor/utils/druid_sql_ast_nodes/FindDruidSqlAstNodes.gdl -f json -o <path-to-sparrow-cli-repo>/language/sql/extractor/utils/druid_sql_ast_nodes -d ./db
 # Analyze the Sparrow output data and generate a class diagram in Dot format
 python3 <path-to-sparrow-cli-repo>/language/sql/extractor/utils/druid_sql_ast_nodes/generate_dot_diagram.py 
-``` 
+```
+
+TODO: `FindDruidSqlAstNodes.gdl` is missing, to be added.

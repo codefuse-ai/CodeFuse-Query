@@ -22,6 +22,7 @@ CodeFuse-Query SQL 提取器将 SQL 文件的源代码转换为标准化的 core
    # 输出路径必须为 language/sql/extractor/utils/code_generator/FindDruidSqlAstAllPublicGetterMethods.json，步骤2会默认使用该位置
    sparrow query run <path-to-sparrow-cli-repo>/language/sql/extractor/utils/code_generator/FindDruidSqlAstAllPublicGetterMethods.gdl -f json -o <path-to-sparrow-cli-repo>/language/sql/extractor/utils/code_generator -d <path-to-druid-repo>/db
    ```
+   TODO: `FindDruidSqlAstAllPublicGetterMethods.gdl` 已缺失，待补充。
 
 2. 按提取的Druid AST信息生成SQL抽取器的代码。 
    ```bash 
@@ -43,3 +44,5 @@ sparrow query run <path-to-sparrow-cli-repo>/language/sql/extractor/utils/druid_
 # 分析Sparrow输出数据并生成Dot格式的类图
 python3 <path-to-sparrow-cli-repo>/language/sql/extractor/utils/druid_sql_ast_nodes/generate_dot_diagram.py 
 ```
+
+TODO: `FindDruidSqlAstNodes.gdl` 已缺失，待补充。
