@@ -119,7 +119,7 @@ files=$(get_target_files "$PWD")
 
 # Iterate over the files
 for file in $files; do
-  output=$(("$sparrow_godel_script" "$file" -p "$sparrow_lib_1_0" -o "${file%.*}_tmp.gdl") 2>&1)
+  output=$(("$sparrow_godel_script" "$file" -p "$sparrow_lib_1_0" --semantic-only 2>&1)
 
   # Check if the output is not empty
   if [ -n "$output" ]; then
@@ -130,9 +130,6 @@ for file in $files; do
   else
     echo "$file build successful"
   fi
-
-  # Remove temporary file
-  rm -f "${file%.*}_tmp.gdl"
 done
 
 exit 0
