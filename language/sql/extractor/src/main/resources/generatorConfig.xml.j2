@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Automatically Generated From generatorConfig.xml.j2. Do Not Edit Directly! -->
+<!DOCTYPE generatorConfiguration
+    PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+    "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<!-- 配置生成器 -->
+<generatorConfiguration>
+
+    <context id="sqlite" defaultModelType="hierarchical" targetRuntime="MyBatis3DynamicSql">
+
+        <property name="autoDelimitKeywords" value="false"/>
+        <!-- 生成的Java文件的编码 -->
+        <property name="javaFileEncoding" value="UTF-8"/>
+        <!-- 格式化java代码 -->
+        <property name="javaFormatter" value="org.mybatis.generator.api.dom.DefaultJavaFormatter"/>
+        <!-- 格式化XML代码 -->
+        <property name="xmlFormatter" value="org.mybatis.generator.api.dom.DefaultXmlFormatter"/>
+
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
+        <plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin"/>
+        <plugin type="org.mybatis.generator.plugins.ToStringPlugin"/>
+        <!--MENTION: this plugin is slow for MapperHelper initialization, but we do not need it now-->
+        <!--<plugin type="tk.mybatis.mapper.generator.MapperPlugin">-->
+        <!--    <property name="mappers" value="tk.mybatis.mapper.common.Mapper"/>-->
+        <!--    &lt;!&ndash; caseSensitive默认false，当数据库表名区分大小写时，可以将该属性设置为true &ndash;&gt;-->
+        <!--    <property name="caseSensitive" value="true"/>-->
+        <!--</plugin>-->
+
+
+        <commentGenerator>
+            <property name="suppressDate" value="true"/>
+        </commentGenerator>
+        <jdbcConnection driverClass="org.sqlite.JDBC"
+                        connectionURL="jdbc:sqlite:tmp_only_for_mybatis_generator.db" userId="" password="">
+        </jdbcConnection>
+
+        <javaTypeResolver type="org.mybatis.generator.internal.types.JavaTypeResolverDefaultImpl">
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+        <javaModelGenerator targetPackage="com.alipay.codequery.dal.mybatis.domain" targetProject="src/main/java">
+            <property name="constructorBased" value="true"/>
+            <property name="enableSubPackages" value="true"/>
+            <property name="immutable" value="false"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+
+        <sqlMapGenerator targetPackage="com.alipay.codequery.dal.mybatis.mapper" targetProject="src/main/resources">
+            <!-- 在targetPackage的基础上，根据数据库的schema再生成一层package，最终生成的类放在这个package下，默认为false -->
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+        <javaClientGenerator targetPackage="com.alipay.codequery.dal.mybatis.mapper" type="ANNOTATEDMAPPER"
+                             targetProject="src/main/java">
+            <!-- 在targetPackage的基础上，根据数据库的schema再生成一层package，最终生成的类放在这个package下，默认为false -->
+            <property name="enableSubPackages" value="true"/>
+            <!--            <property name="rootInterface" value="com.alipay.codequery.dal.mybatis.BaseMapper"/>-->
+        </javaClientGenerator>
+
+        {% for table in table_list %}
+        <table tableName="{{table.name}}">
+            {%- for column in table.column_list %}
+            <columnOverride column="{{ column.name }}" delimitedColumnName="true" javaType="{{ column.java_type }}" jdbcType="{{ column.jdbc_type }}"/>
+            {%- endfor %}
+        </table>
+        {% endfor %}
+    </context>
+
+</generatorConfiguration>

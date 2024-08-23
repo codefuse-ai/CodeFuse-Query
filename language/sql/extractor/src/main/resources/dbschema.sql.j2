@@ -1,0 +1,19 @@
+-- Automatically Generated From dbschema.sql.j2.
+-- Do Not Edit Directly!
+{% for table in table_list %}
+DROP TABLE IF EXISTS "{{table.name}}";
+CREATE TABLE IF NOT EXISTS "{{table.name}}" (
+	{%- for column in table.column_list %}
+	"{{ column.name }}"	{{ column.type }} NOT NULL
+
+	{%- if not loop.last -%}
+	,
+	{%- endif -%}
+	{%- endfor -%}
+
+	{%- if table.pk_index != -1 -%}
+	,
+	PRIMARY KEY("{{ table.column_list[table.pk_index].name }}")
+	{%- endif %}
+);
+{% endfor %}
