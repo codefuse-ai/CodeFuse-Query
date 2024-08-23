@@ -1,0 +1,19 @@
+import coref.java.*
+
+predicate output(string className, string superClassName) {
+    exists(Class c, string pkg) {
+        className = c.getName()
+        and
+        pkg = c.getPackage().getPackageName()
+        and
+        contains("com.alibaba.druid.sql", pkg)
+        and
+        (
+            contains(".ast", pkg)
+            or
+            // Special case: to include AST nodes in com.alibaba.druid.sql.dialect.hive.stmt
+            contains(".stmt", pkg))
+        and
+        superClassName = c.getSuperClass().getName()
+    }
+}

@@ -1,0 +1,89 @@
+/**
+ * @filename: LOCATION
+ * @date: 2022/10/13
+ * @brief: LOCATION provides classes and predicates for working with SQL locations
+ */
+/**
+ * @brief The location information of a locatable elements.
+ */
+schema Location extends LocationDO {
+    
+}
+impl Location {
+    @data_constraint
+    @inline
+    pub fn __all__(db: SqlDB) -> *Location {
+        for (tmp in LocationDO(db)) {
+            yield Location {
+                oid_ : tmp.oid_,
+                file_oid_ : tmp.file_oid_,
+                start_line_number_ : tmp.start_line_number_,
+                start_column_number_ : tmp.start_column_number_
+            }
+        }
+    }
+    /**
+     * @brief gets the file information for the location
+     * @return File 
+     */
+    pub fn getFile(self) -> File {
+        for (f in File(__all_data__)) {
+            if (f.oid_ = self.getFileOid()) {
+                return f
+            }
+        }
+    }
+}
+/**
+ * @brief A swift file.
+ */
+schema File extends FileDO {
+    
+}
+impl File {
+    @data_constraint
+    @inline
+    pub fn __all__(db: SqlDB) -> *File {
+        for (tmp in FileDO(db)) {
+            yield File {
+                oid_ : tmp.oid_,
+                relative_path_ : tmp.relative_path_,
+                extension_ : tmp.extension_,
+                name_ : tmp.name_,
+                corpus_oid_ : tmp.corpus_oid_
+            }
+        }
+    }
+    /**
+     * @brief gets the folder which contains the file, if any.
+     * @return Folder 
+     */
+    pub fn getCorpus(self) -> Corpus {
+        for (c in Corpus(__all_data__),
+            f in File(__all_data__)) {
+            if (self = f) {
+                if (c.oid_ = f.getCorpusOid()) {
+                    return Corpus(__all_data__).find(f)
+                }
+            }
+        }
+    }
+}
+/**
+ * @brief A corpus.
+ */
+schema Corpus extends CorpusDO {
+    
+}
+impl Corpus {
+    @data_constraint
+    @inline
+    pub fn __all__(db: SqlDB) -> *Corpus {
+        for (tmp in CorpusDO(db)) {
+            yield Corpus {
+                oid_ : tmp.oid_,
+                printable_text : tmp.printable_text
+            }
+        }
+    }
+}

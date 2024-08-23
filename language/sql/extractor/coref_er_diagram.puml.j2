@@ -1,0 +1,66 @@
+@startuml
+' code location
+entity location {
+    oid: INTEGER <<PK>>
+    file_oid: INTEGER
+    start_line_number: INTEGER
+    start_column_number: INTEGER
+}
+
+entity file {
+    oid: INTEGER <<PK>>
+    relative_path: TEXT
+    extension: TEXT
+    name: TEXT
+	corpus_oid: INTEGER
+}
+
+entity corpus {
+    oid: INTEGER <<PK>>
+    debug_message: TEXT
+}
+
+' ----------
+' SQL Object
+' ----------
+
+entity sql_object {
+    oid: INTEGER <<PK>>
+    parent_oid: INTEGER
+    location_oid: INTEGER
+    node_type: TEXT
+    index_in_parent: INTEGER
+    after_comments_direct: TEXT
+    before_comments_direct: TEXT
+    db_type: TEXT
+    debug_message: TEXT
+}
+
+' ----------------------
+' Abstract SQL AST nodes
+' ----------------------
+
+{% for node in node_list if node.is_abstract and node.name not in NODE_BLACK_LIST %}
+entity {{ node.table_name }} {
+    oid: INTEGER <<PK>>
+    {%- for method in node.method_list
+        if method.return_type_in_sqlite and method.name not in METHOD_BLACK_LIST|list + ['getNumber'] %}
+    {{ method.column_name }}: {{ method.return_type_in_sqlite }}
+    {%- endfor %}
+}
+{% endfor %}
+
+' --------------------
+' Common SQL AST nodes
+' --------------------
+{% for node in node_list if not node.is_abstract and node.name not in NODE_BLACK_LIST %}
+entity {{ node.table_name }} {
+    oid: INTEGER <<PK>>
+    {%- for method in node.method_list
+        if method.return_type_in_sqlite and method.name not in METHOD_BLACK_LIST %}
+    {{ method.column_name }}: {{ method.return_type_in_sqlite }}
+    {%- endfor %}
+}
+{% endfor %}
+
+@enduml

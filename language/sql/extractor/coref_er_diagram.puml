@@ -1,0 +1,5027 @@
+@startuml
+' code location
+entity location {
+    oid: INTEGER <<PK>>
+    file_oid: INTEGER
+    start_line_number: INTEGER
+    start_column_number: INTEGER
+}
+
+entity file {
+    oid: INTEGER <<PK>>
+    relative_path: TEXT
+    extension: TEXT
+    name: TEXT
+	corpus_oid: INTEGER
+}
+
+entity corpus {
+    oid: INTEGER <<PK>>
+    debug_message: TEXT
+}
+
+' ----------
+' SQL Object
+' ----------
+
+entity sql_object {
+    oid: INTEGER <<PK>>
+    parent_oid: INTEGER
+    location_oid: INTEGER
+    node_type: TEXT
+    index_in_parent: INTEGER
+    after_comments_direct: TEXT
+    before_comments_direct: TEXT
+    db_type: TEXT
+    debug_message: TEXT
+}
+
+' ----------------------
+' Abstract SQL AST nodes
+' ----------------------
+
+
+entity sql_expr_impl {
+    oid: INTEGER <<PK>>
+}
+
+entity sql_partition_by {
+    oid: INTEGER <<PK>>
+    is_linear: INTEGER
+    lifecycle_oid: INTEGER
+    partitions_count_oid: INTEGER
+    sub_partition_by_oid: INTEGER
+}
+
+entity sql_statement_impl {
+    oid: INTEGER <<PK>>
+    is_after_semi: INTEGER
+}
+
+entity sql_sub_partition_by {
+    oid: INTEGER <<PK>>
+    is_linear: INTEGER
+    lifecycle_oid: INTEGER
+    sub_partitions_count_oid: INTEGER
+}
+
+entity sql_numeric_literal_expr {
+    oid: INTEGER <<PK>>
+}
+
+entity sql_text_literal_expr {
+    oid: INTEGER <<PK>>
+    text: TEXT
+}
+
+entity sql_constraint_impl {
+    oid: INTEGER <<PK>>
+    comment_oid: INTEGER
+    enable: INTEGER
+    name_oid: INTEGER
+    rely: INTEGER
+    validate: INTEGER
+}
+
+entity sql_insert_into {
+    oid: INTEGER <<PK>>
+    alias: TEXT
+    columns_string: TEXT
+    columns_string_hash: TEXT
+    hint_oid: INTEGER
+    insert_before_comments_direct: TEXT
+    is_overwrite: INTEGER
+    query_oid: INTEGER
+    table_name_oid: INTEGER
+    table_source_oid: INTEGER
+    values: TEXT
+    values_list: TEXT
+}
+
+entity sql_privilege_statement {
+    oid: INTEGER <<PK>>
+    resource: TEXT
+    resource_type: TEXT
+}
+
+entity sql_select_query_base {
+    oid: INTEGER <<PK>>
+    is_parenthesized: INTEGER
+}
+
+entity sql_table_source_impl {
+    oid: INTEGER <<PK>>
+    alias: TEXT
+    alias2: TEXT
+    flashback_oid: INTEGER
+    hints_size: INTEGER
+}
+
+entity db2_statement_impl {
+    oid: INTEGER <<PK>>
+}
+
+entity my_sql_index_hint_impl {
+    oid: INTEGER <<PK>>
+    option: TEXT
+}
+
+entity my_sql_object_impl {
+    oid: INTEGER <<PK>>
+}
+
+entity my_sql_expr_impl {
+    oid: INTEGER <<PK>>
+    hint_oid: INTEGER
+}
+
+entity my_sql_statement_impl {
+    oid: INTEGER <<PK>>
+}
+
+entity odps_object_impl {
+    oid: INTEGER <<PK>>
+}
+
+entity odps_statement_impl {
+    oid: INTEGER <<PK>>
+}
+
+entity odps_statistic_clause {
+    oid: INTEGER <<PK>>
+}
+
+entity oracle_sql_object_impl {
+    oid: INTEGER <<PK>>
+}
+
+entity oracle_segment_attributes_impl {
+    oid: INTEGER <<PK>>
+    compress: INTEGER
+    compress_level: INTEGER
+    free_lists: INTEGER
+    initrans: INTEGER
+    is_compress_for_oltp: INTEGER
+    logging: INTEGER
+    maxtrans: INTEGER
+    pctfree: INTEGER
+    pctincrease: INTEGER
+    pctthreshold: INTEGER
+    pctused: INTEGER
+    storage: TEXT
+    tablespace_oid: INTEGER
+}
+
+entity oracle_alter_table_item {
+    oid: INTEGER <<PK>>
+}
+
+entity oracle_select_pivot_base {
+    oid: INTEGER <<PK>>
+}
+
+entity oracle_select_restriction {
+    oid: INTEGER <<PK>>
+    constraint_oid: INTEGER
+}
+
+entity oracle_statement_impl {
+    oid: INTEGER <<PK>>
+}
+
+entity oscar_object_impl {
+    oid: INTEGER <<PK>>
+}
+
+entity phoenix_statement_impl {
+    oid: INTEGER <<PK>>
+}
+
+entity pgsql_object_impl {
+    oid: INTEGER <<PK>>
+}
+
+entity pg_expr_impl {
+    oid: INTEGER <<PK>>
+}
+
+entity sql_server_object_impl {
+    oid: INTEGER <<PK>>
+}
+
+entity sql_server_statement_impl {
+    oid: INTEGER <<PK>>
+}
+
+
+' --------------------
+' Common SQL AST nodes
+' --------------------
+
+entity sql_adhoc_table_source {
+    oid: INTEGER <<PK>>
+    definition_oid: INTEGER
+}
+
+entity sql_ann_index {
+    oid: INTEGER <<PK>>
+    distance: TEXT
+    index_type: INTEGER
+    rt_index_type: INTEGER
+}
+
+entity sql_argument {
+    oid: INTEGER <<PK>>
+    expr_oid: INTEGER
+    type: TEXT
+}
+
+entity sql_array_data_type {
+    oid: INTEGER <<PK>>
+    component_type_oid: INTEGER
+    is_int: INTEGER
+    is_numberic: INTEGER
+    is_string: INTEGER
+    is_with_local_time_zone: INTEGER
+    name: TEXT
+    with_time_zone: INTEGER
+}
+
+entity sql_comment_hint {
+    oid: INTEGER <<PK>>
+    text: TEXT
+}
+
+entity sql_current_time_expr {
+    oid: INTEGER <<PK>>
+    type: TEXT
+}
+
+entity sql_current_user_expr {
+    oid: INTEGER <<PK>>
+}
+
+entity sql_data_type_impl {
+    oid: INTEGER <<PK>>
+    index_by_oid: INTEGER
+    is_int: INTEGER
+    is_numberic: INTEGER
+    is_string: INTEGER
+    is_unsigned: INTEGER
+    is_with_local_time_zone: INTEGER
+    is_zerofill: INTEGER
+    name: TEXT
+    with_time_zone: INTEGER
+}
+
+entity sql_data_type_ref_expr {
+    oid: INTEGER <<PK>>
+    data_type_oid: INTEGER
+}
+
+entity sql_declare_item {
+    oid: INTEGER <<PK>>
+    data_type_oid: INTEGER
+    name_oid: INTEGER
+    resolved_object: TEXT
+    type: TEXT
+    value_oid: INTEGER
+}
+
+entity sql_index_definition {
+    oid: INTEGER <<PK>>
+    algorithm: TEXT
+    analyzer_name_oid: INTEGER
+    db_partition_by_oid: INTEGER
+    distance_measure: TEXT
+    index_analyzer_name_oid: INTEGER
+    is_global: INTEGER
+    is_hash_map_type: INTEGER
+    is_hash_type: INTEGER
+    is_index: INTEGER
+    is_key: INTEGER
+    is_local: INTEGER
+    name_oid: INTEGER
+    options_oid: INTEGER
+    query_analyzer_name_oid: INTEGER
+    symbol_oid: INTEGER
+    table_oid: INTEGER
+    tb_partition_by_oid: INTEGER
+    tb_partitions_oid: INTEGER
+    type: TEXT
+    with_dic_name_oid: INTEGER
+}
+
+entity sql_index_options {
+    oid: INTEGER <<PK>>
+    algorithm: TEXT
+    comment_oid: INTEGER
+    index_type: TEXT
+    is_global: INTEGER
+    is_invisible: INTEGER
+    is_local: INTEGER
+    is_visible: INTEGER
+    key_block_size_oid: INTEGER
+    lock: TEXT
+    parser_name: TEXT
+}
+
+entity sql_keep {
+    oid: INTEGER <<PK>>
+    dense_rank: TEXT
+    order_by_oid: INTEGER
+}
+
+entity sql_limit {
+    oid: INTEGER <<PK>>
+    offset_oid: INTEGER
+    row_count_oid: INTEGER
+}
+
+entity sql_map_data_type {
+    oid: INTEGER <<PK>>
+    is_int: INTEGER
+    is_numberic: INTEGER
+    is_string: INTEGER
+    is_with_local_time_zone: INTEGER
+    key_type_oid: INTEGER
+    name: TEXT
+    value_type_oid: INTEGER
+    with_time_zone: INTEGER
+}
+
+entity sql_order_by {
+    oid: INTEGER <<PK>>
+    is_siblings: INTEGER
+}
+
+entity sql_over {
+    oid: INTEGER <<PK>>
+    cluster_by_oid: INTEGER
+    distribute_by_oid: INTEGER
+    is_exclude_current_row: INTEGER
+    is_windowing_between_end_following: INTEGER
+    is_windowing_between_end_preceding: INTEGER
+    is_windowing_preceding: INTEGER
+    of_oid: INTEGER
+    order_by_oid: INTEGER
+    sort_by_oid: INTEGER
+    windowing_between_begin_oid: INTEGER
+    windowing_between_begin_bound: TEXT
+    windowing_between_end_oid: INTEGER
+    windowing_between_end_bound: TEXT
+    windowing_type: TEXT
+}
+
+entity sql_parameter {
+    oid: INTEGER <<PK>>
+    cursor_name_oid: INTEGER
+    data_type_oid: INTEGER
+    default_value_oid: INTEGER
+    is_constant: INTEGER
+    is_map: INTEGER
+    is_member: INTEGER
+    is_no_copy: INTEGER
+    is_order: INTEGER
+    name_oid: INTEGER
+    param_type: TEXT
+}
+
+entity sql_partition {
+    oid: INTEGER <<PK>>
+    comment_oid: INTEGER
+    data_directory_oid: INTEGER
+    engine_oid: INTEGER
+    index_directory_oid: INTEGER
+    is_segment_creation_deferred: INTEGER
+    is_segment_creation_immediate: INTEGER
+    lob_storage: TEXT
+    locality_oid: INTEGER
+    max_rows_oid: INTEGER
+    min_rows_oid: INTEGER
+    name_oid: INTEGER
+    sub_partitions_count_oid: INTEGER
+    values_oid: INTEGER
+}
+
+entity sql_partition_by_hash {
+    oid: INTEGER <<PK>>
+    is_key: INTEGER
+    is_unique: INTEGER
+}
+
+entity sql_partition_by_list {
+    oid: INTEGER <<PK>>
+}
+
+entity sql_partition_by_range {
+    oid: INTEGER <<PK>>
+    expire_after_oid: INTEGER
+    interval_oid: INTEGER
+    is_columns: INTEGER
+    is_disable_schedule: INTEGER
+    pivot_date_expr_oid: INTEGER
+    pre_allocate_oid: INTEGER
+    start_with_oid: INTEGER
+}
+
+entity sql_partition_by_value {
+    oid: INTEGER <<PK>>
+}
+
+entity sql_partition_spec {
+    oid: INTEGER <<PK>>
+    items: TEXT
+}
+
+entity sql_partition_value {
+    oid: INTEGER <<PK>>
+    operator: TEXT
+}
+
+entity sql_record_data_type {
+    oid: INTEGER <<PK>>
+}
+
+entity sql_row_data_type {
+    oid: INTEGER <<PK>>
+    fields: TEXT
+    is_int: INTEGER
+    is_numberic: INTEGER
+    is_string: INTEGER
+    is_with_local_time_zone: INTEGER
+    name: TEXT
+    with_time_zone: INTEGER
+}
+
+entity sql_struct_data_type {
+    oid: INTEGER <<PK>>
+    fields: TEXT
+    is_int: INTEGER
+    is_numberic: INTEGER
+    is_string: INTEGER
+    is_with_local_time_zone: INTEGER
+    name: TEXT
+    with_time_zone: INTEGER
+}
+
+entity sql_sub_partition {
+    oid: INTEGER <<PK>>
+    comment_oid: INTEGER
+    data_directory_oid: INTEGER
+    engine_oid: INTEGER
+    index_directory_oid: INTEGER
+    max_rows_oid: INTEGER
+    min_rows_oid: INTEGER
+    name_oid: INTEGER
+    table_space_oid: INTEGER
+    values_oid: INTEGER
+}
+
+entity sql_sub_partition_by_hash {
+    oid: INTEGER <<PK>>
+    expr_oid: INTEGER
+    is_key: INTEGER
+}
+
+entity sql_sub_partition_by_list {
+    oid: INTEGER <<PK>>
+    column_oid: INTEGER
+}
+
+entity sql_sub_partition_by_range {
+    oid: INTEGER <<PK>>
+}
+
+entity sql_table_data_type {
+    oid: INTEGER <<PK>>
+    is_int: INTEGER
+    is_numberic: INTEGER
+    is_string: INTEGER
+    is_with_local_time_zone: INTEGER
+    name: TEXT
+    with_time_zone: INTEGER
+}
+
+entity sql_union_data_type {
+    oid: INTEGER <<PK>>
+    name: TEXT
+}
+
+entity sql_window {
+    oid: INTEGER <<PK>>
+    name_oid: INTEGER
+    over_oid: INTEGER
+}
+
+entity sqlz_order_by {
+    oid: INTEGER <<PK>>
+    is_sibings: INTEGER
+}
+
+entity sql_aggregate_expr {
+    oid: INTEGER <<PK>>
+    filter_oid: INTEGER
+    ignore_nulls: INTEGER
+    is_distinct: INTEGER
+    is_ignore_nulls: INTEGER
+    is_within_group: INTEGER
+    keep_oid: INTEGER
+    option: TEXT
+    order_by_oid: INTEGER
+    over_oid: INTEGER
+    over_ref_oid: INTEGER
+}
+
+entity sql_all_column_expr {
+    oid: INTEGER <<PK>>
+    resolved_table_source_oid: INTEGER
+}
+
+entity sql_all_expr {
+    oid: INTEGER <<PK>>
+    sub_query_oid: INTEGER
+}
+
+entity sql_any_expr {
+    oid: INTEGER <<PK>>
+    sub_query_oid: INTEGER
+}
+
+entity sql_array_expr {
+    oid: INTEGER <<PK>>
+    expr_oid: INTEGER
+}
+
+entity sql_between_expr {
+    oid: INTEGER <<PK>>
+    begin_expr_oid: INTEGER
+    end_expr_oid: INTEGER
+    is_not: INTEGER
+    test_expr_oid: INTEGER
+}
+
+entity sql_big_int_expr {
+    oid: INTEGER <<PK>>
+    number: TEXT
+    value: TEXT
+}
+
+entity sql_binary_expr {
+    oid: INTEGER <<PK>>
+    text: TEXT
+    value: TEXT
+}
+
+entity sql_binary_op_expr {
+    oid: INTEGER <<PK>>
+    is_both_name: INTEGER
+    is_left_function_and_right_literal: INTEGER
+    is_left_literal_and_right_name: INTEGER
+    is_left_name_and_right_literal: INTEGER
+    is_name_and_literal: INTEGER
+    is_parenthesized: INTEGER
+    left_oid: INTEGER
+    operator: TEXT
+    right_oid: INTEGER
+}
+
+entity sql_binary_op_expr_group {
+    oid: INTEGER <<PK>>
+    operator: TEXT
+}
+
+entity sql_boolean_expr {
+    oid: INTEGER <<PK>>
+    boolean_value: INTEGER
+    value: INTEGER
+}
+
+entity sql_case_expr {
+    oid: INTEGER <<PK>>
+    else_expr_oid: INTEGER
+    items: TEXT
+    value_expr_oid: INTEGER
+}
+
+entity sql_case_statement {
+    oid: INTEGER <<PK>>
+    items: TEXT
+    value_expr_oid: INTEGER
+}
+
+entity sql_cast_expr {
+    oid: INTEGER <<PK>>
+    data_type_oid: INTEGER
+    expr_oid: INTEGER
+    is_try: INTEGER
+}
+
+entity sql_char_expr {
+    oid: INTEGER <<PK>>
+    value: TEXT
+}
+
+entity sql_contains_expr {
+    oid: INTEGER <<PK>>
+    expr_oid: INTEGER
+    is_not: INTEGER
+}
+
+entity sql_current_of_cursor_expr {
+    oid: INTEGER <<PK>>
+    cursor_name_oid: INTEGER
+}
+
+entity sql_date_expr {
+    oid: INTEGER <<PK>>
+    date: TEXT
+    literal: TEXT
+    value: TEXT
+}
+
+entity sql_date_time_expr {
+    oid: INTEGER <<PK>>
+    literal_oid: INTEGER
+    value: TEXT
+}
+
+entity sql_db_link_expr {
+    oid: INTEGER <<PK>>
+    db_link: TEXT
+    expr_oid: INTEGER
+    resolved_column_oid: INTEGER
+    simple_name: TEXT
+}
+
+entity sql_decimal_expr {
+    oid: INTEGER <<PK>>
+    literal: TEXT
+    number: TEXT
+    value: TEXT
+}
+
+entity sql_default_expr {
+    oid: INTEGER <<PK>>
+}
+
+entity sql_double_expr {
+    oid: INTEGER <<PK>>
+    number: TEXT
+    value: TEXT
+}
+
+entity sql_exists_expr {
+    oid: INTEGER <<PK>>
+    is_not: INTEGER
+    sub_query_oid: INTEGER
+}
+
+entity sql_extract_expr {
+    oid: INTEGER <<PK>>
+    unit: TEXT
+    value_oid: INTEGER
+}
+
+entity sql_flashback_expr {
+    oid: INTEGER <<PK>>
+    expr_oid: INTEGER
+    type: TEXT
+}
+
+entity sql_float_expr {
+    oid: INTEGER <<PK>>
+    number: TEXT
+    value: TEXT
+}
+
+entity sql_grouping_set_expr {
+    oid: INTEGER <<PK>>
+}
+
+entity sql_hex_expr {
+    oid: INTEGER <<PK>>
+    hex: TEXT
+    value: TEXT
+}
+
+entity sql_identifier_expr {
+    oid: INTEGER <<PK>>
+    lower_name: TEXT
+    name: TEXT
+    resolved_column_object: TEXT
+    resolved_column_oid: INTEGER
+    resolved_declare_item_oid: INTEGER
+    resolved_owner_object: TEXT
+    resolved_parameter_oid: INTEGER
+    resolved_select_item_oid: INTEGER
+    resolved_table_source_oid: INTEGER
+    simple_name: TEXT
+}
+
+entity sql_in_list_expr {
+    oid: INTEGER <<PK>>
+    expr_oid: INTEGER
+    hint_oid: INTEGER
+    is_not: INTEGER
+}
+
+entity sql_in_sub_query_expr {
+    oid: INTEGER <<PK>>
+    expr_oid: INTEGER
+    hint_oid: INTEGER
+    is_global: INTEGER
+    is_not: INTEGER
+    sub_query_oid: INTEGER
+}
+
+entity sql_integer_expr {
+    oid: INTEGER <<PK>>
+    number: TEXT
+    type: TEXT
+    value: TEXT
+}
+
+entity sql_interval_expr {
+    oid: INTEGER <<PK>>
+    unit: TEXT
+    value_oid: INTEGER
+}
+
+entity sqljson_expr {
+    oid: INTEGER <<PK>>
+    literal: TEXT
+    value: TEXT
+}
+
+entity sql_list_expr {
+    oid: INTEGER <<PK>>
+}
+
+entity sql_match_against_expr {
+    oid: INTEGER <<PK>>
+    against_oid: INTEGER
+    search_modifier: TEXT
+}
+
+entity sql_method_invoke_expr {
+    oid: INTEGER <<PK>>
+    for_oid: INTEGER
+    from_oid: INTEGER
+    method_name: TEXT
+    owner_oid: INTEGER
+    resolved_return_data_type_oid: INTEGER
+    trim_option: TEXT
+    using_oid: INTEGER
+}
+
+entity sqln_char_expr {
+    oid: INTEGER <<PK>>
+}
+
+entity sql_not_expr {
+    oid: INTEGER <<PK>>
+    expr_oid: INTEGER
+}
+
+entity sql_null_expr {
+    oid: INTEGER <<PK>>
+    value: TEXT
+}
+
+entity sql_number_expr {
+    oid: INTEGER <<PK>>
+    literal: TEXT
+    number: TEXT
+    value: TEXT
+}
+
+entity sql_property_expr {
+    oid: INTEGER <<PK>>
+    name: TEXT
+    owner_oid: INTEGER
+    owner_name: TEXT
+    resolved_column_oid: INTEGER
+    resolved_owner_object: TEXT
+    resolved_procudure_oid: INTEGER
+    resolved_table_source_oid: INTEGER
+    simple_name: TEXT
+}
+
+entity sql_query_expr {
+    oid: INTEGER <<PK>>
+    sub_query_oid: INTEGER
+}
+
+entity sql_real_expr {
+    oid: INTEGER <<PK>>
+    number: TEXT
+    value: TEXT
+}
+
+entity sql_sequence_expr {
+    oid: INTEGER <<PK>>
+    function: TEXT
+    sequence_oid: INTEGER
+}
+
+entity sql_size_expr {
+    oid: INTEGER <<PK>>
+    unit: TEXT
+    value_oid: INTEGER
+}
+
+entity sql_small_int_expr {
+    oid: INTEGER <<PK>>
+    number: TEXT
+    value: INTEGER
+}
+
+entity sql_some_expr {
+    oid: INTEGER <<PK>>
+    sub_query_oid: INTEGER
+}
+
+entity sql_time_expr {
+    oid: INTEGER <<PK>>
+    literal_oid: INTEGER
+    value: TEXT
+}
+
+entity sql_timestamp_expr {
+    oid: INTEGER <<PK>>
+    is_with_time_zone: INTEGER
+    literal: TEXT
+    time_zone: TEXT
+    value: TEXT
+}
+
+entity sql_tiny_int_expr {
+    oid: INTEGER <<PK>>
+    number: TEXT
+    value: INTEGER
+}
+
+entity sql_unary_expr {
+    oid: INTEGER <<PK>>
+    expr_oid: INTEGER
+    operator: TEXT
+}
+
+entity sql_values_expr {
+    oid: INTEGER <<PK>>
+}
+
+entity sql_variant_ref_expr {
+    oid: INTEGER <<PK>>
+    index: INTEGER
+    is_global: INTEGER
+    is_session: INTEGER
+    name: TEXT
+}
+
+entity sql_alter_character {
+    oid: INTEGER <<PK>>
+    character_set_oid: INTEGER
+    collate_oid: INTEGER
+}
+
+entity sql_alter_database_statement {
+    oid: INTEGER <<PK>>
+    character_oid: INTEGER
+    is_upgrade_data_directory_name: INTEGER
+    item_oid: INTEGER
+    name_oid: INTEGER
+}
+
+entity sql_alter_function_statement {
+    oid: INTEGER <<PK>>
+    comment_oid: INTEGER
+    is_contains_sql: INTEGER
+    is_debug: INTEGER
+    is_language_sql: INTEGER
+    is_reuse_settings: INTEGER
+    name_oid: INTEGER
+    sql_security_oid: INTEGER
+}
+
+entity sql_alter_index_statement {
+    oid: INTEGER <<PK>>
+    db_partition_by_oid: INTEGER
+    enable: INTEGER
+    is_compile: INTEGER
+    is_unusable: INTEGER
+    monitoring_usage: INTEGER
+    name_oid: INTEGER
+    parallel_oid: INTEGER
+    rebuild: TEXT
+    rename_to_oid: INTEGER
+    table_oid: INTEGER
+}
+
+entity sql_alter_materialized_view_statement {
+    oid: INTEGER <<PK>>
+    enable_query_rewrite: INTEGER
+    is_rebuild: INTEGER
+    is_refresh: INTEGER
+    is_refresh_complete: INTEGER
+    is_refresh_fast: INTEGER
+    is_refresh_force: INTEGER
+    is_refresh_next: INTEGER
+    is_refresh_on_commit: INTEGER
+    is_refresh_on_demand: INTEGER
+    is_refresh_on_over_write: INTEGER
+    is_refresh_start_with: INTEGER
+    name_oid: INTEGER
+    next_oid: INTEGER
+    start_with_oid: INTEGER
+}
+
+entity sql_alter_outline_statement {
+    oid: INTEGER <<PK>>
+    is_disable: INTEGER
+    is_enable: INTEGER
+    is_resync: INTEGER
+    name_oid: INTEGER
+}
+
+entity sql_alter_procedure_statement {
+    oid: INTEGER <<PK>>
+    comment_oid: INTEGER
+    is_compile: INTEGER
+    is_contains_sql: INTEGER
+    is_language_sql: INTEGER
+    is_reuse_settings: INTEGER
+    name_oid: INTEGER
+    sql_security_oid: INTEGER
+}
+
+entity sql_alter_sequence_statement {
+    oid: INTEGER <<PK>>
+    cache: INTEGER
+    cache_value_oid: INTEGER
+    cycle: INTEGER
+    increment_by_oid: INTEGER
+    is_change_to_group: INTEGER
+    is_change_to_simple: INTEGER
+    is_change_to_time: INTEGER
+    is_no_max_value: INTEGER
+    is_no_min_value: INTEGER
+    is_restart: INTEGER
+    max_value_oid: INTEGER
+    min_value_oid: INTEGER
+    name_oid: INTEGER
+    order: INTEGER
+    restart_with_oid: INTEGER
+    schema: TEXT
+    start_with_oid: INTEGER
+    with_cache: INTEGER
+}
+
+entity sql_alter_system_get_config_statement {
+    oid: INTEGER <<PK>>
+    name_oid: INTEGER
+}
+
+entity sql_alter_system_set_config_statement {
+    oid: INTEGER <<PK>>
+}
+
+entity sql_alter_table_add_clustering_key {
+    oid: INTEGER <<PK>>
+    name_oid: INTEGER
+}
+
+entity sql_alter_table_add_column {
+    oid: INTEGER <<PK>>
+    after_column_oid: INTEGER
+    first_column_oid: INTEGER
+    is_cascade: INTEGER
+    is_first: INTEGER
+    is_restrict: INTEGER
+    restrict: INTEGER
+}
+
+entity sql_alter_table_add_constraint {
+    oid: INTEGER <<PK>>
+    constraint_oid: INTEGER
+    is_with_no_check: INTEGER
+}
+
+entity sql_alter_table_add_ext_partition {
+    oid: INTEGER <<PK>>
+    ext_partition_oid: INTEGER
+}
+
+entity sql_alter_table_add_index {
+    oid: INTEGER <<PK>>
+    algorithm: TEXT
+    comment_oid: INTEGER
+    db_partition_by_oid: INTEGER
+    distance_measure: TEXT
+    index_definition_oid: INTEGER
+    is_global: INTEGER
+    is_hash_map_type: INTEGER
+    is_key: INTEGER
+    is_unique: INTEGER
+    key_block_size_oid: INTEGER
+    name_oid: INTEGER
+    parser_name: TEXT
+    table_partition_by_oid: INTEGER
+    table_partitions_oid: INTEGER
+    type: TEXT
+    using: TEXT
+}
+
+entity sql_alter_table_add_partition {
+    oid: INTEGER <<PK>>
+    is_if_not_exists: INTEGER
+    location_oid: INTEGER
+    partition_count_oid: INTEGER
+}
+
+entity sql_alter_table_add_supplemental {
+    oid: INTEGER <<PK>>
+    element_oid: INTEGER
+}
+
+entity sql_alter_table_alter_column {
+    oid: INTEGER <<PK>>
+    after_oid: INTEGER
+    column_oid: INTEGER
+    data_type_oid: INTEGER
+    is_drop_default: INTEGER
+    is_drop_not_null: INTEGER
+    is_first: INTEGER
+    is_set_not_null: INTEGER
+    origin_column_oid: INTEGER
+    set_default_oid: INTEGER
+}
+
+entity sql_alter_table_alter_index {
+    oid: INTEGER <<PK>>
+    algorithm: TEXT
+    comment_oid: INTEGER
+    db_partition_by_oid: INTEGER
+    distance_measure: TEXT
+    index_definition_oid: INTEGER
+    is_global: INTEGER
+    is_hash_map_type: INTEGER
+    is_key: INTEGER
+    is_unique: INTEGER
+    key_block_size_oid: INTEGER
+    name_oid: INTEGER
+    parser_name: TEXT
+    table_partition_by_oid: INTEGER
+    table_partitions_oid: INTEGER
+    type: TEXT
+    using: TEXT
+}
+
+entity sql_alter_table_analyze_partition {
+    oid: INTEGER <<PK>>
+}
+
+entity sql_alter_table_archive_partition {
+    oid: INTEGER <<PK>>
+}
+
+entity sql_alter_table_block_size {
+    oid: INTEGER <<PK>>
+    size_oid: INTEGER
+}
+
+entity sql_alter_table_change_owner {
+    oid: INTEGER <<PK>>
+    owner_oid: INTEGER
+}
+
+entity sql_alter_table_check_partition {
+    oid: INTEGER <<PK>>
+}
+
+entity sql_alter_table_coalesce_partition {
+    oid: INTEGER <<PK>>
+    count_oid: INTEGER
+}
+
+entity sql_alter_table_compression {
+    oid: INTEGER <<PK>>
+    name_oid: INTEGER
+}
+
+entity sql_alter_table_convert_char_set {
+    oid: INTEGER <<PK>>
+    charset_oid: INTEGER
+    collate_oid: INTEGER
+}
+
+entity sql_alter_table_delete_by_condition {
+    oid: INTEGER <<PK>>
+    where_oid: INTEGER
+}
+
+entity sql_alter_table_disable_constraint {
+    oid: INTEGER <<PK>>
+    constraint_name_oid: INTEGER
+}
+
+entity sql_alter_table_disable_keys {
+    oid: INTEGER <<PK>>
+}
+
+entity sql_alter_table_disable_lifecycle {
+    oid: INTEGER <<PK>>
+}
+
+entity sql_alter_table_discard_partition {
+    oid: INTEGER <<PK>>
+    is_tablespace: INTEGER
+}
+
+entity sql_alter_table_drop_clustering_key {
+    oid: INTEGER <<PK>>
+    key_name_oid: INTEGER
+}
+
+entity sql_alter_table_drop_column_item {
+    oid: INTEGER <<PK>>
+    is_cascade: INTEGER
+}
+
+entity sql_alter_table_drop_constraint {
+    oid: INTEGER <<PK>>
+    constraint_name_oid: INTEGER
+    is_cascade: INTEGER
+    is_restrict: INTEGER
+}
+
+entity sql_alter_table_drop_ext_partition {
+    oid: INTEGER <<PK>>
+    ext_partition_oid: INTEGER
+}
+
+entity sql_alter_table_drop_foreign_key {
+    oid: INTEGER <<PK>>
+    index_name_oid: INTEGER
+}
+
+entity sql_alter_table_drop_index {
+    oid: INTEGER <<PK>>
+    index_name_oid: INTEGER
+}
+
+entity sql_alter_table_drop_key {
+    oid: INTEGER <<PK>>
+    key_name_oid: INTEGER
+}
+
+entity sql_alter_table_drop_partition {
+    oid: INTEGER <<PK>>
+    is_if_exists: INTEGER
+    is_purge: INTEGER
+}
+
+entity sql_alter_table_drop_primary_key {
+    oid: INTEGER <<PK>>
+}
+
+entity sql_alter_table_drop_subpartition {
+    oid: INTEGER <<PK>>
+}
+
+entity sql_alter_table_enable_constraint {
+    oid: INTEGER <<PK>>
+    constraint_name_oid: INTEGER
+}
+
+entity sql_alter_table_enable_keys {
+    oid: INTEGER <<PK>>
+}
+
+entity sql_alter_table_enable_lifecycle {
+    oid: INTEGER <<PK>>
+}
+
+entity sql_alter_table_exchange_partition {
+    oid: INTEGER <<PK>>
+    table_oid: INTEGER
+    validation: INTEGER
+}
+
+entity sql_alter_table_group_statement {
+    oid: INTEGER <<PK>>
+    name_oid: INTEGER
+}
+
+entity sql_alter_table_import_partition {
+    oid: INTEGER <<PK>>
+    is_tablespace: INTEGER
+}
+
+entity sql_alter_table_merge_partition {
+    oid: INTEGER <<PK>>
+    is_if_exists: INTEGER
+    is_purge: INTEGER
+    overwrite_partition_oid: INTEGER
+}
+
+entity sql_alter_table_modify_clustered_by {
+    oid: INTEGER <<PK>>
+}
+
+entity sql_alter_table_optimize_partition {
+    oid: INTEGER <<PK>>
+}
+
+entity sql_alter_table_partition {
+    oid: INTEGER <<PK>>
+}
+
+entity sql_alter_table_partition_count {
+    oid: INTEGER <<PK>>
+    count_oid: INTEGER
+}
+
+entity sql_alter_table_partition_lifecycle {
+    oid: INTEGER <<PK>>
+    lifecycle_oid: INTEGER
+}
+
+entity sql_alter_table_partition_set_properties {
+    oid: INTEGER <<PK>>
+}
+
+entity sql_alter_table_re_organize_partition {
+    oid: INTEGER <<PK>>
+}
+
+entity sql_alter_table_rebuild_partition {
+    oid: INTEGER <<PK>>
+}
+
+entity sql_alter_table_recover_partitions {
+    oid: INTEGER <<PK>>
+}
+
+entity sql_alter_table_rename {
+    oid: INTEGER <<PK>>
+    to_name_oid: INTEGER
+    to_oid: INTEGER
+}
+
+entity sql_alter_table_rename_column {
+    oid: INTEGER <<PK>>
+    column_oid: INTEGER
+    to_oid: INTEGER
+}
+
+entity sql_alter_table_rename_index {
+    oid: INTEGER <<PK>>
+    name_oid: INTEGER
+    to_oid: INTEGER
+}
+
+entity sql_alter_table_rename_partition {
+    oid: INTEGER <<PK>>
+    is_if_not_exists: INTEGER
+}
+
+entity sql_alter_table_repair_partition {
+    oid: INTEGER <<PK>>
+}
+
+entity sql_alter_table_replace_column {
+    oid: INTEGER <<PK>>
+    after_column_oid: INTEGER
+    first_column_oid: INTEGER
+    is_first: INTEGER
+}
+
+entity sql_alter_table_set_comment {
+    oid: INTEGER <<PK>>
+    comment_oid: INTEGER
+}
+
+entity sql_alter_table_set_lifecycle {
+    oid: INTEGER <<PK>>
+    lifecycle_oid: INTEGER
+}
+
+entity sql_alter_table_set_location {
+    oid: INTEGER <<PK>>
+    location_oid: INTEGER
+}
+
+entity sql_alter_table_set_option {
+    oid: INTEGER <<PK>>
+    on_oid: INTEGER
+}
+
+entity sql_alter_table_statement {
+    oid: INTEGER <<PK>>
+    buckets: INTEGER
+    is_if_exists: INTEGER
+    is_ignore: INTEGER
+    is_invalidate_global_indexes: INTEGER
+    is_merge_small_files: INTEGER
+    is_not_clustered: INTEGER
+    is_offline: INTEGER
+    is_online: INTEGER
+    is_range: INTEGER
+    is_remove_patiting: INTEGER
+    is_update_global_indexes: INTEGER
+    is_upgrade_patiting: INTEGER
+    name_oid: INTEGER
+    partition_oid: INTEGER
+    schema: TEXT
+    shards: INTEGER
+    table_name: TEXT
+    table_source_oid: INTEGER
+}
+
+entity sql_alter_table_subpartition_available_partition_num {
+    oid: INTEGER <<PK>>
+    number_oid: INTEGER
+}
+
+entity sql_alter_table_subpartition_lifecycle {
+    oid: INTEGER <<PK>>
+}
+
+entity sql_alter_table_touch {
+    oid: INTEGER <<PK>>
+}
+
+entity sql_alter_table_truncate_partition {
+    oid: INTEGER <<PK>>
+}
+
+entity sql_alter_table_unarchive_partition {
+    oid: INTEGER <<PK>>
+}
+
+entity sql_alter_type_statement {
+    oid: INTEGER <<PK>>
+    is_body: INTEGER
+    is_compile: INTEGER
+    is_debug: INTEGER
+    is_reuse_settings: INTEGER
+    name_oid: INTEGER
+}
+
+entity sql_alter_view_rename_statement {
+    oid: INTEGER <<PK>>
+    change_owner_to_oid: INTEGER
+    name_oid: INTEGER
+    to_oid: INTEGER
+}
+
+entity sql_alter_view_statement {
+    oid: INTEGER <<PK>>
+    algorithm: TEXT
+    comment_oid: INTEGER
+    definer_oid: INTEGER
+    is_force: INTEGER
+    is_if_not_exists: INTEGER
+    is_with_cascaded: INTEGER
+    is_with_check_option: INTEGER
+    is_with_local: INTEGER
+    is_with_read_only: INTEGER
+    name_oid: INTEGER
+    schema: TEXT
+    sql_security: TEXT
+    sub_query_oid: INTEGER
+    table_source_oid: INTEGER
+}
+
+entity sql_analyze_table_statement {
+    oid: INTEGER <<PK>>
+    adb_schema_oid: INTEGER
+    adb_where_oid: INTEGER
+    is_cache_metadata: INTEGER
+    is_compute_statistics: INTEGER
+    is_for_colums: INTEGER
+    is_noscan: INTEGER
+    partition_oid: INTEGER
+    table_oid: INTEGER
+}
+
+entity sql_archive_table_statement {
+    oid: INTEGER <<PK>>
+    table_oid: INTEGER
+    type_oid: INTEGER
+}
+
+entity sql_assign_item {
+    oid: INTEGER <<PK>>
+    target_oid: INTEGER
+    value_oid: INTEGER
+}
+
+entity sql_backup_statement {
+    oid: INTEGER <<PK>>
+    action_oid: INTEGER
+    type_oid: INTEGER
+}
+
+entity sql_block_statement {
+    oid: INTEGER <<PK>>
+    end_label: TEXT
+    exception_oid: INTEGER
+    is_end_of_commit: INTEGER
+    label_name: TEXT
+}
+
+entity sql_build_table_statement {
+    oid: INTEGER <<PK>>
+    is_force: INTEGER
+    is_with_split: INTEGER
+    table_oid: INTEGER
+    version_oid: INTEGER
+}
+
+entity sql_call_statement {
+    oid: INTEGER <<PK>>
+    is_brace: INTEGER
+    out_parameter_oid: INTEGER
+    procedure_name_oid: INTEGER
+}
+
+entity sql_cancel_job_statement {
+    oid: INTEGER <<PK>>
+    is_import: INTEGER
+    job_name_oid: INTEGER
+}
+
+entity sql_character_data_type {
+    oid: INTEGER <<PK>>
+    char_set_name: TEXT
+    char_type: TEXT
+    collate: TEXT
+    is_has_binary: INTEGER
+    length: INTEGER
+}
+
+entity sql_check {
+    oid: INTEGER <<PK>>
+    enforced: INTEGER
+    expr_oid: INTEGER
+}
+
+entity sql_clone_table_statement {
+    oid: INTEGER <<PK>>
+    from_oid: INTEGER
+    is_if_exists_ignore: INTEGER
+    is_if_exists_overwrite: INTEGER
+    to_name_oid: INTEGER
+    to_oid: INTEGER
+}
+
+entity sql_close_statement {
+    oid: INTEGER <<PK>>
+    cursor_name_oid: INTEGER
+}
+
+entity sql_column_check {
+    oid: INTEGER <<PK>>
+    enforced: INTEGER
+    expr_oid: INTEGER
+}
+
+entity sql_column_definition {
+    oid: INTEGER <<PK>>
+    ann_index_oid: INTEGER
+    as_expr_oid: INTEGER
+    charset_expr_oid: INTEGER
+    collate_expr_oid: INTEGER
+    column_name: TEXT
+    comment_oid: INTEGER
+    compression_oid: INTEGER
+    data_type_oid: INTEGER
+    default_expr_oid: INTEGER
+    delimiter_oid: INTEGER
+    delimiter_tokenizer_oid: INTEGER
+    enable: INTEGER
+    encode_oid: INTEGER
+    format_oid: INTEGER
+    generated_alaws_as_oid: INTEGER
+    identity: TEXT
+    is_auto_increment: INTEGER
+    is_disable_index: INTEGER
+    is_only_primary_key: INTEGER
+    is_partition_by: INTEGER
+    is_pre_sort: INTEGER
+    is_primary_key: INTEGER
+    is_stored: INTEGER
+    is_virtual: INTEGER
+    is_visible: INTEGER
+    json_index_attrs_expr_oid: INTEGER
+    name_oid: INTEGER
+    name_as_string: TEXT
+    nlp_tokenizer_oid: INTEGER
+    npl_tokenizer_oid: INTEGER
+    on_update_oid: INTEGER
+    pre_sort_order: INTEGER
+    rely: INTEGER
+    sequence_type: TEXT
+    step_oid: INTEGER
+    storage_oid: INTEGER
+    unit_count_oid: INTEGER
+    unit_index_oid: INTEGER
+    validate: INTEGER
+    value_type_oid: INTEGER
+}
+
+entity sql_column_primary_key {
+    oid: INTEGER <<PK>>
+}
+
+entity sql_column_reference {
+    oid: INTEGER <<PK>>
+    on_delete: TEXT
+    on_update: TEXT
+    reference_match: TEXT
+    table_oid: INTEGER
+}
+
+entity sql_column_unique_key {
+    oid: INTEGER <<PK>>
+}
+
+entity sql_comment_statement {
+    oid: INTEGER <<PK>>
+    comment_oid: INTEGER
+    on_oid: INTEGER
+    type: TEXT
+}
+
+entity sql_commit_statement {
+    oid: INTEGER <<PK>>
+    chain: INTEGER
+    delayed_durability_oid: INTEGER
+    immediate: INTEGER
+    is_work: INTEGER
+    is_write: INTEGER
+    release: INTEGER
+    transaction_name_oid: INTEGER
+    wait: INTEGER
+}
+
+entity sql_copy_from_statement {
+    oid: INTEGER <<PK>>
+    access_key_id_oid: INTEGER
+    access_key_secret_oid: INTEGER
+    from_oid: INTEGER
+    table_oid: INTEGER
+}
+
+entity sql_create_database_statement {
+    oid: INTEGER <<PK>>
+    character_set: TEXT
+    collate: TEXT
+    comment_oid: INTEGER
+    database_name: TEXT
+    is_if_not_exists: INTEGER
+    is_physical: INTEGER
+    location_oid: INTEGER
+    name_oid: INTEGER
+    options: TEXT
+    password_oid: INTEGER
+    server: TEXT
+    stored_as_oid: INTEGER
+    stored_by: TEXT
+    stored_in_oid: INTEGER
+    user: TEXT
+}
+
+entity sql_create_function_statement {
+    oid: INTEGER <<PK>>
+    authid_oid: INTEGER
+    block_oid: INTEGER
+    comment: TEXT
+    data_type_oid: INTEGER
+    definer_oid: INTEGER
+    is_aggregate: INTEGER
+    is_create: INTEGER
+    is_deterministic: INTEGER
+    is_if_not_exists: INTEGER
+    is_or_replace: INTEGER
+    is_parallel_enable: INTEGER
+    is_pipelined: INTEGER
+    is_result_cache: INTEGER
+    is_temporary: INTEGER
+    java_call_spec: TEXT
+    language: TEXT
+    name_oid: INTEGER
+    return_data_type_oid: INTEGER
+    schema: TEXT
+    using_oid: INTEGER
+    wrapped_source: TEXT
+}
+
+entity sql_create_index_statement {
+    oid: INTEGER <<PK>>
+    comment_oid: INTEGER
+    db_partition_by_oid: INTEGER
+    in_oid: INTEGER
+    index_definition_oid: INTEGER
+    is_concurrently: INTEGER
+    is_defered_rebuild: INTEGER
+    is_global: INTEGER
+    is_if_not_exists: INTEGER
+    is_local: INTEGER
+    is_storing: INTEGER
+    name_oid: INTEGER
+    row_format_oid: INTEGER
+    schema: TEXT
+    stored_as_oid: INTEGER
+    table_oid: INTEGER
+    table_name: TEXT
+    table_partition_by_oid: INTEGER
+    table_partitions_oid: INTEGER
+    tablespace_oid: INTEGER
+    type: TEXT
+    using: TEXT
+}
+
+entity sql_create_materialized_view_statement {
+    oid: INTEGER <<PK>>
+    cache: INTEGER
+    comment_oid: INTEGER
+    compress: INTEGER
+    compress_level: INTEGER
+    distributed_by_type_oid: INTEGER
+    enable_query_rewrite: INTEGER
+    free_lists: INTEGER
+    initrans: INTEGER
+    is_build_deferred: INTEGER
+    is_build_immediate: INTEGER
+    is_compress_for_oltp: INTEGER
+    is_if_not_exists: INTEGER
+    is_refresh: INTEGER
+    is_refresh_complete: INTEGER
+    is_refresh_fast: INTEGER
+    is_refresh_force: INTEGER
+    is_refresh_next: INTEGER
+    is_refresh_on_commit: INTEGER
+    is_refresh_on_demand: INTEGER
+    is_refresh_on_over_write: INTEGER
+    is_refresh_start_with: INTEGER
+    is_with_row_id: INTEGER
+    lify_cycle_oid: INTEGER
+    logging: INTEGER
+    maxtrans: INTEGER
+    name_oid: INTEGER
+    next_oid: INTEGER
+    parallel: INTEGER
+    parallel_value: INTEGER
+    partition_by_oid: INTEGER
+    pctfree: INTEGER
+    pctincrease: INTEGER
+    pctthreshold: INTEGER
+    pctused: INTEGER
+    query_oid: INTEGER
+    start_with_oid: INTEGER
+    storage: TEXT
+    tablespace_oid: INTEGER
+}
+
+entity sql_create_outline_statement {
+    oid: INTEGER <<PK>>
+    name_oid: INTEGER
+    on_oid: INTEGER
+    to_oid: INTEGER
+    where_oid: INTEGER
+}
+
+entity sql_create_procedure_statement {
+    oid: INTEGER <<PK>>
+    authid_oid: INTEGER
+    block_oid: INTEGER
+    comment_oid: INTEGER
+    definer_oid: INTEGER
+    is_contains_sql: INTEGER
+    is_create: INTEGER
+    is_deterministic: INTEGER
+    is_language_sql: INTEGER
+    is_modifies_sql_data: INTEGER
+    is_no_sql: INTEGER
+    is_or_replace: INTEGER
+    is_read_sql_data: INTEGER
+    java_call_spec: TEXT
+    name_oid: INTEGER
+    wrapped_source: TEXT
+}
+
+entity sql_create_role_statement {
+    oid: INTEGER <<PK>>
+    is_if_not_exists: INTEGER
+    name_oid: INTEGER
+}
+
+entity sql_create_sequence_statement {
+    oid: INTEGER <<PK>>
+    cache: INTEGER
+    cache_value_oid: INTEGER
+    cycle: INTEGER
+    increment_by_oid: INTEGER
+    is_group: INTEGER
+    is_no_max_value: INTEGER
+    is_no_min_value: INTEGER
+    is_simple: INTEGER
+    is_time: INTEGER
+    max_value_oid: INTEGER
+    min_value_oid: INTEGER
+    name_oid: INTEGER
+    order: INTEGER
+    schema: TEXT
+    start_with_oid: INTEGER
+    step_oid: INTEGER
+    unit_count_oid: INTEGER
+    unit_index_oid: INTEGER
+    with_cache: INTEGER
+}
+
+entity sql_create_table_group_statement {
+    oid: INTEGER <<PK>>
+    is_if_not_exists: INTEGER
+    name_oid: INTEGER
+    partition_num_oid: INTEGER
+    schema_name: TEXT
+    table_group_name: TEXT
+}
+
+entity sql_create_table_statement {
+    oid: INTEGER <<PK>>
+    body_before_comments_direct: TEXT
+    buckets: INTEGER
+    catalog: TEXT
+    clustering_type: TEXT
+    column_comments: TEXT
+    comment_oid: INTEGER
+    compress: INTEGER
+    engine_oid: INTEGER
+    inherits_oid: INTEGER
+    is_dimension: INTEGER
+    is_external: INTEGER
+    is_if_not_exists: INTEGER
+    is_ignore: INTEGER
+    is_on_commit_preserve_rows: INTEGER
+    is_replace: INTEGER
+    is_single: INTEGER
+    like_oid: INTEGER
+    local_partitioning_oid: INTEGER
+    location_oid: INTEGER
+    logging: INTEGER
+    name_oid: INTEGER
+    partitioning_oid: INTEGER
+    primary_key_names: TEXT
+    row_format_oid: INTEGER
+    schema: TEXT
+    select_oid: INTEGER
+    shards: INTEGER
+    stored_as_oid: INTEGER
+    table_name: TEXT
+    table_source_oid: INTEGER
+    tablespace_oid: INTEGER
+    type: TEXT
+}
+
+entity sql_create_trigger_statement {
+    oid: INTEGER <<PK>>
+    body_oid: INTEGER
+    definer_oid: INTEGER
+    is_delete: INTEGER
+    is_for_each_row: INTEGER
+    is_insert: INTEGER
+    is_or_replace: INTEGER
+    is_update: INTEGER
+    name_oid: INTEGER
+    on_oid: INTEGER
+    trigger_events: TEXT
+    trigger_type: TEXT
+    when_oid: INTEGER
+}
+
+entity sql_create_user_statement {
+    oid: INTEGER <<PK>>
+    password_oid: INTEGER
+    user_oid: INTEGER
+}
+
+entity sql_create_view_statement {
+    oid: INTEGER <<PK>>
+    algorithm: TEXT
+    comment_oid: INTEGER
+    definer_oid: INTEGER
+    is_force: INTEGER
+    is_if_not_exists: INTEGER
+    is_on_cluster: INTEGER
+    is_or_replace: INTEGER
+    is_with_cascaded: INTEGER
+    is_with_check_option: INTEGER
+    is_with_local: INTEGER
+    is_with_read_only: INTEGER
+    name_oid: INTEGER
+    returns_data_type_oid: INTEGER
+    returns_oid: INTEGER
+    schema: TEXT
+    script_oid: INTEGER
+    sql_security: TEXT
+    sub_query_oid: INTEGER
+    table_source_oid: INTEGER
+    to_oid: INTEGER
+}
+
+entity sql_declare_statement {
+    oid: INTEGER <<PK>>
+}
+
+entity sql_default {
+    oid: INTEGER <<PK>>
+    column_oid: INTEGER
+    expr_oid: INTEGER
+    is_with_values: INTEGER
+}
+
+entity sql_delete_statement {
+    oid: INTEGER <<PK>>
+    alias: TEXT
+    expr_table_source_oid: INTEGER
+    from_oid: INTEGER
+    is_only: INTEGER
+    table_name_oid: INTEGER
+    table_source_oid: INTEGER
+    using_oid: INTEGER
+    where_oid: INTEGER
+    with_oid: INTEGER
+}
+
+entity sql_describe_statement {
+    oid: INTEGER <<PK>>
+    column_oid: INTEGER
+    is_extended: INTEGER
+    is_formatted: INTEGER
+    object_oid: INTEGER
+    object_type: TEXT
+}
+
+entity sql_drop_catalog_statement {
+    oid: INTEGER <<PK>>
+    is_external: INTEGER
+    is_if_exists: INTEGER
+    name_oid: INTEGER
+}
+
+entity sql_drop_database_statement {
+    oid: INTEGER <<PK>>
+    database_oid: INTEGER
+    database_name: TEXT
+    is_cascade: INTEGER
+    is_if_exists: INTEGER
+    is_physical: INTEGER
+    is_restrict: INTEGER
+    name_oid: INTEGER
+    restrict: INTEGER
+    server: TEXT
+}
+
+entity sql_drop_event_statement {
+    oid: INTEGER <<PK>>
+    is_if_exists: INTEGER
+    name_oid: INTEGER
+}
+
+entity sql_drop_function_statement {
+    oid: INTEGER <<PK>>
+    is_if_exists: INTEGER
+    is_temporary: INTEGER
+    name_oid: INTEGER
+}
+
+entity sql_drop_index_statement {
+    oid: INTEGER <<PK>>
+    algorithm_oid: INTEGER
+    index_name_oid: INTEGER
+    is_if_exists: INTEGER
+    lock_option_oid: INTEGER
+    table_name_oid: INTEGER
+}
+
+entity sql_drop_log_file_group_statement {
+    oid: INTEGER <<PK>>
+    engine_oid: INTEGER
+    name_oid: INTEGER
+}
+
+entity sql_drop_materialized_view_statement {
+    oid: INTEGER <<PK>>
+    is_if_exists: INTEGER
+    name_oid: INTEGER
+}
+
+entity sql_drop_outline_statement {
+    oid: INTEGER <<PK>>
+    is_if_exists: INTEGER
+    name_oid: INTEGER
+}
+
+entity sql_drop_procedure_statement {
+    oid: INTEGER <<PK>>
+    is_if_exists: INTEGER
+    name_oid: INTEGER
+}
+
+entity sql_drop_resource_group_statement {
+    oid: INTEGER <<PK>>
+    is_if_exists: INTEGER
+    name_oid: INTEGER
+}
+
+entity sql_drop_resource_statement {
+    oid: INTEGER <<PK>>
+    is_if_exists: INTEGER
+    name_oid: INTEGER
+}
+
+entity sql_drop_role_statement {
+    oid: INTEGER <<PK>>
+    is_if_not_exists: INTEGER
+    name_oid: INTEGER
+}
+
+entity sql_drop_sequence_statement {
+    oid: INTEGER <<PK>>
+    is_if_exists: INTEGER
+    name_oid: INTEGER
+    schema: TEXT
+}
+
+entity sql_drop_server_statement {
+    oid: INTEGER <<PK>>
+    is_if_exists: INTEGER
+    name_oid: INTEGER
+}
+
+entity sql_drop_synonym_statement {
+    oid: INTEGER <<PK>>
+    is_force: INTEGER
+    is_if_exists: INTEGER
+    is_public: INTEGER
+    name_oid: INTEGER
+    schema: TEXT
+}
+
+entity sql_drop_table_group_statement {
+    oid: INTEGER <<PK>>
+    is_if_exists: INTEGER
+    name_oid: INTEGER
+    table_group_name: TEXT
+}
+
+entity sql_drop_table_space_statement {
+    oid: INTEGER <<PK>>
+    engine_oid: INTEGER
+    is_if_exists: INTEGER
+    name_oid: INTEGER
+    table_space_name: TEXT
+}
+
+entity sql_drop_table_statement {
+    oid: INTEGER <<PK>>
+    is_cascade: INTEGER
+    is_drop_partition: INTEGER
+    is_external: INTEGER
+    is_if_exists: INTEGER
+    is_purge: INTEGER
+    is_restrict: INTEGER
+    is_temporary: INTEGER
+    where_oid: INTEGER
+}
+
+entity sql_drop_trigger_statement {
+    oid: INTEGER <<PK>>
+    is_if_exists: INTEGER
+    name_oid: INTEGER
+}
+
+entity sql_drop_type_statement {
+    oid: INTEGER <<PK>>
+    is_if_exists: INTEGER
+    name_oid: INTEGER
+}
+
+entity sql_drop_user_statement {
+    oid: INTEGER <<PK>>
+    is_if_exists: INTEGER
+}
+
+entity sql_drop_view_statement {
+    oid: INTEGER <<PK>>
+    is_cascade: INTEGER
+    is_if_exists: INTEGER
+    is_restrict: INTEGER
+}
+
+entity sql_dump_statement {
+    oid: INTEGER <<PK>>
+    into_oid: INTEGER
+    is_overwrite: INTEGER
+    select_oid: INTEGER
+}
+
+entity sql_error_logging_clause {
+    oid: INTEGER <<PK>>
+    into_oid: INTEGER
+    limit_oid: INTEGER
+    simple_expression_oid: INTEGER
+}
+
+entity sql_explain_analyze_statement {
+    oid: INTEGER <<PK>>
+    select_oid: INTEGER
+}
+
+entity sql_explain_statement {
+    oid: INTEGER <<PK>>
+    format: TEXT
+    is_authorization: INTEGER
+    is_dependency: INTEGER
+    is_extended: INTEGER
+    is_optimizer: INTEGER
+    is_parenthesis: INTEGER
+    statement_oid: INTEGER
+    type: TEXT
+}
+
+entity sql_export_database_statement {
+    oid: INTEGER <<PK>>
+    db_oid: INTEGER
+    is_realtime: INTEGER
+}
+
+entity sql_export_table_statement {
+    oid: INTEGER <<PK>>
+    for_replication_oid: INTEGER
+    table_oid: INTEGER
+    to_oid: INTEGER
+}
+
+entity sql_expr_hint {
+    oid: INTEGER <<PK>>
+    expr_oid: INTEGER
+}
+
+entity sql_expr_statement {
+    oid: INTEGER <<PK>>
+    expr_oid: INTEGER
+}
+
+entity sql_expr_table_source {
+    oid: INTEGER <<PK>>
+    catalog: TEXT
+    expr_oid: INTEGER
+    name_oid: INTEGER
+    partition_size: INTEGER
+    sampling_oid: INTEGER
+    schema: TEXT
+    schema_object: TEXT
+    table_name: TEXT
+}
+
+entity sql_external_record_format {
+    oid: INTEGER <<PK>>
+    badfile: INTEGER
+    collection_items_terminated_by_oid: INTEGER
+    delimited_by_oid: INTEGER
+    escaped_by_oid: INTEGER
+    is_ltrim: INTEGER
+    is_missing_field_values_are_null: INTEGER
+    is_reject_rows_with_all_null_fields: INTEGER
+    lines_terminated_by_oid: INTEGER
+    logfile: INTEGER
+    map_keys_terminated_by_oid: INTEGER
+    null_defined_as_oid: INTEGER
+    serde_oid: INTEGER
+    terminated_by_oid: INTEGER
+}
+
+entity sql_fetch_statement {
+    oid: INTEGER <<PK>>
+    cursor_name_oid: INTEGER
+    is_bulk_collect: INTEGER
+    limit_oid: INTEGER
+}
+
+entity sql_for_statement {
+    oid: INTEGER <<PK>>
+    index_oid: INTEGER
+    range_oid: INTEGER
+}
+
+entity sql_foreign_key_impl {
+    oid: INTEGER <<PK>>
+    is_disable_novalidate: INTEGER
+    is_on_delete_cascade: INTEGER
+    is_on_delete_set_null: INTEGER
+    referenced_table_name_oid: INTEGER
+    referenced_table_oid: INTEGER
+}
+
+entity sql_grant_statement {
+    oid: INTEGER <<PK>>
+    identified_by_oid: INTEGER
+    identified_by_password: TEXT
+    is_admin_option: INTEGER
+    max_connections_per_hour_oid: INTEGER
+    max_queries_per_hour_oid: INTEGER
+    max_updates_per_hour_oid: INTEGER
+    max_user_connections_oid: INTEGER
+    resource_type: TEXT
+    with_grant_option: INTEGER
+}
+
+entity sql_if_statement {
+    oid: INTEGER <<PK>>
+    condition_oid: INTEGER
+    else_if_list: TEXT
+    else_item: TEXT
+}
+
+entity sql_import_database_statement {
+    oid: INTEGER <<PK>>
+    db_oid: INTEGER
+    status_oid: INTEGER
+}
+
+entity sql_import_table_statement {
+    oid: INTEGER <<PK>>
+    from_oid: INTEGER
+    is_extenal: INTEGER
+    is_using_build: INTEGER
+    location_oid: INTEGER
+    table_oid: INTEGER
+    version_oid: INTEGER
+}
+
+entity sql_insert_statement {
+    oid: INTEGER <<PK>>
+    is_after_semi: INTEGER
+    is_upsert: INTEGER
+    with_oid: INTEGER
+}
+
+entity sql_join_table_source {
+    oid: INTEGER <<PK>>
+    condition_oid: INTEGER
+    is_asof: INTEGER
+    is_global: INTEGER
+    is_natural: INTEGER
+    join_type: TEXT
+    left_oid: INTEGER
+    right_oid: INTEGER
+    udj: TEXT
+}
+
+entity sql_lateral_view_table_source {
+    oid: INTEGER <<PK>>
+    is_outer: INTEGER
+    method_oid: INTEGER
+    on_oid: INTEGER
+    table_source_oid: INTEGER
+}
+
+entity sql_loop_statement {
+    oid: INTEGER <<PK>>
+    label_name: TEXT
+}
+
+entity sql_merge_statement {
+    oid: INTEGER <<PK>>
+    alias: TEXT
+    error_logging_clause_oid: INTEGER
+    insert_clause: TEXT
+    into_oid: INTEGER
+    on_oid: INTEGER
+    update_clause: TEXT
+    using_oid: INTEGER
+}
+
+entity sql_not_null_constraint {
+    oid: INTEGER <<PK>>
+}
+
+entity sql_null_constraint {
+    oid: INTEGER <<PK>>
+}
+
+entity sql_open_statement {
+    oid: INTEGER <<PK>>
+    cursor_name_oid: INTEGER
+    for_oid: INTEGER
+}
+
+entity sql_optimize_statement {
+    oid: INTEGER <<PK>>
+    cluster_oid: INTEGER
+    deduplicate_by_oid: INTEGER
+    is_deduplicate: INTEGER
+    is_final: INTEGER
+}
+
+entity sql_partition_ref {
+    oid: INTEGER <<PK>>
+    items: TEXT
+}
+
+entity sql_primary_key_impl {
+    oid: INTEGER <<PK>>
+    is_clustered: INTEGER
+    is_disable_novalidate: INTEGER
+}
+
+entity sql_privilege_item {
+    oid: INTEGER <<PK>>
+    action_oid: INTEGER
+}
+
+entity sql_purge_logs_statement {
+    oid: INTEGER <<PK>>
+    before_oid: INTEGER
+    is_all: INTEGER
+    is_binary: INTEGER
+    is_master: INTEGER
+    to_oid: INTEGER
+}
+
+entity sql_purge_recyclebin_statement {
+    oid: INTEGER <<PK>>
+}
+
+entity sql_purge_table_statement {
+    oid: INTEGER <<PK>>
+    count: INTEGER
+    is_all: INTEGER
+    table_oid: INTEGER
+}
+
+entity sql_purge_temporary_output_statement {
+    oid: INTEGER <<PK>>
+    name_oid: INTEGER
+}
+
+entity sql_refresh_materialized_view_statement {
+    oid: INTEGER <<PK>>
+    name_oid: INTEGER
+}
+
+entity sql_release_save_point_statement {
+    oid: INTEGER <<PK>>
+    name_oid: INTEGER
+}
+
+entity sql_rename_user_statement {
+    oid: INTEGER <<PK>>
+    name_oid: INTEGER
+    to_oid: INTEGER
+}
+
+entity sql_replace_statement {
+    oid: INTEGER <<PK>>
+    hints_size: INTEGER
+    is_delayed: INTEGER
+    is_low_priority: INTEGER
+    query_oid: INTEGER
+    table_name_oid: INTEGER
+    table_source_oid: INTEGER
+    values_list: TEXT
+}
+
+entity sql_restore_statement {
+    oid: INTEGER <<PK>>
+    type_oid: INTEGER
+}
+
+entity sql_return_statement {
+    oid: INTEGER <<PK>>
+    expr_oid: INTEGER
+}
+
+entity sql_revoke_statement {
+    oid: INTEGER <<PK>>
+    is_grant_option: INTEGER
+}
+
+entity sql_rollback_statement {
+    oid: INTEGER <<PK>>
+    chain: INTEGER
+    force_oid: INTEGER
+    release: INTEGER
+    to_oid: INTEGER
+}
+
+entity sql_save_point_statement {
+    oid: INTEGER <<PK>>
+    name_oid: INTEGER
+}
+
+entity sql_script_commit_statement {
+    oid: INTEGER <<PK>>
+}
+
+entity sql_select {
+    oid: INTEGER <<PK>>
+    first_query_block_oid: INTEGER
+    for_xml_options: TEXT
+    for_xml_options_size: INTEGER
+    head_hint_oid: INTEGER
+    hints_size: INTEGER
+    is_for_browse: INTEGER
+    is_simple: INTEGER
+    limit_oid: INTEGER
+    offset_oid: INTEGER
+    order_by_oid: INTEGER
+    query_oid: INTEGER
+    query_block_oid: INTEGER
+    restriction: TEXT
+    row_count_oid: INTEGER
+    with_sub_query_oid: INTEGER
+    xml_path_oid: INTEGER
+}
+
+entity sql_select_group_by_clause {
+    oid: INTEGER <<PK>>
+    having_oid: INTEGER
+    hint_oid: INTEGER
+    is_distinct: INTEGER
+    is_paren: INTEGER
+    is_with_cube: INTEGER
+    is_with_roll_up: INTEGER
+}
+
+entity sql_select_item {
+    oid: INTEGER <<PK>>
+    alias: TEXT
+    alias2: TEXT
+    alias_list: TEXT
+    expr_oid: INTEGER
+    is_connect_by_root: INTEGER
+    is_udtf_select_item: INTEGER
+}
+
+entity sql_select_order_by_item {
+    oid: INTEGER <<PK>>
+    collate: TEXT
+    expr_oid: INTEGER
+    is_cluster_by: INTEGER
+    is_distribute_by: INTEGER
+    is_sort_by: INTEGER
+    nulls_order_type: TEXT
+    resolved_select_item_oid: INTEGER
+    type: TEXT
+}
+
+entity sql_select_query_block {
+    oid: INTEGER <<PK>>
+    cached_select_list: TEXT
+    cached_select_list_hash: TEXT
+    connect_by_oid: INTEGER
+    distion_option: INTEGER
+    first_oid: INTEGER
+    for_update_of_size: INTEGER
+    from_oid: INTEGER
+    group_by_oid: INTEGER
+    hints_size: INTEGER
+    into_oid: INTEGER
+    is_distinct: INTEGER
+    is_for_share: INTEGER
+    is_for_update: INTEGER
+    is_no_cycle: INTEGER
+    is_no_wait: INTEGER
+    is_prior: INTEGER
+    is_skip_locked: INTEGER
+    limit_oid: INTEGER
+    offset_oid: INTEGER
+    order_by_oid: INTEGER
+    order_by_siblings_oid: INTEGER
+    start_with_oid: INTEGER
+    wait_time_oid: INTEGER
+    where_oid: INTEGER
+}
+
+entity sql_select_statement {
+    oid: INTEGER <<PK>>
+    select_oid: INTEGER
+}
+
+entity sql_set_statement {
+    oid: INTEGER <<PK>>
+    option: TEXT
+}
+
+entity sql_show_acl_statement {
+    oid: INTEGER <<PK>>
+    table_oid: INTEGER
+}
+
+entity sql_show_catalogs_statement {
+    oid: INTEGER <<PK>>
+    like_oid: INTEGER
+}
+
+entity sql_show_columns_statement {
+    oid: INTEGER <<PK>>
+    database_oid: INTEGER
+    is_full: INTEGER
+    like_oid: INTEGER
+    table_oid: INTEGER
+    where_oid: INTEGER
+}
+
+entity sql_show_create_materialized_view_statement {
+    oid: INTEGER <<PK>>
+    name_oid: INTEGER
+}
+
+entity sql_show_create_table_statement {
+    oid: INTEGER <<PK>>
+    is_all: INTEGER
+    like_mapping_oid: INTEGER
+    name_oid: INTEGER
+}
+
+entity sql_show_create_view_statement {
+    oid: INTEGER <<PK>>
+    name_oid: INTEGER
+}
+
+entity sql_show_databases_statement {
+    oid: INTEGER <<PK>>
+    database_oid: INTEGER
+    is_extra: INTEGER
+    is_full: INTEGER
+    is_physical: INTEGER
+    like_oid: INTEGER
+    where_oid: INTEGER
+}
+
+entity sql_show_errors_statement {
+    oid: INTEGER <<PK>>
+}
+
+entity sql_show_functions_statement {
+    oid: INTEGER <<PK>>
+    like_oid: INTEGER
+}
+
+entity sql_show_grants_statement {
+    oid: INTEGER <<PK>>
+    on_oid: INTEGER
+    user_oid: INTEGER
+}
+
+entity sql_show_history_statement {
+    oid: INTEGER <<PK>>
+    is_tables: INTEGER
+    table_oid: INTEGER
+}
+
+entity sql_show_indexes_statement {
+    oid: INTEGER <<PK>>
+    database_oid: INTEGER
+    table_oid: INTEGER
+    type: TEXT
+    where_oid: INTEGER
+}
+
+entity sql_show_materialized_view_statement {
+    oid: INTEGER <<PK>>
+    like_oid: INTEGER
+    name_oid: INTEGER
+}
+
+entity sql_show_outlines_statement {
+    oid: INTEGER <<PK>>
+    limit_oid: INTEGER
+    order_by_oid: INTEGER
+    where_oid: INTEGER
+}
+
+entity sql_show_packages_statement {
+    oid: INTEGER <<PK>>
+}
+
+entity sql_show_partitions_stmt {
+    oid: INTEGER <<PK>>
+    table_source_oid: INTEGER
+    where_oid: INTEGER
+}
+
+entity sql_show_process_list_statement {
+    oid: INTEGER <<PK>>
+    is_full: INTEGER
+    is_mpp: INTEGER
+    limit_oid: INTEGER
+    order_by_oid: INTEGER
+    where_oid: INTEGER
+}
+
+entity sql_show_query_task_statement {
+    oid: INTEGER <<PK>>
+    for_oid: INTEGER
+    is_full: INTEGER
+    limit_oid: INTEGER
+    order_by_oid: INTEGER
+    user_oid: INTEGER
+    where_oid: INTEGER
+}
+
+entity sql_show_recylebin_statement {
+    oid: INTEGER <<PK>>
+}
+
+entity sql_show_role_statement {
+    oid: INTEGER <<PK>>
+    grant_oid: INTEGER
+}
+
+entity sql_show_roles_statement {
+    oid: INTEGER <<PK>>
+}
+
+entity sql_show_session_statement {
+    oid: INTEGER <<PK>>
+    like_oid: INTEGER
+}
+
+entity sql_show_statistic_list_stmt {
+    oid: INTEGER <<PK>>
+    is_full: INTEGER
+    table_source_oid: INTEGER
+}
+
+entity sql_show_statistic_stmt {
+    oid: INTEGER <<PK>>
+    is_full: INTEGER
+    table_source_oid: INTEGER
+}
+
+entity sql_show_table_groups_statement {
+    oid: INTEGER <<PK>>
+    database_oid: INTEGER
+}
+
+entity sql_show_tables_statement {
+    oid: INTEGER <<PK>>
+    database_oid: INTEGER
+    from_oid: INTEGER
+    is_extended: INTEGER
+    is_full: INTEGER
+    like_oid: INTEGER
+    where_oid: INTEGER
+}
+
+entity sql_show_users_statement {
+    oid: INTEGER <<PK>>
+}
+
+entity sql_show_variants_statement {
+    oid: INTEGER <<PK>>
+    is_global: INTEGER
+    is_session: INTEGER
+    like_oid: INTEGER
+    where_oid: INTEGER
+}
+
+entity sql_show_views_statement {
+    oid: INTEGER <<PK>>
+    database_oid: INTEGER
+    like_oid: INTEGER
+}
+
+entity sql_start_transaction_statement {
+    oid: INTEGER <<PK>>
+    is_begin: INTEGER
+    is_consistent_snapshot: INTEGER
+    is_read_only: INTEGER
+    is_work: INTEGER
+    isolation_level: TEXT
+    name_oid: INTEGER
+}
+
+entity sql_submit_job_statement {
+    oid: INTEGER <<PK>>
+    is_await: INTEGER
+    statment_oid: INTEGER
+}
+
+entity sql_subquery_table_source {
+    oid: INTEGER <<PK>>
+    select_oid: INTEGER
+}
+
+entity sql_sync_meta_statement {
+    oid: INTEGER <<PK>>
+    from_oid: INTEGER
+    ignore: INTEGER
+    like_oid: INTEGER
+    restrict: INTEGER
+}
+
+entity sql_table_like {
+    oid: INTEGER <<PK>>
+    is_exclude_properties: INTEGER
+    is_include_properties: INTEGER
+    table_oid: INTEGER
+}
+
+entity sql_table_sampling {
+    oid: INTEGER <<PK>>
+    bucket_oid: INTEGER
+    byte_length_oid: INTEGER
+    is_bernoulli: INTEGER
+    is_system: INTEGER
+    on_oid: INTEGER
+    out_of_oid: INTEGER
+    percent_oid: INTEGER
+    rows_oid: INTEGER
+}
+
+entity sql_truncate_statement {
+    oid: INTEGER <<PK>>
+    cascade: INTEGER
+    is_continue_identity: INTEGER
+    is_drop_storage: INTEGER
+    is_if_exists: INTEGER
+    is_ignore_delete_triggers: INTEGER
+    is_immediate: INTEGER
+    is_only: INTEGER
+    is_partition_all: INTEGER
+    is_purge_snapshot_log: INTEGER
+    is_restrict_when_delete_triggers: INTEGER
+    is_reuse_storage: INTEGER
+    restart_identity: INTEGER
+}
+
+entity sql_union_query {
+    oid: INTEGER <<PK>>
+    first_query_block_oid: INTEGER
+    is_empty: INTEGER
+    left_oid: INTEGER
+    limit_oid: INTEGER
+    operator: TEXT
+    order_by_oid: INTEGER
+    right_oid: INTEGER
+}
+
+entity sql_union_query_table_source {
+    oid: INTEGER <<PK>>
+    union_oid: INTEGER
+}
+
+entity sql_unique {
+    oid: INTEGER <<PK>>
+    comment_oid: INTEGER
+    index_definition_oid: INTEGER
+    name_oid: INTEGER
+}
+
+entity sql_unnest_table_source {
+    oid: INTEGER <<PK>>
+    is_ordinality: INTEGER
+}
+
+entity sql_update_set_item {
+    oid: INTEGER <<PK>>
+    column_oid: INTEGER
+    value_oid: INTEGER
+}
+
+entity sql_update_statement {
+    oid: INTEGER <<PK>>
+    from_oid: INTEGER
+    order_by_oid: INTEGER
+    table_name_oid: INTEGER
+    table_source_oid: INTEGER
+    where_oid: INTEGER
+    with_oid: INTEGER
+}
+
+entity sql_use_statement {
+    oid: INTEGER <<PK>>
+    database_oid: INTEGER
+}
+
+entity sql_values_query {
+    oid: INTEGER <<PK>>
+}
+
+entity sql_values_table_source {
+    oid: INTEGER <<PK>>
+    is_parenthesized: INTEGER
+}
+
+entity sql_while_statement {
+    oid: INTEGER <<PK>>
+    condition_oid: INTEGER
+    label_name: TEXT
+}
+
+entity sql_whoami_statement {
+    oid: INTEGER <<PK>>
+}
+
+entity sql_with_subquery_clause {
+    oid: INTEGER <<PK>>
+    entries: TEXT
+    recursive: INTEGER
+}
+
+entity antspark_create_table_statement {
+    oid: INTEGER <<PK>>
+    datasource_oid: INTEGER
+    meta_life_cycle_oid: INTEGER
+    serde_properties: TEXT
+}
+
+entity blink_create_table_statement {
+    oid: INTEGER <<PK>>
+    period_for_oid: INTEGER
+}
+
+entity clickhouse_create_table_statement {
+    oid: INTEGER <<PK>>
+    order_by_oid: INTEGER
+    partition_by_oid: INTEGER
+    sample_by_oid: INTEGER
+}
+
+entity db2_create_table_statement {
+    oid: INTEGER <<PK>>
+    database_oid: INTEGER
+    index_in_oid: INTEGER
+    is_data_capture_changes: INTEGER
+    is_data_capture_none: INTEGER
+    validproc_oid: INTEGER
+}
+
+entity db2_select_query_block {
+    oid: INTEGER <<PK>>
+    is_for_read_only: INTEGER
+    isolation: TEXT
+    optimize_for_oid: INTEGER
+}
+
+entity db2_values_statement {
+    oid: INTEGER <<PK>>
+    expr_oid: INTEGER
+}
+
+entity hive_input_output_format {
+    oid: INTEGER <<PK>>
+    input_oid: INTEGER
+    output_oid: INTEGER
+}
+
+entity hive_insert {
+    oid: INTEGER <<PK>>
+    query_oid: INTEGER
+    table_source_oid: INTEGER
+    values_list: TEXT
+}
+
+entity hive_insert_statement {
+    oid: INTEGER <<PK>>
+    is_if_not_exists: INTEGER
+}
+
+entity hive_multi_insert_statement {
+    oid: INTEGER <<PK>>
+    from_oid: INTEGER
+    with_oid: INTEGER
+}
+
+entity hive_create_function_statement {
+    oid: INTEGER <<PK>>
+    class_name_oid: INTEGER
+    code: TEXT
+    is_declare: INTEGER
+    location_oid: INTEGER
+    resource_type: TEXT
+    symbol_oid: INTEGER
+}
+
+entity hive_create_table_statement {
+    oid: INTEGER <<PK>>
+    into_buckets_oid: INTEGER
+    is_like_query: INTEGER
+    meta_life_cycle_oid: INTEGER
+    serde_properties: TEXT
+    using_oid: INTEGER
+}
+
+entity hive_load_data_statement {
+    oid: INTEGER <<PK>>
+    format_oid: INTEGER
+    inpath_oid: INTEGER
+    into_oid: INTEGER
+    is_local: INTEGER
+    is_overwrite: INTEGER
+    row_format_oid: INTEGER
+    serde_properties: TEXT
+    stored_as_oid: INTEGER
+    stored_by_oid: INTEGER
+    using_oid: INTEGER
+}
+
+entity hive_msck_repair_statement {
+    oid: INTEGER <<PK>>
+    database_oid: INTEGER
+    is_add_partitions: INTEGER
+    table_oid: INTEGER
+}
+
+entity my_sql_force_index_hint {
+    oid: INTEGER <<PK>>
+}
+
+entity my_sql_ignore_index_hint {
+    oid: INTEGER <<PK>>
+}
+
+entity my_sql_key {
+    oid: INTEGER <<PK>>
+    index_type: TEXT
+    is_has_constraint: INTEGER
+    key_block_size_oid: INTEGER
+}
+
+entity my_sql_primary_key {
+    oid: INTEGER <<PK>>
+}
+
+entity my_sql_unique {
+    oid: INTEGER <<PK>>
+    db_partition_by_oid: INTEGER
+    is_global: INTEGER
+    is_local: INTEGER
+    table_partition_by_oid: INTEGER
+    table_partitions_oid: INTEGER
+}
+
+entity my_sql_use_index_hint {
+    oid: INTEGER <<PK>>
+}
+
+entity mysql_foreign_key {
+    oid: INTEGER <<PK>>
+    index_name_oid: INTEGER
+    is_has_constraint: INTEGER
+    on_delete: TEXT
+    on_update: TEXT
+    reference_match: TEXT
+}
+
+entity my_sql_case_statement {
+    oid: INTEGER <<PK>>
+    condition_oid: INTEGER
+    else_item: TEXT
+    when_list: TEXT
+}
+
+entity my_sql_cursor_declare_statement {
+    oid: INTEGER <<PK>>
+    cursor_name_oid: INTEGER
+    select_oid: INTEGER
+}
+
+entity my_sql_declare_condition_statement {
+    oid: INTEGER <<PK>>
+    condition_name: TEXT
+    condition_value: TEXT
+}
+
+entity my_sql_declare_handler_statement {
+    oid: INTEGER <<PK>>
+    condition_values: TEXT
+    handle_type: TEXT
+    sp_statement_oid: INTEGER
+}
+
+entity my_sql_declare_statement {
+    oid: INTEGER <<PK>>
+}
+
+entity my_sql_iterate_statement {
+    oid: INTEGER <<PK>>
+    label_name: TEXT
+}
+
+entity my_sql_leave_statement {
+    oid: INTEGER <<PK>>
+    label_name: TEXT
+}
+
+entity my_sql_repeat_statement {
+    oid: INTEGER <<PK>>
+    condition_oid: INTEGER
+    label_name: TEXT
+}
+
+entity my_sql_select_into_statement {
+    oid: INTEGER <<PK>>
+    select_oid: INTEGER
+}
+
+entity my_sql_char_expr {
+    oid: INTEGER <<PK>>
+    charset: TEXT
+    collate: TEXT
+    type: TEXT
+}
+
+entity my_sql_json_table_expr {
+    oid: INTEGER <<PK>>
+    columns: TEXT
+    expr_oid: INTEGER
+    path_oid: INTEGER
+}
+
+entity my_sql_ordering_expr {
+    oid: INTEGER <<PK>>
+    expr_oid: INTEGER
+    type: TEXT
+}
+
+entity my_sql_out_file_expr {
+    oid: INTEGER <<PK>>
+    charset: TEXT
+    columns_enclosed_by_oid: INTEGER
+    columns_escaped_oid: INTEGER
+    columns_terminated_by_oid: INTEGER
+    file_oid: INTEGER
+    ignore_lines_number_oid: INTEGER
+    is_columns_enclosed_optionally: INTEGER
+    lines_starting_by_oid: INTEGER
+    lines_terminated_by_oid: INTEGER
+}
+
+entity my_sql_user_name {
+    oid: INTEGER <<PK>>
+    host: TEXT
+    identified_by: TEXT
+    normalize_user_name: TEXT
+    resolved_column_oid: INTEGER
+    simple_name: TEXT
+    user_name: TEXT
+}
+
+entity cobar_show_status {
+    oid: INTEGER <<PK>>
+}
+
+entity drds_baseline_statement {
+    oid: INTEGER <<PK>>
+    baseline_ids: TEXT
+    operation: TEXT
+    select_oid: INTEGER
+}
+
+entity drds_cancel_ddl_job {
+    oid: INTEGER <<PK>>
+    job_ids: TEXT
+}
+
+entity drds_change_ddl_job {
+    oid: INTEGER <<PK>>
+    group_and_table_name_list: TEXT
+    is_add: INTEGER
+    is_skip: INTEGER
+    job_id: TEXT
+}
+
+entity drds_clear_ddl_job_cache {
+    oid: INTEGER <<PK>>
+    is_all_jobs: INTEGER
+    job_ids: TEXT
+}
+
+entity drds_inspect_ddl_job_cache {
+    oid: INTEGER <<PK>>
+}
+
+entity drds_recover_ddl_job {
+    oid: INTEGER <<PK>>
+    is_all_jobs: INTEGER
+    job_ids: TEXT
+}
+
+entity drds_remove_ddl_job {
+    oid: INTEGER <<PK>>
+    is_all_completed: INTEGER
+    is_all_pending: INTEGER
+    job_ids: TEXT
+}
+
+entity drds_rollback_ddl_job {
+    oid: INTEGER <<PK>>
+    job_ids: TEXT
+}
+
+entity drds_show_ddl_jobs {
+    oid: INTEGER <<PK>>
+    is_full: INTEGER
+    job_ids: TEXT
+}
+
+entity drds_show_global_index {
+    oid: INTEGER <<PK>>
+    table_name_oid: INTEGER
+}
+
+entity drds_show_metadata_lock {
+    oid: INTEGER <<PK>>
+    schema_name_oid: INTEGER
+}
+
+entity my_sql_alter_database_kill_job {
+    oid: INTEGER <<PK>>
+    job_id_oid: INTEGER
+    job_type_oid: INTEGER
+}
+
+entity my_sql_alter_database_set_option {
+    oid: INTEGER <<PK>>
+    on_oid: INTEGER
+}
+
+entity my_sql_alter_event_statement {
+    oid: INTEGER <<PK>>
+    comment_oid: INTEGER
+    definer_oid: INTEGER
+    enable: INTEGER
+    event_body_oid: INTEGER
+    is_disable_on_slave: INTEGER
+    is_on_completion_preserve: INTEGER
+    name_oid: INTEGER
+    rename_to_oid: INTEGER
+    schedule_oid: INTEGER
+}
+
+entity my_sql_alter_log_file_group_statement {
+    oid: INTEGER <<PK>>
+    add_undo_file_oid: INTEGER
+    engine_oid: INTEGER
+    initial_size_oid: INTEGER
+    is_wait: INTEGER
+    name_oid: INTEGER
+}
+
+entity my_sql_alter_server_statement {
+    oid: INTEGER <<PK>>
+    name_oid: INTEGER
+    user_oid: INTEGER
+}
+
+entity my_sql_alter_table_alter_column {
+    oid: INTEGER <<PK>>
+    column_oid: INTEGER
+    default_expr_oid: INTEGER
+    is_drop_default: INTEGER
+}
+
+entity my_sql_alter_table_alter_full_text_index {
+    oid: INTEGER <<PK>>
+    analyzer_name_oid: INTEGER
+    analyzer_type: TEXT
+    index_name_oid: INTEGER
+}
+
+entity my_sql_alter_table_change_column {
+    oid: INTEGER <<PK>>
+    after_column_oid: INTEGER
+    column_name_oid: INTEGER
+    first_column_oid: INTEGER
+    is_first: INTEGER
+    new_column_definition_oid: INTEGER
+}
+
+entity my_sql_alter_table_discard_tablespace {
+    oid: INTEGER <<PK>>
+}
+
+entity my_sql_alter_table_force {
+    oid: INTEGER <<PK>>
+}
+
+entity my_sql_alter_table_import_tablespace {
+    oid: INTEGER <<PK>>
+}
+
+entity my_sql_alter_table_lock {
+    oid: INTEGER <<PK>>
+    lock_type_oid: INTEGER
+}
+
+entity my_sql_alter_table_modify_column {
+    oid: INTEGER <<PK>>
+    after_column_oid: INTEGER
+    first_column_oid: INTEGER
+    is_first: INTEGER
+    new_column_definition_oid: INTEGER
+}
+
+entity my_sql_alter_table_option {
+    oid: INTEGER <<PK>>
+    name: TEXT
+    value: TEXT
+}
+
+entity my_sql_alter_table_order_by {
+    oid: INTEGER <<PK>>
+}
+
+entity my_sql_alter_table_validation {
+    oid: INTEGER <<PK>>
+    is_with_validation: INTEGER
+}
+
+entity my_sql_alter_tablespace_statement {
+    oid: INTEGER <<PK>>
+    add_data_file_oid: INTEGER
+    drop_data_file_oid: INTEGER
+    engine_oid: INTEGER
+    initial_size_oid: INTEGER
+    is_wait: INTEGER
+    name_oid: INTEGER
+}
+
+entity my_sql_alter_user_statement {
+    oid: INTEGER <<PK>>
+    alter_users: TEXT
+    is_if_exists: INTEGER
+    password_option: TEXT
+}
+
+entity my_sql_analyze_statement {
+    oid: INTEGER <<PK>>
+    is_local: INTEGER
+    is_no_write_to_binlog: INTEGER
+}
+
+entity my_sql_binlog_statement {
+    oid: INTEGER <<PK>>
+    expr_oid: INTEGER
+}
+
+entity my_sql_check_table_statement {
+    oid: INTEGER <<PK>>
+}
+
+entity my_sql_checksum_table_statement {
+    oid: INTEGER <<PK>>
+    is_extended: INTEGER
+    is_quick: INTEGER
+}
+
+entity my_sql_clear_plan_cache_statement {
+    oid: INTEGER <<PK>>
+}
+
+entity my_sql_create_add_log_file_group_statement {
+    oid: INTEGER <<PK>>
+    add_undo_file_oid: INTEGER
+    comment_oid: INTEGER
+    engine_oid: INTEGER
+    initial_size_oid: INTEGER
+    is_wait: INTEGER
+    name_oid: INTEGER
+    node_group_oid: INTEGER
+    redo_buffer_size_oid: INTEGER
+    undo_buffer_size_oid: INTEGER
+}
+
+entity my_sql_create_event_statement {
+    oid: INTEGER <<PK>>
+    comment_oid: INTEGER
+    definer_oid: INTEGER
+    enable: INTEGER
+    event_body_oid: INTEGER
+    is_disable_on_slave: INTEGER
+    is_if_not_exists: INTEGER
+    is_on_completion_preserve: INTEGER
+    name_oid: INTEGER
+    rename_to_oid: INTEGER
+    schedule_oid: INTEGER
+}
+
+entity my_sql_create_external_catalog_statement {
+    oid: INTEGER <<PK>>
+    comment_oid: INTEGER
+    is_if_not_exists: INTEGER
+    name_oid: INTEGER
+    properties: TEXT
+}
+
+entity my_sql_create_server_statement {
+    oid: INTEGER <<PK>>
+    database_oid: INTEGER
+    foreign_data_wrapper_oid: INTEGER
+    host_oid: INTEGER
+    name_oid: INTEGER
+    owner_oid: INTEGER
+    password_oid: INTEGER
+    port_oid: INTEGER
+    socket_oid: INTEGER
+    user_oid: INTEGER
+}
+
+entity my_sql_create_table_space_statement {
+    oid: INTEGER <<PK>>
+    add_data_file_oid: INTEGER
+    auto_extent_size_oid: INTEGER
+    comment_oid: INTEGER
+    engine_oid: INTEGER
+    extent_size_oid: INTEGER
+    file_block_size_oid: INTEGER
+    initial_size_oid: INTEGER
+    is_wait: INTEGER
+    log_file_group_oid: INTEGER
+    max_size_oid: INTEGER
+    name_oid: INTEGER
+    node_group_oid: INTEGER
+}
+
+entity my_sql_create_table_statement {
+    oid: INTEGER <<PK>>
+    archive_by_oid: INTEGER
+    db_partition_by_oid: INTEGER
+    db_partitions_oid: INTEGER
+    dbpartitions_oid: INTEGER
+    distribute_by_type_oid: INTEGER
+    engine_oid: INTEGER
+    ext_partition_oid: INTEGER
+    is_broad_cast: INTEGER
+    stored_by_oid: INTEGER
+    table_group_oid: INTEGER
+    table_partition_by_oid: INTEGER
+    table_partitions_oid: INTEGER
+    tbpartitions_oid: INTEGER
+    with: TEXT
+    with_data: INTEGER
+}
+
+entity my_sql_create_user_statement {
+    oid: INTEGER <<PK>>
+    is_if_not_exists: INTEGER
+    users: TEXT
+}
+
+entity my_sql_delete_statement {
+    oid: INTEGER <<PK>>
+    force_partition_oid: INTEGER
+    hints_size: INTEGER
+    is_force_all_partitions: INTEGER
+    is_fulltext_dictionary: INTEGER
+    is_ignore: INTEGER
+    is_low_priority: INTEGER
+    is_quick: INTEGER
+    limit_oid: INTEGER
+    order_by_oid: INTEGER
+}
+
+entity my_sql_disabled_plan_cache_statement {
+    oid: INTEGER <<PK>>
+}
+
+entity my_sql_event_schedule {
+    oid: INTEGER <<PK>>
+    at_oid: INTEGER
+    ends_oid: INTEGER
+    every_oid: INTEGER
+    starts_oid: INTEGER
+}
+
+entity my_sql_execute_for_ads_statement {
+    oid: INTEGER <<PK>>
+    action_oid: INTEGER
+    role_oid: INTEGER
+    status_oid: INTEGER
+    target_id_oid: INTEGER
+}
+
+entity my_sql_execute_statement {
+    oid: INTEGER <<PK>>
+    statement_name_oid: INTEGER
+}
+
+entity my_sql_explain_plan_cache_statement {
+    oid: INTEGER <<PK>>
+}
+
+entity my_sql_explain_statement {
+    oid: INTEGER <<PK>>
+    column_name_oid: INTEGER
+    connection_id_oid: INTEGER
+    is_describe: INTEGER
+    is_distribute_info: INTEGER
+    table_name_oid: INTEGER
+    wild_oid: INTEGER
+}
+
+entity my_sql_ext_partition {
+    oid: INTEGER <<PK>>
+    items: TEXT
+}
+
+entity my_sql_flashback_statement {
+    oid: INTEGER <<PK>>
+    name_oid: INTEGER
+    rename_to_oid: INTEGER
+}
+
+entity my_sql_flush_statement {
+    oid: INTEGER <<PK>>
+    is_binary_logs: INTEGER
+    is_des_key_file: INTEGER
+    is_engine_logs: INTEGER
+    is_error_logs: INTEGER
+    is_for_export: INTEGER
+    is_general_logs: INTEGER
+    is_hots: INTEGER
+    is_local: INTEGER
+    is_logs: INTEGER
+    is_master: INTEGER
+    is_no_write_to_binlog: INTEGER
+    is_optimizer_costs: INTEGER
+    is_privileges: INTEGER
+    is_query_cache: INTEGER
+    is_relay_logs: INTEGER
+    is_slow_logs: INTEGER
+    is_status: INTEGER
+    is_table_option: INTEGER
+    is_user_resources: INTEGER
+    is_with_read_lock: INTEGER
+    relay_logs_for_channel_oid: INTEGER
+    version_oid: INTEGER
+}
+
+entity my_sql_help_statement {
+    oid: INTEGER <<PK>>
+    content_oid: INTEGER
+}
+
+entity my_sql_hint_statement {
+    oid: INTEGER <<PK>>
+    hint_version: INTEGER
+}
+
+entity my_sql_insert_statement {
+    oid: INTEGER <<PK>>
+    hints_size: INTEGER
+    is_delayed: INTEGER
+    is_fulltext_dictionary: INTEGER
+    is_high_priority: INTEGER
+    is_if_not_exists: INTEGER
+    is_ignore: INTEGER
+    is_low_priority: INTEGER
+    is_overwrite: INTEGER
+    is_rollback_on_fail: INTEGER
+}
+
+entity my_sql_kill_statement {
+    oid: INTEGER <<PK>>
+    thread_id_oid: INTEGER
+    type: TEXT
+}
+
+entity my_sql_load_data_in_file_statement {
+    oid: INTEGER <<PK>>
+    charset: TEXT
+    columns_enclosed_by_oid: INTEGER
+    columns_escaped_oid: INTEGER
+    columns_terminated_by_oid: INTEGER
+    file_name_oid: INTEGER
+    ignore_lines_number_oid: INTEGER
+    is_columns_enclosed_optionally: INTEGER
+    is_concurrent: INTEGER
+    is_ignore: INTEGER
+    is_local: INTEGER
+    is_low_priority: INTEGER
+    is_replicate: INTEGER
+    lines_starting_by_oid: INTEGER
+    lines_terminated_by_oid: INTEGER
+    table_name_oid: INTEGER
+}
+
+entity my_sql_load_xml_statement {
+    oid: INTEGER <<PK>>
+    charset: TEXT
+    file_name_oid: INTEGER
+    ignore_lines_number_oid: INTEGER
+    is_concurrent: INTEGER
+    is_ignore: INTEGER
+    is_local: INTEGER
+    is_low_priority: INTEGER
+    is_replicate: INTEGER
+    rows_identified_by_oid: INTEGER
+    table_name_oid: INTEGER
+}
+
+entity my_sql_lock_table_statement {
+    oid: INTEGER <<PK>>
+    items: TEXT
+}
+
+entity my_sql_manage_instance_group_statement {
+    oid: INTEGER <<PK>>
+    group_names_to_string: TEXT
+    operation_oid: INTEGER
+    replication_oid: INTEGER
+}
+
+entity my_sql_migrate_statement {
+    oid: INTEGER <<PK>>
+    from_ins_id_oid: INTEGER
+    from_ins_ip_oid: INTEGER
+    from_ins_port_oid: INTEGER
+    from_ins_status_oid: INTEGER
+    migrate_type_oid: INTEGER
+    schema_oid: INTEGER
+    shard_names_oid: INTEGER
+    to_ins_id_oid: INTEGER
+    to_ins_ip_oid: INTEGER
+    to_ins_port_oid: INTEGER
+    to_ins_status_oid: INTEGER
+}
+
+entity my_sql_optimize_statement {
+    oid: INTEGER <<PK>>
+    is_local: INTEGER
+    is_no_write_to_binlog: INTEGER
+}
+
+entity my_sql_partition_by_key {
+    oid: INTEGER <<PK>>
+    algorithm: INTEGER
+}
+
+entity my_sql_prepare_statement {
+    oid: INTEGER <<PK>>
+    from_oid: INTEGER
+    name_oid: INTEGER
+}
+
+entity my_sql_raft_leader_transfer_statement {
+    oid: INTEGER <<PK>>
+    from_oid: INTEGER
+    shard_oid: INTEGER
+    timeout_oid: INTEGER
+    to_oid: INTEGER
+}
+
+entity my_sql_raft_member_change_statement {
+    oid: INTEGER <<PK>>
+    host_oid: INTEGER
+    is_force: INTEGER
+    is_no_leader: INTEGER
+    shard_oid: INTEGER
+    status_oid: INTEGER
+}
+
+entity my_sql_rename_sequence_statement {
+    oid: INTEGER <<PK>>
+    name_oid: INTEGER
+    to_oid: INTEGER
+}
+
+entity my_sql_rename_table_statement {
+    oid: INTEGER <<PK>>
+    items: TEXT
+}
+
+entity my_sql_reset_statement {
+    oid: INTEGER <<PK>>
+    options: TEXT
+}
+
+entity my_sql_select_query_block {
+    oid: INTEGER <<PK>>
+    cache: INTEGER
+    force_partition_oid: INTEGER
+    hints_size: INTEGER
+    is_big_result: INTEGER
+    is_buffer_result: INTEGER
+    is_calc_found_rows: INTEGER
+    is_hign_priority: INTEGER
+    is_lock_in_share_mode: INTEGER
+    is_small_result: INTEGER
+    is_straight_join: INTEGER
+    procedure_name_oid: INTEGER
+}
+
+entity my_sql_set_transaction_statement {
+    oid: INTEGER <<PK>>
+    access_model: TEXT
+    global: INTEGER
+    is_local: INTEGER
+    isolation_level: TEXT
+    policy_oid: INTEGER
+    session: INTEGER
+}
+
+entity my_sql_show_authors_statement {
+    oid: INTEGER <<PK>>
+}
+
+entity my_sql_show_bin_log_events_statement {
+    oid: INTEGER <<PK>>
+    from_oid: INTEGER
+    in_oid: INTEGER
+    limit_oid: INTEGER
+}
+
+entity my_sql_show_binary_logs_statement {
+    oid: INTEGER <<PK>>
+}
+
+entity my_sql_show_broadcasts_statement {
+    oid: INTEGER <<PK>>
+    limit_oid: INTEGER
+    order_by_oid: INTEGER
+    where_oid: INTEGER
+}
+
+entity my_sql_show_character_set_statement {
+    oid: INTEGER <<PK>>
+    pattern_oid: INTEGER
+    where_oid: INTEGER
+}
+
+entity my_sql_show_cluster_name_statement {
+    oid: INTEGER <<PK>>
+}
+
+entity my_sql_show_collation_statement {
+    oid: INTEGER <<PK>>
+    pattern_oid: INTEGER
+    where_oid: INTEGER
+}
+
+entity my_sql_show_config_statement {
+    oid: INTEGER <<PK>>
+    name_oid: INTEGER
+}
+
+entity my_sql_show_contributors_statement {
+    oid: INTEGER <<PK>>
+}
+
+entity my_sql_show_create_database_statement {
+    oid: INTEGER <<PK>>
+    database_oid: INTEGER
+    is_if_not_exists: INTEGER
+}
+
+entity my_sql_show_create_event_statement {
+    oid: INTEGER <<PK>>
+    event_name_oid: INTEGER
+}
+
+entity my_sql_show_create_function_statement {
+    oid: INTEGER <<PK>>
+    name_oid: INTEGER
+}
+
+entity my_sql_show_create_procedure_statement {
+    oid: INTEGER <<PK>>
+    name_oid: INTEGER
+}
+
+entity my_sql_show_create_trigger_statement {
+    oid: INTEGER <<PK>>
+    name_oid: INTEGER
+}
+
+entity my_sql_show_database_status_statement {
+    oid: INTEGER <<PK>>
+    is_full: INTEGER
+    limit_oid: INTEGER
+    name_oid: INTEGER
+    order_by_oid: INTEGER
+    where_oid: INTEGER
+}
+
+entity my_sql_show_datasources_statement {
+    oid: INTEGER <<PK>>
+    limit_oid: INTEGER
+    order_by_oid: INTEGER
+    where_oid: INTEGER
+}
+
+entity my_sql_show_ddl_status_statement {
+    oid: INTEGER <<PK>>
+    limit_oid: INTEGER
+    order_by_oid: INTEGER
+    where_oid: INTEGER
+}
+
+entity my_sql_show_ds_statement {
+    oid: INTEGER <<PK>>
+    limit_oid: INTEGER
+    order_by_oid: INTEGER
+    where_oid: INTEGER
+}
+
+entity my_sql_show_engine_statement {
+    oid: INTEGER <<PK>>
+    name_oid: INTEGER
+    option: TEXT
+}
+
+entity my_sql_show_engines_statement {
+    oid: INTEGER <<PK>>
+    is_storage: INTEGER
+}
+
+entity my_sql_show_errors_statement {
+    oid: INTEGER <<PK>>
+    is_count: INTEGER
+    limit_oid: INTEGER
+}
+
+entity my_sql_show_events_statement {
+    oid: INTEGER <<PK>>
+    like_oid: INTEGER
+    schema_oid: INTEGER
+    where_oid: INTEGER
+}
+
+entity my_sql_show_function_code_statement {
+    oid: INTEGER <<PK>>
+    name_oid: INTEGER
+}
+
+entity my_sql_show_function_status_statement {
+    oid: INTEGER <<PK>>
+    like_oid: INTEGER
+    where_oid: INTEGER
+}
+
+entity my_sql_show_grants_statement {
+    oid: INTEGER <<PK>>
+}
+
+entity my_sql_show_hms_meta_statement {
+    oid: INTEGER <<PK>>
+    name_oid: INTEGER
+    schema: TEXT
+    table_name: TEXT
+}
+
+entity my_sql_show_help_statement {
+    oid: INTEGER <<PK>>
+    limit_oid: INTEGER
+    order_by_oid: INTEGER
+    where_oid: INTEGER
+}
+
+entity my_sql_show_job_status_statement {
+    oid: INTEGER <<PK>>
+    is_sync: INTEGER
+    where_oid: INTEGER
+}
+
+entity my_sql_show_master_logs_statement {
+    oid: INTEGER <<PK>>
+}
+
+entity my_sql_show_master_status_statement {
+    oid: INTEGER <<PK>>
+}
+
+entity my_sql_show_migrate_task_status_statement {
+    oid: INTEGER <<PK>>
+    where_oid: INTEGER
+}
+
+entity my_sql_show_node_statement {
+    oid: INTEGER <<PK>>
+    limit_oid: INTEGER
+    order_by_oid: INTEGER
+    where_oid: INTEGER
+}
+
+entity my_sql_show_open_tables_statement {
+    oid: INTEGER <<PK>>
+    database_oid: INTEGER
+    like_oid: INTEGER
+    where_oid: INTEGER
+}
+
+entity my_sql_show_partitions_statement {
+    oid: INTEGER <<PK>>
+    name_oid: INTEGER
+}
+
+entity my_sql_show_physical_processlist_statement {
+    oid: INTEGER <<PK>>
+    is_full: INTEGER
+}
+
+entity my_sql_show_plan_cache_statement {
+    oid: INTEGER <<PK>>
+    select_oid: INTEGER
+}
+
+entity my_sql_show_plan_cache_status_statement {
+    oid: INTEGER <<PK>>
+}
+
+entity my_sql_show_plugins_statement {
+    oid: INTEGER <<PK>>
+}
+
+entity my_sql_show_privileges_statement {
+    oid: INTEGER <<PK>>
+}
+
+entity my_sql_show_procedure_code_statement {
+    oid: INTEGER <<PK>>
+    name_oid: INTEGER
+}
+
+entity my_sql_show_procedure_status_statement {
+    oid: INTEGER <<PK>>
+    like_oid: INTEGER
+    where_oid: INTEGER
+}
+
+entity my_sql_show_process_list_statement {
+    oid: INTEGER <<PK>>
+}
+
+entity my_sql_show_profile_statement {
+    oid: INTEGER <<PK>>
+    for_query_oid: INTEGER
+    limit_oid: INTEGER
+    types: TEXT
+}
+
+entity my_sql_show_profiles_statement {
+    oid: INTEGER <<PK>>
+}
+
+entity my_sql_show_relay_log_events_statement {
+    oid: INTEGER <<PK>>
+    from_oid: INTEGER
+    limit_oid: INTEGER
+    log_name_oid: INTEGER
+}
+
+entity my_sql_show_rule_statement {
+    oid: INTEGER <<PK>>
+    is_full: INTEGER
+    is_version: INTEGER
+    limit_oid: INTEGER
+    name_oid: INTEGER
+    order_by_oid: INTEGER
+    where_oid: INTEGER
+}
+
+entity my_sql_show_rule_status_statement {
+    oid: INTEGER <<PK>>
+    is_full: INTEGER
+    is_lite: INTEGER
+    is_version: INTEGER
+    limit_oid: INTEGER
+    order_by_oid: INTEGER
+    where_oid: INTEGER
+}
+
+entity my_sql_show_sequences_statement {
+    oid: INTEGER <<PK>>
+    limit_oid: INTEGER
+    order_by_oid: INTEGER
+    where_oid: INTEGER
+}
+
+entity my_sql_show_slave_hosts_statement {
+    oid: INTEGER <<PK>>
+}
+
+entity my_sql_show_slave_status_statement {
+    oid: INTEGER <<PK>>
+}
+
+entity my_sql_show_slow_statement {
+    oid: INTEGER <<PK>>
+    is_full: INTEGER
+    is_physical: INTEGER
+    limit_oid: INTEGER
+    order_by_oid: INTEGER
+    where_oid: INTEGER
+}
+
+entity my_sql_show_status_statement {
+    oid: INTEGER <<PK>>
+    is_global: INTEGER
+    is_session: INTEGER
+    like_oid: INTEGER
+    where_oid: INTEGER
+}
+
+entity my_sql_show_table_status_statement {
+    oid: INTEGER <<PK>>
+    database_oid: INTEGER
+    like_oid: INTEGER
+    table_group_oid: INTEGER
+    where_oid: INTEGER
+}
+
+entity my_sql_show_topology_statement {
+    oid: INTEGER <<PK>>
+    is_full: INTEGER
+    limit_oid: INTEGER
+    name_oid: INTEGER
+    order_by_oid: INTEGER
+    where_oid: INTEGER
+}
+
+entity my_sql_show_trace_statement {
+    oid: INTEGER <<PK>>
+    limit_oid: INTEGER
+    order_by_oid: INTEGER
+    where_oid: INTEGER
+}
+
+entity my_sql_show_triggers_statement {
+    oid: INTEGER <<PK>>
+    database_oid: INTEGER
+    like_oid: INTEGER
+    where_oid: INTEGER
+}
+
+entity my_sql_show_warnings_statement {
+    oid: INTEGER <<PK>>
+    is_count: INTEGER
+    limit_oid: INTEGER
+}
+
+entity my_sql_sub_partition_by_key {
+    oid: INTEGER <<PK>>
+    algorithm: INTEGER
+}
+
+entity my_sql_sub_partition_by_list {
+    oid: INTEGER <<PK>>
+}
+
+entity my_sql_sub_partition_by_value {
+    oid: INTEGER <<PK>>
+}
+
+entity my_sql_table_index {
+    oid: INTEGER <<PK>>
+    algorithm: TEXT
+    analyzer_name_oid: INTEGER
+    comment_oid: INTEGER
+    db_partition_by_oid: INTEGER
+    distance_measure: TEXT
+    index_analyzer_name_oid: INTEGER
+    index_definition_oid: INTEGER
+    index_type: TEXT
+    is_global: INTEGER
+    is_local: INTEGER
+    name_oid: INTEGER
+    query_analyzer_name_oid: INTEGER
+    table_partition_by_oid: INTEGER
+    table_partitions_oid: INTEGER
+    with_dic_name_oid: INTEGER
+}
+
+entity my_sql_unlock_tables_statement {
+    oid: INTEGER <<PK>>
+}
+
+entity my_sql_update_plan_cache_statement {
+    oid: INTEGER <<PK>>
+    form_select_oid: INTEGER
+    to_select_oid: INTEGER
+}
+
+entity my_sql_update_statement {
+    oid: INTEGER <<PK>>
+    force_partition_oid: INTEGER
+    hints_size: INTEGER
+    is_commit_on_success: INTEGER
+    is_force_all_partitions: INTEGER
+    is_ignore: INTEGER
+    is_low_priority: INTEGER
+    is_query_on_pk: INTEGER
+    is_roll_back_on_fail: INTEGER
+    limit_oid: INTEGER
+    target_affect_row_oid: INTEGER
+}
+
+entity my_sql_update_table_source {
+    oid: INTEGER <<PK>>
+    update_oid: INTEGER
+}
+
+entity mysql_alter_full_text_statement {
+    oid: INTEGER <<PK>>
+    item_oid: INTEGER
+    name_oid: INTEGER
+    type: TEXT
+}
+
+entity mysql_alter_table_alter_check {
+    oid: INTEGER <<PK>>
+    enforced: INTEGER
+    name_oid: INTEGER
+}
+
+entity mysql_create_full_text_analyzer_statement {
+    oid: INTEGER <<PK>>
+    charfilters: TEXT
+    name_oid: INTEGER
+    tokenizer: TEXT
+    tokenizers: TEXT
+}
+
+entity mysql_create_full_text_char_filter_statement {
+    oid: INTEGER <<PK>>
+    name_oid: INTEGER
+    type_name_oid: INTEGER
+}
+
+entity mysql_create_full_text_dictionary_statement {
+    oid: INTEGER <<PK>>
+    column_oid: INTEGER
+    comment: TEXT
+    name_oid: INTEGER
+}
+
+entity mysql_create_full_text_token_filter_statement {
+    oid: INTEGER <<PK>>
+    name_oid: INTEGER
+    type_name_oid: INTEGER
+}
+
+entity mysql_create_full_text_tokenizer_statement {
+    oid: INTEGER <<PK>>
+    name_oid: INTEGER
+    type_name_oid: INTEGER
+    user_defined_dict_oid: INTEGER
+}
+
+entity mysql_deallocate_prepare_statement {
+    oid: INTEGER <<PK>>
+    statement_name_oid: INTEGER
+}
+
+entity mysql_drop_full_text_statement {
+    oid: INTEGER <<PK>>
+    name_oid: INTEGER
+    type: TEXT
+}
+
+entity mysql_show_create_full_text_statement {
+    oid: INTEGER <<PK>>
+    name_oid: INTEGER
+    type: TEXT
+}
+
+entity mysql_show_db_lock_statement {
+    oid: INTEGER <<PK>>
+}
+
+entity mysql_show_full_text_statement {
+    oid: INTEGER <<PK>>
+    type: TEXT
+}
+
+entity mysql_show_htc_statement {
+    oid: INTEGER <<PK>>
+    is_full: INTEGER
+    is_his: INTEGER
+}
+
+entity mysql_show_stc_statement {
+    oid: INTEGER <<PK>>
+    is_full: INTEGER
+    is_his: INTEGER
+}
+
+entity sql_alter_resource_group_statement {
+    oid: INTEGER <<PK>>
+    enable: INTEGER
+    name_oid: INTEGER
+    properties: TEXT
+}
+
+entity sql_create_resource_group_statement {
+    oid: INTEGER <<PK>>
+    enable: INTEGER
+    name_oid: INTEGER
+    properties: TEXT
+}
+
+entity sql_list_resource_group_statement {
+    oid: INTEGER <<PK>>
+}
+
+entity odps_add_account_provider_statement {
+    oid: INTEGER <<PK>>
+    provider_oid: INTEGER
+}
+
+entity odps_add_file_statement {
+    oid: INTEGER <<PK>>
+    alias: TEXT
+    comment_oid: INTEGER
+    file: TEXT
+    is_force: INTEGER
+    type: TEXT
+}
+
+entity odps_add_statistic_statement {
+    oid: INTEGER <<PK>>
+    statistic_clause_oid: INTEGER
+    table_oid: INTEGER
+}
+
+entity odps_add_table_statement {
+    oid: INTEGER <<PK>>
+    comment_oid: INTEGER
+    is_force: INTEGER
+    table_oid: INTEGER
+    to_package_oid: INTEGER
+}
+
+entity odps_add_user_statement {
+    oid: INTEGER <<PK>>
+    user_oid: INTEGER
+}
+
+entity odps_alter_table_set_change_logs {
+    oid: INTEGER <<PK>>
+    value_oid: INTEGER
+}
+
+entity odps_alter_table_set_file_format {
+    oid: INTEGER <<PK>>
+    value_oid: INTEGER
+}
+
+entity odps_count_statement {
+    oid: INTEGER <<PK>>
+    table_oid: INTEGER
+}
+
+entity odps_create_table_statement {
+    oid: INTEGER <<PK>>
+    lifecycle_oid: INTEGER
+    like_oid: INTEGER
+    stored_by_oid: INTEGER
+}
+
+entity odps_declare_variable_statement {
+    oid: INTEGER <<PK>>
+    data_type_oid: INTEGER
+    init_value_oid: INTEGER
+    variant: TEXT
+}
+
+entity odps_exstore_statement {
+    oid: INTEGER <<PK>>
+    table_oid: INTEGER
+}
+
+entity odps_grant_stmt {
+    oid: INTEGER <<PK>>
+    expire_oid: INTEGER
+    is_label: INTEGER
+    is_super: INTEGER
+    label_oid: INTEGER
+    subject_type: TEXT
+}
+
+entity odps_install_package_statement {
+    oid: INTEGER <<PK>>
+    package_name_oid: INTEGER
+}
+
+entity odps_list_stmt {
+    oid: INTEGER <<PK>>
+    object_oid: INTEGER
+}
+
+entity odps_new_expr {
+    oid: INTEGER <<PK>>
+    is_array: INTEGER
+}
+
+entity odps_query_alias_statement {
+    oid: INTEGER <<PK>>
+    is_cache: INTEGER
+    statement_oid: INTEGER
+    variant: TEXT
+}
+
+entity odps_read_statement {
+    oid: INTEGER <<PK>>
+    row_count_oid: INTEGER
+    table_oid: INTEGER
+}
+
+entity odps_remove_statistic_statement {
+    oid: INTEGER <<PK>>
+    statistic_clause_oid: INTEGER
+    table_oid: INTEGER
+}
+
+entity odps_remove_user_statement {
+    oid: INTEGER <<PK>>
+    user_oid: INTEGER
+}
+
+entity odps_restore_statement {
+    oid: INTEGER <<PK>>
+    alias: TEXT
+    table_oid: INTEGER
+    to_oid: INTEGER
+}
+
+entity odps_select_query_block {
+    oid: INTEGER <<PK>>
+    z_order_by_oid: INTEGER
+}
+
+entity odps_set_label_statement {
+    oid: INTEGER <<PK>>
+    label: TEXT
+    project_oid: INTEGER
+    table_oid: INTEGER
+    user_oid: INTEGER
+}
+
+entity odps_show_changelogs_statement {
+    oid: INTEGER <<PK>>
+    id_oid: INTEGER
+    is_tables: INTEGER
+    table_oid: INTEGER
+}
+
+entity odps_show_grants_stmt {
+    oid: INTEGER <<PK>>
+    is_label: INTEGER
+    object_type_oid: INTEGER
+    user_oid: INTEGER
+}
+
+entity odps_transform_expr {
+    oid: INTEGER <<PK>>
+    input_row_format_oid: INTEGER
+    output_row_format_oid: INTEGER
+    using_oid: INTEGER
+}
+
+entity odps_udtfsql_select_item {
+    oid: INTEGER <<PK>>
+}
+
+entity odps_undo_table_statement {
+    oid: INTEGER <<PK>>
+    table_oid: INTEGER
+    to_oid: INTEGER
+}
+
+entity odps_unload_statement {
+    oid: INTEGER <<PK>>
+    from_oid: INTEGER
+    location_oid: INTEGER
+    row_format_oid: INTEGER
+    stored_as_oid: INTEGER
+}
+
+entity oracle_data_type_interval_day {
+    oid: INTEGER <<PK>>
+    is_to_second: INTEGER
+}
+
+entity oracle_data_type_interval_year {
+    oid: INTEGER <<PK>>
+}
+
+entity cycle_clause {
+    oid: INTEGER <<PK>>
+    default_value_oid: INTEGER
+    mark_oid: INTEGER
+    value_oid: INTEGER
+}
+
+entity model_clause {
+    oid: INTEGER <<PK>>
+    cell_reference_options: TEXT
+    main_model: TEXT
+    reference_model_clauses: TEXT
+    return_rows_clause: TEXT
+}
+
+entity oracle_lob_storage_clause {
+    oid: INTEGER <<PK>>
+    cache: INTEGER
+    chunk_oid: INTEGER
+    compress: INTEGER
+    enable: INTEGER
+    is_basic_file: INTEGER
+    is_retention: INTEGER
+    is_secure_file: INTEGER
+    keep_duplicate: INTEGER
+    logging: INTEGER
+    pctversion_oid: INTEGER
+    segement_name_oid: INTEGER
+    storage_clause_oid: INTEGER
+}
+
+entity oracle_returning_clause {
+    oid: INTEGER <<PK>>
+}
+
+entity oracle_storage_clause {
+    oid: INTEGER <<PK>>
+    buffer_pool_oid: INTEGER
+    cell_flash_cache: TEXT
+    flash_cache: TEXT
+    free_list_groups_oid: INTEGER
+    free_lists_oid: INTEGER
+    initial_oid: INTEGER
+    max_extents_oid: INTEGER
+    max_size_oid: INTEGER
+    min_extents_oid: INTEGER
+    next_oid: INTEGER
+    objno_oid: INTEGER
+    pct_increase_oid: INTEGER
+}
+
+entity oracle_with_subquery_entry {
+    oid: INTEGER <<PK>>
+    cycle_clause_oid: INTEGER
+    search_clause_oid: INTEGER
+}
+
+entity partition_extension_clause {
+    oid: INTEGER <<PK>>
+    is_sub_partition: INTEGER
+    partition_oid: INTEGER
+}
+
+entity sample_clause {
+    oid: INTEGER <<PK>>
+    is_block: INTEGER
+    seed_value_oid: INTEGER
+}
+
+entity search_clause {
+    oid: INTEGER <<PK>>
+    ordering_column_oid: INTEGER
+    type: TEXT
+}
+
+entity oracle_analytic {
+    oid: INTEGER <<PK>>
+    windowing_oid: INTEGER
+}
+
+entity oracle_analytic_windowing {
+    oid: INTEGER <<PK>>
+    expr_oid: INTEGER
+    type: TEXT
+}
+
+entity oracle_argument_expr {
+    oid: INTEGER <<PK>>
+    argument_name: TEXT
+    value_oid: INTEGER
+}
+
+entity oracle_binary_double_expr {
+    oid: INTEGER <<PK>>
+    number: TEXT
+    value: TEXT
+}
+
+entity oracle_binary_float_expr {
+    oid: INTEGER <<PK>>
+    number: TEXT
+    value: TEXT
+}
+
+entity oracle_cursor_expr {
+    oid: INTEGER <<PK>>
+    query_oid: INTEGER
+}
+
+entity oracle_datetime_expr {
+    oid: INTEGER <<PK>>
+    expr_oid: INTEGER
+    time_zone_oid: INTEGER
+}
+
+entity oracle_interval_expr {
+    oid: INTEGER <<PK>>
+    factional_seconds_precision: INTEGER
+    precision_oid: INTEGER
+    to_factional_seconds_precision_oid: INTEGER
+    to_type: TEXT
+    type: TEXT
+    value_oid: INTEGER
+}
+
+entity oracle_is_of_type_expr {
+    oid: INTEGER <<PK>>
+    expr_oid: INTEGER
+}
+
+entity oracle_is_set_expr {
+    oid: INTEGER <<PK>>
+    nested_table_oid: INTEGER
+}
+
+entity oracle_outer_expr {
+    oid: INTEGER <<PK>>
+    expr_oid: INTEGER
+}
+
+entity oracle_range_expr {
+    oid: INTEGER <<PK>>
+    low_bound_oid: INTEGER
+    up_bound_oid: INTEGER
+}
+
+entity oracle_sysdate_expr {
+    oid: INTEGER <<PK>>
+    option: TEXT
+}
+
+entity oracle_treat_expr {
+    oid: INTEGER <<PK>>
+    expr_oid: INTEGER
+    is_ref: INTEGER
+    type_oid: INTEGER
+}
+
+entity oracle_alter_session_statement {
+    oid: INTEGER <<PK>>
+}
+
+entity oracle_alter_synonym_statement {
+    oid: INTEGER <<PK>>
+    enable: INTEGER
+    is_compile: INTEGER
+    name_oid: INTEGER
+}
+
+entity oracle_alter_table_drop_partition {
+    oid: INTEGER <<PK>>
+    name_oid: INTEGER
+}
+
+entity oracle_alter_table_modify {
+    oid: INTEGER <<PK>>
+}
+
+entity oracle_alter_table_move_tablespace {
+    oid: INTEGER <<PK>>
+    name_oid: INTEGER
+}
+
+entity oracle_alter_table_split_partition {
+    oid: INTEGER <<PK>>
+    into: TEXT
+    name_oid: INTEGER
+    update_indexes: TEXT
+}
+
+entity oracle_alter_table_truncate_partition {
+    oid: INTEGER <<PK>>
+    name_oid: INTEGER
+}
+
+entity oracle_alter_tablespace_add_data_file {
+    oid: INTEGER <<PK>>
+}
+
+entity oracle_alter_tablespace_statement {
+    oid: INTEGER <<PK>>
+    item_oid: INTEGER
+    name_oid: INTEGER
+}
+
+entity oracle_alter_trigger_statement {
+    oid: INTEGER <<PK>>
+    enable: INTEGER
+    is_compile: INTEGER
+    name_oid: INTEGER
+}
+
+entity oracle_alter_view_statement {
+    oid: INTEGER <<PK>>
+    enable: INTEGER
+    is_compile: INTEGER
+    name_oid: INTEGER
+}
+
+entity oracle_check {
+    oid: INTEGER <<PK>>
+    deferrable: INTEGER
+    exceptions_into_oid: INTEGER
+    initially: TEXT
+    using_oid: INTEGER
+}
+
+entity oracle_continue_statement {
+    oid: INTEGER <<PK>>
+    label: TEXT
+    when_oid: INTEGER
+}
+
+entity oracle_create_database_db_link_statement {
+    oid: INTEGER <<PK>>
+    authenticated_password: TEXT
+    authenticated_user_oid: INTEGER
+    is_public: INTEGER
+    is_shared: INTEGER
+    name_oid: INTEGER
+    password: TEXT
+    user_oid: INTEGER
+    using_oid: INTEGER
+}
+
+entity oracle_create_index_statement {
+    oid: INTEGER <<PK>>
+    compress: INTEGER
+    compress_level: INTEGER
+    enable: INTEGER
+    free_lists: INTEGER
+    initrans: INTEGER
+    is_cluster: INTEGER
+    is_compress_for_oltp: INTEGER
+    is_compute_statistics: INTEGER
+    is_global: INTEGER
+    is_index_only_top_level: INTEGER
+    is_local: INTEGER
+    is_no_parallel: INTEGER
+    is_online: INTEGER
+    is_reverse: INTEGER
+    logging: INTEGER
+    maxtrans: INTEGER
+    parallel_oid: INTEGER
+    pctfree: INTEGER
+    pctincrease: INTEGER
+    pctthreshold: INTEGER
+    pctused: INTEGER
+    sort: INTEGER
+    storage: TEXT
+    tablespace_oid: INTEGER
+}
+
+entity oracle_create_package_statement {
+    oid: INTEGER <<PK>>
+    is_body: INTEGER
+    is_or_replace: INTEGER
+    name_oid: INTEGER
+}
+
+entity oracle_create_synonym_statement {
+    oid: INTEGER <<PK>>
+    is_or_replace: INTEGER
+    is_public: INTEGER
+    name_oid: INTEGER
+    object_oid: INTEGER
+}
+
+entity oracle_create_table_statement {
+    oid: INTEGER <<PK>>
+    cache: INTEGER
+    cluster_oid: INTEGER
+    compress_level: INTEGER
+    deferred_segment_creation: TEXT
+    enable_row_movement: INTEGER
+    initrans: INTEGER
+    is_compress_for_oltp: INTEGER
+    is_cursor_specific_segment: INTEGER
+    is_in_memory_metadata: INTEGER
+    is_monitoring: INTEGER
+    is_on_commit_delete_rows: INTEGER
+    lob_storage_oid: INTEGER
+    maxtrans: INTEGER
+    of_oid: INTEGER
+    oid_index: TEXT
+    organization: TEXT
+    parallel: INTEGER
+    parallel_value_oid: INTEGER
+    pctfree: INTEGER
+    pctincrease: INTEGER
+    pctused: INTEGER
+    storage_oid: INTEGER
+    xml_type_column_properties_oid: INTEGER
+}
+
+entity oracle_create_type_statement {
+    oid: INTEGER <<PK>>
+    auth_id_oid: INTEGER
+    instantiable: INTEGER
+    is_body: INTEGER
+    is_final: INTEGER
+    is_force: INTEGER
+    is_object: INTEGER
+    is_or_replace: INTEGER
+    is_paren: INTEGER
+    name_oid: INTEGER
+    oid_oid: INTEGER
+    table_of_oid: INTEGER
+    under_oid: INTEGER
+    varray_data_type_oid: INTEGER
+    varray_size_limit_oid: INTEGER
+    wrapped_source: TEXT
+}
+
+entity oracle_delete_statement {
+    oid: INTEGER <<PK>>
+    returning_oid: INTEGER
+}
+
+entity oracle_drop_db_link_statement {
+    oid: INTEGER <<PK>>
+    is_public: INTEGER
+    name_oid: INTEGER
+}
+
+entity oracle_exception_statement {
+    oid: INTEGER <<PK>>
+    items: TEXT
+}
+
+entity oracle_execute_immediate_statement {
+    oid: INTEGER <<PK>>
+    dynamic_sql_oid: INTEGER
+}
+
+entity oracle_exit_statement {
+    oid: INTEGER <<PK>>
+    label: TEXT
+    when_oid: INTEGER
+}
+
+entity oracle_explain_statement {
+    oid: INTEGER <<PK>>
+    into_oid: INTEGER
+    statement_id_oid: INTEGER
+}
+
+entity oracle_file_specification {
+    oid: INTEGER <<PK>>
+    auto_extend_on_oid: INTEGER
+    is_auto_extend_off: INTEGER
+    size_oid: INTEGER
+}
+
+entity oracle_for_statement {
+    oid: INTEGER <<PK>>
+    end_label_oid: INTEGER
+    is_all: INTEGER
+}
+
+entity oracle_foreign_key {
+    oid: INTEGER <<PK>>
+    deferrable: INTEGER
+    exceptions_into_oid: INTEGER
+    initially: TEXT
+    using_oid: INTEGER
+}
+
+entity oracle_goto_statement {
+    oid: INTEGER <<PK>>
+    label_oid: INTEGER
+}
+
+entity oracle_insert_statement {
+    oid: INTEGER <<PK>>
+    error_logging_oid: INTEGER
+    returning_oid: INTEGER
+}
+
+entity oracle_label_statement {
+    oid: INTEGER <<PK>>
+    label_oid: INTEGER
+}
+
+entity oracle_lock_table_statement {
+    oid: INTEGER <<PK>>
+    is_no_wait: INTEGER
+    lock_mode: TEXT
+    partition_oid: INTEGER
+    table_oid: INTEGER
+    wait_oid: INTEGER
+}
+
+entity oracle_multi_insert_statement {
+    oid: INTEGER <<PK>>
+    entries: TEXT
+    option: TEXT
+    sub_query_oid: INTEGER
+}
+
+entity oracle_pipe_row_statement {
+    oid: INTEGER <<PK>>
+}
+
+entity oracle_primary_key {
+    oid: INTEGER <<PK>>
+    deferrable: INTEGER
+    enable: INTEGER
+    exceptions_into_oid: INTEGER
+    initially: TEXT
+    using_oid: INTEGER
+}
+
+entity oracle_raise_statement {
+    oid: INTEGER <<PK>>
+    exception_oid: INTEGER
+}
+
+entity oracle_run_statement {
+    oid: INTEGER <<PK>>
+    expr_oid: INTEGER
+}
+
+entity oracle_select_join {
+    oid: INTEGER <<PK>>
+    pivot_oid: INTEGER
+}
+
+entity oracle_select_pivot {
+    oid: INTEGER <<PK>>
+    is_xml: INTEGER
+    items: TEXT
+    pivot_in: TEXT
+}
+
+entity oracle_select_query_block {
+    oid: INTEGER <<PK>>
+    is_skip_locked: INTEGER
+    model_clause_oid: INTEGER
+}
+
+entity oracle_select_subquery_table_source {
+    oid: INTEGER <<PK>>
+    pivot_oid: INTEGER
+}
+
+entity oracle_select_table_reference {
+    oid: INTEGER <<PK>>
+    is_only: INTEGER
+    partition_oid: INTEGER
+    pivot_oid: INTEGER
+    sample_clause_oid: INTEGER
+}
+
+entity oracle_select_un_pivot {
+    oid: INTEGER <<PK>>
+    nulls_include_type: TEXT
+    pivot_in: TEXT
+}
+
+entity oracle_set_transaction_statement {
+    oid: INTEGER <<PK>>
+    is_read_only: INTEGER
+    is_write: INTEGER
+    name_oid: INTEGER
+}
+
+entity oracle_supplemental_id_key {
+    oid: INTEGER <<PK>>
+    is_all: INTEGER
+    is_foreign_key: INTEGER
+    is_primary_key: INTEGER
+    is_unique: INTEGER
+    is_unique_index: INTEGER
+}
+
+entity oracle_supplemental_log_grp {
+    oid: INTEGER <<PK>>
+    group_oid: INTEGER
+    is_always: INTEGER
+}
+
+entity oracle_unique {
+    oid: INTEGER <<PK>>
+    deferrable: INTEGER
+    exceptions_into_oid: INTEGER
+    initially: TEXT
+    using_oid: INTEGER
+}
+
+entity oracle_update_statement {
+    oid: INTEGER <<PK>>
+    alias: TEXT
+    hints_size: INTEGER
+    is_only: INTEGER
+}
+
+entity oracle_using_index_clause {
+    oid: INTEGER <<PK>>
+    enable: INTEGER
+    index: TEXT
+    is_compute_statistics: INTEGER
+    is_reverse: INTEGER
+}
+
+entity oracle_xml_column_properties {
+    oid: INTEGER <<PK>>
+    allow_any_schema: INTEGER
+    allow_non_schema: INTEGER
+    column_oid: INTEGER
+    storage: TEXT
+}
+
+entity oscar_top {
+    oid: INTEGER <<PK>>
+    expr_oid: INTEGER
+    is_percent: INTEGER
+    is_with_ties: INTEGER
+}
+
+entity oscar_alter_schema_statement {
+    oid: INTEGER <<PK>>
+    new_name_oid: INTEGER
+    new_owner_oid: INTEGER
+    schema_name_oid: INTEGER
+}
+
+entity oscar_connect_to_statement {
+    oid: INTEGER <<PK>>
+    target_oid: INTEGER
+}
+
+entity oscar_create_schema_statement {
+    oid: INTEGER <<PK>>
+    is_authorization: INTEGER
+    is_if_not_exists: INTEGER
+    schema_name_oid: INTEGER
+    user_name_oid: INTEGER
+}
+
+entity oscar_delete_statement {
+    oid: INTEGER <<PK>>
+    alias: TEXT
+    is_returning: INTEGER
+}
+
+entity oscar_drop_schema_statement {
+    oid: INTEGER <<PK>>
+    is_cascade: INTEGER
+    is_if_exists: INTEGER
+    is_restrict: INTEGER
+    schema_name_oid: INTEGER
+}
+
+entity oscar_function_table_source {
+    oid: INTEGER <<PK>>
+}
+
+entity oscar_insert_statement {
+    oid: INTEGER <<PK>>
+    is_default_values: INTEGER
+    is_on_conflict_do_nothing: INTEGER
+    on_conflict_constraint_oid: INTEGER
+    on_conflict_update_where_oid: INTEGER
+    on_conflict_where_oid: INTEGER
+    returning_oid: INTEGER
+    values: TEXT
+    values_list: TEXT
+}
+
+entity oscar_select_query_block {
+    oid: INTEGER <<PK>>
+    fetch: TEXT
+    for_clause: TEXT
+    into_option_local: TEXT
+    into_option_temp: TEXT
+    top_oid: INTEGER
+}
+
+entity oscar_select_statement {
+    oid: INTEGER <<PK>>
+}
+
+entity oscar_show_statement {
+    oid: INTEGER <<PK>>
+    expr_oid: INTEGER
+}
+
+entity oscar_start_transaction_statement {
+    oid: INTEGER <<PK>>
+}
+
+entity oscar_update_statement {
+    oid: INTEGER <<PK>>
+    is_only: INTEGER
+}
+
+entity pg_box_expr {
+    oid: INTEGER <<PK>>
+    value_oid: INTEGER
+}
+
+entity pg_cidr_expr {
+    oid: INTEGER <<PK>>
+    value_oid: INTEGER
+}
+
+entity pg_circle_expr {
+    oid: INTEGER <<PK>>
+    value_oid: INTEGER
+}
+
+entity pg_extract_expr {
+    oid: INTEGER <<PK>>
+    field: TEXT
+    source_oid: INTEGER
+}
+
+entity pg_inet_expr {
+    oid: INTEGER <<PK>>
+    value_oid: INTEGER
+}
+
+entity pg_line_segments_expr {
+    oid: INTEGER <<PK>>
+    value_oid: INTEGER
+}
+
+entity pg_mac_addr_expr {
+    oid: INTEGER <<PK>>
+    value_oid: INTEGER
+}
+
+entity pg_point_expr {
+    oid: INTEGER <<PK>>
+    value_oid: INTEGER
+}
+
+entity pg_polygon_expr {
+    oid: INTEGER <<PK>>
+    value_oid: INTEGER
+}
+
+entity pg_type_cast_expr {
+    oid: INTEGER <<PK>>
+}
+
+entity pg_alter_schema_statement {
+    oid: INTEGER <<PK>>
+    new_name_oid: INTEGER
+    new_owner_oid: INTEGER
+    schema_name_oid: INTEGER
+}
+
+entity pg_connect_to_statement {
+    oid: INTEGER <<PK>>
+    target_oid: INTEGER
+}
+
+entity pg_create_schema_statement {
+    oid: INTEGER <<PK>>
+    is_authorization: INTEGER
+    is_if_not_exists: INTEGER
+    schema_name_oid: INTEGER
+    user_name_oid: INTEGER
+}
+
+entity pg_delete_statement {
+    oid: INTEGER <<PK>>
+    alias: TEXT
+    is_returning: INTEGER
+}
+
+entity pg_drop_schema_statement {
+    oid: INTEGER <<PK>>
+    is_cascade: INTEGER
+    is_if_exists: INTEGER
+    is_restrict: INTEGER
+    schema_name_oid: INTEGER
+}
+
+entity pg_function_table_source {
+    oid: INTEGER <<PK>>
+}
+
+entity pg_insert_statement {
+    oid: INTEGER <<PK>>
+    is_default_values: INTEGER
+    is_on_conflict_do_nothing: INTEGER
+    on_conflict_constraint_oid: INTEGER
+    on_conflict_update_where_oid: INTEGER
+    on_conflict_where_oid: INTEGER
+    returning_oid: INTEGER
+    values: TEXT
+    values_list: TEXT
+}
+
+entity pg_select_query_block {
+    oid: INTEGER <<PK>>
+    fetch: TEXT
+    for_clause: TEXT
+    into_option: TEXT
+}
+
+entity pg_select_statement {
+    oid: INTEGER <<PK>>
+}
+
+entity pg_show_statement {
+    oid: INTEGER <<PK>>
+    expr_oid: INTEGER
+}
+
+entity pg_start_transaction_statement {
+    oid: INTEGER <<PK>>
+}
+
+entity pg_update_statement {
+    oid: INTEGER <<PK>>
+    is_only: INTEGER
+}
+
+entity sql_server_output {
+    oid: INTEGER <<PK>>
+    into_oid: INTEGER
+}
+
+entity sql_server_select_query_block {
+    oid: INTEGER <<PK>>
+    top_oid: INTEGER
+}
+
+entity sql_server_top {
+    oid: INTEGER <<PK>>
+    expr_oid: INTEGER
+    is_percent: INTEGER
+    is_with_ties: INTEGER
+}
+
+entity sql_server_object_reference_expr {
+    oid: INTEGER <<PK>>
+    database: TEXT
+    resolved_column_oid: INTEGER
+    schema: TEXT
+    server: TEXT
+    simple_name: TEXT
+}
+
+entity sql_server_exec_statement {
+    oid: INTEGER <<PK>>
+    module_name_oid: INTEGER
+    parameters: TEXT
+    return_status_oid: INTEGER
+}
+
+entity sql_server_insert_statement {
+    oid: INTEGER <<PK>>
+    is_default_values: INTEGER
+    output_oid: INTEGER
+    top_oid: INTEGER
+}
+
+entity sql_server_rollback_statement {
+    oid: INTEGER <<PK>>
+    is_work: INTEGER
+    name_oid: INTEGER
+}
+
+entity sql_server_set_transaction_isolation_level_statement {
+    oid: INTEGER <<PK>>
+    level: TEXT
+}
+
+entity sql_server_update_statement {
+    oid: INTEGER <<PK>>
+    output_oid: INTEGER
+    top_oid: INTEGER
+}
+
+entity sql_server_wait_for_statement {
+    oid: INTEGER <<PK>>
+    delay_oid: INTEGER
+    statement_oid: INTEGER
+    time_oid: INTEGER
+    timeout_oid: INTEGER
+}
+
+
+@enduml

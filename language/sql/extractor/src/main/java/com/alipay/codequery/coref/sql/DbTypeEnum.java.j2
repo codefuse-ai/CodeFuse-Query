@@ -1,0 +1,45 @@
+/*
+ * Automatically Generated From DbTypeEnum.java.j2.
+ * Do Not Edit Directly!
+ *
+ * Ant Group
+ * Copyright (c) 2004-2022 All Rights Reserved.
+ */
+package com.alipay.codequery.coref.sql;
+
+public enum DbTypeEnum {
+    {% for db_type in db_type_list %}
+    /**
+     * {{ db_type.upper() }} SQL
+     */
+    {{ db_type.upper() }}("{{ db_type.lower() }}"),
+    {% endfor %}
+    /**
+     * OTHER SQL, fallback db type.
+     */
+    OTHER("other");
+
+    private final String name;
+
+    public String getName() {
+        return name;
+    }
+
+    DbTypeEnum(String name) {
+        this.name = name;
+    }
+
+    /**
+     * 根据name的值获取枚举类型
+     * @param name
+     * @return
+     */
+    public static com.alipay.codequery.coref.sql.DbTypeEnum getByName(String name) {
+        for (com.alipay.codequery.coref.sql.DbTypeEnum aName : values()) {
+            if (aName.getName().equalsIgnoreCase(name)) {
+                return aName;
+            }
+        }
+        return null;
+    }
+}

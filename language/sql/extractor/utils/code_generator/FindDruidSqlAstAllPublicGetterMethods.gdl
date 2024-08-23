@@ -1,0 +1,180 @@
+import coref.java.*
+
+predicate isNestedClass(Class c) {
+    exists(NestedClass n) { c = n}
+}
+
+predicate isAbstractClass(Class c) {
+    c.getModifier().getName() = "abstract"
+}
+
+predicate isStaticMethod(Method m) {
+    m.getModifier().getName() = "static"
+}
+
+predicate hasParameter(Method m) {
+    exists(Method m, Parameter p) {
+        p = m.getParameter()
+    }
+}
+
+predicate isDeprecated(Method m) {
+    exists(Method m, Annotation a, string annotationName) {
+        a = m.getAnnotation()
+        and
+        annotationName = a.getName()
+        and
+        contains("Deprecated", annotationName)
+    }
+}
+
+class DruidSqlAstClass extends Class {
+    DruidSqlAstClass() {
+        exists(Class c, string pkg, int i, Class ancestorClass, int i) {
+            // Filter out nested classes
+            not isNestedClass(c)
+            and
+            // // Filter out abstract classes
+            // not isAbstractClass(c)
+            // and
+            // Should extend from SQLObjectImpl
+            ancestorClass = c.getAnAncestorClass() and ancestorClass.getQualifiedName() = "com.alibaba.druid.sql.ast.SQLObjectImpl"
+            and
+            this = c
+            and
+            pkg = c.getPackage().getPackageName()
+            and
+            contains("com.alibaba.druid.sql", pkg)
+            and
+            (
+                contains(".ast", pkg)
+                or
+                // Special case: to include AST nodes in com.alibaba.druid.sql.dialect.hive.stmt
+                contains(".stmt", pkg)
+            )
+        }
+    }
+
+    Method getAllPublicGetterMethods() {
+        return m: exists(Method m, string methodName) {
+            m = this.getAllMethods()
+            and
+            // Should not be static
+            not isStaticMethod(m)
+            and
+            // Should have no parameter
+            not hasParameter(m)
+            and
+            // Should not be deprecated
+            not isDeprecated(m)
+            and
+            methodName = m.getName()
+            and
+            (
+                match("^get.*", methodName)
+                or
+                match("^is.*", methodName)
+            )
+            and
+            m.getModifier().getName() = "public"
+        }
+    }
+}
+
+@inline
+predicate ifIsAbstract(Class c, int isAbstract) {
+    if(isAbstractClass(c))
+    then(
+        isAbstract = 1
+    )
+    else(
+        isAbstract = 0
+    )
+}
+
+predicate typeOfAstClass(Type t) {
+    exists(DruidSqlAstClass c, ReferenceType rt) {
+        (
+            (rt = t and c.getQualifiedName() = rt.getQualifiedName())
+            or
+            (t = c)
+        )
+    }
+}
+
+@inline
+predicate ifIsAnAstClass(Type t, int isAnAstClass) {
+    if(typeOfAstClass(t))
+    then(
+        isAnAstClass = 1
+    )
+    else(
+        isAnAstClass = 0
+    )
+}
+
+predicate getImplementsInterface(DruidSqlAstClass c) {
+    exists(Interface i) {
+        i = c.getImplementsInterface()
+    }
+}
+
+predicate getImplementsInterfaceName(DruidSqlAstClass c, string implementsInterfaceName) {
+    exists(DruidSqlAstClass x) {
+        x = c
+        and
+        if(getImplementsInterface(x))
+        then(
+            exists(Interface i) {
+                i = x.getImplementsInterface()
+                and
+                implementsInterfaceName = i.getName()
+            }
+        )
+        else(
+            implementsInterfaceName = ""
+        )
+    }
+}
+
+predicate output(string qualifiedName, string className, string methodName, string returnTypeName, int isReturnTypeAnAstClass, int isAbstract, string superClassName, string implementsInterfaceName) {
+    exists(DruidSqlAstClass c, Class superClass, Type returnType, Class returnedClass) {
+        qualifiedName = c.getQualifiedName()
+        and
+        className = c.getName()
+        and
+        superClass = c.getSuperClass()
+        and
+        ifIsAbstract(c, isAbstract)
+        and
+        superClassName = superClass.getQualifiedName()
+        and
+        getImplementsInterfaceName(c, implementsInterfaceName)
+        and
+        if(count{
+            exists(Method m) {
+                m = c.getAllPublicGetterMethods()
+            }
+        } > 0)
+        then(
+            exists(Method m) {
+                m = c.getAllPublicGetterMethods()
+                and
+                methodName = m.getName()
+                and
+                returnType = m.getType()
+                and
+                returnTypeName = returnType.getName()
+                and
+                ifIsAnAstClass(returnType, isReturnTypeAnAstClass)
+            }
+        )
+        else(
+            methodName = ""
+            and
+            returnTypeName = ""
+            and
+            isReturnTypeAnAstClass = 0
+        )
+    }
+}
