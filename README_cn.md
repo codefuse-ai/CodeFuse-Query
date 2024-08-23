@@ -103,7 +103,7 @@ CodeFuse-Query 包括**Sparrow CLI **和CodeFuse-Query**在线服务Query中心*
 | Go | Y | Y | RELEASE |
 | XML | Y | Y | RELEASE |
 | Cfamily | N | N | BETA |
-| SQL | N | N | BETA |
+| SQL | Y | Y | BETA |
 | Swift | N | N | BETA |
 | Properties | Y | Y | BETA |
 
