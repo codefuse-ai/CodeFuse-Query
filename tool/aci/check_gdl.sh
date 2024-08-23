@@ -44,7 +44,7 @@ fi
 cd "$1" || exit 1
 
 sparrow_godel_script="$HOME/sparrow-cli/sparrow-cli/godel-script/usr/bin/godel"
-sparrow_lib="$HOME/sparrow-cli/sparrow-cli/lib-1.0"
+sparrow_lib="$HOME/sparrow-cli/sparrow-cli/lib"
 
 # Define get_files function
 get_files() {
