@@ -73,23 +73,6 @@ impl ArtifactElement {
     }
 }
 
-schema PomFile extends XmlFile {}
-
-impl PomFile {
-    @data_constraint
-    pub fn __all__(db: XmlDB) -> *PomFile {
-        for(f in XmlFile(db)) {
-            if (f.getFileName() = "pom.xml") {
-                yield PomFile {
-                    id: f.id,
-                    file_name: f.file_name,
-                    relative_path: f.relative_path
-                }
-            }
-        }
-    }
-}
-
 // output relative path of the file, referenced jar name and version
 fn out(fileName: string, m1: string, m2: string, m3: string) -> bool {
     let (db = XmlDB::load("coref_xml_src.db")) {
