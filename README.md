@@ -103,7 +103,7 @@ Regarding the openness of languages, you can refer to the table below:
 | JavaScript | Y | Y | RELEASE |
 | Go | Y | Y | RELEASE |
 | XML | Y | Y | RELEASE |
-| Cfamily | N | N | BETA |
+| Cfamily | Y | Y | BETA |
 | SQL | Y | Y | BETA |
 | Swift | N | N | BETA |
 | Properties | Y | Y | BETA |
