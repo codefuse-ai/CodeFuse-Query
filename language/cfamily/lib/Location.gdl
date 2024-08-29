@@ -1,0 +1,38 @@
+/**
+ * @filename: LOCATION
+ * @date: 2021/12/9
+ * @brief: LOCATION provides classes and predicates for working with C family locations
+ */
+/**
+ * @brief The location information of a locatable elements.
+ */
+schema Location extends LocationDO {
+    
+}
+impl Location {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *Location {
+        for (tmp in LocationDO(db)) {
+            yield Location {
+                oid : tmp.oid,
+                file_oid : tmp.file_oid,
+                start_line_number : tmp.start_line_number,
+                start_column_number : tmp.start_column_number,
+                end_line_number : tmp.end_line_number,
+                end_column_number : tmp.end_column_number
+            }
+        }
+    }
+    /**
+     * @brief gets the file information for the location
+     * @return File 
+     */
+    pub fn getFile(self) -> File {
+        for (f in File(__all_data__)) {
+            if (f.oid = self.getFileOid()) {
+                return f
+            }
+        }
+    }
+}

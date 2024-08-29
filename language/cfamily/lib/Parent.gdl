@@ -1,0 +1,113 @@
+/**
+ * @filename: PARENT
+ * @date: 2021/12/10
+ * @brief: PARENT provides classes and predicates for working with C family AST node parents
+ */
+/**
+ * @brief An AST parent of a coref element.
+ */
+schema ElementParent {
+    @primary id: int
+}
+impl ElementParent {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *ElementParent {
+        for (s in Statement(db)) {
+            yield ElementParent {id : s.oid}
+        }
+        for (d in Declaration(db)) {
+            yield ElementParent {id : d.oid}
+        }
+    }
+    /**
+     * @brief gets the parent of the element.
+     * @return ElementParent 
+     */
+    pub fn getElementParent(self) -> *ElementParent {
+        for (parent in ElementParent(__all_data__)) {
+            for (s in Statement(__all_data__)) {
+                if (self.key_eq(s)) {
+                    if (parent = s.getParent()) {
+                        yield parent
+                    }
+                }
+            }
+            for (d in Declaration(__all_data__)) {
+                if (self.key_eq(d)) {
+                    if (parent = d.getParent()) {
+                        yield parent
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the location info of the element.
+     * @return Location 
+     */
+    pub fn getLocation(self) -> Location {
+        for (parent in Location(__all_data__)) {
+            for (s in Statement(__all_data__)) {
+                if (self.key_eq(s)) {
+                    if (parent = s.getLocation()) {
+                        return parent
+                    }
+                }
+            }
+            for (d in Declaration(__all_data__)) {
+                if (self.key_eq(d)) {
+                    if (parent = d.getLocation()) {
+                        return parent
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets an ancestor of the element.
+     * @return ElementParent 
+     */
+    pub fn getAnAncestor(self) -> *ElementParent {
+        for (ancestor in ElementParent(__all_data__)) {
+            for (auto_tmp1 in self.getElementParent()) {
+                if (ancestor = auto_tmp1) {
+                    yield ancestor
+                }
+            }
+            for (temp in ElementParent(__all_data__)) {
+                for (auto_tmp2 in temp.getAnAncestor()) {
+                    if (ancestor = auto_tmp2) {
+                        for (auto_tmp3 in self.getElementParent()) {
+                            if (temp = auto_tmp3) {
+                                yield ancestor
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the printable text for printing AST
+     * @return string
+     */
+    pub fn getPrintableText(self) -> *string {
+        for (text in string::__undetermined_all__()) {
+            for (s in Statement(__all_data__)) {
+                if (self.key_eq(s)) {
+                    if (text = s.getPrintableText()) {
+                        yield text
+                    }
+                }
+            }
+            for (d in Declaration(__all_data__)) {
+                if (self.key_eq(d)) {
+                    if (text = d.getPrintableText()) {
+                        yield text
+                    }
+                }
+            }
+        }
+    }
+}

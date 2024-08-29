@@ -1,0 +1,2243 @@
+/**
+ * @brief DO class: Represents a block literal declaration, which is like an unnamed FunctionDecl.
+ */
+schema BlockDeclarationDO {
+    @primary oid: int,
+    printable_text: string
+}
+impl BlockDeclarationDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *BlockDeclarationDO {
+    	for (tmp in db.block_declaration) {
+            yield BlockDeclarationDO {
+                oid : tmp.oid,
+                printable_text : tmp.printable_text
+            }
+    	}
+    }
+    /**
+     * @brief gets a printed representation of this element, including its structure where applicable.
+     * @return string.
+     */
+    pub fn getPrintableText(self) -> string {
+        return self.printable_text
+    }
+}
+/**
+ * @brief DO class: BlockExpr - Adaptor class for mixing a BlockDecl with expressions. \n
+ ^{ statement-body } or ^(int arg1, float arg2){ statement-body }
+ */
+schema BlockExpressionDO {
+    @primary oid: int,
+    block_declaration_oid: int,
+    printable_text: string
+}
+impl BlockExpressionDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *BlockExpressionDO {
+    	for (tmp in db.block_expression) {
+            yield BlockExpressionDO {
+                oid : tmp.oid,
+                block_declaration_oid : tmp.block_declaration_oid,
+                printable_text : tmp.printable_text
+            }
+    	}
+    }
+    /**
+     * @brief gets the block declaration oid of this element.
+     * @return int
+     */
+    pub fn getBlockDeclarationOid(self) -> int {
+        return self.block_declaration_oid
+    }
+    /**
+     * @brief gets a printed representation of this element, including its structure where applicable.
+     * @return string.
+     */
+    pub fn getPrintableText(self) -> string {
+        return self.printable_text
+    }
+}
+/**
+ * @brief DO class: An expression represents a function call
+ */
+schema CallExpressionDO {
+    @primary oid: int,
+    callee_declaration_oid: int,
+    printable_text: string
+}
+impl CallExpressionDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *CallExpressionDO {
+    	for (tmp in db.call_expression) {
+            yield CallExpressionDO {
+                oid : tmp.oid,
+                callee_declaration_oid : tmp.callee_declaration_oid,
+                printable_text : tmp.printable_text
+            }
+    	}
+    }
+    /**
+     * @brief gets the callee declaration oid of this element.
+     * @return int
+     */
+    pub fn getCalleeDeclarationOid(self) -> int {
+        return self.callee_declaration_oid
+    }
+    /**
+     * @brief gets a printed representation of this element, including its structure where applicable.
+     * @return string.
+     */
+    pub fn getPrintableText(self) -> string {
+        return self.printable_text
+    }
+}
+/**
+ * @brief DO class: The arguments to an call_expression, not including the receiver
+ */
+schema CallExpressionArgumentsDO {
+    @primary oid: int,
+    call_expression_oid: int,
+    printable_text: string
+}
+impl CallExpressionArgumentsDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *CallExpressionArgumentsDO {
+    	for (tmp in db.call_expression_arguments) {
+            yield CallExpressionArgumentsDO {
+                oid : tmp.oid,
+                call_expression_oid : tmp.call_expression_oid,
+                printable_text : tmp.printable_text
+            }
+    	}
+    }
+    /**
+     * @brief gets the call expression oid of this element.
+     * @return int
+     */
+    pub fn getCallExpressionOid(self) -> int {
+        return self.call_expression_oid
+    }
+    /**
+     * @brief gets a printed representation of this element, including its structure where applicable.
+     * @return string.
+     */
+    pub fn getPrintableText(self) -> string {
+        return self.printable_text
+    }
+}
+/**
+ * @brief DO class: Record the corresponding relationship between a statement and its caller callable
+ */
+schema CallableEnclosingStatementDO {
+    @primary statement_oid: int,
+    callable_oid: int
+}
+impl CallableEnclosingStatementDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *CallableEnclosingStatementDO {
+    	for (tmp in db.callable_enclosing_statement) {
+            yield CallableEnclosingStatementDO {
+                statement_oid : tmp.statement_oid,
+                callable_oid : tmp.callable_oid
+            }
+    	}
+    }
+    /**
+     * @brief gets the callable oid of this element.
+     * @return int
+     */
+    pub fn getCallableOid(self) -> int {
+        return self.callable_oid
+    }
+}
+/**
+ * @brief DO class: class inheritance
+ */
+schema ClassHierarchyDO {
+    @primary child_oid: int,
+    parent_oid: int
+}
+impl ClassHierarchyDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *ClassHierarchyDO {
+    	for (tmp in db.class_hierarchy) {
+            yield ClassHierarchyDO {
+                child_oid : tmp.child_oid,
+                parent_oid : tmp.parent_oid
+            }
+    	}
+    }
+    /**
+     * @brief gets the parent oid of this element.
+     * @return int
+     */
+    pub fn getParentOid(self) -> int {
+        return self.parent_oid
+    }
+}
+//gcc.gnu.org/onlinedocs/gcc/Conditionals.html
+/**
+ * @brief DO class: This models both ConditionalOperator and BinaryConditionalOperator in Clang AST \n
+ BinaryConditionalOperator: The middle operand in a conditional expression may be omitted \n
+ e.g.: x ? : y see https://gcc.gnu.org/onlinedocs/gcc/Conditionals.html
+ */
+schema ConditionalOperatorExpressionDO {
+    @primary oid: int,
+    condition_expression_oid: int,
+    true_expression_oid: int,
+    false_expression_oid: int,
+    is_middle_operand_omitted: int,
+    printable_text: string
+}
+impl ConditionalOperatorExpressionDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *ConditionalOperatorExpressionDO {
+    	for (tmp in db.conditional_operator_expression) {
+            yield ConditionalOperatorExpressionDO {
+                oid : tmp.oid,
+                condition_expression_oid : tmp.condition_expression_oid,
+                true_expression_oid : tmp.true_expression_oid,
+                false_expression_oid : tmp.false_expression_oid,
+                is_middle_operand_omitted : tmp.is_middle_operand_omitted,
+                printable_text : tmp.printable_text
+            }
+    	}
+    }
+    /**
+     * @brief gets the condition expression oid of this element.
+     * @return int
+     */
+    pub fn getConditionExpressionOid(self) -> int {
+        return self.condition_expression_oid
+    }
+    /**
+     * @brief Return the subexpression which will be evaluated if the condition evaluates to true
+     * @return int
+     */
+    pub fn getTrueExpressionOid(self) -> int {
+        return self.true_expression_oid
+    }
+    /**
+     * @brief Return the subexpression which will be evaluated if the condition evaluates to false
+     * @return int
+     */
+    pub fn getFalseExpressionOid(self) -> int {
+        return self.false_expression_oid
+    }
+    /**
+     * @brief For BinaryConditionalOperator
+     * @return int
+     */
+    pub fn getIsMiddleOperandOmitted(self) -> int {
+        return self.is_middle_operand_omitted
+    }
+    /**
+     * @brief gets a printed representation of this element, including its structure where applicable.
+     * @return string.
+     */
+    pub fn getPrintableText(self) -> string {
+        return self.printable_text
+    }
+}
+/**
+ * @brief DO class: This represents C++0x [stmt.ranged]'s ranged for statement, represented as 'for (range-declarator : range-expression)' or 'for (init-statement range-declarator : range-expression)'.
+ */
+schema CxxForRangeStatementDO {
+    @primary oid: int,
+    body_statement_oid: int,
+    loop_variable_variable_declaration_oid: int,
+    range_initialization_expression_oid: int,
+    printable_text: string
+}
+impl CxxForRangeStatementDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *CxxForRangeStatementDO {
+    	for (tmp in db.cxx_for_range_statement) {
+            yield CxxForRangeStatementDO {
+                oid : tmp.oid,
+                body_statement_oid : tmp.body_statement_oid,
+                loop_variable_variable_declaration_oid : tmp.loop_variable_variable_declaration_oid,
+                range_initialization_expression_oid : tmp.range_initialization_expression_oid,
+                printable_text : tmp.printable_text
+            }
+    	}
+    }
+    /**
+     * @brief gets the body statement oid of this element.
+     * @return int
+     */
+    pub fn getBodyStatementOid(self) -> int {
+        return self.body_statement_oid
+    }
+    /**
+     * @brief gets the loop variable variable declaration oid of this element.
+     * @return int
+     */
+    pub fn getLoopVariableVariableDeclarationOid(self) -> int {
+        return self.loop_variable_variable_declaration_oid
+    }
+    /**
+     * @brief gets the range initialization expression oid of this element.
+     * @return int
+     */
+    pub fn getRangeInitializationExpressionOid(self) -> int {
+        return self.range_initialization_expression_oid
+    }
+    /**
+     * @brief gets a printed representation of this element, including its structure where applicable.
+     * @return string.
+     */
+    pub fn getPrintableText(self) -> string {
+        return self.printable_text
+    }
+}
+/**
+ * @brief DO class: Represents a call to a member function that may be written either with member call syntax \n
+ (e.g., "obj.func()" or "objptr->func()") or with normal function-call syntax ("func()") \n
+ within a member function that ends up calling a member function.
+ */
+schema CxxMemberCallExpressionDO {
+    @primary oid: int,
+    object_type_oid: int,
+    cxx_method_oid: int,
+    cxx_record_oid: int,
+    printable_text: string
+}
+impl CxxMemberCallExpressionDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *CxxMemberCallExpressionDO {
+    	for (tmp in db.cxx_member_call_expression) {
+            yield CxxMemberCallExpressionDO {
+                oid : tmp.oid,
+                object_type_oid : tmp.object_type_oid,
+                cxx_method_oid : tmp.cxx_method_oid,
+                cxx_record_oid : tmp.cxx_record_oid,
+                printable_text : tmp.printable_text
+            }
+    	}
+    }
+    /**
+     * @brief the type of the object argument.
+     * @return int
+     */
+    pub fn getObjectTypeOid(self) -> int {
+        return self.object_type_oid
+    }
+    /**
+     * @brief the declaration of the called method.
+     * @return int
+     */
+    pub fn getCxxMethodOid(self) -> int {
+        return self.cxx_method_oid
+    }
+    /**
+     * @brief the CXXRecordDecl for the underlying type of the implicit object argument.
+     * @return int
+     */
+    pub fn getCxxRecordOid(self) -> int {
+        return self.cxx_record_oid
+    }
+    /**
+     * @brief gets a printed representation of this element, including its structure where applicable.
+     * @return string.
+     */
+    pub fn getPrintableText(self) -> string {
+        return self.printable_text
+    }
+}
+/**
+ * @brief DO class: Represents a static or instance method of a struct/union/class.
+ */
+schema CxxMethodDeclarationDO {
+    @primary oid: int,
+    parent_oid: int,
+    printable_text: string
+}
+impl CxxMethodDeclarationDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *CxxMethodDeclarationDO {
+    	for (tmp in db.cxx_method_declaration) {
+            yield CxxMethodDeclarationDO {
+                oid : tmp.oid,
+                parent_oid : tmp.parent_oid,
+                printable_text : tmp.printable_text
+            }
+    	}
+    }
+    /**
+     * @brief the parent of this method declaration, which is the class in which this method is defined.
+     * @return int
+     */
+    pub fn getParentOid(self) -> int {
+        return self.parent_oid
+    }
+    /**
+     * @brief gets a printed representation of this element, including its structure where applicable.
+     * @return string.
+     */
+    pub fn getPrintableText(self) -> string {
+        return self.printable_text
+    }
+}
+/**
+ * @brief DO class: Represents a C++ struct/union/class. Its base classes will be recorded to class hierarchy
+ */
+schema CxxRecordDeclarationDO {
+    @primary oid: int,
+    printable_text: string
+}
+impl CxxRecordDeclarationDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *CxxRecordDeclarationDO {
+    	for (tmp in db.cxx_record_declaration) {
+            yield CxxRecordDeclarationDO {
+                oid : tmp.oid,
+                printable_text : tmp.printable_text
+            }
+    	}
+    }
+    /**
+     * @brief gets a printed representation of this element, including its structure where applicable.
+     * @return string.
+     */
+    pub fn getPrintableText(self) -> string {
+        return self.printable_text
+    }
+}
+/**
+ * @brief DO class: A declaration.
+ */
+schema DeclarationDO {
+    @primary oid: int,
+    parent_oid: int,
+    index_order: int,
+    location_oid: int,
+    kind_name: string,
+    printable_text: string
+}
+impl DeclarationDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *DeclarationDO {
+    	for (tmp in db.declaration) {
+            yield DeclarationDO {
+                oid : tmp.oid,
+                parent_oid : tmp.parent_oid,
+                index_order : tmp.index_order,
+                location_oid : tmp.location_oid,
+                kind_name : tmp.kind_name,
+                printable_text : tmp.printable_text
+            }
+    	}
+    }
+    /**
+     * @brief gets the parent oid of this element.
+     * @return int
+     */
+    pub fn getParentOid(self) -> int {
+        return self.parent_oid
+    }
+    /**
+     * @brief gets the index order of this element.
+     * @return int
+     */
+    pub fn getIndexOrder(self) -> int {
+        return self.index_order
+    }
+    /**
+     * @brief gets the location oid of this element.
+     * @return int
+     */
+    pub fn getLocationOid(self) -> int {
+        return self.location_oid
+    }
+    /**
+     * @brief Declaration kind name
+     * @return string
+     */
+    pub fn getKindName(self) -> string {
+        return self.kind_name
+    }
+    /**
+     * @brief gets a printed representation of this element, including its structure where applicable.
+     * @return string.
+     */
+    pub fn getPrintableText(self) -> string {
+        return self.printable_text
+    }
+}
+/**
+ * @brief DO class: Not modeling this for now becasue except OMPDeclareMapperDecl, \n
+ all declaration context are also inherited from Decl \n
+ This is used only as base class of specific decl types that can act as declaration contexts
+ */
+schema DeclarationContextDO {
+    @primary oid: int,
+    printable_text: string
+}
+impl DeclarationContextDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *DeclarationContextDO {
+    	for (tmp in db.declaration_context) {
+            yield DeclarationContextDO {
+                oid : tmp.oid,
+                printable_text : tmp.printable_text
+            }
+    	}
+    }
+    /**
+     * @brief gets a printed representation of this element, including its structure where applicable.
+     * @return string.
+     */
+    pub fn getPrintableText(self) -> string {
+        return self.printable_text
+    }
+}
+/**
+ * @brief DO class: A declaration statement.
+ */
+schema DeclarationStatementDO {
+    @primary oid: int,
+    printable_text: string
+}
+impl DeclarationStatementDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *DeclarationStatementDO {
+    	for (tmp in db.declaration_statement) {
+            yield DeclarationStatementDO {
+                oid : tmp.oid,
+                printable_text : tmp.printable_text
+            }
+    	}
+    }
+    /**
+     * @brief gets a printed representation of this element, including its structure where applicable.
+     * @return string.
+     */
+    pub fn getPrintableText(self) -> string {
+        return self.printable_text
+    }
+}
+/**
+ * @brief DO class: Represents a ValueDecl that came out of a declarator. \n
+ Contains type source information through TypeSourceInfo.
+ */
+schema DeclaratorDeclarationDO {
+    @primary oid: int,
+    printable_text: string
+}
+impl DeclaratorDeclarationDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *DeclaratorDeclarationDO {
+    	for (tmp in db.declarator_declaration) {
+            yield DeclaratorDeclarationDO {
+                oid : tmp.oid,
+                printable_text : tmp.printable_text
+            }
+    	}
+    }
+    /**
+     * @brief gets a printed representation of this element, including its structure where applicable.
+     * @return string.
+     */
+    pub fn getPrintableText(self) -> string {
+        return self.printable_text
+    }
+}
+/**
+ * @brief DO class: A do statement.
+ */
+schema DoStatementDO {
+    @primary oid: int,
+    condition_expression_oid: int,
+    body_statement_oid: int,
+    printable_text: string
+}
+impl DoStatementDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *DoStatementDO {
+    	for (tmp in db.do_statement) {
+            yield DoStatementDO {
+                oid : tmp.oid,
+                condition_expression_oid : tmp.condition_expression_oid,
+                body_statement_oid : tmp.body_statement_oid,
+                printable_text : tmp.printable_text
+            }
+    	}
+    }
+    /**
+     * @brief gets the condition expression oid of this element.
+     * @return int
+     */
+    pub fn getConditionExpressionOid(self) -> int {
+        return self.condition_expression_oid
+    }
+    /**
+     * @brief gets the body statement oid of this element.
+     * @return int
+     */
+    pub fn getBodyStatementOid(self) -> int {
+        return self.body_statement_oid
+    }
+    /**
+     * @brief gets a printed representation of this element, including its structure where applicable.
+     * @return string.
+     */
+    pub fn getPrintableText(self) -> string {
+        return self.printable_text
+    }
+}
+/**
+ * @brief DO class: Gets the ‘else’ statement of this ‘if’ statement, if any
+ */
+schema ElseStatementInIfDO {
+    @primary oid: int,
+    if_statement_oid: int
+}
+impl ElseStatementInIfDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *ElseStatementInIfDO {
+    	for (tmp in db.else_statement_in_if) {
+            yield ElseStatementInIfDO {
+                oid : tmp.oid,
+                if_statement_oid : tmp.if_statement_oid
+            }
+    	}
+    }
+    /**
+     * @brief gets the if statement oid of this element.
+     * @return int
+     */
+    pub fn getIfStatementOid(self) -> int {
+        return self.if_statement_oid
+    }
+}
+/**
+ * @brief DO class: An expression.
+ */
+schema ExpressionDO {
+    @primary oid: int,
+    printable_text: string
+}
+impl ExpressionDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *ExpressionDO {
+    	for (tmp in db.expression) {
+            yield ExpressionDO {
+                oid : tmp.oid,
+                printable_text : tmp.printable_text
+            }
+    	}
+    }
+    /**
+     * @brief gets a printed representation of this element, including its structure where applicable.
+     * @return string.
+     */
+    pub fn getPrintableText(self) -> string {
+        return self.printable_text
+    }
+}
+/**
+ * @brief DO class: Represents a member variable of a C++ struct/union/class.
+ */
+schema FieldDeclarationDO {
+    @primary oid: int,
+    type_oid: int,
+    record_oid: int,
+    printable_text: string
+}
+impl FieldDeclarationDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *FieldDeclarationDO {
+    	for (tmp in db.field_declaration) {
+            yield FieldDeclarationDO {
+                oid : tmp.oid,
+                type_oid : tmp.type_oid,
+                record_oid : tmp.record_oid,
+                printable_text : tmp.printable_text
+            }
+    	}
+    }
+    /**
+     * @brief gets the type oid of this element.
+     * @return int
+     */
+    pub fn getTypeOid(self) -> int {
+        return self.type_oid
+    }
+    /**
+     * @brief gets the record oid of this element.
+     * @return int
+     */
+    pub fn getRecordOid(self) -> int {
+        return self.record_oid
+    }
+    /**
+     * @brief gets a printed representation of this element, including its structure where applicable.
+     * @return string.
+     */
+    pub fn getPrintableText(self) -> string {
+        return self.printable_text
+    }
+}
+/**
+ * @brief DO class: A file.
+ */
+schema FileDO {
+    @primary oid: int,
+    relative_path: string,
+    extension: string,
+    name: string,
+    program_oid: int
+}
+impl FileDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *FileDO {
+    	for (tmp in db.file) {
+            yield FileDO {
+                oid : tmp.oid,
+                relative_path : tmp.relative_path,
+                extension : tmp.extension,
+                name : tmp.name,
+                program_oid : tmp.program_oid
+            }
+    	}
+    }
+    /**
+     * @brief gets the relative path of this element.
+     * @return string
+     */
+    pub fn getRelativePath(self) -> string {
+        return self.relative_path
+    }
+    /**
+     * @brief gets the extension of this element.
+     * @return string
+     */
+    pub fn getExtension(self) -> string {
+        return self.extension
+    }
+    /**
+     * @brief gets the name of this element.
+     * @return string
+     */
+    pub fn getName(self) -> string {
+        return self.name
+    }
+    /**
+     * @brief gets the program oid of this element.
+     * @return int
+     */
+    pub fn getProgramOid(self) -> int {
+        return self.program_oid
+    }
+}
+/**
+ * @brief DO class: !!! This represents a 'for (init;cond;inc)' stmt, not for-in stmt
+ */
+schema ForStatementDO {
+    @primary oid: int,
+    initialization_statement_oid: int,
+    body_statement_oid: int,
+    condition_expression_oid: int,
+    increment_expression_oid: int,
+    printable_text: string
+}
+impl ForStatementDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *ForStatementDO {
+    	for (tmp in db.for_statement) {
+            yield ForStatementDO {
+                oid : tmp.oid,
+                initialization_statement_oid : tmp.initialization_statement_oid,
+                body_statement_oid : tmp.body_statement_oid,
+                condition_expression_oid : tmp.condition_expression_oid,
+                increment_expression_oid : tmp.increment_expression_oid,
+                printable_text : tmp.printable_text
+            }
+    	}
+    }
+    /**
+     * @brief gets the initialization statement oid of this element.
+     * @return int
+     */
+    pub fn getInitializationStatementOid(self) -> int {
+        return self.initialization_statement_oid
+    }
+    /**
+     * @brief gets the body statement oid of this element.
+     * @return int
+     */
+    pub fn getBodyStatementOid(self) -> int {
+        return self.body_statement_oid
+    }
+    /**
+     * @brief Gets the condition expression
+     * @return int
+     */
+    pub fn getConditionExpressionOid(self) -> int {
+        return self.condition_expression_oid
+    }
+    /**
+     * @brief Gets the increment expression
+     * @return int
+     */
+    pub fn getIncrementExpressionOid(self) -> int {
+        return self.increment_expression_oid
+    }
+    /**
+     * @brief gets a printed representation of this element, including its structure where applicable.
+     * @return string.
+     */
+    pub fn getPrintableText(self) -> string {
+        return self.printable_text
+    }
+}
+/**
+ * @brief DO class: Represents a function declaration or definition.
+ */
+schema FunctionDeclarationDO {
+    @primary oid: int,
+    return_type_oid: int,
+    is_definition: int,
+    printable_text: string
+}
+impl FunctionDeclarationDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *FunctionDeclarationDO {
+    	for (tmp in db.function_declaration) {
+            yield FunctionDeclarationDO {
+                oid : tmp.oid,
+                return_type_oid : tmp.return_type_oid,
+                is_definition : tmp.is_definition,
+                printable_text : tmp.printable_text
+            }
+    	}
+    }
+    /**
+     * @brief gets the return type oid of this element.
+     * @return int
+     */
+    pub fn getReturnTypeOid(self) -> int {
+        return self.return_type_oid
+    }
+    /**
+     * @brief Returns whether this specific declaration of the function is also a definition that does not contain uninstantiated body. This does not determine whether the function has been defined (e.g., in a previous definition); for that information, use isDefined. Note: the function declaration does not become a definition until the parser reaches the definition, if called before, this function will return `false`.
+     * @return int
+     */
+    pub fn getIsDefinition(self) -> int {
+        return self.is_definition
+    }
+    /**
+     * @brief gets a printed representation of this element, including its structure where applicable.
+     * @return string.
+     */
+    pub fn getPrintableText(self) -> string {
+        return self.printable_text
+    }
+}
+/**
+ * @brief DO class: An if statement.
+ */
+schema IfStatementDO {
+    @primary oid: int,
+    condition_expression_oid: int,
+    then_statement_oid: int,
+    printable_text: string
+}
+impl IfStatementDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *IfStatementDO {
+    	for (tmp in db.if_statement) {
+            yield IfStatementDO {
+                oid : tmp.oid,
+                condition_expression_oid : tmp.condition_expression_oid,
+                then_statement_oid : tmp.then_statement_oid,
+                printable_text : tmp.printable_text
+            }
+    	}
+    }
+    /**
+     * @brief Gets the condition of this ‘if’ statement, the condition is an expression
+     * @return int
+     */
+    pub fn getConditionExpressionOid(self) -> int {
+        return self.condition_expression_oid
+    }
+    /**
+     * @brief Gets the ‘then’ statement of this ‘if’ statement
+     * @return int
+     */
+    pub fn getThenStatementOid(self) -> int {
+        return self.then_statement_oid
+    }
+    /**
+     * @brief gets a printed representation of this element, including its structure where applicable.
+     * @return string.
+     */
+    pub fn getPrintableText(self) -> string {
+        return self.printable_text
+    }
+}
+/**
+ * @brief DO class: code location
+ */
+schema LocationDO {
+    @primary oid: int,
+    file_oid: int,
+    start_line_number: int,
+    start_column_number: int,
+    end_line_number: int,
+    end_column_number: int
+}
+impl LocationDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *LocationDO {
+    	for (tmp in db.location) {
+            yield LocationDO {
+                oid : tmp.oid,
+                file_oid : tmp.file_oid,
+                start_line_number : tmp.start_line_number,
+                start_column_number : tmp.start_column_number,
+                end_line_number : tmp.end_line_number,
+                end_column_number : tmp.end_column_number
+            }
+    	}
+    }
+    /**
+     * @brief gets the file oid of this element.
+     * @return int
+     */
+    pub fn getFileOid(self) -> int {
+        return self.file_oid
+    }
+    /**
+     * @brief gets the start line number of this element.
+     * @return int
+     */
+    pub fn getStartLineNumber(self) -> int {
+        return self.start_line_number
+    }
+    /**
+     * @brief gets the start column number of this element.
+     * @return int
+     */
+    pub fn getStartColumnNumber(self) -> int {
+        return self.start_column_number
+    }
+    /**
+     * @brief gets the end line number of this element.
+     * @return int
+     */
+    pub fn getEndLineNumber(self) -> int {
+        return self.end_line_number
+    }
+    /**
+     * @brief gets the end column number of this element.
+     * @return int
+     */
+    pub fn getEndColumnNumber(self) -> int {
+        return self.end_column_number
+    }
+}
+/**
+ * @brief DO class: This represents a decl that may have a name
+ */
+schema NamedDeclarationDO {
+    @primary oid: int,
+    name: string,
+    printable_text: string
+}
+impl NamedDeclarationDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *NamedDeclarationDO {
+    	for (tmp in db.named_declaration) {
+            yield NamedDeclarationDO {
+                oid : tmp.oid,
+                name : tmp.name,
+                printable_text : tmp.printable_text
+            }
+    	}
+    }
+    /**
+     * @brief gets the name of this element.
+     * @return string
+     */
+    pub fn getName(self) -> string {
+        return self.name
+    }
+    /**
+     * @brief gets a printed representation of this element, including its structure where applicable.
+     * @return string.
+     */
+    pub fn getPrintableText(self) -> string {
+        return self.printable_text
+    }
+}
+/**
+ * @brief DO class: Represents a category declaration
+ */
+schema ObjCCategoryDeclarationDO {
+    @primary oid: int,
+    interface_oid: int,
+    is_extension: int,
+    display_name: string,
+    printable_text: string
+}
+impl ObjCCategoryDeclarationDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *ObjCCategoryDeclarationDO {
+    	for (tmp in db.obj_c_category_declaration) {
+            yield ObjCCategoryDeclarationDO {
+                oid : tmp.oid,
+                interface_oid : tmp.interface_oid,
+                is_extension : tmp.is_extension,
+                display_name : tmp.display_name,
+                printable_text : tmp.printable_text
+            }
+    	}
+    }
+    /**
+     * @brief gets the interface oid of this element.
+     * @return int
+     */
+    pub fn getInterfaceOid(self) -> int {
+        return self.interface_oid
+    }
+    /**
+     * @brief gets the is extension of this element.
+     * @return int
+     */
+    pub fn getIsExtension(self) -> int {
+        return self.is_extension
+    }
+    /**
+     * @brief gets the display name of this element.
+     * @return string
+     */
+    pub fn getDisplayName(self) -> string {
+        return self.display_name
+    }
+    /**
+     * @brief gets a printed representation of this element, including its structure where applicable.
+     * @return string.
+     */
+    pub fn getPrintableText(self) -> string {
+        return self.printable_text
+    }
+}
+/**
+ * @brief DO class: Binding category and protocol
+ */
+schema ObjCCategoryProtocolBindingDO {
+    @primary obj_c_category_declaration_oid: int,
+    obj_c_protocol_declaration_oid: int
+}
+impl ObjCCategoryProtocolBindingDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *ObjCCategoryProtocolBindingDO {
+    	for (tmp in db.obj_c_category_protocol_binding) {
+            yield ObjCCategoryProtocolBindingDO {
+                obj_c_category_declaration_oid : tmp.obj_c_category_declaration_oid,
+                obj_c_protocol_declaration_oid : tmp.obj_c_protocol_declaration_oid
+            }
+    	}
+    }
+    /**
+     * @brief gets the obj c protocol declaration oid of this element.
+     * @return int
+     */
+    pub fn getObjCProtocolDeclarationOid(self) -> int {
+        return self.obj_c_protocol_declaration_oid
+    }
+}
+/**
+ * @brief DO class: Represents a container for method declarations
+ */
+schema ObjCContainerDeclarationDO {
+    @primary oid: int,
+    declaration_kind: string,
+    declaration_context_oid: int,
+    printable_text: string
+}
+impl ObjCContainerDeclarationDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *ObjCContainerDeclarationDO {
+    	for (tmp in db.obj_c_container_declaration) {
+            yield ObjCContainerDeclarationDO {
+                oid : tmp.oid,
+                declaration_kind : tmp.declaration_kind,
+                declaration_context_oid : tmp.declaration_context_oid,
+                printable_text : tmp.printable_text
+            }
+    	}
+    }
+    /**
+     * @brief gets the declaration kind of this element.
+     * @return string
+     */
+    pub fn getDeclarationKind(self) -> string {
+        return self.declaration_kind
+    }
+    /**
+     * @brief Not modeling this
+     * @return int
+     */
+    pub fn getDeclarationContextOid(self) -> int {
+        return self.declaration_context_oid
+    }
+    /**
+     * @brief gets a printed representation of this element, including its structure where applicable.
+     * @return string.
+     */
+    pub fn getPrintableText(self) -> string {
+        return self.printable_text
+    }
+}
+/**
+ * @brief DO class: Represents Objective-C's collection statement \n
+ This is represented as 'for (element 'in' collection-expression)' stmt
+ */
+schema ObjCForCollectionStatementDO {
+    @primary oid: int,
+    element_statement_oid: int,
+    collection_expression_oid: int,
+    body_statement_oid: int,
+    printable_text: string
+}
+impl ObjCForCollectionStatementDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *ObjCForCollectionStatementDO {
+    	for (tmp in db.obj_c_for_collection_statement) {
+            yield ObjCForCollectionStatementDO {
+                oid : tmp.oid,
+                element_statement_oid : tmp.element_statement_oid,
+                collection_expression_oid : tmp.collection_expression_oid,
+                body_statement_oid : tmp.body_statement_oid,
+                printable_text : tmp.printable_text
+            }
+    	}
+    }
+    /**
+     * @brief gets the element statement oid of this element.
+     * @return int
+     */
+    pub fn getElementStatementOid(self) -> int {
+        return self.element_statement_oid
+    }
+    /**
+     * @brief gets the collection expression oid of this element.
+     * @return int
+     */
+    pub fn getCollectionExpressionOid(self) -> int {
+        return self.collection_expression_oid
+    }
+    /**
+     * @brief gets the body statement oid of this element.
+     * @return int
+     */
+    pub fn getBodyStatementOid(self) -> int {
+        return self.body_statement_oid
+    }
+    /**
+     * @brief gets a printed representation of this element, including its structure where applicable.
+     * @return string.
+     */
+    pub fn getPrintableText(self) -> string {
+        return self.printable_text
+    }
+}
+/**
+ * @brief DO class: An obj c implementation declaration.
+ */
+schema ObjCImplementationDeclarationDO {
+    @primary oid: int,
+    is_category: int,
+    printable_text: string
+}
+impl ObjCImplementationDeclarationDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *ObjCImplementationDeclarationDO {
+    	for (tmp in db.obj_c_implementation_declaration) {
+            yield ObjCImplementationDeclarationDO {
+                oid : tmp.oid,
+                is_category : tmp.is_category,
+                printable_text : tmp.printable_text
+            }
+    	}
+    }
+    /**
+     * @brief gets the is category of this element.
+     * @return int
+     */
+    pub fn getIsCategory(self) -> int {
+        return self.is_category
+    }
+    /**
+     * @brief gets a printed representation of this element, including its structure where applicable.
+     * @return string.
+     */
+    pub fn getPrintableText(self) -> string {
+        return self.printable_text
+    }
+}
+/**
+ * @brief DO class: An obj c interface declaration.
+ */
+schema ObjCInterfaceDeclarationDO {
+    @primary oid: int,
+    super_class_obj_c_interface_declaration_oid: int,
+    is_definition: int,
+    printable_text: string
+}
+impl ObjCInterfaceDeclarationDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *ObjCInterfaceDeclarationDO {
+    	for (tmp in db.obj_c_interface_declaration) {
+            yield ObjCInterfaceDeclarationDO {
+                oid : tmp.oid,
+                super_class_obj_c_interface_declaration_oid : tmp.super_class_obj_c_interface_declaration_oid,
+                is_definition : tmp.is_definition,
+                printable_text : tmp.printable_text
+            }
+    	}
+    }
+    /**
+     * @brief Get super class (of type obj_c_interface_declaration)
+     * @return int
+     */
+    pub fn getSuperClassObjCInterfaceDeclarationOid(self) -> int {
+        return self.super_class_obj_c_interface_declaration_oid
+    }
+    /**
+     * @brief Determine whether this particular declaration of this class is actually also a definition.
+     * @return int
+     */
+    pub fn getIsDefinition(self) -> int {
+        return self.is_definition
+    }
+    /**
+     * @brief gets a printed representation of this element, including its structure where applicable.
+     * @return string.
+     */
+    pub fn getPrintableText(self) -> string {
+        return self.printable_text
+    }
+}
+/**
+ * @brief DO class: Binding interface and protocol
+ */
+schema ObjCInterfaceProtocolBindingDO {
+    @primary obj_c_interface_declaration_oid: int,
+    obj_c_protocol_declaration_oid: int
+}
+impl ObjCInterfaceProtocolBindingDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *ObjCInterfaceProtocolBindingDO {
+    	for (tmp in db.obj_c_interface_protocol_binding) {
+            yield ObjCInterfaceProtocolBindingDO {
+                obj_c_interface_declaration_oid : tmp.obj_c_interface_declaration_oid,
+                obj_c_protocol_declaration_oid : tmp.obj_c_protocol_declaration_oid
+            }
+    	}
+    }
+    /**
+     * @brief gets the obj c protocol declaration oid of this element.
+     * @return int
+     */
+    pub fn getObjCProtocolDeclarationOid(self) -> int {
+        return self.obj_c_protocol_declaration_oid
+    }
+}
+/**
+ * @brief DO class: An expression that sends a message to the given Objective-C object or class \n
+ [SampleClass sayHello 1 2]
+ */
+schema ObjCMessageExpressionDO {
+    @primary oid: int,
+    receiver_kind: string,
+    receiver_qualified_type_oid: int,
+    receiver_interface_obj_c_interface_declaration_oid: int,
+    obj_c_method_declaration_oid: int,
+    printable_text: string
+}
+impl ObjCMessageExpressionDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *ObjCMessageExpressionDO {
+    	for (tmp in db.obj_c_message_expression) {
+            yield ObjCMessageExpressionDO {
+                oid : tmp.oid,
+                receiver_kind : tmp.receiver_kind,
+                receiver_qualified_type_oid : tmp.receiver_qualified_type_oid,
+                receiver_interface_obj_c_interface_declaration_oid : tmp.receiver_interface_obj_c_interface_declaration_oid,
+                obj_c_method_declaration_oid : tmp.obj_c_method_declaration_oid,
+                printable_text : tmp.printable_text
+            }
+    	}
+    }
+    /**
+     * @brief The kind of receiver this message is sending to. \n
+ Enum: \n
+ class: The receiver is a class. \n
+ instance: The receiver is an object instance. \n
+ super_class: The receiver is a superclass. \n
+ super_instance: The receiver is the instance of the superclass object.
+     * @return string
+     */
+    pub fn getReceiverKind(self) -> string {
+        return self.receiver_kind
+    }
+    /**
+     * @brief Retrieve the receiver type to which this message is being directed
+     * @return int
+     */
+    pub fn getReceiverQualifiedTypeOid(self) -> int {
+        return self.receiver_qualified_type_oid
+    }
+    /**
+     * @brief Retrieve the Objective-C interface to which this message is being directed, if known
+     * @return int
+     */
+    pub fn getReceiverInterfaceObjCInterfaceDeclarationOid(self) -> int {
+        return self.receiver_interface_obj_c_interface_declaration_oid
+    }
+    /**
+     * @brief gets the obj c method declaration oid of this element.
+     * @return int
+     */
+    pub fn getObjCMethodDeclarationOid(self) -> int {
+        return self.obj_c_method_declaration_oid
+    }
+    /**
+     * @brief gets a printed representation of this element, including its structure where applicable.
+     * @return string.
+     */
+    pub fn getPrintableText(self) -> string {
+        return self.printable_text
+    }
+}
+/**
+ * @brief DO class: The arguments to an obj_c_message_expression, not including the receiver
+ */
+schema ObjCMessageExpressionArgumentsDO {
+    @primary oid: int,
+    obj_c_message_expression_oid: int,
+    printable_text: string
+}
+impl ObjCMessageExpressionArgumentsDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *ObjCMessageExpressionArgumentsDO {
+    	for (tmp in db.obj_c_message_expression_arguments) {
+            yield ObjCMessageExpressionArgumentsDO {
+                oid : tmp.oid,
+                obj_c_message_expression_oid : tmp.obj_c_message_expression_oid,
+                printable_text : tmp.printable_text
+            }
+    	}
+    }
+    /**
+     * @brief gets the obj c message expression oid of this element.
+     * @return int
+     */
+    pub fn getObjCMessageExpressionOid(self) -> int {
+        return self.obj_c_message_expression_oid
+    }
+    /**
+     * @brief gets a printed representation of this element, including its structure where applicable.
+     * @return string.
+     */
+    pub fn getPrintableText(self) -> string {
+        return self.printable_text
+    }
+}
+/**
+ * @brief DO class: ObjC methods can be declared within 4 contexts: class interfaces, categories, protocols, and class implementations.
+ */
+schema ObjCMethodDeclarationDO {
+    @primary oid: int,
+    obj_c_container_declaration_oid: int,
+    return_type_oid: int,
+    is_definition: int,
+    printable_text: string
+}
+impl ObjCMethodDeclarationDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *ObjCMethodDeclarationDO {
+    	for (tmp in db.obj_c_method_declaration) {
+            yield ObjCMethodDeclarationDO {
+                oid : tmp.oid,
+                obj_c_container_declaration_oid : tmp.obj_c_container_declaration_oid,
+                return_type_oid : tmp.return_type_oid,
+                is_definition : tmp.is_definition,
+                printable_text : tmp.printable_text
+            }
+    	}
+    }
+    /**
+     * @brief gets the obj c container declaration oid of this element.
+     * @return int
+     */
+    pub fn getObjCContainerDeclarationOid(self) -> int {
+        return self.obj_c_container_declaration_oid
+    }
+    /**
+     * @brief Enum: interface, category, protocol, implementation
+     * @return int
+     */
+    pub fn getReturnTypeOid(self) -> int {
+        return self.return_type_oid
+    }
+    /**
+     * @brief Returns whether this specific method is a definition.
+     * @return int
+     */
+    pub fn getIsDefinition(self) -> int {
+        return self.is_definition
+    }
+    /**
+     * @brief gets a printed representation of this element, including its structure where applicable.
+     * @return string.
+     */
+    pub fn getPrintableText(self) -> string {
+        return self.printable_text
+    }
+}
+/**
+ * @brief DO class: Represents a class type in Objective-C
+ */
+schema ObjCObjectTypeDO {
+    @primary oid: int,
+    obj_c_interface_declaration_oid: int
+}
+impl ObjCObjectTypeDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *ObjCObjectTypeDO {
+    	for (tmp in db.obj_c_object_type) {
+            yield ObjCObjectTypeDO {
+                oid : tmp.oid,
+                obj_c_interface_declaration_oid : tmp.obj_c_interface_declaration_oid
+            }
+    	}
+    }
+    /**
+     * @brief gets the obj c interface declaration oid of this element.
+     * @return int
+     */
+    pub fn getObjCInterfaceDeclarationOid(self) -> int {
+        return self.obj_c_interface_declaration_oid
+    }
+}
+/**
+ * @brief DO class: Represents one property declaration in an Objective-C interface
+ */
+schema ObjCPropertyDeclarationDO {
+    @primary oid: int,
+    type_oid: int,
+    obj_c_container_declaration_oid: int,
+    property_control: string,
+    setter_kind: string,
+    printable_text: string
+}
+impl ObjCPropertyDeclarationDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *ObjCPropertyDeclarationDO {
+    	for (tmp in db.obj_c_property_declaration) {
+            yield ObjCPropertyDeclarationDO {
+                oid : tmp.oid,
+                type_oid : tmp.type_oid,
+                obj_c_container_declaration_oid : tmp.obj_c_container_declaration_oid,
+                property_control : tmp.property_control,
+                setter_kind : tmp.setter_kind,
+                printable_text : tmp.printable_text
+            }
+    	}
+    }
+    /**
+     * @brief gets the type oid of this element.
+     * @return int
+     */
+    pub fn getTypeOid(self) -> int {
+        return self.type_oid
+    }
+    /**
+     * @brief gets the obj c container declaration oid of this element.
+     * @return int
+     */
+    pub fn getObjCContainerDeclarationOid(self) -> int {
+        return self.obj_c_container_declaration_oid
+    }
+    /**
+     * @brief Enum: none, required, optional
+     * @return string
+     */
+    pub fn getPropertyControl(self) -> string {
+        return self.property_control
+    }
+    /**
+     * @brief Enum: assign, retain, copy, weak
+     * @return string
+     */
+    pub fn getSetterKind(self) -> string {
+        return self.setter_kind
+    }
+    /**
+     * @brief gets a printed representation of this element, including its structure where applicable.
+     * @return string.
+     */
+    pub fn getPrintableText(self) -> string {
+        return self.printable_text
+    }
+}
+/**
+ * @brief DO class: An obj c protocol declaration.
+ */
+schema ObjCProtocolDeclarationDO {
+    @primary oid: int,
+    is_definition: int,
+    printable_text: string
+}
+impl ObjCProtocolDeclarationDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *ObjCProtocolDeclarationDO {
+    	for (tmp in db.obj_c_protocol_declaration) {
+            yield ObjCProtocolDeclarationDO {
+                oid : tmp.oid,
+                is_definition : tmp.is_definition,
+                printable_text : tmp.printable_text
+            }
+    	}
+    }
+    /**
+     * @brief Determine whether this particular declaration is also the definition.
+     * @return int
+     */
+    pub fn getIsDefinition(self) -> int {
+        return self.is_definition
+    }
+    /**
+     * @brief gets a printed representation of this element, including its structure where applicable.
+     * @return string.
+     */
+    pub fn getPrintableText(self) -> string {
+        return self.printable_text
+    }
+}
+/**
+ * @brief DO class: Used for Objective-C string literals
+ */
+schema ObjCStringLiteralDO {
+    @primary oid: int,
+    printable_text: string
+}
+impl ObjCStringLiteralDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *ObjCStringLiteralDO {
+    	for (tmp in db.obj_c_string_literal) {
+            yield ObjCStringLiteralDO {
+                oid : tmp.oid,
+                printable_text : tmp.printable_text
+            }
+    	}
+    }
+    /**
+     * @brief gets a printed representation of this element, including its structure where applicable.
+     * @return string.
+     */
+    pub fn getPrintableText(self) -> string {
+        return self.printable_text
+    }
+}
+/**
+ * @brief DO class: A param variable declaration.
+ */
+schema ParamVariableDeclarationDO {
+    @primary oid: int,
+    callable_oid: int,
+    type_oid: int,
+    printable_text: string
+}
+impl ParamVariableDeclarationDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *ParamVariableDeclarationDO {
+    	for (tmp in db.param_variable_declaration) {
+            yield ParamVariableDeclarationDO {
+                oid : tmp.oid,
+                callable_oid : tmp.callable_oid,
+                type_oid : tmp.type_oid,
+                printable_text : tmp.printable_text
+            }
+    	}
+    }
+    /**
+     * @brief gets the callable oid of this element.
+     * @return int
+     */
+    pub fn getCallableOid(self) -> int {
+        return self.callable_oid
+    }
+    /**
+     * @brief gets the type oid of this element.
+     * @return int
+     */
+    pub fn getTypeOid(self) -> int {
+        return self.type_oid
+    }
+    /**
+     * @brief gets a printed representation of this element, including its structure where applicable.
+     * @return string.
+     */
+    pub fn getPrintableText(self) -> string {
+        return self.printable_text
+    }
+}
+/**
+ * @brief DO class: Represents a pointer type or an Objective-C object pointer type
+ */
+schema PointerTypeDO {
+    @primary oid: int,
+    pointee_type_oid: int
+}
+impl PointerTypeDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *PointerTypeDO {
+    	for (tmp in db.pointer_type) {
+            yield PointerTypeDO {
+                oid : tmp.oid,
+                pointee_type_oid : tmp.pointee_type_oid
+            }
+    	}
+    }
+    /**
+     * @brief If this is a pointer, ObjC object pointer, or block pointer, this returns the respective pointee.
+     * @return int
+     */
+    pub fn getPointeeTypeOid(self) -> int {
+        return self.pointee_type_oid
+    }
+}
+/**
+ * @brief DO class: A program.
+ */
+schema ProgramDO {
+    @primary oid: int,
+    printable_text: string
+}
+impl ProgramDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *ProgramDO {
+    	for (tmp in db.program) {
+            yield ProgramDO {
+                oid : tmp.oid,
+                printable_text : tmp.printable_text
+            }
+    	}
+    }
+    /**
+     * @brief gets a printed representation of this element, including its structure where applicable.
+     * @return string.
+     */
+    pub fn getPrintableText(self) -> string {
+        return self.printable_text
+    }
+}
+/**
+ * @brief DO class: A qualified type.
+ */
+schema QualifiedTypeDO {
+    @primary oid: int,
+    printable_text: string
+}
+impl QualifiedTypeDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *QualifiedTypeDO {
+    	for (tmp in db.qualified_type) {
+            yield QualifiedTypeDO {
+                oid : tmp.oid,
+                printable_text : tmp.printable_text
+            }
+    	}
+    }
+    /**
+     * @brief gets a printed representation of this element, including its structure where applicable.
+     * @return string.
+     */
+    pub fn getPrintableText(self) -> string {
+        return self.printable_text
+    }
+}
+/**
+ * @brief DO class: Represents a struct/union/class.
+ */
+schema RecordDeclarationDO {
+    @primary oid: int,
+    printable_text: string
+}
+impl RecordDeclarationDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *RecordDeclarationDO {
+    	for (tmp in db.record_declaration) {
+            yield RecordDeclarationDO {
+                oid : tmp.oid,
+                printable_text : tmp.printable_text
+            }
+    	}
+    }
+    /**
+     * @brief gets a printed representation of this element, including its structure where applicable.
+     * @return string.
+     */
+    pub fn getPrintableText(self) -> string {
+        return self.printable_text
+    }
+}
+/**
+ * @brief DO class: A statement.
+ */
+schema StatementDO {
+    @primary oid: int,
+    parent_oid: int,
+    index_order: int,
+    location_oid: int,
+    kind_name: string,
+    printable_text: string
+}
+impl StatementDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *StatementDO {
+    	for (tmp in db.statement) {
+            yield StatementDO {
+                oid : tmp.oid,
+                parent_oid : tmp.parent_oid,
+                index_order : tmp.index_order,
+                location_oid : tmp.location_oid,
+                kind_name : tmp.kind_name,
+                printable_text : tmp.printable_text
+            }
+    	}
+    }
+    /**
+     * @brief gets the parent oid of this element.
+     * @return int
+     */
+    pub fn getParentOid(self) -> int {
+        return self.parent_oid
+    }
+    /**
+     * @brief gets the index order of this element.
+     * @return int
+     */
+    pub fn getIndexOrder(self) -> int {
+        return self.index_order
+    }
+    /**
+     * @brief gets the location oid of this element.
+     * @return int
+     */
+    pub fn getLocationOid(self) -> int {
+        return self.location_oid
+    }
+    /**
+     * @brief Statement kind name
+     * @return string
+     */
+    pub fn getKindName(self) -> string {
+        return self.kind_name
+    }
+    /**
+     * @brief gets a printed representation of this element, including its structure where applicable.
+     * @return string.
+     */
+    pub fn getPrintableText(self) -> string {
+        return self.printable_text
+    }
+}
+/**
+ * @brief DO class: A switch case.
+ */
+schema SwitchCaseDO {
+    @primary oid: int,
+    sub_statement_oid: int,
+    next_switch_case_oid: int,
+    is_default: int,
+    printable_text: string
+}
+impl SwitchCaseDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *SwitchCaseDO {
+    	for (tmp in db.switch_case) {
+            yield SwitchCaseDO {
+                oid : tmp.oid,
+                sub_statement_oid : tmp.sub_statement_oid,
+                next_switch_case_oid : tmp.next_switch_case_oid,
+                is_default : tmp.is_default,
+                printable_text : tmp.printable_text
+            }
+    	}
+    }
+    /**
+     * @brief gets the sub statement oid of this element.
+     * @return int
+     */
+    pub fn getSubStatementOid(self) -> int {
+        return self.sub_statement_oid
+    }
+    /**
+     * @brief Gets the next switch case belonging to the same switch statement, if any
+     * @return int
+     */
+    pub fn getNextSwitchCaseOid(self) -> int {
+        return self.next_switch_case_oid
+    }
+    /**
+     * @brief gets the is default of this element.
+     * @return int
+     */
+    pub fn getIsDefault(self) -> int {
+        return self.is_default
+    }
+    /**
+     * @brief gets a printed representation of this element, including its structure where applicable.
+     * @return string.
+     */
+    pub fn getPrintableText(self) -> string {
+        return self.printable_text
+    }
+}
+/**
+ * @brief DO class: A switch statement.
+ */
+schema SwitchStatementDO {
+    @primary oid: int,
+    condition_expression_oid: int,
+    starting_switch_case_oid: int,
+    printable_text: string
+}
+impl SwitchStatementDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *SwitchStatementDO {
+    	for (tmp in db.switch_statement) {
+            yield SwitchStatementDO {
+                oid : tmp.oid,
+                condition_expression_oid : tmp.condition_expression_oid,
+                starting_switch_case_oid : tmp.starting_switch_case_oid,
+                printable_text : tmp.printable_text
+            }
+    	}
+    }
+    /**
+     * @brief Gets the condition of this switch statement, the condition is an expression
+     * @return int
+     */
+    pub fn getConditionExpressionOid(self) -> int {
+        return self.condition_expression_oid
+    }
+    /**
+     * @brief Gets the starting switch case statement of this switch statement
+     * @return int
+     */
+    pub fn getStartingSwitchCaseOid(self) -> int {
+        return self.starting_switch_case_oid
+    }
+    /**
+     * @brief gets a printed representation of this element, including its structure where applicable.
+     * @return string.
+     */
+    pub fn getPrintableText(self) -> string {
+        return self.printable_text
+    }
+}
+/**
+ * @brief DO class: Store named declaration oid and its symbol name
+ */
+schema SymbolTableDO {
+    @primary named_declaration_oid: int,
+    symbol_name: string
+}
+impl SymbolTableDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *SymbolTableDO {
+    	for (tmp in db.symbol_table) {
+            yield SymbolTableDO {
+                named_declaration_oid : tmp.named_declaration_oid,
+                symbol_name : tmp.symbol_name
+            }
+    	}
+    }
+    /**
+     * @brief gets the symbol name of this element.
+     * @return string
+     */
+    pub fn getSymbolName(self) -> string {
+        return self.symbol_name
+    }
+}
+/**
+ * @brief DO class: Represents the declaration of a struct/union/class/enum.
+ */
+schema TagDeclarationDO {
+    @primary oid: int,
+    tag_kind: string,
+    is_definition: int,
+    printable_text: string
+}
+impl TagDeclarationDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *TagDeclarationDO {
+    	for (tmp in db.tag_declaration) {
+            yield TagDeclarationDO {
+                oid : tmp.oid,
+                tag_kind : tmp.tag_kind,
+                is_definition : tmp.is_definition,
+                printable_text : tmp.printable_text
+            }
+    	}
+    }
+    /**
+     * @brief The kind of a tag type. \n
+ Enum: struct, interface, union, class, enum
+     * @return string
+     */
+    pub fn getTagKind(self) -> string {
+        return self.tag_kind
+    }
+    /**
+     * @brief Return true if this declaration is a completion definition of the type. Provided for consistency.
+     * @return int
+     */
+    pub fn getIsDefinition(self) -> int {
+        return self.is_definition
+    }
+    /**
+     * @brief gets a printed representation of this element, including its structure where applicable.
+     * @return string.
+     */
+    pub fn getPrintableText(self) -> string {
+        return self.printable_text
+    }
+}
+/**
+ * @brief DO class: Represents a struct/union/class/enum type in C/C++
+ */
+schema TagTypeDO {
+    @primary oid: int,
+    tag_declaration_oid: int
+}
+impl TagTypeDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *TagTypeDO {
+    	for (tmp in db.tag_type) {
+            yield TagTypeDO {
+                oid : tmp.oid,
+                tag_declaration_oid : tmp.tag_declaration_oid
+            }
+    	}
+    }
+    /**
+     * @brief gets the tag declaration oid of this element.
+     * @return int
+     */
+    pub fn getTagDeclarationOid(self) -> int {
+        return self.tag_declaration_oid
+    }
+}
+/**
+ * @brief DO class: The base class of the type hierarchy
+ */
+schema TypeDO {
+    @primary oid: int,
+    kind_name: string,
+    printable_text: string
+}
+impl TypeDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *TypeDO {
+    	for (tmp in db.type) {
+            yield TypeDO {
+                oid : tmp.oid,
+                kind_name : tmp.kind_name,
+                printable_text : tmp.printable_text
+            }
+    	}
+    }
+    /**
+     * @brief Type kind name
+     * @return string
+     */
+    pub fn getKindName(self) -> string {
+        return self.kind_name
+    }
+    /**
+     * @brief gets a printed representation of this element, including its structure where applicable.
+     * @return string.
+     */
+    pub fn getPrintableText(self) -> string {
+        return self.printable_text
+    }
+}
+/**
+ * @brief DO class: Represents a declaration of a type.
+ */
+schema TypeDeclarationDO {
+    @primary oid: int,
+    type_oid: int,
+    printable_text: string
+}
+impl TypeDeclarationDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *TypeDeclarationDO {
+    	for (tmp in db.type_declaration) {
+            yield TypeDeclarationDO {
+                oid : tmp.oid,
+                type_oid : tmp.type_oid,
+                printable_text : tmp.printable_text
+            }
+    	}
+    }
+    /**
+     * @brief Type defined by this node
+     * @return int
+     */
+    pub fn getTypeOid(self) -> int {
+        return self.type_oid
+    }
+    /**
+     * @brief gets a printed representation of this element, including its structure where applicable.
+     * @return string.
+     */
+    pub fn getPrintableText(self) -> string {
+        return self.printable_text
+    }
+}
+/**
+ * @brief DO class: Represent the declaration of a variable (in which case it is an lvalue) a function (in which case it is a function designator) or an enum constant.
+ */
+schema ValueDeclarationDO {
+    @primary oid: int,
+    printable_text: string
+}
+impl ValueDeclarationDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *ValueDeclarationDO {
+    	for (tmp in db.value_declaration) {
+            yield ValueDeclarationDO {
+                oid : tmp.oid,
+                printable_text : tmp.printable_text
+            }
+    	}
+    }
+    /**
+     * @brief gets a printed representation of this element, including its structure where applicable.
+     * @return string.
+     */
+    pub fn getPrintableText(self) -> string {
+        return self.printable_text
+    }
+}
+/**
+ * @brief DO class: A value statement.
+ */
+schema ValueStatementDO {
+    @primary oid: int,
+    printable_text: string
+}
+impl ValueStatementDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *ValueStatementDO {
+    	for (tmp in db.value_statement) {
+            yield ValueStatementDO {
+                oid : tmp.oid,
+                printable_text : tmp.printable_text
+            }
+    	}
+    }
+    /**
+     * @brief gets a printed representation of this element, including its structure where applicable.
+     * @return string.
+     */
+    pub fn getPrintableText(self) -> string {
+        return self.printable_text
+    }
+}
+/**
+ * @brief DO class: Represents a variable declaration or definition
+ */
+schema VariableDeclarationDO {
+    @primary oid: int,
+    printable_text: string
+}
+impl VariableDeclarationDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *VariableDeclarationDO {
+    	for (tmp in db.variable_declaration) {
+            yield VariableDeclarationDO {
+                oid : tmp.oid,
+                printable_text : tmp.printable_text
+            }
+    	}
+    }
+    /**
+     * @brief gets a printed representation of this element, including its structure where applicable.
+     * @return string.
+     */
+    pub fn getPrintableText(self) -> string {
+        return self.printable_text
+    }
+}
+/**
+ * @brief DO class: A while statement.
+ */
+schema WhileStatementDO {
+    @primary oid: int,
+    condition_expression_oid: int,
+    body_statement_oid: int,
+    printable_text: string
+}
+impl WhileStatementDO {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *WhileStatementDO {
+    	for (tmp in db.while_statement) {
+            yield WhileStatementDO {
+                oid : tmp.oid,
+                condition_expression_oid : tmp.condition_expression_oid,
+                body_statement_oid : tmp.body_statement_oid,
+                printable_text : tmp.printable_text
+            }
+    	}
+    }
+    /**
+     * @brief gets the condition expression oid of this element.
+     * @return int
+     */
+    pub fn getConditionExpressionOid(self) -> int {
+        return self.condition_expression_oid
+    }
+    /**
+     * @brief gets the body statement oid of this element.
+     * @return int
+     */
+    pub fn getBodyStatementOid(self) -> int {
+        return self.body_statement_oid
+    }
+    /**
+     * @brief gets a printed representation of this element, including its structure where applicable.
+     * @return string.
+     */
+    pub fn getPrintableText(self) -> string {
+        return self.printable_text
+    }
+}
+
+database CfamilyDB {
+    block_declaration: *BlockDeclarationDO,
+    block_expression: *BlockExpressionDO,
+    call_expression: *CallExpressionDO,
+    call_expression_arguments: *CallExpressionArgumentsDO,
+    callable_enclosing_statement: *CallableEnclosingStatementDO,
+    class_hierarchy: *ClassHierarchyDO,
+    conditional_operator_expression: *ConditionalOperatorExpressionDO,
+    cxx_for_range_statement: *CxxForRangeStatementDO,
+    cxx_member_call_expression: *CxxMemberCallExpressionDO,
+    cxx_method_declaration: *CxxMethodDeclarationDO,
+    cxx_record_declaration: *CxxRecordDeclarationDO,
+    declaration: *DeclarationDO,
+    declaration_context: *DeclarationContextDO,
+    declaration_statement: *DeclarationStatementDO,
+    declarator_declaration: *DeclaratorDeclarationDO,
+    do_statement: *DoStatementDO,
+    else_statement_in_if: *ElseStatementInIfDO,
+    expression: *ExpressionDO,
+    field_declaration: *FieldDeclarationDO,
+    file: *FileDO,
+    for_statement: *ForStatementDO,
+    function_declaration: *FunctionDeclarationDO,
+    if_statement: *IfStatementDO,
+    location: *LocationDO,
+    named_declaration: *NamedDeclarationDO,
+    obj_c_category_declaration: *ObjCCategoryDeclarationDO,
+    obj_c_category_protocol_binding: *ObjCCategoryProtocolBindingDO,
+    obj_c_container_declaration: *ObjCContainerDeclarationDO,
+    obj_c_for_collection_statement: *ObjCForCollectionStatementDO,
+    obj_c_implementation_declaration: *ObjCImplementationDeclarationDO,
+    obj_c_interface_declaration: *ObjCInterfaceDeclarationDO,
+    obj_c_interface_protocol_binding: *ObjCInterfaceProtocolBindingDO,
+    obj_c_message_expression: *ObjCMessageExpressionDO,
+    obj_c_message_expression_arguments: *ObjCMessageExpressionArgumentsDO,
+    obj_c_method_declaration: *ObjCMethodDeclarationDO,
+    obj_c_object_type: *ObjCObjectTypeDO,
+    obj_c_property_declaration: *ObjCPropertyDeclarationDO,
+    obj_c_protocol_declaration: *ObjCProtocolDeclarationDO,
+    obj_c_string_literal: *ObjCStringLiteralDO,
+    param_variable_declaration: *ParamVariableDeclarationDO,
+    pointer_type: *PointerTypeDO,
+    program: *ProgramDO,
+    qualified_type: *QualifiedTypeDO,
+    record_declaration: *RecordDeclarationDO,
+    statement: *StatementDO,
+    switch_case: *SwitchCaseDO,
+    switch_statement: *SwitchStatementDO,
+    symbol_table: *SymbolTableDO,
+    tag_declaration: *TagDeclarationDO,
+    tag_type: *TagTypeDO,
+    type: *TypeDO,
+    type_declaration: *TypeDeclarationDO,
+    value_declaration: *ValueDeclarationDO,
+    value_statement: *ValueStatementDO,
+    variable_declaration: *VariableDeclarationDO,
+    while_statement: *WhileStatementDO,
+}

@@ -1,0 +1,670 @@
+/**
+ * @filename: STATEMENT
+ * @date: 2021/12/9
+ * @brief: STATEMENT provides classes and predicates for working with C family statements
+ */
+/**
+ * @brief A super class for all statements.
+ */
+schema Statement extends StatementDO {
+    
+}
+impl Statement {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *Statement {
+        for (tmp in StatementDO(db)) {
+            yield Statement {
+                oid : tmp.oid,
+                parent_oid : tmp.parent_oid,
+                index_order : tmp.index_order,
+                location_oid : tmp.location_oid,
+                kind_name : tmp.kind_name,
+                printable_text : tmp.printable_text
+            }
+        }
+    }
+    /**
+     * @brief gets the location for the element.
+     * @return Location
+     */
+    pub fn getLocation(self) -> Location {
+        for (loc in Location(__all_data__)) {
+            if (loc.oid = self.getLocationOid()) {
+                return loc
+            }
+        }
+    }
+    /**
+     * @brief gets the parent element of the statement
+     * @return ElementParent
+     */
+    pub fn getParent(self) -> ElementParent {
+        for (parent in ElementParent(__all_data__)) {
+            if (parent.id = self.getParentOid()) {
+                return parent
+            }
+        }
+    }
+    /**
+     * @brief gets an ancestor of the element.
+     * @return ElementParent 
+     */
+    pub fn getAnAncestor(self) -> *ElementParent {
+        for (ancestor in ElementParent(__all_data__),
+            temp in ElementParent(__all_data__)) {
+            if (self.key_eq(temp)) {
+                for (auto_tmp1 in temp.getAnAncestor()) {
+                    if (ancestor = auto_tmp1) {
+                        yield ancestor
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the immediately enclosing callable whose body contains this statement.
+     * @return Callable 
+     */
+    pub fn getEnclosingCallable(self) -> *Callable {
+        for (enclosingCallable in Callable(__all_data__),
+            c in CallableEnclosingStatement(__all_data__)) {
+            for (auto_tmp1 in c.getEnclosingCallable()) {
+                if (enclosingCallable = auto_tmp1) {
+                    if (self.key_eq(c)) {
+                        yield enclosingCallable
+                    }
+                }
+            }
+        }
+    }
+}
+schema CallableEnclosingStatement extends CallableEnclosingStatementDO {
+    
+}
+impl CallableEnclosingStatement {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *CallableEnclosingStatement {
+        for (tmp in CallableEnclosingStatementDO(db)) {
+            yield CallableEnclosingStatement {
+                statement_oid : tmp.statement_oid,
+                callable_oid : tmp.callable_oid
+            }
+        }
+    }
+    pub fn getEnclosingCallable(self) -> *Callable {
+        for (c in Callable(__all_data__)) {
+            if (c.id = self.getCallableOid()) {
+                yield c
+            }
+        }
+    }
+}
+schema ValueStatement extends Statement {
+    
+}
+impl ValueStatement {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *ValueStatement {
+        for (tmp in Statement(db)) {
+            for (v in ValueStatementDO(db)) {
+                if (tmp.key_eq(v)) {
+                    yield ValueStatement {
+                        oid : tmp.oid,
+                        parent_oid : tmp.parent_oid,
+                        index_order : tmp.index_order,
+                        location_oid : tmp.location_oid,
+                        kind_name : tmp.kind_name,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+}
+/**
+ * @brief A if statement.
+ */
+schema IfStatement extends Statement {
+    
+}
+impl IfStatement {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *IfStatement {
+        for (tmp in Statement(db)) {
+            for (ifs in IfStatementDO(db)) {
+                if (tmp.key_eq(ifs)) {
+                    yield IfStatement {
+                        oid : tmp.oid,
+                        parent_oid : tmp.parent_oid,
+                        index_order : tmp.index_order,
+                        location_oid : tmp.location_oid,
+                        kind_name : tmp.kind_name,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief Gets the condition of this ‘if’ statement, the condition is an expression.
+     * @return Expression
+     */
+    pub fn getConditionExpression(self) -> Expression {
+        for (expr in Expression(__all_data__),
+            ifs in IfStatementDO(__all_data__)) {
+            if (self.key_eq(ifs)) {
+                if (expr.oid = ifs.getConditionExpressionOid()) {
+                    return expr
+                }
+            }
+        }
+    }
+    /**
+     * @brief Gets the ‘then’ statement of this ‘if’ statement
+     * @return Statement
+     */
+    pub fn getThenStatement(self) -> Statement {
+        for (thenStmt in Statement(__all_data__),
+            ifs in IfStatementDO(__all_data__)) {
+            if (self.key_eq(ifs)) {
+                if (thenStmt.oid = ifs.getThenStatementOid()) {
+                    return thenStmt
+                }
+            }
+        }
+    }
+    /**
+     * @brief Gets the ‘else’ statement of this ‘if’ statement, if any
+     * @return Statement
+     */
+    pub fn getElseStatement(self) -> Statement {
+        for (elseStmt in Statement(__all_data__),
+            esii in ElseStatementInIfDO(__all_data__)) {
+            if (self.oid = esii.getIfStatementOid()) {
+                if (elseStmt.key_eq(esii)) {
+                    return elseStmt
+                }
+            }
+        }
+    }
+}
+/**
+ * @brief A while statement.
+ */
+schema WhileStatement extends Statement {
+    
+}
+impl WhileStatement {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *WhileStatement {
+        for (tmp in Statement(db)) {
+            for (ws in WhileStatementDO(db)) {
+                if (tmp.key_eq(ws)) {
+                    yield WhileStatement {
+                        oid : tmp.oid,
+                        parent_oid : tmp.parent_oid,
+                        index_order : tmp.index_order,
+                        location_oid : tmp.location_oid,
+                        kind_name : tmp.kind_name,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the boolean condition of this while loop.
+     * @return Expression 
+     */
+    pub fn getConditionExpression(self) -> Expression {
+        for (cond in Expression(__all_data__),
+            ws in WhileStatementDO(__all_data__)) {
+            if (self.key_eq(ws)) {
+                if (cond.oid = ws.getConditionExpressionOid()) {
+                    return cond
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the body of this while loop.
+     * @return Statement 
+     */
+    pub fn getBodyStatement(self) -> Statement {
+        for (body in Statement(__all_data__),
+            ws in WhileStatementDO(__all_data__)) {
+            if (self.key_eq(ws)) {
+                if (body.oid = ws.getBodyStatementOid()) {
+                    return body
+                }
+            }
+        }
+    }
+}
+/**
+ * @brief A do-while statement.
+ */
+schema DoStatement extends Statement {
+    
+}
+impl DoStatement {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *DoStatement {
+        for (tmp in Statement(db)) {
+            for (ds in DoStatementDO(db)) {
+                if (tmp.key_eq(ds)) {
+                    yield DoStatement {
+                        oid : tmp.oid,
+                        parent_oid : tmp.parent_oid,
+                        index_order : tmp.index_order,
+                        location_oid : tmp.location_oid,
+                        kind_name : tmp.kind_name,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the boolean condition of this dowhile loop.
+     * @return Expression 
+     */
+    pub fn getConditionExpression(self) -> Expression {
+        for (cond in Expression(__all_data__),
+            ds in DoStatementDO(__all_data__)) {
+            if (self.key_eq(ds)) {
+                if (cond.oid = ds.getConditionExpressionOid()) {
+                    return cond
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the body of this while loop.
+     * @return Statement 
+     */
+    pub fn getBodyStatement(self) -> Statement {
+        for (body in Statement(__all_data__),
+            ds in DoStatementDO(__all_data__)) {
+            if (self.key_eq(ds)) {
+                if (body.oid = ds.getBodyStatementOid()) {
+                    return body
+                }
+            }
+        }
+    }
+}
+schema ForStatement extends Statement {
+    
+}
+impl ForStatement {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *ForStatement {
+        for (tmp in Statement(db)) {
+            for (fs in ForStatementDO(db)) {
+                if (tmp.key_eq(fs)) {
+                    yield ForStatement {
+                        oid : tmp.oid,
+                        parent_oid : tmp.parent_oid,
+                        index_order : tmp.index_order,
+                        location_oid : tmp.location_oid,
+                        kind_name : tmp.kind_name,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the initialization statement of this element.
+     * @return Statement
+     */
+    pub fn getInitializationStatement(self) -> Statement {
+        for (init in Statement(__all_data__),
+            fs in ForStatementDO(__all_data__)) {
+            if (self.key_eq(fs)) {
+                if (init.oid = fs.getInitializationStatementOid()) {
+                    return init
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the body statement of this element.
+     * @return Statement
+     */
+    pub fn getBodyStatement(self) -> Statement {
+        for (bodyStatement in Statement(__all_data__),
+            fs in ForStatementDO(__all_data__)) {
+            if (self.key_eq(fs)) {
+                if (bodyStatement.oid = fs.getBodyStatementOid()) {
+                    return bodyStatement
+                }
+            }
+        }
+    }
+    /**
+     * @brief Gets the condition expression
+     * @return Expression
+     */
+    pub fn getConditionExpression(self) -> Expression {
+        for (conditionExpression in Expression(__all_data__),
+            fs in ForStatementDO(__all_data__)) {
+            if (self.key_eq(fs)) {
+                if (conditionExpression.oid = fs.getConditionExpressionOid()) {
+                    return conditionExpression
+                }
+            }
+        }
+    }
+    /**
+     * @brief Gets the increment expression
+     * @return Expression
+     */
+    pub fn getIncrementExpression(self) -> Expression {
+        for (incrementExpression in Expression(__all_data__)) {
+            for (fs in ForStatementDO(__all_data__)) {
+                if (self.key_eq(fs)) {
+                    if (incrementExpression.oid = fs.getIncrementExpressionOid()) {
+                        return incrementExpression
+                    }
+                }
+            }
+        }
+    }
+}
+/**
+ * 
+ * @brief Represents Objective-C's collection statement \n
+ This is represented as 'for (element 'in' collection-expression)' stmt
+ */
+schema ObjCForCollectionStatement extends Statement {
+    
+}
+impl ObjCForCollectionStatement {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *ObjCForCollectionStatement {
+        for (tmp in Statement(db)) {
+            for (ofs in ObjCForCollectionStatementDO(db)) {
+                if (tmp.key_eq(ofs)) {
+                    yield ObjCForCollectionStatement {
+                        oid : tmp.oid,
+                        parent_oid : tmp.parent_oid,
+                        index_order : tmp.index_order,
+                        location_oid : tmp.location_oid,
+                        kind_name : tmp.kind_name,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the element statement of this element.
+     * @return Statement
+     */
+    pub fn getElementStatement(self) -> Statement {
+        for (elementStatement in Statement(__all_data__),
+            ofs in ObjCForCollectionStatementDO(__all_data__)) {
+            if (self.key_eq(ofs)) {
+                if (elementStatement.oid = ofs.getElementStatementOid()) {
+                    return elementStatement
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the collection expression of this element.
+     * @return Expression
+     */
+    pub fn getCollectionExpression(self) -> Expression {
+        for (collectionExpression in Expression(__all_data__),
+            ofs in ObjCForCollectionStatementDO(__all_data__)) {
+            if (self.key_eq(ofs)) {
+                if (collectionExpression.oid = ofs.getCollectionExpressionOid()) {
+                    return collectionExpression
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the body statement of this element.
+     * @return Statement
+     */
+    pub fn getBodyStatement(self) -> Statement {
+        for (bodyStatement in Statement(__all_data__),
+            ofs in ObjCForCollectionStatementDO(__all_data__)) {
+            if (self.key_eq(ofs)) {
+                if (bodyStatement.oid = ofs.getBodyStatementOid()) {
+                    return bodyStatement
+                }
+            }
+        }
+    }
+}
+/**
+ * 
+ * @brief This represents C++0x [stmt.ranged]'s ranged for statement, represented as 'for (range-declarator : range-expression)' or 'for (init-statement range-declarator : range-expression)'.
+ */
+schema CxxForRangeStatement extends Statement {
+    
+}
+impl CxxForRangeStatement {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *CxxForRangeStatement {
+        for (tmp in Statement(db)) {
+            for (cfs in CxxForRangeStatementDO(db)) {
+                if (tmp.key_eq(cfs)) {
+                    yield CxxForRangeStatement {
+                        oid : tmp.oid,
+                        parent_oid : tmp.parent_oid,
+                        index_order : tmp.index_order,
+                        location_oid : tmp.location_oid,
+                        kind_name : tmp.kind_name,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the body statement oid of this element.
+     * @return Statement
+     */
+    pub fn getBodyStatement(self) -> Statement {
+        for (bodyStatement in Statement(__all_data__),
+            cfs in CxxForRangeStatementDO(__all_data__)) {
+            if (self.key_eq(cfs)) {
+                if (bodyStatement.oid = cfs.getBodyStatementOid()) {
+                    return bodyStatement
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the loop variable variable declaration oid of this element.
+     * @return Declaration
+     */
+    pub fn getLoopVariableVariableDeclaration(self) -> Declaration {
+        for (loopVariableVariableDeclaration in Declaration(__all_data__),
+            cfs in CxxForRangeStatementDO(__all_data__)) {
+            if (self.key_eq(cfs)) {
+                if (loopVariableVariableDeclaration.oid = cfs.getLoopVariableVariableDeclarationOid()) {
+                    return loopVariableVariableDeclaration
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the range initialization expression oid of this element.
+     * @return Expression
+     */
+    pub fn getRangeInitializationExpression(self) -> Expression {
+        for (rangeInitializationExpression in Expression(__all_data__),
+            cfs in CxxForRangeStatementDO(__all_data__)) {
+            if (self.key_eq(cfs)) {
+                if (rangeInitializationExpression.oid = cfs.getRangeInitializationExpressionOid()) {
+                    return rangeInitializationExpression
+                }
+            }
+        }
+    }
+}
+/**
+ * 
+ * @brief A switch statement.
+ */
+schema SwitchStatement extends Statement {
+    
+}
+impl SwitchStatement {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *SwitchStatement {
+        for (tmp in Statement(db)) {
+            for (s in SwitchStatementDO(db)) {
+                if (tmp.key_eq(s)) {
+                    yield SwitchStatement {
+                        oid : tmp.oid,
+                        parent_oid : tmp.parent_oid,
+                        index_order : tmp.index_order,
+                        location_oid : tmp.location_oid,
+                        kind_name : tmp.kind_name,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief Gets the condition of this switch statement, the condition is an expression
+     * @return Expression
+     */
+    pub fn getConditionExpression(self) -> Expression {
+        for (expr in Expression(__all_data__),
+            s in SwitchStatementDO(__all_data__)) {
+            if (self.key_eq(s)) {
+                if (expr.oid = s.getConditionExpressionOid()) {
+                    return expr
+                }
+            }
+        }
+    }
+    /**
+     * @brief Gets the starting switch case statement of this switch statement
+     * @return SwitchCase
+     */
+    pub fn getStartingSwitchCase(self) -> SwitchCase {
+        for (startingSwitchCase in SwitchCase(__all_data__),
+            s in SwitchStatementDO(__all_data__)) {
+            if (self.key_eq(s)) {
+                if (startingSwitchCase.oid = s.getStartingSwitchCaseOid()) {
+                    return startingSwitchCase
+                }
+            }
+        }
+    }
+ // TODO
+    /**
+     * @brief Gets a ‘switch case’ statement of this ‘switch’ statement.
+     * @return Statement
+     */
+    pub fn getASwitchCase(self) -> SwitchCase {
+        for (sc in SwitchCase(__all_data__),
+            s in SwitchStatement(__all_data__)) {
+            if (self = s) {
+                if (sc = s.getStartingSwitchCase()) {
+                    return sc
+                }
+            }
+            for (temp in SwitchCase(__all_data__)) {
+                if (self = s) {
+                    if (temp = s.getStartingSwitchCase()) {
+                        if (sc = temp.getNextSwitchCase()) {
+                            return sc
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+/**
+ * 
+ * @brief A switch case.
+ */
+schema SwitchCase extends Statement {
+    
+}
+impl SwitchCase {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *SwitchCase {
+        for (tmp in Statement(db)) {
+            for (sc in SwitchCaseDO(db)) {
+                if (tmp.key_eq(sc)) {
+                    yield SwitchCase {
+                        oid : tmp.oid,
+                        parent_oid : tmp.parent_oid,
+                        index_order : tmp.index_order,
+                        location_oid : tmp.location_oid,
+                        kind_name : tmp.kind_name,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the sub statement of this element.
+     * @return Statement
+     */
+    pub fn getSubStatement(self) -> Statement {
+        for (subStatement in Statement(__all_data__),
+            sc in SwitchCaseDO(__all_data__)) {
+            if (self.key_eq(sc)) {
+                if (subStatement.oid = sc.getSubStatementOid()) {
+                    return subStatement
+                }
+            }
+        }
+    }
+    /**
+     * @brief Gets the next switch case belonging to the same switch statement, if any
+     * @return SwitchCaseDO
+     */
+    pub fn getNextSwitchCase(self) -> SwitchCase {
+        for (sc in SwitchCaseDO(__all_data__),
+            currentSc in SwitchCaseDO(__all_data__)) {
+            if (self.key_eq(currentSc)) {
+                if (sc.oid = currentSc.getNextSwitchCaseOid()) {
+                    return SwitchCase(__all_data__).find(sc)
+                }
+            }
+        }
+    }
+    /**
+     * @brief the element represents a default section or not, 1 means true.
+     * @return int
+     */
+    pub fn isDefault(self) -> int {
+        for (isDefault in int::__undetermined_all__()) {
+            for (sc in SwitchCaseDO(__all_data__)) {
+                if (self.key_eq(sc)) {
+                    if (isDefault = sc.getIsDefault()) {
+                        return isDefault
+                    }
+                }
+            }
+        }
+    }
+}

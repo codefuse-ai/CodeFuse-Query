@@ -1,0 +1,17 @@
+#OS X specific files.
+.DS_store
+
+# Nested build directory
+/cmake-build-*
+/Tests/cmake-build-*
+
+# VS2017 and VSCode config files.
+.vscode
+.vs
+
+# CLion project configuration
+/.idea
+
+# Ignore all bazel-* symlinks. There is no full list since this can change
+# based on the name of the directory bazel is cloned into.
+/bazel-*

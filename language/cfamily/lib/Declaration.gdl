@@ -1,0 +1,864 @@
+/**
+ * @filename: DECLARATION
+ * @date: 2021/12/9
+ * @brief: DECLARATION provides classes and predicates for working with C family declarations
+ */
+/**
+ * @brief A super class for all declarations.
+ */
+schema Declaration extends DeclarationDO {
+    
+}
+impl Declaration {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *Declaration {
+        for (tmp in DeclarationDO(db)) {
+            yield Declaration {
+                oid : tmp.oid,
+                parent_oid : tmp.parent_oid,
+                index_order : tmp.index_order,
+                location_oid : tmp.location_oid,
+                kind_name : tmp.kind_name,
+                printable_text : tmp.printable_text
+            }
+        }
+    }
+    /**
+     * @brief gets the location for the element.
+     * @return Location
+     */
+    pub fn getLocation(self) -> Location {
+        for (loc in Location(__all_data__)) {
+            if (loc.oid = self.getLocationOid()) {
+                return loc
+            }
+        }
+    }
+    /**
+     * @brief gets the parent element of the declaration
+     * @return ElementParent 
+     */
+    pub fn getParent(self) -> ElementParent {
+        for (parent in ElementParent(__all_data__)) {
+            if (parent.id = self.getParentOid()) {
+                return parent
+            }
+        }
+    }
+    /**
+     * @brief gets an ancestor of the element.
+     * @return ElementParent 
+     */
+    pub fn getAnAncestor(self) -> *ElementParent {
+        for (temp in ElementParent(__all_data__)) {
+            if (self.key_eq(temp)) {
+                yield temp.getAnAncestor()
+            }
+        }
+    }
+}
+schema BlockDeclaration extends Declaration {
+    
+}
+impl BlockDeclaration {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *BlockDeclaration {
+        for (tmp in Declaration(db)) {
+            for (bd in BlockDeclarationDO(db)) {
+                if (tmp.key_eq(bd)) {
+                    yield BlockDeclaration {
+                        oid : tmp.oid,
+                        parent_oid : tmp.parent_oid,
+                        index_order : tmp.index_order,
+                        location_oid : tmp.location_oid,
+                        kind_name : tmp.kind_name,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+}
+schema NamedDeclaration extends Declaration {
+    
+}
+impl NamedDeclaration {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *NamedDeclaration {
+        for (tmp in Declaration(db)) {
+            for (nd in NamedDeclarationDO(db)) {
+                if (tmp.key_eq(nd)) {
+                    yield NamedDeclaration {
+                        oid : tmp.oid,
+                        parent_oid : tmp.parent_oid,
+                        index_order : tmp.index_order,
+                        location_oid : tmp.location_oid,
+                        kind_name : tmp.kind_name,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the name of the named declaration.
+     * @return string 
+     */
+    pub fn getName(self) -> string {
+        for (nd in NamedDeclarationDO(__all_data__)) {
+            if (self.key_eq(nd)) {
+                return nd.getName()
+            }
+        }
+    }
+}
+schema ObjCContainerDeclaration extends NamedDeclaration {
+    
+}
+impl ObjCContainerDeclaration {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *ObjCContainerDeclaration {
+        for (tmp in NamedDeclaration(db)) {
+            for (ocd in ObjCContainerDeclarationDO(db)) {
+                if (tmp.key_eq(ocd)) {
+                    yield ObjCContainerDeclaration {
+                        oid : tmp.oid,
+                        parent_oid : tmp.parent_oid,
+                        index_order : tmp.index_order,
+                        location_oid : tmp.location_oid,
+                        kind_name : tmp.kind_name,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+}
+schema ObjCMethodDeclaration extends NamedDeclaration {
+    
+}
+impl ObjCMethodDeclaration {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *ObjCMethodDeclaration {
+        for (tmp in NamedDeclaration(db)) {
+            for (o in ObjCMethodDeclarationDO(db)) {
+                if (tmp.key_eq(o)) {
+                    yield ObjCMethodDeclaration {
+                        oid : tmp.oid,
+                        parent_oid : tmp.parent_oid,
+                        index_order : tmp.index_order,
+                        location_oid : tmp.location_oid,
+                        kind_name : tmp.kind_name,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the objc container of the method.
+     * @return Type
+     */
+    pub fn getObjCContainerDeclaration(self) -> ObjCContainerDeclaration {
+        for (o in ObjCMethodDeclarationDO(__all_data__),
+            container in ObjCContainerDeclaration(__all_data__)) {
+            if (self.key_eq(o)) {
+                if (container.oid = o.getObjCContainerDeclarationOid()) {
+                    return container
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the return type.
+     * @return Type
+     */
+    pub fn getReturnType(self) -> Type {
+        for (o in ObjCMethodDeclarationDO(__all_data__),
+            t in Type(__all_data__)) {
+            if (self.key_eq(o)) {
+                if (t.oid = o.getReturnTypeOid()) {
+                    return t
+                }
+            }
+        }
+    }
+    /**
+     * @brief whether the declarion is a definition.
+     * @return int
+     */
+    pub fn isDefinition(self) -> int {
+        for (o in ObjCMethodDeclarationDO(__all_data__)) {
+            if (self.key_eq(o)) {
+                return o.getIsDefinition()
+            }
+        }
+    }
+}
+schema TypeDeclaration extends NamedDeclaration {
+    
+}
+impl TypeDeclaration {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *TypeDeclaration {
+        for (tmp in NamedDeclaration(db)) {
+            for (t in TypeDeclarationDO(db)) {
+                if (tmp.key_eq(t)) {
+                    yield TypeDeclaration {
+                        oid : tmp.oid,
+                        parent_oid : tmp.parent_oid,
+                        index_order : tmp.index_order,
+                        location_oid : tmp.location_oid,
+                        kind_name : tmp.kind_name,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+}
+schema TagDeclaration extends TypeDeclaration {
+    
+}
+impl TagDeclaration {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *TagDeclaration {
+        for (tmp in TypeDeclaration(db)) {
+            for (t in TagDeclarationDO(db)) {
+                if (tmp.key_eq(t)) {
+                    yield TagDeclaration {
+                        oid : tmp.oid,
+                        parent_oid : tmp.parent_oid,
+                        index_order : tmp.index_order,
+                        location_oid : tmp.location_oid,
+                        kind_name : tmp.kind_name,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the tag kind of the tag declaration.
+     * @return string 
+     */
+    pub fn getTagKind(self) -> string {
+        for (s in string::__undetermined_all__()) {
+            for (t in TagDeclarationDO(__all_data__)) {
+                if (self.key_eq(t)) {
+                    if (s = t.getTagKind()) {
+                        return s
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @description If the tag declaration is a definition declaration
+     * @return int
+     */
+    pub fn isDefinition(self) -> int {
+        for (isDefinition in int::__undetermined_all__()) {
+            for (t in TagDeclarationDO(__all_data__)) {
+                if (self.key_eq(t)) {
+                    if (isDefinition = t.getIsDefinition()) {
+                        return isDefinition
+                    }
+                }
+            }
+        }
+    }
+}
+schema RecordDeclaration extends TagDeclaration {
+    
+}
+impl RecordDeclaration {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *RecordDeclaration {
+        for (tmp in TagDeclaration(db)) {
+            for (r in RecordDeclarationDO(db)) {
+                if (tmp.key_eq(r)) {
+                    yield RecordDeclaration {
+                        oid : tmp.oid,
+                        parent_oid : tmp.parent_oid,
+                        index_order : tmp.index_order,
+                        location_oid : tmp.location_oid,
+                        kind_name : tmp.kind_name,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+}
+schema CxxRecordDeclaration extends RecordDeclaration {
+    
+}
+impl CxxRecordDeclaration {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *CxxRecordDeclaration {
+        for (tmp in RecordDeclaration(db)) {
+            for (c in CxxRecordDeclarationDO(db)) {
+                if (tmp.key_eq(c)) {
+                    yield CxxRecordDeclaration {
+                        oid : tmp.oid,
+                        parent_oid : tmp.parent_oid,
+                        index_order : tmp.index_order,
+                        location_oid : tmp.location_oid,
+                        kind_name : tmp.kind_name,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+}
+schema ObjCInterfaceDeclaration extends ObjCContainerDeclaration {
+    
+}
+impl ObjCInterfaceDeclaration {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *ObjCInterfaceDeclaration {
+        for (tmp in ObjCContainerDeclaration(db)) {
+            for (oid in ObjCInterfaceDeclarationDO(db)) {
+                if (tmp.key_eq(oid)) {
+                    yield ObjCInterfaceDeclaration {
+                        oid : tmp.oid,
+                        parent_oid : tmp.parent_oid,
+                        index_order : tmp.index_order,
+                        location_oid : tmp.location_oid,
+                        kind_name : tmp.kind_name,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @description If the interface is a definition declaration
+     * @return int
+     */
+    pub fn isDefinition(self) -> int {
+        for (isDefinition in int::__undetermined_all__()) {
+            for (oid in ObjCInterfaceDeclarationDO(__all_data__)) {
+                if (self.key_eq(oid)) {
+                    if (isDefinition = oid.getIsDefinition()) {
+                        return isDefinition
+                    }
+                }
+            }
+        }
+    }
+}
+schema ObjCProtocolDeclaration extends ObjCContainerDeclaration {
+    
+}
+impl ObjCProtocolDeclaration {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *ObjCProtocolDeclaration {
+        for (tmp in ObjCContainerDeclaration(db)) {
+            for (o in ObjCProtocolDeclarationDO(db)) {
+                if (tmp.key_eq(o)) {
+                    yield ObjCProtocolDeclaration {
+                        oid : tmp.oid,
+                        parent_oid : tmp.parent_oid,
+                        index_order : tmp.index_order,
+                        location_oid : tmp.location_oid,
+                        kind_name : tmp.kind_name,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @description If the protocol is a definition declaration
+     * @return int
+     */
+    pub fn isDefinition(self) -> int {
+        for (isDefinition in int::__undetermined_all__()) {
+            for (o in ObjCProtocolDeclarationDO(__all_data__)) {
+                if (self.key_eq(o)) {
+                    if (isDefinition = o.getIsDefinition()) {
+                        return isDefinition
+                    }
+                }
+            }
+        }
+    }
+}
+schema ObjCImplementationDeclaration extends ObjCContainerDeclaration {
+    
+}
+impl ObjCImplementationDeclaration {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *ObjCImplementationDeclaration {
+        for (tmp in ObjCContainerDeclaration(db)) {
+            for (o in ObjCImplementationDeclarationDO(db)) {
+                if (tmp.key_eq(o)) {
+                    yield ObjCImplementationDeclaration {
+                        oid : tmp.oid,
+                        parent_oid : tmp.parent_oid,
+                        index_order : tmp.index_order,
+                        location_oid : tmp.location_oid,
+                        kind_name : tmp.kind_name,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @description If the ObjcImplementationDeclaration is a category implementation declaration
+     * @return int
+     */
+    pub fn isCategoryImpl(self) -> int {
+        for (isCategoryImpl in int::__undetermined_all__()) {
+            for (o in ObjCImplementationDeclarationDO(__all_data__)) {
+                if (self.key_eq(o)) {
+                    if (isCategoryImpl = o.getIsCategory()) {
+                        return isCategoryImpl
+                    }
+                }
+            }
+        }
+    }
+}
+schema ObjCCategoryDeclaration extends ObjCContainerDeclaration {
+    
+}
+impl ObjCCategoryDeclaration {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *ObjCCategoryDeclaration {
+        for (tmp in ObjCContainerDeclaration(db)) {
+            for (o in ObjCCategoryDeclarationDO(db)) {
+                if (tmp.key_eq(o)) {
+                    yield ObjCCategoryDeclaration {
+                        oid : tmp.oid,
+                        parent_oid : tmp.parent_oid,
+                        index_order : tmp.index_order,
+                        location_oid : tmp.location_oid,
+                        kind_name : tmp.kind_name,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+    pub fn getName(self) -> string {
+        for (name in string::__undetermined_all__()) {
+            for (o in ObjCCategoryDeclarationDO(__all_data__)) {
+                if (self.key_eq(o)) {
+                    if (name = o.getDisplayName()) {
+                        return name
+                    }
+                }
+            }
+        }
+    }
+}
+schema ValueDeclaration extends NamedDeclaration {
+    
+}
+impl ValueDeclaration {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *ValueDeclaration {
+        for (tmp in NamedDeclaration(db)) {
+            for (v in ValueDeclarationDO(db)) {
+                if (tmp.key_eq(v)) {
+                    yield ValueDeclaration {
+                        oid : tmp.oid,
+                        parent_oid : tmp.parent_oid,
+                        index_order : tmp.index_order,
+                        location_oid : tmp.location_oid,
+                        kind_name : tmp.kind_name,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+}
+schema DeclaratorDeclaration extends ValueDeclaration {
+    
+}
+impl DeclaratorDeclaration {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *DeclaratorDeclaration {
+        for (tmp in ValueDeclaration(db)) {
+            for (d in DeclaratorDeclarationDO(db)) {
+                if (tmp.key_eq(d)) {
+                    yield DeclaratorDeclaration {
+                        oid : tmp.oid,
+                        parent_oid : tmp.parent_oid,
+                        index_order : tmp.index_order,
+                        location_oid : tmp.location_oid,
+                        kind_name : tmp.kind_name,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+}
+schema FunctionDeclaration extends DeclaratorDeclaration {
+    
+}
+impl FunctionDeclaration {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *FunctionDeclaration {
+        for (tmp in DeclaratorDeclaration(db)) {
+            for (f in FunctionDeclarationDO(db)) {
+                if (tmp.key_eq(f)) {
+                    yield FunctionDeclaration {
+                        oid : tmp.oid,
+                        parent_oid : tmp.parent_oid,
+                        index_order : tmp.index_order,
+                        location_oid : tmp.location_oid,
+                        kind_name : tmp.kind_name,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the return type.
+     * @return Type
+     */
+    pub fn getReturnType(self) -> Type {
+        for (f in FunctionDeclarationDO(__all_data__),
+            t in Type(__all_data__)) {
+            if (self.key_eq(f)) {
+                if (t.oid = f.getReturnTypeOid()) {
+                    return t
+                }
+            }
+        }
+    }
+    /**
+     * @brief whether the declarion is a definition.
+     * @return int
+     */
+    pub fn isDefinition(self) -> int {
+        for (d in int::__undetermined_all__()) {
+            for (f in FunctionDeclarationDO(__all_data__)) {
+                if (self.key_eq(f)) {
+                    if (d = f.getIsDefinition()) {
+                        return d
+                    }
+                }
+            }
+        }
+    }
+}
+schema CxxMethodDeclaration extends FunctionDeclaration {
+    
+}
+impl CxxMethodDeclaration {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *CxxMethodDeclaration {
+        for (tmp in FunctionDeclaration(db)) {
+            for (c in CxxMethodDeclarationDO(db)) {
+                if (tmp.key_eq(c)) {
+                    yield CxxMethodDeclaration {
+                        oid : tmp.oid,
+                        parent_oid : tmp.parent_oid,
+                        index_order : tmp.index_order,
+                        location_oid : tmp.location_oid,
+                        kind_name : tmp.kind_name,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the class of the CXX method
+     * @return Class 
+     */
+    pub fn getParent(self) -> Class {
+        for (c in CxxMethodDeclarationDO(__all_data__),
+            p in Class(__all_data__)) {
+            if (self.key_eq(c)) {
+                if (p.id = c.getParentOid()) {
+                    return p
+                }
+            }
+        }
+    }
+}
+schema VariableDeclaration extends DeclaratorDeclaration {
+    
+}
+impl VariableDeclaration {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *VariableDeclaration {
+        for (tmp in DeclaratorDeclaration(db)) {
+            for (v in VariableDeclarationDO(db)) {
+                if (tmp.key_eq(v)) {
+                    yield VariableDeclaration {
+                        oid : tmp.oid,
+                        parent_oid : tmp.parent_oid,
+                        index_order : tmp.index_order,
+                        location_oid : tmp.location_oid,
+                        kind_name : tmp.kind_name,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+}
+schema ParamVariableDeclaration extends VariableDeclaration {
+    
+}
+impl ParamVariableDeclaration {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *ParamVariableDeclaration {
+        for (tmp in VariableDeclaration(db)) {
+            for (f in ParamVariableDeclarationDO(db)) {
+                if (tmp.key_eq(f)) {
+                    yield ParamVariableDeclaration {
+                        oid : tmp.oid,
+                        parent_oid : tmp.parent_oid,
+                        index_order : tmp.index_order,
+                        location_oid : tmp.location_oid,
+                        kind_name : tmp.kind_name,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the callable where the param variable belongs.
+     * @return Callable 
+     */
+    pub fn getCallable(self) -> Callable {
+        for (p in ParamVariableDeclarationDO(__all_data__),
+            c in Callable(__all_data__)) {
+            if (self.key_eq(p)) {
+                if (c.id = p.getCallableOid()) {
+                    return c
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the type of the parameter variable
+     * @return Type 
+     */
+    pub fn getType(self) -> Type {
+        for (p in ParamVariableDeclarationDO(__all_data__),
+            t in Type(__all_data__)) {
+            if (self.key_eq(p)) {
+                if (t.oid = p.getTypeOid()) {
+                    return t
+                }
+            }
+        }
+    }
+}
+schema ObjCPropertyDeclaration extends NamedDeclaration {
+    
+}
+impl ObjCPropertyDeclaration {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *ObjCPropertyDeclaration {
+        for (tmp in NamedDeclaration(db)) {
+            for (p in ObjCPropertyDeclarationDO(db)) {
+                if (tmp.key_eq(p)) {
+                    yield ObjCPropertyDeclaration {
+                        oid : tmp.oid,
+                        parent_oid : tmp.parent_oid,
+                        index_order : tmp.index_order,
+                        location_oid : tmp.location_oid,
+                        kind_name : tmp.kind_name,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the type of the objc property
+     * @return Type
+     */
+    pub fn getType(self) -> Type {
+        for (p in ObjCPropertyDeclarationDO(__all_data__),
+            t in Type(__all_data__)) {
+            if (self.key_eq(p)) {
+                if (t.oid = p.getTypeOid()) {
+                    return t
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the parent of the objc property belong to.
+     * @return Type
+     */
+    pub fn getParent(self) -> ObjCContainerDeclaration {
+        for (p in ObjCPropertyDeclarationDO(__all_data__),
+            container in ObjCContainerDeclaration(__all_data__)) {
+            if (self.key_eq(p)) {
+                if (container.oid = p.getObjCContainerDeclarationOid()) {
+                    return container
+                }
+            }
+        }
+    }
+}
+schema FieldDeclaration extends ValueDeclaration {
+    
+}
+impl FieldDeclaration {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *FieldDeclaration {
+        for (tmp in ValueDeclaration(db)) {
+            for (f in FieldDeclarationDO(db)) {
+                if (tmp.key_eq(f)) {
+                    yield FieldDeclaration {
+                        oid : tmp.oid,
+                        parent_oid : tmp.parent_oid,
+                        index_order : tmp.index_order,
+                        location_oid : tmp.location_oid,
+                        kind_name : tmp.kind_name,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the type of the field
+     * @return Type
+     */
+    pub fn getType(self) -> Type {
+        for (f in FieldDeclarationDO(__all_data__),
+            t in Type(__all_data__)) {
+            if (self.key_eq(f)) {
+                if (t.oid = f.getTypeOid()) {
+                    return t
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the parent of the field belong to.
+     * @return Type
+     */
+    pub fn getParent(self) -> RecordDeclaration {
+        for (f in FieldDeclarationDO(__all_data__),
+            record in RecordDeclaration(__all_data__)) {
+            if (self.key_eq(f)) {
+                if (record.oid = f.getRecordOid()) {
+                    return record
+                }
+            }
+        }
+    }
+}
+schema ObjCPropertyOrField {
+    @primary id: int
+}
+impl ObjCPropertyOrField {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *ObjCPropertyOrField {
+        for (p in ObjCPropertyDeclaration(db)) {
+            yield ObjCPropertyOrField {id : p.oid}
+        }
+        for (f in FieldDeclaration(db)) {
+            yield ObjCPropertyOrField {id : f.oid}
+        }
+    }
+    /**
+     * @brief gets the name of the OOP field declaration.
+     * @return string 
+     */
+    pub fn getName(self) -> string {
+        for (name in string::__undetermined_all__()) {
+            for (p in ObjCPropertyDeclaration(__all_data__)) {
+                if (self.key_eq(p)) {
+                    if (name = p.getName()) {
+                        return name
+                    }
+                }
+            }
+            for (f in FieldDeclaration(__all_data__)) {
+                if (self.key_eq(f)) {
+                    if (name = f.getName()) {
+                        return name
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the type of the OOP field declaration.
+     * @return Type
+     */
+    pub fn getType(self) -> Type {
+        for (t in Type(__all_data__)) {
+            for (p in ObjCPropertyDeclaration(__all_data__)) {
+                if (self.key_eq(p)) {
+                    if (t = p.getType()) {
+                        return t
+                    }
+                }
+            }
+            for (f in FieldDeclaration(__all_data__)) {
+                if (self.key_eq(f)) {
+                    if (t = f.getType()) {
+                        return t
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the parent of the OOP field declaration.
+     * @return Class 
+     */
+    pub fn getParent(self) -> Class {
+        for (c in Class(__all_data__)) {
+            for (p in ObjCPropertyDeclaration(__all_data__)) {
+                if (self.key_eq(p)) {
+                    if (c.key_eq(p.getParent())) {
+                        return c
+                    }
+                }
+            }
+            for (f in FieldDeclaration(__all_data__)) {
+                if (self.key_eq(f)) {
+                    if (c.key_eq(f.getParent())) {
+                        return c
+                    }
+                }
+            }
+        }
+    }
+}

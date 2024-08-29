@@ -1,0 +1,55 @@
+/**
+ * @filename: CONTAINER
+ * @date: 2021/12/9
+ * @brief: CONTAINER provides classes and predicates for working with C family containers
+ */
+/**
+ * @brief The root of the extracted project.
+ */
+schema Program extends ProgramDO {
+    
+}
+impl Program {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *Program {
+        for (tmp in ProgramDO(db)) {
+            yield Program {
+                oid : tmp.oid,
+                printable_text : tmp.printable_text
+            }
+        }
+    }
+}
+/**
+ * @brief A C family file.
+ */
+schema File extends FileDO {
+    
+}
+impl File {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *File {
+        for (tmp in FileDO(db)) {
+            yield File {
+                oid : tmp.oid,
+                relative_path : tmp.relative_path,
+                extension : tmp.extension,
+                name : tmp.name,
+                program_oid : tmp.program_oid
+            }
+        }
+    }
+    /**
+     * @brief gets the program root of the file element.
+     * @return Program 
+     */
+    pub fn getProgram(self) -> Program {
+        for (program in Program(__all_data__)) {
+            if (program.oid = self.getProgramOid()) {
+                return program
+            }
+        }
+    }
+}

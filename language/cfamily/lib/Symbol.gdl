@@ -1,0 +1,48 @@
+/**
+ * @filename: SYMBOL
+ * @date: 2022/4/11
+ * @description: SYMBOL provides classes and predicates for working with C family symbol relarations.
+ */
+/**
+ * @brief Symbol mapping relation between reference node to its resolved node.
+ */
+schema SymbolRelation extends SymbolTableDO {
+    
+}
+impl SymbolRelation {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *SymbolRelation {
+        for (tmp in SymbolTableDO(db)) {
+            yield SymbolRelation {
+                named_declaration_oid : tmp.named_declaration_oid,
+                symbol_name : tmp.symbol_name
+            }
+        }
+    }
+    /**
+     * @brief get the reference element which references some definitions.
+     * @return Expression 
+     */
+    pub fn getSource(self) -> ElementParent {
+        for (e in ElementParent(__all_data__)) {
+            if (self.key_eq(e)) {
+                return e
+            }
+        }
+    }
+    /**
+     * @brief get the destination of this reference relation. 
+     * @return ExpressionParent 
+     */
+    pub fn getDestination(self) -> *ElementParent {
+        for (d in ElementParent(__all_data__),
+            dSymbol in SymbolRelation(__all_data__)) {
+            if (self.getSymbolName() = dSymbol.getSymbolName()) {
+                if (d.key_eq(dSymbol)) {
+                    yield d
+                }
+            }
+        }
+    }
+}
