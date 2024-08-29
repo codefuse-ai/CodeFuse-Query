@@ -1,0 +1,159 @@
+/**
+ * @filename: TYPE
+ * @date: 2022/02/11
+ * @brief: TYPE provides classes and predicates for working with C family types
+ */
+schema Type extends TypeDO {
+    
+}
+impl Type {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *Type {
+        for (tmp in TypeDO(db)) {
+            yield Type {
+                oid : tmp.oid,
+                kind_name : tmp.kind_name,
+                printable_text : tmp.printable_text
+            }
+        }
+    }
+}
+schema ObjCObjectType extends Type {
+    
+}
+impl ObjCObjectType {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *ObjCObjectType {
+        for (tmp in Type(db)) {
+            for (o in ObjCObjectTypeDO(db)) {
+                if (tmp.key_eq(o)) {
+                    yield ObjCObjectType {
+                        oid : tmp.oid,
+                        kind_name : tmp.kind_name,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the obj c interface declaration of this element.
+     * @return ObjCInterfaceDeclaration
+     */
+    pub fn getObjCInterfaceDeclaration(self) -> ObjCInterfaceDeclaration {
+        for (i in ObjCInterfaceDeclaration(__all_data__),
+            o in ObjCObjectTypeDO(__all_data__)) {
+            if (self.key_eq(o)) {
+                if (i.oid = o.getObjCInterfaceDeclarationOid()) {
+                    return i
+                }
+            }
+        }
+    }
+}
+schema TagType extends Type {
+
+}
+impl TagType {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *TagType {
+        for (tmp in Type(db)) {
+            for (o in TagTypeDO(db)) {
+                if (tmp.key_eq(o)) {
+                    yield TagType {
+                        oid : tmp.oid,
+                        kind_name : tmp.kind_name,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the tag declaration of this element.
+     * @return TagDeclaration
+     */
+    pub fn getTagDeclaration(self) -> TagDeclaration {
+        for (i in TagDeclaration(__all_data__),
+            o in TagTypeDO(__all_data__)) {
+            if (self.key_eq(o)) {
+                if (i.oid = o.getTagDeclarationOid()) {
+                    return i
+                }
+            }
+        }
+    }
+}
+schema PointerType extends Type {
+
+}
+impl PointerType {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *PointerType {
+        for (tmp in Type(db)) {
+            for (o in PointerTypeDO(db)) {
+                if (tmp.key_eq(o)) {
+                    yield PointerType {
+                        oid : tmp.oid,
+                        kind_name : tmp.kind_name,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief If this is a pointer, ObjC object pointer, or block pointer, this returns the respective pointee.
+     * @return Type
+     */
+    pub fn getPointeeType(self) -> Type {
+        for (pointer in PointerTypeDO(__all_data__),
+            pointee in Type(__all_data__)) {
+            if (self.key_eq(pointer)) {
+                if (pointee.oid = pointer.getPointeeTypeOid()) {
+                    return pointee
+                }
+            }
+        }
+    }
+}
+pub fn findClassByType(t: Type, c: Class) -> bool {
+    for (objt in ObjCObjectType(__all_data__)) {
+        if (t.key_eq(objt)) {
+            if (c.key_eq(objt.getObjCInterfaceDeclaration())) {
+                return true
+            }
+        }
+    }
+    for (tt in TagType(__all_data__)) {
+        if (t.key_eq(tt)) {
+            if (c.key_eq(tt.getTagDeclaration())) {
+                return true
+            }
+        }
+    }
+    for (pointer in PointerType(__all_data__),
+        pointee in ObjCObjectType(__all_data__)) {
+        if (t.key_eq(pointer)) {
+            if (pointee.key_eq(pointer.getPointeeType())) {
+                if (c.key_eq(pointee.getObjCInterfaceDeclaration())) {
+                    return true
+                }
+            }
+        }
+    }
+    for (pointer in PointerType(__all_data__),
+        tt in TagType(__all_data__)) {
+        if (t.key_eq(pointer)) {
+            if (tt.key_eq(pointer.getPointeeType())) {
+                if (c.key_eq(tt.getTagDeclaration())) {
+                    return true
+                }
+            }
+        }
+    }
+}

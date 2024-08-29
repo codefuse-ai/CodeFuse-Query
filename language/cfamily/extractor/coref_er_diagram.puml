@@ -1,0 +1,497 @@
+@startuml
+' Store named declaration oid and its symbol name
+entity symbol_table {
+	named_declaration_oid: INTEGER <<PK>>
+	symbol_name: TEXT
+}
+
+' class inheritance
+entity class_hierarchy {
+    child_oid: INTEGER
+    parent_oid: INTEGER
+}
+
+' code location
+entity location {
+    oid: INTEGER <<PK>>
+    file_oid: INTEGER
+    start_line_number: INTEGER
+    start_column_number: INTEGER
+    end_line_number: INTEGER
+    end_column_number: INTEGER
+}
+
+entity file {
+    oid: INTEGER <<PK>>
+    relative_path: TEXT
+    extension: TEXT
+    name: TEXT
+	program_oid: INTEGER
+}
+
+entity program {
+    oid: INTEGER <<PK>>
+    debug_message: TEXT
+}
+
+' ---------
+' STATEMENT
+' ---------
+entity statement {
+    oid: INTEGER <<PK>>
+    parent_oid: INTEGER
+    index_order: INTEGER
+    location_oid: INTEGER
+    ' Statement kind name
+    kind_name: TEXT
+    debug_message: TEXT
+}
+
+entity declaration_statement {
+    oid: INTEGER <<PK>>
+    debug_message: TEXT
+}
+
+entity if_statement {
+    oid: INTEGER <<PK>>
+    ' Gets the condition of this ‘if’ statement, the condition is an expression
+    condition_expression_oid: INTEGER
+    ' Gets the ‘then’ statement of this ‘if’ statement
+    then_statement_oid: INTEGER
+    debug_message: TEXT
+}
+
+' Gets the ‘else’ statement of this ‘if’ statement, if any
+entity else_statement_in_if {
+    oid: INTEGER <<PK>>
+    if_statement_oid: INTEGER
+}
+
+entity switch_statement {
+    oid: INTEGER <<PK>>
+    ' Gets the condition of this switch statement, the condition is an expression
+    condition_expression_oid: INTEGER
+    ' Gets the starting switch case statement of this switch statement
+    starting_switch_case_oid: INTEGER
+    debug_message: TEXT
+}
+
+entity switch_case {
+    oid: INTEGER <<PK>>
+    sub_statement_oid: INTEGER
+    ' Gets the next switch case belonging to the same switch statement, if any
+    next_switch_case_oid: INTEGER
+    is_default: INTEGER
+    debug_message: TEXT
+}
+
+entity while_statement {
+    oid: INTEGER <<PK>>
+    condition_expression_oid: INTEGER
+    body_statement_oid: INTEGER
+    debug_message: TEXT
+}
+
+entity do_statement {
+    oid: INTEGER <<PK>>
+    condition_expression_oid: INTEGER
+    body_statement_oid: INTEGER
+    debug_message: TEXT
+}
+
+' !!! This represents a 'for (init;cond;inc)' stmt, not for-in stmt
+entity for_statement {
+    oid: INTEGER <<PK>>
+    initialization_statement_oid: INTEGER
+    body_statement_oid: INTEGER
+    ' Gets the condition expression
+    condition_expression_oid: INTEGER
+    ' Gets the increment expression
+    increment_expression_oid: INTEGER
+    debug_message: TEXT
+}
+
+' Represents Objective-C's collection statement
+' This is represented as 'for (element 'in' collection-expression)' stmt
+entity obj_c_for_collection_statement {
+    oid: INTEGER <<PK>>
+    element_statement_oid: INTEGER
+    collection_expression_oid: INTEGER
+    body_statement_oid: INTEGER
+    debug_message: TEXT
+}
+
+' This represents C++0x [stmt.ranged]'s ranged for statement, represented as 'for (range-declarator : range-expression)' or 'for (init-statement range-declarator : range-expression)'.
+entity cxx_for_range_statement {
+    oid: INTEGER <<PK>>
+    body_statement_oid: INTEGER
+    loop_variable_variable_declaration_oid: INTEGER
+    range_initialization_expression_oid: INTEGER
+    debug_message: TEXT
+    ' Those attributes below are for desugared form. No need to store them.
+    ' initialization_statement_oid: INTEGER
+    ' condition_expression_oid: INTEGER
+    ' begin_declaration_statement_oid: INTEGER
+    ' end_declaration_statement_oid: INTEGER
+    '' Gets the increment expression
+    ' increment_expression_oid: INTEGER
+}
+
+entity value_statement {
+    oid: INTEGER <<PK>>
+    debug_message: TEXT
+}
+
+entity expression {
+    oid: INTEGER <<PK>>
+    debug_message: TEXT
+}
+
+'A dot-syntax expression to access an ObjC property.'
+entity obj_c_property_ref_expression {
+    oid: INTEGER <<PK>>
+    is_messaging_getter: INTEGER
+    obj_c_property_declaration_oid: INTEGER
+    debug_message: TEXT
+}
+
+'A reference to an ObjC instance variable'
+entity obj_c_instance_variable_ref_expression {
+    oid: INTEGER <<PK>>
+    obj_c_instance_variable_oid: INTEGER
+    debug_message: TEXT
+}
+
+' Used for Objective-C string literals
+entity obj_c_string_literal {
+    oid: INTEGER <<PK>>
+    ' store the string literal
+    debug_message: TEXT
+}
+
+' This models both ConditionalOperator and BinaryConditionalOperator in Clang AST
+' BinaryConditionalOperator: The middle operand in a conditional expression may be omitted
+' e.g.: x ? : y see https://gcc.gnu.org/onlinedocs/gcc/Conditionals.html
+entity conditional_operator_expression {
+    oid: INTEGER <<PK>>
+    condition_expression_oid: INTEGER
+    ' Return the subexpression which will be evaluated if the condition evaluates to true
+    true_expression_oid: INTEGER
+    ' Return the subexpression which will be evaluated if the condition evaluates to false
+    false_expression_oid: INTEGER
+    ' For BinaryConditionalOperator
+    is_middle_operand_omitted: INTEGER
+    debug_message: TEXT
+}
+
+' An expression that sends a message to the given Objective-C object or class
+' [SampleClass sayHello 1 2]
+entity obj_c_message_expression {
+    oid: INTEGER <<PK>>
+
+    ' The kind of receiver this message is sending to.
+    ' Enum:
+    ' class: The receiver is a class.
+    ' instance: The receiver is an object instance.
+    ' super_class: The receiver is a superclass.
+    ' super_instance: The receiver is the instance of the superclass object.
+    receiver_kind: TEXT
+
+    ' Retrieve the receiver type to which this message is being directed
+    receiver_qualified_type_oid: INTEGER
+    ' Retrieve the Objective-C interface to which this message is being directed, if known
+    receiver_interface_obj_c_interface_declaration_oid: INTEGER
+    obj_c_method_declaration_oid: INTEGER
+    debug_message: TEXT
+}
+
+' The arguments to an obj_c_message_expression, not including the receiver
+entity obj_c_message_expression_arguments {
+    oid: INTEGER <<PK>>
+    obj_c_message_expression_oid: INTEGER
+    debug_message: TEXT
+}
+
+' An expression represents a function call
+entity call_expression {
+    oid: INTEGER <<PK>>
+    callee_declaration_oid: INTEGER
+    debug_message: TEXT
+}
+
+' The arguments to an call_expression, not including the receiver
+entity call_expression_arguments {
+    oid: INTEGER <<PK>>
+    call_expression_oid: INTEGER
+    debug_message: TEXT
+}
+
+' Represents a call to a member function that may be written either with member call syntax
+' (e.g., "obj.func()" or "objptr->func()") or with normal function-call syntax ("func()")
+' within a member function that ends up calling a member function.
+entity cxx_member_call_expression {
+    oid: INTEGER <<PK>>
+    ' the type of the object argument.
+    object_type_oid: INTEGER
+    ' the declaration of the called method.
+    cxx_method_oid: INTEGER
+    ' the CXXRecordDecl for the underlying type of the implicit object argument.
+    cxx_record_oid: INTEGER
+    debug_message: TEXT
+}
+
+' BlockExpr - Adaptor class for mixing a BlockDecl with expressions.
+' ^{ statement-body } or ^(int arg1, float arg2){ statement-body }
+entity block_expression {
+    oid: INTEGER <<PK>>
+    block_declaration_oid: INTEGER
+    debug_message: TEXT
+}
+
+' Record the corresponding relationship between a statement and its caller callable
+entity callable_enclosing_statement {
+    statement_oid: INTEGER
+    callable_oid: INTEGER
+}
+
+' -----------
+' DECLARATION
+' -----------
+entity declaration {
+    oid: INTEGER <<PK>>
+    parent_oid: INTEGER
+    index_order: INTEGER
+    location_oid: INTEGER
+    ' Declaration kind name
+    kind_name: TEXT
+    debug_message: TEXT
+}
+
+' Not modeling this for now becasue except OMPDeclareMapperDecl,
+' all declaration context are also inherited from Decl
+' This is used only as base class of specific decl types that can act as declaration contexts
+entity declaration_context {
+    oid: INTEGER <<PK>>
+    debug_message: TEXT
+}
+
+' Represents a variable declaration or definition
+entity variable_declaration {
+    oid: INTEGER <<PK>>
+    debug_message: TEXT
+}
+
+' Represents a ValueDecl that came out of a declarator.
+' Contains type source information through TypeSourceInfo.
+entity declarator_declaration {
+    oid: INTEGER <<PK>>
+    debug_message: TEXT
+}
+
+' Represent the declaration of a variable (in which case it is an lvalue) a function (in which case it is a function designator) or an enum constant.
+entity value_declaration {
+    oid: INTEGER <<PK>>
+    debug_message: TEXT
+}
+
+' This represents a decl that may have a name
+entity named_declaration {
+    oid: INTEGER <<PK>>
+    name: TEXT
+    debug_message: TEXT
+}
+
+' Represents a container for method declarations
+entity obj_c_container_declaration {
+    oid: INTEGER <<PK>>
+    declaration_kind: TEXT
+    ' Not modeling this
+    declaration_context_oid: INTEGER
+    debug_message: TEXT
+}
+
+' Represents a category declaration
+entity obj_c_category_declaration {
+    oid: INTEGER <<PK>>
+    interface_oid: INTEGER
+    is_extension: INTEGER
+    display_name: TEXT
+    debug_message: TEXT
+}
+
+entity obj_c_interface_declaration {
+    oid: INTEGER <<PK>>
+    ' Get super class (of type obj_c_interface_declaration)
+    super_class_obj_c_interface_declaration_oid: INTEGER
+    ' Determine whether this particular declaration of this class is actually also a definition.
+    is_definition: INTEGER
+    debug_message: TEXT
+}
+
+entity obj_c_protocol_declaration {
+    oid: INTEGER <<PK>>
+    ' Determine whether this particular declaration is also the definition.
+    is_definition: INTEGER
+    debug_message: TEXT
+}
+
+entity obj_c_implementation_declaration {
+    oid: INTEGER <<PK>>
+    is_category: INTEGER
+    debug_message: TEXT
+}
+
+' Binding interface and protocol
+entity obj_c_interface_protocol_binding {
+    obj_c_interface_declaration_oid: INTEGER
+    obj_c_protocol_declaration_oid: INTEGER
+}
+
+' Binding category and protocol
+entity obj_c_category_protocol_binding {
+    obj_c_category_declaration_oid: INTEGER
+    obj_c_protocol_declaration_oid: INTEGER
+}
+
+' Represents one property declaration in an Objective-C interface
+entity obj_c_property_declaration {
+    oid: INTEGER <<PK>>
+    type_oid: INTEGER
+    obj_c_container_declaration_oid: INTEGER
+    ' Enum: none, required, optional
+    property_control: TEXT
+    ' Enum: assign, retain, copy, weak
+    setter_kind: TEXT
+    debug_message: TEXT
+}
+
+' ObjC methods can be declared within 4 contexts: class interfaces, categories, protocols, and class implementations.
+entity obj_c_method_declaration {
+    oid: INTEGER <<PK>>
+    obj_c_container_declaration_oid: INTEGER
+    ' Enum: interface, category, protocol, implementation
+    return_type_oid: INTEGER
+    ' Returns whether this specific method is a definition.
+    is_definition: INTEGER
+    debug_message: TEXT
+}
+
+entity param_variable_declaration {
+    oid: INTEGER <<PK>>
+    callable_oid: INTEGER
+    type_oid: INTEGER
+    debug_message: TEXT
+}
+
+' Represents a static or instance method of a struct/union/class.
+entity cxx_method_declaration {
+    oid: INTEGER <<PK>>
+    ' the parent of this method declaration, which is the class in which this method is defined.
+    parent_oid: TEXT
+    debug_message: TEXT
+}
+
+' Represents a function declaration or definition.
+entity function_declaration {
+    oid: INTEGER <<PK>>
+    return_type_oid: INTEGER
+    ' Returns whether this specific declaration of the function is also a definition that does not contain uninstantiated body. This does not determine whether the function has been defined (e.g., in a previous definition); for that information, use isDefined. Note: the function declaration does not become a definition until the parser reaches the definition, if called before, this function will return `false`.
+    is_definition: INTEGER
+    debug_message: TEXT
+}
+
+' Represents a declaration of a type.
+entity type_declaration {
+    oid: INTEGER <<PK>>
+    ' Type defined by this node
+    type_oid: INTEGER
+    debug_message: TEXT
+}
+
+' Represents the declaration of a struct/union/class/enum.
+entity tag_declaration {
+    oid: INTEGER <<PK>>
+    ' The kind of a tag type.
+    ' Enum: struct, interface, union, class, enum
+    tag_kind: TEXT
+    ' Return true if this declaration is a completion definition of the type. Provided for consistency.
+    is_definition: INTEGER
+    debug_message: TEXT
+}
+
+' Represents a struct/union/class.
+entity record_declaration {
+    oid: INTEGER <<PK>>
+    debug_message: TEXT
+}
+
+' Represents a C++ struct/union/class. Its base classes will be recorded to class hierarchy
+entity cxx_record_declaration {
+    oid: INTEGER <<PK>>
+    debug_message: TEXT
+}
+
+' Represents a member variable of a C++ struct/union/class.
+entity field_declaration {
+    oid: INTEGER <<PK>>
+    type_oid: INTEGER
+    record_oid: INTEGER
+    debug_message: TEXT
+}
+
+'Represents an ObjC instance variable.'
+entity obj_c_instance_variable_declaration {
+    oid: INTEGER <<PK>>
+    obj_c_interface_declaration_oid: INTEGER
+    debug_message: TEXT
+}
+
+' Represents a block literal declaration, which is like an unnamed FunctionDecl.
+entity block_declaration {
+    oid: INTEGER <<PK>>
+    debug_message: TEXT
+}
+
+' ----
+' TYPE
+' ----
+
+' The base class of the type hierarchy
+entity type {
+    oid: INTEGER <<PK>>
+    ' Type kind name
+    kind_name: TEXT
+    debug_message: TEXT
+}
+
+' Represents a class type in Objective-C
+entity obj_c_object_type {
+    oid: INTEGER <<PK>>
+    obj_c_interface_declaration_oid: INTEGER
+}
+
+' Represents a struct/union/class/enum type in C/C++
+entity tag_type {
+    oid: INTEGER <<PK>>
+    tag_declaration_oid: INTEGER
+}
+
+' Represents a pointer type or an Objective-C object pointer type
+entity pointer_type {
+    oid: INTEGER <<PK>>
+    ' If this is a pointer, ObjC object pointer, or block pointer, this returns the respective pointee.
+    pointee_type_oid: INTEGER
+}
+
+' ------
+' OTHERS
+' ------
+' Others other than stmt, decl, type
+
+
+entity qualified_type {
+    oid: INTEGER <<PK>>
+    debug_message: TEXT
+}
+
+@enduml

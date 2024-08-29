@@ -1,0 +1,289 @@
+ /**
+ * @filename: CLASS
+ * @date: 2021/12/9
+ * @brief: CLASS provides classes and predicates for working with C family classes
+ */
+ /**
+ * @brief A C/C++/Objective-C class.
+ * @todo
+ */
+schema Class {
+    @primary id: int
+}
+impl Class {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *Class {
+        for (oid in ObjCInterfaceDeclaration(db)) {
+            if (oid.isDefinition() = 1) {
+                yield Class {id : oid.oid}
+            }
+        }
+        for (opd in ObjCProtocolDeclaration(db)) {
+            if (opd.isDefinition() = 1) {
+                yield Class {id : opd.oid}
+            }
+        }
+        for (ocd in ObjCCategoryDeclaration(db)) {
+            yield Class {id : ocd.oid}
+        }
+        for (c in CxxRecordDeclaration(db)) {
+            if (c.getTagKind() = "class") {
+                if (c.isDefinition() = 1) {
+                    yield Class {id : c.oid}
+                }
+            }
+        }
+    }
+     /**
+     * @brief gets the name of the class.
+     * @return string 
+     */
+    pub fn getName(self) -> string {
+        for (name in string::__undetermined_all__()) {
+            for (oid in ObjCInterfaceDeclaration(__all_data__)) {
+                if (self.key_eq(oid)) {
+                    if (name = oid.getName()) {
+                        return name
+                    }
+                }
+            }
+            for (opd in ObjCProtocolDeclaration(__all_data__)) {
+                if (self.key_eq(opd)) {
+                    if (name = opd.getName()) {
+                        return name
+                    }
+                }
+            }
+            for (ocd in ObjCCategoryDeclaration(__all_data__)) {
+                if (self.key_eq(ocd)) {
+                    if (name = ocd.getName()) {
+                        return name
+                    }
+                }
+            }
+            for (c in CxxRecordDeclaration(__all_data__)) {
+                if (self.key_eq(c)) {
+                    if (name = c.getName()) {
+                        return name
+                    }
+                }
+            }
+        }
+    }
+     /**
+     * @brief gets the parent of the class.
+     * @return ElementParent
+     */
+    pub fn getParent(self) -> ElementParent {
+        for (parent in ElementParent(__all_data__)) {
+            for (oid in ObjCInterfaceDeclaration(__all_data__)) {
+                if (self.key_eq(oid)) {
+                    if (parent = oid.getParent()) {
+                        return parent
+                    }
+                }
+            }
+            for (opd in ObjCProtocolDeclaration(__all_data__)) {
+                if (self.key_eq(opd)) {
+                    if (parent = opd.getParent()) {
+                        return parent
+                    }
+                }
+            }
+            for (ocd in ObjCCategoryDeclaration(__all_data__)) {
+                if (self.key_eq(ocd)) {
+                    if (parent = ocd.getParent()) {
+                        return parent
+                    }
+                }
+            }
+            for (c in CxxRecordDeclaration(__all_data__)) {
+                if (self.key_eq(c)) {
+                    if (parent = c.getParent()) {
+                        return parent
+                    }
+                }
+            }
+        }
+    }
+     /**
+     * @brief gets an ancestor of the element.
+     * @return ElementParent 
+     */
+    pub fn getAnAncestor(self) -> *ElementParent {
+        for (temp in ElementParent(__all_data__)) {
+            if (self.key_eq(temp)) {
+                yield temp.getAnAncestor()
+            }
+        }
+    }
+     /**
+     * @brief gets the location info of the element.
+     * @return Location
+     */
+    pub fn getLocation(self) -> Location {
+        for (oid in ObjCInterfaceDeclaration(__all_data__)) {
+            if (self.key_eq(oid)) {
+                return oid.getLocation()
+            }
+        }
+        for (opd in ObjCProtocolDeclaration(__all_data__)) {
+            if (self.key_eq(opd)) {
+                return opd.getLocation()
+            }
+        }
+        for (ocd in ObjCCategoryDeclaration(__all_data__)) {
+            if (self.key_eq(ocd)) {
+                return ocd.getLocation()
+            }
+        }
+        for (c in CxxRecordDeclaration(__all_data__)) {
+            if (self.key_eq(c)) {
+                return c.getLocation()
+            }
+        }
+    }
+     /**
+     * @brief gets the super class of the element.
+     * @return Class 
+     */
+    pub fn getSuperClass(self) -> Class {
+        for (CH in ClassHierarchy(__all_data__)) {
+            if (self.key_eq(CH)) {
+                return CH.getSuperClass()
+            }
+        }
+    }
+     /**
+     * @brief gets all ancestor classes of the element.
+     * @return Class
+     */
+    pub fn getAnAncestorClass(self) -> *Class {
+        yield self.getSuperClass()
+        for (temp in self.getAnAncestorClass()) {
+            yield temp.getSuperClass()
+        }
+    }
+     /**
+     * @brief gets member variable declarations of the class.
+     * @return ObjCPropertyOrField
+     */
+    pub fn getMemberVariable(self) -> *ObjCPropertyOrField {
+        for (f in ObjCPropertyOrField(__all_data__)) {
+            if (self = f.getParent()) {
+                yield f
+            }
+        }
+    }
+     /**
+     * @brief gets a printed representation of this element, including its structure where applicable.
+     * @return Class 
+     */
+    pub fn getPrintableText(self) -> string {
+        for (oid in ObjCInterfaceDeclaration(__all_data__)) {
+            if (self.key_eq(oid)) {
+                return oid.getPrintableText()
+            }
+        }
+        for (opd in ObjCProtocolDeclaration(__all_data__)) {
+            if (self.key_eq(opd)) {
+                return opd.getPrintableText()
+            }
+        }
+        for (ocd in ObjCCategoryDeclaration(__all_data__)) {
+            if (self.key_eq(ocd)) {
+                return ocd.getPrintableText()
+            }
+        }
+        for (c in CxxRecordDeclaration(__all_data__)) {
+            if (self.key_eq(c)) {
+                return c.getPrintableText()
+            }
+        }
+    }
+}
+ /**
+ * @brief Represents the class hierarchy of all classes.
+ */
+schema ClassHierarchy extends ClassHierarchyDO {
+    
+}
+impl ClassHierarchy {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *ClassHierarchy {
+        for (tmp in ClassHierarchyDO(db)) {
+            yield ClassHierarchy {
+                child_oid : tmp.child_oid,
+                parent_oid : tmp.parent_oid
+            }
+        }
+    }
+     /**
+     * @brief gets the superclass of the class.
+     * @return Class 
+     */
+    pub fn getSuperClass(self) -> Class {
+        for (s in Class(__all_data__)) {
+            if (s.id = self.getParentOid()) {
+                return s
+            }
+        }
+    }
+}
+ /**
+ * @brief Represents the reference relationship between classes.
+ */
+pub fn referencedDependency(c: Class, refClass: Class) -> bool {
+    for (m in Callable(__all_data__)) {
+        if (c in m.getReferClassByParamVarAndReturnVar()) {
+            if (refClass = m.getBelongedClass()) {
+                return true
+            }
+        }
+    }
+}
+ /**
+ * @brief Represents the inherite relationship between classes.
+ */
+pub fn inheritedDependency(c: Class, subClass: Class) -> bool {
+    if (c in subClass.getAnAncestorClass()) {
+        return true
+    }
+}
+ /**
+ * @brief Represents the calling relationship between classes.
+ */
+pub fn callerDependency(c: Class, callerClass: Class) -> bool {
+    for (m in Callable(__all_data__),
+        callerCallable in Callable(__all_data__)) {
+        if (c = m.getBelongedClass()) {
+            if (callerCallable in m.getAnAncestorCaller()) {
+                if (callerClass = callerCallable.getBelongedClass()) {
+                    return true
+                }
+            }
+        }
+    }
+}
+ /**
+ * @brief Class dependency check.
+ */
+pub fn dependencyCheck(c: Class, depClass: Class, depType: string) -> bool {
+    if (inheritedDependency(c, depClass)) {
+        if (depType = "inherited") {
+            return true
+        }
+    }
+    if (referencedDependency(c, depClass)) {
+        if (depType = "referenced") {
+            return true
+        }
+    }
+    if (callerDependency(c, depClass)) {
+        if (depType = "caller") {
+            return true
+        }
+    }
+}

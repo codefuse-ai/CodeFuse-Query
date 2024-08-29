@@ -1,0 +1,509 @@
+/**
+ * @filename: EXPRESSION
+ * @date: 2021/12/29
+ * @description: EXPRESSION provides classes and predicates for working with C family Expressions
+ */
+/**
+ * @brief An expression.
+ */
+schema Expression extends ValueStatement {
+    
+}
+impl Expression {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *Expression {
+        for (tmp in ValueStatement(db)) {
+            for (e in ExpressionDO(db)) {
+                if (tmp.key_eq(e)) {
+                    yield Expression {
+                        oid : tmp.oid,
+                        parent_oid : tmp.parent_oid,
+                        index_order : tmp.index_order,
+                        location_oid : tmp.location_oid,
+                        kind_name : tmp.kind_name,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+}
+//gcc.gnu.org/onlinedocs/gcc/Conditionals.html
+/**
+ * 
+ * @brief DO class: This models both ConditionalOperator and BinaryConditionalOperator in Clang AST \n
+ BinaryConditionalOperator: The middle operand in a conditional expression may be omitted \n
+ e.g.: x ? : y see https://gcc.gnu.org/onlinedocs/gcc/Conditionals.html
+ */
+schema ConditionalOperatorExpression extends Expression {
+    
+}
+impl ConditionalOperatorExpression {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *ConditionalOperatorExpression {
+        for (tmp in Expression(db)) {
+            for (c in ConditionalOperatorExpressionDO(db)) {
+                if (tmp.key_eq(c)) {
+                    yield ConditionalOperatorExpression {
+                        oid : tmp.oid,
+                        parent_oid : tmp.parent_oid,
+                        index_order : tmp.index_order,
+                        location_oid : tmp.location_oid,
+                        kind_name : tmp.kind_name,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the condition expression oid of this element.
+     * @return Expression
+     */
+    pub fn getConditionExpression(self) -> Expression {
+        for (conditionExpression in Expression(__all_data__),
+            c in ConditionalOperatorExpressionDO(__all_data__)) {
+            if (self.key_eq(c)) {
+                if (conditionExpression.oid = c.getConditionExpressionOid()) {
+                    return conditionExpression
+                }
+            }
+        }
+    }
+    /**
+     * @brief Return the subexpression which will be evaluated if the condition evaluates to true
+     * @return Expression
+     */
+    pub fn getTrueExpression(self) -> Expression {
+        for (trueExpression in Expression(__all_data__),
+            c in ConditionalOperatorExpressionDO(__all_data__)) {
+            if (self.key_eq(c)) {
+                if (trueExpression.oid = c.getTrueExpressionOid()) {
+                    return trueExpression
+                }
+            }
+        }
+    }
+    /**
+     * @brief Return the subexpression which will be evaluated if the condition evaluates to false
+     * @return Expression
+     */
+    pub fn getFalseExpression(self) -> Expression {
+        for (falseExpression in Expression(__all_data__),
+            c in ConditionalOperatorExpressionDO(__all_data__)) {
+            if (self.key_eq(c)) {
+                if (falseExpression.oid = c.getFalseExpressionOid()) {
+                    return falseExpression
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the is middle operand omitted of this element.
+     * @return int
+     */
+    pub fn isMiddleOperandOmitted(self) -> int {
+        for (isMiddleOperandOmitted in int::__undetermined_all__()) {
+            for (c in ConditionalOperatorExpressionDO(__all_data__)) {
+                if (self.key_eq(c)) {
+                    if (isMiddleOperandOmitted = c.getIsMiddleOperandOmitted()) {
+                        return isMiddleOperandOmitted
+                    }
+                }
+            }
+        }
+    }
+}
+/**
+ * 
+ * @brief DO class: ObjC methods can be declared within 4 contexts: class interfaces, categories, protocols, and class implementations.
+ */
+schema ObjCMessageExpression extends Expression {
+    
+}
+impl ObjCMessageExpression {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *ObjCMessageExpression {
+        for (tmp in Expression(db)) {
+            for (o in ObjCMessageExpressionDO(db)) {
+                if (tmp.key_eq(o)) {
+                    yield ObjCMessageExpression {
+                        oid : tmp.oid,
+                        parent_oid : tmp.parent_oid,
+                        index_order : tmp.index_order,
+                        location_oid : tmp.location_oid,
+                        kind_name : tmp.kind_name,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the receiver kind of this element.
+     * @return string
+     */
+    pub fn getReceiverKind(self) -> string {
+        for (kind in string::__undetermined_all__()) {
+            for (o in ObjCMessageExpressionDO(__all_data__)) {
+                if (self.key_eq(o)) {
+                    if (kind = o.getReceiverKind()) {
+                        return kind
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief Retrieve the Objective-C interface to which this message is being directed, if known
+     * @return ObjCInterfaceDeclaration
+     */
+    pub fn getReceiverInterfaceObjCInterfaceDeclaration(self) -> ObjCInterfaceDeclaration {
+        for (receiver in ObjCInterfaceDeclaration(__all_data__),
+            o in ObjCMessageExpressionDO(__all_data__)) {
+            if (self.key_eq(o)) {
+                if (receiver.oid = o.getReceiverInterfaceObjCInterfaceDeclarationOid()) {
+                    return receiver
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the obj c method declaration of this element.
+     * @return ObjCMethodDeclaration
+     */
+    pub fn getObjCMethodDeclaration(self) -> ObjCMethodDeclaration {
+        for (method in ObjCMethodDeclaration(__all_data__),
+            o in ObjCMessageExpressionDO(__all_data__)) {
+            if (self.key_eq(o)) {
+                if (method.oid = o.getObjCMethodDeclarationOid()) {
+                    return method
+                }
+            }
+        }
+    }
+}
+/**
+ * 
+ * @brief DO class: Represents a function call.
+ */
+schema CallExpression extends Expression {
+    
+}
+impl CallExpression {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *CallExpression {
+        for (tmp in Expression(db)) {
+            for (o in CallExpressionDO(db)) {
+                if (tmp.key_eq(o)) {
+                    yield CallExpression {
+                        oid : tmp.oid,
+                        parent_oid : tmp.parent_oid,
+                        index_order : tmp.index_order,
+                        location_oid : tmp.location_oid,
+                        kind_name : tmp.kind_name,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the callee declaration of this call expression.
+     * @return Declaration
+     */
+    pub fn getCalleeDeclaration(self) -> Declaration {
+        for (o in CallExpressionDO(__all_data__),
+            d in Declaration(__all_data__)) {
+            if (self.key_eq(o)) {
+                if (d.oid = o.getCalleeDeclarationOid()) {
+                    return d
+                }
+            }
+        }
+    }
+}
+/**
+ * 
+ * @brief DO class: Adaptor class for mixing a BlockDecl with expressions.
+ */
+schema BlockExpression extends Expression {
+    
+}
+impl BlockExpression {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *BlockExpression {
+        for (tmp in Expression(db)) {
+            for (o in BlockExpressionDO(db)) {
+                if (tmp.key_eq(o)) {
+                    yield BlockExpression {
+                        oid : tmp.oid,
+                        parent_oid : tmp.parent_oid,
+                        index_order : tmp.index_order,
+                        location_oid : tmp.location_oid,
+                        kind_name : tmp.kind_name,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the block declaration of this expression.
+     * @return Declaration
+     */
+    pub fn getBlockDeclaration(self) -> BlockDeclaration {
+        for (o in BlockExpressionDO(__all_data__),
+            b in BlockDeclaration(__all_data__)) {
+            if (self.key_eq(o)) {
+                if (b.oid = o.getBlockDeclarationOid()) {
+                    return b
+                }
+            }
+        }
+    }
+}
+/**
+ * 
+ * @brief DO class: Represents a call to a member function that may be written either with member call syntax within a member function that ends up calling a member function.
+ */
+schema CxxMemberCallExpression extends CallExpression {
+    
+}
+impl CxxMemberCallExpression {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *CxxMemberCallExpression {
+        for (tmp in CallExpression(db)) {
+            for (o in CxxMemberCallExpressionDO(db)) {
+                if (tmp.key_eq(o)) {
+                    yield CxxMemberCallExpression {
+                        oid : tmp.oid,
+                        parent_oid : tmp.parent_oid,
+                        index_order : tmp.index_order,
+                        location_oid : tmp.location_oid,
+                        kind_name : tmp.kind_name,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the type of the object argument.
+     * @return TagType
+     */
+    pub fn getObjectType(self) -> TagType {
+        for (o in CxxMemberCallExpressionDO(__all_data__),
+            t in TagType(__all_data__)) {
+            if (self.key_eq(o)) {
+                if (t.oid = o.getObjectTypeOid()) {
+                    return t
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the called cxx method declaration
+     * @return CxxMethodDeclaration
+     */
+    pub fn getCxxMethodDecl(self) -> CxxMethodDeclaration {
+        for (o in CxxMemberCallExpressionDO(__all_data__),
+            m in CxxMethodDeclaration(__all_data__)) {
+            if (self.key_eq(o)) {
+                if (m.oid = o.getCxxMethodOid()) {
+                    return m
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the CXXRecordDecl of the implicit object argument
+     * @return CxxRecordDeclaration
+     */
+    pub fn getCxxRecordDecl(self) -> CxxRecordDeclaration {
+        for (o in CxxMemberCallExpressionDO(__all_data__),
+            r in CxxRecordDeclaration(__all_data__)) {
+            if (self.key_eq(o)) {
+                if (r.oid = o.getCxxRecordOid()) {
+                    return r
+                }
+            }
+        }
+    }
+}
+schema CommonCallExpression {
+    @primary id: int
+}
+impl CommonCallExpression {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *CommonCallExpression {
+        for (ocme in ObjCMessageExpression(db)) {
+            yield CommonCallExpression {id : ocme.oid}
+        }
+        for (ce in CallExpression(db)) {
+            yield CommonCallExpression {id : ce.oid}
+        }
+    }
+    /**
+     * @brief gets the callee method declaration of the call expression.
+     * @return Callable
+     */
+    pub fn getCalleeMethod(self) -> *Callable {
+        for (calleeCallable in Callable(__all_data__)) {
+            for (ocme in ObjCMessageExpression(__all_data__),
+                symbolRelation in SymbolRelation(__all_data__)) {
+                if (self.key_eq(ocme)) {
+                    if (ocme.getObjCMethodDeclaration().key_eq(symbolRelation.getSource())) {
+                        for (auto_tmp1 in symbolRelation.getDestination()) {
+                            if (calleeCallable.key_eq(auto_tmp1)) {
+                                yield calleeCallable
+                            }
+                        }
+                    }
+                }
+            }
+            for (ce in CallExpression(__all_data__),
+                symbolRelation in SymbolRelation(__all_data__)) {
+                if (self.key_eq(ce)) {
+                    if (ce.getCalleeDeclaration().key_eq(symbolRelation.getSource())) {
+                        for (auto_tmp2 in symbolRelation.getDestination()) {
+                            if (calleeCallable.key_eq(auto_tmp2)) {
+                                yield calleeCallable
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the callee class declaration of the call expression.
+     * @return Class
+     */
+    pub fn getCalleeClass(self) -> *Class {
+        for (c in Class(__all_data__)) {
+            for (ocme in ObjCMessageExpression(__all_data__),
+                symbolRelation in SymbolRelation(__all_data__)) {
+                if (self.key_eq(ocme)) {
+                    if (ocme.getReceiverInterfaceObjCInterfaceDeclaration().key_eq(symbolRelation.getSource())) {
+                        for (auto_tmp1 in symbolRelation.getDestination()) {
+                            if (c.key_eq(auto_tmp1)) {
+                                yield c
+                            }
+                        }
+                    }
+                }
+            }
+            for (cxxme in CxxMemberCallExpression(__all_data__),
+                symbolRelation in SymbolRelation(__all_data__)) {
+                if (self.key_eq(cxxme)) {
+                    if (cxxme.getCxxRecordDecl().key_eq(symbolRelation.getSource())) {
+                        for (auto_tmp2 in symbolRelation.getDestination()) {
+                            if (c.key_eq(auto_tmp2)) {
+                                yield c
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    pub fn getPrintableText(self) -> string {
+        for (s in string::__undetermined_all__()) {
+            for (ocme in ObjCMessageExpression(__all_data__)) {
+                if (self.key_eq(ocme)) {
+                    if (s = ocme.getPrintableText()) {
+                        return s
+                    }
+                }
+            }
+            for (ce in CallExpression(__all_data__)) {
+                if (self.key_eq(ce)) {
+                    if (s = ce.getPrintableText()) {
+                        return s
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets an ancestor of the element.
+     * @return ElementParent 
+     */
+    pub fn getAnAncestor(self) -> *ElementParent {
+        for (ancestor in ElementParent(__all_data__),
+            temp in ElementParent(__all_data__)) {
+            if (self.key_eq(temp)) {
+                for (auto_tmp1 in temp.getAnAncestor()) {
+                    if (ancestor = auto_tmp1) {
+                        yield ancestor
+                    }
+                }
+            }
+        }
+    }
+ // consider the senario that an expression is nested in a block decl.
+    /**
+     * @brief gets the enclosing callable of the call expression.
+     * @return Callable
+     */
+    pub fn getEnclosingCallable(self) -> Callable {
+        for (e in Expression(__all_data__),
+            callable in Callable(__all_data__)) {
+            if (self.key_eq(e)) {
+                for (b in BlockDeclaration(__all_data__),
+                    be in BlockExpression(__all_data__)) {
+                    for (auto_tmp1 in e.getEnclosingCallable()) {
+                        if (b.key_eq(auto_tmp1)) {
+                            if (b = be.getBlockDeclaration()) {
+                                for (auto_tmp2 in be.getEnclosingCallable()) {
+                                    if (callable = auto_tmp2) {
+                                        return callable
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                for (auto_tmp3 in e.getEnclosingCallable()) {
+                    if (callable = auto_tmp3) {
+                        return callable
+                    }
+                }
+            }
+        }
+    }
+}
+/**
+ * @brief An Objctive String Literal.
+ */
+schema ObjCStringLiteral extends Expression {
+    
+}
+impl ObjCStringLiteral {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *ObjCStringLiteral {
+        for (tmp in Expression(db)) {
+            for (e in ObjCStringLiteralDO(db)) {
+                if (tmp.key_eq(e)) {
+                    yield ObjCStringLiteral {
+                        oid : tmp.oid,
+                        parent_oid : tmp.parent_oid,
+                        index_order : tmp.index_order,
+                        location_oid : tmp.location_oid,
+                        kind_name : tmp.kind_name,
+                        printable_text : tmp.printable_text
+                    }
+                }
+            }
+        }
+    }
+}

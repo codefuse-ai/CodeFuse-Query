@@ -1,0 +1,5 @@
+-i https://pypi.antfin-inc.com/simple
+
+dataclasses==0.6
+Jinja2==3.0.3
+jinja2-strcase==0.0.2

@@ -1,0 +1,301 @@
+/**
+ * @filename: CODEMETRIC
+ * @date: 2021/12/29
+ * @brief: CODEMETRIC This class provides access to metrics information for callables.
+ */
+/**
+ * @brief A callable element, either a method or a function. Model only for Godel, not exist in clang
+ */
+schema Callable {
+    @primary id: int
+}
+impl Callable {
+    @data_constraint
+    @inline
+    pub fn __all__(db: CfamilyDB) -> *Callable {
+        for (f in FunctionDeclaration(db)) {
+            if (f.isDefinition() = 1) {
+                yield Callable {id : f.oid}
+            }
+        }
+        for (o in ObjCMethodDeclaration(db)) {
+            if (o.isDefinition() = 1) {
+                yield Callable {id : o.oid}
+            }
+        }
+    }
+    /**
+     * @brief gets the name of the callable
+     * @return string 
+     */
+    pub fn getName(self) -> string {
+        for (f in FunctionDeclaration(__all_data__)) {
+            if (self.key_eq(f)) {
+                return f.getName()
+            }
+        }
+        for (o in ObjCMethodDeclaration(__all_data__)) {
+            if (self.key_eq(o)) {
+                return o.getName()
+            }
+        }
+    }
+    /**
+     * @brief gets the Class declaration which this callable belongs to.
+     * @return Type
+     */
+    pub fn getBelongedClass(self) -> Class {
+        for (c in Class(__all_data__)) {
+            for (m in CxxMethodDeclaration(__all_data__)) {
+                if (self.key_eq(m)) {
+                    if (c = m.getParent()) {
+                        return c
+                    }
+                }
+            }
+            for (o in ObjCMethodDeclaration(__all_data__)) {
+                if (self.key_eq(o)) {
+                    if (c.key_eq(o.getObjCContainerDeclaration())) {
+                        return c
+                    }
+                    for (oid in ObjCImplementationDeclaration(__all_data__),
+                        symbolRelation in SymbolRelation(__all_data__)) {
+                        if (oid.key_eq(o.getObjCContainerDeclaration())) {
+                            if (oid.key_eq(symbolRelation.getSource())) {
+                                for (auto_tmp1 in symbolRelation.getDestination()) {
+                                    if (c.key_eq(auto_tmp1)) {
+                                        return c
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * @brief gets the return type.
+     * @return Type
+     */
+    pub fn getReturnType(self) -> Type {
+        for (f in FunctionDeclaration(__all_data__)) {
+            if (self.key_eq(f)) {
+                return f.getReturnType()
+            }
+        }
+        for (o in ObjCMethodDeclaration(__all_data__)) {
+            if (self.key_eq(o)) {
+                return o.getReturnType()
+            }
+        }
+    }
+    /**
+     * @brief gets the location for the element.
+     * @return Location
+     */
+    pub fn getLocation(self) -> Location {
+        for (f in FunctionDeclaration(__all_data__)) {
+            if (self.key_eq(f)) {
+                return f.getLocation()
+            }
+        }
+        for (o in ObjCMethodDeclaration(__all_data__)) {
+            if (self.key_eq(o)) {
+                return o.getLocation()
+            }
+        }
+    }
+    /**
+     * @brief gets the printable text for printing AST
+     * @return string
+     */
+    pub fn getPrintableText(self) -> string {
+        for (f in FunctionDeclaration(__all_data__)) {
+            if (self.key_eq(f)) {
+                return f.getPrintableText()
+            }
+        }
+        for (o in ObjCMethodDeclaration(__all_data__)) {
+            if (self.key_eq(o)) {
+                return o.getPrintableText()
+            }
+        }
+    }
+    /**
+     * @brief gets the caller callable object of current callable
+     * @return Callable
+     */
+    pub fn getCaller(self) -> *Callable {
+        for (cce in CommonCallExpression(__all_data__)) {
+            if (self in cce.getCalleeMethod()) {
+                yield cce.getEnclosingCallable()
+            }
+        }
+    }
+    /**
+     * @brief gets an ancestor caller of the callable, if any
+     * @return Callable 
+     */
+    pub fn getAnAncestorCaller(self) -> *Callable {
+        yield self.getCaller()
+        for (tmp in self.getAnAncestorCaller()) {
+            yield tmp.getCaller()
+        }
+    }
+    /**
+     * @brief gets the callee callable object of current callable
+     * @return Callable
+     */
+    pub fn getCallee(self) -> *Callable {
+        for (cce in CommonCallExpression(__all_data__)) {
+            if (self = cce.getEnclosingCallable()) {
+                yield cce.getCalleeMethod()
+            }
+        }
+    }
+    /**
+     * @brief gets an ancestor callee of the callable, if any
+     * @return Callable 
+     */
+    pub fn getAnAncestorCallee(self) -> *Callable {
+        yield self.getCallee()
+        for (tmp in self.getAnAncestorCallee()) {
+            yield tmp.getCallee()
+        }
+    }
+    /**
+     * @brief gets the referred class by the param variable and return variable of the callable 
+     * @return Class 
+     */
+    pub fn getReferClassByParamVarAndReturnVar(self) -> *Class {
+        for (c in Class(__all_data__)) {
+            for (p in ParamVariableDeclaration(__all_data__)) {
+                if (self = p.getCallable()) {
+                    let (t = p.getType()) {
+                        if (findClassByType(t, c)) {
+                            yield c
+                        }
+                    }
+                }
+            }
+            let (t = self.getReturnType()) {
+                if (findClassByType(t, c)) {
+                    yield c
+                }
+            }
+        }
+    }
+    /**
+     * Gets the cyclomatic complexity of this function. This is defined as the
+     * number of branching statements (`if`, `while`, `do`, `for`, and
+     * non-fallthrough `case`) plus the number of branching expressions (`?`,
+     * `&&`, and `||`) plus one.
+     * @return int
+     */
+    pub fn getCyclomaticComplexity(self) -> int {
+        let (j = tmp_statement_set(self).len()) {
+            let (k = tmp_expression_set(self).len()) {
+                return j + k + 1
+            }
+        }
+    }
+}
+pub fn branchingStatement(s: Statement) -> bool {
+    for (i in IfStatement(__all_data__)) {
+        if (s.key_eq(i)) {
+            return true
+        }
+    }
+    for (w in WhileStatement(__all_data__)) {
+        if (s.key_eq(w)) {
+            return true
+        }
+    }
+    for (d in DoStatement(__all_data__)) {
+        if (s.key_eq(d)) {
+            return true
+        }
+    }
+    for (f in ForStatement(__all_data__)) {
+        if (s.key_eq(f)) {
+            return true
+        }
+    }
+    for (e in ObjCForCollectionStatement(__all_data__)) {
+        if (s.key_eq(e)) {
+            return true
+        }
+    }
+    for (e in CxxForRangeStatement(__all_data__)) {
+        if (s.key_eq(e)) {
+            return true
+        }
+    }
+    for (sc in SwitchCase(__all_data__)) {
+        if (branchingSwitchCase(sc)) {
+            if (s.key_eq(sc)) {
+                return true
+            }
+        }
+    }
+}
+ // TODO some info is missing
+ // and 
+ // (
+     //     exists (ContinueStatement c) {
+         //         l = c.getAnAncestor()
+     //     }
+     //     or 
+     //     exists (BreakStatement b) {
+         //         l = b.getAnAncestor()
+     //     }
+     //     or 
+     //     exists (ReturnStatement r) {
+         //         l = r.getAnAncestor()
+     //     }
+     //     or 
+     //     exists (ThrowStatement t) {
+         //         l = t.getAnAncestor()
+     //     }
+ // )
+pub fn branchingSwitchCase(sc: SwitchCase) -> bool {
+    if (sc.isDefault() = 0) {
+        return true
+    }
+}
+ // TODO missing `?`, `&&`, and `||`
+pub fn branchingExpression(expr: Expression) -> bool {
+    for (i in ConditionalOperatorExpression(__all_data__)) {
+        if (expr.key_eq(i)) {
+            return true
+        }
+    }
+}
+
+fn tmp_statement_set(callable: Callable) -> *Statement {
+    for (s in Statement(__all_data__)) {
+        if (branchingStatement(s)) {
+            for (tmp in s.getAnAncestor()) {
+                if (callable.key_eq(tmp)) {
+                    yield s
+                }
+            }
+        }
+    }
+}
+
+fn tmp_expression_set(callable: Callable) -> *Expression {
+    for (e in Expression(__all_data__),
+        s in Statement(__all_data__)) {
+        if (branchingExpression(e)) {
+            if (s.key_eq(e)) {
+                for (tmp in s.getAnAncestor()) {
+                    if (callable.key_eq(tmp)) {
+                        yield e
+                    }
+                }
+            }
+        }
+    }
+}

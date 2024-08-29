@@ -1,0 +1,6 @@
+# We'll use defaults from the LLVM style, but with 4 columns indentation.
+BasedOnStyle: LLVM
+IndentWidth: 4
+##    The column limit.
+##    A column limit of 0 means that there is no column limit. In this case, clang-format will respect the input’s line breaking decisions within statements.
+ColumnLimit: 100
