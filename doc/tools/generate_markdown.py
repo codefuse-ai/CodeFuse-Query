@@ -92,9 +92,12 @@ def dump_database(database) -> str:
         result += "[*" + table["type"]["name"] + "](./schema/" + table["type"]["name"] + ".html)\n"
     return result
 
-def dump_schema(comment_list, schema) -> str:
+def dump_schema(comment_list, schema, library_name) -> str:
     result = "---\n"
     result += "layout: default\n"
+    result += "title: " + schema["name"] + "\n"
+    result += "parent: \"schema of coref::" + library_name + "\"\n"
+    result += "grand_parent: \"coref::" + library_name + "\"\n"
     result += "---\n\n"
     result += "# " + schema["name"] + "\n\n"
     comment_of_schema = match_schema_comment(comment_list, schema)
@@ -199,7 +202,7 @@ name_mapper = {
     "coref.javascript.gdl": "javascript",
     "coref.properties.gdl": "properties",
     "coref.python.gdl": "python",
-    "coref.sql.gdl": "sql",
+    # "coref.sql.gdl": "sql",
     "coref.xml.gdl": "xml"
 }
 
@@ -216,22 +219,6 @@ for file in input_file_list:
         continue
     semantic_dict[file["name"]] = result.stdout.decode("utf-8")
 
-def dump_reference_main_doc():
-    output_file_path = markdown_output_path + "/coref_library_reference.md"
-    output_data = "---\n"
-    output_data += "title: \"COREF Library Reference\"\n"
-    output_data += "layout: default\n"
-    output_data += "nav_order: 2\n"
-    output_data += "has_children: true\n"
-    output_data += "---\n\n"
-    output_data += "# COREF Library Reference\n\n"
-    for file in input_file_list:
-        output_data += "* [coref::" + name_mapper[file["name"]] + "]"
-        output_data += "(./" + name_mapper[file["name"]] + "/reference.html)\n"
-    open(output_file_path, "w").write(output_data)
-
-dump_reference_main_doc()
-
 assets_count = 0
 
 for file in input_file_list:
@@ -245,8 +232,8 @@ for file in input_file_list:
     output_data = "---\n"
     output_data += "title: \"coref::" + name_mapper[file["name"]] + "\"\n"
     output_data += "layout: default\n"
+    output_data += "nav_order: 2\n"
     output_data += "has_children: true\n"
-    output_data += "parent: \"COREF Library Reference\"\n"
     output_data += "---\n"
     output_data += "# COREF Library Reference for " + name_mapper[file["name"]] + "\n\n"
     output_data += "* coref::" + name_mapper[file["name"]] + " [database](./database.html)\n" 
@@ -259,8 +246,8 @@ for file in input_file_list:
     output_data = "---\n"
     output_data += "title: \"database\"\n"
     output_data += "layout: default\n"
+    output_data += "nav_order: 3\n"
     output_data += "parent: \"coref::" + name_mapper[file["name"]] + "\"\n"
-    output_data += "grand_parent: \"COREF Library Reference\"\n"
     output_data += "---\n"
     output_data += "# Database of " + file["name"] + "\n\n"
     database_list = semantic_info["semantic"]["database"]
@@ -277,8 +264,8 @@ for file in input_file_list:
     output_data = "---\n"
     output_data += "title: \"function\"\n"
     output_data += "layout: default\n"
+    output_data += "nav_order: 3\n"
     output_data += "parent: \"coref::" + name_mapper[file["name"]] + "\"\n"
-    output_data += "grand_parent: \"COREF Library Reference\"\n"
     output_data += "---\n"
     output_data += "# Global Function of " + file["name"] + "\n\n"
     for function in function_list:
@@ -303,17 +290,18 @@ for file in input_file_list:
     assets_count += len(schema_list)
     print("Generate schema documents for", file_full_path, ":", len(schema_list))
     for schema in schema_list:
-        output_data = dump_schema(comment_list, schema)
+        output_data = dump_schema(comment_list, schema, name_mapper[file["name"]])
         output_file_path = markdown_output_path + "/" + name_mapper[file["name"]] + "/schema/" + schema["name"] + ".md"
         open(output_file_path, "w").write(output_data)
     
     # generate schema hierarchy document
     assets_count += 1
     output_data = "---\n"
-    output_data += "title: \"schema\"\n"
+    output_data += "title: \"schema of coref::" + name_mapper[file["name"]] + "\"\n"
     output_data += "layout: default\n"
     output_data += "parent: \"coref::" + name_mapper[file["name"]] + "\"\n"
-    output_data += "grand_parent: \"COREF Library Reference\"\n"
+    output_data += "nav_order: 3\n"
+    output_data += "has_children: true\n"
     output_data += "---\n"
     output_data += "# Schema of " + file["name"] + "\n\n"
     output_data += dump_schema_tree_view(schema_list)
