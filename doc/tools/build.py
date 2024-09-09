@@ -4,7 +4,7 @@ print("Download Sparrow CLI")
 subprocess.run([
     "curl",
     "-L",
-    "https://github.com/codefuse-ai/CodeFuse-Query/releases/download/2.0.2/sparrow-cli-2.0.2.linux.tar.gz",
+    "https://github.com/codefuse-ai/CodeFuse-Query/releases/download/2.1.0/sparrow-cli-2.1.0.linux.tar.gz",
     "-o",
     "sparrow-cli.tar.gz"
 ])

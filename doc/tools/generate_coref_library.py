@@ -12,10 +12,13 @@ if not os.path.exists("./.coref-api-build"):
     os.mkdir("./.coref-api-build")
 
 mapper = {
+    "coref.cfamily.gdl": input_language_dir + "/cfamily/lib",
     "coref.go.gdl": input_language_dir + "/go/lib",
     "coref.java.gdl": input_language_dir + "/java/lib",
     "coref.javascript.gdl": input_language_dir + "/javascript/lib",
+    "coref.properties.gdl": input_language_dir + "/properties/lib",
     "coref.python.gdl": input_language_dir + "/python/lib",
+    "coref.sql.gdl": input_language_dir + "/sql/lib",
     "coref.xml.gdl": input_language_dir + "/xml/lib",
 }
 
