@@ -80,7 +80,7 @@ Note: The maturity level of the language status is determined based on the types
 - [Installation, Configuration, and Running](./doc/3_install_and_run.en.md)
 - [GödelScript Query Language](./doc/4_godelscript_language.en.md)
 - [Developing Plugins (VSCode)](./doc/5_toolchain.en.md)
-- [COREF API](https://codefuse-ai.github.io/CodeFuse-Query/godel-api/coref_library_reference.html)
+- [COREF API](https://codefuse-ai.github.io/CodeFuse-Query)
 
 ## Tutorial
 - [Online Tutorial](./tutorial/README.en.md)
