@@ -1,0 +1,40 @@
+# build --remote_cache=http://bazelcache.inc.alipay.net
+
+# specify java version
+build --java_language_version=8
+#build --java_runtime_version=localjdk
+#build --tool_java_runtime_version=localjdk
+#build --extra_toolchains=@local_jdk//:all
+#build --java_toolchain=//:default_toolchain
+
+# specify javac options
+build --javacopt="-Aproject=org.example/sparrow-cli -source 8 -target 8"
+
+# verbose test failed message
+build --verbose_failures
+build --test_output=errors
+
+# for c
+build --repo_env=CC=clang --repo_env=CXX=clang++
+build --action_env=BAZEL_CXXOPTS="-std=gnu++17"
+build --cxxopt=-std=gnu++17 --host_cxxopt=-std=gnu++17
+build --features=-default_link_flags
+
+# For linux-specific configurations
+build --enable_platform_specific_config
+build:linux --linkopt=-fuse-ld=gold --host_linkopt=-fuse-ld=gold
+
+# Links all targets in mostly static mode. If -static is set in linkopts, targets will change to fully static.
+build --dynamic_mode=off
+
+# build with optimization enabled and with assert() calls disabled
+build --compilation_mode opt
+
+# for js
+build --strategy=Genrule=standalone
+
+# for go
+# set GOPROXY
+test --action_env=GOPROXY=https://goproxy.cn
+build --action_env=GOPROXY=https://goproxy.cn
+run --action_env=GOPROXY=https://goproxy.cn

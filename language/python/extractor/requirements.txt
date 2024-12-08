@@ -1,3 +1,4 @@
+-i https://pypi.antfin-inc.com/simple
 SQLAlchemy~=1.4.32
 
 tqdm~=4.64.0
