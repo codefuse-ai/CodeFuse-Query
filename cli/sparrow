@@ -12,16 +12,4 @@ function get_realpath() {
     echo "${previous}"
 }
 
-PYTHON=""
-if command -v python > /dev/null 2>&1; then
-    PYTHON="python"
-elif command -v python2 > /dev/null 2>&1; then
-    PYTHON="python2"
-elif command -v python3 > /dev/null 2>&1; then
-    PYTHON="python3"
-else
-    echo "No python interpreter founded."
-    exit -1
-fi
-
-exec $PYTHON "$(dirname $(get_realpath "$0"))"/cli/sparrow-cli.zip --sparrow-cli-internal "$(dirname $(get_realpath "$0"))" "$@"
+exec "$(dirname $(get_realpath "$0"))"/cli/sparrow-cli --sparrow-cli-internal "$(dirname $(get_realpath "$0"))" "$@"
