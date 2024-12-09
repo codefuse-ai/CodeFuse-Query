@@ -39,7 +39,7 @@
         <javaTypeResolver type="org.mybatis.generator.internal.types.JavaTypeResolverDefaultImpl">
             <property name="forceBigDecimals" value="false"/>
         </javaTypeResolver>
-        <javaModelGenerator targetPackage="com.sbrella.dal.mybatis.domain" targetProject="src/main/java">
+        <javaModelGenerator targetPackage="com.alipay.codequery.dal.mybatis.domain" targetProject="src/main/java">
             <property name="constructorBased" value="true"/>
             <property name="enableSubPackages" value="true"/>
             <property name="immutable" value="false"/>
@@ -47,15 +47,15 @@
         </javaModelGenerator>
 
 
-        <sqlMapGenerator targetPackage="com.sbrella.dal.mybatis.mapper" targetProject="src/main/resources">
+        <sqlMapGenerator targetPackage="com.alipay.codequery.dal.mybatis.mapper" targetProject="src/main/resources">
             <!-- 在targetPackage的基础上，根据数据库的schema再生成一层package，最终生成的类放在这个package下，默认为false -->
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
-        <javaClientGenerator targetPackage="com.sbrella.dal.mybatis.mapper" type="ANNOTATEDMAPPER"
+        <javaClientGenerator targetPackage="com.alipay.codequery.dal.mybatis.mapper" type="ANNOTATEDMAPPER"
                              targetProject="src/main/java">
             <!-- 在targetPackage的基础上，根据数据库的schema再生成一层package，最终生成的类放在这个package下，默认为false -->
             <property name="enableSubPackages" value="true"/>
-            <!--            <property name="rootInterface" value="com.sbrella.dal.mybatis.BaseMapper"/>-->
+            <!--            <property name="rootInterface" value="com.alipay.codequery.dal.mybatis.BaseMapper"/>-->
         </javaClientGenerator>
         <table tableName="annotation">
             <columnOverride column="id" javaType="java.lang.Long" jdbcType="BIGINT"/>

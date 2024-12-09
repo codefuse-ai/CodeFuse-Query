@@ -1,0 +1,38 @@
+filegroup(
+    name = "source-code",
+    srcs = glob(["**/*.py"]),
+)
+
+filegroup(
+    name = "requirements",
+    srcs = ["requirements.txt"],
+)
+
+filegroup(
+    name = "pyinstaller-spec-file",
+    srcs = ["sparrow-cli.spec"],
+)
+
+genrule(
+    name = "pyinstaller-sparrow-cli",
+    srcs = [
+        ":source-code",
+        ":requirements",
+        ":pyinstaller-spec-file",
+    ],
+    outs = [
+        "_internal",
+        "sparrow-cli",
+    ],
+    cmd = """
+    chmod -R 755 $$(dirname $(PYTHON3))/../lib/python3.10/site-packages
+    $(PYTHON3) -m pip install -r cli/requirements.txt -i https://pypi.antfin-inc.com/simple
+    $(PYTHON3) -m PyInstaller ./cli/sparrow-cli.spec --distpath $(RULEDIR) --workpath ./pyinstaller-build -y --clean
+    mv $(RULEDIR)/cli/* $(RULEDIR)/
+    rmdir $(RULEDIR)/cli
+    """,
+    toolchains = ["@rules_python//python:current_py_toolchain"],
+    visibility = ["//visibility:public"],
+)
+
+exports_files(["sparrow"])
