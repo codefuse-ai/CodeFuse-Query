@@ -203,6 +203,9 @@ def jar_extractor_cmd(extractor_path, source_root, database, options):
     if not jvm_opts:
         mem = psutil.virtual_memory()
         total_memory = mem.total
+        pod_memory_limit = get_pod_memory_limit()
+        if pod_memory_limit != 0:
+            total_memory = pod_memory_limit
         total_memory_gb = round(total_memory / (1024 ** 3))
         total_memory_gb = min(total_memory_gb, 32)  # limit to 32G
         xmx = max(total_memory_gb - 1, 6)
@@ -233,3 +236,19 @@ def extractor_run(language, source_root, database, timeout, options):
         logging.error("Failed to obtain the %s extractor", language)
         return -1
 
+def get_pod_memory_limit():
+    # cgroup 文件系统路径
+    memory_limit_path = "/sys/fs/cgroup/memory/memory.limit_in_bytes"
+    memory_limit = 0
+    try:
+        with open(memory_limit_path, 'r') as f:
+            memory_limit = int(f.read().strip())
+    except FileNotFoundError:
+        pass
+    except PermissionError:
+        logging.error("Permission denied when accessing cgroup files.")
+    except IOError as e:
+        logging.error(f"IO error occurred when accessing cgroup files: {e}")
+    except Exception as e:
+        logging.error(f"An unexpected error occurred: {e}")
+    return memory_limit
