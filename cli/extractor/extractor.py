@@ -1,7 +1,7 @@
 import logging
 
 import psutil
-
+import shlex
 from run.runner import Runner
 from sparrow_schema.schema import sparrow
 
@@ -17,6 +17,7 @@ class Extractor:
     sql_extractor = ""
     swift_extractor = ""
     xml_extractor = ""
+    arkts_extractor = ""
 
     def __init__(self):
         Extractor.cfamily_extractor = sparrow.home / "language" / "cfamily" / "extractor" / "usr" / "bin" / "coref-cfamily-src-extractor"
@@ -28,6 +29,7 @@ class Extractor:
         Extractor.sql_extractor = sparrow.home / "language" / "sql" / "extractor" / "coref-sql-src-extractor_deploy.jar"
         Extractor.swift_extractor = sparrow.home / "language" / "swift" / "extractor" / "usr" / "bin" / "coref-swift-src-extractor"
         Extractor.xml_extractor = sparrow.home / "language" / "xml" / "extractor" / "coref-xml-extractor_deploy.jar"
+        Extractor.arkts_extractor = sparrow.home / "language" / "arkts" / "extractor" / "coref-arkts-src-extractor"
 
 
 def cfamily_extractor_cmd(source_root, database, options):
@@ -58,15 +60,19 @@ def go_extractor_cmd(source_root, database, options):
 
 def java_extractor_cmd(source_root, database, options):
     cmd = list()
-    cmd += jar_extractor_cmd(Extractor.java_extractor, source_root, database)
+    cmd += jar_extractor_cmd(Extractor.java_extractor, source_root, database, options)
     if options:
+        if "white-list" in options and "whiteList" in options:
+            logging.error("white-list and whiteList cannot be configured at the same time")
+            return -1
+        if "cp" in options and "classpath" in options:
+            logging.error("cp and classpath cannot be configured at the same time")
+            return -1
         for (key, value) in options.items():
             if key == "white-list" or key == "whiteList":
-                cmd += ["-w=", value]
-            elif key == "cp":
-                cmd += ["-cp=", value]
-            elif key == "classpath":
-                cmd += ["--classpath=", value]
+                cmd += ["-w=" + value]
+            elif key == "cp" or key == "classpath":
+                cmd += ["-cp=" + value]
             elif key == "incremental":
                 if value == "true":
                     cmd += ["--incremental"]
@@ -80,8 +86,9 @@ def java_extractor_cmd(source_root, database, options):
                     logging.warning("java.incremental does not take effect, please use java.incremental=true")
             else:
                 if key != "cache-dir" and key != "commit" and key != "remote-cache-type" and \
-                        key != "oss-bucket" and key != "oss-config-file" and key != "oss-path-prefix":
-                    logging.warning("unsupported config name:%s for java extractor.", key)
+                        key != "oss-bucket" and key != "oss-config-file" and key != "oss-path-prefix" and \
+                        key != "jvm_opts":
+                    logging.warning("unsupported config name: %s for java extractor.", key)
     if "incremental" not in options or options["incremental"] != "true":
         cmd += ["--parallel"]
     return cmd
@@ -124,7 +131,7 @@ def javascript_extractor_cmd(source_root, database, options):
 
 
 def properties_extractor_cmd(source_root, database, options):
-    cmd = jar_extractor_cmd(Extractor.properties_extractor, source_root, database)
+    cmd = jar_extractor_cmd(Extractor.properties_extractor, source_root, database, options)
     return cmd
 
 
@@ -136,13 +143,13 @@ def python_extractor_cmd(source_root, database, options):
 
 def sql_extractor_cmd(source_root, database, options):
     cmd = list()
-    cmd += jar_extractor_cmd(Extractor.sql_extractor, source_root, database)
+    cmd += jar_extractor_cmd(Extractor.sql_extractor, source_root, database, options)
     if "sql-dialect-type" in options:
         cmd += ["--sql-dialect-type", options["sql-dialect-type"]]
     return cmd
 
 
-def swift_extractor(source_root, database, options):
+def swift_extractor_cmd(source_root, database, options):
     cmd = list()
     cmd += [str(Extractor.swift_extractor), str(source_root), str(database)]
     if options:
@@ -156,23 +163,59 @@ def swift_extractor(source_root, database, options):
 
 
 def xml_extractor_cmd(source_root, database, options):
-    cmd = jar_extractor_cmd(Extractor.xml_extractor, source_root, database)
+    cmd = jar_extractor_cmd(Extractor.xml_extractor, source_root, database, options)
     return cmd
 
 
-def jar_extractor_cmd(extractor_path, source_root, database):
-    # 获取内存信息
-    mem = psutil.virtual_memory()
-    total_memory = mem.total
-    pod_memory_limit = get_pod_memory_limit()
-    if pod_memory_limit != 0:
-        total_memory = pod_memory_limit
-    total_memory_gb = round(total_memory / (1024 ** 3))
-    logging.info("current memory is : %s GB", total_memory_gb)
-    xmx = max(total_memory_gb - 1, 6)
-    logging.info("final -Xmx is: %s GB", xmx)
+def arkts_extractor_cmd(source_root, database, options):
     cmd = list()
-    cmd += ["java", "-jar", "-Xmx" + str(xmx) + "g", str(extractor_path)]
+    cmd += [str(Extractor.arkts_extractor), "extract"] + \
+           ["--extract-text", "-s", str(source_root)] + \
+           ["-d", str(database / "coref_arkts_src.db")]
+    if options:
+        for (key, value) in options.items():
+            if key == "blacklist" or key == "b":
+                cmd += ["--blacklist"] + value.split(",")
+            elif key == "use-gitignore":
+                cmd += ["--use-gitignore"]
+            elif key == "extract-text":
+                cmd += ["--extract-text"]
+            elif key == "extract-deps":
+                cmd += ["--extract-deps"]
+            elif key == "file-size-limit":
+                cmd += ["--file-size-limit", value]
+            elif key == "paths":
+                cmd += ["--paths", value]
+            else:
+                logging.warning("unsupported config name:%s for arkts extractor.", key)
+    return cmd
+
+
+def jar_extractor_cmd(extractor_path, source_root, database, options):
+    jvm_opts = None
+    if options:
+        for (key, value) in options.items():
+            if key == "jvm_opts":
+                # jvm_opts from user specified extract config
+                jvm_opts = value
+
+    # if no jvm_opts from extract config, calculate xmx according to current memory.
+    if not jvm_opts:
+        mem = psutil.virtual_memory()
+        total_memory = mem.total
+        pod_memory_limit = get_pod_memory_limit()
+        if pod_memory_limit != 0:
+            total_memory = pod_memory_limit
+        total_memory_gb = round(total_memory / (1024 ** 3))
+        total_memory_gb = min(total_memory_gb, 32)  # limit to 32G
+        xmx = max(total_memory_gb - 1, 6)
+        logging.info("current memory is: %s GB, will use xmx: %s GB.", total_memory_gb, xmx)
+        jvm_opts = f"-Xmx{xmx}g"
+
+    logging.info("extract jvm_opts is: %s .", jvm_opts)
+
+    cmd = list()
+    cmd += ["java"] + shlex.split(jvm_opts) + ["-jar", str(extractor_path)]
     cmd += [str(source_root), str(database)]
     return cmd
 
@@ -190,9 +233,8 @@ def extractor_run(language, source_root, database, timeout, options):
         tmp = Runner(cmd, timeout)
         return tmp.subrun()
     else:
-        logging.error("Not supported language: %s", language)
+        logging.error("Failed to obtain the %s extractor", language)
         return -1
-
 
 def get_pod_memory_limit():
     # cgroup 文件系统路径
@@ -210,6 +252,3 @@ def get_pod_memory_limit():
     except Exception as e:
         logging.error(f"An unexpected error occurred: {e}")
     return memory_limit
-
-
-

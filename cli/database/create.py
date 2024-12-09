@@ -48,17 +48,65 @@ def memory_statistics():
     logging.info(f"final -Xmx is : {max(total_memory - 1, 6):.2f} {size_units[unit_index]}")
 
 
+def is_valid_regex(pattern):
+    try:
+        re.compile(pattern)
+        return True
+    except re.error:
+        return False
+
+
 def conf_option_deal(args):
     options = dict()
     if args.extraction_config_file:
         try:
             with open(args.extraction_config_file, "r") as f:
-                options = json.load(f)
+                extract_options = json.load(f)
+                for conf in extract_options:
+                    language = conf["extractor"]
+                    # all 先不处理
+                    if language == "all":
+                        continue
+                    if language not in args.language:
+                        logging.error("%s language will not be extracted and the configuration is invalid", language)
+                        continue
+                    for option in conf["extractor_options"]:
+                        if "name" not in option:
+                            logging.error("option language error: please check name not in this conf : %s",
+                                          json.dumps(option))
+                            return -1
+                        key = option["name"]
+                        if "value" not in option:
+                            logging.error("option value error: value not in this conf : %s", json.dumps(option))
+                            return -1
+                        if "config" not in option["value"]:
+                            logging.error("option config error:config not in this conf[\"value\"]: %s",
+                                          json.dumps(option))
+                            return -1
+                        value = option["value"]["config"]
+                        if "pattern" in option["value"]:
+                            pattern = option["value"]["pattern"]
+                            if is_valid_regex(pattern):
+                                if re.search(pattern, value):
+                                    logging.warning("option pattern error: this conf will be ignore: %s",
+                                                    json.dumps(option))
+                                    continue
+                            else:
+                                logging.warning("option pattern error: this conf will be ignore: %s",
+                                                json.dumps(option))
+                                continue
+                        if language not in options:
+                            options[language] = dict()
+                        if key in options[language]:
+                            logging.error("in %s extract, %s redefine", language, key)
+                            return -1
+                        options[language][key] = value
         except Exception as e:
             logging.error(e)
             return -1
     for language in args.language:
-        options[language] = dict()
+        if language not in options:
+            options[language] = dict()
     if args.extraction_config:
         # 要求option必须是a.b=c的形式，a为语言名，若不是报错
         pattern = r'^(.+)\.(.+)\=(.+)$'
@@ -71,6 +119,9 @@ def conf_option_deal(args):
                 # 若option与需要抽取的语言对不上, 报错并返回配置错误
                 if language not in args.language:
                     logging.error("option language error: %s does not need to be extracted", language)
+                    return -1
+                if key in options[language]:
+                    logging.error("in %s extract, %s redefine", language, key)
                     return -1
                 options[language][key] = value
             else:
@@ -87,7 +138,6 @@ def database_create(args):
     if options == -1:
         logging.error("configuration error, Please check conf")
         raise ValueError("configuration error")
-    memory_statistics()
     timeout = args.timeout
     extractor_fail = list()
     for language in args.language:
