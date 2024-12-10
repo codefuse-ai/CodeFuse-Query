@@ -39,6 +39,13 @@ In the domain of large-scale software development, the demands for dynamic and m
 CodeFuse-Query reimagines code analysis as a data computation task, support scanning over 10 billion lines of code daily and more than 300 different tasks. It optimizes resource utilization, prioritizes data reusability, applies incremental code extraction, and introduces tasks types specially for Code Change, underscoring its domain-optimized design. The system's logic-oriented facet employs Datalog, utilizing a unique two-tiered schema, COREF, to convert source code into data facts. Through Godel, a distinctive language, CodeFuse-Query enables formulation of complex tasks as logical expressions, harnessing Datalog's declarative prowess.
 
 Overall, the CodeFuse-Query platform is divided into three main parts: code data model, code query DSL, and platform productization services.
+
+**News!!** A paper describing the data-centric and language-agnostic static analysis has been accepted by ICSE 2025: 
+
+- Title: Datalog-Based Language-Agnostic Change Impact Analysis for Microservices
+
+- Authors: [Qingkai Shi](https://qingkaishi.github.io) (Nanjing University), Xiaoheng Xie (Ant Group), Xianjin Fu (Ant Group), Peng Di (Ant Group), Huawei Li (Alibaba Inc.), Ang Zhou (Ant Group), and Gang Fan (Ant Group)
+
 ### Code Data Model: COREF
 We have defined a code data and standardization model: COREF, which requires all code to be converted to this model through various language extractors.
 COREF mainly contains the following information:
