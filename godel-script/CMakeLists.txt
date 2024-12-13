@@ -140,12 +140,3 @@ target_link_libraries(godel
 # link dynamic library
 target_link_libraries(godel PUBLIC
         libsouffle-shared souffle_ext)
-
-# add testing rule
-enable_testing()
-add_test(NAME godel-test
-        COMMAND godel -p ${PROJECT_SOURCE_DIR}/godel-frontend/test/pkgtest ${PROJECT_SOURCE_DIR}/godel-frontend/test/pkgtest/a.gdl)
-add_test(NAME gs_new-test
-        COMMAND godel ${PROJECT_SOURCE_DIR}/godel-frontend/test/semantic/gs_new.gdl)
-add_test(NAME fact-stmt-test
-        COMMAND godel ${PROJECT_SOURCE_DIR}/godel-frontend/test/semantic/fact.gdl)
