@@ -63,7 +63,7 @@ Use this command to apply patch:
 
 ```bash
 cd souffle
-git am ../../0001-init-self-used-souffle-from-public-souffle.patch
+git am ../0001-init-self-used-souffle-from-public-souffle.patch
 ```
 
 Use these commands to revert:

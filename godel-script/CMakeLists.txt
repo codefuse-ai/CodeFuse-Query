@@ -20,6 +20,7 @@ set(GODEL_FRONTEND_HDR_FILES
         godel-frontend/src/semantic.h
         godel-frontend/src/symbol.h
         godel-frontend/src/ir/aggregator_inline_remark.h
+        godel-frontend/src/ir/call_graph.h
         godel-frontend/src/ir/flatten_block.h
         godel-frontend/src/ir/ir_gen.h
         godel-frontend/src/ir/ir_context.h
@@ -29,6 +30,7 @@ set(GODEL_FRONTEND_HDR_FILES
         godel-frontend/src/ir/pass.h
         godel-frontend/src/ir/pass_manager.h
         godel-frontend/src/ir/remove_unused.h
+        godel-frontend/src/ir/reorder.h
         godel-frontend/src/error/error.h
         godel-frontend/src/ast/ast_node.h
         godel-frontend/src/ast/ast_root.h
@@ -60,6 +62,7 @@ set(GODEL_FRONTEND_SRC_FILES
         godel-frontend/src/semantic.cpp
         godel-frontend/src/symbol.cpp
         godel-frontend/src/ir/aggregator_inline_remark.cpp
+        godel-frontend/src/ir/call_graph.cpp
         godel-frontend/src/ir/flatten_block.cpp
         godel-frontend/src/ir/ir_gen.cpp
         godel-frontend/src/ir/ir_context.cpp
@@ -69,6 +72,7 @@ set(GODEL_FRONTEND_SRC_FILES
         godel-frontend/src/ir/pass.cpp
         godel-frontend/src/ir/pass_manager.cpp
         godel-frontend/src/ir/remove_unused.cpp
+        godel-frontend/src/ir/reorder.cpp
         godel-frontend/src/error/error.cpp
         godel-frontend/src/ast/ast_visitor.cpp
         godel-frontend/src/ast/ast_root.cpp
@@ -136,3 +140,12 @@ target_link_libraries(godel
 # link dynamic library
 target_link_libraries(godel PUBLIC
         libsouffle-shared souffle_ext)
+
+# add testing rule
+enable_testing()
+add_test(NAME godel-test
+        COMMAND godel -p ${PROJECT_SOURCE_DIR}/godel-frontend/test/pkgtest ${PROJECT_SOURCE_DIR}/godel-frontend/test/pkgtest/a.gdl)
+add_test(NAME gs_new-test
+        COMMAND godel ${PROJECT_SOURCE_DIR}/godel-frontend/test/semantic/gs_new.gdl)
+add_test(NAME fact-stmt-test
+        COMMAND godel ${PROJECT_SOURCE_DIR}/godel-frontend/test/semantic/fact.gdl)
