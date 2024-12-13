@@ -1,16 +1,9 @@
-From 9cd9cafbc050f6a2ce04a2aaf7ed3267f32cc2db Mon Sep 17 00:00:00 2001
+From 5ef4e439424421214071cf8b9bb5b413534fe582 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?=E6=81=95=E5=B1=B1?= <lihaokun.lhk@antgroup.com>
-Date: Mon, 24 Jun 2024 16:55:26 +0800
-Subject: [PATCH] init self-used souffle from public souffle
+Date: Fri, 13 Dec 2024 18:02:01 +0800
+Subject: [PATCH] init self used souffle from public souffle
 
 ---
- .github/actions/cmake-test/action.yml         |    2 +-
- .github/actions/set-test-ids/action.yml       |    2 +-
- .github/images/arch-linux/entrypoint.sh       |    2 +-
- .github/scripts/updatePPA.sh                  |    8 +-
- .github/workflows/CI-Tests.yml                |   67 +-
- .github/workflows/VS-CI-Tests.yml             |   20 +-
- .github/workflows/create-packages.yml         |   28 +-
  CMakeLists.txt                                |   29 +-
  README.md                                     |    6 +-
  choco-packages.config                         |    5 +-
@@ -22,15 +15,15 @@ Subject: [PATCH] init self-used souffle from public souffle
  sh/checkStyle.sh                              |    4 +-
  sh/check_os.sh                                |    2 +-
  src/CMakeLists.txt                            |  104 +-
- src/DynamicLibrary.cpp                        |   72 +
- src/ExtraConfig.h                             |   24 +
+ src/DynamicLibrary.cpp                        |   84 +
+ src/ExtraConfig.h                             |   36 +
  src/FunctorOps.cpp                            |    4 -
  src/FunctorOps.h                              |    5 -
  src/Global.cpp                                |    6 +-
  src/Global.h                                  |   11 +-
  src/GraphUtils.h                              |   76 +-
  src/LogStatement.h                            |   31 +-
- src/MainEntry.cpp                             |    5 +
+ src/MainEntry.cpp                             |   17 +
  src/RelationTag.h                             |    2 +
  src/TranslationUnitBase.h                     |   22 +-
  src/ast/Aggregator.cpp                        |   29 +-
@@ -233,7 +226,7 @@ Subject: [PATCH] init self-used souffle from public souffle
  src/include/souffle/io/ReadStreamSQLite.h     |   26 +-
  src/include/souffle/io/SerialisationStream.h  |    2 +-
  src/include/souffle/io/WriteStream.h          |    2 +-
- src/include/souffle/io/WriteStreamSQLite.h    |   30 +-
+ src/include/souffle/io/WriteStreamSQLite.h    |   50 +-
  src/include/souffle/profile/Cell.h            |   16 +-
  src/include/souffle/profile/CellInterface.h   |    2 +-
  src/include/souffle/profile/Cli.h             |   17 +-
@@ -261,7 +254,7 @@ Subject: [PATCH] init self-used souffle from public souffle
  src/interpreter/BTreeDeleteIndex.cpp          |   18 +-
  src/interpreter/BTreeIndex.cpp                |   19 +-
  src/interpreter/Context.h                     |    9 -
- src/interpreter/Engine.cpp                    |  564 +++---
+ src/interpreter/Engine.cpp                    |  620 +++---
  src/interpreter/Engine.h                      |   45 +-
  src/interpreter/EqrelIndex.cpp                |    3 +-
  src/interpreter/Generator.cpp                 |  144 +-
@@ -423,7 +416,7 @@ Subject: [PATCH] init self-used souffle from public souffle
  tests/syntactic/syntax5/syntax5.err           |    2 +-
  tests/syntactic/syntax6/syntax6.err           |    2 +-
  tests/syntactic/syntax8/syntax8.err           |    2 +-
- 419 files changed, 7762 insertions(+), 9621 deletions(-)
+ 412 files changed, 7824 insertions(+), 9542 deletions(-)
  create mode 100644 src/DynamicLibrary.cpp
  create mode 100644 src/ExtraConfig.h
  create mode 100644 src/MainEntry.cpp
@@ -435,372 +428,6 @@ Subject: [PATCH] init self-used souffle from public souffle
  create mode 100644 src/parser/Helper.h
  create mode 100644 src/ram/CountUniqueKeys.h
 
-diff --git a/.github/actions/cmake-test/action.yml b/.github/actions/cmake-test/action.yml
-index 90ddfab..460a1ab 100644
---- a/.github/actions/cmake-test/action.yml
-+++ b/.github/actions/cmake-test/action.yml
-@@ -14,7 +14,7 @@ runs:
-   using: "composite"
-   steps:
-     - name: checkout
--      uses: actions/checkout@v4
-+      uses: actions/checkout@v2
- 
-     - name: setup-env
-       run: |
-diff --git a/.github/actions/set-test-ids/action.yml b/.github/actions/set-test-ids/action.yml
-index 2cc54e6..d87f49f 100644
---- a/.github/actions/set-test-ids/action.yml
-+++ b/.github/actions/set-test-ids/action.yml
-@@ -13,5 +13,5 @@ runs:
-     - id: set-test-ids
-       run: |
-         CHUNKS=$(python3 -c "print(list(range(${{ inputs.n-chunks }})))")
--        echo "chunks=${CHUNKS}" >> $GITHUB_OUTPUT
-+        echo "::set-output name=chunks::${CHUNKS}"
-       shell: bash
-diff --git a/.github/images/arch-linux/entrypoint.sh b/.github/images/arch-linux/entrypoint.sh
-index 7aa8d7a..751c90b 100755
---- a/.github/images/arch-linux/entrypoint.sh
-+++ b/.github/images/arch-linux/entrypoint.sh
-@@ -3,6 +3,6 @@
- set -e
- set -x
- 
--envsubst '${RELEASE_TAG},${REPO_OWNER}' < PKGBUILD.in  > PKGBUILD
-+envsubst '${RELEASE_TAG}' < PKGBUILD.in  > PKGBUILD
- makepkg
- makepkg --printsrcinfo > .SRCINFO
-diff --git a/.github/scripts/updatePPA.sh b/.github/scripts/updatePPA.sh
-index 5eeb9f8..d4588f3 100755
---- a/.github/scripts/updatePPA.sh
-+++ b/.github/scripts/updatePPA.sh
-@@ -46,17 +46,17 @@ sudo apt-get install createrepo rpm
- echo "%_gpg_name Bot\n%__gpg_sign_cmd %{__gpg} gpg --force-v3-sigs --batch --verbose --no-armor --no-secmem-warning -u \"%{_gpg_name}\" -sbo %{__signature_filename} --digest-algo sha256 %{__plaintext_filename}'" > ~/.rpmmacros
- 
- ## Fedora
--mkdir -p $TMPDIR/ppa/fedora/39/x86_64
-+mkdir -p $TMPDIR/ppa/fedora/34/x86_64
- cd $TMPDIR/ppa/fedora
- 
--for i in $DEBPATH/*fedora-39*/*rpm
-+for i in $DEBPATH/*fedora-34*/*rpm
- do
-     rpm --addsign $i
- done
- 
--cp $DEBPATH/*fedora-39*/*rpm 39/x86_64/
-+cp $DEBPATH/*fedora-34*/*rpm 34/x86_64/
- 
--createrepo 39/x86_64
-+createrepo 34/x86_64
- 
- git add .
- git commit -m "Added fedora rpm files for $SOUFFLE_TAG"
-diff --git a/.github/workflows/CI-Tests.yml b/.github/workflows/CI-Tests.yml
-index f8b865f..0eda992 100644
---- a/.github/workflows/CI-Tests.yml
-+++ b/.github/workflows/CI-Tests.yml
-@@ -3,9 +3,6 @@ on:
-   pull_request:
-     types: [opened, synchronize]
-   workflow_dispatch:
--  push:
--    branches:
--      - 'master'
- 
- jobs:
-   Code-Style:
-@@ -13,7 +10,7 @@ jobs:
- 
-     steps:
-     - name: checkout
--      uses: actions/checkout@v4
-+      uses: actions/checkout@v2
-       with:
-         fetch-depth: 2
- 
-@@ -31,7 +28,7 @@ jobs:
-       chunks: ${{ steps.set-test-ids.outputs.chunks }}
-     steps:
-       - name: checkout
--        uses: actions/checkout@v4
-+        uses: actions/checkout@v2
-       - id: set-test-ids
-         uses: ./.github/actions/set-test-ids
-         with:
-@@ -54,7 +51,7 @@ jobs:
- 
-     steps:
-     - name: checkout
--      uses: actions/checkout@v4
-+      uses: actions/checkout@v2
- 
-     - name: install-lcov
-       if: ${{ matrix.domain == '32bit' }}
-@@ -97,7 +94,7 @@ jobs:
- 
-     - name: upload-coverage-artifact
-       if: ${{ matrix.domain == '32bit' }}
--      uses: actions/upload-artifact@v4
-+      uses: actions/upload-artifact@v2
-       with:
-         name: coverage-${{ matrix.domain }}-${{ matrix.chunk }}
-         path: coverage.info
-@@ -113,17 +110,11 @@ jobs:
-       matrix:
-         chunk: ${{ fromJSON(needs.Test-Setup.outputs.chunks) }}
- 
--    runs-on: macos-12
-+    runs-on: macos-latest
- 
-     steps:
--    - name: Select XCode version
--      uses: maxim-lobanov/setup-xcode@v1
--      with:
--        # Pending https://github.com/actions/runner-images/issues/6350
--        xcode-version: '13.4'
--
-     - name: checkout
--      uses: actions/checkout@v4
-+      uses: actions/checkout@v2
- 
-     - name: install-deps
-       run: sh/setup/install_macos_deps.sh
-@@ -135,39 +126,6 @@ jobs:
-         n-chunks: ${{ needs.Test-Setup.outputs.n-chunks }}
-         chunk: ${{ matrix.chunk }}
- 
--  AppleM-CMake:
--    needs: Test-Setup
--    timeout-minutes: 150
--
--    name: AppleM-CMake (chunk ${{ matrix.chunk }})
--
--    strategy:
--      fail-fast: false
--      matrix:
--        chunk: ${{ fromJSON(needs.Test-Setup.outputs.chunks) }}
--
--    runs-on: macos-14
--
--    steps:
--    - name: Select XCode version
--      uses: maxim-lobanov/setup-xcode@v1
--      with:
--        xcode-version: '15.2'
--
--    - name: checkout
--      uses: actions/checkout@v4
--
--    - name: install-deps
--      run: sh/setup/install_macos_arm_deps.sh
--
--    - name: cmake-test-64bit
--      uses: ./.github/actions/cmake-test
--      with:
--        # disable openmp on ARM architecture, see souffle-lang/souffle#2476
--        cmake-flags: -DSOUFFLE_DOMAIN_64BIT=ON -DSOUFFLE_USE_OPENMP=OFF
--        n-chunks: ${{ needs.Test-Setup.outputs.n-chunks }}
--        chunk: ${{ matrix.chunk }}
--
-   Memory-Check:
-     needs: Test-Setup
-     timeout-minutes: 150
-@@ -183,16 +141,11 @@ jobs:
- 
-     steps:
-     - name: checkout
--      uses: actions/checkout@v4
-+      uses: actions/checkout@v2
- 
-     - name: install-deps
-       run: sudo sh/setup/install_ubuntu_deps.sh
- 
--    - name: fix mmap_rnd_bits
--      # issue with ubuntu:latest runner and ASAN
--      # https://github.com/actions/runner-images/issues/9491
--      run: sudo sysctl vm.mmap_rnd_bits=28
--
-     - name: cmake-test-32bit
-       uses: ./.github/actions/cmake-test
-       with:
-@@ -208,7 +161,7 @@ jobs:
- 
-     steps:
-     - name: checkout
--      uses: actions/checkout@v4
-+      uses: actions/checkout@v2
-       with:
-         fetch-depth: 0
- 
-@@ -216,13 +169,13 @@ jobs:
-       run: sudo apt-get update && sudo apt-get install lcov
- 
-     - name: download-coverage-artifacts
--      uses: actions/download-artifact@v4
-+      uses: actions/download-artifact@v2
- 
-     - name: merge-coverage-report
-       run: lcov $(for i in coverage-*-*/coverage.info; do echo -a $i; done) --output-file coverage.info
- 
-     - name: upload-coverage-report
--      uses: codecov/codecov-action@v4
-+      uses: codecov/codecov-action@v2
-       with:
-         token: ${{ secrets.CODECOV_TOKEN }}
-         files: coverage.info
-diff --git a/.github/workflows/VS-CI-Tests.yml b/.github/workflows/VS-CI-Tests.yml
-index 3955a6f..3ba0030 100644
---- a/.github/workflows/VS-CI-Tests.yml
-+++ b/.github/workflows/VS-CI-Tests.yml
-@@ -4,9 +4,6 @@ on:
-   pull_request:
-     types: [opened, synchronize]
-   workflow_dispatch:
--  push:
--    branches:
--      - 'master'
- 
- env:
-   CHOCO_CACHE_DIR: "${{ github.workspace }}/choco-cache"
-@@ -16,10 +13,10 @@ jobs:
-   Windows-CMake-MSVC:
-     runs-on: windows-2019
-     steps:
--    - uses: actions/checkout@v4
-+    - uses: actions/checkout@v2
- 
-     - name: Dependencies Cache
--      uses: actions/cache@v3
-+      uses: actions/cache@v2
-       env:
-         cache-name: cache-chocolatey
-       with:
-@@ -32,18 +29,19 @@ jobs:
-     - name: Binary Dependencies (Chocolatey)
-       run: |
-         choco config set cacheLocation ${{ env.CHOCO_CACHE_DIR }}
--        choco install choco-packages.config --no-progress --installargs 'ADD_CMAKE_TO_PATH=System'
-+        choco install choco-packages.config --no-progress --installargs 'ADD_CMAKE_TO_PATH=""System""'
- 
-     # Use vcpkg to install devel library dependencies.
-     - name: Library Dependencies (vcpkg)
--      uses: lukka/run-vcpkg@v11
-+      uses: lukka/run-vcpkg@v7
-       with:
--        vcpkgGitCommitId: '56954f1db97f38635782d5ad7cdfd45d2731c854'
-+        vcpkgGitCommitId: 'af2287382b1991dbdcb7e5112d236f3323b9dd7a'
-+        vcpkgTriplet: x64-windows
-+        vcpkgArguments: 'sqlite3 zlib libffi'
- 
-     - name: Create Build Directory
-       working-directory: ${{github.workspace}}
--      run: |
--        mkdir build
-+      run: mkdir build
- 
-     - name: Configure Build
-       working-directory: ${{github.workspace}}
-@@ -51,7 +49,7 @@ jobs:
-         $env:ChocolateyInstall = Convert-Path "$((Get-Command choco).Path)\..\.."
-         Import-Module "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
-         refreshenv
--        cmake -S . -B build -G "Visual Studio 16 2019" -A x64 "-DCMAKE_TOOLCHAIN_FILE=${{env.VCPKG_ROOT}}/scripts/buildsystems/vcpkg.cmake" -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_FLAGS=/bigobj -DSOUFFLE_DOMAIN_64BIT=ON -DCMAKE_FIND_LIBRARY_PREFIXES=";lib" -DCMAKE_FIND_LIBRARY_SUFFIXES=".lib;.dll" -DSOUFFLE_USE_CURSES=OFF -DSOUFFLE_USE_ZLIB=ON -DSOUFFLE_USE_SQLITE=ON -DCMAKE_FIND_DEBUG_MODE=FALSE -DSOUFFLE_BASH_COMPLETION=OFF
-+        cmake -S . -B build -G "Visual Studio 16 2019" -A x64 "-DCMAKE_TOOLCHAIN_FILE=${{env.VCPKG_ROOT}}/scripts/buildsystems/vcpkg.cmake" -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_FLAGS=/bigobj -DSOUFFLE_DOMAIN_64BIT=ON -DCMAKE_FIND_LIBRARY_PREFIXES=";lib" -DCMAKE_FIND_LIBRARY_SUFFIXES=".lib;.dll" -DSOUFFLE_USE_CURSES=OFF -DSOUFFLE_USE_ZLIB=ON -DCMAKE_FIND_DEBUG_MODE=FALSE -DSOUFFLE_BASH_COMPLETION=OFF
- 
-     - name: Build
-       working-directory: ${{github.workspace}}
-diff --git a/.github/workflows/create-packages.yml b/.github/workflows/create-packages.yml
-index 35531db..46f76c4 100644
---- a/.github/workflows/create-packages.yml
-+++ b/.github/workflows/create-packages.yml
-@@ -15,14 +15,18 @@ jobs:
-           - release: oraclelinux-8
-             extension: ".rpm"
-             OS-name: "el/8"
--          - release: fedora-39
-+          - release: fedora-34
-             extension: ".rpm"
--            OS-name: "fedora/39"
-+            OS-name: "fedora/34"
-+          # build issue on fedora 35
-+          # - release: fedora-35
-+          #   extension: ".rpm"
-+          #   OS-name: "fedora/35"
- 
-     runs-on: ubuntu-latest
-     steps:
-       - name: Checkout
--        uses: actions/checkout@v4
-+        uses: actions/checkout@v2
-         with:
-           fetch-depth: 0
- 
-@@ -37,14 +41,14 @@ jobs:
-         run: |-
-           docker cp container:/souffle/build/ . &&
-           cd build &&
--          echo "pkg_name=$(ls *${{ matrix.extension }} | head -n1)" >> $GITHUB_OUTPUT
--          echo "artifact_name=x86_64-${{ matrix.release }}-$(ls *${{ matrix.extension }} | head -n1)" >> $GITHUB_OUTPUT
-+          echo "::set-output name=pkg_name::$(ls *${{ matrix.extension }} | head -n1)"
-+          echo "::set-output name=artifact_name::x86_64-${{ matrix.release }}-$(ls *${{ matrix.extension }} | head -n1)"
- 
-       - name: Naming Artifact
-         run: cp build/${{ steps.extract_pkg.outputs.pkg_name }} build/${{ steps.extract_pkg.outputs.artifact_name }}
- 
-       - name: Upload Artifact
--        uses: actions/upload-artifact@v3
-+        uses: actions/upload-artifact@v2
-         with:
-           name: ${{ steps.extract_pkg.outputs.artifact_name }}
-           path: build/${{ steps.extract_pkg.outputs.artifact_name }}
-@@ -53,14 +57,14 @@ jobs:
-     runs-on: ubuntu-latest
-     steps:
-       - name: Checkout
--        uses: actions/checkout@v4
-+        uses: actions/checkout@v2
-         with:
-           fetch-depth: 0
- 
-       - name: Prepare
-         id: prepare
-         run: |-
--          echo "release_tag=$(git describe --tags --always | sed "s/-.*$//")" >> $GITHUB_OUTPUT
-+          echo "::set-output name=release_tag::$(git describe --tags --always | sed "s/-.*$//")"
- 
-       - name: Build Container
-         run: docker build ./.github/images/arch-linux/ -t package_builder
-@@ -105,7 +109,7 @@ jobs:
-     runs-on: ubuntu-latest
-     steps:
-       - name: Download All Artifacts
--        uses: actions/download-artifact@v3
-+        uses: actions/download-artifact@v2
-         with:
-           path: ./downloads
- 
-@@ -126,16 +130,16 @@ jobs:
-     needs: CPack-Package-Build
-     if: ${{ always() }}
- 
--    runs-on: ubuntu-latest
-+    runs-on: ubuntu-18.04
-     steps:
-       - name: Checkout
--        uses: actions/checkout@v4
-+        uses: actions/checkout@v2
-         with:
-           fetch-depth: 0
-           clean: false
- 
-       - name: Download All Artifacts
--        uses: actions/download-artifact@v3
-+        uses: actions/download-artifact@v2
-         with:
-           path: ./downloads
- 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
 index 5ab514d..1204593 100644
 --- a/CMakeLists.txt
@@ -1447,10 +1074,22 @@ index c2ce37b..5c07576 100644
    set(SOUFFLE_COMPILED_LINK_OPTIONS "/link ${SOUFFLE_COMPILED_LINK_OPTIONS}")
 diff --git a/src/DynamicLibrary.cpp b/src/DynamicLibrary.cpp
 new file mode 100644
-index 0000000..aeea973
+index 0000000..28be988
 --- /dev/null
 +++ b/src/DynamicLibrary.cpp
-@@ -0,0 +1,72 @@
+@@ -0,0 +1,84 @@
++// Copyright (c), 2016-present, Sourcebrella, Inc Ltd - All rights reserved.
++// Unauthorized copying, using, modifying of this file, via any medium is strictly prohibited.
++// Proprietary and confidential.
++//
++// Alipay.com Inc.
++// Copyright (c) 2004 All Rights Reserved.
++//
++// Author: 冰莲 (lyn249877@antfin.com)
++// File Description:
++// Creation Date: 2022-01-28
++// Modification History:
++
 +#include <iostream>
 +#include <vector>
 +
@@ -1525,10 +1164,22 @@ index 0000000..aeea973
 +}
 diff --git a/src/ExtraConfig.h b/src/ExtraConfig.h
 new file mode 100644
-index 0000000..24bdd29
+index 0000000..961a3aa
 --- /dev/null
 +++ b/src/ExtraConfig.h
-@@ -0,0 +1,24 @@
+@@ -0,0 +1,36 @@
++// Copyright (c), 2016-present, Sourcebrella, Inc Ltd - All rights reserved.
++// Unauthorized copying, using, modifying of this file, via any medium is strictly prohibited.
++// Proprietary and confidential.
++//
++// Alipay.com Inc.
++// Copyright (c) 2004 All Rights Reserved.
++//
++// Author: 冰莲 (lyn249877@antfin.com)
++// File Description:
++// Creation Date: 2022-01-28
++// Modification History:
++
 +#pragma once
 +
 +#ifndef GODEL_EXTRACONFIG_H
@@ -1870,10 +1521,22 @@ index 1a84c08..498d9d8 100644
          line << ";";
 diff --git a/src/MainEntry.cpp b/src/MainEntry.cpp
 new file mode 100644
-index 0000000..948655e
+index 0000000..a5a6416
 --- /dev/null
 +++ b/src/MainEntry.cpp
-@@ -0,0 +1,5 @@
+@@ -0,0 +1,17 @@
++// Copyright (c), 2016-present, Sourcebrella, Inc Ltd - All rights reserved.
++// Unauthorized copying, using, modifying of this file, via any medium is strictly prohibited.
++// Proprietary and confidential.
++//
++// Alipay.com Inc.
++// Copyright (c) 2004 All Rights Reserved.
++//
++// Author: 冰莲 (lyn249877@antfin.com)
++// File Description:
++// Creation Date: 2021-09-15
++// Modification History:
++
 +namespace souffle { int main(int argc, char **argv); }
 +
 +int main(int argc, char** argv) {
@@ -15436,10 +15099,10 @@ index 555ce8a..06449cd 100644
          }
      }
 diff --git a/src/include/souffle/io/WriteStreamSQLite.h b/src/include/souffle/io/WriteStreamSQLite.h
-index 240b6da..09f9218 100644
+index 240b6da..c51a180 100644
 --- a/src/include/souffle/io/WriteStreamSQLite.h
 +++ b/src/include/souffle/io/WriteStreamSQLite.h
-@@ -58,20 +58,30 @@ protected:
+@@ -58,20 +58,27 @@ protected:
      void writeNextTuple(const RamDomain* tuple) override {
          for (std::size_t i = 0; i < arity; i++) {
              RamDomain value = 0;  // Silence warning
@@ -15447,10 +15110,7 @@ index 240b6da..09f9218 100644
  
              switch (typeAttributes.at(i)[0]) {
 -                case 's': value = getSymbolTableID(tuple[i]); break;
-+                case 's':
-+                    value = getSymbolTableID(tuple[i]);
-+                    symvalue = symbolTable.decode(tuple[i]).c_str();
-+                    break;
++                case 's': symvalue = symbolTable.decode(tuple[i]).c_str(); break;
                  default: value = tuple[i]; break;
              }
 -
@@ -15477,28 +15137,65 @@ index 240b6da..09f9218 100644
              }
          }
          if (sqlite3_step(insertStatement) != SQLITE_DONE) {
-@@ -192,18 +202,18 @@ private:
+@@ -153,8 +160,8 @@ private:
+ 
+     void prepareStatements() {
+         prepareInsertStatement();
+-        prepareSymbolInsertStatement();
+-        prepareSymbolSelectStatement();
++        // prepareSymbolInsertStatement();
++        // prepareSymbolSelectStatement();
+     }
+     void prepareSymbolInsertStatement() {
+         std::stringstream insertSQL;
+@@ -178,7 +185,7 @@ private:
+ 
+     void prepareInsertStatement() {
+         std::stringstream insertSQL;
+-        insertSQL << "INSERT INTO '_" << relationName << "' VALUES ";
++        insertSQL << "INSERT INTO '" << relationName << "' VALUES ";
+         insertSQL << "(@V0";
+         for (unsigned int i = 1; i < arity; i++) {
+             insertSQL << ",@V" << i;
+@@ -192,23 +199,30 @@ private:
  
      void createTables() {
          createRelationTable();
 -        createRelationView();
-         createSymbolTable();
-+        createRelationView();
+-        createSymbolTable();
++        // createSymbolTable();
++        // createRelationView();
      }
  
      void createRelationTable() {
++        const auto columnNames = params["relation"]["params"].array_items();
++
          std::stringstream createTableText;
-         createTableText << "CREATE TABLE IF NOT EXISTS '_" << relationName << "' (";
+-        createTableText << "CREATE TABLE IF NOT EXISTS '_" << relationName << "' (";
++        createTableText << "CREATE TABLE IF NOT EXISTS '" << relationName << "' (";
          if (arity > 0) {
 -            createTableText << "'0' INTEGER";
-+            createTableText << "'0' " << (typeAttributes.at(0)[0] == 's'? "TEXT":"INTEGER");
-             for (unsigned int i = 1; i < arity; i++) {
-                 createTableText << ",'" << std::to_string(i) << "' ";
+-            for (unsigned int i = 1; i < arity; i++) {
+-                createTableText << ",'" << std::to_string(i) << "' ";
 -                createTableText << "INTEGER";
++            for (unsigned int i = 0; i < arity; i++) {
++                const std::string tableColumnName = std::to_string(i);
++                const auto& realColumnName =
++                        (columnNames[i].is_string() ? columnNames[i].string_value() : tableColumnName);
++                if (i) {
++                    createTableText << ",";
++                }
++                createTableText << "'" << realColumnName << "' ";
 +                createTableText << (typeAttributes.at(i)[0] == 's'? "TEXT":"INTEGER");
              }
          }
          createTableText << ");";
+         executeSQL(createTableText.str(), db);
+-        executeSQL("DELETE FROM '_" + relationName + "';", db);
++        executeSQL("DELETE FROM '" + relationName + "';", db);
+     }
+ 
+     void createRelationView() {
 diff --git a/src/include/souffle/profile/Cell.h b/src/include/souffle/profile/Cell.h
 index 0ebd83e..a759495 100644
 --- a/src/include/souffle/profile/Cell.h
@@ -17006,7 +16703,7 @@ index 6b9a0fd..efba119 100644
  
  }  // namespace souffle::interpreter
 diff --git a/src/interpreter/Engine.cpp b/src/interpreter/Engine.cpp
-index 41683d3..cb38b9f 100644
+index 41683d3..f46ba08 100644
 --- a/src/interpreter/Engine.cpp
 +++ b/src/interpreter/Engine.cpp
 @@ -23,18 +23,16 @@
@@ -17117,7 +16814,7 @@ index 41683d3..cb38b9f 100644
  RecordTable& Engine::getRecordTable() {
      return recordTable;
  }
-@@ -339,6 +314,37 @@ ram::TranslationUnit& Engine::getTranslationUnit() {
+@@ -339,6 +314,86 @@ ram::TranslationUnit& Engine::getTranslationUnit() {
      return tUnit;
  }
  
@@ -17152,23 +16849,79 @@ index 41683d3..cb38b9f 100644
 +    return "";
 +}
 +
++static const char* godel_lang_builtin_string_to_upper(const char *self) {
++    auto buffer = new char[strlen(self) + 1]();
++    std::transform(self, self + strlen(self), buffer, toupper);
++    return buffer;
++}
++
++static const char* godel_lang_builtin_string_to_lower(const char *self) {
++    auto buffer = new char[strlen(self) + 1]();
++    std::transform(self, self + strlen(self), buffer, tolower);
++    return buffer;
++}
++
++static const char* godel_lang_builtin_string_replace_all(const char *self, const char *pattern, const char* replacement) {
++    std::regex re(pattern);
++    std::stringstream ss;
++    std::regex_replace(std::ostreambuf_iterator<char>(ss), self, self + strlen(self), re, replacement);
++
++    const auto& res = ss.str();
++    auto buffer = new char[res.length() + 1]();
++    std::strncpy(buffer, res.c_str(), res.length());
++    buffer[res.length()] = 0;
++    return buffer;
++}
++
++static const char* godel_lang_builtin_string_replace_once(const char *self, const char *pattern, const char* replacement, int index) {
++    std::regex re(pattern);
++    std::string result = self;
++
++    std::string temp = result;
++    std::smatch match;
++
++    size_t offset = 0;
++    size_t matched_index = 0;
++    while (std::regex_search(temp, match, re)) {
++        if (matched_index == static_cast<size_t>(index)) {
++            result.replace(offset + match.position(), match.length(), replacement);
++            break;
++        }
++        ++matched_index;
++        offset += match.position() + match.length();
++        temp = match.suffix().str();
++    }
++
++    auto buffer = new char[result.length() + 1]();
++    std::strncpy(buffer, result.c_str(), result.length());
++    buffer[result.length()] = 0;
++    return buffer;
++}
++
  void* Engine::getMethodHandle(const std::string& method) {
      for (void* libHandle : dll) {
          auto* methodHandle = dlsym(libHandle, method.c_str());
-@@ -346,6 +352,12 @@ void* Engine::getMethodHandle(const std::string& method) {
+@@ -346,6 +401,19 @@ void* Engine::getMethodHandle(const std::string& method) {
              return methodHandle;
          }
      }
++
 +    // TODO: Given from Gödel
-+    if (method == "get_field_by_index") {
-+        return reinterpret_cast<void*>(get_field_by_index);
-+    } else if (method == "godel_lang_builtin_string_getMatchResult") {
-+        return reinterpret_cast<void*>(godel_lang_builtin_string_getMatchResult);
++    static std::unordered_map<std::string, void*> mapper = {
++        {"get_field_by_index", reinterpret_cast<void*>(get_field_by_index)},
++        {"godel_lang_builtin_string_getMatchResult", reinterpret_cast<void*>(godel_lang_builtin_string_getMatchResult)},
++        {"godel_lang_builtin_string_to_upper", reinterpret_cast<void*>(godel_lang_builtin_string_to_upper)},
++        {"godel_lang_builtin_string_to_lower", reinterpret_cast<void*>(godel_lang_builtin_string_to_lower)},
++        {"godel_lang_builtin_string_replace_all", reinterpret_cast<void*>(godel_lang_builtin_string_replace_all)},
++        {"godel_lang_builtin_string_replace_once", reinterpret_cast<void*>(godel_lang_builtin_string_replace_once)}
++    };
++    if (mapper.count(method)) {
++        return mapper.at(method);
 +    }
      return nullptr;
  }
  
-@@ -359,13 +371,13 @@ void Engine::createRelation(const ram::Relation& id, const std::size_t idx) {
+@@ -359,13 +427,13 @@ void Engine::createRelation(const ram::Relation& id, const std::size_t idx) {
      }
  
      RelationHandle res;
@@ -17186,7 +16939,7 @@ index 41683d3..cb38b9f 100644
      } else {
          res = createBTreeRelation(id, isa.getIndexSelection(id.getName()));
      }
-@@ -377,19 +389,19 @@ const std::vector<void*>& Engine::loadDLL() {
+@@ -377,19 +445,19 @@ const std::vector<void*>& Engine::loadDLL() {
          return dll;
      }
  
@@ -17212,7 +16965,7 @@ index 41683d3..cb38b9f 100644
          // Set up our paths to have a library appended
          for (std::string& path : paths) {
              if (path.back() != pathSeparator) {
-@@ -406,11 +418,7 @@ const std::vector<void*>& Engine::loadDLL() {
+@@ -406,11 +474,7 @@ const std::vector<void*>& Engine::loadDLL() {
          void* tmp = nullptr;
          for (const std::string& path : paths) {
              std::string fullpath = path + "lib" + library + dynamicLibSuffix;
@@ -17224,7 +16977,7 @@ index 41683d3..cb38b9f 100644
              if (tmp != nullptr) {
                  dll.push_back(tmp);
                  break;
-@@ -424,18 +432,16 @@ const std::vector<void*>& Engine::loadDLL() {
+@@ -424,18 +488,16 @@ const std::vector<void*>& Engine::loadDLL() {
  std::size_t Engine::getIterationNumber() const {
      return iteration;
  }
@@ -17244,7 +16997,7 @@ index 41683d3..cb38b9f 100644
          SignalHandler::instance()->enableLogging();
      }
  
-@@ -450,7 +456,7 @@ void Engine::executeMain() {
+@@ -450,7 +512,7 @@ void Engine::executeMain() {
          Context ctxt;
          execute(main.get(), ctxt);
      } else {
@@ -17253,7 +17006,7 @@ index 41683d3..cb38b9f 100644
          // Prepare the frequency table for threaded use
          const ram::Program& program = tUnit.getProgram();
          visit(program, [&](const ram::TupleOperation& node) {
-@@ -463,7 +469,7 @@ void Engine::executeMain() {
+@@ -463,7 +525,7 @@ void Engine::executeMain() {
          ProfileEventSingleton::instance().startTimer();
          ProfileEventSingleton::instance().makeTimeEvent("@time;starttime");
          // Store configuration
@@ -17262,7 +17015,7 @@ index 41683d3..cb38b9f 100644
              for (auto&& v : vs)
                  ProfileEventSingleton::instance().makeConfigRecord(k, v);
  
-@@ -482,8 +488,6 @@ void Engine::executeMain() {
+@@ -482,8 +544,6 @@ void Engine::executeMain() {
          visit(program, [&](const ram::Query&) { ++ruleCount; });
          ProfileEventSingleton::instance().makeConfigRecord("ruleCount", std::to_string(ruleCount));
  
@@ -17271,7 +17024,7 @@ index 41683d3..cb38b9f 100644
          Context ctxt;
          execute(main.get(), ctxt);
          ProfileEventSingleton::instance().stopTimer();
-@@ -506,7 +510,7 @@ void Engine::generateIR() {
+@@ -506,7 +566,7 @@ void Engine::generateIR() {
      NodeGenerator generator(*this);
      if (subroutine.empty()) {
          for (const auto& sub : program.getSubroutines()) {
@@ -17280,7 +17033,7 @@ index 41683d3..cb38b9f 100644
          }
      }
      if (main == nullptr) {
-@@ -520,7 +524,10 @@ void Engine::executeSubroutine(
+@@ -520,7 +580,10 @@ void Engine::executeSubroutine(
      ctxt.setReturnValues(ret);
      ctxt.setArguments(args);
      generateIR();
@@ -17292,7 +17045,7 @@ index 41683d3..cb38b9f 100644
  }
  
  RamDomain Engine::execute(const Node* node, Context& ctxt) {
-@@ -531,9 +538,9 @@ RamDomain Engine::execute(const Node* node, Context& ctxt) {
+@@ -531,9 +594,9 @@ RamDomain Engine::execute(const Node* node, Context& ctxt) {
  
  // Overload CASE based on number of arguments.
  // CASE(Kind) -> BASE_CASE(Kind)
@@ -17305,7 +17058,7 @@ index 41683d3..cb38b9f 100644
  
  #define BASE_CASE(Kind) \
      case (I_##Kind): {  \
-@@ -541,12 +548,12 @@ RamDomain Engine::execute(const Node* node, Context& ctxt) {
+@@ -541,12 +604,12 @@ RamDomain Engine::execute(const Node* node, Context& ctxt) {
              [[maybe_unused]] const auto& shadow = *static_cast<const interpreter::Kind*>(node); \
              [[maybe_unused]] const auto& cur = *static_cast<const ram::Kind*>(node->getShadow());
  // EXTEND_CASE also defer the relation type
@@ -17321,7 +17074,7 @@ index 41683d3..cb38b9f 100644
  #define ESAC(Kind) \
      }              \
      ();            \
-@@ -580,10 +587,6 @@ RamDomain Engine::execute(const Node* node, Context& ctxt) {
+@@ -580,10 +643,6 @@ RamDomain Engine::execute(const Node* node, Context& ctxt) {
              return cur.getConstant();
          ESAC(NumericConstant)
  
@@ -17332,7 +17085,7 @@ index 41683d3..cb38b9f 100644
          CASE(StringConstant)
              return shadow.getConstant();
          ESAC(StringConstant)
-@@ -597,7 +600,7 @@ RamDomain Engine::execute(const Node* node, Context& ctxt) {
+@@ -597,7 +656,7 @@ RamDomain Engine::execute(const Node* node, Context& ctxt) {
          ESAC(AutoIncrement)
  
          CASE(IntrinsicOperator)
@@ -17341,7 +17094,7 @@ index 41683d3..cb38b9f 100644
  #define BINARY_OP_TYPED(ty, op) return ramBitCast(static_cast<ty>(EVAL_CHILD(ty, 0) op EVAL_CHILD(ty, 1)))
  
  #define BINARY_OP_LOGICAL(opcode, op) BINARY_OP_INTEGRAL(opcode, op)
-@@ -618,7 +621,7 @@ RamDomain Engine::execute(const Node* node, Context& ctxt) {
+@@ -618,7 +677,7 @@ RamDomain Engine::execute(const Node* node, Context& ctxt) {
      {                                                            \
          auto result = EVAL_CHILD(RamDomain, 0);                  \
          auto* result_val = &getSymbolTable().decode(result);     \
@@ -17350,7 +17103,7 @@ index 41683d3..cb38b9f 100644
              auto alt = EVAL_CHILD(RamDomain, i);                 \
              if (alt == result) continue;                         \
                                                                   \
-@@ -633,7 +636,7 @@ RamDomain Engine::execute(const Node* node, Context& ctxt) {
+@@ -633,7 +692,7 @@ RamDomain Engine::execute(const Node* node, Context& ctxt) {
  #define MINMAX_OP(ty, op)                           \
      {                                               \
          auto result = EVAL_CHILD(ty, 0);            \
@@ -17359,7 +17112,7 @@ index 41683d3..cb38b9f 100644
              result = op(result, EVAL_CHILD(ty, i)); \
          }                                           \
          return ramBitCast(result);                  \
-@@ -655,7 +658,7 @@ RamDomain Engine::execute(const Node* node, Context& ctxt) {
+@@ -655,7 +714,7 @@ RamDomain Engine::execute(const Node* node, Context& ctxt) {
          getSymbolTable().decode(EVAL_CHILD(RamDomain, 0))));
              // clang-format on
  
@@ -17368,7 +17121,7 @@ index 41683d3..cb38b9f 100644
              switch (cur.getOperator()) {
                  /** Unary Functor Operators */
                  case FunctorOp::ORD: return execute(shadow.getChild(0), ctxt);
-@@ -763,7 +766,7 @@ RamDomain Engine::execute(const Node* node, Context& ctxt) {
+@@ -763,7 +822,7 @@ RamDomain Engine::execute(const Node* node, Context& ctxt) {
  
                  case FunctorOp::CAT: {
                      std::stringstream ss;
@@ -17377,7 +17130,7 @@ index 41683d3..cb38b9f 100644
                          ss << getSymbolTable().decode(execute(shadow.getChild(i), ctxt));
                      }
                      return getSymbolTable().encode(ss.str());
-@@ -777,7 +780,7 @@ RamDomain Engine::execute(const Node* node, Context& ctxt) {
+@@ -777,7 +836,7 @@ RamDomain Engine::execute(const Node* node, Context& ctxt) {
                      std::string sub_str;
                      try {
                          sub_str = str.substr(idx, len);
@@ -17386,7 +17139,7 @@ index 41683d3..cb38b9f 100644
                          std::cerr << "warning: wrong index position provided by substr(\"";
                          std::cerr << str << "\"," << (int32_t)idx << "," << (int32_t)len << ") functor.\n";
                      }
-@@ -788,17 +791,9 @@ RamDomain Engine::execute(const Node* node, Context& ctxt) {
+@@ -788,17 +847,9 @@ RamDomain Engine::execute(const Node* node, Context& ctxt) {
                  case FunctorOp::URANGE:
                  case FunctorOp::FRANGE:
                      fatal("ICE: functor `%s` must map onto `NestedIntrinsicOperator`", cur.getOperator());
@@ -17405,7 +17158,7 @@ index 41683d3..cb38b9f 100644
  
  #undef BINARY_OP_LOGICAL
  #undef BINARY_OP_INTEGRAL
-@@ -814,8 +809,8 @@ RamDomain Engine::execute(const Node* node, Context& ctxt) {
+@@ -814,8 +865,8 @@ RamDomain Engine::execute(const Node* node, Context& ctxt) {
          ESAC(IntrinsicOperator)
  
          CASE(NestedIntrinsicOperator)
@@ -17416,7 +17169,7 @@ index 41683d3..cb38b9f 100644
                  ctxt[cur.getTupleId()] = tuple.data();
                  execute(shadow.getChild(numArgs), ctxt);
              };
-@@ -832,7 +827,7 @@ RamDomain Engine::execute(const Node* node, Context& ctxt) {
+@@ -832,7 +883,7 @@ RamDomain Engine::execute(const Node* node, Context& ctxt) {
                  case ram::NestedIntrinsicOp::FRANGE: return RUN_RANGE(RamFloat);
              }
  
@@ -17425,7 +17178,7 @@ index 41683d3..cb38b9f 100644
  #undef RUN_RANGE
          ESAC(NestedIntrinsicOperator)
  
-@@ -841,7 +836,7 @@ RamDomain Engine::execute(const Node* node, Context& ctxt) {
+@@ -841,7 +892,7 @@ RamDomain Engine::execute(const Node* node, Context& ctxt) {
  
              auto userFunctor = reinterpret_cast<void (*)()>(shadow.getFunctionPointer());
              if (userFunctor == nullptr) fatal("cannot find user-defined operator `%s`", name);
@@ -17434,7 +17187,7 @@ index 41683d3..cb38b9f 100644
  
              if (cur.isStateful()) {
                  auto exec = std::bind(&Engine::execute, this, std::placeholders::_1, std::placeholders::_2);
-@@ -961,7 +956,8 @@ RamDomain Engine::execute(const Node* node, Context& ctxt) {
+@@ -961,7 +1012,8 @@ RamDomain Engine::execute(const Node* node, Context& ctxt) {
          ESAC(UserDefinedOperator)
  
          CASE(PackRecord)
@@ -17444,7 +17197,7 @@ index 41683d3..cb38b9f 100644
              std::unique_ptr<RamDomain[]> data = std::make_unique<RamDomain[]>(arity);
              for (std::size_t i = 0; i < arity; ++i) {
                  data[i] = execute(shadow.getChild(i), ctxt);
-@@ -989,8 +985,8 @@ RamDomain Engine::execute(const Node* node, Context& ctxt) {
+@@ -989,8 +1041,8 @@ RamDomain Engine::execute(const Node* node, Context& ctxt) {
              return !execute(shadow.getChild(), ctxt);
          ESAC(Negation)
  
@@ -17455,7 +17208,7 @@ index 41683d3..cb38b9f 100644
          const auto& rel = *static_cast<RelType*>(shadow.getRelation()); \
          return rel.empty();                                             \
      ESAC(EmptinessCheck)
-@@ -998,8 +994,8 @@ RamDomain Engine::execute(const Node* node, Context& ctxt) {
+@@ -998,8 +1050,8 @@ RamDomain Engine::execute(const Node* node, Context& ctxt) {
          FOR_EACH(EMPTINESS_CHECK)
  #undef EMPTINESS_CHECK
  
@@ -17466,7 +17219,7 @@ index 41683d3..cb38b9f 100644
          const auto& rel = *static_cast<RelType*>(shadow.getRelation()); \
          return rel.size();                                              \
      ESAC(RelationSize)
-@@ -1007,17 +1003,17 @@ RamDomain Engine::execute(const Node* node, Context& ctxt) {
+@@ -1007,17 +1059,17 @@ RamDomain Engine::execute(const Node* node, Context& ctxt) {
          FOR_EACH(RELATION_SIZE)
  #undef RELATION_SIZE
  
@@ -17490,7 +17243,7 @@ index 41683d3..cb38b9f 100644
      ESAC(ProvenanceExistenceCheck)
  
          FOR_EACH_PROVENANCE(PROVENANCE_EXISTENCE_CHECK)
-@@ -1049,53 +1045,30 @@ RamDomain Engine::execute(const Node* node, Context& ctxt) {
+@@ -1049,53 +1101,30 @@ RamDomain Engine::execute(const Node* node, Context& ctxt) {
                  COMPARE(GE, >=)
  
                  case BinaryConstraintOp::MATCH: {
@@ -17560,7 +17313,7 @@ index 41683d3..cb38b9f 100644
                      }
                      return result;
                  }
-@@ -1115,7 +1088,7 @@ RamDomain Engine::execute(const Node* node, Context& ctxt) {
+@@ -1115,7 +1144,7 @@ RamDomain Engine::execute(const Node* node, Context& ctxt) {
                  }
              }
  
@@ -17569,7 +17322,7 @@ index 41683d3..cb38b9f 100644
  
  #undef COMPARE_NUMERIC
  #undef COMPARE_STRING
-@@ -1138,8 +1111,8 @@ RamDomain Engine::execute(const Node* node, Context& ctxt) {
+@@ -1138,8 +1167,8 @@ RamDomain Engine::execute(const Node* node, Context& ctxt) {
              return result;
          ESAC(TupleOperation)
  
@@ -17580,7 +17333,7 @@ index 41683d3..cb38b9f 100644
          const auto& rel = *static_cast<RelType*>(shadow.getRelation()); \
          return evalScan(rel, cur, shadow, ctxt);                        \
      ESAC(Scan)
-@@ -1147,24 +1120,24 @@ RamDomain Engine::execute(const Node* node, Context& ctxt) {
+@@ -1147,24 +1176,24 @@ RamDomain Engine::execute(const Node* node, Context& ctxt) {
          FOR_EACH(SCAN)
  #undef SCAN
  
@@ -17611,7 +17364,7 @@ index 41683d3..cb38b9f 100644
          const auto& rel = *static_cast<RelType*>(shadow.getRelation()); \
          return evalParallelIndexScan(rel, cur, shadow, ctxt);           \
      ESAC(ParallelIndexScan)
-@@ -1172,8 +1145,8 @@ RamDomain Engine::execute(const Node* node, Context& ctxt) {
+@@ -1172,8 +1201,8 @@ RamDomain Engine::execute(const Node* node, Context& ctxt) {
          FOR_EACH(PARALLEL_INDEX_SCAN)
  #undef PARALLEL_INDEX_SCAN
  
@@ -17622,7 +17375,7 @@ index 41683d3..cb38b9f 100644
          const auto& rel = *static_cast<RelType*>(shadow.getRelation()); \
          return evalIfExists(rel, cur, shadow, ctxt);                    \
      ESAC(IfExists)
-@@ -1181,8 +1154,8 @@ RamDomain Engine::execute(const Node* node, Context& ctxt) {
+@@ -1181,8 +1210,8 @@ RamDomain Engine::execute(const Node* node, Context& ctxt) {
          FOR_EACH(IFEXISTS)
  #undef IFEXISTS
  
@@ -17633,7 +17386,7 @@ index 41683d3..cb38b9f 100644
          const auto& rel = *static_cast<RelType*>(shadow.getRelation()); \
          return evalParallelIfExists(rel, cur, shadow, ctxt);            \
      ESAC(ParallelIfExists)
-@@ -1190,16 +1163,16 @@ RamDomain Engine::execute(const Node* node, Context& ctxt) {
+@@ -1190,16 +1219,16 @@ RamDomain Engine::execute(const Node* node, Context& ctxt) {
          FOR_EACH(PARALLEL_IFEXISTS)
  #undef PARALLEL_IFEXISTS
  
@@ -17654,7 +17407,7 @@ index 41683d3..cb38b9f 100644
          const auto& rel = *static_cast<RelType*>(shadow.getRelation()); \
          return evalParallelIndexIfExists(rel, cur, shadow, ctxt);       \
      ESAC(ParallelIndexIfExists)
-@@ -1226,8 +1199,8 @@ RamDomain Engine::execute(const Node* node, Context& ctxt) {
+@@ -1226,8 +1255,8 @@ RamDomain Engine::execute(const Node* node, Context& ctxt) {
              return execute(shadow.getNestedOperation(), ctxt);
          ESAC(UnpackRecord)
  
@@ -17665,7 +17418,7 @@ index 41683d3..cb38b9f 100644
          const auto& rel = *static_cast<RelType*>(shadow.getRelation()); \
          return evalParallelAggregate(rel, cur, shadow, ctxt);           \
      ESAC(ParallelAggregate)
-@@ -1235,25 +1208,26 @@ RamDomain Engine::execute(const Node* node, Context& ctxt) {
+@@ -1235,25 +1264,26 @@ RamDomain Engine::execute(const Node* node, Context& ctxt) {
          FOR_EACH(PARALLEL_AGGREGATE)
  #undef PARALLEL_AGGREGATE
  
@@ -17701,7 +17454,7 @@ index 41683d3..cb38b9f 100644
          return evalIndexAggregate<RelType>(cur, shadow, ctxt); \
      ESAC(IndexAggregate)
  
-@@ -1286,8 +1260,8 @@ RamDomain Engine::execute(const Node* node, Context& ctxt) {
+@@ -1286,8 +1316,8 @@ RamDomain Engine::execute(const Node* node, Context& ctxt) {
              return result;
          ESAC(Filter)
  
@@ -17712,7 +17465,7 @@ index 41683d3..cb38b9f 100644
          auto& rel = *static_cast<RelType*>(shadow.getRelation()); \
          return evalGuardedInsert(rel, shadow, ctxt);              \
      ESAC(GuardedInsert)
-@@ -1295,8 +1269,8 @@ RamDomain Engine::execute(const Node* node, Context& ctxt) {
+@@ -1295,8 +1325,8 @@ RamDomain Engine::execute(const Node* node, Context& ctxt) {
          FOR_EACH(GUARDED_INSERT)
  #undef GUARDED_INSERT
  
@@ -17723,7 +17476,7 @@ index 41683d3..cb38b9f 100644
          auto& rel = *static_cast<RelType*>(shadow.getRelation()); \
          return evalInsert(rel, shadow, ctxt);                     \
      ESAC(Insert)
-@@ -1304,18 +1278,18 @@ RamDomain Engine::execute(const Node* node, Context& ctxt) {
+@@ -1304,18 +1334,18 @@ RamDomain Engine::execute(const Node* node, Context& ctxt) {
          FOR_EACH(INSERT)
  #undef INSERT
  
@@ -17748,7 +17501,7 @@ index 41683d3..cb38b9f 100644
                  if (shadow.getChild(i) == nullptr) {
                      ctxt.addReturnValue(0);
                  } else {
-@@ -1345,11 +1319,9 @@ RamDomain Engine::execute(const Node* node, Context& ctxt) {
+@@ -1345,11 +1375,9 @@ RamDomain Engine::execute(const Node* node, Context& ctxt) {
  
          CASE(Loop)
              resetIterationNumber();
@@ -17760,7 +17513,7 @@ index 41683d3..cb38b9f 100644
              resetIterationNumber();
              return true;
          ESAC(Loop)
-@@ -1374,23 +1346,27 @@ RamDomain Engine::execute(const Node* node, Context& ctxt) {
+@@ -1374,23 +1402,27 @@ RamDomain Engine::execute(const Node* node, Context& ctxt) {
              return execute(shadow.getChild(), ctxt);
          ESAC(DebugInfo)
  
@@ -17775,12 +17528,12 @@ index 41683d3..cb38b9f 100644
 +        rel.__purge();                                            \
 +        return true;                                              \
 +    ESAC(Clear)
++
++        FOR_EACH(CLEAR)
++#undef CLEAR
  
 -#define ESTIMATEJOINSIZE(Structure, Arity, AuxiliaryArity, ...)         \
 -    CASE(EstimateJoinSize, Structure, Arity, AuxiliaryArity)            \
-+        FOR_EACH(CLEAR)
-+#undef CLEAR
-+
 +#define COUNTUNIQUEKEYS(Structure, Arity, ...)                          \
 +    CASE(CountUniqueKeys, Structure, Arity)                             \
          const auto& rel = *static_cast<RelType*>(shadow.getRelation()); \
@@ -17800,7 +17553,7 @@ index 41683d3..cb38b9f 100644
              return true;
          ESAC(Call)
  
-@@ -1413,7 +1389,6 @@ RamDomain Engine::execute(const Node* node, Context& ctxt) {
+@@ -1413,7 +1445,6 @@ RamDomain Engine::execute(const Node* node, Context& ctxt) {
                              ->readAll(rel);
                  } catch (std::exception& e) {
                      std::cerr << "Error loading " << rel.getName() << " data: " << e.what() << "\n";
@@ -17808,7 +17561,7 @@ index 41683d3..cb38b9f 100644
                  }
                  return true;
              } else if (op == "output" || op == "printsize") {
-@@ -1481,13 +1456,6 @@ RamDomain Engine::execute(const Node* node, Context& ctxt) {
+@@ -1481,13 +1512,6 @@ RamDomain Engine::execute(const Node* node, Context& ctxt) {
              swapRelation(shadow.getSourceId(), shadow.getTargetId());
              return true;
          ESAC(Swap)
@@ -17822,7 +17575,7 @@ index 41683d3..cb38b9f 100644
      }
  
      UNREACHABLE_BAD_CASE_ANALYSIS
-@@ -1602,7 +1570,7 @@ RamDomain Engine::evalParallelScan(
+@@ -1602,7 +1626,7 @@ RamDomain Engine::evalParallelScan(
          const Rel& rel, const ram::ParallelScan& cur, const ParallelScan& shadow, Context& ctxt) {
      auto viewContext = shadow.getViewContext();
  
@@ -17831,7 +17584,7 @@ index 41683d3..cb38b9f 100644
  
      PARALLEL_START
          Context newCtxt(ctxt);
-@@ -1630,8 +1598,8 @@ RamDomain Engine::evalParallelScan(
+@@ -1630,8 +1654,8 @@ RamDomain Engine::evalParallelScan(
  }
  
  template <typename Rel>
@@ -17842,7 +17595,7 @@ index 41683d3..cb38b9f 100644
      (void)ctxt;
      constexpr std::size_t Arity = Rel::Arity;
      bool onlyConstants = true;
-@@ -1681,8 +1649,8 @@ RamDomain Engine::evalEstimateJoinSize(
+@@ -1681,8 +1705,8 @@ RamDomain Engine::evalEstimateJoinSize(
      // ensure range is non-empty
      auto* index = rel.getIndex(indexPos);
      // initial values
@@ -17853,7 +17606,7 @@ index 41683d3..cb38b9f 100644
  
      if (!index->scan().empty()) {
          // assign first tuple as prev as a dummy
-@@ -1710,14 +1678,14 @@ RamDomain Engine::evalEstimateJoinSize(
+@@ -1710,14 +1734,14 @@ RamDomain Engine::evalEstimateJoinSize(
              ++total;
          }
      }
@@ -17870,7 +17623,7 @@ index 41683d3..cb38b9f 100644
      bool first = true;
      for (auto& [k, constant] : cur.getConstantsMap()) {
          if (first) {
-@@ -1727,18 +1695,18 @@ RamDomain Engine::evalEstimateJoinSize(
+@@ -1727,18 +1751,18 @@ RamDomain Engine::evalEstimateJoinSize(
          }
          constantsStream << k << "->" << *constant;
      }
@@ -17894,7 +17647,7 @@ index 41683d3..cb38b9f 100644
      }
      return true;
  }
-@@ -1777,7 +1745,7 @@ RamDomain Engine::evalParallelIndexScan(
+@@ -1777,7 +1801,7 @@ RamDomain Engine::evalParallelIndexScan(
      CAL_SEARCH_BOUND(superInfo, low, high);
  
      std::size_t indexPos = shadow.getViewId();
@@ -17903,7 +17656,7 @@ index 41683d3..cb38b9f 100644
      PARALLEL_START
          Context newCtxt(ctxt);
          auto viewInfo = viewContext->getViewInfoForNested();
-@@ -1822,7 +1790,7 @@ RamDomain Engine::evalParallelIfExists(
+@@ -1822,7 +1846,7 @@ RamDomain Engine::evalParallelIfExists(
          const Rel& rel, const ram::ParallelIfExists& cur, const ParallelIfExists& shadow, Context& ctxt) {
      auto viewContext = shadow.getViewContext();
  
@@ -17912,7 +17665,7 @@ index 41683d3..cb38b9f 100644
      auto viewInfo = viewContext->getViewInfoForNested();
      PARALLEL_START
          Context newCtxt(ctxt);
-@@ -1886,7 +1854,7 @@ RamDomain Engine::evalParallelIndexIfExists(const Rel& rel, const ram::ParallelI
+@@ -1886,7 +1910,7 @@ RamDomain Engine::evalParallelIndexIfExists(const Rel& rel, const ram::ParallelI
      CAL_SEARCH_BOUND(superInfo, low, high);
  
      std::size_t indexPos = shadow.getViewId();
@@ -17921,7 +17674,7 @@ index 41683d3..cb38b9f 100644
  
      PARALLEL_START
          Context newCtxt(ctxt);
-@@ -1914,68 +1882,49 @@ RamDomain Engine::evalParallelIndexIfExists(const Rel& rel, const ram::ParallelI
+@@ -1914,68 +1938,49 @@ RamDomain Engine::evalParallelIndexIfExists(const Rel& rel, const ram::ParallelI
      return true;
  }
  
@@ -18026,7 +17779,7 @@ index 41683d3..cb38b9f 100644
  
      for (const auto& tuple : ranges) {
          ctxt[aggregate.getTupleId()] = tuple.data();
-@@ -1986,11 +1935,8 @@ RamDomain Engine::evalAggregate(
+@@ -1986,11 +1991,8 @@ RamDomain Engine::evalAggregate(
  
          shouldRunNested = true;
  
@@ -18039,7 +17792,7 @@ index 41683d3..cb38b9f 100644
              ++res;
              continue;
          }
-@@ -1999,56 +1945,43 @@ RamDomain Engine::evalAggregate(
+@@ -1999,56 +2001,43 @@ RamDomain Engine::evalAggregate(
          assert(expression);  // only case where this is null is `COUNT`
          RamDomain val = execute(expression, ctxt);
  
@@ -18126,7 +17879,7 @@ index 41683d3..cb38b9f 100644
  
      // write result to environment
      souffle::Tuple<RamDomain, 1> tuple;
-@@ -2072,7 +2005,8 @@ RamDomain Engine::evalParallelAggregate(
+@@ -2072,7 +2061,8 @@ RamDomain Engine::evalParallelAggregate(
      for (const auto& info : viewInfo) {
          newCtxt.createView(*getRelationHandle(info[0]), info[1], info[2]);
      }
@@ -18136,7 +17889,7 @@ index 41683d3..cb38b9f 100644
  }
  
  template <typename Rel>
-@@ -2097,7 +2031,8 @@ RamDomain Engine::evalParallelIndexAggregate(
+@@ -2097,7 +2087,8 @@ RamDomain Engine::evalParallelIndexAggregate(
      std::size_t viewId = shadow.getViewId();
      auto view = Rel::castView(newCtxt.getView(viewId));
  
@@ -18146,7 +17899,7 @@ index 41683d3..cb38b9f 100644
  }
  
  template <typename Rel>
-@@ -2113,7 +2048,8 @@ RamDomain Engine::evalIndexAggregate(
+@@ -2113,7 +2104,8 @@ RamDomain Engine::evalIndexAggregate(
      std::size_t viewId = shadow.getViewId();
      auto view = Rel::castView(ctxt.getView(viewId));
  
