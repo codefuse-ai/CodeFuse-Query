@@ -28,7 +28,7 @@ void ir_gen::emit_type_alias_for_database() {
             .type_name = sc.second.name,
             .type_loc = sc.second.location
         };
-        const auto name = replace_colon(sym.full_path_name());
+        const auto name = type_mangle(sym.full_path_name());
 
         // insert type alias into the context
         // for example:
@@ -63,8 +63,8 @@ void ir_gen::emit_type_alias_for_schema_with_primary_key(const schema& sc) {
     // .type Example = int
     //
     irc.type_alias.push_back(souffle_type_alias {
-        .alias = replace_colon(sym.full_path_name()),
-        .real = replace_colon(real_type.full_path_name_without_set()),
+        .alias = type_mangle(sym.full_path_name()),
+        .real = type_mangle(real_type.full_path_name_without_set()),
         .structure_type_list = {}
     });
 }
@@ -82,7 +82,7 @@ void ir_gen::emit_type_alias_for_schema_without_primary_key(const schema& sc) {
     for(const auto& i : sc.ordered_fields) {
         real += i + ": ";
         const auto& type = sc.fields.at(i);
-        const auto name = replace_colon(type.full_path_name_without_set());
+        const auto name = type_mangle(type.full_path_name_without_set());
         real += name + ", ";
         structure_type_list.push_back(name);
     }
@@ -99,7 +99,7 @@ void ir_gen::emit_type_alias_for_schema_without_primary_key(const schema& sc) {
     // .type Example = [id: int, name: string]
     //
     irc.type_alias.push_back(souffle_type_alias {
-        .alias = replace_colon(sym.full_path_name()),
+        .alias = type_mangle(sym.full_path_name()),
         .real = real,
         .structure_type_list = structure_type_list
     });
@@ -126,7 +126,7 @@ void ir_gen::emit_type_alias_for_enum() {
             .type_loc = e.second.location
         };
         irc.type_alias.push_back(souffle_type_alias {
-            .alias = replace_colon(sym.full_path_name()),
+            .alias = type_mangle(sym.full_path_name()),
             .real = "int",
             .structure_type_list = {}
         });
@@ -160,8 +160,8 @@ void ir_gen::emit_used_database_get_table_impl(const std::string& db_type_name,
         "get_table_" + db_type_name + "_" + table_name,
         report::span::null()
     );
-    get_table_impl->add_param("result");
-    get_table_impl->add_param(db_id);
+    get_table_impl->add_param_variable("ret?result");
+    get_table_impl->add_param_literal(db_id);
     get_table_impl->get_block()->set_use_comma();
 
     // generate input call
@@ -175,7 +175,7 @@ void ir_gen::emit_used_database_get_table_impl(const std::string& db_type_name,
         // only need primary key
         for(const auto& f : sc.ordered_fields) {
             input_call->add_arg(sc.fields.at(f).primary?
-                lir::inst_value_t::variable("result"):
+                lir::inst_value_t::variable("ret?result"):
                 lir::inst_value_t::default_value()
             );
         }
@@ -200,7 +200,7 @@ void ir_gen::emit_used_database_get_table_impl(const std::string& db_type_name,
         // generate result = [ f1, f2, ...]
         get_table_impl->get_block()->add_new_content(new lir::store(
             lir::inst_value_t::literal(literal),
-            lir::inst_value_t::variable("result"),
+            lir::inst_value_t::variable("ret?result"),
             report::span::null()
         ));
     }
@@ -220,19 +220,19 @@ void ir_gen::emit_schema_data_constraint_impl(const std::string& db_type_name,
     );
 
     // load parameter
+    // schema with primary key, just set the result = primary key
+    // schema without primary key, need to generate result = [...]
     if (sc.has_primary_key()) {
-        // schema with primary key, just set the result = primary key
-        input_to_schema->add_param(sc.get_primary_key());
+        input_to_schema->add_param_variable(sc.get_primary_key());
     } else {
-        // schema without primary key, need to generate result = [...]
-        input_to_schema->add_param("result");
+        input_to_schema->add_param_variable("ret?result");
     }
 
-    // database index
-    input_to_schema->add_param(db_id);
+    // database index, literal
+    input_to_schema->add_param_literal(db_id);
     // schema field
     for(const auto& field : sc.ordered_fields) {
-        input_to_schema->add_param(field);
+        input_to_schema->add_param_variable(field);
     }
 
     // load result, generate result = [...]
@@ -247,7 +247,7 @@ void ir_gen::emit_schema_data_constraint_impl(const std::string& db_type_name,
         literal += "]";
         input_to_schema->get_block()->add_new_content(new lir::store(
             lir::inst_value_t::literal(literal),
-            lir::inst_value_t::variable("result"),
+            lir::inst_value_t::variable("ret?result"),
             report::span::null()
         ));
     }
@@ -398,6 +398,7 @@ void ir_gen::emit_schema_method_decl(const function& method,
         method.has_annotation("@inline") ||
         method.inherit
     );
+    method_decl->set_is_inherited_rule(method.inherit);
 
     // load parameters of the method
     for(const auto& arg_name : method.ordered_parameter_list) {
@@ -428,11 +429,11 @@ void ir_gen::emit_schema_inherit_method(const schema& sc,
 
     if (method.return_type!=symbol::null() &&
         method.return_type!=symbol::boolean()) {
-        impl->add_param("result");
-        call->add_arg(lir::inst_value_t::variable("result"));
+        impl->add_param_variable("ret?result");
+        call->add_arg(lir::inst_value_t::variable("ret?result"));
     }
     for(auto& arg : method.ordered_parameter_list) {
-        impl->add_param(arg);
+        impl->add_param_variable(arg);
         call->add_arg(lir::inst_value_t::variable(arg));
     }
     irc.rule_impls.push_back(impl);
@@ -468,7 +469,7 @@ void ir_gen::emit_schema_type_check_impl(const symbol& sym, const schema& sc) {
         "typecheck_" + sym.full_path_name(),
         report::span::null()
     );
-    typecheck_impl->add_param("self");
+    typecheck_impl->add_param_variable("self");
 
     // generate inner data constraint call
     auto data_constraint_call = new lir::call(
@@ -499,6 +500,7 @@ void ir_gen::emit_schema_get_field() {
         };
 
         for(const auto& field : sc.second.ordered_fields) {
+            // generate get field method name
             auto name = "get_field_" + sym.full_path_name() + "_" + field;
             auto rule = new souffle_rule_decl(name);
             rule->set_return_type(
@@ -512,15 +514,15 @@ void ir_gen::emit_schema_get_field() {
 
             // implementation of get field method
             auto rule_impl = new souffle_rule_impl(name, report::span::null());
-            rule_impl->add_param("result");
-            rule_impl->add_param("self");
+            rule_impl->add_param_variable("ret?result");
+            rule_impl->add_param_variable("self");
 
             // necessary optimization, if the field is primary key,
             // we can directly store self in result to avoid extra join
             if (sc.second.fields.at(field).primary) {
                 auto assign = new lir::store(
                     lir::inst_value_t::variable("self"),
-                    lir::inst_value_t::variable("result"),
+                    lir::inst_value_t::variable("ret?result"),
                     report::span::null()
                 );
                 rule_impl->get_block()->add_new_content(assign);
@@ -538,7 +540,7 @@ void ir_gen::emit_schema_get_field() {
                 call->add_arg(lir::inst_value_t::default_value());
                 for(const auto& f : sc.second.ordered_fields) {
                     call->add_arg(f==field?
-                        lir::inst_value_t::variable("result"):
+                        lir::inst_value_t::variable("ret?result"):
                         lir::inst_value_t::default_value()
                     );
                 }
@@ -569,21 +571,20 @@ void ir_gen::emit_DO_schema_default_constructor() {
 
         // generate this method as a rule implementation:
         // rule_name(result, ...) :- schema_name(result, db, ...).
-        const auto function_name = replace_colon(sym.full_path_name() + "::__all__");
         auto func_impl = new souffle_rule_impl(
-            "rule_" + function_name,
+            "rule_" + sym.full_path_name() + "::__all__",
             report::span::null()
         );
-        func_impl->add_param("result");
-        func_impl->add_param("db");
+        func_impl->add_param_variable("ret?result");
+        func_impl->add_param_variable("db");
         irc.rule_impls.push_back(func_impl);
 
         auto call = new lir::call(
-            "schema_" + replace_colon(sym.full_path_name()),
+            "schema_" + sym.full_path_name(),
             report::span::null()
         );
         func_impl->get_block()->add_new_content(call);
-        call->add_arg(lir::inst_value_t::variable("result"));
+        call->add_arg(lir::inst_value_t::variable("ret?result"));
         call->add_arg(lir::inst_value_t::variable("db"));
         for(size_t i = 0; i<sc.second.ordered_fields.size(); ++i) {
             call->add_arg(lir::inst_value_t::default_value());
@@ -813,6 +814,7 @@ void ir_gen::get_field_from_schema(call_expr* node) {
     const auto index = ctx->global.get_index(name);
     const auto& sch = ctx->global.get_schema(index);
     if (sch.fields.count(node->get_field_name()->get_name())) {
+        // generate get field method call
         auto lir_call = new lir::call(
             "get_field_" + name + "_" + node->get_field_name()->get_name(),
             node->get_location()
@@ -1097,7 +1099,7 @@ void ir_gen::report_ignored_DO_schema_data_constraint() {
     if (ignored_DO_schema.empty()) {
         return;
     }
-    err.warn_report_ignored_DO_schema(ignored_DO_schema);
+    err.warn_ignored_DO_schema(ignored_DO_schema);
 }
 
 bool ir_gen::visit_number_literal(number_literal* node) {
@@ -1426,10 +1428,10 @@ void ir_gen::not_data_constraint_func_decl(const std::string& function_name,
     );
     if (node->has_return_value() &&
         node->get_return_type()->get_full_name()!="bool") {
-        current_rule->add_param("result");
+        current_rule->add_param_variable("ret?result");
     }
     for(auto i : node->get_parameter_list()) {
-        current_rule->add_param(i->get_var_name()->get_name());
+        current_rule->add_param_variable(i->get_var_name()->get_name());
     }
     irc.rule_impls.push_back(current_rule);
 
@@ -1502,27 +1504,23 @@ void ir_gen::data_constraint_func_decl(const std::string& function_name,
     if (sc.referenced_by_database_table &&
         flag_ignore_do_schema_data_constraint) {
         // DO schema's __all__ does not need to be generated to data constraint
-        ignored_DO_schema.push_back({
-            impl_schema_name,
-            node->get_name()->get_location()
-        });
+        ignored_DO_schema.insert(impl_schema_name);
     } else {
         current_rule = new souffle_rule_impl(
             "schema_" + impl_schema_name,
             node->get_location()
         );
-        current_rule->add_param("result");
+        current_rule->add_param_variable("ret?result");
         // add database name into parameter
-        current_rule->add_param(
-            database_param_name.empty()?
-            "[-1, -1]":
-            database_param_name
-        );
+        if (database_param_name.empty()) {
+            current_rule->add_param_literal("[-1, -1]");
+        } else {
+            current_rule->add_param_variable(database_param_name);
+        }
         // add field name into parameter, doing mangling
         for(const auto& f : sc.ordered_fields) {
-            const auto type = sc.fields.at(f);
-            const auto name_mangled_field = field_name_mangling(f, type);
-            current_rule->add_param(name_mangled_field);
+            const auto name_mangled_field = field_mangle(f);
+            current_rule->add_param_variable(name_mangled_field);
         }
         irc.rule_impls.push_back(current_rule);
 
@@ -1558,13 +1556,13 @@ void ir_gen::data_constraint_func_decl(const std::string& function_name,
         "rule_" + function_name,
         node->get_location()
     );
-    fn_impl->add_param("result");
+    fn_impl->add_param_variable("ret?result");
     for(auto i : node->get_parameter_list()) {
-        fn_impl->add_param(i->get_var_name()->get_name());
+        fn_impl->add_param_variable(i->get_var_name()->get_name());
     }
     auto call = new lir::call("schema_" + impl_schema_name, node->get_location());
     fn_impl->get_block()->add_new_content(call);
-    call->add_arg(lir::inst_value_t::variable("result"));
+    call->add_arg(lir::inst_value_t::variable("ret?result"));
     call->add_arg(database_param_name.empty()?
         lir::inst_value_t::default_value():
         lir::inst_value_t::variable(database_param_name)
@@ -1645,7 +1643,7 @@ bool ir_gen::visit_query_decl(query_decl* node) {
         node->get_location()
     );
     for(const auto& i : query_self.ordered_output_list) {
-        query_impl->add_param(i);
+        query_impl->add_param_variable(i);
     }
     query_impl->get_block()->set_use_comma();
     blocks.push_back(query_impl->get_block());
@@ -1891,7 +1889,7 @@ bool ir_gen::visit_ret_stmt(ret_stmt* node) {
     if (value_stack.size()) {
         blocks.back()->add_new_content(new lir::store(
             value_stack.back().to_inst_value(),
-            lir::inst_value_t::variable("result"),
+            lir::inst_value_t::variable("ret?result"),
             node->get_return_value()->get_location()
         ));
         value_stack.pop_back();
@@ -1924,7 +1922,12 @@ bool ir_gen::visit_fact_data(fact_data* node) {
         }
 
         // inst_value_t here should be inst_value_t::variable
-        new_fact->add_pair(params[c], value_stack.back().to_inst_value());
+        new_fact->add_pair(
+            params[c].content,
+            value_stack.back().to_inst_value()
+        );
+
+        // pop value stack
         value_stack.pop_back();
         c++;
     }
@@ -2233,7 +2236,7 @@ bool ir_gen::visit_func_call(func_call* node) {
     if (func_stack.back().kind==func_kind::schema_to) {
         auto schema_to_block = new lir::block(node->get_location());
         auto typecheck_call = new lir::call(
-            "typecheck_" + replace_colon(func_stack.back().generic_type),
+            "typecheck_" + func_stack.back().generic_type,
             node->get_location()
         );
         const auto source = value_stack.back();
@@ -2264,7 +2267,7 @@ bool ir_gen::visit_func_call(func_call* node) {
     //
     if (func_stack.back().kind==func_kind::schema_is) {
         auto typecheck_call = new lir::call(
-            "typecheck_" + replace_colon(func_stack.back().generic_type),
+            "typecheck_" + func_stack.back().generic_type,
             node->get_location()
         );
         const auto source = value_stack.back();
@@ -2332,6 +2335,7 @@ void ir_gen::generate_spread_expr(
     const auto& infer_schema = ctx->global.get_schema(index);
 
     for(const auto& field : infer_schema.ordered_fields) {
+        // generate get field method name
         const auto name = "get_field_" + full_name + "_" + field;
 
         // generate call
@@ -2397,7 +2401,7 @@ bool ir_gen::visit_initializer(initializer* node) {
     } else {
         // generate construct code in data constraint block
         for(const auto& f : sc.ordered_fields) {
-            const auto name_mangled_field = field_name_mangling(f, sc.fields.at(f));
+            const auto name_mangled_field = field_mangle(f);
             blocks.back()->add_new_content(new lir::store(
                 fields.at(f).to_inst_value(),
                 lir::inst_value_t::variable(name_mangled_field),
@@ -2407,15 +2411,15 @@ bool ir_gen::visit_initializer(initializer* node) {
         // generate result variable
         if (sc.has_primary_key()) {
             const auto& key = sc.get_primary_key();
-            const auto name_mangled_field = field_name_mangling(key, sc.fields.at(key));
+            const auto name_mangled_field = field_mangle(key);
             blocks.back()->add_new_content(new lir::store(
                 lir::inst_value_t::variable(name_mangled_field),
-                lir::inst_value_t::variable("result"),
+                lir::inst_value_t::variable("ret?result"),
                 node->get_location()
             ));
         } else {
             auto record = new lir::record(
-                lir::inst_value_t::variable("result"),
+                lir::inst_value_t::variable("ret?result"),
                 node->get_location()
             );
             blocks.back()->add_new_content(record);

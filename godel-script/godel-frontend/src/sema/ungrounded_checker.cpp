@@ -4,7 +4,7 @@ namespace godel {
 
 bool return_ungrounded_checker::visit_in_block_expr(in_block_expr* node) {
     err->err(node->get_location(),
-        "require a return statement, but get an expression.",
+        "require return statement, but get expression.",
         "return value is ungrounded."
     );
     return true;
@@ -15,7 +15,7 @@ bool return_ungrounded_checker::visit_let_stmt(let_stmt* node) {
         node->get_code_block()->accept(this);
     } else {
         err->err(node->get_location(),
-            "require a return statement in this statement.",
+            "require return statement in this statement.",
             "return value is ungrounded."
         );
     }
@@ -27,7 +27,7 @@ bool return_ungrounded_checker::visit_if_stmt(if_stmt* node) {
         node->get_code_block()->accept(this);
     } else {
         err->err(node->get_location(),
-            "require a return statement in this statement.",
+            "require return statement in this statement.",
             "return value is ungrounded."
         );
     }
@@ -39,7 +39,7 @@ bool return_ungrounded_checker::visit_for_stmt(for_stmt* node) {
         node->get_code_block()->accept(this);
     } else {
         err->err(node->get_location(),
-            "require a return statement in this statement.",
+            "require return statement in this statement.",
             "return value is ungrounded."
         );
     }
@@ -62,8 +62,8 @@ bool return_ungrounded_checker::visit_match_stmt(match_stmt* node) {
 bool return_ungrounded_checker::visit_block_stmt(block_stmt* node) {
     if (node->get_statement().empty()) {
         err->err(node->get_location(),
-            "require a return statement in this block.",
-            "otherwise the return value is ungrounded."
+            "require return statement in this block.",
+            "return value is ungrounded."
         );
     }
     for(auto i : node->get_statement()) {
@@ -77,7 +77,7 @@ bool return_ungrounded_checker::visit_block_stmt(block_stmt* node) {
             case ast_class::ac_in_block_expr: i->accept(this); break;
             default:
                 err->err(i->get_location(),
-                    "require a return statement in this statement.",
+                    "require return statement in this statement.",
                     "return value is ungrounded."
                 );
         }
@@ -90,6 +90,7 @@ bool return_ungrounded_checker::visit_function_decl(function_decl* func) {
     if (!func->has_return_value() || !func->implemented()) {
         return true;
     }
+
     // do not check predicate
     if (func->get_return_type()->get_resolve().type==symbol::boolean()) {
         return true;
@@ -100,7 +101,88 @@ bool return_ungrounded_checker::visit_function_decl(function_decl* func) {
     return true;
 }
 
-bool negative_expression_ungrounded_checker::visit_call_expr(call_expr* node) {
+bool undetermined_checker::match_undetermined_call(call_root* node) {
+    // undetermined call in souffle is in fact an ungrounded error
+    // if variables assigned by undetermined call is not bound,
+    // it will cause ungrounded error.
+    // undetermined call in godel script is like:
+    //
+    // int::__undetermined_all__()
+    // string::__undetermined_all__()
+    //
+
+    // call head should be identifier `int` or `string`, without function call.
+    auto head = node->get_call_head();
+    if (head->has_func_call() || head->is_initializer()) {
+        return false;
+    }
+    auto first = head->get_first_expression();
+    // check call head is in fact an identifier
+    if (first->get_ast_class()!=ast_class::ac_identifier) {
+        return false;
+    }
+    // identifier must be `int` or `string`
+    const auto& name = reinterpret_cast<identifier*>(first)->get_name();
+    if (name!="int" && name!="string") {
+        return false;
+    }
+
+    if (node->get_call_chain().empty()) {
+        return false;
+    }
+
+    // first call expression should be get path
+    auto first_call = node->get_call_chain()[0];
+    if (first_call->get_call_type()!=call_expr::type::get_path) {
+        return false;
+    }
+    auto field = first_call->get_field_name();
+    // `__undetermined_all__` is a special function.
+    if (field->get_name()!="__undetermined_all__") {
+        return false;
+    }
+    if (!first_call->has_func_call()) {
+        return false;
+    }
+
+    return true;
+}
+
+bool undetermined_checker::visit_call_root(call_root* node) {
+    if (match_undetermined_call(node)) {
+        if (node->get_call_chain().size()>1) {
+            err->err(node->get_location(),
+                "ungrounded value cannot be used in call chain."
+            );
+        } else if (!in_for_initialization_level) {
+            err->warn(node->get_location(),
+                "undetermined value used outside for-initialization.",
+                "will cause ungrounded error."
+            );
+        }
+    }
+
+    node->get_call_head()->accept(this);
+    for(auto i : node->get_call_chain()) {
+        i->accept(this);
+    }
+    return true;
+}
+
+bool undetermined_checker::visit_for_stmt(for_stmt* node) {
+    ++in_for_initialization_level;
+    for(auto i : node->get_symbols()) {
+        i->accept(this);
+    }
+    --in_for_initialization_level;
+
+    if (node->has_statement()) {
+        node->get_code_block()->accept(this);
+    }
+    return true;
+}
+
+bool neg_expr_ungrounded_checker::visit_call_expr(call_expr* node) {
     if (in_logical_negative_expression_level) {
         if (node->is_aggregator_find()) {
             err->err(node->get_field_name()->get_location(),
@@ -132,6 +214,13 @@ bool negative_expression_ungrounded_checker::visit_call_expr(call_expr* node) {
                 "will cause ungrounded error."
             );
         }
+        if (node->has_func_call() &&
+            node->get_func_call()->get_resolve().type!=symbol::boolean()) {
+            err->warn(node->get_location(),
+                "non-boolean return value in logical negative expression.",
+                "will produce temporary variables, causing ungrounded error."
+            );
+        }
     }
     node->get_field_name()->accept(this);
     if (node->is_generic()) {
@@ -146,7 +235,7 @@ bool negative_expression_ungrounded_checker::visit_call_expr(call_expr* node) {
     return true;
 }
 
-bool negative_expression_ungrounded_checker::visit_initializer(initializer* node) {
+bool neg_expr_ungrounded_checker::visit_initializer(initializer* node) {
     if (in_logical_negative_expression_level) {
         err->err(node->get_location(),
             "object construction is not allowed in logical negative expression.",
@@ -159,31 +248,40 @@ bool negative_expression_ungrounded_checker::visit_initializer(initializer* node
     return true;
 }
 
-bool negative_expression_ungrounded_checker::visit_unary_operator(unary_operator* node) {
-    bool is_logical_negative = (
-        node->get_operator_type()==unary_operator::type::logical_negation
-    );
-    if (is_logical_negative) {
+bool neg_expr_ungrounded_checker::visit_unary_operator(unary_operator* node) {
+    if (node->get_operator_type()==unary_operator::type::logical_negation) {
         in_logical_negative_expression_level++;
     }
     node->get_child()->accept(this);
-    if (is_logical_negative) {
+    if (node->get_operator_type()==unary_operator::type::logical_negation) {
         in_logical_negative_expression_level--;
     }
     return true;
 }
 
-void ungrounded_parameter_checker::unused_parameter_check(const report::span& stmt_loc) {
+bool neg_expr_ungrounded_checker::visit_binary_operator(binary_operator* node) {
+    if (in_logical_negative_expression_level && !in_binary_operator_level) {
+        err->warn(node->get_location(),
+            "binary expression used in logical negative expression.",
+            "will produce temporary variables, causing ungrounded error."
+        );
+    }
+    ++in_binary_operator_level;
+    node->get_left()->accept(this);
+    node->get_right()->accept(this);
+    --in_binary_operator_level;
+    return true;
+}
+
+void ungrounded_parameter_checker::report_unused_parameter(const report::span& stmt_loc) {
     // do not check inline function & check if need to check constraint for self
     bool flag_is_self_typecheck_free = false;
-    if (func_node->get_annotations().size()) {
-        for(auto i : func_node->get_annotations()) {
-            if (i->get_annotation()=="@inline") {
-                return;
-            }
-            if (i->get_annotation()=="@self_typecheck_free") {
-                flag_is_self_typecheck_free = true;
-            }
+    for(auto i : func_node->get_annotations()) {
+        if (i->get_annotation()=="@inline") {
+            return;
+        }
+        if (i->get_annotation()=="@self_typecheck_free") {
+            flag_is_self_typecheck_free = true;
         }
     }
 
@@ -214,8 +312,7 @@ void ungrounded_parameter_checker::unused_parameter_check(const report::span& st
 
         // unused int/float/string and "self" parameter is marked as ungrounded
         // set of int/float/string are not considered as ungrounded
-        if ((type == symbol::i64() || type == symbol::f64() || type == symbol::str()) &&
-            !record_is_set_flag.at(i)) {
+        if (is_native_type(type) && !record_is_set_flag.at(i)) {
             ungrounded_params += ungrounded_params.length()? ", ":"";
             ungrounded_params += i;
         } else if (i!="self") {
@@ -229,17 +326,14 @@ void ungrounded_parameter_checker::unused_parameter_check(const report::span& st
     // unused warning report
     if (unused_params.length()) {
         err->warn(stmt_loc,
-            "unused parameter \"" + unused_params +
-            "\" in this statement branch.",
-            "may cause empty result."
+            "unused parameter \"" + unused_params + "\" in this branch."
         );
     }
 
     // ungrounded error report
     if (ungrounded_params.length()) {
         err->err(stmt_loc,
-            "ungrounded parameter \"" + ungrounded_params +
-            "\" in this statement branch."
+            "ungrounded parameter \"" + ungrounded_params + "\" in this branch."
         );
     }
 
@@ -249,8 +343,8 @@ void ungrounded_parameter_checker::unused_parameter_check(const report::span& st
     }
     if (flag_self_ungrounded && flag_is_self_typecheck_free) {
         err->err(stmt_loc,
-            "ungrounded parameter \"self\" in this statement branch.",
-            "need to constraint this parameter, otherwise it causes ungrounded error."
+            "ungrounded \"self\" in this branch.",
+            "constraint \"self\" to avoid ungrounded error."
         );
     }
 }
@@ -262,7 +356,7 @@ bool ungrounded_parameter_checker::visit_identifier(identifier* node) {
     const auto& name = node->get_name();
     if (record.count(name) && !used_variable.back().count(name)) {
         // if this table's size is not zero
-        // this means in progress of analysing logical or expression
+        // this means in progress of analysing logical `or` expression
         if (logical_or_variable_used.size()) {
             logical_or_variable_used.back().insert(name);
             return true;
@@ -347,7 +441,7 @@ bool ungrounded_parameter_checker::visit_for_stmt(for_stmt* node) {
     if (node->has_statement()) {
         node->get_code_block()->accept(this);
     } else {
-        unused_parameter_check(node->get_location());
+        report_unused_parameter(node->get_location());
     }
     pop_used_variable_mark_scope();
     return true;
@@ -361,7 +455,7 @@ bool ungrounded_parameter_checker::visit_let_stmt(let_stmt* node) {
     if (node->has_statement()) {
         node->get_code_block()->accept(this);
     } else {
-        unused_parameter_check(node->get_location());
+        report_unused_parameter(node->get_location());
     }
     pop_used_variable_mark_scope();
     return true;
@@ -390,7 +484,7 @@ bool ungrounded_parameter_checker::visit_if_stmt(if_stmt* node) {
     if (node->has_statement()) {
         node->get_code_block()->accept(this);
     } else {
-        unused_parameter_check(node->get_location());
+        report_unused_parameter(node->get_location());
     }
     pop_used_variable_mark_scope();
     return true;
@@ -447,7 +541,7 @@ bool ungrounded_parameter_checker::visit_ret_stmt(ret_stmt* node) {
         // pop table
         logical_or_variable_used.pop_back();
     }
-    unused_parameter_check(node->get_location());
+    report_unused_parameter(node->get_location());
     pop_used_variable_mark_scope();
     return true;
 }
@@ -455,7 +549,7 @@ bool ungrounded_parameter_checker::visit_ret_stmt(ret_stmt* node) {
 bool ungrounded_parameter_checker::visit_in_block_expr(in_block_expr* node) {
     new_used_variable_mark_scope();
     node->get_expr()->accept(this);
-    unused_parameter_check(node->get_location());
+    report_unused_parameter(node->get_location());
     pop_used_variable_mark_scope();
     return true;
 }
@@ -463,7 +557,7 @@ bool ungrounded_parameter_checker::visit_in_block_expr(in_block_expr* node) {
 bool ungrounded_parameter_checker::visit_block_stmt(block_stmt* node) {
     // if having no statement in it, check unused parameter directly
     if (!node->get_statement().size()) {
-        unused_parameter_check(node->get_location());
+        report_unused_parameter(node->get_location());
         return true;
     }
     for(auto i : node->get_statement()) {

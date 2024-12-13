@@ -575,9 +575,7 @@ void semantic::cond_stmt_check(cond_stmt* node, const function& func) {
     if_stmt_check(node->get_if_stmt(), func);
 
     // check if having else branches when switch is on
-    if (flag_check_no_else_branch && (
-        node->get_elsif_stmt().size() ||
-        node->has_else_stmt())) {
+    if (node->get_elsif_stmt().size() || node->has_else_stmt()) {
         err.err(node->get_location(),
             "else branches are not allowed.",
             "may cause fatal ungrounded error."
@@ -877,17 +875,31 @@ infer semantic::in_expr(binary_operator* node) {
         );
         return infer::boolean();
     }
+
+    // left hand side value should not be value set
     if (left_type.is_set) {
         err.err(node->get_left()->get_location(),
-            "should be single value but get value set \"" +
+            "expect single value but get set \"" +
             left_type.full_path_name() + "\"."
         );
         return infer::boolean();
     }
-    if (left_type!=right_type || !right_type.is_set) {
+
+    // right hand side value must be value set
+    if (!right_type.is_set) {
         err.err(node->get_right()->get_location(),
-            "should be a value set, expect \"*" + left_type.full_path_name() +
-            "\", but get a single value \"" + right_type.full_path_name() +
+            "expect \"*" + left_type.full_path_name() +
+            "\", but get single value \"" + right_type.full_path_name() +
+            "\"."
+        );
+        return infer::boolean();
+    }
+
+    // type should be the same
+    if (left_type!=right_type) {
+        err.err(node->get_right()->get_location(),
+            "expect \"*" + left_type.full_path_name() +
+            "\", but get \"" + right_type.full_path_name() +
             "\"."
         );
         return infer::boolean();
@@ -3008,7 +3020,6 @@ const error& semantic::analyse(const configure& config, ast_root* root) {
     // stage 1: initialize
     impl_schema_name = "";
     flag_check_access_authority = config.count(option::cli_semantic_pub_check);
-    flag_check_no_else_branch = config.count(option::cli_semantic_no_else);
     ctx.this_file_name = root->get_file();
 
     // stage 2:
@@ -3066,7 +3077,8 @@ const error& semantic::analyse(const configure& config, ast_root* root) {
     // stage 7: all function implemention block check
     all_function_block_check(root);
     return_ungrounded_checker(&err).check(root);
-    negative_expression_ungrounded_checker(&err).check(root);
+    undetermined_checker(&err).check(root);
+    neg_expr_ungrounded_checker(&err).check(root);
     if (err.get_error()) {
         return err;
     }

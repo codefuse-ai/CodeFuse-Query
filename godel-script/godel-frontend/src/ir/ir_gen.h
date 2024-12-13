@@ -200,7 +200,7 @@ private:
     void generate_method_call(func_call*, lir::call*);
 
 private:
-    std::vector<std::pair<std::string, span>> ignored_DO_schema;
+    std::unordered_set<std::string> ignored_DO_schema;
     void report_ignored_DO_schema_data_constraint();
 
 private:

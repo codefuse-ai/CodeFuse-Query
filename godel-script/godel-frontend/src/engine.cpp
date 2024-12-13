@@ -9,6 +9,7 @@
 
 #include <iostream>
 #include <cstring>
+#include <fstream>
 #include <sstream>
 #include <unordered_map>
 #include <chrono>
@@ -214,6 +215,23 @@ std::string engine::dump_json_used_files() const {
     return res + "]";
 }
 
+void engine::dump_json_only_schema_without_loc(std::ostream& out) const {
+    out << "{\"semantic\":{\"schema\":[";
+    std::string res = "";
+    for(const auto& i : name_space()) {
+        if (i.second!=symbol_kind::schema) {
+            continue;
+        }
+        res += global().get_schema(mapper().at(i.first)).to_json(false);
+        res += ",";
+    }
+    if (res.back()==',') {
+        res.pop_back();
+    }
+    out << res;
+    out << "]}}";
+}
+
 void engine::dump_json(std::ostream& out) const {
     out << "{";
 
@@ -263,7 +281,11 @@ bool engine::language_server_dump(const configure& config) {
     if (config.count(option::cli_dump_lsp_file_indexed)) {
         span::set_flag_lsp_dump_use_file_index(true);
     }
-    dump_json(std::cout);
+    if (config.count(option::cli_dump_lsp_only_schema)) {
+        dump_json_only_schema_without_loc(std::cout);
+    } else {
+        dump_json(std::cout);
+    }
     error::json_output_stderr();
     return true;
 }
@@ -333,9 +355,27 @@ void engine::template_extract() {
     return;
 }
 
-void engine::run_souffle(const configure& config) {
-    const auto souffle_content = ir_gen::get_mutable_context().str_output(config);
+void engine::run_souffle_from_file(const configure& config) {
+    const auto& path = config.at(option::cli_input_path);
+    if (!std::filesystem::exists(path)) {
+        err.fatal("file <" + path + "> does not exist.");
+    } else if (!std::filesystem::is_regular_file(path)) {
+        err.fatal("file <" + path + "> is not regular file.");
+    }
+    std::ifstream in(path, std::ios::binary);
+    std::stringstream ss;
+    ss << in.rdbuf();
+    const auto souffle_content = ss.str();
+    run_souffle(souffle_content, config);
+}
 
+void engine::run_souffle_from_generated(const configure& config) {
+    const auto souffle_content = ir_gen::get_mutable_context().str_output(config);
+    run_souffle(souffle_content, config);
+}
+
+void engine::run_souffle(const std::string& souffle_content,
+                         const configure& config) {
     // extra arguments to be passed to souffle
     std::vector<const char*> argv = {};
 
@@ -426,6 +466,11 @@ const error& engine::run(const configure& config) {
 
     this_file_name = config.at(option::cli_input_path);
     if (!this_file_name.length()) {
+        return err;
+    }
+
+    if (config.count(option::cli_directly_run_souffle)) {
+        run_souffle_from_file(config);
         return err;
     }
 
@@ -538,7 +583,7 @@ const error& engine::run(const configure& config) {
 
     // directly run souffle program
     if (config.count(option::cli_run_souffle)) {
-        run_souffle(config);
+        run_souffle_from_generated(config);
     }
     return err;
 }

@@ -85,10 +85,14 @@ public:
         return out;
     }
 
-    std::string to_json() const {
-        return "{\"name\":\"" + type_name +
-               "\",\"is_set\":\"" + (is_set? "true":"false") +
-               "\",\"type_loc\":" + type_loc.to_json() + "}";
+    std::string to_json(bool with_location = true) const {
+        auto res = "{\"name\":\"" + type_name +
+                   "\",\"is_set\":\"" + (is_set? "true":"false") + "\"";
+        if (with_location) {
+            res += ",\"type_loc\":" + type_loc.to_json();
+        }
+        res += "}";
+        return res;
     }
 
     // get full path name of the symbol
@@ -249,9 +253,12 @@ struct function {
 
     // for aggregator to check input set type
     std::vector<symbol> aggregator_set_type;
-    
+
+    // mark it is implemented
     bool implemented = false;
+    // mark it is inherited method
     bool inherit = false;
+    // mark it is native method
     bool builtin = false;
     // default private
     bool public_access_authority = false;
@@ -323,7 +330,7 @@ public:
         return out;
     }
 
-    std::string to_json() const;
+    std::string to_json(bool with_location = true) const;
 };
 
 struct basic {
@@ -445,7 +452,7 @@ public:
         return out;
     }
 
-    std::string to_json() const;
+    std::string to_json(bool with_location = true) const;
     std::string fuzzy_search(const std::string&) const;
 
     bool has_primary_key() const  {

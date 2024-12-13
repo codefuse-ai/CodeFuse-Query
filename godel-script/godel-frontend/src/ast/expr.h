@@ -306,8 +306,9 @@ private:
     func_call* call;
     initializer* ini;
 
+private:
     // mark schema(xxx) is schema::__all__(xxx)
-    bool schema_loader;
+    bool flag_is_schema_loader;
 
 private:
     void check_call_and_init() {
@@ -321,20 +322,22 @@ public:
     call_head(const span& location):
         expr(ast_class::ac_call_head, location),
         first(nullptr), call(nullptr), ini(nullptr),
-        schema_loader(false) {}
+        flag_is_schema_loader(false) {}
     ~call_head() override;
     void set_first_expression(expr* node) { first = node; }
     void set_func_call(func_call* node) { call = node; check_call_and_init(); }
     void set_initializer(initializer* node) { ini = node; check_call_and_init(); }
-    void set_is_schema_loader() { schema_loader = true; }
+    void set_is_schema_loader() { flag_is_schema_loader = true; }
 
+public:
     expr* get_first_expression() { return first; }
     bool has_func_call() const { return call!=nullptr; }
     func_call* get_func_call() { return call; }
     bool is_initializer() const { return ini!=nullptr; }
     initializer* get_initializer() { return ini; }
-    bool is_schema_loader() const { return schema_loader; }
+    bool is_schema_loader() const { return flag_is_schema_loader; }
 
+public:
     void accept(ast_visitor* visitor) override;
 };
 

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "godel-frontend/src/error/error.h"
+#include "godel-frontend/src/ir/name_mangling.h"
 
 #include <cstring>
 #include <sstream>
@@ -8,9 +9,6 @@
 #include <unordered_map>
 
 namespace godel {
-
-std::string replace_colon(const std::string&);
-
 namespace lir {
 
 enum class inst_value_kind {
@@ -150,16 +148,16 @@ public:
 class store: public inst {
 private:
     inst_value_t source;
-    inst_value_t destination;
+    inst_value_t target;
 
 public:
     store(const inst_value_t& src,
-          const inst_value_t& dst,
+          const inst_value_t& tgt,
           const report::span& loc):
-        inst(inst_kind::inst_store, loc), source(src), destination(dst) {}
+        inst(inst_kind::inst_store, loc), source(src), target(tgt) {}
     store(const store& s):
         inst(inst_kind::inst_store, s.get_location()),
-        source(s.source), destination(s.destination) {}
+        source(s.source), target(s.target) {}
     ~store() override = default;
     void dump(std::ostream&, const std::string&) const override;
     void accept(inst_visitor* v) override {
@@ -167,7 +165,7 @@ public:
     }
 
     const auto& get_source() const { return source; }
-    const auto& get_destination() const { return destination; }
+    const auto& get_target() const { return target; }
 };
 
 class call: public inst {
@@ -185,6 +183,7 @@ public:
         basic_static,  // basic static method (static call)
     };
 
+public:
     // native method for int type
     enum class int_method_kind {
         int_add,
@@ -208,7 +207,7 @@ public:
         int_to_set
     };
     // mapper for method name -> int method kind
-    std::unordered_map<std::string, int_method_kind> int_basic_methods = {
+    const std::unordered_map<std::string, int_method_kind> int_basic_methods = {
         {"int::add", int_method_kind::int_add},
         {"int::sub", int_method_kind::int_sub},
         {"int::div", int_method_kind::int_div},
@@ -248,7 +247,7 @@ public:
         string_replace_once
     };
     // mapper for method name -> string method kind
-    std::unordered_map<std::string, string_method_kind> string_basic_methods = {
+    const std::unordered_map<std::string, string_method_kind> string_basic_methods = {
         {"string::substr", string_method_kind::string_substr},
         {"string::get_regex_match_result", string_method_kind::string_get_regex_match_result},
         {"string::matches", string_method_kind::string_matches},
@@ -300,6 +299,11 @@ public:
         generic_type(c.generic_type) {}
     ~call() override = default;
     void dump(std::ostream&, const std::string&) const override;
+    void accept(inst_visitor* v) override {
+        v->visit_call(this);
+    }
+
+public:
     void add_arg(const inst_value_t& arg) { arguments.push_back(arg); }
     void set_return(const inst_value_t& dst) { destination = dst; }
     void set_call_type(kind t) { type = t; }
@@ -307,14 +311,26 @@ public:
     const auto& get_generic_type() const { return generic_type; }
     const auto& get_function_name() const { return function_name; }
     auto get_func_kind() const { return type; }
-    void accept(inst_visitor* v) override {
-        v->visit_call(this);
-    }
-
     const auto& get_arguments() const { return arguments; }
     const auto& get_return() const { return destination; }
     auto& get_mutable_arguments() { return arguments; }
     auto& get_mutable_result() { return destination; }
+
+public:
+    // get mangled function name, may fail in some cases
+    // if failed to mangle, return raw function name directly
+    auto get_mangled_name() const {
+        switch(get_func_kind()) {
+            case lir::call::kind::database_load:
+            case lir::call::kind::find:
+            case lir::call::kind::key_cmp:
+            case lir::call::kind::to_set:
+            case lir::call::kind::basic_method:
+            case lir::call::kind::basic_static: return get_function_name();
+            default: break;
+        }
+        return rule_mangle(get_function_name());
+    }
 };
 
 class constructor: public inst {
@@ -340,6 +356,7 @@ public:
         fields_value.push_back(source);
     }
     const auto& get_fields() const { return fields_value; }
+    const auto& get_result() const { return destination; }
     const auto& get_schema_name() const { return schema_name; }
     void accept(inst_visitor* v) override {
         v->visit_constructor(this);
@@ -347,8 +364,18 @@ public:
 
     auto& get_mutable_fields() { return fields_value; }
     auto& get_mutable_result() { return destination; }
+
+public:
+    // get mangled constructor name
+    auto get_mangled_name() const {
+        return rule_mangle("schema_" + schema_name);
+    }
 };
 
+// souffle record type, for example:
+//   res = [1, "str", -1.0]
+// res type is [number, string, float]
+//
 class record: public inst {
 private:
     std::vector<inst_value_t> fields_value;
@@ -363,11 +390,14 @@ public:
         fields_value(c.fields_value),
         destination(c.destination) {}
     ~record() override = default;
+
+public:
     void dump(std::ostream&, const std::string&) const override;
     void add_field(const inst_value_t& source) {
         fields_value.push_back(source);
     }
     const auto& get_fields() const { return fields_value; }
+    const auto& get_result() const { return destination; }
     void accept(inst_visitor* v) override {
         v->visit_record(this);
     }
@@ -385,23 +415,24 @@ public:
 private:
     kind operand;
     inst_value_t source;
-    inst_value_t destination;
+    inst_value_t target;
 
 public:
     unary(const kind op,
           const inst_value_t& src,
-          const inst_value_t& dst,
+          const inst_value_t& tgt,
           const report::span& loc):
         inst(inst_kind::inst_unary, loc), operand(op),
-        source(src), destination(dst) {}
+        source(src), target(tgt) {}
     unary(const unary& u):
         inst(inst_kind::inst_unary, u.get_location()), operand(u.operand),
-        source(u.source), destination(u.destination) {}
+        source(u.source), target(u.target) {}
     ~unary() override = default;
 
 public:
-    const auto& get_destination() const { return destination; }
-    auto& get_mutable_destination() { return destination; }
+    const auto& get_source() const { return source; }
+    const auto& get_target() const { return target; }
+    auto& get_mutable_target() { return target; }
 
 public:
     void dump(std::ostream&, const std::string&) const override;
@@ -422,21 +453,21 @@ public:
 private:
     inst_value_t left;
     inst_value_t right;
-    inst_value_t destination;
+    inst_value_t target;
     kind operator_kind;
 
 public:
     binary(const inst_value_t& l,
            const inst_value_t& r,
-           const inst_value_t& dst,
+           const inst_value_t& tgt,
            const kind op,
            const report::span& loc):
         inst(inst_kind::inst_binary, loc), left(l), right(r),
-        destination(dst), operator_kind(op) {}
+        target(tgt), operator_kind(op) {}
     binary(const binary& b):
         inst(inst_kind::inst_binary, b.get_location()),
         left(b.left), right(b.right),
-        destination(b.destination), operator_kind(b.operator_kind) {}
+        target(b.target), operator_kind(b.operator_kind) {}
     ~binary() override = default;
 
 public:
@@ -449,8 +480,8 @@ public:
     auto get_operator() const { return operator_kind; }
     const auto& get_left() const { return left; }
     const auto& get_right() const { return right; }
-    const auto& get_destination() const { return destination; }
-    auto& get_mutable_destination() { return destination; }
+    const auto& get_target() const { return target; }
+    auto& get_mutable_target() { return target; }
 };
 
 class compare: public inst {
@@ -536,6 +567,9 @@ public:
     void add_pair(const std::string& name, const inst_value_t& literal) {
         literals.push_back({name, literal});
     }
+
+public:
+    const auto& get_pairs() const { return literals; }
     void dump(std::ostream&, const std::string&) const override;
     void accept(inst_visitor* v) override {
         v->visit_fact(this);

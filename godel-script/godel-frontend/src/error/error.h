@@ -5,6 +5,7 @@
 #include <sstream>
 #include <cstring>
 #include <vector>
+#include <unordered_set>
 #include <unordered_map>
 
 namespace report {
@@ -124,7 +125,7 @@ private:
     void report_context(const span&, bool, const std::string&);
 
 public:
-    void warn_report_ignored_DO_schema(const std::vector<std::pair<std::string, span>>&);
+    void warn_ignored_DO_schema(const std::unordered_set<std::string>&);
 
 public:
     void load(const std::string&);

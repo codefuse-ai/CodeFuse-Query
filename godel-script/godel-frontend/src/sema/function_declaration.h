@@ -20,7 +20,7 @@ private:
     // not the same as ctx.invalid_variable_name, this allows `self`
     const std::unordered_set<std::string> invalid_parameter_name = {
         "Self", "count", "sum", "output",
-        "input", "max", "min", "result"
+        "input", "max", "min"
     };
     bool flag_in_impl = false;
     std::string self_type_name = "";

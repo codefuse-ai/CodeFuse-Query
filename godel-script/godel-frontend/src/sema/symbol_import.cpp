@@ -53,7 +53,6 @@ configure symbol_import::inherit_config(const std::string& filename) {
         // executable path, for souffle arguments
         option::cli_executable_path,
         // semantic check options
-        option::cli_semantic_no_else,
         option::cli_semantic_pub_check,
         // verbose info dump
         option::cli_verbose,

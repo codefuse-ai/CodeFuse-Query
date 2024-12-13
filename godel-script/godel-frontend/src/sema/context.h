@@ -39,7 +39,7 @@ struct context {
     // store variable names that should not be used
     const std::unordered_set<std::string> invalid_variable_name = {
         "Self", "self", "count", "sum", "output",
-        "input", "max", "min", "result"
+        "input", "max", "min"
     };
 
 public:
