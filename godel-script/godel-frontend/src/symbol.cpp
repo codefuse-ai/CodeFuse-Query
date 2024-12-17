@@ -29,11 +29,13 @@ function function::build_native(const std::string& name,
     return native_function;
 }
 
-std::string function::to_json() const {
+std::string function::to_json(bool with_location) const {
     std::string res = "{\"name\":\"" + name;
     res += has_generic? "<T>\",":"\",";
-    res += "\"location\":" + location.to_json() + ",";
-    res += "\"return\":" + return_type.to_json() + ",";
+    if (with_location) {
+        res += "\"location\":" + location.to_json() + ",";
+    }
+    res += "\"return\":" + return_type.to_json(with_location) + ",";
     res += "\"is_public\":";
     res += public_access_authority? "\"true\",":"\"false\",";
     res += "\"is_inherited\":";
@@ -41,7 +43,7 @@ std::string function::to_json() const {
     res += "\"parameter\":[";
     for(const auto& i : ordered_parameter_list) {
         res += "{\"name\":\"" + i + "\",\"type\":";
-        res += parameter_list.at(i).to_json() + "},";
+        res += parameter_list.at(i).to_json(with_location) + "},";
     }
     if (res.back()==',') {
         res.pop_back();
@@ -108,14 +110,16 @@ std::string enumerate::fuzzy_search(const std::string& id) const {
     return fuzzy_search_name;
 }
 
-std::string schema::to_json() const {
+std::string schema::to_json(bool with_location) const {
     std::string res = "{\"name\":\"" + name + "\",";
-    res += "\"location\":" + location.to_json() + ",";
+    if (with_location) {
+        res += "\"location\":" + location.to_json() + ",";
+    }
     res += "\"parent\": \"" + std::string(parent? parent->name:"") + "\",";
     res += "\"fields\":[";
     for(const auto& i : ordered_fields) {
         const auto& type = fields.at(i);
-        res += "{\"name\":\"" + i + "\",\"type\":" + type.to_json();
+        res += "{\"name\":\"" + i + "\",\"type\":" + type.to_json(with_location);
         res += ",\"primary\":";
         res += type.primary? "\"true\"":"\"false\"";
         res += ",\"is_inherited\":";
@@ -131,10 +135,10 @@ std::string schema::to_json() const {
     }
     res += "],\"methods\":[";
     for(const auto& i : methods) {
-        res += i.second.to_json() + ",";
+        res += i.second.to_json(with_location) + ",";
     }
     for(const auto& i : natives) {
-        res += i.second.to_json() + ",";
+        res += i.second.to_json(with_location) + ",";
     }
     if (res.back()==',') {
         res.pop_back();

@@ -99,6 +99,7 @@ private:
     std::string dump_json_local() const;
     std::string dump_json_infer() const;
     std::string dump_json_used_files() const;
+    void dump_json_only_schema_without_loc(std::ostream&) const;
     void dump_json(std::ostream&) const;
     void dump_used_modules() const;
     bool language_server_dump(const configure&);
@@ -110,7 +111,13 @@ private:
     void do_semantic_analysis(const configure&);
     void ast_structure_dump();
     void template_extract();
-    void run_souffle(const configure&);
+
+private:
+    // run souffle code from source file
+    void run_souffle_from_file(const configure&);
+    // run generated souffle code
+    void run_souffle_from_generated(const configure&);
+    void run_souffle(const std::string&, const configure&);
 
 public:
     const auto& name_space() const { return semantic_analyser.get_context().this_name_space; }

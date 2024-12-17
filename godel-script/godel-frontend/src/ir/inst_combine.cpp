@@ -6,7 +6,7 @@ namespace godel {
 
 void inst_combine_pass::visit_store(lir::store* s) {
     const auto& src = s->get_source();
-    const auto& dst = s->get_destination();
+    const auto& tgt = s->get_target();
 
     // record this case:
     //
@@ -20,10 +20,10 @@ void inst_combine_pass::visit_store(lir::store* s) {
     //
     // (call(ssa_temp_2, a, b))
     //
-    if (dst.kind==lir::inst_value_kind::variable &&
+    if (tgt.kind==lir::inst_value_kind::variable &&
         src.kind==lir::inst_value_kind::variable) {
-        variable_reference_graph[dst.content].insert({src.content, s});
-        variable_reference_graph[src.content].insert({dst.content, s});
+        variable_reference_graph[tgt.content].insert({src.content, s});
+        variable_reference_graph[src.content].insert({tgt.content, s});
     }
 
     // record this case:
@@ -38,9 +38,9 @@ void inst_combine_pass::visit_store(lir::store* s) {
     //
     // (call(ssa_temp_2, 1, 2))
     //
-    if (dst.kind==lir::inst_value_kind::variable &&
+    if (tgt.kind==lir::inst_value_kind::variable &&
         src.kind==lir::inst_value_kind::literal) {
-        variable_reference_graph[dst.content].insert({src.content, s});
+        variable_reference_graph[tgt.content].insert({src.content, s});
     }
 }
 
@@ -216,19 +216,19 @@ void combine_worker::visit_record(lir::record* node) {
 }
 
 void combine_worker::visit_unary(lir::unary* node) {
-    const auto& dst = node->get_destination();
-    if (is_single_ref_ssa_temp(dst.content)) {
-        const auto& ref = get_single_ref(dst.content);
-        node->get_mutable_destination().content = ref.first;
+    const auto& tgt = node->get_target();
+    if (is_single_ref_ssa_temp(tgt.content)) {
+        const auto& ref = get_single_ref(tgt.content);
+        node->get_mutable_target().content = ref.first;
         ref.second->set_flag_eliminated(true);
     }
 }
 
 void combine_worker::visit_binary(lir::binary* node) {
-    const auto& dst = node->get_destination();
-    if (is_single_ref_ssa_temp(dst.content)) {
-        const auto& ref = get_single_ref(dst.content);
-        node->get_mutable_destination().content = ref.first;
+    const auto& tgt = node->get_target();
+    if (is_single_ref_ssa_temp(tgt.content)) {
+        const auto& ref = get_single_ref(tgt.content);
+        node->get_mutable_target().content = ref.first;
         ref.second->set_flag_eliminated(true);
     }
 }

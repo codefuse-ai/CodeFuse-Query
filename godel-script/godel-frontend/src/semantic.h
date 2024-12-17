@@ -60,9 +60,6 @@ private:
     // switch of public access authority checker
     bool flag_check_access_authority = false;
 
-    // switch of condition statements having else branch checker
-    bool flag_check_no_else_branch = false;
-
 private:
     // generate output used functions and methods
     void generate_output_used_function_name();

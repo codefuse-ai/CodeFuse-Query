@@ -1,102 +1,12 @@
 #include "godel-frontend/src/ir/remove_unused.h"
+#include "godel-frontend/src/ir/name_mangling.h"
 
 namespace godel {
 
-void call_graph_generator::check_inst(lir::inst* stmt,
-                                      std::queue<lir::block*>& bfs,
-                                      used_dict& dict) const {
-    switch(stmt->get_kind()) {
-        case lir::inst_kind::inst_call:
-            dict.insert(replace_colon(
-                reinterpret_cast<lir::call*>(stmt)->get_function_name()
-            ));
-            break;
-        case lir::inst_kind::inst_ctor:
-            dict.insert(replace_colon(
-                "schema_" +
-                reinterpret_cast<lir::constructor*>(stmt)->get_schema_name()
-            ));
-            break;
-        case lir::inst_kind::inst_block:
-            bfs.push(reinterpret_cast<lir::block*>(stmt));
-            break;
-        case lir::inst_kind::inst_not:
-            bfs.push(reinterpret_cast<lir::not_operand*>(stmt)->get_body());
-            break;
-        case lir::inst_kind::inst_and:
-            bfs.push(reinterpret_cast<lir::and_operand*>(stmt)->get_left_block());
-            bfs.push(reinterpret_cast<lir::and_operand*>(stmt)->get_right_block());
-            break;
-        case lir::inst_kind::inst_or:
-            bfs.push(reinterpret_cast<lir::or_operand*>(stmt)->get_left_block());
-            bfs.push(reinterpret_cast<lir::or_operand*>(stmt)->get_right_block());
-            break;
-        case lir::inst_kind::inst_aggr:
-            bfs.push(reinterpret_cast<lir::aggregator*>(stmt)->get_body());
-        default: break;
-    }
-}
-
-void call_graph_generator::scan_call(souffle_rule_impl* impl,
-                                     used_dict& dict) const {
-    // recursively search used rules
-    // but we use bfs queue to avoid stack overflow
-    // so visitor(dfs) is not needed here
-    std::queue<lir::block*> bfs;
-    bfs.push(impl->get_block());
-    while(!bfs.empty()) {
-        auto block = bfs.front();
-        bfs.pop();
-        for(auto stmt : block->get_content()) {
-            check_inst(stmt, bfs, dict);
-        }
-    }
-}
-
-void call_graph_generator::initialize_call_graph_root(const std::vector<std::string>& output,
-                                                      call_graph& cg) const {
-    for(const auto& i : output) {
-        const auto name = replace_colon(i);
-        if (!cg.count(name)) {
-            cg.insert({name, {}});
-        }
-    }
-}
-
-void call_graph_generator::initialize_call_graph_root(
-    const std::vector<souffle_annotated_file_output>& output,
-    call_graph& cg) const {
-    for(const auto& i : output) {
-        const auto name = replace_colon(i.rule_name);
-        if (!cg.count(name)) {
-            cg.insert({name, {}});
-        }
-    }
-}
-
-void call_graph_generator::initialize_call_graph(const std::vector<souffle_rule_impl*>& impls,
-                                                 call_graph& cg) const {
-    for(auto i : impls) {
-        const auto name = replace_colon(i->get_func_name());
-        if (!cg.count(name)) {
-            cg.insert({name, {}});
-        }
-        // construct the call graph and mark all used rules
-        scan_call(i, cg.at(name));
-    }
-}
-
-const used_dict& call_graph_generator::apply(const ir_context& ctx) {
+const callee_dict& unused_remove_pass::used_finder::apply(const ir_context& ctx) {
     // create call graph data structure
-    call_graph cg;
-
-    // construct call graph by scanning the IR
-    initialize_call_graph_root(ctx.souffle_output, cg);
-    initialize_call_graph_root(ctx.annotated_output, cg);
-    initialize_call_graph(ctx.rule_impls, cg);
-    initialize_call_graph(ctx.database_get_table, cg);
-    initialize_call_graph(ctx.schema_get_field, cg);
-    initialize_call_graph(ctx.schema_data_constraint_impls, cg);
+    call_graph_generator cgg;
+    const auto& cg = cgg.apply(ctx);
 
     // use bfs to find all used rules
     std::queue<std::string> bfs;
@@ -106,12 +16,14 @@ const used_dict& call_graph_generator::apply(const ir_context& ctx) {
     used.insert("all_data_DBIndex");
     // start from souffle output, the root of call graph
     for(const auto& i : ctx.souffle_output) {
-        bfs.push(replace_colon(i));
-        used.insert(replace_colon(i));
+        const auto mangled_name = rule_mangle(i);
+        bfs.push(mangled_name);
+        used.insert(mangled_name);
     }
     for(const auto& i : ctx.annotated_output) {
-        bfs.push(replace_colon(i.rule_name));
-        used.insert(replace_colon(i.rule_name));
+        const auto mangled_name = i.get_mangled_name();
+        bfs.push(mangled_name);
+        used.insert(mangled_name);
     }
 
     // use bfs to find all used rules
@@ -137,20 +49,22 @@ const used_dict& call_graph_generator::apply(const ir_context& ctx) {
     return used;
 }
 
-void unused_remove_pass::remove_unused_schema_data_constraint_decl(const used_dict& used_rule) {
+void unused_remove_pass::remove_unused_schema_data_constraint_decl(
+    const callee_dict& used_rule) {
     std::vector<souffle_schema> used;
     for(const auto& i : ctx->schema_data_constraint_decls) {
-        if (used_rule.count("schema_" + replace_colon(i.name))) {
+        if (used_rule.count(i.get_mangled_name())) {
             used.push_back(i);
         }
     }
     ctx->schema_data_constraint_decls = used;
 }
 
-void unused_remove_pass::remove_unused_schema_data_constraint_impl(const used_dict& used_rule) {
+void unused_remove_pass::remove_unused_schema_data_constraint_impl(
+    const callee_dict& used_rule) {
     std::vector<souffle_rule_impl*> used;
     for(auto i : ctx->schema_data_constraint_impls) {
-        if (used_rule.count(replace_colon(i->get_func_name()))) {
+        if (used_rule.count(i->get_mangled_name())) {
             used.push_back(i);
         } else {
             delete i;
@@ -159,10 +73,11 @@ void unused_remove_pass::remove_unused_schema_data_constraint_impl(const used_di
     ctx->schema_data_constraint_impls = used;
 }
 
-void unused_remove_pass::remove_unused_schema_get_field(const used_dict& used_rule) {
+void unused_remove_pass::remove_unused_schema_get_field(
+    const callee_dict& used_rule) {
     std::vector<souffle_rule_impl*> used;
     for(auto i : ctx->schema_get_field) {
-        if (used_rule.count(replace_colon(i->get_func_name()))) {
+        if (used_rule.count(i->get_mangled_name())) {
             used.push_back(i);
         } else {
             delete i;
@@ -171,10 +86,11 @@ void unused_remove_pass::remove_unused_schema_get_field(const used_dict& used_ru
     ctx->schema_get_field = used;
 }
 
-void unused_remove_pass::remove_unused_rule_decl(const used_dict& used_rule) {
+void unused_remove_pass::remove_unused_rule_decl(
+    const callee_dict& used_rule) {
     std::vector<souffle_rule_decl*> used;
     for(auto i : ctx->rule_decls) {
-        if (used_rule.count(replace_colon(i->get_rule_raw_name()))) {
+        if (used_rule.count(i->get_mangled_name())) {
             used.push_back(i);
         } else {
             delete i;
@@ -183,10 +99,10 @@ void unused_remove_pass::remove_unused_rule_decl(const used_dict& used_rule) {
     ctx->rule_decls = used;
 }
 
-void unused_remove_pass::remove_unused_rule_impl(const used_dict& used_rule) {
+void unused_remove_pass::remove_unused_rule_impl(const callee_dict& used_rule) {
     std::vector<souffle_rule_impl*> used;
     for(auto i : ctx->rule_impls) {
-        if (used_rule.count(replace_colon(i->get_func_name()))) {
+        if (used_rule.count(i->get_mangled_name())) {
             used.push_back(i);
         } else {
             delete i;
@@ -195,40 +111,42 @@ void unused_remove_pass::remove_unused_rule_impl(const used_dict& used_rule) {
     ctx->rule_impls = used;
 }
 
-void unused_remove_pass::remove_unused_input_decl(const used_dict& used_rule) {
+void unused_remove_pass::remove_unused_input_decl(const callee_dict& used_rule) {
     std::vector<souffle_input_decl> used;
     for(const auto& i : ctx->input_decls) {
-        if (used_rule.count(i.get_decl_name())) {
+        if (used_rule.count(i.get_mangled_name())) {
             used.push_back(i);
         }
     }
     ctx->input_decls = used;
 }
 
-void unused_remove_pass::remove_unused_input_impl(const used_dict& used_rule) {
+void unused_remove_pass::remove_unused_input_impl(const callee_dict& used_rule) {
     std::vector<souffle_input_impl> used;
     for(const auto& i : ctx->input_impls) {
-        if (used_rule.count(i.get_decl_name())) {
+        if (used_rule.count(i.get_mangled_name())) {
             used.push_back(i);
         }
     }
     ctx->input_impls = used;
 }
 
-void unused_remove_pass::remove_unused_annotated_input(const used_dict& used_rule) {
+void unused_remove_pass::remove_unused_annotated_input(
+    const callee_dict& used_rule) {
     std::vector<souffle_annotated_file_input> used;
     for(const auto& i : ctx->annotated_input) {
-        if (used_rule.count(i.rule_name)) {
+        if (used_rule.count(i.get_mangled_name())) {
             used.push_back(i);
         }
     }
     ctx->annotated_input = used;
 }
 
-void unused_remove_pass::remove_unused_database_get_table(const used_dict& used_rule) {
+void unused_remove_pass::remove_unused_database_get_table(
+    const callee_dict& used_rule) {
     std::vector<souffle_rule_impl*> used;
     for(auto i : ctx->database_get_table) {
-        if (used_rule.count(replace_colon(i->get_func_name()))) {
+        if (used_rule.count(i->get_mangled_name())) {
             used.push_back(i);
         } else {
             delete i;
@@ -238,8 +156,8 @@ void unused_remove_pass::remove_unused_database_get_table(const used_dict& used_
 }
 
 bool unused_remove_pass::run() {
-    call_graph_generator cgg;
-    const auto& used_rule = cgg.apply(*ctx);
+    used_finder uf;
+    const auto& used_rule = uf.apply(*ctx);
     remove_unused_schema_data_constraint_decl(used_rule);
     remove_unused_schema_data_constraint_impl(used_rule);
     remove_unused_schema_get_field(used_rule);
@@ -253,22 +171,22 @@ bool unused_remove_pass::run() {
 }
 
 bool unused_type_alias_remove_pass::run() {
-    std::unordered_set<std::string> used_type = {"int", "string"};
+    std::unordered_set<std::string> used_type = {"int", "string", "float"};
     for(const auto& i : ctx->schema_data_constraint_decls) {
         for(const auto& field : i.fields) {
-            used_type.insert(replace_colon(field.second));
+            used_type.insert(type_mangle(field.second));
         }
     }
     for(const auto& i : ctx->input_decls) {
         for(const auto& field : i.fields) {
-            used_type.insert(replace_colon(field.second));
+            used_type.insert(type_mangle(field.second));
         }
     }
     for(auto i : ctx->rule_decls) {
         for(const auto& param : i->get_params()) {
-            used_type.insert(replace_colon(param.second));
+            used_type.insert(type_mangle(param.second));
         }
-        used_type.insert(replace_colon(i->get_return_type()));
+        used_type.insert(type_mangle(i->get_return_type()));
     }
     // add their real type into the used type too
     for(const auto& i : ctx->type_alias) {

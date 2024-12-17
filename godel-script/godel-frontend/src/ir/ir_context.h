@@ -3,6 +3,7 @@
 #include "godel-frontend/src/ir/lir.h"
 #include "godel-frontend/src/sema/context.h"
 #include "godel-frontend/src/cli.h"
+#include "godel-frontend/src/ir/name_mangling.h"
 
 #include <iostream>
 #include <fstream>
@@ -32,14 +33,19 @@ struct souffle_type_alias {
     void dump(std::ostream&) const;
 };
 
+// generate rule begin with `schema_`
 struct souffle_schema {
     std::string name;
     std::vector<std::pair<std::string, std::string>> fields;
 
+    auto get_mangled_name() const {
+        return rule_mangle("schema_" + name);
+    }
     void dump(std::ostream&) const;
 };
 
 // declaration of database input
+// generate rule begin with `input_`
 struct souffle_input_decl {
     std::string database_name;
     std::string table_type;
@@ -54,15 +60,17 @@ public:
                        const std::string& tt,
                        uint64_t lt):
         database_name(dbn), table_type(tt), load_times(lt) {
-        decl_name = "input_" + replace_colon(database_name) + "_" + 
-                    replace_colon(table_type) + "_" +
-                    std::to_string(load_times);
+        decl_name = "input_" + database_name +
+                    "_" + table_type +
+                    "_" + std::to_string(load_times);
+        decl_name = rule_mangle(decl_name);
     }
     void dump(std::ostream&) const;
-    const auto& get_decl_name() const { return decl_name; }
+    const auto& get_mangled_name() const { return decl_name; }
 };
 
 // implementation of database input
+// generate rule begin with `input_`
 struct souffle_input_impl {
     std::string name;
     std::string table_name;
@@ -81,14 +89,16 @@ public:
                        const std::string& idb):
         name(n), table_name(tn), table_type(tt),
         path_id(pid), input_db_path(idb) {
-        decl_name = "input_" + replace_colon(name) + "_" + 
-                    replace_colon(table_type) + "_" +
-                    std::to_string(path_id);
+        decl_name = "input_" + name +
+                    "_" +  table_type +
+                    "_" + std::to_string(path_id);
+        decl_name = rule_mangle(decl_name);
     }
     void dump(std::ostream&) const;
-    const auto& get_decl_name() const { return decl_name; }
+    const auto& get_mangled_name() const { return decl_name; }
 };
 
+// generate rule begin with `rule_`
 class souffle_rule_decl {
 private:
     std::string name;
@@ -98,34 +108,40 @@ private:
 private:
     bool flag_is_inline_rule;
     bool flag_need_cache;
+    bool flag_is_inherited_rule;
 
 public:
     souffle_rule_decl(const std::string& n):
         name(n), return_type(""),
         flag_is_inline_rule(false),
-        flag_need_cache(false) {}
+        flag_need_cache(false),
+        flag_is_inherited_rule(false) {}
     void dump(std::ostream&) const;
 
 public:
     void set_return_type(const std::string& t) { return_type = t; }
     void set_is_inline_rule(bool flag) { flag_is_inline_rule = flag; }
     void set_need_cache(bool flag) { flag_need_cache = flag; }
+    void set_is_inherited_rule(bool flag) { flag_is_inherited_rule = flag; }
     void add_param(const std::string& pn, const std::string& pt) {
         params.push_back({pn, pt});
     }
 
 public:
     const auto& get_rule_raw_name() const { return name; }
+    auto get_mangled_name() const { return rule_mangle(name); }
     const auto& get_params() const { return params; }
     const auto& get_return_type() const { return return_type; }
     auto is_inline() const { return flag_is_inline_rule; }
     auto need_cache() const { return flag_need_cache;}
+    auto is_inherited() const { return flag_is_inherited_rule; }
 };
 
+// generate rule begin with `rule_`
 class souffle_rule_impl {
 private:
     std::string func_name;
-    std::vector<std::string> params;
+    std::vector<lir::inst_value_t> params;
     lir::block block;
 
 public:
@@ -133,12 +149,20 @@ public:
         func_name(c), block(loc) {
         block.set_use_semicolon();
     }
-    void add_param(const std::string& p) {
-        params.push_back(p);
+
+public:
+    void add_param_variable(const std::string& var) {
+        params.push_back(lir::inst_value_t::variable(var));
     }
+    void add_param_literal(const std::string& lit) {
+        params.push_back(lir::inst_value_t::literal(lit));
+    }
+
+public:
     auto get_block() { return &block; }
     const auto& get_params() const { return params; }
     const auto& get_func_name() const { return func_name; }
+    auto get_mangled_name() const { return rule_mangle(func_name); }
 
     void dump(std::ostream&) const;
 };
@@ -147,6 +171,8 @@ struct souffle_annotated_file_output {
     std::string format;
     std::string file_path;
     std::string rule_name;
+
+    auto get_mangled_name() const { return rule_mangle(rule_name); }
 };
 
 // alias to annotated_file_output
@@ -156,8 +182,9 @@ struct ir_context {
     std::vector<souffle_functor> functors;
     std::vector<souffle_type_alias> type_alias;
 
-    // souffle stdout output, can be redirected to file output
+    // rules' name for souffle stdout output, can be redirected to file output
     std::vector<std::string> souffle_output;
+
     // mapper stores real name of mangled output rule,
     // used for merging output files into one file
     std::unordered_map<std::string, std::string> souffle_output_real_name;
@@ -214,7 +241,7 @@ private:
     void dump_input_impls(std::ostream&) const;
     void dump_souffle_annotated_input(std::ostream&) const;
     void dump_souffle_multi_json_output(std::ostream&) const;
-    void dump_souffle_output(std::ostream&) const;
+    void dump_souffle_redirect_output(std::ostream&) const;
     void dump_souffle_annotated_output(std::ostream&) const;
     void dump(std::ostream&, const cli::configure&);
 

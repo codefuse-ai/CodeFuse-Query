@@ -1,21 +1,11 @@
 #include "godel-frontend/src/ir/lir.h"
+#include "godel-frontend/src/ir/name_mangling.h"
 
 #include <cassert>
 #include <ostream>
 #include <iostream>
 
 namespace godel {
-
-std::string replace_colon(const std::string& input) {
-    auto result = input;
-    auto colon_pos = result.find(':');
-    while(colon_pos!=std::string::npos) {
-        result.replace(colon_pos, 1, "_");
-        colon_pos = result.find(':', colon_pos+1);
-    }
-    return result;
-}
-
 namespace lir {
 
 std::ostream& operator<<(std::ostream& os, const inst_value_t& ivt) {
@@ -52,7 +42,7 @@ void boolean::dump(std::ostream& os, const std::string& indent) const {
 }
 
 void store::dump(std::ostream& os, const std::string& indent) const {
-    os << indent << destination << " = " << source;
+    os << indent << target << " = " << source;
 }
 
 void call::generate_key_cmp(std::ostream& os) const {
@@ -222,7 +212,7 @@ void call::generate_find(std::ostream& os) const {
     //    class_instance_set = class_or_interface_instance
     // )
     //
-    if (function_name=="find") {
+    if (function_name == "find") {
         os << "(" << destination << " = " << arguments[0] << ", ";
         os << arguments[0] << " = " << arguments[1] << ")";
         return;
@@ -246,7 +236,7 @@ void call::dump(std::ostream& os, const std::string& indent) const {
     }
 
     // normal function and method call
-    os << replace_colon(function_name) << "(";
+    os << get_mangled_name() << "(";
     if (destination.content.size()) {
         os << destination << (arguments.size()? ", ":"");
     }
@@ -263,7 +253,7 @@ void call::dump(std::ostream& os, const std::string& indent) const {
 }
 
 void constructor::dump(std::ostream& os, const std::string& indent) const {
-    os << indent << "schema_" << replace_colon(schema_name);
+    os << indent << get_mangled_name();
     os << "(" << destination << ", _" << (fields_value.size()? ", ":"");
 
     size_t s = fields_value.size();
@@ -294,7 +284,7 @@ void record::dump(std::ostream& os, const std::string& indent) const {
 }
 
 void unary::dump(std::ostream& os, const std::string& indent) const {
-    os << indent << destination << " = ";
+    os << indent << target << " = ";
     switch(operand) {
         case kind::op_neg: os << "-"; break;
         default: assert(false && "unreachable"); break;
@@ -303,7 +293,7 @@ void unary::dump(std::ostream& os, const std::string& indent) const {
 }
 
 void binary::dump(std::ostream& os, const std::string& indent) const {
-    os << indent<< destination << " = ";
+    os << indent << target << " = ";
     os << left << " ";
     switch(operator_kind) {
         case kind::op_add: os << "+"; break;

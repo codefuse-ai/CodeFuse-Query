@@ -6,6 +6,7 @@
 #include <cstring>
 #include <sstream>
 #include <filesystem>
+#include <unordered_set>
 
 namespace report {
 
@@ -217,23 +218,26 @@ void error::report_context(const span& loc,
     }
 }
 
-void error::warn_report_ignored_DO_schema(const std::vector<std::pair<std::string, span>>& vec) {
+void error::warn_ignored_DO_schema(const std::unordered_set<std::string>& vec) {
     if (json_output) {
         return;
     }
+    // report head
     auto info = std::to_string(vec.size());
     info += " \"__all__\" methods of DO schemas are ignored:";
     report_head_info(info, false);
+
+    // report ignored schema
     size_t ignored_count = 0;
     for(const auto& i : vec) {
         ++ignored_count;
         if (ignored_count > 4) {
             break;
         }
-        report_context(i.second, false, "");
+        std::clog << reset << "  " << i << "\n";
     }
     if (vec.size() > 4) {
-        std::clog << cyan << "  --> " << reset << "...(" << vec.size()-4 << ")\n";
+        std::clog << reset << "  ...(" << vec.size()-4 << ")\n";
     }
     std::clog << std::endl;
 }

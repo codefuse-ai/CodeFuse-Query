@@ -2,6 +2,7 @@
 #include "godel-frontend/src/ir/pass_manager.h"
 #include "godel-frontend/src/ir/remove_unused.h"
 #include "godel-frontend/src/ir/inst_combine.h"
+#include "godel-frontend/src/ir/name_mangling.h"
 
 #include <iostream>
 #include <fstream>
@@ -22,13 +23,13 @@ void souffle_type_alias::dump(std::ostream& out) const {
 }
 
 void souffle_schema::dump(std::ostream& out) const {
-    out << ".decl schema_" << replace_colon(name) << "(";
-    out << "result: " << replace_colon(name) << ", db_id: DBIndex";
+    out << ".decl " << get_mangled_name() << "(";
+    out << "result: " << type_mangle(name) << ", db_id: DBIndex";
     if (fields.size()) {
         out << ", ";
     }
     for(const auto& i : fields) {
-        out << i.first << ": " << replace_colon(i.second);
+        out << i.first << ": " << type_mangle(i.second);
         if (i!=fields.back()) {
             out << ", ";
         }
@@ -39,7 +40,7 @@ void souffle_schema::dump(std::ostream& out) const {
 void souffle_input_decl::dump(std::ostream& os) const {
     os << ".decl " << decl_name << "(";
     for(const auto& i : fields) {
-        os << i.first << ": " << replace_colon(i.second);
+        os << i.first << ": " << type_mangle(i.second);
         if (i!=fields.back()) {
             os << ", ";
         }
@@ -54,15 +55,15 @@ void souffle_input_impl::dump(std::ostream& os) const {
 }
 
 void souffle_rule_decl::dump(std::ostream& out) const {
-    out << ".decl " << replace_colon(name) << "(";
+    out << ".decl " << get_mangled_name() << "(";
     if (return_type.length() && return_type!="bool") {
-        out << "result: " << replace_colon(return_type);
+        out << "result: " << type_mangle(return_type);
         if (params.size()) {
             out << ", ";
         }
     }
     for(const auto& i : params) {
-        out << i.first << ": " << replace_colon(i.second);
+        out << i.first << ": " << type_mangle(i.second);
         if (i!=params.back()) {
             out << ", ";
         }
@@ -71,11 +72,14 @@ void souffle_rule_decl::dump(std::ostream& out) const {
     if (flag_is_inline_rule) {
         out << " inline";
     }
+    if (flag_is_inherited_rule) {
+        out << " // inherited";
+    }
     out << "\n";
 }
 
 void souffle_rule_impl::dump(std::ostream& out) const {
-    out << replace_colon(func_name) << "(";
+    out << get_mangled_name() << "(";
     if (!params.empty()) {
         auto it = params.begin();
         out << *it++;
@@ -170,10 +174,12 @@ bool ir_context::cache_input_impl(std::ostream& out, const std::string& fn) cons
     if (!enable_souffle_cache || !std::filesystem::exists(tempfile)) {
         return false;
     }
+
+    // sqlite-cache reader will not convert empty string to "n/a"
     if (check_cache_table_exists(fn)) {
         out << ".input " << fn;
         out << "(IO=\"sqlite-cache\", dbname=\"" << tempfile.string() << "\", ";
-        out << "name=\"_" << fn << "\")\n";
+        out << "name=\"" << fn << "\")\n";
         return true;
     }
     return false;
@@ -182,7 +188,7 @@ bool ir_context::cache_input_impl(std::ostream& out, const std::string& fn) cons
 void ir_context::dump_rule_impls(std::ostream& out,
                                  const std::unordered_set<std::string>& cache_decl) const {
     for(auto i : rule_impls) {
-        const auto name = replace_colon(i->get_func_name());
+        const auto name = i->get_mangled_name();
         // cache input
         if (cache_decl.count(name) && cache_input_impl(out, name)) {
             continue;
@@ -244,7 +250,7 @@ void ir_context::dump_souffle_annotated_input(std::ostream& out) const {
         return;
     }
     for(const auto& i : annotated_input) {
-        out << ".input " << replace_colon(i.rule_name);
+        out << ".input " << i.get_mangled_name();
         if (i.format=="\"json\"") {
             out << "(IO=\"jsonfile\", filename=";
             out << i.file_path << ", format=\"object\")";
@@ -268,7 +274,7 @@ void ir_context::dump_souffle_multi_json_output(std::ostream& out) const {
     // dump output rules
     for(const auto& i : souffle_output) {
         const auto temp_file = temp / ("godel_script_" + i + ".json");
-        out << ".output " << replace_colon(i);
+        out << ".output " << rule_mangle(i);
         out << "(IO=\"jsonfile\", filename=\"";
         out << temp_file.string() << "\", format=\"object\")" << "\n";
     }
@@ -277,7 +283,7 @@ void ir_context::dump_souffle_multi_json_output(std::ostream& out) const {
     }
 }
 
-void ir_context::dump_souffle_output(std::ostream& out) const {
+void ir_context::dump_souffle_redirect_output(std::ostream& out) const {
     if (souffle_output.empty()) {
         return;
     }
@@ -305,7 +311,7 @@ void ir_context::dump_souffle_output(std::ostream& out) const {
     }
     // dump output rules
     for(const auto& i : souffle_output) {
-        out << ".output " << replace_colon(i) << io_format << "\n";
+        out << ".output " << rule_mangle(i) << io_format << "\n";
     }
     if (souffle_output.size()) {
         out << "\n";
@@ -317,7 +323,7 @@ void ir_context::dump_souffle_annotated_output(std::ostream& out) const {
         return;
     }
     for(const auto& i : annotated_output) {
-        out << ".output " << replace_colon(i.rule_name);
+        out << ".output " << i.get_mangled_name();
         if (i.format=="\"json\"") {
             out << "(IO=\"jsonfile\", filename=";
             out << i.file_path << ", format=\"object\")";
@@ -345,10 +351,10 @@ void ir_context::dump(std::ostream& out, const cli::configure& conf) {
     std::unordered_set<std::string> cache_decl;
     for(auto i : rule_decls) {
         if (i->is_inline()) {
-            inline_decl.insert(replace_colon(i->get_rule_raw_name()));
+            inline_decl.insert(i->get_mangled_name());
         }
         if (i->need_cache()) {
-            cache_decl.insert(replace_colon(i->get_rule_raw_name()));
+            cache_decl.insert(i->get_mangled_name());
         }
     }
 
@@ -385,7 +391,7 @@ void ir_context::dump(std::ostream& out, const cli::configure& conf) {
     dump_input_impls(out);
     dump_souffle_annotated_input(out);
     // dump souffle output
-    dump_souffle_output(out);
+    dump_souffle_redirect_output(out);
     dump_souffle_annotated_output(out);
 
     if (enable_souffle_cache) {
@@ -406,7 +412,7 @@ bool ir_context::check_cache_table_exists(const std::string& rule) const {
     }
 
     auto cmd = std::string("SELECT name FROM sqlite_master WHERE type='table'");
-    cmd += " AND name='_" + rule + "';";
+    cmd += " AND name='" + rule + "';";
 
     sqlite3_stmt* stmt = nullptr;
     const char* tail = nullptr;

@@ -33,19 +33,42 @@ public:
     }
 };
 
-class negative_expression_ungrounded_checker: public ast_visitor {
+class neg_expr_ungrounded_checker: public ast_visitor {
 private:
     report::error* err;
     size_t in_logical_negative_expression_level;
+    size_t in_binary_operator_level;
 
 private:
     bool visit_call_expr(call_expr*) override;
     bool visit_initializer(initializer*) override;
     bool visit_unary_operator(unary_operator*) override;
+    bool visit_binary_operator(binary_operator*) override;
 
 public:
-    negative_expression_ungrounded_checker(report::error* err_ptr):
-        err(err_ptr), in_logical_negative_expression_level(0) {}
+    neg_expr_ungrounded_checker(report::error* e):
+        err(e), in_logical_negative_expression_level(0),
+        in_binary_operator_level(0) {}
+    void check(ast_root* root) {
+        root->accept(this);
+    }
+};
+
+class undetermined_checker: public ast_visitor {
+private:
+    report::error* err;
+    size_t in_for_initialization_level;
+
+private:
+    bool match_undetermined_call(call_root*);
+
+private:
+    bool visit_call_root(call_root*) override;
+    bool visit_for_stmt(for_stmt*) override;
+
+public:
+    undetermined_checker(report::error* e):
+        err(e), in_for_initialization_level(0) {}
     void check(ast_root* root) {
         root->accept(this);
     }
@@ -102,7 +125,15 @@ private:
     }
 
 private:
-    void unused_parameter_check(const report::span&);
+    bool is_native_type(const godel::symbol& sym) const {
+        return sym == symbol::i64() ||
+               sym == symbol::f64() ||
+               sym == symbol::str();
+    }
+    void report_unused_parameter(const report::span&);
+    bool check_directly_return_self(ret_stmt*);
+
+private:
     bool visit_identifier(identifier*) override;
     bool visit_call_expr(call_expr*) override;
     bool visit_unary_operator(unary_operator*) override;
@@ -111,7 +142,6 @@ private:
     bool visit_let_stmt(let_stmt*) override;
     bool visit_if_stmt(if_stmt*) override;
     bool visit_match_stmt(match_stmt*) override;
-    bool check_directly_return_self(ret_stmt*);
     bool visit_ret_stmt(ret_stmt*) override;
     bool visit_in_block_expr(in_block_expr*) override;
     bool visit_block_stmt(block_stmt*) override;

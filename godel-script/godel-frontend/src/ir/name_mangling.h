@@ -1,11 +1,15 @@
 #pragma once
 
-#include "godel-frontend/src/ir/ir_context.h"
-#include "godel-frontend/src/ir/lir.h"
-#include "godel-frontend/src/symbol.h"
+#include <cstring>
+#include <sstream>
 
 namespace godel {
 
-std::string field_name_mangling(const std::string&, const symbol&);
+bool starts_with(const std::string&, const std::string&);
+
+std::string mangle(const std::string&);
+std::string field_mangle(const std::string&);
+std::string type_mangle(const std::string&);
+std::string rule_mangle(const std::string&);
 
 }

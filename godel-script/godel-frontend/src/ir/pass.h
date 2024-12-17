@@ -14,7 +14,9 @@ enum class pass_kind {
     ps_remove_unused_type,
     ps_inst_combine,
     ps_flatten_nested_block,
-    ps_aggregator_inline_remark
+    ps_aggregator_inline_remark,
+    ps_ungrounded_check,
+    ps_join_reorder
 };
 
 // there are three types of passes:

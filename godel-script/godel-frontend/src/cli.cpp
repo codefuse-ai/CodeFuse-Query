@@ -42,10 +42,12 @@ std::ostream& help(std::ostream& out) {
     << reset << "\nUsage: ./godel "
     << green << "[options] <input>\n\n"
     << reset << "Compile options:\n"
+    << green << "  -###                              "
+    << reset << "Print detailed compilation commands (not run).\n"
     << green << "  -s,   --souffle <path>            "
     << reset << "Output generated souffle to file.\n"
     << green << "  -r,   --run-souffle               "
-    << reset << "Run compiled godel script program directly.\n"
+    << reset << "Run compiled godel script program.\n"
     << green << "  -p,   --package-path <path>       "
     << reset << "Give godelscript package root path.\n"
     << green << "  -f,   --fact                      "
@@ -53,7 +55,7 @@ std::ostream& help(std::ostream& out) {
     << green << "  -e,   --extract-template          "
     << reset << "Extract probable script template.\n"
     << green << "  -l,   --location-extract <path>   "
-    << reset << "Extract all functions and methods location into json.\n";
+    << reset << "Extract function and method location into json.\n";
     out
     << reset << "\nInformation dump options:\n"
     << green << "  -h,   --help                      "
@@ -81,7 +83,9 @@ std::ostream& help(std::ostream& out) {
     << green << "        --dump-lsp                  "
     << reset << "Show semantic result in json format.\n"
     << green << "        --lsp-dump-use-indexed-file "
-    << reset << "Use file index instead of string.\n";
+    << reset << "Use file index instead of string.\n"
+    << green << "        --lsp-dump-only-schema      "
+    << reset << "Only dump schema without location.\n";
     out
     << reset << "\nLexical analysis dump options:\n"
     << green << "        --lexer-dump-token          "
@@ -93,25 +97,33 @@ std::ostream& help(std::ostream& out) {
     << green << "        --semantic-only             "
     << reset << "Only do semantic analysis and exit.\n"
     << green << "        --semantic-pub-check        "
-    << reset << "Enable semantic public access authority checker.\n"
-    << green << "        --semantic-no-else          "
-    << reset << "Enable semantic no else branch checker.\n";
+    << reset << "Enable semantic public access authority checker.\n";
     out
     << reset << "\nSouffle code generation options:\n"
+    << green << "  -O1                               "
+    << reset << "Enable souffle code generator optimizer, level 1.\n"
+    << green << "  -O2                               "
+    << reset << "Enable souffle code generator optimizer, level 2.\n"
+    << green << "  -O3                               "
+    << reset << "Enable souffle code generator optimizer, level 3.\n"
     << green << "  -Of,  --opt-for                   "
     << reset << "Enable souffle code generator for statement optimizer.\n"
     << green << "  -Ol,  --opt-let                   "
     << reset << "Enable souffle code generator let statement optimizer(not suggested).\n"
     << green << "  -Oim, --opt-ir-merge              "
-    << reset << "Enable souffle inst combine pass (Experimental).\n"
+    << reset << "Enable souffle inst combine pass.\n"
     << green << "  -Osc, --opt-self-constraint       "
     << reset << "Enable self data constraint optimizer in souffle code generator.\n"
+    << green << "  -Ojr, --opt-join-reorder          "
+    << reset << "Enable join reorder optimizer(experimental).\n"
     << green << "        --disable-remove-unused     "
     << reset << "Disable unused method deletion pass.\n"
     << green << "        --disable-do-schema-opt     "
     << reset << "Disable DO Schema data constraint __all__ method optimization.\n"
     << green << "        --souffle-debug             "
-    << reset << "Dump generated souffle code by stdout.\n"
+    << reset << "Dump generated souffle code by stdout.\n";
+    out
+    << reset << "\nSouffle execution options:\n"
     << green << "        --souffle-slow-transformers "
     << reset << "Enable Souffle slow transformers.\n"
     << green << "        --enable-souffle-profiling  "
@@ -125,7 +137,9 @@ std::ostream& help(std::ostream& out) {
     << green << "        --output-csv    <path>      "
     << reset << "Redirect stdout souffle execution result into csv.\n"
     << green << "        --output-sqlite <path>      "
-    << reset << "Redirect stdout souffle execution result into sqlite.\n";
+    << reset << "Redirect stdout souffle execution result into sqlite.\n"
+    << green << "  -Drs, --directly-run-souffle      "
+    << reset << "Directly run input souffle source.\n";
 
     out << "\n";
     return out;
@@ -168,9 +182,53 @@ void report_invalid_argument(const std::string& arg) {
     report::error().fatal(info);
 }
 
+void dump_configure(const configure& conf) {
+    if (conf.empty()) {
+        return;
+    }
+
+    std::unordered_map<option, std::string> mapper = {
+        {option::cli_executable_path, "executable"},
+        {option::cli_input_path, "input-script"}
+    };
+
+    for(const auto& i : settings) {
+        if (mapper.count(i.second.command_type) &&
+            mapper.at(i.second.command_type).length()>i.first.length()) {
+            continue;
+        }
+        mapper[i.second.command_type] = i.first;
+    }
+    for(const auto& i : options) {
+        if (mapper.count(i.second) &&
+            mapper.at(i.second).length()>i.first.length()) {
+            continue;
+        }
+        mapper[i.second] = i.first;
+    }
+
+    std::clog << conf.at(option::cli_executable_path) << " ";
+    std::clog << conf.at(option::cli_input_path);
+    for(const auto& i : mapper) {
+        if (i.first == option::cli_executable_path ||
+            i.first == option::cli_input_path) {
+            continue;
+        }
+        if (!conf.count(i.first)) {
+            continue;
+        }
+        std::clog << " " << i.second;
+        if (conf.at(i.first).length()) {
+            std::clog << " " << conf.at(i.first);
+        }
+    }
+    std::clog << "\n\n";
+}
+
 configure process_args(const std::vector<std::string>& vec) {
     configure config = {
-        {option::cli_executable_path, vec[0]} // load executable path here
+        // load executable path here
+        { option::cli_executable_path, vec[0] }
     };
 
     report::error err;
@@ -178,6 +236,10 @@ configure process_args(const std::vector<std::string>& vec) {
         const auto& arg = vec[i];
         if (options.count(arg)) {
             config[options.at(arg)] = "";
+        } else if (multi_options.count(arg)) {
+            for(auto o : multi_options.at(arg)) {
+                config[o] = "";
+            }
         } else if (settings.count(arg)) {
             ++i;
             if (i>=vec.size() || vec[i][0]=='-') {
@@ -211,6 +273,11 @@ configure process_args(const std::vector<std::string>& vec) {
 
     if (!config.count(option::cli_input_path)) {
         err.fatal("input file is required.");
+    }
+
+    if (config.count(option::cli_show_real_cmd_args)) {
+        dump_configure(config);
+        std::exit(0);
     }
 
     return config;
