@@ -165,12 +165,14 @@ maven_install(
         "org.osgi:osgi.core:5.0.0",
         "biz.aQute.bnd:biz.aQute.bnd.annotation:6.3.1",
         "org.codehaus.jettison:jettison:1.5.4",
-        "org.jetbrains:intellij-fernflower:1.2.1.16",
+        
     ],
     repositories = [
         # Private repositories are supported through HTTP Basic auth
         "http://mvn.dev.alipay.net/artifactory/content/groups/public/",
         "http://mvn.test.alipay.net/artifactory/content/groups/public",
+        "https://maven.aliyun.com/repository/public",
+        "https://repo1.maven.org/maven2",
     ],
 )
 
