@@ -26,7 +26,7 @@ genrule(
     ],
     cmd = """
     chmod -R 755 $$(dirname $(PYTHON3))/../lib/python3.10/site-packages
-    $(PYTHON3) -m pip install -r cli/requirements.txt -i https://pypi.antfin-inc.com/simple
+    $(PYTHON3) -m pip install -r cli/requirements.txt
     $(PYTHON3) -m PyInstaller ./cli/sparrow-cli.spec --distpath $(RULEDIR) --workpath ./pyinstaller-build -y --clean
     mv $(RULEDIR)/cli/* $(RULEDIR)/
     rmdir $(RULEDIR)/cli

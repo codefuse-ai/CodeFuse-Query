@@ -71,8 +71,8 @@ genrule(
     outs = ["coref-python-src-extractor"],
     cmd = """
     chmod -R 755 $$(dirname $(PYTHON3))/../lib/python3.10/site-packages
-    $(PYTHON3) -m pip install pyinstaller -i https://pypi.antfin-inc.com/simple
-    $(PYTHON3) -m pip install sqlalchemy -i https://pypi.antfin-inc.com/simple
+    $(PYTHON3) -m pip install pyinstaller
+    $(PYTHON3) -m pip install sqlalchemy
     cp language/python/extractor/src/resources/hook-_tkinter.py $$(dirname $(PYTHON3))/../lib/python3.10/site-packages/PyInstaller/hooks/hook-_tkinter.py
     $(PYTHON3) $(locations //language/python/extractor:install_source)
     cp language/python/extractor/src/dist/coref-python-src-extractor $(RULEDIR)
