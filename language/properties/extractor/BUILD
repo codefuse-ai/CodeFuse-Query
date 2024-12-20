@@ -4,7 +4,7 @@ load("//:junit5.bzl", "java_junit5_test")
 java_import(
     name = "lombok_jar",
     jars = [
-        "@maven//:v1/http/mvn.dev.alipay.net/artifactory/content/groups/public/org/projectlombok/lombok/1.18.16/lombok-1.18.16.jar",
+        "@maven//:v1/https/maven.aliyun.com/repository/public/org/projectlombok/lombok/1.18.16/lombok-1.18.16.jar",
     ],
 )
 
@@ -21,8 +21,8 @@ java_plugin(
 java_import(
     name = "picocli_jar",
     jars = [
-        "@maven//:v1/http/mvn.dev.alipay.net/artifactory/content/groups/public/info/picocli/picocli/4.6.1/picocli-4.6.1.jar",
-        "@maven//:v1/http/mvn.dev.alipay.net/artifactory/content/groups/public/info/picocli/picocli-codegen/4.6.1/picocli-codegen-4.6.1.jar",
+        "@maven//:v1/https/maven.aliyun.com/repository/public/info/picocli/picocli/4.6.1/picocli-4.6.1.jar",
+        "@maven//:v1/https/maven.aliyun.com/repository/public/info/picocli/picocli-codegen/4.6.1/picocli-codegen-4.6.1.jar",
     ],
 )
 

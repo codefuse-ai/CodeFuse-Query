@@ -2,7 +2,7 @@
 java_import(
     name = "lombok_jar",
     jars = [
-        "@maven//:v1/http/mvn.dev.alipay.net/artifactory/content/groups/public/org/projectlombok/lombok/1.18.16/lombok-1.18.16.jar",
+        "@maven//:v1/https/maven.aliyun.com/repository/public/org/projectlombok/lombok/1.18.16/lombok-1.18.16.jar",
     ],
 )
 
