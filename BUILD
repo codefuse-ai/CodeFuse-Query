@@ -705,10 +705,7 @@ pkg_tar(
     deps = [
         ":sparrow-cli-pkg",
         ":coref-cfamily-src-extractor-pkg",
-    ] + select({
-        ":custom_build": [],
-        "//conditions:default": [":coref-swift-src-extractor-pkg"],
-    }),
+    ],
 )
 
 # buildifier(
