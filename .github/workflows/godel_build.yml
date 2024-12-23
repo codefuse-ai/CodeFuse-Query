@@ -8,6 +8,7 @@ on:
     branches: [ main ]
     paths:
       - godel-script/**
+  workflow_dispatch:
 
 jobs:
   mac-aarch64-build:
