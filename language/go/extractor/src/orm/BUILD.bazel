@@ -1,0 +1,20 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "orm",
+    srcs = [
+        "data_decl.go",
+        "data_types.go",
+        "db_model.go",
+        "db_writer.go",
+    ],
+    importpath = "alipay.com/code_insight/coref-go-extractor/src/orm",
+    visibility = ["//visibility:public"],
+    deps = [
+        "@com_github_glebarez_sqlite//:sqlite",
+        "@io_gorm_gorm//:gorm",
+        "@io_gorm_gorm//logger",
+        "@io_gorm_gorm//schema",
+        "@org_golang_x_tools//go/packages",
+    ],
+)

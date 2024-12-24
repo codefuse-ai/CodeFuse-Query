@@ -467,7 +467,6 @@ copy_to_bin(
     visibility = ["//visibility:public"],
 )
 
-
 # copy_to_directory(
 #     name = "copy-godel-0.3-lib",
 #     srcs = [
@@ -703,8 +702,8 @@ pkg_tar(
     strip_prefix = strip_prefix.from_pkg(),
     visibility = ["//visibility:public"],
     deps = [
-        ":sparrow-cli-pkg",
         ":coref-cfamily-src-extractor-pkg",
+        ":sparrow-cli-pkg",
     ],
 )
 
@@ -726,4 +725,4 @@ pkg_tar(
 #         "-build_file_proto_mode=disable_global",
 #     ],
 #     command = "update-repos",
-# )
+# )   

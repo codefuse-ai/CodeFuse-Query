@@ -1,13 +1,11 @@
 load("//:visibility.bzl", "PUBLIC_VISIBILITY")
-
 load("@rules_python//python:defs.bzl", "py_runtime_pair")
-
 load("@python3_10//:defs.bzl", "interpreter")
 
 py_runtime(
     name = "my_py3_runtime",
+    interpreter = interpreter,
     python_version = "PY3",
-    interpreter = interpreter
 )
 
 #py_runtime_pair(
@@ -26,9 +24,7 @@ package(
 )
 
 load("@deps//:requirements.bzl", "requirement")
-
 load("@rules_python//python:defs.bzl", "py_library")
-
 
 #py_binary(
 #    name = "coref-python-src-extractor1",
@@ -45,7 +41,10 @@ load("@rules_python//python:defs.bzl", "py_library")
 
 py_library(
     name = "test",
-    srcs = glob(["src/**/*.py"], exclude=["**/tests/**"]),
+    srcs = glob(
+        ["src/**/*.py"],
+        exclude = ["**/tests/**"],
+    ),
     visibility = ["//visibility:public"],
     deps = [
         requirement("tqdm"),
@@ -60,7 +59,6 @@ filegroup(
         "src/auto_build.py",
     ],
 )
-
 
 genrule(
     name = "test1",
@@ -77,8 +75,6 @@ genrule(
     $(PYTHON3) $(locations //language/python/extractor:install_source)
     cp language/python/extractor/src/dist/coref-python-src-extractor $(RULEDIR)
     """,
-    toolchains=["@rules_python//python:current_py_toolchain",],
+    toolchains = ["@rules_python//python:current_py_toolchain"],
     visibility = ["//visibility:public"],
 )
-
-
