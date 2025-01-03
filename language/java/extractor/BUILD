@@ -127,4 +127,3 @@ genrule(
         "@maven//:org_xerial_sqlite_jdbc",
     ],
 )
-

@@ -1,0 +1,24 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "core",
+    srcs = [
+        "extract_file.go",
+        "extract_mod.go",
+        "extract_pkg.go",
+        "extraction.go",
+        "label.go",
+        "profile.go",
+    ],
+    importpath = "alipay.com/code_insight/coref-go-extractor/src/core",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//language/go/extractor/src/config",
+        "//language/go/extractor/src/orm",
+        "//language/go/extractor/src/util",
+        "@io_gorm_gorm//:gorm",
+        "@org_golang_x_mod//modfile",
+        "@org_golang_x_tools//go/packages",
+        "@org_modernc_mathutil//:mathutil",
+    ],
+)
