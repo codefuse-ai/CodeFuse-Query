@@ -1,0 +1,42 @@
+// script
+use coref::java::*
+use coref::xml::*
+
+fn default_xml_db() -> XmlDB { return XmlDB::load("coref_xml_src.db") }
+fn default_java_db() -> JavaDB { return JavaDB::load("coref_java_src.db") }
+
+schema DBElement extends XmlElement {}
+
+impl DBElement {
+    // find XmlElement with name "resultMap"
+    pub fn __all__(db: XmlDB) -> *Self {
+        for (x in XmlElement(db)) {
+            if (x.getElementName() = "resultMap") {
+                yield DBElement { ..x }
+            }
+        }
+    }
+
+    // get attribute "type" from XmlElement "resultMap"
+    pub fn getType(self) -> string {
+        for (a in self.getAttribute()) {
+            if (a.getName() = "type") {
+                return a.getValue()
+            }
+        }
+    }
+}
+
+// if DBElement's type name equals to Java Class name, then collect this Class info
+fn getDOClassFromResultMap() -> *Class {
+    for (c in Class(default_java_db()), e in DBElement(default_xml_db())) {
+        if (c.getQualifiedName() = e.getType()) {
+            yield c
+        }
+    }
+}
+
+// example query, just get the class name, you could do other queries
+query do_class
+from c in getDOClassFromResultMap()
+select c.getQualifiedName() as do_class_name

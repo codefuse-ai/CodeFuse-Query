@@ -8,6 +8,7 @@ on:
     branches: [ main ]
     paths:
       - godel-script/**
+  workflow_dispatch:
 
 jobs:
   mac-aarch64-build:
@@ -47,6 +48,9 @@ jobs:
       run: |
         git config --global user.name "$(git log -n 1 --pretty=format:%an)"
         git config --global user.email "$(git log -n 1 --pretty=format:%ae)"
+    - name: Install Package
+      run: |
+        apt-get install sqlite3 libsqlite3-dev
     - name: Build
       run: |
         cd godel-script
