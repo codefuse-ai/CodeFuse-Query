@@ -581,11 +581,18 @@ bool ungrounded_parameter_checker::is_schema_get_primary_key(call_root* node) {
     if (node->get_call_head()->get_first_expression()->get_ast_class()!=ast_class::ac_identifier) {
         return false;
     }
+
     const auto& head_type = node->get_call_head()->get_resolve();
+    // head type should not be global symbol or data-set type
     if (head_type.is_global || head_type.type.is_set) {
         return false;
     }
-    if (node->get_call_chain().size()!=1) {
+
+    // schema get primary key pattern may be:
+    // 1. schema.primary_key
+    // 2. schema.primary_key.other_calls()
+    // so size should be >= 1
+    if (node->get_call_chain().size()<1) {
         return false;
     }
     const auto name = head_type.type.full_path_name_without_set();
@@ -602,6 +609,7 @@ bool ungrounded_parameter_checker::is_schema_get_primary_key(call_root* node) {
         return false;
     }
     const auto key = node->get_call_chain()[0]->get_field_name()->get_name();
+    // check if the field is primary key
     return sc.fields.count(key) && sc.fields.at(key).primary;
 }
 
