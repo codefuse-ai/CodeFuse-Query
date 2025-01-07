@@ -236,7 +236,7 @@ pkg_files(
 pkg_files(
     name = "coref-python-src-extractor-pkg",
     srcs = [
-        "//language/python/extractor:test1",
+        "//language/python/extractor:coref-python-extractor-bin",
     ],
     attributes = pkg_attributes(
         mode = "0755",
@@ -507,10 +507,7 @@ coref_lib_script_pkgs = [
     ":coref-properties-lib-script-pkg",
     ":coref-sql-lib-script-pkg",
     # ":coref-arkts-lib-script-pkg",
-] + select({
-    ":custom_build": [],
-    "//conditions:default": [":coref-swift-lib-script-pkg"],
-})
+] 
 
 coref_libscript_languages = [
     "java",

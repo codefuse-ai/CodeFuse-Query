@@ -2,4 +2,4 @@ SQLAlchemy~=1.4.32
 
 tqdm~=4.64.0
 astor~=0.8.1
-pyinstaller~=5.3
+pyinstaller==6.11.1

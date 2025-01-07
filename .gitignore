@@ -40,3 +40,8 @@ bazel-bin
 bazel-CodeFuse-Query
 bazel-out
 bazel-testlogs
+
+__pycache__/
+*.pyc
+*.pyo
+*.pyd

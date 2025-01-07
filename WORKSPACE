@@ -230,28 +230,40 @@ http_archive(
     name = "osx_godel_0.3",
     build_file = "godel.BUILD",
     sha256 = "1e7e0151f1acd1656f4079b7b16dfa4e5da607a1239149a88e9df3b543b23c30",
-    urls = ["https://antsys-sparrow-data.cn-shanghai-alipay-office.oss-alipay.aliyuncs.com/sparrow/public/osx-godel/godel-multipleinput-20221115.tar.gz"],
+    urls = [
+        "https://antsys-sparrow-data.cn-shanghai-alipay-office.oss-alipay.aliyuncs.com/sparrow/public/osx-godel/godel-multipleinput-20221115.tar.gz",
+        "https://github.com/codefuse-ai/CodeFuse-Query/releases/download/godel_0.3_artifacts/godel-0.3.osx.multipleinput-20221115.tar.gz",
+    ],
 )
 
 http_archive(
     name = "linux_godel_0.3",
     build_file = "godel.BUILD",
     sha256 = "4dbc04677b9c785a00c127228368919ba6cee2a1f160e83e497d44fb4820dcd3",
-    urls = ["https://antsys-sparrow-data.cn-shanghai-alipay-office.oss-alipay.aliyuncs.com/sparrow/public/linux-godel/godel-multipleinput-20221115.tar.gz"],
+    urls = [
+        "https://antsys-sparrow-data.cn-shanghai-alipay-office.oss-alipay.aliyuncs.com/sparrow/public/linux-godel/godel-multipleinput-20221115.tar.gz",
+        "https://github.com/codefuse-ai/CodeFuse-Query/releases/download/godel_0.3_artifacts/godel-0.3.linux.multipleinput-20221115.tar.gz",
+    ],
 )
 
 http_archive(
     name = "osx_godel_script",
     build_file = "godel.BUILD",
     sha256 = "4c4189320523ca63d9fb50e37aa0bcbd452109011a8d669d878b91492168e4e0",
-    urls = ["https://antsys-sparrow-data.cn-shanghai-alipay-office.oss-alipay.aliyuncs.com/sparrow/public/godel-script/osx/godel-script-osx-2ac5184520240812.tar.gz"],
+    urls = [
+        "https://antsys-sparrow-data.cn-shanghai-alipay-office.oss-alipay.aliyuncs.com/sparrow/public/godel-script/osx/godel-script-osx-2ac5184520240812.tar.gz",
+        "https://github.com/codefuse-ai/CodeFuse-Query/releases/download/godel_0.3_artifacts/godel-script-osx-2ac5184520240812.tar.gz",
+    ],
 )
 
 http_archive(
     name = "linux_godel_script",
     build_file = "godel.BUILD",
     sha256 = "ac7c0d62b02cb3d7c673dac0c69079e347f727232a56053402ebbab655fd5649",
-    urls = ["https://antsys-sparrow-data.cn-shanghai-alipay-office.oss-alipay.aliyuncs.com/sparrow/public/godel-script/linux/godel-script-linux-2ac5184520240812.tar.gz"],
+    urls = [
+        "https://antsys-sparrow-data.cn-shanghai-alipay-office.oss-alipay.aliyuncs.com/sparrow/public/godel-script/linux/godel-script-linux-2ac5184520240812.tar.gz",
+        "https://github.com/codefuse-ai/CodeFuse-Query/releases/download/godel_0.3_artifacts/godel-script-linux-2ac5184520240812.tar.gz",
+    ],
 )
 
 # Setting up for bazel go dependency
