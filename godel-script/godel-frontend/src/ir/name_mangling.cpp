@@ -127,7 +127,7 @@ std::string rule_mangle(const std::string& name) {
         prefix = "GT_";
     } else if (starts_with(name, "typecheck_")) {
         // typecheck_xxx -> TC_xxx
-        temp = name.substr(11);
+        temp = name.substr(10);
         prefix = "TC_";
     } else {
         // std::cerr << "unknown rule name: " << name << std::endl;
