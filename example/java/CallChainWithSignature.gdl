@@ -15,18 +15,17 @@ fn isChecked(signature: string) -> bool {
 
 // You can view the signature, line number, and file location of each callable by outputting the following function:
 fn signature_name(signature: string, line: int, fileName: string) -> bool {
-    let (db = default_java_db()){
-        for (callable in Callable(db)){
-            if (signature = callable.getSignature() && fileName = callable.getLocation().getFile().getName()
-                && line = callable.getLocation().getStartLineNumber()) {
-                return true
-            }
+    for (callable in Callable(default_java_db())) {
+        if (signature = callable.getSignature() &&
+            fileName = callable.getLocation().getFile().getName() &&
+            line = callable.getLocation().getStartLineNumber()) {
+            return true
         }
     }
 }
 
 // Determine whether it is a callable corresponding to the function signature
-fn checkCallable(c: Callable)-> bool {
+fn checkCallable(c: Callable) -> bool {
     if (isChecked(c.getSignature())) {
         return true
     }
@@ -35,7 +34,7 @@ fn checkCallable(c: Callable)-> bool {
 
 // Do an upward search
 fn getAncestorCallerEndWithLimit(c: Callable) -> *Callable {
-    // Get the calling function of the current functio
+    // Get the calling function of the current function
     yield c.getCaller()
     // The current node is multiple layers above, and recursive calls are required to obtain all calling functions
     for (tmp in c.getCaller()) {
@@ -43,23 +42,35 @@ fn getAncestorCallerEndWithLimit(c: Callable) -> *Callable {
     }
 }
 
-fn getAllLimitedCallable(c:Callable)->*Callable{
+fn getAllLimitedCallable(c: Callable) -> *Callable {
     yield c
     yield getAncestorCallerEndWithLimit(c)
 }
 
 // At the same time, output the class corresponding to callable
-fn getCallGraph(callMethodName:string, callClassName: string,
-                calleeMethodName:string, calleeClassName: string) -> bool {
-    let (db = default_java_db()){
-        for (callable in Callable(db)){
+fn getCallGraph(callMethodName: string,
+                callClassName: string,
+                calleeMethodName: string,
+                calleeClassName: string) -> bool {
+    let (db = default_java_db()) {
+        for (callable in Callable(db)) {
             if (checkCallable(callable)) {
-                for (call in getAllLimitedCallable(callable), callee in getAllLimitedCallable(callable)){
+                for (call in getAllLimitedCallable(callable), callee in getAllLimitedCallable(callable)) {
                     if (call != callee && callee in call.getCallee()) {
+                        // Get the method corresponding to the callable
+                        // But be aware that the callable is mixed with method and constructor
+                        // So this call graph may not contain constructor
                         for (callMethod in Method(db), calleeMethod in Method(db)) {
                             if (callMethod.key_eq(call) && calleeMethod.key_eq(callee)) {
-                                if (callMethodName = callMethod.getName() && callClassName = callMethod.getBelongedClass().getQualifiedName() &&
-                                    calleeMethodName = callee.getName() && calleeClassName = calleeMethod.getBelongedClass().getQualifiedName()) {
+                                if (callMethodName = callMethod.getName() &&
+                                    callClassName = callMethod.getBelongedClass().getQualifiedName() &&
+                                    calleeMethodName = callee.getName() &&
+                                    // Also, method's getBelongedClass will get Class,
+                                    // but some of methods are belonged to interface.
+                                    // So this call graph may not contain methods in interfaces.
+                                    // If you want to get methods in interfaces, you can use the following code:
+                                    //   calleeClassName = calleeMethod.getParent().getQualifiedName()
+                                    calleeClassName = calleeMethod.getBelongedClass().getQualifiedName()) {
                                     return true
                                 }
                             }
@@ -67,7 +78,6 @@ fn getCallGraph(callMethodName:string, callClassName: string,
                     }
                 }
             }
-
         }
     }
 }

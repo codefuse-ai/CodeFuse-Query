@@ -53,6 +53,7 @@ private:
     void visit_record(lir::record*) override;
     void visit_unary(lir::unary*) override;
     void visit_binary(lir::binary*) override;
+    void visit_aggregator(lir::aggregator*) override;
 
 public:
     combine_worker(const inst_combine_pass::ref_graph& g): vg(g) {}

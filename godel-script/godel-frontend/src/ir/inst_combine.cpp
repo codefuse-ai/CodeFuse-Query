@@ -143,18 +143,26 @@ void inst_combine_pass::scan(souffle_rule_impl* b) {
     //
     for(const auto& i : variable_reference_graph) {
         const auto& name = i.first;
-        if (i.second.size()!=1) {
+        // if alias variables' count > 1, even if there's a circle, still skip it.
+        if (i.second.size() != 1) {
             continue;
         }
+        // alias variable's name
         const auto& to = i.second.begin()->first;
         if (!variable_reference_graph.count(to)) {
             continue;
         }
-        if (variable_reference_graph.at(to).size()!=1) {
+        // this variable's alias count should be 1
+        if (variable_reference_graph.at(to).size() != 1) {
             continue;
         }
+        // get `to`'s alias variable's name, this name should be equal to `name`
         const auto& from = variable_reference_graph.at(to).begin()->first;
-        if (from==name && to.find("ssa_temp")==0 && from.find("ssa_temp")==0) {
+        // means there's a circle like this:
+        //   `to` <--> `from`(aka `name`)
+        // after clear(), `to`'s alias count should be 0:
+        //   `to` <--- `from`(aka `name`)
+        if (from == name && to.find("ssa_temp") == 0 && from.find("ssa_temp") == 0) {
             variable_reference_graph.at(to).clear();
         }
     }
@@ -225,6 +233,15 @@ void combine_worker::visit_unary(lir::unary* node) {
 }
 
 void combine_worker::visit_binary(lir::binary* node) {
+    const auto& tgt = node->get_target();
+    if (is_single_ref_ssa_temp(tgt.content)) {
+        const auto& ref = get_single_ref(tgt.content);
+        node->get_mutable_target().content = ref.first;
+        ref.second->set_flag_eliminated(true);
+    }
+}
+
+void combine_worker::visit_aggregator(lir::aggregator* node) {
     const auto& tgt = node->get_target();
     if (is_single_ref_ssa_temp(tgt.content)) {
         const auto& ref = get_single_ref(tgt.content);

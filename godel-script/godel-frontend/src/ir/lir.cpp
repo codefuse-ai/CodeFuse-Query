@@ -359,7 +359,19 @@ void not_operand::dump(std::ostream& os, const std::string& indent) const {
     // only one statement in the block
     if (body->get_content().size()==1) {
         os << indent << "!(";
-        body->get_content()[0]->dump(os, "");
+        switch(body->get_content()[0]->get_kind()) {
+            case inst_kind::inst_not:
+            case inst_kind::inst_and:
+            case inst_kind::inst_or:
+            case inst_kind::inst_aggr:
+                os << "\n";
+                body->get_content()[0]->dump(os, indent + "  ");
+                os << "\n" << indent;
+                break;
+            default:
+                body->get_content()[0]->dump(os, "");
+                break;
+        }
         os << ")";
         return;
     }
