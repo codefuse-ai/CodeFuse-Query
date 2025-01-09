@@ -666,6 +666,10 @@ public:
     void accept(inst_visitor* v) override {
         v->visit_aggregator(this);
     }
+
+public:
+    const auto& get_target() const { return destination; }
+    auto& get_mutable_target() { return destination; }
 };
 
 }

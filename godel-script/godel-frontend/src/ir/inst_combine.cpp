@@ -241,6 +241,15 @@ void combine_worker::visit_binary(lir::binary* node) {
     }
 }
 
+void combine_worker::visit_aggregator(lir::aggregator* node) {
+    const auto& tgt = node->get_target();
+    if (is_single_ref_ssa_temp(tgt.content)) {
+        const auto& ref = get_single_ref(tgt.content);
+        node->get_mutable_target().content = ref.first;
+        ref.second->set_flag_eliminated(true);
+    }
+}
+
 void combine_worker::mark(souffle_rule_impl* b) {
     b->get_block()->accept(this);
 }
