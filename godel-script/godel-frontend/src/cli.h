@@ -46,9 +46,9 @@ enum class option {
     /* optimization */
     cli_enable_for_opt,             // switch for optimization on
     cli_enable_let_opt,             // switch let optimization on
-    cli_enable_ir_merge,            // switch ir merge on
     cli_enable_self_constraint_opt, // switch self constraint optimization on
     cli_enable_join_reorder,        // switch join reorder optimization on
+    cli_disable_inst_combine,       // switch inst combine off
     cli_disable_remove_unused,      // switch unused method deletion off
     cli_disable_do_schema_opt,      // switch do schema optimization off
     cli_souffle_debug_dump,         // switch souffle debug mode on
@@ -121,12 +121,11 @@ const std::unordered_map<std::string, option> options = {
     {"-Of", option::cli_enable_for_opt},
     {"--opt-let", option::cli_enable_let_opt},
     {"-Ol", option::cli_enable_let_opt},
-    {"--opt-ir-merge", option::cli_enable_ir_merge},
-    {"-Oim", option::cli_enable_ir_merge},
     {"--opt-self-constraint", option::cli_enable_self_constraint_opt},
     {"-Osc", option::cli_enable_self_constraint_opt},
     {"--opt-join-reorder", option::cli_enable_join_reorder},
     {"-Ojr", option::cli_enable_join_reorder},
+    {"--disable-inst-combine", option::cli_disable_inst_combine},
     {"--disable-remove-unused", option::cli_disable_remove_unused},
     {"--disable-do-schema-opt", option::cli_disable_do_schema_opt},
     {"--souffle-debug", option::cli_souffle_debug_dump},
@@ -142,11 +141,9 @@ const std::unordered_map<std::string, option> options = {
 const std::unordered_map<std::string, std::vector<option>> multi_options = {
     {"-O1", {option::cli_enable_for_opt}},
     {"-O2", {option::cli_enable_for_opt,
-             option::cli_enable_self_constraint_opt,
-             option::cli_enable_ir_merge}},
+             option::cli_enable_self_constraint_opt}},
     {"-O3", {option::cli_enable_for_opt,
              option::cli_enable_self_constraint_opt,
-             option::cli_enable_ir_merge,
              option::cli_enable_join_reorder}}
 };
 

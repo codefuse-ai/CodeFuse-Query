@@ -28,7 +28,7 @@ void pass_manager::run(ir_context& ctx, const cli::configure& conf) {
         ordered_pass_list.push_back(new unused_remove_pass(ctx));
         ordered_pass_list.push_back(new unused_type_alias_remove_pass(ctx));
     }
-    if (conf.count(cli::option::cli_enable_ir_merge)) {
+    if (!conf.count(cli::option::cli_disable_inst_combine)) {
         ordered_pass_list.push_back(new inst_combine_pass(ctx));
     }
     ordered_pass_list.push_back(new flatten_nested_block(ctx));
