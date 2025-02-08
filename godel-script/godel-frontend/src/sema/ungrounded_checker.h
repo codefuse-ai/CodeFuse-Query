@@ -132,6 +132,11 @@ private:
     }
     void report_unused_parameter(const report::span&);
     bool check_directly_return_self(ret_stmt*);
+    // check expression is call_root node, and only contains identifier call
+    bool check_directly_call_identifier(expr*);
+    // check identifier call in binary expression is semanticly a condition, not binding
+    // e.g. `a - 1` is a condition (`a` ungrounded), but `a = 1` is binding (`a` grounded)
+    bool check_non_binding_binary_operator(binary_operator*);
 
 private:
     bool visit_identifier(identifier*) override;

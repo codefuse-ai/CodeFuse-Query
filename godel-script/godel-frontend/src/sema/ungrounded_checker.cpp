@@ -367,6 +367,47 @@ bool ungrounded_parameter_checker::visit_identifier(identifier* node) {
     return true;
 }
 
+bool ungrounded_parameter_checker::check_directly_call_identifier(expr* node) {
+    if (node->get_ast_class() != ast_class::ac_call_root) {
+        return false;
+    }
+
+    auto real = static_cast<call_root*>(node);
+    if (real->get_call_head()->has_func_call() ||
+        real->get_call_head()->is_initializer()) {
+        return false;
+    }
+    if (real->get_call_head()->get_first_expression()->get_ast_class()
+            != ast_class::ac_identifier) {
+        return false;
+    }
+    if (!real->get_call_chain().empty()) {
+        return false;
+    }
+
+    return true;
+}
+
+bool ungrounded_parameter_checker::check_non_binding_binary_operator(binary_operator* node) {
+    // binary expressions like:
+    //   a - 1, a + 1, a * 1, a / 1
+    // are used as condition,
+    // variables directly called in the expression will not be marked as grounded
+
+    // both lhs and rhs are not directly called identifier,
+    // this is definitely not a binding binary operator,
+    // and we do not need to ignore checkings on both sides
+    if (!check_directly_call_identifier(node->get_left()) &&
+        !check_directly_call_identifier(node->get_right())) {
+        return false;
+    }
+
+    return node->get_operator_type() == binary_operator::type::add ||
+           node->get_operator_type() == binary_operator::type::sub ||
+           node->get_operator_type() == binary_operator::type::mult ||
+           node->get_operator_type() == binary_operator::type::div;
+}
+
 bool ungrounded_parameter_checker::visit_call_expr(call_expr* node) {
     // do not visit field name and generic type here
     // because they include identifier nodes, which may
@@ -398,12 +439,34 @@ bool ungrounded_parameter_checker::visit_unary_operator(unary_operator* node) {
 bool ungrounded_parameter_checker::visit_binary_operator(binary_operator* node) {
     // not in logical or expression, just visit and exit
     if (!logical_or_variable_used.size()) {
+        // e.g. `a + 1`, we do not check `a`
+        // e.g. `a + f(a)`, we do not check `a` but we check `f(a)`
+        if (check_non_binding_binary_operator(node)) {
+            if (!check_directly_call_identifier(node->get_left())) {
+                node->get_left()->accept(this);
+            }
+            if (!check_directly_call_identifier(node->get_right())) {
+                node->get_right()->accept(this);
+            }
+            return true;
+        }
         node->get_left()->accept(this);
         node->get_right()->accept(this);
         return true;
     }
 
-    if (node->get_operator_type()!=binary_operator::type::logical_or) {
+    if (node->get_operator_type() != binary_operator::type::logical_or) {
+        // e.g. `a + 1`, we do not check `a`
+        // e.g. `a + f(a)`, we do not check `a` but we check `f(a)`
+        if (check_non_binding_binary_operator(node)) {
+            if (!check_directly_call_identifier(node->get_left())) {
+                node->get_left()->accept(this);
+            }
+            if (!check_directly_call_identifier(node->get_right())) {
+                node->get_right()->accept(this);
+            }
+            return true;
+        }
         node->get_left()->accept(this);
         node->get_right()->accept(this);
         return true;
@@ -618,6 +681,8 @@ bool ungrounded_parameter_checker::visit_call_root(call_root* node) {
         return true;
     }
     for(auto i : node->get_call_chain()) {
+        // if souffle aggregator is used in the call chain,
+        // all variables used in this call is not grounded
         if (i->is_aggregator() && !i->is_aggregator_find()) {
             return true;
         }
