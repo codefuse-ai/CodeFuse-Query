@@ -681,6 +681,8 @@ bool ungrounded_parameter_checker::visit_call_root(call_root* node) {
         return true;
     }
     for(auto i : node->get_call_chain()) {
+        // if souffle aggregator is used in the call chain,
+        // all variables used in this call is not grounded
         if (i->is_aggregator() && !i->is_aggregator_find()) {
             return true;
         }
