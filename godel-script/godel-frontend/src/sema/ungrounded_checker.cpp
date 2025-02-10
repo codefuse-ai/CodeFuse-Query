@@ -293,7 +293,7 @@ void ungrounded_parameter_checker::report_unused_parameter(const report::span& s
     bool flag_self_ungrounded = false;
 
     // start checking
-    for(const auto& i : func->ordered_parameter_list) {
+    for (const auto& i : func->ordered_parameter_list) {
         // if variable is not a parameter or already used, do not report
         if (!record.count(i) || record.at(i)) {
             continue;
@@ -315,10 +315,12 @@ void ungrounded_parameter_checker::report_unused_parameter(const report::span& s
         if (is_native_type(type) && !record_is_set_flag.at(i)) {
             ungrounded_params += ungrounded_params.length()? ", ":"";
             ungrounded_params += i;
-        } else if (i!="self") {
+        } else if (i != "self") {
             unused_params += unused_params.length()? ", ":"";
             unused_params += i;
         } else {
+            // unused self, mark it as ungrounded
+            // so self constraint will be generated to protect this parameter
             flag_self_ungrounded = true;
         }
     }
@@ -326,14 +328,14 @@ void ungrounded_parameter_checker::report_unused_parameter(const report::span& s
     // unused warning report
     if (unused_params.length()) {
         err->warn(stmt_loc,
-            "unused parameter \"" + unused_params + "\" in this branch."
+            "\"" + unused_params + "\" is unused in this branch."
         );
     }
 
     // ungrounded error report
     if (ungrounded_params.length()) {
         err->err(stmt_loc,
-            "ungrounded parameter \"" + ungrounded_params + "\" in this branch."
+            "\"" + ungrounded_params + "\" is ungrounded in this branch."
         );
     }
 
@@ -380,6 +382,11 @@ bool ungrounded_parameter_checker::check_directly_call_identifier(expr* node) {
     if (real->get_call_head()->get_first_expression()->get_ast_class()
             != ast_class::ac_identifier) {
         return false;
+    }
+    // schema instance getting primary key equals to directly using this instance
+    // e.g. `a.id` in fact equals to `a` itself, so we see this as direct call id
+    if (is_schema_get_primary_key(real)) {
+        return true;
     }
     if (!real->get_call_chain().empty()) {
         return false;
@@ -646,11 +653,13 @@ bool ungrounded_parameter_checker::visit_call_head(call_head* node) {
 }
 
 bool ungrounded_parameter_checker::is_schema_get_primary_key(call_root* node) {
-    if (node->get_call_head()->get_first_expression()->get_ast_class()!=ast_class::ac_identifier) {
+    auto head = node->get_call_head();
+    // should call a variable
+    if (head->get_first_expression()->get_ast_class() != ast_class::ac_identifier) {
         return false;
     }
 
-    const auto& head_type = node->get_call_head()->get_resolve();
+    const auto& head_type = head->get_resolve();
     // head type should not be global symbol or data-set type
     if (head_type.is_global || head_type.type.is_set) {
         return false;
@@ -663,16 +672,19 @@ bool ungrounded_parameter_checker::is_schema_get_primary_key(call_root* node) {
     if (node->get_call_chain().size()<1) {
         return false;
     }
+
+    // get type full path name
     const auto name = head_type.type.full_path_name_without_set();
     const auto index = ctx->global.get_index(name);
-    if (index==global_symbol_table::npos) {
+    if (index == global_symbol_table::npos) {
         return false;
     }
-    if (ctx->global.get_kind(index)!=symbol_kind::schema) {
+    if (ctx->global.get_kind(index) != symbol_kind::schema) {
         return false;
     }
+
     const auto& sc = ctx->global.get_schema(index);
-    if (node->get_call_chain()[0]->get_call_type()!=call_expr::type::get_field ||
+    if (node->get_call_chain()[0]->get_call_type() != call_expr::type::get_field ||
         node->get_call_chain()[0]->has_func_call()) {
         return false;
     }
@@ -682,7 +694,20 @@ bool ungrounded_parameter_checker::is_schema_get_primary_key(call_root* node) {
 }
 
 bool ungrounded_parameter_checker::visit_call_root(call_root* node) {
+    // we see schema get primary key as call schema itself
+    // because in generated souffle:
+    //   schema.primary_key = schema
+    // if schema is not grounded, the primary key is not grounded too
+    // but we add type constraint for each schema, so mark this as grounded
+    // except this call is:
+    //   self.primary_key
+    // self is not always constraint, if marked as grounded
+    // self will be ungrounded in generated souffle
     if (is_schema_get_primary_key(node)) {
+        auto first = node->get_call_head()->get_first_expression();
+        if (reinterpret_cast<identifier*>(first)->get_name() != "self") {
+            node->get_call_head()->accept(this);
+        }
         return true;
     }
     for(auto i : node->get_call_chain()) {

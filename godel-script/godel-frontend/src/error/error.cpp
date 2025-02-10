@@ -231,13 +231,13 @@ void error::warn_ignored_DO_schema(const std::unordered_set<std::string>& vec) {
     size_t ignored_count = 0;
     for(const auto& i : vec) {
         ++ignored_count;
-        if (ignored_count > 4) {
+        if (ignored_count > 8) {
             break;
         }
         std::clog << reset << "  " << i << "\n";
     }
-    if (vec.size() > 4) {
-        std::clog << reset << "  ...(" << vec.size()-4 << ")\n";
+    if (vec.size() > 8) {
+        std::clog << reset << "  ...(" << vec.size() - 8 << ")\n";
     }
     std::clog << std::endl;
 }
