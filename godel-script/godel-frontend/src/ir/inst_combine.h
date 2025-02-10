@@ -118,4 +118,16 @@ public:
     }
 };
 
+class replace_find_call: public pass {
+private:
+    void visit_block(lir::block*) override;
+
+public:
+    replace_find_call(ir_context& c): pass(pass_kind::ps_replace_find_call, c) {}
+    const char* get_name() const override {
+        return "[Transform] Replace Find Call";
+    }
+    bool run() override;
+};
+
 }
