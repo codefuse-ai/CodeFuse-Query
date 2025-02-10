@@ -23,6 +23,7 @@ private:
 
 private:
     void scan(souffle_rule_impl*);
+    void run_on_single_impl(souffle_rule_impl*);
 
 public:
     inst_combine_pass(ir_context& c): pass(pass_kind::ps_inst_combine, c) {}
@@ -65,6 +66,7 @@ public:
 class inst_elimination_worker: public lir::inst_visitor {
 private:
     std::vector<lir::block*> blk;
+    size_t eliminated_count = 0;
 
 private:
     void visit_boolean(lir::boolean* node) override {
@@ -111,6 +113,9 @@ private:
 
 public:
     void copy(souffle_rule_impl*);
+    auto get_eliminated_count() const {
+        return eliminated_count;
+    }
 };
 
 }

@@ -87,23 +87,33 @@ void inst_combine_pass::visit_compare(lir::compare* c) {
 }
 
 bool inst_combine_pass::run() {
-    for(auto impl : ctx->rule_impls) {
-        scan(impl);
-        inst_elimination_worker().copy(impl);
+    for (auto impl : ctx->rule_impls) {
+        run_on_single_impl(impl);
     }
-    for(auto impl : ctx->database_get_table) {
-        scan(impl);
-        inst_elimination_worker().copy(impl);
+    for (auto impl : ctx->database_get_table) {
+        run_on_single_impl(impl);
     }
-    for(auto impl : ctx->schema_get_field) {
-        scan(impl);
-        inst_elimination_worker().copy(impl);
+    for (auto impl : ctx->schema_get_field) {
+        run_on_single_impl(impl);
     }
-    for(auto impl : ctx->schema_data_constraint_impls) {
-        scan(impl);
-        inst_elimination_worker().copy(impl);
+    for (auto impl : ctx->schema_data_constraint_impls) {
+        run_on_single_impl(impl);
     }
     return true;
+}
+
+void inst_combine_pass::run_on_single_impl(souffle_rule_impl* b) {
+    auto worker = inst_elimination_worker();
+    size_t pass_run_count = 0;
+    const size_t max_pass_run_count = 16;
+    scan(b);
+    worker.copy(b);
+    ++ pass_run_count;
+    while (worker.get_eliminated_count() && pass_run_count < max_pass_run_count) {
+        scan(b);
+        worker.copy(b);
+        ++ pass_run_count;
+    }
 }
 
 void inst_combine_pass::scan(souffle_rule_impl* b) {
@@ -265,6 +275,7 @@ void inst_elimination_worker::visit_block(lir::block* node) {
     for(auto i : node->get_content()) {
         // skip eliminated instruction
         if (i->get_flag_eliminated()) {
+            ++ eliminated_count;
             continue;
         }
 
@@ -338,6 +349,8 @@ void inst_elimination_worker::visit_aggregator(lir::aggregator* node) {
 }
 
 void inst_elimination_worker::copy(souffle_rule_impl* impl) {
+    eliminated_count = 0;
+    blk.clear();
     auto impl_blk = new lir::block(impl->get_block()->get_location());
 
     blk.push_back(impl_blk);
