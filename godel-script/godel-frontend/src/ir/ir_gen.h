@@ -226,9 +226,14 @@ private:
                              std::vector<lir::call*>&,
                              bool);
     bool visit_for_stmt(for_stmt*) override;
+    // adjust order of generated IR, to change the join order, make it running faster
+    // for statement often uses a large set, so this optimization is useful in most cases
     void optimized_for_stmt_gen(for_stmt*);
     void unoptimized_for_stmt_gen(for_stmt*);
     bool visit_let_stmt(let_stmt*) override;
+    // adjust order of generated IR, to change the join order, make it running faster
+    // let statement often uses single value or a small set
+    // so this optimization is not very useful, or even harmful
     void optimized_let_stmt_gen(let_stmt*);
     void unoptimized_let_stmt_gen(let_stmt*);
 
