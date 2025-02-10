@@ -405,7 +405,12 @@ bool ungrounded_parameter_checker::check_non_binding_binary_operator(binary_oper
     return node->get_operator_type() == binary_operator::type::add ||
            node->get_operator_type() == binary_operator::type::sub ||
            node->get_operator_type() == binary_operator::type::mult ||
-           node->get_operator_type() == binary_operator::type::div;
+           node->get_operator_type() == binary_operator::type::div ||
+           node->get_operator_type() == binary_operator::type::compare_not_equal ||
+           node->get_operator_type() == binary_operator::type::compare_less ||
+           node->get_operator_type() == binary_operator::type::compare_less_equal ||
+           node->get_operator_type() == binary_operator::type::compare_great ||
+           node->get_operator_type() == binary_operator::type::compare_great_equal;
 }
 
 bool ungrounded_parameter_checker::visit_call_expr(call_expr* node) {
