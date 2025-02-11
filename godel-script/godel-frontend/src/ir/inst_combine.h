@@ -20,6 +20,7 @@ private:
 private:
     void visit_store(lir::store*) override;
     void visit_compare(lir::compare*) override;
+    void visit_call(lir::call*) override;
 
 private:
     void scan(souffle_rule_impl*);

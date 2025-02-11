@@ -12,7 +12,7 @@ void inst_combine_pass::visit_store(lir::store* s) {
     //
     // (
     //   ssa_temp_0 = a,
-    //   b = ssa_temp_1,
+    //   ssa_temp_1 = b,
     //   call(ssa_temp_2, ssa_temp_0, ssa_temp_1)
     // )
     //
@@ -83,6 +83,37 @@ void inst_combine_pass::visit_compare(lir::compare* c) {
     if (left.kind==lir::inst_value_kind::variable &&
         right.kind==lir::inst_value_kind::literal) {
         variable_reference_graph[left.content].insert({right.content, c});
+    }
+}
+
+void inst_combine_pass::visit_call(lir::call* c) {
+    if (c->get_func_kind() != lir::call::kind::key_cmp) {
+        return;
+    }
+    if (c->get_function_name() != "key_eq") {
+        return;
+    }
+
+    const auto& left = c->get_arguments()[0];
+    const auto& right = c->get_arguments()[1];
+
+    // record this case:
+    // 
+    // a.key_eq(b.getParent())
+    // -->
+    // (
+    //   getParent(ssa_temp_0, b),
+    //   a = ssa_temp_0
+    // )
+    //
+    // and optimize this case to:
+    //
+    // getParent(a, b)
+    //
+    if (left.kind==lir::inst_value_kind::variable &&
+        right.kind==lir::inst_value_kind::variable) {
+        variable_reference_graph[left.content].insert({right.content, c});
+        variable_reference_graph[right.content].insert({left.content, c});
     }
 }
 
