@@ -1,0 +1,90 @@
+// script
+use coref::python::*
+
+fn default_db() -> PythonDB {
+    return PythonDB::load("coref_python_src.db")
+}
+
+// 递归查找以a为起点的语法树边，b 和 c 组成一条有向边，b 为父节点，c 为子节点，index 为这条边在树中距离 root 的层级
+fn searchEdge(a: CombineElement, b: CombineElement, c: CombineElement, index: int) -> bool {
+    if (a = b.getAnAncestorForIndex(index) || (b = a && index = 0)) {
+        if (b = c.getParent()) {
+            return true
+        }
+    }
+}
+
+// 获取位置信息，如果该节点在 ast parser 中不存在位置信息，则会递归展示该节点的父节点的位置信息，
+// 例如 Comprehension，Arguments，Withitem, DocstringComment 等类型
+fn getLoc(p: CombineElement, line: int, col: int) -> bool {
+    return line = p.getLocation().getStartLineNumber() &&
+           col = p.getLocation().getStartColumnNumber()
+}
+
+// 输出AST语法树的有向边，以及点的代码片段
+// 第一列是层数，从0开始
+// 第二列是当前边的父节点
+// 第三列是父节点的节点类型
+// 第四列是父节点的代码片段
+// 第五列是父节点起始行号
+// 第六列是父节点起始列号
+// 第七列是当前边的子节点
+// 第八列是子节点的节点类型
+// 第九列是子节点的代码片段
+// 第十列是子节点起始行号
+// 第十一列是子节点起始列号
+@output
+fn out(filePath: string,
+       depth: int,
+       parent: CombineElement,
+       parentKind: string,
+       parentContent: string,
+       parentLine: int,
+       parentColumn: int,
+       child: CombineElement,
+       childKind: string,
+       childContent: string,
+       childLine: int,
+       childColumn: int) -> bool {
+    for (a in File(default_db()))  {
+        if (filePath = a.getRelativePath() && 
+            searchEdge(CombineElement(default_db()).find(a), parent, child, depth) && 
+            childContent = child.print() && // 输出子节点的内容 
+            shortPrint(parent, parentContent) && // 优化输出父节点内容
+            parentKind = parent.getType() &&
+            childKind = child.getType() &&
+            getLoc(parent, parentLine, parentColumn) &&
+            getLoc(child, childLine, childColumn)) {
+            return true
+        }
+    }
+}
+
+// 找到长度在 5 行以上的Expression, 可以调整
+fn isLongExpression(s: CombineElement) -> bool {
+    return Expression(default_db()).find(s).getSize().getNumberOfTotalLines() > 4
+}
+
+// 优化输出父节点
+fn shortPrint(p: CombineElement, n: string) -> bool {
+    if (isStatement(p)) {
+        return n = p.getType()
+    }
+    if (!isStatement(p)) {
+        if (isLongExpression(p)) {
+            return n = p.getType()
+        }
+        if (!isLongExpression(p)) {
+            return n = p.print()
+        }
+    }
+}
+
+// 找到属于Statement的节点
+fn isStatement(s: CombineElement) -> bool {
+    for (b in Statement(default_db())) {
+        if (b.key_eq(s)) {
+            return true
+        }
+    }
+}
