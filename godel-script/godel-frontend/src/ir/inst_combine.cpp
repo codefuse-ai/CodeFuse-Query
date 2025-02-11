@@ -12,7 +12,7 @@ void inst_combine_pass::visit_store(lir::store* s) {
     //
     // (
     //   ssa_temp_0 = a,
-    //   b = ssa_temp_1,
+    //   ssa_temp_1 = b,
     //   call(ssa_temp_2, ssa_temp_0, ssa_temp_1)
     // )
     //
@@ -86,24 +86,65 @@ void inst_combine_pass::visit_compare(lir::compare* c) {
     }
 }
 
+void inst_combine_pass::visit_call(lir::call* c) {
+    if (c->get_func_kind() != lir::call::kind::key_cmp) {
+        return;
+    }
+    if (c->get_function_name() != "key_eq") {
+        return;
+    }
+
+    const auto& left = c->get_arguments()[0];
+    const auto& right = c->get_arguments()[1];
+
+    // record this case:
+    // 
+    // a.key_eq(b.getParent())
+    // -->
+    // (
+    //   getParent(ssa_temp_0, b),
+    //   a = ssa_temp_0
+    // )
+    //
+    // and optimize this case to:
+    //
+    // getParent(a, b)
+    //
+    if (left.kind==lir::inst_value_kind::variable &&
+        right.kind==lir::inst_value_kind::variable) {
+        variable_reference_graph[left.content].insert({right.content, c});
+        variable_reference_graph[right.content].insert({left.content, c});
+    }
+}
+
 bool inst_combine_pass::run() {
-    for(auto impl : ctx->rule_impls) {
-        scan(impl);
-        inst_elimination_worker().copy(impl);
+    for (auto impl : ctx->rule_impls) {
+        run_on_single_impl(impl);
     }
-    for(auto impl : ctx->database_get_table) {
-        scan(impl);
-        inst_elimination_worker().copy(impl);
+    for (auto impl : ctx->database_get_table) {
+        run_on_single_impl(impl);
     }
-    for(auto impl : ctx->schema_get_field) {
-        scan(impl);
-        inst_elimination_worker().copy(impl);
+    for (auto impl : ctx->schema_get_field) {
+        run_on_single_impl(impl);
     }
-    for(auto impl : ctx->schema_data_constraint_impls) {
-        scan(impl);
-        inst_elimination_worker().copy(impl);
+    for (auto impl : ctx->schema_data_constraint_impls) {
+        run_on_single_impl(impl);
     }
     return true;
+}
+
+void inst_combine_pass::run_on_single_impl(souffle_rule_impl* b) {
+    auto worker = inst_elimination_worker();
+    size_t pass_run_count = 0;
+    const size_t max_pass_run_count = 16;
+    scan(b);
+    worker.copy(b);
+    ++ pass_run_count;
+    while (worker.get_eliminated_count() && pass_run_count < max_pass_run_count) {
+        scan(b);
+        worker.copy(b);
+        ++ pass_run_count;
+    }
 }
 
 void inst_combine_pass::scan(souffle_rule_impl* b) {
@@ -265,6 +306,7 @@ void inst_elimination_worker::visit_block(lir::block* node) {
     for(auto i : node->get_content()) {
         // skip eliminated instruction
         if (i->get_flag_eliminated()) {
+            ++ eliminated_count;
             continue;
         }
 
@@ -338,6 +380,8 @@ void inst_elimination_worker::visit_aggregator(lir::aggregator* node) {
 }
 
 void inst_elimination_worker::copy(souffle_rule_impl* impl) {
+    eliminated_count = 0;
+    blk.clear();
     auto impl_blk = new lir::block(impl->get_block()->get_location());
 
     blk.push_back(impl_blk);
@@ -352,6 +396,71 @@ void inst_elimination_worker::copy(souffle_rule_impl* impl) {
     }
     impl->get_block()->get_mutable_content().swap(impl_blk->get_mutable_content());
     delete impl_blk;
+}
+
+void replace_find_call::visit_block(lir::block* node) {
+    bool has_find_call = false;
+    for (auto i : node->get_content()) {
+        if (i->get_kind() != lir::inst_kind::inst_call) {
+            continue;
+        }
+        auto call = reinterpret_cast<lir::call*>(i);
+        if (call->get_func_kind() == lir::call::kind::find &&
+            call->get_function_name() == "find") {
+            has_find_call = true;
+            break;
+        }
+    }
+
+    if (has_find_call) {
+        std::vector<lir::inst*> new_content;
+        for (auto i : node->get_content()) {
+            if (i->get_kind() != lir::inst_kind::inst_call) {
+                new_content.push_back(i);
+                continue;
+            }
+
+            auto call = reinterpret_cast<lir::call*>(i);
+            if (call->get_func_kind() != lir::call::kind::find ||
+                call->get_function_name() != "find") {
+                new_content.push_back(i);
+                continue;
+            }
+
+            auto dst = call->get_return();
+            auto arg0 = call->get_arguments()[0];
+            auto arg1 = call->get_arguments()[1];
+            auto new_block = new lir::block(call->get_location());
+            new_block->set_use_comma();
+            new_content.push_back(new_block);
+
+            new_block->add_new_content(new lir::store(arg0, dst, call->get_location()));
+            new_block->add_new_content(new lir::store(arg1, arg0, call->get_location()));
+
+            delete i;
+        }
+        node->get_mutable_content().swap(new_content);
+    } else {
+        for (auto i : node->get_content()) {
+            i->accept(this);
+        }
+    }
+}
+
+bool replace_find_call::run() {
+    for (auto impl : ctx->rule_impls) {
+        impl->get_block()->accept(this);
+    }
+    for (auto impl : ctx->database_get_table) {
+        impl->get_block()->accept(this);
+    }
+    for (auto impl : ctx->schema_get_field) {
+        impl->get_block()->accept(this);
+    }
+    for (auto impl : ctx->schema_data_constraint_impls) {
+        impl->get_block()->accept(this);
+    }
+    return true;
 }
 
 }

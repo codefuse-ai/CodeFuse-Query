@@ -79,10 +79,8 @@ git reset HEAD~
 Use command below:
 
 ```bash
-mkdir build
-cd build
-cmake ..
-make -j
+mkdir build && cd build && cmake .. -DCMAKE_BUILD_TYPE=Release
+make -j6
 ```
 
 After building, you'll find `build/godel` in the `build` folder.
@@ -91,20 +89,18 @@ After building, you'll find `build/godel` in the `build` folder.
 
 Use this command for help:
 
-> ./build/godel -h
+> godel -h
 
-### Compile Target Soufflé
+### Compile GödelScript to Target Soufflé
 
-> ./build/godel -p {godel library directory} {input file} -s {soufflé output file} -Of
+> godel -p {godel library directory} {input file} -s {soufflé output file} -O2
 
-`-Of` is an optimization for join order, we suggest to switch it on.
+We suggest to use `-O2` for stable optimizations.
 
-### Directly Run Soufflé
+### Directly Run GödelScript
 
-> ./build/godel -p {godel library directory} {input file} -r -Of -f {database directory}
+> godel -p {godel library directory} {input file} -r -O2 -f {database directory}
 
-`-Of` is an optimization for join order, we suggest to switch it on.
+We suggest to use `-O2` for stable optimizations.
 
 `-r` means directly run soufflé.
-
-`-v` could be used for getting verbose info.

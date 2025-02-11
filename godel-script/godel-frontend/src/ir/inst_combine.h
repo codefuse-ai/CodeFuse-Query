@@ -20,9 +20,11 @@ private:
 private:
     void visit_store(lir::store*) override;
     void visit_compare(lir::compare*) override;
+    void visit_call(lir::call*) override;
 
 private:
     void scan(souffle_rule_impl*);
+    void run_on_single_impl(souffle_rule_impl*);
 
 public:
     inst_combine_pass(ir_context& c): pass(pass_kind::ps_inst_combine, c) {}
@@ -65,6 +67,7 @@ public:
 class inst_elimination_worker: public lir::inst_visitor {
 private:
     std::vector<lir::block*> blk;
+    size_t eliminated_count = 0;
 
 private:
     void visit_boolean(lir::boolean* node) override {
@@ -111,6 +114,21 @@ private:
 
 public:
     void copy(souffle_rule_impl*);
+    auto get_eliminated_count() const {
+        return eliminated_count;
+    }
+};
+
+class replace_find_call: public pass {
+private:
+    void visit_block(lir::block*) override;
+
+public:
+    replace_find_call(ir_context& c): pass(pass_kind::ps_replace_find_call, c) {}
+    const char* get_name() const override {
+        return "[Transform] Replace Find Call";
+    }
+    bool run() override;
 };
 
 }

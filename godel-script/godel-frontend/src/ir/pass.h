@@ -13,6 +13,7 @@ enum class pass_kind {
     ps_remove_unused,
     ps_remove_unused_type,
     ps_inst_combine,
+    ps_replace_find_call,
     ps_flatten_nested_block,
     ps_aggregator_inline_remark,
     ps_ungrounded_check,
