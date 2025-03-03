@@ -52,24 +52,77 @@ Structure of this project:
     +-- src             godel-frontend source code
 ```
 
+### Environment
+
 Need C++ standard at least `-std=c++17`.
+
+You can refer to the following Dockerfile to prepare your development environment.
+
+```Dockerfile
+FROM ubuntu:24.04
+
+RUN echo "Types: deb\n\
+URIs: http://mirrors.cloud.tencent.com/ubuntu/\n\
+Suites: noble noble-updates noble-security\n\
+Components: main restricted universe multiverse\n\
+Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg" > /etc/apt/sources.list.d/ubuntu.sources
+
+RUN apt update && apt upgrade -y && apt install -y git build-essential m4 cmake ninja-build clang-format clang-tidy clang-tools clang clangd libc++-dev libc++1 libc++abi-dev libc++abi1 libclang-dev libclang1 liblldb-dev libllvm-ocaml-dev libomp-dev libomp5 lld lldb llvm-dev llvm-runtime llvm python3-clang libsqlite3-dev sqlite3 zlib1g-dev
+```
+
+For convenience, we recommend directly using the [Dev Container plugin](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) of VSCode. Here is `devcontainer.json`.
+
+```json
+{
+	"name": "godel-script",
+	"build": {
+		"context": "..",
+		"dockerfile": "./Dockerfile"
+	},
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"xaver.clang-format",
+				"twxs.cmake",
+				"ms-vscode.cmake-tools",
+				"vadimcn.vscode-lldb",
+				"llvm-vs-code-extensions.vscode-clangd"
+			],
+			"settings": {
+				"[cpp]": {
+					"editor.defaultFormatter": "xaver.clang-format"
+				},
+				"editor.formatOnSave": true,
+				"editor.formatOnPaste": true,
+				"cmake.generator": "Ninja"
+			}
+		}
+	},
+	"remoteUser": "root"
+}
+```
+
 
 ### Apply Patch On Soufflé Submodule
 
-GödelScript uses a self-modified soufflé from a much older branch of public soufflé,
-now we use patch to make sure it could be built successfully.
-
-Use this command to apply patch:
+GödelScript uses a self-modified soufflé from a much older branch of public soufflé. Use these commands to clone.
 
 ```bash
-cd souffle
+git submodule init
+git submodule update --recursive
+```
+
+Now we use patch to make sure it could be built successfully. Use these commands to apply patch:
+
+```bash
+cd godel-backend/souffle
 git am ../0001-init-self-used-souffle-from-public-souffle.patch
 ```
 
 Use these commands to revert:
 
 ```bash
-cd souffle
+cd godel-backend/souffle
 git apply -R ../0001-init-self-used-souffle-from-public-souffle.patch
 git reset HEAD~
 ```
@@ -79,8 +132,9 @@ git reset HEAD~
 Use command below:
 
 ```bash
-mkdir build && cd build && cmake .. -DCMAKE_BUILD_TYPE=Release
-make -j6
+mkdir build && cd build
+cmake .. -DCMAKE_BUILD_TYPE:STRING=Release -DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=TRUE -DCMAKE_C_COMPILER:FILEPATH=/usr/bin/clang -DCMAKE_CXX_COMPILER:FILEPATH=/usr/bin/clang++ --no-warn-unused-cli -G Ninja
+cmake --build . --config Release --target all -j 8
 ```
 
 After building, you'll find `build/godel` in the `build` folder.
