@@ -1,0 +1,1073 @@
+/**
+ * A Text
+ */
+schema Text {
+    @primary id: int,
+    text: string
+}
+
+impl Text {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *Text {
+        for (text in TextDO(db)) {
+            yield Text {
+                id: text.id,
+                text : text.text
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the text.
+     */
+    pub fn getText(self) -> string {
+        return self.text
+    }
+    
+}
+
+/**
+ * A AstNode
+ */
+schema AstNode {
+    @primary id: int,
+    kind: int,
+    parent_id: int,
+    parent_kind: int,
+    index: int,
+    location_id: int
+}
+
+impl AstNode {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *AstNode {
+        for (astNode in AstNodeDO(db)) {
+            yield AstNode {
+                id: astNode.id,
+                kind : astNode.kind,
+                parent_id : astNode.parent_id,
+                parent_kind : astNode.parent_kind,
+                index : astNode.index,
+                location_id : astNode.location_id
+            }
+        }
+        for (topLevel in TopLevel(db)) {
+            yield AstNode {
+                id: topLevel.id,
+                kind : topLevel.kind,
+                parent_id : -1,  // TopLevel 无父节点，与index信息
+                parent_kind : -1,
+                index : -1,
+                location_id : topLevel.location_id
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the kind.
+     */
+    pub fn getKind(self) -> int {
+        return self.kind
+    }
+    
+    /**
+     * Gets the parent.
+     */
+    pub fn getParent(self) -> AstNode {
+        for (astNode in AstNode(__all_data__)) {
+            if (self.parent_id = astNode.id) {
+                return astNode
+            }
+        }
+    }
+    
+    /**
+     * Gets the parentKind.
+     */
+    pub fn getParentKind(self) -> int {
+        return self.parent_kind
+    }
+    
+    /**
+     * Gets the index.
+     */
+    pub fn getIndex(self) -> int {
+        return self.index
+    }
+    
+    /**
+     * Gets the location.
+     */
+    pub fn getLocation(self) -> Location {
+        for (location in Location(__all_data__)) {
+            if (self.location_id = location.id) {
+                return location
+            }
+        }
+    }
+    
+    /**
+     * Get the real kind name.
+     */
+    pub fn getKindName(self) -> string {
+        return getRealKind(self.getKind())
+    }
+    
+    /**
+     * Get the real kind name.
+     */
+    pub fn getParentKindName(self) -> string {
+        return getRealKind(self.getParentKind())
+    }
+    
+    /**
+     * Get the symbol.
+     */
+    pub fn getSymbol(self) -> Symbol {
+        for (astNodeSymbol in AstNodeSymbol(__all_data__)) {
+            if (astNodeSymbol.ast_node_id = self.id) {
+                return astNodeSymbol.getSymbol()
+            }
+        }
+    }
+    
+    /**
+     * Get the type.
+     */
+    pub fn getType(self) -> Type {
+        for (astNodeType in AstNodeType(__all_data__)) {
+            if (astNodeType.ast_node_id = self.id) {
+                return astNodeType.getType()
+            }
+        }
+    }
+    
+    /**
+     * Get the comment.
+     */
+    pub fn getComment(self) -> *Comment {
+        for (astNodeComment in AstNodeComment(__all_data__)) {
+            if (astNodeComment.ast_node_id = self.id) {
+                yield astNodeComment.getComment()
+            }
+        }
+    }
+    
+
+    /**
+     * Get the text corresponding to the current astNode
+     */
+    pub fn getText(self) -> string {
+        return self.getLocation().getText()
+    }
+
+    /**
+     * Gets child node of this node.
+     */
+    pub fn getChild(self) -> *AstNode {
+        for (child in AstNode(__all_data__)) {
+            if (child.parent_id = self.id) {
+                yield child
+            }
+        }
+    }
+
+    /**
+     * Gets the `i`th child of this node.
+     */
+    pub fn getIthChild(self, index: int) -> AstNode {
+        for (child in AstNode(__all_data__)) {
+            if (child.getIndex() = index && child.parent_id = self.id) {
+                return child
+            }
+        }
+    }
+
+    /**
+     * Gets the number of child nodes.
+     */
+    pub fn getChildCount(self) -> int {
+        return self.getChild().len()
+    }
+
+    /**
+     * Gets the last child of this node parent.
+     */
+    pub fn getLastChild(self) -> AstNode {
+        let (childCount = self.getChildCount()) {
+            return self.getIthChild(childCount - 1)
+        }
+    }
+
+    /**
+     * Gets an ancestor of this node. 
+     */
+    pub fn getAncestor(self) -> *AstNode {
+        for (ancestor in AstNode(__all_data__)) {
+            if (ancestor = self.getParent()) {
+                yield ancestor
+            }
+            let (parent = self.getParent()) {
+                if (ancestor in parent.getAncestor()) {
+                    yield ancestor
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets an ancestor of this node by the level of the hierarchy.
+     *
+     * @param level: the number of levels to go up in the hierarchy.
+     */
+    pub fn getAncestorByLevel(self, level: int) -> AstNode {
+        if (level = 1) {
+            return self.getParent()
+        }
+        let (parent = self.getParent()) {
+            for (parentLevel in int::__undetermined_all__()) {
+                let (ancestor = parent.getAncestorByLevel(parentLevel)) {
+                    if (level = parentLevel + 1) {
+                        return ancestor
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets a descendant of this node. 
+     */
+    pub fn getDescendant(self) -> *AstNode {
+        for (descendant in AstNode(__all_data__)) {
+            if (descendant in self.getChild()) {
+                yield descendant
+            }
+            if (descendant in self.getChild()) {
+                yield descendant.getDescendant()
+            }
+        }
+    }
+
+    /**
+     * Gets a descendant of this node by the level of the hierarchy.
+     *
+     * @param level: the number of levels to go up in the hierarchy.
+     */
+    pub fn getDescendantByLevel(self, level: int) -> *AstNode {
+        if (level = 1) {
+            yield self.getChild()
+        }
+        for (child in AstNode(__all_data__),
+            descendant in AstNode(__all_data__)) {
+            if (child in self.getChild()) {
+                for (childLevel in int::__undetermined_all__()) {
+                    if (descendant in child.getDescendantByLevel(childLevel)) {
+                        if (level = childLevel + 1) {
+                            yield descendant
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets the enclosing container of it, may [TopLevel, FunctionLikeDeclaration, ModuleDeclaration]
+     */
+    pub fn getContainer(self) -> AstNodeContainer {
+        for (container in AstNodeContainerRelation(__all_data__)) {
+            if (self.key_eq(container)) {
+                return container.getContainer()
+            }
+        }
+    }
+
+    /**
+     * Gets the enclosing function of it
+     */
+    pub fn getEnclosingFunction(self) -> FunctionLikeDeclaration {
+        for (function in FunctionLikeDeclaration(__all_data__)) {
+            let (container = self.getContainer()) {
+                if (function.key_eq(container)) {
+                    return function
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets the enclosing class of it
+     */
+    pub fn getBelongClass(self) -> ClassLikeDeclaration {
+        if (isClassLikeDeclaration(self)) {
+            for (classLikeDeclaration in ClassLikeDeclaration(__all_data__)) {
+                if (classLikeDeclaration.key_eq(self)) {
+                    return classLikeDeclaration
+                }
+            }
+        }
+        if (!isClassLikeDeclaration(self)) {
+            return self.getParent().getBelongClass()
+        }
+    }
+
+    /**
+     * Determine whether this astNode has enclosing function.
+     */
+    pub fn hasEnclosingFunction(self) -> bool {
+        let (func = self.getEnclosingFunction()) {
+            return true
+        }
+    }
+
+    /**
+     * Determine whether this astNode is a function object or a ArrowFunction
+     */
+    pub fn isFuncRef(self) -> bool {
+        if (isIdentifier(self) || isPropertyAccessExpression(self)) {
+            for (functionLikeDeclaration in FunctionLikeDeclaration(__all_data__)) {
+                if (self.getSymbol() = functionLikeDeclaration.getSymbol()) {
+                    return true
+                }
+            }
+        }
+        for (arrowFunction in ArrowFunction(__all_data__)) {
+            if (self.key_eq(arrowFunction)) {
+                return true
+            }
+        }
+    }
+    
+}
+
+/**
+ * A TopLevel
+ */
+schema TopLevel {
+    @primary id: int,
+    kind: int,
+    location_id: int
+}
+
+impl TopLevel {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *TopLevel {
+        for (topLevel in TopLevelDO(db)) {
+            yield TopLevel {
+                id: topLevel.id,
+                kind : topLevel.kind,
+                location_id : topLevel.location_id
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the kind.
+     */
+    pub fn getKind(self) -> int {
+        return self.kind
+    }
+    
+    /**
+     * Gets the location.
+     */
+    pub fn getLocation(self) -> Location {
+        for (location in Location(__all_data__)) {
+            if (self.location_id = location.id) {
+                return location
+            }
+        }
+    }
+    
+    /**
+     * Get the real kind name.
+     */
+    pub fn getKindName(self) -> string {
+        return getRealKind(self.getKind())
+    }
+    
+    /**
+     * Get the statement.
+     */
+    pub fn getStatement(self) -> *Statement {
+        for (topLevelStatement in TopLevelStatement(__all_data__)) {
+            if (topLevelStatement.top_level_id = self.id) {
+                yield topLevelStatement.getStatement()
+            }
+        }
+    }
+    
+
+    /**
+     * Get the text corresponding to the current astNode
+     */
+    pub fn getText(self) -> string {
+        return self.getLocation().getText()
+    }
+
+    /**
+     * Gets all child node of this toplevel.
+     */
+    pub fn getChild(self) -> *AstNode {
+        for (child in AstNode(__all_data__)) {
+            if (child.parent_id = self.id) {
+                yield child
+            }
+        }
+    }
+
+    /**
+     * Gets the `i`th child of this toplevel.
+     */
+    pub fn getIthChild(self, index: int) -> AstNode {
+        for (child in AstNode(__all_data__)) {
+            if (child.getIndex() = index && child.parent_id = self.id) {
+                return child
+            }
+        }
+    }
+
+    /**
+     * Get the `i`th statement of this toplevel.
+     */
+    pub fn getIthStatement(self, index: int) -> Statement {
+        for (topLevelStatement in TopLevelStatement(__all_data__)) {
+            if (topLevelStatement.top_level_id = self.id && topLevelStatement.getIndex() = index) {
+                return topLevelStatement.getStatement()
+            }
+        }
+    }
+
+    /**
+     * Get the number of statements in this toplevel.
+     */
+    pub fn getStatementCount(self) -> int {
+        return self.getStatement().len()
+    }
+
+    /**
+     * Gets the enclosing container of it, may [TopLevel, FunctionLikeDeclaration, ModuleDeclaration]
+     */
+    pub fn getContainer(self) -> AstNodeContainer {
+        for (astNodeContainerRelation in AstNodeContainerRelation(__all_data__)) {
+            if (astNodeContainerRelation.key_eq(astNodeContainerRelation)) {
+                return astNodeContainerRelation.getContainer()
+            }
+        }
+    }
+
+    /**
+     * Gets the enclosing function of it
+     */
+    pub fn getEnclosingFunction(self) -> FunctionLikeDeclaration {
+        for (function in FunctionLikeDeclaration(__all_data__)) {
+            let (container = self.getContainer()) {
+                if (function.key_eq(container)) {
+                    return function
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A AstNodeContainerRelation
+ */
+schema AstNodeContainerRelation {
+    @primary ast_node_id: int,
+    container_id: int
+}
+
+impl AstNodeContainerRelation {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *AstNodeContainerRelation {
+        for (astNodeContainerRelation in AstNodeContainerRelationDO(db)) {
+            yield AstNodeContainerRelation {
+                ast_node_id: astNodeContainerRelation.ast_node_id,
+                container_id : astNodeContainerRelation.container_id
+            }
+        }
+    }
+    
+    /**
+     * Gets the astNode.
+     */
+    pub fn getAstNode(self) -> AstNode {
+        for (astNode in AstNode(__all_data__)) {
+            if (self.ast_node_id = astNode.id) {
+                return astNode
+            }
+        }
+    }
+    
+    /**
+     * Gets the container.
+     */
+    pub fn getContainer(self) -> AstNodeContainer {
+        for (astNodeContainer in AstNodeContainer(__all_data__)) {
+            if (self.container_id = astNodeContainer.id) {
+                return astNodeContainer
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.ast_node_id
+    }
+    
+}
+
+/**
+ * A Symbol
+ */
+schema Symbol {
+    @primary id: int,
+    name: string,
+    description: string
+}
+
+impl Symbol {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *Symbol {
+        for (symbol in SymbolDO(db)) {
+            yield Symbol {
+                id: symbol.id,
+                name : symbol.name,
+                description : symbol.description
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the name.
+     */
+    pub fn getName(self) -> string {
+        return self.name
+    }
+    
+    /**
+     * Gets the description.
+     */
+    pub fn getDescription(self) -> string {
+        return self.description
+    }
+    
+}
+
+/**
+ * A AstNodeSymbol
+ */
+schema AstNodeSymbol {
+    @primary ast_node_id: int,
+    symbol_id: int
+}
+
+impl AstNodeSymbol {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *AstNodeSymbol {
+        for (astNodeSymbol in AstNodeSymbolDO(db)) {
+            yield AstNodeSymbol {
+                ast_node_id: astNodeSymbol.ast_node_id,
+                symbol_id : astNodeSymbol.symbol_id
+            }
+        }
+    }
+    
+    /**
+     * Gets the astNode.
+     */
+    pub fn getAstNode(self) -> AstNode {
+        for (astNode in AstNode(__all_data__)) {
+            if (self.ast_node_id = astNode.id) {
+                return astNode
+            }
+        }
+    }
+    
+    /**
+     * Gets the symbol.
+     */
+    pub fn getSymbol(self) -> Symbol {
+        for (symbol in Symbol(__all_data__)) {
+            if (self.symbol_id = symbol.id) {
+                return symbol
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.ast_node_id
+    }
+    
+}
+
+/**
+ * A AstNodeType
+ */
+schema AstNodeType {
+    @primary ast_node_id: int,
+    type_id: int
+}
+
+impl AstNodeType {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *AstNodeType {
+        for (astNodeType in AstNodeTypeDO(db)) {
+            yield AstNodeType {
+                ast_node_id: astNodeType.ast_node_id,
+                type_id : astNodeType.type_id
+            }
+        }
+    }
+    
+    /**
+     * Gets the astNode.
+     */
+    pub fn getAstNode(self) -> AstNode {
+        for (astNode in AstNode(__all_data__)) {
+            if (self.ast_node_id = astNode.id) {
+                return astNode
+            }
+        }
+    }
+    
+    /**
+     * Gets the type.
+     */
+    pub fn getType(self) -> Type {
+        for (type in Type(__all_data__)) {
+            if (self.type_id = type.id) {
+                return type
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.ast_node_id
+    }
+    
+}
+
+/**
+ * A Comment
+ */
+schema Comment {
+    @primary id: int,
+    kind: int,
+    location_id: int
+}
+
+impl Comment {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *Comment {
+        for (comment in CommentDO(db)) {
+            yield Comment {
+                id: comment.id,
+                kind : comment.kind,
+                location_id : comment.location_id
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the kind.
+     */
+    pub fn getKind(self) -> int {
+        return self.kind
+    }
+    
+    /**
+     * Gets the location.
+     */
+    pub fn getLocation(self) -> Location {
+        for (location in Location(__all_data__)) {
+            if (self.location_id = location.id) {
+                return location
+            }
+        }
+    }
+    
+    /**
+     * Get the real kind name.
+     */
+    pub fn getKindName(self) -> string {
+        return getRealKind(self.getKind())
+    }
+    
+
+    /**
+     * Get the text corresponding to the comment
+     */
+     pub fn getText(self) -> string {
+        return self.getLocation().getText()
+     }
+}
+
+/**
+ * A AstNodeComment
+ */
+schema AstNodeComment {
+    @primary id: int,
+    kind: int,
+    ast_node_id: int,
+    comment_id: int,
+    index: int
+}
+
+impl AstNodeComment {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *AstNodeComment {
+        for (astNodeComment in AstNodeCommentDO(db)) {
+            yield AstNodeComment {
+                id: astNodeComment.id,
+                kind : astNodeComment.kind,
+                ast_node_id : astNodeComment.ast_node_id,
+                comment_id : astNodeComment.comment_id,
+                index : astNodeComment.index
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the kind.
+     */
+    pub fn getKind(self) -> int {
+        return self.kind
+    }
+    
+    /**
+     * Gets the astNode.
+     */
+    pub fn getAstNode(self) -> AstNode {
+        for (astNode in AstNode(__all_data__)) {
+            if (self.ast_node_id = astNode.id) {
+                return astNode
+            }
+        }
+    }
+    
+    /**
+     * Gets the comment.
+     */
+    pub fn getComment(self) -> Comment {
+        for (comment in Comment(__all_data__)) {
+            if (self.comment_id = comment.id) {
+                return comment
+            }
+        }
+    }
+    
+    /**
+     * Gets the index.
+     */
+    pub fn getIndex(self) -> int {
+        return self.index
+    }
+    
+    /**
+     * Get the real kind name.
+     */
+    pub fn getKindName(self) -> string {
+        return getRealKind(self.getKind())
+    }
+    
+}
+
+/**
+ * A Metadata
+ */
+schema Metadata {
+    @primary id: int,
+    version: string,
+    created_time: string
+}
+
+impl Metadata {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *Metadata {
+        for (metadata in MetadataDO(db)) {
+            yield Metadata {
+                id: metadata.id,
+                version : metadata.version,
+                created_time : metadata.created_time
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the version.
+     */
+    pub fn getVersion(self) -> string {
+        return self.version
+    }
+    
+    /**
+     * Gets the createdTime.
+     */
+    pub fn getCreatedTime(self) -> string {
+        return self.created_time
+    }
+    
+}
+
+/**
+ * A IgnoredPath
+ */
+schema IgnoredPath {
+    @primary id: int,
+    path_kind: int,
+    path: string,
+    ignore_kind: int
+}
+
+impl IgnoredPath {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *IgnoredPath {
+        for (ignoredPath in IgnoredPathDO(db)) {
+            yield IgnoredPath {
+                id: ignoredPath.id,
+                path_kind : ignoredPath.path_kind,
+                path : ignoredPath.path,
+                ignore_kind : ignoredPath.ignore_kind
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the pathKind.
+     */
+    pub fn getPathKind(self) -> int {
+        return self.path_kind
+    }
+    
+    /**
+     * Gets the path.
+     */
+    pub fn getPath(self) -> string {
+        return self.path
+    }
+    
+    /**
+     * Gets the ignoreKind.
+     */
+    pub fn getIgnoreKind(self) -> int {
+        return self.ignore_kind
+    }
+    
+}
+
+/**
+ * This type consists of the following types: [TopLevel, FunctionLikeDeclaration, ModuleDeclaration]
+ */
+schema AstNodeContainer extends AstNode {
+}
+
+impl AstNodeContainer {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *AstNodeContainer {
+        for (topLevel in TopLevel(db)) {
+            yield AstNodeContainer {
+                id: topLevel.id,
+                kind : topLevel.kind,
+                parent_id : -1,  // TopLevel 无父节点，与index信息
+                parent_kind : -1,
+                index : -1,
+                location_id : topLevel.location_id
+            }
+        }
+        for (functionLikeDeclaration in FunctionLikeDeclaration(db)) {
+            yield AstNodeContainer {
+                id : functionLikeDeclaration.id,
+                kind : functionLikeDeclaration.kind,
+                parent_id : functionLikeDeclaration.parent_id,
+                parent_kind : functionLikeDeclaration.parent_kind,
+                index : functionLikeDeclaration.index,
+                location_id : functionLikeDeclaration.location_id,
+            }
+        }
+        for (moduleDeclaration in ModuleDeclaration(db)) {
+            yield AstNodeContainer {
+                id : moduleDeclaration.id,
+                kind : moduleDeclaration.kind,
+                parent_id : moduleDeclaration.parent_id,
+                parent_kind : moduleDeclaration.parent_kind,
+                index : moduleDeclaration.index,
+                location_id : moduleDeclaration.location_id,
+            }
+        }
+    }
+
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * trans to TopLevel
+     */
+    pub fn toTopLevel(self) -> TopLevel {
+        for (topLevel in TopLevel(__all_data__)) {
+            if (topLevel.key_eq(self)) {
+                return topLevel
+            }
+        }
+    }
+    
+    /**
+     * trans to FunctionLikeDeclaration
+     */
+    pub fn toFunctionLikeDeclaration(self) -> FunctionLikeDeclaration {
+        for (functionLikeDeclaration in FunctionLikeDeclaration(__all_data__)) {
+            if (functionLikeDeclaration.key_eq(self)) {
+                return functionLikeDeclaration
+            }
+        }
+    }
+    
+    /**
+     * trans to ModuleDeclaration
+     */
+    pub fn toModuleDeclaration(self) -> ModuleDeclaration {
+        for (moduleDeclaration in ModuleDeclaration(__all_data__)) {
+            if (moduleDeclaration.key_eq(self)) {
+                return moduleDeclaration
+            }
+        }
+    }
+    
+}
+
+/*
+ * it store this.eventFunc tmp and (data: string) =>  {});
+ export default class EntryAbility{
+    onCreate(want: any, launchParam: any): void {
+        eventhub.on('event1', this.eventFunc);
+        eventhub.on('event1', tmp);
+        eventhub.on('event1', (data: string) =>  {
+        });
+     }
+    eventFunc(argOne: any, argTwo: any): void {}
+}
+function tmp(h: any) {
+    let s = h + "111"
+    console.log(s);
+}
+ */
+schema FuncRef extends AstNode {
+
+}
+
+impl FuncRef {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *FuncRef {
+        for (astNode in AstNode(db)) {
+            if (astNode.isFuncRef()) {
+                yield FuncRef {
+                    id : astNode.id,
+                    kind : astNode.kind,
+                    parent_id : astNode.parent_id,
+                    parent_kind : astNode.parent_kind,
+                    index : astNode.index,
+                    location_id : astNode.location_id
+                }
+            }
+        }
+    }
+
+    /**
+     * Get the declaration corresponding to this funcRef
+     */
+    pub fn getDeclaration(self) -> FunctionLikeDeclaration {
+        for (functionLikeDeclaration in FunctionLikeDeclaration(__all_data__)) {
+            if (self.getSymbol() = functionLikeDeclaration.getSymbol()) {
+                return functionLikeDeclaration
+            }
+            // arrowFunction
+            if (self.key_eq(functionLikeDeclaration)) {
+                return functionLikeDeclaration
+            }
+        }
+    }
+}
+

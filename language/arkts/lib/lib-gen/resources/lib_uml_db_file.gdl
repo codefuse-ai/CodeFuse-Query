@@ -1,0 +1,9 @@
+database ArkTsDB {
+    {%- for k, v in typeTable.items() %}
+    {%- if not loop.last %}
+    {{ v }} : *{{ k }},
+    {%- else %}
+    {{ v }} : *{{ k }}
+    {%- endif %}
+    {%- endfor %}
+}

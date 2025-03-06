@@ -1,0 +1,309 @@
+/**
+ * A TemplateHead
+ */
+schema TemplateHead extends TemplateLiteralLikeNode {
+}
+
+impl TemplateHead {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *TemplateHead {
+        for (fa in TemplateLiteralLikeNode(db)) {
+            for (son in TemplateHeadDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield TemplateHead {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        value : fa.value,
+                        raw_text : fa.raw_text,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A TemplateMiddle
+ */
+schema TemplateMiddle extends TemplateLiteralLikeNode {
+}
+
+impl TemplateMiddle {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *TemplateMiddle {
+        for (fa in TemplateLiteralLikeNode(db)) {
+            for (son in TemplateMiddleDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield TemplateMiddle {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        value : fa.value,
+                        raw_text : fa.raw_text,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A TemplateTail
+ */
+schema TemplateTail extends TemplateLiteralLikeNode {
+}
+
+impl TemplateTail {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *TemplateTail {
+        for (fa in TemplateLiteralLikeNode(db)) {
+            for (son in TemplateTailDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield TemplateTail {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        value : fa.value,
+                        raw_text : fa.raw_text,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A TemplateSpan
+ */
+schema TemplateSpan extends AstNode {
+    expression_id: int,
+    literal_id: int
+}
+
+impl TemplateSpan {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *TemplateSpan {
+        for (fa in AstNode(db)) {
+            for (son in TemplateSpanDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield TemplateSpan {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        expression_id : son.expression_id,
+                        literal_id : son.literal_id
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the parent.
+     */
+    pub fn getParent(self) -> TemplateExpression {
+        for (templateExpression in TemplateExpression(__all_data__)) {
+            if (self.parent_id = templateExpression.id) {
+                return templateExpression
+            }
+        }
+    }
+    
+    /**
+     * Gets the expression.
+     */
+    pub fn getExpression(self) -> Expression {
+        for (expression in Expression(__all_data__)) {
+            if (self.expression_id = expression.id) {
+                return expression
+            }
+        }
+    }
+    
+    /**
+     * Gets the literal.
+     */
+    pub fn getLiteral(self) -> TemplateMiddleOrTail {
+        for (templateMiddleOrTail in TemplateMiddleOrTail(__all_data__)) {
+            if (self.literal_id = templateMiddleOrTail.id) {
+                return templateMiddleOrTail
+            }
+        }
+    }
+    
+}
+
+/**
+ * This type consists of the following types: [TemplateMiddle, TemplateTail]
+ */
+schema TemplateMiddleOrTail extends AstNode {
+}
+
+impl TemplateMiddleOrTail {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *TemplateMiddleOrTail {
+        for (templateMiddle in TemplateMiddle(db)) {
+            yield TemplateMiddleOrTail {
+                id : templateMiddle.id,
+                kind : templateMiddle.kind,
+                parent_id : templateMiddle.parent_id,
+                parent_kind : templateMiddle.parent_kind,
+                index : templateMiddle.index,
+                location_id : templateMiddle.location_id,
+            }
+        }
+        for (templateTail in TemplateTail(db)) {
+            yield TemplateMiddleOrTail {
+                id : templateTail.id,
+                kind : templateTail.kind,
+                parent_id : templateTail.parent_id,
+                parent_kind : templateTail.parent_kind,
+                index : templateTail.index,
+                location_id : templateTail.location_id,
+            }
+        }
+    }
+
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * trans to TemplateMiddle
+     */
+    pub fn toTemplateMiddle(self) -> TemplateMiddle {
+        for (templateMiddle in TemplateMiddle(__all_data__)) {
+            if (templateMiddle.key_eq(self)) {
+                return templateMiddle
+            }
+        }
+    }
+    
+    /**
+     * trans to TemplateTail
+     */
+    pub fn toTemplateTail(self) -> TemplateTail {
+        for (templateTail in TemplateTail(__all_data__)) {
+            if (templateTail.key_eq(self)) {
+                return templateTail
+            }
+        }
+    }
+    
+}
+
+/**
+ * This type consists of the following types: [TemplateExpression, NoSubstitutionTemplateLiteral]
+ */
+schema TemplateLiteral extends AstNode {
+}
+
+impl TemplateLiteral {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *TemplateLiteral {
+        for (templateExpression in TemplateExpression(db)) {
+            yield TemplateLiteral {
+                id : templateExpression.id,
+                kind : templateExpression.kind,
+                parent_id : templateExpression.parent_id,
+                parent_kind : templateExpression.parent_kind,
+                index : templateExpression.index,
+                location_id : templateExpression.location_id,
+            }
+        }
+        for (noSubstitutionTemplateLiteral in NoSubstitutionTemplateLiteral(db)) {
+            yield TemplateLiteral {
+                id : noSubstitutionTemplateLiteral.id,
+                kind : noSubstitutionTemplateLiteral.kind,
+                parent_id : noSubstitutionTemplateLiteral.parent_id,
+                parent_kind : noSubstitutionTemplateLiteral.parent_kind,
+                index : noSubstitutionTemplateLiteral.index,
+                location_id : noSubstitutionTemplateLiteral.location_id,
+            }
+        }
+    }
+
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * trans to TemplateExpression
+     */
+    pub fn toTemplateExpression(self) -> TemplateExpression {
+        for (templateExpression in TemplateExpression(__all_data__)) {
+            if (templateExpression.key_eq(self)) {
+                return templateExpression
+            }
+        }
+    }
+    
+    /**
+     * trans to NoSubstitutionTemplateLiteral
+     */
+    pub fn toNoSubstitutionTemplateLiteral(self) -> NoSubstitutionTemplateLiteral {
+        for (noSubstitutionTemplateLiteral in NoSubstitutionTemplateLiteral(__all_data__)) {
+            if (noSubstitutionTemplateLiteral.key_eq(self)) {
+                return noSubstitutionTemplateLiteral
+            }
+        }
+    }
+    
+}
+

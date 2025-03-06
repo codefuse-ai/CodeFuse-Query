@@ -1,0 +1,26 @@
+# IDEs
+.vscode
+.idea
+
+# Dependency directory
+node_modules/
+
+# Build
+dist/
+out/
+
+# Bazel
+bazel-*
+
+# SQLite
+*.db
+*.db-journal
+
+# Coverage reports
+coverage
+
+# API keys and secrets
+.env
+
+# OS metadata
+.DS_Store

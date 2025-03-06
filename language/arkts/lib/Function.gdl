@@ -1,0 +1,820 @@
+/**
+ * A FunctionLikeDeclaration
+ */
+schema FunctionLikeDeclaration extends SignatureDeclaration {
+}
+
+impl FunctionLikeDeclaration {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *FunctionLikeDeclaration {
+        for (fa in SignatureDeclaration(db)) {
+            for (son in FunctionLikeDeclarationDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield FunctionLikeDeclaration {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Get the asteriskToken.
+     */
+    pub fn getAsteriskToken(self) -> AsteriskToken {
+        for (functionLikeDeclarationAsteriskToken in FunctionLikeDeclarationAsteriskToken(__all_data__)) {
+            if (functionLikeDeclarationAsteriskToken.function_like_declaration_id = self.id) {
+                return functionLikeDeclarationAsteriskToken.getAsteriskToken()
+            }
+        }
+    }
+    
+    /**
+     * Get the questionToken.
+     */
+    pub fn getQuestionToken(self) -> QuestionToken {
+        for (functionLikeDeclarationQuestionToken in FunctionLikeDeclarationQuestionToken(__all_data__)) {
+            if (functionLikeDeclarationQuestionToken.function_like_declaration_id = self.id) {
+                return functionLikeDeclarationQuestionToken.getQuestionToken()
+            }
+        }
+    }
+    
+    /**
+     * Get the exclamationToken.
+     */
+    pub fn getExclamationToken(self) -> ExclamationToken {
+        for (functionLikeDeclarationExclamationToken in FunctionLikeDeclarationExclamationToken(__all_data__)) {
+            if (functionLikeDeclarationExclamationToken.function_like_declaration_id = self.id) {
+                return functionLikeDeclarationExclamationToken.getExclamationToken()
+            }
+        }
+    }
+    
+    /**
+     * Get the body.
+     */
+    pub fn getBody(self) -> BlockOrExpression {
+        for (functionLikeDeclarationBody in FunctionLikeDeclarationBody(__all_data__)) {
+            if (functionLikeDeclarationBody.function_like_declaration_id = self.id) {
+                return functionLikeDeclarationBody.getBody()
+            }
+        }
+    }
+    
+    /**
+     * Determine this FunctionLikeDeclarationBody has body.
+     */
+    pub fn hasBody(self) -> bool {
+        let (body = self.getBody()) {
+            return true
+        }
+    }
+
+    fn getAllParameterIndex(self) -> *int {
+        for (childIndex in int::__undetermined_all__(),
+            parameter in Parameter(__all_data__)) {
+            let (child = self.getIthChild(childIndex)) {
+                if (parameter.key_eq(child)) {
+                    yield childIndex
+                }
+            }
+        }
+    }
+
+    pub fn getParameterFirstIndex(self) -> int {
+        return self.getAllParameterIndex().min()
+    }
+
+    pub fn hasParameter(self) -> bool {
+        let (parameter = self.getParameter()) {
+            return true
+        }
+    }
+
+    /**
+     * Gets the count of parameters.
+     */
+    pub fn getParameterCount(self) -> int {
+        let (num = self.getParameter().len()) {
+            return num
+        }
+    }
+
+    pub fn getReturnStatement(self) -> *ReturnStatement {
+        for (returnStatement in ReturnStatement(__all_data__)) {
+            if (returnStatement.getEnclosingFunction() = self) {
+                yield returnStatement
+            }
+        }
+    }
+
+    pub fn getReturnedExpression(self) -> *Expression {
+        for (returnStatement in self.getReturnStatement()) {
+            yield returnStatement.getExpression()
+        }
+        for (arrowFunction in ArrowFunction(__all_data__)) {
+            if (self.key_eq(arrowFunction)) {
+                for (returnExpression in Expression(__all_data__)) {
+                    if (arrowFunction.getBody().key_eq(returnExpression)) {
+                        yield returnExpression
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets the name of this function-like declaration
+     */
+    pub fn getName(self) -> string {
+        let (nameNode = self.getNameNode()) {
+            return nameNode.getName()
+        }
+    }
+
+    pub fn getModifiers(self) -> *Modifier {
+        for (modifier in Modifier(__all_data__)) {
+            if (modifier.parent_id = self.id) {
+                yield modifier
+            }
+        }
+    }
+
+    @inline
+    pub fn toFunctionDeclaration(self) -> FunctionDeclaration {
+        for (functionDeclaration in FunctionDeclaration(__all_data__)) {
+            if (self.key_eq(functionDeclaration)) {
+                return functionDeclaration
+            }
+        }
+    }
+
+    @inline
+    pub fn toMethodDeclaration(self) -> MethodDeclaration {
+        for (methodDeclaration in MethodDeclaration(__all_data__)) {
+            if (self.key_eq(methodDeclaration)) {
+                return methodDeclaration
+            }
+        }
+    }
+
+    @inline
+    pub fn toGetAccessor(self) -> GetAccessor {
+        for (getAccessor in GetAccessor(__all_data__)) {
+            if (self.key_eq(getAccessor)) {
+                return getAccessor
+            }
+        }
+    }
+
+    @inline
+    pub fn toSetAccessor(self) -> SetAccessor {
+        for (setAccessor in SetAccessor(__all_data__)) {
+            if (self.key_eq(setAccessor)) {
+                return setAccessor
+            }
+        }
+    }
+
+    @inline
+    pub fn toConstructor(self) -> Constructor {
+        for (constructor in Constructor(__all_data__)) {
+            if (self.key_eq(constructor)) {
+                return constructor
+            }
+        }
+    }
+
+    @inline
+    pub fn toFunctionExpression(self) -> FunctionExpression {
+        for (functionExpression in FunctionExpression(__all_data__)) {
+            if (self.key_eq(functionExpression)) {
+                return functionExpression
+            }
+        }
+    }
+
+    @inline
+    pub fn toArrowFunction(self) -> ArrowFunction {
+        for (arrowFunction in ArrowFunction(__all_data__)) {
+            if (self.key_eq(arrowFunction)) {
+                return arrowFunction
+            }
+        }
+    }
+}
+
+/**
+ * A FunctionLikeDeclarationAsteriskToken
+ */
+schema FunctionLikeDeclarationAsteriskToken {
+    @primary function_like_declaration_id: int,
+    asterisk_token_id: int
+}
+
+impl FunctionLikeDeclarationAsteriskToken {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *FunctionLikeDeclarationAsteriskToken {
+        for (functionLikeDeclarationAsteriskToken in FunctionLikeDeclarationAsteriskTokenDO(db)) {
+            yield FunctionLikeDeclarationAsteriskToken {
+                function_like_declaration_id: functionLikeDeclarationAsteriskToken.function_like_declaration_id,
+                asterisk_token_id : functionLikeDeclarationAsteriskToken.asterisk_token_id
+            }
+        }
+    }
+    
+    /**
+     * Gets the functionLikeDeclaration.
+     */
+    pub fn getFunctionLikeDeclaration(self) -> FunctionLikeDeclaration {
+        for (functionLikeDeclaration in FunctionLikeDeclaration(__all_data__)) {
+            if (self.function_like_declaration_id = functionLikeDeclaration.id) {
+                return functionLikeDeclaration
+            }
+        }
+    }
+    
+    /**
+     * Gets the asteriskToken.
+     */
+    pub fn getAsteriskToken(self) -> AsteriskToken {
+        for (asteriskToken in AsteriskToken(__all_data__)) {
+            if (self.asterisk_token_id = asteriskToken.id) {
+                return asteriskToken
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.function_like_declaration_id
+    }
+    
+}
+
+/**
+ * A FunctionLikeDeclarationQuestionToken
+ */
+schema FunctionLikeDeclarationQuestionToken {
+    @primary function_like_declaration_id: int,
+    question_token_id: int
+}
+
+impl FunctionLikeDeclarationQuestionToken {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *FunctionLikeDeclarationQuestionToken {
+        for (functionLikeDeclarationQuestionToken in FunctionLikeDeclarationQuestionTokenDO(db)) {
+            yield FunctionLikeDeclarationQuestionToken {
+                function_like_declaration_id: functionLikeDeclarationQuestionToken.function_like_declaration_id,
+                question_token_id : functionLikeDeclarationQuestionToken.question_token_id
+            }
+        }
+    }
+    
+    /**
+     * Gets the functionLikeDeclaration.
+     */
+    pub fn getFunctionLikeDeclaration(self) -> FunctionLikeDeclaration {
+        for (functionLikeDeclaration in FunctionLikeDeclaration(__all_data__)) {
+            if (self.function_like_declaration_id = functionLikeDeclaration.id) {
+                return functionLikeDeclaration
+            }
+        }
+    }
+    
+    /**
+     * Gets the questionToken.
+     */
+    pub fn getQuestionToken(self) -> QuestionToken {
+        for (questionToken in QuestionToken(__all_data__)) {
+            if (self.question_token_id = questionToken.id) {
+                return questionToken
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.function_like_declaration_id
+    }
+    
+}
+
+/**
+ * A FunctionLikeDeclarationExclamationToken
+ */
+schema FunctionLikeDeclarationExclamationToken {
+    @primary function_like_declaration_id: int,
+    exclamation_token_id: int
+}
+
+impl FunctionLikeDeclarationExclamationToken {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *FunctionLikeDeclarationExclamationToken {
+        for (functionLikeDeclarationExclamationToken in FunctionLikeDeclarationExclamationTokenDO(db)) {
+            yield FunctionLikeDeclarationExclamationToken {
+                function_like_declaration_id: functionLikeDeclarationExclamationToken.function_like_declaration_id,
+                exclamation_token_id : functionLikeDeclarationExclamationToken.exclamation_token_id
+            }
+        }
+    }
+    
+    /**
+     * Gets the functionLikeDeclaration.
+     */
+    pub fn getFunctionLikeDeclaration(self) -> FunctionLikeDeclaration {
+        for (functionLikeDeclaration in FunctionLikeDeclaration(__all_data__)) {
+            if (self.function_like_declaration_id = functionLikeDeclaration.id) {
+                return functionLikeDeclaration
+            }
+        }
+    }
+    
+    /**
+     * Gets the exclamationToken.
+     */
+    pub fn getExclamationToken(self) -> ExclamationToken {
+        for (exclamationToken in ExclamationToken(__all_data__)) {
+            if (self.exclamation_token_id = exclamationToken.id) {
+                return exclamationToken
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.function_like_declaration_id
+    }
+    
+}
+
+/**
+ * A FunctionLikeDeclarationBody
+ */
+schema FunctionLikeDeclarationBody {
+    @primary function_like_declaration_id: int,
+    body_id: int
+}
+
+impl FunctionLikeDeclarationBody {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *FunctionLikeDeclarationBody {
+        for (functionLikeDeclarationBody in FunctionLikeDeclarationBodyDO(db)) {
+            yield FunctionLikeDeclarationBody {
+                function_like_declaration_id: functionLikeDeclarationBody.function_like_declaration_id,
+                body_id : functionLikeDeclarationBody.body_id
+            }
+        }
+    }
+    
+    /**
+     * Gets the functionLikeDeclaration.
+     */
+    pub fn getFunctionLikeDeclaration(self) -> FunctionLikeDeclaration {
+        for (functionLikeDeclaration in FunctionLikeDeclaration(__all_data__)) {
+            if (self.function_like_declaration_id = functionLikeDeclaration.id) {
+                return functionLikeDeclaration
+            }
+        }
+    }
+    
+    /**
+     * Gets the body.
+     */
+    pub fn getBody(self) -> BlockOrExpression {
+        for (blockOrExpression in BlockOrExpression(__all_data__)) {
+            if (self.body_id = blockOrExpression.id) {
+                return blockOrExpression
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.function_like_declaration_id
+    }
+    
+}
+
+/**
+ * A FunctionExpression
+ */
+schema FunctionExpression extends PrimaryExpression {
+    body_id: int
+}
+
+impl FunctionExpression {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *FunctionExpression {
+        for (fa in PrimaryExpression(db)) {
+            for (son in FunctionExpressionDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield FunctionExpression {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        body_id : son.body_id
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the body.
+     */
+    pub fn getBody(self) -> Block {
+        for (block in Block(__all_data__)) {
+            if (self.body_id = block.id) {
+                return block
+            }
+        }
+    }
+    
+    /**
+     * trans to FunctionLikeDeclaration to use func.
+     */
+    pub fn toFunctionLikeDeclaration(self) -> FunctionLikeDeclaration {
+        for (functionLikeDeclaration in FunctionLikeDeclaration(__all_data__)) {
+            if (self.id = functionLikeDeclaration.id) {
+                return functionLikeDeclaration
+            }
+        }
+    }
+    
+    /**
+     * Get the nameNode.
+     */
+    pub fn getNameNode(self) -> Identifier {
+        for (functionExpressionNameNode in FunctionExpressionNameNode(__all_data__)) {
+            if (functionExpressionNameNode.function_expression_id = self.id) {
+                return functionExpressionNameNode.getNameNode()
+            }
+        }
+    }
+    
+    /**
+     * Get the modifiers.
+     */
+    pub fn getModifiers(self) -> *Modifier {
+        for (modifier in Modifier(__all_data__)) {
+            if (modifier.parent_id = self.id) {
+                yield modifier
+            }
+        }
+    }
+    
+}
+
+/**
+ * A FunctionExpressionNameNode
+ */
+schema FunctionExpressionNameNode {
+    @primary function_expression_id: int,
+    name_node_id: int
+}
+
+impl FunctionExpressionNameNode {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *FunctionExpressionNameNode {
+        for (functionExpressionNameNode in FunctionExpressionNameNodeDO(db)) {
+            yield FunctionExpressionNameNode {
+                function_expression_id: functionExpressionNameNode.function_expression_id,
+                name_node_id : functionExpressionNameNode.name_node_id
+            }
+        }
+    }
+    
+    /**
+     * Gets the functionExpression.
+     */
+    pub fn getFunctionExpression(self) -> FunctionExpression {
+        for (functionExpression in FunctionExpression(__all_data__)) {
+            if (self.function_expression_id = functionExpression.id) {
+                return functionExpression
+            }
+        }
+    }
+    
+    /**
+     * Gets the nameNode.
+     */
+    pub fn getNameNode(self) -> Identifier {
+        for (identifier in Identifier(__all_data__)) {
+            if (self.name_node_id = identifier.id) {
+                return identifier
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.function_expression_id
+    }
+    
+}
+
+/**
+ * A ArrowFunction
+ */
+schema ArrowFunction extends Expression {
+    equals_greater_than_token_id: int,
+    body_id: int
+}
+
+impl ArrowFunction {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ArrowFunction {
+        for (fa in Expression(db)) {
+            for (son in ArrowFunctionDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield ArrowFunction {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        equals_greater_than_token_id : son.equals_greater_than_token_id,
+                        body_id : son.body_id
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the equalsGreaterThanToken.
+     */
+    pub fn getEqualsGreaterThanToken(self) -> EqualsGreaterThanToken {
+        for (equalsGreaterThanToken in EqualsGreaterThanToken(__all_data__)) {
+            if (self.equals_greater_than_token_id = equalsGreaterThanToken.id) {
+                return equalsGreaterThanToken
+            }
+        }
+    }
+    
+    /**
+     * Gets the body.
+     */
+    pub fn getBody(self) -> BlockOrExpression {
+        for (blockOrExpression in BlockOrExpression(__all_data__)) {
+            if (self.body_id = blockOrExpression.id) {
+                return blockOrExpression
+            }
+        }
+    }
+    
+    /**
+     * trans to FunctionLikeDeclaration to use func.
+     */
+    pub fn toFunctionLikeDeclaration(self) -> FunctionLikeDeclaration {
+        for (functionLikeDeclaration in FunctionLikeDeclaration(__all_data__)) {
+            if (self.id = functionLikeDeclaration.id) {
+                return functionLikeDeclaration
+            }
+        }
+    }
+    
+    /**
+     * Get the modifiers.
+     */
+    pub fn getModifiers(self) -> *Modifier {
+        for (modifier in Modifier(__all_data__)) {
+            if (modifier.parent_id = self.id) {
+                yield modifier
+            }
+        }
+    }
+    
+}
+
+/**
+ * A FunctionDeclaration
+ */
+schema FunctionDeclaration extends FunctionLikeDeclaration {
+}
+
+impl FunctionDeclaration {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *FunctionDeclaration {
+        for (fa in FunctionLikeDeclaration(db)) {
+            for (son in FunctionDeclarationDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield FunctionDeclaration {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * trans to DeclarationStatement to use func.
+     */
+    pub fn toDeclarationStatement(self) -> DeclarationStatement {
+        for (declarationStatement in DeclarationStatement(__all_data__)) {
+            if (self.id = declarationStatement.id) {
+                return declarationStatement
+            }
+        }
+    }
+    
+    /**
+     * Get the nameNode.
+     */
+    pub fn getNameNode(self) -> Identifier {
+        for (functionDeclarationNameNode in FunctionDeclarationNameNode(__all_data__)) {
+            if (functionDeclarationNameNode.function_declaration_id = self.id) {
+                return functionDeclarationNameNode.getNameNode()
+            }
+        }
+    }
+    
+    /**
+     * Get the body.
+     */
+    pub fn getBody(self) -> Block {
+        for (functionDeclarationBody in FunctionDeclarationBody(__all_data__)) {
+            if (functionDeclarationBody.function_declaration_id = self.id) {
+                return functionDeclarationBody.getBody()
+            }
+        }
+    }
+    
+    /**
+     * Get the modifiers.
+     */
+    pub fn getModifiers(self) -> *Modifier {
+        for (modifier in Modifier(__all_data__)) {
+            if (modifier.parent_id = self.id) {
+                yield modifier
+            }
+        }
+    }
+    
+}
+
+/**
+ * A FunctionDeclarationNameNode
+ */
+schema FunctionDeclarationNameNode {
+    @primary function_declaration_id: int,
+    name_node_id: int
+}
+
+impl FunctionDeclarationNameNode {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *FunctionDeclarationNameNode {
+        for (functionDeclarationNameNode in FunctionDeclarationNameNodeDO(db)) {
+            yield FunctionDeclarationNameNode {
+                function_declaration_id: functionDeclarationNameNode.function_declaration_id,
+                name_node_id : functionDeclarationNameNode.name_node_id
+            }
+        }
+    }
+    
+    /**
+     * Gets the functionDeclaration.
+     */
+    pub fn getFunctionDeclaration(self) -> FunctionDeclaration {
+        for (functionDeclaration in FunctionDeclaration(__all_data__)) {
+            if (self.function_declaration_id = functionDeclaration.id) {
+                return functionDeclaration
+            }
+        }
+    }
+    
+    /**
+     * Gets the nameNode.
+     */
+    pub fn getNameNode(self) -> Identifier {
+        for (identifier in Identifier(__all_data__)) {
+            if (self.name_node_id = identifier.id) {
+                return identifier
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.function_declaration_id
+    }
+    
+}
+
+/**
+ * A FunctionDeclarationBody
+ */
+schema FunctionDeclarationBody {
+    @primary function_declaration_id: int,
+    body_id: int
+}
+
+impl FunctionDeclarationBody {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *FunctionDeclarationBody {
+        for (functionDeclarationBody in FunctionDeclarationBodyDO(db)) {
+            yield FunctionDeclarationBody {
+                function_declaration_id: functionDeclarationBody.function_declaration_id,
+                body_id : functionDeclarationBody.body_id
+            }
+        }
+    }
+    
+    /**
+     * Gets the functionDeclaration.
+     */
+    pub fn getFunctionDeclaration(self) -> FunctionDeclaration {
+        for (functionDeclaration in FunctionDeclaration(__all_data__)) {
+            if (self.function_declaration_id = functionDeclaration.id) {
+                return functionDeclaration
+            }
+        }
+    }
+    
+    /**
+     * Gets the body.
+     */
+    pub fn getBody(self) -> Block {
+        for (block in Block(__all_data__)) {
+            if (self.body_id = block.id) {
+                return block
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.function_declaration_id
+    }
+    
+}
+

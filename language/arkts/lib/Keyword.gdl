@@ -1,0 +1,1001 @@
+/**
+ * A ConstKeyword
+ */
+schema ConstKeyword extends AstNode {
+}
+
+impl ConstKeyword {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ConstKeyword {
+        for (fa in AstNode(db)) {
+            for (son in ConstKeywordDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield ConstKeyword {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A DefaultKeyword
+ */
+schema DefaultKeyword extends AstNode {
+}
+
+impl DefaultKeyword {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *DefaultKeyword {
+        for (fa in AstNode(db)) {
+            for (son in DefaultKeywordDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield DefaultKeyword {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A ExportKeyword
+ */
+schema ExportKeyword extends AstNode {
+}
+
+impl ExportKeyword {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ExportKeyword {
+        for (fa in AstNode(db)) {
+            for (son in ExportKeywordDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield ExportKeyword {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A ExtendsKeyword
+ */
+schema ExtendsKeyword extends AstNode {
+}
+
+impl ExtendsKeyword {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ExtendsKeyword {
+        for (fa in AstNode(db)) {
+            for (son in ExtendsKeywordDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield ExtendsKeyword {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A ImportKeyword
+ */
+schema ImportKeyword extends AstNode {
+}
+
+impl ImportKeyword {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ImportKeyword {
+        for (fa in AstNode(db)) {
+            for (son in ImportKeywordDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield ImportKeyword {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A InKeyword
+ */
+schema InKeyword extends AstNode {
+}
+
+impl InKeyword {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *InKeyword {
+        for (fa in AstNode(db)) {
+            for (son in InKeywordDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield InKeyword {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A InstanceOfKeyword
+ */
+schema InstanceOfKeyword extends AstNode {
+}
+
+impl InstanceOfKeyword {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *InstanceOfKeyword {
+        for (fa in AstNode(db)) {
+            for (son in InstanceOfKeywordDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield InstanceOfKeyword {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A NewKeyword
+ */
+schema NewKeyword extends AstNode {
+}
+
+impl NewKeyword {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *NewKeyword {
+        for (fa in AstNode(db)) {
+            for (son in NewKeywordDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield NewKeyword {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A ImplementsKeyword
+ */
+schema ImplementsKeyword extends AstNode {
+}
+
+impl ImplementsKeyword {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ImplementsKeyword {
+        for (fa in AstNode(db)) {
+            for (son in ImplementsKeywordDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield ImplementsKeyword {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A PrivateKeyword
+ */
+schema PrivateKeyword extends AstNode {
+}
+
+impl PrivateKeyword {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *PrivateKeyword {
+        for (fa in AstNode(db)) {
+            for (son in PrivateKeywordDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield PrivateKeyword {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A ProtectedKeyword
+ */
+schema ProtectedKeyword extends AstNode {
+}
+
+impl ProtectedKeyword {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ProtectedKeyword {
+        for (fa in AstNode(db)) {
+            for (son in ProtectedKeywordDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield ProtectedKeyword {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A PublicKeyword
+ */
+schema PublicKeyword extends AstNode {
+}
+
+impl PublicKeyword {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *PublicKeyword {
+        for (fa in AstNode(db)) {
+            for (son in PublicKeywordDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield PublicKeyword {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A StaticKeyword
+ */
+schema StaticKeyword extends AstNode {
+}
+
+impl StaticKeyword {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *StaticKeyword {
+        for (fa in AstNode(db)) {
+            for (son in StaticKeywordDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield StaticKeyword {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A AbstractKeyword
+ */
+schema AbstractKeyword extends AstNode {
+}
+
+impl AbstractKeyword {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *AbstractKeyword {
+        for (fa in AstNode(db)) {
+            for (son in AbstractKeywordDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield AbstractKeyword {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A AccessorKeyword
+ */
+schema AccessorKeyword extends AstNode {
+}
+
+impl AccessorKeyword {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *AccessorKeyword {
+        for (fa in AstNode(db)) {
+            for (son in AccessorKeywordDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield AccessorKeyword {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A AssertsKeyword
+ */
+schema AssertsKeyword extends AstNode {
+}
+
+impl AssertsKeyword {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *AssertsKeyword {
+        for (fa in AstNode(db)) {
+            for (son in AssertsKeywordDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield AssertsKeyword {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A AssertKeyword
+ */
+schema AssertKeyword extends AstNode {
+}
+
+impl AssertKeyword {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *AssertKeyword {
+        for (fa in AstNode(db)) {
+            for (son in AssertKeywordDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield AssertKeyword {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A AsyncKeyword
+ */
+schema AsyncKeyword extends AstNode {
+}
+
+impl AsyncKeyword {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *AsyncKeyword {
+        for (fa in AstNode(db)) {
+            for (son in AsyncKeywordDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield AsyncKeyword {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A AwaitKeyword
+ */
+schema AwaitKeyword extends AstNode {
+}
+
+impl AwaitKeyword {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *AwaitKeyword {
+        for (fa in AstNode(db)) {
+            for (son in AwaitKeywordDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield AwaitKeyword {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A DeclareKeyword
+ */
+schema DeclareKeyword extends AstNode {
+}
+
+impl DeclareKeyword {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *DeclareKeyword {
+        for (fa in AstNode(db)) {
+            for (son in DeclareKeywordDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield DeclareKeyword {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A KeyOfKeyword
+ */
+schema KeyOfKeyword extends AstNode {
+}
+
+impl KeyOfKeyword {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *KeyOfKeyword {
+        for (fa in AstNode(db)) {
+            for (son in KeyOfKeywordDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield KeyOfKeyword {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A OutKeyword
+ */
+schema OutKeyword extends AstNode {
+}
+
+impl OutKeyword {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *OutKeyword {
+        for (fa in AstNode(db)) {
+            for (son in OutKeywordDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield OutKeyword {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A ReadonlyKeyword
+ */
+schema ReadonlyKeyword extends AstNode {
+}
+
+impl ReadonlyKeyword {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ReadonlyKeyword {
+        for (fa in AstNode(db)) {
+            for (son in ReadonlyKeywordDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield ReadonlyKeyword {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A UniqueKeyword
+ */
+schema UniqueKeyword extends AstNode {
+}
+
+impl UniqueKeyword {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *UniqueKeyword {
+        for (fa in AstNode(db)) {
+            for (son in UniqueKeywordDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield UniqueKeyword {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A OverrideKeyword
+ */
+schema OverrideKeyword extends AstNode {
+}
+
+impl OverrideKeyword {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *OverrideKeyword {
+        for (fa in AstNode(db)) {
+            for (son in OverrideKeywordDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield OverrideKeyword {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * This type consists of the following types: [NewKeyword, ImportKeyword]
+ */
+schema NewOrImportKeyword extends AstNode {
+}
+
+impl NewOrImportKeyword {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *NewOrImportKeyword {
+        for (newKeyword in NewKeyword(db)) {
+            yield NewOrImportKeyword {
+                id : newKeyword.id,
+                kind : newKeyword.kind,
+                parent_id : newKeyword.parent_id,
+                parent_kind : newKeyword.parent_kind,
+                index : newKeyword.index,
+                location_id : newKeyword.location_id,
+            }
+        }
+        for (importKeyword in ImportKeyword(db)) {
+            yield NewOrImportKeyword {
+                id : importKeyword.id,
+                kind : importKeyword.kind,
+                parent_id : importKeyword.parent_id,
+                parent_kind : importKeyword.parent_kind,
+                index : importKeyword.index,
+                location_id : importKeyword.location_id,
+            }
+        }
+    }
+
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * trans to NewKeyword
+     */
+    pub fn toNewKeyword(self) -> NewKeyword {
+        for (newKeyword in NewKeyword(__all_data__)) {
+            if (newKeyword.key_eq(self)) {
+                return newKeyword
+            }
+        }
+    }
+    
+    /**
+     * trans to ImportKeyword
+     */
+    pub fn toImportKeyword(self) -> ImportKeyword {
+        for (importKeyword in ImportKeyword(__all_data__)) {
+            if (importKeyword.key_eq(self)) {
+                return importKeyword
+            }
+        }
+    }
+    
+}
+
+/**
+ * This type consists of the following types: [ExtendsKeyword, ImplementsKeyword]
+ */
+schema ExtendsOrImplementsKeyword extends AstNode {
+}
+
+impl ExtendsOrImplementsKeyword {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ExtendsOrImplementsKeyword {
+        for (extendsKeyword in ExtendsKeyword(db)) {
+            yield ExtendsOrImplementsKeyword {
+                id : extendsKeyword.id,
+                kind : extendsKeyword.kind,
+                parent_id : extendsKeyword.parent_id,
+                parent_kind : extendsKeyword.parent_kind,
+                index : extendsKeyword.index,
+                location_id : extendsKeyword.location_id,
+            }
+        }
+        for (implementsKeyword in ImplementsKeyword(db)) {
+            yield ExtendsOrImplementsKeyword {
+                id : implementsKeyword.id,
+                kind : implementsKeyword.kind,
+                parent_id : implementsKeyword.parent_id,
+                parent_kind : implementsKeyword.parent_kind,
+                index : implementsKeyword.index,
+                location_id : implementsKeyword.location_id,
+            }
+        }
+    }
+
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * trans to ExtendsKeyword
+     */
+    pub fn toExtendsKeyword(self) -> ExtendsKeyword {
+        for (extendsKeyword in ExtendsKeyword(__all_data__)) {
+            if (extendsKeyword.key_eq(self)) {
+                return extendsKeyword
+            }
+        }
+    }
+    
+    /**
+     * trans to ImplementsKeyword
+     */
+    pub fn toImplementsKeyword(self) -> ImplementsKeyword {
+        for (implementsKeyword in ImplementsKeyword(__all_data__)) {
+            if (implementsKeyword.key_eq(self)) {
+                return implementsKeyword
+            }
+        }
+    }
+    
+}
+

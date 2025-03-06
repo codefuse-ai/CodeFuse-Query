@@ -1,0 +1,2821 @@
+impl IterationStatement {
+    /**
+     * Gets the body statement of this iteration statement.
+     */
+    pub fn getBody(self) -> Statement {
+        return self.getStatement()
+    }
+
+    /**
+     * Gets the condition expression of this iteration statement.
+     * Only a `while`, `do`-`while` and `for` statement has a condition.
+     */
+    pub fn getCondition(self) -> Expression {
+        for (whileStatement in WhileStatement(__all_data__)) {
+            if (whileStatement.key_eq(self)) {
+                return whileStatement.getCondition()
+            }
+        }
+        for (doWhileStatement in DoStatement(__all_data__)) {
+            if (doWhileStatement.key_eq(self)) {
+                return doWhileStatement.getCondition()
+            }
+        }
+        for (forStatement in ForStatement(__all_data__)) {
+            if (forStatement.key_eq(self)) {
+                return forStatement.getCondition()
+            }
+        }
+    }
+}
+
+/**
+ * A `for`-`in` or `for`-`of` loop.
+ */
+schema EnhancedForStatement extends IterationStatement {
+}
+
+impl EnhancedForStatement {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *EnhancedForStatement {
+        for (enhancedForStatement in IterationStatement(db)) {
+            if (isEnhancedForStatement(enhancedForStatement.to<AstNode>())) {
+                yield EnhancedForStatement {
+                    id : enhancedForStatement.id,
+                    kind : enhancedForStatement.kind,
+                    parent_id : enhancedForStatement.parent_id,
+                    parent_kind : enhancedForStatement.parent_kind,
+                    index : enhancedForStatement.index,
+                    location_id : enhancedForStatement.location_id,
+                    statement_id : enhancedForStatement.statement_id
+                }
+            }
+        }
+    }
+
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+
+    /**
+     * Gets the iterator of this `for`-`in` or `for`-`of` loop.
+     */
+    pub fn getInitializer(self) -> ForInitializer {
+        for (forStmt in ForInStatement(__all_data__)) {
+            if (self.key_eq(forStmt)) {
+                return forStmt.getInitializer()
+            }
+        }
+        for (forStmt in ForOfStatement(__all_data__)) {
+            if (self.key_eq(forStmt)) {
+                return forStmt.getInitializer()
+            }
+        }
+    }
+
+    /**
+     * Gets the expression over which this `for`-`in` or `for`-`of` loop iterates.
+     */
+    pub fn getExpression(self) -> Expression {
+        for (forStmt in ForInStatement(__all_data__)) {
+            if (self.key_eq(forStmt)) {
+                return forStmt.getExpression()
+            }
+        }
+        for (forStmt in ForOfStatement(__all_data__)) {
+            if (self.key_eq(forStmt)) {
+                return forStmt.getExpression()
+            }
+        }
+    }
+
+}
+
+impl DoStatement {
+    /** 
+     * Gets the loop condition of this `do`-`while` loop. 
+     */
+    pub fn getCondition(self) -> Expression {
+        return self.getExpression()
+    }
+}
+
+impl ForStatement {
+    /**
+     * Determine this ForStatement has condition expr.
+     */
+    pub fn hasCondition(self) -> bool {
+        let (condition = self.getCondition()) {
+            return true
+        }
+    }
+
+    /**
+     * Determine this ForStatement has incrementor expr.
+     */
+    pub fn hasIncrementor(self) -> bool {
+        let (incrementor = self.getIncrementor()) {
+            return true
+        }
+    }
+
+    /**
+     * Determine this ForStatement has initializer expr.
+     */
+    pub fn hasInitializer(self) -> bool {
+        let (initializer = self.getInitializer()) {
+            return true
+        }
+    }
+}
+
+impl WhileStatement {
+    /** 
+     * Gets the loop condition of this `while` loop. 
+     */
+    pub fn getCondition(self) -> Expression {
+        return self.getExpression()
+    }
+}
+
+impl IfStatement {
+    /**
+     * Determine whether this if statement contains an else branch
+     */
+    pub fn hasElse(self) -> bool {
+        let (elseStatement = self.getElseStatement()) {
+            return true
+        }
+    }
+}
+
+impl EnumMember {
+    /**
+     * Determine whether this EnumMember has an initializer.
+     */
+    pub fn hasInitializer(self) -> bool {
+        let (initializer = self.getInitializer()) {
+            return true
+        }
+    }
+}
+
+impl ShorthandPropertyAssignment {
+    /**
+     * Gets identifier
+     */
+    pub fn getIdentifier(self) -> Identifier {
+        return self.getNameNode()
+    }
+}
+
+impl Block {
+    /**
+     * Gets the `i`th statement in this block.
+     */
+    pub fn getIthStatement(self, index: int) -> Statement {
+        for (blockStatement in BlockStatement(__all_data__)) {
+            if (self.id = blockStatement.block_id && blockStatement.getIndex() = index) {
+                return blockStatement.getStatement()
+            }
+        }
+    }
+
+    /**
+     * Gets the number of statements in this block.
+     */
+    pub fn getStatementCount(self) -> int {
+        return self.getStatement().len()
+    }
+}
+
+impl CaseBlock {
+    /**
+     * Gets the `i`th `case` clause of this `switch`-`case` block.
+     * index starts from 0.
+     */
+    pub fn getIthCaseClause(self, index: int) -> CaseClause {
+        for (caseBlockClause in CaseBlockClause(__all_data__), 
+            caseClause in CaseClause(__all_data__)) {
+            if (caseBlockClause.case_block_id = self.id && caseBlockClause.getIndex() = index) {
+                if (caseClause.key_eq(caseBlockClause.getClause())) {
+                    return caseClause
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets the `default` clause of this `switch`-`case` block.
+     */
+    pub fn getDefaultClause(self) -> DefaultClause {
+        for (defaultClause in DefaultClause(__all_data__),
+            caseOrDefaultClause in CaseOrDefaultClause(__all_data__)) {
+            if (caseOrDefaultClause in self.getClause()) {
+                if (defaultClause.key_eq(caseOrDefaultClause)) {
+                    return defaultClause
+                }
+            }
+        }
+    }
+
+    /**
+     * Determine whether this CaseBlock has a DefaultClause.
+     */
+    pub fn hasDefaultClause(self) -> bool {
+        let (defaultClause = self.getDefaultClause()) {
+            return true
+        }
+    }
+
+    /**
+     * Gets CaseClause or DefaultClause of this CaseBlock.
+     */
+    pub fn getCaseOrDefault(self) -> *Statement {
+        for (statement in Statement(__all_data__),
+            caseOrDefaultClause in CaseOrDefaultClause(__all_data__)) {
+            if (caseOrDefaultClause.key_eq(statement)) {
+                if (caseOrDefaultClause in self.getClause()) {
+                    yield statement
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets the CaseClause count of this CaseBlock.
+     */
+    pub fn getCaseClauseCount(self) -> int {
+        return self.getClause().len()
+    }
+}
+
+impl CaseClause {
+    /**
+     * Gets the statement of this CaseClause with index,
+     * starts from 0.
+     * child index 0 is CaseClause's Expression
+     */
+    pub fn getIthStatement(self, index: int) -> Statement {
+        for (caseClauseStatement in CaseClauseStatement(__all_data__)) {
+            if (caseClauseStatement.case_clause_id = self.id && caseClauseStatement.getIndex() = index) {
+                return caseClauseStatement.getStatement()
+            }
+        }
+    }
+
+    /**
+     * Gets the statement count of this CaseClause.
+     */
+    pub fn getStatementCount(self) -> int {
+        return self.getStatement().len()
+    }
+}
+
+impl DefaultClause {
+    /**
+     * Gets the statement of this DefaultClause with index,
+     * starts from 0.
+     */
+    pub fn getIthStatement(self, index: int) -> Statement {
+        for (defaultClauseStatement in DefaultClauseStatement(__all_data__)) {
+            if (defaultClauseStatement.default_clause_id = self.id && defaultClauseStatement.getIndex() = index) {
+                return defaultClauseStatement.getStatement()
+            }
+        }
+    }
+
+    /**
+     * Gets the statement count of this DefaultClause.
+     */
+    pub fn getStatementCount(self) -> int {
+        return self.getStatement().len()
+    }
+}
+
+impl Location {
+    /**
+     * Get the text corresponding to the location
+     */
+    pub fn getText(self) -> string {
+        for (text in Text(__all_data__)) {
+            if (text.key_eq(self)) {
+                return text.getText()
+            }
+        }
+    }
+}
+
+impl Comment {
+    /**
+     * Get the text corresponding to the comment
+     */
+     pub fn getText(self) -> string {
+        return self.getLocation().getText()
+     }
+}
+
+impl Decorator {
+    /**
+     * Gets the name of this decorator.
+     */
+    pub fn getName(self) -> string {
+        return self.getExpression().getText()
+    }
+}
+
+impl Modifier {
+    /**
+     * trans to Decorator
+     */
+    pub fn toDecorator(self) -> Decorator {
+        for (decorator in Decorator(__all_data__)) {
+            if (self.key_eq(decorator)) {
+                return decorator
+            }
+        }
+    }
+}
+
+impl AstNode {
+    /**
+     * Get the text corresponding to the current astNode
+     */
+    pub fn getText(self) -> string {
+        return self.getLocation().getText()
+    }
+
+    /**
+     * Gets child node of this node.
+     */
+    pub fn getChild(self) -> *AstNode {
+        for (child in AstNode(__all_data__)) {
+            if (child.parent_id = self.id) {
+                yield child
+            }
+        }
+    }
+
+    /**
+     * Gets the `i`th child of this node.
+     */
+    pub fn getIthChild(self, index: int) -> AstNode {
+        for (child in AstNode(__all_data__)) {
+            if (child.getIndex() = index && child.parent_id = self.id) {
+                return child
+            }
+        }
+    }
+
+    /**
+     * Gets the number of child nodes.
+     */
+    pub fn getChildCount(self) -> int {
+        return self.getChild().len()
+    }
+
+    /**
+     * Gets the last child of this node parent.
+     */
+    pub fn getLastChild(self) -> AstNode {
+        let (childCount = self.getChildCount()) {
+            return self.getIthChild(childCount - 1)
+        }
+    }
+
+    /**
+     * Gets an ancestor of this node. 
+     */
+    pub fn getAncestor(self) -> *AstNode {
+        for (ancestor in AstNode(__all_data__)) {
+            if (ancestor = self.getParent()) {
+                yield ancestor
+            }
+            let (parent = self.getParent()) {
+                if (ancestor in parent.getAncestor()) {
+                    yield ancestor
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets an ancestor of this node by the level of the hierarchy.
+     *
+     * @param level: the number of levels to go up in the hierarchy.
+     */
+    pub fn getAncestorByLevel(self, level: int) -> AstNode {
+        if (level = 1) {
+            return self.getParent()
+        }
+        let (parent = self.getParent()) {
+            for (parentLevel in int::__undetermined_all__()) {
+                let (ancestor = parent.getAncestorByLevel(parentLevel)) {
+                    if (level = parentLevel + 1) {
+                        return ancestor
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets a descendant of this node. 
+     */
+    pub fn getDescendant(self) -> *AstNode {
+        for (descendant in AstNode(__all_data__)) {
+            if (descendant in self.getChild()) {
+                yield descendant
+            }
+            if (descendant in self.getChild()) {
+                yield descendant.getDescendant()
+            }
+        }
+    }
+
+    /**
+     * Gets a descendant of this node by the level of the hierarchy.
+     *
+     * @param level: the number of levels to go up in the hierarchy.
+     */
+    pub fn getDescendantByLevel(self, level: int) -> *AstNode {
+        if (level = 1) {
+            yield self.getChild()
+        }
+        for (child in AstNode(__all_data__),
+            descendant in AstNode(__all_data__)) {
+            if (child in self.getChild()) {
+                for (childLevel in int::__undetermined_all__()) {
+                    if (descendant in child.getDescendantByLevel(childLevel)) {
+                        if (level = childLevel + 1) {
+                            yield descendant
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets the enclosing container of it, may [TopLevel, FunctionLikeDeclaration, ModuleDeclaration]
+     */
+    pub fn getContainer(self) -> AstNodeContainer {
+        for (container in AstNodeContainerRelation(__all_data__)) {
+            if (self.key_eq(container)) {
+                return container.getContainer()
+            }
+        }
+    }
+
+    /**
+     * Gets the enclosing function of it
+     */
+    pub fn getEnclosingFunction(self) -> FunctionLikeDeclaration {
+        for (function in FunctionLikeDeclaration(__all_data__)) {
+            let (container = self.getContainer()) {
+                if (function.key_eq(container)) {
+                    return function
+                }
+            }
+        }
+    }
+
+    /**
+     * Determine whether this astNode has enclosing function.
+     */
+    pub fn hasEnclosingFunction(self) -> bool {
+        let (func = self.getEnclosingFunction()) {
+            return true
+        }
+    }
+
+    /**
+     * Determine whether this astNode is a function object or a ArrowFunction
+     */
+    pub fn isFuncRef(self) -> bool {
+        if (isIdentifier(self) || isPropertyAccessExpression(self)) {
+            for (functionLikeDeclaration in FunctionLikeDeclaration(__all_data__)) {
+                if (self.getSymbol() = functionLikeDeclaration.getSymbol()) {
+                    return true
+                }
+            }
+        }
+        for (arrowFunction in ArrowFunction(__all_data__)) {
+            if (self.key_eq(arrowFunction)) {
+                return true
+            }
+        }
+    }
+    
+}
+
+impl Expression {
+    /**
+     * Get the call site if self is an argument.
+     */
+    pub fn getCallSiteIfIsArgument(self) -> MayInvokeExpression {
+        for (mayInvokeExpression in MayInvokeExpression(__all_data__)) {
+            if (self in mayInvokeExpression.getArgument()) {
+                return mayInvokeExpression
+            }
+        }
+    }
+
+    pub fn isArgument(self) -> bool {
+        let (mayInvokeExpression = self.getCallSiteIfIsArgument()) {
+            return true
+        }
+    }
+
+    pub fn getArgumentIndex(self) -> int {
+        let (mayInvokeExpression = self.getCallSiteIfIsArgument()) {
+            for (i in int::__undetermined_all__()) {
+                if (self = mayInvokeExpression.getIthArgument(i)) {
+                    return i
+                }
+            }
+        }
+    }
+
+    pub fn getFunctionIfIsReturn(self) -> FunctionLikeDeclaration {
+        for (functionLikeDeclaration in FunctionLikeDeclaration(__all_data__)) {
+            if (self in functionLikeDeclaration.getReturnedExpression()) {
+                return functionLikeDeclaration
+            }
+        }
+    }
+
+    pub fn isReturn(self) -> bool {
+        let (functionLikeDeclaration = self.getFunctionIfIsReturn()) {
+            return true
+        }
+    }
+}
+
+/*
+ * it store this.eventFunc tmp and (data: string) =>  {});
+ export default class EntryAbility{
+    onCreate(want: any, launchParam: any): void {
+        eventhub.on('event1', this.eventFunc);
+        eventhub.on('event1', tmp);
+        eventhub.on('event1', (data: string) =>  {
+        });
+     }
+    eventFunc(argOne: any, argTwo: any): void {}
+}
+function tmp(h: any) {
+    let s = h + "111"
+    console.log(s);
+}
+ */
+schema FuncRef extends AstNode {
+
+}
+
+impl FuncRef {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *FuncRef {
+        for (astNode in AstNode(db)) {
+            if (astNode.isFuncRef()) {
+                yield FuncRef {
+                    id : astNode.id,
+                    kind : astNode.kind,
+                    parent_id : astNode.parent_id,
+                    parent_kind : astNode.parent_kind,
+                    index : astNode.index,
+                    location_id : astNode.location_id
+                }
+            }
+        }
+    }
+
+    /**
+     * Get the declaration corresponding to this funcRef
+     */
+    pub fn getDeclaration(self) -> FunctionLikeDeclaration {
+        for (functionLikeDeclaration in FunctionLikeDeclaration(__all_data__)) {
+            if (self.getSymbol() = functionLikeDeclaration.getSymbol()) {
+                return functionLikeDeclaration
+            }
+            // arrowFunction
+            if (self.key_eq(functionLikeDeclaration)) {
+                return functionLikeDeclaration
+            }
+        }
+    }
+}
+
+impl TopLevel {
+    /**
+     * Get the text corresponding to the current astNode
+     */
+    pub fn getText(self) -> string {
+        return self.getLocation().getText()
+    }
+
+    /**
+     * Gets all child node of this toplevel.
+     */
+    pub fn getChild(self) -> *AstNode {
+        for (child in AstNode(__all_data__)) {
+            if (child.parent_id = self.id) {
+                yield child
+            }
+        }
+    }
+
+    /**
+     * Gets the `i`th child of this toplevel.
+     */
+    pub fn getIthChild(self, index: int) -> AstNode {
+        for (child in AstNode(__all_data__)) {
+            if (child.getIndex() = index && child.parent_id = self.id) {
+                return child
+            }
+        }
+    }
+
+    /**
+     * Get the `i`th statement of this toplevel.
+     */
+    pub fn getIthStatement(self, index: int) -> Statement {
+        for (topLevelStatement in TopLevelStatement(__all_data__)) {
+            if (topLevelStatement.top_level_id = self.id && topLevelStatement.getIndex() = index) {
+                return topLevelStatement.getStatement()
+            }
+        }
+    }
+
+    /**
+     * Get the number of statements in this toplevel.
+     */
+    pub fn getStatementCount(self) -> int {
+        return self.getStatement().len()
+    }
+
+    /**
+     * Gets the enclosing container of it, may [TopLevel, FunctionLikeDeclaration, ModuleDeclaration]
+     */
+    pub fn getContainer(self) -> AstNodeContainer {
+        for (astNodeContainerRelation in AstNodeContainerRelation(__all_data__)) {
+            if (astNodeContainerRelation.key_eq(astNodeContainerRelation)) {
+                return astNodeContainerRelation.getContainer()
+            }
+        }
+    }
+
+    /**
+     * Gets the enclosing function of it
+     */
+    pub fn getEnclosingFunction(self) -> FunctionLikeDeclaration {
+        for (function in FunctionLikeDeclaration(__all_data__)) {
+            let (container = self.getContainer()) {
+                if (function.key_eq(container)) {
+                    return function
+                }
+            }
+        }
+    }
+}
+
+impl ObjectLiteralElement {
+    /**
+     * Gets the name of this ObjectLiteralElement.
+     */
+    pub fn getName(self) -> string {
+        for (objectLiteralElementNameNode in ObjectLiteralElementNameNode(__all_data__)) {
+            if (self.key_eq(objectLiteralElementNameNode)) {
+                return objectLiteralElementNameNode.getNameNode().getName()
+            }
+        }
+    }
+}
+
+impl ObjectLiteralExpression {
+    /**
+     * Get the `i`th property.
+     */
+    pub fn getIthProperty(self, index: int) -> ObjectLiteralElement {
+        for (objectLiteralExpressionProperty in ObjectLiteralExpressionProperty(__all_data__)) {
+            if (objectLiteralExpressionProperty.object_literal_expression_id = self.id
+                && objectLiteralExpressionProperty.getIndex() = index) {
+                return objectLiteralExpressionProperty.getProperty()
+            }
+        }
+    }
+
+    /**
+     * Get the property of this ObjectLiteralExpression by name.
+     */
+    pub fn getPropertyByName(self, name: string) -> ObjectLiteralElement {
+        for (objectLiteralElement in self.getProperty()) {
+            if (objectLiteralElement.getName() = name) {
+                return objectLiteralElement
+            }
+        }
+    }
+}
+
+impl CallExpression {
+    /**
+     * Gets the `i`th argument of this call expression.
+     * index from 0
+     */
+    pub fn getIthArgument(self, index: int) -> Expression {
+        for (callExpressionArgument in CallExpressionArgument(__all_data__)) {
+            if (callExpressionArgument.call_expression_id = self.id &&
+                callExpressionArgument.getIndex() = index) {
+                return callExpressionArgument.getArgument()
+            }
+        }
+    }
+}
+
+impl MayInvokeExpression {
+    /**
+     * Gets the callee of this MayInvokeExpression.
+     */
+    pub fn getCallee(self) -> FunctionLikeDeclaration {
+        // FIXME: hack for now, fix me later
+        for (callSiteImplementation in CallSiteImplementation(__all_data__)) {
+            if (self.key_eq(callSiteImplementation.getCallSite())) {
+                for (functionLikeDeclaration in FunctionLikeDeclaration(__all_data__)) {
+                    if (functionLikeDeclaration.getNameNode().id = callSiteImplementation.implementation_id) {
+                        return functionLikeDeclaration
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Determine whether this MayInvokeExpression has a callee.
+     */
+    pub fn hasCallee(self) -> bool {
+        let (callee = self.getCallee()) {
+            return true
+        }
+    }
+
+    /**
+     * Gets the count of the arguments.
+     */
+    pub fn getArgumentCount(self) -> int {
+        return self.getArgument().len()
+    }
+
+    /**
+     * Gets an argument of this invoke expression.
+     */
+    pub fn getArgument(self) -> *Expression {
+        let (callExpression = self.toCallExpression()) {
+            yield callExpression.getArgument()
+        }
+        let (newExpression = self.toNewExpression()) {
+            yield newExpression.getArgument()
+        }
+        let (decorator = self.toDecorator()) {
+            yield decorator.getExpression()
+        }
+        let (etsComponentExpression = self.toEtsComponentExpression()) {
+            yield etsComponentExpression.getArgument()
+        }
+        // TODO: TaggedTemplateExpression, PropertyAccessExpression, ElementAccessExpression
+    }
+
+    /**
+     * Gets the `i`th argument of this invoke expression.
+     * index from 0
+     */
+    pub fn getIthArgument(self, index: int) -> Expression {
+        let (callExpression = self.toCallExpression()) {
+            return callExpression.getIthArgument(index)
+        }
+        let (newExpression = self.toNewExpression()) {
+            return newExpression.getIthArgument(index)
+        }
+        let (decorator = self.toDecorator()) {
+            if (index = 0) {
+                return decorator.getExpression()
+            }
+        }
+        let (etsComponentExpression = self.toEtsComponentExpression()) {
+            return etsComponentExpression.getIthArgument(index)
+        }
+        // TODO: TaggedTemplateExpression, PropertyAccessExpression, ElementAccessExpression
+    }
+
+    pub fn getExpression(self) -> Expression {
+        let (callExpression = self.toCallExpression()) {
+            return callExpression.getExpression()
+        }
+        let (newExpression = self.toNewExpression()) {
+            return newExpression.getExpression().to<Expression>()
+        }
+        let (decorator = self.toDecorator()) {
+            return decorator.getExpression()
+        }
+        let (etsComponentExpression = self.toEtsComponentExpression()) {
+            return etsComponentExpression.getExpression().to<Expression>()
+        }
+        let (propertyAccessExpression = self.toPropertyAccessExpression()) {
+            return propertyAccessExpression.getExpression().to<Expression>()
+        }
+        let (elementAccessExpression = self.toElementAccessExpression()) {
+            return elementAccessExpression.getExpression().to<Expression>()
+        }
+        // TODO: TaggedTemplateExpression
+    }
+
+    pub fn getCallInCallChain(self, index: int) -> MayInvokeExpression {
+        if (index = 0) {
+            return self
+        }
+        let (expression = self.getExpression()) {
+            for (mayInvokeExpression in MayInvokeExpression(__all_data__)) {
+                if (expression.key_eq(mayInvokeExpression)) {
+                    for (middleIndex in int::__undetermined_all__()) {
+                        let (middleCall = mayInvokeExpression.getCallInCallChain(middleIndex)) {
+                            if (index = middleIndex + 1) {
+                                return middleCall
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    fn getCallChainIndex(self) -> *int {
+        for (index in int::__undetermined_all__()) {
+            let (mayInvokeExpression = self.getCallInCallChain(index)) {
+                yield index
+            }
+        }
+    }
+
+    pub fn getRootCallInCallChain(self) -> MayInvokeExpression {
+        let (maxIndex = self.getCallChainIndex().max()) {
+            return self.getCallInCallChain(maxIndex)
+        }
+    }
+}
+
+/**
+ * An increment expression using `++`.
+ */
+schema IncrementExpression extends UpdateExpression {
+}
+
+impl IncrementExpression {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *IncrementExpression {
+        for (incrementExpression in UpdateExpression(db)) {
+            if (isIncrementExpression(incrementExpression.to<AstNode>())) {
+                yield IncrementExpression {
+                    id : incrementExpression.id,
+                    kind : incrementExpression.kind,
+                    parent_id : incrementExpression.parent_id,
+                    parent_kind : incrementExpression.parent_kind,
+                    index : incrementExpression.index,
+                    location_id : incrementExpression.location_id
+                }
+            }
+        }
+    }
+
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+}
+
+/**
+ * A decrement expression using `--`.
+ */
+schema DecrementExpression extends UpdateExpression {
+}
+
+impl DecrementExpression {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *DecrementExpression {
+        for (decrementExpression in UpdateExpression(db)) {
+            if (isDecrementExpression(decrementExpression.to<AstNode>())) {
+                yield DecrementExpression {
+                    id : decrementExpression.id,
+                    kind : decrementExpression.kind,
+                    parent_id : decrementExpression.parent_id,
+                    parent_kind : decrementExpression.parent_kind,
+                    index : decrementExpression.index,
+                    location_id : decrementExpression.location_id
+                }
+            }
+        }
+    }
+
+    /**
+     * Get primary key.
+     */
+     pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+}
+
+
+impl VariableDeclarationList {
+    /**
+     * Gets the `i`th variable declaration with given
+     */
+    pub fn getIthDeclaration(self, index: int) -> VariableDeclaration {
+        for (variableDeclarationListDeclaration in VariableDeclarationListDeclaration(__all_data__)) {
+            if (variableDeclarationListDeclaration.variable_declaration_list_id = self.id && variableDeclarationListDeclaration.getIndex() = index) {
+                return variableDeclarationListDeclaration.getDeclaration()
+            }
+        }
+    }
+}
+
+impl MethodDeclaration {
+    /**
+     * Get parameters.
+     * MethodDeclaration is part of SignatureDeclaration 
+     */
+    pub fn getParameter(self) -> *Parameter {
+        for (signatureDeclarationParameter in SignatureDeclarationParameter(__all_data__)) {
+            if (signatureDeclarationParameter.signature_declaration_id = self.id) {
+                yield signatureDeclarationParameter.getParameter()
+            }
+        }
+    }
+
+    /**
+     * Determine this MethodDeclaration contains any parameter.
+     */
+    pub fn hasParameter(self) -> bool {
+        let (parameter = self.getParameter()) {
+            return true
+        }
+    }
+
+    /**
+     * Gets the `i`th parameter.
+     * MethodDeclaration is part of SignatureDeclaration 
+     */
+    pub fn getIthParameter(self, index: int) -> Parameter {
+        for (signatureDeclarationParameter in SignatureDeclarationParameter(__all_data__)) {
+            if (signatureDeclarationParameter.signature_declaration_id = self.id && signatureDeclarationParameter.getIndex() = index) {
+                return signatureDeclarationParameter.getParameter()
+            }
+        }
+    }
+
+    /**
+     * trans to FunctionLikeDeclaration
+     */
+    pub fn toFunctionLikeDeclaration(self) -> FunctionLikeDeclaration {
+        for (functionLikeDeclaration in FunctionLikeDeclaration(__all_data__)) {
+            if (self.key_eq(functionLikeDeclaration)) {
+                return functionLikeDeclaration
+            }
+        }
+    }
+}
+
+impl BindingPattern {
+    pub fn getElement(self) -> *ArrayBindingElement {
+        yield self.toArrayBindingPattern().getElement()
+        for (element in self.toObjectBindingPattern().getElement()) {
+            for (res in ArrayBindingElement(__all_data__)) {
+                if (element.key_eq(res)) {
+                    yield res
+                }
+            }
+        }
+    }
+}
+
+impl BindingName {
+    pub fn getName(self) -> string {
+        return self.toIdentifier().getName()
+    }
+}
+
+impl Parameter {
+    /**
+     * Determines whether this parameter has the initializer.
+     */
+    pub fn hasInitializer(self) -> bool {
+        let (expression = self.getInitializer()) {
+            return true
+        }
+    }
+
+    /**
+     * Gets the parameter index of this Parameter
+     * index starts from 0
+     */
+    pub fn getParameterIndex(self) -> int {
+        for (signatureDeclarationParameter in SignatureDeclarationParameter(__all_data__)) {
+            if (signatureDeclarationParameter.parameter_id = self.id) {
+                return signatureDeclarationParameter.getIndex()
+            }
+        }
+    }
+}
+
+impl AccessExpression {
+    /**
+     * Gets the expression on which the property is accessed.
+     */
+    pub fn getExpression(self) -> LeftHandSideExpression {
+        return self.toPropertyAccessExpression().getExpression()
+        return self.toElementAccessExpression().getExpression()
+    }
+
+    /**
+     * Gets the property expression of this AccessExpression.
+     */
+    pub fn getPropertyExpression(self) -> Expression {
+        let (t = self.toPropertyAccessExpression().getNameNode()) {
+            for (expression in Expression(__all_data__)) {
+                if (expression.key_eq(t)) {
+                    return expression
+                }
+            }
+        }
+        return self.toElementAccessExpression().getArgumentExpression()
+    }
+
+    pub fn getPropertyName(self) -> string {
+        // For PropertyAccessExpression
+        for (property in MemberName(__all_data__)) {
+            if (property.key_eq(self.getPropertyExpression())) {
+                let (propertyName = property.getName()) {
+                    return propertyName
+                }
+            }
+        }
+        // For ElementAccessExpression
+        for (literalExpression in LiteralExpression(__all_data__)) {
+            if (literalExpression.key_eq(self.getPropertyExpression())) {
+                let (propertyName = literalExpression.getValue()) {
+                    return propertyName
+                }
+            }
+        }
+    }
+
+    pub fn getMethodDeclaration(self) -> MethodDeclaration {
+        for (methodDeclaration in MethodDeclaration(__all_data__)) {
+            if (methodDeclaration.getSymbol() = self.getSymbol()) {
+                return methodDeclaration
+            }
+        }
+    }
+}
+
+impl MemberName {
+    pub fn getName(self) -> string {
+        return self.toIdentifier().getName()
+        return self.toPrivateIdentifier().getName()
+    }
+}
+
+impl PropertyName {
+    /**
+     * Get the actual name of PropertyName
+     */
+    pub fn getName(self) -> string {
+        return self.toIdentifier().getName()
+        return self.toStringLiteral().getValue()
+        return self.toNumericLiteral().getValue()
+        // If this PropertyName is a ComputedPropertyName, it doesn't have a name
+        //return self.toComputedPropertyName().getName()
+        return self.toPrivateIdentifier().getName()
+    }
+}
+
+impl ArrayLiteralExpression {
+    /**
+     * Gets the `i`th element of this call ArrayLiteralExpression.
+     * index from 0
+     */
+    pub fn getIthElement(self, index: int) -> Expression {
+        for (arrayLiteralExpressionElement in ArrayLiteralExpressionElement(__all_data__)) {
+            if (arrayLiteralExpressionElement.array_literal_expression_id = self.id && arrayLiteralExpressionElement.getIndex() = index) {
+                return arrayLiteralExpressionElement.getElement()
+            }
+        }
+    }
+}
+
+impl NewExpression {
+    /**
+     * Gets the `i`th argument of this call NewExpression.
+     * index from 0
+     */
+    pub fn getIthArgument(self, index: int) -> Expression {
+        for (newExpressionArgument in NewExpressionArgument(__all_data__)) {
+            if (newExpressionArgument.new_expression_id = self.id && newExpressionArgument.getIndex() = index) {
+                return newExpressionArgument.getArgument()
+            }
+        }
+    }
+
+    /**
+     * Gets the count of the type arguments.
+     */
+    pub fn getTypeArgumentCount(self) -> int {
+        return self.getTypeArgument().len()
+    }
+}
+
+impl EtsComponentExpression {
+    /**
+     * Gets the `i`th argument of this ets component expression.
+     * index from 0
+     */
+    pub fn getIthArgument(self, index: int) -> Expression {
+        for (etsComponentExpressionArgument in EtsComponentExpressionArgument(__all_data__)) {
+            if (etsComponentExpressionArgument.ets_component_expression_id = self.id) {
+                if (index = etsComponentExpressionArgument.getIndex()) {
+                    return etsComponentExpressionArgument.getArgument()
+                }
+            }
+        }
+    }
+}
+
+impl UnaryExpression {
+    // TODO:: may exist bug, need fix
+    pub fn getExpression(self) -> Expression {
+        for (expression in Expression(__all_data__)) {
+            if (expression.key_eq(self.getIthChild(0))) {
+                return expression
+            }
+        }
+    }
+}
+
+impl ConditionalExpression {
+    /**
+     * Gets this branch
+     */
+    pub fn getBranch(self) -> *Expression {
+        yield self.getThenExpression()
+        yield self.getElseExpression()
+    }
+}
+
+impl VariableDeclaration {
+    /**
+     * Determines whether this variable declaration has the initializer.
+     */
+    pub fn hasInitializer(self) -> bool {
+        let (expression = self.getInitializer()) {
+            return true
+        }
+    }
+}
+
+impl BindingElement {
+    /**
+     * Determines whether this bindingElement has the initializer.
+     */
+    pub fn hasInitializer(self) -> bool {
+        let (expression = self.getInitializer()) {
+            return true
+        }
+    }
+}
+
+impl TemplateExpression {
+    /**
+     * Get the ith templateSpan of templateExpression.
+     * index from 0
+     */
+    pub fn getIthTemplateSpan(self, index: int) -> TemplateSpan {
+        for (templateSpan in TemplateSpan(__all_data__)) {
+            if (templateSpan.parent_id = self.id) {
+                if (index = templateSpan.getIndex() - 1) {
+                    return templateSpan
+                }
+            }
+        }
+    }
+}
+
+impl ObjectBindingPattern {
+    /**
+     * Gets the `i`th Element of this ObjectBindingPattern.
+     * index from 0
+     */
+    pub fn getIthElement(self, index: int) -> BindingElement {
+        for (objectBindingPatternElement in ObjectBindingPatternElement(__all_data__)) {
+            if (objectBindingPatternElement.object_binding_pattern_id = self.id && objectBindingPatternElement.getIndex() = index) {
+                return objectBindingPatternElement.getElement()
+            }
+        }
+    }
+}
+
+impl ArrayBindingPattern {
+    /**
+     * Gets the `i`th Element of this ArrayBindingPattern.
+     * index starts from 0
+     */
+    pub fn getIthElement(self, index: int) -> ArrayBindingElement {
+        for (arrayBindingPatternElement in ArrayBindingPatternElement(__all_data__)) {
+            if (arrayBindingPatternElement.array_binding_pattern_id = self.id && arrayBindingPatternElement.getIndex() = index) {
+                return arrayBindingPatternElement.getElement()
+            }
+        }
+    }
+}
+
+impl SignatureDeclaration {
+    /**
+     * Gets the `i`th Parameter of this SignatureDeclaration
+     */
+    pub fn getIthParameter(self, index: int) -> Parameter {
+        for (signatureDeclarationParameter in SignatureDeclarationParameter(__all_data__)) {
+            if (signatureDeclarationParameter.signature_declaration_id = self.id
+                && signatureDeclarationParameter.getIndex() = index) {
+                return signatureDeclarationParameter.getParameter()
+            }
+        }
+    }
+}
+
+impl FunctionLikeDeclaration {
+    fn getAllParameterIndex(self) -> *int {
+        for (childIndex in int::__undetermined_all__(),
+            parameter in Parameter(__all_data__)) {
+            let (child = self.getIthChild(childIndex)) {
+                if (parameter.key_eq(child)) {
+                    yield childIndex
+                }
+            }
+        }
+    }
+
+    pub fn getParameterFirstIndex(self) -> int {
+        return self.getAllParameterIndex().min()
+    }
+
+    pub fn hasParameter(self) -> bool {
+        let (parameter = self.getParameter()) {
+            return true
+        }
+    }
+
+    /**
+     * Gets the count of parameters.
+     */
+    pub fn getParameterCount(self) -> int {
+        return self.getParameter().len()
+    }
+
+    /**
+     * Gets call site locat at this function-like declaration
+     */
+    pub fn getCallSite(self) -> *MayInvokeExpression {
+        for (callSite in MayInvokeExpression(__all_data__)) {
+            if (self = callSite.getEnclosingFunction()) {
+                yield callSite
+            }
+        }
+    }
+
+    /**
+     * Gets call site invoke this function-like declaration
+     */
+    pub fn getCallSiteInvokeThis(self) -> *MayInvokeExpression {
+        for (callSite in MayInvokeExpression(__all_data__)) {
+            if (self = callSite.getCallee()) {
+                yield callSite
+            }
+        }
+    }
+
+    pub fn getReturnStatement(self) -> *ReturnStatement {
+        for (returnStatement in ReturnStatement(__all_data__)) {
+            if (returnStatement.getEnclosingFunction() = self) {
+                yield returnStatement
+            }
+        }
+    }
+
+    pub fn getReturnedExpression(self) -> *Expression {
+        for (returnStatement in self.getReturnStatement()) {
+            yield returnStatement.getExpression()
+        }
+        for (arrowFunction in ArrowFunction(__all_data__)) {
+            if (self.key_eq(arrowFunction)) {
+                for (returnExpression in Expression(__all_data__)) {
+                    if (arrowFunction.getBody().key_eq(returnExpression)) {
+                        yield returnExpression
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets the name of this function-like declaration
+     */
+    pub fn getName(self) -> string {
+        let (nameNode = self.getNameNode()) {
+            return nameNode.getName()
+        }
+    }
+
+    pub fn getModifiers(self) -> *Modifier {
+        let (functionDeclaration = self.toFunctionDeclaration()) {
+            yield functionDeclaration.getModifiers()
+        }
+        let (methodDeclaration = self.toMethodDeclaration()) {
+            yield methodDeclaration.getModifiers()
+        }
+        let (getAccessor = self.toGetAccessor()) {
+            yield getAccessor.getModifiers()
+        }
+        let (setAccessor = self.toSetAccessor()) {
+            yield setAccessor.getModifiers()
+        }
+        let (constructor = self.toConstructor()) {
+            yield constructor.getModifiers()
+        }
+        let (functionExpression = self.toFunctionExpression()) {
+            yield functionExpression.getModifiers()
+        }
+        let (arrowFunction = self.toArrowFunction()) {
+            yield arrowFunction.getModifiers()
+        }
+    }
+
+    @inline
+    pub fn toFunctionDeclaration(self) -> FunctionDeclaration {
+        for (functionDeclaration in FunctionDeclaration(__all_data__)) {
+            if (self.key_eq(functionDeclaration)) {
+                return functionDeclaration
+            }
+        }
+    }
+
+    @inline
+    pub fn toMethodDeclaration(self) -> MethodDeclaration {
+        for (methodDeclaration in MethodDeclaration(__all_data__)) {
+            if (self.key_eq(methodDeclaration)) {
+                return methodDeclaration
+            }
+        }
+    }
+
+    @inline
+    pub fn toGetAccessor(self) -> GetAccessor {
+        for (getAccessor in GetAccessor(__all_data__)) {
+            if (self.key_eq(getAccessor)) {
+                return getAccessor
+            }
+        }
+    }
+
+    @inline
+    pub fn toSetAccessor(self) -> SetAccessor {
+        for (setAccessor in SetAccessor(__all_data__)) {
+            if (self.key_eq(setAccessor)) {
+                return setAccessor
+            }
+        }
+    }
+
+    @inline
+    pub fn toConstructor(self) -> Constructor {
+        for (constructor in Constructor(__all_data__)) {
+            if (self.key_eq(constructor)) {
+                return constructor
+            }
+        }
+    }
+
+    @inline
+    pub fn toFunctionExpression(self) -> FunctionExpression {
+        for (functionExpression in FunctionExpression(__all_data__)) {
+            if (self.key_eq(functionExpression)) {
+                return functionExpression
+            }
+        }
+    }
+
+    @inline
+    pub fn toArrowFunction(self) -> ArrowFunction {
+        for (arrowFunction in ArrowFunction(__all_data__)) {
+            if (self.key_eq(arrowFunction)) {
+                return arrowFunction
+            }
+        }
+    }
+}
+
+impl EnumDeclaration {
+    /**
+     * Gets the identifier this EnumDeclaration.
+     */
+    pub fn getIdentifier(self) -> Identifier {
+        return self.getNameNode() 
+    }
+}
+
+impl TryStatement {
+    /** 
+     * Gets the `catch` clause of this `try` statement, if any. 
+     */
+    pub fn getCatchClause(self) -> CatchClause {
+        for (catchClause in CatchClause(__all_data__)) {
+            for (astNode in AstNode(__all_data__)) {
+                if (astNode in self.getChild()) {
+                    if (catchClause.key_eq(astNode)) {
+                        return catchClause
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Determine whether this TryStatement has finally block or not.
+     */
+    pub fn hasFinallyBlock(self) -> bool {
+        let (finallyBlock = self.getFinallyBlock()) {
+            return true
+        }
+    }
+}
+
+impl CatchClause {
+     /**
+     * Determine this CatchClause has variable declaration or not.
+     */
+    pub fn hasVariableDeclaration(self) -> bool {
+        let (variableDeclaration = self.getVariableDeclaration()) {
+            return true
+        }
+    }
+}
+
+impl BinaryExpression {
+    /**
+     * Gets binaryExpression Operand
+     */
+    pub fn getOperand(self) -> *Expression {
+        for (operand in Expression(__all_data__)) {
+            for (child in self.getChild()) {
+                if (operand.key_eq(child)) {
+                    yield operand
+                }
+            }
+        }
+    }
+}
+
+schema BinaryLogicalExpression extends BinaryExpression {
+}
+
+/**
+ * A binary logical expression 
+ */
+impl BinaryLogicalExpression {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *BinaryLogicalExpression {
+        for (binaryLogicalExpression in BinaryExpression(db),
+            binaryLogicalOperator in LogicalOperator(db)) {
+            if (binaryLogicalExpression.getOperator().key_eq(binaryLogicalOperator)) {
+                yield BinaryLogicalExpression {
+                    id : binaryLogicalExpression.id,
+                    kind : binaryLogicalExpression.kind,
+                    parent_id : binaryLogicalExpression.parent_id,
+                    parent_kind : binaryLogicalExpression.parent_kind,
+                    index : binaryLogicalExpression.index,
+                    location_id : binaryLogicalExpression.location_id,
+                    left_id : binaryLogicalExpression.left_id,
+                    operator_id : binaryLogicalExpression.operator_id,
+                    right_id : binaryLogicalExpression.right_id
+                }
+            }
+        }
+    }
+
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+}
+
+/**
+ * A logical AND expression using `&&`.
+ */
+schema LogicalAndExpression extends BinaryLogicalExpression {
+}
+
+impl LogicalAndExpression {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *LogicalAndExpression {
+        for (logicalAndExpression in BinaryLogicalExpression(db)) {
+            if (isLogicalAndExpression(logicalAndExpression.to<AstNode>())) {
+                yield LogicalAndExpression {
+                    id : logicalAndExpression.id,
+                    kind : logicalAndExpression.kind,
+                    parent_id : logicalAndExpression.parent_id,
+                    parent_kind : logicalAndExpression.parent_kind,
+                    index : logicalAndExpression.index,
+                    location_id : logicalAndExpression.location_id,
+                    left_id : logicalAndExpression.left_id,
+                    operator_id : logicalAndExpression.operator_id,
+                    right_id : logicalAndExpression.right_id
+                }
+            }
+        }
+    }
+
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+}
+
+/**
+ * A logical OR expression using `||`.
+ */
+schema LogicalOrExpression extends BinaryLogicalExpression {
+}
+
+impl LogicalOrExpression {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *LogicalOrExpression {
+        for (logicalOrExpression in BinaryLogicalExpression(db)) {
+            if (isLogicalOrExpression(logicalOrExpression.to<AstNode>())) {
+                yield LogicalOrExpression {
+                    id : logicalOrExpression.id,
+                    kind : logicalOrExpression.kind,
+                    parent_id : logicalOrExpression.parent_id,
+                    parent_kind : logicalOrExpression.parent_kind,
+                    index : logicalOrExpression.index,
+                    location_id : logicalOrExpression.location_id,
+                    left_id : logicalOrExpression.left_id,
+                    operator_id : logicalOrExpression.operator_id,
+                    right_id : logicalOrExpression.right_id
+                }
+            }
+        }
+    }
+
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+}
+
+/**
+ * A nullish coalescing expression using `??`.
+ */
+schema NullishCoalescingExpression extends BinaryLogicalExpression {
+}
+
+impl NullishCoalescingExpression {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *NullishCoalescingExpression {
+        for (nullishCoalescingExpression in BinaryLogicalExpression(db)) {
+            if (isNullishCoalescingExpression(nullishCoalescingExpression.to<AstNode>())) {
+                yield NullishCoalescingExpression {
+                    id : nullishCoalescingExpression.id,
+                    kind : nullishCoalescingExpression.kind,
+                    parent_id : nullishCoalescingExpression.parent_id,
+                    parent_kind : nullishCoalescingExpression.parent_kind,
+                    index : nullishCoalescingExpression.index,
+                    location_id : nullishCoalescingExpression.location_id,
+                    left_id : nullishCoalescingExpression.left_id,
+                    operator_id : nullishCoalescingExpression.operator_id,
+                    right_id : nullishCoalescingExpression.right_id
+                }
+            }
+        }
+    }
+
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+}
+
+/**
+ * An equality test expression using `==`, `!=`, `===` or `!==`.
+ */
+schema EqualityTestExpression extends BinaryExpression {
+}
+
+impl EqualityTestExpression {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *EqualityTestExpression {
+        for (equalityTestExpression in BinaryExpression(db)) {
+            if (isEqualityTestExpression(equalityTestExpression.to<AstNode>())) {
+                yield EqualityTestExpression {
+                    id : equalityTestExpression.id,
+                    kind : equalityTestExpression.kind,
+                    parent_id : equalityTestExpression.parent_id,
+                    parent_kind : equalityTestExpression.parent_kind,
+                    index : equalityTestExpression.index,
+                    location_id : equalityTestExpression.location_id,
+                    left_id : equalityTestExpression.left_id,
+                    operator_id : equalityTestExpression.operator_id,
+                    right_id : equalityTestExpression.right_id
+                }
+            }
+        }
+    }
+
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+}
+
+/**
+ * A exponentiation expression using `**`.
+ */
+schema ExponentiationExpression extends BinaryExpression {
+}
+
+impl ExponentiationExpression {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ExponentiationExpression {
+        for (exponentiationExpression in BinaryExpression(db)) {
+            if (isExponentiationExpression(exponentiationExpression.to<AstNode>())) {
+                yield ExponentiationExpression {
+                    id : exponentiationExpression.id,
+                    kind : exponentiationExpression.kind,
+                    parent_id : exponentiationExpression.parent_id,
+                    parent_kind : exponentiationExpression.parent_kind,
+                    index : exponentiationExpression.index,
+                    location_id : exponentiationExpression.location_id,
+                    left_id : exponentiationExpression.left_id,
+                    operator_id : exponentiationExpression.operator_id,
+                    right_id : exponentiationExpression.right_id
+                }
+            }
+        }
+    }
+
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+}
+
+/**
+ * A multiplicative expression using `*`, `/` or `%`.
+ */
+schema MultiplicativeExpression extends BinaryExpression {
+}
+
+impl MultiplicativeExpression {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *MultiplicativeExpression {
+        for (multiplicativeExpression in BinaryExpression(db)) {
+            if (isMultiplicativeExpression(multiplicativeExpression.to<AstNode>())) {
+                yield MultiplicativeExpression {
+                    id : multiplicativeExpression.id,
+                    kind : multiplicativeExpression.kind,
+                    parent_id : multiplicativeExpression.parent_id,
+                    parent_kind : multiplicativeExpression.parent_kind,
+                    index : multiplicativeExpression.index,
+                    location_id : multiplicativeExpression.location_id,
+                    left_id : multiplicativeExpression.left_id,
+                    operator_id : multiplicativeExpression.operator_id,
+                    right_id : multiplicativeExpression.right_id
+                }
+            }
+        }
+    }
+
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+}
+
+/**
+ * An additive expression using `+` or `-`.
+ */
+schema AdditiveExpression extends BinaryExpression {
+
+}
+
+impl AdditiveExpression {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *AdditiveExpression {
+        for (additiveExpression in BinaryExpression(db)) {
+            if (isAdditiveExpression(additiveExpression.to<AstNode>())) {
+                yield AdditiveExpression {
+                    id : additiveExpression.id,
+                    kind : additiveExpression.kind,
+                    parent_id : additiveExpression.parent_id,
+                    parent_kind : additiveExpression.parent_kind,
+                    index : additiveExpression.index,
+                    location_id : additiveExpression.location_id,
+                    left_id : additiveExpression.left_id,
+                    operator_id : additiveExpression.operator_id,
+                    right_id : additiveExpression.right_id
+                }
+            }
+        }
+    }
+
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+}
+
+/**
+ * A shift expression using `<<`, `>>` or `>>>`.
+ */
+schema ShiftExpression extends BinaryExpression {
+}
+
+impl ShiftExpression {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ShiftExpression {
+        for (shiftExpression in BinaryExpression(db)) {
+            if (isShiftExpression(shiftExpression.to<AstNode>())) {
+                yield ShiftExpression {
+                    id : shiftExpression.id,
+                    kind : shiftExpression.kind,
+                    parent_id : shiftExpression.parent_id,
+                    parent_kind : shiftExpression.parent_kind,
+                    index : shiftExpression.index,
+                    location_id : shiftExpression.location_id,
+                    left_id : shiftExpression.left_id,
+                    operator_id : shiftExpression.operator_id,
+                    right_id : shiftExpression.right_id
+                }
+            }
+        }
+    }
+
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+}
+
+/**
+ * A relational expression using `<`, `<=`, `>`, `>=`, `instanceof` or `in`.
+ */
+schema RelationalExpression extends BinaryExpression {
+}
+
+impl RelationalExpression {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *RelationalExpression {
+        for (relationalExpression in BinaryExpression(db)) {
+            if (isRelationalExpression(relationalExpression.to<AstNode>())) {
+                yield RelationalExpression {
+                    id : relationalExpression.id,
+                    kind : relationalExpression.kind,
+                    parent_id : relationalExpression.parent_id,
+                    parent_kind : relationalExpression.parent_kind,
+                    index : relationalExpression.index,
+                    location_id : relationalExpression.location_id,
+                    left_id : relationalExpression.left_id,
+                    operator_id : relationalExpression.operator_id,
+                    right_id : relationalExpression.right_id
+                }
+            }
+        }
+    }
+
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+}
+
+/**
+ * A comma expression using `,`.
+ */
+schema CommaExpression extends BinaryExpression {
+}
+
+impl CommaExpression {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *CommaExpression {
+        for (commaExpression in BinaryExpression(db)) {
+            if (isCommaExpression(commaExpression.to<AstNode>())) {
+                yield CommaExpression {
+                    id : commaExpression.id,
+                    kind : commaExpression.kind,
+                    parent_id : commaExpression.parent_id,
+                    parent_kind : commaExpression.parent_kind,
+                    index : commaExpression.index,
+                    location_id : commaExpression.location_id,
+                    left_id : commaExpression.left_id,
+                    operator_id : commaExpression.operator_id,
+                    right_id : commaExpression.right_id
+                }
+            }
+        }
+    }
+
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+}
+
+/**
+ * A binary bitwise expression using `&`, `|` or `^`.
+ */
+schema BinaryBitwiseExpression extends BinaryExpression {
+}
+
+impl BinaryBitwiseExpression {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *BinaryBitwiseExpression {
+        for (binaryBitwiseExpression in BinaryExpression(db)) {
+            if (isBinaryBitwiseExpression(binaryBitwiseExpression.to<AstNode>())) {
+                yield BinaryBitwiseExpression {
+                    id : binaryBitwiseExpression.id,
+                    kind : binaryBitwiseExpression.kind,
+                    parent_id : binaryBitwiseExpression.parent_id,
+                    parent_kind : binaryBitwiseExpression.parent_kind,
+                    index : binaryBitwiseExpression.index,
+                    location_id : binaryBitwiseExpression.location_id,
+                    left_id : binaryBitwiseExpression.left_id,
+                    operator_id : binaryBitwiseExpression.operator_id,
+                    right_id : binaryBitwiseExpression.right_id
+                }
+            }
+        }
+    }
+
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+}
+
+/**
+ * An assignment expression, either compound or simple.
+ */
+schema AssignmentExpression extends BinaryExpression {
+}
+
+impl AssignmentExpression {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *AssignmentExpression {
+        for (assignmentExpression in BinaryExpression(db)) {
+            if (isAssignmentExpression(assignmentExpression.to<AstNode>())) {
+                yield AssignmentExpression {
+                    id : assignmentExpression.id,
+                    kind : assignmentExpression.kind,
+                    parent_id : assignmentExpression.parent_id,
+                    parent_kind : assignmentExpression.parent_kind,
+                    index : assignmentExpression.index,
+                    location_id : assignmentExpression.location_id,
+                    left_id : assignmentExpression.left_id,
+                    operator_id : assignmentExpression.operator_id,
+                    right_id : assignmentExpression.right_id
+                }
+            }
+        }
+    }
+
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+}
+
+
+/**
+ * A compound assignment expression using
+ * `+=`, `-=`, `**=`, `*=`, `/=`, `%=`, `&=`, `|=`, `^=`, `<<=`, `>>=`, `>>>=`,
+ * `&&=`, `||=` or `??=`.
+ */
+schema CompoundAssignmentExpression extends AssignmentExpression {
+}
+
+impl CompoundAssignmentExpression {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *CompoundAssignmentExpression {
+        for (compoundAssignmentExpression in AssignmentExpression(db)) {
+            if (isCompoundAssignmentExpression(compoundAssignmentExpression.to<AstNode>())) {
+                yield CompoundAssignmentExpression {
+                    id : compoundAssignmentExpression.id,
+                    kind : compoundAssignmentExpression.kind,
+                    parent_id : compoundAssignmentExpression.parent_id,
+                    parent_kind : compoundAssignmentExpression.parent_kind,
+                    index : compoundAssignmentExpression.index,
+                    location_id : compoundAssignmentExpression.location_id,
+                    left_id : compoundAssignmentExpression.left_id,
+                    operator_id : compoundAssignmentExpression.operator_id,
+                    right_id : compoundAssignmentExpression.right_id
+                }
+            }
+        }
+    }
+
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+}
+
+/**
+ * A logical AND assignment expression using `&&=`.
+ */
+schema LogicalAndAssignmentExpression extends CompoundAssignmentExpression {
+}
+
+impl LogicalAndAssignmentExpression {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *LogicalAndAssignmentExpression {
+        for (logicalAndAssignmentExpression in CompoundAssignmentExpression(db)) {
+            if (isLogicalAndAssignmentExpression(logicalAndAssignmentExpression.to<AstNode>())) {
+                yield LogicalAndAssignmentExpression {
+                    id : logicalAndAssignmentExpression.id,
+                    kind : logicalAndAssignmentExpression.kind,
+                    parent_id : logicalAndAssignmentExpression.parent_id,
+                    parent_kind : logicalAndAssignmentExpression.parent_kind,
+                    index : logicalAndAssignmentExpression.index,
+                    location_id : logicalAndAssignmentExpression.location_id,
+                    left_id : logicalAndAssignmentExpression.left_id,
+                    operator_id : logicalAndAssignmentExpression.operator_id,
+                    right_id : logicalAndAssignmentExpression.right_id
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+}
+
+/**
+ * A logical OR assignment expression using `||=`.
+ */
+schema LogicalOrAssignmentExpression extends CompoundAssignmentExpression {
+}
+
+impl LogicalOrAssignmentExpression {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *LogicalOrAssignmentExpression {
+        for (logicalOrAssignmentExpression in CompoundAssignmentExpression(db)) {
+            if (isLogicalOrAssignmentExpression(logicalOrAssignmentExpression.to<AstNode>())) {
+                yield LogicalOrAssignmentExpression {
+                    id : logicalOrAssignmentExpression.id,
+                    kind : logicalOrAssignmentExpression.kind,
+                    parent_id : logicalOrAssignmentExpression.parent_id,
+                    parent_kind : logicalOrAssignmentExpression.parent_kind,
+                    index : logicalOrAssignmentExpression.index,
+                    location_id : logicalOrAssignmentExpression.location_id,
+                    left_id : logicalOrAssignmentExpression.left_id,
+                    operator_id : logicalOrAssignmentExpression.operator_id,
+                    right_id : logicalOrAssignmentExpression.right_id
+                }
+            }
+        }
+    }
+
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+}
+
+/**
+ * A nullish assignment expression using `??=`.
+ */
+schema NullishAssignmentExpression extends CompoundAssignmentExpression {
+}
+
+impl NullishAssignmentExpression {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *NullishAssignmentExpression {
+        for (nullishAssignmentExpression in AssignmentExpression(db)) {
+            if (isNullishAssignmentExpression(nullishAssignmentExpression.to<AstNode>())) {
+                yield NullishAssignmentExpression {
+                    id : nullishAssignmentExpression.id,
+                    kind : nullishAssignmentExpression.kind,
+                    parent_id : nullishAssignmentExpression.parent_id,
+                    parent_kind : nullishAssignmentExpression.parent_kind,
+                    index : nullishAssignmentExpression.index,
+                    location_id : nullishAssignmentExpression.location_id,
+                    left_id : nullishAssignmentExpression.left_id,
+                    operator_id : nullishAssignmentExpression.operator_id,
+                    right_id : nullishAssignmentExpression.right_id
+                }
+            }
+        }
+    }
+
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+}
+
+/**
+ * A simple assignment expression using `=`.
+ */
+schema SimpleAssignmentExpression extends AssignmentExpression {
+}
+
+impl SimpleAssignmentExpression {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *SimpleAssignmentExpression {
+        for (simpleAssignmentExpression in AssignmentExpression(db)) {
+            if (isSimpleAssignmentExpression(simpleAssignmentExpression.to<AstNode>())) {
+                yield SimpleAssignmentExpression {
+                    id : simpleAssignmentExpression.id,
+                    kind : simpleAssignmentExpression.kind,
+                    parent_id : simpleAssignmentExpression.parent_id,
+                    parent_kind : simpleAssignmentExpression.parent_kind,
+                    index : simpleAssignmentExpression.index,
+                    location_id : simpleAssignmentExpression.location_id,
+                    left_id : simpleAssignmentExpression.left_id,
+                    operator_id : simpleAssignmentExpression.operator_id,
+                    right_id : simpleAssignmentExpression.right_id
+                }
+            }
+        }
+    }
+
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+}
+
+schema Token {
+    @primary id: int
+}
+
+impl Token {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *Token {
+        for (astNode in AstNode(db)) {
+            if (isTokenKind(astNode.kind)) {
+                yield Token{id: astNode.id}
+            }
+        }
+    }
+
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+}
+
+impl DeclarationName {
+    /**
+     * Get the actual name of DeclarationName
+     */
+    pub fn getName(self) -> string {
+        return self.toIdentifier().getName()
+        return self.toPrivateIdentifier().getName()
+        return self.toNumericLiteral().getValue()
+        // TODO: ElementAccessExpression
+        return self.toPropertyAccessExpression().getNameNode().getName()
+        return self.toStringLiteral().getValue()
+        // TODO: NoSubstitutionTemplateLiteral, ObjectBindingPattern, ArrayBindingPattern
+    }
+}
+
+pub fn isTokenKind(kind: int) -> bool {
+    [
+        // {0},    // Unknown
+        // {1},    // EndOfFileToken
+        // {2},    // SingleLineCommentTrivia
+        // {3},    // MultiLineCommentTrivia
+        // {4},    // NewLineTrivia
+        // {5},    // WhitespaceTrivia
+        // {6},    // ShebangTrivia
+        // {7},    // ConflictMarkerTrivia
+        {8},    // NumericLiteral
+        {9},    // BigIntLiteral
+        {10},   // StringLiteral
+        {11},   // JsxText
+        {12},   // JsxTextAllWhiteSpaces
+        {13},   // RegularExpressionLiteral
+        {14},   // NoSubstitutionTemplateLiteral
+        {15},   // TemplateHead
+        {16},   // TemplateMiddle
+        {17},   // TemplateTail
+        {18},   // OpenBraceToken
+        {19},   // CloseBraceToken
+        {20},   // OpenParenToken
+        {21},   // CloseParenToken
+        {22},   // OpenBracketToken
+        {23},   // CloseBracketToken
+        {24},   // DotToken
+        {25},   // DotDotDotToken
+        {26},   // SemicolonToken
+        {27},   // CommaToken
+        {28},   // QuestionDotToken
+        {29},   // LessThanToken
+        {30},   // LessThanSlashToken
+        {31},   // GreaterThanToken
+        {32},   // LessThanEqualsToken
+        {33},   // GreaterThanEqualsToken
+        {34},   // EqualsEqualsToken
+        {35},   // ExclamationEqualsToken
+        {36},   // EqualsEqualsEqualsToken
+        {37},   // ExclamationEqualsEqualsToken
+        {38},   // EqualsGreaterThanToken
+        {39},   // PlusToken
+        {40},   // MinusToken
+        {41},   // AsteriskToken
+        {42},   // AsteriskAsteriskToken
+        {43},   // SlashToken
+        {44},   // PercentToken
+        {45},   // PlusPlusToken
+        {46},   // MinusMinusToken
+        {47},   // LessThanLessThanToken
+        {48},   // GreaterThanGreaterThanToken
+        {49},   // GreaterThanGreaterThanGreaterThanToken
+        {50},   // AmpersandToken
+        {51},   // BarToken
+        {52},   // CaretToken
+        {53},   // ExclamationToken
+        {54},   // TildeToken
+        {55},   // AmpersandAmpersandToken
+        {56},   // BarBarToken
+        {57},   // QuestionToken
+        {58},   // ColonToken
+        {59},   // AtToken
+        {60},   // QuestionQuestionToken
+        {61},   // BacktickToken
+        {62},   // HashToken
+        {63},   // EqualsToken
+        {64},   // PlusEqualsToken
+        {65},   // MinusEqualsToken
+        {66},   // AsteriskEqualsToken
+        {67},   // AsteriskAsteriskEqualsToken
+        {68},   // SlashEqualsToken
+        {69},   // PercentEqualsToken
+        {70},   // LessThanLessThanEqualsToken
+        {71},   // GreaterThanGreaterThanEqualsToken
+        {72},   // GreaterThanGreaterThanGreaterThanEqualsToken
+        {73},   // AmpersandEqualsToken
+        {74},   // BarEqualsToken
+        {75},   // BarBarEqualsToken
+        {76},   // AmpersandAmpersandEqualsToken
+        {77},   // QuestionQuestionEqualsToken
+        {78},   // CaretEqualsToken
+        {79},   // Identifier
+        {80},   // PrivateIdentifier
+        {81},   // BreakKeyword
+        {82},   // CaseKeyword
+        {83},   // CatchKeyword
+        {84},   // ClassKeyword
+        {86},   // ConstKeyword
+        {87},   // ContinueKeyword
+        {88},   // DebuggerKeyword
+        {89},   // DefaultKeyword
+        {90},   // DeleteKeyword
+        {91},   // DoKeyword
+        {92},   // ElseKeyword
+        {93},   // EnumKeyword
+        {94},   // ExportKeyword
+        {95},   // ExtendsKeyword
+        {96},   // FalseKeyword
+        {97},   // FinallyKeyword
+        {98},   // ForKeyword
+        {99},   // FunctionKeyword
+        {100},   // IfKeyword
+        {101},  // ImportKeyword
+        {102},  // InKeyword
+        {103},  // InstanceOfKeyword
+        {104},  // NewKeyword
+        {105},  // NullKeyword
+        {106},  // ReturnKeyword
+        {107},  // SuperExpression
+        {108},  // SwitchKeyword
+        {109},  // ThisKeyword
+        {110},  // ThrowKeyword
+        {111},  // TrueKeyword
+        {112},  // TryKeyword
+        {113},  // TypeOfKeyword
+        {114},  // VarKeyword
+        {115},  // VoidKeyword
+        {116},  // WhileKeyword
+        {117},  // WithKeyword
+        {118},  // ImplementsKeyword
+        {119},  // InterfaceKeyword
+        {120},  // LetKeyword
+        {121},  // PackageKeyword
+        {122},  // PrivateKeyword
+        {123},  // ProtectedKeyword
+        {124},  // PublicKeyword
+        {125},  // StaticKeyword
+        {126},  // YieldKeyword
+        {127},  // AbstractKeyword
+        {129},  // AsKeyword
+        {130},  // AssertsKeyword
+        {131},  // AssertKeyword
+        {132},  // AnyKeyword
+        {133},  // AsyncKeyword
+        {134},  // AwaitKeyword
+        {135},  // BooleanKeyword
+        {136},  // ConstructorKeyword
+        {137},  // DeclareKeyword
+        {138},  // GetKeyword
+        {139},  // InferKeyword
+        {140},  // IntrinsicKeyword
+        {141},  // IsKeyword
+        {142},  // KeyOfKeyword
+        {143},  // ModuleKeyword
+        {144},  // NamespaceKeyword
+        {145},  // NeverKeyword
+        {147},  // ReadonlyKeyword
+        {148},  // RequireKeyword
+        {149},  // NumberKeyword
+        {150},  // ObjectKeyword
+        {152},  // SetKeyword
+        {153},  // StringKeyword
+        {154},  // SymbolKeyword
+        {155},  // TypeKeyword
+        {156},  // UndefinedKeyword
+        {157},  // UniqueKeyword
+        {158},  // UnknownKeyword
+        {159},  // FromKeyword
+        {160},  // GlobalKeyword
+        {161},  // BigIntKeyword
+        {162},  // OverrideKeyword
+        {163},  // OfKeyword
+    ]
+}
+
+/**
+ * Determines whether a node is a binary logical expression using
+ * `&&`, `||` or `??`.
+ */
+pub fn isBinaryLogicalExpression(node: AstNode) -> bool {
+    for (binaryExpression in BinaryExpression(__all_data__),
+        binaryLogicalOperator in LogicalOperator(__all_data__)) {
+        if (binaryExpression.key_eq(node)) {
+            if (binaryExpression.getOperator().key_eq(binaryLogicalOperator)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a logical AND expression using `&&`.
+ */
+pub fn isLogicalAndExpression(node: AstNode) -> bool {
+    for (binaryExpression in BinaryExpression(__all_data__),
+        ampersandAmpersandToken in AmpersandAmpersandToken(__all_data__)) {
+        if (binaryExpression.key_eq(node)) {
+            if (binaryExpression.getOperator().key_eq(ampersandAmpersandToken)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a logical OR expression using `||`.
+ */
+pub fn isLogicalOrExpression(node: AstNode) -> bool {
+    for (binaryExpression in BinaryExpression(__all_data__),
+        barBarToken in BarBarToken(__all_data__)) {
+        if (binaryExpression.key_eq(node)) {
+            if (binaryExpression.getOperator().key_eq(barBarToken)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a nullish coalescing expression using `??`.
+ */
+pub fn isNullishCoalescingExpression(node: AstNode) -> bool {
+    for (binaryExpression in BinaryExpression(__all_data__),
+        questionQuestionToken in QuestionQuestionToken(__all_data__)) {
+        if (binaryExpression.key_eq(node)) {
+            if (binaryExpression.getOperator().key_eq(questionQuestionToken)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a AstNode is an assignment expression, either compound or simple.
+ */
+pub fn isAssignmentExpression(node: AstNode) -> bool {
+    for (binaryExpression in BinaryExpression(__all_data__),
+        assignmentOperator in AssignmentOperator(__all_data__)) {
+        if (binaryExpression.key_eq(node)) {
+            if (binaryExpression.getOperator().key_eq(assignmentOperator)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a `throw` statement
+ */
+pub fn isThrowStatement(node: AstNode) -> bool {
+    if (node.getKindName() = "ThrowStatement") {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a `return` statement
+ */
+pub fn isReturnStatement(node: AstNode) -> bool {
+    if (node.getKindName() = "ReturnStatement") {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a `for`-`in` or `for`-`of` statement
+ */
+pub fn isEnhancedForStatement(node: AstNode) -> bool {
+    let (kind = node.getKindName()) {
+        if (kind = "ForInStatement" || kind = "ForOfStatement") {
+            return true
+        }
+    }
+}
+
+/**
+ * Determines whether a node is an equality test expression using `==`, `!=`,
+ * `===` or `!==`.
+ */
+pub fn isEqualityTestExpression(node: AstNode) -> bool {
+    for (binaryExpression in BinaryExpression(__all_data__),
+        equalityOperator in EqualityOperator(__all_data__)) {
+        if (binaryExpression.key_eq(node)) {
+            if (binaryExpression.getOperator().key_eq(equalityOperator)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a exponentiation expression using `**`.
+ */
+pub fn isExponentiationExpression(node: AstNode) -> bool {
+    for (binaryExpression in BinaryExpression(__all_data__),
+        asteriskAsteriskToken in AsteriskAsteriskToken(__all_data__)) {
+        if (binaryExpression.key_eq(node)) {
+            if (binaryExpression.getOperator().key_eq(asteriskAsteriskToken)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a multiplicative expression using `*`, `/` or `%`.
+ */
+pub fn isMultiplicativeExpression(node: AstNode) -> bool {
+    for (binaryExpression in BinaryExpression(__all_data__),
+        multiplicativeOperator in MultiplicativeOperator(__all_data__)) {
+        if (binaryExpression.key_eq(node)) {
+            if (binaryExpression.getOperator().key_eq(multiplicativeOperator)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is an additive expression using `+` or `-`.
+ */
+pub fn isAdditiveExpression(node: AstNode) -> bool {
+    for (binaryExpression in BinaryExpression(__all_data__),
+        additiveOperator in AdditiveOperator(__all_data__)) {
+        if (binaryExpression.key_eq(node)) {
+            if (binaryExpression.getOperator().key_eq(additiveOperator)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a shift expression using `<<`, `>>` or `>>>`.
+ */
+pub fn isShiftExpression(node: AstNode) -> bool {
+    for (binaryExpression in BinaryExpression(__all_data__),
+        shiftOperator in ShiftOperator(__all_data__)) {
+        if (binaryExpression.key_eq(node)) {
+            if (binaryExpression.getOperator().key_eq(shiftOperator)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a comma expression using `,`.
+ */
+pub fn isCommaExpression(node: AstNode) -> bool {
+    for (binaryExpression in BinaryExpression(__all_data__),
+        commaToken in CommaToken(__all_data__)) {
+        if (binaryExpression.key_eq(node)) {
+            if (binaryExpression.getOperator().key_eq(commaToken)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a relational expression using `<`, `<=`, `>`, `>=`, `instanceof` or `in`.
+ */
+pub fn isRelationalExpression(node: AstNode) -> bool {
+    for (binaryExpression in BinaryExpression(__all_data__),
+        relationalOperator in RelationalOperator(__all_data__)) {
+        if (binaryExpression.key_eq(node)) {
+            if (binaryExpression.getOperator().key_eq(relationalOperator)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a binary bitwise expression using
+ * `&`, `|` or `^`.
+ */
+pub fn isBinaryBitwiseExpression(node: AstNode) -> bool {
+    for (binaryExpression in BinaryExpression(__all_data__),
+        binaryBitwiseOperator in BitwiseOperator(__all_data__)) {
+        if (binaryExpression.key_eq(node)) {
+            if (binaryExpression.getOperator().key_eq(binaryBitwiseOperator)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a compound assignment expression using
+ * `+=`, `-=`, `**=`, `*=`, `/=`, `%=`, `&=`, `|=`, `^=`, `<<=`, `>>=`, `>>>=`,
+ * `&&=`, `||=` or `??=`.
+ */
+pub fn isCompoundAssignmentExpression(node: AstNode) -> bool {
+    for (binaryExpression in BinaryExpression(__all_data__),
+        compoundAssignmentOperator in CompoundAssignmentOperator(__all_data__)) {
+        if (binaryExpression.key_eq(node)) {
+            if (binaryExpression.getOperator().key_eq(compoundAssignmentOperator)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a simple assignment expression using `=`.
+ */
+pub fn isSimpleAssignmentExpression(node: AstNode) -> bool {
+    for (binaryExpression in BinaryExpression(__all_data__),
+        equalsToken in EqualsToken(__all_data__)) {
+        if (binaryExpression.key_eq(node)) {
+            if (binaryExpression.getOperator().key_eq(equalsToken)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is an update expression.
+ */
+pub fn isUpdateExpression(node: AstNode) -> bool {
+    // TODO:: judging by kind will be faster than taking the entire collection. if the execution speed slows down, modify it.
+    for (updateExpression in UpdateExpression(__all_data__)) {
+        if (updateExpression.key_eq(node)) {
+            return true
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a type assertion expression.
+ */
+pub fn isTypeAssertionExpression(node: AstNode) -> bool {
+    if (node.getKindName() = "TypeAssertionExpression") {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is an `await` expression.
+ */
+pub fn isAwaitExpression(node: AstNode) -> bool {
+    if (node.getKindName() = "AwaitExpression") {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a logical AND assignment expression using `&&=`.
+ */
+pub fn isLogicalAndAssignmentExpression(node: AstNode) -> bool {
+    for (binaryExpression in BinaryExpression(__all_data__),
+        ampersandAmpersandEqualsToken in AmpersandAmpersandEqualsToken(__all_data__)) {
+        if (binaryExpression.key_eq(node)) {
+            if (binaryExpression.getOperator().key_eq(ampersandAmpersandEqualsToken)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a logical OR assignment expression using `||=`.
+ */
+pub fn isLogicalOrAssignmentExpression(node: AstNode) -> bool {
+    for (binaryExpression in BinaryExpression(__all_data__),
+        barBarEqualsToken in BarBarEqualsToken(__all_data__)) {
+        if (binaryExpression.key_eq(node)) {
+            if (binaryExpression.getOperator().key_eq(barBarEqualsToken)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a nullish assignment expression using `??=`.
+ */
+pub fn isNullishAssignmentExpression(node: AstNode) -> bool {
+    for (binaryExpression in BinaryExpression(__all_data__),
+        questionQuestionEqualsToken in QuestionQuestionEqualsToken(__all_data__)) {
+        if (binaryExpression.key_eq(node)) {
+            if (binaryExpression.getOperator().key_eq(questionQuestionEqualsToken)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is an access expression.
+ */
+pub fn isAccessExpression(node: AstNode) -> bool {
+    // TODO:: judging by kind will be faster than taking the entire collection. if the execution speed slows down, modify it.
+    for (accessExpression in AccessExpression(__all_data__)) {
+        if (accessExpression.key_eq(node)) {
+            return true
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a prefix increment expression using `++`.
+ */
+pub fn isPrefixIncrementExpression(node: AstNode) -> bool {
+    for (prefixUnaryExpression in PrefixUnaryExpression(__all_data__),
+        plusPlusToken in PlusPlusToken(__all_data__)) {
+        if (prefixUnaryExpression.key_eq(node)) {
+            if (prefixUnaryExpression.getOperator().key_eq(plusPlusToken)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is an increment expression using `++`.
+ */
+pub fn isIncrementExpression(node: AstNode) -> bool {
+    if (isPrefixIncrementExpression(node)) {
+        return true
+    }
+    if (isPostfixIncrementExpression(node)) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a postfix increment expression using `++`.
+ */
+pub fn isPostfixIncrementExpression(node: AstNode) -> bool {
+    for (postfixUnaryExpression in PostfixUnaryExpression(__all_data__),
+        plusPlusToken in PlusPlusToken(__all_data__)) {
+        if (postfixUnaryExpression.key_eq(node)) {
+            if (postfixUnaryExpression.getOperator().key_eq(plusPlusToken)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a prefix decrement expression using `--`.
+ */
+pub fn isPrefixDecrementExpression(node: AstNode) -> bool {
+    for (prefixUnaryExpression in PrefixUnaryExpression(__all_data__),
+        minusMinusToken in MinusMinusToken(__all_data__)) {
+        if (prefixUnaryExpression.key_eq(node)) {
+            if (prefixUnaryExpression.getOperator().key_eq(minusMinusToken)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a postfix decrement expression using `--`.
+ */
+pub fn isPostfixDecrementExpression(node: AstNode) -> bool {
+    for (postfixUnaryExpression in PostfixUnaryExpression(__all_data__),
+        minusMinusToken in MinusMinusToken(__all_data__)) {
+        if (postfixUnaryExpression.key_eq(node)) {
+            if (postfixUnaryExpression.getOperator().key_eq(minusMinusToken)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a decrement expression using `--`.
+ */
+pub fn isDecrementExpression(node: AstNode) -> bool {
+    if (isPrefixDecrementExpression(node)) {
+        return true
+    }
+    if (isPostfixDecrementExpression(node)) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a variable declaration
+ */
+pub fn isVariableDeclaration(node: AstNode) -> bool {
+    // TODO:: judging by kind will be faster than taking the entire collection. if the execution speed slows down, modify it.
+    for (variableDeclaration in VariableDeclaration(__all_data__)) {
+        if (variableDeclaration.key_eq(node)) {
+            return true
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a functionLike Declaration
+ */
+pub fn isFunctionLikeDeclaration(node: AstNode) -> bool {
+    // TODO:: judging by kind will be faster than taking the entire collection. if the execution speed slows down, modify it.
+    for (functionLikeDeclaration in FunctionLikeDeclaration(__all_data__)) {
+        if (functionLikeDeclaration.key_eq(node)) {
+            return true
+        }
+    }
+}
+
+
+/**
+ * Determines whether a node is a expression
+ */
+pub fn isExpression(node: AstNode) -> bool {
+    // TODO:: judging by kind will be faster than taking the entire collection. if the execution speed slows down, modify it.
+    for (expression in Expression(__all_data__)) {
+        if (expression.key_eq(node)) {
+            return true
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a callExpression
+ */
+pub fn isCallExpression(node: AstNode) -> bool {
+    // TODO:: judging by kind will be faster than taking the entire collection. if the execution speed slows down, modify it.
+    for (expression in CallExpression(__all_data__)) {
+        if (expression.key_eq(node)) {
+            return true
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a Identifier
+ */
+pub fn isIdentifier(node: AstNode) -> bool {
+    // TODO:: judging by kind will be faster than taking the entire collection. if the execution speed slows down, modify it.
+    for (identifier in Identifier(__all_data__)) {
+        if (identifier.key_eq(node)) {
+            return true
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a PropertyAccessExpression
+ */
+pub fn isPropertyAccessExpression(node: AstNode) -> bool {
+    // TODO:: judging by kind will be faster than taking the entire collection. if the execution speed slows down, modify it.
+    for (propertyAccessExpression in PropertyAccessExpression(__all_data__)) {
+        if (propertyAccessExpression.key_eq(node)) {
+            return true
+        }
+    }
+}
+
+
+/**
+ * Determines whether a node is a ArrowFunction
+ */
+pub fn isArrowFunction(node: AstNode) -> bool {
+    // TODO:: judging by kind will be faster than taking the entire collection. if the execution speed slows down, modify it.
+    for (arrowFunction in ArrowFunction(__all_data__)) {
+        if (arrowFunction.key_eq(node)) {
+            return true
+        }
+    }
+}

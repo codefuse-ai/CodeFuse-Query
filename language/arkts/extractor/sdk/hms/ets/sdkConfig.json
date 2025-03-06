@@ -1,0 +1,4 @@
+{
+    "apiPath": ["./api", "./kits"],
+    "prefix": "@hms"
+    }

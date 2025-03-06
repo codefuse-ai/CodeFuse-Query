@@ -1,0 +1,770 @@
+/**
+ * A CaseBlockClause
+ */
+schema CaseBlockClause {
+    @primary clause_id: int,
+    case_block_id: int,
+    index: int
+}
+
+impl CaseBlockClause {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *CaseBlockClause {
+        for (caseBlockClause in CaseBlockClauseDO(db)) {
+            yield CaseBlockClause {
+                clause_id: caseBlockClause.clause_id,
+                case_block_id : caseBlockClause.case_block_id,
+                index : caseBlockClause.index
+            }
+        }
+    }
+    
+    /**
+     * Gets the clause.
+     */
+    pub fn getClause(self) -> CaseOrDefaultClause {
+        for (caseOrDefaultClause in CaseOrDefaultClause(__all_data__)) {
+            if (self.clause_id = caseOrDefaultClause.id) {
+                return caseOrDefaultClause
+            }
+        }
+    }
+    
+    /**
+     * Gets the caseBlock.
+     */
+    pub fn getCaseBlock(self) -> CaseBlock {
+        for (caseBlock in CaseBlock(__all_data__)) {
+            if (self.case_block_id = caseBlock.id) {
+                return caseBlock
+            }
+        }
+    }
+    
+    /**
+     * Gets the index.
+     */
+    pub fn getIndex(self) -> int {
+        return self.index
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.clause_id
+    }
+    
+}
+
+/**
+ * A CaseClause
+ */
+schema CaseClause extends AstNode {
+    expression_id: int
+}
+
+impl CaseClause {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *CaseClause {
+        for (fa in AstNode(db)) {
+            for (son in CaseClauseDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield CaseClause {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        expression_id : son.expression_id
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the expression.
+     */
+    pub fn getExpression(self) -> Expression {
+        for (expression in Expression(__all_data__)) {
+            if (self.expression_id = expression.id) {
+                return expression
+            }
+        }
+    }
+    
+    /**
+     * Get the statement.
+     */
+    pub fn getStatement(self) -> *Statement {
+        for (caseClauseStatement in CaseClauseStatement(__all_data__)) {
+            if (caseClauseStatement.case_clause_id = self.id) {
+                yield caseClauseStatement.getStatement()
+            }
+        }
+    }
+    
+
+    /**
+     * Gets the statement of this CaseClause with index,
+     * starts from 0.
+     * child index 0 is CaseClause's Expression
+     */
+    pub fn getIthStatement(self, index: int) -> Statement {
+        for (caseClauseStatement in CaseClauseStatement(__all_data__)) {
+            if (caseClauseStatement.case_clause_id = self.id && caseClauseStatement.getIndex() = index) {
+                return caseClauseStatement.getStatement()
+            }
+        }
+    }
+
+    /**
+     * Gets the statement count of this CaseClause.
+     */
+    pub fn getStatementCount(self) -> int {
+        return self.getStatement().len()
+    }
+}
+
+/**
+ * A CaseClauseStatement
+ */
+schema CaseClauseStatement {
+    @primary statement_id: int,
+    case_clause_id: int,
+    index: int
+}
+
+impl CaseClauseStatement {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *CaseClauseStatement {
+        for (caseClauseStatement in CaseClauseStatementDO(db)) {
+            yield CaseClauseStatement {
+                statement_id: caseClauseStatement.statement_id,
+                case_clause_id : caseClauseStatement.case_clause_id,
+                index : caseClauseStatement.index
+            }
+        }
+    }
+    
+    /**
+     * Gets the statement.
+     */
+    pub fn getStatement(self) -> Statement {
+        for (statement in Statement(__all_data__)) {
+            if (self.statement_id = statement.id) {
+                return statement
+            }
+        }
+    }
+    
+    /**
+     * Gets the caseClause.
+     */
+    pub fn getCaseClause(self) -> CaseClause {
+        for (caseClause in CaseClause(__all_data__)) {
+            if (self.case_clause_id = caseClause.id) {
+                return caseClause
+            }
+        }
+    }
+    
+    /**
+     * Gets the index.
+     */
+    pub fn getIndex(self) -> int {
+        return self.index
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.statement_id
+    }
+    
+}
+
+/**
+ * A DefaultClause
+ */
+schema DefaultClause extends AstNode {
+}
+
+impl DefaultClause {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *DefaultClause {
+        for (fa in AstNode(db)) {
+            for (son in DefaultClauseDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield DefaultClause {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Get the statement.
+     */
+    pub fn getStatement(self) -> *Statement {
+        for (defaultClauseStatement in DefaultClauseStatement(__all_data__)) {
+            if (defaultClauseStatement.default_clause_id = self.id) {
+                yield defaultClauseStatement.getStatement()
+            }
+        }
+    }
+    
+
+    /**
+     * Gets the statement of this DefaultClause with index,
+     * starts from 0.
+     */
+    pub fn getIthStatement(self, index: int) -> Statement {
+        for (defaultClauseStatement in DefaultClauseStatement(__all_data__)) {
+            if (defaultClauseStatement.default_clause_id = self.id && defaultClauseStatement.getIndex() = index) {
+                return defaultClauseStatement.getStatement()
+            }
+        }
+    }
+
+    /**
+     * Gets the statement count of this DefaultClause.
+     */
+    pub fn getStatementCount(self) -> int {
+        return self.getStatement().len()
+    }
+}
+
+/**
+ * A DefaultClauseStatement
+ */
+schema DefaultClauseStatement {
+    @primary statement_id: int,
+    default_clause_id: int,
+    index: int
+}
+
+impl DefaultClauseStatement {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *DefaultClauseStatement {
+        for (defaultClauseStatement in DefaultClauseStatementDO(db)) {
+            yield DefaultClauseStatement {
+                statement_id: defaultClauseStatement.statement_id,
+                default_clause_id : defaultClauseStatement.default_clause_id,
+                index : defaultClauseStatement.index
+            }
+        }
+    }
+    
+    /**
+     * Gets the statement.
+     */
+    pub fn getStatement(self) -> Statement {
+        for (statement in Statement(__all_data__)) {
+            if (self.statement_id = statement.id) {
+                return statement
+            }
+        }
+    }
+    
+    /**
+     * Gets the defaultClause.
+     */
+    pub fn getDefaultClause(self) -> DefaultClause {
+        for (defaultClause in DefaultClause(__all_data__)) {
+            if (self.default_clause_id = defaultClause.id) {
+                return defaultClause
+            }
+        }
+    }
+    
+    /**
+     * Gets the index.
+     */
+    pub fn getIndex(self) -> int {
+        return self.index
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.statement_id
+    }
+    
+}
+
+/**
+ * A CatchClause
+ */
+schema CatchClause extends AstNode {
+    block_id: int
+}
+
+impl CatchClause {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *CatchClause {
+        for (fa in AstNode(db)) {
+            for (son in CatchClauseDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield CatchClause {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        block_id : son.block_id
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the parent.
+     */
+    pub fn getParent(self) -> TryStatement {
+        for (tryStatement in TryStatement(__all_data__)) {
+            if (self.parent_id = tryStatement.id) {
+                return tryStatement
+            }
+        }
+    }
+    
+    /**
+     * Gets the block.
+     */
+    pub fn getBlock(self) -> Block {
+        for (block in Block(__all_data__)) {
+            if (self.block_id = block.id) {
+                return block
+            }
+        }
+    }
+    
+    /**
+     * Get the variableDeclaration.
+     */
+    pub fn getVariableDeclaration(self) -> VariableDeclaration {
+        for (catchClauseVariableDeclaration in CatchClauseVariableDeclaration(__all_data__)) {
+            if (catchClauseVariableDeclaration.catch_clause_id = self.id) {
+                return catchClauseVariableDeclaration.getVariableDeclaration()
+            }
+        }
+    }
+    
+
+     /**
+     * Determine this CatchClause has variable declaration or not.
+     */
+    pub fn hasVariableDeclaration(self) -> bool {
+        let (variableDeclaration = self.getVariableDeclaration()) {
+            return true
+        }
+    }
+}
+
+/**
+ * A CatchClauseVariableDeclaration
+ */
+schema CatchClauseVariableDeclaration {
+    @primary catch_clause_id: int,
+    variable_declaration_id: int
+}
+
+impl CatchClauseVariableDeclaration {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *CatchClauseVariableDeclaration {
+        for (catchClauseVariableDeclaration in CatchClauseVariableDeclarationDO(db)) {
+            yield CatchClauseVariableDeclaration {
+                catch_clause_id: catchClauseVariableDeclaration.catch_clause_id,
+                variable_declaration_id : catchClauseVariableDeclaration.variable_declaration_id
+            }
+        }
+    }
+    
+    /**
+     * Gets the catchClause.
+     */
+    pub fn getCatchClause(self) -> CatchClause {
+        for (catchClause in CatchClause(__all_data__)) {
+            if (self.catch_clause_id = catchClause.id) {
+                return catchClause
+            }
+        }
+    }
+    
+    /**
+     * Gets the variableDeclaration.
+     */
+    pub fn getVariableDeclaration(self) -> VariableDeclaration {
+        for (variableDeclaration in VariableDeclaration(__all_data__)) {
+            if (self.variable_declaration_id = variableDeclaration.id) {
+                return variableDeclaration
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.catch_clause_id
+    }
+    
+}
+
+/**
+ * A HeritageClause
+ */
+schema HeritageClause extends AstNode {
+    token_id: int
+}
+
+impl HeritageClause {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *HeritageClause {
+        for (fa in AstNode(db)) {
+            for (son in HeritageClauseDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield HeritageClause {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        token_id : son.token_id
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the parent.
+     */
+    pub fn getParent(self) -> InterfaceOrClassLikeDeclaration {
+        for (interfaceOrClassLikeDeclaration in InterfaceOrClassLikeDeclaration(__all_data__)) {
+            if (self.parent_id = interfaceOrClassLikeDeclaration.id) {
+                return interfaceOrClassLikeDeclaration
+            }
+        }
+    }
+    
+    /**
+     * Gets the token.
+     */
+    pub fn getToken(self) -> ExtendsOrImplementsKeyword {
+        for (extendsOrImplementsKeyword in ExtendsOrImplementsKeyword(__all_data__)) {
+            if (self.token_id = extendsOrImplementsKeyword.id) {
+                return extendsOrImplementsKeyword
+            }
+        }
+    }
+    
+    /**
+     * Get the typeNode.
+     */
+    pub fn getTypeNode(self) -> *ExpressionWithTypeArguments {
+        for (heritageClauseTypeNode in HeritageClauseTypeNode(__all_data__)) {
+            if (heritageClauseTypeNode.heritage_clause_id = self.id) {
+                yield heritageClauseTypeNode.getTypeNode()
+            }
+        }
+    }
+    
+}
+
+/**
+ * A HeritageClauseTypeNode
+ */
+schema HeritageClauseTypeNode {
+    @primary type_node_id: int,
+    heritage_clause_id: int,
+    index: int
+}
+
+impl HeritageClauseTypeNode {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *HeritageClauseTypeNode {
+        for (heritageClauseTypeNode in HeritageClauseTypeNodeDO(db)) {
+            yield HeritageClauseTypeNode {
+                type_node_id: heritageClauseTypeNode.type_node_id,
+                heritage_clause_id : heritageClauseTypeNode.heritage_clause_id,
+                index : heritageClauseTypeNode.index
+            }
+        }
+    }
+    
+    /**
+     * Gets the typeNode.
+     */
+    pub fn getTypeNode(self) -> ExpressionWithTypeArguments {
+        for (expressionWithTypeArguments in ExpressionWithTypeArguments(__all_data__)) {
+            if (self.type_node_id = expressionWithTypeArguments.id) {
+                return expressionWithTypeArguments
+            }
+        }
+    }
+    
+    /**
+     * Gets the heritageClause.
+     */
+    pub fn getHeritageClause(self) -> HeritageClause {
+        for (heritageClause in HeritageClause(__all_data__)) {
+            if (self.heritage_clause_id = heritageClause.id) {
+                return heritageClause
+            }
+        }
+    }
+    
+    /**
+     * Gets the index.
+     */
+    pub fn getIndex(self) -> int {
+        return self.index
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.type_node_id
+    }
+    
+}
+
+/**
+ * A ImportClause
+ */
+schema ImportClause extends Declaration {
+    is_type_only: int
+}
+
+impl ImportClause {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ImportClause {
+        for (fa in Declaration(db)) {
+            for (son in ImportClauseDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield ImportClause {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        is_type_only : son.is_type_only
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the parent.
+     */
+    pub fn getParent(self) -> ImportDeclaration {
+        for (importDeclaration in ImportDeclaration(__all_data__)) {
+            if (self.parent_id = importDeclaration.id) {
+                return importDeclaration
+            }
+        }
+    }
+    
+    /**
+     * Gets the ypeOnly.
+     */
+    pub fn IsTypeOnly(self) -> bool {
+        return self.is_type_only = 1
+    }
+    
+    /**
+     * Get the nameNode.
+     */
+    pub fn getNameNode(self) -> Identifier {
+        for (importClauseNameNode in ImportClauseNameNode(__all_data__)) {
+            if (importClauseNameNode.import_clause_id = self.id) {
+                return importClauseNameNode.getNameNode()
+            }
+        }
+    }
+    
+    /**
+     * Get the namedBindings.
+     */
+    pub fn getNamedBindings(self) -> NamedImportBindings {
+        for (importClauseNamedBindings in ImportClauseNamedBindings(__all_data__)) {
+            if (importClauseNamedBindings.import_clause_id = self.id) {
+                return importClauseNamedBindings.getNamedBindings()
+            }
+        }
+    }
+    
+}
+
+/**
+ * A AssertClause
+ */
+schema AssertClause extends AstNode {
+}
+
+impl AssertClause {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *AssertClause {
+        for (fa in AstNode(db)) {
+            for (son in AssertClauseDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield AssertClause {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Get the elements.
+     */
+    pub fn getElements(self) -> *AssertEntry {
+        for (assertEntry in AssertEntry(__all_data__)) {
+            if (assertEntry.parent_id = self.id) {
+                yield assertEntry
+            }
+        }
+    }
+    
+}
+
+/**
+ * This type consists of the following types: [CaseClause, DefaultClause]
+ */
+schema CaseOrDefaultClause extends AstNode {
+}
+
+impl CaseOrDefaultClause {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *CaseOrDefaultClause {
+        for (caseClause in CaseClause(db)) {
+            yield CaseOrDefaultClause {
+                id : caseClause.id,
+                kind : caseClause.kind,
+                parent_id : caseClause.parent_id,
+                parent_kind : caseClause.parent_kind,
+                index : caseClause.index,
+                location_id : caseClause.location_id,
+            }
+        }
+        for (defaultClause in DefaultClause(db)) {
+            yield CaseOrDefaultClause {
+                id : defaultClause.id,
+                kind : defaultClause.kind,
+                parent_id : defaultClause.parent_id,
+                parent_kind : defaultClause.parent_kind,
+                index : defaultClause.index,
+                location_id : defaultClause.location_id,
+            }
+        }
+    }
+
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * trans to CaseClause
+     */
+    pub fn toCaseClause(self) -> CaseClause {
+        for (caseClause in CaseClause(__all_data__)) {
+            if (caseClause.key_eq(self)) {
+                return caseClause
+            }
+        }
+    }
+    
+    /**
+     * trans to DefaultClause
+     */
+    pub fn toDefaultClause(self) -> DefaultClause {
+        for (defaultClause in DefaultClause(__all_data__)) {
+            if (defaultClause.key_eq(self)) {
+                return defaultClause
+            }
+        }
+    }
+    
+}
+

@@ -1,0 +1,537 @@
+/**
+ * A QualifiedName
+ */
+schema QualifiedName extends AstNode {
+    left_id: int,
+    right_id: int
+}
+
+impl QualifiedName {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *QualifiedName {
+        for (fa in AstNode(db)) {
+            for (son in QualifiedNameDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield QualifiedName {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        left_id : son.left_id,
+                        right_id : son.right_id
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the left.
+     */
+    pub fn getLeft(self) -> EntityName {
+        for (entityName in EntityName(__all_data__)) {
+            if (self.left_id = entityName.id) {
+                return entityName
+            }
+        }
+    }
+    
+    /**
+     * Gets the right.
+     */
+    pub fn getRight(self) -> Identifier {
+        for (identifier in Identifier(__all_data__)) {
+            if (self.right_id = identifier.id) {
+                return identifier
+            }
+        }
+    }
+    
+}
+
+/**
+ * A ComputedPropertyName
+ */
+schema ComputedPropertyName extends AstNode {
+    expression_id: int
+}
+
+impl ComputedPropertyName {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ComputedPropertyName {
+        for (fa in AstNode(db)) {
+            for (son in ComputedPropertyNameDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield ComputedPropertyName {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        expression_id : son.expression_id
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the expression.
+     */
+    pub fn getExpression(self) -> Expression {
+        for (expression in Expression(__all_data__)) {
+            if (self.expression_id = expression.id) {
+                return expression
+            }
+        }
+    }
+    
+}
+
+/**
+ * This type consists of the following types: [Identifier, QualifiedName]
+ */
+schema EntityName extends AstNode {
+}
+
+impl EntityName {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *EntityName {
+        for (identifier in Identifier(db)) {
+            yield EntityName {
+                id : identifier.id,
+                kind : identifier.kind,
+                parent_id : identifier.parent_id,
+                parent_kind : identifier.parent_kind,
+                index : identifier.index,
+                location_id : identifier.location_id,
+            }
+        }
+        for (qualifiedName in QualifiedName(db)) {
+            yield EntityName {
+                id : qualifiedName.id,
+                kind : qualifiedName.kind,
+                parent_id : qualifiedName.parent_id,
+                parent_kind : qualifiedName.parent_kind,
+                index : qualifiedName.index,
+                location_id : qualifiedName.location_id,
+            }
+        }
+    }
+
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * trans to Identifier
+     */
+    pub fn toIdentifier(self) -> Identifier {
+        for (identifier in Identifier(__all_data__)) {
+            if (identifier.key_eq(self)) {
+                return identifier
+            }
+        }
+    }
+    
+    /**
+     * trans to QualifiedName
+     */
+    pub fn toQualifiedName(self) -> QualifiedName {
+        for (qualifiedName in QualifiedName(__all_data__)) {
+            if (qualifiedName.key_eq(self)) {
+                return qualifiedName
+            }
+        }
+    }
+    
+}
+
+/**
+ * This type consists of the following types: [Identifier, StringLiteral, NumericLiteral, ComputedPropertyName, PrivateIdentifier]
+ */
+schema PropertyName extends AstNode {
+}
+
+impl PropertyName {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *PropertyName {
+        for (identifier in Identifier(db)) {
+            yield PropertyName {
+                id : identifier.id,
+                kind : identifier.kind,
+                parent_id : identifier.parent_id,
+                parent_kind : identifier.parent_kind,
+                index : identifier.index,
+                location_id : identifier.location_id,
+            }
+        }
+        for (stringLiteral in StringLiteral(db)) {
+            yield PropertyName {
+                id : stringLiteral.id,
+                kind : stringLiteral.kind,
+                parent_id : stringLiteral.parent_id,
+                parent_kind : stringLiteral.parent_kind,
+                index : stringLiteral.index,
+                location_id : stringLiteral.location_id,
+            }
+        }
+        for (numericLiteral in NumericLiteral(db)) {
+            yield PropertyName {
+                id : numericLiteral.id,
+                kind : numericLiteral.kind,
+                parent_id : numericLiteral.parent_id,
+                parent_kind : numericLiteral.parent_kind,
+                index : numericLiteral.index,
+                location_id : numericLiteral.location_id,
+            }
+        }
+        for (computedPropertyName in ComputedPropertyName(db)) {
+            yield PropertyName {
+                id : computedPropertyName.id,
+                kind : computedPropertyName.kind,
+                parent_id : computedPropertyName.parent_id,
+                parent_kind : computedPropertyName.parent_kind,
+                index : computedPropertyName.index,
+                location_id : computedPropertyName.location_id,
+            }
+        }
+        for (privateIdentifier in PrivateIdentifier(db)) {
+            yield PropertyName {
+                id : privateIdentifier.id,
+                kind : privateIdentifier.kind,
+                parent_id : privateIdentifier.parent_id,
+                parent_kind : privateIdentifier.parent_kind,
+                index : privateIdentifier.index,
+                location_id : privateIdentifier.location_id,
+            }
+        }
+    }
+
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * trans to Identifier
+     */
+    pub fn toIdentifier(self) -> Identifier {
+        for (identifier in Identifier(__all_data__)) {
+            if (identifier.key_eq(self)) {
+                return identifier
+            }
+        }
+    }
+    
+    /**
+     * trans to StringLiteral
+     */
+    pub fn toStringLiteral(self) -> StringLiteral {
+        for (stringLiteral in StringLiteral(__all_data__)) {
+            if (stringLiteral.key_eq(self)) {
+                return stringLiteral
+            }
+        }
+    }
+    
+    /**
+     * trans to NumericLiteral
+     */
+    pub fn toNumericLiteral(self) -> NumericLiteral {
+        for (numericLiteral in NumericLiteral(__all_data__)) {
+            if (numericLiteral.key_eq(self)) {
+                return numericLiteral
+            }
+        }
+    }
+    
+    /**
+     * trans to ComputedPropertyName
+     */
+    pub fn toComputedPropertyName(self) -> ComputedPropertyName {
+        for (computedPropertyName in ComputedPropertyName(__all_data__)) {
+            if (computedPropertyName.key_eq(self)) {
+                return computedPropertyName
+            }
+        }
+    }
+    
+    /**
+     * trans to PrivateIdentifier
+     */
+    pub fn toPrivateIdentifier(self) -> PrivateIdentifier {
+        for (privateIdentifier in PrivateIdentifier(__all_data__)) {
+            if (privateIdentifier.key_eq(self)) {
+                return privateIdentifier
+            }
+        }
+    }
+    
+
+    /**
+     * Get the actual name of PropertyName
+     */
+    pub fn getName(self) -> string {
+        return self.toIdentifier().getName()
+        return self.toStringLiteral().getValue()
+        return self.toNumericLiteral().getValue()
+        // If this PropertyName is a ComputedPropertyName, it doesn't have a name
+        //return self.toComputedPropertyName().getName()
+        return self.toPrivateIdentifier().getName()
+    }
+}
+
+/**
+ * This type consists of the following types: [Identifier, PrivateIdentifier]
+ */
+schema MemberName extends AstNode {
+}
+
+impl MemberName {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *MemberName {
+        for (identifier in Identifier(db)) {
+            yield MemberName {
+                id : identifier.id,
+                kind : identifier.kind,
+                parent_id : identifier.parent_id,
+                parent_kind : identifier.parent_kind,
+                index : identifier.index,
+                location_id : identifier.location_id,
+            }
+        }
+        for (privateIdentifier in PrivateIdentifier(db)) {
+            yield MemberName {
+                id : privateIdentifier.id,
+                kind : privateIdentifier.kind,
+                parent_id : privateIdentifier.parent_id,
+                parent_kind : privateIdentifier.parent_kind,
+                index : privateIdentifier.index,
+                location_id : privateIdentifier.location_id,
+            }
+        }
+    }
+
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * trans to Identifier
+     */
+    pub fn toIdentifier(self) -> Identifier {
+        for (identifier in Identifier(__all_data__)) {
+            if (identifier.key_eq(self)) {
+                return identifier
+            }
+        }
+    }
+    
+    /**
+     * trans to PrivateIdentifier
+     */
+    pub fn toPrivateIdentifier(self) -> PrivateIdentifier {
+        for (privateIdentifier in PrivateIdentifier(__all_data__)) {
+            if (privateIdentifier.key_eq(self)) {
+                return privateIdentifier
+            }
+        }
+    }
+    
+
+    pub fn getName(self) -> string {
+        return self.toIdentifier().getName()
+        return self.toPrivateIdentifier().getName()
+    }
+}
+
+/**
+ * This type consists of the following types: [Identifier, ObjectBindingPattern, ArrayBindingPattern]
+ */
+schema BindingName extends AstNode {
+}
+
+impl BindingName {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *BindingName {
+        for (identifier in Identifier(db)) {
+            yield BindingName {
+                id : identifier.id,
+                kind : identifier.kind,
+                parent_id : identifier.parent_id,
+                parent_kind : identifier.parent_kind,
+                index : identifier.index,
+                location_id : identifier.location_id,
+            }
+        }
+        for (objectBindingPattern in ObjectBindingPattern(db)) {
+            yield BindingName {
+                id : objectBindingPattern.id,
+                kind : objectBindingPattern.kind,
+                parent_id : objectBindingPattern.parent_id,
+                parent_kind : objectBindingPattern.parent_kind,
+                index : objectBindingPattern.index,
+                location_id : objectBindingPattern.location_id,
+            }
+        }
+        for (arrayBindingPattern in ArrayBindingPattern(db)) {
+            yield BindingName {
+                id : arrayBindingPattern.id,
+                kind : arrayBindingPattern.kind,
+                parent_id : arrayBindingPattern.parent_id,
+                parent_kind : arrayBindingPattern.parent_kind,
+                index : arrayBindingPattern.index,
+                location_id : arrayBindingPattern.location_id,
+            }
+        }
+    }
+
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * trans to Identifier
+     */
+    pub fn toIdentifier(self) -> Identifier {
+        for (identifier in Identifier(__all_data__)) {
+            if (identifier.key_eq(self)) {
+                return identifier
+            }
+        }
+    }
+    
+    /**
+     * trans to ObjectBindingPattern
+     */
+    pub fn toObjectBindingPattern(self) -> ObjectBindingPattern {
+        for (objectBindingPattern in ObjectBindingPattern(__all_data__)) {
+            if (objectBindingPattern.key_eq(self)) {
+                return objectBindingPattern
+            }
+        }
+    }
+    
+    /**
+     * trans to ArrayBindingPattern
+     */
+    pub fn toArrayBindingPattern(self) -> ArrayBindingPattern {
+        for (arrayBindingPattern in ArrayBindingPattern(__all_data__)) {
+            if (arrayBindingPattern.key_eq(self)) {
+                return arrayBindingPattern
+            }
+        }
+    }
+    
+
+    pub fn getName(self) -> string {
+        return self.toIdentifier().getName()
+    }
+}
+
+/**
+ * This type consists of the following types: [Identifier, StringLiteral]
+ */
+schema ModuleName extends AstNode {
+}
+
+impl ModuleName {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ModuleName {
+        for (identifier in Identifier(db)) {
+            yield ModuleName {
+                id : identifier.id,
+                kind : identifier.kind,
+                parent_id : identifier.parent_id,
+                parent_kind : identifier.parent_kind,
+                index : identifier.index,
+                location_id : identifier.location_id,
+            }
+        }
+        for (stringLiteral in StringLiteral(db)) {
+            yield ModuleName {
+                id : stringLiteral.id,
+                kind : stringLiteral.kind,
+                parent_id : stringLiteral.parent_id,
+                parent_kind : stringLiteral.parent_kind,
+                index : stringLiteral.index,
+                location_id : stringLiteral.location_id,
+            }
+        }
+    }
+
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * trans to Identifier
+     */
+    pub fn toIdentifier(self) -> Identifier {
+        for (identifier in Identifier(__all_data__)) {
+            if (identifier.key_eq(self)) {
+                return identifier
+            }
+        }
+    }
+    
+    /**
+     * trans to StringLiteral
+     */
+    pub fn toStringLiteral(self) -> StringLiteral {
+        for (stringLiteral in StringLiteral(__all_data__)) {
+            if (stringLiteral.key_eq(self)) {
+                return stringLiteral
+            }
+        }
+    }
+    
+    pub fn getName(self) -> string {
+        let (identifier = self.toIdentifier()) {
+            return identifier.getName()
+        }
+        let (stringLiteral = self.toStringLiteral()) {
+            return stringLiteral.getValue()
+        }
+    }
+}
+

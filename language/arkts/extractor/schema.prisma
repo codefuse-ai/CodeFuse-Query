@@ -1,0 +1,1917 @@
+// Generated from `er.puml`
+
+datasource db {
+  provider = "sqlite"
+  url = "file:init.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+  binaryTargets = ["darwin", "darwin-arm64", "debian-openssl-1.0.x", "debian-openssl-1.1.x", "debian-openssl-3.0.x", "rhel-openssl-1.0.x", "rhel-openssl-1.1.x", "rhel-openssl-3.0.x"]
+}
+
+
+model location {
+  id BigInt @id
+  file_id BigInt
+  start Int
+  start_line Int
+  start_column Int
+  end Int
+  end_line Int
+  end_column Int
+}
+
+model text {
+  id BigInt @id
+  text String
+}
+
+model number_of_lines {
+  id BigInt @id
+  lines Int
+  code_lines Int
+  comment_lines Int
+}
+
+model file {
+  id BigInt @id
+  location_id BigInt
+  parent_id BigInt
+  name String
+  extension String
+  relative_path String
+}
+
+model root_directory {
+  id BigInt @id
+  relative_path String
+}
+
+model non_root_directory {
+  id BigInt @id
+  name String
+  relative_path String
+  parent_id BigInt
+}
+
+model ast_node {
+  id BigInt @id
+  kind Int
+  parent_id BigInt
+  parent_kind Int
+  index Int
+  location_id BigInt
+}
+
+model dot_token {
+  id BigInt @id
+}
+
+model dot_dot_dot_token {
+  id BigInt @id
+}
+
+model comma_token {
+  id BigInt @id
+}
+
+model question_dot_token {
+  id BigInt @id
+}
+
+model less_than_token {
+  id BigInt @id
+}
+
+model greater_than_token {
+  id BigInt @id
+}
+
+model less_than_equals_token {
+  id BigInt @id
+}
+
+model greater_than_equals_token {
+  id BigInt @id
+}
+
+model equals_equals_token {
+  id BigInt @id
+}
+
+model exclamation_equals_token {
+  id BigInt @id
+}
+
+model equals_equals_equals_token {
+  id BigInt @id
+}
+
+model exclamation_equals_equals_token {
+  id BigInt @id
+}
+
+model equals_greater_than_token {
+  id BigInt @id
+}
+
+model plus_token {
+  id BigInt @id
+}
+
+model minus_token {
+  id BigInt @id
+}
+
+model asterisk_token {
+  id BigInt @id
+}
+
+model asterisk_asterisk_token {
+  id BigInt @id
+}
+
+model slash_token {
+  id BigInt @id
+}
+
+model percent_token {
+  id BigInt @id
+}
+
+model plus_plus_token {
+  id BigInt @id
+}
+
+model minus_minus_token {
+  id BigInt @id
+}
+
+model less_than_less_than_token {
+  id BigInt @id
+}
+
+model greater_than_greater_than_token {
+  id BigInt @id
+}
+
+model greater_than_greater_than_greater_than_token {
+  id BigInt @id
+}
+
+model ampersand_token {
+  id BigInt @id
+}
+
+model bar_token {
+  id BigInt @id
+}
+
+model caret_token {
+  id BigInt @id
+}
+
+model exclamation_token {
+  id BigInt @id
+}
+
+model tilde_token {
+  id BigInt @id
+}
+
+model ampersand_ampersand_token {
+  id BigInt @id
+}
+
+model bar_bar_token {
+  id BigInt @id
+}
+
+model question_token {
+  id BigInt @id
+}
+
+model colon_token {
+  id BigInt @id
+}
+
+model question_question_token {
+  id BigInt @id
+}
+
+model equals_token {
+  id BigInt @id
+}
+
+model plus_equals_token {
+  id BigInt @id
+}
+
+model minus_equals_token {
+  id BigInt @id
+}
+
+model asterisk_equals_token {
+  id BigInt @id
+}
+
+model asterisk_asterisk_equals_token {
+  id BigInt @id
+}
+
+model slash_equals_token {
+  id BigInt @id
+}
+
+model percent_equals_token {
+  id BigInt @id
+}
+
+model less_than_less_than_equals_token {
+  id BigInt @id
+}
+
+model greater_than_greater_than_equals_token {
+  id BigInt @id
+}
+
+model greater_than_greater_than_greater_than_equals_token {
+  id BigInt @id
+}
+
+model ampersand_equals_token {
+  id BigInt @id
+}
+
+model bar_equals_token {
+  id BigInt @id
+}
+
+model bar_bar_equals_token {
+  id BigInt @id
+}
+
+model ampersand_ampersand_equals_token {
+  id BigInt @id
+}
+
+model question_question_equals_token {
+  id BigInt @id
+}
+
+model caret_equals_token {
+  id BigInt @id
+}
+
+model const_keyword {
+  id BigInt @id
+}
+
+model default_keyword {
+  id BigInt @id
+}
+
+model export_keyword {
+  id BigInt @id
+}
+
+model extends_keyword {
+  id BigInt @id
+}
+
+model import_keyword {
+  id BigInt @id
+}
+
+model in_keyword {
+  id BigInt @id
+}
+
+model instance_of_keyword {
+  id BigInt @id
+}
+
+model new_keyword {
+  id BigInt @id
+}
+
+model implements_keyword {
+  id BigInt @id
+}
+
+model private_keyword {
+  id BigInt @id
+}
+
+model protected_keyword {
+  id BigInt @id
+}
+
+model public_keyword {
+  id BigInt @id
+}
+
+model static_keyword {
+  id BigInt @id
+}
+
+model abstract_keyword {
+  id BigInt @id
+}
+
+model accessor_keyword {
+  id BigInt @id
+}
+
+model asserts_keyword {
+  id BigInt @id
+}
+
+model assert_keyword {
+  id BigInt @id
+}
+
+model async_keyword {
+  id BigInt @id
+}
+
+model await_keyword {
+  id BigInt @id
+}
+
+model declare_keyword {
+  id BigInt @id
+}
+
+model key_of_keyword {
+  id BigInt @id
+}
+
+model out_keyword {
+  id BigInt @id
+}
+
+model readonly_keyword {
+  id BigInt @id
+}
+
+model unique_keyword {
+  id BigInt @id
+}
+
+model override_keyword {
+  id BigInt @id
+}
+
+model declaration {
+  id BigInt @id
+  kind Int
+}
+
+model declaration_name_node {
+  declaration_id BigInt @id
+  name_node_id BigInt
+}
+
+model expression {
+  id BigInt @id
+  kind Int
+}
+
+model unary_expression {
+  id BigInt @id
+  kind Int
+}
+
+model update_expression {
+  id BigInt @id
+  kind Int
+}
+
+model left_hand_side_expression {
+  id BigInt @id
+  kind Int
+}
+
+model member_expression {
+  id BigInt @id
+  kind Int
+}
+
+model primary_expression {
+  id BigInt @id
+  kind Int
+}
+
+model null_literal {
+  id BigInt @id
+}
+
+model true_literal {
+  id BigInt @id
+}
+
+model false_literal {
+  id BigInt @id
+}
+
+model literal_like_node {
+  id BigInt @id
+  kind Int
+  value String
+}
+
+model literal_expression {
+  id BigInt @id
+  kind Int
+}
+
+model numeric_literal {
+  id BigInt @id
+  flags Int
+}
+
+model big_int_literal {
+  id BigInt @id
+}
+
+model string_literal {
+  id BigInt @id
+  single_quote Boolean
+}
+
+model regular_expression_literal {
+  id BigInt @id
+}
+
+model template_literal_like_node {
+  id BigInt @id
+  kind Int
+  raw_text String
+}
+
+model no_substitution_template_literal {
+  id BigInt @id
+}
+
+model template_head {
+  id BigInt @id
+}
+
+model template_middle {
+  id BigInt @id
+}
+
+model template_tail {
+  id BigInt @id
+}
+
+model template_span {
+  id BigInt @id
+  parent_id BigInt
+  index Int
+  expression_id BigInt
+  literal_id BigInt
+}
+
+model modifier {
+  id BigInt @id
+  kind Int
+  parent_id BigInt
+  parent_kind Int
+  index Int
+}
+
+model identifier {
+  id BigInt @id
+  name String
+}
+
+model private_identifier {
+  id BigInt @id
+  name String
+}
+
+model qualified_name {
+  id BigInt @id
+  left_id BigInt
+  right_id BigInt
+}
+
+model computed_property_name {
+  id BigInt @id
+  expression_id BigInt
+}
+
+model type_node {
+  id BigInt @id
+  kind Int
+}
+
+model any_type {
+  id BigInt @id
+}
+
+model big_int_type {
+  id BigInt @id
+}
+
+model boolean_type {
+  id BigInt @id
+}
+
+model intrinsic_type {
+  id BigInt @id
+}
+
+model never_type {
+  id BigInt @id
+}
+
+model number_type {
+  id BigInt @id
+}
+
+model object_type {
+  id BigInt @id
+}
+
+model string_type {
+  id BigInt @id
+}
+
+model symbol_type {
+  id BigInt @id
+}
+
+model undefined_type {
+  id BigInt @id
+}
+
+model unknown_type {
+  id BigInt @id
+}
+
+model void_type {
+  id BigInt @id
+}
+
+model type_parameter {
+  id BigInt @id
+  name_node_id BigInt
+}
+
+model type_parameter_constraint {
+  type_parameter_id BigInt @id
+  constraint_id BigInt
+}
+
+model type_parameter_default {
+  type_parameter_id BigInt @id
+  default_id BigInt
+}
+
+model parameter {
+  id BigInt @id
+  name_node_id BigInt
+}
+
+model parameter_dot_dot_dot_token {
+  parameter_id BigInt @id
+  dot_dot_dot_token_id BigInt
+}
+
+model parameter_question_token {
+  parameter_id BigInt @id
+  question_token_id BigInt
+}
+
+model parameter_type_node {
+  parameter_id BigInt @id
+  type_node_id BigInt
+}
+
+model parameter_initializer {
+  parameter_id BigInt @id
+  initializer_id BigInt
+}
+
+model decorator {
+  id BigInt @id
+  expression_id BigInt
+}
+
+model object_literal_element {
+  id BigInt @id
+  kind Int
+}
+
+model object_literal_element_name_node {
+  object_literal_element_id BigInt @id
+  name_node_id BigInt
+}
+
+model class_element {
+  id BigInt @id
+  kind Int
+}
+
+model class_element_name_node {
+  class_element_id BigInt @id
+  name_node_id BigInt
+}
+
+model type_element {
+  id BigInt @id
+  kind Int
+}
+
+model type_element_name_node {
+  type_element_id BigInt @id
+  name_node_id BigInt
+}
+
+model type_element_question_token {
+  type_element_id BigInt @id
+  question_token_id BigInt
+}
+
+model property_signature {
+  id BigInt @id
+  name_node_id BigInt
+}
+
+model property_signature_question_token {
+  property_signature_id BigInt @id
+  question_token_id BigInt
+}
+
+model property_signature_type_node {
+  property_signature_id BigInt @id
+  type_node_id BigInt
+}
+
+model property_declaration {
+  id BigInt @id
+  name_node_id BigInt
+}
+
+model property_declaration_question_token {
+  property_declaration_id BigInt @id
+  question_token_id BigInt
+}
+
+model property_declaration_exclamation_token {
+  property_declaration_id BigInt @id
+  exclamation_token_id BigInt
+}
+
+model property_declaration_type_node {
+  property_declaration_id BigInt @id
+  type_node_id BigInt
+}
+
+model property_declaration_initializer {
+  property_declaration_id BigInt @id
+  initializer_id BigInt
+}
+
+model method_signature {
+  id BigInt @id
+  name_node_id BigInt
+}
+
+model method_declaration {
+  id BigInt @id
+  name_node_id BigInt
+}
+
+model method_declaration_body {
+  method_declaration_id BigInt @id
+  body_id BigInt
+}
+
+model class_static_block_declaration {
+  id BigInt @id
+  body_id BigInt
+}
+
+model constructor {
+  id BigInt @id
+}
+
+model constructor_body {
+  constructor_id BigInt @id
+  body_id BigInt
+}
+
+model get_accessor {
+  id BigInt @id
+  name_node_id BigInt
+}
+
+model get_accessor_body {
+  get_accessor_id BigInt @id
+  body_id BigInt
+}
+
+model set_accessor {
+  id BigInt @id
+  name_node_id BigInt
+}
+
+model set_accessor_body {
+  set_accessor_id BigInt @id
+  body_id BigInt
+}
+
+model call_signature {
+  id BigInt @id
+}
+
+model construct_signature {
+  id BigInt @id
+}
+
+model index_signature {
+  id BigInt @id
+  type_node_id BigInt
+}
+
+model semicolon_class_element {
+  id BigInt @id
+}
+
+model property_assignment {
+  id BigInt @id
+  name_node_id BigInt
+  initializer_id BigInt
+}
+
+model shorthand_property_assignment {
+  id BigInt @id
+  name_node_id BigInt
+}
+
+model spread_assignment {
+  id BigInt @id
+  expression_id BigInt
+}
+
+model enum_member {
+  id BigInt @id
+  parent_id BigInt
+  index Int
+  name_node_id BigInt
+}
+
+model enum_member_initializer {
+  enum_member_id BigInt @id
+  initializer_id BigInt
+}
+
+model signature_declaration {
+  id BigInt @id
+  kind Int
+}
+
+model signature_declaration_name_node {
+  signature_declaration_id BigInt @id
+  name_node_id BigInt
+}
+
+model signature_declaration_type_parameter {
+  type_parameter_id BigInt @id
+  signature_declaration_id BigInt
+  index Int
+}
+
+model signature_declaration_parameter {
+  parameter_id BigInt @id
+  signature_declaration_id BigInt
+  index Int
+}
+
+model signature_declaration_type_node {
+  signature_declaration_id BigInt @id
+  type_node_id BigInt
+}
+
+model function_like_declaration {
+  id BigInt @id
+  kind Int
+}
+
+model function_like_declaration_asterisk_token {
+  function_like_declaration_id BigInt @id
+  asterisk_token_id BigInt
+}
+
+model function_like_declaration_question_token {
+  function_like_declaration_id BigInt @id
+  question_token_id BigInt
+}
+
+model function_like_declaration_exclamation_token {
+  function_like_declaration_id BigInt @id
+  exclamation_token_id BigInt
+}
+
+model function_like_declaration_body {
+  function_like_declaration_id BigInt @id
+  body_id BigInt
+}
+
+model class_like_declaration {
+  id BigInt @id
+  kind Int
+}
+
+model class_like_declaration_name_node {
+  class_like_declaration_id BigInt @id
+  name_node_id BigInt
+}
+
+model class_like_declaration_type_parameter {
+  type_parameter_id BigInt @id
+  class_like_declaration_id BigInt
+  index Int
+}
+
+model class_like_declaration_member {
+  member_id BigInt @id
+  class_like_declaration_id BigInt
+  index Int
+}
+
+model this_type {
+  id BigInt @id
+}
+
+model type_predicate {
+  id BigInt @id
+  parameter_name_node_id BigInt
+}
+
+model type_predicate_asserts_modifier {
+  type_predicate_id BigInt @id
+  asserts_modifier_id BigInt
+}
+
+model type_predicate_type_node {
+  type_predicate_id BigInt @id
+  type_node_id BigInt
+}
+
+model node_with_type_arguments {
+  id BigInt @id
+  kind Int
+}
+
+model node_with_type_arguments_type_argument {
+  type_argument_id BigInt @id
+  node_with_type_arguments_id BigInt
+  index Int
+}
+
+model type_reference {
+  id BigInt @id
+  type_name_node_id BigInt
+}
+
+model function_or_constructor_type {
+  id BigInt @id
+  kind Int
+  type_node_id BigInt
+}
+
+model function_type {
+  id BigInt @id
+}
+
+model constructor_type {
+  id BigInt @id
+}
+
+model type_query {
+  id BigInt @id
+  expression_name_node_id BigInt
+}
+
+model type_literal {
+  id BigInt @id
+}
+
+model type_literal_member {
+  member_id BigInt @id
+  type_literal_id BigInt
+  index Int
+}
+
+model array_type {
+  id BigInt @id
+  element_type_node_id BigInt
+}
+
+model tuple_type {
+  id BigInt @id
+}
+
+model tuple_type_element {
+  element_id BigInt @id
+  tuple_type_id BigInt
+  index Int
+}
+
+model optional_type {
+  id BigInt @id
+  type_node_id BigInt
+}
+
+model rest_type {
+  id BigInt @id
+  type_node_id BigInt
+}
+
+model union_type {
+  id BigInt @id
+}
+
+model union_type_type_node {
+  type_node_id BigInt @id
+  union_type_id BigInt
+  index Int
+}
+
+model intersection_type {
+  id BigInt @id
+}
+
+model intersection_type_type_node {
+  type_node_id BigInt @id
+  intersection_type_id BigInt
+  index Int
+}
+
+model conditional_type {
+  id BigInt @id
+  check_type_node_id BigInt
+  extends_type_node_id BigInt
+  then_type_node_id BigInt
+  else_type_node_id BigInt
+}
+
+model infer_type {
+  id BigInt @id
+  type_parameter_id BigInt
+}
+
+model parenthesized_type {
+  id BigInt @id
+  type_node_id BigInt
+}
+
+model type_operator {
+  id BigInt @id
+  operator_id BigInt
+  type_node_id BigInt
+}
+
+model indexed_access_type {
+  id BigInt @id
+  object_type_node_id BigInt
+  index_type_node_id BigInt
+}
+
+model mapped_type {
+  id BigInt @id
+  type_parameter_id BigInt
+}
+
+model mapped_type_readonly_token {
+  mapped_type_id BigInt @id
+  readonly_token_id BigInt
+}
+
+model mapped_type_name_type_node {
+  mapped_type_id BigInt @id
+  name_type_node_id BigInt
+}
+
+model mapped_type_question_token {
+  mapped_type_id BigInt @id
+  question_token_id BigInt
+}
+
+model mapped_type_type_node {
+  mapped_type_id BigInt @id
+  type_node_id BigInt
+}
+
+model literal_type {
+  id BigInt @id
+  literal_id BigInt
+}
+
+model named_tuple_member {
+  id BigInt @id
+  name_node_id BigInt
+  type_node_id BigInt
+}
+
+model named_tuple_member_dot_dot_dot_token {
+  named_tuple_member_id BigInt @id
+  dot_dot_dot_token_id BigInt
+}
+
+model named_tuple_member_question_token {
+  named_tuple_member_id BigInt @id
+  question_token_id BigInt
+}
+
+model template_literal_type_span {
+  id BigInt @id
+  parent_id BigInt
+  index Int
+  type_node_id BigInt
+  literal_id BigInt
+}
+
+model template_literal_type {
+  id BigInt @id
+  head_id BigInt
+}
+
+model import_type_assertion_container {
+  id BigInt @id
+  parent_id BigInt
+  assert_clause_id BigInt
+}
+
+model import_type {
+  id BigInt @id
+  is_type_of Boolean
+  argument_id BigInt
+}
+
+model import_type_qualifier {
+  import_type_id BigInt @id
+  qualifier_id BigInt
+}
+
+model binding_element {
+  id BigInt @id
+  name_node_id BigInt
+}
+
+model binding_element_property_name_node {
+  binding_element_id BigInt @id
+  property_name_node_id BigInt
+}
+
+model binding_element_dot_dot_dot_token {
+  binding_element_id BigInt @id
+  dot_dot_dot_token_id BigInt
+}
+
+model binding_element_initializer {
+  binding_element_id BigInt @id
+  initializer_id BigInt
+}
+
+model object_binding_pattern {
+  id BigInt @id
+}
+
+model object_binding_pattern_element {
+  element_id BigInt @id
+  object_binding_pattern_id BigInt
+  index Int
+}
+
+model array_binding_pattern {
+  id BigInt @id
+}
+
+model array_binding_pattern_element {
+  element_id BigInt @id
+  array_binding_pattern_id BigInt
+  index Int
+}
+
+model this_expression {
+  id BigInt @id
+}
+
+model super_expression {
+  id BigInt @id
+}
+
+model import_expression {
+  id BigInt @id
+}
+
+model array_literal_expression {
+  id BigInt @id
+}
+
+model array_literal_expression_element {
+  element_id BigInt @id
+  array_literal_expression_id BigInt
+  index Int
+}
+
+model object_literal_expression {
+  id BigInt @id
+}
+
+model object_literal_expression_property {
+  property_id BigInt @id
+  object_literal_expression_id BigInt
+  index Int
+}
+
+model property_access_expression {
+  id BigInt @id
+  expression_id BigInt
+  name_node_id BigInt
+}
+
+model property_access_expression_question_dot_token {
+  property_access_expression_id BigInt @id
+  question_dot_token_id BigInt
+}
+
+model element_access_expression {
+  id BigInt @id
+  expression_id BigInt
+  argument_expression_id BigInt
+}
+
+model element_access_expression_question_dot_token {
+  element_access_expression_id BigInt @id
+  question_dot_token_id BigInt
+}
+
+model call_expression {
+  id BigInt @id
+  expression_id BigInt
+}
+
+model call_expression_question_dot_token {
+  call_expression_id BigInt @id
+  question_dot_token_id BigInt
+}
+
+model call_expression_type_argument {
+  type_argument_id BigInt @id
+  call_expression_id BigInt
+  index Int
+}
+
+model call_expression_argument {
+  argument_id BigInt @id
+  call_expression_id BigInt
+  index Int
+}
+
+model new_expression {
+  id BigInt @id
+  expression_id BigInt
+}
+
+model new_expression_type_argument {
+  type_argument_id BigInt @id
+  new_expression_id BigInt
+  index Int
+}
+
+model new_expression_argument {
+  argument_id BigInt @id
+  new_expression_id BigInt
+  index Int
+}
+
+model template_expression {
+  id BigInt @id
+  head_id BigInt
+}
+
+model tagged_template_expression {
+  id BigInt @id
+  tag_id BigInt
+  template_id BigInt
+}
+
+model tagged_template_expression_type_argument {
+  type_argument_id BigInt @id
+  tagged_template_expression_id BigInt
+  index Int
+}
+
+model type_assertion_expression {
+  id BigInt @id
+  type_node_id BigInt
+  expression_id BigInt
+}
+
+model parenthesized_expression {
+  id BigInt @id
+  expression_id BigInt
+}
+
+model function_expression {
+  id BigInt @id
+  body_id BigInt
+}
+
+model function_expression_name_node {
+  function_expression_id BigInt @id
+  name_node_id BigInt
+}
+
+model arrow_function {
+  id BigInt @id
+  equals_greater_than_token_id BigInt
+  body_id BigInt
+}
+
+model ets_component_expression {
+  id BigInt @id
+  expression_id BigInt
+}
+
+model ets_component_expression_type_argument {
+  type_argument_id BigInt @id
+  ets_component_expression_id BigInt
+  index Int
+}
+
+model ets_component_expression_argument {
+  argument_id BigInt @id
+  ets_component_expression_id BigInt
+  index Int
+}
+
+model ets_component_expression_body {
+  ets_component_expression_id BigInt @id
+  body_id BigInt
+}
+
+model delete_expression {
+  id BigInt @id
+  expression_id BigInt
+}
+
+model type_of_expression {
+  id BigInt @id
+  expression_id BigInt
+}
+
+model void_expression {
+  id BigInt @id
+  expression_id BigInt
+}
+
+model await_expression {
+  id BigInt @id
+  expression_id BigInt
+}
+
+model prefix_unary_expression {
+  id BigInt @id
+  operator_id BigInt
+  operand_id BigInt
+}
+
+model postfix_unary_expression {
+  id BigInt @id
+  operand_id BigInt
+  operator_id BigInt
+}
+
+model binary_expression {
+  id BigInt @id
+  left_id BigInt
+  operator_id BigInt
+  right_id BigInt
+}
+
+model conditional_expression {
+  id BigInt @id
+  condition_id BigInt
+  question_token_id BigInt
+  then_expression_id BigInt
+  colon_token_id BigInt
+  else_expression_id BigInt
+}
+
+model yield_expression {
+  id BigInt @id
+}
+
+model yield_expression_asterisk_token {
+  yield_expression_id BigInt @id
+  asterisk_token_id BigInt
+}
+
+model yield_expression_expression {
+  yield_expression_id BigInt @id
+  expression_id BigInt
+}
+
+model spread_element {
+  id BigInt @id
+  expression_id BigInt
+}
+
+model class_expression {
+  id BigInt @id
+}
+
+model omitted_expression {
+  id BigInt @id
+}
+
+model expression_with_type_arguments {
+  id BigInt @id
+  expression_id BigInt
+}
+
+model as_expression {
+  id BigInt @id
+  expression_id BigInt
+  type_node_id BigInt
+}
+
+model non_null_expression {
+  id BigInt @id
+  expression_id BigInt
+}
+
+model meta_property {
+  id BigInt @id
+  keyword_token_id BigInt
+  name_node_id BigInt
+}
+
+model satisfies_expression {
+  id BigInt @id
+  expression_id BigInt
+  type_node_id BigInt
+}
+
+model statement {
+  id BigInt @id
+  kind Int
+}
+
+model block {
+  id BigInt @id
+}
+
+model block_statement {
+  statement_id BigInt @id
+  block_id BigInt
+  index Int
+}
+
+model empty_statement {
+  id BigInt @id
+}
+
+model variable_declaration {
+  id BigInt @id
+  name_node_id BigInt
+}
+
+model variable_declaration_exclamation_token {
+  variable_declaration_id BigInt @id
+  exclamation_token_id BigInt
+}
+
+model variable_declaration_type_node {
+  variable_declaration_id BigInt @id
+  type_node_id BigInt
+}
+
+model variable_declaration_initializer {
+  variable_declaration_id BigInt @id
+  initializer_id BigInt
+}
+
+model variable_declaration_list {
+  id BigInt @id
+}
+
+model variable_declaration_list_declaration {
+  declaration_id BigInt @id
+  variable_declaration_list_id BigInt
+  index Int
+}
+
+model variable_statement {
+  id BigInt @id
+  declaration_list_id BigInt
+}
+
+model expression_statement {
+  id BigInt @id
+  expression_id BigInt
+}
+
+model if_statement {
+  id BigInt @id
+  condition_id BigInt
+  then_statement_id BigInt
+}
+
+model if_statement_else_statement {
+  if_statement_id BigInt @id
+  else_statement_id BigInt
+}
+
+model iteration_statement {
+  id BigInt @id
+  kind Int
+  statement_id BigInt
+}
+
+model do_statement {
+  id BigInt @id
+  expression_id BigInt
+}
+
+model while_statement {
+  id BigInt @id
+  expression_id BigInt
+}
+
+model for_statement {
+  id BigInt @id
+}
+
+model for_statement_initializer {
+  for_statement_id BigInt @id
+  initializer_id BigInt
+}
+
+model for_statement_condition {
+  for_statement_id BigInt @id
+  condition_id BigInt
+}
+
+model for_statement_incrementor {
+  for_statement_id BigInt @id
+  incrementor_id BigInt
+}
+
+model for_in_statement {
+  id BigInt @id
+  initializer_id BigInt
+  expression_id BigInt
+}
+
+model for_of_statement {
+  id BigInt @id
+  initializer_id BigInt
+  expression_id BigInt
+}
+
+model for_of_statement_await_modifier {
+  for_of_statement_id BigInt @id
+  await_modifier_id BigInt
+}
+
+model continue_statement {
+  id BigInt @id
+}
+
+model continue_statement_label {
+  continue_statement_id BigInt @id
+  label_id BigInt
+}
+
+model break_statement {
+  id BigInt @id
+}
+
+model break_statement_label {
+  break_statement_id BigInt @id
+  label_id BigInt
+}
+
+model return_statement {
+  id BigInt @id
+}
+
+model return_statement_expression {
+  return_statement_id BigInt @id
+  expression_id BigInt
+}
+
+model with_statement {
+  id BigInt @id
+  expression_id BigInt
+  statement_id BigInt
+}
+
+model case_block {
+  id BigInt @id
+}
+
+model case_block_clause {
+  clause_id BigInt @id
+  case_block_id BigInt
+  index Int
+}
+
+model case_clause {
+  id BigInt @id
+  expression_id BigInt
+}
+
+model case_clause_statement {
+  statement_id BigInt @id
+  case_clause_id BigInt
+  index Int
+}
+
+model default_clause {
+  id BigInt @id
+}
+
+model default_clause_statement {
+  statement_id BigInt @id
+  default_clause_id BigInt
+  index Int
+}
+
+model switch_statement {
+  id BigInt @id
+  expression_id BigInt
+  case_block_id BigInt
+}
+
+model labeled_statement {
+  id BigInt @id
+  label_id BigInt
+  statement_id BigInt
+}
+
+model throw_statement {
+  id BigInt @id
+  expression_id BigInt
+}
+
+model try_statement {
+  id BigInt @id
+  try_block_id BigInt
+}
+
+model try_statement_finally_block {
+  try_statement_id BigInt @id
+  finally_block_id BigInt
+}
+
+model catch_clause {
+  id BigInt @id
+  parent_id BigInt
+  block_id BigInt
+}
+
+model catch_clause_variable_declaration {
+  catch_clause_id BigInt @id
+  variable_declaration_id BigInt
+}
+
+model debugger_statement {
+  id BigInt @id
+}
+
+model declaration_statement {
+  id BigInt @id
+  kind Int
+}
+
+model declaration_statement_name_node {
+  declaration_statement_id BigInt @id
+  name_node_id BigInt
+}
+
+model function_declaration {
+  id BigInt @id
+}
+
+model function_declaration_name_node {
+  function_declaration_id BigInt @id
+  name_node_id BigInt
+}
+
+model function_declaration_body {
+  function_declaration_id BigInt @id
+  body_id BigInt
+}
+
+model class_declaration {
+  id BigInt @id
+}
+
+model class_declaration_name_node {
+  class_declaration_id BigInt @id
+  name_node_id BigInt
+}
+
+model struct_declaration {
+  id BigInt @id
+}
+
+model struct_declaration_name_node {
+  struct_declaration_id BigInt @id
+  name_node_id BigInt
+}
+
+model heritage_clause {
+  id BigInt @id
+  parent_id BigInt
+  index Int
+  token_id BigInt
+}
+
+model heritage_clause_type_node {
+  type_node_id BigInt @id
+  heritage_clause_id BigInt
+  index Int
+}
+
+model interface_declaration {
+  id BigInt @id
+  name_node_id BigInt
+}
+
+model interface_declaration_type_parameter {
+  type_parameter_id BigInt @id
+  interface_declaration_id BigInt
+  index Int
+}
+
+model interface_declaration_member {
+  member_id BigInt @id
+  interface_declaration_id BigInt
+  index Int
+}
+
+model type_alias_declaration {
+  id BigInt @id
+  name_node_id BigInt
+  type_node_id BigInt
+}
+
+model type_alias_declaration_type_parameter {
+  type_parameter_id BigInt @id
+  type_alias_declaration_id BigInt
+  index Int
+}
+
+model enum_declaration {
+  id BigInt @id
+  name_node_id BigInt
+}
+
+model module_declaration {
+  id BigInt @id
+  name_node_id BigInt
+}
+
+model module_declaration_body {
+  module_declaration_id BigInt @id
+  body_id BigInt
+}
+
+model module_block {
+  id BigInt @id
+}
+
+model module_block_statement {
+  statement_id BigInt @id
+  module_block_id BigInt
+  index Int
+}
+
+model namespace_export_declaration {
+  id BigInt @id
+  name_node_id BigInt
+}
+
+model external_module_reference {
+  id BigInt @id
+  expression_id BigInt
+}
+
+model import_equals_declaration {
+  id BigInt @id
+  name_node_id BigInt
+  is_type_only Boolean
+  module_reference_id BigInt
+}
+
+model namespace_import {
+  id BigInt @id
+  name_node_id BigInt
+}
+
+model import_specifier {
+  id BigInt @id
+  parent_id BigInt
+  index Int
+  name_node_id BigInt
+  is_type_only Boolean
+}
+
+model import_specifier_property_name_node {
+  import_specifier_id BigInt @id
+  property_name_node_id BigInt
+}
+
+model named_imports {
+  id BigInt @id
+}
+
+model import_clause {
+  id BigInt @id
+  parent_id BigInt
+  is_type_only Boolean
+}
+
+model import_clause_name_node {
+  import_clause_id BigInt @id
+  name_node_id BigInt
+}
+
+model import_clause_named_bindings {
+  import_clause_id BigInt @id
+  named_bindings_id BigInt
+}
+
+model assert_entry {
+  id BigInt @id
+  parent_id BigInt
+  index Int
+  name_node_id BigInt
+  value_node_id BigInt
+}
+
+model assert_clause {
+  id BigInt @id
+}
+
+model import_declaration {
+  id BigInt @id
+  module_specifier_id BigInt
+}
+
+model import_declaration_assert_clause {
+  import_declaration_id BigInt @id
+  assert_clause_id BigInt
+}
+
+model export_assignment {
+  id BigInt @id
+  is_export_equals Boolean
+  expression_id BigInt
+}
+
+model export_specifier {
+  id BigInt @id
+  parent_id BigInt
+  index Int
+  is_type_only Boolean
+  name_node_id BigInt
+}
+
+model export_specifier_property_name_node {
+  export_specifier_id BigInt @id
+  property_name_node_id BigInt
+}
+
+model named_exports {
+  id BigInt @id
+}
+
+model namespace_export {
+  id BigInt @id
+  name_node_id BigInt
+}
+
+model export_declaration {
+  id BigInt @id
+  is_type_only Boolean
+}
+
+model export_declaration_export_clause {
+  export_declaration_id BigInt @id
+  export_clause_id BigInt
+}
+
+model export_declaration_module_specifier {
+  export_declaration_id BigInt @id
+  module_specifier_id BigInt
+}
+
+model export_declaration_assert_clause {
+  export_declaration_id BigInt @id
+  assert_clause_id BigInt
+}
+
+model top_level {
+  id BigInt @id
+  kind Int
+  location_id BigInt
+}
+
+model top_level_statement {
+  statement_id BigInt @id
+  top_level_id BigInt
+  index Int
+}
+
+model ast_node_container_relation {
+  ast_node_id BigInt @id
+  container_id BigInt
+}
+
+model cfg_entry_node {
+  id BigInt @id
+  ast_node_id BigInt
+}
+
+model cfg_exit_node {
+  id BigInt @id
+  ast_node_id BigInt
+}
+
+model symbol_ {
+  id BigInt @id
+  name String
+  description String
+}
+
+model ast_node_symbol {
+  ast_node_id BigInt @id
+  symbol_id BigInt
+}
+
+model shorthand_property_assignment_value_symbol {
+  shorthand_property_assignment_id BigInt @id
+  symbol_id BigInt
+}
+
+model type_ {
+  id BigInt @id
+  name String
+}
+
+model ast_node_type {
+  ast_node_id BigInt @id
+  type_id BigInt
+}
+
+model call_site_declaration {
+  id BigInt @id
+  call_site_id BigInt
+  declaration_id BigInt
+}
+
+model call_site_implementation {
+  id BigInt @id
+  call_site_id BigInt
+  implementation_id BigInt
+}
+
+model comment {
+  id BigInt @id
+  kind Int
+  location_id BigInt
+}
+
+model ast_node_comment {
+  id BigInt @id
+  kind Int
+  ast_node_id BigInt
+  comment_id BigInt
+  index Int
+}
+
+model metadata {
+  id BigInt @id
+  version String
+  created_time DateTime
+}
+
+model ignored_path {
+  id BigInt @id
+  path_kind Int
+  path String
+  ignore_kind Int
+}

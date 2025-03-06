@@ -1,0 +1,587 @@
+schema DataFlowNode extends AstNode {
+}
+
+impl DataFlowNode {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *DataFlowNode {
+        for (astNode in AstNode(db)) {
+            if (isDataFlowNode(astNode)) {
+                yield DataFlowNode {
+                    id: astNode.id,
+                    kind : astNode.kind,
+                    parent_id : astNode.parent_id,
+                    parent_kind : astNode.parent_kind,
+                    index : astNode.index,
+                    location_id : astNode.location_id
+                }
+            }
+        }
+    }
+
+    pub fn getPredecessor(self) -> *DataFlowNode {
+        for (predecessor in DataFlowNode(__all_data__)) {
+            if (localFlowEdge(predecessor, self)) {
+                yield predecessor
+            }
+        }
+    }
+
+    pub fn getSuccessor(self) -> *DataFlowNode {
+        for (successor in DataFlowNode(__all_data__)) {
+            if (localFlowEdge(self, successor)) {
+                yield successor
+            }
+        }
+    }
+
+    /**
+     * Get string constant 
+     */
+    pub fn getStringValue(self) -> string {
+        for (literalLikeNode in LiteralLikeNode(__all_data__)) {
+            if (literalLikeNode.key_eq(self)) {
+                return literalLikeNode.getValue()
+            }
+        }
+        
+        // The DataFlowNode that can obtain string constants is either a use point or an LValue
+        for (varUse in VarUse(__all_data__)) {
+            if (self.key_eq(varUse)) {
+                return getExpressionStringValue(varUse.nearestLocalDefinedLValue().getRhs())
+            }
+        }
+
+        for (lvalue in LValue(__all_data__)) {
+            if (self.key_eq(lvalue)) {
+                return getExpressionStringValue(lvalue.getRhs())
+            }
+        }
+    }
+
+    /**
+     * Get int constant 
+     */
+    pub fn getIntValue(self) -> int {
+        for (number in NumericLiteral(__all_data__)) {
+            if (number.key_eq(self)) {
+                return number.getValue().to_int()
+            }
+        }
+
+        // The DataFlowNode that can obtain string constants is either a use point or an LValue
+        for (varUse in VarUse(__all_data__)) {
+            if (self.key_eq(varUse)) {
+                return getExpressionIntValue(varUse.nearestLocalDefinedLValue().getRhs())
+            }
+        }
+
+        for (lvalue in LValue(__all_data__)) {
+            if (self.key_eq(lvalue)) {
+                return getExpressionIntValue(lvalue.getRhs())
+            }
+        }
+    }
+
+    /**
+     * Determine whether this dataFlowNode can flowTo sink
+     */
+    pub fn canFlowTo(self, sink: AstNode) -> bool {
+        if (self.key_eq(sink)) {
+            return true
+        }
+        for (middle in DataFlowNode(__all_data__)) {
+            if (localFlowEdge(self, middle)) {
+                if (middle.canFlowTo(sink)) {
+                    return true
+                }
+            }
+        }
+    }
+}
+
+pub fn isDataFlowNode(node: AstNode) -> bool {
+    for (expression in Expression(__all_data__)) {
+        if (expression.key_eq(node)) {
+            return true
+        }
+    }
+    if (node.getKindName() = "VariableDeclaration") {
+        return true
+    }
+    for (bindingPattern in BindingPattern(__all_data__)) {
+        if (bindingPattern.key_eq(node)) {
+            return true
+        }
+    }
+    for (functionLikeDeclaration in FunctionLikeDeclaration(__all_data__)) {
+        if (functionLikeDeclaration.key_eq(node)) {
+            return true
+        }
+    }
+    if (node.getKindName() = "Parameter") {
+        return true
+    }
+    for (classLikeDeclaration in ClassLikeDeclaration(__all_data__)) {
+        if (classLikeDeclaration.key_eq(node)) {
+            return true
+        }
+    }
+    for (classElement in ClassElement(__all_data__)) {
+        if (classElement.key_eq(node)) {
+            return true
+        }
+    }
+    for (objectLiteralElement in ObjectLiteralElement(__all_data__)) {
+        if (objectLiteralElement.key_eq(node)) {
+            return true
+        }
+    }
+    if (node.getKindName() = "ModuleDeclaration") {
+        return true
+    }
+    if (node.getKindName() = "EnumDeclaration") {
+        return true
+    }
+    if (node.getKindName() = "EnumMember") {
+        return true
+    }
+}
+
+pub fn lvalueFlowEdge(predecessor: DataFlowNode, successor: DataFlowNode) -> bool {
+    for (def in VarDef(__all_data__), op in LValue(__all_data__)) {
+        if (predecessor.key_eq(def.getSource())) {
+            if (op in def.getTarget()) {
+                if (successor.key_eq(op)) {
+                    return true
+                }
+            }
+        }
+    }
+    for (bindingPattern in BindingPattern(__all_data__),
+        element in ArrayBindingElement(__all_data__)) {
+        if (predecessor.key_eq(bindingPattern)) {
+            if (element in bindingPattern.getElement()) {
+                if (successor.key_eq(element)) {
+                    return true
+                }
+            }
+        }
+    }
+    // 
+    for (bindingElement in BindingElement(__all_data__)) {
+        if (predecessor.key_eq(bindingElement)) {
+            if (successor.key_eq(bindingElement.getNameNode())) {
+                return true
+            }
+        }
+    }
+    /* in a : "value"  : a -> a : "value"
+     */
+    for (objectLiteralElement in ObjectLiteralElement(__all_data__)) {
+        if (predecessor.key_eq(objectLiteralElement.getNameNode())) {
+            if (successor.key_eq(objectLiteralElement)) {
+                return true
+            }
+        }
+    }
+
+    for (index in int::__undetermined_all__()) {
+        // TODO: Process all MayInvokeExpressions
+        for (mayInvokeExpression in MayInvokeExpression(__all_data__)) {
+            if (predecessor.key_eq(mayInvokeExpression.getIthArgument(index))) {
+                for (function in FunctionLikeDeclaration(__all_data__)) {
+                    if (function.to<SignatureDeclaration>() in mayInvokeExpression.getCallee()) {
+                        if (successor.key_eq(function.getIthParameter(index))) {
+                            return true
+                        }
+                    }
+                }
+                // // fallback if the CallExpression doesn't have a callee
+                // if (!callExpression.hasCallee()) {
+                //     if (successor.key_eq(callExpression)) {
+                //         return true
+                //     }
+                // }
+            }
+        }
+    }
+    for (parameter in Parameter(__all_data__)) {
+        if (predecessor.key_eq(parameter)) {
+            if (successor.key_eq(parameter.getNameNode())) {
+                return true
+            }
+        }
+    }
+}
+
+fn sameBBUseIndex(varUse: VarUse) -> *int {
+    let (bb = varUse.getBasicBlock()) {
+        for (index in int::__undetermined_all__()) {
+            if (varUse.key_eq(bb.getIthNode(index))) {
+                for (i in int::__undetermined_all__()) {
+                    for (nextUse in VarUse(__all_data__)) {
+                        if (bb.getIthNode(i).key_eq(nextUse) && i > index) {
+                            if (isSameRefExpr(RefExpr(__all_data__).find(nextUse), RefExpr(__all_data__).find(varUse))) {
+                                for (expression in Expression(__all_data__)) {
+                                    if (!hasCallExpressionParent(expression) && expression.key_eq(varUse)) {
+                                        yield i
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+pub fn immediateFlowEdge(predecessor: DataFlowNode, successor: DataFlowNode) -> bool {
+    for (varUse in VarUse(__all_data__)) {
+        if (successor.key_eq(varUse)) {
+            for (op in varUse.getDefinedByLValue()) {
+                if (predecessor.key_eq(op)) {
+                    return true
+                }
+            }
+        }
+    }
+
+    // // varUse -> varUse order by cfg if in same bb now erase
+    // for (pre in VarUse(__all_data__), 
+    //     preExp in Expression(__all_data__)) {
+    //     if (pre.key_eq(predecessor) && pre.key_eq(preExp)) {
+    //         let (nextIndex = sameBBUseIndex(pre).min()) {
+    //             let (next = pre.getBasicBlock().getIthNode(nextIndex)) {
+    //                 if (!hasCallExpressionParent(preExp) && next.key_eq(successor)) {
+    //                     return true
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
+
+    // a["x"], a.x: a.x->a, a["x"]->a 
+    for (accessExpression in AccessExpression(__all_data__),
+        expression in Expression(__all_data__)) {
+        if (accessExpression.key_eq(predecessor) && successor.key_eq(accessExpression.getExpression())) {
+            if (!hasCallExpressionParent(expression) && expression.key_eq(accessExpression)) {
+                return true
+            }
+        }
+    }
+
+    for (parenthesizedExpression in ParenthesizedExpression(__all_data__)) {
+        if (successor.key_eq(parenthesizedExpression)) {
+            if (predecessor.key_eq(parenthesizedExpression.getExpression())) {
+                return true
+            }
+        }
+    }
+    for (commaExpression in CommaExpression(__all_data__)) {
+        if (successor.key_eq(commaExpression)) {
+            if (predecessor.key_eq(commaExpression.getRight())) {
+                return true
+            }
+        }
+    }
+    for (simpleAssignmentExpression in SimpleAssignmentExpression(__all_data__)) {
+        if (successor.key_eq(simpleAssignmentExpression)) {
+            if (predecessor.key_eq(simpleAssignmentExpression.getRight())) {
+                return true
+            }
+        }
+    }
+    for (typeAssertionExpression in TypeAssertionExpression(__all_data__)) {
+        if (successor.key_eq(typeAssertionExpression)) {
+            if (predecessor.key_eq(typeAssertionExpression.getExpression())) {
+                return true
+            }
+        }
+    }
+    for (asExpression in AsExpression(__all_data__)) {
+        if (successor.key_eq(asExpression)) {
+            if (predecessor.key_eq(asExpression.getExpression())) {
+                return true
+            }
+        }
+    }
+    for (unaryExpression in UnaryExpression(__all_data__)) {
+        if (successor.key_eq(unaryExpression)) {
+            let (astNode = unaryExpression.to<AstNode>()) {
+                if (isUpdateExpression(astNode)) {
+                    let (exp = astNode.to<Expression>()) {
+                        if (!isCallExpression(astNode) && !hasCallExpressionParent(exp)) {
+                            if (predecessor.key_eq(unaryExpression.getExpression())) {
+                                return true
+                            }
+                        }
+                    }
+                }
+                if (isTypeAssertionExpression(astNode)) {
+                    if (predecessor.key_eq(unaryExpression.getExpression())) {
+                        return true
+                    }
+                }
+                if (isAwaitExpression(astNode)) {
+                    if (predecessor.key_eq(unaryExpression.getExpression())) {
+                        return true
+                    }
+                }
+            }
+        }
+    }
+    for (nonNullExpression in NonNullExpression(__all_data__)) {
+        if (predecessor.key_eq(nonNullExpression.getExpression())) {
+            if (successor.key_eq(nonNullExpression)) {
+                return true
+            }
+        }
+    }
+    // TODO: ExpressionWithTypeArguments
+    for (compoundAssignmentExpression in CompoundAssignmentExpression(__all_data__)) {
+        if (successor.key_eq(compoundAssignmentExpression)) {
+            for (op in compoundAssignmentExpression.getOperand()) {
+                if (predecessor.key_eq(op)) {
+                    let (astNode = compoundAssignmentExpression.to<AstNode>()) {
+                        if (isLogicalAndAssignmentExpression(astNode)) {
+                            return true
+                        }
+                        if (isLogicalOrAssignmentExpression(astNode)) {
+                            return true
+                        }
+                        if (isNullishAssignmentExpression(astNode)) {
+                            return true
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+    let myObj: { [key: string]: any } = {
+        property1: {a: 'value1'},
+        property2: 'value2' + "as",
+    }; a: 'value1' -> {a: 'value1'} -> property1 -> {property1: {a: 'value1'},property2: 'value2' + "as",}
+    */
+    for (objectLiteralExpression in ObjectLiteralExpression(__all_data__)) {
+        if (successor.key_eq(objectLiteralExpression)) {
+            for (objectLiteralElement in objectLiteralExpression.getProperty()) {
+                if (predecessor.key_eq(objectLiteralElement)) {
+                    return true
+                }
+            }
+        }
+    }
+}
+
+pub fn indirectFlowEdge(predecessor: DataFlowNode, successor: DataFlowNode) -> bool {
+    for (unaryExpression in UnaryExpression(__all_data__),
+        typeOfExpression in TypeOfExpression(__all_data__)) {
+        if (successor.key_eq(unaryExpression)) {
+            if (typeOfExpression.key_eq(unaryExpression)) {
+                if (predecessor.key_eq(unaryExpression.getExpression())) {
+                    return true
+                }
+            }
+        }
+    }
+    for (binaryExpression in BinaryExpression(__all_data__),
+        op in Expression(__all_data__)) {
+        if (successor.key_eq(binaryExpression)) {
+            if (op in binaryExpression.getOperand()) {
+                if (predecessor.key_eq(op)) {
+                    let (astNode = binaryExpression.to<AstNode>()) {
+                        if (isExponentiationExpression(astNode)) {
+                            return true
+                        }
+                        if (isMultiplicativeExpression(astNode)) {
+                            return true
+                        }
+                        if (isAdditiveExpression(astNode)) {
+                            return true
+                        }
+                        if (isShiftExpression(astNode)) {
+                            return true
+                        }
+                        if (isEqualityTestExpression(astNode)) {
+                            return true
+                        }
+                        if (isRelationalExpression(astNode)) {
+                            return true
+                        }
+                        if (isBinaryBitwiseExpression(astNode)) {
+                            return true
+                        }
+                        if (isCompoundAssignmentExpression(astNode)) {
+                            return true
+                        }
+                    }
+                }
+            }
+        }
+    }   
+    for (objectLiteralExpression in ObjectLiteralExpression(__all_data__),
+        varDef in VarDef(__all_data__), op in VarUse(__all_data__),
+        accessExpression in AccessExpression(__all_data__)) {
+        if (varDef.getSource().key_eq(objectLiteralExpression)) {
+            if (successor.key_eq(accessExpression)) {
+                if (op in varDef.getUse()) {
+                    if (accessExpression.key_eq(op)) {
+                        let (propertyName = accessExpression.getPropertyName()) {
+                            let (objectLiteralElement = objectLiteralExpression.getPropertyByName(propertyName)) {
+                                for (propertyAssignment in PropertyAssignment(__all_data__)) {
+                                    if (propertyAssignment.key_eq(objectLiteralElement)) {
+                                        if (predecessor.key_eq(propertyAssignment.getInitializer())) {
+                                            return true
+                                        }
+                                    }
+                                }
+                                for (shorthandPropertyAssignment in ShorthandPropertyAssignment(__all_data__)) {
+                                    if (shorthandPropertyAssignment.key_eq(objectLiteralElement)) {
+                                        if (predecessor.key_eq(shorthandPropertyAssignment.getIdentifier())) {
+                                            return true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+pub fn localFlowEdge(predecessor: DataFlowNode, successor: DataFlowNode) -> bool {
+    /**
+     * @todo the edges from the default values in BindingPatterns
+     */
+    if (lvalueFlowEdge(predecessor, successor)) {
+        return true
+    }
+    if (immediateFlowEdge(predecessor, successor)) {
+        return true
+    }
+    for (binaryLogicalExpression in BinaryLogicalExpression(__all_data__)) {
+        if (successor.key_eq(binaryLogicalExpression)) {
+            for (op in binaryLogicalExpression.getOperand()) {
+                if (predecessor.key_eq(op)) {
+                    return true
+                }
+            }
+        }
+    }
+    for (conditionalExpression in ConditionalExpression(__all_data__)) {
+        if (successor.key_eq(conditionalExpression)) {
+            for (branch in conditionalExpression.getBranch()) {
+                if (predecessor.key_eq(branch)) {
+                    return true
+                }
+            }
+        }
+    }
+    for (function in FunctionLikeDeclaration(__all_data__), 
+        callSite in MayInvokeExpression(__all_data__),
+        returnExpression in Expression(__all_data__)) {
+        if (returnExpression in function.getReturnedExpression()) {
+            if (predecessor.key_eq(returnExpression)) {
+                if (callSite in function.getCallSiteInvokeThis()) {
+                    if (successor.key_eq(callSite)) {
+                        return true
+                    }
+                }
+            }
+        }
+    }
+    /* in a : "value"  : "value" -> a
+     */
+    for (propertyAssignment in PropertyAssignment(__all_data__)) {
+        if (predecessor.key_eq(propertyAssignment.getInitializer())) {
+            if (successor.key_eq(propertyAssignment.getNameNode())) {
+                return true
+            }
+        }
+    }
+    if (indirectFlowEdge(predecessor, successor)) {
+        return true
+    }
+}
+
+pub fn flowTo(source: AstNode, sink: AstNode) -> bool {
+    if (source = sink) {
+        return true
+    }
+    let (begin = source.to<DataFlowNode>()) {
+        for (middle in AstNode(__all_data__)) {
+            if (localFlowEdge(begin, DataFlowNode(__all_data__).find(middle))) {
+                if (flowTo(middle, sink)) {
+                    return true
+                }
+            }
+        }
+    }
+}
+
+fn hasCallExpressionParent(expression: Expression) -> bool {
+    for (callExpression in CallExpression(__all_data__)) {
+        if (callExpression.getExpression() = expression) {
+            return true
+        }
+    }
+}
+
+fn getExpressionStringValue(expression: Expression) -> string {
+    for (literalLikeNode in LiteralLikeNode(__all_data__)) {
+        if (literalLikeNode.key_eq(expression)) {
+            return literalLikeNode.getValue()
+        }
+    }
+    for (additiveExpression in AdditiveExpression(__all_data__)) {
+        if (additiveExpression.key_eq(expression)) {
+            if (additiveExpression.getOperator().getText() = "+") {
+                let (expLValue = getExpressionStringValue(additiveExpression.getLeft()),
+                     expRValue = getExpressionStringValue(additiveExpression.getRight())) {
+                     return expLValue + expRValue
+                }
+            }
+        }
+    }
+    for (varUse in VarUse(__all_data__)) {
+        if (expression.key_eq(varUse)) {
+            return getExpressionStringValue(varUse.nearestLocalDefinedLValue().getRhs())
+        }
+    }
+}
+
+fn getExpressionIntValue(expression: Expression) -> int {
+    for (number in NumericLiteral(__all_data__)) {
+        if (number.key_eq(expression)) {
+            return number.getValue().to_int()
+        }
+    }
+    for (additiveExpression in AdditiveExpression(__all_data__)) {
+        if (additiveExpression.key_eq(expression)) {
+            if (additiveExpression.getOperator().getText() = "+") {
+                let (expLValue = getExpressionIntValue(additiveExpression.getLeft()),
+                     expRValue = getExpressionIntValue(additiveExpression.getRight())) {
+                     return expLValue + expRValue
+                }
+            }
+
+            if (additiveExpression.getOperator().getText() = "-") {
+                let (expLValue = getExpressionIntValue(additiveExpression.getLeft()),
+                     expRValue = getExpressionIntValue(additiveExpression.getRight())) {
+                     return expLValue - expRValue
+                }
+            }
+        }
+    }
+    for (varUse in VarUse(__all_data__)) {
+        if (expression.key_eq(varUse)) {
+            return getExpressionIntValue(varUse.nearestLocalDefinedLValue().getRhs())
+        }
+    }
+}

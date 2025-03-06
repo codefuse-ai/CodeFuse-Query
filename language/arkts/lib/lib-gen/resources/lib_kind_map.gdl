@@ -1,0 +1,19 @@
+pub fn KindMap(name: string, kind: int) -> bool {
+    [
+        {%- for kind, name in kind_map.items() %}
+        {%- if not loop.last %}
+        {"{{name}}", {{kind}}},
+        {%- else %}
+        {"{{name}}", {{kind}}}
+        {%- endif %}
+        {%- endfor %}
+    ]
+}
+
+pub fn getRealKind(kind: int) -> string {
+    for (res in string::__undetermined_all__()) {
+        if (KindMap(res, kind)) {
+            return res
+        }
+    }
+}

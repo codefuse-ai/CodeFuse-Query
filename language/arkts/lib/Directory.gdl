@@ -1,0 +1,298 @@
+/**
+ * A File
+ */
+schema File {
+    @primary id: int,
+    location_id: int,
+    parent_id: int,
+    name: string,
+    extension: string,
+    relative_path: string
+}
+
+impl File {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *File {
+        for (file in FileDO(db)) {
+            yield File {
+                id: file.id,
+                location_id : file.location_id,
+                parent_id : file.parent_id,
+                name : file.name,
+                extension : file.extension,
+                relative_path : file.relative_path
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the location.
+     */
+    pub fn getLocation(self) -> Location {
+        for (location in Location(__all_data__)) {
+            if (self.location_id = location.id) {
+                return location
+            }
+        }
+    }
+    
+    /**
+     * Gets the parent.
+     */
+    pub fn getParent(self) -> Directory {
+        for (directory in Directory(__all_data__)) {
+            if (self.parent_id = directory.id) {
+                return directory
+            }
+        }
+    }
+    
+    /**
+     * Gets the name.
+     */
+    pub fn getName(self) -> string {
+        return self.name
+    }
+    
+    /**
+     * Gets the extension.
+     */
+    pub fn getExtension(self) -> string {
+        return self.extension
+    }
+    
+    /**
+     * Gets the relativePath.
+     */
+    pub fn getRelativePath(self) -> string {
+        return self.relative_path
+    }
+    
+}
+
+/**
+ * A RootDirectory
+ */
+schema RootDirectory {
+    @primary id: int,
+    relative_path: string
+}
+
+impl RootDirectory {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *RootDirectory {
+        for (rootDirectory in RootDirectoryDO(db)) {
+            yield RootDirectory {
+                id: rootDirectory.id,
+                relative_path : rootDirectory.relative_path
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the relativePath.
+     */
+    pub fn getRelativePath(self) -> string {
+        return self.relative_path
+    }
+    
+}
+
+/**
+ * A NonRootDirectory
+ */
+schema NonRootDirectory {
+    @primary id: int,
+    name: string,
+    relative_path: string,
+    parent_id: int
+}
+
+impl NonRootDirectory {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *NonRootDirectory {
+        for (nonRootDirectory in NonRootDirectoryDO(db)) {
+            yield NonRootDirectory {
+                id: nonRootDirectory.id,
+                name : nonRootDirectory.name,
+                relative_path : nonRootDirectory.relative_path,
+                parent_id : nonRootDirectory.parent_id
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the name.
+     */
+    pub fn getName(self) -> string {
+        return self.name
+    }
+    
+    /**
+     * Gets the relativePath.
+     */
+    pub fn getRelativePath(self) -> string {
+        return self.relative_path
+    }
+    
+    /**
+     * Gets the parent.
+     */
+    pub fn getParent(self) -> Directory {
+        for (directory in Directory(__all_data__)) {
+            if (self.parent_id = directory.id) {
+                return directory
+            }
+        }
+    }
+    
+}
+
+/**
+ * This type consists of the following types: [RootDirectory, NonRootDirectory]
+ */
+schema Directory {
+    @primary id: int
+}
+
+impl Directory {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *Directory {
+        for (rootDirectory in RootDirectory(db)) {
+            yield Directory {
+                id : rootDirectory.id
+            }
+        }
+        for (nonRootDirectory in NonRootDirectory(db)) {
+            yield Directory {
+                id : nonRootDirectory.id
+            }
+        }
+    }
+
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+
+    /**
+     * trans to AstNode
+     */
+    pub fn toAstNode(self) -> AstNode {
+        for (astNode in AstNode(__all_data__)) {
+            if (self.key_eq(astNode)) {
+                return astNode
+            }
+        }
+    }
+    /**
+     * trans to RootDirectory
+     */
+    pub fn toRootDirectory(self) -> RootDirectory {
+        for (rootDirectory in RootDirectory(__all_data__)) {
+            if (rootDirectory.key_eq(self)) {
+                return rootDirectory
+            }
+        }
+    }
+    /**
+     * trans to NonRootDirectory
+     */
+    pub fn toNonRootDirectory(self) -> NonRootDirectory {
+        for (nonRootDirectory in NonRootDirectory(__all_data__)) {
+            if (nonRootDirectory.key_eq(self)) {
+                return nonRootDirectory
+            }
+        }
+    }
+}
+
+/**
+ * This type consists of the following types: [File, NonRootDirectory]
+ */
+schema FileOrNonRootDirectory {
+    @primary id: int
+}
+
+impl FileOrNonRootDirectory {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *FileOrNonRootDirectory {
+        for (file in File(db)) {
+            yield FileOrNonRootDirectory {
+                id : file.id
+            }
+        }
+        for (nonRootDirectory in NonRootDirectory(db)) {
+            yield FileOrNonRootDirectory {
+                id : nonRootDirectory.id
+            }
+        }
+    }
+
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+
+    /**
+     * trans to AstNode
+     */
+    pub fn toAstNode(self) -> AstNode {
+        for (astNode in AstNode(__all_data__)) {
+            if (self.key_eq(astNode)) {
+                return astNode
+            }
+        }
+    }
+    /**
+     * trans to File
+     */
+    pub fn toFile(self) -> File {
+        for (file in File(__all_data__)) {
+            if (file.key_eq(self)) {
+                return file
+            }
+        }
+    }
+    /**
+     * trans to NonRootDirectory
+     */
+    pub fn toNonRootDirectory(self) -> NonRootDirectory {
+        for (nonRootDirectory in NonRootDirectory(__all_data__)) {
+            if (nonRootDirectory.key_eq(self)) {
+                return nonRootDirectory
+            }
+        }
+    }
+}
+

@@ -1,0 +1,14 @@
+{
+    "meta": {
+        "version": "1.0.0"
+    },
+    "data": {
+        "apiVersion": "12",
+        "displayName": "HarmonyOS NEXT",
+        "path": "HarmonyOS-NEXT",
+        "platformVersion": "5.0.0",
+        "releaseType": "Canary4",
+        "version": "5.0.0.25",
+        "stage": "Developer Beta1"
+    }
+}

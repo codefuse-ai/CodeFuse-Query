@@ -1,0 +1,159 @@
+/**
+ * A Location
+ */
+schema Location {
+    @primary id: int,
+    file_id: int,
+    start: int,
+    start_line: int,
+    start_column: int,
+    end: int,
+    end_line: int,
+    end_column: int
+}
+
+impl Location {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *Location {
+        for (location in LocationDO(db)) {
+            yield Location {
+                id: location.id,
+                file_id : location.file_id,
+                start : location.start,
+                start_line : location.start_line,
+                start_column : location.start_column,
+                end : location.end,
+                end_line : location.end_line,
+                end_column : location.end_column
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the file.
+     */
+    pub fn getFile(self) -> File {
+        for (file in File(__all_data__)) {
+            if (self.file_id = file.id) {
+                return file
+            }
+        }
+    }
+    
+    /**
+     * Gets the start.
+     */
+    pub fn getStart(self) -> int {
+        return self.start
+    }
+    
+    /**
+     * Gets the startLine.
+     */
+    pub fn getStartLine(self) -> int {
+        return self.start_line
+    }
+    
+    /**
+     * Gets the startColumn.
+     */
+    pub fn getStartColumn(self) -> int {
+        return self.start_column
+    }
+    
+    /**
+     * Gets the end.
+     */
+    pub fn getEnd(self) -> int {
+        return self.end
+    }
+    
+    /**
+     * Gets the endLine.
+     */
+    pub fn getEndLine(self) -> int {
+        return self.end_line
+    }
+    
+    /**
+     * Gets the endColumn.
+     */
+    pub fn getEndColumn(self) -> int {
+        return self.end_column
+    }
+    
+
+    /**
+     * Get the text corresponding to the location
+     */
+    pub fn getText(self) -> string {
+        for (text in Text(__all_data__)) {
+            if (text.key_eq(self)) {
+                return text.getText()
+            }
+        }
+    }
+}
+
+/**
+ * A NumberOfLines
+ */
+schema NumberOfLines {
+    @primary id: int,
+    lines: int,
+    code_lines: int,
+    comment_lines: int
+}
+
+impl NumberOfLines {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *NumberOfLines {
+        for (numberOfLines in NumberOfLinesDO(db)) {
+            yield NumberOfLines {
+                id: numberOfLines.id,
+                lines : numberOfLines.lines,
+                code_lines : numberOfLines.code_lines,
+                comment_lines : numberOfLines.comment_lines
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the lines.
+     */
+    pub fn getLines(self) -> int {
+        return self.lines
+    }
+    
+    /**
+     * Gets the codeLines.
+     */
+    pub fn getCodeLines(self) -> int {
+        return self.code_lines
+    }
+    
+    /**
+     * Gets the commentLines.
+     */
+    pub fn getCommentLines(self) -> int {
+        return self.comment_lines
+    }
+    
+}
+

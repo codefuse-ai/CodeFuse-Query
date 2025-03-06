@@ -1,0 +1,308 @@
+/**
+ * A GetAccessor
+ */
+schema GetAccessor extends ClassElement {
+    name_node_id: int
+}
+
+impl GetAccessor {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *GetAccessor {
+        for (fa in ClassElement(db)) {
+            for (son in GetAccessorDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield GetAccessor {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        name_node_id : son.name_node_id
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the nameNode.
+     */
+    pub fn getNameNode(self) -> PropertyName {
+        for (propertyName in PropertyName(__all_data__)) {
+            if (self.name_node_id = propertyName.id) {
+                return propertyName
+            }
+        }
+    }
+
+    /**
+     * Cast to FunctionLikeDeclaration
+     */
+    pub fn toFunctionLikeDeclaration(self) -> FunctionLikeDeclaration {
+        for (functionLikeDeclaration in FunctionLikeDeclaration(__all_data__)) {
+            if (self.key_eq(functionLikeDeclaration)) {
+                return functionLikeDeclaration
+            }
+        }
+    }
+
+    /**
+     * trans to TypeElement to use func.
+     */
+    pub fn toTypeElement(self) -> TypeElement {
+        for (typeElement in TypeElement(__all_data__)) {
+            if (self.id = typeElement.id) {
+                return typeElement
+            }
+        }
+    }
+    
+    /**
+     * trans to ObjectLiteralElement to use func.
+     */
+    pub fn toObjectLiteralElement(self) -> ObjectLiteralElement {
+        for (objectLiteralElement in ObjectLiteralElement(__all_data__)) {
+            if (self.id = objectLiteralElement.id) {
+                return objectLiteralElement
+            }
+        }
+    }
+    
+    /**
+     * Get the body.
+     */
+    pub fn getBody(self) -> Block {
+        for (getAccessorBody in GetAccessorBody(__all_data__)) {
+            if (getAccessorBody.get_accessor_id = self.id) {
+                return getAccessorBody.getBody()
+            }
+        }
+    }
+    
+    /**
+     * Get the modifiers.
+     */
+    pub fn getModifiers(self) -> *Modifier {
+        for (modifier in Modifier(__all_data__)) {
+            if (modifier.parent_id = self.id) {
+                yield modifier
+            }
+        }
+    }
+    
+}
+
+/**
+ * A GetAccessorBody
+ */
+schema GetAccessorBody {
+    @primary get_accessor_id: int,
+    body_id: int
+}
+
+impl GetAccessorBody {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *GetAccessorBody {
+        for (getAccessorBody in GetAccessorBodyDO(db)) {
+            yield GetAccessorBody {
+                get_accessor_id: getAccessorBody.get_accessor_id,
+                body_id : getAccessorBody.body_id
+            }
+        }
+    }
+    
+    /**
+     * Gets the getAccessor.
+     */
+    pub fn getGetAccessor(self) -> GetAccessor {
+        for (getAccessor in GetAccessor(__all_data__)) {
+            if (self.get_accessor_id = getAccessor.id) {
+                return getAccessor
+            }
+        }
+    }
+    
+    /**
+     * Gets the body.
+     */
+    pub fn getBody(self) -> Block {
+        for (block in Block(__all_data__)) {
+            if (self.body_id = block.id) {
+                return block
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.get_accessor_id
+    }
+    
+}
+
+/**
+ * A SetAccessor
+ */
+schema SetAccessor extends ClassElement {
+    name_node_id: int
+}
+
+impl SetAccessor {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *SetAccessor {
+        for (fa in ClassElement(db)) {
+            for (son in SetAccessorDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield SetAccessor {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        name_node_id : son.name_node_id
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the nameNode.
+     */
+    pub fn getNameNode(self) -> PropertyName {
+        for (propertyName in PropertyName(__all_data__)) {
+            if (self.name_node_id = propertyName.id) {
+                return propertyName
+            }
+        }
+    }
+
+    /**
+     * Cast to FunctionLikeDeclaration
+     */
+    pub fn toFunctionLikeDeclaration(self) -> FunctionLikeDeclaration {
+        for (functionLikeDeclaration in FunctionLikeDeclaration(__all_data__)) {
+            if (self.key_eq(functionLikeDeclaration)) {
+                return functionLikeDeclaration
+            }
+        }
+    }
+
+    /**
+     * trans to TypeElement to use func.
+     */
+    pub fn toTypeElement(self) -> TypeElement {
+        for (typeElement in TypeElement(__all_data__)) {
+            if (self.id = typeElement.id) {
+                return typeElement
+            }
+        }
+    }
+    
+    /**
+     * trans to ObjectLiteralElement to use func.
+     */
+    pub fn toObjectLiteralElement(self) -> ObjectLiteralElement {
+        for (objectLiteralElement in ObjectLiteralElement(__all_data__)) {
+            if (self.id = objectLiteralElement.id) {
+                return objectLiteralElement
+            }
+        }
+    }
+    
+    /**
+     * Get the body.
+     */
+    pub fn getBody(self) -> Block {
+        for (setAccessorBody in SetAccessorBody(__all_data__)) {
+            if (setAccessorBody.set_accessor_id = self.id) {
+                return setAccessorBody.getBody()
+            }
+        }
+    }
+    
+    /**
+     * Get the modifiers.
+     */
+    pub fn getModifiers(self) -> *Modifier {
+        for (modifier in Modifier(__all_data__)) {
+            if (modifier.parent_id = self.id) {
+                yield modifier
+            }
+        }
+    }
+    
+}
+
+/**
+ * A SetAccessorBody
+ */
+schema SetAccessorBody {
+    @primary set_accessor_id: int,
+    body_id: int
+}
+
+impl SetAccessorBody {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *SetAccessorBody {
+        for (setAccessorBody in SetAccessorBodyDO(db)) {
+            yield SetAccessorBody {
+                set_accessor_id: setAccessorBody.set_accessor_id,
+                body_id : setAccessorBody.body_id
+            }
+        }
+    }
+    
+    /**
+     * Gets the setAccessor.
+     */
+    pub fn getSetAccessor(self) -> SetAccessor {
+        for (setAccessor in SetAccessor(__all_data__)) {
+            if (self.set_accessor_id = setAccessor.id) {
+                return setAccessor
+            }
+        }
+    }
+    
+    /**
+     * Gets the body.
+     */
+    pub fn getBody(self) -> Block {
+        for (block in Block(__all_data__)) {
+            if (self.body_id = block.id) {
+                return block
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.set_accessor_id
+    }
+    
+}
+
