@@ -1,0 +1,3269 @@
+@startuml
+' https://plantuml.com/ie-diagram
+
+left to right direction
+
+' Location table
+entity location {
+    id: int <<PK>>
+    file_id: int file
+    start: int
+    start_line: int
+    start_column: int
+    end: int
+    end_line: int
+    end_column: int
+}
+
+' Text data is optional. It is stored separately to ensure the performance of location table.
+entity text {
+    id: int <<PK>> location
+    text: text
+}
+
+text ||--|| location
+
+
+' Number of lines table
+entity number_of_lines {
+    id: int <<PK>> location
+    lines: int
+    code_lines: int
+    comment_lines: int
+}
+
+number_of_lines ||--|| location
+
+entity file {
+    id: int <<PK>>
+    location_id: int location
+    parent_id: int Directory
+    name: text
+    extension: text
+    relative_path: text
+}
+
+file ||--o| location
+location }|--|| file
+
+enum Directory {
+    root_directory
+    non_root_directory
+}
+
+enum FileOrNonRootDirectory {
+    file
+    non_root_directory
+}
+
+Directory ||--o{ FileOrNonRootDirectory
+
+entity root_directory {
+    id: int <<PK>>
+    relative_path: text
+}
+
+entity non_root_directory {
+    id: int <<PK>>
+    name: text
+    relative_path: text
+    parent_id: int Directory
+}
+
+'
+' AST Nodes
+'
+entity ast_node {
+    id: int <<PK>>
+    kind: int
+    parent_id: int ast_node
+    parent_kind: int
+    index: int
+    location_id: int location
+}
+
+' ==== Tokens ====
+' Punctuations
+
+' DotToken
+entity dot_token extends ast_node {
+    id: int <<PK>>
+}
+
+' DotDotDotToken
+entity dot_dot_dot_token extends ast_node {
+    id: int <<PK>>
+}
+
+' CommaToken
+entity comma_token extends ast_node {
+    id: int <<PK>>
+}
+
+' QuestionDotToken
+entity question_dot_token extends ast_node {
+    id: int <<PK>>
+}
+
+' LessThanToken
+entity less_than_token extends ast_node {
+    id: int <<PK>>
+}
+
+' GreaterThanToken
+entity greater_than_token extends ast_node {
+    id: int <<PK>>
+}
+
+' LessThanEqualsToken
+entity less_than_equals_token extends ast_node {
+    id: int <<PK>>
+}
+
+' GreaterThanEqualsToken
+entity greater_than_equals_token extends ast_node {
+    id: int <<PK>>
+}
+
+' EqualsEqualsToken
+entity equals_equals_token extends ast_node {
+    id: int <<PK>>
+}
+
+' ExclamationEqualsToken
+entity exclamation_equals_token extends ast_node {
+    id: int <<PK>>
+}
+
+' EqualsEqualsEqualsToken
+entity equals_equals_equals_token extends ast_node {
+    id: int <<PK>>
+}
+
+' ExclamationEqualsEqualsToken
+entity exclamation_equals_equals_token extends ast_node {
+    id: int <<PK>>
+}
+
+' EqualsGreaterThanToken
+entity equals_greater_than_token extends ast_node {
+    id: int <<PK>>
+}
+
+' PlusToken
+entity plus_token extends ast_node {
+    id: int <<PK>>
+}
+
+' MinusToken
+entity minus_token extends ast_node {
+    id: int <<PK>>
+}
+
+' AsteriskToken
+entity asterisk_token extends ast_node {
+    id: int <<PK>>
+}
+
+' AsteriskAsteriskToken
+entity asterisk_asterisk_token extends ast_node {
+    id: int <<PK>>
+}
+
+' SlashToken
+entity slash_token extends ast_node {
+    id: int <<PK>>
+}
+
+' PercentToken
+entity percent_token extends ast_node {
+    id: int <<PK>>
+}
+
+' PlusPlusToken
+entity plus_plus_token extends ast_node {
+    id: int <<PK>>
+}
+
+' MinusMinusToken
+entity minus_minus_token extends ast_node {
+    id: int <<PK>>
+}
+
+' LessThanLessThanToken
+entity less_than_less_than_token extends ast_node {
+    id: int <<PK>>
+}
+
+' GreaterThanGreaterThanToken
+entity greater_than_greater_than_token extends ast_node {
+    id: int <<PK>>
+}
+
+' GreaterThanGreaterThanGreaterThanToken
+entity greater_than_greater_than_greater_than_token extends ast_node {
+    id: int <<PK>>
+}
+
+' AmpersandToken
+entity ampersand_token extends ast_node {
+    id: int <<PK>>
+}
+
+' BarToken
+entity bar_token extends ast_node {
+    id: int <<PK>>
+}
+
+' CaretToken
+entity caret_token extends ast_node {
+    id: int <<PK>>
+}
+
+' ExclamationToken
+entity exclamation_token extends ast_node {
+    id: int <<PK>>
+}
+
+' TildeToken
+entity tilde_token extends ast_node {
+    id: int <<PK>>
+}
+
+' AmpersandAmpersandToken
+entity ampersand_ampersand_token extends ast_node {
+    id: int <<PK>>
+}
+
+' BarBarToken
+entity bar_bar_token extends ast_node {
+    id: int <<PK>>
+}
+
+' QuestionToken
+entity question_token extends ast_node {
+    id: int <<PK>>
+}
+
+' ColonToken
+entity colon_token extends ast_node {
+    id: int <<PK>>
+}
+
+' QuestionQuestionToken
+entity question_question_token extends ast_node {
+    id: int <<PK>>
+}
+
+' EqualsToken
+entity equals_token extends ast_node {
+    id: int <<PK>>
+}
+
+' PlusEqualsToken
+entity plus_equals_token extends ast_node {
+    id: int <<PK>>
+}
+
+' MinusEqualsToken
+entity minus_equals_token extends ast_node {
+    id: int <<PK>>
+}
+
+' AsteriskEqualsToken
+entity asterisk_equals_token extends ast_node {
+    id: int <<PK>>
+}
+
+' AsteriskAsteriskEqualsToken
+entity asterisk_asterisk_equals_token extends ast_node {
+    id: int <<PK>>
+}
+
+' SlashEqualsToken
+entity slash_equals_token extends ast_node {
+    id: int <<PK>>
+}
+
+' PercentEqualsToken
+entity percent_equals_token extends ast_node {
+    id: int <<PK>>
+}
+
+' LessThanLessThanEqualsToken
+entity less_than_less_than_equals_token extends ast_node {
+    id: int <<PK>>
+}
+
+' GreaterThanGreaterThanEqualsToken
+entity greater_than_greater_than_equals_token extends ast_node {
+    id: int <<PK>>
+}
+
+' GreaterThanGreaterThanGreaterThanEqualsToken
+entity greater_than_greater_than_greater_than_equals_token extends ast_node {
+    id: int <<PK>>
+}
+
+' AmpersandEqualsToken
+entity ampersand_equals_token extends ast_node {
+    id: int <<PK>>
+}
+
+' BarEqualsToken
+entity bar_equals_token extends ast_node {
+    id: int <<PK>>
+}
+
+' BarBarEqualsToken
+entity bar_bar_equals_token extends ast_node {
+    id: int <<PK>>
+}
+
+' AmpersandAmpersandEqualsToken
+entity ampersand_ampersand_equals_token extends ast_node {
+    id: int <<PK>>
+}
+
+' QuestionQuestionEqualsToken
+entity question_question_equals_token extends ast_node {
+    id: int <<PK>>
+}
+
+' CaretEqualsToken
+entity caret_equals_token extends ast_node {
+    id: int <<PK>>
+}
+
+
+' Keywords
+
+' ConstKeyword
+entity const_keyword extends ast_node {
+    id: int <<PK>>
+}
+
+' DefaultKeyword
+entity default_keyword extends ast_node {
+    id: int <<PK>>
+}
+
+'ExportKeyword
+entity export_keyword extends ast_node {
+    id: int <<PK>>
+}
+
+' ExtendsKeyword
+entity extends_keyword extends ast_node {
+    id: int <<PK>>
+}
+
+' ImportKeyword
+entity import_keyword extends ast_node {
+    id: int <<PK>>
+}
+
+' InKeyword
+entity in_keyword extends ast_node {
+    id: int <<PK>>
+}
+
+' InstanceOfKeyword
+entity instance_of_keyword extends ast_node {
+    id: int <<PK>>
+}
+
+' NewKeyword
+entity new_keyword  extends ast_node {
+    id: int <<PK>>
+}
+
+' ImplementsKeyword
+entity implements_keyword extends ast_node {
+    id: int <<PK>>
+}
+
+' PrivateKeyword
+entity private_keyword extends ast_node {
+    id: int <<PK>>
+}
+
+' ProtectedKeyword
+entity protected_keyword extends ast_node {
+    id: int <<PK>>
+}
+
+' PublicKeyword
+entity public_keyword extends ast_node {
+    id: int <<PK>>
+}
+
+' StaticKeyword
+entity static_keyword extends ast_node {
+    id: int <<PK>>
+}
+
+' AbstractKeyword
+entity abstract_keyword extends ast_node {
+    id: int <<PK>>
+}
+
+' AccessorKeyword
+entity accessor_keyword extends ast_node {
+    id: int <<PK>>
+}
+
+' AssertsKeyword
+entity asserts_keyword extends ast_node {
+    id: int <<PK>>
+}
+
+' AssertKeyword
+entity assert_keyword extends ast_node {
+    id: int <<PK>>
+}
+
+' AsyncKeyword
+entity async_keyword extends ast_node {
+    id: int <<PK>>
+}
+
+' AwaitKeyword
+entity await_keyword extends ast_node {
+    id: int <<PK>>
+}
+
+' DeclareKeyword
+entity declare_keyword extends ast_node {
+    id: int <<PK>>
+}
+
+' KeyOfKeyword
+entity key_of_keyword extends ast_node {
+    id: int <<PK>>
+}
+
+' OutKeyword
+entity out_keyword extends ast_node {
+    id: int <<PK>>
+}
+
+' ReadonlyKeyword
+entity readonly_keyword extends ast_node {
+    id: int <<PK>>
+}
+
+' UniqueKeyword
+entity unique_keyword extends ast_node {
+    id: int <<PK>>
+}
+
+' OverrideKeyword
+entity override_keyword extends ast_node {
+    id: int <<PK>>
+}
+
+' ==== End of Tokens ====
+
+' ==== Declaration ====
+
+' Declaration
+entity declaration extends ast_node {
+    id: int <<PK>>
+    kind: int
+}
+
+enum StringLiteralLike {
+    string_literal
+    no_substitution_template_literal
+}
+
+enum DeclarationName extends StringLiteralLike, BindingPattern {
+    identifier
+    private_identifier
+    numeric_literal
+    computed_property_name
+    element_access_expression
+    property_access_expression
+}
+
+entity declaration_name_node {
+    declaration_id: int <<PK>> declaration
+    name_node_id: int DeclarationName
+}
+
+declaration ||--o| declaration_name_node
+DeclarationName ||--o| declaration_name_node
+
+' ==== End of Declaration ====
+
+' ==== Expression Base Entities ====
+' Expression
+entity expression extends ast_node {
+    id: int <<PK>>
+    kind: int
+}
+
+' UnaryExpression
+entity unary_expression extends expression {
+    id: int <<PK>>
+    kind: int
+}
+
+' UpdateExpression
+entity update_expression extends unary_expression {
+    id: int <<PK>>
+    kind: int
+}
+
+' LeftHandSideExpression
+entity left_hand_side_expression extends update_expression {    
+    id: int <<PK>>
+    kind: int
+}
+
+' MemberExpression
+entity member_expression extends left_hand_side_expression {
+    id: int <<PK>>
+    kind: int
+}
+
+' PrimaryExpression
+entity primary_expression extends member_expression {
+    id: int <<PK>>
+    kind: int
+}
+
+' ==== End of Expression Base Entities ====
+
+' ==== Literals ====
+
+' NullLiteral
+entity null_literal extends primary_expression {
+    id: int <<PK>>
+}
+
+' TrueLiteral
+entity true_literal extends primary_expression {
+    id: int <<PK>>
+}
+
+' FalseLiteral
+entity false_literal extends primary_expression {
+    id: int <<PK>>
+}
+
+enum BooleanLiteral {
+    true_literal
+    false_literal
+}
+
+
+' LiteralLikeNode. Including:
+' NumericLiteral,
+' BigIntLiteral,
+' StringLiteral,
+' RegularExpressionLiteral, 
+' TemplateLiteralLikeNode
+entity literal_like_node extends ast_node {
+    id: int <<PK>>
+    kind: int
+    value: text
+}
+
+entity literal_expression extends literal_like_node, primary_expression {
+    id: int <<PK>>
+    kind: int
+}
+
+' NumericLiteral
+entity numeric_literal extends literal_expression, declaration {
+    id: int <<PK>>
+    flags: int
+}
+
+' BigIntLiteral
+entity big_int_literal extends literal_expression {
+    id: int <<PK>>
+}
+
+' StringLiteral
+entity string_literal extends literal_expression, declaration {
+    id: int <<PK>>
+    single_quote: boolean
+}
+
+' RegularExpressionLiteral
+entity regular_expression_literal extends literal_expression {
+    id: int <<PK>>
+}
+
+' TemplateLiteralLikeNode. Including:
+' NoSubstitutionTemplateLiteral,
+' TemplateHead,
+' TemplateMiddle,
+' TemplateTail
+entity template_literal_like_node extends literal_like_node {
+    id: int <<PK>>
+    kind: int
+    raw_text: text
+}
+
+' NoSubstitutionTemplateLiteral
+entity no_substitution_template_literal extends literal_expression, template_literal_like_node, declaration {
+    id: int <<PK>>
+}
+
+' TemplateHead
+entity template_head extends template_literal_like_node {
+    id: int <<PK>>
+}
+
+' TemplateMiddle
+entity template_middle extends template_literal_like_node {
+    id: int <<PK>>
+}
+
+' TemplateTail
+entity template_tail extends template_literal_like_node {
+    id: int <<PK>>
+}
+
+enum TemplateMiddleOrTail {
+    template_middle
+    template_tail
+}
+
+' TemplateSpan
+entity template_span extends ast_node {
+    id: int <<PK>>
+    parent_id: int template_expression
+    index: int
+    expression_id: int expression
+    literal_id: int  TemplateMiddleOrTail
+}
+
+template_span |o--|| expression
+template_span |o--|| TemplateMiddleOrTail
+
+' ==== End of Literals ====
+
+' ==== Modifiers ====
+
+enum HasModifiersNode {
+    type_parameter
+    parameter
+    constructor_type
+    property_signature
+    property_declaration
+    method_signature
+    method_declaration
+    constructor
+    get_accessor
+    set_accessor
+    index_signature
+    function_expression
+    arrow_function
+    class_expression
+    variable_statement
+    function_declaration
+    class_declaration
+    struct_declaration
+    interface_declaration
+    type_alias_declaration
+    enum_declaration
+    module_declaration
+    import_equals_declaration
+    import_declaration
+    export_assignment
+    export_declaration
+}
+
+entity modifier extends ast_node {
+    id: int <<PK>>
+    kind: int
+    parent_id: int HasModifiersNode
+    parent_kind: int
+    index: int
+}
+
+HasModifiersNode |o--o{ modifier
+
+' ==== End of Modifiers ====
+
+' ==== Names ====
+
+' Identifier
+entity identifier extends primary_expression, declaration {
+    id: int <<PK>>
+    name: text
+}
+
+' PrivateIdentifier
+entity private_identifier extends primary_expression {
+    id: int <<PK>>
+    name: text
+}
+
+' QualifiedName
+entity qualified_name extends ast_node {
+    id: int <<PK>>
+    left_id: int EntityName
+    right_id: int identifier
+}
+
+qualified_name |o--|| EntityName
+qualified_name |o--|| identifier
+
+' ComputedPropertyName
+entity computed_property_name extends ast_node {
+    id: int <<PK>>
+    expression_id: int expression
+}
+
+computed_property_name |o--|| expression
+
+enum EntityName {
+    identifier
+    qualified_name
+}
+
+enum PropertyName {
+    identifier
+    string_literal
+    numeric_literal
+    computed_property_name
+    private_identifier
+}
+
+enum MemberName {
+    identifier
+    private_identifier
+}
+
+' ==== End of Names ====
+
+' ==== Type Nodes ====
+' TypeNode
+' kind: AnyKeyword | BigIntKeyword | BooleanKeyword | IntrinsicKeyword | NeverKeyword | NumberKeyword | ObjectKeyword | StringKeyword | SymbolKeyword | UndefinedKeyword | UnknownKeyword | VoidKeyword | TypePredicate | TypeReference | FunctionType | ConstructorType | TypeQuery | TypeLiteral | ArrayType | TupleType | NamedTupleMember | OptionalType | RestType | UnionType | IntersectionType | ConditionalType | InferType | ParenthesizedType | ThisType | TypeOperator | IndexedAccessType | MappedType | LiteralType | TemplateLiteralType | TemplateLiteralTypeSpan | ImportType | ExpressionWithTypeArguments | JSDocTypeExpression | JSDocAllType | JSDocUnknownType | JSDocNonNullableType | JSDocNullableType | JSDocOptionalType | JSDocFunctionType | JSDocVariadicType | JSDocNamepathType | JSDocSignature | JSDocTypeLiteral
+entity type_node extends ast_node {
+    id: int <<PK>>
+    kind: int
+}
+
+' AnyType
+entity any_type extends type_node {
+    id: int <<PK>>
+}
+
+' BigIntType
+entity big_int_type extends type_node {
+    id: int <<PK>>
+}
+
+' BooleanType
+entity boolean_type extends type_node {
+    id: int <<PK>>
+}
+
+' IntrinsicType
+entity intrinsic_type extends type_node {
+    id: int <<PK>>
+}
+
+' NeverType
+entity never_type extends type_node {
+    id: int <<PK>>
+}
+
+' NumberType
+entity number_type extends type_node {
+    id: int <<PK>>
+}
+
+' ObjectType
+entity object_type extends type_node {
+    id: int <<PK>>
+}
+
+' StringType
+entity string_type extends type_node {
+    id: int <<PK>>
+}
+
+' SymbolType
+entity symbol_type extends type_node {
+    id: int <<PK>>
+}
+
+' UndefinedType
+entity undefined_type extends type_node {
+    id: int <<PK>>
+}
+
+' UnknownType
+entity unknown_type extends type_node {
+    id: int <<PK>>
+}
+
+' VoidType
+entity void_type extends type_node {
+    id: int <<PK>>
+}
+
+' ==== Type Nodes to be Continued ====
+
+' ==== Signature Elements ====
+
+' TypeParameter
+entity type_parameter extends declaration {
+    id: int <<PK>>
+    ' modifiers modifier
+    name_node_id: int identifier
+}
+
+type_parameter |o--o{ modifier
+type_parameter ||--|| identifier
+
+entity type_parameter_constraint {
+    type_parameter_id: int <<PK>> type_parameter
+    constraint_id: int type_node
+}
+
+type_parameter |o--|| type_parameter_constraint
+type_node ||--o| type_parameter_constraint
+
+entity type_parameter_default {
+    type_parameter_id: int <<PK>> type_parameter
+    default_id: int type_node
+}
+
+type_parameter |o--|| type_parameter_default
+type_node ||--o| type_parameter_default
+
+' BindingName
+enum BindingName extends BindingPattern {
+    identifier
+}
+
+' Parameter
+entity parameter extends declaration {
+    id: int <<PK>>
+    ' modifiers modifier
+    name_node_id: int BindingName
+}
+
+parameter |o--o{ modifier
+parameter ||--|| BindingName
+
+entity parameter_dot_dot_dot_token {
+    parameter_id: int <<PK>> parameter
+    dot_dot_dot_token_id: int dot_dot_dot_token
+}
+
+parameter ||--o| parameter_dot_dot_dot_token
+dot_dot_dot_token ||--o| parameter_dot_dot_dot_token
+
+entity parameter_question_token {
+    parameter_id: int <<PK>> parameter
+    question_token_id: int question_token
+}
+
+parameter ||--o| parameter_question_token
+question_token ||--o| parameter_question_token
+
+entity parameter_type_node {
+    parameter_id: int <<PK>> parameter
+    type_node_id: int type_node
+}
+
+parameter ||--o| parameter_type_node
+type_node ||--o| parameter_type_node
+
+entity parameter_initializer {
+    parameter_id: int <<PK>> parameter
+    initializer_id: int expression
+}
+
+parameter ||--o| parameter_initializer
+expression ||--o| parameter_initializer
+
+' Decorator
+entity decorator extends ast_node {
+    id: int <<PK>>
+    expression_id: int expression
+}
+
+decorator |o--|| expression
+
+' ==== End of Signature Elements ====
+
+' ==== Members ====
+
+' ObjectLiteralElement
+' kind:
+' | PropertyAssignment
+' | ShorthandPropertyAssignment
+' | SpreadAssignment
+' | MethodDeclaration
+' | GetAccessor
+' | SetAccessor
+entity object_literal_element extends declaration {
+    id: int <<PK>>
+    kind: int
+}
+
+entity object_literal_element_name_node {
+    object_literal_element_id: int <<PK>> object_literal_element
+    name_node_id: int PropertyName
+}
+
+object_literal_element ||-o| object_literal_element_name_node
+PropertyName ||--o| object_literal_element_name_node
+
+' ClassElement
+' kind:
+' | PropertyDeclaration
+' | MethodDeclaration
+' | Constructor
+' | SemicolonClassElement
+' | GetAccessor
+' | SetAccessor
+' | IndexSignature
+' | ClassStaticBlockDeclaration
+entity class_element extends declaration {
+    id: int <<PK>>
+    kind: int
+}
+
+entity class_element_name_node {
+    class_element_id: int <<PK>> class_element
+    name_node_id: int PropertyName
+}
+
+class_element ||-o| class_element_name_node
+PropertyName ||-o| class_element_name_node
+
+' TypeElement
+' kind:
+' | CallSignature
+' | ConstructSignature
+' | PropertySignature
+' | MethodSignature
+' | GetAccessor
+' | SetAccessor
+' | IndexSignature
+entity type_element extends declaration {
+    id: int <<PK>>
+    kind: int
+}
+
+entity type_element_name_node {
+    type_element_id: int <<PK>> type_element
+    name_node_id: int PropertyName
+}
+
+entity type_element_question_token {
+    type_element_id: int <<PK>> type_element
+    question_token_id: int question_token
+}
+
+type_element ||-o| type_element_name_node
+PropertyName ||-o| type_element_name_node
+type_element ||-o| type_element_question_token
+question_token ||-o| type_element_question_token
+
+' PropertySignature
+entity property_signature extends type_element {
+    id: int <<PK>>
+    ' modifiers modifier
+    name_node_id: int PropertyName
+}
+
+property_signature |o--o{ modifier
+property_signature |o--|| PropertyName
+
+entity property_signature_question_token {
+    property_signature_id: int <<PK>> property_signature
+    question_token_id: int question_token
+}
+
+property_signature ||--o| property_signature_question_token
+question_token ||--o| property_signature_question_token
+
+entity property_signature_type_node {
+    property_signature_id: int <<PK>> property_signature
+    type_node_id: int type_node
+}
+
+property_signature ||--o| property_signature_type_node
+type_node ||--o| property_signature_type_node
+
+' PropertyDeclaration
+entity property_declaration extends class_element {
+    id: int <<PK>>
+    ' modifiers modifier
+    name_node_id: int PropertyName
+}
+
+property_declaration |o--o{ modifier
+property_declaration |o--|| PropertyName
+
+entity property_declaration_question_token {
+    property_declaration_id: int <<PK>> property_declaration
+    question_token_id: int question_token
+}
+
+property_declaration ||--o| property_declaration_question_token
+question_token ||--o| property_declaration_question_token
+
+entity property_declaration_exclamation_token {
+    property_declaration_id: int <<PK>> property_declaration
+    exclamation_token_id: int exclamation_token
+}
+
+property_declaration ||--o| property_declaration_exclamation_token
+exclamation_token ||--o| property_declaration_exclamation_token
+
+entity property_declaration_type_node {
+    property_declaration_id: int <<PK>> property_declaration
+    type_node_id: int type_node
+}
+
+property_declaration ||--o| property_declaration_type_node
+type_node ||--o| property_declaration_type_node
+
+entity property_declaration_initializer {
+    property_declaration_id: int <<PK>> property_declaration
+    initializer_id: int expression
+}
+
+property_declaration ||--o| property_declaration_initializer
+expression ||--o| property_declaration_initializer
+
+' SignatureDeclaration
+entity signature_declaration extends declaration {
+    id: int <<PK>>
+    kind: int
+}
+
+' MethodSignature
+entity method_signature extends signature_declaration, type_element {
+    id: int <<PK>>
+    ' modifiers modifier
+    name_node_id: int PropertyName
+}
+
+method_signature |o--o{ modifier
+method_signature |o--|| PropertyName
+
+' MethodDeclaration
+entity method_declaration extends function_like_declaration, class_element, object_literal_element {
+    id: int <<PK>>
+    ' modifiers modifier
+    name_node_id: int PropertyName
+}
+
+method_declaration |o--o{ modifier
+method_declaration |o--|| PropertyName
+
+entity method_declaration_body {
+    method_declaration_id: int <<PK>> method_declaration
+    body_id: int block
+}
+
+method_declaration ||--o| method_declaration_body
+
+' ClassStaticBlockDeclaration
+entity class_static_block_declaration extends class_element {
+    id: int <<PK>>
+    body_id: int block
+}
+
+' Constructor
+entity constructor extends function_like_declaration, class_element {
+    id: int <<PK>>
+    ' modifiers modifier
+}
+
+constructor |o--o{ modifier
+
+entity constructor_body {
+    constructor_id: int <<PK>>
+    body_id: int block
+}
+
+constructor ||--o| constructor_body
+
+' GetAccessor
+entity get_accessor extends function_like_declaration, class_element, type_element, object_literal_element {
+    id: int <<PK>>
+    ' modifiers modifier
+    name_node_id: int PropertyName
+}
+
+get_accessor |o--o{ modifier
+get_accessor ||--o| PropertyName
+
+entity get_accessor_body {
+    get_accessor_id: int <<PK>> get_accessor
+    body_id: int block
+}
+
+get_accessor ||--o| get_accessor_body
+
+' SetAccessor
+entity set_accessor extends function_like_declaration, class_element, type_element, object_literal_element {
+    id: int <<PK>>
+    ' modifiers modifier
+    name_node_id: int PropertyName
+}
+
+set_accessor |o--o{ modifier
+set_accessor ||--o| PropertyName
+
+entity set_accessor_body {
+    set_accessor_id: int <<PK>> set_accessor
+    body_id: int block
+}
+
+set_accessor ||--o| set_accessor_body
+
+' AccessorDeclaration
+enum AccessorDeclaration {
+    get_accessor
+    set_accessor
+}
+
+' CallSignature
+entity call_signature extends signature_declaration, type_element {
+    id: int <<PK>>
+}
+
+' ConstructSignature
+entity construct_signature extends signature_declaration, type_element {
+    id: int <<PK>>
+}
+
+' IndexSignature
+entity index_signature extends signature_declaration, class_element, type_element {
+    id: int <<PK>>
+    ' modifiers modifier
+    type_node_id: int type_node
+}
+
+index_signature |o--o{ modifier
+index_signature |o--|| type_node
+
+' SemicolonClassElement
+entity semicolon_class_element extends class_element {
+    id: int <<PK>>
+}
+
+' PropertyAssignment
+entity property_assignment extends object_literal_element {
+    id: int <<PK>>
+    name_node_id: int PropertyName
+    initializer_id: int expression
+}
+
+property_assignment |o--|| PropertyName
+property_assignment |o--|| expression
+
+' ShorthandPropertyAssignment
+entity shorthand_property_assignment extends object_literal_element {
+    id: int <<PK>>
+    name_node_id: int identifier
+}
+
+shorthand_property_assignment |o--|| identifier
+
+' SpreadAssignment
+entity spread_assignment extends object_literal_element {
+    id: int <<PK>>
+    expression_id: int expression
+}
+
+spread_assignment |o--|| expression
+
+' EnumMember
+entity enum_member extends declaration {
+    id: int <<PK>>
+    parent_id: int enum_declaration
+    index: int
+    name_node_id: int PropertyName
+}
+
+entity enum_member_initializer {
+    enum_member_id: int <<PK>> enum_member
+    initializer_id: int expression
+}
+
+enum_member ||-o| enum_member_initializer
+expression ||-o| enum_member_initializer
+
+' ==== End of Members ====
+
+' ==== Declarations ====
+
+' SignatureDeclaration
+entity signature_declaration_name_node {
+    signature_declaration_id: int <<PK>> signature_declaration
+    name_node_id: int PropertyName
+}
+
+signature_declaration ||--o| signature_declaration_name_node
+PropertyName ||--o| signature_declaration_name_node
+
+entity signature_declaration_type_parameter {
+    type_parameter_id: int <<PK>> type_parameter
+    signature_declaration_id: int signature_declaration
+    index: int
+}
+
+signature_declaration ||--o{ signature_declaration_type_parameter
+type_parameter ||--o| signature_declaration_type_parameter
+
+entity signature_declaration_parameter {
+    parameter_id: int <<PK>> parameter
+    signature_declaration_id: int signature_declaration
+    index: int
+}
+
+signature_declaration ||--o{ signature_declaration_parameter
+parameter ||--o| signature_declaration_parameter
+
+entity signature_declaration_type_node {
+    signature_declaration_id: int <<PK>> signature_declaration
+    type_node_id: int type_node
+}
+
+signature_declaration ||--o| signature_declaration_type_node
+type_node ||--o| signature_declaration_type_node
+
+enum BlockOrExpression {
+    block
+    expression
+}
+
+' FunctionLikeDeclaration
+entity function_like_declaration extends signature_declaration {
+    id: int <<PK>>
+    kind: int
+}
+
+entity function_like_declaration_asterisk_token {
+    function_like_declaration_id: int <<PK>> function_like_declaration
+    asterisk_token_id: int asterisk_token
+}
+
+function_like_declaration ||--o| function_like_declaration_asterisk_token
+asterisk_token ||--o| function_like_declaration_asterisk_token
+
+entity function_like_declaration_question_token {
+    function_like_declaration_id: int <<PK>> function_like_declaration
+    question_token_id: int question_token
+}
+
+function_like_declaration ||--o| function_like_declaration_question_token
+question_token ||--o| function_like_declaration_question_token
+
+entity function_like_declaration_exclamation_token {
+    function_like_declaration_id: int <<PK>> function_like_declaration
+    exclamation_token_id: int exclamation_token
+}
+
+function_like_declaration ||--o| function_like_declaration_exclamation_token
+exclamation_token ||--o| function_like_declaration_exclamation_token
+
+entity function_like_declaration_body {
+    function_like_declaration_id: int <<PK>> function_like_declaration
+    body_id: int BlockOrExpression
+}
+
+function_like_declaration ||--o| function_like_declaration_body
+BlockOrExpression ||--o| function_like_declaration_body
+
+' ClassLikeDeclaration
+entity class_like_declaration extends declaration {
+    id: int <<PK>>
+    kind: int
+    ' heritage_clauses heritage_clause
+}
+
+entity class_like_declaration_name_node {
+    class_like_declaration_id: int <<PK>> class_like_declaration
+    name_node_id: int identifier
+}
+
+class_like_declaration ||--o| class_like_declaration_name_node
+identifier ||--o| class_like_declaration_name_node
+
+entity class_like_declaration_type_parameter {
+    type_parameter_id: int <<PK>> type_parameter
+    class_like_declaration_id: int class_like_declaration
+    index: int
+}
+
+class_like_declaration ||--o{ class_like_declaration_type_parameter
+type_parameter ||--o| class_like_declaration_type_parameter
+
+entity class_like_declaration_member {
+    member_id: int <<PK>> class_element
+    class_like_declaration_id: int class_like_declaration
+    index: int
+}
+
+class_like_declaration ||--o{ class_like_declaration_member
+class_element ||--o| class_like_declaration_member
+
+' ==== End of Declarations ====
+
+' ==== Type Nodes Continued ====
+
+' ThisType
+entity this_type extends type_node {
+    id: int <<PK>>
+}
+
+enum IdentifierOrThisType {
+    identifier
+    this_type
+}
+
+' TypePredicate
+entity type_predicate extends type_node {
+    id: int <<PK>>
+    parameter_name_node_id: int IdentifierOrThisType
+}
+
+type_predicate |o--|| IdentifierOrThisType
+
+entity type_predicate_asserts_modifier {
+    type_predicate_id: int <<PK>> type_predicate
+    asserts_modifier_id: int asserts_keyword
+}
+
+type_predicate ||--o| type_predicate_asserts_modifier
+asserts_keyword ||--o| type_predicate_asserts_modifier
+
+entity type_predicate_type_node {
+    type_predicate_id: int <<PK>> type_predicate
+    type_node_id: int type_node
+}
+
+type_predicate ||--o| type_predicate_type_node
+type_node ||--o| type_predicate_type_node
+
+' NodeWithTypeArguments
+' kind: TypeReference | TypeQuery | ExpressionWithTypeArguments | ImportType
+entity node_with_type_arguments extends type_node {
+    id: int <<PK>>
+    kind: int
+}
+
+entity node_with_type_arguments_type_argument {
+    type_argument_id: int <<PK>> type_node
+    node_with_type_arguments_id: int node_with_type_arguments
+    index: int
+}
+
+node_with_type_arguments ||--o{ node_with_type_arguments_type_argument
+type_node ||--o| node_with_type_arguments_type_argument
+
+' TypeReference
+entity type_reference extends node_with_type_arguments {
+    id: int <<PK>>
+    type_name_node_id: int EntityName
+}
+
+type_reference |o--|| EntityName
+
+' FunctionOrConstructorType
+entity function_or_constructor_type extends type_node, signature_declaration {
+    id: int <<PK>>
+    kind: int
+    type_node_id: int type_node
+}
+
+function_or_constructor_type |o--|| type_node
+
+' FunctionType
+entity function_type extends function_or_constructor_type {
+    id: int <<PK>>
+}
+
+' ConstructorType
+entity constructor_type extends function_or_constructor_type {
+    id: int <<PK>>
+    ' modifiers modifier
+}
+
+constructor_type |o--o{ modifier
+
+' TypeQuery
+entity type_query extends node_with_type_arguments {
+    id: int <<PK>>
+    expression_name_node_id: int EntityName
+}
+
+type_query |o--|| EntityName
+
+' TypeLiteral
+entity type_literal extends type_node, declaration {
+    id: int <<PK>>
+}
+
+entity type_literal_member {
+    member_id: int <<PK>> type_element
+    type_literal_id: int type_literal
+    index: int
+}
+
+type_literal ||--o{ type_literal_member
+type_element ||--o| type_literal_member
+
+' ArrayType
+entity array_type extends type_node {
+    id: int <<PK>>
+    element_type_node_id: int type_node
+}
+
+array_type |o--|| type_node
+
+' TupleType
+entity tuple_type extends type_node {
+    id: int <<PK>>
+}
+
+entity tuple_type_element {
+    element_id: int <<PK>> type_node
+    tuple_type_id: int tuple_type
+    index: int
+}
+
+tuple_type ||--o{ tuple_type_element
+type_node ||--o| tuple_type_element
+
+' OptionalType
+entity optional_type extends type_node {
+    id: int <<PK>>
+    type_node_id: int type_node
+}
+
+optional_type |o--|| type_node
+
+' RestType
+entity rest_type extends type_node {
+    id: int <<PK>>
+    type_node_id: int type_node
+}
+
+rest_type |o--|| type_node
+
+' UnionType
+entity union_type extends type_node {
+    id: int <<PK>>
+}
+
+entity union_type_type_node {
+    type_node_id: int <<PK>> type_node
+    union_type_id: int union_type
+    index: int
+}
+
+union_type ||--o{ union_type_type_node
+type_node ||--o| union_type_type_node
+
+' IntersectionType
+entity intersection_type extends type_node {
+    id: int <<PK>>
+}
+
+entity intersection_type_type_node {
+    type_node_id: int <<PK>> type_node
+    intersection_type_id: int intersection_type
+    index: int
+}
+
+intersection_type ||--o{ intersection_type_type_node
+type_node ||--o| intersection_type_type_node
+
+' ConditionalType
+entity conditional_type extends type_node {
+    id: int <<PK>>
+    check_type_node_id: int type_node
+    extends_type_node_id: int type_node
+    then_type_node_id: int type_node
+    else_type_node_id: int type_node
+}
+
+conditional_type |o--|| type_node
+conditional_type |o--|| type_node
+conditional_type |o--|| type_node
+conditional_type |o--|| type_node
+
+' InferType
+entity infer_type extends type_node {
+    id: int <<PK>>
+    type_parameter_id: int type_parameter
+}
+
+infer_type |o--|| type_parameter
+
+' ParenthesizedType
+entity parenthesized_type extends type_node {
+    id: int <<PK>>
+    type_node_id: int type_node
+}
+
+enum TypeOperatorOperatorType {
+    key_of_keyword
+    unique_keyword
+    readonly_keyword
+}
+
+' TypeOperator
+entity type_operator extends type_node {
+    id: int <<PK>>
+    operator_id: int TypeOperatorOperatorType
+    type_node_id: int type_node
+}
+
+type_operator |o--|| TypeOperatorOperatorType
+type_operator |o--|| type_node
+
+' IndexedAccessType
+entity indexed_access_type extends type_node {
+    id: int <<PK>>
+    object_type_node_id: int type_node
+    index_type_node_id: int type_node
+}
+
+indexed_access_type |o--|| type_node
+indexed_access_type |o--|| type_node
+
+enum MappedTypeReadonlyTokenType {
+    readonly_keyword
+    plus_token
+    minus_token
+}
+
+enum MappedTypeQuestionTokenType {
+    question_token
+    plus_token
+    minus_token
+}
+
+' MappedType
+entity mapped_type extends type_node, declaration {
+    id: int <<PK>>
+    type_parameter_id: int type_parameter
+}
+
+mapped_type |o--|| type_parameter
+
+entity mapped_type_readonly_token {
+    mapped_type_id: int <<PK>> mapped_type
+    readonly_token_id: int MappedTypeReadonlyTokenType
+}
+
+mapped_type ||-o| mapped_type_readonly_token
+MappedTypeReadonlyTokenType ||-o| mapped_type_readonly_token
+
+entity mapped_type_name_type_node {
+    mapped_type_id: int <<PK>> mapped_type
+    name_type_node_id: int type_node
+}
+
+mapped_type ||-o| mapped_type_name_type_node
+type_node ||-o| mapped_type_name_type_node
+
+entity mapped_type_question_token {
+    mapped_type_id: int <<PK>> mapped_type
+    question_token_id: int MappedTypeQuestionTokenType
+}
+
+mapped_type ||-o| mapped_type_question_token
+MappedTypeQuestionTokenType ||-o| mapped_type_question_token
+
+entity mapped_type_type_node {
+    mapped_type_id: int <<PK>> mapped_type
+    type_node_id: int type_node
+}
+
+mapped_type ||-o| mapped_type_type_node
+type_node ||-o| mapped_type_type_node
+
+enum LiteralTypeLiteralType extends BooleanLiteral {
+    null_literal
+    literal_expression
+    prefix_unary_expression
+}
+
+' LiteralType
+entity literal_type extends type_node {
+    id: int <<PK>>
+    literal_id: int LiteralTypeLiteralType
+}
+
+literal_type |o--|| LiteralTypeLiteralType
+
+' NamedTupleMember
+entity named_tuple_member extends type_node, declaration {
+    id: int <<PK>>
+    name_node_id: int identifier
+    type_node_id: int type_node
+}
+
+named_tuple_member |o--|| identifier
+named_tuple_member |o--|| type_node
+
+entity named_tuple_member_dot_dot_dot_token {
+    named_tuple_member_id: int <<PK>> named_tuple_member
+    dot_dot_dot_token_id: int dot_dot_dot_token
+}
+
+named_tuple_member ||--o| named_tuple_member_dot_dot_dot_token
+dot_dot_dot_token ||--o| named_tuple_member_dot_dot_dot_token
+
+entity named_tuple_member_question_token {
+    named_tuple_member_id: int <<PK>> named_tuple_member
+    question_token_id: int question_token
+}
+
+named_tuple_member ||--o| named_tuple_member_question_token
+question_token ||--o| named_tuple_member_question_token
+
+' TemplateLiteralTypeSpan
+entity template_literal_type_span extends type_node {
+    id: int <<PK>>
+    parent_id: int template_literal_type
+    index: int
+    type_node_id: int type_node
+    literal_id: int TemplateMiddleOrTail
+}
+
+template_literal_type_span |o--|| type_node
+template_literal_type_span |o--|| TemplateMiddleOrTail
+
+' TemplateLiteralType
+entity template_literal_type extends type_node {
+    id: int <<PK>>
+    head_id: int template_head
+    ' templateSpans template_literal_type_span
+}
+
+template_literal_type |o--|| template_head
+template_literal_type ||--o{ template_literal_type_span
+
+' ImportTypeAssertionContainer
+entity import_type_assertion_container extends ast_node {
+    id: int <<PK>>
+    parent_id: int import_type
+    assert_clause_id: int assert_clause
+}
+
+' ImportType
+entity import_type extends node_with_type_arguments {
+    id: int <<PK>>
+    is_type_of: boolean
+    argument_id: int type_node
+    ' assertions import_type_assertion_container
+}
+
+import_type |o--|| type_node
+import_type ||--o| import_type_assertion_container
+
+entity import_type_qualifier {
+    import_type_id: int <<PK>> import_type
+    qualifier_id: int EntityName
+}
+
+import_type ||--o| import_type_qualifier
+EntityName ||--o| import_type_qualifier
+
+' ==== End of Type Nodes ====
+
+' ==== Binding patterns ====
+
+' BindingElement
+entity binding_element extends declaration {
+    id: int <<PK>>
+    name_node_id: int BindingName
+}
+
+enum BindingPattern {
+    object_binding_pattern
+    array_binding_pattern
+}
+
+enum ArrayBindingElement {
+    binding_element
+    omitted_expression
+}
+
+entity binding_element_property_name_node {
+    binding_element_id: int <<PK>> binding_element
+    property_name_node_id: int PropertyName
+}
+
+binding_element ||--o| binding_element_property_name_node
+PropertyName ||--o| binding_element_property_name_node
+
+entity binding_element_dot_dot_dot_token {
+    binding_element_id: int <<PK>> binding_element
+    dot_dot_dot_token_id: int dot_dot_dot_token
+}
+
+binding_element ||--o| binding_element_dot_dot_dot_token
+dot_dot_dot_token ||--o| binding_element_dot_dot_dot_token
+
+entity binding_element_initializer {
+    binding_element_id: int <<PK>> binding_element
+    initializer_id: int expression
+}
+
+binding_element ||--o| binding_element_initializer
+expression ||--o| binding_element_initializer
+
+' ObjectBindingPattern
+entity object_binding_pattern extends ast_node {
+    id: int <<PK>>
+}
+
+entity object_binding_pattern_element {
+    element_id: int <<PK>> binding_element
+    object_binding_pattern_id: int object_binding_pattern
+    index: int
+}
+
+object_binding_pattern ||--o{ object_binding_pattern_element
+binding_element ||--o| object_binding_pattern_element
+
+' ArrayBindingPattern
+entity array_binding_pattern extends ast_node {
+    id: int <<PK>>
+}
+
+entity array_binding_pattern_element {
+    element_id: int <<PK>> ArrayBindingElement
+    array_binding_pattern_id: int array_binding_pattern
+    index: int
+}
+
+array_binding_pattern ||--o{ array_binding_pattern_element
+ArrayBindingElement ||--o| array_binding_pattern_element
+
+' ==== End of Binding patterns ====
+
+' ==== Expressions ====
+
+' ThisExpression
+entity this_expression extends primary_expression {
+    id: int <<PK>>
+}
+
+' SuperExpression
+entity super_expression extends primary_expression {
+    id: int <<PK>>
+}
+
+' ImportExpression
+entity import_expression extends primary_expression {
+    id: int <<PK>>
+}
+
+' ArrayLiteralExpression
+entity array_literal_expression extends primary_expression {
+    id: int <<PK>>
+}
+
+entity array_literal_expression_element {
+    element_id: int <<PK>> expression
+    array_literal_expression_id: int array_literal_expression
+    index: int
+}
+
+array_literal_expression ||--o{ array_literal_expression_element
+expression ||--o| array_literal_expression_element
+
+
+' ObjectLiteralExpression
+entity object_literal_expression extends primary_expression, declaration {
+    id: int <<PK>>
+}
+
+entity object_literal_expression_property {
+    property_id: int <<PK>> object_literal_element
+    object_literal_expression_id: int object_literal_expression
+    index: int
+}
+
+object_literal_expression ||--o{ object_literal_expression_property
+object_literal_element ||--o| object_literal_expression_property
+
+' PropertyAccessExpression
+entity property_access_expression extends member_expression, declaration {
+    id: int <<PK>>
+    expression_id: int left_hand_side_expression
+    name_node_id: int MemberName
+}
+
+property_access_expression |o--|| left_hand_side_expression
+property_access_expression |o--|| MemberName
+
+entity property_access_expression_question_dot_token {
+    property_access_expression_id: int <<PK>> property_access_expression
+    question_dot_token_id: int question_dot_token
+}
+
+property_access_expression ||--o| property_access_expression_question_dot_token
+question_dot_token ||--o| property_access_expression_question_dot_token
+
+
+' ElementAccessExpression
+entity element_access_expression extends member_expression {
+    id: int <<PK>>
+    expression_id: int left_hand_side_expression
+    argument_expression_id: int expression
+}
+
+element_access_expression |o--|| left_hand_side_expression
+element_access_expression |o--|| expression
+
+entity element_access_expression_question_dot_token {
+    element_access_expression_id: int <<PK>> element_access_expression
+    question_dot_token_id: int question_dot_token
+}
+
+element_access_expression ||--o| element_access_expression_question_dot_token
+question_dot_token ||--o| element_access_expression_question_dot_token
+
+' AccessExpression
+enum AccessExpression {
+    property_access_expression
+    element_access_expression
+}
+
+' CallExpression
+entity call_expression extends left_hand_side_expression, declaration {
+    id: int <<PK>>
+    expression_id: int expression
+}
+
+call_expression |o--|| expression
+
+entity call_expression_question_dot_token {
+    call_expression_id: int <<PK>> call_expression
+    question_dot_token_id: int question_dot_token
+}
+
+call_expression ||--o| call_expression_question_dot_token
+question_dot_token ||--o| call_expression_question_dot_token
+
+entity call_expression_type_argument {
+    type_argument_id: int <<PK>> type_node
+    call_expression_id: int call_expression
+    index: int
+}
+
+call_expression ||--o{ call_expression_type_argument
+type_node ||--o| call_expression_type_argument
+
+entity call_expression_argument {
+    argument_id: int <<PK>> expression
+    call_expression_id: int call_expression
+    index: int
+}
+
+call_expression ||--o{ call_expression_argument
+expression ||--o| call_expression_argument
+
+' NewExpression
+entity new_expression extends primary_expression, declaration {
+    id: int <<PK>>
+    expression_id: int left_hand_side_expression
+}
+
+entity new_expression_type_argument {
+    type_argument_id: int <<PK>> type_node
+    new_expression_id: int new_expression
+    index: int
+}
+
+new_expression ||--o{ new_expression_type_argument
+type_node ||--o| new_expression_type_argument
+
+entity new_expression_argument {
+    argument_id: int <<PK>> expression
+    new_expression_id: int new_expression
+    index: int
+}
+
+new_expression ||--o{ new_expression_argument
+expression ||--o| new_expression_argument
+
+' TemplateExpression
+entity template_expression extends primary_expression {
+    id: int <<PK>>
+    head_id: int template_head
+    ' template_spans template_span
+}
+
+template_expression |o--|| template_head
+template_expression ||--o{ template_span
+
+enum TemplateLiteral {
+    template_expression
+    no_substitution_template_literal
+}
+
+' TaggedTemplateExpression
+entity tagged_template_expression extends member_expression {
+    id: int <<PK>>
+    tag_id: int left_hand_side_expression
+    template_id: int TemplateLiteral
+}
+
+tagged_template_expression |o--|| left_hand_side_expression
+tagged_template_expression |o--|| TemplateLiteral
+
+entity tagged_template_expression_type_argument {
+    type_argument_id: int <<PK>> type_node
+    tagged_template_expression_id: int tagged_template_expression
+    index: int
+}
+
+tagged_template_expression ||--o{ tagged_template_expression_type_argument
+type_node ||--o| tagged_template_expression_type_argument
+
+' TypeAssertionExpression
+entity type_assertion_expression extends unary_expression {
+    id: int <<PK>>
+    type_node_id: int type_node
+    expression_id: int unary_expression
+}
+
+type_assertion_expression |o--|| type_node
+type_assertion_expression |o--|| unary_expression
+
+' ParenthesizedExpression
+entity parenthesized_expression extends primary_expression {
+    id: int <<PK>>
+    expression_id: int expression
+}
+
+parenthesized_expression |o--|| expression
+
+' FunctionExpression
+entity function_expression extends primary_expression, function_like_declaration {
+    id: int <<PK>>
+    ' modifiers modifier
+    body_id: int block
+}
+
+function_expression |o--o{ modifier
+
+entity function_expression_name_node {
+    function_expression_id: int <<PK>> function_expression
+    name_node_id: int identifier
+}
+
+function_expression ||--o| function_expression_name_node
+identifier ||--o| function_expression_name_node
+
+' ArrowFunction
+entity arrow_function extends expression, function_like_declaration {
+    id: int <<PK>>
+    ' modifiers modifier
+    equals_greater_than_token_id: int equals_greater_than_token
+    body_id: int BlockOrExpression
+}
+
+arrow_function |o--o{ modifier
+arrow_function |o--|| equals_greater_than_token
+arrow_function |o--|| BlockOrExpression
+
+' EtsComponentExpression
+entity ets_component_expression extends primary_expression, declaration {
+    id: int <<PK>>
+    expression_id: int left_hand_side_expression
+}
+
+ets_component_expression |o--|| left_hand_side_expression
+
+entity ets_component_expression_type_argument {
+    type_argument_id: int <<PK>> type_node
+    ets_component_expression_id: int ets_component_expression
+    index: int
+}
+
+ets_component_expression ||--o{ ets_component_expression_type_argument
+type_node ||--o| ets_component_expression_type_argument
+
+entity ets_component_expression_argument {
+    argument_id: int <<PK>> expression
+    ets_component_expression_id: int ets_component_expression
+    index: int
+}
+
+ets_component_expression ||--o{ ets_component_expression_argument
+expression ||--o| ets_component_expression_argument
+
+entity ets_component_expression_body {
+    ets_component_expression_id: int <<PK>> ets_component_expression
+    body_id: int block
+}
+
+ets_component_expression ||--o| ets_component_expression_body
+
+' DeleteExpression
+entity delete_expression extends unary_expression {
+    id: int <<PK>>
+    expression_id: int unary_expression
+}
+
+delete_expression |o--|| unary_expression
+
+' TypeOfExpression
+entity type_of_expression extends unary_expression {
+    id: int <<PK>>
+    expression_id: int unary_expression
+}
+
+type_of_expression |o--|| unary_expression
+
+' VoidExpression
+entity void_expression extends unary_expression {
+    id: int <<PK>>
+    expression_id: int unary_expression
+}
+
+void_expression |o--|| unary_expression
+
+' AwaitExpression
+entity await_expression extends unary_expression {
+    id: int <<PK>>
+    expression_id: int unary_expression
+}
+
+await_expression |o--|| unary_expression
+
+' PrefixUnaryOperator
+enum PrefixUnaryOperator {
+    plus_plus_token
+    minus_minus_token
+    plus_token
+    minus_token
+    tilde_token
+    exclamation_token
+}
+
+' PrefixUnaryExpression
+entity prefix_unary_expression extends update_expression {
+    id: int <<PK>>
+    operator_id: int PrefixUnaryOperator
+    operand_id: int unary_expression
+}
+
+prefix_unary_expression |o--|| PrefixUnaryOperator
+prefix_unary_expression |o--|| unary_expression
+
+' PostUnaryOperator
+enum PostUnaryOperator {
+    plus_plus_token
+    minus_minus_token
+}
+
+' PostfixUnaryExpression
+entity postfix_unary_expression extends update_expression {
+    id: int <<PK>>
+    operand_id: int left_hand_side_expression
+    operator_id: int PostUnaryOperator
+}
+
+postfix_unary_expression |o--|| left_hand_side_expression
+postfix_unary_expression |o--|| PostUnaryOperator
+
+enum ExponentiationOperator {
+    asterisk_asterisk_token
+}
+
+enum MultiplicativeOperator {
+    asterisk_token
+    slash_token
+    percent_token
+}
+
+enum MultiplicativeOperatorOrHigher extends ExponentiationOperator, MultiplicativeOperator {}
+
+enum AdditiveOperator {
+    plus_token
+    minus_token
+}
+
+enum AdditiveOperatorOrHigher extends MultiplicativeOperatorOrHigher, AdditiveOperator {}
+
+enum ShiftOperator {
+    less_than_less_than_token
+    greater_than_greater_than_token
+    greater_than_greater_than_greater_than_token
+}
+
+enum ShiftOperatorOrHigher extends AdditiveOperatorOrHigher, ShiftOperator {}
+
+enum RelationalOperator {
+    less_than_token
+    less_than_equals_token
+    greater_than_token
+    greater_than_equals_token
+    instance_of_keyword
+    in_keyword
+}
+
+enum RelationalOperatorOrHigher extends ShiftOperatorOrHigher, RelationalOperator {}
+
+enum EqualityOperator {
+    equals_equals_token
+    equals_equals_equals_token
+    exclamation_equals_equals_token
+    exclamation_equals_token
+}
+
+enum EqualityOperatorOrHigher extends RelationalOperatorOrHigher, EqualityOperator {}
+
+enum BitwiseOperator {
+    ampersand_token
+    bar_token
+    caret_token
+}
+
+enum BitwiseOperatorOrHigher extends EqualityOperatorOrHigher, BitwiseOperator {}
+
+enum LogicalOperator {
+    ampersand_ampersand_token
+    bar_bar_token
+}
+
+enum LogicalOperatorOrHigher extends BitwiseOperatorOrHigher, LogicalOperator {}
+
+enum CompoundAssignmentOperator {
+    plus_equals_token
+    minus_equals_token
+    asterisk_equals_token
+    asterisk_asterisk_equals_token
+    slash_equals_token
+    percent_equals_token
+    ampersand_equals_token
+    bar_equals_token
+    caret_equals_token
+    less_than_less_than_equals_token
+    greater_than_greater_than_greater_than_equals_token
+    greater_than_greater_than_equals_token
+    bar_bar_equals_token
+    ampersand_ampersand_equals_token
+    question_question_equals_token
+}
+
+enum AssignmentOperator extends CompoundAssignmentOperator {
+    equals_token
+}
+
+enum AssignmentOperatorOrHigher extends LogicalOperatorOrHigher, AssignmentOperator {
+    question_question_token
+}
+
+enum BinaryOperator extends AssignmentOperatorOrHigher {
+    comma_token
+}
+
+' BinaryExpression
+entity binary_expression extends expression, declaration {
+    id: int <<PK>>
+    left_id: int expression
+    operator_id: int BinaryOperator
+    right_id: int expression
+}
+
+binary_expression |o--|| expression
+binary_expression |o--|| BinaryOperator
+binary_expression |o--|| expression
+
+' ConditionalExpression
+entity conditional_expression extends expression {
+    id: int <<PK>>
+    condition_id: int expression
+    question_token_id: int question_token
+    then_expression_id: int expression
+    colon_token_id: int colon_token
+    else_expression_id: int expression
+}
+
+conditional_expression |o--|| expression
+conditional_expression |o--|| question_token
+conditional_expression |o--|| expression
+conditional_expression |o--|| colon_token
+conditional_expression |o--|| expression
+
+' YieldExpression
+entity yield_expression extends expression {
+    id: int <<PK>>
+}
+
+entity yield_expression_asterisk_token {
+    yield_expression_id: int <<PK>> yield_expression
+    asterisk_token_id: int asterisk_token
+}
+
+yield_expression ||--o| yield_expression_asterisk_token
+asterisk_token ||--o| yield_expression_asterisk_token
+
+entity yield_expression_expression {
+    yield_expression_id: int <<PK>> yield_expression
+    expression_id: int expression
+}
+
+yield_expression ||--o| yield_expression_expression
+expression ||--o| yield_expression_expression
+
+' SpreadElement
+entity spread_element extends expression {
+    id: int <<PK>>
+    expression_id: int expression
+}
+
+spread_element |o--|| expression
+
+' ClassExpression
+entity class_expression extends class_like_declaration, primary_expression {
+    id: int <<PK>>
+    ' modifiers modifier
+}
+
+class_expression |o--o{ modifier
+
+' OmittedExpression
+entity omitted_expression extends expression {
+    id: int <<PK>>
+}
+
+' ExpressionWithTypeArguments
+entity expression_with_type_arguments extends member_expression, node_with_type_arguments {
+    id: int <<PK>>
+    expression_id: int left_hand_side_expression
+}
+
+expression_with_type_arguments |o--|| left_hand_side_expression
+
+' AsExpression
+entity as_expression extends expression {
+    id: int <<PK>>
+    expression_id: int expression
+    type_node_id: int type_node
+}
+
+as_expression |o--|| expression
+as_expression |o--|| type_node
+
+' NonNullExpression
+entity non_null_expression extends left_hand_side_expression {
+    id: int <<PK>>
+    expression_id: int expression
+}
+
+non_null_expression |o--|| expression
+
+enum NewOrImportKeyword {
+    new_keyword
+    import_keyword
+}
+
+' MetaProperty
+entity meta_property extends primary_expression {
+    id: int <<PK>>
+    keyword_token_id: int NewOrImportKeyword
+    name_node_id: int identifier
+}
+
+meta_property |o--|| NewOrImportKeyword
+meta_property |o--|| identifier
+
+' SatisfiesExpression
+entity satisfies_expression extends expression {
+    id: int <<PK>>
+    expression_id: int expression
+    type_node_id: int type_node
+}
+
+satisfies_expression |o--|| expression
+satisfies_expression |o--|| type_node
+
+' ==== End of Expressions ====
+
+' ==== Statements and Clauses ====
+
+' Statement
+entity statement extends ast_node {
+    id: int <<PK>>
+    kind: int
+}
+
+' Block
+entity block extends statement {
+    id: int <<PK>>
+}
+
+entity block_statement {
+    statement_id: int <<PK>> statement
+    block_id: int block
+    index: int
+}
+
+block ||--o{ block_statement
+statement |o--|| block_statement
+
+block ||--o| method_declaration_body
+block ||--o| constructor_body
+block ||--o| get_accessor_body
+block ||--o| set_accessor_body
+function_expression |o--|| block
+block ||--o| ets_component_expression_body
+
+
+' EmptyStatement
+entity empty_statement extends statement {
+    id: int <<PK>>
+}
+
+' VariableDeclaration
+entity variable_declaration extends declaration {
+    id: int <<PK>>
+    name_node_id: int BindingName
+}
+
+entity variable_declaration_exclamation_token {
+    variable_declaration_id: int <<PK>> variable_declaration
+    exclamation_token_id: int exclamation_token
+}
+
+entity variable_declaration_type_node {
+    variable_declaration_id: int <<PK>> variable_declaration
+    type_node_id: int type_node
+}
+
+entity variable_declaration_initializer {
+    variable_declaration_id: int <<PK>> variable_declaration
+    initializer_id: int expression
+}
+
+variable_declaration |o--|| BindingName
+variable_declaration ||-o| variable_declaration_exclamation_token
+exclamation_token ||-o| variable_declaration_exclamation_token
+variable_declaration ||-o| variable_declaration_type_node
+type_node ||-o| variable_declaration_type_node
+variable_declaration ||-o| variable_declaration_initializer
+expression ||-o| variable_declaration_initializer
+
+
+' VariableDeclarationList
+entity variable_declaration_list extends ast_node {
+    id: int <<PK>>
+}
+
+entity variable_declaration_list_declaration {
+    declaration_id: int <<PK>> variable_declaration
+    variable_declaration_list_id: int variable_declaration_list
+    index: int
+}
+
+variable_declaration_list ||--|{ variable_declaration_list_declaration
+variable_declaration ||--o| variable_declaration_list_declaration
+
+' VariableStatement
+entity variable_statement extends statement {
+    id: int <<PK>>
+    ' modifiers modifier
+    declaration_list_id: int variable_declaration_list
+}
+
+variable_statement |o--o{ modifier
+variable_statement |o--|| variable_declaration_list
+
+' ExpressionStatement
+entity expression_statement extends statement {
+    id: int <<PK>>
+    expression_id: int expression
+}
+
+expression_statement |o--|| expression
+
+' IfStatement
+entity if_statement extends statement {
+    id: int <<PK>>
+    condition_id: int expression
+    then_statement_id: int statement
+}
+
+entity if_statement_else_statement {
+    if_statement_id: int <<PK>> if_statement
+    else_statement_id: int statement
+}
+
+if_statement |o--|| expression
+if_statement |o--|| statement
+if_statement ||--o| if_statement_else_statement
+statement ||--o| if_statement_else_statement
+
+' IterationStatement
+entity iteration_statement extends statement {
+    id: int <<PK>>
+    kind: int
+    statement_id: int statement
+}
+
+iteration_statement |o--|| statement
+
+' DoStatement
+entity do_statement extends iteration_statement {
+    id: int <<PK>>
+    expression_id: int expression
+}
+
+do_statement |o--|| expression
+
+' WhileStatement
+entity while_statement extends iteration_statement {
+    id: int <<PK>>
+    expression_id: int expression
+}
+
+while_statement |o--|| expression
+
+enum ForInitializer {
+    variable_declaration_list
+    expression
+}
+
+' ForStatement
+entity for_statement extends iteration_statement {
+    id: int <<PK>>
+}
+
+entity for_statement_initializer {
+    for_statement_id: int <<PK>> for_statement
+    initializer_id: int ForInitializer
+}
+
+entity for_statement_condition {
+    for_statement_id: int <<PK>> for_statement
+    condition_id: int expression
+}
+
+entity for_statement_incrementor {
+    for_statement_id: int <<PK>> for_statement
+    incrementor_id: int expression
+}
+
+for_statement ||--o| for_statement_initializer
+for_statement ||--o| for_statement_condition
+for_statement ||--o| for_statement_incrementor
+ForInitializer ||--o| for_statement_initializer
+expression ||--o| for_statement_condition
+expression ||--o| for_statement_incrementor
+
+' ForInStatement
+entity for_in_statement extends iteration_statement {
+    id: int <<PK>>
+    initializer_id: int ForInitializer
+    expression_id: int expression
+}
+
+for_in_statement |o--|| ForInitializer
+for_in_statement |o--|| expression
+
+' ForOfStatement
+entity for_of_statement extends iteration_statement {
+    id: int <<PK>>
+    initializer_id: int ForInitializer
+    expression_id: int expression
+}
+
+entity for_of_statement_await_modifier {
+    for_of_statement_id: int <<PK>> for_of_statement
+    await_modifier_id: int await_keyword
+}
+
+for_of_statement |o--|| ForInitializer
+for_of_statement |o--|| expression
+for_of_statement ||--o| for_of_statement_await_modifier
+await_keyword |o--|| for_of_statement_await_modifier
+
+' ForInOrOfStatement
+enum ForInOrOfStatement {
+    for_in_statement
+    for_of_statement
+}
+
+' ContinueStatement
+entity continue_statement extends statement {
+    id: int <<PK>>
+}
+
+entity continue_statement_label {
+    continue_statement_id: int <<PK>> continue_statement
+    label_id: int identifier
+}
+
+continue_statement ||--o| continue_statement_label
+identifier |o--|| continue_statement_label
+
+' BreakStatement
+entity break_statement extends statement {
+    id: int <<PK>>
+}
+
+entity break_statement_label {
+    break_statement_id: int <<PK>> continue_statement
+    label_id: int identifier
+}
+
+enum BreakOrContinueStatement {
+    continue_statement
+    break_statement
+}
+
+break_statement ||--o| break_statement_label
+identifier |o--|| break_statement_label
+
+' ReturnStatement
+entity return_statement extends statement {
+    id: int <<PK>>
+}
+
+entity return_statement_expression {
+    return_statement_id: int <<PK>> return_statement
+    expression_id: int expression
+}
+
+return_statement ||--o| return_statement_expression
+expression |o--|| return_statement_expression
+
+' WithStatement
+entity with_statement extends statement {
+    id: int <<PK>>
+    expression_id: int expression
+    statement_id: int statement
+}
+
+with_statement |o--|| expression
+with_statement |o--|| statement
+
+' CaseBlock
+entity case_block extends ast_node {
+    id: int <<PK>>
+}
+
+' CaseOrDefaultClause
+enum CaseOrDefaultClause {
+    case_clause
+    default_clause
+}
+
+entity case_block_clause {
+    clause_id: int <<PK>> CaseOrDefaultClause
+    case_block_id: int case_block
+    index: int
+}
+
+case_block ||--o{ case_block_clause
+CaseOrDefaultClause ||--|| case_block_clause
+
+' CaseClause
+entity case_clause extends ast_node {
+    id: int <<PK>>
+    expression_id: int expression
+}
+
+entity case_clause_statement {
+    statement_id: int <<PK>> statement
+    case_clause_id: int case_clause
+    index: int
+}
+
+case_clause |o--|| expression
+case_clause ||--o{ case_clause_statement
+statement ||--o| case_clause_statement
+
+
+' DefaultClause
+entity default_clause extends ast_node {
+    id: int <<PK>>
+}
+
+entity default_clause_statement {
+    statement_id: int <<PK>> statement
+    default_clause_id: int default_clause
+    index: int
+}
+
+default_clause ||--o{ default_clause_statement
+statement ||--o| default_clause_statement
+
+' SwitchStatement
+entity switch_statement extends statement {
+    id: int <<PK>>
+    expression_id: int expression
+    case_block_id: int case_block
+}
+
+switch_statement |o--|| expression
+switch_statement |o--|| case_block
+
+' LabeledStatement
+entity labeled_statement extends statement {
+    id: int <<PK>>
+    label_id: int identifier
+    statement_id: int statement
+}
+
+labeled_statement |o--|| identifier
+labeled_statement |o--|| statement
+
+' ThrowStatement
+entity throw_statement extends statement {
+    id: int <<PK>>
+    expression_id: int expression
+}
+
+throw_statement |o--|| expression
+
+' TryStatement
+entity try_statement extends statement {
+    id: int <<PK>>
+    try_block_id: int block
+}
+
+entity try_statement_finally_block {
+    try_statement_id: int <<PK>> try_statement
+    finally_block_id: int block
+}
+
+try_statement ||--o| try_statement_finally_block
+block ||--o| try_statement_finally_block
+
+' CatchClause
+entity catch_clause extends ast_node {
+    id: int <<PK>>
+    parent_id: int try_statement
+    block_id: int block
+}
+
+try_statement ||--o| catch_clause
+
+entity catch_clause_variable_declaration {
+    catch_clause_id: int <<PK>> catch_clause
+    variable_declaration_id: int variable_declaration
+}
+
+catch_clause |o--|| block
+catch_clause ||--o| catch_clause_variable_declaration
+variable_declaration ||--o| catch_clause_variable_declaration
+
+' DebuggerStatement
+entity debugger_statement extends statement {
+    id: int <<PK>>
+}
+
+enum DeclarationStatementNameNodeType {
+    identifier
+    string_literal
+    numeric_literal
+}
+
+' DeclarationStatement
+entity declaration_statement extends declaration, statement {
+    id: int <<PK>>
+    kind: int
+}
+
+entity declaration_statement_name_node {
+    declaration_statement_id: int <<PK>> declaration_statement
+    name_node_id: int DeclarationStatementNameNodeType
+}
+
+declaration_statement ||--o| declaration_statement_name_node
+DeclarationStatementNameNodeType |o--o| declaration_statement_name_node
+
+' FunctionDeclaration
+entity function_declaration extends function_like_declaration, declaration_statement {
+    id: int <<PK>>
+    ' modifiers modifier
+}
+
+function_declaration |o--o{ modifier
+
+entity function_declaration_name_node {
+    function_declaration_id: int <<PK>> function_declaration
+    name_node_id: int identifier
+}
+
+entity function_declaration_body {
+    function_declaration_id: int <<PK>> function_declaration
+    body_id: int block
+}
+
+function_declaration ||--o| function_declaration_name_node
+identifier ||--o| function_declaration_name_node
+function_declaration ||--o| function_declaration_body
+block ||--o| function_declaration_body
+
+' ClassDeclaration
+entity class_declaration extends class_like_declaration, declaration_statement {
+    id: int <<PK>>
+    ' modifiers modifier
+}
+
+class_declaration |o--o{ modifier
+
+entity class_declaration_name_node {
+    class_declaration_id: int <<PK>> class_declaration
+    name_node_id: int identifier
+}
+
+class_declaration ||--o| class_declaration_name_node
+identifier ||--o| class_declaration_name_node
+
+' StructDeclaration
+entity struct_declaration extends class_like_declaration, declaration_statement {
+    id: int <<PK>>
+    ' modifiers modifier
+}
+
+struct_declaration |o--o{ modifier
+
+entity struct_declaration_name_node {
+    struct_declaration_id: int <<PK>> struct_declaration
+    name_node_id: int identifier
+}
+
+struct_declaration ||--o| struct_declaration_name_node
+identifier ||--o| struct_declaration_name_node
+
+enum InterfaceOrClassLikeDeclaration {
+    interface_declaration
+    class_like_declaration
+}
+
+enum ExtendsOrImplementsKeyword {
+    extends_keyword
+    implements_keyword
+}
+
+' HeritageClause
+entity heritage_clause extends ast_node {
+    id: int <<PK>>
+    parent_id: int InterfaceOrClassLikeDeclaration
+    index: int
+    token_id: int ExtendsOrImplementsKeyword
+}
+
+heritage_clause ||--|| ExtendsOrImplementsKeyword
+
+class_like_declaration |o--o{ heritage_clause
+
+entity heritage_clause_type_node {
+    type_node_id: int <<PK>> expression_with_type_arguments
+    heritage_clause_id: int heritage_clause
+    index: int
+}
+
+heritage_clause ||--o{ heritage_clause_type_node
+expression_with_type_arguments ||--o| heritage_clause_type_node
+
+' InterfaceDeclaration
+entity interface_declaration extends declaration_statement {
+    id: int <<PK>>
+    ' modifiers modifier
+    name_node_id: int identifier
+    ' heritage_clauses heritage_clause
+}
+
+interface_declaration |o--o{ modifier
+interface_declaration |o--|| identifier
+interface_declaration |o--o{ heritage_clause
+
+entity interface_declaration_type_parameter {
+    type_parameter_id: int <<PK>> type_parameter
+    interface_declaration_id: int interface_declaration
+    index: int
+}
+
+interface_declaration ||--o{ interface_declaration_type_parameter
+type_parameter ||--o| interface_declaration_type_parameter
+
+entity interface_declaration_member {
+    member_id: int <<PK>> type_element
+    interface_declaration_id: int interface_declaration
+    index: int
+}
+
+interface_declaration ||--o{ interface_declaration_member
+type_element ||--o| interface_declaration_member
+
+
+' TypeAliasDeclaration
+entity type_alias_declaration extends declaration_statement {
+    id: int <<PK>>
+    ' modifiers modifier
+    name_node_id: int identifier
+    type_node_id: int type_node
+}
+
+type_alias_declaration |o--o{ modifier
+type_alias_declaration |o--|| identifier
+type_alias_declaration |o--|| type_node
+
+entity type_alias_declaration_type_parameter {
+    type_parameter_id: int <<PK>> type_parameter
+    type_alias_declaration_id: int type_alias_declaration
+    index: int
+}
+
+type_alias_declaration ||--o{ type_alias_declaration_type_parameter
+type_parameter ||--o| type_alias_declaration_type_parameter
+
+' EnumDeclaration
+entity enum_declaration extends declaration_statement {
+    id: int <<PK>>
+    ' modifiers modifier
+    name_node_id: int identifier
+    ' members enum_member
+}
+
+enum_declaration |o--o{ modifier
+enum_declaration |o--|| identifier
+enum_declaration ||--o{ enum_member
+
+' ModuleName
+enum ModuleName {
+    identifier
+    string_literal
+}
+
+' ModuleBody
+enum ModuleBody {
+    module_block
+    module_declaration
+    identifier
+}
+
+' ModuleDeclaration
+entity module_declaration extends declaration_statement {
+    id: int <<PK>>
+    ' modifiers modifier
+    name_node_id: int ModuleName
+}
+
+module_declaration |o--o{ modifier
+module_declaration |o--|| ModuleName
+
+entity module_declaration_body {
+    module_declaration_id: int <<PK>> module_declaration
+    body_id: int ModuleBody
+}
+
+module_declaration ||--o| module_declaration_body
+ModuleBody ||--o| module_declaration_body
+
+' ModuleBlock
+entity module_block extends statement {
+    id: int <<PK>>
+}
+
+entity module_block_statement {
+    statement_id: int <<PK>> statement
+    module_block_id: int module_block
+    index: int
+}
+
+module_block ||--o{ module_block_statement
+statement ||--o| module_block_statement
+
+' NamespaceExportDeclaration
+entity namespace_export_declaration extends declaration_statement {
+    id: int <<PK>>
+    name_node_id: int identifier
+}
+
+namespace_export_declaration |o--|| identifier
+
+' ExternalModuleReference
+entity external_module_reference extends ast_node {
+    id: int <<PK>>
+    expression_id: int expression
+}
+
+external_module_reference |o--|| expression
+
+' ModuleReference
+enum ModuleReference extends EntityName{
+    external_module_reference
+}
+
+' ImportEqualsDeclaration
+entity import_equals_declaration extends declaration_statement {
+    id: int <<PK>>
+    ' modifiers modifier
+    name_node_id: int identifier
+    is_type_only: boolean
+    module_reference_id: int ModuleReference
+}
+
+import_equals_declaration |o--o{ modifier
+import_equals_declaration |o--|| identifier
+import_equals_declaration |o--|| ModuleReference
+
+' NamespaceImport
+entity namespace_import extends declaration {
+    id: int <<PK>>
+    name_node_id: int identifier
+}
+
+namespace_import |o--|| identifier
+
+' ImportSpecifier
+entity import_specifier extends declaration {
+    id: int <<PK>>
+    parent_id: int named_imports
+    index: int
+    name_node_id: int identifier
+    is_type_only: boolean
+}
+
+import_specifier |o--|| identifier
+
+entity import_specifier_property_name_node {
+    import_specifier_id: int <<PK>> import_specifier
+    property_name_node_id: int identifier
+}
+
+import_specifier ||--o| import_specifier_property_name_node
+identifier ||--o| import_specifier_property_name_node
+
+' NamedImports
+entity named_imports extends ast_node {
+    id: int <<PK>>
+    ' elements import_specifier
+}
+
+named_imports ||--|{ import_specifier
+
+' NamedImportBindings
+enum NamedImportBindings {
+    namespace_import
+    named_imports
+}
+
+' ImportClause
+entity import_clause extends declaration {
+    id: int <<PK>>
+    parent_id: int import_declaration
+    is_type_only: boolean
+}
+
+entity import_clause_name_node {
+   import_clause_id: int <<PK>> import_clause
+   name_node_id: int identifier
+}
+
+import_clause ||--o| import_clause_name_node
+identifier ||--o| import_clause_name_node
+
+entity import_clause_named_bindings {
+   import_clause_id: int <<PK>> import_clause
+   named_bindings_id: int NamedImportBindings
+}
+
+import_clause ||--o| import_clause_named_bindings
+NamedImportBindings ||--o| import_clause_named_bindings
+
+' AssertionKey
+enum AssertionKey {
+    identifier
+    string_literal
+}
+
+' AssertEntry
+entity assert_entry extends ast_node {
+    id: int <<PK>>
+    parent_id: int assert_clause
+    index: int
+    name_node_id: int AssertionKey
+    value_node_id: int expression
+}
+
+assert_entry |o--|| AssertionKey
+assert_entry |o--|| expression
+
+' AssertClause
+entity assert_clause extends ast_node {
+    id: int <<PK>>
+    ' elements assert_entry
+}
+
+assert_clause ||--o{ assert_entry
+
+import_type_assertion_container |o--|| assert_clause
+
+' ImportDeclaration
+entity import_declaration extends declaration_statement {
+    id: int <<PK>>
+    ' modifiers modifier
+    ' import_clause import_clause
+    module_specifier_id: int string_literal
+}
+
+import_declaration |o--o{ modifier
+import_declaration |o--o| import_clause
+import_declaration |o--|| string_literal
+
+entity import_declaration_assert_clause {
+    import_declaration_id: int <<PK>> import_declaration
+    assert_clause_id: int assert_clause
+}
+
+import_declaration ||--o| import_declaration_assert_clause
+assert_clause ||--o| import_declaration_assert_clause
+
+' ExportAssignment
+entity export_assignment extends declaration_statement {
+    id: int <<PK>>
+    ' modifiers modifier
+    is_export_equals: boolean
+    expression_id: int expression
+}
+
+export_assignment |o--o{ modifier
+export_assignment |o--|| expression
+
+' ExportSpecifier
+entity export_specifier extends declaration {
+    id: int <<PK>>
+    parent_id: int named_exports
+    index: int
+    is_type_only: boolean
+    name_node_id: int identifier
+}
+
+export_specifier |o--|| identifier
+
+entity export_specifier_property_name_node {
+    export_specifier_id: int <<PK>> export_specifier
+    property_name_node_id: int identifier
+}
+
+export_specifier ||--o| export_specifier_property_name_node
+identifier ||--o| export_specifier_property_name_node
+
+' NamedExports
+entity named_exports extends ast_node {
+    id: int <<PK>>
+    ' elements export_specifier
+}
+
+named_exports ||--|{ export_specifier
+
+' NamespaceExport
+entity namespace_export extends declaration {
+    id: int <<PK>>
+    name_node_id: int identifier
+}
+
+namespace_export |o--|| identifier
+
+' NamedExportBindings
+enum NamedExportBindings {
+    namespace_export
+    named_exports
+}
+
+' ExportDeclaration
+entity export_declaration extends declaration_statement {
+    id: int <<PK>>
+    ' modifiers modifier
+    is_type_only: boolean
+}
+
+export_declaration |o--o{ modifier
+
+entity export_declaration_export_clause {
+    export_declaration_id: int <<PK>> export_declaration
+    export_clause_id: int NamedExportBindings
+}
+
+export_declaration ||--o| export_declaration_export_clause
+NamedExportBindings ||--o| export_declaration_export_clause
+
+entity export_declaration_module_specifier {
+    export_declaration_id: int <<PK>> export_declaration
+    module_specifier_id: int string_literal
+}
+
+export_declaration ||--o| export_declaration_module_specifier
+string_literal ||--o| export_declaration_module_specifier
+
+entity export_declaration_assert_clause {
+    export_declaration_id: int <<PK>> export_declaration
+    assert_clause_id: int
+}
+
+export_declaration ||--o| export_declaration_assert_clause
+assert_clause ||--o| export_declaration_assert_clause
+
+' ==== End of Statements and Clauses ====
+
+' TopLevel
+entity top_level {
+    id: int <<PK>>
+    kind: int
+    location_id: int location
+}
+
+entity top_level_statement {
+    statement_id: int <<PK>> statement
+    top_level_id: int top_level
+    index: int
+}
+
+top_level ||--o{ top_level_statement
+statement ||--o| top_level_statement
+
+'
+' End of AST Nodes
+'
+
+enum AstNodeContainer {
+    top_level
+    function_like_declaration
+    module_declaration
+}
+
+entity ast_node_container_relation {
+    ast_node_id: int <<PK>> ast_node
+    container_id: int AstNodeContainer
+}
+
+entity cfg_entry_node {
+    id: int <<PK>>
+    ast_node_id: int AstNodeContainer
+}
+
+entity cfg_exit_node {
+    id: int <<PK>>
+    ast_node_id: int AstNodeContainer
+}
+
+
+' use `symbol_` instead of `symbol` to avoid the typescript error TS2457: Type alias name cannot be 'symbol'.
+entity symbol_ {
+    id: int <<PK>>
+    name: text
+    description: text
+}
+
+entity ast_node_symbol {
+    ast_node_id: int <<PK>> ast_node
+    symbol_id: int symbol_
+}
+
+symbol_ ||--|{ ast_node_symbol
+ast_node ||--o| ast_node_symbol
+
+entity shorthand_property_assignment_value_symbol {
+    shorthand_property_assignment_id: int <<PK>> shorthand_property_assignment
+    symbol_id: int symbol_
+}
+
+shorthand_property_assignment ||--o| shorthand_property_assignment_value_symbol
+symbol_ |o--|| shorthand_property_assignment_value_symbol
+
+
+entity type_ {
+    id: int <<PK>>
+    name: text
+}
+
+entity ast_node_type {
+    ast_node_id: int <<PK>> ast_node
+    type_id: int type_
+}
+
+ast_node ||--o| ast_node_type
+type_ ||--|{ ast_node_type
+
+enum CallLikeExpression {
+    call_expression
+    new_expression
+    tagged_template_expression
+    decorator
+    ets_component_expression
+}
+
+enum MayInvokeExpression extends CallLikeExpression, AccessExpression {}
+
+entity call_site_declaration {
+    id: int <<PK>>
+    call_site_id: int MayInvokeExpression
+    declaration_id: int signature_declaration | property_signature
+}
+
+call_site_declaration |o--|| MayInvokeExpression
+call_site_declaration |o--o| signature_declaration
+call_site_declaration |o--o| property_signature
+
+entity call_site_implementation {
+    id: int <<PK>>
+    call_site_id: int MayInvokeExpression
+    implementation_id: int signature_declaration
+}
+
+call_site_implementation |o--|| MayInvokeExpression
+call_site_implementation |o--|| signature_declaration
+
+' ==== Comments ====
+
+entity comment {
+    id: int <<PK>>
+    kind: int
+    location_id: int location
+}
+
+entity ast_node_comment {
+    id: int <<PK>>
+    kind: int
+    ast_node_id: int ast_node
+    comment_id: int comment
+    index: int
+}
+
+comment ||--o{ ast_node_comment
+ast_node ||--o{ ast_node_comment
+
+' ==== End of Comments ====
+
+' ==== Other data ====
+entity metadata {
+    id: int <<PK>>
+    version: text
+    created_time: datetime
+}
+
+entity ignored_path {
+    id: int <<PK>>
+    path_kind: int
+    path: text
+    ignore_kind: int
+}
+
+@enduml

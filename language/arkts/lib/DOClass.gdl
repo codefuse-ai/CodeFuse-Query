@@ -1,0 +1,3439 @@
+/**
+ * A LocationDO load location from db
+ */
+schema LocationDO {
+    @primary id: int,
+    file_id: int,
+    start: int,
+    start_line: int,
+    start_column: int,
+    end: int,
+    end_line: int,
+    end_column: int
+}
+
+/**
+ * A TextDO load text from db
+ */
+schema TextDO {
+    @primary id: int,
+    text: string
+}
+
+/**
+ * A NumberOfLinesDO load number_of_lines from db
+ */
+schema NumberOfLinesDO {
+    @primary id: int,
+    lines: int,
+    code_lines: int,
+    comment_lines: int
+}
+
+/**
+ * A FileDO load file from db
+ */
+schema FileDO {
+    @primary id: int,
+    location_id: int,
+    parent_id: int,
+    name: string,
+    extension: string,
+    relative_path: string
+}
+
+/**
+ * A RootDirectoryDO load root_directory from db
+ */
+schema RootDirectoryDO {
+    @primary id: int,
+    relative_path: string
+}
+
+/**
+ * A NonRootDirectoryDO load non_root_directory from db
+ */
+schema NonRootDirectoryDO {
+    @primary id: int,
+    name: string,
+    relative_path: string,
+    parent_id: int
+}
+
+/**
+ * A AstNodeDO load ast_node from db
+ */
+schema AstNodeDO {
+    @primary id: int,
+    kind: int,
+    parent_id: int,
+    parent_kind: int,
+    index: int,
+    location_id: int
+}
+
+/**
+ * A DotTokenDO load dot_token from db
+ */
+schema DotTokenDO {
+    @primary id: int,
+}
+
+/**
+ * A DotDotDotTokenDO load dot_dot_dot_token from db
+ */
+schema DotDotDotTokenDO {
+    @primary id: int,
+}
+
+/**
+ * A CommaTokenDO load comma_token from db
+ */
+schema CommaTokenDO {
+    @primary id: int,
+}
+
+/**
+ * A QuestionDotTokenDO load question_dot_token from db
+ */
+schema QuestionDotTokenDO {
+    @primary id: int,
+}
+
+/**
+ * A LessThanTokenDO load less_than_token from db
+ */
+schema LessThanTokenDO {
+    @primary id: int,
+}
+
+/**
+ * A GreaterThanTokenDO load greater_than_token from db
+ */
+schema GreaterThanTokenDO {
+    @primary id: int,
+}
+
+/**
+ * A LessThanEqualsTokenDO load less_than_equals_token from db
+ */
+schema LessThanEqualsTokenDO {
+    @primary id: int,
+}
+
+/**
+ * A GreaterThanEqualsTokenDO load greater_than_equals_token from db
+ */
+schema GreaterThanEqualsTokenDO {
+    @primary id: int,
+}
+
+/**
+ * A EqualsEqualsTokenDO load equals_equals_token from db
+ */
+schema EqualsEqualsTokenDO {
+    @primary id: int,
+}
+
+/**
+ * A ExclamationEqualsTokenDO load exclamation_equals_token from db
+ */
+schema ExclamationEqualsTokenDO {
+    @primary id: int,
+}
+
+/**
+ * A EqualsEqualsEqualsTokenDO load equals_equals_equals_token from db
+ */
+schema EqualsEqualsEqualsTokenDO {
+    @primary id: int,
+}
+
+/**
+ * A ExclamationEqualsEqualsTokenDO load exclamation_equals_equals_token from db
+ */
+schema ExclamationEqualsEqualsTokenDO {
+    @primary id: int,
+}
+
+/**
+ * A EqualsGreaterThanTokenDO load equals_greater_than_token from db
+ */
+schema EqualsGreaterThanTokenDO {
+    @primary id: int,
+}
+
+/**
+ * A PlusTokenDO load plus_token from db
+ */
+schema PlusTokenDO {
+    @primary id: int,
+}
+
+/**
+ * A MinusTokenDO load minus_token from db
+ */
+schema MinusTokenDO {
+    @primary id: int,
+}
+
+/**
+ * A AsteriskTokenDO load asterisk_token from db
+ */
+schema AsteriskTokenDO {
+    @primary id: int,
+}
+
+/**
+ * A AsteriskAsteriskTokenDO load asterisk_asterisk_token from db
+ */
+schema AsteriskAsteriskTokenDO {
+    @primary id: int,
+}
+
+/**
+ * A SlashTokenDO load slash_token from db
+ */
+schema SlashTokenDO {
+    @primary id: int,
+}
+
+/**
+ * A PercentTokenDO load percent_token from db
+ */
+schema PercentTokenDO {
+    @primary id: int,
+}
+
+/**
+ * A PlusPlusTokenDO load plus_plus_token from db
+ */
+schema PlusPlusTokenDO {
+    @primary id: int,
+}
+
+/**
+ * A MinusMinusTokenDO load minus_minus_token from db
+ */
+schema MinusMinusTokenDO {
+    @primary id: int,
+}
+
+/**
+ * A LessThanLessThanTokenDO load less_than_less_than_token from db
+ */
+schema LessThanLessThanTokenDO {
+    @primary id: int,
+}
+
+/**
+ * A GreaterThanGreaterThanTokenDO load greater_than_greater_than_token from db
+ */
+schema GreaterThanGreaterThanTokenDO {
+    @primary id: int,
+}
+
+/**
+ * A GreaterThanGreaterThanGreaterThanTokenDO load greater_than_greater_than_greater_than_token from db
+ */
+schema GreaterThanGreaterThanGreaterThanTokenDO {
+    @primary id: int,
+}
+
+/**
+ * A AmpersandTokenDO load ampersand_token from db
+ */
+schema AmpersandTokenDO {
+    @primary id: int,
+}
+
+/**
+ * A BarTokenDO load bar_token from db
+ */
+schema BarTokenDO {
+    @primary id: int,
+}
+
+/**
+ * A CaretTokenDO load caret_token from db
+ */
+schema CaretTokenDO {
+    @primary id: int,
+}
+
+/**
+ * A ExclamationTokenDO load exclamation_token from db
+ */
+schema ExclamationTokenDO {
+    @primary id: int,
+}
+
+/**
+ * A TildeTokenDO load tilde_token from db
+ */
+schema TildeTokenDO {
+    @primary id: int,
+}
+
+/**
+ * A AmpersandAmpersandTokenDO load ampersand_ampersand_token from db
+ */
+schema AmpersandAmpersandTokenDO {
+    @primary id: int,
+}
+
+/**
+ * A BarBarTokenDO load bar_bar_token from db
+ */
+schema BarBarTokenDO {
+    @primary id: int,
+}
+
+/**
+ * A QuestionTokenDO load question_token from db
+ */
+schema QuestionTokenDO {
+    @primary id: int,
+}
+
+/**
+ * A ColonTokenDO load colon_token from db
+ */
+schema ColonTokenDO {
+    @primary id: int,
+}
+
+/**
+ * A QuestionQuestionTokenDO load question_question_token from db
+ */
+schema QuestionQuestionTokenDO {
+    @primary id: int,
+}
+
+/**
+ * A EqualsTokenDO load equals_token from db
+ */
+schema EqualsTokenDO {
+    @primary id: int,
+}
+
+/**
+ * A PlusEqualsTokenDO load plus_equals_token from db
+ */
+schema PlusEqualsTokenDO {
+    @primary id: int,
+}
+
+/**
+ * A MinusEqualsTokenDO load minus_equals_token from db
+ */
+schema MinusEqualsTokenDO {
+    @primary id: int,
+}
+
+/**
+ * A AsteriskEqualsTokenDO load asterisk_equals_token from db
+ */
+schema AsteriskEqualsTokenDO {
+    @primary id: int,
+}
+
+/**
+ * A AsteriskAsteriskEqualsTokenDO load asterisk_asterisk_equals_token from db
+ */
+schema AsteriskAsteriskEqualsTokenDO {
+    @primary id: int,
+}
+
+/**
+ * A SlashEqualsTokenDO load slash_equals_token from db
+ */
+schema SlashEqualsTokenDO {
+    @primary id: int,
+}
+
+/**
+ * A PercentEqualsTokenDO load percent_equals_token from db
+ */
+schema PercentEqualsTokenDO {
+    @primary id: int,
+}
+
+/**
+ * A LessThanLessThanEqualsTokenDO load less_than_less_than_equals_token from db
+ */
+schema LessThanLessThanEqualsTokenDO {
+    @primary id: int,
+}
+
+/**
+ * A GreaterThanGreaterThanEqualsTokenDO load greater_than_greater_than_equals_token from db
+ */
+schema GreaterThanGreaterThanEqualsTokenDO {
+    @primary id: int,
+}
+
+/**
+ * A GreaterThanGreaterThanGreaterThanEqualsTokenDO load greater_than_greater_than_greater_than_equals_token from db
+ */
+schema GreaterThanGreaterThanGreaterThanEqualsTokenDO {
+    @primary id: int,
+}
+
+/**
+ * A AmpersandEqualsTokenDO load ampersand_equals_token from db
+ */
+schema AmpersandEqualsTokenDO {
+    @primary id: int,
+}
+
+/**
+ * A BarEqualsTokenDO load bar_equals_token from db
+ */
+schema BarEqualsTokenDO {
+    @primary id: int,
+}
+
+/**
+ * A BarBarEqualsTokenDO load bar_bar_equals_token from db
+ */
+schema BarBarEqualsTokenDO {
+    @primary id: int,
+}
+
+/**
+ * A AmpersandAmpersandEqualsTokenDO load ampersand_ampersand_equals_token from db
+ */
+schema AmpersandAmpersandEqualsTokenDO {
+    @primary id: int,
+}
+
+/**
+ * A QuestionQuestionEqualsTokenDO load question_question_equals_token from db
+ */
+schema QuestionQuestionEqualsTokenDO {
+    @primary id: int,
+}
+
+/**
+ * A CaretEqualsTokenDO load caret_equals_token from db
+ */
+schema CaretEqualsTokenDO {
+    @primary id: int,
+}
+
+/**
+ * A ConstKeywordDO load const_keyword from db
+ */
+schema ConstKeywordDO {
+    @primary id: int,
+}
+
+/**
+ * A DefaultKeywordDO load default_keyword from db
+ */
+schema DefaultKeywordDO {
+    @primary id: int,
+}
+
+/**
+ * A ExportKeywordDO load export_keyword from db
+ */
+schema ExportKeywordDO {
+    @primary id: int,
+}
+
+/**
+ * A ExtendsKeywordDO load extends_keyword from db
+ */
+schema ExtendsKeywordDO {
+    @primary id: int,
+}
+
+/**
+ * A ImportKeywordDO load import_keyword from db
+ */
+schema ImportKeywordDO {
+    @primary id: int,
+}
+
+/**
+ * A InKeywordDO load in_keyword from db
+ */
+schema InKeywordDO {
+    @primary id: int,
+}
+
+/**
+ * A InstanceOfKeywordDO load instance_of_keyword from db
+ */
+schema InstanceOfKeywordDO {
+    @primary id: int,
+}
+
+/**
+ * A NewKeywordDO load new_keyword from db
+ */
+schema NewKeywordDO {
+    @primary id: int,
+}
+
+/**
+ * A ImplementsKeywordDO load implements_keyword from db
+ */
+schema ImplementsKeywordDO {
+    @primary id: int,
+}
+
+/**
+ * A PrivateKeywordDO load private_keyword from db
+ */
+schema PrivateKeywordDO {
+    @primary id: int,
+}
+
+/**
+ * A ProtectedKeywordDO load protected_keyword from db
+ */
+schema ProtectedKeywordDO {
+    @primary id: int,
+}
+
+/**
+ * A PublicKeywordDO load public_keyword from db
+ */
+schema PublicKeywordDO {
+    @primary id: int,
+}
+
+/**
+ * A StaticKeywordDO load static_keyword from db
+ */
+schema StaticKeywordDO {
+    @primary id: int,
+}
+
+/**
+ * A AbstractKeywordDO load abstract_keyword from db
+ */
+schema AbstractKeywordDO {
+    @primary id: int,
+}
+
+/**
+ * A AccessorKeywordDO load accessor_keyword from db
+ */
+schema AccessorKeywordDO {
+    @primary id: int,
+}
+
+/**
+ * A AssertsKeywordDO load asserts_keyword from db
+ */
+schema AssertsKeywordDO {
+    @primary id: int,
+}
+
+/**
+ * A AssertKeywordDO load assert_keyword from db
+ */
+schema AssertKeywordDO {
+    @primary id: int,
+}
+
+/**
+ * A AsyncKeywordDO load async_keyword from db
+ */
+schema AsyncKeywordDO {
+    @primary id: int,
+}
+
+/**
+ * A AwaitKeywordDO load await_keyword from db
+ */
+schema AwaitKeywordDO {
+    @primary id: int,
+}
+
+/**
+ * A DeclareKeywordDO load declare_keyword from db
+ */
+schema DeclareKeywordDO {
+    @primary id: int,
+}
+
+/**
+ * A KeyOfKeywordDO load key_of_keyword from db
+ */
+schema KeyOfKeywordDO {
+    @primary id: int,
+}
+
+/**
+ * A OutKeywordDO load out_keyword from db
+ */
+schema OutKeywordDO {
+    @primary id: int,
+}
+
+/**
+ * A ReadonlyKeywordDO load readonly_keyword from db
+ */
+schema ReadonlyKeywordDO {
+    @primary id: int,
+}
+
+/**
+ * A UniqueKeywordDO load unique_keyword from db
+ */
+schema UniqueKeywordDO {
+    @primary id: int,
+}
+
+/**
+ * A OverrideKeywordDO load override_keyword from db
+ */
+schema OverrideKeywordDO {
+    @primary id: int,
+}
+
+/**
+ * A DeclarationDO load declaration from db
+ */
+schema DeclarationDO {
+    @primary id: int,
+    kind: int
+}
+
+/**
+ * A DeclarationNameNodeDO load declaration_name_node from db
+ */
+schema DeclarationNameNodeDO {
+    @primary declaration_id: int,
+    name_node_id: int
+}
+
+/**
+ * A ExpressionDO load expression from db
+ */
+schema ExpressionDO {
+    @primary id: int,
+    kind: int
+}
+
+/**
+ * A UnaryExpressionDO load unary_expression from db
+ */
+schema UnaryExpressionDO {
+    @primary id: int,
+    kind: int
+}
+
+/**
+ * A UpdateExpressionDO load update_expression from db
+ */
+schema UpdateExpressionDO {
+    @primary id: int,
+    kind: int
+}
+
+/**
+ * A LeftHandSideExpressionDO load left_hand_side_expression from db
+ */
+schema LeftHandSideExpressionDO {
+    @primary id: int,
+    kind: int
+}
+
+/**
+ * A MemberExpressionDO load member_expression from db
+ */
+schema MemberExpressionDO {
+    @primary id: int,
+    kind: int
+}
+
+/**
+ * A PrimaryExpressionDO load primary_expression from db
+ */
+schema PrimaryExpressionDO {
+    @primary id: int,
+    kind: int
+}
+
+/**
+ * A NullLiteralDO load null_literal from db
+ */
+schema NullLiteralDO {
+    @primary id: int,
+}
+
+/**
+ * A TrueLiteralDO load true_literal from db
+ */
+schema TrueLiteralDO {
+    @primary id: int,
+}
+
+/**
+ * A FalseLiteralDO load false_literal from db
+ */
+schema FalseLiteralDO {
+    @primary id: int,
+}
+
+/**
+ * A LiteralLikeNodeDO load literal_like_node from db
+ */
+schema LiteralLikeNodeDO {
+    @primary id: int,
+    kind: int,
+    value: string
+}
+
+/**
+ * A LiteralExpressionDO load literal_expression from db
+ */
+schema LiteralExpressionDO {
+    @primary id: int,
+    kind: int
+}
+
+/**
+ * A NumericLiteralDO load numeric_literal from db
+ */
+schema NumericLiteralDO {
+    @primary id: int,
+    flags: int
+}
+
+/**
+ * A BigIntLiteralDO load big_int_literal from db
+ */
+schema BigIntLiteralDO {
+    @primary id: int,
+}
+
+/**
+ * A StringLiteralDO load string_literal from db
+ */
+schema StringLiteralDO {
+    @primary id: int,
+    single_quote: int
+}
+
+/**
+ * A RegularExpressionLiteralDO load regular_expression_literal from db
+ */
+schema RegularExpressionLiteralDO {
+    @primary id: int,
+}
+
+/**
+ * A TemplateLiteralLikeNodeDO load template_literal_like_node from db
+ */
+schema TemplateLiteralLikeNodeDO {
+    @primary id: int,
+    kind: int,
+    raw_text: string
+}
+
+/**
+ * A NoSubstitutionTemplateLiteralDO load no_substitution_template_literal from db
+ */
+schema NoSubstitutionTemplateLiteralDO {
+    @primary id: int,
+}
+
+/**
+ * A TemplateHeadDO load template_head from db
+ */
+schema TemplateHeadDO {
+    @primary id: int,
+}
+
+/**
+ * A TemplateMiddleDO load template_middle from db
+ */
+schema TemplateMiddleDO {
+    @primary id: int,
+}
+
+/**
+ * A TemplateTailDO load template_tail from db
+ */
+schema TemplateTailDO {
+    @primary id: int,
+}
+
+/**
+ * A TemplateSpanDO load template_span from db
+ */
+schema TemplateSpanDO {
+    @primary id: int,
+    parent_id: int,
+    index: int,
+    expression_id: int,
+    literal_id: int
+}
+
+/**
+ * A ModifierDO load modifier from db
+ */
+schema ModifierDO {
+    @primary id: int,
+    kind: int,
+    parent_id: int,
+    parent_kind: int,
+    index: int
+}
+
+/**
+ * A IdentifierDO load identifier from db
+ */
+schema IdentifierDO {
+    @primary id: int,
+    name: string
+}
+
+/**
+ * A PrivateIdentifierDO load private_identifier from db
+ */
+schema PrivateIdentifierDO {
+    @primary id: int,
+    name: string
+}
+
+/**
+ * A QualifiedNameDO load qualified_name from db
+ */
+schema QualifiedNameDO {
+    @primary id: int,
+    left_id: int,
+    right_id: int
+}
+
+/**
+ * A ComputedPropertyNameDO load computed_property_name from db
+ */
+schema ComputedPropertyNameDO {
+    @primary id: int,
+    expression_id: int
+}
+
+/**
+ * A TypeNodeDO load type_node from db
+ */
+schema TypeNodeDO {
+    @primary id: int,
+    kind: int
+}
+
+/**
+ * A AnyTypeDO load any_type from db
+ */
+schema AnyTypeDO {
+    @primary id: int,
+}
+
+/**
+ * A BigIntTypeDO load big_int_type from db
+ */
+schema BigIntTypeDO {
+    @primary id: int,
+}
+
+/**
+ * A BooleanTypeDO load boolean_type from db
+ */
+schema BooleanTypeDO {
+    @primary id: int,
+}
+
+/**
+ * A IntrinsicTypeDO load intrinsic_type from db
+ */
+schema IntrinsicTypeDO {
+    @primary id: int,
+}
+
+/**
+ * A NeverTypeDO load never_type from db
+ */
+schema NeverTypeDO {
+    @primary id: int,
+}
+
+/**
+ * A NumberTypeDO load number_type from db
+ */
+schema NumberTypeDO {
+    @primary id: int,
+}
+
+/**
+ * A ObjectTypeDO load object_type from db
+ */
+schema ObjectTypeDO {
+    @primary id: int,
+}
+
+/**
+ * A StringTypeDO load string_type from db
+ */
+schema StringTypeDO {
+    @primary id: int,
+}
+
+/**
+ * A SymbolTypeDO load symbol_type from db
+ */
+schema SymbolTypeDO {
+    @primary id: int,
+}
+
+/**
+ * A UndefinedTypeDO load undefined_type from db
+ */
+schema UndefinedTypeDO {
+    @primary id: int,
+}
+
+/**
+ * A UnknownTypeDO load unknown_type from db
+ */
+schema UnknownTypeDO {
+    @primary id: int,
+}
+
+/**
+ * A VoidTypeDO load void_type from db
+ */
+schema VoidTypeDO {
+    @primary id: int,
+}
+
+/**
+ * A TypeParameterDO load type_parameter from db
+ */
+schema TypeParameterDO {
+    @primary id: int,
+    name_node_id: int
+}
+
+/**
+ * A TypeParameterConstraintDO load type_parameter_constraint from db
+ */
+schema TypeParameterConstraintDO {
+    @primary type_parameter_id: int,
+    constraint_id: int
+}
+
+/**
+ * A TypeParameterDefaultDO load type_parameter_default from db
+ */
+schema TypeParameterDefaultDO {
+    @primary type_parameter_id: int,
+    default_id: int
+}
+
+/**
+ * A ParameterDO load parameter from db
+ */
+schema ParameterDO {
+    @primary id: int,
+    name_node_id: int
+}
+
+/**
+ * A ParameterDotDotDotTokenDO load parameter_dot_dot_dot_token from db
+ */
+schema ParameterDotDotDotTokenDO {
+    @primary parameter_id: int,
+    dot_dot_dot_token_id: int
+}
+
+/**
+ * A ParameterQuestionTokenDO load parameter_question_token from db
+ */
+schema ParameterQuestionTokenDO {
+    @primary parameter_id: int,
+    question_token_id: int
+}
+
+/**
+ * A ParameterTypeNodeDO load parameter_type_node from db
+ */
+schema ParameterTypeNodeDO {
+    @primary parameter_id: int,
+    type_node_id: int
+}
+
+/**
+ * A ParameterInitializerDO load parameter_initializer from db
+ */
+schema ParameterInitializerDO {
+    @primary parameter_id: int,
+    initializer_id: int
+}
+
+/**
+ * A DecoratorDO load decorator from db
+ */
+schema DecoratorDO {
+    @primary id: int,
+    expression_id: int
+}
+
+/**
+ * A ObjectLiteralElementDO load object_literal_element from db
+ */
+schema ObjectLiteralElementDO {
+    @primary id: int,
+    kind: int
+}
+
+/**
+ * A ObjectLiteralElementNameNodeDO load object_literal_element_name_node from db
+ */
+schema ObjectLiteralElementNameNodeDO {
+    @primary object_literal_element_id: int,
+    name_node_id: int
+}
+
+/**
+ * A ClassElementDO load class_element from db
+ */
+schema ClassElementDO {
+    @primary id: int,
+    kind: int
+}
+
+/**
+ * A ClassElementNameNodeDO load class_element_name_node from db
+ */
+schema ClassElementNameNodeDO {
+    @primary class_element_id: int,
+    name_node_id: int
+}
+
+/**
+ * A TypeElementDO load type_element from db
+ */
+schema TypeElementDO {
+    @primary id: int,
+    kind: int
+}
+
+/**
+ * A TypeElementNameNodeDO load type_element_name_node from db
+ */
+schema TypeElementNameNodeDO {
+    @primary type_element_id: int,
+    name_node_id: int
+}
+
+/**
+ * A TypeElementQuestionTokenDO load type_element_question_token from db
+ */
+schema TypeElementQuestionTokenDO {
+    @primary type_element_id: int,
+    question_token_id: int
+}
+
+/**
+ * A PropertySignatureDO load property_signature from db
+ */
+schema PropertySignatureDO {
+    @primary id: int,
+    name_node_id: int
+}
+
+/**
+ * A PropertySignatureQuestionTokenDO load property_signature_question_token from db
+ */
+schema PropertySignatureQuestionTokenDO {
+    @primary property_signature_id: int,
+    question_token_id: int
+}
+
+/**
+ * A PropertySignatureTypeNodeDO load property_signature_type_node from db
+ */
+schema PropertySignatureTypeNodeDO {
+    @primary property_signature_id: int,
+    type_node_id: int
+}
+
+/**
+ * A PropertyDeclarationDO load property_declaration from db
+ */
+schema PropertyDeclarationDO {
+    @primary id: int,
+    name_node_id: int
+}
+
+/**
+ * A PropertyDeclarationQuestionTokenDO load property_declaration_question_token from db
+ */
+schema PropertyDeclarationQuestionTokenDO {
+    @primary property_declaration_id: int,
+    question_token_id: int
+}
+
+/**
+ * A PropertyDeclarationExclamationTokenDO load property_declaration_exclamation_token from db
+ */
+schema PropertyDeclarationExclamationTokenDO {
+    @primary property_declaration_id: int,
+    exclamation_token_id: int
+}
+
+/**
+ * A PropertyDeclarationTypeNodeDO load property_declaration_type_node from db
+ */
+schema PropertyDeclarationTypeNodeDO {
+    @primary property_declaration_id: int,
+    type_node_id: int
+}
+
+/**
+ * A PropertyDeclarationInitializerDO load property_declaration_initializer from db
+ */
+schema PropertyDeclarationInitializerDO {
+    @primary property_declaration_id: int,
+    initializer_id: int
+}
+
+/**
+ * A MethodSignatureDO load method_signature from db
+ */
+schema MethodSignatureDO {
+    @primary id: int,
+    name_node_id: int
+}
+
+/**
+ * A MethodDeclarationDO load method_declaration from db
+ */
+schema MethodDeclarationDO {
+    @primary id: int,
+    name_node_id: int
+}
+
+/**
+ * A MethodDeclarationBodyDO load method_declaration_body from db
+ */
+schema MethodDeclarationBodyDO {
+    @primary method_declaration_id: int,
+    body_id: int
+}
+
+/**
+ * A ClassStaticBlockDeclarationDO load class_static_block_declaration from db
+ */
+schema ClassStaticBlockDeclarationDO {
+    @primary id: int,
+    body_id: int
+}
+
+/**
+ * A ConstructorDO load constructor from db
+ */
+schema ConstructorDO {
+    @primary id: int,
+}
+
+/**
+ * A ConstructorBodyDO load constructor_body from db
+ */
+schema ConstructorBodyDO {
+    @primary constructor_id: int,
+    body_id: int
+}
+
+/**
+ * A GetAccessorDO load get_accessor from db
+ */
+schema GetAccessorDO {
+    @primary id: int,
+    name_node_id: int
+}
+
+/**
+ * A GetAccessorBodyDO load get_accessor_body from db
+ */
+schema GetAccessorBodyDO {
+    @primary get_accessor_id: int,
+    body_id: int
+}
+
+/**
+ * A SetAccessorDO load set_accessor from db
+ */
+schema SetAccessorDO {
+    @primary id: int,
+    name_node_id: int
+}
+
+/**
+ * A SetAccessorBodyDO load set_accessor_body from db
+ */
+schema SetAccessorBodyDO {
+    @primary set_accessor_id: int,
+    body_id: int
+}
+
+/**
+ * A CallSignatureDO load call_signature from db
+ */
+schema CallSignatureDO {
+    @primary id: int,
+}
+
+/**
+ * A ConstructSignatureDO load construct_signature from db
+ */
+schema ConstructSignatureDO {
+    @primary id: int,
+}
+
+/**
+ * A IndexSignatureDO load index_signature from db
+ */
+schema IndexSignatureDO {
+    @primary id: int,
+    type_node_id: int
+}
+
+/**
+ * A SemicolonClassElementDO load semicolon_class_element from db
+ */
+schema SemicolonClassElementDO {
+    @primary id: int,
+}
+
+/**
+ * A PropertyAssignmentDO load property_assignment from db
+ */
+schema PropertyAssignmentDO {
+    @primary id: int,
+    name_node_id: int,
+    initializer_id: int
+}
+
+/**
+ * A ShorthandPropertyAssignmentDO load shorthand_property_assignment from db
+ */
+schema ShorthandPropertyAssignmentDO {
+    @primary id: int,
+    name_node_id: int
+}
+
+/**
+ * A SpreadAssignmentDO load spread_assignment from db
+ */
+schema SpreadAssignmentDO {
+    @primary id: int,
+    expression_id: int
+}
+
+/**
+ * A EnumMemberDO load enum_member from db
+ */
+schema EnumMemberDO {
+    @primary id: int,
+    parent_id: int,
+    index: int,
+    name_node_id: int
+}
+
+/**
+ * A EnumMemberInitializerDO load enum_member_initializer from db
+ */
+schema EnumMemberInitializerDO {
+    @primary enum_member_id: int,
+    initializer_id: int
+}
+
+/**
+ * A SignatureDeclarationDO load signature_declaration from db
+ */
+schema SignatureDeclarationDO {
+    @primary id: int,
+    kind: int
+}
+
+/**
+ * A SignatureDeclarationNameNodeDO load signature_declaration_name_node from db
+ */
+schema SignatureDeclarationNameNodeDO {
+    @primary signature_declaration_id: int,
+    name_node_id: int
+}
+
+/**
+ * A SignatureDeclarationTypeParameterDO load signature_declaration_type_parameter from db
+ */
+schema SignatureDeclarationTypeParameterDO {
+    @primary type_parameter_id: int,
+    signature_declaration_id: int,
+    index: int
+}
+
+/**
+ * A SignatureDeclarationParameterDO load signature_declaration_parameter from db
+ */
+schema SignatureDeclarationParameterDO {
+    @primary parameter_id: int,
+    signature_declaration_id: int,
+    index: int
+}
+
+/**
+ * A SignatureDeclarationTypeNodeDO load signature_declaration_type_node from db
+ */
+schema SignatureDeclarationTypeNodeDO {
+    @primary signature_declaration_id: int,
+    type_node_id: int
+}
+
+/**
+ * A FunctionLikeDeclarationDO load function_like_declaration from db
+ */
+schema FunctionLikeDeclarationDO {
+    @primary id: int,
+    kind: int
+}
+
+/**
+ * A FunctionLikeDeclarationAsteriskTokenDO load function_like_declaration_asterisk_token from db
+ */
+schema FunctionLikeDeclarationAsteriskTokenDO {
+    @primary function_like_declaration_id: int,
+    asterisk_token_id: int
+}
+
+/**
+ * A FunctionLikeDeclarationQuestionTokenDO load function_like_declaration_question_token from db
+ */
+schema FunctionLikeDeclarationQuestionTokenDO {
+    @primary function_like_declaration_id: int,
+    question_token_id: int
+}
+
+/**
+ * A FunctionLikeDeclarationExclamationTokenDO load function_like_declaration_exclamation_token from db
+ */
+schema FunctionLikeDeclarationExclamationTokenDO {
+    @primary function_like_declaration_id: int,
+    exclamation_token_id: int
+}
+
+/**
+ * A FunctionLikeDeclarationBodyDO load function_like_declaration_body from db
+ */
+schema FunctionLikeDeclarationBodyDO {
+    @primary function_like_declaration_id: int,
+    body_id: int
+}
+
+/**
+ * A ClassLikeDeclarationDO load class_like_declaration from db
+ */
+schema ClassLikeDeclarationDO {
+    @primary id: int,
+    kind: int
+}
+
+/**
+ * A ClassLikeDeclarationNameNodeDO load class_like_declaration_name_node from db
+ */
+schema ClassLikeDeclarationNameNodeDO {
+    @primary class_like_declaration_id: int,
+    name_node_id: int
+}
+
+/**
+ * A ClassLikeDeclarationTypeParameterDO load class_like_declaration_type_parameter from db
+ */
+schema ClassLikeDeclarationTypeParameterDO {
+    @primary type_parameter_id: int,
+    class_like_declaration_id: int,
+    index: int
+}
+
+/**
+ * A ClassLikeDeclarationMemberDO load class_like_declaration_member from db
+ */
+schema ClassLikeDeclarationMemberDO {
+    @primary member_id: int,
+    class_like_declaration_id: int,
+    index: int
+}
+
+/**
+ * A ThisTypeDO load this_type from db
+ */
+schema ThisTypeDO {
+    @primary id: int,
+}
+
+/**
+ * A TypePredicateDO load type_predicate from db
+ */
+schema TypePredicateDO {
+    @primary id: int,
+    parameter_name_node_id: int
+}
+
+/**
+ * A TypePredicateAssertsModifierDO load type_predicate_asserts_modifier from db
+ */
+schema TypePredicateAssertsModifierDO {
+    @primary type_predicate_id: int,
+    asserts_modifier_id: int
+}
+
+/**
+ * A TypePredicateTypeNodeDO load type_predicate_type_node from db
+ */
+schema TypePredicateTypeNodeDO {
+    @primary type_predicate_id: int,
+    type_node_id: int
+}
+
+/**
+ * A NodeWithTypeArgumentsDO load node_with_type_arguments from db
+ */
+schema NodeWithTypeArgumentsDO {
+    @primary id: int,
+    kind: int
+}
+
+/**
+ * A NodeWithTypeArgumentsTypeArgumentDO load node_with_type_arguments_type_argument from db
+ */
+schema NodeWithTypeArgumentsTypeArgumentDO {
+    @primary type_argument_id: int,
+    node_with_type_arguments_id: int,
+    index: int
+}
+
+/**
+ * A TypeReferenceDO load type_reference from db
+ */
+schema TypeReferenceDO {
+    @primary id: int,
+    type_name_node_id: int
+}
+
+/**
+ * A FunctionOrConstructorTypeDO load function_or_constructor_type from db
+ */
+schema FunctionOrConstructorTypeDO {
+    @primary id: int,
+    kind: int,
+    type_node_id: int
+}
+
+/**
+ * A FunctionTypeDO load function_type from db
+ */
+schema FunctionTypeDO {
+    @primary id: int,
+}
+
+/**
+ * A ConstructorTypeDO load constructor_type from db
+ */
+schema ConstructorTypeDO {
+    @primary id: int,
+}
+
+/**
+ * A TypeQueryDO load type_query from db
+ */
+schema TypeQueryDO {
+    @primary id: int,
+    expression_name_node_id: int
+}
+
+/**
+ * A TypeLiteralDO load type_literal from db
+ */
+schema TypeLiteralDO {
+    @primary id: int,
+}
+
+/**
+ * A TypeLiteralMemberDO load type_literal_member from db
+ */
+schema TypeLiteralMemberDO {
+    @primary member_id: int,
+    type_literal_id: int,
+    index: int
+}
+
+/**
+ * A ArrayTypeDO load array_type from db
+ */
+schema ArrayTypeDO {
+    @primary id: int,
+    element_type_node_id: int
+}
+
+/**
+ * A TupleTypeDO load tuple_type from db
+ */
+schema TupleTypeDO {
+    @primary id: int,
+}
+
+/**
+ * A TupleTypeElementDO load tuple_type_element from db
+ */
+schema TupleTypeElementDO {
+    @primary element_id: int,
+    tuple_type_id: int,
+    index: int
+}
+
+/**
+ * A OptionalTypeDO load optional_type from db
+ */
+schema OptionalTypeDO {
+    @primary id: int,
+    type_node_id: int
+}
+
+/**
+ * A RestTypeDO load rest_type from db
+ */
+schema RestTypeDO {
+    @primary id: int,
+    type_node_id: int
+}
+
+/**
+ * A UnionTypeDO load union_type from db
+ */
+schema UnionTypeDO {
+    @primary id: int,
+}
+
+/**
+ * A UnionTypeTypeNodeDO load union_type_type_node from db
+ */
+schema UnionTypeTypeNodeDO {
+    @primary type_node_id: int,
+    union_type_id: int,
+    index: int
+}
+
+/**
+ * A IntersectionTypeDO load intersection_type from db
+ */
+schema IntersectionTypeDO {
+    @primary id: int,
+}
+
+/**
+ * A IntersectionTypeTypeNodeDO load intersection_type_type_node from db
+ */
+schema IntersectionTypeTypeNodeDO {
+    @primary type_node_id: int,
+    intersection_type_id: int,
+    index: int
+}
+
+/**
+ * A ConditionalTypeDO load conditional_type from db
+ */
+schema ConditionalTypeDO {
+    @primary id: int,
+    check_type_node_id: int,
+    extends_type_node_id: int,
+    then_type_node_id: int,
+    else_type_node_id: int
+}
+
+/**
+ * A InferTypeDO load infer_type from db
+ */
+schema InferTypeDO {
+    @primary id: int,
+    type_parameter_id: int
+}
+
+/**
+ * A ParenthesizedTypeDO load parenthesized_type from db
+ */
+schema ParenthesizedTypeDO {
+    @primary id: int,
+    type_node_id: int
+}
+
+/**
+ * A TypeOperatorDO load type_operator from db
+ */
+schema TypeOperatorDO {
+    @primary id: int,
+    operator_id: int,
+    type_node_id: int
+}
+
+/**
+ * A IndexedAccessTypeDO load indexed_access_type from db
+ */
+schema IndexedAccessTypeDO {
+    @primary id: int,
+    object_type_node_id: int,
+    index_type_node_id: int
+}
+
+/**
+ * A MappedTypeDO load mapped_type from db
+ */
+schema MappedTypeDO {
+    @primary id: int,
+    type_parameter_id: int
+}
+
+/**
+ * A MappedTypeReadonlyTokenDO load mapped_type_readonly_token from db
+ */
+schema MappedTypeReadonlyTokenDO {
+    @primary mapped_type_id: int,
+    readonly_token_id: int
+}
+
+/**
+ * A MappedTypeNameTypeNodeDO load mapped_type_name_type_node from db
+ */
+schema MappedTypeNameTypeNodeDO {
+    @primary mapped_type_id: int,
+    name_type_node_id: int
+}
+
+/**
+ * A MappedTypeQuestionTokenDO load mapped_type_question_token from db
+ */
+schema MappedTypeQuestionTokenDO {
+    @primary mapped_type_id: int,
+    question_token_id: int
+}
+
+/**
+ * A MappedTypeTypeNodeDO load mapped_type_type_node from db
+ */
+schema MappedTypeTypeNodeDO {
+    @primary mapped_type_id: int,
+    type_node_id: int
+}
+
+/**
+ * A LiteralTypeDO load literal_type from db
+ */
+schema LiteralTypeDO {
+    @primary id: int,
+    literal_id: int
+}
+
+/**
+ * A NamedTupleMemberDO load named_tuple_member from db
+ */
+schema NamedTupleMemberDO {
+    @primary id: int,
+    name_node_id: int,
+    type_node_id: int
+}
+
+/**
+ * A NamedTupleMemberDotDotDotTokenDO load named_tuple_member_dot_dot_dot_token from db
+ */
+schema NamedTupleMemberDotDotDotTokenDO {
+    @primary named_tuple_member_id: int,
+    dot_dot_dot_token_id: int
+}
+
+/**
+ * A NamedTupleMemberQuestionTokenDO load named_tuple_member_question_token from db
+ */
+schema NamedTupleMemberQuestionTokenDO {
+    @primary named_tuple_member_id: int,
+    question_token_id: int
+}
+
+/**
+ * A TemplateLiteralTypeSpanDO load template_literal_type_span from db
+ */
+schema TemplateLiteralTypeSpanDO {
+    @primary id: int,
+    parent_id: int,
+    index: int,
+    type_node_id: int,
+    literal_id: int
+}
+
+/**
+ * A TemplateLiteralTypeDO load template_literal_type from db
+ */
+schema TemplateLiteralTypeDO {
+    @primary id: int,
+    head_id: int
+}
+
+/**
+ * A ImportTypeAssertionContainerDO load import_type_assertion_container from db
+ */
+schema ImportTypeAssertionContainerDO {
+    @primary id: int,
+    parent_id: int,
+    assert_clause_id: int
+}
+
+/**
+ * A ImportTypeDO load import_type from db
+ */
+schema ImportTypeDO {
+    @primary id: int,
+    is_type_of: int,
+    argument_id: int
+}
+
+/**
+ * A ImportTypeQualifierDO load import_type_qualifier from db
+ */
+schema ImportTypeQualifierDO {
+    @primary import_type_id: int,
+    qualifier_id: int
+}
+
+/**
+ * A BindingElementDO load binding_element from db
+ */
+schema BindingElementDO {
+    @primary id: int,
+    name_node_id: int
+}
+
+/**
+ * A BindingElementPropertyNameNodeDO load binding_element_property_name_node from db
+ */
+schema BindingElementPropertyNameNodeDO {
+    @primary binding_element_id: int,
+    property_name_node_id: int
+}
+
+/**
+ * A BindingElementDotDotDotTokenDO load binding_element_dot_dot_dot_token from db
+ */
+schema BindingElementDotDotDotTokenDO {
+    @primary binding_element_id: int,
+    dot_dot_dot_token_id: int
+}
+
+/**
+ * A BindingElementInitializerDO load binding_element_initializer from db
+ */
+schema BindingElementInitializerDO {
+    @primary binding_element_id: int,
+    initializer_id: int
+}
+
+/**
+ * A ObjectBindingPatternDO load object_binding_pattern from db
+ */
+schema ObjectBindingPatternDO {
+    @primary id: int,
+}
+
+/**
+ * A ObjectBindingPatternElementDO load object_binding_pattern_element from db
+ */
+schema ObjectBindingPatternElementDO {
+    @primary element_id: int,
+    object_binding_pattern_id: int,
+    index: int
+}
+
+/**
+ * A ArrayBindingPatternDO load array_binding_pattern from db
+ */
+schema ArrayBindingPatternDO {
+    @primary id: int,
+}
+
+/**
+ * A ArrayBindingPatternElementDO load array_binding_pattern_element from db
+ */
+schema ArrayBindingPatternElementDO {
+    @primary element_id: int,
+    array_binding_pattern_id: int,
+    index: int
+}
+
+/**
+ * A ThisExpressionDO load this_expression from db
+ */
+schema ThisExpressionDO {
+    @primary id: int,
+}
+
+/**
+ * A SuperExpressionDO load super_expression from db
+ */
+schema SuperExpressionDO {
+    @primary id: int,
+}
+
+/**
+ * A ImportExpressionDO load import_expression from db
+ */
+schema ImportExpressionDO {
+    @primary id: int,
+}
+
+/**
+ * A ArrayLiteralExpressionDO load array_literal_expression from db
+ */
+schema ArrayLiteralExpressionDO {
+    @primary id: int,
+}
+
+/**
+ * A ArrayLiteralExpressionElementDO load array_literal_expression_element from db
+ */
+schema ArrayLiteralExpressionElementDO {
+    @primary element_id: int,
+    array_literal_expression_id: int,
+    index: int
+}
+
+/**
+ * A ObjectLiteralExpressionDO load object_literal_expression from db
+ */
+schema ObjectLiteralExpressionDO {
+    @primary id: int,
+}
+
+/**
+ * A ObjectLiteralExpressionPropertyDO load object_literal_expression_property from db
+ */
+schema ObjectLiteralExpressionPropertyDO {
+    @primary property_id: int,
+    object_literal_expression_id: int,
+    index: int
+}
+
+/**
+ * A PropertyAccessExpressionDO load property_access_expression from db
+ */
+schema PropertyAccessExpressionDO {
+    @primary id: int,
+    expression_id: int,
+    name_node_id: int
+}
+
+/**
+ * A PropertyAccessExpressionQuestionDotTokenDO load property_access_expression_question_dot_token from db
+ */
+schema PropertyAccessExpressionQuestionDotTokenDO {
+    @primary property_access_expression_id: int,
+    question_dot_token_id: int
+}
+
+/**
+ * A ElementAccessExpressionDO load element_access_expression from db
+ */
+schema ElementAccessExpressionDO {
+    @primary id: int,
+    expression_id: int,
+    argument_expression_id: int
+}
+
+/**
+ * A ElementAccessExpressionQuestionDotTokenDO load element_access_expression_question_dot_token from db
+ */
+schema ElementAccessExpressionQuestionDotTokenDO {
+    @primary element_access_expression_id: int,
+    question_dot_token_id: int
+}
+
+/**
+ * A CallExpressionDO load call_expression from db
+ */
+schema CallExpressionDO {
+    @primary id: int,
+    expression_id: int
+}
+
+/**
+ * A CallExpressionQuestionDotTokenDO load call_expression_question_dot_token from db
+ */
+schema CallExpressionQuestionDotTokenDO {
+    @primary call_expression_id: int,
+    question_dot_token_id: int
+}
+
+/**
+ * A CallExpressionTypeArgumentDO load call_expression_type_argument from db
+ */
+schema CallExpressionTypeArgumentDO {
+    @primary type_argument_id: int,
+    call_expression_id: int,
+    index: int
+}
+
+/**
+ * A CallExpressionArgumentDO load call_expression_argument from db
+ */
+schema CallExpressionArgumentDO {
+    @primary argument_id: int,
+    call_expression_id: int,
+    index: int
+}
+
+/**
+ * A NewExpressionDO load new_expression from db
+ */
+schema NewExpressionDO {
+    @primary id: int,
+    expression_id: int
+}
+
+/**
+ * A NewExpressionTypeArgumentDO load new_expression_type_argument from db
+ */
+schema NewExpressionTypeArgumentDO {
+    @primary type_argument_id: int,
+    new_expression_id: int,
+    index: int
+}
+
+/**
+ * A NewExpressionArgumentDO load new_expression_argument from db
+ */
+schema NewExpressionArgumentDO {
+    @primary argument_id: int,
+    new_expression_id: int,
+    index: int
+}
+
+/**
+ * A TemplateExpressionDO load template_expression from db
+ */
+schema TemplateExpressionDO {
+    @primary id: int,
+    head_id: int
+}
+
+/**
+ * A TaggedTemplateExpressionDO load tagged_template_expression from db
+ */
+schema TaggedTemplateExpressionDO {
+    @primary id: int,
+    tag_id: int,
+    template_id: int
+}
+
+/**
+ * A TaggedTemplateExpressionTypeArgumentDO load tagged_template_expression_type_argument from db
+ */
+schema TaggedTemplateExpressionTypeArgumentDO {
+    @primary type_argument_id: int,
+    tagged_template_expression_id: int,
+    index: int
+}
+
+/**
+ * A TypeAssertionExpressionDO load type_assertion_expression from db
+ */
+schema TypeAssertionExpressionDO {
+    @primary id: int,
+    type_node_id: int,
+    expression_id: int
+}
+
+/**
+ * A ParenthesizedExpressionDO load parenthesized_expression from db
+ */
+schema ParenthesizedExpressionDO {
+    @primary id: int,
+    expression_id: int
+}
+
+/**
+ * A FunctionExpressionDO load function_expression from db
+ */
+schema FunctionExpressionDO {
+    @primary id: int,
+    body_id: int
+}
+
+/**
+ * A FunctionExpressionNameNodeDO load function_expression_name_node from db
+ */
+schema FunctionExpressionNameNodeDO {
+    @primary function_expression_id: int,
+    name_node_id: int
+}
+
+/**
+ * A ArrowFunctionDO load arrow_function from db
+ */
+schema ArrowFunctionDO {
+    @primary id: int,
+    equals_greater_than_token_id: int,
+    body_id: int
+}
+
+/**
+ * A EtsComponentExpressionDO load ets_component_expression from db
+ */
+schema EtsComponentExpressionDO {
+    @primary id: int,
+    expression_id: int
+}
+
+/**
+ * A EtsComponentExpressionTypeArgumentDO load ets_component_expression_type_argument from db
+ */
+schema EtsComponentExpressionTypeArgumentDO {
+    @primary type_argument_id: int,
+    ets_component_expression_id: int,
+    index: int
+}
+
+/**
+ * A EtsComponentExpressionArgumentDO load ets_component_expression_argument from db
+ */
+schema EtsComponentExpressionArgumentDO {
+    @primary argument_id: int,
+    ets_component_expression_id: int,
+    index: int
+}
+
+/**
+ * A EtsComponentExpressionBodyDO load ets_component_expression_body from db
+ */
+schema EtsComponentExpressionBodyDO {
+    @primary ets_component_expression_id: int,
+    body_id: int
+}
+
+/**
+ * A DeleteExpressionDO load delete_expression from db
+ */
+schema DeleteExpressionDO {
+    @primary id: int,
+    expression_id: int
+}
+
+/**
+ * A TypeOfExpressionDO load type_of_expression from db
+ */
+schema TypeOfExpressionDO {
+    @primary id: int,
+    expression_id: int
+}
+
+/**
+ * A VoidExpressionDO load void_expression from db
+ */
+schema VoidExpressionDO {
+    @primary id: int,
+    expression_id: int
+}
+
+/**
+ * A AwaitExpressionDO load await_expression from db
+ */
+schema AwaitExpressionDO {
+    @primary id: int,
+    expression_id: int
+}
+
+/**
+ * A PrefixUnaryExpressionDO load prefix_unary_expression from db
+ */
+schema PrefixUnaryExpressionDO {
+    @primary id: int,
+    operator_id: int,
+    operand_id: int
+}
+
+/**
+ * A PostfixUnaryExpressionDO load postfix_unary_expression from db
+ */
+schema PostfixUnaryExpressionDO {
+    @primary id: int,
+    operand_id: int,
+    operator_id: int
+}
+
+/**
+ * A BinaryExpressionDO load binary_expression from db
+ */
+schema BinaryExpressionDO {
+    @primary id: int,
+    left_id: int,
+    operator_id: int,
+    right_id: int
+}
+
+/**
+ * A ConditionalExpressionDO load conditional_expression from db
+ */
+schema ConditionalExpressionDO {
+    @primary id: int,
+    condition_id: int,
+    question_token_id: int,
+    then_expression_id: int,
+    colon_token_id: int,
+    else_expression_id: int
+}
+
+/**
+ * A YieldExpressionDO load yield_expression from db
+ */
+schema YieldExpressionDO {
+    @primary id: int,
+}
+
+/**
+ * A YieldExpressionAsteriskTokenDO load yield_expression_asterisk_token from db
+ */
+schema YieldExpressionAsteriskTokenDO {
+    @primary yield_expression_id: int,
+    asterisk_token_id: int
+}
+
+/**
+ * A YieldExpressionExpressionDO load yield_expression_expression from db
+ */
+schema YieldExpressionExpressionDO {
+    @primary yield_expression_id: int,
+    expression_id: int
+}
+
+/**
+ * A SpreadElementDO load spread_element from db
+ */
+schema SpreadElementDO {
+    @primary id: int,
+    expression_id: int
+}
+
+/**
+ * A ClassExpressionDO load class_expression from db
+ */
+schema ClassExpressionDO {
+    @primary id: int,
+}
+
+/**
+ * A OmittedExpressionDO load omitted_expression from db
+ */
+schema OmittedExpressionDO {
+    @primary id: int,
+}
+
+/**
+ * A ExpressionWithTypeArgumentsDO load expression_with_type_arguments from db
+ */
+schema ExpressionWithTypeArgumentsDO {
+    @primary id: int,
+    expression_id: int
+}
+
+/**
+ * A AsExpressionDO load as_expression from db
+ */
+schema AsExpressionDO {
+    @primary id: int,
+    expression_id: int,
+    type_node_id: int
+}
+
+/**
+ * A NonNullExpressionDO load non_null_expression from db
+ */
+schema NonNullExpressionDO {
+    @primary id: int,
+    expression_id: int
+}
+
+/**
+ * A MetaPropertyDO load meta_property from db
+ */
+schema MetaPropertyDO {
+    @primary id: int,
+    keyword_token_id: int,
+    name_node_id: int
+}
+
+/**
+ * A SatisfiesExpressionDO load satisfies_expression from db
+ */
+schema SatisfiesExpressionDO {
+    @primary id: int,
+    expression_id: int,
+    type_node_id: int
+}
+
+/**
+ * A StatementDO load statement from db
+ */
+schema StatementDO {
+    @primary id: int,
+    kind: int
+}
+
+/**
+ * A BlockDO load block from db
+ */
+schema BlockDO {
+    @primary id: int,
+}
+
+/**
+ * A BlockStatementDO load block_statement from db
+ */
+schema BlockStatementDO {
+    @primary statement_id: int,
+    block_id: int,
+    index: int
+}
+
+/**
+ * A EmptyStatementDO load empty_statement from db
+ */
+schema EmptyStatementDO {
+    @primary id: int,
+}
+
+/**
+ * A VariableDeclarationDO load variable_declaration from db
+ */
+schema VariableDeclarationDO {
+    @primary id: int,
+    name_node_id: int
+}
+
+/**
+ * A VariableDeclarationExclamationTokenDO load variable_declaration_exclamation_token from db
+ */
+schema VariableDeclarationExclamationTokenDO {
+    @primary variable_declaration_id: int,
+    exclamation_token_id: int
+}
+
+/**
+ * A VariableDeclarationTypeNodeDO load variable_declaration_type_node from db
+ */
+schema VariableDeclarationTypeNodeDO {
+    @primary variable_declaration_id: int,
+    type_node_id: int
+}
+
+/**
+ * A VariableDeclarationInitializerDO load variable_declaration_initializer from db
+ */
+schema VariableDeclarationInitializerDO {
+    @primary variable_declaration_id: int,
+    initializer_id: int
+}
+
+/**
+ * A VariableDeclarationListDO load variable_declaration_list from db
+ */
+schema VariableDeclarationListDO {
+    @primary id: int,
+}
+
+/**
+ * A VariableDeclarationListDeclarationDO load variable_declaration_list_declaration from db
+ */
+schema VariableDeclarationListDeclarationDO {
+    @primary declaration_id: int,
+    variable_declaration_list_id: int,
+    index: int
+}
+
+/**
+ * A VariableStatementDO load variable_statement from db
+ */
+schema VariableStatementDO {
+    @primary id: int,
+    declaration_list_id: int
+}
+
+/**
+ * A ExpressionStatementDO load expression_statement from db
+ */
+schema ExpressionStatementDO {
+    @primary id: int,
+    expression_id: int
+}
+
+/**
+ * A IfStatementDO load if_statement from db
+ */
+schema IfStatementDO {
+    @primary id: int,
+    condition_id: int,
+    then_statement_id: int
+}
+
+/**
+ * A IfStatementElseStatementDO load if_statement_else_statement from db
+ */
+schema IfStatementElseStatementDO {
+    @primary if_statement_id: int,
+    else_statement_id: int
+}
+
+/**
+ * A IterationStatementDO load iteration_statement from db
+ */
+schema IterationStatementDO {
+    @primary id: int,
+    kind: int,
+    statement_id: int
+}
+
+/**
+ * A DoStatementDO load do_statement from db
+ */
+schema DoStatementDO {
+    @primary id: int,
+    expression_id: int
+}
+
+/**
+ * A WhileStatementDO load while_statement from db
+ */
+schema WhileStatementDO {
+    @primary id: int,
+    expression_id: int
+}
+
+/**
+ * A ForStatementDO load for_statement from db
+ */
+schema ForStatementDO {
+    @primary id: int,
+}
+
+/**
+ * A ForStatementInitializerDO load for_statement_initializer from db
+ */
+schema ForStatementInitializerDO {
+    @primary for_statement_id: int,
+    initializer_id: int
+}
+
+/**
+ * A ForStatementConditionDO load for_statement_condition from db
+ */
+schema ForStatementConditionDO {
+    @primary for_statement_id: int,
+    condition_id: int
+}
+
+/**
+ * A ForStatementIncrementorDO load for_statement_incrementor from db
+ */
+schema ForStatementIncrementorDO {
+    @primary for_statement_id: int,
+    incrementor_id: int
+}
+
+/**
+ * A ForInStatementDO load for_in_statement from db
+ */
+schema ForInStatementDO {
+    @primary id: int,
+    initializer_id: int,
+    expression_id: int
+}
+
+/**
+ * A ForOfStatementDO load for_of_statement from db
+ */
+schema ForOfStatementDO {
+    @primary id: int,
+    initializer_id: int,
+    expression_id: int
+}
+
+/**
+ * A ForOfStatementAwaitModifierDO load for_of_statement_await_modifier from db
+ */
+schema ForOfStatementAwaitModifierDO {
+    @primary for_of_statement_id: int,
+    await_modifier_id: int
+}
+
+/**
+ * A ContinueStatementDO load continue_statement from db
+ */
+schema ContinueStatementDO {
+    @primary id: int,
+}
+
+/**
+ * A ContinueStatementLabelDO load continue_statement_label from db
+ */
+schema ContinueStatementLabelDO {
+    @primary continue_statement_id: int,
+    label_id: int
+}
+
+/**
+ * A BreakStatementDO load break_statement from db
+ */
+schema BreakStatementDO {
+    @primary id: int,
+}
+
+/**
+ * A BreakStatementLabelDO load break_statement_label from db
+ */
+schema BreakStatementLabelDO {
+    @primary break_statement_id: int,
+    label_id: int
+}
+
+/**
+ * A ReturnStatementDO load return_statement from db
+ */
+schema ReturnStatementDO {
+    @primary id: int,
+}
+
+/**
+ * A ReturnStatementExpressionDO load return_statement_expression from db
+ */
+schema ReturnStatementExpressionDO {
+    @primary return_statement_id: int,
+    expression_id: int
+}
+
+/**
+ * A WithStatementDO load with_statement from db
+ */
+schema WithStatementDO {
+    @primary id: int,
+    expression_id: int,
+    statement_id: int
+}
+
+/**
+ * A CaseBlockDO load case_block from db
+ */
+schema CaseBlockDO {
+    @primary id: int,
+}
+
+/**
+ * A CaseBlockClauseDO load case_block_clause from db
+ */
+schema CaseBlockClauseDO {
+    @primary clause_id: int,
+    case_block_id: int,
+    index: int
+}
+
+/**
+ * A CaseClauseDO load case_clause from db
+ */
+schema CaseClauseDO {
+    @primary id: int,
+    expression_id: int
+}
+
+/**
+ * A CaseClauseStatementDO load case_clause_statement from db
+ */
+schema CaseClauseStatementDO {
+    @primary statement_id: int,
+    case_clause_id: int,
+    index: int
+}
+
+/**
+ * A DefaultClauseDO load default_clause from db
+ */
+schema DefaultClauseDO {
+    @primary id: int,
+}
+
+/**
+ * A DefaultClauseStatementDO load default_clause_statement from db
+ */
+schema DefaultClauseStatementDO {
+    @primary statement_id: int,
+    default_clause_id: int,
+    index: int
+}
+
+/**
+ * A SwitchStatementDO load switch_statement from db
+ */
+schema SwitchStatementDO {
+    @primary id: int,
+    expression_id: int,
+    case_block_id: int
+}
+
+/**
+ * A LabeledStatementDO load labeled_statement from db
+ */
+schema LabeledStatementDO {
+    @primary id: int,
+    label_id: int,
+    statement_id: int
+}
+
+/**
+ * A ThrowStatementDO load throw_statement from db
+ */
+schema ThrowStatementDO {
+    @primary id: int,
+    expression_id: int
+}
+
+/**
+ * A TryStatementDO load try_statement from db
+ */
+schema TryStatementDO {
+    @primary id: int,
+    try_block_id: int
+}
+
+/**
+ * A TryStatementFinallyBlockDO load try_statement_finally_block from db
+ */
+schema TryStatementFinallyBlockDO {
+    @primary try_statement_id: int,
+    finally_block_id: int
+}
+
+/**
+ * A CatchClauseDO load catch_clause from db
+ */
+schema CatchClauseDO {
+    @primary id: int,
+    parent_id: int,
+    block_id: int
+}
+
+/**
+ * A CatchClauseVariableDeclarationDO load catch_clause_variable_declaration from db
+ */
+schema CatchClauseVariableDeclarationDO {
+    @primary catch_clause_id: int,
+    variable_declaration_id: int
+}
+
+/**
+ * A DebuggerStatementDO load debugger_statement from db
+ */
+schema DebuggerStatementDO {
+    @primary id: int,
+}
+
+/**
+ * A DeclarationStatementDO load declaration_statement from db
+ */
+schema DeclarationStatementDO {
+    @primary id: int,
+    kind: int
+}
+
+/**
+ * A DeclarationStatementNameNodeDO load declaration_statement_name_node from db
+ */
+schema DeclarationStatementNameNodeDO {
+    @primary declaration_statement_id: int,
+    name_node_id: int
+}
+
+/**
+ * A FunctionDeclarationDO load function_declaration from db
+ */
+schema FunctionDeclarationDO {
+    @primary id: int,
+}
+
+/**
+ * A FunctionDeclarationNameNodeDO load function_declaration_name_node from db
+ */
+schema FunctionDeclarationNameNodeDO {
+    @primary function_declaration_id: int,
+    name_node_id: int
+}
+
+/**
+ * A FunctionDeclarationBodyDO load function_declaration_body from db
+ */
+schema FunctionDeclarationBodyDO {
+    @primary function_declaration_id: int,
+    body_id: int
+}
+
+/**
+ * A ClassDeclarationDO load class_declaration from db
+ */
+schema ClassDeclarationDO {
+    @primary id: int,
+}
+
+/**
+ * A ClassDeclarationNameNodeDO load class_declaration_name_node from db
+ */
+schema ClassDeclarationNameNodeDO {
+    @primary class_declaration_id: int,
+    name_node_id: int
+}
+
+/**
+ * A StructDeclarationDO load struct_declaration from db
+ */
+schema StructDeclarationDO {
+    @primary id: int,
+}
+
+/**
+ * A StructDeclarationNameNodeDO load struct_declaration_name_node from db
+ */
+schema StructDeclarationNameNodeDO {
+    @primary struct_declaration_id: int,
+    name_node_id: int
+}
+
+/**
+ * A HeritageClauseDO load heritage_clause from db
+ */
+schema HeritageClauseDO {
+    @primary id: int,
+    parent_id: int,
+    index: int,
+    token_id: int
+}
+
+/**
+ * A HeritageClauseTypeNodeDO load heritage_clause_type_node from db
+ */
+schema HeritageClauseTypeNodeDO {
+    @primary type_node_id: int,
+    heritage_clause_id: int,
+    index: int
+}
+
+/**
+ * A InterfaceDeclarationDO load interface_declaration from db
+ */
+schema InterfaceDeclarationDO {
+    @primary id: int,
+    name_node_id: int
+}
+
+/**
+ * A InterfaceDeclarationTypeParameterDO load interface_declaration_type_parameter from db
+ */
+schema InterfaceDeclarationTypeParameterDO {
+    @primary type_parameter_id: int,
+    interface_declaration_id: int,
+    index: int
+}
+
+/**
+ * A InterfaceDeclarationMemberDO load interface_declaration_member from db
+ */
+schema InterfaceDeclarationMemberDO {
+    @primary member_id: int,
+    interface_declaration_id: int,
+    index: int
+}
+
+/**
+ * A TypeAliasDeclarationDO load type_alias_declaration from db
+ */
+schema TypeAliasDeclarationDO {
+    @primary id: int,
+    name_node_id: int,
+    type_node_id: int
+}
+
+/**
+ * A TypeAliasDeclarationTypeParameterDO load type_alias_declaration_type_parameter from db
+ */
+schema TypeAliasDeclarationTypeParameterDO {
+    @primary type_parameter_id: int,
+    type_alias_declaration_id: int,
+    index: int
+}
+
+/**
+ * A EnumDeclarationDO load enum_declaration from db
+ */
+schema EnumDeclarationDO {
+    @primary id: int,
+    name_node_id: int
+}
+
+/**
+ * A ModuleDeclarationDO load module_declaration from db
+ */
+schema ModuleDeclarationDO {
+    @primary id: int,
+    name_node_id: int
+}
+
+/**
+ * A ModuleDeclarationBodyDO load module_declaration_body from db
+ */
+schema ModuleDeclarationBodyDO {
+    @primary module_declaration_id: int,
+    body_id: int
+}
+
+/**
+ * A ModuleBlockDO load module_block from db
+ */
+schema ModuleBlockDO {
+    @primary id: int,
+}
+
+/**
+ * A ModuleBlockStatementDO load module_block_statement from db
+ */
+schema ModuleBlockStatementDO {
+    @primary statement_id: int,
+    module_block_id: int,
+    index: int
+}
+
+/**
+ * A NamespaceExportDeclarationDO load namespace_export_declaration from db
+ */
+schema NamespaceExportDeclarationDO {
+    @primary id: int,
+    name_node_id: int
+}
+
+/**
+ * A ExternalModuleReferenceDO load external_module_reference from db
+ */
+schema ExternalModuleReferenceDO {
+    @primary id: int,
+    expression_id: int
+}
+
+/**
+ * A ImportEqualsDeclarationDO load import_equals_declaration from db
+ */
+schema ImportEqualsDeclarationDO {
+    @primary id: int,
+    name_node_id: int,
+    is_type_only: int,
+    module_reference_id: int
+}
+
+/**
+ * A NamespaceImportDO load namespace_import from db
+ */
+schema NamespaceImportDO {
+    @primary id: int,
+    name_node_id: int
+}
+
+/**
+ * A ImportSpecifierDO load import_specifier from db
+ */
+schema ImportSpecifierDO {
+    @primary id: int,
+    parent_id: int,
+    index: int,
+    name_node_id: int,
+    is_type_only: int
+}
+
+/**
+ * A ImportSpecifierPropertyNameNodeDO load import_specifier_property_name_node from db
+ */
+schema ImportSpecifierPropertyNameNodeDO {
+    @primary import_specifier_id: int,
+    property_name_node_id: int
+}
+
+/**
+ * A NamedImportsDO load named_imports from db
+ */
+schema NamedImportsDO {
+    @primary id: int,
+}
+
+/**
+ * A ImportClauseDO load import_clause from db
+ */
+schema ImportClauseDO {
+    @primary id: int,
+    parent_id: int,
+    is_type_only: int
+}
+
+/**
+ * A ImportClauseNameNodeDO load import_clause_name_node from db
+ */
+schema ImportClauseNameNodeDO {
+    @primary import_clause_id: int,
+    name_node_id: int
+}
+
+/**
+ * A ImportClauseNamedBindingsDO load import_clause_named_bindings from db
+ */
+schema ImportClauseNamedBindingsDO {
+    @primary import_clause_id: int,
+    named_bindings_id: int
+}
+
+/**
+ * A AssertEntryDO load assert_entry from db
+ */
+schema AssertEntryDO {
+    @primary id: int,
+    parent_id: int,
+    index: int,
+    name_node_id: int,
+    value_node_id: int
+}
+
+/**
+ * A AssertClauseDO load assert_clause from db
+ */
+schema AssertClauseDO {
+    @primary id: int,
+}
+
+/**
+ * A ImportDeclarationDO load import_declaration from db
+ */
+schema ImportDeclarationDO {
+    @primary id: int,
+    module_specifier_id: int
+}
+
+/**
+ * A ImportDeclarationAssertClauseDO load import_declaration_assert_clause from db
+ */
+schema ImportDeclarationAssertClauseDO {
+    @primary import_declaration_id: int,
+    assert_clause_id: int
+}
+
+/**
+ * A ExportAssignmentDO load export_assignment from db
+ */
+schema ExportAssignmentDO {
+    @primary id: int,
+    is_export_equals: int,
+    expression_id: int
+}
+
+/**
+ * A ExportSpecifierDO load export_specifier from db
+ */
+schema ExportSpecifierDO {
+    @primary id: int,
+    parent_id: int,
+    index: int,
+    is_type_only: int,
+    name_node_id: int
+}
+
+/**
+ * A ExportSpecifierPropertyNameNodeDO load export_specifier_property_name_node from db
+ */
+schema ExportSpecifierPropertyNameNodeDO {
+    @primary export_specifier_id: int,
+    property_name_node_id: int
+}
+
+/**
+ * A NamedExportsDO load named_exports from db
+ */
+schema NamedExportsDO {
+    @primary id: int,
+}
+
+/**
+ * A NamespaceExportDO load namespace_export from db
+ */
+schema NamespaceExportDO {
+    @primary id: int,
+    name_node_id: int
+}
+
+/**
+ * A ExportDeclarationDO load export_declaration from db
+ */
+schema ExportDeclarationDO {
+    @primary id: int,
+    is_type_only: int
+}
+
+/**
+ * A ExportDeclarationExportClauseDO load export_declaration_export_clause from db
+ */
+schema ExportDeclarationExportClauseDO {
+    @primary export_declaration_id: int,
+    export_clause_id: int
+}
+
+/**
+ * A ExportDeclarationModuleSpecifierDO load export_declaration_module_specifier from db
+ */
+schema ExportDeclarationModuleSpecifierDO {
+    @primary export_declaration_id: int,
+    module_specifier_id: int
+}
+
+/**
+ * A ExportDeclarationAssertClauseDO load export_declaration_assert_clause from db
+ */
+schema ExportDeclarationAssertClauseDO {
+    @primary export_declaration_id: int,
+    assert_clause_id: int
+}
+
+/**
+ * A TopLevelDO load top_level from db
+ */
+schema TopLevelDO {
+    @primary id: int,
+    kind: int,
+    location_id: int
+}
+
+/**
+ * A TopLevelStatementDO load top_level_statement from db
+ */
+schema TopLevelStatementDO {
+    @primary statement_id: int,
+    top_level_id: int,
+    index: int
+}
+
+/**
+ * A AstNodeContainerRelationDO load ast_node_container_relation from db
+ */
+schema AstNodeContainerRelationDO {
+    @primary ast_node_id: int,
+    container_id: int
+}
+
+/**
+ * A CfgEntryNodeDO load cfg_entry_node from db
+ */
+schema CfgEntryNodeDO {
+    @primary id: int,
+    ast_node_id: int
+}
+
+/**
+ * A CfgExitNodeDO load cfg_exit_node from db
+ */
+schema CfgExitNodeDO {
+    @primary id: int,
+    ast_node_id: int
+}
+
+/**
+ * A SymbolDO load symbol_ from db
+ */
+schema SymbolDO {
+    @primary id: int,
+    name: string,
+    description: string
+}
+
+/**
+ * A AstNodeSymbolDO load ast_node_symbol from db
+ */
+schema AstNodeSymbolDO {
+    @primary ast_node_id: int,
+    symbol_id: int
+}
+
+/**
+ * A ShorthandPropertyAssignmentValueSymbolDO load shorthand_property_assignment_value_symbol from db
+ */
+schema ShorthandPropertyAssignmentValueSymbolDO {
+    @primary shorthand_property_assignment_id: int,
+    symbol_id: int
+}
+
+/**
+ * A TypeDO load type_ from db
+ */
+schema TypeDO {
+    @primary id: int,
+    name: string
+}
+
+/**
+ * A AstNodeTypeDO load ast_node_type from db
+ */
+schema AstNodeTypeDO {
+    @primary ast_node_id: int,
+    type_id: int
+}
+
+/**
+ * A CallSiteDeclarationDO load call_site_declaration from db
+ */
+schema CallSiteDeclarationDO {
+    @primary id: int,
+    call_site_id: int,
+    declaration_id: int
+}
+
+/**
+ * A CallSiteImplementationDO load call_site_implementation from db
+ */
+schema CallSiteImplementationDO {
+    @primary id: int,
+    call_site_id: int,
+    implementation_id: int
+}
+
+/**
+ * A CommentDO load comment from db
+ */
+schema CommentDO {
+    @primary id: int,
+    kind: int,
+    location_id: int
+}
+
+/**
+ * A AstNodeCommentDO load ast_node_comment from db
+ */
+schema AstNodeCommentDO {
+    @primary id: int,
+    kind: int,
+    ast_node_id: int,
+    comment_id: int,
+    index: int
+}
+
+/**
+ * A MetadataDO load metadata from db
+ */
+schema MetadataDO {
+    @primary id: int,
+    version: string,
+    created_time: string
+}
+
+/**
+ * A IgnoredPathDO load ignored_path from db
+ */
+schema IgnoredPathDO {
+    @primary id: int,
+    path_kind: int,
+    path: string,
+    ignore_kind: int
+}
+
+database ArkTsDB {
+    location : *LocationDO,
+    text : *TextDO,
+    number_of_lines : *NumberOfLinesDO,
+    file : *FileDO,
+    root_directory : *RootDirectoryDO,
+    non_root_directory : *NonRootDirectoryDO,
+    ast_node : *AstNodeDO,
+    dot_token : *DotTokenDO,
+    dot_dot_dot_token : *DotDotDotTokenDO,
+    comma_token : *CommaTokenDO,
+    question_dot_token : *QuestionDotTokenDO,
+    less_than_token : *LessThanTokenDO,
+    greater_than_token : *GreaterThanTokenDO,
+    less_than_equals_token : *LessThanEqualsTokenDO,
+    greater_than_equals_token : *GreaterThanEqualsTokenDO,
+    equals_equals_token : *EqualsEqualsTokenDO,
+    exclamation_equals_token : *ExclamationEqualsTokenDO,
+    equals_equals_equals_token : *EqualsEqualsEqualsTokenDO,
+    exclamation_equals_equals_token : *ExclamationEqualsEqualsTokenDO,
+    equals_greater_than_token : *EqualsGreaterThanTokenDO,
+    plus_token : *PlusTokenDO,
+    minus_token : *MinusTokenDO,
+    asterisk_token : *AsteriskTokenDO,
+    asterisk_asterisk_token : *AsteriskAsteriskTokenDO,
+    slash_token : *SlashTokenDO,
+    percent_token : *PercentTokenDO,
+    plus_plus_token : *PlusPlusTokenDO,
+    minus_minus_token : *MinusMinusTokenDO,
+    less_than_less_than_token : *LessThanLessThanTokenDO,
+    greater_than_greater_than_token : *GreaterThanGreaterThanTokenDO,
+    greater_than_greater_than_greater_than_token : *GreaterThanGreaterThanGreaterThanTokenDO,
+    ampersand_token : *AmpersandTokenDO,
+    bar_token : *BarTokenDO,
+    caret_token : *CaretTokenDO,
+    exclamation_token : *ExclamationTokenDO,
+    tilde_token : *TildeTokenDO,
+    ampersand_ampersand_token : *AmpersandAmpersandTokenDO,
+    bar_bar_token : *BarBarTokenDO,
+    question_token : *QuestionTokenDO,
+    colon_token : *ColonTokenDO,
+    question_question_token : *QuestionQuestionTokenDO,
+    equals_token : *EqualsTokenDO,
+    plus_equals_token : *PlusEqualsTokenDO,
+    minus_equals_token : *MinusEqualsTokenDO,
+    asterisk_equals_token : *AsteriskEqualsTokenDO,
+    asterisk_asterisk_equals_token : *AsteriskAsteriskEqualsTokenDO,
+    slash_equals_token : *SlashEqualsTokenDO,
+    percent_equals_token : *PercentEqualsTokenDO,
+    less_than_less_than_equals_token : *LessThanLessThanEqualsTokenDO,
+    greater_than_greater_than_equals_token : *GreaterThanGreaterThanEqualsTokenDO,
+    greater_than_greater_than_greater_than_equals_token : *GreaterThanGreaterThanGreaterThanEqualsTokenDO,
+    ampersand_equals_token : *AmpersandEqualsTokenDO,
+    bar_equals_token : *BarEqualsTokenDO,
+    bar_bar_equals_token : *BarBarEqualsTokenDO,
+    ampersand_ampersand_equals_token : *AmpersandAmpersandEqualsTokenDO,
+    question_question_equals_token : *QuestionQuestionEqualsTokenDO,
+    caret_equals_token : *CaretEqualsTokenDO,
+    const_keyword : *ConstKeywordDO,
+    default_keyword : *DefaultKeywordDO,
+    export_keyword : *ExportKeywordDO,
+    extends_keyword : *ExtendsKeywordDO,
+    import_keyword : *ImportKeywordDO,
+    in_keyword : *InKeywordDO,
+    instance_of_keyword : *InstanceOfKeywordDO,
+    new_keyword : *NewKeywordDO,
+    implements_keyword : *ImplementsKeywordDO,
+    private_keyword : *PrivateKeywordDO,
+    protected_keyword : *ProtectedKeywordDO,
+    public_keyword : *PublicKeywordDO,
+    static_keyword : *StaticKeywordDO,
+    abstract_keyword : *AbstractKeywordDO,
+    accessor_keyword : *AccessorKeywordDO,
+    asserts_keyword : *AssertsKeywordDO,
+    assert_keyword : *AssertKeywordDO,
+    async_keyword : *AsyncKeywordDO,
+    await_keyword : *AwaitKeywordDO,
+    declare_keyword : *DeclareKeywordDO,
+    key_of_keyword : *KeyOfKeywordDO,
+    out_keyword : *OutKeywordDO,
+    readonly_keyword : *ReadonlyKeywordDO,
+    unique_keyword : *UniqueKeywordDO,
+    override_keyword : *OverrideKeywordDO,
+    declaration : *DeclarationDO,
+    declaration_name_node : *DeclarationNameNodeDO,
+    expression : *ExpressionDO,
+    unary_expression : *UnaryExpressionDO,
+    update_expression : *UpdateExpressionDO,
+    left_hand_side_expression : *LeftHandSideExpressionDO,
+    member_expression : *MemberExpressionDO,
+    primary_expression : *PrimaryExpressionDO,
+    null_literal : *NullLiteralDO,
+    true_literal : *TrueLiteralDO,
+    false_literal : *FalseLiteralDO,
+    literal_like_node : *LiteralLikeNodeDO,
+    literal_expression : *LiteralExpressionDO,
+    numeric_literal : *NumericLiteralDO,
+    big_int_literal : *BigIntLiteralDO,
+    string_literal : *StringLiteralDO,
+    regular_expression_literal : *RegularExpressionLiteralDO,
+    template_literal_like_node : *TemplateLiteralLikeNodeDO,
+    no_substitution_template_literal : *NoSubstitutionTemplateLiteralDO,
+    template_head : *TemplateHeadDO,
+    template_middle : *TemplateMiddleDO,
+    template_tail : *TemplateTailDO,
+    template_span : *TemplateSpanDO,
+    modifier : *ModifierDO,
+    identifier : *IdentifierDO,
+    private_identifier : *PrivateIdentifierDO,
+    qualified_name : *QualifiedNameDO,
+    computed_property_name : *ComputedPropertyNameDO,
+    type_node : *TypeNodeDO,
+    any_type : *AnyTypeDO,
+    big_int_type : *BigIntTypeDO,
+    boolean_type : *BooleanTypeDO,
+    intrinsic_type : *IntrinsicTypeDO,
+    never_type : *NeverTypeDO,
+    number_type : *NumberTypeDO,
+    object_type : *ObjectTypeDO,
+    string_type : *StringTypeDO,
+    symbol_type : *SymbolTypeDO,
+    undefined_type : *UndefinedTypeDO,
+    unknown_type : *UnknownTypeDO,
+    void_type : *VoidTypeDO,
+    type_parameter : *TypeParameterDO,
+    type_parameter_constraint : *TypeParameterConstraintDO,
+    type_parameter_default : *TypeParameterDefaultDO,
+    parameter : *ParameterDO,
+    parameter_dot_dot_dot_token : *ParameterDotDotDotTokenDO,
+    parameter_question_token : *ParameterQuestionTokenDO,
+    parameter_type_node : *ParameterTypeNodeDO,
+    parameter_initializer : *ParameterInitializerDO,
+    decorator : *DecoratorDO,
+    object_literal_element : *ObjectLiteralElementDO,
+    object_literal_element_name_node : *ObjectLiteralElementNameNodeDO,
+    class_element : *ClassElementDO,
+    class_element_name_node : *ClassElementNameNodeDO,
+    type_element : *TypeElementDO,
+    type_element_name_node : *TypeElementNameNodeDO,
+    type_element_question_token : *TypeElementQuestionTokenDO,
+    property_signature : *PropertySignatureDO,
+    property_signature_question_token : *PropertySignatureQuestionTokenDO,
+    property_signature_type_node : *PropertySignatureTypeNodeDO,
+    property_declaration : *PropertyDeclarationDO,
+    property_declaration_question_token : *PropertyDeclarationQuestionTokenDO,
+    property_declaration_exclamation_token : *PropertyDeclarationExclamationTokenDO,
+    property_declaration_type_node : *PropertyDeclarationTypeNodeDO,
+    property_declaration_initializer : *PropertyDeclarationInitializerDO,
+    method_signature : *MethodSignatureDO,
+    method_declaration : *MethodDeclarationDO,
+    method_declaration_body : *MethodDeclarationBodyDO,
+    class_static_block_declaration : *ClassStaticBlockDeclarationDO,
+    constructor : *ConstructorDO,
+    constructor_body : *ConstructorBodyDO,
+    get_accessor : *GetAccessorDO,
+    get_accessor_body : *GetAccessorBodyDO,
+    set_accessor : *SetAccessorDO,
+    set_accessor_body : *SetAccessorBodyDO,
+    call_signature : *CallSignatureDO,
+    construct_signature : *ConstructSignatureDO,
+    index_signature : *IndexSignatureDO,
+    semicolon_class_element : *SemicolonClassElementDO,
+    property_assignment : *PropertyAssignmentDO,
+    shorthand_property_assignment : *ShorthandPropertyAssignmentDO,
+    spread_assignment : *SpreadAssignmentDO,
+    enum_member : *EnumMemberDO,
+    enum_member_initializer : *EnumMemberInitializerDO,
+    signature_declaration : *SignatureDeclarationDO,
+    signature_declaration_name_node : *SignatureDeclarationNameNodeDO,
+    signature_declaration_type_parameter : *SignatureDeclarationTypeParameterDO,
+    signature_declaration_parameter : *SignatureDeclarationParameterDO,
+    signature_declaration_type_node : *SignatureDeclarationTypeNodeDO,
+    function_like_declaration : *FunctionLikeDeclarationDO,
+    function_like_declaration_asterisk_token : *FunctionLikeDeclarationAsteriskTokenDO,
+    function_like_declaration_question_token : *FunctionLikeDeclarationQuestionTokenDO,
+    function_like_declaration_exclamation_token : *FunctionLikeDeclarationExclamationTokenDO,
+    function_like_declaration_body : *FunctionLikeDeclarationBodyDO,
+    class_like_declaration : *ClassLikeDeclarationDO,
+    class_like_declaration_name_node : *ClassLikeDeclarationNameNodeDO,
+    class_like_declaration_type_parameter : *ClassLikeDeclarationTypeParameterDO,
+    class_like_declaration_member : *ClassLikeDeclarationMemberDO,
+    this_type : *ThisTypeDO,
+    type_predicate : *TypePredicateDO,
+    type_predicate_asserts_modifier : *TypePredicateAssertsModifierDO,
+    type_predicate_type_node : *TypePredicateTypeNodeDO,
+    node_with_type_arguments : *NodeWithTypeArgumentsDO,
+    node_with_type_arguments_type_argument : *NodeWithTypeArgumentsTypeArgumentDO,
+    type_reference : *TypeReferenceDO,
+    function_or_constructor_type : *FunctionOrConstructorTypeDO,
+    function_type : *FunctionTypeDO,
+    constructor_type : *ConstructorTypeDO,
+    type_query : *TypeQueryDO,
+    type_literal : *TypeLiteralDO,
+    type_literal_member : *TypeLiteralMemberDO,
+    array_type : *ArrayTypeDO,
+    tuple_type : *TupleTypeDO,
+    tuple_type_element : *TupleTypeElementDO,
+    optional_type : *OptionalTypeDO,
+    rest_type : *RestTypeDO,
+    union_type : *UnionTypeDO,
+    union_type_type_node : *UnionTypeTypeNodeDO,
+    intersection_type : *IntersectionTypeDO,
+    intersection_type_type_node : *IntersectionTypeTypeNodeDO,
+    conditional_type : *ConditionalTypeDO,
+    infer_type : *InferTypeDO,
+    parenthesized_type : *ParenthesizedTypeDO,
+    type_operator : *TypeOperatorDO,
+    indexed_access_type : *IndexedAccessTypeDO,
+    mapped_type : *MappedTypeDO,
+    mapped_type_readonly_token : *MappedTypeReadonlyTokenDO,
+    mapped_type_name_type_node : *MappedTypeNameTypeNodeDO,
+    mapped_type_question_token : *MappedTypeQuestionTokenDO,
+    mapped_type_type_node : *MappedTypeTypeNodeDO,
+    literal_type : *LiteralTypeDO,
+    named_tuple_member : *NamedTupleMemberDO,
+    named_tuple_member_dot_dot_dot_token : *NamedTupleMemberDotDotDotTokenDO,
+    named_tuple_member_question_token : *NamedTupleMemberQuestionTokenDO,
+    template_literal_type_span : *TemplateLiteralTypeSpanDO,
+    template_literal_type : *TemplateLiteralTypeDO,
+    import_type_assertion_container : *ImportTypeAssertionContainerDO,
+    import_type : *ImportTypeDO,
+    import_type_qualifier : *ImportTypeQualifierDO,
+    binding_element : *BindingElementDO,
+    binding_element_property_name_node : *BindingElementPropertyNameNodeDO,
+    binding_element_dot_dot_dot_token : *BindingElementDotDotDotTokenDO,
+    binding_element_initializer : *BindingElementInitializerDO,
+    object_binding_pattern : *ObjectBindingPatternDO,
+    object_binding_pattern_element : *ObjectBindingPatternElementDO,
+    array_binding_pattern : *ArrayBindingPatternDO,
+    array_binding_pattern_element : *ArrayBindingPatternElementDO,
+    this_expression : *ThisExpressionDO,
+    super_expression : *SuperExpressionDO,
+    import_expression : *ImportExpressionDO,
+    array_literal_expression : *ArrayLiteralExpressionDO,
+    array_literal_expression_element : *ArrayLiteralExpressionElementDO,
+    object_literal_expression : *ObjectLiteralExpressionDO,
+    object_literal_expression_property : *ObjectLiteralExpressionPropertyDO,
+    property_access_expression : *PropertyAccessExpressionDO,
+    property_access_expression_question_dot_token : *PropertyAccessExpressionQuestionDotTokenDO,
+    element_access_expression : *ElementAccessExpressionDO,
+    element_access_expression_question_dot_token : *ElementAccessExpressionQuestionDotTokenDO,
+    call_expression : *CallExpressionDO,
+    call_expression_question_dot_token : *CallExpressionQuestionDotTokenDO,
+    call_expression_type_argument : *CallExpressionTypeArgumentDO,
+    call_expression_argument : *CallExpressionArgumentDO,
+    new_expression : *NewExpressionDO,
+    new_expression_type_argument : *NewExpressionTypeArgumentDO,
+    new_expression_argument : *NewExpressionArgumentDO,
+    template_expression : *TemplateExpressionDO,
+    tagged_template_expression : *TaggedTemplateExpressionDO,
+    tagged_template_expression_type_argument : *TaggedTemplateExpressionTypeArgumentDO,
+    type_assertion_expression : *TypeAssertionExpressionDO,
+    parenthesized_expression : *ParenthesizedExpressionDO,
+    function_expression : *FunctionExpressionDO,
+    function_expression_name_node : *FunctionExpressionNameNodeDO,
+    arrow_function : *ArrowFunctionDO,
+    ets_component_expression : *EtsComponentExpressionDO,
+    ets_component_expression_type_argument : *EtsComponentExpressionTypeArgumentDO,
+    ets_component_expression_argument : *EtsComponentExpressionArgumentDO,
+    ets_component_expression_body : *EtsComponentExpressionBodyDO,
+    delete_expression : *DeleteExpressionDO,
+    type_of_expression : *TypeOfExpressionDO,
+    void_expression : *VoidExpressionDO,
+    await_expression : *AwaitExpressionDO,
+    prefix_unary_expression : *PrefixUnaryExpressionDO,
+    postfix_unary_expression : *PostfixUnaryExpressionDO,
+    binary_expression : *BinaryExpressionDO,
+    conditional_expression : *ConditionalExpressionDO,
+    yield_expression : *YieldExpressionDO,
+    yield_expression_asterisk_token : *YieldExpressionAsteriskTokenDO,
+    yield_expression_expression : *YieldExpressionExpressionDO,
+    spread_element : *SpreadElementDO,
+    class_expression : *ClassExpressionDO,
+    omitted_expression : *OmittedExpressionDO,
+    expression_with_type_arguments : *ExpressionWithTypeArgumentsDO,
+    as_expression : *AsExpressionDO,
+    non_null_expression : *NonNullExpressionDO,
+    meta_property : *MetaPropertyDO,
+    satisfies_expression : *SatisfiesExpressionDO,
+    statement : *StatementDO,
+    block : *BlockDO,
+    block_statement : *BlockStatementDO,
+    empty_statement : *EmptyStatementDO,
+    variable_declaration : *VariableDeclarationDO,
+    variable_declaration_exclamation_token : *VariableDeclarationExclamationTokenDO,
+    variable_declaration_type_node : *VariableDeclarationTypeNodeDO,
+    variable_declaration_initializer : *VariableDeclarationInitializerDO,
+    variable_declaration_list : *VariableDeclarationListDO,
+    variable_declaration_list_declaration : *VariableDeclarationListDeclarationDO,
+    variable_statement : *VariableStatementDO,
+    expression_statement : *ExpressionStatementDO,
+    if_statement : *IfStatementDO,
+    if_statement_else_statement : *IfStatementElseStatementDO,
+    iteration_statement : *IterationStatementDO,
+    do_statement : *DoStatementDO,
+    while_statement : *WhileStatementDO,
+    for_statement : *ForStatementDO,
+    for_statement_initializer : *ForStatementInitializerDO,
+    for_statement_condition : *ForStatementConditionDO,
+    for_statement_incrementor : *ForStatementIncrementorDO,
+    for_in_statement : *ForInStatementDO,
+    for_of_statement : *ForOfStatementDO,
+    for_of_statement_await_modifier : *ForOfStatementAwaitModifierDO,
+    continue_statement : *ContinueStatementDO,
+    continue_statement_label : *ContinueStatementLabelDO,
+    break_statement : *BreakStatementDO,
+    break_statement_label : *BreakStatementLabelDO,
+    return_statement : *ReturnStatementDO,
+    return_statement_expression : *ReturnStatementExpressionDO,
+    with_statement : *WithStatementDO,
+    case_block : *CaseBlockDO,
+    case_block_clause : *CaseBlockClauseDO,
+    case_clause : *CaseClauseDO,
+    case_clause_statement : *CaseClauseStatementDO,
+    default_clause : *DefaultClauseDO,
+    default_clause_statement : *DefaultClauseStatementDO,
+    switch_statement : *SwitchStatementDO,
+    labeled_statement : *LabeledStatementDO,
+    throw_statement : *ThrowStatementDO,
+    try_statement : *TryStatementDO,
+    try_statement_finally_block : *TryStatementFinallyBlockDO,
+    catch_clause : *CatchClauseDO,
+    catch_clause_variable_declaration : *CatchClauseVariableDeclarationDO,
+    debugger_statement : *DebuggerStatementDO,
+    declaration_statement : *DeclarationStatementDO,
+    declaration_statement_name_node : *DeclarationStatementNameNodeDO,
+    function_declaration : *FunctionDeclarationDO,
+    function_declaration_name_node : *FunctionDeclarationNameNodeDO,
+    function_declaration_body : *FunctionDeclarationBodyDO,
+    class_declaration : *ClassDeclarationDO,
+    class_declaration_name_node : *ClassDeclarationNameNodeDO,
+    struct_declaration : *StructDeclarationDO,
+    struct_declaration_name_node : *StructDeclarationNameNodeDO,
+    heritage_clause : *HeritageClauseDO,
+    heritage_clause_type_node : *HeritageClauseTypeNodeDO,
+    interface_declaration : *InterfaceDeclarationDO,
+    interface_declaration_type_parameter : *InterfaceDeclarationTypeParameterDO,
+    interface_declaration_member : *InterfaceDeclarationMemberDO,
+    type_alias_declaration : *TypeAliasDeclarationDO,
+    type_alias_declaration_type_parameter : *TypeAliasDeclarationTypeParameterDO,
+    enum_declaration : *EnumDeclarationDO,
+    module_declaration : *ModuleDeclarationDO,
+    module_declaration_body : *ModuleDeclarationBodyDO,
+    module_block : *ModuleBlockDO,
+    module_block_statement : *ModuleBlockStatementDO,
+    namespace_export_declaration : *NamespaceExportDeclarationDO,
+    external_module_reference : *ExternalModuleReferenceDO,
+    import_equals_declaration : *ImportEqualsDeclarationDO,
+    namespace_import : *NamespaceImportDO,
+    import_specifier : *ImportSpecifierDO,
+    import_specifier_property_name_node : *ImportSpecifierPropertyNameNodeDO,
+    named_imports : *NamedImportsDO,
+    import_clause : *ImportClauseDO,
+    import_clause_name_node : *ImportClauseNameNodeDO,
+    import_clause_named_bindings : *ImportClauseNamedBindingsDO,
+    assert_entry : *AssertEntryDO,
+    assert_clause : *AssertClauseDO,
+    import_declaration : *ImportDeclarationDO,
+    import_declaration_assert_clause : *ImportDeclarationAssertClauseDO,
+    export_assignment : *ExportAssignmentDO,
+    export_specifier : *ExportSpecifierDO,
+    export_specifier_property_name_node : *ExportSpecifierPropertyNameNodeDO,
+    named_exports : *NamedExportsDO,
+    namespace_export : *NamespaceExportDO,
+    export_declaration : *ExportDeclarationDO,
+    export_declaration_export_clause : *ExportDeclarationExportClauseDO,
+    export_declaration_module_specifier : *ExportDeclarationModuleSpecifierDO,
+    export_declaration_assert_clause : *ExportDeclarationAssertClauseDO,
+    top_level : *TopLevelDO,
+    top_level_statement : *TopLevelStatementDO,
+    ast_node_container_relation : *AstNodeContainerRelationDO,
+    cfg_entry_node : *CfgEntryNodeDO,
+    cfg_exit_node : *CfgExitNodeDO,
+    symbol_ : *SymbolDO,
+    ast_node_symbol : *AstNodeSymbolDO,
+    shorthand_property_assignment_value_symbol : *ShorthandPropertyAssignmentValueSymbolDO,
+    type_ : *TypeDO,
+    ast_node_type : *AstNodeTypeDO,
+    call_site_declaration : *CallSiteDeclarationDO,
+    call_site_implementation : *CallSiteImplementationDO,
+    comment : *CommentDO,
+    ast_node_comment : *AstNodeCommentDO,
+    metadata : *MetadataDO,
+    ignored_path : *IgnoredPathDO
+}

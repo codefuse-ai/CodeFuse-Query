@@ -1,0 +1,2522 @@
+/**
+ * A Statement
+ */
+schema Statement extends AstNode {
+}
+
+impl Statement {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *Statement {
+        for (fa in AstNode(db)) {
+            for (son in StatementDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield Statement {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A Block
+ */
+schema Block extends Statement {
+}
+
+impl Block {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *Block {
+        for (fa in Statement(db)) {
+            for (son in BlockDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield Block {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Get the statement.
+     */
+    pub fn getStatement(self) -> *Statement {
+        for (blockStatement in BlockStatement(__all_data__)) {
+            if (blockStatement.block_id = self.id) {
+                yield blockStatement.getStatement()
+            }
+        }
+    }
+    
+
+    /**
+     * Gets the `i`th statement in this block.
+     */
+    pub fn getIthStatement(self, index: int) -> Statement {
+        for (blockStatement in BlockStatement(__all_data__)) {
+            if (self.id = blockStatement.block_id && blockStatement.getIndex() = index) {
+                return blockStatement.getStatement()
+            }
+        }
+    }
+
+    /**
+     * Gets the number of statements in this block.
+     */
+    pub fn getStatementCount(self) -> int {
+        return self.getStatement().len()
+    }
+}
+
+/**
+ * A BlockStatement
+ */
+schema BlockStatement {
+    @primary statement_id: int,
+    block_id: int,
+    index: int
+}
+
+impl BlockStatement {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *BlockStatement {
+        for (blockStatement in BlockStatementDO(db)) {
+            yield BlockStatement {
+                statement_id: blockStatement.statement_id,
+                block_id : blockStatement.block_id,
+                index : blockStatement.index
+            }
+        }
+    }
+    
+    /**
+     * Gets the statement.
+     */
+    pub fn getStatement(self) -> Statement {
+        for (statement in Statement(__all_data__)) {
+            if (self.statement_id = statement.id) {
+                return statement
+            }
+        }
+    }
+    
+    /**
+     * Gets the block.
+     */
+    pub fn getBlock(self) -> Block {
+        for (block in Block(__all_data__)) {
+            if (self.block_id = block.id) {
+                return block
+            }
+        }
+    }
+    
+    /**
+     * Gets the index.
+     */
+    pub fn getIndex(self) -> int {
+        return self.index
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.statement_id
+    }
+    
+}
+
+/**
+ * A EmptyStatement
+ */
+schema EmptyStatement extends Statement {
+}
+
+impl EmptyStatement {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *EmptyStatement {
+        for (fa in Statement(db)) {
+            for (son in EmptyStatementDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield EmptyStatement {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A VariableStatement
+ */
+schema VariableStatement extends Statement {
+    declaration_list_id: int
+}
+
+impl VariableStatement {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *VariableStatement {
+        for (fa in Statement(db)) {
+            for (son in VariableStatementDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield VariableStatement {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        declaration_list_id : son.declaration_list_id
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the declarationList.
+     */
+    pub fn getDeclarationList(self) -> VariableDeclarationList {
+        for (variableDeclarationList in VariableDeclarationList(__all_data__)) {
+            if (self.declaration_list_id = variableDeclarationList.id) {
+                return variableDeclarationList
+            }
+        }
+    }
+    
+    /**
+     * Get the modifiers.
+     */
+    pub fn getModifiers(self) -> *Modifier {
+        for (modifier in Modifier(__all_data__)) {
+            if (modifier.parent_id = self.id) {
+                yield modifier
+            }
+        }
+    }
+    
+}
+
+/**
+ * A ExpressionStatement
+ */
+schema ExpressionStatement extends Statement {
+    expression_id: int
+}
+
+impl ExpressionStatement {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ExpressionStatement {
+        for (fa in Statement(db)) {
+            for (son in ExpressionStatementDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield ExpressionStatement {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        expression_id : son.expression_id
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the expression.
+     */
+    pub fn getExpression(self) -> Expression {
+        for (expression in Expression(__all_data__)) {
+            if (self.expression_id = expression.id) {
+                return expression
+            }
+        }
+    }
+    
+}
+
+/**
+ * A IfStatement
+ */
+schema IfStatement extends Statement {
+    condition_id: int,
+    then_statement_id: int
+}
+
+impl IfStatement {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *IfStatement {
+        for (fa in Statement(db)) {
+            for (son in IfStatementDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield IfStatement {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        condition_id : son.condition_id,
+                        then_statement_id : son.then_statement_id
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the condition.
+     */
+    pub fn getCondition(self) -> Expression {
+        for (expression in Expression(__all_data__)) {
+            if (self.condition_id = expression.id) {
+                return expression
+            }
+        }
+    }
+    
+    /**
+     * Gets the thenStatement.
+     */
+    pub fn getThenStatement(self) -> Statement {
+        for (statement in Statement(__all_data__)) {
+            if (self.then_statement_id = statement.id) {
+                return statement
+            }
+        }
+    }
+    
+    /**
+     * Get the elseStatement.
+     */
+    pub fn getElseStatement(self) -> Statement {
+        for (ifStatementElseStatement in IfStatementElseStatement(__all_data__)) {
+            if (ifStatementElseStatement.if_statement_id = self.id) {
+                return ifStatementElseStatement.getElseStatement()
+            }
+        }
+    }
+    
+
+    /**
+     * Determine whether this if statement contains an else branch
+     */
+    pub fn hasElse(self) -> bool {
+        let (elseStatement = self.getElseStatement()) {
+            return true
+        }
+    }
+}
+
+/**
+ * A IfStatementElseStatement
+ */
+schema IfStatementElseStatement {
+    @primary if_statement_id: int,
+    else_statement_id: int
+}
+
+impl IfStatementElseStatement {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *IfStatementElseStatement {
+        for (ifStatementElseStatement in IfStatementElseStatementDO(db)) {
+            yield IfStatementElseStatement {
+                if_statement_id: ifStatementElseStatement.if_statement_id,
+                else_statement_id : ifStatementElseStatement.else_statement_id
+            }
+        }
+    }
+    
+    /**
+     * Gets the ifStatement.
+     */
+    pub fn getIfStatement(self) -> IfStatement {
+        for (ifStatement in IfStatement(__all_data__)) {
+            if (self.if_statement_id = ifStatement.id) {
+                return ifStatement
+            }
+        }
+    }
+    
+    /**
+     * Gets the elseStatement.
+     */
+    pub fn getElseStatement(self) -> Statement {
+        for (statement in Statement(__all_data__)) {
+            if (self.else_statement_id = statement.id) {
+                return statement
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.if_statement_id
+    }
+    
+}
+
+/**
+ * A IterationStatement
+ */
+schema IterationStatement extends Statement {
+    statement_id: int
+}
+
+impl IterationStatement {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *IterationStatement {
+        for (fa in Statement(db)) {
+            for (son in IterationStatementDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield IterationStatement {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        statement_id : son.statement_id
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the statement.
+     */
+    pub fn getStatement(self) -> Statement {
+        for (statement in Statement(__all_data__)) {
+            if (self.statement_id = statement.id) {
+                return statement
+            }
+        }
+    }
+    
+
+    /**
+     * Gets the body statement of this iteration statement.
+     */
+    pub fn getBody(self) -> Statement {
+        return self.getStatement()
+    }
+
+    /**
+     * Gets the condition expression of this iteration statement.
+     * Only a `while`, `do`-`while` and `for` statement has a condition.
+     */
+    pub fn getCondition(self) -> Expression {
+        for (whileStatement in WhileStatement(__all_data__)) {
+            if (whileStatement.key_eq(self)) {
+                return whileStatement.getCondition()
+            }
+        }
+        for (doWhileStatement in DoStatement(__all_data__)) {
+            if (doWhileStatement.key_eq(self)) {
+                return doWhileStatement.getCondition()
+            }
+        }
+        for (forStatement in ForStatement(__all_data__)) {
+            if (forStatement.key_eq(self)) {
+                return forStatement.getCondition()
+            }
+        }
+    }
+}
+
+/**
+ * A DoStatement
+ */
+schema DoStatement extends IterationStatement {
+    expression_id: int
+}
+
+impl DoStatement {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *DoStatement {
+        for (fa in IterationStatement(db)) {
+            for (son in DoStatementDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield DoStatement {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        statement_id : fa.statement_id,
+                        expression_id : son.expression_id
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the expression.
+     */
+    pub fn getExpression(self) -> Expression {
+        for (expression in Expression(__all_data__)) {
+            if (self.expression_id = expression.id) {
+                return expression
+            }
+        }
+    }
+    
+
+    /** 
+     * Gets the loop condition of this `do`-`while` loop. 
+     */
+    pub fn getCondition(self) -> Expression {
+        return self.getExpression()
+    }
+}
+
+/**
+ * A WhileStatement
+ */
+schema WhileStatement extends IterationStatement {
+    expression_id: int
+}
+
+impl WhileStatement {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *WhileStatement {
+        for (fa in IterationStatement(db)) {
+            for (son in WhileStatementDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield WhileStatement {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        statement_id : fa.statement_id,
+                        expression_id : son.expression_id
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the expression.
+     */
+    pub fn getExpression(self) -> Expression {
+        for (expression in Expression(__all_data__)) {
+            if (self.expression_id = expression.id) {
+                return expression
+            }
+        }
+    }
+    
+
+    /** 
+     * Gets the loop condition of this `while` loop. 
+     */
+    pub fn getCondition(self) -> Expression {
+        return self.getExpression()
+    }
+}
+
+/**
+ * A ForStatement
+ */
+schema ForStatement extends IterationStatement {
+}
+
+impl ForStatement {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ForStatement {
+        for (fa in IterationStatement(db)) {
+            for (son in ForStatementDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield ForStatement {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        statement_id : fa.statement_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Get the initializer.
+     */
+    pub fn getInitializer(self) -> ForInitializer {
+        for (forStatementInitializer in ForStatementInitializer(__all_data__)) {
+            if (forStatementInitializer.for_statement_id = self.id) {
+                return forStatementInitializer.getInitializer()
+            }
+        }
+    }
+    
+    /**
+     * Get the condition.
+     */
+    pub fn getCondition(self) -> Expression {
+        for (forStatementCondition in ForStatementCondition(__all_data__)) {
+            if (forStatementCondition.for_statement_id = self.id) {
+                return forStatementCondition.getCondition()
+            }
+        }
+    }
+    
+    /**
+     * Get the incrementor.
+     */
+    pub fn getIncrementor(self) -> Expression {
+        for (forStatementIncrementor in ForStatementIncrementor(__all_data__)) {
+            if (forStatementIncrementor.for_statement_id = self.id) {
+                return forStatementIncrementor.getIncrementor()
+            }
+        }
+    }
+    
+
+    /**
+     * Determine this ForStatement has condition expr.
+     */
+    pub fn hasCondition(self) -> bool {
+        let (condition = self.getCondition()) {
+            return true
+        }
+    }
+
+    /**
+     * Determine this ForStatement has incrementor expr.
+     */
+    pub fn hasIncrementor(self) -> bool {
+        let (incrementor = self.getIncrementor()) {
+            return true
+        }
+    }
+
+    /**
+     * Determine this ForStatement has initializer expr.
+     */
+    pub fn hasInitializer(self) -> bool {
+        let (initializer = self.getInitializer()) {
+            return true
+        }
+    }
+}
+
+/**
+ * A ForStatementInitializer
+ */
+schema ForStatementInitializer {
+    @primary for_statement_id: int,
+    initializer_id: int
+}
+
+impl ForStatementInitializer {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ForStatementInitializer {
+        for (forStatementInitializer in ForStatementInitializerDO(db)) {
+            yield ForStatementInitializer {
+                for_statement_id: forStatementInitializer.for_statement_id,
+                initializer_id : forStatementInitializer.initializer_id
+            }
+        }
+    }
+    
+    /**
+     * Gets the forStatement.
+     */
+    pub fn getForStatement(self) -> ForStatement {
+        for (forStatement in ForStatement(__all_data__)) {
+            if (self.for_statement_id = forStatement.id) {
+                return forStatement
+            }
+        }
+    }
+    
+    /**
+     * Gets the initializer.
+     */
+    pub fn getInitializer(self) -> ForInitializer {
+        for (forInitializer in ForInitializer(__all_data__)) {
+            if (self.initializer_id = forInitializer.id) {
+                return forInitializer
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.for_statement_id
+    }
+    
+}
+
+/**
+ * A ForStatementCondition
+ */
+schema ForStatementCondition {
+    @primary for_statement_id: int,
+    condition_id: int
+}
+
+impl ForStatementCondition {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ForStatementCondition {
+        for (forStatementCondition in ForStatementConditionDO(db)) {
+            yield ForStatementCondition {
+                for_statement_id: forStatementCondition.for_statement_id,
+                condition_id : forStatementCondition.condition_id
+            }
+        }
+    }
+    
+    /**
+     * Gets the forStatement.
+     */
+    pub fn getForStatement(self) -> ForStatement {
+        for (forStatement in ForStatement(__all_data__)) {
+            if (self.for_statement_id = forStatement.id) {
+                return forStatement
+            }
+        }
+    }
+    
+    /**
+     * Gets the condition.
+     */
+    pub fn getCondition(self) -> Expression {
+        for (expression in Expression(__all_data__)) {
+            if (self.condition_id = expression.id) {
+                return expression
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.for_statement_id
+    }
+    
+}
+
+/**
+ * A ForStatementIncrementor
+ */
+schema ForStatementIncrementor {
+    @primary for_statement_id: int,
+    incrementor_id: int
+}
+
+impl ForStatementIncrementor {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ForStatementIncrementor {
+        for (forStatementIncrementor in ForStatementIncrementorDO(db)) {
+            yield ForStatementIncrementor {
+                for_statement_id: forStatementIncrementor.for_statement_id,
+                incrementor_id : forStatementIncrementor.incrementor_id
+            }
+        }
+    }
+    
+    /**
+     * Gets the forStatement.
+     */
+    pub fn getForStatement(self) -> ForStatement {
+        for (forStatement in ForStatement(__all_data__)) {
+            if (self.for_statement_id = forStatement.id) {
+                return forStatement
+            }
+        }
+    }
+    
+    /**
+     * Gets the incrementor.
+     */
+    pub fn getIncrementor(self) -> Expression {
+        for (expression in Expression(__all_data__)) {
+            if (self.incrementor_id = expression.id) {
+                return expression
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.for_statement_id
+    }
+    
+}
+
+/**
+ * A ForInStatement
+ */
+schema ForInStatement extends IterationStatement {
+    initializer_id: int,
+    expression_id: int
+}
+
+impl ForInStatement {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ForInStatement {
+        for (fa in IterationStatement(db)) {
+            for (son in ForInStatementDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield ForInStatement {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        statement_id : fa.statement_id,
+                        initializer_id : son.initializer_id,
+                        expression_id : son.expression_id
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the initializer.
+     */
+    pub fn getInitializer(self) -> ForInitializer {
+        for (forInitializer in ForInitializer(__all_data__)) {
+            if (self.initializer_id = forInitializer.id) {
+                return forInitializer
+            }
+        }
+    }
+    
+    /**
+     * Gets the expression.
+     */
+    pub fn getExpression(self) -> Expression {
+        for (expression in Expression(__all_data__)) {
+            if (self.expression_id = expression.id) {
+                return expression
+            }
+        }
+    }
+    
+}
+
+/**
+ * A ForOfStatement
+ */
+schema ForOfStatement extends IterationStatement {
+    initializer_id: int,
+    expression_id: int
+}
+
+impl ForOfStatement {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ForOfStatement {
+        for (fa in IterationStatement(db)) {
+            for (son in ForOfStatementDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield ForOfStatement {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        statement_id : fa.statement_id,
+                        initializer_id : son.initializer_id,
+                        expression_id : son.expression_id
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the initializer.
+     */
+    pub fn getInitializer(self) -> ForInitializer {
+        for (forInitializer in ForInitializer(__all_data__)) {
+            if (self.initializer_id = forInitializer.id) {
+                return forInitializer
+            }
+        }
+    }
+    
+    /**
+     * Gets the expression.
+     */
+    pub fn getExpression(self) -> Expression {
+        for (expression in Expression(__all_data__)) {
+            if (self.expression_id = expression.id) {
+                return expression
+            }
+        }
+    }
+    
+    /**
+     * Get the awaitModifier.
+     */
+    pub fn getAwaitModifier(self) -> AwaitKeyword {
+        for (forOfStatementAwaitModifier in ForOfStatementAwaitModifier(__all_data__)) {
+            if (forOfStatementAwaitModifier.for_of_statement_id = self.id) {
+                return forOfStatementAwaitModifier.getAwaitModifier()
+            }
+        }
+    }
+    
+}
+
+/**
+ * A ForOfStatementAwaitModifier
+ */
+schema ForOfStatementAwaitModifier {
+    @primary for_of_statement_id: int,
+    await_modifier_id: int
+}
+
+impl ForOfStatementAwaitModifier {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ForOfStatementAwaitModifier {
+        for (forOfStatementAwaitModifier in ForOfStatementAwaitModifierDO(db)) {
+            yield ForOfStatementAwaitModifier {
+                for_of_statement_id: forOfStatementAwaitModifier.for_of_statement_id,
+                await_modifier_id : forOfStatementAwaitModifier.await_modifier_id
+            }
+        }
+    }
+    
+    /**
+     * Gets the forOfStatement.
+     */
+    pub fn getForOfStatement(self) -> ForOfStatement {
+        for (forOfStatement in ForOfStatement(__all_data__)) {
+            if (self.for_of_statement_id = forOfStatement.id) {
+                return forOfStatement
+            }
+        }
+    }
+    
+    /**
+     * Gets the awaitModifier.
+     */
+    pub fn getAwaitModifier(self) -> AwaitKeyword {
+        for (awaitKeyword in AwaitKeyword(__all_data__)) {
+            if (self.await_modifier_id = awaitKeyword.id) {
+                return awaitKeyword
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.for_of_statement_id
+    }
+    
+}
+
+/**
+ * A ContinueStatement
+ */
+schema ContinueStatement extends Statement {
+}
+
+impl ContinueStatement {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ContinueStatement {
+        for (fa in Statement(db)) {
+            for (son in ContinueStatementDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield ContinueStatement {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Get the label.
+     */
+    pub fn getLabel(self) -> Identifier {
+        for (continueStatementLabel in ContinueStatementLabel(__all_data__)) {
+            if (continueStatementLabel.continue_statement_id = self.id) {
+                return continueStatementLabel.getLabel()
+            }
+        }
+    }
+    
+}
+
+/**
+ * A ContinueStatementLabel
+ */
+schema ContinueStatementLabel {
+    @primary continue_statement_id: int,
+    label_id: int
+}
+
+impl ContinueStatementLabel {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ContinueStatementLabel {
+        for (continueStatementLabel in ContinueStatementLabelDO(db)) {
+            yield ContinueStatementLabel {
+                continue_statement_id: continueStatementLabel.continue_statement_id,
+                label_id : continueStatementLabel.label_id
+            }
+        }
+    }
+    
+    /**
+     * Gets the continueStatement.
+     */
+    pub fn getContinueStatement(self) -> ContinueStatement {
+        for (continueStatement in ContinueStatement(__all_data__)) {
+            if (self.continue_statement_id = continueStatement.id) {
+                return continueStatement
+            }
+        }
+    }
+    
+    /**
+     * Gets the label.
+     */
+    pub fn getLabel(self) -> Identifier {
+        for (identifier in Identifier(__all_data__)) {
+            if (self.label_id = identifier.id) {
+                return identifier
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.continue_statement_id
+    }
+    
+}
+
+/**
+ * A BreakStatement
+ */
+schema BreakStatement extends Statement {
+}
+
+impl BreakStatement {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *BreakStatement {
+        for (fa in Statement(db)) {
+            for (son in BreakStatementDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield BreakStatement {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Get the label.
+     */
+    pub fn getLabel(self) -> Identifier {
+        for (breakStatementLabel in BreakStatementLabel(__all_data__)) {
+            if (breakStatementLabel.break_statement_id = self.id) {
+                return breakStatementLabel.getLabel()
+            }
+        }
+    }
+    
+}
+
+/**
+ * A BreakStatementLabel
+ */
+schema BreakStatementLabel {
+    @primary break_statement_id: int,
+    label_id: int
+}
+
+impl BreakStatementLabel {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *BreakStatementLabel {
+        for (breakStatementLabel in BreakStatementLabelDO(db)) {
+            yield BreakStatementLabel {
+                break_statement_id: breakStatementLabel.break_statement_id,
+                label_id : breakStatementLabel.label_id
+            }
+        }
+    }
+    
+    /**
+     * Gets the breakStatement.
+     */
+    pub fn getBreakStatement(self) -> ContinueStatement {
+        for (continueStatement in ContinueStatement(__all_data__)) {
+            if (self.break_statement_id = continueStatement.id) {
+                return continueStatement
+            }
+        }
+    }
+    
+    /**
+     * Gets the label.
+     */
+    pub fn getLabel(self) -> Identifier {
+        for (identifier in Identifier(__all_data__)) {
+            if (self.label_id = identifier.id) {
+                return identifier
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.break_statement_id
+    }
+    
+}
+
+/**
+ * A ReturnStatement
+ */
+schema ReturnStatement extends Statement {
+}
+
+impl ReturnStatement {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ReturnStatement {
+        for (fa in Statement(db)) {
+            for (son in ReturnStatementDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield ReturnStatement {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Get the expression.
+     */
+    pub fn getExpression(self) -> Expression {
+        for (returnStatementExpression in ReturnStatementExpression(__all_data__)) {
+            if (returnStatementExpression.return_statement_id = self.id) {
+                return returnStatementExpression.getExpression()
+            }
+        }
+    }
+    
+}
+
+/**
+ * A ReturnStatementExpression
+ */
+schema ReturnStatementExpression {
+    @primary return_statement_id: int,
+    expression_id: int
+}
+
+impl ReturnStatementExpression {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ReturnStatementExpression {
+        for (returnStatementExpression in ReturnStatementExpressionDO(db)) {
+            yield ReturnStatementExpression {
+                return_statement_id: returnStatementExpression.return_statement_id,
+                expression_id : returnStatementExpression.expression_id
+            }
+        }
+    }
+    
+    /**
+     * Gets the returnStatement.
+     */
+    pub fn getReturnStatement(self) -> ReturnStatement {
+        for (returnStatement in ReturnStatement(__all_data__)) {
+            if (self.return_statement_id = returnStatement.id) {
+                return returnStatement
+            }
+        }
+    }
+    
+    /**
+     * Gets the expression.
+     */
+    pub fn getExpression(self) -> Expression {
+        for (expression in Expression(__all_data__)) {
+            if (self.expression_id = expression.id) {
+                return expression
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.return_statement_id
+    }
+    
+}
+
+/**
+ * A WithStatement
+ */
+schema WithStatement extends Statement {
+    expression_id: int,
+    statement_id: int
+}
+
+impl WithStatement {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *WithStatement {
+        for (fa in Statement(db)) {
+            for (son in WithStatementDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield WithStatement {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        expression_id : son.expression_id,
+                        statement_id : son.statement_id
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the expression.
+     */
+    pub fn getExpression(self) -> Expression {
+        for (expression in Expression(__all_data__)) {
+            if (self.expression_id = expression.id) {
+                return expression
+            }
+        }
+    }
+    
+    /**
+     * Gets the statement.
+     */
+    pub fn getStatement(self) -> Statement {
+        for (statement in Statement(__all_data__)) {
+            if (self.statement_id = statement.id) {
+                return statement
+            }
+        }
+    }
+    
+}
+
+/**
+ * A CaseBlock
+ */
+schema CaseBlock extends AstNode {
+}
+
+impl CaseBlock {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *CaseBlock {
+        for (fa in AstNode(db)) {
+            for (son in CaseBlockDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield CaseBlock {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Get the clause.
+     */
+    pub fn getClause(self) -> *CaseOrDefaultClause {
+        for (caseBlockClause in CaseBlockClause(__all_data__)) {
+            if (caseBlockClause.case_block_id = self.id) {
+                yield caseBlockClause.getClause()
+            }
+        }
+    }
+    
+
+    /**
+     * Gets the `i`th `case` clause of this `switch`-`case` block.
+     * index starts from 0.
+     */
+    pub fn getIthCaseClause(self, index: int) -> CaseClause {
+        for (caseBlockClause in CaseBlockClause(__all_data__), 
+            caseClause in CaseClause(__all_data__)) {
+            if (caseBlockClause.case_block_id = self.id && caseBlockClause.getIndex() = index) {
+                if (caseClause.key_eq(caseBlockClause.getClause())) {
+                    return caseClause
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets the `default` clause of this `switch`-`case` block.
+     */
+    pub fn getDefaultClause(self) -> DefaultClause {
+        for (defaultClause in DefaultClause(__all_data__),
+            caseOrDefaultClause in CaseOrDefaultClause(__all_data__)) {
+            if (caseOrDefaultClause in self.getClause()) {
+                if (defaultClause.key_eq(caseOrDefaultClause)) {
+                    return defaultClause
+                }
+            }
+        }
+    }
+
+    /**
+     * Determine whether this CaseBlock has a DefaultClause.
+     */
+    pub fn hasDefaultClause(self) -> bool {
+        let (defaultClause = self.getDefaultClause()) {
+            return true
+        }
+    }
+
+    /**
+     * Gets CaseClause or DefaultClause of this CaseBlock.
+     */
+    pub fn getCaseOrDefault(self) -> *Statement {
+        for (statement in Statement(__all_data__),
+            caseOrDefaultClause in CaseOrDefaultClause(__all_data__)) {
+            if (caseOrDefaultClause.key_eq(statement)) {
+                if (caseOrDefaultClause in self.getClause()) {
+                    yield statement
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets the CaseClause count of this CaseBlock.
+     */
+    pub fn getCaseClauseCount(self) -> int {
+        return self.getClause().len()
+    }
+}
+
+/**
+ * A SwitchStatement
+ */
+schema SwitchStatement extends Statement {
+    expression_id: int,
+    case_block_id: int
+}
+
+impl SwitchStatement {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *SwitchStatement {
+        for (fa in Statement(db)) {
+            for (son in SwitchStatementDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield SwitchStatement {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        expression_id : son.expression_id,
+                        case_block_id : son.case_block_id
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the expression.
+     */
+    pub fn getExpression(self) -> Expression {
+        for (expression in Expression(__all_data__)) {
+            if (self.expression_id = expression.id) {
+                return expression
+            }
+        }
+    }
+    
+    /**
+     * Gets the caseBlock.
+     */
+    pub fn getCaseBlock(self) -> CaseBlock {
+        for (caseBlock in CaseBlock(__all_data__)) {
+            if (self.case_block_id = caseBlock.id) {
+                return caseBlock
+            }
+        }
+    }
+    
+}
+
+/**
+ * A LabeledStatement
+ */
+schema LabeledStatement extends Statement {
+    label_id: int,
+    statement_id: int
+}
+
+impl LabeledStatement {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *LabeledStatement {
+        for (fa in Statement(db)) {
+            for (son in LabeledStatementDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield LabeledStatement {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        label_id : son.label_id,
+                        statement_id : son.statement_id
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the label.
+     */
+    pub fn getLabel(self) -> Identifier {
+        for (identifier in Identifier(__all_data__)) {
+            if (self.label_id = identifier.id) {
+                return identifier
+            }
+        }
+    }
+    
+    /**
+     * Gets the statement.
+     */
+    pub fn getStatement(self) -> Statement {
+        for (statement in Statement(__all_data__)) {
+            if (self.statement_id = statement.id) {
+                return statement
+            }
+        }
+    }
+    
+}
+
+/**
+ * A ThrowStatement
+ */
+schema ThrowStatement extends Statement {
+    expression_id: int
+}
+
+impl ThrowStatement {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ThrowStatement {
+        for (fa in Statement(db)) {
+            for (son in ThrowStatementDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield ThrowStatement {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        expression_id : son.expression_id
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the expression.
+     */
+    pub fn getExpression(self) -> Expression {
+        for (expression in Expression(__all_data__)) {
+            if (self.expression_id = expression.id) {
+                return expression
+            }
+        }
+    }
+    
+}
+
+/**
+ * A TryStatement
+ */
+schema TryStatement extends Statement {
+    try_block_id: int
+}
+
+impl TryStatement {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *TryStatement {
+        for (fa in Statement(db)) {
+            for (son in TryStatementDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield TryStatement {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        try_block_id : son.try_block_id
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the tryBlock.
+     */
+    pub fn getTryBlock(self) -> Block {
+        for (block in Block(__all_data__)) {
+            if (self.try_block_id = block.id) {
+                return block
+            }
+        }
+    }
+    
+    /**
+     * Get the finallyBlock.
+     */
+    pub fn getFinallyBlock(self) -> Block {
+        for (tryStatementFinallyBlock in TryStatementFinallyBlock(__all_data__)) {
+            if (tryStatementFinallyBlock.try_statement_id = self.id) {
+                return tryStatementFinallyBlock.getFinallyBlock()
+            }
+        }
+    }
+    
+
+    /** 
+     * Gets the `catch` clause of this `try` statement, if any. 
+     */
+    pub fn getCatchClause(self) -> CatchClause {
+        for (catchClause in CatchClause(__all_data__)) {
+            for (astNode in AstNode(__all_data__)) {
+                if (astNode in self.getChild()) {
+                    if (catchClause.key_eq(astNode)) {
+                        return catchClause
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Determine whether this TryStatement has finally block or not.
+     */
+    pub fn hasFinallyBlock(self) -> bool {
+        let (finallyBlock = self.getFinallyBlock()) {
+            return true
+        }
+    }
+}
+
+/**
+ * A TryStatementFinallyBlock
+ */
+schema TryStatementFinallyBlock {
+    @primary try_statement_id: int,
+    finally_block_id: int
+}
+
+impl TryStatementFinallyBlock {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *TryStatementFinallyBlock {
+        for (tryStatementFinallyBlock in TryStatementFinallyBlockDO(db)) {
+            yield TryStatementFinallyBlock {
+                try_statement_id: tryStatementFinallyBlock.try_statement_id,
+                finally_block_id : tryStatementFinallyBlock.finally_block_id
+            }
+        }
+    }
+    
+    /**
+     * Gets the tryStatement.
+     */
+    pub fn getTryStatement(self) -> TryStatement {
+        for (tryStatement in TryStatement(__all_data__)) {
+            if (self.try_statement_id = tryStatement.id) {
+                return tryStatement
+            }
+        }
+    }
+    
+    /**
+     * Gets the finallyBlock.
+     */
+    pub fn getFinallyBlock(self) -> Block {
+        for (block in Block(__all_data__)) {
+            if (self.finally_block_id = block.id) {
+                return block
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.try_statement_id
+    }
+    
+}
+
+/**
+ * A DebuggerStatement
+ */
+schema DebuggerStatement extends Statement {
+}
+
+impl DebuggerStatement {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *DebuggerStatement {
+        for (fa in Statement(db)) {
+            for (son in DebuggerStatementDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield DebuggerStatement {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A DeclarationStatement
+ */
+schema DeclarationStatement extends Declaration {
+}
+
+impl DeclarationStatement {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *DeclarationStatement {
+        for (fa in Declaration(db)) {
+            for (son in DeclarationStatementDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield DeclarationStatement {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * trans to Statement to use func.
+     */
+    pub fn toStatement(self) -> Statement {
+        for (statement in Statement(__all_data__)) {
+            if (self.id = statement.id) {
+                return statement
+            }
+        }
+    }
+    
+    /**
+     * Get the nameNode.
+     */
+    pub fn getNameNode(self) -> DeclarationStatementNameNodeType {
+        for (declarationStatementNameNode in DeclarationStatementNameNode(__all_data__)) {
+            if (declarationStatementNameNode.declaration_statement_id = self.id) {
+                return declarationStatementNameNode.getNameNode()
+            }
+        }
+    }
+    
+}
+
+/**
+ * A DeclarationStatementNameNode
+ */
+schema DeclarationStatementNameNode {
+    @primary declaration_statement_id: int,
+    name_node_id: int
+}
+
+impl DeclarationStatementNameNode {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *DeclarationStatementNameNode {
+        for (declarationStatementNameNode in DeclarationStatementNameNodeDO(db)) {
+            yield DeclarationStatementNameNode {
+                declaration_statement_id: declarationStatementNameNode.declaration_statement_id,
+                name_node_id : declarationStatementNameNode.name_node_id
+            }
+        }
+    }
+    
+    /**
+     * Gets the declarationStatement.
+     */
+    pub fn getDeclarationStatement(self) -> DeclarationStatement {
+        for (declarationStatement in DeclarationStatement(__all_data__)) {
+            if (self.declaration_statement_id = declarationStatement.id) {
+                return declarationStatement
+            }
+        }
+    }
+    
+    /**
+     * Gets the nameNode.
+     */
+    pub fn getNameNode(self) -> DeclarationStatementNameNodeType {
+        for (declarationStatementNameNodeType in DeclarationStatementNameNodeType(__all_data__)) {
+            if (self.name_node_id = declarationStatementNameNodeType.id) {
+                return declarationStatementNameNodeType
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.declaration_statement_id
+    }
+    
+}
+
+/**
+ * A ModuleBlock
+ */
+schema ModuleBlock extends Statement {
+}
+
+impl ModuleBlock {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ModuleBlock {
+        for (fa in Statement(db)) {
+            for (son in ModuleBlockDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield ModuleBlock {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Get the statement.
+     */
+    pub fn getStatement(self) -> *Statement {
+        for (moduleBlockStatement in ModuleBlockStatement(__all_data__)) {
+            if (moduleBlockStatement.module_block_id = self.id) {
+                yield moduleBlockStatement.getStatement()
+            }
+        }
+    }
+    
+}
+
+/**
+ * A ModuleBlockStatement
+ */
+schema ModuleBlockStatement {
+    @primary statement_id: int,
+    module_block_id: int,
+    index: int
+}
+
+impl ModuleBlockStatement {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ModuleBlockStatement {
+        for (moduleBlockStatement in ModuleBlockStatementDO(db)) {
+            yield ModuleBlockStatement {
+                statement_id: moduleBlockStatement.statement_id,
+                module_block_id : moduleBlockStatement.module_block_id,
+                index : moduleBlockStatement.index
+            }
+        }
+    }
+    
+    /**
+     * Gets the statement.
+     */
+    pub fn getStatement(self) -> Statement {
+        for (statement in Statement(__all_data__)) {
+            if (self.statement_id = statement.id) {
+                return statement
+            }
+        }
+    }
+    
+    /**
+     * Gets the moduleBlock.
+     */
+    pub fn getModuleBlock(self) -> ModuleBlock {
+        for (moduleBlock in ModuleBlock(__all_data__)) {
+            if (self.module_block_id = moduleBlock.id) {
+                return moduleBlock
+            }
+        }
+    }
+    
+    /**
+     * Gets the index.
+     */
+    pub fn getIndex(self) -> int {
+        return self.index
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.statement_id
+    }
+    
+}
+
+/**
+ * A TopLevelStatement
+ */
+schema TopLevelStatement {
+    @primary statement_id: int,
+    top_level_id: int,
+    index: int
+}
+
+impl TopLevelStatement {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *TopLevelStatement {
+        for (topLevelStatement in TopLevelStatementDO(db)) {
+            yield TopLevelStatement {
+                statement_id: topLevelStatement.statement_id,
+                top_level_id : topLevelStatement.top_level_id,
+                index : topLevelStatement.index
+            }
+        }
+    }
+    
+    /**
+     * Gets the statement.
+     */
+    pub fn getStatement(self) -> Statement {
+        for (statement in Statement(__all_data__)) {
+            if (self.statement_id = statement.id) {
+                return statement
+            }
+        }
+    }
+    
+    /**
+     * Gets the topLevel.
+     */
+    pub fn getTopLevel(self) -> TopLevel {
+        for (topLevel in TopLevel(__all_data__)) {
+            if (self.top_level_id = topLevel.id) {
+                return topLevel
+            }
+        }
+    }
+    
+    /**
+     * Gets the index.
+     */
+    pub fn getIndex(self) -> int {
+        return self.index
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.statement_id
+    }
+    
+}
+
+/**
+ * This type consists of the following types: [VariableDeclarationList, Expression]
+ */
+schema ForInitializer extends AstNode {
+}
+
+impl ForInitializer {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ForInitializer {
+        for (forInitializer in VariableDeclarationList(db)) {
+            for (init in ForStatementInitializer(db)) {
+                if (init.initializer_id = forInitializer.id) {
+                    yield ForInitializer {
+                        id : forInitializer.id,
+                        kind : forInitializer.kind,
+                        parent_id : forInitializer.parent_id,
+                        parent_kind : forInitializer.parent_kind,
+                        index : forInitializer.index,
+                        location_id : forInitializer.location_id,
+                    }
+                }
+            }
+            for (init in ForInStatement(db)) {
+                if (init.initializer_id = forInitializer.id) {
+                    yield ForInitializer {
+                        id : forInitializer.id,
+                        kind : forInitializer.kind,
+                        parent_id : forInitializer.parent_id,
+                        parent_kind : forInitializer.parent_kind,
+                        index : forInitializer.index,
+                        location_id : forInitializer.location_id,
+                    }
+                }
+            }
+            for (init in ForOfStatement(db)) {
+                if (init.initializer_id = forInitializer.id) {
+                    yield ForInitializer {
+                        id : forInitializer.id,
+                        kind : forInitializer.kind,
+                        parent_id : forInitializer.parent_id,
+                        parent_kind : forInitializer.parent_kind,
+                        index : forInitializer.index,
+                        location_id : forInitializer.location_id,
+                    }
+                }
+            }
+        }
+        for (forInitializer in Expression(db)) {
+            for (init in ForStatementInitializer(db)) {
+                if (init.initializer_id = forInitializer.id) {
+                    yield ForInitializer {
+                        id : forInitializer.id,
+                        kind : forInitializer.kind,
+                        parent_id : forInitializer.parent_id,
+                        parent_kind : forInitializer.parent_kind,
+                        index : forInitializer.index,
+                        location_id : forInitializer.location_id,
+                    }
+                }
+            }
+            for (init in ForInStatement(db)) {
+                if (init.initializer_id = forInitializer.id) {
+                    yield ForInitializer {
+                        id : forInitializer.id,
+                        kind : forInitializer.kind,
+                        parent_id : forInitializer.parent_id,
+                        parent_kind : forInitializer.parent_kind,
+                        index : forInitializer.index,
+                        location_id : forInitializer.location_id,
+                    }
+                }
+            }
+            for (init in ForOfStatement(db)) {
+                if (init.initializer_id = forInitializer.id) {
+                    yield ForInitializer {
+                        id : forInitializer.id,
+                        kind : forInitializer.kind,
+                        parent_id : forInitializer.parent_id,
+                        parent_kind : forInitializer.parent_kind,
+                        index : forInitializer.index,
+                        location_id : forInitializer.location_id,
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * trans to VariableDeclarationList
+     */
+    pub fn toVariableDeclarationList(self) -> VariableDeclarationList {
+        for (variableDeclarationList in VariableDeclarationList(__all_data__)) {
+            if (variableDeclarationList.key_eq(self)) {
+                return variableDeclarationList
+            }
+        }
+    }
+    
+    /**
+     * trans to Expression
+     */
+    pub fn toExpression(self) -> Expression {
+        for (expression in Expression(__all_data__)) {
+            if (expression.key_eq(self)) {
+                return expression
+            }
+        }
+    }
+    
+}
+
+/**
+ * This type consists of the following types: [ForInStatement, ForOfStatement]
+ */
+schema ForInOrOfStatement extends AstNode {
+}
+
+impl ForInOrOfStatement {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ForInOrOfStatement {
+        for (forInStatement in ForInStatement(db)) {
+            yield ForInOrOfStatement {
+                id : forInStatement.id,
+                kind : forInStatement.kind,
+                parent_id : forInStatement.parent_id,
+                parent_kind : forInStatement.parent_kind,
+                index : forInStatement.index,
+                location_id : forInStatement.location_id,
+            }
+        }
+        for (forOfStatement in ForOfStatement(db)) {
+            yield ForInOrOfStatement {
+                id : forOfStatement.id,
+                kind : forOfStatement.kind,
+                parent_id : forOfStatement.parent_id,
+                parent_kind : forOfStatement.parent_kind,
+                index : forOfStatement.index,
+                location_id : forOfStatement.location_id,
+            }
+        }
+    }
+
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * trans to ForInStatement
+     */
+    pub fn toForInStatement(self) -> ForInStatement {
+        for (forInStatement in ForInStatement(__all_data__)) {
+            if (forInStatement.key_eq(self)) {
+                return forInStatement
+            }
+        }
+    }
+    
+    /**
+     * trans to ForOfStatement
+     */
+    pub fn toForOfStatement(self) -> ForOfStatement {
+        for (forOfStatement in ForOfStatement(__all_data__)) {
+            if (forOfStatement.key_eq(self)) {
+                return forOfStatement
+            }
+        }
+    }
+    
+}
+
+/**
+ * This type consists of the following types: [ContinueStatement, BreakStatement]
+ */
+schema BreakOrContinueStatement extends AstNode {
+}
+
+impl BreakOrContinueStatement {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *BreakOrContinueStatement {
+        for (continueStatement in ContinueStatement(db)) {
+            yield BreakOrContinueStatement {
+                id : continueStatement.id,
+                kind : continueStatement.kind,
+                parent_id : continueStatement.parent_id,
+                parent_kind : continueStatement.parent_kind,
+                index : continueStatement.index,
+                location_id : continueStatement.location_id,
+            }
+        }
+        for (breakStatement in BreakStatement(db)) {
+            yield BreakOrContinueStatement {
+                id : breakStatement.id,
+                kind : breakStatement.kind,
+                parent_id : breakStatement.parent_id,
+                parent_kind : breakStatement.parent_kind,
+                index : breakStatement.index,
+                location_id : breakStatement.location_id,
+            }
+        }
+    }
+
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * trans to ContinueStatement
+     */
+    pub fn toContinueStatement(self) -> ContinueStatement {
+        for (continueStatement in ContinueStatement(__all_data__)) {
+            if (continueStatement.key_eq(self)) {
+                return continueStatement
+            }
+        }
+    }
+    
+    /**
+     * trans to BreakStatement
+     */
+    pub fn toBreakStatement(self) -> BreakStatement {
+        for (breakStatement in BreakStatement(__all_data__)) {
+            if (breakStatement.key_eq(self)) {
+                return breakStatement
+            }
+        }
+    }
+    
+}
+
+/**
+ * This type consists of the following types: [Identifier, StringLiteral, NumericLiteral]
+ */
+schema DeclarationStatementNameNodeType extends AstNode {
+}
+
+impl DeclarationStatementNameNodeType {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *DeclarationStatementNameNodeType {
+        for (identifier in Identifier(db)) {
+            yield DeclarationStatementNameNodeType {
+                id : identifier.id,
+                kind : identifier.kind,
+                parent_id : identifier.parent_id,
+                parent_kind : identifier.parent_kind,
+                index : identifier.index,
+                location_id : identifier.location_id,
+            }
+        }
+        for (stringLiteral in StringLiteral(db)) {
+            yield DeclarationStatementNameNodeType {
+                id : stringLiteral.id,
+                kind : stringLiteral.kind,
+                parent_id : stringLiteral.parent_id,
+                parent_kind : stringLiteral.parent_kind,
+                index : stringLiteral.index,
+                location_id : stringLiteral.location_id,
+            }
+        }
+        for (numericLiteral in NumericLiteral(db)) {
+            yield DeclarationStatementNameNodeType {
+                id : numericLiteral.id,
+                kind : numericLiteral.kind,
+                parent_id : numericLiteral.parent_id,
+                parent_kind : numericLiteral.parent_kind,
+                index : numericLiteral.index,
+                location_id : numericLiteral.location_id,
+            }
+        }
+    }
+
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * trans to Identifier
+     */
+    pub fn toIdentifier(self) -> Identifier {
+        for (identifier in Identifier(__all_data__)) {
+            if (identifier.key_eq(self)) {
+                return identifier
+            }
+        }
+    }
+    
+    /**
+     * trans to StringLiteral
+     */
+    pub fn toStringLiteral(self) -> StringLiteral {
+        for (stringLiteral in StringLiteral(__all_data__)) {
+            if (stringLiteral.key_eq(self)) {
+                return stringLiteral
+            }
+        }
+    }
+    
+    /**
+     * trans to NumericLiteral
+     */
+    pub fn toNumericLiteral(self) -> NumericLiteral {
+        for (numericLiteral in NumericLiteral(__all_data__)) {
+            if (numericLiteral.key_eq(self)) {
+                return numericLiteral
+            }
+        }
+    }
+    
+}
+
+/**
+ * A `for`-`in` or `for`-`of` loop.
+ */
+schema EnhancedForStatement extends IterationStatement {
+}
+
+impl EnhancedForStatement {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *EnhancedForStatement {
+        for (enhancedForStatement in IterationStatement(db)) {
+            if (isEnhancedForStatement(enhancedForStatement.to<AstNode>())) {
+                yield EnhancedForStatement {
+                    id : enhancedForStatement.id,
+                    kind : enhancedForStatement.kind,
+                    parent_id : enhancedForStatement.parent_id,
+                    parent_kind : enhancedForStatement.parent_kind,
+                    index : enhancedForStatement.index,
+                    location_id : enhancedForStatement.location_id,
+                    statement_id : enhancedForStatement.statement_id
+                }
+            }
+        }
+    }
+
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+
+    /**
+     * Gets the iterator of this `for`-`in` or `for`-`of` loop.
+     */
+    pub fn getInitializer(self) -> ForInitializer {
+        for (forStmt in ForInStatement(__all_data__)) {
+            if (self.key_eq(forStmt)) {
+                return forStmt.getInitializer()
+            }
+        }
+        for (forStmt in ForOfStatement(__all_data__)) {
+            if (self.key_eq(forStmt)) {
+                return forStmt.getInitializer()
+            }
+        }
+    }
+
+    /**
+     * Gets the expression over which this `for`-`in` or `for`-`of` loop iterates.
+     */
+    pub fn getExpression(self) -> Expression {
+        for (forStmt in ForInStatement(__all_data__)) {
+            if (self.key_eq(forStmt)) {
+                return forStmt.getExpression()
+            }
+        }
+        for (forStmt in ForOfStatement(__all_data__)) {
+            if (self.key_eq(forStmt)) {
+                return forStmt.getExpression()
+            }
+        }
+    }
+
+}
+

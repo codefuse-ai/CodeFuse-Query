@@ -1,0 +1,11 @@
+{
+  "apiVersion": "12",
+  "displayName": "Ets",
+  "meta": {
+    "metaVersion": "3.1.0"
+  },
+  "path": "ets",
+  "platformVersion": "5.0.0",
+  "releaseType": "Canary4",
+  "version": "5.0.0.25"
+}

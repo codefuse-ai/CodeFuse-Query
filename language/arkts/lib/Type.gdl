@@ -1,0 +1,3736 @@
+/**
+ * A TypeNode
+ */
+schema TypeNode extends AstNode {
+}
+
+impl TypeNode {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *TypeNode {
+        for (fa in AstNode(db)) {
+            for (son in TypeNodeDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield TypeNode {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A AnyType
+ */
+schema AnyType extends TypeNode {
+}
+
+impl AnyType {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *AnyType {
+        for (fa in TypeNode(db)) {
+            for (son in AnyTypeDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield AnyType {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A BigIntType
+ */
+schema BigIntType extends TypeNode {
+}
+
+impl BigIntType {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *BigIntType {
+        for (fa in TypeNode(db)) {
+            for (son in BigIntTypeDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield BigIntType {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A BooleanType
+ */
+schema BooleanType extends TypeNode {
+}
+
+impl BooleanType {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *BooleanType {
+        for (fa in TypeNode(db)) {
+            for (son in BooleanTypeDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield BooleanType {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A IntrinsicType
+ */
+schema IntrinsicType extends TypeNode {
+}
+
+impl IntrinsicType {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *IntrinsicType {
+        for (fa in TypeNode(db)) {
+            for (son in IntrinsicTypeDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield IntrinsicType {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A NeverType
+ */
+schema NeverType extends TypeNode {
+}
+
+impl NeverType {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *NeverType {
+        for (fa in TypeNode(db)) {
+            for (son in NeverTypeDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield NeverType {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A NumberType
+ */
+schema NumberType extends TypeNode {
+}
+
+impl NumberType {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *NumberType {
+        for (fa in TypeNode(db)) {
+            for (son in NumberTypeDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield NumberType {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A ObjectType
+ */
+schema ObjectType extends TypeNode {
+}
+
+impl ObjectType {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ObjectType {
+        for (fa in TypeNode(db)) {
+            for (son in ObjectTypeDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield ObjectType {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A StringType
+ */
+schema StringType extends TypeNode {
+}
+
+impl StringType {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *StringType {
+        for (fa in TypeNode(db)) {
+            for (son in StringTypeDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield StringType {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A SymbolType
+ */
+schema SymbolType extends TypeNode {
+}
+
+impl SymbolType {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *SymbolType {
+        for (fa in TypeNode(db)) {
+            for (son in SymbolTypeDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield SymbolType {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A UndefinedType
+ */
+schema UndefinedType extends TypeNode {
+}
+
+impl UndefinedType {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *UndefinedType {
+        for (fa in TypeNode(db)) {
+            for (son in UndefinedTypeDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield UndefinedType {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A UnknownType
+ */
+schema UnknownType extends TypeNode {
+}
+
+impl UnknownType {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *UnknownType {
+        for (fa in TypeNode(db)) {
+            for (son in UnknownTypeDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield UnknownType {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A VoidType
+ */
+schema VoidType extends TypeNode {
+}
+
+impl VoidType {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *VoidType {
+        for (fa in TypeNode(db)) {
+            for (son in VoidTypeDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield VoidType {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A TypeParameter
+ */
+schema TypeParameter extends Declaration {
+    name_node_id: int
+}
+
+impl TypeParameter {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *TypeParameter {
+        for (fa in Declaration(db)) {
+            for (son in TypeParameterDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield TypeParameter {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        name_node_id : son.name_node_id
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the nameNode.
+     */
+    pub fn getNameNode(self) -> Identifier {
+        for (identifier in Identifier(__all_data__)) {
+            if (self.name_node_id = identifier.id) {
+                return identifier
+            }
+        }
+    }
+    
+    /**
+     * Get the modifiers.
+     */
+    pub fn getModifiers(self) -> *Modifier {
+        for (modifier in Modifier(__all_data__)) {
+            if (modifier.parent_id = self.id) {
+                yield modifier
+            }
+        }
+    }
+    
+}
+
+/**
+ * A TypeParameterConstraint
+ */
+schema TypeParameterConstraint {
+    @primary type_parameter_id: int,
+    constraint_id: int
+}
+
+impl TypeParameterConstraint {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *TypeParameterConstraint {
+        for (typeParameterConstraint in TypeParameterConstraintDO(db)) {
+            yield TypeParameterConstraint {
+                type_parameter_id: typeParameterConstraint.type_parameter_id,
+                constraint_id : typeParameterConstraint.constraint_id
+            }
+        }
+    }
+    
+    /**
+     * Gets the typeParameter.
+     */
+    pub fn getTypeParameter(self) -> TypeParameter {
+        for (typeParameter in TypeParameter(__all_data__)) {
+            if (self.type_parameter_id = typeParameter.id) {
+                return typeParameter
+            }
+        }
+    }
+    
+    /**
+     * Gets the constraint.
+     */
+    pub fn getConstraint(self) -> TypeNode {
+        for (typeNode in TypeNode(__all_data__)) {
+            if (self.constraint_id = typeNode.id) {
+                return typeNode
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.type_parameter_id
+    }
+    
+}
+
+/**
+ * A TypeParameterDefault
+ */
+schema TypeParameterDefault {
+    @primary type_parameter_id: int,
+    default_id: int
+}
+
+impl TypeParameterDefault {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *TypeParameterDefault {
+        for (typeParameterDefault in TypeParameterDefaultDO(db)) {
+            yield TypeParameterDefault {
+                type_parameter_id: typeParameterDefault.type_parameter_id,
+                default_id : typeParameterDefault.default_id
+            }
+        }
+    }
+    
+    /**
+     * Gets the typeParameter.
+     */
+    pub fn getTypeParameter(self) -> TypeParameter {
+        for (typeParameter in TypeParameter(__all_data__)) {
+            if (self.type_parameter_id = typeParameter.id) {
+                return typeParameter
+            }
+        }
+    }
+    
+    /**
+     * Gets the default.
+     */
+    pub fn getDefault(self) -> TypeNode {
+        for (typeNode in TypeNode(__all_data__)) {
+            if (self.default_id = typeNode.id) {
+                return typeNode
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.type_parameter_id
+    }
+    
+}
+
+/**
+ * A TypeElement
+ */
+schema TypeElement extends Declaration {
+}
+
+impl TypeElement {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *TypeElement {
+        for (fa in Declaration(db)) {
+            for (son in TypeElementDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield TypeElement {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Get the nameNode.
+     */
+    pub fn getNameNode(self) -> PropertyName {
+        for (typeElementNameNode in TypeElementNameNode(__all_data__)) {
+            if (typeElementNameNode.type_element_id = self.id) {
+                return typeElementNameNode.getNameNode()
+            }
+        }
+    }
+    
+    /**
+     * Get the questionToken.
+     */
+    pub fn getQuestionToken(self) -> QuestionToken {
+        for (typeElementQuestionToken in TypeElementQuestionToken(__all_data__)) {
+            if (typeElementQuestionToken.type_element_id = self.id) {
+                return typeElementQuestionToken.getQuestionToken()
+            }
+        }
+    }
+    
+}
+
+/**
+ * A TypeElementNameNode
+ */
+schema TypeElementNameNode {
+    @primary type_element_id: int,
+    name_node_id: int
+}
+
+impl TypeElementNameNode {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *TypeElementNameNode {
+        for (typeElementNameNode in TypeElementNameNodeDO(db)) {
+            yield TypeElementNameNode {
+                type_element_id: typeElementNameNode.type_element_id,
+                name_node_id : typeElementNameNode.name_node_id
+            }
+        }
+    }
+    
+    /**
+     * Gets the typeElement.
+     */
+    pub fn getTypeElement(self) -> TypeElement {
+        for (typeElement in TypeElement(__all_data__)) {
+            if (self.type_element_id = typeElement.id) {
+                return typeElement
+            }
+        }
+    }
+    
+    /**
+     * Gets the nameNode.
+     */
+    pub fn getNameNode(self) -> PropertyName {
+        for (propertyName in PropertyName(__all_data__)) {
+            if (self.name_node_id = propertyName.id) {
+                return propertyName
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.type_element_id
+    }
+    
+}
+
+/**
+ * A TypeElementQuestionToken
+ */
+schema TypeElementQuestionToken {
+    @primary type_element_id: int,
+    question_token_id: int
+}
+
+impl TypeElementQuestionToken {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *TypeElementQuestionToken {
+        for (typeElementQuestionToken in TypeElementQuestionTokenDO(db)) {
+            yield TypeElementQuestionToken {
+                type_element_id: typeElementQuestionToken.type_element_id,
+                question_token_id : typeElementQuestionToken.question_token_id
+            }
+        }
+    }
+    
+    /**
+     * Gets the typeElement.
+     */
+    pub fn getTypeElement(self) -> TypeElement {
+        for (typeElement in TypeElement(__all_data__)) {
+            if (self.type_element_id = typeElement.id) {
+                return typeElement
+            }
+        }
+    }
+    
+    /**
+     * Gets the questionToken.
+     */
+    pub fn getQuestionToken(self) -> QuestionToken {
+        for (questionToken in QuestionToken(__all_data__)) {
+            if (self.question_token_id = questionToken.id) {
+                return questionToken
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.type_element_id
+    }
+    
+}
+
+/**
+ * A PropertySignature
+ */
+schema PropertySignature extends TypeElement {
+    name_node_id: int
+}
+
+impl PropertySignature {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *PropertySignature {
+        for (fa in TypeElement(db)) {
+            for (son in PropertySignatureDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield PropertySignature {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        name_node_id : son.name_node_id
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the nameNode.
+     */
+    pub fn getNameNode(self) -> PropertyName {
+        for (propertyName in PropertyName(__all_data__)) {
+            if (self.name_node_id = propertyName.id) {
+                return propertyName
+            }
+        }
+    }
+    
+    /**
+     * Get the questionToken.
+     */
+    pub fn getQuestionToken(self) -> QuestionToken {
+        for (propertySignatureQuestionToken in PropertySignatureQuestionToken(__all_data__)) {
+            if (propertySignatureQuestionToken.property_signature_id = self.id) {
+                return propertySignatureQuestionToken.getQuestionToken()
+            }
+        }
+    }
+    
+    /**
+     * Get the typeNode.
+     */
+    pub fn getTypeNode(self) -> TypeNode {
+        for (propertySignatureTypeNode in PropertySignatureTypeNode(__all_data__)) {
+            if (propertySignatureTypeNode.property_signature_id = self.id) {
+                return propertySignatureTypeNode.getTypeNode()
+            }
+        }
+    }
+    
+    /**
+     * Get the modifiers.
+     */
+    pub fn getModifiers(self) -> *Modifier {
+        for (modifier in Modifier(__all_data__)) {
+            if (modifier.parent_id = self.id) {
+                yield modifier
+            }
+        }
+    }
+    
+}
+
+/**
+ * A PropertySignatureTypeNode
+ */
+schema PropertySignatureTypeNode {
+    @primary property_signature_id: int,
+    type_node_id: int
+}
+
+impl PropertySignatureTypeNode {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *PropertySignatureTypeNode {
+        for (propertySignatureTypeNode in PropertySignatureTypeNodeDO(db)) {
+            yield PropertySignatureTypeNode {
+                property_signature_id: propertySignatureTypeNode.property_signature_id,
+                type_node_id : propertySignatureTypeNode.type_node_id
+            }
+        }
+    }
+    
+    /**
+     * Gets the propertySignature.
+     */
+    pub fn getPropertySignature(self) -> PropertySignature {
+        for (propertySignature in PropertySignature(__all_data__)) {
+            if (self.property_signature_id = propertySignature.id) {
+                return propertySignature
+            }
+        }
+    }
+    
+    /**
+     * Gets the typeNode.
+     */
+    pub fn getTypeNode(self) -> TypeNode {
+        for (typeNode in TypeNode(__all_data__)) {
+            if (self.type_node_id = typeNode.id) {
+                return typeNode
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.property_signature_id
+    }
+    
+}
+
+/**
+ * A PropertyDeclarationTypeNode
+ */
+schema PropertyDeclarationTypeNode {
+    @primary property_declaration_id: int,
+    type_node_id: int
+}
+
+impl PropertyDeclarationTypeNode {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *PropertyDeclarationTypeNode {
+        for (propertyDeclarationTypeNode in PropertyDeclarationTypeNodeDO(db)) {
+            yield PropertyDeclarationTypeNode {
+                property_declaration_id: propertyDeclarationTypeNode.property_declaration_id,
+                type_node_id : propertyDeclarationTypeNode.type_node_id
+            }
+        }
+    }
+    
+    /**
+     * Gets the propertyDeclaration.
+     */
+    pub fn getPropertyDeclaration(self) -> PropertyDeclaration {
+        for (propertyDeclaration in PropertyDeclaration(__all_data__)) {
+            if (self.property_declaration_id = propertyDeclaration.id) {
+                return propertyDeclaration
+            }
+        }
+    }
+    
+    /**
+     * Gets the typeNode.
+     */
+    pub fn getTypeNode(self) -> TypeNode {
+        for (typeNode in TypeNode(__all_data__)) {
+            if (self.type_node_id = typeNode.id) {
+                return typeNode
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.property_declaration_id
+    }
+    
+}
+
+/**
+ * A PropertyDeclarationInitializer
+ */
+schema PropertyDeclarationInitializer {
+    @primary property_declaration_id: int,
+    initializer_id: int
+}
+
+impl PropertyDeclarationInitializer {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *PropertyDeclarationInitializer {
+        for (propertyDeclarationInitializer in PropertyDeclarationInitializerDO(db)) {
+            yield PropertyDeclarationInitializer {
+                property_declaration_id: propertyDeclarationInitializer.property_declaration_id,
+                initializer_id : propertyDeclarationInitializer.initializer_id
+            }
+        }
+    }
+    
+    /**
+     * Gets the propertyDeclaration.
+     */
+    pub fn getPropertyDeclaration(self) -> PropertyDeclaration {
+        for (propertyDeclaration in PropertyDeclaration(__all_data__)) {
+            if (self.property_declaration_id = propertyDeclaration.id) {
+                return propertyDeclaration
+            }
+        }
+    }
+    
+    /**
+     * Gets the initializer.
+     */
+    pub fn getInitializer(self) -> Expression {
+        for (expression in Expression(__all_data__)) {
+            if (self.initializer_id = expression.id) {
+                return expression
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.property_declaration_id
+    }
+    
+}
+
+/**
+ * A MethodSignature
+ */
+schema MethodSignature extends SignatureDeclaration {
+    name_node_id: int
+}
+
+impl MethodSignature {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *MethodSignature {
+        for (fa in SignatureDeclaration(db)) {
+            for (son in MethodSignatureDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield MethodSignature {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        name_node_id : son.name_node_id
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the nameNode.
+     */
+    pub fn getNameNode(self) -> PropertyName {
+        for (propertyName in PropertyName(__all_data__)) {
+            if (self.name_node_id = propertyName.id) {
+                return propertyName
+            }
+        }
+    }
+    
+    /**
+     * trans to TypeElement to use func.
+     */
+    pub fn toTypeElement(self) -> TypeElement {
+        for (typeElement in TypeElement(__all_data__)) {
+            if (self.id = typeElement.id) {
+                return typeElement
+            }
+        }
+    }
+    
+    /**
+     * Get the modifiers.
+     */
+    pub fn getModifiers(self) -> *Modifier {
+        for (modifier in Modifier(__all_data__)) {
+            if (modifier.parent_id = self.id) {
+                yield modifier
+            }
+        }
+    }
+    
+}
+
+/**
+ * A ThisType
+ */
+schema ThisType extends TypeNode {
+}
+
+impl ThisType {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ThisType {
+        for (fa in TypeNode(db)) {
+            for (son in ThisTypeDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield ThisType {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A TypePredicate
+ */
+schema TypePredicate extends TypeNode {
+    parameter_name_node_id: int
+}
+
+impl TypePredicate {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *TypePredicate {
+        for (fa in TypeNode(db)) {
+            for (son in TypePredicateDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield TypePredicate {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        parameter_name_node_id : son.parameter_name_node_id
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the parameterNameNode.
+     */
+    pub fn getParameterNameNode(self) -> IdentifierOrThisType {
+        for (identifierOrThisType in IdentifierOrThisType(__all_data__)) {
+            if (self.parameter_name_node_id = identifierOrThisType.id) {
+                return identifierOrThisType
+            }
+        }
+    }
+    
+    /**
+     * Get the assertsModifier.
+     */
+    pub fn getAssertsModifier(self) -> AssertsKeyword {
+        for (typePredicateAssertsModifier in TypePredicateAssertsModifier(__all_data__)) {
+            if (typePredicateAssertsModifier.type_predicate_id = self.id) {
+                return typePredicateAssertsModifier.getAssertsModifier()
+            }
+        }
+    }
+    
+    /**
+     * Get the typeNode.
+     */
+    pub fn getTypeNode(self) -> TypeNode {
+        for (typePredicateTypeNode in TypePredicateTypeNode(__all_data__)) {
+            if (typePredicateTypeNode.type_predicate_id = self.id) {
+                return typePredicateTypeNode.getTypeNode()
+            }
+        }
+    }
+    
+}
+
+/**
+ * A TypePredicateAssertsModifier
+ */
+schema TypePredicateAssertsModifier {
+    @primary type_predicate_id: int,
+    asserts_modifier_id: int
+}
+
+impl TypePredicateAssertsModifier {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *TypePredicateAssertsModifier {
+        for (typePredicateAssertsModifier in TypePredicateAssertsModifierDO(db)) {
+            yield TypePredicateAssertsModifier {
+                type_predicate_id: typePredicateAssertsModifier.type_predicate_id,
+                asserts_modifier_id : typePredicateAssertsModifier.asserts_modifier_id
+            }
+        }
+    }
+    
+    /**
+     * Gets the typePredicate.
+     */
+    pub fn getTypePredicate(self) -> TypePredicate {
+        for (typePredicate in TypePredicate(__all_data__)) {
+            if (self.type_predicate_id = typePredicate.id) {
+                return typePredicate
+            }
+        }
+    }
+    
+    /**
+     * Gets the assertsModifier.
+     */
+    pub fn getAssertsModifier(self) -> AssertsKeyword {
+        for (assertsKeyword in AssertsKeyword(__all_data__)) {
+            if (self.asserts_modifier_id = assertsKeyword.id) {
+                return assertsKeyword
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.type_predicate_id
+    }
+    
+}
+
+/**
+ * A TypePredicateTypeNode
+ */
+schema TypePredicateTypeNode {
+    @primary type_predicate_id: int,
+    type_node_id: int
+}
+
+impl TypePredicateTypeNode {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *TypePredicateTypeNode {
+        for (typePredicateTypeNode in TypePredicateTypeNodeDO(db)) {
+            yield TypePredicateTypeNode {
+                type_predicate_id: typePredicateTypeNode.type_predicate_id,
+                type_node_id : typePredicateTypeNode.type_node_id
+            }
+        }
+    }
+    
+    /**
+     * Gets the typePredicate.
+     */
+    pub fn getTypePredicate(self) -> TypePredicate {
+        for (typePredicate in TypePredicate(__all_data__)) {
+            if (self.type_predicate_id = typePredicate.id) {
+                return typePredicate
+            }
+        }
+    }
+    
+    /**
+     * Gets the typeNode.
+     */
+    pub fn getTypeNode(self) -> TypeNode {
+        for (typeNode in TypeNode(__all_data__)) {
+            if (self.type_node_id = typeNode.id) {
+                return typeNode
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.type_predicate_id
+    }
+    
+}
+
+/**
+ * A NodeWithTypeArguments
+ */
+schema NodeWithTypeArguments extends TypeNode {
+}
+
+impl NodeWithTypeArguments {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *NodeWithTypeArguments {
+        for (fa in TypeNode(db)) {
+            for (son in NodeWithTypeArgumentsDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield NodeWithTypeArguments {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Get the typeArgument.
+     */
+    pub fn getTypeArgument(self) -> *TypeNode {
+        for (nodeWithTypeArgumentsTypeArgument in NodeWithTypeArgumentsTypeArgument(__all_data__)) {
+            if (nodeWithTypeArgumentsTypeArgument.node_with_type_arguments_id = self.id) {
+                yield nodeWithTypeArgumentsTypeArgument.getTypeArgument()
+            }
+        }
+    }
+    
+}
+
+/**
+ * A NodeWithTypeArgumentsTypeArgument
+ */
+schema NodeWithTypeArgumentsTypeArgument {
+    @primary type_argument_id: int,
+    node_with_type_arguments_id: int,
+    index: int
+}
+
+impl NodeWithTypeArgumentsTypeArgument {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *NodeWithTypeArgumentsTypeArgument {
+        for (nodeWithTypeArgumentsTypeArgument in NodeWithTypeArgumentsTypeArgumentDO(db)) {
+            yield NodeWithTypeArgumentsTypeArgument {
+                type_argument_id: nodeWithTypeArgumentsTypeArgument.type_argument_id,
+                node_with_type_arguments_id : nodeWithTypeArgumentsTypeArgument.node_with_type_arguments_id,
+                index : nodeWithTypeArgumentsTypeArgument.index
+            }
+        }
+    }
+    
+    /**
+     * Gets the typeArgument.
+     */
+    pub fn getTypeArgument(self) -> TypeNode {
+        for (typeNode in TypeNode(__all_data__)) {
+            if (self.type_argument_id = typeNode.id) {
+                return typeNode
+            }
+        }
+    }
+    
+    /**
+     * Gets the nodeWithTypeArguments.
+     */
+    pub fn getNodeWithTypeArguments(self) -> NodeWithTypeArguments {
+        for (nodeWithTypeArguments in NodeWithTypeArguments(__all_data__)) {
+            if (self.node_with_type_arguments_id = nodeWithTypeArguments.id) {
+                return nodeWithTypeArguments
+            }
+        }
+    }
+    
+    /**
+     * Gets the index.
+     */
+    pub fn getIndex(self) -> int {
+        return self.index
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.type_argument_id
+    }
+    
+}
+
+/**
+ * A TypeReference
+ */
+schema TypeReference extends NodeWithTypeArguments {
+    type_name_node_id: int
+}
+
+impl TypeReference {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *TypeReference {
+        for (fa in NodeWithTypeArguments(db)) {
+            for (son in TypeReferenceDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield TypeReference {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        type_name_node_id : son.type_name_node_id
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the typeNameNode.
+     */
+    pub fn getTypeNameNode(self) -> EntityName {
+        for (entityName in EntityName(__all_data__)) {
+            if (self.type_name_node_id = entityName.id) {
+                return entityName
+            }
+        }
+    }
+    
+}
+
+/**
+ * A FunctionOrConstructorType
+ */
+schema FunctionOrConstructorType extends TypeNode {
+    type_node_id: int
+}
+
+impl FunctionOrConstructorType {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *FunctionOrConstructorType {
+        for (fa in TypeNode(db)) {
+            for (son in FunctionOrConstructorTypeDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield FunctionOrConstructorType {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        type_node_id : son.type_node_id
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the typeNode.
+     */
+    pub fn getTypeNode(self) -> TypeNode {
+        for (typeNode in TypeNode(__all_data__)) {
+            if (self.type_node_id = typeNode.id) {
+                return typeNode
+            }
+        }
+    }
+    
+    /**
+     * trans to SignatureDeclaration to use func.
+     */
+    pub fn toSignatureDeclaration(self) -> SignatureDeclaration {
+        for (signatureDeclaration in SignatureDeclaration(__all_data__)) {
+            if (self.id = signatureDeclaration.id) {
+                return signatureDeclaration
+            }
+        }
+    }
+    
+}
+
+/**
+ * A FunctionType
+ */
+schema FunctionType extends FunctionOrConstructorType {
+}
+
+impl FunctionType {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *FunctionType {
+        for (fa in FunctionOrConstructorType(db)) {
+            for (son in FunctionTypeDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield FunctionType {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        type_node_id : fa.type_node_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A ConstructorType
+ */
+schema ConstructorType extends FunctionOrConstructorType {
+}
+
+impl ConstructorType {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ConstructorType {
+        for (fa in FunctionOrConstructorType(db)) {
+            for (son in ConstructorTypeDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield ConstructorType {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        type_node_id : fa.type_node_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Get the modifiers.
+     */
+    pub fn getModifiers(self) -> *Modifier {
+        for (modifier in Modifier(__all_data__)) {
+            if (modifier.parent_id = self.id) {
+                yield modifier
+            }
+        }
+    }
+    
+}
+
+/**
+ * A TypeQuery
+ */
+schema TypeQuery extends NodeWithTypeArguments {
+    expression_name_node_id: int
+}
+
+impl TypeQuery {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *TypeQuery {
+        for (fa in NodeWithTypeArguments(db)) {
+            for (son in TypeQueryDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield TypeQuery {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        expression_name_node_id : son.expression_name_node_id
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the expressionNameNode.
+     */
+    pub fn getExpressionNameNode(self) -> EntityName {
+        for (entityName in EntityName(__all_data__)) {
+            if (self.expression_name_node_id = entityName.id) {
+                return entityName
+            }
+        }
+    }
+    
+}
+
+/**
+ * A TypeLiteral
+ */
+schema TypeLiteral extends TypeNode {
+}
+
+impl TypeLiteral {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *TypeLiteral {
+        for (fa in TypeNode(db)) {
+            for (son in TypeLiteralDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield TypeLiteral {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * trans to Declaration to use func.
+     */
+    pub fn toDeclaration(self) -> Declaration {
+        for (declaration in Declaration(__all_data__)) {
+            if (self.id = declaration.id) {
+                return declaration
+            }
+        }
+    }
+    
+    /**
+     * Get the member.
+     */
+    pub fn getMember(self) -> *TypeElement {
+        for (typeLiteralMember in TypeLiteralMember(__all_data__)) {
+            if (typeLiteralMember.type_literal_id = self.id) {
+                yield typeLiteralMember.getMember()
+            }
+        }
+    }
+    
+}
+
+/**
+ * A TypeLiteralMember
+ */
+schema TypeLiteralMember {
+    @primary member_id: int,
+    type_literal_id: int,
+    index: int
+}
+
+impl TypeLiteralMember {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *TypeLiteralMember {
+        for (typeLiteralMember in TypeLiteralMemberDO(db)) {
+            yield TypeLiteralMember {
+                member_id: typeLiteralMember.member_id,
+                type_literal_id : typeLiteralMember.type_literal_id,
+                index : typeLiteralMember.index
+            }
+        }
+    }
+    
+    /**
+     * Gets the member.
+     */
+    pub fn getMember(self) -> TypeElement {
+        for (typeElement in TypeElement(__all_data__)) {
+            if (self.member_id = typeElement.id) {
+                return typeElement
+            }
+        }
+    }
+    
+    /**
+     * Gets the typeLiteral.
+     */
+    pub fn getTypeLiteral(self) -> TypeLiteral {
+        for (typeLiteral in TypeLiteral(__all_data__)) {
+            if (self.type_literal_id = typeLiteral.id) {
+                return typeLiteral
+            }
+        }
+    }
+    
+    /**
+     * Gets the index.
+     */
+    pub fn getIndex(self) -> int {
+        return self.index
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.member_id
+    }
+    
+}
+
+/**
+ * A ArrayType
+ */
+schema ArrayType extends TypeNode {
+    element_type_node_id: int
+}
+
+impl ArrayType {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ArrayType {
+        for (fa in TypeNode(db)) {
+            for (son in ArrayTypeDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield ArrayType {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        element_type_node_id : son.element_type_node_id
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the elementTypeNode.
+     */
+    pub fn getElementTypeNode(self) -> TypeNode {
+        for (typeNode in TypeNode(__all_data__)) {
+            if (self.element_type_node_id = typeNode.id) {
+                return typeNode
+            }
+        }
+    }
+    
+}
+
+/**
+ * A TupleType
+ */
+schema TupleType extends TypeNode {
+}
+
+impl TupleType {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *TupleType {
+        for (fa in TypeNode(db)) {
+            for (son in TupleTypeDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield TupleType {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Get the element.
+     */
+    pub fn getElement(self) -> *TypeNode {
+        for (tupleTypeElement in TupleTypeElement(__all_data__)) {
+            if (tupleTypeElement.tuple_type_id = self.id) {
+                yield tupleTypeElement.getElement()
+            }
+        }
+    }
+    
+}
+
+/**
+ * A TupleTypeElement
+ */
+schema TupleTypeElement {
+    @primary element_id: int,
+    tuple_type_id: int,
+    index: int
+}
+
+impl TupleTypeElement {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *TupleTypeElement {
+        for (tupleTypeElement in TupleTypeElementDO(db)) {
+            yield TupleTypeElement {
+                element_id: tupleTypeElement.element_id,
+                tuple_type_id : tupleTypeElement.tuple_type_id,
+                index : tupleTypeElement.index
+            }
+        }
+    }
+    
+    /**
+     * Gets the element.
+     */
+    pub fn getElement(self) -> TypeNode {
+        for (typeNode in TypeNode(__all_data__)) {
+            if (self.element_id = typeNode.id) {
+                return typeNode
+            }
+        }
+    }
+    
+    /**
+     * Gets the tupleType.
+     */
+    pub fn getTupleType(self) -> TupleType {
+        for (tupleType in TupleType(__all_data__)) {
+            if (self.tuple_type_id = tupleType.id) {
+                return tupleType
+            }
+        }
+    }
+    
+    /**
+     * Gets the index.
+     */
+    pub fn getIndex(self) -> int {
+        return self.index
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.element_id
+    }
+    
+}
+
+/**
+ * A OptionalType
+ */
+schema OptionalType extends TypeNode {
+    type_node_id: int
+}
+
+impl OptionalType {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *OptionalType {
+        for (fa in TypeNode(db)) {
+            for (son in OptionalTypeDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield OptionalType {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        type_node_id : son.type_node_id
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the typeNode.
+     */
+    pub fn getTypeNode(self) -> TypeNode {
+        for (typeNode in TypeNode(__all_data__)) {
+            if (self.type_node_id = typeNode.id) {
+                return typeNode
+            }
+        }
+    }
+    
+}
+
+/**
+ * A RestType
+ */
+schema RestType extends TypeNode {
+    type_node_id: int
+}
+
+impl RestType {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *RestType {
+        for (fa in TypeNode(db)) {
+            for (son in RestTypeDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield RestType {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        type_node_id : son.type_node_id
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the typeNode.
+     */
+    pub fn getTypeNode(self) -> TypeNode {
+        for (typeNode in TypeNode(__all_data__)) {
+            if (self.type_node_id = typeNode.id) {
+                return typeNode
+            }
+        }
+    }
+    
+}
+
+/**
+ * A UnionType
+ */
+schema UnionType extends TypeNode {
+}
+
+impl UnionType {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *UnionType {
+        for (fa in TypeNode(db)) {
+            for (son in UnionTypeDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield UnionType {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Get the typeNode.
+     */
+    pub fn getTypeNode(self) -> *TypeNode {
+        for (unionTypeTypeNode in UnionTypeTypeNode(__all_data__)) {
+            if (unionTypeTypeNode.union_type_id = self.id) {
+                yield unionTypeTypeNode.getTypeNode()
+            }
+        }
+    }
+    
+}
+
+/**
+ * A UnionTypeTypeNode
+ */
+schema UnionTypeTypeNode {
+    @primary type_node_id: int,
+    union_type_id: int,
+    index: int
+}
+
+impl UnionTypeTypeNode {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *UnionTypeTypeNode {
+        for (unionTypeTypeNode in UnionTypeTypeNodeDO(db)) {
+            yield UnionTypeTypeNode {
+                type_node_id: unionTypeTypeNode.type_node_id,
+                union_type_id : unionTypeTypeNode.union_type_id,
+                index : unionTypeTypeNode.index
+            }
+        }
+    }
+    
+    /**
+     * Gets the typeNode.
+     */
+    pub fn getTypeNode(self) -> TypeNode {
+        for (typeNode in TypeNode(__all_data__)) {
+            if (self.type_node_id = typeNode.id) {
+                return typeNode
+            }
+        }
+    }
+    
+    /**
+     * Gets the unionType.
+     */
+    pub fn getUnionType(self) -> UnionType {
+        for (unionType in UnionType(__all_data__)) {
+            if (self.union_type_id = unionType.id) {
+                return unionType
+            }
+        }
+    }
+    
+    /**
+     * Gets the index.
+     */
+    pub fn getIndex(self) -> int {
+        return self.index
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.type_node_id
+    }
+    
+}
+
+/**
+ * A IntersectionType
+ */
+schema IntersectionType extends TypeNode {
+}
+
+impl IntersectionType {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *IntersectionType {
+        for (fa in TypeNode(db)) {
+            for (son in IntersectionTypeDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield IntersectionType {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Get the typeNode.
+     */
+    pub fn getTypeNode(self) -> *TypeNode {
+        for (intersectionTypeTypeNode in IntersectionTypeTypeNode(__all_data__)) {
+            if (intersectionTypeTypeNode.intersection_type_id = self.id) {
+                yield intersectionTypeTypeNode.getTypeNode()
+            }
+        }
+    }
+    
+}
+
+/**
+ * A IntersectionTypeTypeNode
+ */
+schema IntersectionTypeTypeNode {
+    @primary type_node_id: int,
+    intersection_type_id: int,
+    index: int
+}
+
+impl IntersectionTypeTypeNode {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *IntersectionTypeTypeNode {
+        for (intersectionTypeTypeNode in IntersectionTypeTypeNodeDO(db)) {
+            yield IntersectionTypeTypeNode {
+                type_node_id: intersectionTypeTypeNode.type_node_id,
+                intersection_type_id : intersectionTypeTypeNode.intersection_type_id,
+                index : intersectionTypeTypeNode.index
+            }
+        }
+    }
+    
+    /**
+     * Gets the typeNode.
+     */
+    pub fn getTypeNode(self) -> TypeNode {
+        for (typeNode in TypeNode(__all_data__)) {
+            if (self.type_node_id = typeNode.id) {
+                return typeNode
+            }
+        }
+    }
+    
+    /**
+     * Gets the intersectionType.
+     */
+    pub fn getIntersectionType(self) -> IntersectionType {
+        for (intersectionType in IntersectionType(__all_data__)) {
+            if (self.intersection_type_id = intersectionType.id) {
+                return intersectionType
+            }
+        }
+    }
+    
+    /**
+     * Gets the index.
+     */
+    pub fn getIndex(self) -> int {
+        return self.index
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.type_node_id
+    }
+    
+}
+
+/**
+ * A ConditionalType
+ */
+schema ConditionalType extends TypeNode {
+    check_type_node_id: int,
+    extends_type_node_id: int,
+    then_type_node_id: int,
+    else_type_node_id: int
+}
+
+impl ConditionalType {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ConditionalType {
+        for (fa in TypeNode(db)) {
+            for (son in ConditionalTypeDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield ConditionalType {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        check_type_node_id : son.check_type_node_id,
+                        extends_type_node_id : son.extends_type_node_id,
+                        then_type_node_id : son.then_type_node_id,
+                        else_type_node_id : son.else_type_node_id
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the checkTypeNode.
+     */
+    pub fn getCheckTypeNode(self) -> TypeNode {
+        for (typeNode in TypeNode(__all_data__)) {
+            if (self.check_type_node_id = typeNode.id) {
+                return typeNode
+            }
+        }
+    }
+    
+    /**
+     * Gets the extendsTypeNode.
+     */
+    pub fn getExtendsTypeNode(self) -> TypeNode {
+        for (typeNode in TypeNode(__all_data__)) {
+            if (self.extends_type_node_id = typeNode.id) {
+                return typeNode
+            }
+        }
+    }
+    
+    /**
+     * Gets the thenTypeNode.
+     */
+    pub fn getThenTypeNode(self) -> TypeNode {
+        for (typeNode in TypeNode(__all_data__)) {
+            if (self.then_type_node_id = typeNode.id) {
+                return typeNode
+            }
+        }
+    }
+    
+    /**
+     * Gets the elseTypeNode.
+     */
+    pub fn getElseTypeNode(self) -> TypeNode {
+        for (typeNode in TypeNode(__all_data__)) {
+            if (self.else_type_node_id = typeNode.id) {
+                return typeNode
+            }
+        }
+    }
+    
+}
+
+/**
+ * A InferType
+ */
+schema InferType extends TypeNode {
+    type_parameter_id: int
+}
+
+impl InferType {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *InferType {
+        for (fa in TypeNode(db)) {
+            for (son in InferTypeDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield InferType {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        type_parameter_id : son.type_parameter_id
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the typeParameter.
+     */
+    pub fn getTypeParameter(self) -> TypeParameter {
+        for (typeParameter in TypeParameter(__all_data__)) {
+            if (self.type_parameter_id = typeParameter.id) {
+                return typeParameter
+            }
+        }
+    }
+    
+}
+
+/**
+ * A ParenthesizedType
+ */
+schema ParenthesizedType extends TypeNode {
+    type_node_id: int
+}
+
+impl ParenthesizedType {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ParenthesizedType {
+        for (fa in TypeNode(db)) {
+            for (son in ParenthesizedTypeDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield ParenthesizedType {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        type_node_id : son.type_node_id
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the typeNode.
+     */
+    pub fn getTypeNode(self) -> TypeNode {
+        for (typeNode in TypeNode(__all_data__)) {
+            if (self.type_node_id = typeNode.id) {
+                return typeNode
+            }
+        }
+    }
+    
+}
+
+/**
+ * A TypeOperator
+ */
+schema TypeOperator extends TypeNode {
+    operator_id: int,
+    type_node_id: int
+}
+
+impl TypeOperator {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *TypeOperator {
+        for (fa in TypeNode(db)) {
+            for (son in TypeOperatorDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield TypeOperator {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        operator_id : son.operator_id,
+                        type_node_id : son.type_node_id
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the operator.
+     */
+    pub fn getOperator(self) -> TypeOperatorOperatorType {
+        for (typeOperatorOperatorType in TypeOperatorOperatorType(__all_data__)) {
+            if (self.operator_id = typeOperatorOperatorType.id) {
+                return typeOperatorOperatorType
+            }
+        }
+    }
+    
+    /**
+     * Gets the typeNode.
+     */
+    pub fn getTypeNode(self) -> TypeNode {
+        for (typeNode in TypeNode(__all_data__)) {
+            if (self.type_node_id = typeNode.id) {
+                return typeNode
+            }
+        }
+    }
+    
+}
+
+/**
+ * A IndexedAccessType
+ */
+schema IndexedAccessType extends TypeNode {
+    object_type_node_id: int,
+    index_type_node_id: int
+}
+
+impl IndexedAccessType {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *IndexedAccessType {
+        for (fa in TypeNode(db)) {
+            for (son in IndexedAccessTypeDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield IndexedAccessType {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        object_type_node_id : son.object_type_node_id,
+                        index_type_node_id : son.index_type_node_id
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the objectTypeNode.
+     */
+    pub fn getObjectTypeNode(self) -> TypeNode {
+        for (typeNode in TypeNode(__all_data__)) {
+            if (self.object_type_node_id = typeNode.id) {
+                return typeNode
+            }
+        }
+    }
+    
+    /**
+     * Gets the indexTypeNode.
+     */
+    pub fn getIndexTypeNode(self) -> TypeNode {
+        for (typeNode in TypeNode(__all_data__)) {
+            if (self.index_type_node_id = typeNode.id) {
+                return typeNode
+            }
+        }
+    }
+    
+}
+
+/**
+ * A MappedType
+ */
+schema MappedType extends TypeNode {
+    type_parameter_id: int
+}
+
+impl MappedType {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *MappedType {
+        for (fa in TypeNode(db)) {
+            for (son in MappedTypeDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield MappedType {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        type_parameter_id : son.type_parameter_id
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the typeParameter.
+     */
+    pub fn getTypeParameter(self) -> TypeParameter {
+        for (typeParameter in TypeParameter(__all_data__)) {
+            if (self.type_parameter_id = typeParameter.id) {
+                return typeParameter
+            }
+        }
+    }
+    
+    /**
+     * trans to Declaration to use func.
+     */
+    pub fn toDeclaration(self) -> Declaration {
+        for (declaration in Declaration(__all_data__)) {
+            if (self.id = declaration.id) {
+                return declaration
+            }
+        }
+    }
+    
+    /**
+     * Get the readonlyToken.
+     */
+    pub fn getReadonlyToken(self) -> MappedTypeReadonlyTokenType {
+        for (mappedTypeReadonlyToken in MappedTypeReadonlyToken(__all_data__)) {
+            if (mappedTypeReadonlyToken.mapped_type_id = self.id) {
+                return mappedTypeReadonlyToken.getReadonlyToken()
+            }
+        }
+    }
+    
+    /**
+     * Get the nameTypeNode.
+     */
+    pub fn getNameTypeNode(self) -> TypeNode {
+        for (mappedTypeNameTypeNode in MappedTypeNameTypeNode(__all_data__)) {
+            if (mappedTypeNameTypeNode.mapped_type_id = self.id) {
+                return mappedTypeNameTypeNode.getNameTypeNode()
+            }
+        }
+    }
+    
+    /**
+     * Get the questionToken.
+     */
+    pub fn getQuestionToken(self) -> MappedTypeQuestionTokenType {
+        for (mappedTypeQuestionToken in MappedTypeQuestionToken(__all_data__)) {
+            if (mappedTypeQuestionToken.mapped_type_id = self.id) {
+                return mappedTypeQuestionToken.getQuestionToken()
+            }
+        }
+    }
+    
+    /**
+     * Get the typeNode.
+     */
+    pub fn getTypeNode(self) -> TypeNode {
+        for (mappedTypeTypeNode in MappedTypeTypeNode(__all_data__)) {
+            if (mappedTypeTypeNode.mapped_type_id = self.id) {
+                return mappedTypeTypeNode.getTypeNode()
+            }
+        }
+    }
+    
+}
+
+/**
+ * A MappedTypeReadonlyToken
+ */
+schema MappedTypeReadonlyToken {
+    @primary mapped_type_id: int,
+    readonly_token_id: int
+}
+
+impl MappedTypeReadonlyToken {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *MappedTypeReadonlyToken {
+        for (mappedTypeReadonlyToken in MappedTypeReadonlyTokenDO(db)) {
+            yield MappedTypeReadonlyToken {
+                mapped_type_id: mappedTypeReadonlyToken.mapped_type_id,
+                readonly_token_id : mappedTypeReadonlyToken.readonly_token_id
+            }
+        }
+    }
+    
+    /**
+     * Gets the mappedType.
+     */
+    pub fn getMappedType(self) -> MappedType {
+        for (mappedType in MappedType(__all_data__)) {
+            if (self.mapped_type_id = mappedType.id) {
+                return mappedType
+            }
+        }
+    }
+    
+    /**
+     * Gets the readonlyToken.
+     */
+    pub fn getReadonlyToken(self) -> MappedTypeReadonlyTokenType {
+        for (mappedTypeReadonlyTokenType in MappedTypeReadonlyTokenType(__all_data__)) {
+            if (self.readonly_token_id = mappedTypeReadonlyTokenType.id) {
+                return mappedTypeReadonlyTokenType
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.mapped_type_id
+    }
+    
+}
+
+/**
+ * A MappedTypeNameTypeNode
+ */
+schema MappedTypeNameTypeNode {
+    @primary mapped_type_id: int,
+    name_type_node_id: int
+}
+
+impl MappedTypeNameTypeNode {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *MappedTypeNameTypeNode {
+        for (mappedTypeNameTypeNode in MappedTypeNameTypeNodeDO(db)) {
+            yield MappedTypeNameTypeNode {
+                mapped_type_id: mappedTypeNameTypeNode.mapped_type_id,
+                name_type_node_id : mappedTypeNameTypeNode.name_type_node_id
+            }
+        }
+    }
+    
+    /**
+     * Gets the mappedType.
+     */
+    pub fn getMappedType(self) -> MappedType {
+        for (mappedType in MappedType(__all_data__)) {
+            if (self.mapped_type_id = mappedType.id) {
+                return mappedType
+            }
+        }
+    }
+    
+    /**
+     * Gets the nameTypeNode.
+     */
+    pub fn getNameTypeNode(self) -> TypeNode {
+        for (typeNode in TypeNode(__all_data__)) {
+            if (self.name_type_node_id = typeNode.id) {
+                return typeNode
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.mapped_type_id
+    }
+    
+}
+
+/**
+ * A MappedTypeQuestionToken
+ */
+schema MappedTypeQuestionToken {
+    @primary mapped_type_id: int,
+    question_token_id: int
+}
+
+impl MappedTypeQuestionToken {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *MappedTypeQuestionToken {
+        for (mappedTypeQuestionToken in MappedTypeQuestionTokenDO(db)) {
+            yield MappedTypeQuestionToken {
+                mapped_type_id: mappedTypeQuestionToken.mapped_type_id,
+                question_token_id : mappedTypeQuestionToken.question_token_id
+            }
+        }
+    }
+    
+    /**
+     * Gets the mappedType.
+     */
+    pub fn getMappedType(self) -> MappedType {
+        for (mappedType in MappedType(__all_data__)) {
+            if (self.mapped_type_id = mappedType.id) {
+                return mappedType
+            }
+        }
+    }
+    
+    /**
+     * Gets the questionToken.
+     */
+    pub fn getQuestionToken(self) -> MappedTypeQuestionTokenType {
+        for (mappedTypeQuestionTokenType in MappedTypeQuestionTokenType(__all_data__)) {
+            if (self.question_token_id = mappedTypeQuestionTokenType.id) {
+                return mappedTypeQuestionTokenType
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.mapped_type_id
+    }
+    
+}
+
+/**
+ * A MappedTypeTypeNode
+ */
+schema MappedTypeTypeNode {
+    @primary mapped_type_id: int,
+    type_node_id: int
+}
+
+impl MappedTypeTypeNode {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *MappedTypeTypeNode {
+        for (mappedTypeTypeNode in MappedTypeTypeNodeDO(db)) {
+            yield MappedTypeTypeNode {
+                mapped_type_id: mappedTypeTypeNode.mapped_type_id,
+                type_node_id : mappedTypeTypeNode.type_node_id
+            }
+        }
+    }
+    
+    /**
+     * Gets the mappedType.
+     */
+    pub fn getMappedType(self) -> MappedType {
+        for (mappedType in MappedType(__all_data__)) {
+            if (self.mapped_type_id = mappedType.id) {
+                return mappedType
+            }
+        }
+    }
+    
+    /**
+     * Gets the typeNode.
+     */
+    pub fn getTypeNode(self) -> TypeNode {
+        for (typeNode in TypeNode(__all_data__)) {
+            if (self.type_node_id = typeNode.id) {
+                return typeNode
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.mapped_type_id
+    }
+    
+}
+
+/**
+ * A LiteralType
+ */
+schema LiteralType extends TypeNode {
+    literal_id: int
+}
+
+impl LiteralType {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *LiteralType {
+        for (fa in TypeNode(db)) {
+            for (son in LiteralTypeDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield LiteralType {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        literal_id : son.literal_id
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the literal.
+     */
+    pub fn getLiteral(self) -> LiteralTypeLiteralType {
+        for (literalTypeLiteralType in LiteralTypeLiteralType(__all_data__)) {
+            if (self.literal_id = literalTypeLiteralType.id) {
+                return literalTypeLiteralType
+            }
+        }
+    }
+    
+}
+
+/**
+ * A NamedTupleMember
+ */
+schema NamedTupleMember extends TypeNode {
+    name_node_id: int,
+    type_node_id: int
+}
+
+impl NamedTupleMember {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *NamedTupleMember {
+        for (fa in TypeNode(db)) {
+            for (son in NamedTupleMemberDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield NamedTupleMember {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        name_node_id : son.name_node_id,
+                        type_node_id : son.type_node_id
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the nameNode.
+     */
+    pub fn getNameNode(self) -> Identifier {
+        for (identifier in Identifier(__all_data__)) {
+            if (self.name_node_id = identifier.id) {
+                return identifier
+            }
+        }
+    }
+    
+    /**
+     * Gets the typeNode.
+     */
+    pub fn getTypeNode(self) -> TypeNode {
+        for (typeNode in TypeNode(__all_data__)) {
+            if (self.type_node_id = typeNode.id) {
+                return typeNode
+            }
+        }
+    }
+    
+    /**
+     * trans to Declaration to use func.
+     */
+    pub fn toDeclaration(self) -> Declaration {
+        for (declaration in Declaration(__all_data__)) {
+            if (self.id = declaration.id) {
+                return declaration
+            }
+        }
+    }
+    
+    /**
+     * Get the dotDotDotToken.
+     */
+    pub fn getDotDotDotToken(self) -> DotDotDotToken {
+        for (namedTupleMemberDotDotDotToken in NamedTupleMemberDotDotDotToken(__all_data__)) {
+            if (namedTupleMemberDotDotDotToken.named_tuple_member_id = self.id) {
+                return namedTupleMemberDotDotDotToken.getDotDotDotToken()
+            }
+        }
+    }
+    
+    /**
+     * Get the questionToken.
+     */
+    pub fn getQuestionToken(self) -> QuestionToken {
+        for (namedTupleMemberQuestionToken in NamedTupleMemberQuestionToken(__all_data__)) {
+            if (namedTupleMemberQuestionToken.named_tuple_member_id = self.id) {
+                return namedTupleMemberQuestionToken.getQuestionToken()
+            }
+        }
+    }
+    
+}
+
+/**
+ * A NamedTupleMemberDotDotDotToken
+ */
+schema NamedTupleMemberDotDotDotToken {
+    @primary named_tuple_member_id: int,
+    dot_dot_dot_token_id: int
+}
+
+impl NamedTupleMemberDotDotDotToken {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *NamedTupleMemberDotDotDotToken {
+        for (namedTupleMemberDotDotDotToken in NamedTupleMemberDotDotDotTokenDO(db)) {
+            yield NamedTupleMemberDotDotDotToken {
+                named_tuple_member_id: namedTupleMemberDotDotDotToken.named_tuple_member_id,
+                dot_dot_dot_token_id : namedTupleMemberDotDotDotToken.dot_dot_dot_token_id
+            }
+        }
+    }
+    
+    /**
+     * Gets the namedTupleMember.
+     */
+    pub fn getNamedTupleMember(self) -> NamedTupleMember {
+        for (namedTupleMember in NamedTupleMember(__all_data__)) {
+            if (self.named_tuple_member_id = namedTupleMember.id) {
+                return namedTupleMember
+            }
+        }
+    }
+    
+    /**
+     * Gets the dotDotDotToken.
+     */
+    pub fn getDotDotDotToken(self) -> DotDotDotToken {
+        for (dotDotDotToken in DotDotDotToken(__all_data__)) {
+            if (self.dot_dot_dot_token_id = dotDotDotToken.id) {
+                return dotDotDotToken
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.named_tuple_member_id
+    }
+    
+}
+
+/**
+ * A NamedTupleMemberQuestionToken
+ */
+schema NamedTupleMemberQuestionToken {
+    @primary named_tuple_member_id: int,
+    question_token_id: int
+}
+
+impl NamedTupleMemberQuestionToken {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *NamedTupleMemberQuestionToken {
+        for (namedTupleMemberQuestionToken in NamedTupleMemberQuestionTokenDO(db)) {
+            yield NamedTupleMemberQuestionToken {
+                named_tuple_member_id: namedTupleMemberQuestionToken.named_tuple_member_id,
+                question_token_id : namedTupleMemberQuestionToken.question_token_id
+            }
+        }
+    }
+    
+    /**
+     * Gets the namedTupleMember.
+     */
+    pub fn getNamedTupleMember(self) -> NamedTupleMember {
+        for (namedTupleMember in NamedTupleMember(__all_data__)) {
+            if (self.named_tuple_member_id = namedTupleMember.id) {
+                return namedTupleMember
+            }
+        }
+    }
+    
+    /**
+     * Gets the questionToken.
+     */
+    pub fn getQuestionToken(self) -> QuestionToken {
+        for (questionToken in QuestionToken(__all_data__)) {
+            if (self.question_token_id = questionToken.id) {
+                return questionToken
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.named_tuple_member_id
+    }
+    
+}
+
+/**
+ * A TemplateLiteralTypeSpan
+ */
+schema TemplateLiteralTypeSpan extends TypeNode {
+    type_node_id: int,
+    literal_id: int
+}
+
+impl TemplateLiteralTypeSpan {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *TemplateLiteralTypeSpan {
+        for (fa in TypeNode(db)) {
+            for (son in TemplateLiteralTypeSpanDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield TemplateLiteralTypeSpan {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        type_node_id : son.type_node_id,
+                        literal_id : son.literal_id
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the parent.
+     */
+    pub fn getParent(self) -> TemplateLiteralType {
+        for (templateLiteralType in TemplateLiteralType(__all_data__)) {
+            if (self.parent_id = templateLiteralType.id) {
+                return templateLiteralType
+            }
+        }
+    }
+    
+    /**
+     * Gets the typeNode.
+     */
+    pub fn getTypeNode(self) -> TypeNode {
+        for (typeNode in TypeNode(__all_data__)) {
+            if (self.type_node_id = typeNode.id) {
+                return typeNode
+            }
+        }
+    }
+    
+    /**
+     * Gets the literal.
+     */
+    pub fn getLiteral(self) -> TemplateMiddleOrTail {
+        for (templateMiddleOrTail in TemplateMiddleOrTail(__all_data__)) {
+            if (self.literal_id = templateMiddleOrTail.id) {
+                return templateMiddleOrTail
+            }
+        }
+    }
+    
+}
+
+/**
+ * A TemplateLiteralType
+ */
+schema TemplateLiteralType extends TypeNode {
+    head_id: int
+}
+
+impl TemplateLiteralType {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *TemplateLiteralType {
+        for (fa in TypeNode(db)) {
+            for (son in TemplateLiteralTypeDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield TemplateLiteralType {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        head_id : son.head_id
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the head.
+     */
+    pub fn getHead(self) -> TemplateHead {
+        for (templateHead in TemplateHead(__all_data__)) {
+            if (self.head_id = templateHead.id) {
+                return templateHead
+            }
+        }
+    }
+    
+    /**
+     * Get the templateSpans.
+     */
+    pub fn getTemplateSpans(self) -> *TemplateLiteralTypeSpan {
+        for (templateLiteralTypeSpan in TemplateLiteralTypeSpan(__all_data__)) {
+            if (templateLiteralTypeSpan.parent_id = self.id) {
+                yield templateLiteralTypeSpan
+            }
+        }
+    }
+    
+}
+
+/**
+ * A ImportTypeAssertionContainer
+ */
+schema ImportTypeAssertionContainer extends AstNode {
+    assert_clause_id: int
+}
+
+impl ImportTypeAssertionContainer {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ImportTypeAssertionContainer {
+        for (fa in AstNode(db)) {
+            for (son in ImportTypeAssertionContainerDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield ImportTypeAssertionContainer {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        assert_clause_id : son.assert_clause_id
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the parent.
+     */
+    pub fn getParent(self) -> ImportType {
+        for (importType in ImportType(__all_data__)) {
+            if (self.parent_id = importType.id) {
+                return importType
+            }
+        }
+    }
+    
+    /**
+     * Gets the assertClause.
+     */
+    pub fn getAssertClause(self) -> AssertClause {
+        for (assertClause in AssertClause(__all_data__)) {
+            if (self.assert_clause_id = assertClause.id) {
+                return assertClause
+            }
+        }
+    }
+    
+}
+
+/**
+ * A ImportType
+ */
+schema ImportType extends NodeWithTypeArguments {
+    is_type_of: int,
+    argument_id: int
+}
+
+impl ImportType {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ImportType {
+        for (fa in NodeWithTypeArguments(db)) {
+            for (son in ImportTypeDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield ImportType {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        is_type_of : son.is_type_of,
+                        argument_id : son.argument_id
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the ypeOf.
+     */
+    pub fn IsTypeOf(self) -> bool {
+        return self.is_type_of = 1
+    }
+    
+    /**
+     * Gets the argument.
+     */
+    pub fn getArgument(self) -> TypeNode {
+        for (typeNode in TypeNode(__all_data__)) {
+            if (self.argument_id = typeNode.id) {
+                return typeNode
+            }
+        }
+    }
+    
+    /**
+     * Get the qualifier.
+     */
+    pub fn getQualifier(self) -> EntityName {
+        for (importTypeQualifier in ImportTypeQualifier(__all_data__)) {
+            if (importTypeQualifier.import_type_id = self.id) {
+                return importTypeQualifier.getQualifier()
+            }
+        }
+    }
+    
+    /**
+     * Get the assertions.
+     */
+    pub fn getAssertions(self) -> ImportTypeAssertionContainer {
+        for (importTypeAssertionContainer in ImportTypeAssertionContainer(__all_data__)) {
+            if (importTypeAssertionContainer.parent_id = self.id) {
+                return importTypeAssertionContainer
+            }
+        }
+    }
+    
+}
+
+/**
+ * A ImportTypeQualifier
+ */
+schema ImportTypeQualifier {
+    @primary import_type_id: int,
+    qualifier_id: int
+}
+
+impl ImportTypeQualifier {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ImportTypeQualifier {
+        for (importTypeQualifier in ImportTypeQualifierDO(db)) {
+            yield ImportTypeQualifier {
+                import_type_id: importTypeQualifier.import_type_id,
+                qualifier_id : importTypeQualifier.qualifier_id
+            }
+        }
+    }
+    
+    /**
+     * Gets the importType.
+     */
+    pub fn getImportType(self) -> ImportType {
+        for (importType in ImportType(__all_data__)) {
+            if (self.import_type_id = importType.id) {
+                return importType
+            }
+        }
+    }
+    
+    /**
+     * Gets the qualifier.
+     */
+    pub fn getQualifier(self) -> EntityName {
+        for (entityName in EntityName(__all_data__)) {
+            if (self.qualifier_id = entityName.id) {
+                return entityName
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.import_type_id
+    }
+    
+}
+
+/**
+ * A Type
+ */
+schema Type {
+    @primary id: int,
+    name: string
+}
+
+impl Type {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *Type {
+        for (type in TypeDO(db)) {
+            yield Type {
+                id: type.id,
+                name : type.name
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the name.
+     */
+    pub fn getName(self) -> string {
+        return self.name
+    }
+    
+}
+
+/**
+ * This type consists of the following types: [Identifier, ThisType]
+ */
+schema IdentifierOrThisType extends AstNode {
+}
+
+impl IdentifierOrThisType {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *IdentifierOrThisType {
+        for (identifier in Identifier(db)) {
+            yield IdentifierOrThisType {
+                id : identifier.id,
+                kind : identifier.kind,
+                parent_id : identifier.parent_id,
+                parent_kind : identifier.parent_kind,
+                index : identifier.index,
+                location_id : identifier.location_id,
+            }
+        }
+        for (thisType in ThisType(db)) {
+            yield IdentifierOrThisType {
+                id : thisType.id,
+                kind : thisType.kind,
+                parent_id : thisType.parent_id,
+                parent_kind : thisType.parent_kind,
+                index : thisType.index,
+                location_id : thisType.location_id,
+            }
+        }
+    }
+
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * trans to Identifier
+     */
+    pub fn toIdentifier(self) -> Identifier {
+        for (identifier in Identifier(__all_data__)) {
+            if (identifier.key_eq(self)) {
+                return identifier
+            }
+        }
+    }
+    
+    /**
+     * trans to ThisType
+     */
+    pub fn toThisType(self) -> ThisType {
+        for (thisType in ThisType(__all_data__)) {
+            if (thisType.key_eq(self)) {
+                return thisType
+            }
+        }
+    }
+    
+}
+
+/**
+ * This type consists of the following types: [KeyOfKeyword, UniqueKeyword, ReadonlyKeyword]
+ */
+schema TypeOperatorOperatorType extends AstNode {
+}
+
+impl TypeOperatorOperatorType {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *TypeOperatorOperatorType {
+        for (keyOfKeyword in KeyOfKeyword(db)) {
+            yield TypeOperatorOperatorType {
+                id : keyOfKeyword.id,
+                kind : keyOfKeyword.kind,
+                parent_id : keyOfKeyword.parent_id,
+                parent_kind : keyOfKeyword.parent_kind,
+                index : keyOfKeyword.index,
+                location_id : keyOfKeyword.location_id,
+            }
+        }
+        for (uniqueKeyword in UniqueKeyword(db)) {
+            yield TypeOperatorOperatorType {
+                id : uniqueKeyword.id,
+                kind : uniqueKeyword.kind,
+                parent_id : uniqueKeyword.parent_id,
+                parent_kind : uniqueKeyword.parent_kind,
+                index : uniqueKeyword.index,
+                location_id : uniqueKeyword.location_id,
+            }
+        }
+        for (readonlyKeyword in ReadonlyKeyword(db)) {
+            yield TypeOperatorOperatorType {
+                id : readonlyKeyword.id,
+                kind : readonlyKeyword.kind,
+                parent_id : readonlyKeyword.parent_id,
+                parent_kind : readonlyKeyword.parent_kind,
+                index : readonlyKeyword.index,
+                location_id : readonlyKeyword.location_id,
+            }
+        }
+    }
+
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * trans to KeyOfKeyword
+     */
+    pub fn toKeyOfKeyword(self) -> KeyOfKeyword {
+        for (keyOfKeyword in KeyOfKeyword(__all_data__)) {
+            if (keyOfKeyword.key_eq(self)) {
+                return keyOfKeyword
+            }
+        }
+    }
+    
+    /**
+     * trans to UniqueKeyword
+     */
+    pub fn toUniqueKeyword(self) -> UniqueKeyword {
+        for (uniqueKeyword in UniqueKeyword(__all_data__)) {
+            if (uniqueKeyword.key_eq(self)) {
+                return uniqueKeyword
+            }
+        }
+    }
+    
+    /**
+     * trans to ReadonlyKeyword
+     */
+    pub fn toReadonlyKeyword(self) -> ReadonlyKeyword {
+        for (readonlyKeyword in ReadonlyKeyword(__all_data__)) {
+            if (readonlyKeyword.key_eq(self)) {
+                return readonlyKeyword
+            }
+        }
+    }
+    
+}
+
+/**
+ * This type consists of the following types: [ReadonlyKeyword, PlusToken, MinusToken]
+ */
+schema MappedTypeReadonlyTokenType extends AstNode {
+}
+
+impl MappedTypeReadonlyTokenType {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *MappedTypeReadonlyTokenType {
+        for (readonlyKeyword in ReadonlyKeyword(db)) {
+            yield MappedTypeReadonlyTokenType {
+                id : readonlyKeyword.id,
+                kind : readonlyKeyword.kind,
+                parent_id : readonlyKeyword.parent_id,
+                parent_kind : readonlyKeyword.parent_kind,
+                index : readonlyKeyword.index,
+                location_id : readonlyKeyword.location_id,
+            }
+        }
+        for (plusToken in PlusToken(db)) {
+            yield MappedTypeReadonlyTokenType {
+                id : plusToken.id,
+                kind : plusToken.kind,
+                parent_id : plusToken.parent_id,
+                parent_kind : plusToken.parent_kind,
+                index : plusToken.index,
+                location_id : plusToken.location_id,
+            }
+        }
+        for (minusToken in MinusToken(db)) {
+            yield MappedTypeReadonlyTokenType {
+                id : minusToken.id,
+                kind : minusToken.kind,
+                parent_id : minusToken.parent_id,
+                parent_kind : minusToken.parent_kind,
+                index : minusToken.index,
+                location_id : minusToken.location_id,
+            }
+        }
+    }
+
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * trans to ReadonlyKeyword
+     */
+    pub fn toReadonlyKeyword(self) -> ReadonlyKeyword {
+        for (readonlyKeyword in ReadonlyKeyword(__all_data__)) {
+            if (readonlyKeyword.key_eq(self)) {
+                return readonlyKeyword
+            }
+        }
+    }
+    
+    /**
+     * trans to PlusToken
+     */
+    pub fn toPlusToken(self) -> PlusToken {
+        for (plusToken in PlusToken(__all_data__)) {
+            if (plusToken.key_eq(self)) {
+                return plusToken
+            }
+        }
+    }
+    
+    /**
+     * trans to MinusToken
+     */
+    pub fn toMinusToken(self) -> MinusToken {
+        for (minusToken in MinusToken(__all_data__)) {
+            if (minusToken.key_eq(self)) {
+                return minusToken
+            }
+        }
+    }
+    
+}
+
+/**
+ * This type consists of the following types: [QuestionToken, PlusToken, MinusToken]
+ */
+schema MappedTypeQuestionTokenType extends AstNode {
+}
+
+impl MappedTypeQuestionTokenType {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *MappedTypeQuestionTokenType {
+        for (questionToken in QuestionToken(db)) {
+            yield MappedTypeQuestionTokenType {
+                id : questionToken.id,
+                kind : questionToken.kind,
+                parent_id : questionToken.parent_id,
+                parent_kind : questionToken.parent_kind,
+                index : questionToken.index,
+                location_id : questionToken.location_id,
+            }
+        }
+        for (plusToken in PlusToken(db)) {
+            yield MappedTypeQuestionTokenType {
+                id : plusToken.id,
+                kind : plusToken.kind,
+                parent_id : plusToken.parent_id,
+                parent_kind : plusToken.parent_kind,
+                index : plusToken.index,
+                location_id : plusToken.location_id,
+            }
+        }
+        for (minusToken in MinusToken(db)) {
+            yield MappedTypeQuestionTokenType {
+                id : minusToken.id,
+                kind : minusToken.kind,
+                parent_id : minusToken.parent_id,
+                parent_kind : minusToken.parent_kind,
+                index : minusToken.index,
+                location_id : minusToken.location_id,
+            }
+        }
+    }
+
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * trans to QuestionToken
+     */
+    pub fn toQuestionToken(self) -> QuestionToken {
+        for (questionToken in QuestionToken(__all_data__)) {
+            if (questionToken.key_eq(self)) {
+                return questionToken
+            }
+        }
+    }
+    
+    /**
+     * trans to PlusToken
+     */
+    pub fn toPlusToken(self) -> PlusToken {
+        for (plusToken in PlusToken(__all_data__)) {
+            if (plusToken.key_eq(self)) {
+                return plusToken
+            }
+        }
+    }
+    
+    /**
+     * trans to MinusToken
+     */
+    pub fn toMinusToken(self) -> MinusToken {
+        for (minusToken in MinusToken(__all_data__)) {
+            if (minusToken.key_eq(self)) {
+                return minusToken
+            }
+        }
+    }
+    
+}
+

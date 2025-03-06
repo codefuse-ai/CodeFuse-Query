@@ -1,0 +1,1919 @@
+/**
+ * A DotToken
+ */
+schema DotToken extends AstNode {
+}
+
+impl DotToken {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *DotToken {
+        for (fa in AstNode(db)) {
+            for (son in DotTokenDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield DotToken {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A DotDotDotToken
+ */
+schema DotDotDotToken extends AstNode {
+}
+
+impl DotDotDotToken {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *DotDotDotToken {
+        for (fa in AstNode(db)) {
+            for (son in DotDotDotTokenDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield DotDotDotToken {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A CommaToken
+ */
+schema CommaToken extends AstNode {
+}
+
+impl CommaToken {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *CommaToken {
+        for (fa in AstNode(db)) {
+            for (son in CommaTokenDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield CommaToken {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A QuestionDotToken
+ */
+schema QuestionDotToken extends AstNode {
+}
+
+impl QuestionDotToken {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *QuestionDotToken {
+        for (fa in AstNode(db)) {
+            for (son in QuestionDotTokenDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield QuestionDotToken {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A LessThanToken
+ */
+schema LessThanToken extends AstNode {
+}
+
+impl LessThanToken {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *LessThanToken {
+        for (fa in AstNode(db)) {
+            for (son in LessThanTokenDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield LessThanToken {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A GreaterThanToken
+ */
+schema GreaterThanToken extends AstNode {
+}
+
+impl GreaterThanToken {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *GreaterThanToken {
+        for (fa in AstNode(db)) {
+            for (son in GreaterThanTokenDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield GreaterThanToken {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A LessThanEqualsToken
+ */
+schema LessThanEqualsToken extends AstNode {
+}
+
+impl LessThanEqualsToken {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *LessThanEqualsToken {
+        for (fa in AstNode(db)) {
+            for (son in LessThanEqualsTokenDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield LessThanEqualsToken {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A GreaterThanEqualsToken
+ */
+schema GreaterThanEqualsToken extends AstNode {
+}
+
+impl GreaterThanEqualsToken {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *GreaterThanEqualsToken {
+        for (fa in AstNode(db)) {
+            for (son in GreaterThanEqualsTokenDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield GreaterThanEqualsToken {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A EqualsEqualsToken
+ */
+schema EqualsEqualsToken extends AstNode {
+}
+
+impl EqualsEqualsToken {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *EqualsEqualsToken {
+        for (fa in AstNode(db)) {
+            for (son in EqualsEqualsTokenDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield EqualsEqualsToken {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A ExclamationEqualsToken
+ */
+schema ExclamationEqualsToken extends AstNode {
+}
+
+impl ExclamationEqualsToken {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ExclamationEqualsToken {
+        for (fa in AstNode(db)) {
+            for (son in ExclamationEqualsTokenDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield ExclamationEqualsToken {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A EqualsEqualsEqualsToken
+ */
+schema EqualsEqualsEqualsToken extends AstNode {
+}
+
+impl EqualsEqualsEqualsToken {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *EqualsEqualsEqualsToken {
+        for (fa in AstNode(db)) {
+            for (son in EqualsEqualsEqualsTokenDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield EqualsEqualsEqualsToken {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A ExclamationEqualsEqualsToken
+ */
+schema ExclamationEqualsEqualsToken extends AstNode {
+}
+
+impl ExclamationEqualsEqualsToken {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ExclamationEqualsEqualsToken {
+        for (fa in AstNode(db)) {
+            for (son in ExclamationEqualsEqualsTokenDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield ExclamationEqualsEqualsToken {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A EqualsGreaterThanToken
+ */
+schema EqualsGreaterThanToken extends AstNode {
+}
+
+impl EqualsGreaterThanToken {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *EqualsGreaterThanToken {
+        for (fa in AstNode(db)) {
+            for (son in EqualsGreaterThanTokenDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield EqualsGreaterThanToken {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A PlusToken
+ */
+schema PlusToken extends AstNode {
+}
+
+impl PlusToken {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *PlusToken {
+        for (fa in AstNode(db)) {
+            for (son in PlusTokenDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield PlusToken {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A MinusToken
+ */
+schema MinusToken extends AstNode {
+}
+
+impl MinusToken {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *MinusToken {
+        for (fa in AstNode(db)) {
+            for (son in MinusTokenDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield MinusToken {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A AsteriskToken
+ */
+schema AsteriskToken extends AstNode {
+}
+
+impl AsteriskToken {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *AsteriskToken {
+        for (fa in AstNode(db)) {
+            for (son in AsteriskTokenDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield AsteriskToken {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A AsteriskAsteriskToken
+ */
+schema AsteriskAsteriskToken extends AstNode {
+}
+
+impl AsteriskAsteriskToken {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *AsteriskAsteriskToken {
+        for (fa in AstNode(db)) {
+            for (son in AsteriskAsteriskTokenDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield AsteriskAsteriskToken {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A SlashToken
+ */
+schema SlashToken extends AstNode {
+}
+
+impl SlashToken {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *SlashToken {
+        for (fa in AstNode(db)) {
+            for (son in SlashTokenDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield SlashToken {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A PercentToken
+ */
+schema PercentToken extends AstNode {
+}
+
+impl PercentToken {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *PercentToken {
+        for (fa in AstNode(db)) {
+            for (son in PercentTokenDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield PercentToken {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A PlusPlusToken
+ */
+schema PlusPlusToken extends AstNode {
+}
+
+impl PlusPlusToken {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *PlusPlusToken {
+        for (fa in AstNode(db)) {
+            for (son in PlusPlusTokenDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield PlusPlusToken {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A MinusMinusToken
+ */
+schema MinusMinusToken extends AstNode {
+}
+
+impl MinusMinusToken {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *MinusMinusToken {
+        for (fa in AstNode(db)) {
+            for (son in MinusMinusTokenDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield MinusMinusToken {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A LessThanLessThanToken
+ */
+schema LessThanLessThanToken extends AstNode {
+}
+
+impl LessThanLessThanToken {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *LessThanLessThanToken {
+        for (fa in AstNode(db)) {
+            for (son in LessThanLessThanTokenDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield LessThanLessThanToken {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A GreaterThanGreaterThanToken
+ */
+schema GreaterThanGreaterThanToken extends AstNode {
+}
+
+impl GreaterThanGreaterThanToken {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *GreaterThanGreaterThanToken {
+        for (fa in AstNode(db)) {
+            for (son in GreaterThanGreaterThanTokenDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield GreaterThanGreaterThanToken {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A GreaterThanGreaterThanGreaterThanToken
+ */
+schema GreaterThanGreaterThanGreaterThanToken extends AstNode {
+}
+
+impl GreaterThanGreaterThanGreaterThanToken {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *GreaterThanGreaterThanGreaterThanToken {
+        for (fa in AstNode(db)) {
+            for (son in GreaterThanGreaterThanGreaterThanTokenDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield GreaterThanGreaterThanGreaterThanToken {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A AmpersandToken
+ */
+schema AmpersandToken extends AstNode {
+}
+
+impl AmpersandToken {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *AmpersandToken {
+        for (fa in AstNode(db)) {
+            for (son in AmpersandTokenDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield AmpersandToken {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A BarToken
+ */
+schema BarToken extends AstNode {
+}
+
+impl BarToken {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *BarToken {
+        for (fa in AstNode(db)) {
+            for (son in BarTokenDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield BarToken {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A CaretToken
+ */
+schema CaretToken extends AstNode {
+}
+
+impl CaretToken {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *CaretToken {
+        for (fa in AstNode(db)) {
+            for (son in CaretTokenDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield CaretToken {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A ExclamationToken
+ */
+schema ExclamationToken extends AstNode {
+}
+
+impl ExclamationToken {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ExclamationToken {
+        for (fa in AstNode(db)) {
+            for (son in ExclamationTokenDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield ExclamationToken {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A TildeToken
+ */
+schema TildeToken extends AstNode {
+}
+
+impl TildeToken {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *TildeToken {
+        for (fa in AstNode(db)) {
+            for (son in TildeTokenDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield TildeToken {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A AmpersandAmpersandToken
+ */
+schema AmpersandAmpersandToken extends AstNode {
+}
+
+impl AmpersandAmpersandToken {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *AmpersandAmpersandToken {
+        for (fa in AstNode(db)) {
+            for (son in AmpersandAmpersandTokenDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield AmpersandAmpersandToken {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A BarBarToken
+ */
+schema BarBarToken extends AstNode {
+}
+
+impl BarBarToken {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *BarBarToken {
+        for (fa in AstNode(db)) {
+            for (son in BarBarTokenDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield BarBarToken {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A QuestionToken
+ */
+schema QuestionToken extends AstNode {
+}
+
+impl QuestionToken {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *QuestionToken {
+        for (fa in AstNode(db)) {
+            for (son in QuestionTokenDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield QuestionToken {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A ColonToken
+ */
+schema ColonToken extends AstNode {
+}
+
+impl ColonToken {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ColonToken {
+        for (fa in AstNode(db)) {
+            for (son in ColonTokenDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield ColonToken {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A QuestionQuestionToken
+ */
+schema QuestionQuestionToken extends AstNode {
+}
+
+impl QuestionQuestionToken {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *QuestionQuestionToken {
+        for (fa in AstNode(db)) {
+            for (son in QuestionQuestionTokenDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield QuestionQuestionToken {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A EqualsToken
+ */
+schema EqualsToken extends AstNode {
+}
+
+impl EqualsToken {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *EqualsToken {
+        for (fa in AstNode(db)) {
+            for (son in EqualsTokenDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield EqualsToken {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A PlusEqualsToken
+ */
+schema PlusEqualsToken extends AstNode {
+}
+
+impl PlusEqualsToken {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *PlusEqualsToken {
+        for (fa in AstNode(db)) {
+            for (son in PlusEqualsTokenDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield PlusEqualsToken {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A MinusEqualsToken
+ */
+schema MinusEqualsToken extends AstNode {
+}
+
+impl MinusEqualsToken {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *MinusEqualsToken {
+        for (fa in AstNode(db)) {
+            for (son in MinusEqualsTokenDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield MinusEqualsToken {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A AsteriskEqualsToken
+ */
+schema AsteriskEqualsToken extends AstNode {
+}
+
+impl AsteriskEqualsToken {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *AsteriskEqualsToken {
+        for (fa in AstNode(db)) {
+            for (son in AsteriskEqualsTokenDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield AsteriskEqualsToken {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A AsteriskAsteriskEqualsToken
+ */
+schema AsteriskAsteriskEqualsToken extends AstNode {
+}
+
+impl AsteriskAsteriskEqualsToken {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *AsteriskAsteriskEqualsToken {
+        for (fa in AstNode(db)) {
+            for (son in AsteriskAsteriskEqualsTokenDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield AsteriskAsteriskEqualsToken {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A SlashEqualsToken
+ */
+schema SlashEqualsToken extends AstNode {
+}
+
+impl SlashEqualsToken {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *SlashEqualsToken {
+        for (fa in AstNode(db)) {
+            for (son in SlashEqualsTokenDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield SlashEqualsToken {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A PercentEqualsToken
+ */
+schema PercentEqualsToken extends AstNode {
+}
+
+impl PercentEqualsToken {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *PercentEqualsToken {
+        for (fa in AstNode(db)) {
+            for (son in PercentEqualsTokenDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield PercentEqualsToken {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A LessThanLessThanEqualsToken
+ */
+schema LessThanLessThanEqualsToken extends AstNode {
+}
+
+impl LessThanLessThanEqualsToken {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *LessThanLessThanEqualsToken {
+        for (fa in AstNode(db)) {
+            for (son in LessThanLessThanEqualsTokenDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield LessThanLessThanEqualsToken {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A GreaterThanGreaterThanEqualsToken
+ */
+schema GreaterThanGreaterThanEqualsToken extends AstNode {
+}
+
+impl GreaterThanGreaterThanEqualsToken {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *GreaterThanGreaterThanEqualsToken {
+        for (fa in AstNode(db)) {
+            for (son in GreaterThanGreaterThanEqualsTokenDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield GreaterThanGreaterThanEqualsToken {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A GreaterThanGreaterThanGreaterThanEqualsToken
+ */
+schema GreaterThanGreaterThanGreaterThanEqualsToken extends AstNode {
+}
+
+impl GreaterThanGreaterThanGreaterThanEqualsToken {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *GreaterThanGreaterThanGreaterThanEqualsToken {
+        for (fa in AstNode(db)) {
+            for (son in GreaterThanGreaterThanGreaterThanEqualsTokenDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield GreaterThanGreaterThanGreaterThanEqualsToken {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A AmpersandEqualsToken
+ */
+schema AmpersandEqualsToken extends AstNode {
+}
+
+impl AmpersandEqualsToken {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *AmpersandEqualsToken {
+        for (fa in AstNode(db)) {
+            for (son in AmpersandEqualsTokenDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield AmpersandEqualsToken {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A BarEqualsToken
+ */
+schema BarEqualsToken extends AstNode {
+}
+
+impl BarEqualsToken {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *BarEqualsToken {
+        for (fa in AstNode(db)) {
+            for (son in BarEqualsTokenDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield BarEqualsToken {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A BarBarEqualsToken
+ */
+schema BarBarEqualsToken extends AstNode {
+}
+
+impl BarBarEqualsToken {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *BarBarEqualsToken {
+        for (fa in AstNode(db)) {
+            for (son in BarBarEqualsTokenDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield BarBarEqualsToken {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A AmpersandAmpersandEqualsToken
+ */
+schema AmpersandAmpersandEqualsToken extends AstNode {
+}
+
+impl AmpersandAmpersandEqualsToken {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *AmpersandAmpersandEqualsToken {
+        for (fa in AstNode(db)) {
+            for (son in AmpersandAmpersandEqualsTokenDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield AmpersandAmpersandEqualsToken {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A QuestionQuestionEqualsToken
+ */
+schema QuestionQuestionEqualsToken extends AstNode {
+}
+
+impl QuestionQuestionEqualsToken {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *QuestionQuestionEqualsToken {
+        for (fa in AstNode(db)) {
+            for (son in QuestionQuestionEqualsTokenDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield QuestionQuestionEqualsToken {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A CaretEqualsToken
+ */
+schema CaretEqualsToken extends AstNode {
+}
+
+impl CaretEqualsToken {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *CaretEqualsToken {
+        for (fa in AstNode(db)) {
+            for (son in CaretEqualsTokenDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield CaretEqualsToken {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A PrivateIdentifier
+ */
+schema PrivateIdentifier extends PrimaryExpression {
+    name: string
+}
+
+impl PrivateIdentifier {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *PrivateIdentifier {
+        for (fa in PrimaryExpression(db)) {
+            for (son in PrivateIdentifierDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield PrivateIdentifier {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        name : son.name
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the name.
+     */
+    pub fn getName(self) -> string {
+        return self.name
+    }
+    
+}
+
+/**
+ * A ParameterDotDotDotToken
+ */
+schema ParameterDotDotDotToken {
+    @primary parameter_id: int,
+    dot_dot_dot_token_id: int
+}
+
+impl ParameterDotDotDotToken {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ParameterDotDotDotToken {
+        for (parameterDotDotDotToken in ParameterDotDotDotTokenDO(db)) {
+            yield ParameterDotDotDotToken {
+                parameter_id: parameterDotDotDotToken.parameter_id,
+                dot_dot_dot_token_id : parameterDotDotDotToken.dot_dot_dot_token_id
+            }
+        }
+    }
+    
+    /**
+     * Gets the parameter.
+     */
+    pub fn getParameter(self) -> Parameter {
+        for (parameter in Parameter(__all_data__)) {
+            if (self.parameter_id = parameter.id) {
+                return parameter
+            }
+        }
+    }
+    
+    /**
+     * Gets the dotDotDotToken.
+     */
+    pub fn getDotDotDotToken(self) -> DotDotDotToken {
+        for (dotDotDotToken in DotDotDotToken(__all_data__)) {
+            if (self.dot_dot_dot_token_id = dotDotDotToken.id) {
+                return dotDotDotToken
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.parameter_id
+    }
+    
+}
+
+/**
+ * A ParameterQuestionToken
+ */
+schema ParameterQuestionToken {
+    @primary parameter_id: int,
+    question_token_id: int
+}
+
+impl ParameterQuestionToken {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ParameterQuestionToken {
+        for (parameterQuestionToken in ParameterQuestionTokenDO(db)) {
+            yield ParameterQuestionToken {
+                parameter_id: parameterQuestionToken.parameter_id,
+                question_token_id : parameterQuestionToken.question_token_id
+            }
+        }
+    }
+    
+    /**
+     * Gets the parameter.
+     */
+    pub fn getParameter(self) -> Parameter {
+        for (parameter in Parameter(__all_data__)) {
+            if (self.parameter_id = parameter.id) {
+                return parameter
+            }
+        }
+    }
+    
+    /**
+     * Gets the questionToken.
+     */
+    pub fn getQuestionToken(self) -> QuestionToken {
+        for (questionToken in QuestionToken(__all_data__)) {
+            if (self.question_token_id = questionToken.id) {
+                return questionToken
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.parameter_id
+    }
+    
+}
+
+schema Token {
+    @primary id: int
+}
+
+impl Token {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *Token {
+        for (astNode in AstNode(db)) {
+            if (isTokenKind(astNode.kind)) {
+                yield Token{id: astNode.id}
+            }
+        }
+    }
+
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+}
+

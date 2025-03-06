@@ -1,0 +1,616 @@
+/**
+ * A ClassElement
+ */
+schema ClassElement extends Declaration {
+}
+
+impl ClassElement {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ClassElement {
+        for (fa in Declaration(db)) {
+            for (son in ClassElementDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield ClassElement {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Get the nameNode.
+     */
+    pub fn getNameNode(self) -> PropertyName {
+        for (classElementNameNode in ClassElementNameNode(__all_data__)) {
+            if (classElementNameNode.class_element_id = self.id) {
+                return classElementNameNode.getNameNode()
+            }
+        }
+    }
+    
+}
+
+/**
+ * A ClassElementNameNode
+ */
+schema ClassElementNameNode {
+    @primary class_element_id: int,
+    name_node_id: int
+}
+
+impl ClassElementNameNode {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ClassElementNameNode {
+        for (classElementNameNode in ClassElementNameNodeDO(db)) {
+            yield ClassElementNameNode {
+                class_element_id: classElementNameNode.class_element_id,
+                name_node_id : classElementNameNode.name_node_id
+            }
+        }
+    }
+    
+    /**
+     * Gets the classElement.
+     */
+    pub fn getClassElement(self) -> ClassElement {
+        for (classElement in ClassElement(__all_data__)) {
+            if (self.class_element_id = classElement.id) {
+                return classElement
+            }
+        }
+    }
+    
+    /**
+     * Gets the nameNode.
+     */
+    pub fn getNameNode(self) -> PropertyName {
+        for (propertyName in PropertyName(__all_data__)) {
+            if (self.name_node_id = propertyName.id) {
+                return propertyName
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.class_element_id
+    }
+    
+}
+
+/**
+ * A Constructor
+ */
+schema Constructor extends ClassElement {
+}
+
+impl Constructor {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *Constructor {
+        for (fa in ClassElement(db)) {
+            for (son in ConstructorDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield Constructor {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Cast to FunctionLikeDeclaration
+     */
+    pub fn toFunctionLikeDeclaration(self) -> FunctionLikeDeclaration {
+        for (functionLikeDeclaration in FunctionLikeDeclaration(__all_data__)) {
+            if (self.key_eq(functionLikeDeclaration)) {
+                return functionLikeDeclaration
+            }
+        }
+    }
+
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Get the body.
+     */
+    pub fn getBody(self) -> Block {
+        for (constructorBody in ConstructorBody(__all_data__)) {
+            if (constructorBody.constructor_id = self.id) {
+                return constructorBody.getBody()
+            }
+        }
+    }
+    
+    /**
+     * Get the modifiers.
+     */
+    pub fn getModifiers(self) -> *Modifier {
+        for (modifier in Modifier(__all_data__)) {
+            if (modifier.parent_id = self.id) {
+                yield modifier
+            }
+        }
+    }
+    
+}
+
+/**
+ * A ConstructorBody
+ */
+schema ConstructorBody {
+    @primary constructor_id: int,
+    body_id: int
+}
+
+impl ConstructorBody {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ConstructorBody {
+        for (constructorBody in ConstructorBodyDO(db)) {
+            yield ConstructorBody {
+                constructor_id: constructorBody.constructor_id,
+                body_id : constructorBody.body_id
+            }
+        }
+    }
+    
+    /**
+     * Gets the constructor.
+     */
+    pub fn getConstructor(self) -> int {
+        return self.constructor_id
+    }
+    
+    /**
+     * Gets the body.
+     */
+    pub fn getBody(self) -> Block {
+        for (block in Block(__all_data__)) {
+            if (self.body_id = block.id) {
+                return block
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.constructor_id
+    }
+    
+}
+
+/**
+ * A SemicolonClassElement
+ */
+schema SemicolonClassElement extends ClassElement {
+}
+
+impl SemicolonClassElement {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *SemicolonClassElement {
+        for (fa in ClassElement(db)) {
+            for (son in SemicolonClassElementDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield SemicolonClassElement {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A ClassLikeDeclaration
+ */
+schema ClassLikeDeclaration extends Declaration {
+}
+
+impl ClassLikeDeclaration {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ClassLikeDeclaration {
+        for (fa in Declaration(db)) {
+            for (son in ClassLikeDeclarationDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield ClassLikeDeclaration {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Get the nameNode.
+     */
+    pub fn getNameNode(self) -> Identifier {
+        for (classLikeDeclarationNameNode in ClassLikeDeclarationNameNode(__all_data__)) {
+            if (classLikeDeclarationNameNode.class_like_declaration_id = self.id) {
+                return classLikeDeclarationNameNode.getNameNode()
+            }
+        }
+    }
+    
+    /**
+     * Get the typeParameter.
+     */
+    pub fn getTypeParameter(self) -> *TypeParameter {
+        for (classLikeDeclarationTypeParameter in ClassLikeDeclarationTypeParameter(__all_data__)) {
+            if (classLikeDeclarationTypeParameter.class_like_declaration_id = self.id) {
+                yield classLikeDeclarationTypeParameter.getTypeParameter()
+            }
+        }
+    }
+    
+    /**
+     * Get the member.
+     */
+    pub fn getMember(self) -> *ClassElement {
+        for (classLikeDeclarationMember in ClassLikeDeclarationMember(__all_data__)) {
+            if (classLikeDeclarationMember.class_like_declaration_id = self.id) {
+                yield classLikeDeclarationMember.getMember()
+            }
+        }
+    }
+    
+    /**
+     * Get the heritageClauses.
+     */
+    pub fn getHeritageClauses(self) -> *HeritageClause {
+        for (heritageClause in HeritageClause(__all_data__)) {
+            if (heritageClause.parent_id = self.id) {
+                yield heritageClause
+            }
+        }
+    }
+    
+}
+
+/**
+ * A ClassLikeDeclarationNameNode
+ */
+schema ClassLikeDeclarationNameNode {
+    @primary class_like_declaration_id: int,
+    name_node_id: int
+}
+
+impl ClassLikeDeclarationNameNode {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ClassLikeDeclarationNameNode {
+        for (classLikeDeclarationNameNode in ClassLikeDeclarationNameNodeDO(db)) {
+            yield ClassLikeDeclarationNameNode {
+                class_like_declaration_id: classLikeDeclarationNameNode.class_like_declaration_id,
+                name_node_id : classLikeDeclarationNameNode.name_node_id
+            }
+        }
+    }
+    
+    /**
+     * Gets the classLikeDeclaration.
+     */
+    pub fn getClassLikeDeclaration(self) -> ClassLikeDeclaration {
+        for (classLikeDeclaration in ClassLikeDeclaration(__all_data__)) {
+            if (self.class_like_declaration_id = classLikeDeclaration.id) {
+                return classLikeDeclaration
+            }
+        }
+    }
+    
+    /**
+     * Gets the nameNode.
+     */
+    pub fn getNameNode(self) -> Identifier {
+        for (identifier in Identifier(__all_data__)) {
+            if (self.name_node_id = identifier.id) {
+                return identifier
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.class_like_declaration_id
+    }
+    
+}
+
+/**
+ * A ClassLikeDeclarationTypeParameter
+ */
+schema ClassLikeDeclarationTypeParameter {
+    @primary type_parameter_id: int,
+    class_like_declaration_id: int,
+    index: int
+}
+
+impl ClassLikeDeclarationTypeParameter {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ClassLikeDeclarationTypeParameter {
+        for (classLikeDeclarationTypeParameter in ClassLikeDeclarationTypeParameterDO(db)) {
+            yield ClassLikeDeclarationTypeParameter {
+                type_parameter_id: classLikeDeclarationTypeParameter.type_parameter_id,
+                class_like_declaration_id : classLikeDeclarationTypeParameter.class_like_declaration_id,
+                index : classLikeDeclarationTypeParameter.index
+            }
+        }
+    }
+    
+    /**
+     * Gets the typeParameter.
+     */
+    pub fn getTypeParameter(self) -> TypeParameter {
+        for (typeParameter in TypeParameter(__all_data__)) {
+            if (self.type_parameter_id = typeParameter.id) {
+                return typeParameter
+            }
+        }
+    }
+    
+    /**
+     * Gets the classLikeDeclaration.
+     */
+    pub fn getClassLikeDeclaration(self) -> ClassLikeDeclaration {
+        for (classLikeDeclaration in ClassLikeDeclaration(__all_data__)) {
+            if (self.class_like_declaration_id = classLikeDeclaration.id) {
+                return classLikeDeclaration
+            }
+        }
+    }
+    
+    /**
+     * Gets the index.
+     */
+    pub fn getIndex(self) -> int {
+        return self.index
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.type_parameter_id
+    }
+    
+}
+
+/**
+ * A ClassLikeDeclarationMember
+ */
+schema ClassLikeDeclarationMember {
+    @primary member_id: int,
+    class_like_declaration_id: int,
+    index: int
+}
+
+impl ClassLikeDeclarationMember {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ClassLikeDeclarationMember {
+        for (classLikeDeclarationMember in ClassLikeDeclarationMemberDO(db)) {
+            yield ClassLikeDeclarationMember {
+                member_id: classLikeDeclarationMember.member_id,
+                class_like_declaration_id : classLikeDeclarationMember.class_like_declaration_id,
+                index : classLikeDeclarationMember.index
+            }
+        }
+    }
+    
+    /**
+     * Gets the member.
+     */
+    pub fn getMember(self) -> ClassElement {
+        for (classElement in ClassElement(__all_data__)) {
+            if (self.member_id = classElement.id) {
+                return classElement
+            }
+        }
+    }
+    
+    /**
+     * Gets the classLikeDeclaration.
+     */
+    pub fn getClassLikeDeclaration(self) -> ClassLikeDeclaration {
+        for (classLikeDeclaration in ClassLikeDeclaration(__all_data__)) {
+            if (self.class_like_declaration_id = classLikeDeclaration.id) {
+                return classLikeDeclaration
+            }
+        }
+    }
+    
+    /**
+     * Gets the index.
+     */
+    pub fn getIndex(self) -> int {
+        return self.index
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.member_id
+    }
+    
+}
+
+/**
+ * A ClassDeclaration
+ */
+schema ClassDeclaration extends ClassLikeDeclaration {
+}
+
+impl ClassDeclaration {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ClassDeclaration {
+        for (fa in ClassLikeDeclaration(db)) {
+            for (son in ClassDeclarationDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield ClassDeclaration {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * trans to DeclarationStatement to use func.
+     */
+    pub fn toDeclarationStatement(self) -> DeclarationStatement {
+        for (declarationStatement in DeclarationStatement(__all_data__)) {
+            if (self.id = declarationStatement.id) {
+                return declarationStatement
+            }
+        }
+    }
+    
+    /**
+     * Get the nameNode.
+     */
+    pub fn getNameNode(self) -> Identifier {
+        for (classDeclarationNameNode in ClassDeclarationNameNode(__all_data__)) {
+            if (classDeclarationNameNode.class_declaration_id = self.id) {
+                return classDeclarationNameNode.getNameNode()
+            }
+        }
+    }
+    
+    /**
+     * Get the modifiers.
+     */
+    pub fn getModifiers(self) -> *Modifier {
+        for (modifier in Modifier(__all_data__)) {
+            if (modifier.parent_id = self.id) {
+                yield modifier
+            }
+        }
+    }
+    
+}
+
+/**
+ * A ClassDeclarationNameNode
+ */
+schema ClassDeclarationNameNode {
+    @primary class_declaration_id: int,
+    name_node_id: int
+}
+
+impl ClassDeclarationNameNode {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ClassDeclarationNameNode {
+        for (classDeclarationNameNode in ClassDeclarationNameNodeDO(db)) {
+            yield ClassDeclarationNameNode {
+                class_declaration_id: classDeclarationNameNode.class_declaration_id,
+                name_node_id : classDeclarationNameNode.name_node_id
+            }
+        }
+    }
+    
+    /**
+     * Gets the classDeclaration.
+     */
+    pub fn getClassDeclaration(self) -> ClassDeclaration {
+        for (classDeclaration in ClassDeclaration(__all_data__)) {
+            if (self.class_declaration_id = classDeclaration.id) {
+                return classDeclaration
+            }
+        }
+    }
+    
+    /**
+     * Gets the nameNode.
+     */
+    pub fn getNameNode(self) -> Identifier {
+        for (identifier in Identifier(__all_data__)) {
+            if (self.name_node_id = identifier.id) {
+                return identifier
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.class_declaration_id
+    }
+    
+}
+

@@ -1,0 +1,204 @@
+/**
+ * {{comment}}
+ */
+
+{%- if name == 'FileOrNonRootDirectory' or name == 'Directory' %}
+schema {{ name }} {
+    @primary id: int
+}
+
+impl {{ name }} {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *{{ name }} {
+        {%- for type_name, primary in contains.items() %}
+        for ({{ type_name|lower_first}} in {{ type_name }}(db)) {
+            yield {{ name }} {
+                id : {{ type_name|lower_first}}.id
+            }
+        }
+        {%- endfor %}
+    }
+
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+
+    /**
+     * trans to AstNode
+     */
+    pub fn toAstNode(self) -> AstNode {
+        for (astNode in AstNode(__all_data__)) {
+            if (self.key_eq(astNode)) {
+                return astNode
+            }
+        }
+    }
+
+    {%- for type_name, primary in contains.items() %}
+    /**
+     * trans to {{type_name}}
+     */
+    pub fn to{{ type_name }}(self) -> {{ type_name }} {
+        for ({{ type_name|lower_first}} in {{type_name}}(__all_data__)) {
+            if ({{ type_name|lower_first}}.key_eq(self)) {
+                return {{ type_name|lower_first}}
+            }
+        }
+    }
+    {%- endfor %}
+}
+{%- else %}
+schema {{ name }} extends AstNode {
+}
+
+impl {{ name }} {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *{{ name }} {
+        {%- if name == 'ForInitializer'%}
+        for (forInitializer in VariableDeclarationList(db)) {
+            for (init in ForStatementInitializer(db)) {
+                if (init.initializer_id = forInitializer.id) {
+                    yield ForInitializer {
+                        id : forInitializer.id,
+                        kind : forInitializer.kind,
+                        parent_id : forInitializer.parent_id,
+                        parent_kind : forInitializer.parent_kind,
+                        index : forInitializer.index,
+                        location_id : forInitializer.location_id,
+                    }
+                }
+            }
+            for (init in ForInStatement(db)) {
+                if (init.initializer_id = forInitializer.id) {
+                    yield ForInitializer {
+                        id : forInitializer.id,
+                        kind : forInitializer.kind,
+                        parent_id : forInitializer.parent_id,
+                        parent_kind : forInitializer.parent_kind,
+                        index : forInitializer.index,
+                        location_id : forInitializer.location_id,
+                    }
+                }
+            }
+            for (init in ForOfStatement(db)) {
+                if (init.initializer_id = forInitializer.id) {
+                    yield ForInitializer {
+                        id : forInitializer.id,
+                        kind : forInitializer.kind,
+                        parent_id : forInitializer.parent_id,
+                        parent_kind : forInitializer.parent_kind,
+                        index : forInitializer.index,
+                        location_id : forInitializer.location_id,
+                    }
+                }
+            }
+        }
+        for (forInitializer in Expression(db)) {
+            for (init in ForStatementInitializer(db)) {
+                if (init.initializer_id = forInitializer.id) {
+                    yield ForInitializer {
+                        id : forInitializer.id,
+                        kind : forInitializer.kind,
+                        parent_id : forInitializer.parent_id,
+                        parent_kind : forInitializer.parent_kind,
+                        index : forInitializer.index,
+                        location_id : forInitializer.location_id,
+                    }
+                }
+            }
+            for (init in ForInStatement(db)) {
+                if (init.initializer_id = forInitializer.id) {
+                    yield ForInitializer {
+                        id : forInitializer.id,
+                        kind : forInitializer.kind,
+                        parent_id : forInitializer.parent_id,
+                        parent_kind : forInitializer.parent_kind,
+                        index : forInitializer.index,
+                        location_id : forInitializer.location_id,
+                    }
+                }
+            }
+            for (init in ForOfStatement(db)) {
+                if (init.initializer_id = forInitializer.id) {
+                    yield ForInitializer {
+                        id : forInitializer.id,
+                        kind : forInitializer.kind,
+                        parent_id : forInitializer.parent_id,
+                        parent_kind : forInitializer.parent_kind,
+                        index : forInitializer.index,
+                        location_id : forInitializer.location_id,
+                    }
+                }
+            }
+        }
+        {%- else %}
+        {%- for type_name, primary in contains.items() %}
+        {%- if type_name == 'PropertyAccessExpression' and name == 'MayInvokeExpression'%}
+        for (propertyAccessExpression in PropertyAccessExpression(db)) {
+            for (callSiteImplementation in CallSiteImplementation(db)) {
+                if (propertyAccessExpression.id = callSiteImplementation.call_site_id) {
+                    yield MayInvokeExpression {
+                        id : propertyAccessExpression.id,
+                        kind : propertyAccessExpression.kind,
+                        parent_id : propertyAccessExpression.parent_id,
+                        parent_kind : propertyAccessExpression.parent_kind,
+                        index : propertyAccessExpression.index,
+                        location_id : propertyAccessExpression.location_id,
+                    }
+                }
+            }
+        }
+        {%- else %}
+        {%- if type_name == 'TopLevel'%}
+        for (topLevel in TopLevel(db)) {
+            yield {{ name }} {
+                id: topLevel.id,
+                kind : topLevel.kind,
+                parent_id : -1,  // TopLevel 无父节点，与index信息
+                parent_kind : -1,
+                index : -1,
+                location_id : topLevel.location_id
+            }
+        }
+        {%- else %}
+        for ({{ type_name|lower_first}} in {{ type_name }}(db)) {
+            yield {{ name }} {
+                id : {{ type_name|lower_first}}.id,
+                kind : {{ type_name|lower_first}}.kind,
+                parent_id : {{ type_name|lower_first}}.parent_id,
+                parent_kind : {{ type_name|lower_first}}.parent_kind,
+                index : {{ type_name|lower_first}}.index,
+                location_id : {{ type_name|lower_first}}.location_id,
+            }
+        }
+        {%- endif %}
+        {%- endif %}
+        {%- endfor %}
+        {%- endif %}
+    }
+
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    {% for type_name, primary in contains.items() %}
+    /**
+     * trans to {{type_name}}
+     */
+    pub fn to{{ type_name }}(self) -> {{ type_name }} {
+        for ({{type_name|lower_first}} in {{type_name}}(__all_data__)) {
+            if ({{type_name|lower_first}}.key_eq(self)) {
+                return {{type_name|lower_first}}
+            }
+        }
+    }
+    {% endfor %}
+}
+{%- endif %}
