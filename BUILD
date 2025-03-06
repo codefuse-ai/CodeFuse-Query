@@ -378,28 +378,28 @@ pkg_files(
 )
 
 # Pack ArkTs artifacts
-# pkg_files(
-#     name = "coref-arkts-lib-script-pkg",
-#     srcs = [
-#         "//language/arkts:lib",
-#     ],
-#     attributes = pkg_attributes(
-#         mode = "0644",
-#     ),
-#     prefix = "lib/coref/arkts",
-#     strip_prefix = strip_prefix.from_pkg() + "lib",
-# )
+pkg_files(
+    name = "coref-arkts-lib-script-pkg",
+    srcs = [
+        "//language/arkts:lib",
+    ],
+    attributes = pkg_attributes(
+        mode = "0644",
+    ),
+    prefix = "lib/coref/arkts",
+    strip_prefix = strip_prefix.from_pkg() + "lib",
+)
 
-# pkg_files(
-#     name = "coref-arkts-src-extractor-pkg",
-#     srcs = [
-#         "//language/arkts/extractor:coref-arkts-src-extractor",
-#     ],
-#     attributes = pkg_attributes(
-#         mode = "0755",
-#     ),
-#     prefix = "language/arkts/extractor",
-# )
+pkg_files(
+    name = "coref-arkts-src-extractor-pkg",
+    srcs = [
+        "//language/arkts/extractor:coref-arkts-src-extractor",
+    ],
+    attributes = pkg_attributes(
+        mode = "0755",
+    ),
+    prefix = "language/arkts/extractor",
+)
 
 # Current pkg_tar/pkg_files rules can't pack a directory generated from genrule.
 # To workaround this, use the deprecated pkg_tar rule instead
@@ -506,7 +506,7 @@ coref_lib_script_pkgs = [
     ":coref-cfamily-lib-script-pkg",
     ":coref-properties-lib-script-pkg",
     ":coref-sql-lib-script-pkg",
-    # ":coref-arkts-lib-script-pkg",
+    ":coref-arkts-lib-script-pkg",
 ] 
 
 coref_libscript_languages = [
@@ -519,7 +519,7 @@ coref_libscript_languages = [
     "properties",
     "sql",
     # "swift",
-    # "arkts",
+    "arkts",
 ]
 
 copy_to_directory(
@@ -626,15 +626,15 @@ copy_to_directory(
 #     visibility = ["//visibility:public"],
 # )
 
-# copy_to_directory(
-#     name = "copy-arkts-lib-script",
-#     srcs = [
-#         "//language/arkts:lib",
-#     ],
-#     out = "lib/coref/arkts",
-#     replace_prefixes = {"language/arkts/lib": ""},
-#     visibility = ["//visibility:public"],
-# )
+copy_to_directory(
+    name = "copy-arkts-lib-script",
+    srcs = [
+        "//language/arkts:lib",
+    ],
+    out = "lib/coref/arkts",
+    replace_prefixes = {"language/arkts/lib": ""},
+    visibility = ["//visibility:public"],
+)
 
 genrule(
     name = "coref-lib-script-gen",
@@ -650,7 +650,7 @@ genrule(
         ":copy-sql-lib-script",
         ":copy-cfamily-lib-script",
         # ":copy-swift-lib-script",
-        # ":copy-arkts-lib-script",
+        ":copy-arkts-lib-script",
     ],
     outs = ["lib/coref/%s.gdl" % language for language in coref_libscript_languages],
     cmd = """
@@ -680,7 +680,7 @@ pkg_tar(
     name = "sparrow-cli",
     srcs = [
         ":coref-lib-pkg",
-        # ":coref-arkts-src-extractor-pkg",
+        ":coref-arkts-src-extractor-pkg",
         # ":coref-go-src-extractor-pkg",
         ":coref-sql-src-extractor-pkg",
         ":coref-java-src-extractor-pkg",

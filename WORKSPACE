@@ -560,3 +560,20 @@ aspect_bazel_lib_dependencies()
 #     sha256 = "d4292d9b898a9d264c3e8ea58c83074a63d0c8d84602f4a85b9dbb1b4dcd52ad",
 #     urls = ["https://antsys-sparrow-data.cn-shanghai-alipay-office.oss-alipay.aliyuncs.com/sparrow/public/tools/swift/lib_InternalSwiftSyntaxParser/5.5.3-alios7/lib_InternalSwiftSyntaxParser.zip"],
 # )
+
+
+# third_party_typescript 4.9.5-raw Release
+# Replace with the third_party_typescript commit you want to use.
+third_party_typescript_commit = "5bef9c4ec07035be8167d8190f6df47275b81058"
+third_party_typescript_SHA256 = "e703a2ccb546e7fa78f0a0681cbc9569991b807247ff903bf6f0fe5304ec0fe9"
+
+http_archive(
+    name = "ohos_typescript_src",
+    sha256 = third_party_typescript_SHA256,
+    strip_prefix = "third_party_typescript-" + third_party_typescript_commit,
+    build_file = "//:external/rules_ohos_typescript/ohos_typescript.BUILD",
+    urls = [
+        "https://gitee.com/openharmony/third_party_typescript/repository/archive/{commit}.zip".format(commit = third_party_typescript_commit),
+        "https://antsys-sparrow-data.cn-shanghai-alipay-office.oss-alipay.aliyuncs.com/sparrow/public/tools/ohos-typescript/third_party_typescript-{commit}.zip".format(commit = third_party_typescript_commit),
+    ],
+)
