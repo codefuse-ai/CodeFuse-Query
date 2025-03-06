@@ -92,28 +92,6 @@ Note: The maturity level of the language status is determined based on the types
 ## Tutorial
 - [Online Tutorial](./tutorial/README.en.md)
 
-## Directory Structure Description
-- `cli`: The entry point for the command-line tool, providing a unified command-line interface, calling other modules to complete specific functions
-- `language`: Core data and data modeling (lib) for various languages. Regarding the degree of openness, please refer to the section "Some Notes on the Scope of Open Source"
-- `doc`: Reference documents
-- `examples`: Gödel query language examples
-- `tutorial`：CodeFuse-Query Development Container Usage Tutorial
-
-## Some Notes on the Scope of Open Source
-As of now, it is **not possible** to build an executable program from the source code because not all modules have been made open-source in this release, and missing modules will be released over the next year. Nevertheless, to ensure a complete experience, we have released **complete installation packages** for download, please see the Release page.
-Regarding the openness of languages, you can refer to the table below:
-
-| Language | Data Modeling Open Source | Data Core Open Source | Maturity |
-| --- | --- | --- | --- |
-| Python | Y | Y | RELEASE |
-| Java | Y | Y | RELEASE |
-| JavaScript | Y | Y | RELEASE |
-| Go | Y | Y | RELEASE |
-| XML | Y | Y | RELEASE |
-| Cfamily | Y | Y | BETA |
-| SQL | Y | Y | BETA |
-| Swift | N | N | BETA |
-| Properties | Y | Y | BETA |
 
 ## Related Paper  
 
