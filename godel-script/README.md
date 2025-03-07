@@ -56,51 +56,13 @@ Structure of this project:
 
 Need C++ standard at least `-std=c++17`.
 
-You can refer to the following Dockerfile to prepare your development environment.
+On Ubuntu, you are expected to install the following packages before compiling.
 
-```Dockerfile
-FROM ubuntu:24.04
-
-RUN echo "Types: deb\n\
-URIs: http://mirrors.cloud.tencent.com/ubuntu/\n\
-Suites: noble noble-updates noble-security\n\
-Components: main restricted universe multiverse\n\
-Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg" > /etc/apt/sources.list.d/ubuntu.sources
-
-RUN apt update && apt upgrade -y && apt install -y git build-essential m4 cmake ninja-build clang-format clang-tidy clang-tools clang clangd libc++-dev libc++1 libc++abi-dev libc++abi1 libclang-dev libclang1 liblldb-dev libllvm-ocaml-dev libomp-dev libomp5 lld lldb llvm-dev llvm-runtime llvm python3-clang libsqlite3-dev sqlite3 zlib1g-dev
+```bash
+sudo apt install -y git build-essential libffi-dev m4 cmake libsqlite3-dev zlib1g-dev
 ```
 
-For convenience, we recommend directly using the [Dev Container plugin](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) of VSCode. Here is `devcontainer.json`.
-
-```json
-{
-	"name": "godel-script",
-	"build": {
-		"context": "..",
-		"dockerfile": "./Dockerfile"
-	},
-	"customizations": {
-		"vscode": {
-			"extensions": [
-				"xaver.clang-format",
-				"twxs.cmake",
-				"ms-vscode.cmake-tools",
-				"vadimcn.vscode-lldb",
-				"llvm-vs-code-extensions.vscode-clangd"
-			],
-			"settings": {
-				"[cpp]": {
-					"editor.defaultFormatter": "xaver.clang-format"
-				},
-				"editor.formatOnSave": true,
-				"editor.formatOnPaste": true,
-				"cmake.generator": "Ninja"
-			}
-		}
-	},
-	"remoteUser": "root"
-}
-```
+For convenience, we recommend directly using the [Dev Container plugin](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) of VSCode. The configuration files are in `godel-script/.devcontainer/`.
 
 
 ### Apply Patch On Soufflé Submodule
@@ -133,8 +95,8 @@ Use command below:
 
 ```bash
 mkdir build && cd build
-cmake .. -DCMAKE_BUILD_TYPE:STRING=Release -DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=TRUE -DCMAKE_C_COMPILER:FILEPATH=/usr/bin/clang -DCMAKE_CXX_COMPILER:FILEPATH=/usr/bin/clang++ --no-warn-unused-cli -G Ninja
-cmake --build . --config Release --target all -j 8
+cmake .. -DCMAKE_BUILD_TYPE:STRING=Release 
+cmake --build .
 ```
 
 After building, you'll find `build/godel` in the `build` folder.
