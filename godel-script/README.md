@@ -52,24 +52,39 @@ Structure of this project:
     +-- src             godel-frontend source code
 ```
 
+### Environment
+
 Need C++ standard at least `-std=c++17`.
+
+On Ubuntu, you are expected to install the following packages before compiling.
+
+```bash
+sudo apt install -y git build-essential libffi-dev m4 cmake libsqlite3-dev zlib1g-dev
+```
+
+For convenience, we recommend directly using the [Dev Container plugin](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) of VSCode. The configuration files are in `godel-script/.devcontainer/`.
+
 
 ### Apply Patch On Soufflé Submodule
 
-GödelScript uses a self-modified soufflé from a much older branch of public soufflé,
-now we use patch to make sure it could be built successfully.
-
-Use this command to apply patch:
+GödelScript uses a self-modified soufflé from a much older branch of public soufflé. Use these commands to clone.
 
 ```bash
-cd souffle
+git submodule init
+git submodule update --recursive
+```
+
+Now we use patch to make sure it could be built successfully. Use these commands to apply patch:
+
+```bash
+cd godel-backend/souffle
 git am ../0001-init-self-used-souffle-from-public-souffle.patch
 ```
 
 Use these commands to revert:
 
 ```bash
-cd souffle
+cd godel-backend/souffle
 git apply -R ../0001-init-self-used-souffle-from-public-souffle.patch
 git reset HEAD~
 ```
@@ -79,8 +94,9 @@ git reset HEAD~
 Use command below:
 
 ```bash
-mkdir build && cd build && cmake .. -DCMAKE_BUILD_TYPE=Release
-make -j6
+mkdir build && cd build
+cmake .. -DCMAKE_BUILD_TYPE:STRING=Release 
+cmake --build .
 ```
 
 After building, you'll find `build/godel` in the `build` folder.
