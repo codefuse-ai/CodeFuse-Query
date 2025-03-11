@@ -1,0 +1,294 @@
+/**
+ * A PropertyAssignment
+ */
+schema PropertyAssignment extends ObjectLiteralElement {
+    name_node_id: int,
+    initializer_id: int
+}
+
+impl PropertyAssignment {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *PropertyAssignment {
+        for (fa in ObjectLiteralElement(db)) {
+            for (son in PropertyAssignmentDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield PropertyAssignment {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        name_node_id : son.name_node_id,
+                        initializer_id : son.initializer_id
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the nameNode.
+     */
+    pub fn getNameNode(self) -> PropertyName {
+        for (propertyName in PropertyName(__all_data__)) {
+            if (self.name_node_id = propertyName.id) {
+                return propertyName
+            }
+        }
+    }
+    
+    /**
+     * Gets the initializer.
+     */
+    pub fn getInitializer(self) -> Expression {
+        for (expression in Expression(__all_data__)) {
+            if (self.initializer_id = expression.id) {
+                return expression
+            }
+        }
+    }
+    
+}
+
+/**
+ * A ShorthandPropertyAssignment
+ */
+schema ShorthandPropertyAssignment extends ObjectLiteralElement {
+    name_node_id: int
+}
+
+impl ShorthandPropertyAssignment {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ShorthandPropertyAssignment {
+        for (fa in ObjectLiteralElement(db)) {
+            for (son in ShorthandPropertyAssignmentDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield ShorthandPropertyAssignment {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        name_node_id : son.name_node_id
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the nameNode.
+     */
+    pub fn getNameNode(self) -> Identifier {
+        for (identifier in Identifier(__all_data__)) {
+            if (self.name_node_id = identifier.id) {
+                return identifier
+            }
+        }
+    }
+    
+    /**
+     * Gets the value symbol associated with this shorthand property assignment.
+     */
+    pub fn getSymbol(self) -> Symbol {
+        for (shorthandPropertyAssignmentValueSymbol in ShorthandPropertyAssignmentValueSymbol(__all_data__)) {
+            if (shorthandPropertyAssignmentValueSymbol.shorthand_property_assignment_id = self.id) {
+                return shorthandPropertyAssignmentValueSymbol.getSymbol()
+            }
+        }
+    }
+    
+
+    /**
+     * Gets identifier
+     */
+    pub fn getIdentifier(self) -> Identifier {
+        return self.getNameNode()
+    }
+}
+
+/**
+ * A SpreadAssignment
+ */
+schema SpreadAssignment extends ObjectLiteralElement {
+    expression_id: int
+}
+
+impl SpreadAssignment {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *SpreadAssignment {
+        for (fa in ObjectLiteralElement(db)) {
+            for (son in SpreadAssignmentDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield SpreadAssignment {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        expression_id : son.expression_id
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the expression.
+     */
+    pub fn getExpression(self) -> Expression {
+        for (expression in Expression(__all_data__)) {
+            if (self.expression_id = expression.id) {
+                return expression
+            }
+        }
+    }
+    
+}
+
+/**
+ * A ExportAssignment
+ */
+schema ExportAssignment extends DeclarationStatement {
+    is_export_equals: int,
+    expression_id: int
+}
+
+impl ExportAssignment {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ExportAssignment {
+        for (fa in DeclarationStatement(db)) {
+            for (son in ExportAssignmentDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield ExportAssignment {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        is_export_equals : son.is_export_equals,
+                        expression_id : son.expression_id
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the xportEquals.
+     */
+    pub fn IsExportEquals(self) -> bool {
+        return self.is_export_equals = 1
+    }
+    
+    /**
+     * Gets the expression.
+     */
+    pub fn getExpression(self) -> Expression {
+        for (expression in Expression(__all_data__)) {
+            if (self.expression_id = expression.id) {
+                return expression
+            }
+        }
+    }
+    
+    /**
+     * Get the modifiers.
+     */
+    pub fn getModifiers(self) -> *Modifier {
+        for (modifier in Modifier(__all_data__)) {
+            if (modifier.parent_id = self.id) {
+                yield modifier
+            }
+        }
+    }
+    
+}
+
+/**
+ * A ShorthandPropertyAssignmentValueSymbol
+ */
+schema ShorthandPropertyAssignmentValueSymbol {
+    @primary shorthand_property_assignment_id: int,
+    symbol_id: int
+}
+
+impl ShorthandPropertyAssignmentValueSymbol {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ShorthandPropertyAssignmentValueSymbol {
+        for (shorthandPropertyAssignmentValueSymbol in ShorthandPropertyAssignmentValueSymbolDO(db)) {
+            yield ShorthandPropertyAssignmentValueSymbol {
+                shorthand_property_assignment_id: shorthandPropertyAssignmentValueSymbol.shorthand_property_assignment_id,
+                symbol_id : shorthandPropertyAssignmentValueSymbol.symbol_id
+            }
+        }
+    }
+    
+    /**
+     * Gets the shorthandPropertyAssignment.
+     */
+    pub fn getShorthandPropertyAssignment(self) -> ShorthandPropertyAssignment {
+        for (shorthandPropertyAssignment in ShorthandPropertyAssignment(__all_data__)) {
+            if (self.shorthand_property_assignment_id = shorthandPropertyAssignment.id) {
+                return shorthandPropertyAssignment
+            }
+        }
+    }
+    
+    /**
+     * Gets the symbol.
+     */
+    pub fn getSymbol(self) -> Symbol {
+        for (symbol in Symbol(__all_data__)) {
+            if (self.symbol_id = symbol.id) {
+                return symbol
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.shorthand_property_assignment_id
+    }
+    
+}
+

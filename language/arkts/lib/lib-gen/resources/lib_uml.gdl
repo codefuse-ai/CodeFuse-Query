@@ -1,0 +1,125 @@
+/**
+ * A {{ name }} {%- if isDO is defined %} load {{table}} from db {%- endif %}
+ */
+schema {{ name }} {{extends}}{
+    {%- if extends is not defined %}
+    @primary {{primary}}: int,
+    {%- endif %}
+    {%- for key, value in schema.items() %}
+    {%- if not loop.last %}
+    {{ key }}: {{ value }},
+    {%- else %}
+    {{ key }}: {{ value }}
+    {%- endif %}
+    {%- endfor %}
+}
+
+{%- if isDO is not defined %}
+impl {{ name }} {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *{{ name }} {
+        {%- if extends is not defined %}
+        for ({{name|lower_first}} in {{ name }}DO(db)) {
+            yield {{ name }} {
+                {{primary}}: {{name|lower_first}}.{{primary}},
+                {%- for field in fields %}
+                {%- if not loop.last %}
+                {{ field }} : {{name|lower_first}}.{{ field }},
+                {%- else %}
+                {{ field }} : {{name|lower_first}}.{{ field }}
+                {%- endif %}
+                {%- endfor %}
+            }
+        }
+        {%- if name == 'AstNode' %}
+        for (topLevel in TopLevel(db)) {
+            yield AstNode {
+                id: topLevel.id,
+                kind : topLevel.kind,
+                parent_id : -1,  // TopLevel 无父节点，与index信息
+                parent_kind : -1,
+                index : -1,
+                location_id : topLevel.location_id
+            }
+        }
+        {%- endif %}
+        {%- else %}
+        for (fa in {{ fa }}(db)) {
+            for (son in {{nowName}}(db)) {
+                if (son.key_eq(fa)) {
+                    yield {{ name }} {
+                        {%- for field in fa_fields %}
+                        {{ field }} : fa.{{ field }},
+                        {%- endfor %}
+                        {%- for field in schema %}
+                        {%- if not loop.last %}
+                        {{ field }} : son.{{ field }},
+                        {%- else %}
+                        {{ field }} : son.{{ field }}
+                        {%- endif %}
+                        {%- endfor %}
+                    }
+                }
+            }
+        }
+        {%- endif %}
+    }
+    {% for func_name, value in func.items() %}
+    /**
+     * {{ value["comment"] }}.
+     */
+    pub fn {{ func_name }}(self {%- for id, type in value["params"].items() %}, {{ id }}: {{ type }}{%- endfor %}) -> {{ value["return_type"] }} {
+        {%- if value["return_type"] == 'int' or value["return_type"] == 'string' or value["return_type"] == 'bool' %}
+        {%- if value["return_type"] == 'bool' %}
+        return self.{{value["field_key"]}} = 1
+        {%- else %}
+        {%- if func_name == 'getKindName' or func_name == 'getParentKindName'%}
+        return getRealKind(self.{{value["field_key"]}})
+        {%- else %}
+        return self.{{value["field_key"]}}
+        {%- endif %}
+        {%- endif %}
+        {%- else %}
+        for ({{value["return_type"]|lower_first}} in {{value["return_type"]}}(__all_data__)) {
+        {%- if 'return_type_key' in value %}
+            if (self.{{value["field_key"]}} = {{value["return_type"]|lower_first}}.{{value["return_type_key"]}}) {
+                return {{value["return_type"]|lower_first}}
+            }
+        {%- else %}
+            if (self.{{value["field_key"]}} = {{value["return_type"]|lower_first}}.id) {
+                return {{value["return_type"]|lower_first}}
+            }
+        {%- endif %}
+        }
+        {%- endif %}
+    }
+    {% endfor %}
+
+    {%- for func_name, value in addFunc.items() %}
+    /**
+     * {{ value["comment"] }}.
+     */
+    pub fn {{ func_name }}(self) -> {{ value["return_type"] }} {
+        for ({{value["son"]|lower_first}} in {{value["son"]}}(__all_data__)) {
+            if ({{value["son"]|lower_first}}.{{ table }}_id = self.{{primary}}) {
+                {{value["return_stmt"]}}
+            }
+        }
+    }
+    {% endfor %}
+
+    {%- for func_name, value in specFunc.items() %}
+    /**
+     * {{ value["comment"] }}.
+     */
+    pub fn {{ func_name }}(self) -> {{ value["return_type"] }} {
+        for ({{value["son"]|lower_first}} in {{value["son"]}}(__all_data__)) {
+            if ({{value["son"]|lower_first}}.parent_id = self.{{primary}}) {
+                {{value["return_stmt"]}}
+            }
+        }
+    }
+    {% endfor %}
+}
+{%- endif %}

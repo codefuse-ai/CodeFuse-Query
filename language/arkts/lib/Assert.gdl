@@ -1,0 +1,135 @@
+/**
+ * A AssertEntry
+ */
+schema AssertEntry extends AstNode {
+    name_node_id: int,
+    value_node_id: int
+}
+
+impl AssertEntry {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *AssertEntry {
+        for (fa in AstNode(db)) {
+            for (son in AssertEntryDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield AssertEntry {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        name_node_id : son.name_node_id,
+                        value_node_id : son.value_node_id
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the parent.
+     */
+    pub fn getParent(self) -> AssertClause {
+        for (assertClause in AssertClause(__all_data__)) {
+            if (self.parent_id = assertClause.id) {
+                return assertClause
+            }
+        }
+    }
+    
+    /**
+     * Gets the nameNode.
+     */
+    pub fn getNameNode(self) -> AssertionKey {
+        for (assertionKey in AssertionKey(__all_data__)) {
+            if (self.name_node_id = assertionKey.id) {
+                return assertionKey
+            }
+        }
+    }
+    
+    /**
+     * Gets the valueNode.
+     */
+    pub fn getValueNode(self) -> Expression {
+        for (expression in Expression(__all_data__)) {
+            if (self.value_node_id = expression.id) {
+                return expression
+            }
+        }
+    }
+    
+}
+
+/**
+ * This type consists of the following types: [Identifier, StringLiteral]
+ */
+schema AssertionKey extends AstNode {
+}
+
+impl AssertionKey {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *AssertionKey {
+        for (identifier in Identifier(db)) {
+            yield AssertionKey {
+                id : identifier.id,
+                kind : identifier.kind,
+                parent_id : identifier.parent_id,
+                parent_kind : identifier.parent_kind,
+                index : identifier.index,
+                location_id : identifier.location_id,
+            }
+        }
+        for (stringLiteral in StringLiteral(db)) {
+            yield AssertionKey {
+                id : stringLiteral.id,
+                kind : stringLiteral.kind,
+                parent_id : stringLiteral.parent_id,
+                parent_kind : stringLiteral.parent_kind,
+                index : stringLiteral.index,
+                location_id : stringLiteral.location_id,
+            }
+        }
+    }
+
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * trans to Identifier
+     */
+    pub fn toIdentifier(self) -> Identifier {
+        for (identifier in Identifier(__all_data__)) {
+            if (identifier.key_eq(self)) {
+                return identifier
+            }
+        }
+    }
+    
+    /**
+     * trans to StringLiteral
+     */
+    pub fn toStringLiteral(self) -> StringLiteral {
+        for (stringLiteral in StringLiteral(__all_data__)) {
+            if (stringLiteral.key_eq(self)) {
+                return stringLiteral
+            }
+        }
+    }
+    
+}
+

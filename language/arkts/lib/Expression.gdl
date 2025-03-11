@@ -1,0 +1,4477 @@
+/**
+ * A Expression
+ */
+schema Expression extends AstNode {
+}
+
+impl Expression {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *Expression {
+        for (fa in AstNode(db)) {
+            for (son in ExpressionDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield Expression {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+
+    /**
+     * Get the call site if self is an argument.
+     */
+    pub fn getCallSiteIfIsArgument(self) -> MayInvokeExpression {
+        for (mayInvokeExpression in MayInvokeExpression(__all_data__)) {
+            if (self in mayInvokeExpression.getArgument()) {
+                return mayInvokeExpression
+            }
+        }
+    }
+
+    pub fn isArgument(self) -> bool {
+        let (mayInvokeExpression = self.getCallSiteIfIsArgument()) {
+            return true
+        }
+    }
+
+    pub fn getArgumentIndex(self) -> int {
+        let (mayInvokeExpression = self.getCallSiteIfIsArgument()) {
+            for (i in int::__undetermined_all__()) {
+                if (self = mayInvokeExpression.getIthArgument(i)) {
+                    return i
+                }
+            }
+        }
+    }
+
+    pub fn getFunctionIfIsReturn(self) -> FunctionLikeDeclaration {
+        for (functionLikeDeclaration in FunctionLikeDeclaration(__all_data__)) {
+            if (self in functionLikeDeclaration.getReturnedExpression()) {
+                return functionLikeDeclaration
+            }
+        }
+    }
+
+    pub fn isReturn(self) -> bool {
+        let (functionLikeDeclaration = self.getFunctionIfIsReturn()) {
+            return true
+        }
+    }
+}
+
+/**
+ * A UnaryExpression
+ */
+schema UnaryExpression extends Expression {
+}
+
+impl UnaryExpression {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *UnaryExpression {
+        for (fa in Expression(db)) {
+            for (son in UnaryExpressionDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield UnaryExpression {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+
+    // TODO:: may exist bug, need fix
+    pub fn getExpression(self) -> Expression {
+        for (expression in Expression(__all_data__)) {
+            if (expression.key_eq(self.getIthChild(0))) {
+                return expression
+            }
+        }
+    }
+}
+
+/**
+ * A UpdateExpression
+ */
+schema UpdateExpression extends UnaryExpression {
+}
+
+impl UpdateExpression {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *UpdateExpression {
+        for (fa in UnaryExpression(db)) {
+            for (son in UpdateExpressionDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield UpdateExpression {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A LeftHandSideExpression
+ */
+schema LeftHandSideExpression extends UpdateExpression {
+}
+
+impl LeftHandSideExpression {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *LeftHandSideExpression {
+        for (fa in UpdateExpression(db)) {
+            for (son in LeftHandSideExpressionDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield LeftHandSideExpression {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A MemberExpression
+ */
+schema MemberExpression extends LeftHandSideExpression {
+}
+
+impl MemberExpression {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *MemberExpression {
+        for (fa in LeftHandSideExpression(db)) {
+            for (son in MemberExpressionDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield MemberExpression {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A PrimaryExpression
+ */
+schema PrimaryExpression extends MemberExpression {
+}
+
+impl PrimaryExpression {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *PrimaryExpression {
+        for (fa in MemberExpression(db)) {
+            for (son in PrimaryExpressionDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield PrimaryExpression {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A LiteralExpression
+ */
+schema LiteralExpression extends LiteralLikeNode {
+}
+
+impl LiteralExpression {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *LiteralExpression {
+        for (fa in LiteralLikeNode(db)) {
+            for (son in LiteralExpressionDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield LiteralExpression {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        value : fa.value,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * trans to PrimaryExpression to use func.
+     */
+    pub fn toPrimaryExpression(self) -> PrimaryExpression {
+        for (primaryExpression in PrimaryExpression(__all_data__)) {
+            if (self.id = primaryExpression.id) {
+                return primaryExpression
+            }
+        }
+    }
+    
+}
+
+/**
+ * A Identifier
+ */
+schema Identifier extends PrimaryExpression {
+    name: string
+}
+
+impl Identifier {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *Identifier {
+        for (fa in PrimaryExpression(db)) {
+            for (son in IdentifierDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield Identifier {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        name : son.name
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the name.
+     */
+    pub fn getName(self) -> string {
+        return self.name
+    }
+    
+    /**
+     * trans to Declaration to use func.
+     */
+    pub fn toDeclaration(self) -> Declaration {
+        for (declaration in Declaration(__all_data__)) {
+            if (self.id = declaration.id) {
+                return declaration
+            }
+        }
+    }
+    
+}
+
+/**
+ * A Decorator
+ */
+schema Decorator extends AstNode {
+    expression_id: int
+}
+
+impl Decorator {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *Decorator {
+        for (fa in AstNode(db)) {
+            for (son in DecoratorDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield Decorator {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        expression_id : son.expression_id
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the expression.
+     */
+    pub fn getExpression(self) -> Expression {
+        for (expression in Expression(__all_data__)) {
+            if (self.expression_id = expression.id) {
+                return expression
+            }
+        }
+    }
+    
+
+    /**
+     * Gets the name of this decorator.
+     */
+    pub fn getName(self) -> string {
+        return self.getExpression().getText()
+    }
+}
+
+/**
+ * A ThisExpression
+ */
+schema ThisExpression extends PrimaryExpression {
+}
+
+impl ThisExpression {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ThisExpression {
+        for (fa in PrimaryExpression(db)) {
+            for (son in ThisExpressionDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield ThisExpression {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A SuperExpression
+ */
+schema SuperExpression extends PrimaryExpression {
+}
+
+impl SuperExpression {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *SuperExpression {
+        for (fa in PrimaryExpression(db)) {
+            for (son in SuperExpressionDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield SuperExpression {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A ImportExpression
+ */
+schema ImportExpression extends PrimaryExpression {
+}
+
+impl ImportExpression {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ImportExpression {
+        for (fa in PrimaryExpression(db)) {
+            for (son in ImportExpressionDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield ImportExpression {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A ArrayLiteralExpression
+ */
+schema ArrayLiteralExpression extends PrimaryExpression {
+}
+
+impl ArrayLiteralExpression {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ArrayLiteralExpression {
+        for (fa in PrimaryExpression(db)) {
+            for (son in ArrayLiteralExpressionDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield ArrayLiteralExpression {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Get the element.
+     */
+    pub fn getElement(self) -> *Expression {
+        for (arrayLiteralExpressionElement in ArrayLiteralExpressionElement(__all_data__)) {
+            if (arrayLiteralExpressionElement.array_literal_expression_id = self.id) {
+                yield arrayLiteralExpressionElement.getElement()
+            }
+        }
+    }
+    
+
+    /**
+     * Gets the `i`th element of this call ArrayLiteralExpression.
+     * index from 0
+     */
+    pub fn getIthElement(self, index: int) -> Expression {
+        for (arrayLiteralExpressionElement in ArrayLiteralExpressionElement(__all_data__)) {
+            if (arrayLiteralExpressionElement.array_literal_expression_id = self.id && arrayLiteralExpressionElement.getIndex() = index) {
+                return arrayLiteralExpressionElement.getElement()
+            }
+        }
+    }
+}
+
+/**
+ * A ArrayLiteralExpressionElement
+ */
+schema ArrayLiteralExpressionElement {
+    @primary element_id: int,
+    array_literal_expression_id: int,
+    index: int
+}
+
+impl ArrayLiteralExpressionElement {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ArrayLiteralExpressionElement {
+        for (arrayLiteralExpressionElement in ArrayLiteralExpressionElementDO(db)) {
+            yield ArrayLiteralExpressionElement {
+                element_id: arrayLiteralExpressionElement.element_id,
+                array_literal_expression_id : arrayLiteralExpressionElement.array_literal_expression_id,
+                index : arrayLiteralExpressionElement.index
+            }
+        }
+    }
+    
+    /**
+     * Gets the element.
+     */
+    pub fn getElement(self) -> Expression {
+        for (expression in Expression(__all_data__)) {
+            if (self.element_id = expression.id) {
+                return expression
+            }
+        }
+    }
+    
+    /**
+     * Gets the arrayLiteralExpression.
+     */
+    pub fn getArrayLiteralExpression(self) -> ArrayLiteralExpression {
+        for (arrayLiteralExpression in ArrayLiteralExpression(__all_data__)) {
+            if (self.array_literal_expression_id = arrayLiteralExpression.id) {
+                return arrayLiteralExpression
+            }
+        }
+    }
+    
+    /**
+     * Gets the index.
+     */
+    pub fn getIndex(self) -> int {
+        return self.index
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.element_id
+    }
+    
+}
+
+/**
+ * A PropertyAccessExpression
+ */
+schema PropertyAccessExpression extends MemberExpression {
+    expression_id: int,
+    name_node_id: int
+}
+
+impl PropertyAccessExpression {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *PropertyAccessExpression {
+        for (fa in MemberExpression(db)) {
+            for (son in PropertyAccessExpressionDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield PropertyAccessExpression {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        expression_id : son.expression_id,
+                        name_node_id : son.name_node_id
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the expression.
+     */
+    pub fn getExpression(self) -> LeftHandSideExpression {
+        for (leftHandSideExpression in LeftHandSideExpression(__all_data__)) {
+            if (self.expression_id = leftHandSideExpression.id) {
+                return leftHandSideExpression
+            }
+        }
+    }
+    
+    /**
+     * Gets the nameNode.
+     */
+    pub fn getNameNode(self) -> MemberName {
+        for (memberName in MemberName(__all_data__)) {
+            if (self.name_node_id = memberName.id) {
+                return memberName
+            }
+        }
+    }
+    
+    /**
+     * trans to Declaration to use func.
+     */
+    pub fn toDeclaration(self) -> Declaration {
+        for (declaration in Declaration(__all_data__)) {
+            if (self.id = declaration.id) {
+                return declaration
+            }
+        }
+    }
+    
+    /**
+     * Get the questionDotToken.
+     */
+    pub fn getQuestionDotToken(self) -> QuestionDotToken {
+        for (propertyAccessExpressionQuestionDotToken in PropertyAccessExpressionQuestionDotToken(__all_data__)) {
+            if (propertyAccessExpressionQuestionDotToken.property_access_expression_id = self.id) {
+                return propertyAccessExpressionQuestionDotToken.getQuestionDotToken()
+            }
+        }
+    }
+    
+}
+
+/**
+ * A PropertyAccessExpressionQuestionDotToken
+ */
+schema PropertyAccessExpressionQuestionDotToken {
+    @primary property_access_expression_id: int,
+    question_dot_token_id: int
+}
+
+impl PropertyAccessExpressionQuestionDotToken {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *PropertyAccessExpressionQuestionDotToken {
+        for (propertyAccessExpressionQuestionDotToken in PropertyAccessExpressionQuestionDotTokenDO(db)) {
+            yield PropertyAccessExpressionQuestionDotToken {
+                property_access_expression_id: propertyAccessExpressionQuestionDotToken.property_access_expression_id,
+                question_dot_token_id : propertyAccessExpressionQuestionDotToken.question_dot_token_id
+            }
+        }
+    }
+    
+    /**
+     * Gets the propertyAccessExpression.
+     */
+    pub fn getPropertyAccessExpression(self) -> PropertyAccessExpression {
+        for (propertyAccessExpression in PropertyAccessExpression(__all_data__)) {
+            if (self.property_access_expression_id = propertyAccessExpression.id) {
+                return propertyAccessExpression
+            }
+        }
+    }
+    
+    /**
+     * Gets the questionDotToken.
+     */
+    pub fn getQuestionDotToken(self) -> QuestionDotToken {
+        for (questionDotToken in QuestionDotToken(__all_data__)) {
+            if (self.question_dot_token_id = questionDotToken.id) {
+                return questionDotToken
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.property_access_expression_id
+    }
+    
+}
+
+/**
+ * A ElementAccessExpression
+ */
+schema ElementAccessExpression extends MemberExpression {
+    expression_id: int,
+    argument_expression_id: int
+}
+
+impl ElementAccessExpression {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ElementAccessExpression {
+        for (fa in MemberExpression(db)) {
+            for (son in ElementAccessExpressionDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield ElementAccessExpression {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        expression_id : son.expression_id,
+                        argument_expression_id : son.argument_expression_id
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the expression.
+     */
+    pub fn getExpression(self) -> LeftHandSideExpression {
+        for (leftHandSideExpression in LeftHandSideExpression(__all_data__)) {
+            if (self.expression_id = leftHandSideExpression.id) {
+                return leftHandSideExpression
+            }
+        }
+    }
+    
+    /**
+     * Gets the argumentExpression.
+     */
+    pub fn getArgumentExpression(self) -> Expression {
+        for (expression in Expression(__all_data__)) {
+            if (self.argument_expression_id = expression.id) {
+                return expression
+            }
+        }
+    }
+    
+    /**
+     * Get the questionDotToken.
+     */
+    pub fn getQuestionDotToken(self) -> QuestionDotToken {
+        for (elementAccessExpressionQuestionDotToken in ElementAccessExpressionQuestionDotToken(__all_data__)) {
+            if (elementAccessExpressionQuestionDotToken.element_access_expression_id = self.id) {
+                return elementAccessExpressionQuestionDotToken.getQuestionDotToken()
+            }
+        }
+    }
+    
+}
+
+/**
+ * A ElementAccessExpressionQuestionDotToken
+ */
+schema ElementAccessExpressionQuestionDotToken {
+    @primary element_access_expression_id: int,
+    question_dot_token_id: int
+}
+
+impl ElementAccessExpressionQuestionDotToken {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ElementAccessExpressionQuestionDotToken {
+        for (elementAccessExpressionQuestionDotToken in ElementAccessExpressionQuestionDotTokenDO(db)) {
+            yield ElementAccessExpressionQuestionDotToken {
+                element_access_expression_id: elementAccessExpressionQuestionDotToken.element_access_expression_id,
+                question_dot_token_id : elementAccessExpressionQuestionDotToken.question_dot_token_id
+            }
+        }
+    }
+    
+    /**
+     * Gets the elementAccessExpression.
+     */
+    pub fn getElementAccessExpression(self) -> ElementAccessExpression {
+        for (elementAccessExpression in ElementAccessExpression(__all_data__)) {
+            if (self.element_access_expression_id = elementAccessExpression.id) {
+                return elementAccessExpression
+            }
+        }
+    }
+    
+    /**
+     * Gets the questionDotToken.
+     */
+    pub fn getQuestionDotToken(self) -> QuestionDotToken {
+        for (questionDotToken in QuestionDotToken(__all_data__)) {
+            if (self.question_dot_token_id = questionDotToken.id) {
+                return questionDotToken
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.element_access_expression_id
+    }
+    
+}
+
+/**
+ * A CallExpression
+ */
+schema CallExpression extends LeftHandSideExpression {
+    expression_id: int
+}
+
+impl CallExpression {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *CallExpression {
+        for (fa in LeftHandSideExpression(db)) {
+            for (son in CallExpressionDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield CallExpression {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        expression_id : son.expression_id
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the expression.
+     */
+    pub fn getExpression(self) -> Expression {
+        for (expression in Expression(__all_data__)) {
+            if (self.expression_id = expression.id) {
+                return expression
+            }
+        }
+    }
+    
+    /**
+     * trans to Declaration to use func.
+     */
+    pub fn toDeclaration(self) -> Declaration {
+        for (declaration in Declaration(__all_data__)) {
+            if (self.id = declaration.id) {
+                return declaration
+            }
+        }
+    }
+    
+    /**
+     * Get the questionDotToken.
+     */
+    pub fn getQuestionDotToken(self) -> QuestionDotToken {
+        for (callExpressionQuestionDotToken in CallExpressionQuestionDotToken(__all_data__)) {
+            if (callExpressionQuestionDotToken.call_expression_id = self.id) {
+                return callExpressionQuestionDotToken.getQuestionDotToken()
+            }
+        }
+    }
+    
+    /**
+     * Get the typeArgument.
+     */
+    pub fn getTypeArgument(self) -> *TypeNode {
+        for (callExpressionTypeArgument in CallExpressionTypeArgument(__all_data__)) {
+            if (callExpressionTypeArgument.call_expression_id = self.id) {
+                yield callExpressionTypeArgument.getTypeArgument()
+            }
+        }
+    }
+    
+    /**
+     * Get the argument.
+     */
+    pub fn getArgument(self) -> *Expression {
+        for (callExpressionArgument in CallExpressionArgument(__all_data__)) {
+            if (callExpressionArgument.call_expression_id = self.id) {
+                yield callExpressionArgument.getArgument()
+            }
+        }
+    }
+    
+
+    /**
+     * Gets the `i`th argument of this call expression.
+     * index from 0
+     */
+    pub fn getIthArgument(self, index: int) -> Expression {
+        for (callExpressionArgument in CallExpressionArgument(__all_data__)) {
+            if (callExpressionArgument.call_expression_id = self.id &&
+                callExpressionArgument.getIndex() = index) {
+                return callExpressionArgument.getArgument()
+            }
+        }
+    }
+}
+
+/**
+ * A CallExpressionQuestionDotToken
+ */
+schema CallExpressionQuestionDotToken {
+    @primary call_expression_id: int,
+    question_dot_token_id: int
+}
+
+impl CallExpressionQuestionDotToken {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *CallExpressionQuestionDotToken {
+        for (callExpressionQuestionDotToken in CallExpressionQuestionDotTokenDO(db)) {
+            yield CallExpressionQuestionDotToken {
+                call_expression_id: callExpressionQuestionDotToken.call_expression_id,
+                question_dot_token_id : callExpressionQuestionDotToken.question_dot_token_id
+            }
+        }
+    }
+    
+    /**
+     * Gets the callExpression.
+     */
+    pub fn getCallExpression(self) -> CallExpression {
+        for (callExpression in CallExpression(__all_data__)) {
+            if (self.call_expression_id = callExpression.id) {
+                return callExpression
+            }
+        }
+    }
+    
+    /**
+     * Gets the questionDotToken.
+     */
+    pub fn getQuestionDotToken(self) -> QuestionDotToken {
+        for (questionDotToken in QuestionDotToken(__all_data__)) {
+            if (self.question_dot_token_id = questionDotToken.id) {
+                return questionDotToken
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.call_expression_id
+    }
+    
+}
+
+/**
+ * A CallExpressionTypeArgument
+ */
+schema CallExpressionTypeArgument {
+    @primary type_argument_id: int,
+    call_expression_id: int,
+    index: int
+}
+
+impl CallExpressionTypeArgument {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *CallExpressionTypeArgument {
+        for (callExpressionTypeArgument in CallExpressionTypeArgumentDO(db)) {
+            yield CallExpressionTypeArgument {
+                type_argument_id: callExpressionTypeArgument.type_argument_id,
+                call_expression_id : callExpressionTypeArgument.call_expression_id,
+                index : callExpressionTypeArgument.index
+            }
+        }
+    }
+    
+    /**
+     * Gets the typeArgument.
+     */
+    pub fn getTypeArgument(self) -> TypeNode {
+        for (typeNode in TypeNode(__all_data__)) {
+            if (self.type_argument_id = typeNode.id) {
+                return typeNode
+            }
+        }
+    }
+    
+    /**
+     * Gets the callExpression.
+     */
+    pub fn getCallExpression(self) -> CallExpression {
+        for (callExpression in CallExpression(__all_data__)) {
+            if (self.call_expression_id = callExpression.id) {
+                return callExpression
+            }
+        }
+    }
+    
+    /**
+     * Gets the index.
+     */
+    pub fn getIndex(self) -> int {
+        return self.index
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.type_argument_id
+    }
+    
+}
+
+/**
+ * A CallExpressionArgument
+ */
+schema CallExpressionArgument {
+    @primary argument_id: int,
+    call_expression_id: int,
+    index: int
+}
+
+impl CallExpressionArgument {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *CallExpressionArgument {
+        for (callExpressionArgument in CallExpressionArgumentDO(db)) {
+            yield CallExpressionArgument {
+                argument_id: callExpressionArgument.argument_id,
+                call_expression_id : callExpressionArgument.call_expression_id,
+                index : callExpressionArgument.index
+            }
+        }
+    }
+    
+    /**
+     * Gets the argument.
+     */
+    pub fn getArgument(self) -> Expression {
+        for (expression in Expression(__all_data__)) {
+            if (self.argument_id = expression.id) {
+                return expression
+            }
+        }
+    }
+    
+    /**
+     * Gets the callExpression.
+     */
+    pub fn getCallExpression(self) -> CallExpression {
+        for (callExpression in CallExpression(__all_data__)) {
+            if (self.call_expression_id = callExpression.id) {
+                return callExpression
+            }
+        }
+    }
+    
+    /**
+     * Gets the index.
+     */
+    pub fn getIndex(self) -> int {
+        return self.index
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.argument_id
+    }
+    
+}
+
+/**
+ * A NewExpression
+ */
+schema NewExpression extends PrimaryExpression {
+    expression_id: int
+}
+
+impl NewExpression {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *NewExpression {
+        for (fa in PrimaryExpression(db)) {
+            for (son in NewExpressionDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield NewExpression {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        expression_id : son.expression_id
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the expression.
+     */
+    pub fn getExpression(self) -> LeftHandSideExpression {
+        for (leftHandSideExpression in LeftHandSideExpression(__all_data__)) {
+            if (self.expression_id = leftHandSideExpression.id) {
+                return leftHandSideExpression
+            }
+        }
+    }
+
+    /**
+     * Gets the ClassLikeDeclaration.
+     */
+    pub fn getClassLikeDeclaration(self) -> ClassLikeDeclaration {
+        for (classLikeDeclaration in ClassLikeDeclaration(__all_data__)) {
+            for (callSiteImplementation in CallSiteImplementation(__all_data__)) {
+                if (self.key_eq(callSiteImplementation.getCallSite())) {
+                    if (classLikeDeclaration.id = callSiteImplementation.implementation_id) {
+                        return classLikeDeclaration
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * trans to Declaration to use func.
+     */
+    pub fn toDeclaration(self) -> Declaration {
+        for (declaration in Declaration(__all_data__)) {
+            if (self.id = declaration.id) {
+                return declaration
+            }
+        }
+    }
+    
+    /**
+     * Get the typeArgument.
+     */
+    pub fn getTypeArgument(self) -> *TypeNode {
+        for (newExpressionTypeArgument in NewExpressionTypeArgument(__all_data__)) {
+            if (newExpressionTypeArgument.new_expression_id = self.id) {
+                yield newExpressionTypeArgument.getTypeArgument()
+            }
+        }
+    }
+    
+    /**
+     * Get the argument.
+     */
+    pub fn getArgument(self) -> *Expression {
+        for (newExpressionArgument in NewExpressionArgument(__all_data__)) {
+            if (newExpressionArgument.new_expression_id = self.id) {
+                yield newExpressionArgument.getArgument()
+            }
+        }
+    }
+    
+
+    /**
+     * Gets the `i`th argument of this call NewExpression.
+     * index from 0
+     */
+    pub fn getIthArgument(self, index: int) -> Expression {
+        for (newExpressionArgument in NewExpressionArgument(__all_data__)) {
+            if (newExpressionArgument.new_expression_id = self.id && newExpressionArgument.getIndex() = index) {
+                return newExpressionArgument.getArgument()
+            }
+        }
+    }
+
+    /**
+     * Gets the count of the type arguments.
+     */
+    pub fn getTypeArgumentCount(self) -> int {
+        return self.getTypeArgument().len()
+    }
+
+    pub fn getClassDeclaration(self) -> ClassDeclaration {
+        for (callSiteDeclaration in CallSiteDeclaration(__all_data__)) {
+            if (self.id = callSiteDeclaration.call_site_id) {
+                for (classDeclaration in ClassDeclaration(__all_data__)) {
+                    if (classDeclaration.id = callSiteDeclaration.declaration_id) {
+                        return classDeclaration
+                    }
+                }
+            }
+        }
+    }
+
+}
+
+/**
+ * A NewExpressionTypeArgument
+ */
+schema NewExpressionTypeArgument {
+    @primary type_argument_id: int,
+    new_expression_id: int,
+    index: int
+}
+
+impl NewExpressionTypeArgument {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *NewExpressionTypeArgument {
+        for (newExpressionTypeArgument in NewExpressionTypeArgumentDO(db)) {
+            yield NewExpressionTypeArgument {
+                type_argument_id: newExpressionTypeArgument.type_argument_id,
+                new_expression_id : newExpressionTypeArgument.new_expression_id,
+                index : newExpressionTypeArgument.index
+            }
+        }
+    }
+    
+    /**
+     * Gets the typeArgument.
+     */
+    pub fn getTypeArgument(self) -> TypeNode {
+        for (typeNode in TypeNode(__all_data__)) {
+            if (self.type_argument_id = typeNode.id) {
+                return typeNode
+            }
+        }
+    }
+    
+    /**
+     * Gets the newExpression.
+     */
+    pub fn getNewExpression(self) -> NewExpression {
+        for (newExpression in NewExpression(__all_data__)) {
+            if (self.new_expression_id = newExpression.id) {
+                return newExpression
+            }
+        }
+    }
+    
+    /**
+     * Gets the index.
+     */
+    pub fn getIndex(self) -> int {
+        return self.index
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.type_argument_id
+    }
+    
+}
+
+/**
+ * A NewExpressionArgument
+ */
+schema NewExpressionArgument {
+    @primary argument_id: int,
+    new_expression_id: int,
+    index: int
+}
+
+impl NewExpressionArgument {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *NewExpressionArgument {
+        for (newExpressionArgument in NewExpressionArgumentDO(db)) {
+            yield NewExpressionArgument {
+                argument_id: newExpressionArgument.argument_id,
+                new_expression_id : newExpressionArgument.new_expression_id,
+                index : newExpressionArgument.index
+            }
+        }
+    }
+    
+    /**
+     * Gets the argument.
+     */
+    pub fn getArgument(self) -> Expression {
+        for (expression in Expression(__all_data__)) {
+            if (self.argument_id = expression.id) {
+                return expression
+            }
+        }
+    }
+    
+    /**
+     * Gets the newExpression.
+     */
+    pub fn getNewExpression(self) -> NewExpression {
+        for (newExpression in NewExpression(__all_data__)) {
+            if (self.new_expression_id = newExpression.id) {
+                return newExpression
+            }
+        }
+    }
+    
+    /**
+     * Gets the index.
+     */
+    pub fn getIndex(self) -> int {
+        return self.index
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.argument_id
+    }
+    
+}
+
+/**
+ * A TemplateExpression
+ */
+schema TemplateExpression extends PrimaryExpression {
+    head_id: int
+}
+
+impl TemplateExpression {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *TemplateExpression {
+        for (fa in PrimaryExpression(db)) {
+            for (son in TemplateExpressionDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield TemplateExpression {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        head_id : son.head_id
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the head.
+     */
+    pub fn getHead(self) -> TemplateHead {
+        for (templateHead in TemplateHead(__all_data__)) {
+            if (self.head_id = templateHead.id) {
+                return templateHead
+            }
+        }
+    }
+    
+    /**
+     * Get the templateSpans.
+     */
+    pub fn getTemplateSpans(self) -> *TemplateSpan {
+        for (templateSpan in TemplateSpan(__all_data__)) {
+            if (templateSpan.parent_id = self.id) {
+                yield templateSpan
+            }
+        }
+    }
+    
+
+    /**
+     * Get the ith templateSpan of templateExpression.
+     * index from 0
+     */
+    pub fn getIthTemplateSpan(self, index: int) -> TemplateSpan {
+        for (templateSpan in TemplateSpan(__all_data__)) {
+            if (templateSpan.parent_id = self.id) {
+                if (index = templateSpan.getIndex() - 1) {
+                    return templateSpan
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A TaggedTemplateExpression
+ */
+schema TaggedTemplateExpression extends MemberExpression {
+    tag_id: int,
+    template_id: int
+}
+
+impl TaggedTemplateExpression {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *TaggedTemplateExpression {
+        for (fa in MemberExpression(db)) {
+            for (son in TaggedTemplateExpressionDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield TaggedTemplateExpression {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        tag_id : son.tag_id,
+                        template_id : son.template_id
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the tag.
+     */
+    pub fn getTag(self) -> LeftHandSideExpression {
+        for (leftHandSideExpression in LeftHandSideExpression(__all_data__)) {
+            if (self.tag_id = leftHandSideExpression.id) {
+                return leftHandSideExpression
+            }
+        }
+    }
+    
+    /**
+     * Gets the template.
+     */
+    pub fn getTemplate(self) -> TemplateLiteral {
+        for (templateLiteral in TemplateLiteral(__all_data__)) {
+            if (self.template_id = templateLiteral.id) {
+                return templateLiteral
+            }
+        }
+    }
+    
+    /**
+     * Get the typeArgument.
+     */
+    pub fn getTypeArgument(self) -> *TypeNode {
+        for (taggedTemplateExpressionTypeArgument in TaggedTemplateExpressionTypeArgument(__all_data__)) {
+            if (taggedTemplateExpressionTypeArgument.tagged_template_expression_id = self.id) {
+                yield taggedTemplateExpressionTypeArgument.getTypeArgument()
+            }
+        }
+    }
+    
+}
+
+/**
+ * A TaggedTemplateExpressionTypeArgument
+ */
+schema TaggedTemplateExpressionTypeArgument {
+    @primary type_argument_id: int,
+    tagged_template_expression_id: int,
+    index: int
+}
+
+impl TaggedTemplateExpressionTypeArgument {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *TaggedTemplateExpressionTypeArgument {
+        for (taggedTemplateExpressionTypeArgument in TaggedTemplateExpressionTypeArgumentDO(db)) {
+            yield TaggedTemplateExpressionTypeArgument {
+                type_argument_id: taggedTemplateExpressionTypeArgument.type_argument_id,
+                tagged_template_expression_id : taggedTemplateExpressionTypeArgument.tagged_template_expression_id,
+                index : taggedTemplateExpressionTypeArgument.index
+            }
+        }
+    }
+    
+    /**
+     * Gets the typeArgument.
+     */
+    pub fn getTypeArgument(self) -> TypeNode {
+        for (typeNode in TypeNode(__all_data__)) {
+            if (self.type_argument_id = typeNode.id) {
+                return typeNode
+            }
+        }
+    }
+    
+    /**
+     * Gets the taggedTemplateExpression.
+     */
+    pub fn getTaggedTemplateExpression(self) -> TaggedTemplateExpression {
+        for (taggedTemplateExpression in TaggedTemplateExpression(__all_data__)) {
+            if (self.tagged_template_expression_id = taggedTemplateExpression.id) {
+                return taggedTemplateExpression
+            }
+        }
+    }
+    
+    /**
+     * Gets the index.
+     */
+    pub fn getIndex(self) -> int {
+        return self.index
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.type_argument_id
+    }
+    
+}
+
+/**
+ * A TypeAssertionExpression
+ */
+schema TypeAssertionExpression extends UnaryExpression {
+    type_node_id: int,
+    expression_id: int
+}
+
+impl TypeAssertionExpression {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *TypeAssertionExpression {
+        for (fa in UnaryExpression(db)) {
+            for (son in TypeAssertionExpressionDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield TypeAssertionExpression {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        type_node_id : son.type_node_id,
+                        expression_id : son.expression_id
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the typeNode.
+     */
+    pub fn getTypeNode(self) -> TypeNode {
+        for (typeNode in TypeNode(__all_data__)) {
+            if (self.type_node_id = typeNode.id) {
+                return typeNode
+            }
+        }
+    }
+    
+    /**
+     * Gets the expression.
+     */
+    pub fn getExpression(self) -> UnaryExpression {
+        for (unaryExpression in UnaryExpression(__all_data__)) {
+            if (self.expression_id = unaryExpression.id) {
+                return unaryExpression
+            }
+        }
+    }
+    
+}
+
+/**
+ * A ParenthesizedExpression
+ */
+schema ParenthesizedExpression extends PrimaryExpression {
+    expression_id: int
+}
+
+impl ParenthesizedExpression {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ParenthesizedExpression {
+        for (fa in PrimaryExpression(db)) {
+            for (son in ParenthesizedExpressionDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield ParenthesizedExpression {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        expression_id : son.expression_id
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the expression.
+     */
+    pub fn getExpression(self) -> Expression {
+        for (expression in Expression(__all_data__)) {
+            if (self.expression_id = expression.id) {
+                return expression
+            }
+        }
+    }
+    
+}
+
+/**
+ * A EtsComponentExpression
+ */
+schema EtsComponentExpression extends PrimaryExpression {
+    expression_id: int
+}
+
+impl EtsComponentExpression {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *EtsComponentExpression {
+        for (fa in PrimaryExpression(db)) {
+            for (son in EtsComponentExpressionDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield EtsComponentExpression {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        expression_id : son.expression_id
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the expression.
+     */
+    pub fn getExpression(self) -> LeftHandSideExpression {
+        for (leftHandSideExpression in LeftHandSideExpression(__all_data__)) {
+            if (self.expression_id = leftHandSideExpression.id) {
+                return leftHandSideExpression
+            }
+        }
+    }
+    
+    /**
+     * trans to Declaration to use func.
+     */
+    pub fn toDeclaration(self) -> Declaration {
+        for (declaration in Declaration(__all_data__)) {
+            if (self.id = declaration.id) {
+                return declaration
+            }
+        }
+    }
+    
+    /**
+     * Get the typeArgument.
+     */
+    pub fn getTypeArgument(self) -> *TypeNode {
+        for (etsComponentExpressionTypeArgument in EtsComponentExpressionTypeArgument(__all_data__)) {
+            if (etsComponentExpressionTypeArgument.ets_component_expression_id = self.id) {
+                yield etsComponentExpressionTypeArgument.getTypeArgument()
+            }
+        }
+    }
+    
+    /**
+     * Get the argument.
+     */
+    pub fn getArgument(self) -> *Expression {
+        for (etsComponentExpressionArgument in EtsComponentExpressionArgument(__all_data__)) {
+            if (etsComponentExpressionArgument.ets_component_expression_id = self.id) {
+                yield etsComponentExpressionArgument.getArgument()
+            }
+        }
+    }
+    
+    /**
+     * Get the body.
+     */
+    pub fn getBody(self) -> Block {
+        for (etsComponentExpressionBody in EtsComponentExpressionBody(__all_data__)) {
+            if (etsComponentExpressionBody.ets_component_expression_id = self.id) {
+                return etsComponentExpressionBody.getBody()
+            }
+        }
+    }
+    
+
+    /**
+     * Gets the `i`th argument of this ets component expression.
+     * index from 0
+     */
+    pub fn getIthArgument(self, index: int) -> Expression {
+        for (etsComponentExpressionArgument in EtsComponentExpressionArgument(__all_data__)) {
+            if (etsComponentExpressionArgument.ets_component_expression_id = self.id) {
+                if (index = etsComponentExpressionArgument.getIndex()) {
+                    return etsComponentExpressionArgument.getArgument()
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A EtsComponentExpressionTypeArgument
+ */
+schema EtsComponentExpressionTypeArgument {
+    @primary type_argument_id: int,
+    ets_component_expression_id: int,
+    index: int
+}
+
+impl EtsComponentExpressionTypeArgument {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *EtsComponentExpressionTypeArgument {
+        for (etsComponentExpressionTypeArgument in EtsComponentExpressionTypeArgumentDO(db)) {
+            yield EtsComponentExpressionTypeArgument {
+                type_argument_id: etsComponentExpressionTypeArgument.type_argument_id,
+                ets_component_expression_id : etsComponentExpressionTypeArgument.ets_component_expression_id,
+                index : etsComponentExpressionTypeArgument.index
+            }
+        }
+    }
+    
+    /**
+     * Gets the typeArgument.
+     */
+    pub fn getTypeArgument(self) -> TypeNode {
+        for (typeNode in TypeNode(__all_data__)) {
+            if (self.type_argument_id = typeNode.id) {
+                return typeNode
+            }
+        }
+    }
+    
+    /**
+     * Gets the etsComponentExpression.
+     */
+    pub fn getEtsComponentExpression(self) -> EtsComponentExpression {
+        for (etsComponentExpression in EtsComponentExpression(__all_data__)) {
+            if (self.ets_component_expression_id = etsComponentExpression.id) {
+                return etsComponentExpression
+            }
+        }
+    }
+    
+    /**
+     * Gets the index.
+     */
+    pub fn getIndex(self) -> int {
+        return self.index
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.type_argument_id
+    }
+    
+}
+
+/**
+ * A EtsComponentExpressionArgument
+ */
+schema EtsComponentExpressionArgument {
+    @primary argument_id: int,
+    ets_component_expression_id: int,
+    index: int
+}
+
+impl EtsComponentExpressionArgument {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *EtsComponentExpressionArgument {
+        for (etsComponentExpressionArgument in EtsComponentExpressionArgumentDO(db)) {
+            yield EtsComponentExpressionArgument {
+                argument_id: etsComponentExpressionArgument.argument_id,
+                ets_component_expression_id : etsComponentExpressionArgument.ets_component_expression_id,
+                index : etsComponentExpressionArgument.index
+            }
+        }
+    }
+    
+    /**
+     * Gets the argument.
+     */
+    pub fn getArgument(self) -> Expression {
+        for (expression in Expression(__all_data__)) {
+            if (self.argument_id = expression.id) {
+                return expression
+            }
+        }
+    }
+    
+    /**
+     * Gets the etsComponentExpression.
+     */
+    pub fn getEtsComponentExpression(self) -> EtsComponentExpression {
+        for (etsComponentExpression in EtsComponentExpression(__all_data__)) {
+            if (self.ets_component_expression_id = etsComponentExpression.id) {
+                return etsComponentExpression
+            }
+        }
+    }
+    
+    /**
+     * Gets the index.
+     */
+    pub fn getIndex(self) -> int {
+        return self.index
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.argument_id
+    }
+    
+}
+
+/**
+ * A EtsComponentExpressionBody
+ */
+schema EtsComponentExpressionBody {
+    @primary ets_component_expression_id: int,
+    body_id: int
+}
+
+impl EtsComponentExpressionBody {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *EtsComponentExpressionBody {
+        for (etsComponentExpressionBody in EtsComponentExpressionBodyDO(db)) {
+            yield EtsComponentExpressionBody {
+                ets_component_expression_id: etsComponentExpressionBody.ets_component_expression_id,
+                body_id : etsComponentExpressionBody.body_id
+            }
+        }
+    }
+    
+    /**
+     * Gets the etsComponentExpression.
+     */
+    pub fn getEtsComponentExpression(self) -> EtsComponentExpression {
+        for (etsComponentExpression in EtsComponentExpression(__all_data__)) {
+            if (self.ets_component_expression_id = etsComponentExpression.id) {
+                return etsComponentExpression
+            }
+        }
+    }
+    
+    /**
+     * Gets the body.
+     */
+    pub fn getBody(self) -> Block {
+        for (block in Block(__all_data__)) {
+            if (self.body_id = block.id) {
+                return block
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.ets_component_expression_id
+    }
+    
+}
+
+/**
+ * A DeleteExpression
+ */
+schema DeleteExpression extends UnaryExpression {
+    expression_id: int
+}
+
+impl DeleteExpression {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *DeleteExpression {
+        for (fa in UnaryExpression(db)) {
+            for (son in DeleteExpressionDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield DeleteExpression {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        expression_id : son.expression_id
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the expression.
+     */
+    pub fn getExpression(self) -> UnaryExpression {
+        for (unaryExpression in UnaryExpression(__all_data__)) {
+            if (self.expression_id = unaryExpression.id) {
+                return unaryExpression
+            }
+        }
+    }
+    
+}
+
+/**
+ * A TypeOfExpression
+ */
+schema TypeOfExpression extends UnaryExpression {
+    expression_id: int
+}
+
+impl TypeOfExpression {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *TypeOfExpression {
+        for (fa in UnaryExpression(db)) {
+            for (son in TypeOfExpressionDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield TypeOfExpression {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        expression_id : son.expression_id
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the expression.
+     */
+    pub fn getExpression(self) -> UnaryExpression {
+        for (unaryExpression in UnaryExpression(__all_data__)) {
+            if (self.expression_id = unaryExpression.id) {
+                return unaryExpression
+            }
+        }
+    }
+    
+}
+
+/**
+ * A VoidExpression
+ */
+schema VoidExpression extends UnaryExpression {
+    expression_id: int
+}
+
+impl VoidExpression {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *VoidExpression {
+        for (fa in UnaryExpression(db)) {
+            for (son in VoidExpressionDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield VoidExpression {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        expression_id : son.expression_id
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the expression.
+     */
+    pub fn getExpression(self) -> UnaryExpression {
+        for (unaryExpression in UnaryExpression(__all_data__)) {
+            if (self.expression_id = unaryExpression.id) {
+                return unaryExpression
+            }
+        }
+    }
+    
+}
+
+/**
+ * A AwaitExpression
+ */
+schema AwaitExpression extends UnaryExpression {
+    expression_id: int
+}
+
+impl AwaitExpression {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *AwaitExpression {
+        for (fa in UnaryExpression(db)) {
+            for (son in AwaitExpressionDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield AwaitExpression {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        expression_id : son.expression_id
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the expression.
+     */
+    pub fn getExpression(self) -> UnaryExpression {
+        for (unaryExpression in UnaryExpression(__all_data__)) {
+            if (self.expression_id = unaryExpression.id) {
+                return unaryExpression
+            }
+        }
+    }
+    
+}
+
+/**
+ * A PrefixUnaryExpression
+ */
+schema PrefixUnaryExpression extends UpdateExpression {
+    operator_id: int,
+    operand_id: int
+}
+
+impl PrefixUnaryExpression {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *PrefixUnaryExpression {
+        for (fa in UpdateExpression(db)) {
+            for (son in PrefixUnaryExpressionDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield PrefixUnaryExpression {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        operator_id : son.operator_id,
+                        operand_id : son.operand_id
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the operator.
+     */
+    pub fn getOperator(self) -> PrefixUnaryOperator {
+        for (prefixUnaryOperator in PrefixUnaryOperator(__all_data__)) {
+            if (self.operator_id = prefixUnaryOperator.id) {
+                return prefixUnaryOperator
+            }
+        }
+    }
+    
+    /**
+     * Gets the operand.
+     */
+    pub fn getOperand(self) -> UnaryExpression {
+        for (unaryExpression in UnaryExpression(__all_data__)) {
+            if (self.operand_id = unaryExpression.id) {
+                return unaryExpression
+            }
+        }
+    }
+    
+}
+
+/**
+ * A PostfixUnaryExpression
+ */
+schema PostfixUnaryExpression extends UpdateExpression {
+    operand_id: int,
+    operator_id: int
+}
+
+impl PostfixUnaryExpression {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *PostfixUnaryExpression {
+        for (fa in UpdateExpression(db)) {
+            for (son in PostfixUnaryExpressionDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield PostfixUnaryExpression {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        operand_id : son.operand_id,
+                        operator_id : son.operator_id
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the operand.
+     */
+    pub fn getOperand(self) -> LeftHandSideExpression {
+        for (leftHandSideExpression in LeftHandSideExpression(__all_data__)) {
+            if (self.operand_id = leftHandSideExpression.id) {
+                return leftHandSideExpression
+            }
+        }
+    }
+    
+    /**
+     * Gets the operator.
+     */
+    pub fn getOperator(self) -> PostUnaryOperator {
+        for (postUnaryOperator in PostUnaryOperator(__all_data__)) {
+            if (self.operator_id = postUnaryOperator.id) {
+                return postUnaryOperator
+            }
+        }
+    }
+    
+}
+
+/**
+ * A BinaryExpression
+ */
+schema BinaryExpression extends Expression {
+    left_id: int,
+    operator_id: int,
+    right_id: int
+}
+
+impl BinaryExpression {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *BinaryExpression {
+        for (fa in Expression(db)) {
+            for (son in BinaryExpressionDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield BinaryExpression {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        left_id : son.left_id,
+                        operator_id : son.operator_id,
+                        right_id : son.right_id
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the left.
+     */
+    pub fn getLeft(self) -> Expression {
+        for (expression in Expression(__all_data__)) {
+            if (self.left_id = expression.id) {
+                return expression
+            }
+        }
+    }
+    
+    /**
+     * Gets the operator.
+     */
+    pub fn getOperator(self) -> BinaryOperator {
+        for (binaryOperator in BinaryOperator(__all_data__)) {
+            if (self.operator_id = binaryOperator.id) {
+                return binaryOperator
+            }
+        }
+    }
+    
+    /**
+     * Gets the right.
+     */
+    pub fn getRight(self) -> Expression {
+        for (expression in Expression(__all_data__)) {
+            if (self.right_id = expression.id) {
+                return expression
+            }
+        }
+    }
+    
+    /**
+     * trans to Declaration to use func.
+     */
+    pub fn toDeclaration(self) -> Declaration {
+        for (declaration in Declaration(__all_data__)) {
+            if (self.id = declaration.id) {
+                return declaration
+            }
+        }
+    }
+    
+
+    /**
+     * Gets binaryExpression Operand
+     */
+    pub fn getOperand(self) -> *Expression {
+        for (operand in Expression(__all_data__)) {
+            for (child in self.getChild()) {
+                if (operand.key_eq(child)) {
+                    yield operand
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A ConditionalExpression
+ */
+schema ConditionalExpression extends Expression {
+    condition_id: int,
+    question_token_id: int,
+    then_expression_id: int,
+    colon_token_id: int,
+    else_expression_id: int
+}
+
+impl ConditionalExpression {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ConditionalExpression {
+        for (fa in Expression(db)) {
+            for (son in ConditionalExpressionDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield ConditionalExpression {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        condition_id : son.condition_id,
+                        question_token_id : son.question_token_id,
+                        then_expression_id : son.then_expression_id,
+                        colon_token_id : son.colon_token_id,
+                        else_expression_id : son.else_expression_id
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the condition.
+     */
+    pub fn getCondition(self) -> Expression {
+        for (expression in Expression(__all_data__)) {
+            if (self.condition_id = expression.id) {
+                return expression
+            }
+        }
+    }
+    
+    /**
+     * Gets the questionToken.
+     */
+    pub fn getQuestionToken(self) -> QuestionToken {
+        for (questionToken in QuestionToken(__all_data__)) {
+            if (self.question_token_id = questionToken.id) {
+                return questionToken
+            }
+        }
+    }
+    
+    /**
+     * Gets the thenExpression.
+     */
+    pub fn getThenExpression(self) -> Expression {
+        for (expression in Expression(__all_data__)) {
+            if (self.then_expression_id = expression.id) {
+                return expression
+            }
+        }
+    }
+    
+    /**
+     * Gets the colonToken.
+     */
+    pub fn getColonToken(self) -> ColonToken {
+        for (colonToken in ColonToken(__all_data__)) {
+            if (self.colon_token_id = colonToken.id) {
+                return colonToken
+            }
+        }
+    }
+    
+    /**
+     * Gets the elseExpression.
+     */
+    pub fn getElseExpression(self) -> Expression {
+        for (expression in Expression(__all_data__)) {
+            if (self.else_expression_id = expression.id) {
+                return expression
+            }
+        }
+    }
+    
+
+    /**
+     * Gets this branch
+     */
+    pub fn getBranch(self) -> *Expression {
+        yield self.getThenExpression()
+        yield self.getElseExpression()
+    }
+}
+
+/**
+ * A YieldExpression
+ */
+schema YieldExpression extends Expression {
+}
+
+impl YieldExpression {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *YieldExpression {
+        for (fa in Expression(db)) {
+            for (son in YieldExpressionDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield YieldExpression {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Get the asteriskToken.
+     */
+    pub fn getAsteriskToken(self) -> AsteriskToken {
+        for (yieldExpressionAsteriskToken in YieldExpressionAsteriskToken(__all_data__)) {
+            if (yieldExpressionAsteriskToken.yield_expression_id = self.id) {
+                return yieldExpressionAsteriskToken.getAsteriskToken()
+            }
+        }
+    }
+    
+    /**
+     * Get the expression.
+     */
+    pub fn getExpression(self) -> Expression {
+        for (yieldExpressionExpression in YieldExpressionExpression(__all_data__)) {
+            if (yieldExpressionExpression.yield_expression_id = self.id) {
+                return yieldExpressionExpression.getExpression()
+            }
+        }
+    }
+    
+}
+
+/**
+ * A YieldExpressionAsteriskToken
+ */
+schema YieldExpressionAsteriskToken {
+    @primary yield_expression_id: int,
+    asterisk_token_id: int
+}
+
+impl YieldExpressionAsteriskToken {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *YieldExpressionAsteriskToken {
+        for (yieldExpressionAsteriskToken in YieldExpressionAsteriskTokenDO(db)) {
+            yield YieldExpressionAsteriskToken {
+                yield_expression_id: yieldExpressionAsteriskToken.yield_expression_id,
+                asterisk_token_id : yieldExpressionAsteriskToken.asterisk_token_id
+            }
+        }
+    }
+    
+    /**
+     * Gets the yieldExpression.
+     */
+    pub fn getYieldExpression(self) -> YieldExpression {
+        for (yieldExpression in YieldExpression(__all_data__)) {
+            if (self.yield_expression_id = yieldExpression.id) {
+                return yieldExpression
+            }
+        }
+    }
+    
+    /**
+     * Gets the asteriskToken.
+     */
+    pub fn getAsteriskToken(self) -> AsteriskToken {
+        for (asteriskToken in AsteriskToken(__all_data__)) {
+            if (self.asterisk_token_id = asteriskToken.id) {
+                return asteriskToken
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.yield_expression_id
+    }
+    
+}
+
+/**
+ * A YieldExpressionExpression
+ */
+schema YieldExpressionExpression {
+    @primary yield_expression_id: int,
+    expression_id: int
+}
+
+impl YieldExpressionExpression {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *YieldExpressionExpression {
+        for (yieldExpressionExpression in YieldExpressionExpressionDO(db)) {
+            yield YieldExpressionExpression {
+                yield_expression_id: yieldExpressionExpression.yield_expression_id,
+                expression_id : yieldExpressionExpression.expression_id
+            }
+        }
+    }
+    
+    /**
+     * Gets the yieldExpression.
+     */
+    pub fn getYieldExpression(self) -> YieldExpression {
+        for (yieldExpression in YieldExpression(__all_data__)) {
+            if (self.yield_expression_id = yieldExpression.id) {
+                return yieldExpression
+            }
+        }
+    }
+    
+    /**
+     * Gets the expression.
+     */
+    pub fn getExpression(self) -> Expression {
+        for (expression in Expression(__all_data__)) {
+            if (self.expression_id = expression.id) {
+                return expression
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.yield_expression_id
+    }
+    
+}
+
+/**
+ * A SpreadElement
+ */
+schema SpreadElement extends Expression {
+    expression_id: int
+}
+
+impl SpreadElement {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *SpreadElement {
+        for (fa in Expression(db)) {
+            for (son in SpreadElementDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield SpreadElement {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        expression_id : son.expression_id
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the expression.
+     */
+    pub fn getExpression(self) -> Expression {
+        for (expression in Expression(__all_data__)) {
+            if (self.expression_id = expression.id) {
+                return expression
+            }
+        }
+    }
+    
+}
+
+/**
+ * A ClassExpression
+ */
+schema ClassExpression extends ClassLikeDeclaration {
+}
+
+impl ClassExpression {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ClassExpression {
+        for (fa in ClassLikeDeclaration(db)) {
+            for (son in ClassExpressionDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield ClassExpression {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * trans to PrimaryExpression to use func.
+     */
+    pub fn toPrimaryExpression(self) -> PrimaryExpression {
+        for (primaryExpression in PrimaryExpression(__all_data__)) {
+            if (self.id = primaryExpression.id) {
+                return primaryExpression
+            }
+        }
+    }
+    
+    /**
+     * Get the modifiers.
+     */
+    pub fn getModifiers(self) -> *Modifier {
+        for (modifier in Modifier(__all_data__)) {
+            if (modifier.parent_id = self.id) {
+                yield modifier
+            }
+        }
+    }
+    
+}
+
+/**
+ * A OmittedExpression
+ */
+schema OmittedExpression extends Expression {
+}
+
+impl OmittedExpression {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *OmittedExpression {
+        for (fa in Expression(db)) {
+            for (son in OmittedExpressionDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield OmittedExpression {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A ExpressionWithTypeArguments
+ */
+schema ExpressionWithTypeArguments extends MemberExpression {
+    expression_id: int
+}
+
+impl ExpressionWithTypeArguments {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ExpressionWithTypeArguments {
+        for (fa in MemberExpression(db)) {
+            for (son in ExpressionWithTypeArgumentsDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield ExpressionWithTypeArguments {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        expression_id : son.expression_id
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the expression.
+     */
+    pub fn getExpression(self) -> LeftHandSideExpression {
+        for (leftHandSideExpression in LeftHandSideExpression(__all_data__)) {
+            if (self.expression_id = leftHandSideExpression.id) {
+                return leftHandSideExpression
+            }
+        }
+    }
+    
+    /**
+     * trans to NodeWithTypeArguments to use func.
+     */
+    pub fn toNodeWithTypeArguments(self) -> NodeWithTypeArguments {
+        for (nodeWithTypeArguments in NodeWithTypeArguments(__all_data__)) {
+            if (self.id = nodeWithTypeArguments.id) {
+                return nodeWithTypeArguments
+            }
+        }
+    }
+    
+}
+
+/**
+ * A AsExpression
+ */
+schema AsExpression extends Expression {
+    expression_id: int,
+    type_node_id: int
+}
+
+impl AsExpression {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *AsExpression {
+        for (fa in Expression(db)) {
+            for (son in AsExpressionDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield AsExpression {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        expression_id : son.expression_id,
+                        type_node_id : son.type_node_id
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the expression.
+     */
+    pub fn getExpression(self) -> Expression {
+        for (expression in Expression(__all_data__)) {
+            if (self.expression_id = expression.id) {
+                return expression
+            }
+        }
+    }
+    
+    /**
+     * Gets the typeNode.
+     */
+    pub fn getTypeNode(self) -> TypeNode {
+        for (typeNode in TypeNode(__all_data__)) {
+            if (self.type_node_id = typeNode.id) {
+                return typeNode
+            }
+        }
+    }
+    
+}
+
+/**
+ * A NonNullExpression
+ */
+schema NonNullExpression extends LeftHandSideExpression {
+    expression_id: int
+}
+
+impl NonNullExpression {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *NonNullExpression {
+        for (fa in LeftHandSideExpression(db)) {
+            for (son in NonNullExpressionDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield NonNullExpression {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        expression_id : son.expression_id
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the expression.
+     */
+    pub fn getExpression(self) -> Expression {
+        for (expression in Expression(__all_data__)) {
+            if (self.expression_id = expression.id) {
+                return expression
+            }
+        }
+    }
+    
+}
+
+/**
+ * A MetaProperty
+ */
+schema MetaProperty extends PrimaryExpression {
+    keyword_token_id: int,
+    name_node_id: int
+}
+
+impl MetaProperty {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *MetaProperty {
+        for (fa in PrimaryExpression(db)) {
+            for (son in MetaPropertyDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield MetaProperty {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        keyword_token_id : son.keyword_token_id,
+                        name_node_id : son.name_node_id
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the keywordToken.
+     */
+    pub fn getKeywordToken(self) -> NewOrImportKeyword {
+        for (newOrImportKeyword in NewOrImportKeyword(__all_data__)) {
+            if (self.keyword_token_id = newOrImportKeyword.id) {
+                return newOrImportKeyword
+            }
+        }
+    }
+    
+    /**
+     * Gets the nameNode.
+     */
+    pub fn getNameNode(self) -> Identifier {
+        for (identifier in Identifier(__all_data__)) {
+            if (self.name_node_id = identifier.id) {
+                return identifier
+            }
+        }
+    }
+    
+}
+
+/**
+ * A SatisfiesExpression
+ */
+schema SatisfiesExpression extends Expression {
+    expression_id: int,
+    type_node_id: int
+}
+
+impl SatisfiesExpression {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *SatisfiesExpression {
+        for (fa in Expression(db)) {
+            for (son in SatisfiesExpressionDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield SatisfiesExpression {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        expression_id : son.expression_id,
+                        type_node_id : son.type_node_id
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the expression.
+     */
+    pub fn getExpression(self) -> Expression {
+        for (expression in Expression(__all_data__)) {
+            if (self.expression_id = expression.id) {
+                return expression
+            }
+        }
+    }
+    
+    /**
+     * Gets the typeNode.
+     */
+    pub fn getTypeNode(self) -> TypeNode {
+        for (typeNode in TypeNode(__all_data__)) {
+            if (self.type_node_id = typeNode.id) {
+                return typeNode
+            }
+        }
+    }
+    
+}
+
+/**
+ * A CallSiteImplementation
+ */
+schema CallSiteImplementation {
+    @primary id: int,
+    call_site_id: int,
+    implementation_id: int
+}
+
+impl CallSiteImplementation {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *CallSiteImplementation {
+        for (callSiteImplementation in CallSiteImplementationDO(db)) {
+            yield CallSiteImplementation {
+                id: callSiteImplementation.id,
+                call_site_id : callSiteImplementation.call_site_id,
+                implementation_id : callSiteImplementation.implementation_id
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the callSite.
+     */
+    pub fn getCallSite(self) -> MayInvokeExpression {
+        for (mayInvokeExpression in MayInvokeExpression(__all_data__)) {
+            if (self.call_site_id = mayInvokeExpression.id) {
+                return mayInvokeExpression
+            }
+        }
+    }
+    
+    /**
+     * Gets the implementation.
+     */
+    pub fn getImplementation(self) -> *SignatureDeclaration {
+        for (signatureDeclaration in SignatureDeclaration(__all_data__)) {
+            if (self.implementation_id = signatureDeclaration.id) {
+                yield signatureDeclaration
+            }
+        }
+    }
+    
+}
+
+/**
+ * This type consists of the following types: [Block, Expression]
+ */
+schema BlockOrExpression extends AstNode {
+}
+
+impl BlockOrExpression {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *BlockOrExpression {
+        for (block in Block(db)) {
+            yield BlockOrExpression {
+                id : block.id,
+                kind : block.kind,
+                parent_id : block.parent_id,
+                parent_kind : block.parent_kind,
+                index : block.index,
+                location_id : block.location_id,
+            }
+        }
+        for (expression in Expression(db)) {
+            yield BlockOrExpression {
+                id : expression.id,
+                kind : expression.kind,
+                parent_id : expression.parent_id,
+                parent_kind : expression.parent_kind,
+                index : expression.index,
+                location_id : expression.location_id,
+            }
+        }
+    }
+
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * trans to Block
+     */
+    pub fn toBlock(self) -> Block {
+        for (block in Block(__all_data__)) {
+            if (block.key_eq(self)) {
+                return block
+            }
+        }
+    }
+    
+    /**
+     * trans to Expression
+     */
+    pub fn toExpression(self) -> Expression {
+        for (expression in Expression(__all_data__)) {
+            if (expression.key_eq(self)) {
+                return expression
+            }
+        }
+    }
+    
+}
+
+/**
+ * This type consists of the following types: [PropertyAccessExpression, ElementAccessExpression]
+ */
+schema AccessExpression extends AstNode {
+}
+
+impl AccessExpression {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *AccessExpression {
+        for (propertyAccessExpression in PropertyAccessExpression(db)) {
+            yield AccessExpression {
+                id : propertyAccessExpression.id,
+                kind : propertyAccessExpression.kind,
+                parent_id : propertyAccessExpression.parent_id,
+                parent_kind : propertyAccessExpression.parent_kind,
+                index : propertyAccessExpression.index,
+                location_id : propertyAccessExpression.location_id,
+            }
+        }
+        for (elementAccessExpression in ElementAccessExpression(db)) {
+            yield AccessExpression {
+                id : elementAccessExpression.id,
+                kind : elementAccessExpression.kind,
+                parent_id : elementAccessExpression.parent_id,
+                parent_kind : elementAccessExpression.parent_kind,
+                index : elementAccessExpression.index,
+                location_id : elementAccessExpression.location_id,
+            }
+        }
+    }
+
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * trans to PropertyAccessExpression
+     */
+    pub fn toPropertyAccessExpression(self) -> PropertyAccessExpression {
+        for (propertyAccessExpression in PropertyAccessExpression(__all_data__)) {
+            if (propertyAccessExpression.key_eq(self)) {
+                return propertyAccessExpression
+            }
+        }
+    }
+    
+    /**
+     * trans to ElementAccessExpression
+     */
+    pub fn toElementAccessExpression(self) -> ElementAccessExpression {
+        for (elementAccessExpression in ElementAccessExpression(__all_data__)) {
+            if (elementAccessExpression.key_eq(self)) {
+                return elementAccessExpression
+            }
+        }
+    }
+    
+
+    /**
+     * Gets the expression on which the property is accessed.
+     */
+    pub fn getExpression(self) -> LeftHandSideExpression {
+        return self.toPropertyAccessExpression().getExpression()
+        return self.toElementAccessExpression().getExpression()
+    }
+
+    /**
+     * Gets the property expression of this AccessExpression.
+     */
+    pub fn getPropertyExpression(self) -> Expression {
+        let (t = self.toPropertyAccessExpression().getNameNode()) {
+            for (expression in Expression(__all_data__)) {
+                if (expression.key_eq(t)) {
+                    return expression
+                }
+            }
+        }
+        return self.toElementAccessExpression().getArgumentExpression()
+    }
+
+    pub fn getPropertyName(self) -> string {
+        // For PropertyAccessExpression
+        for (property in MemberName(__all_data__)) {
+            if (property.key_eq(self.getPropertyExpression())) {
+                let (propertyName = property.getName()) {
+                    return propertyName
+                }
+            }
+        }
+        // For ElementAccessExpression
+        for (literalExpression in LiteralExpression(__all_data__)) {
+            if (literalExpression.key_eq(self.getPropertyExpression())) {
+                let (propertyName = literalExpression.getValue()) {
+                    return propertyName
+                }
+            }
+        }
+    }
+
+    pub fn getMethodDeclaration(self) -> MethodDeclaration {
+        for (methodDeclaration in MethodDeclaration(__all_data__)) {
+            if (methodDeclaration.getSymbol() = self.getSymbol()) {
+                return methodDeclaration
+            }
+        }
+    }
+}
+
+/**
+ * This type consists of the following types: [CallExpression, NewExpression, TaggedTemplateExpression, Decorator, EtsComponentExpression]
+ */
+schema CallLikeExpression extends AstNode {
+}
+
+impl CallLikeExpression {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *CallLikeExpression {
+        for (callExpression in CallExpression(db)) {
+            yield CallLikeExpression {
+                id : callExpression.id,
+                kind : callExpression.kind,
+                parent_id : callExpression.parent_id,
+                parent_kind : callExpression.parent_kind,
+                index : callExpression.index,
+                location_id : callExpression.location_id,
+            }
+        }
+        for (newExpression in NewExpression(db)) {
+            yield CallLikeExpression {
+                id : newExpression.id,
+                kind : newExpression.kind,
+                parent_id : newExpression.parent_id,
+                parent_kind : newExpression.parent_kind,
+                index : newExpression.index,
+                location_id : newExpression.location_id,
+            }
+        }
+        for (taggedTemplateExpression in TaggedTemplateExpression(db)) {
+            yield CallLikeExpression {
+                id : taggedTemplateExpression.id,
+                kind : taggedTemplateExpression.kind,
+                parent_id : taggedTemplateExpression.parent_id,
+                parent_kind : taggedTemplateExpression.parent_kind,
+                index : taggedTemplateExpression.index,
+                location_id : taggedTemplateExpression.location_id,
+            }
+        }
+        for (decorator in Decorator(db)) {
+            yield CallLikeExpression {
+                id : decorator.id,
+                kind : decorator.kind,
+                parent_id : decorator.parent_id,
+                parent_kind : decorator.parent_kind,
+                index : decorator.index,
+                location_id : decorator.location_id,
+            }
+        }
+        for (etsComponentExpression in EtsComponentExpression(db)) {
+            yield CallLikeExpression {
+                id : etsComponentExpression.id,
+                kind : etsComponentExpression.kind,
+                parent_id : etsComponentExpression.parent_id,
+                parent_kind : etsComponentExpression.parent_kind,
+                index : etsComponentExpression.index,
+                location_id : etsComponentExpression.location_id,
+            }
+        }
+    }
+
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * trans to CallExpression
+     */
+    pub fn toCallExpression(self) -> CallExpression {
+        for (callExpression in CallExpression(__all_data__)) {
+            if (callExpression.key_eq(self)) {
+                return callExpression
+            }
+        }
+    }
+    
+    /**
+     * trans to NewExpression
+     */
+    pub fn toNewExpression(self) -> NewExpression {
+        for (newExpression in NewExpression(__all_data__)) {
+            if (newExpression.key_eq(self)) {
+                return newExpression
+            }
+        }
+    }
+    
+    /**
+     * trans to TaggedTemplateExpression
+     */
+    pub fn toTaggedTemplateExpression(self) -> TaggedTemplateExpression {
+        for (taggedTemplateExpression in TaggedTemplateExpression(__all_data__)) {
+            if (taggedTemplateExpression.key_eq(self)) {
+                return taggedTemplateExpression
+            }
+        }
+    }
+    
+    /**
+     * trans to Decorator
+     */
+    pub fn toDecorator(self) -> Decorator {
+        for (decorator in Decorator(__all_data__)) {
+            if (decorator.key_eq(self)) {
+                return decorator
+            }
+        }
+    }
+    
+    /**
+     * trans to EtsComponentExpression
+     */
+    pub fn toEtsComponentExpression(self) -> EtsComponentExpression {
+        for (etsComponentExpression in EtsComponentExpression(__all_data__)) {
+            if (etsComponentExpression.key_eq(self)) {
+                return etsComponentExpression
+            }
+        }
+    }
+    
+}
+
+/**
+ * This type consists of the following types: [CallExpression, NewExpression, TaggedTemplateExpression, Decorator, EtsComponentExpression, PropertyAccessExpression, ElementAccessExpression]
+ */
+schema MayInvokeExpression extends AstNode {
+}
+
+impl MayInvokeExpression {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *MayInvokeExpression {
+        for (callExpression in CallExpression(db)) {
+            yield MayInvokeExpression {
+                id : callExpression.id,
+                kind : callExpression.kind,
+                parent_id : callExpression.parent_id,
+                parent_kind : callExpression.parent_kind,
+                index : callExpression.index,
+                location_id : callExpression.location_id,
+            }
+        }
+        for (newExpression in NewExpression(db)) {
+            yield MayInvokeExpression {
+                id : newExpression.id,
+                kind : newExpression.kind,
+                parent_id : newExpression.parent_id,
+                parent_kind : newExpression.parent_kind,
+                index : newExpression.index,
+                location_id : newExpression.location_id,
+            }
+        }
+        for (taggedTemplateExpression in TaggedTemplateExpression(db)) {
+            yield MayInvokeExpression {
+                id : taggedTemplateExpression.id,
+                kind : taggedTemplateExpression.kind,
+                parent_id : taggedTemplateExpression.parent_id,
+                parent_kind : taggedTemplateExpression.parent_kind,
+                index : taggedTemplateExpression.index,
+                location_id : taggedTemplateExpression.location_id,
+            }
+        }
+        for (decorator in Decorator(db)) {
+            yield MayInvokeExpression {
+                id : decorator.id,
+                kind : decorator.kind,
+                parent_id : decorator.parent_id,
+                parent_kind : decorator.parent_kind,
+                index : decorator.index,
+                location_id : decorator.location_id,
+            }
+        }
+        for (etsComponentExpression in EtsComponentExpression(db)) {
+            yield MayInvokeExpression {
+                id : etsComponentExpression.id,
+                kind : etsComponentExpression.kind,
+                parent_id : etsComponentExpression.parent_id,
+                parent_kind : etsComponentExpression.parent_kind,
+                index : etsComponentExpression.index,
+                location_id : etsComponentExpression.location_id,
+            }
+        }
+        for (propertyAccessExpression in PropertyAccessExpression(db)) {
+            for (getAccessor in GetAccessor(db)) {
+                if (propertyAccessExpression.key_eq(getAccessor)) {
+                    yield MayInvokeExpression {
+                        id : propertyAccessExpression.id,
+                        kind : propertyAccessExpression.kind,
+                        parent_id : propertyAccessExpression.parent_id,
+                        parent_kind : propertyAccessExpression.parent_kind,
+                        index : propertyAccessExpression.index,
+                        location_id : propertyAccessExpression.location_id,
+                    }
+                }
+            }
+            for (setAccessor in SetAccessor(db)) {
+                if (propertyAccessExpression.key_eq(setAccessor)) {
+                    yield MayInvokeExpression {
+                        id : propertyAccessExpression.id,
+                        kind : propertyAccessExpression.kind,
+                        parent_id : propertyAccessExpression.parent_id,
+                        parent_kind : propertyAccessExpression.parent_kind,
+                        index : propertyAccessExpression.index,
+                        location_id : propertyAccessExpression.location_id,
+                    }
+                }
+            }
+        }
+        for (elementAccessExpression in ElementAccessExpression(db)) {
+            yield MayInvokeExpression {
+                id : elementAccessExpression.id,
+                kind : elementAccessExpression.kind,
+                parent_id : elementAccessExpression.parent_id,
+                parent_kind : elementAccessExpression.parent_kind,
+                index : elementAccessExpression.index,
+                location_id : elementAccessExpression.location_id,
+            }
+        }
+    }
+
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * trans to CallExpression
+     */
+    pub fn toCallExpression(self) -> CallExpression {
+        for (callExpression in CallExpression(__all_data__)) {
+            if (callExpression.key_eq(self)) {
+                return callExpression
+            }
+        }
+    }
+    
+    /**
+     * trans to NewExpression
+     */
+    pub fn toNewExpression(self) -> NewExpression {
+        for (newExpression in NewExpression(__all_data__)) {
+            if (newExpression.key_eq(self)) {
+                return newExpression
+            }
+        }
+    }
+    
+    /**
+     * trans to TaggedTemplateExpression
+     */
+    pub fn toTaggedTemplateExpression(self) -> TaggedTemplateExpression {
+        for (taggedTemplateExpression in TaggedTemplateExpression(__all_data__)) {
+            if (taggedTemplateExpression.key_eq(self)) {
+                return taggedTemplateExpression
+            }
+        }
+    }
+    
+    /**
+     * trans to Decorator
+     */
+    pub fn toDecorator(self) -> Decorator {
+        for (decorator in Decorator(__all_data__)) {
+            if (decorator.key_eq(self)) {
+                return decorator
+            }
+        }
+    }
+    
+    /**
+     * trans to EtsComponentExpression
+     */
+    pub fn toEtsComponentExpression(self) -> EtsComponentExpression {
+        for (etsComponentExpression in EtsComponentExpression(__all_data__)) {
+            if (etsComponentExpression.key_eq(self)) {
+                return etsComponentExpression
+            }
+        }
+    }
+    
+    /**
+     * trans to PropertyAccessExpression
+     */
+    pub fn toPropertyAccessExpression(self) -> PropertyAccessExpression {
+        for (propertyAccessExpression in PropertyAccessExpression(__all_data__)) {
+            if (propertyAccessExpression.key_eq(self)) {
+                return propertyAccessExpression
+            }
+        }
+    }
+    
+    /**
+     * trans to ElementAccessExpression
+     */
+    pub fn toElementAccessExpression(self) -> ElementAccessExpression {
+        for (elementAccessExpression in ElementAccessExpression(__all_data__)) {
+            if (elementAccessExpression.key_eq(self)) {
+                return elementAccessExpression
+            }
+        }
+    }
+    
+
+    /**
+     * Gets the callee of this MayInvokeExpression.
+     */
+    pub fn getCallee(self) -> *SignatureDeclaration {
+        for (callSiteImplementation in CallSiteImplementation(__all_data__)) {
+            if (self.key_eq(callSiteImplementation.getCallSite())) {
+                yield callSiteImplementation.getImplementation()
+            }
+        }
+    }
+
+    /**
+     * Determine whether this MayInvokeExpression has a callee.
+     */
+    pub fn hasCallee(self) -> bool {
+        let (callee = self.getCallee()) {
+            return true
+        }
+    }
+
+    /**
+     * Gets the count of the arguments.
+     */
+    pub fn getArgumentCount(self) -> int {
+        return self.getArgument().len()
+    }
+
+    /**
+     * Gets an argument of this invoke expression.
+     */
+    pub fn getArgument(self) -> *Expression {
+        let (callExpression = self.toCallExpression()) {
+            yield callExpression.getArgument()
+        }
+        let (newExpression = self.toNewExpression()) {
+            yield newExpression.getArgument()
+        }
+        let (decorator = self.toDecorator()) {
+            yield decorator.getExpression()
+        }
+        let (etsComponentExpression = self.toEtsComponentExpression()) {
+            yield etsComponentExpression.getArgument()
+        }
+        // TODO: TaggedTemplateExpression, PropertyAccessExpression, ElementAccessExpression
+    }
+
+    /**
+     * Gets the `i`th argument of this invoke expression.
+     * index from 0
+     */
+    pub fn getIthArgument(self, index: int) -> Expression {
+        let (callExpression = self.toCallExpression()) {
+            return callExpression.getIthArgument(index)
+        }
+        let (newExpression = self.toNewExpression()) {
+            return newExpression.getIthArgument(index)
+        }
+        let (decorator = self.toDecorator()) {
+            if (index = 0) {
+                return decorator.getExpression()
+            }
+        }
+        let (etsComponentExpression = self.toEtsComponentExpression()) {
+            return etsComponentExpression.getIthArgument(index)
+        }
+        // TODO: TaggedTemplateExpression, PropertyAccessExpression, ElementAccessExpression
+    }
+
+    pub fn getExpression(self) -> Expression {
+        let (callExpression = self.toCallExpression()) {
+            return callExpression.getExpression()
+        }
+        let (newExpression = self.toNewExpression()) {
+            return newExpression.getExpression().to<Expression>()
+        }
+        let (decorator = self.toDecorator()) {
+            return decorator.getExpression()
+        }
+        let (etsComponentExpression = self.toEtsComponentExpression()) {
+            return etsComponentExpression.getExpression().to<Expression>()
+        }
+        let (propertyAccessExpression = self.toPropertyAccessExpression()) {
+            return propertyAccessExpression.getExpression().to<Expression>()
+        }
+        let (elementAccessExpression = self.toElementAccessExpression()) {
+            return elementAccessExpression.getExpression().to<Expression>()
+        }
+        // TODO: TaggedTemplateExpression
+    }
+
+    pub fn getCallInCallChain(self, index: int) -> MayInvokeExpression {
+        if (index = 0) {
+            return self
+        }
+        let (expression = self.getExpression()) {
+            for (mayInvokeExpression in MayInvokeExpression(__all_data__)) {
+                if (expression.key_eq(mayInvokeExpression)) {
+                    for (middleIndex in int::__undetermined_all__()) {
+                        let (middleCall = mayInvokeExpression.getCallInCallChain(middleIndex)) {
+                            if (index = middleIndex + 1) {
+                                return middleCall
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    fn getCallChainIndex(self) -> *int {
+        for (index in int::__undetermined_all__()) {
+            let (mayInvokeExpression = self.getCallInCallChain(index)) {
+                yield index
+            }
+        }
+    }
+
+    pub fn getRootCallInCallChain(self) -> MayInvokeExpression {
+        let (maxIndex = self.getCallChainIndex().max()) {
+            return self.getCallInCallChain(maxIndex)
+        }
+    }
+}
+
+/**
+ * An increment expression using `++`.
+ */
+schema IncrementExpression extends UpdateExpression {
+}
+
+impl IncrementExpression {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *IncrementExpression {
+        for (incrementExpression in UpdateExpression(db)) {
+            if (isIncrementExpression(incrementExpression.to<AstNode>())) {
+                yield IncrementExpression {
+                    id : incrementExpression.id,
+                    kind : incrementExpression.kind,
+                    parent_id : incrementExpression.parent_id,
+                    parent_kind : incrementExpression.parent_kind,
+                    index : incrementExpression.index,
+                    location_id : incrementExpression.location_id
+                }
+            }
+        }
+    }
+
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+}
+
+/**
+ * A decrement expression using `--`.
+ */
+schema DecrementExpression extends UpdateExpression {
+}
+
+impl DecrementExpression {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *DecrementExpression {
+        for (decrementExpression in UpdateExpression(db)) {
+            if (isDecrementExpression(decrementExpression.to<AstNode>())) {
+                yield DecrementExpression {
+                    id : decrementExpression.id,
+                    kind : decrementExpression.kind,
+                    parent_id : decrementExpression.parent_id,
+                    parent_kind : decrementExpression.parent_kind,
+                    index : decrementExpression.index,
+                    location_id : decrementExpression.location_id
+                }
+            }
+        }
+    }
+
+    /**
+     * Get primary key.
+     */
+     pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+}
+
+schema BinaryLogicalExpression extends BinaryExpression {
+}
+
+impl BinaryLogicalExpression {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *BinaryLogicalExpression {
+        for (binaryLogicalExpression in BinaryExpression(db),
+            binaryLogicalOperator in LogicalOperator(db)) {
+            if (binaryLogicalExpression.getOperator().key_eq(binaryLogicalOperator)) {
+                yield BinaryLogicalExpression {
+                    id : binaryLogicalExpression.id,
+                    kind : binaryLogicalExpression.kind,
+                    parent_id : binaryLogicalExpression.parent_id,
+                    parent_kind : binaryLogicalExpression.parent_kind,
+                    index : binaryLogicalExpression.index,
+                    location_id : binaryLogicalExpression.location_id,
+                    left_id : binaryLogicalExpression.left_id,
+                    operator_id : binaryLogicalExpression.operator_id,
+                    right_id : binaryLogicalExpression.right_id
+                }
+            }
+        }
+    }
+
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+}
+
+/**
+ * A logical AND expression using `&&`.
+ */
+schema LogicalAndExpression extends BinaryLogicalExpression {
+}
+
+impl LogicalAndExpression {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *LogicalAndExpression {
+        for (logicalAndExpression in BinaryLogicalExpression(db)) {
+            if (isLogicalAndExpression(logicalAndExpression.to<AstNode>())) {
+                yield LogicalAndExpression {
+                    id : logicalAndExpression.id,
+                    kind : logicalAndExpression.kind,
+                    parent_id : logicalAndExpression.parent_id,
+                    parent_kind : logicalAndExpression.parent_kind,
+                    index : logicalAndExpression.index,
+                    location_id : logicalAndExpression.location_id,
+                    left_id : logicalAndExpression.left_id,
+                    operator_id : logicalAndExpression.operator_id,
+                    right_id : logicalAndExpression.right_id
+                }
+            }
+        }
+    }
+
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+}
+
+/**
+ * A logical OR expression using `||`.
+ */
+schema LogicalOrExpression extends BinaryLogicalExpression {
+}
+
+impl LogicalOrExpression {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *LogicalOrExpression {
+        for (logicalOrExpression in BinaryLogicalExpression(db)) {
+            if (isLogicalOrExpression(logicalOrExpression.to<AstNode>())) {
+                yield LogicalOrExpression {
+                    id : logicalOrExpression.id,
+                    kind : logicalOrExpression.kind,
+                    parent_id : logicalOrExpression.parent_id,
+                    parent_kind : logicalOrExpression.parent_kind,
+                    index : logicalOrExpression.index,
+                    location_id : logicalOrExpression.location_id,
+                    left_id : logicalOrExpression.left_id,
+                    operator_id : logicalOrExpression.operator_id,
+                    right_id : logicalOrExpression.right_id
+                }
+            }
+        }
+    }
+
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+}
+
+/**
+ * A nullish coalescing expression using `??`.
+ */
+schema NullishCoalescingExpression extends BinaryLogicalExpression {
+}
+
+impl NullishCoalescingExpression {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *NullishCoalescingExpression {
+        for (nullishCoalescingExpression in BinaryLogicalExpression(db)) {
+            if (isNullishCoalescingExpression(nullishCoalescingExpression.to<AstNode>())) {
+                yield NullishCoalescingExpression {
+                    id : nullishCoalescingExpression.id,
+                    kind : nullishCoalescingExpression.kind,
+                    parent_id : nullishCoalescingExpression.parent_id,
+                    parent_kind : nullishCoalescingExpression.parent_kind,
+                    index : nullishCoalescingExpression.index,
+                    location_id : nullishCoalescingExpression.location_id,
+                    left_id : nullishCoalescingExpression.left_id,
+                    operator_id : nullishCoalescingExpression.operator_id,
+                    right_id : nullishCoalescingExpression.right_id
+                }
+            }
+        }
+    }
+
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+}
+
+/**
+ * An equality test expression using `==`, `!=`, `===` or `!==`.
+ */
+schema EqualityTestExpression extends BinaryExpression {
+}
+
+impl EqualityTestExpression {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *EqualityTestExpression {
+        for (equalityTestExpression in BinaryExpression(db)) {
+            if (isEqualityTestExpression(equalityTestExpression.to<AstNode>())) {
+                yield EqualityTestExpression {
+                    id : equalityTestExpression.id,
+                    kind : equalityTestExpression.kind,
+                    parent_id : equalityTestExpression.parent_id,
+                    parent_kind : equalityTestExpression.parent_kind,
+                    index : equalityTestExpression.index,
+                    location_id : equalityTestExpression.location_id,
+                    left_id : equalityTestExpression.left_id,
+                    operator_id : equalityTestExpression.operator_id,
+                    right_id : equalityTestExpression.right_id
+                }
+            }
+        }
+    }
+
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+}
+
+/**
+ * A exponentiation expression using `**`.
+ */
+schema ExponentiationExpression extends BinaryExpression {
+}
+
+impl ExponentiationExpression {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ExponentiationExpression {
+        for (exponentiationExpression in BinaryExpression(db)) {
+            if (isExponentiationExpression(exponentiationExpression.to<AstNode>())) {
+                yield ExponentiationExpression {
+                    id : exponentiationExpression.id,
+                    kind : exponentiationExpression.kind,
+                    parent_id : exponentiationExpression.parent_id,
+                    parent_kind : exponentiationExpression.parent_kind,
+                    index : exponentiationExpression.index,
+                    location_id : exponentiationExpression.location_id,
+                    left_id : exponentiationExpression.left_id,
+                    operator_id : exponentiationExpression.operator_id,
+                    right_id : exponentiationExpression.right_id
+                }
+            }
+        }
+    }
+
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+}
+
+/**
+ * A multiplicative expression using `*`, `/` or `%`.
+ */
+schema MultiplicativeExpression extends BinaryExpression {
+}
+
+impl MultiplicativeExpression {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *MultiplicativeExpression {
+        for (multiplicativeExpression in BinaryExpression(db)) {
+            if (isMultiplicativeExpression(multiplicativeExpression.to<AstNode>())) {
+                yield MultiplicativeExpression {
+                    id : multiplicativeExpression.id,
+                    kind : multiplicativeExpression.kind,
+                    parent_id : multiplicativeExpression.parent_id,
+                    parent_kind : multiplicativeExpression.parent_kind,
+                    index : multiplicativeExpression.index,
+                    location_id : multiplicativeExpression.location_id,
+                    left_id : multiplicativeExpression.left_id,
+                    operator_id : multiplicativeExpression.operator_id,
+                    right_id : multiplicativeExpression.right_id
+                }
+            }
+        }
+    }
+
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+}
+
+/**
+ * An additive expression using `+` or `-`.
+ */
+schema AdditiveExpression extends BinaryExpression {
+
+}
+
+impl AdditiveExpression {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *AdditiveExpression {
+        for (additiveExpression in BinaryExpression(db)) {
+            if (isAdditiveExpression(additiveExpression.to<AstNode>())) {
+                yield AdditiveExpression {
+                    id : additiveExpression.id,
+                    kind : additiveExpression.kind,
+                    parent_id : additiveExpression.parent_id,
+                    parent_kind : additiveExpression.parent_kind,
+                    index : additiveExpression.index,
+                    location_id : additiveExpression.location_id,
+                    left_id : additiveExpression.left_id,
+                    operator_id : additiveExpression.operator_id,
+                    right_id : additiveExpression.right_id
+                }
+            }
+        }
+    }
+
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+}
+
+/**
+ * A shift expression using `<<`, `>>` or `>>>`.
+ */
+schema ShiftExpression extends BinaryExpression {
+}
+
+impl ShiftExpression {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ShiftExpression {
+        for (shiftExpression in BinaryExpression(db)) {
+            if (isShiftExpression(shiftExpression.to<AstNode>())) {
+                yield ShiftExpression {
+                    id : shiftExpression.id,
+                    kind : shiftExpression.kind,
+                    parent_id : shiftExpression.parent_id,
+                    parent_kind : shiftExpression.parent_kind,
+                    index : shiftExpression.index,
+                    location_id : shiftExpression.location_id,
+                    left_id : shiftExpression.left_id,
+                    operator_id : shiftExpression.operator_id,
+                    right_id : shiftExpression.right_id
+                }
+            }
+        }
+    }
+
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+}
+
+/**
+ * A relational expression using `<`, `<=`, `>`, `>=`, `instanceof` or `in`.
+ */
+schema RelationalExpression extends BinaryExpression {
+}
+
+impl RelationalExpression {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *RelationalExpression {
+        for (relationalExpression in BinaryExpression(db)) {
+            if (isRelationalExpression(relationalExpression.to<AstNode>())) {
+                yield RelationalExpression {
+                    id : relationalExpression.id,
+                    kind : relationalExpression.kind,
+                    parent_id : relationalExpression.parent_id,
+                    parent_kind : relationalExpression.parent_kind,
+                    index : relationalExpression.index,
+                    location_id : relationalExpression.location_id,
+                    left_id : relationalExpression.left_id,
+                    operator_id : relationalExpression.operator_id,
+                    right_id : relationalExpression.right_id
+                }
+            }
+        }
+    }
+
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+}
+
+/**
+ * A comma expression using `,`.
+ */
+schema CommaExpression extends BinaryExpression {
+}
+
+impl CommaExpression {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *CommaExpression {
+        for (commaExpression in BinaryExpression(db)) {
+            if (isCommaExpression(commaExpression.to<AstNode>())) {
+                yield CommaExpression {
+                    id : commaExpression.id,
+                    kind : commaExpression.kind,
+                    parent_id : commaExpression.parent_id,
+                    parent_kind : commaExpression.parent_kind,
+                    index : commaExpression.index,
+                    location_id : commaExpression.location_id,
+                    left_id : commaExpression.left_id,
+                    operator_id : commaExpression.operator_id,
+                    right_id : commaExpression.right_id
+                }
+            }
+        }
+    }
+
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+}
+
+/**
+ * A binary bitwise expression using `&`, `|` or `^`.
+ */
+schema BinaryBitwiseExpression extends BinaryExpression {
+}
+
+impl BinaryBitwiseExpression {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *BinaryBitwiseExpression {
+        for (binaryBitwiseExpression in BinaryExpression(db)) {
+            if (isBinaryBitwiseExpression(binaryBitwiseExpression.to<AstNode>())) {
+                yield BinaryBitwiseExpression {
+                    id : binaryBitwiseExpression.id,
+                    kind : binaryBitwiseExpression.kind,
+                    parent_id : binaryBitwiseExpression.parent_id,
+                    parent_kind : binaryBitwiseExpression.parent_kind,
+                    index : binaryBitwiseExpression.index,
+                    location_id : binaryBitwiseExpression.location_id,
+                    left_id : binaryBitwiseExpression.left_id,
+                    operator_id : binaryBitwiseExpression.operator_id,
+                    right_id : binaryBitwiseExpression.right_id
+                }
+            }
+        }
+    }
+
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+}
+
+/**
+ * An assignment expression, either compound or simple.
+ */
+schema AssignmentExpression extends BinaryExpression {
+}
+
+impl AssignmentExpression {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *AssignmentExpression {
+        for (assignmentExpression in BinaryExpression(db)) {
+            if (isAssignmentExpression(assignmentExpression.to<AstNode>())) {
+                yield AssignmentExpression {
+                    id : assignmentExpression.id,
+                    kind : assignmentExpression.kind,
+                    parent_id : assignmentExpression.parent_id,
+                    parent_kind : assignmentExpression.parent_kind,
+                    index : assignmentExpression.index,
+                    location_id : assignmentExpression.location_id,
+                    left_id : assignmentExpression.left_id,
+                    operator_id : assignmentExpression.operator_id,
+                    right_id : assignmentExpression.right_id
+                }
+            }
+        }
+    }
+
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+}
+
+/**
+ * A compound assignment expression using
+ * `+=`, `-=`, `**=`, `*=`, `/=`, `%=`, `&=`, `|=`, `^=`, `<<=`, `>>=`, `>>>=`,
+ * `&&=`, `||=` or `??=`.
+ */
+schema CompoundAssignmentExpression extends AssignmentExpression {
+}
+
+impl CompoundAssignmentExpression {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *CompoundAssignmentExpression {
+        for (compoundAssignmentExpression in AssignmentExpression(db)) {
+            if (isCompoundAssignmentExpression(compoundAssignmentExpression.to<AstNode>())) {
+                yield CompoundAssignmentExpression {
+                    id : compoundAssignmentExpression.id,
+                    kind : compoundAssignmentExpression.kind,
+                    parent_id : compoundAssignmentExpression.parent_id,
+                    parent_kind : compoundAssignmentExpression.parent_kind,
+                    index : compoundAssignmentExpression.index,
+                    location_id : compoundAssignmentExpression.location_id,
+                    left_id : compoundAssignmentExpression.left_id,
+                    operator_id : compoundAssignmentExpression.operator_id,
+                    right_id : compoundAssignmentExpression.right_id
+                }
+            }
+        }
+    }
+
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+}
+
+/**
+ * A logical AND assignment expression using `&&=`.
+ */
+schema LogicalAndAssignmentExpression extends CompoundAssignmentExpression {
+}
+
+impl LogicalAndAssignmentExpression {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *LogicalAndAssignmentExpression {
+        for (logicalAndAssignmentExpression in CompoundAssignmentExpression(db)) {
+            if (isLogicalAndAssignmentExpression(logicalAndAssignmentExpression.to<AstNode>())) {
+                yield LogicalAndAssignmentExpression {
+                    id : logicalAndAssignmentExpression.id,
+                    kind : logicalAndAssignmentExpression.kind,
+                    parent_id : logicalAndAssignmentExpression.parent_id,
+                    parent_kind : logicalAndAssignmentExpression.parent_kind,
+                    index : logicalAndAssignmentExpression.index,
+                    location_id : logicalAndAssignmentExpression.location_id,
+                    left_id : logicalAndAssignmentExpression.left_id,
+                    operator_id : logicalAndAssignmentExpression.operator_id,
+                    right_id : logicalAndAssignmentExpression.right_id
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+}
+
+/**
+ * A logical OR assignment expression using `||=`.
+ */
+schema LogicalOrAssignmentExpression extends CompoundAssignmentExpression {
+}
+
+impl LogicalOrAssignmentExpression {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *LogicalOrAssignmentExpression {
+        for (logicalOrAssignmentExpression in CompoundAssignmentExpression(db)) {
+            if (isLogicalOrAssignmentExpression(logicalOrAssignmentExpression.to<AstNode>())) {
+                yield LogicalOrAssignmentExpression {
+                    id : logicalOrAssignmentExpression.id,
+                    kind : logicalOrAssignmentExpression.kind,
+                    parent_id : logicalOrAssignmentExpression.parent_id,
+                    parent_kind : logicalOrAssignmentExpression.parent_kind,
+                    index : logicalOrAssignmentExpression.index,
+                    location_id : logicalOrAssignmentExpression.location_id,
+                    left_id : logicalOrAssignmentExpression.left_id,
+                    operator_id : logicalOrAssignmentExpression.operator_id,
+                    right_id : logicalOrAssignmentExpression.right_id
+                }
+            }
+        }
+    }
+
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+}
+
+/**
+ * A nullish assignment expression using `??=`.
+ */
+schema NullishAssignmentExpression extends CompoundAssignmentExpression {
+}
+
+impl NullishAssignmentExpression {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *NullishAssignmentExpression {
+        for (nullishAssignmentExpression in AssignmentExpression(db)) {
+            if (isNullishAssignmentExpression(nullishAssignmentExpression.to<AstNode>())) {
+                yield NullishAssignmentExpression {
+                    id : nullishAssignmentExpression.id,
+                    kind : nullishAssignmentExpression.kind,
+                    parent_id : nullishAssignmentExpression.parent_id,
+                    parent_kind : nullishAssignmentExpression.parent_kind,
+                    index : nullishAssignmentExpression.index,
+                    location_id : nullishAssignmentExpression.location_id,
+                    left_id : nullishAssignmentExpression.left_id,
+                    operator_id : nullishAssignmentExpression.operator_id,
+                    right_id : nullishAssignmentExpression.right_id
+                }
+            }
+        }
+    }
+
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+}
+
+/**
+ * A simple assignment expression using `=`.
+ */
+schema SimpleAssignmentExpression extends AssignmentExpression {
+}
+
+impl SimpleAssignmentExpression {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *SimpleAssignmentExpression {
+        for (simpleAssignmentExpression in AssignmentExpression(db)) {
+            if (isSimpleAssignmentExpression(simpleAssignmentExpression.to<AstNode>())) {
+                yield SimpleAssignmentExpression {
+                    id : simpleAssignmentExpression.id,
+                    kind : simpleAssignmentExpression.kind,
+                    parent_id : simpleAssignmentExpression.parent_id,
+                    parent_kind : simpleAssignmentExpression.parent_kind,
+                    index : simpleAssignmentExpression.index,
+                    location_id : simpleAssignmentExpression.location_id,
+                    left_id : simpleAssignmentExpression.left_id,
+                    operator_id : simpleAssignmentExpression.operator_id,
+                    right_id : simpleAssignmentExpression.right_id
+                }
+            }
+        }
+    }
+
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+}
+

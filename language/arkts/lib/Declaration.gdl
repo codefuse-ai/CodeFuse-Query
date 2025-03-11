@@ -1,0 +1,3894 @@
+/**
+ * A Declaration
+ */
+schema Declaration extends AstNode {
+}
+
+impl Declaration {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *Declaration {
+        for (fa in AstNode(db)) {
+            for (son in DeclarationDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield Declaration {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Get the nameNode.
+     */
+    pub fn getNameNode(self) -> DeclarationName {
+        for (declarationNameNode in DeclarationNameNode(__all_data__)) {
+            if (declarationNameNode.declaration_id = self.id) {
+                return declarationNameNode.getNameNode()
+            }
+        }
+    }
+    
+}
+
+/**
+ * A DeclarationNameNode
+ */
+schema DeclarationNameNode {
+    @primary declaration_id: int,
+    name_node_id: int
+}
+
+impl DeclarationNameNode {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *DeclarationNameNode {
+        for (declarationNameNode in DeclarationNameNodeDO(db)) {
+            yield DeclarationNameNode {
+                declaration_id: declarationNameNode.declaration_id,
+                name_node_id : declarationNameNode.name_node_id
+            }
+        }
+    }
+    
+    /**
+     * Gets the declaration.
+     */
+    pub fn getDeclaration(self) -> Declaration {
+        for (declaration in Declaration(__all_data__)) {
+            if (self.declaration_id = declaration.id) {
+                return declaration
+            }
+        }
+    }
+    
+    /**
+     * Gets the nameNode.
+     */
+    pub fn getNameNode(self) -> DeclarationName {
+        for (declarationName in DeclarationName(__all_data__)) {
+            if (self.name_node_id = declarationName.id) {
+                return declarationName
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.declaration_id
+    }
+    
+}
+
+/**
+ * A Parameter
+ */
+schema Parameter extends Declaration {
+    name_node_id: int
+}
+
+impl Parameter {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *Parameter {
+        for (fa in Declaration(db)) {
+            for (son in ParameterDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield Parameter {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        name_node_id : son.name_node_id
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the nameNode.
+     */
+    pub fn getNameNode(self) -> BindingName {
+        for (bindingName in BindingName(__all_data__)) {
+            if (self.name_node_id = bindingName.id) {
+                return bindingName
+            }
+        }
+    }
+    
+    /**
+     * Get the dotDotDotToken.
+     */
+    pub fn getDotDotDotToken(self) -> DotDotDotToken {
+        for (parameterDotDotDotToken in ParameterDotDotDotToken(__all_data__)) {
+            if (parameterDotDotDotToken.parameter_id = self.id) {
+                return parameterDotDotDotToken.getDotDotDotToken()
+            }
+        }
+    }
+    
+    /**
+     * Get the questionToken.
+     */
+    pub fn getQuestionToken(self) -> QuestionToken {
+        for (parameterQuestionToken in ParameterQuestionToken(__all_data__)) {
+            if (parameterQuestionToken.parameter_id = self.id) {
+                return parameterQuestionToken.getQuestionToken()
+            }
+        }
+    }
+    
+    /**
+     * Get the typeNode.
+     */
+    pub fn getTypeNode(self) -> TypeNode {
+        for (parameterTypeNode in ParameterTypeNode(__all_data__)) {
+            if (parameterTypeNode.parameter_id = self.id) {
+                return parameterTypeNode.getTypeNode()
+            }
+        }
+    }
+    
+    /**
+     * Get the initializer.
+     */
+    pub fn getInitializer(self) -> Expression {
+        for (parameterInitializer in ParameterInitializer(__all_data__)) {
+            if (parameterInitializer.parameter_id = self.id) {
+                return parameterInitializer.getInitializer()
+            }
+        }
+    }
+    
+    /**
+     * Get the modifiers.
+     */
+    pub fn getModifiers(self) -> *Modifier {
+        for (modifier in Modifier(__all_data__)) {
+            if (modifier.parent_id = self.id) {
+                yield modifier
+            }
+        }
+    }
+    
+
+    /**
+     * Determines whether this parameter has the initializer.
+     */
+    pub fn hasInitializer(self) -> bool {
+        let (expression = self.getInitializer()) {
+            return true
+        }
+    }
+
+    /**
+     * Gets the parameter index of this Parameter
+     * index starts from 0
+     */
+    pub fn getParameterIndex(self) -> int {
+        for (signatureDeclarationParameter in SignatureDeclarationParameter(__all_data__)) {
+            if (signatureDeclarationParameter.parameter_id = self.id) {
+                return signatureDeclarationParameter.getIndex()
+            }
+        }
+    }
+}
+
+/**
+ * A ParameterTypeNode
+ */
+schema ParameterTypeNode {
+    @primary parameter_id: int,
+    type_node_id: int
+}
+
+impl ParameterTypeNode {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ParameterTypeNode {
+        for (parameterTypeNode in ParameterTypeNodeDO(db)) {
+            yield ParameterTypeNode {
+                parameter_id: parameterTypeNode.parameter_id,
+                type_node_id : parameterTypeNode.type_node_id
+            }
+        }
+    }
+    
+    /**
+     * Gets the parameter.
+     */
+    pub fn getParameter(self) -> Parameter {
+        for (parameter in Parameter(__all_data__)) {
+            if (self.parameter_id = parameter.id) {
+                return parameter
+            }
+        }
+    }
+    
+    /**
+     * Gets the typeNode.
+     */
+    pub fn getTypeNode(self) -> TypeNode {
+        for (typeNode in TypeNode(__all_data__)) {
+            if (self.type_node_id = typeNode.id) {
+                return typeNode
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.parameter_id
+    }
+    
+}
+
+/**
+ * A ParameterInitializer
+ */
+schema ParameterInitializer {
+    @primary parameter_id: int,
+    initializer_id: int
+}
+
+impl ParameterInitializer {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ParameterInitializer {
+        for (parameterInitializer in ParameterInitializerDO(db)) {
+            yield ParameterInitializer {
+                parameter_id: parameterInitializer.parameter_id,
+                initializer_id : parameterInitializer.initializer_id
+            }
+        }
+    }
+    
+    /**
+     * Gets the parameter.
+     */
+    pub fn getParameter(self) -> Parameter {
+        for (parameter in Parameter(__all_data__)) {
+            if (self.parameter_id = parameter.id) {
+                return parameter
+            }
+        }
+    }
+    
+    /**
+     * Gets the initializer.
+     */
+    pub fn getInitializer(self) -> Expression {
+        for (expression in Expression(__all_data__)) {
+            if (self.initializer_id = expression.id) {
+                return expression
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.parameter_id
+    }
+    
+}
+
+/**
+ * A PropertySignatureQuestionToken
+ */
+schema PropertySignatureQuestionToken {
+    @primary property_signature_id: int,
+    question_token_id: int
+}
+
+impl PropertySignatureQuestionToken {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *PropertySignatureQuestionToken {
+        for (propertySignatureQuestionToken in PropertySignatureQuestionTokenDO(db)) {
+            yield PropertySignatureQuestionToken {
+                property_signature_id: propertySignatureQuestionToken.property_signature_id,
+                question_token_id : propertySignatureQuestionToken.question_token_id
+            }
+        }
+    }
+    
+    /**
+     * Gets the propertySignature.
+     */
+    pub fn getPropertySignature(self) -> PropertySignature {
+        for (propertySignature in PropertySignature(__all_data__)) {
+            if (self.property_signature_id = propertySignature.id) {
+                return propertySignature
+            }
+        }
+    }
+    
+    /**
+     * Gets the questionToken.
+     */
+    pub fn getQuestionToken(self) -> QuestionToken {
+        for (questionToken in QuestionToken(__all_data__)) {
+            if (self.question_token_id = questionToken.id) {
+                return questionToken
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.property_signature_id
+    }
+    
+}
+
+/**
+ * A PropertyDeclaration
+ */
+schema PropertyDeclaration extends ClassElement {
+    name_node_id: int
+}
+
+impl PropertyDeclaration {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *PropertyDeclaration {
+        for (fa in ClassElement(db)) {
+            for (son in PropertyDeclarationDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield PropertyDeclaration {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        name_node_id : son.name_node_id
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the nameNode.
+     */
+    pub fn getNameNode(self) -> PropertyName {
+        for (propertyName in PropertyName(__all_data__)) {
+            if (self.name_node_id = propertyName.id) {
+                return propertyName
+            }
+        }
+    }
+    
+    /**
+     * Get the questionToken.
+     */
+    pub fn getQuestionToken(self) -> QuestionToken {
+        for (propertyDeclarationQuestionToken in PropertyDeclarationQuestionToken(__all_data__)) {
+            if (propertyDeclarationQuestionToken.property_declaration_id = self.id) {
+                return propertyDeclarationQuestionToken.getQuestionToken()
+            }
+        }
+    }
+    
+    /**
+     * Get the exclamationToken.
+     */
+    pub fn getExclamationToken(self) -> ExclamationToken {
+        for (propertyDeclarationExclamationToken in PropertyDeclarationExclamationToken(__all_data__)) {
+            if (propertyDeclarationExclamationToken.property_declaration_id = self.id) {
+                return propertyDeclarationExclamationToken.getExclamationToken()
+            }
+        }
+    }
+    
+    /**
+     * Get the typeNode.
+     */
+    pub fn getTypeNode(self) -> TypeNode {
+        for (propertyDeclarationTypeNode in PropertyDeclarationTypeNode(__all_data__)) {
+            if (propertyDeclarationTypeNode.property_declaration_id = self.id) {
+                return propertyDeclarationTypeNode.getTypeNode()
+            }
+        }
+    }
+    
+    /**
+     * Get the initializer.
+     */
+    pub fn getInitializer(self) -> Expression {
+        for (propertyDeclarationInitializer in PropertyDeclarationInitializer(__all_data__)) {
+            if (propertyDeclarationInitializer.property_declaration_id = self.id) {
+                return propertyDeclarationInitializer.getInitializer()
+            }
+        }
+    }
+    
+    /**
+     * Get the modifiers.
+     */
+    pub fn getModifiers(self) -> *Modifier {
+        for (modifier in Modifier(__all_data__)) {
+            if (modifier.parent_id = self.id) {
+                yield modifier
+            }
+        }
+    }
+    
+}
+
+/**
+ * A PropertyDeclarationQuestionToken
+ */
+schema PropertyDeclarationQuestionToken {
+    @primary property_declaration_id: int,
+    question_token_id: int
+}
+
+impl PropertyDeclarationQuestionToken {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *PropertyDeclarationQuestionToken {
+        for (propertyDeclarationQuestionToken in PropertyDeclarationQuestionTokenDO(db)) {
+            yield PropertyDeclarationQuestionToken {
+                property_declaration_id: propertyDeclarationQuestionToken.property_declaration_id,
+                question_token_id : propertyDeclarationQuestionToken.question_token_id
+            }
+        }
+    }
+    
+    /**
+     * Gets the propertyDeclaration.
+     */
+    pub fn getPropertyDeclaration(self) -> PropertyDeclaration {
+        for (propertyDeclaration in PropertyDeclaration(__all_data__)) {
+            if (self.property_declaration_id = propertyDeclaration.id) {
+                return propertyDeclaration
+            }
+        }
+    }
+    
+    /**
+     * Gets the questionToken.
+     */
+    pub fn getQuestionToken(self) -> QuestionToken {
+        for (questionToken in QuestionToken(__all_data__)) {
+            if (self.question_token_id = questionToken.id) {
+                return questionToken
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.property_declaration_id
+    }
+    
+}
+
+/**
+ * A PropertyDeclarationExclamationToken
+ */
+schema PropertyDeclarationExclamationToken {
+    @primary property_declaration_id: int,
+    exclamation_token_id: int
+}
+
+impl PropertyDeclarationExclamationToken {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *PropertyDeclarationExclamationToken {
+        for (propertyDeclarationExclamationToken in PropertyDeclarationExclamationTokenDO(db)) {
+            yield PropertyDeclarationExclamationToken {
+                property_declaration_id: propertyDeclarationExclamationToken.property_declaration_id,
+                exclamation_token_id : propertyDeclarationExclamationToken.exclamation_token_id
+            }
+        }
+    }
+    
+    /**
+     * Gets the propertyDeclaration.
+     */
+    pub fn getPropertyDeclaration(self) -> PropertyDeclaration {
+        for (propertyDeclaration in PropertyDeclaration(__all_data__)) {
+            if (self.property_declaration_id = propertyDeclaration.id) {
+                return propertyDeclaration
+            }
+        }
+    }
+    
+    /**
+     * Gets the exclamationToken.
+     */
+    pub fn getExclamationToken(self) -> ExclamationToken {
+        for (exclamationToken in ExclamationToken(__all_data__)) {
+            if (self.exclamation_token_id = exclamationToken.id) {
+                return exclamationToken
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.property_declaration_id
+    }
+    
+}
+
+/**
+ * A MethodDeclaration
+ */
+schema MethodDeclaration extends ClassElement {
+    name_node_id: int
+}
+
+impl MethodDeclaration {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *MethodDeclaration {
+        for (fa in ClassElement(db)) {
+            for (son in MethodDeclarationDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield MethodDeclaration {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        name_node_id : son.name_node_id
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the nameNode.
+     */
+    pub fn getNameNode(self) -> PropertyName {
+        for (propertyName in PropertyName(__all_data__)) {
+            if (self.name_node_id = propertyName.id) {
+                return propertyName
+            }
+        }
+    }
+    
+    /**
+     * trans to ObjectLiteralElement to use func.
+     */
+    pub fn toObjectLiteralElement(self) -> ObjectLiteralElement {
+        for (objectLiteralElement in ObjectLiteralElement(__all_data__)) {
+            if (self.id = objectLiteralElement.id) {
+                return objectLiteralElement
+            }
+        }
+    }
+    
+    /**
+     * Get the body.
+     */
+    pub fn getBody(self) -> Block {
+        for (methodDeclarationBody in MethodDeclarationBody(__all_data__)) {
+            if (methodDeclarationBody.method_declaration_id = self.id) {
+                return methodDeclarationBody.getBody()
+            }
+        }
+    }
+    
+    /**
+     * Get the modifiers.
+     */
+    pub fn getModifiers(self) -> *Modifier {
+        for (modifier in Modifier(__all_data__)) {
+            if (modifier.parent_id = self.id) {
+                yield modifier
+            }
+        }
+    }
+    
+
+    /**
+     * Get parameters.
+     * MethodDeclaration is part of SignatureDeclaration 
+     */
+    pub fn getParameter(self) -> *Parameter {
+        for (signatureDeclarationParameter in SignatureDeclarationParameter(__all_data__)) {
+            if (signatureDeclarationParameter.signature_declaration_id = self.id) {
+                yield signatureDeclarationParameter.getParameter()
+            }
+        }
+    }
+
+    /**
+     * Determine this MethodDeclaration contains any parameter.
+     */
+    pub fn hasParameter(self) -> bool {
+        let (parameter = self.getParameter()) {
+            return true
+        }
+    }
+
+    /**
+     * Gets the `i`th parameter.
+     * MethodDeclaration is part of SignatureDeclaration 
+     */
+    pub fn getIthParameter(self, index: int) -> Parameter {
+        for (signatureDeclarationParameter in SignatureDeclarationParameter(__all_data__)) {
+            if (signatureDeclarationParameter.signature_declaration_id = self.id && signatureDeclarationParameter.getIndex() = index) {
+                return signatureDeclarationParameter.getParameter()
+            }
+        }
+    }
+
+    /**
+     * trans to FunctionLikeDeclaration
+     */
+    pub fn toFunctionLikeDeclaration(self) -> FunctionLikeDeclaration {
+        for (functionLikeDeclaration in FunctionLikeDeclaration(__all_data__)) {
+            if (self.key_eq(functionLikeDeclaration)) {
+                return functionLikeDeclaration
+            }
+        }
+    }
+}
+
+/**
+ * A MethodDeclarationBody
+ */
+schema MethodDeclarationBody {
+    @primary method_declaration_id: int,
+    body_id: int
+}
+
+impl MethodDeclarationBody {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *MethodDeclarationBody {
+        for (methodDeclarationBody in MethodDeclarationBodyDO(db)) {
+            yield MethodDeclarationBody {
+                method_declaration_id: methodDeclarationBody.method_declaration_id,
+                body_id : methodDeclarationBody.body_id
+            }
+        }
+    }
+    
+    /**
+     * Gets the methodDeclaration.
+     */
+    pub fn getMethodDeclaration(self) -> MethodDeclaration {
+        for (methodDeclaration in MethodDeclaration(__all_data__)) {
+            if (self.method_declaration_id = methodDeclaration.id) {
+                return methodDeclaration
+            }
+        }
+    }
+    
+    /**
+     * Gets the body.
+     */
+    pub fn getBody(self) -> Block {
+        for (block in Block(__all_data__)) {
+            if (self.body_id = block.id) {
+                return block
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.method_declaration_id
+    }
+    
+}
+
+/**
+ * A ClassStaticBlockDeclaration
+ */
+schema ClassStaticBlockDeclaration extends ClassElement {
+    body_id: int
+}
+
+impl ClassStaticBlockDeclaration {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ClassStaticBlockDeclaration {
+        for (fa in ClassElement(db)) {
+            for (son in ClassStaticBlockDeclarationDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield ClassStaticBlockDeclaration {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        body_id : son.body_id
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the body.
+     */
+    pub fn getBody(self) -> Block {
+        for (block in Block(__all_data__)) {
+            if (self.body_id = block.id) {
+                return block
+            }
+        }
+    }
+    
+}
+
+/**
+ * A CallSignature
+ */
+schema CallSignature extends SignatureDeclaration {
+}
+
+impl CallSignature {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *CallSignature {
+        for (fa in SignatureDeclaration(db)) {
+            for (son in CallSignatureDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield CallSignature {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * trans to TypeElement to use func.
+     */
+    pub fn toTypeElement(self) -> TypeElement {
+        for (typeElement in TypeElement(__all_data__)) {
+            if (self.id = typeElement.id) {
+                return typeElement
+            }
+        }
+    }
+    
+}
+
+/**
+ * A ConstructSignature
+ */
+schema ConstructSignature extends SignatureDeclaration {
+}
+
+impl ConstructSignature {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ConstructSignature {
+        for (fa in SignatureDeclaration(db)) {
+            for (son in ConstructSignatureDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield ConstructSignature {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * trans to TypeElement to use func.
+     */
+    pub fn toTypeElement(self) -> TypeElement {
+        for (typeElement in TypeElement(__all_data__)) {
+            if (self.id = typeElement.id) {
+                return typeElement
+            }
+        }
+    }
+    
+}
+
+/**
+ * A IndexSignature
+ */
+schema IndexSignature extends SignatureDeclaration {
+    type_node_id: int
+}
+
+impl IndexSignature {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *IndexSignature {
+        for (fa in SignatureDeclaration(db)) {
+            for (son in IndexSignatureDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield IndexSignature {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        type_node_id : son.type_node_id
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the typeNode.
+     */
+    pub fn getTypeNode(self) -> TypeNode {
+        for (typeNode in TypeNode(__all_data__)) {
+            if (self.type_node_id = typeNode.id) {
+                return typeNode
+            }
+        }
+    }
+    
+    /**
+     * trans to ClassElement to use func.
+     */
+    pub fn toClassElement(self) -> ClassElement {
+        for (classElement in ClassElement(__all_data__)) {
+            if (self.id = classElement.id) {
+                return classElement
+            }
+        }
+    }
+    
+    /**
+     * trans to TypeElement to use func.
+     */
+    pub fn toTypeElement(self) -> TypeElement {
+        for (typeElement in TypeElement(__all_data__)) {
+            if (self.id = typeElement.id) {
+                return typeElement
+            }
+        }
+    }
+    
+    /**
+     * Get the modifiers.
+     */
+    pub fn getModifiers(self) -> *Modifier {
+        for (modifier in Modifier(__all_data__)) {
+            if (modifier.parent_id = self.id) {
+                yield modifier
+            }
+        }
+    }
+    
+}
+
+/**
+ * A EnumMember
+ */
+schema EnumMember extends Declaration {
+    name_node_id: int
+}
+
+impl EnumMember {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *EnumMember {
+        for (fa in Declaration(db)) {
+            for (son in EnumMemberDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield EnumMember {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        name_node_id : son.name_node_id
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the parent.
+     */
+    pub fn getParent(self) -> EnumDeclaration {
+        for (enumDeclaration in EnumDeclaration(__all_data__)) {
+            if (self.parent_id = enumDeclaration.id) {
+                return enumDeclaration
+            }
+        }
+    }
+    
+    /**
+     * Gets the nameNode.
+     */
+    pub fn getNameNode(self) -> PropertyName {
+        for (propertyName in PropertyName(__all_data__)) {
+            if (self.name_node_id = propertyName.id) {
+                return propertyName
+            }
+        }
+    }
+    
+    /**
+     * Get the initializer.
+     */
+    pub fn getInitializer(self) -> Expression {
+        for (enumMemberInitializer in EnumMemberInitializer(__all_data__)) {
+            if (enumMemberInitializer.enum_member_id = self.id) {
+                return enumMemberInitializer.getInitializer()
+            }
+        }
+    }
+    
+
+    /**
+     * Determine whether this EnumMember has an initializer.
+     */
+    pub fn hasInitializer(self) -> bool {
+        let (initializer = self.getInitializer()) {
+            return true
+        }
+    }
+}
+
+/**
+ * A EnumMemberInitializer
+ */
+schema EnumMemberInitializer {
+    @primary enum_member_id: int,
+    initializer_id: int
+}
+
+impl EnumMemberInitializer {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *EnumMemberInitializer {
+        for (enumMemberInitializer in EnumMemberInitializerDO(db)) {
+            yield EnumMemberInitializer {
+                enum_member_id: enumMemberInitializer.enum_member_id,
+                initializer_id : enumMemberInitializer.initializer_id
+            }
+        }
+    }
+    
+    /**
+     * Gets the enumMember.
+     */
+    pub fn getEnumMember(self) -> EnumMember {
+        for (enumMember in EnumMember(__all_data__)) {
+            if (self.enum_member_id = enumMember.id) {
+                return enumMember
+            }
+        }
+    }
+    
+    /**
+     * Gets the initializer.
+     */
+    pub fn getInitializer(self) -> Expression {
+        for (expression in Expression(__all_data__)) {
+            if (self.initializer_id = expression.id) {
+                return expression
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.enum_member_id
+    }
+    
+}
+
+/**
+ * A SignatureDeclaration
+ */
+schema SignatureDeclaration extends Declaration {
+}
+
+impl SignatureDeclaration {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *SignatureDeclaration {
+        for (fa in Declaration(db)) {
+            for (son in SignatureDeclarationDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield SignatureDeclaration {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Get the nameNode.
+     */
+    pub fn getNameNode(self) -> PropertyName {
+        for (signatureDeclarationNameNode in SignatureDeclarationNameNode(__all_data__)) {
+            if (signatureDeclarationNameNode.signature_declaration_id = self.id) {
+                return signatureDeclarationNameNode.getNameNode()
+            }
+        }
+    }
+    
+    /**
+     * Get the typeParameter.
+     */
+    pub fn getTypeParameter(self) -> *TypeParameter {
+        for (signatureDeclarationTypeParameter in SignatureDeclarationTypeParameter(__all_data__)) {
+            if (signatureDeclarationTypeParameter.signature_declaration_id = self.id) {
+                yield signatureDeclarationTypeParameter.getTypeParameter()
+            }
+        }
+    }
+
+    /**
+     * Gets the `i`th typeParameter of this SignatureDeclaration.
+     */
+    pub fn getIthTypeParameter(self, index: int) -> TypeParameter {
+        for (signatureDeclarationTypeParameter in SignatureDeclarationTypeParameter(__all_data__)) {
+            if (signatureDeclarationTypeParameter.signature_declaration_id = self.id
+                && signatureDeclarationTypeParameter.getIndex() = index) {
+                return signatureDeclarationTypeParameter.getTypeParameter()
+            }
+        }
+    }
+    
+    /**
+     * Get the parameter.
+     */
+    pub fn getParameter(self) -> *Parameter {
+        for (signatureDeclarationParameter in SignatureDeclarationParameter(__all_data__)) {
+            if (signatureDeclarationParameter.signature_declaration_id = self.id) {
+                yield signatureDeclarationParameter.getParameter()
+            }
+        }
+    }
+
+    /**
+     * Get the numbers of parameter.
+     */
+    pub fn getParameterNum(self) -> int {
+        let (len = self.getParameter().len()) {
+            return len
+        }
+    }
+    
+    /**
+     * Get the typeNode.
+     */
+    pub fn getTypeNode(self) -> TypeNode {
+        for (signatureDeclarationTypeNode in SignatureDeclarationTypeNode(__all_data__)) {
+            if (signatureDeclarationTypeNode.signature_declaration_id = self.id) {
+                return signatureDeclarationTypeNode.getTypeNode()
+            }
+        }
+    }
+    
+
+    /**
+     * Gets the `i`th Parameter of this SignatureDeclaration
+     */
+    pub fn getIthParameter(self, index: int) -> Parameter {
+        for (signatureDeclarationParameter in SignatureDeclarationParameter(__all_data__)) {
+            if (signatureDeclarationParameter.signature_declaration_id = self.id
+                && signatureDeclarationParameter.getIndex() = index) {
+                return signatureDeclarationParameter.getParameter()
+            }
+        }
+    }
+
+    /**
+     * Gets call site locat at this function-like declaration
+     */
+    pub fn getCallSite(self) -> *MayInvokeExpression {
+        for (callSite in MayInvokeExpression(__all_data__)) {
+            if (self.key_eq(callSite.getEnclosingFunction())) {
+                yield callSite
+            }
+        }
+    }
+
+    /**
+     * Gets call site invoke this function-like declaration
+     */
+    pub fn getCallSiteInvokeThis(self) -> *MayInvokeExpression {
+        for (callSite in MayInvokeExpression(__all_data__)) {
+            if (self in callSite.getCallee()) {
+                yield callSite
+            }
+        }
+    }
+
+    /**
+     * Gets the namespace of this SignatureDeclaration, namespace a {} like a, a{b} like a.b
+     */
+    pub fn getNameSpace(self) -> string {
+        for (astNode in AstNode(__all_data__)) {
+            if (self.key_eq(astNode)) {
+                return getNameSpace(astNode)
+            }
+        }
+    }
+
+    // fn hasBody(self) -> bool {
+    //     for (methodDeclaration in FunctionLikeDeclaration(__all_data__)) {
+    //         if (self.key_eq(methodDeclaration)) {
+    //             return methodDeclaration.hasBody()
+    //         }
+    //     }
+    // } 
+
+    // /**
+    //  * Get the signature of this
+    //  */
+    // pub fn getSignature(self) -> string {
+    //     if (self.hasBody()) {
+    //         return self.getSymbol().getDescription()
+    //     }
+    //     if (!self.hasBody()) {
+    //         return self.getText()
+    //     }
+    // }
+
+    // /**
+    //  * Get the packageName of this
+    //  */
+    // pub fn getPackageName(self) -> string {
+    //     let (name = self.getLocation().getFile().getName()) {
+    //         if (name.contains("/")) {
+    //             return packageNameDeal(name.get_regex_match_result(".*\\/([^\\?]+)$", 1))
+    //         }
+    //         if (!name.contains("/")) {
+    //             return packageNameDeal(name)
+    //         }
+    //     }
+    // }
+}
+
+
+/**
+ * A SignatureDeclarationNameNode
+ */
+schema SignatureDeclarationNameNode {
+    @primary signature_declaration_id: int,
+    name_node_id: int
+}
+
+impl SignatureDeclarationNameNode {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *SignatureDeclarationNameNode {
+        for (signatureDeclarationNameNode in SignatureDeclarationNameNodeDO(db)) {
+            yield SignatureDeclarationNameNode {
+                signature_declaration_id: signatureDeclarationNameNode.signature_declaration_id,
+                name_node_id : signatureDeclarationNameNode.name_node_id
+            }
+        }
+    }
+    
+    /**
+     * Gets the signatureDeclaration.
+     */
+    pub fn getSignatureDeclaration(self) -> SignatureDeclaration {
+        for (signatureDeclaration in SignatureDeclaration(__all_data__)) {
+            if (self.signature_declaration_id = signatureDeclaration.id) {
+                return signatureDeclaration
+            }
+        }
+    }
+    
+    /**
+     * Gets the nameNode.
+     */
+    pub fn getNameNode(self) -> PropertyName {
+        for (propertyName in PropertyName(__all_data__)) {
+            if (self.name_node_id = propertyName.id) {
+                return propertyName
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.signature_declaration_id
+    }
+    
+}
+
+/**
+ * A SignatureDeclarationTypeParameter
+ */
+schema SignatureDeclarationTypeParameter {
+    @primary type_parameter_id: int,
+    signature_declaration_id: int,
+    index: int
+}
+
+impl SignatureDeclarationTypeParameter {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *SignatureDeclarationTypeParameter {
+        for (signatureDeclarationTypeParameter in SignatureDeclarationTypeParameterDO(db)) {
+            yield SignatureDeclarationTypeParameter {
+                type_parameter_id: signatureDeclarationTypeParameter.type_parameter_id,
+                signature_declaration_id : signatureDeclarationTypeParameter.signature_declaration_id,
+                index : signatureDeclarationTypeParameter.index
+            }
+        }
+    }
+    
+    /**
+     * Gets the typeParameter.
+     */
+    pub fn getTypeParameter(self) -> TypeParameter {
+        for (typeParameter in TypeParameter(__all_data__)) {
+            if (self.type_parameter_id = typeParameter.id) {
+                return typeParameter
+            }
+        }
+    }
+    
+    /**
+     * Gets the signatureDeclaration.
+     */
+    pub fn getSignatureDeclaration(self) -> SignatureDeclaration {
+        for (signatureDeclaration in SignatureDeclaration(__all_data__)) {
+            if (self.signature_declaration_id = signatureDeclaration.id) {
+                return signatureDeclaration
+            }
+        }
+    }
+    
+    /**
+     * Gets the index.
+     */
+    pub fn getIndex(self) -> int {
+        return self.index
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.type_parameter_id
+    }
+    
+}
+
+/**
+ * A SignatureDeclarationParameter
+ */
+schema SignatureDeclarationParameter {
+    @primary parameter_id: int,
+    signature_declaration_id: int,
+    index: int
+}
+
+impl SignatureDeclarationParameter {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *SignatureDeclarationParameter {
+        for (signatureDeclarationParameter in SignatureDeclarationParameterDO(db)) {
+            yield SignatureDeclarationParameter {
+                parameter_id: signatureDeclarationParameter.parameter_id,
+                signature_declaration_id : signatureDeclarationParameter.signature_declaration_id,
+                index : signatureDeclarationParameter.index
+            }
+        }
+    }
+    
+    /**
+     * Gets the parameter.
+     */
+    pub fn getParameter(self) -> Parameter {
+        for (parameter in Parameter(__all_data__)) {
+            if (self.parameter_id = parameter.id) {
+                return parameter
+            }
+        }
+    }
+    
+    /**
+     * Gets the signatureDeclaration.
+     */
+    pub fn getSignatureDeclaration(self) -> SignatureDeclaration {
+        for (signatureDeclaration in SignatureDeclaration(__all_data__)) {
+            if (self.signature_declaration_id = signatureDeclaration.id) {
+                return signatureDeclaration
+            }
+        }
+    }
+    
+    /**
+     * Gets the index.
+     */
+    pub fn getIndex(self) -> int {
+        return self.index
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.parameter_id
+    }
+    
+}
+
+/**
+ * A SignatureDeclarationTypeNode
+ */
+schema SignatureDeclarationTypeNode {
+    @primary signature_declaration_id: int,
+    type_node_id: int
+}
+
+impl SignatureDeclarationTypeNode {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *SignatureDeclarationTypeNode {
+        for (signatureDeclarationTypeNode in SignatureDeclarationTypeNodeDO(db)) {
+            yield SignatureDeclarationTypeNode {
+                signature_declaration_id: signatureDeclarationTypeNode.signature_declaration_id,
+                type_node_id : signatureDeclarationTypeNode.type_node_id
+            }
+        }
+    }
+    
+    /**
+     * Gets the signatureDeclaration.
+     */
+    pub fn getSignatureDeclaration(self) -> SignatureDeclaration {
+        for (signatureDeclaration in SignatureDeclaration(__all_data__)) {
+            if (self.signature_declaration_id = signatureDeclaration.id) {
+                return signatureDeclaration
+            }
+        }
+    }
+    
+    /**
+     * Gets the typeNode.
+     */
+    pub fn getTypeNode(self) -> TypeNode {
+        for (typeNode in TypeNode(__all_data__)) {
+            if (self.type_node_id = typeNode.id) {
+                return typeNode
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.signature_declaration_id
+    }
+    
+}
+
+/**
+ * A BindingElement
+ */
+schema BindingElement extends Declaration {
+    name_node_id: int
+}
+
+impl BindingElement {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *BindingElement {
+        for (fa in Declaration(db)) {
+            for (son in BindingElementDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield BindingElement {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        name_node_id : son.name_node_id
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the nameNode.
+     */
+    pub fn getNameNode(self) -> BindingName {
+        for (bindingName in BindingName(__all_data__)) {
+            if (self.name_node_id = bindingName.id) {
+                return bindingName
+            }
+        }
+    }
+    
+    /**
+     * Get the propertyNameNode.
+     */
+    pub fn getPropertyNameNode(self) -> PropertyName {
+        for (bindingElementPropertyNameNode in BindingElementPropertyNameNode(__all_data__)) {
+            if (bindingElementPropertyNameNode.binding_element_id = self.id) {
+                return bindingElementPropertyNameNode.getPropertyNameNode()
+            }
+        }
+    }
+    
+    /**
+     * Get the dotDotDotToken.
+     */
+    pub fn getDotDotDotToken(self) -> DotDotDotToken {
+        for (bindingElementDotDotDotToken in BindingElementDotDotDotToken(__all_data__)) {
+            if (bindingElementDotDotDotToken.binding_element_id = self.id) {
+                return bindingElementDotDotDotToken.getDotDotDotToken()
+            }
+        }
+    }
+    
+    /**
+     * Get the initializer.
+     */
+    pub fn getInitializer(self) -> Expression {
+        for (bindingElementInitializer in BindingElementInitializer(__all_data__)) {
+            if (bindingElementInitializer.binding_element_id = self.id) {
+                return bindingElementInitializer.getInitializer()
+            }
+        }
+    }
+    
+
+    /**
+     * Determines whether this bindingElement has the initializer.
+     */
+    pub fn hasInitializer(self) -> bool {
+        let (expression = self.getInitializer()) {
+            return true
+        }
+    }
+}
+
+/**
+ * A BindingElementPropertyNameNode
+ */
+schema BindingElementPropertyNameNode {
+    @primary binding_element_id: int,
+    property_name_node_id: int
+}
+
+impl BindingElementPropertyNameNode {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *BindingElementPropertyNameNode {
+        for (bindingElementPropertyNameNode in BindingElementPropertyNameNodeDO(db)) {
+            yield BindingElementPropertyNameNode {
+                binding_element_id: bindingElementPropertyNameNode.binding_element_id,
+                property_name_node_id : bindingElementPropertyNameNode.property_name_node_id
+            }
+        }
+    }
+    
+    /**
+     * Gets the bindingElement.
+     */
+    pub fn getBindingElement(self) -> BindingElement {
+        for (bindingElement in BindingElement(__all_data__)) {
+            if (self.binding_element_id = bindingElement.id) {
+                return bindingElement
+            }
+        }
+    }
+    
+    /**
+     * Gets the propertyNameNode.
+     */
+    pub fn getPropertyNameNode(self) -> PropertyName {
+        for (propertyName in PropertyName(__all_data__)) {
+            if (self.property_name_node_id = propertyName.id) {
+                return propertyName
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.binding_element_id
+    }
+    
+}
+
+/**
+ * A BindingElementDotDotDotToken
+ */
+schema BindingElementDotDotDotToken {
+    @primary binding_element_id: int,
+    dot_dot_dot_token_id: int
+}
+
+impl BindingElementDotDotDotToken {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *BindingElementDotDotDotToken {
+        for (bindingElementDotDotDotToken in BindingElementDotDotDotTokenDO(db)) {
+            yield BindingElementDotDotDotToken {
+                binding_element_id: bindingElementDotDotDotToken.binding_element_id,
+                dot_dot_dot_token_id : bindingElementDotDotDotToken.dot_dot_dot_token_id
+            }
+        }
+    }
+    
+    /**
+     * Gets the bindingElement.
+     */
+    pub fn getBindingElement(self) -> BindingElement {
+        for (bindingElement in BindingElement(__all_data__)) {
+            if (self.binding_element_id = bindingElement.id) {
+                return bindingElement
+            }
+        }
+    }
+    
+    /**
+     * Gets the dotDotDotToken.
+     */
+    pub fn getDotDotDotToken(self) -> DotDotDotToken {
+        for (dotDotDotToken in DotDotDotToken(__all_data__)) {
+            if (self.dot_dot_dot_token_id = dotDotDotToken.id) {
+                return dotDotDotToken
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.binding_element_id
+    }
+    
+}
+
+/**
+ * A BindingElementInitializer
+ */
+schema BindingElementInitializer {
+    @primary binding_element_id: int,
+    initializer_id: int
+}
+
+impl BindingElementInitializer {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *BindingElementInitializer {
+        for (bindingElementInitializer in BindingElementInitializerDO(db)) {
+            yield BindingElementInitializer {
+                binding_element_id: bindingElementInitializer.binding_element_id,
+                initializer_id : bindingElementInitializer.initializer_id
+            }
+        }
+    }
+    
+    /**
+     * Gets the bindingElement.
+     */
+    pub fn getBindingElement(self) -> BindingElement {
+        for (bindingElement in BindingElement(__all_data__)) {
+            if (self.binding_element_id = bindingElement.id) {
+                return bindingElement
+            }
+        }
+    }
+    
+    /**
+     * Gets the initializer.
+     */
+    pub fn getInitializer(self) -> Expression {
+        for (expression in Expression(__all_data__)) {
+            if (self.initializer_id = expression.id) {
+                return expression
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.binding_element_id
+    }
+    
+}
+
+/**
+ * A ObjectBindingPattern
+ */
+schema ObjectBindingPattern extends AstNode {
+}
+
+impl ObjectBindingPattern {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ObjectBindingPattern {
+        for (fa in AstNode(db)) {
+            for (son in ObjectBindingPatternDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield ObjectBindingPattern {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Get the element.
+     */
+    pub fn getElement(self) -> *BindingElement {
+        for (objectBindingPatternElement in ObjectBindingPatternElement(__all_data__)) {
+            if (objectBindingPatternElement.object_binding_pattern_id = self.id) {
+                yield objectBindingPatternElement.getElement()
+            }
+        }
+    }
+    
+
+    /**
+     * Gets the `i`th Element of this ObjectBindingPattern.
+     * index from 0
+     */
+    pub fn getIthElement(self, index: int) -> BindingElement {
+        for (objectBindingPatternElement in ObjectBindingPatternElement(__all_data__)) {
+            if (objectBindingPatternElement.object_binding_pattern_id = self.id && objectBindingPatternElement.getIndex() = index) {
+                return objectBindingPatternElement.getElement()
+            }
+        }
+    }
+}
+
+/**
+ * A ObjectBindingPatternElement
+ */
+schema ObjectBindingPatternElement {
+    @primary element_id: int,
+    object_binding_pattern_id: int,
+    index: int
+}
+
+impl ObjectBindingPatternElement {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ObjectBindingPatternElement {
+        for (objectBindingPatternElement in ObjectBindingPatternElementDO(db)) {
+            yield ObjectBindingPatternElement {
+                element_id: objectBindingPatternElement.element_id,
+                object_binding_pattern_id : objectBindingPatternElement.object_binding_pattern_id,
+                index : objectBindingPatternElement.index
+            }
+        }
+    }
+    
+    /**
+     * Gets the element.
+     */
+    pub fn getElement(self) -> BindingElement {
+        for (bindingElement in BindingElement(__all_data__)) {
+            if (self.element_id = bindingElement.id) {
+                return bindingElement
+            }
+        }
+    }
+    
+    /**
+     * Gets the objectBindingPattern.
+     */
+    pub fn getObjectBindingPattern(self) -> ObjectBindingPattern {
+        for (objectBindingPattern in ObjectBindingPattern(__all_data__)) {
+            if (self.object_binding_pattern_id = objectBindingPattern.id) {
+                return objectBindingPattern
+            }
+        }
+    }
+    
+    /**
+     * Gets the index.
+     */
+    pub fn getIndex(self) -> int {
+        return self.index
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.element_id
+    }
+    
+}
+
+/**
+ * A ArrayBindingPattern
+ */
+schema ArrayBindingPattern extends AstNode {
+}
+
+impl ArrayBindingPattern {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ArrayBindingPattern {
+        for (fa in AstNode(db)) {
+            for (son in ArrayBindingPatternDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield ArrayBindingPattern {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Get the element.
+     */
+    pub fn getElement(self) -> *ArrayBindingElement {
+        for (arrayBindingPatternElement in ArrayBindingPatternElement(__all_data__)) {
+            if (arrayBindingPatternElement.array_binding_pattern_id = self.id) {
+                yield arrayBindingPatternElement.getElement()
+            }
+        }
+    }
+    
+
+    /**
+     * Gets the `i`th Element of this ArrayBindingPattern.
+     * index starts from 0
+     */
+    pub fn getIthElement(self, index: int) -> ArrayBindingElement {
+        for (arrayBindingPatternElement in ArrayBindingPatternElement(__all_data__)) {
+            if (arrayBindingPatternElement.array_binding_pattern_id = self.id && arrayBindingPatternElement.getIndex() = index) {
+                return arrayBindingPatternElement.getElement()
+            }
+        }
+    }
+}
+
+/**
+ * A ArrayBindingPatternElement
+ */
+schema ArrayBindingPatternElement {
+    @primary element_id: int,
+    array_binding_pattern_id: int,
+    index: int
+}
+
+impl ArrayBindingPatternElement {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ArrayBindingPatternElement {
+        for (arrayBindingPatternElement in ArrayBindingPatternElementDO(db)) {
+            yield ArrayBindingPatternElement {
+                element_id: arrayBindingPatternElement.element_id,
+                array_binding_pattern_id : arrayBindingPatternElement.array_binding_pattern_id,
+                index : arrayBindingPatternElement.index
+            }
+        }
+    }
+    
+    /**
+     * Gets the element.
+     */
+    pub fn getElement(self) -> ArrayBindingElement {
+        for (arrayBindingElement in ArrayBindingElement(__all_data__)) {
+            if (self.element_id = arrayBindingElement.id) {
+                return arrayBindingElement
+            }
+        }
+    }
+    
+    /**
+     * Gets the arrayBindingPattern.
+     */
+    pub fn getArrayBindingPattern(self) -> ArrayBindingPattern {
+        for (arrayBindingPattern in ArrayBindingPattern(__all_data__)) {
+            if (self.array_binding_pattern_id = arrayBindingPattern.id) {
+                return arrayBindingPattern
+            }
+        }
+    }
+    
+    /**
+     * Gets the index.
+     */
+    pub fn getIndex(self) -> int {
+        return self.index
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.element_id
+    }
+    
+}
+
+/**
+ * A VariableDeclaration
+ */
+schema VariableDeclaration extends Declaration {
+    name_node_id: int
+}
+
+impl VariableDeclaration {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *VariableDeclaration {
+        for (fa in Declaration(db)) {
+            for (son in VariableDeclarationDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield VariableDeclaration {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        name_node_id : son.name_node_id
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the nameNode.
+     */
+    pub fn getNameNode(self) -> BindingName {
+        for (bindingName in BindingName(__all_data__)) {
+            if (self.name_node_id = bindingName.id) {
+                return bindingName
+            }
+        }
+    }
+    
+    /**
+     * Get the exclamationToken.
+     */
+    pub fn getExclamationToken(self) -> ExclamationToken {
+        for (variableDeclarationExclamationToken in VariableDeclarationExclamationToken(__all_data__)) {
+            if (variableDeclarationExclamationToken.variable_declaration_id = self.id) {
+                return variableDeclarationExclamationToken.getExclamationToken()
+            }
+        }
+    }
+    
+    /**
+     * Get the typeNode.
+     */
+    pub fn getTypeNode(self) -> TypeNode {
+        for (variableDeclarationTypeNode in VariableDeclarationTypeNode(__all_data__)) {
+            if (variableDeclarationTypeNode.variable_declaration_id = self.id) {
+                return variableDeclarationTypeNode.getTypeNode()
+            }
+        }
+    }
+    
+    /**
+     * Get the initializer.
+     */
+    pub fn getInitializer(self) -> Expression {
+        for (variableDeclarationInitializer in VariableDeclarationInitializer(__all_data__)) {
+            if (variableDeclarationInitializer.variable_declaration_id = self.id) {
+                return variableDeclarationInitializer.getInitializer()
+            }
+        }
+    }
+    
+
+    /**
+     * Determines whether this variable declaration has the initializer.
+     */
+    pub fn hasInitializer(self) -> bool {
+        let (expression = self.getInitializer()) {
+            return true
+        }
+    }
+
+    /**
+     * For variables of type any and ESObject, may define own variable methods and need to return the declarations.
+     */
+    pub fn getBelongDeclaration(self) -> *SignatureDeclaration {
+        if (self.getTypeNode().getText() = "any" || self.getTypeNode().getText() = "ESObject") {
+             for (dec in SignatureDeclaration(__all_data__), ancestor in AstNode(__all_data__)) {
+                if (ancestor in dec.getAncestor()) {
+                    if (ancestor.key_eq(self)) {
+                        yield dec
+                    }
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A VariableDeclarationExclamationToken
+ */
+schema VariableDeclarationExclamationToken {
+    @primary variable_declaration_id: int,
+    exclamation_token_id: int
+}
+
+impl VariableDeclarationExclamationToken {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *VariableDeclarationExclamationToken {
+        for (variableDeclarationExclamationToken in VariableDeclarationExclamationTokenDO(db)) {
+            yield VariableDeclarationExclamationToken {
+                variable_declaration_id: variableDeclarationExclamationToken.variable_declaration_id,
+                exclamation_token_id : variableDeclarationExclamationToken.exclamation_token_id
+            }
+        }
+    }
+    
+    /**
+     * Gets the variableDeclaration.
+     */
+    pub fn getVariableDeclaration(self) -> VariableDeclaration {
+        for (variableDeclaration in VariableDeclaration(__all_data__)) {
+            if (self.variable_declaration_id = variableDeclaration.id) {
+                return variableDeclaration
+            }
+        }
+    }
+    
+    /**
+     * Gets the exclamationToken.
+     */
+    pub fn getExclamationToken(self) -> ExclamationToken {
+        for (exclamationToken in ExclamationToken(__all_data__)) {
+            if (self.exclamation_token_id = exclamationToken.id) {
+                return exclamationToken
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.variable_declaration_id
+    }
+    
+}
+
+/**
+ * A VariableDeclarationTypeNode
+ */
+schema VariableDeclarationTypeNode {
+    @primary variable_declaration_id: int,
+    type_node_id: int
+}
+
+impl VariableDeclarationTypeNode {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *VariableDeclarationTypeNode {
+        for (variableDeclarationTypeNode in VariableDeclarationTypeNodeDO(db)) {
+            yield VariableDeclarationTypeNode {
+                variable_declaration_id: variableDeclarationTypeNode.variable_declaration_id,
+                type_node_id : variableDeclarationTypeNode.type_node_id
+            }
+        }
+    }
+    
+    /**
+     * Gets the variableDeclaration.
+     */
+    pub fn getVariableDeclaration(self) -> VariableDeclaration {
+        for (variableDeclaration in VariableDeclaration(__all_data__)) {
+            if (self.variable_declaration_id = variableDeclaration.id) {
+                return variableDeclaration
+            }
+        }
+    }
+    
+    /**
+     * Gets the typeNode.
+     */
+    pub fn getTypeNode(self) -> TypeNode {
+        for (typeNode in TypeNode(__all_data__)) {
+            if (self.type_node_id = typeNode.id) {
+                return typeNode
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.variable_declaration_id
+    }
+    
+}
+
+/**
+ * A VariableDeclarationInitializer
+ */
+schema VariableDeclarationInitializer {
+    @primary variable_declaration_id: int,
+    initializer_id: int
+}
+
+impl VariableDeclarationInitializer {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *VariableDeclarationInitializer {
+        for (variableDeclarationInitializer in VariableDeclarationInitializerDO(db)) {
+            yield VariableDeclarationInitializer {
+                variable_declaration_id: variableDeclarationInitializer.variable_declaration_id,
+                initializer_id : variableDeclarationInitializer.initializer_id
+            }
+        }
+    }
+    
+    /**
+     * Gets the variableDeclaration.
+     */
+    pub fn getVariableDeclaration(self) -> VariableDeclaration {
+        for (variableDeclaration in VariableDeclaration(__all_data__)) {
+            if (self.variable_declaration_id = variableDeclaration.id) {
+                return variableDeclaration
+            }
+        }
+    }
+    
+    /**
+     * Gets the initializer.
+     */
+    pub fn getInitializer(self) -> Expression {
+        for (expression in Expression(__all_data__)) {
+            if (self.initializer_id = expression.id) {
+                return expression
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.variable_declaration_id
+    }
+    
+}
+
+/**
+ * A VariableDeclarationList
+ */
+schema VariableDeclarationList extends AstNode {
+}
+
+impl VariableDeclarationList {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *VariableDeclarationList {
+        for (fa in AstNode(db)) {
+            for (son in VariableDeclarationListDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield VariableDeclarationList {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Get the declaration.
+     */
+    pub fn getDeclaration(self) -> *VariableDeclaration {
+        for (variableDeclarationListDeclaration in VariableDeclarationListDeclaration(__all_data__)) {
+            if (variableDeclarationListDeclaration.variable_declaration_list_id = self.id) {
+                yield variableDeclarationListDeclaration.getDeclaration()
+            }
+        }
+    }
+    
+
+    /**
+     * Gets the `i`th variable declaration with given
+     */
+    pub fn getIthDeclaration(self, index: int) -> VariableDeclaration {
+        for (variableDeclarationListDeclaration in VariableDeclarationListDeclaration(__all_data__)) {
+            if (variableDeclarationListDeclaration.variable_declaration_list_id = self.id && variableDeclarationListDeclaration.getIndex() = index) {
+                return variableDeclarationListDeclaration.getDeclaration()
+            }
+        }
+    }
+}
+
+/**
+ * A VariableDeclarationListDeclaration
+ */
+schema VariableDeclarationListDeclaration {
+    @primary declaration_id: int,
+    variable_declaration_list_id: int,
+    index: int
+}
+
+impl VariableDeclarationListDeclaration {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *VariableDeclarationListDeclaration {
+        for (variableDeclarationListDeclaration in VariableDeclarationListDeclarationDO(db)) {
+            yield VariableDeclarationListDeclaration {
+                declaration_id: variableDeclarationListDeclaration.declaration_id,
+                variable_declaration_list_id : variableDeclarationListDeclaration.variable_declaration_list_id,
+                index : variableDeclarationListDeclaration.index
+            }
+        }
+    }
+    
+    /**
+     * Gets the declaration.
+     */
+    pub fn getDeclaration(self) -> VariableDeclaration {
+        for (variableDeclaration in VariableDeclaration(__all_data__)) {
+            if (self.declaration_id = variableDeclaration.id) {
+                return variableDeclaration
+            }
+        }
+    }
+    
+    /**
+     * Gets the variableDeclarationList.
+     */
+    pub fn getVariableDeclarationList(self) -> VariableDeclarationList {
+        for (variableDeclarationList in VariableDeclarationList(__all_data__)) {
+            if (self.variable_declaration_list_id = variableDeclarationList.id) {
+                return variableDeclarationList
+            }
+        }
+    }
+    
+    /**
+     * Gets the index.
+     */
+    pub fn getIndex(self) -> int {
+        return self.index
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.declaration_id
+    }
+    
+}
+
+/**
+ * A StructDeclaration
+ */
+schema StructDeclaration extends ClassLikeDeclaration {
+}
+
+impl StructDeclaration {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *StructDeclaration {
+        for (fa in ClassLikeDeclaration(db)) {
+            for (son in StructDeclarationDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield StructDeclaration {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * trans to DeclarationStatement to use func.
+     */
+    pub fn toDeclarationStatement(self) -> DeclarationStatement {
+        for (declarationStatement in DeclarationStatement(__all_data__)) {
+            if (self.id = declarationStatement.id) {
+                return declarationStatement
+            }
+        }
+    }
+    
+    /**
+     * Get the nameNode.
+     */
+    pub fn getNameNode(self) -> Identifier {
+        for (structDeclarationNameNode in StructDeclarationNameNode(__all_data__)) {
+            if (structDeclarationNameNode.struct_declaration_id = self.id) {
+                return structDeclarationNameNode.getNameNode()
+            }
+        }
+    }
+    
+    /**
+     * Get the modifiers.
+     */
+    pub fn getModifiers(self) -> *Modifier {
+        for (modifier in Modifier(__all_data__)) {
+            if (modifier.parent_id = self.id) {
+                yield modifier
+            }
+        }
+    }
+    
+}
+
+/**
+ * A StructDeclarationNameNode
+ */
+schema StructDeclarationNameNode {
+    @primary struct_declaration_id: int,
+    name_node_id: int
+}
+
+impl StructDeclarationNameNode {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *StructDeclarationNameNode {
+        for (structDeclarationNameNode in StructDeclarationNameNodeDO(db)) {
+            yield StructDeclarationNameNode {
+                struct_declaration_id: structDeclarationNameNode.struct_declaration_id,
+                name_node_id : structDeclarationNameNode.name_node_id
+            }
+        }
+    }
+    
+    /**
+     * Gets the structDeclaration.
+     */
+    pub fn getStructDeclaration(self) -> StructDeclaration {
+        for (structDeclaration in StructDeclaration(__all_data__)) {
+            if (self.struct_declaration_id = structDeclaration.id) {
+                return structDeclaration
+            }
+        }
+    }
+    
+    /**
+     * Gets the nameNode.
+     */
+    pub fn getNameNode(self) -> Identifier {
+        for (identifier in Identifier(__all_data__)) {
+            if (self.name_node_id = identifier.id) {
+                return identifier
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.struct_declaration_id
+    }
+    
+}
+
+/**
+ * A InterfaceDeclaration
+ */
+schema InterfaceDeclaration extends DeclarationStatement {
+    name_node_id: int
+}
+
+impl InterfaceDeclaration {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *InterfaceDeclaration {
+        for (fa in DeclarationStatement(db)) {
+            for (son in InterfaceDeclarationDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield InterfaceDeclaration {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        name_node_id : son.name_node_id
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the nameNode.
+     */
+    pub fn getNameNode(self) -> Identifier {
+        for (identifier in Identifier(__all_data__)) {
+            if (self.name_node_id = identifier.id) {
+                return identifier
+            }
+        }
+    }
+    
+    /**
+     * Get the typeParameter.
+     */
+    pub fn getTypeParameter(self) -> *TypeParameter {
+        for (interfaceDeclarationTypeParameter in InterfaceDeclarationTypeParameter(__all_data__)) {
+            if (interfaceDeclarationTypeParameter.interface_declaration_id = self.id) {
+                yield interfaceDeclarationTypeParameter.getTypeParameter()
+            }
+        }
+    }
+    
+    /**
+     * Get the member.
+     */
+    pub fn getMember(self) -> *TypeElement {
+        for (interfaceDeclarationMember in InterfaceDeclarationMember(__all_data__)) {
+            if (interfaceDeclarationMember.interface_declaration_id = self.id) {
+                yield interfaceDeclarationMember.getMember()
+            }
+        }
+    }
+    
+    /**
+     * Get the modifiers.
+     */
+    pub fn getModifiers(self) -> *Modifier {
+        for (modifier in Modifier(__all_data__)) {
+            if (modifier.parent_id = self.id) {
+                yield modifier
+            }
+        }
+    }
+    
+    /**
+     * Get the heritageClauses.
+     */
+    pub fn getHeritageClauses(self) -> *HeritageClause {
+        for (heritageClause in HeritageClause(__all_data__)) {
+            if (heritageClause.parent_id = self.id) {
+                yield heritageClause
+            }
+        }
+    }
+    
+}
+
+/**
+ * A InterfaceDeclarationTypeParameter
+ */
+schema InterfaceDeclarationTypeParameter {
+    @primary type_parameter_id: int,
+    interface_declaration_id: int,
+    index: int
+}
+
+impl InterfaceDeclarationTypeParameter {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *InterfaceDeclarationTypeParameter {
+        for (interfaceDeclarationTypeParameter in InterfaceDeclarationTypeParameterDO(db)) {
+            yield InterfaceDeclarationTypeParameter {
+                type_parameter_id: interfaceDeclarationTypeParameter.type_parameter_id,
+                interface_declaration_id : interfaceDeclarationTypeParameter.interface_declaration_id,
+                index : interfaceDeclarationTypeParameter.index
+            }
+        }
+    }
+    
+    /**
+     * Gets the typeParameter.
+     */
+    pub fn getTypeParameter(self) -> TypeParameter {
+        for (typeParameter in TypeParameter(__all_data__)) {
+            if (self.type_parameter_id = typeParameter.id) {
+                return typeParameter
+            }
+        }
+    }
+    
+    /**
+     * Gets the interfaceDeclaration.
+     */
+    pub fn getInterfaceDeclaration(self) -> InterfaceDeclaration {
+        for (interfaceDeclaration in InterfaceDeclaration(__all_data__)) {
+            if (self.interface_declaration_id = interfaceDeclaration.id) {
+                return interfaceDeclaration
+            }
+        }
+    }
+    
+    /**
+     * Gets the index.
+     */
+    pub fn getIndex(self) -> int {
+        return self.index
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.type_parameter_id
+    }
+    
+}
+
+/**
+ * A InterfaceDeclarationMember
+ */
+schema InterfaceDeclarationMember {
+    @primary member_id: int,
+    interface_declaration_id: int,
+    index: int
+}
+
+impl InterfaceDeclarationMember {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *InterfaceDeclarationMember {
+        for (interfaceDeclarationMember in InterfaceDeclarationMemberDO(db)) {
+            yield InterfaceDeclarationMember {
+                member_id: interfaceDeclarationMember.member_id,
+                interface_declaration_id : interfaceDeclarationMember.interface_declaration_id,
+                index : interfaceDeclarationMember.index
+            }
+        }
+    }
+    
+    /**
+     * Gets the member.
+     */
+    pub fn getMember(self) -> TypeElement {
+        for (typeElement in TypeElement(__all_data__)) {
+            if (self.member_id = typeElement.id) {
+                return typeElement
+            }
+        }
+    }
+    
+    /**
+     * Gets the interfaceDeclaration.
+     */
+    pub fn getInterfaceDeclaration(self) -> InterfaceDeclaration {
+        for (interfaceDeclaration in InterfaceDeclaration(__all_data__)) {
+            if (self.interface_declaration_id = interfaceDeclaration.id) {
+                return interfaceDeclaration
+            }
+        }
+    }
+    
+    /**
+     * Gets the index.
+     */
+    pub fn getIndex(self) -> int {
+        return self.index
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.member_id
+    }
+    
+}
+
+/**
+ * A TypeAliasDeclaration
+ */
+schema TypeAliasDeclaration extends DeclarationStatement {
+    name_node_id: int,
+    type_node_id: int
+}
+
+impl TypeAliasDeclaration {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *TypeAliasDeclaration {
+        for (fa in DeclarationStatement(db)) {
+            for (son in TypeAliasDeclarationDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield TypeAliasDeclaration {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        name_node_id : son.name_node_id,
+                        type_node_id : son.type_node_id
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the nameNode.
+     */
+    pub fn getNameNode(self) -> Identifier {
+        for (identifier in Identifier(__all_data__)) {
+            if (self.name_node_id = identifier.id) {
+                return identifier
+            }
+        }
+    }
+    
+    /**
+     * Gets the typeNode.
+     */
+    pub fn getTypeNode(self) -> TypeNode {
+        for (typeNode in TypeNode(__all_data__)) {
+            if (self.type_node_id = typeNode.id) {
+                return typeNode
+            }
+        }
+    }
+    
+    /**
+     * Get the typeParameter.
+     */
+    pub fn getTypeParameter(self) -> *TypeParameter {
+        for (typeAliasDeclarationTypeParameter in TypeAliasDeclarationTypeParameter(__all_data__)) {
+            if (typeAliasDeclarationTypeParameter.type_alias_declaration_id = self.id) {
+                yield typeAliasDeclarationTypeParameter.getTypeParameter()
+            }
+        }
+    }
+    
+    /**
+     * Get the modifiers.
+     */
+    pub fn getModifiers(self) -> *Modifier {
+        for (modifier in Modifier(__all_data__)) {
+            if (modifier.parent_id = self.id) {
+                yield modifier
+            }
+        }
+    }
+    
+}
+
+/**
+ * A TypeAliasDeclarationTypeParameter
+ */
+schema TypeAliasDeclarationTypeParameter {
+    @primary type_parameter_id: int,
+    type_alias_declaration_id: int,
+    index: int
+}
+
+impl TypeAliasDeclarationTypeParameter {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *TypeAliasDeclarationTypeParameter {
+        for (typeAliasDeclarationTypeParameter in TypeAliasDeclarationTypeParameterDO(db)) {
+            yield TypeAliasDeclarationTypeParameter {
+                type_parameter_id: typeAliasDeclarationTypeParameter.type_parameter_id,
+                type_alias_declaration_id : typeAliasDeclarationTypeParameter.type_alias_declaration_id,
+                index : typeAliasDeclarationTypeParameter.index
+            }
+        }
+    }
+    
+    /**
+     * Gets the typeParameter.
+     */
+    pub fn getTypeParameter(self) -> TypeParameter {
+        for (typeParameter in TypeParameter(__all_data__)) {
+            if (self.type_parameter_id = typeParameter.id) {
+                return typeParameter
+            }
+        }
+    }
+    
+    /**
+     * Gets the typeAliasDeclaration.
+     */
+    pub fn getTypeAliasDeclaration(self) -> TypeAliasDeclaration {
+        for (typeAliasDeclaration in TypeAliasDeclaration(__all_data__)) {
+            if (self.type_alias_declaration_id = typeAliasDeclaration.id) {
+                return typeAliasDeclaration
+            }
+        }
+    }
+    
+    /**
+     * Gets the index.
+     */
+    pub fn getIndex(self) -> int {
+        return self.index
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.type_parameter_id
+    }
+    
+}
+
+/**
+ * A EnumDeclaration
+ */
+schema EnumDeclaration extends DeclarationStatement {
+    name_node_id: int
+}
+
+impl EnumDeclaration {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *EnumDeclaration {
+        for (fa in DeclarationStatement(db)) {
+            for (son in EnumDeclarationDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield EnumDeclaration {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        name_node_id : son.name_node_id
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the nameNode.
+     */
+    pub fn getNameNode(self) -> Identifier {
+        for (identifier in Identifier(__all_data__)) {
+            if (self.name_node_id = identifier.id) {
+                return identifier
+            }
+        }
+    }
+    
+    /**
+     * Get the modifiers.
+     */
+    pub fn getModifiers(self) -> *Modifier {
+        for (modifier in Modifier(__all_data__)) {
+            if (modifier.parent_id = self.id) {
+                yield modifier
+            }
+        }
+    }
+    
+    /**
+     * Get the members.
+     */
+    pub fn getMembers(self) -> *EnumMember {
+        for (enumMember in EnumMember(__all_data__)) {
+            if (enumMember.parent_id = self.id) {
+                yield enumMember
+            }
+        }
+    }
+    
+
+    /**
+     * Gets the identifier this EnumDeclaration.
+     */
+    pub fn getIdentifier(self) -> Identifier {
+        return self.getNameNode() 
+    }
+}
+
+/**
+ * A ModuleDeclaration
+ */
+schema ModuleDeclaration extends DeclarationStatement {
+    name_node_id: int
+}
+
+impl ModuleDeclaration {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ModuleDeclaration {
+        for (fa in DeclarationStatement(db)) {
+            for (son in ModuleDeclarationDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield ModuleDeclaration {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        name_node_id : son.name_node_id
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the nameNode.
+     */
+    pub fn getNameNode(self) -> ModuleName {
+        for (moduleName in ModuleName(__all_data__)) {
+            if (self.name_node_id = moduleName.id) {
+                return moduleName
+            }
+        }
+    }
+    
+    /**
+     * Get the body.
+     */
+    pub fn getBody(self) -> ModuleBody {
+        for (moduleDeclarationBody in ModuleDeclarationBody(__all_data__)) {
+            if (moduleDeclarationBody.module_declaration_id = self.id) {
+                return moduleDeclarationBody.getBody()
+            }
+        }
+    }
+    
+    /**
+     * Get the modifiers.
+     */
+    pub fn getModifiers(self) -> *Modifier {
+        for (modifier in Modifier(__all_data__)) {
+            if (modifier.parent_id = self.id) {
+                yield modifier
+            }
+        }
+    }
+    
+}
+
+/**
+ * A ModuleDeclarationBody
+ */
+schema ModuleDeclarationBody {
+    @primary module_declaration_id: int,
+    body_id: int
+}
+
+impl ModuleDeclarationBody {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ModuleDeclarationBody {
+        for (moduleDeclarationBody in ModuleDeclarationBodyDO(db)) {
+            yield ModuleDeclarationBody {
+                module_declaration_id: moduleDeclarationBody.module_declaration_id,
+                body_id : moduleDeclarationBody.body_id
+            }
+        }
+    }
+    
+    /**
+     * Gets the moduleDeclaration.
+     */
+    pub fn getModuleDeclaration(self) -> ModuleDeclaration {
+        for (moduleDeclaration in ModuleDeclaration(__all_data__)) {
+            if (self.module_declaration_id = moduleDeclaration.id) {
+                return moduleDeclaration
+            }
+        }
+    }
+    
+    /**
+     * Gets the body.
+     */
+    pub fn getBody(self) -> ModuleBody {
+        for (moduleBody in ModuleBody(__all_data__)) {
+            if (self.body_id = moduleBody.id) {
+                return moduleBody
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.module_declaration_id
+    }
+    
+}
+
+/**
+ * A ImportDeclaration
+ */
+schema ImportDeclaration extends DeclarationStatement {
+    module_specifier_id: int
+}
+
+impl ImportDeclaration {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ImportDeclaration {
+        for (fa in DeclarationStatement(db)) {
+            for (son in ImportDeclarationDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield ImportDeclaration {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        module_specifier_id : son.module_specifier_id
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the moduleSpecifier.
+     */
+    pub fn getModuleSpecifier(self) -> StringLiteral {
+        for (stringLiteral in StringLiteral(__all_data__)) {
+            if (self.module_specifier_id = stringLiteral.id) {
+                return stringLiteral
+            }
+        }
+    }
+    
+    /**
+     * Get the assertClause.
+     */
+    pub fn getAssertClause(self) -> AssertClause {
+        for (importDeclarationAssertClause in ImportDeclarationAssertClause(__all_data__)) {
+            if (importDeclarationAssertClause.import_declaration_id = self.id) {
+                return importDeclarationAssertClause.getAssertClause()
+            }
+        }
+    }
+    
+    /**
+     * Get the modifiers.
+     */
+    pub fn getModifiers(self) -> *Modifier {
+        for (modifier in Modifier(__all_data__)) {
+            if (modifier.parent_id = self.id) {
+                yield modifier
+            }
+        }
+    }
+    
+    /**
+     * Get the importClause.
+     */
+    pub fn getImportClause(self) -> ImportClause {
+        for (importClause in ImportClause(__all_data__)) {
+            if (importClause.parent_id = self.id) {
+                return importClause
+            }
+        }
+    }
+    
+}
+
+/**
+ * A ImportDeclarationAssertClause
+ */
+schema ImportDeclarationAssertClause {
+    @primary import_declaration_id : int,
+    assert_clause_id : int
+}
+
+impl ImportDeclarationAssertClause {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ImportDeclarationAssertClause {
+        for (importDeclarationAssertClause in ImportDeclarationAssertClauseDO(db)) {
+            yield ImportDeclarationAssertClause {
+                import_declaration_id : importDeclarationAssertClause.import_declaration_id,
+                assert_clause_id : importDeclarationAssertClause.assert_clause_id
+            }
+        }
+    }
+    
+    /**
+     * Gets the importDeclaration.
+     */
+    pub fn getImportDeclaration(self) -> ImportDeclaration {
+        for (importDeclaration in ImportDeclaration(__all_data__)) {
+            if (self.import_declaration_id = importDeclaration.id) {
+                return importDeclaration
+            }
+        }
+    }
+    
+    /**
+     * Gets the assertClause.
+     */
+    pub fn getAssertClause(self) -> AssertClause {
+        for (assertClause in AssertClause(__all_data__)) {
+            if (self.assert_clause_id = assertClause.id) {
+                return assertClause
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.import_declaration_id
+    }
+    
+}
+
+/**
+ * A CallSiteDeclaration
+ */
+schema CallSiteDeclaration {
+    @primary id: int,
+    call_site_id: int,
+    declaration_id: int
+}
+
+impl CallSiteDeclaration {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *CallSiteDeclaration {
+        for (callSiteDeclaration in CallSiteDeclarationDO(db)) {
+            yield CallSiteDeclaration {
+                id : callSiteDeclaration.id,
+                call_site_id : callSiteDeclaration.call_site_id,
+                declaration_id : callSiteDeclaration.declaration_id
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the callSite.
+     */
+    pub fn getCallSite(self) -> MayInvokeExpression {
+        for (mayInvokeExpression in MayInvokeExpression(__all_data__)) {
+            if (self.call_site_id = mayInvokeExpression.id) {
+                return mayInvokeExpression
+            }
+        }
+    }
+
+    /**
+     * Gets the Declaration.
+     */
+    pub fn getDeclaration(self) -> SignatureDeclaration {
+        for (signatureDeclaration in SignatureDeclaration(__all_data__)) {
+            if (self.declaration_id = signatureDeclaration.id) {
+                return signatureDeclaration
+            }
+        }
+    }
+    
+}
+
+/**
+ * This type consists of the following types: [Identifier, PrivateIdentifier, NumericLiteral, ComputedPropertyName, ElementAccessExpression, PropertyAccessExpression, StringLiteral, NoSubstitutionTemplateLiteral, ObjectBindingPattern, ArrayBindingPattern]
+ */
+schema DeclarationName extends AstNode {
+}
+
+impl DeclarationName {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *DeclarationName {
+        for (identifier in Identifier(db)) {
+            yield DeclarationName {
+                id : identifier.id,
+                kind : identifier.kind,
+                parent_id : identifier.parent_id,
+                parent_kind : identifier.parent_kind,
+                index : identifier.index,
+                location_id : identifier.location_id,
+            }
+        }
+        for (privateIdentifier in PrivateIdentifier(db)) {
+            yield DeclarationName {
+                id : privateIdentifier.id,
+                kind : privateIdentifier.kind,
+                parent_id : privateIdentifier.parent_id,
+                parent_kind : privateIdentifier.parent_kind,
+                index : privateIdentifier.index,
+                location_id : privateIdentifier.location_id,
+            }
+        }
+        for (numericLiteral in NumericLiteral(db)) {
+            yield DeclarationName {
+                id : numericLiteral.id,
+                kind : numericLiteral.kind,
+                parent_id : numericLiteral.parent_id,
+                parent_kind : numericLiteral.parent_kind,
+                index : numericLiteral.index,
+                location_id : numericLiteral.location_id,
+            }
+        }
+        for (computedPropertyName in ComputedPropertyName(db)) {
+            yield DeclarationName {
+                id : computedPropertyName.id,
+                kind : computedPropertyName.kind,
+                parent_id : computedPropertyName.parent_id,
+                parent_kind : computedPropertyName.parent_kind,
+                index : computedPropertyName.index,
+                location_id : computedPropertyName.location_id,
+            }
+        }
+        for (elementAccessExpression in ElementAccessExpression(db)) {
+            yield DeclarationName {
+                id : elementAccessExpression.id,
+                kind : elementAccessExpression.kind,
+                parent_id : elementAccessExpression.parent_id,
+                parent_kind : elementAccessExpression.parent_kind,
+                index : elementAccessExpression.index,
+                location_id : elementAccessExpression.location_id,
+            }
+        }
+        for (propertyAccessExpression in PropertyAccessExpression(db)) {
+            yield DeclarationName {
+                id : propertyAccessExpression.id,
+                kind : propertyAccessExpression.kind,
+                parent_id : propertyAccessExpression.parent_id,
+                parent_kind : propertyAccessExpression.parent_kind,
+                index : propertyAccessExpression.index,
+                location_id : propertyAccessExpression.location_id,
+            }
+        }
+        for (stringLiteral in StringLiteral(db)) {
+            yield DeclarationName {
+                id : stringLiteral.id,
+                kind : stringLiteral.kind,
+                parent_id : stringLiteral.parent_id,
+                parent_kind : stringLiteral.parent_kind,
+                index : stringLiteral.index,
+                location_id : stringLiteral.location_id,
+            }
+        }
+        for (noSubstitutionTemplateLiteral in NoSubstitutionTemplateLiteral(db)) {
+            yield DeclarationName {
+                id : noSubstitutionTemplateLiteral.id,
+                kind : noSubstitutionTemplateLiteral.kind,
+                parent_id : noSubstitutionTemplateLiteral.parent_id,
+                parent_kind : noSubstitutionTemplateLiteral.parent_kind,
+                index : noSubstitutionTemplateLiteral.index,
+                location_id : noSubstitutionTemplateLiteral.location_id,
+            }
+        }
+        for (objectBindingPattern in ObjectBindingPattern(db)) {
+            yield DeclarationName {
+                id : objectBindingPattern.id,
+                kind : objectBindingPattern.kind,
+                parent_id : objectBindingPattern.parent_id,
+                parent_kind : objectBindingPattern.parent_kind,
+                index : objectBindingPattern.index,
+                location_id : objectBindingPattern.location_id,
+            }
+        }
+        for (arrayBindingPattern in ArrayBindingPattern(db)) {
+            yield DeclarationName {
+                id : arrayBindingPattern.id,
+                kind : arrayBindingPattern.kind,
+                parent_id : arrayBindingPattern.parent_id,
+                parent_kind : arrayBindingPattern.parent_kind,
+                index : arrayBindingPattern.index,
+                location_id : arrayBindingPattern.location_id,
+            }
+        }
+    }
+
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * trans to Identifier
+     */
+    pub fn toIdentifier(self) -> Identifier {
+        for (identifier in Identifier(__all_data__)) {
+            if (identifier.key_eq(self)) {
+                return identifier
+            }
+        }
+    }
+    
+    /**
+     * trans to PrivateIdentifier
+     */
+    pub fn toPrivateIdentifier(self) -> PrivateIdentifier {
+        for (privateIdentifier in PrivateIdentifier(__all_data__)) {
+            if (privateIdentifier.key_eq(self)) {
+                return privateIdentifier
+            }
+        }
+    }
+    
+    /**
+     * trans to NumericLiteral
+     */
+    pub fn toNumericLiteral(self) -> NumericLiteral {
+        for (numericLiteral in NumericLiteral(__all_data__)) {
+            if (numericLiteral.key_eq(self)) {
+                return numericLiteral
+            }
+        }
+    }
+    
+    /**
+     * trans to ComputedPropertyName
+     */
+    pub fn toComputedPropertyName(self) -> ComputedPropertyName {
+        for (computedPropertyName in ComputedPropertyName(__all_data__)) {
+            if (computedPropertyName.key_eq(self)) {
+                return computedPropertyName
+            }
+        }
+    }
+    
+    /**
+     * trans to ElementAccessExpression
+     */
+    pub fn toElementAccessExpression(self) -> ElementAccessExpression {
+        for (elementAccessExpression in ElementAccessExpression(__all_data__)) {
+            if (elementAccessExpression.key_eq(self)) {
+                return elementAccessExpression
+            }
+        }
+    }
+    
+    /**
+     * trans to PropertyAccessExpression
+     */
+    pub fn toPropertyAccessExpression(self) -> PropertyAccessExpression {
+        for (propertyAccessExpression in PropertyAccessExpression(__all_data__)) {
+            if (propertyAccessExpression.key_eq(self)) {
+                return propertyAccessExpression
+            }
+        }
+    }
+    
+    /**
+     * trans to StringLiteral
+     */
+    pub fn toStringLiteral(self) -> StringLiteral {
+        for (stringLiteral in StringLiteral(__all_data__)) {
+            if (stringLiteral.key_eq(self)) {
+                return stringLiteral
+            }
+        }
+    }
+    
+    /**
+     * trans to NoSubstitutionTemplateLiteral
+     */
+    pub fn toNoSubstitutionTemplateLiteral(self) -> NoSubstitutionTemplateLiteral {
+        for (noSubstitutionTemplateLiteral in NoSubstitutionTemplateLiteral(__all_data__)) {
+            if (noSubstitutionTemplateLiteral.key_eq(self)) {
+                return noSubstitutionTemplateLiteral
+            }
+        }
+    }
+    
+    /**
+     * trans to ObjectBindingPattern
+     */
+    pub fn toObjectBindingPattern(self) -> ObjectBindingPattern {
+        for (objectBindingPattern in ObjectBindingPattern(__all_data__)) {
+            if (objectBindingPattern.key_eq(self)) {
+                return objectBindingPattern
+            }
+        }
+    }
+    
+    /**
+     * trans to ArrayBindingPattern
+     */
+    pub fn toArrayBindingPattern(self) -> ArrayBindingPattern {
+        for (arrayBindingPattern in ArrayBindingPattern(__all_data__)) {
+            if (arrayBindingPattern.key_eq(self)) {
+                return arrayBindingPattern
+            }
+        }
+    }
+    
+
+    /**
+     * Get the actual name of DeclarationName
+     */
+    pub fn getName(self) -> string {
+        return self.toIdentifier().getName()
+        return self.toPrivateIdentifier().getName()
+        return self.toNumericLiteral().getValue()
+        // TODO: ElementAccessExpression
+        return self.toPropertyAccessExpression().getNameNode().getName()
+        return self.toStringLiteral().getValue()
+        // TODO: NoSubstitutionTemplateLiteral, ObjectBindingPattern, ArrayBindingPattern
+    }
+}
+
+/**
+ * This type consists of the following types: [GetAccessor, SetAccessor]
+ */
+schema AccessorDeclaration extends AstNode {
+}
+
+impl AccessorDeclaration {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *AccessorDeclaration {
+        for (getAccessor in GetAccessor(db)) {
+            yield AccessorDeclaration {
+                id : getAccessor.id,
+                kind : getAccessor.kind,
+                parent_id : getAccessor.parent_id,
+                parent_kind : getAccessor.parent_kind,
+                index : getAccessor.index,
+                location_id : getAccessor.location_id,
+            }
+        }
+        for (setAccessor in SetAccessor(db)) {
+            yield AccessorDeclaration {
+                id : setAccessor.id,
+                kind : setAccessor.kind,
+                parent_id : setAccessor.parent_id,
+                parent_kind : setAccessor.parent_kind,
+                index : setAccessor.index,
+                location_id : setAccessor.location_id,
+            }
+        }
+    }
+
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * trans to GetAccessor
+     */
+    pub fn toGetAccessor(self) -> GetAccessor {
+        for (getAccessor in GetAccessor(__all_data__)) {
+            if (getAccessor.key_eq(self)) {
+                return getAccessor
+            }
+        }
+    }
+    
+    /**
+     * trans to SetAccessor
+     */
+    pub fn toSetAccessor(self) -> SetAccessor {
+        for (setAccessor in SetAccessor(__all_data__)) {
+            if (setAccessor.key_eq(self)) {
+                return setAccessor
+            }
+        }
+    }
+    
+}
+
+/**
+ * This type consists of the following types: [ObjectBindingPattern, ArrayBindingPattern]
+ */
+schema BindingPattern extends AstNode {
+}
+
+impl BindingPattern {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *BindingPattern {
+        for (objectBindingPattern in ObjectBindingPattern(db)) {
+            yield BindingPattern {
+                id : objectBindingPattern.id,
+                kind : objectBindingPattern.kind,
+                parent_id : objectBindingPattern.parent_id,
+                parent_kind : objectBindingPattern.parent_kind,
+                index : objectBindingPattern.index,
+                location_id : objectBindingPattern.location_id,
+            }
+        }
+        for (arrayBindingPattern in ArrayBindingPattern(db)) {
+            yield BindingPattern {
+                id : arrayBindingPattern.id,
+                kind : arrayBindingPattern.kind,
+                parent_id : arrayBindingPattern.parent_id,
+                parent_kind : arrayBindingPattern.parent_kind,
+                index : arrayBindingPattern.index,
+                location_id : arrayBindingPattern.location_id,
+            }
+        }
+    }
+
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * trans to ObjectBindingPattern
+     */
+    pub fn toObjectBindingPattern(self) -> ObjectBindingPattern {
+        for (objectBindingPattern in ObjectBindingPattern(__all_data__)) {
+            if (objectBindingPattern.key_eq(self)) {
+                return objectBindingPattern
+            }
+        }
+    }
+    
+    /**
+     * trans to ArrayBindingPattern
+     */
+    pub fn toArrayBindingPattern(self) -> ArrayBindingPattern {
+        for (arrayBindingPattern in ArrayBindingPattern(__all_data__)) {
+            if (arrayBindingPattern.key_eq(self)) {
+                return arrayBindingPattern
+            }
+        }
+    }
+    
+
+    pub fn getElement(self) -> *ArrayBindingElement {
+        yield self.toArrayBindingPattern().getElement()
+        for (element in self.toObjectBindingPattern().getElement()) {
+            for (res in ArrayBindingElement(__all_data__)) {
+                if (element.key_eq(res)) {
+                    yield res
+                }
+            }
+        }
+    }
+}
+
+/**
+ * This type consists of the following types: [BindingElement, OmittedExpression]
+ */
+schema ArrayBindingElement extends AstNode {
+}
+
+impl ArrayBindingElement {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ArrayBindingElement {
+        for (bindingElement in BindingElement(db)) {
+            yield ArrayBindingElement {
+                id : bindingElement.id,
+                kind : bindingElement.kind,
+                parent_id : bindingElement.parent_id,
+                parent_kind : bindingElement.parent_kind,
+                index : bindingElement.index,
+                location_id : bindingElement.location_id,
+            }
+        }
+        for (omittedExpression in OmittedExpression(db)) {
+            yield ArrayBindingElement {
+                id : omittedExpression.id,
+                kind : omittedExpression.kind,
+                parent_id : omittedExpression.parent_id,
+                parent_kind : omittedExpression.parent_kind,
+                index : omittedExpression.index,
+                location_id : omittedExpression.location_id,
+            }
+        }
+    }
+
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * trans to BindingElement
+     */
+    pub fn toBindingElement(self) -> BindingElement {
+        for (bindingElement in BindingElement(__all_data__)) {
+            if (bindingElement.key_eq(self)) {
+                return bindingElement
+            }
+        }
+    }
+    
+    /**
+     * trans to OmittedExpression
+     */
+    pub fn toOmittedExpression(self) -> OmittedExpression {
+        for (omittedExpression in OmittedExpression(__all_data__)) {
+            if (omittedExpression.key_eq(self)) {
+                return omittedExpression
+            }
+        }
+    }
+    
+}
+
+/**
+ * This type consists of the following types: [InterfaceDeclaration, ClassLikeDeclaration]
+ */
+schema InterfaceOrClassLikeDeclaration extends AstNode {
+}
+
+impl InterfaceOrClassLikeDeclaration {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *InterfaceOrClassLikeDeclaration {
+        for (interfaceDeclaration in InterfaceDeclaration(db)) {
+            yield InterfaceOrClassLikeDeclaration {
+                id : interfaceDeclaration.id,
+                kind : interfaceDeclaration.kind,
+                parent_id : interfaceDeclaration.parent_id,
+                parent_kind : interfaceDeclaration.parent_kind,
+                index : interfaceDeclaration.index,
+                location_id : interfaceDeclaration.location_id,
+            }
+        }
+        for (classLikeDeclaration in ClassLikeDeclaration(db)) {
+            yield InterfaceOrClassLikeDeclaration {
+                id : classLikeDeclaration.id,
+                kind : classLikeDeclaration.kind,
+                parent_id : classLikeDeclaration.parent_id,
+                parent_kind : classLikeDeclaration.parent_kind,
+                index : classLikeDeclaration.index,
+                location_id : classLikeDeclaration.location_id,
+            }
+        }
+    }
+
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * trans to InterfaceDeclaration
+     */
+    pub fn toInterfaceDeclaration(self) -> InterfaceDeclaration {
+        for (interfaceDeclaration in InterfaceDeclaration(__all_data__)) {
+            if (interfaceDeclaration.key_eq(self)) {
+                return interfaceDeclaration
+            }
+        }
+    }
+    
+    /**
+     * trans to ClassLikeDeclaration
+     */
+    pub fn toClassLikeDeclaration(self) -> ClassLikeDeclaration {
+        for (classLikeDeclaration in ClassLikeDeclaration(__all_data__)) {
+            if (classLikeDeclaration.key_eq(self)) {
+                return classLikeDeclaration
+            }
+        }
+    }
+    
+}
+
+/**
+ * This type consists of the following types: [ModuleBlock, ModuleDeclaration, Identifier]
+ */
+schema ModuleBody extends AstNode {
+}
+
+impl ModuleBody {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ModuleBody {
+        for (moduleBlock in ModuleBlock(db)) {
+            yield ModuleBody {
+                id : moduleBlock.id,
+                kind : moduleBlock.kind,
+                parent_id : moduleBlock.parent_id,
+                parent_kind : moduleBlock.parent_kind,
+                index : moduleBlock.index,
+                location_id : moduleBlock.location_id,
+            }
+        }
+        for (moduleDeclaration in ModuleDeclaration(db)) {
+            yield ModuleBody {
+                id : moduleDeclaration.id,
+                kind : moduleDeclaration.kind,
+                parent_id : moduleDeclaration.parent_id,
+                parent_kind : moduleDeclaration.parent_kind,
+                index : moduleDeclaration.index,
+                location_id : moduleDeclaration.location_id,
+            }
+        }
+        for (identifier in Identifier(db)) {
+            yield ModuleBody {
+                id : identifier.id,
+                kind : identifier.kind,
+                parent_id : identifier.parent_id,
+                parent_kind : identifier.parent_kind,
+                index : identifier.index,
+                location_id : identifier.location_id,
+            }
+        }
+    }
+
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * trans to ModuleBlock
+     */
+    pub fn toModuleBlock(self) -> ModuleBlock {
+        for (moduleBlock in ModuleBlock(__all_data__)) {
+            if (moduleBlock.key_eq(self)) {
+                return moduleBlock
+            }
+        }
+    }
+    
+    /**
+     * trans to ModuleDeclaration
+     */
+    pub fn toModuleDeclaration(self) -> ModuleDeclaration {
+        for (moduleDeclaration in ModuleDeclaration(__all_data__)) {
+            if (moduleDeclaration.key_eq(self)) {
+                return moduleDeclaration
+            }
+        }
+    }
+    
+    /**
+     * trans to Identifier
+     */
+    pub fn toIdentifier(self) -> Identifier {
+        for (identifier in Identifier(__all_data__)) {
+            if (identifier.key_eq(self)) {
+                return identifier
+            }
+        }
+    }
+    
+}
+
+/**
+ * This type consists of the following types: [ExternalModuleReference, Identifier, QualifiedName]
+ */
+schema ModuleReference extends AstNode {
+}
+
+impl ModuleReference {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ModuleReference {
+        for (externalModuleReference in ExternalModuleReference(db)) {
+            yield ModuleReference {
+                id : externalModuleReference.id,
+                kind : externalModuleReference.kind,
+                parent_id : externalModuleReference.parent_id,
+                parent_kind : externalModuleReference.parent_kind,
+                index : externalModuleReference.index,
+                location_id : externalModuleReference.location_id,
+            }
+        }
+        for (identifier in Identifier(db)) {
+            yield ModuleReference {
+                id : identifier.id,
+                kind : identifier.kind,
+                parent_id : identifier.parent_id,
+                parent_kind : identifier.parent_kind,
+                index : identifier.index,
+                location_id : identifier.location_id,
+            }
+        }
+        for (qualifiedName in QualifiedName(db)) {
+            yield ModuleReference {
+                id : qualifiedName.id,
+                kind : qualifiedName.kind,
+                parent_id : qualifiedName.parent_id,
+                parent_kind : qualifiedName.parent_kind,
+                index : qualifiedName.index,
+                location_id : qualifiedName.location_id,
+            }
+        }
+    }
+
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * trans to ExternalModuleReference
+     */
+    pub fn toExternalModuleReference(self) -> ExternalModuleReference {
+        for (externalModuleReference in ExternalModuleReference(__all_data__)) {
+            if (externalModuleReference.key_eq(self)) {
+                return externalModuleReference
+            }
+        }
+    }
+    
+    /**
+     * trans to Identifier
+     */
+    pub fn toIdentifier(self) -> Identifier {
+        for (identifier in Identifier(__all_data__)) {
+            if (identifier.key_eq(self)) {
+                return identifier
+            }
+        }
+    }
+    
+    /**
+     * trans to QualifiedName
+     */
+    pub fn toQualifiedName(self) -> QualifiedName {
+        for (qualifiedName in QualifiedName(__all_data__)) {
+            if (qualifiedName.key_eq(self)) {
+                return qualifiedName
+            }
+        }
+    }
+    
+}
+

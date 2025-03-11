@@ -1,0 +1,1090 @@
+/**
+ * A NamespaceExportDeclaration
+ */
+schema NamespaceExportDeclaration extends DeclarationStatement {
+    name_node_id: int
+}
+
+impl NamespaceExportDeclaration {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *NamespaceExportDeclaration {
+        for (fa in DeclarationStatement(db)) {
+            for (son in NamespaceExportDeclarationDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield NamespaceExportDeclaration {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        name_node_id : son.name_node_id
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the nameNode.
+     */
+    pub fn getNameNode(self) -> Identifier {
+        for (identifier in Identifier(__all_data__)) {
+            if (self.name_node_id = identifier.id) {
+                return identifier
+            }
+        }
+    }
+    
+}
+
+/**
+ * A ExternalModuleReference
+ */
+schema ExternalModuleReference extends AstNode {
+    expression_id: int
+}
+
+impl ExternalModuleReference {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ExternalModuleReference {
+        for (fa in AstNode(db)) {
+            for (son in ExternalModuleReferenceDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield ExternalModuleReference {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        expression_id : son.expression_id
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the expression.
+     */
+    pub fn getExpression(self) -> Expression {
+        for (expression in Expression(__all_data__)) {
+            if (self.expression_id = expression.id) {
+                return expression
+            }
+        }
+    }
+    
+}
+
+/**
+ * A ImportEqualsDeclaration
+ */
+schema ImportEqualsDeclaration extends DeclarationStatement {
+    name_node_id: int,
+    is_type_only: int,
+    module_reference_id: int
+}
+
+impl ImportEqualsDeclaration {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ImportEqualsDeclaration {
+        for (fa in DeclarationStatement(db)) {
+            for (son in ImportEqualsDeclarationDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield ImportEqualsDeclaration {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        name_node_id : son.name_node_id,
+                        is_type_only : son.is_type_only,
+                        module_reference_id : son.module_reference_id
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the nameNode.
+     */
+    pub fn getNameNode(self) -> Identifier {
+        for (identifier in Identifier(__all_data__)) {
+            if (self.name_node_id = identifier.id) {
+                return identifier
+            }
+        }
+    }
+    
+    /**
+     * Gets the ypeOnly.
+     */
+    pub fn IsTypeOnly(self) -> bool {
+        return self.is_type_only = 1
+    }
+    
+    /**
+     * Gets the moduleReference.
+     */
+    pub fn getModuleReference(self) -> ModuleReference {
+        for (moduleReference in ModuleReference(__all_data__)) {
+            if (self.module_reference_id = moduleReference.id) {
+                return moduleReference
+            }
+        }
+    }
+    
+    /**
+     * Get the modifiers.
+     */
+    pub fn getModifiers(self) -> *Modifier {
+        for (modifier in Modifier(__all_data__)) {
+            if (modifier.parent_id = self.id) {
+                yield modifier
+            }
+        }
+    }
+    
+}
+
+/**
+ * A NamespaceImport
+ */
+schema NamespaceImport extends Declaration {
+    name_node_id: int
+}
+
+impl NamespaceImport {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *NamespaceImport {
+        for (fa in Declaration(db)) {
+            for (son in NamespaceImportDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield NamespaceImport {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        name_node_id : son.name_node_id
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the nameNode.
+     */
+    pub fn getNameNode(self) -> Identifier {
+        for (identifier in Identifier(__all_data__)) {
+            if (self.name_node_id = identifier.id) {
+                return identifier
+            }
+        }
+    }
+    
+}
+
+/**
+ * A ImportSpecifier
+ */
+schema ImportSpecifier extends Declaration {
+    name_node_id: int,
+    is_type_only: int
+}
+
+impl ImportSpecifier {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ImportSpecifier {
+        for (fa in Declaration(db)) {
+            for (son in ImportSpecifierDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield ImportSpecifier {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        name_node_id : son.name_node_id,
+                        is_type_only : son.is_type_only
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the parent.
+     */
+    pub fn getParent(self) -> NamedImports {
+        for (namedImports in NamedImports(__all_data__)) {
+            if (self.parent_id = namedImports.id) {
+                return namedImports
+            }
+        }
+    }
+    
+    /**
+     * Gets the nameNode.
+     */
+    pub fn getNameNode(self) -> Identifier {
+        for (identifier in Identifier(__all_data__)) {
+            if (self.name_node_id = identifier.id) {
+                return identifier
+            }
+        }
+    }
+    
+    /**
+     * Gets the ypeOnly.
+     */
+    pub fn IsTypeOnly(self) -> bool {
+        return self.is_type_only = 1
+    }
+    
+    /**
+     * Get the propertyNameNode.
+     */
+    pub fn getPropertyNameNode(self) -> Identifier {
+        for (importSpecifierPropertyNameNode in ImportSpecifierPropertyNameNode(__all_data__)) {
+            if (importSpecifierPropertyNameNode.import_specifier_id = self.id) {
+                return importSpecifierPropertyNameNode.getPropertyNameNode()
+            }
+        }
+    }
+    
+}
+
+/**
+ * A ImportSpecifierPropertyNameNode
+ */
+schema ImportSpecifierPropertyNameNode {
+    @primary import_specifier_id: int,
+    property_name_node_id: int
+}
+
+impl ImportSpecifierPropertyNameNode {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ImportSpecifierPropertyNameNode {
+        for (importSpecifierPropertyNameNode in ImportSpecifierPropertyNameNodeDO(db)) {
+            yield ImportSpecifierPropertyNameNode {
+                import_specifier_id: importSpecifierPropertyNameNode.import_specifier_id,
+                property_name_node_id : importSpecifierPropertyNameNode.property_name_node_id
+            }
+        }
+    }
+    
+    /**
+     * Gets the importSpecifier.
+     */
+    pub fn getImportSpecifier(self) -> ImportSpecifier {
+        for (importSpecifier in ImportSpecifier(__all_data__)) {
+            if (self.import_specifier_id = importSpecifier.id) {
+                return importSpecifier
+            }
+        }
+    }
+    
+    /**
+     * Gets the propertyNameNode.
+     */
+    pub fn getPropertyNameNode(self) -> Identifier {
+        for (identifier in Identifier(__all_data__)) {
+            if (self.property_name_node_id = identifier.id) {
+                return identifier
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.import_specifier_id
+    }
+    
+}
+
+/**
+ * A NamedImports
+ */
+schema NamedImports extends AstNode {
+}
+
+impl NamedImports {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *NamedImports {
+        for (fa in AstNode(db)) {
+            for (son in NamedImportsDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield NamedImports {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Get the elements.
+     */
+    pub fn getElements(self) -> *ImportSpecifier {
+        for (importSpecifier in ImportSpecifier(__all_data__)) {
+            if (importSpecifier.parent_id = self.id) {
+                yield importSpecifier
+            }
+        }
+    }
+    
+}
+
+/**
+ * A ImportClauseNameNode
+ */
+schema ImportClauseNameNode {
+    @primary import_clause_id: int,
+    name_node_id: int
+}
+
+impl ImportClauseNameNode {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ImportClauseNameNode {
+        for (importClauseNameNode in ImportClauseNameNodeDO(db)) {
+            yield ImportClauseNameNode {
+                import_clause_id: importClauseNameNode.import_clause_id,
+                name_node_id : importClauseNameNode.name_node_id
+            }
+        }
+    }
+    
+    /**
+     * Gets the importClause.
+     */
+    pub fn getImportClause(self) -> ImportClause {
+        for (importClause in ImportClause(__all_data__)) {
+            if (self.import_clause_id = importClause.id) {
+                return importClause
+            }
+        }
+    }
+    
+    /**
+     * Gets the nameNode.
+     */
+    pub fn getNameNode(self) -> Identifier {
+        for (identifier in Identifier(__all_data__)) {
+            if (self.name_node_id = identifier.id) {
+                return identifier
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.import_clause_id
+    }
+    
+}
+
+/**
+ * A ImportClauseNamedBindings
+ */
+schema ImportClauseNamedBindings {
+    @primary import_clause_id: int,
+    named_bindings_id: int
+}
+
+impl ImportClauseNamedBindings {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ImportClauseNamedBindings {
+        for (importClauseNamedBindings in ImportClauseNamedBindingsDO(db)) {
+            yield ImportClauseNamedBindings {
+                import_clause_id: importClauseNamedBindings.import_clause_id,
+                named_bindings_id : importClauseNamedBindings.named_bindings_id
+            }
+        }
+    }
+    
+    /**
+     * Gets the importClause.
+     */
+    pub fn getImportClause(self) -> ImportClause {
+        for (importClause in ImportClause(__all_data__)) {
+            if (self.import_clause_id = importClause.id) {
+                return importClause
+            }
+        }
+    }
+    
+    /**
+     * Gets the namedBindings.
+     */
+    pub fn getNamedBindings(self) -> NamedImportBindings {
+        for (namedImportBindings in NamedImportBindings(__all_data__)) {
+            if (self.named_bindings_id = namedImportBindings.id) {
+                return namedImportBindings
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.import_clause_id
+    }
+    
+}
+
+/**
+ * A ExportSpecifier
+ */
+schema ExportSpecifier extends Declaration {
+    is_type_only: int,
+    name_node_id: int
+}
+
+impl ExportSpecifier {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ExportSpecifier {
+        for (fa in Declaration(db)) {
+            for (son in ExportSpecifierDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield ExportSpecifier {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        is_type_only : son.is_type_only,
+                        name_node_id : son.name_node_id
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the parent.
+     */
+    pub fn getParent(self) -> NamedExports {
+        for (namedExports in NamedExports(__all_data__)) {
+            if (self.parent_id = namedExports.id) {
+                return namedExports
+            }
+        }
+    }
+    
+    /**
+     * Gets the ypeOnly.
+     */
+    pub fn IsTypeOnly(self) -> bool {
+        return self.is_type_only = 1
+    }
+    
+    /**
+     * Gets the nameNode.
+     */
+    pub fn getNameNode(self) -> Identifier {
+        for (identifier in Identifier(__all_data__)) {
+            if (self.name_node_id = identifier.id) {
+                return identifier
+            }
+        }
+    }
+    
+    /**
+     * Get the propertyNameNode.
+     */
+    pub fn getPropertyNameNode(self) -> Identifier {
+        for (exportSpecifierPropertyNameNode in ExportSpecifierPropertyNameNode(__all_data__)) {
+            if (exportSpecifierPropertyNameNode.export_specifier_id = self.id) {
+                return exportSpecifierPropertyNameNode.getPropertyNameNode()
+            }
+        }
+    }
+    
+}
+
+/**
+ * A ExportSpecifierPropertyNameNode
+ */
+schema ExportSpecifierPropertyNameNode {
+    @primary export_specifier_id: int,
+    property_name_node_id: int
+}
+
+impl ExportSpecifierPropertyNameNode {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ExportSpecifierPropertyNameNode {
+        for (exportSpecifierPropertyNameNode in ExportSpecifierPropertyNameNodeDO(db)) {
+            yield ExportSpecifierPropertyNameNode {
+                export_specifier_id: exportSpecifierPropertyNameNode.export_specifier_id,
+                property_name_node_id : exportSpecifierPropertyNameNode.property_name_node_id
+            }
+        }
+    }
+    
+    /**
+     * Gets the exportSpecifier.
+     */
+    pub fn getExportSpecifier(self) -> ExportSpecifier {
+        for (exportSpecifier in ExportSpecifier(__all_data__)) {
+            if (self.export_specifier_id = exportSpecifier.id) {
+                return exportSpecifier
+            }
+        }
+    }
+    
+    /**
+     * Gets the propertyNameNode.
+     */
+    pub fn getPropertyNameNode(self) -> Identifier {
+        for (identifier in Identifier(__all_data__)) {
+            if (self.property_name_node_id = identifier.id) {
+                return identifier
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.export_specifier_id
+    }
+    
+}
+
+/**
+ * A NamedExports
+ */
+schema NamedExports extends AstNode {
+}
+
+impl NamedExports {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *NamedExports {
+        for (fa in AstNode(db)) {
+            for (son in NamedExportsDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield NamedExports {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Get the elements.
+     */
+    pub fn getElements(self) -> *ExportSpecifier {
+        for (exportSpecifier in ExportSpecifier(__all_data__)) {
+            if (exportSpecifier.parent_id = self.id) {
+                yield exportSpecifier
+            }
+        }
+    }
+    
+}
+
+/**
+ * A NamespaceExport
+ */
+schema NamespaceExport extends Declaration {
+    name_node_id: int
+}
+
+impl NamespaceExport {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *NamespaceExport {
+        for (fa in Declaration(db)) {
+            for (son in NamespaceExportDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield NamespaceExport {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        name_node_id : son.name_node_id
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the nameNode.
+     */
+    pub fn getNameNode(self) -> Identifier {
+        for (identifier in Identifier(__all_data__)) {
+            if (self.name_node_id = identifier.id) {
+                return identifier
+            }
+        }
+    }
+    
+}
+
+/**
+ * A ExportDeclaration
+ */
+schema ExportDeclaration extends DeclarationStatement {
+    is_type_only: int
+}
+
+impl ExportDeclaration {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ExportDeclaration {
+        for (fa in DeclarationStatement(db)) {
+            for (son in ExportDeclarationDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield ExportDeclaration {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        is_type_only : son.is_type_only
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the ypeOnly.
+     */
+    pub fn IsTypeOnly(self) -> bool {
+        return self.is_type_only = 1
+    }
+    
+    /**
+     * Get the exportClause.
+     */
+    pub fn getExportClause(self) -> NamedExportBindings {
+        for (exportDeclarationExportClause in ExportDeclarationExportClause(__all_data__)) {
+            if (exportDeclarationExportClause.export_declaration_id = self.id) {
+                return exportDeclarationExportClause.getExportClause()
+            }
+        }
+    }
+    
+    /**
+     * Get the moduleSpecifier.
+     */
+    pub fn getModuleSpecifier(self) -> StringLiteral {
+        for (exportDeclarationModuleSpecifier in ExportDeclarationModuleSpecifier(__all_data__)) {
+            if (exportDeclarationModuleSpecifier.export_declaration_id = self.id) {
+                return exportDeclarationModuleSpecifier.getModuleSpecifier()
+            }
+        }
+    }
+    
+    /**
+     * Get the assertClause.
+     */
+    pub fn getAssertClause(self) -> int {
+        for (exportDeclarationAssertClause in ExportDeclarationAssertClause(__all_data__)) {
+            if (exportDeclarationAssertClause.export_declaration_id = self.id) {
+                return exportDeclarationAssertClause.getAssertClause()
+            }
+        }
+    }
+    
+    /**
+     * Get the modifiers.
+     */
+    pub fn getModifiers(self) -> *Modifier {
+        for (modifier in Modifier(__all_data__)) {
+            if (modifier.parent_id = self.id) {
+                yield modifier
+            }
+        }
+    }
+    
+}
+
+/**
+ * A ExportDeclarationExportClause
+ */
+schema ExportDeclarationExportClause {
+    @primary export_declaration_id: int,
+    export_clause_id: int
+}
+
+impl ExportDeclarationExportClause {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ExportDeclarationExportClause {
+        for (exportDeclarationExportClause in ExportDeclarationExportClauseDO(db)) {
+            yield ExportDeclarationExportClause {
+                export_declaration_id: exportDeclarationExportClause.export_declaration_id,
+                export_clause_id : exportDeclarationExportClause.export_clause_id
+            }
+        }
+    }
+    
+    /**
+     * Gets the exportDeclaration.
+     */
+    pub fn getExportDeclaration(self) -> ExportDeclaration {
+        for (exportDeclaration in ExportDeclaration(__all_data__)) {
+            if (self.export_declaration_id = exportDeclaration.id) {
+                return exportDeclaration
+            }
+        }
+    }
+    
+    /**
+     * Gets the exportClause.
+     */
+    pub fn getExportClause(self) -> NamedExportBindings {
+        for (namedExportBindings in NamedExportBindings(__all_data__)) {
+            if (self.export_clause_id = namedExportBindings.id) {
+                return namedExportBindings
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.export_declaration_id
+    }
+    
+}
+
+/**
+ * A ExportDeclarationModuleSpecifier
+ */
+schema ExportDeclarationModuleSpecifier {
+    @primary export_declaration_id: int,
+    module_specifier_id: int
+}
+
+impl ExportDeclarationModuleSpecifier {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ExportDeclarationModuleSpecifier {
+        for (exportDeclarationModuleSpecifier in ExportDeclarationModuleSpecifierDO(db)) {
+            yield ExportDeclarationModuleSpecifier {
+                export_declaration_id: exportDeclarationModuleSpecifier.export_declaration_id,
+                module_specifier_id : exportDeclarationModuleSpecifier.module_specifier_id
+            }
+        }
+    }
+    
+    /**
+     * Gets the exportDeclaration.
+     */
+    pub fn getExportDeclaration(self) -> ExportDeclaration {
+        for (exportDeclaration in ExportDeclaration(__all_data__)) {
+            if (self.export_declaration_id = exportDeclaration.id) {
+                return exportDeclaration
+            }
+        }
+    }
+    
+    /**
+     * Gets the moduleSpecifier.
+     */
+    pub fn getModuleSpecifier(self) -> StringLiteral {
+        for (stringLiteral in StringLiteral(__all_data__)) {
+            if (self.module_specifier_id = stringLiteral.id) {
+                return stringLiteral
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.export_declaration_id
+    }
+    
+}
+
+/**
+ * A ExportDeclarationAssertClause
+ */
+schema ExportDeclarationAssertClause {
+    @primary export_declaration_id: int,
+    assert_clause_id: int
+}
+
+impl ExportDeclarationAssertClause {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ExportDeclarationAssertClause {
+        for (exportDeclarationAssertClause in ExportDeclarationAssertClauseDO(db)) {
+            yield ExportDeclarationAssertClause {
+                export_declaration_id: exportDeclarationAssertClause.export_declaration_id,
+                assert_clause_id : exportDeclarationAssertClause.assert_clause_id
+            }
+        }
+    }
+    
+    /**
+     * Gets the exportDeclaration.
+     */
+    pub fn getExportDeclaration(self) -> ExportDeclaration {
+        for (exportDeclaration in ExportDeclaration(__all_data__)) {
+            if (self.export_declaration_id = exportDeclaration.id) {
+                return exportDeclaration
+            }
+        }
+    }
+    
+    /**
+     * Gets the assertClause.
+     */
+    pub fn getAssertClause(self) -> int {
+        return self.assert_clause_id
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.export_declaration_id
+    }
+    
+}
+
+/**
+ * This type consists of the following types: [NamespaceImport, NamedImports]
+ */
+schema NamedImportBindings extends AstNode {
+}
+
+impl NamedImportBindings {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *NamedImportBindings {
+        for (namespaceImport in NamespaceImport(db)) {
+            yield NamedImportBindings {
+                id : namespaceImport.id,
+                kind : namespaceImport.kind,
+                parent_id : namespaceImport.parent_id,
+                parent_kind : namespaceImport.parent_kind,
+                index : namespaceImport.index,
+                location_id : namespaceImport.location_id,
+            }
+        }
+        for (namedImports in NamedImports(db)) {
+            yield NamedImportBindings {
+                id : namedImports.id,
+                kind : namedImports.kind,
+                parent_id : namedImports.parent_id,
+                parent_kind : namedImports.parent_kind,
+                index : namedImports.index,
+                location_id : namedImports.location_id,
+            }
+        }
+    }
+
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * trans to NamespaceImport
+     */
+    pub fn toNamespaceImport(self) -> NamespaceImport {
+        for (namespaceImport in NamespaceImport(__all_data__)) {
+            if (namespaceImport.key_eq(self)) {
+                return namespaceImport
+            }
+        }
+    }
+    
+    /**
+     * trans to NamedImports
+     */
+    pub fn toNamedImports(self) -> NamedImports {
+        for (namedImports in NamedImports(__all_data__)) {
+            if (namedImports.key_eq(self)) {
+                return namedImports
+            }
+        }
+    }
+    
+}
+
+/**
+ * This type consists of the following types: [NamespaceExport, NamedExports]
+ */
+schema NamedExportBindings extends AstNode {
+}
+
+impl NamedExportBindings {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *NamedExportBindings {
+        for (namespaceExport in NamespaceExport(db)) {
+            yield NamedExportBindings {
+                id : namespaceExport.id,
+                kind : namespaceExport.kind,
+                parent_id : namespaceExport.parent_id,
+                parent_kind : namespaceExport.parent_kind,
+                index : namespaceExport.index,
+                location_id : namespaceExport.location_id,
+            }
+        }
+        for (namedExports in NamedExports(db)) {
+            yield NamedExportBindings {
+                id : namedExports.id,
+                kind : namedExports.kind,
+                parent_id : namedExports.parent_id,
+                parent_kind : namedExports.parent_kind,
+                index : namedExports.index,
+                location_id : namedExports.location_id,
+            }
+        }
+    }
+
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * trans to NamespaceExport
+     */
+    pub fn toNamespaceExport(self) -> NamespaceExport {
+        for (namespaceExport in NamespaceExport(__all_data__)) {
+            if (namespaceExport.key_eq(self)) {
+                return namespaceExport
+            }
+        }
+    }
+    
+    /**
+     * trans to NamedExports
+     */
+    pub fn toNamedExports(self) -> NamedExports {
+        for (namedExports in NamedExports(__all_data__)) {
+            if (namedExports.key_eq(self)) {
+                return namedExports
+            }
+        }
+    }
+    
+}
+

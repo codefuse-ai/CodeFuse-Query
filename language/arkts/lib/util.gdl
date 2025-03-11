@@ -1,0 +1,1111 @@
+pub fn KindMap(name: string, kind: int) -> bool {
+    [
+        {"NumericLiteral", 8},
+        {"BigIntLiteral", 9},
+        {"StringLiteral", 10},
+        {"JsxText", 11},
+        {"JsxTextAllWhiteSpaces", 12},
+        {"RegularExpressionLiteral", 13},
+        {"NoSubstitutionTemplateLiteral", 14},
+        {"TemplateHead", 15},
+        {"TemplateMiddle", 16},
+        {"TemplateTail", 17},
+        {"OpenBraceToken", 18},
+        {"CloseBraceToken", 19},
+        {"OpenParenToken", 20},
+        {"CloseParenToken", 21},
+        {"OpenBracketToken", 22},
+        {"CloseBracketToken", 23},
+        {"DotToken", 24},
+        {"DotDotDotToken", 25},
+        {"SemicolonToken", 26},
+        {"CommaToken", 27},
+        {"QuestionDotToken", 28},
+        {"LessThanToken", 29},
+        {"LessThanSlashToken", 30},
+        {"GreaterThanToken", 31},
+        {"LessThanEqualsToken", 32},
+        {"GreaterThanEqualsToken", 33},
+        {"EqualsEqualsToken", 34},
+        {"ExclamationEqualsToken", 35},
+        {"EqualsEqualsEqualsToken", 36},
+        {"ExclamationEqualsEqualsToken", 37},
+        {"EqualsGreaterThanToken", 38},
+        {"PlusToken", 39},
+        {"MinusToken", 40},
+        {"AsteriskToken", 41},
+        {"AsteriskAsteriskToken", 42},
+        {"SlashToken", 43},
+        {"PercentToken", 44},
+        {"PlusPlusToken", 45},
+        {"MinusMinusToken", 46},
+        {"LessThanLessThanToken", 47},
+        {"GreaterThanGreaterThanToken", 48},
+        {"GreaterThanGreaterThanGreaterThanToken", 49},
+        {"AmpersandToken", 50},
+        {"BarToken", 51},
+        {"CaretToken", 52},
+        {"ExclamationToken", 53},
+        {"TildeToken", 54},
+        {"AmpersandAmpersandToken", 55},
+        {"BarBarToken", 56},
+        {"QuestionToken", 57},
+        {"ColonToken", 58},
+        {"AtToken", 59},
+        {"QuestionQuestionToken", 60},
+        {"BacktickToken", 61},
+        {"HashToken", 62},
+        {"EqualsToken", 63},
+        {"PlusEqualsToken", 64},
+        {"MinusEqualsToken", 65},
+        {"AsteriskEqualsToken", 66},
+        {"AsteriskAsteriskEqualsToken", 67},
+        {"SlashEqualsToken", 68},
+        {"PercentEqualsToken", 69},
+        {"LessThanLessThanEqualsToken", 70},
+        {"GreaterThanGreaterThanEqualsToken", 71},
+        {"GreaterThanGreaterThanGreaterThanEqualsToken", 72},
+        {"AmpersandEqualsToken", 73},
+        {"BarEqualsToken", 74},
+        {"BarBarEqualsToken", 75},
+        {"AmpersandAmpersandEqualsToken", 76},
+        {"QuestionQuestionEqualsToken", 77},
+        {"CaretEqualsToken", 78},
+        {"Identifier", 79},
+        {"PrivateIdentifier", 80},
+        {"BreakKeyword", 81},
+        {"CaseKeyword", 82},
+        {"CatchKeyword", 83},
+        {"ClassKeyword", 84},
+        {"StructKeyword", 85},
+        {"ConstKeyword", 86},
+        {"ContinueKeyword", 87},
+        {"DebuggerKeyword", 88},
+        {"DefaultKeyword", 89},
+        {"DeleteKeyword", 90},
+        {"DoKeyword", 91},
+        {"ElseKeyword", 92},
+        {"EnumKeyword", 93},
+        {"ExportKeyword", 94},
+        {"ExtendsKeyword", 95},
+        {"FalseKeyword", 96},
+        {"FinallyKeyword", 97},
+        {"ForKeyword", 98},
+        {"FunctionKeyword", 99},
+        {"IfKeyword", 100},
+        {"ImportKeyword", 101},
+        {"InKeyword", 102},
+        {"InstanceOfKeyword", 103},
+        {"NewKeyword", 104},
+        {"NullKeyword", 105},
+        {"ReturnKeyword", 106},
+        {"SuperExpression", 107},
+        {"SwitchKeyword", 108},
+        {"ThisExpression", 109},
+        {"ThrowKeyword", 110},
+        {"TrueKeyword", 111},
+        {"TryKeyword", 112},
+        {"TypeOfKeyword", 113},
+        {"VarKeyword", 114},
+        {"VoidKeyword", 115},
+        {"WhileKeyword", 116},
+        {"WithKeyword", 117},
+        {"ImplementsKeyword", 118},
+        {"InterfaceKeyword", 119},
+        {"LetKeyword", 120},
+        {"PackageKeyword", 121},
+        {"PrivateKeyword", 122},
+        {"ProtectedKeyword", 123},
+        {"PublicKeyword", 124},
+        {"StaticKeyword", 125},
+        {"YieldKeyword", 126},
+        {"AbstractKeyword", 127},
+        {"AccessorKeyword", 128},
+        {"AsKeyword", 129},
+        {"AssertsKeyword", 130},
+        {"AssertKeyword", 131},
+        {"AnyKeyword", 132},
+        {"AsyncKeyword", 133},
+        {"AwaitKeyword", 134},
+        {"BooleanKeyword", 135},
+        {"ConstructorKeyword", 136},
+        {"DeclareKeyword", 137},
+        {"GetKeyword", 138},
+        {"InferKeyword", 139},
+        {"IntrinsicKeyword", 140},
+        {"IsKeyword", 141},
+        {"KeyOfKeyword", 142},
+        {"ModuleKeyword", 143},
+        {"NamespaceKeyword", 144},
+        {"NeverKeyword", 145},
+        {"OutKeyword", 146},
+        {"ReadonlyKeyword", 147},
+        {"RequireKeyword", 148},
+        {"NumberKeyword", 149},
+        {"ObjectKeyword", 150},
+        {"SatisfiesKeyword", 151},
+        {"SetKeyword", 152},
+        {"StringKeyword", 153},
+        {"SymbolKeyword", 154},
+        {"TypeKeyword", 155},
+        {"UndefinedKeyword", 157},
+        {"UniqueKeyword", 158},
+        {"UnknownKeyword", 159},
+        {"FromKeyword", 160},
+        {"GlobalKeyword", 161},
+        {"BigIntKeyword", 162},
+        {"OverrideKeyword", 163},
+        {"OfKeyword", 164},
+        {"QualifiedName", 165},
+        {"ComputedPropertyName", 166},
+        {"TypeParameter", 167},
+        {"Parameter", 168},
+        {"Decorator", 169},
+        {"PropertySignature", 170},
+        {"PropertyDeclaration", 171},
+        {"MethodSignature", 173},
+        {"MethodDeclaration", 174},
+        {"ClassStaticBlockDeclaration", 175},
+        {"Constructor", 176},
+        {"GetAccessor", 177},
+        {"SetAccessor", 178},
+        {"CallSignature", 179},
+        {"ConstructSignature", 180},
+        {"IndexSignature", 181},
+        {"TypePredicate", 182},
+        {"TypeReference", 183},
+        {"FunctionType", 184},
+        {"ConstructorType", 185},
+        {"TypeQuery", 186},
+        {"TypeLiteral", 187},
+        {"ArrayType", 188},
+        {"TupleType", 189},
+        {"OptionalType", 190},
+        {"RestType", 191},
+        {"UnionType", 192},
+        {"IntersectionType", 193},
+        {"ConditionalType", 194},
+        {"InferType", 195},
+        {"ParenthesizedType", 196},
+        {"ThisType", 197},
+        {"TypeOperator", 198},
+        {"IndexedAccessType", 199},
+        {"MappedType", 200},
+        {"LiteralType", 201},
+        {"NamedTupleMember", 202},
+        {"TemplateLiteralType", 203},
+        {"TemplateLiteralTypeSpan", 204},
+        {"ImportType", 205},
+        {"ObjectBindingPattern", 206},
+        {"ArrayBindingPattern", 207},
+        {"BindingElement", 208},
+        {"ArrayLiteralExpression", 209},
+        {"ObjectLiteralExpression", 210},
+        {"PropertyAccessExpression", 211},
+        {"ElementAccessExpression", 212},
+        {"CallExpression", 213},
+        {"NewExpression", 214},
+        {"TaggedTemplateExpression", 215},
+        {"TypeAssertionExpression", 216},
+        {"ParenthesizedExpression", 217},
+        {"FunctionExpression", 218},
+        {"ArrowFunction", 219},
+        {"EtsComponentExpression", 220},
+        {"DeleteExpression", 221},
+        {"TypeOfExpression", 222},
+        {"VoidExpression", 223},
+        {"AwaitExpression", 224},
+        {"PrefixUnaryExpression", 225},
+        {"PostfixUnaryExpression", 226},
+        {"BinaryExpression", 227},
+        {"ConditionalExpression", 228},
+        {"TemplateExpression", 229},
+        {"YieldExpression", 230},
+        {"SpreadElement", 231},
+        {"ClassExpression", 232},
+        {"OmittedExpression", 233},
+        {"ExpressionWithTypeArguments", 234},
+        {"AsExpression", 235},
+        {"NonNullExpression", 236},
+        {"MetaProperty", 237},
+        {"SyntheticExpression", 238},
+        {"SatisfiesExpression", 239},
+        {"TemplateSpan", 240},
+        {"SemicolonClassElement", 241},
+        {"Block", 242},
+        {"EmptyStatement", 243},
+        {"VariableStatement", 244},
+        {"ExpressionStatement", 245},
+        {"IfStatement", 246},
+        {"DoStatement", 247},
+        {"WhileStatement", 248},
+        {"ForStatement", 249},
+        {"ForInStatement", 250},
+        {"ForOfStatement", 251},
+        {"ContinueStatement", 252},
+        {"BreakStatement", 253},
+        {"ReturnStatement", 254},
+        {"WithStatement", 255},
+        {"SwitchStatement", 256},
+        {"LabeledStatement", 257},
+        {"ThrowStatement", 258},
+        {"TryStatement", 259},
+        {"DebuggerStatement", 260},
+        {"VariableDeclaration", 261},
+        {"VariableDeclarationList", 262},
+        {"FunctionDeclaration", 263},
+        {"ClassDeclaration", 264},
+        {"StructDeclaration", 265},
+        {"InterfaceDeclaration", 267},
+        {"TypeAliasDeclaration", 268},
+        {"EnumDeclaration", 269},
+        {"ModuleDeclaration", 270},
+        {"ModuleBlock", 271},
+        {"CaseBlock", 272},
+        {"NamespaceExportDeclaration", 273},
+        {"ImportEqualsDeclaration", 274},
+        {"ImportDeclaration", 275},
+        {"ImportClause", 276},
+        {"NamespaceImport", 277},
+        {"NamedImports", 278},
+        {"ImportSpecifier", 279},
+        {"ExportAssignment", 280},
+        {"ExportDeclaration", 281},
+        {"NamedExports", 282},
+        {"NamespaceExport", 283},
+        {"ExportSpecifier", 284},
+        {"MissingDeclaration", 285},
+        {"ExternalModuleReference", 286},
+        {"JsxElement", 287},
+        {"JsxSelfClosingElement", 288},
+        {"JsxOpeningElement", 289},
+        {"JsxClosingElement", 290},
+        {"JsxFragment", 291},
+        {"JsxOpeningFragment", 292},
+        {"JsxClosingFragment", 293},
+        {"JsxAttribute", 294},
+        {"JsxAttributes", 295},
+        {"JsxSpreadAttribute", 296},
+        {"JsxExpression", 297},
+        {"CaseClause", 298},
+        {"DefaultClause", 299},
+        {"HeritageClause", 300},
+        {"CatchClause", 301},
+        {"AssertClause", 302},
+        {"AssertEntry", 303},
+        {"ImportTypeAssertionContainer", 304},
+        {"PropertyAssignment", 305},
+        {"ShorthandPropertyAssignment", 306},
+        {"SpreadAssignment", 307},
+        {"EnumMember", 308},
+        {"UnparsedPrologue", 309},
+        {"UnparsedPrepend", 310},
+        {"UnparsedText", 311},
+        {"UnparsedInternalText", 312},
+        {"UnparsedSyntheticReference", 313},
+        {"SourceFile", 314},
+        {"Bundle", 315},
+        {"UnparsedSource", 316},
+        {"InputFiles", 317},
+        {"JSDocTypeExpression", 318},
+        {"JSDocNameReference", 319},
+        {"JSDocMemberName", 320},
+        {"JSDocAllType", 321},
+        {"JSDocUnknownType", 322},
+        {"JSDocNullableType", 323},
+        {"JSDocNonNullableType", 324},
+        {"JSDocOptionalType", 325},
+        {"JSDocFunctionType", 326},
+        {"JSDocVariadicType", 327},
+        {"JSDocNamepathType", 328},
+        {"JSDocComment", 329},
+        {"JSDocText", 330},
+        {"JSDocTypeLiteral", 331},
+        {"JSDocSignature", 332},
+        {"JSDocLink", 333},
+        {"JSDocLinkCode", 334},
+        {"JSDocLinkPlain", 335},
+        {"JSDocTag", 336},
+        {"JSDocAugmentsTag", 337},
+        {"JSDocImplementsTag", 338},
+        {"JSDocAuthorTag", 339},
+        {"JSDocDeprecatedTag", 340},
+        {"JSDocClassTag", 341},
+        {"JSDocPublicTag", 342},
+        {"JSDocPrivateTag", 343},
+        {"JSDocProtectedTag", 344},
+        {"JSDocReadonlyTag", 345},
+        {"JSDocOverrideTag", 346},
+        {"JSDocCallbackTag", 347},
+        {"JSDocEnumTag", 348},
+        {"JSDocParameterTag", 349},
+        {"JSDocReturnTag", 350},
+        {"JSDocThisTag", 351},
+        {"JSDocTypeTag", 352},
+        {"JSDocTemplateTag", 353},
+        {"JSDocTypedefTag", 354},
+        {"JSDocSeeTag", 355},
+        {"JSDocPropertyTag", 356},
+        {"SyntaxList", 357},
+        {"NotEmittedStatement", 358},
+        {"PartiallyEmittedExpression", 359},
+        {"CommaListExpression", 360},
+        {"MergeDeclarationMarker", 361},
+        {"EndOfDeclarationMarker", 362},
+        {"SyntheticReferenceExpression", 363}
+    ]
+}
+
+pub fn getRealKind(kind: int) -> string {
+    for (res in string::__undetermined_all__()) {
+        if (KindMap(res, kind)) {
+            return res
+        }
+    }
+}
+
+ // TODO: may exist bug
+pub fn getFullPropertyAssignmentName(propertyAssignment: PropertyAssignment) -> string {
+    let (grandfa = propertyAssignment.getParent().getParent(), 
+        rightName = propertyAssignment.getNameNode().getName()) {
+        if (grandfa.getKindName() = "PropertyAssignment") {
+            let (leftName = getFullPropertyAssignmentName(PropertyAssignment(__all_data__).find(grandfa))) {
+                return leftName + "." + rightName
+            }
+        }
+        if (grandfa.getKindName() = "VariableDeclaration") {
+            let (leftName = VariableDeclaration(__all_data__).find(grandfa).getNameNode().getName()) {
+                return leftName + "." + rightName
+            }
+        }
+    }
+}
+
+/**
+ * Determine whether this node is in a namespace
+ */
+pub fn hasNameSpace(astNode: AstNode) -> bool {
+    for (moduleDeclaration in ModuleDeclaration(__all_data__)) {
+        for (tmp in astNode.getAncestor()) {
+            if (tmp.key_eq(moduleDeclaration)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Get the namespace of this node
+ */
+pub fn getNameSpace(astNode: AstNode) -> string {
+    if (isModuleDeclaration(astNode)) {
+        for (moduleDeclaration in ModuleDeclaration(__all_data__)) {
+            if (moduleDeclaration.key_eq(astNode)) {
+                let (parent = astNode.getParent(),
+                    name = moduleDeclaration.getNameNode().getName()) {
+                    if (hasNameSpace(parent)) {
+                        return getNameSpace(parent) + "." + name
+                    }
+                    if (!hasNameSpace(parent)) {
+                        return name
+                    }
+                }
+            }
+        }
+    }
+    if (!isModuleDeclaration(astNode)) {
+        return getNameSpace(astNode.getParent())
+    }
+}
+
+pub fn isTokenKind(kind: int) -> bool {
+    [
+        // {0},    // Unknown
+        // {1},    // EndOfFileToken
+        // {2},    // SingleLineCommentTrivia
+        // {3},    // MultiLineCommentTrivia
+        // {4},    // NewLineTrivia
+        // {5},    // WhitespaceTrivia
+        // {6},    // ShebangTrivia
+        // {7},    // ConflictMarkerTrivia
+        {8},    // NumericLiteral
+        {9},    // BigIntLiteral
+        {10},   // StringLiteral
+        {11},   // JsxText
+        {12},   // JsxTextAllWhiteSpaces
+        {13},   // RegularExpressionLiteral
+        {14},   // NoSubstitutionTemplateLiteral
+        {15},   // TemplateHead
+        {16},   // TemplateMiddle
+        {17},   // TemplateTail
+        {18},   // OpenBraceToken
+        {19},   // CloseBraceToken
+        {20},   // OpenParenToken
+        {21},   // CloseParenToken
+        {22},   // OpenBracketToken
+        {23},   // CloseBracketToken
+        {24},   // DotToken
+        {25},   // DotDotDotToken
+        {26},   // SemicolonToken
+        {27},   // CommaToken
+        {28},   // QuestionDotToken
+        {29},   // LessThanToken
+        {30},   // LessThanSlashToken
+        {31},   // GreaterThanToken
+        {32},   // LessThanEqualsToken
+        {33},   // GreaterThanEqualsToken
+        {34},   // EqualsEqualsToken
+        {35},   // ExclamationEqualsToken
+        {36},   // EqualsEqualsEqualsToken
+        {37},   // ExclamationEqualsEqualsToken
+        {38},   // EqualsGreaterThanToken
+        {39},   // PlusToken
+        {40},   // MinusToken
+        {41},   // AsteriskToken
+        {42},   // AsteriskAsteriskToken
+        {43},   // SlashToken
+        {44},   // PercentToken
+        {45},   // PlusPlusToken
+        {46},   // MinusMinusToken
+        {47},   // LessThanLessThanToken
+        {48},   // GreaterThanGreaterThanToken
+        {49},   // GreaterThanGreaterThanGreaterThanToken
+        {50},   // AmpersandToken
+        {51},   // BarToken
+        {52},   // CaretToken
+        {53},   // ExclamationToken
+        {54},   // TildeToken
+        {55},   // AmpersandAmpersandToken
+        {56},   // BarBarToken
+        {57},   // QuestionToken
+        {58},   // ColonToken
+        {59},   // AtToken
+        {60},   // QuestionQuestionToken
+        {61},   // BacktickToken
+        {62},   // HashToken
+        {63},   // EqualsToken
+        {64},   // PlusEqualsToken
+        {65},   // MinusEqualsToken
+        {66},   // AsteriskEqualsToken
+        {67},   // AsteriskAsteriskEqualsToken
+        {68},   // SlashEqualsToken
+        {69},   // PercentEqualsToken
+        {70},   // LessThanLessThanEqualsToken
+        {71},   // GreaterThanGreaterThanEqualsToken
+        {72},   // GreaterThanGreaterThanGreaterThanEqualsToken
+        {73},   // AmpersandEqualsToken
+        {74},   // BarEqualsToken
+        {75},   // BarBarEqualsToken
+        {76},   // AmpersandAmpersandEqualsToken
+        {77},   // QuestionQuestionEqualsToken
+        {78},   // CaretEqualsToken
+        {79},   // Identifier
+        {80},   // PrivateIdentifier
+        {81},   // BreakKeyword
+        {82},   // CaseKeyword
+        {83},   // CatchKeyword
+        {84},   // ClassKeyword
+        {86},   // ConstKeyword
+        {87},   // ContinueKeyword
+        {88},   // DebuggerKeyword
+        {89},   // DefaultKeyword
+        {90},   // DeleteKeyword
+        {91},   // DoKeyword
+        {92},   // ElseKeyword
+        {93},   // EnumKeyword
+        {94},   // ExportKeyword
+        {95},   // ExtendsKeyword
+        {96},   // FalseKeyword
+        {97},   // FinallyKeyword
+        {98},   // ForKeyword
+        {99},   // FunctionKeyword
+        {100},   // IfKeyword
+        {101},  // ImportKeyword
+        {102},  // InKeyword
+        {103},  // InstanceOfKeyword
+        {104},  // NewKeyword
+        {105},  // NullKeyword
+        {106},  // ReturnKeyword
+        {107},  // SuperKeyword
+        {108},  // SwitchKeyword
+        {109},  // ThisKeyword
+        {110},  // ThrowKeyword
+        {111},  // TrueKeyword
+        {112},  // TryKeyword
+        {113},  // TypeOfKeyword
+        {114},  // VarKeyword
+        {115},  // VoidKeyword
+        {116},  // WhileKeyword
+        {117},  // WithKeyword
+        {118},  // ImplementsKeyword
+        {119},  // InterfaceKeyword
+        {120},  // LetKeyword
+        {121},  // PackageKeyword
+        {122},  // PrivateKeyword
+        {123},  // ProtectedKeyword
+        {124},  // PublicKeyword
+        {125},  // StaticKeyword
+        {126},  // YieldKeyword
+        {127},  // AbstractKeyword
+        {129},  // AsKeyword
+        {130},  // AssertsKeyword
+        {131},  // AssertKeyword
+        {132},  // AnyKeyword
+        {133},  // AsyncKeyword
+        {134},  // AwaitKeyword
+        {135},  // BooleanKeyword
+        {136},  // ConstructorKeyword
+        {137},  // DeclareKeyword
+        {138},  // GetKeyword
+        {139},  // InferKeyword
+        {140},  // IntrinsicKeyword
+        {141},  // IsKeyword
+        {142},  // KeyOfKeyword
+        {143},  // ModuleKeyword
+        {144},  // NamespaceKeyword
+        {145},  // NeverKeyword
+        {147},  // ReadonlyKeyword
+        {148},  // RequireKeyword
+        {149},  // NumberKeyword
+        {150},  // ObjectKeyword
+        {152},  // SetKeyword
+        {153},  // StringKeyword
+        {154},  // SymbolKeyword
+        {155},  // TypeKeyword
+        {157},  // UndefinedKeyword
+        {158},  // UniqueKeyword
+        {159},  // UnknownKeyword
+        {160},  // FromKeyword
+        {161},  // GlobalKeyword
+        {162},  // BigIntKeyword
+        {163},  // OverrideKeyword
+        {164},  // OfKeyword
+    ]
+}
+
+/**
+ * Determines whether a node is a binary logical expression using
+ * `&&`, `||` or `??`.
+ */
+pub fn isBinaryLogicalExpression(node: AstNode) -> bool {
+    for (binaryExpression in BinaryExpression(__all_data__),
+        binaryLogicalOperator in LogicalOperator(__all_data__)) {
+        if (binaryExpression.key_eq(node)) {
+            if (binaryExpression.getOperator().key_eq(binaryLogicalOperator)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a logical AND expression using `&&`.
+ */
+pub fn isLogicalAndExpression(node: AstNode) -> bool {
+    for (binaryExpression in BinaryExpression(__all_data__),
+        ampersandAmpersandToken in AmpersandAmpersandToken(__all_data__)) {
+        if (binaryExpression.key_eq(node)) {
+            if (binaryExpression.getOperator().key_eq(ampersandAmpersandToken)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a logical OR expression using `||`.
+ */
+pub fn isLogicalOrExpression(node: AstNode) -> bool {
+    for (binaryExpression in BinaryExpression(__all_data__),
+        barBarToken in BarBarToken(__all_data__)) {
+        if (binaryExpression.key_eq(node)) {
+            if (binaryExpression.getOperator().key_eq(barBarToken)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a nullish coalescing expression using `??`.
+ */
+pub fn isNullishCoalescingExpression(node: AstNode) -> bool {
+    for (binaryExpression in BinaryExpression(__all_data__),
+        questionQuestionToken in QuestionQuestionToken(__all_data__)) {
+        if (binaryExpression.key_eq(node)) {
+            if (binaryExpression.getOperator().key_eq(questionQuestionToken)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a AstNode is an assignment expression, either compound or simple.
+ */
+pub fn isAssignmentExpression(node: AstNode) -> bool {
+    for (binaryExpression in BinaryExpression(__all_data__),
+        assignmentOperator in AssignmentOperator(__all_data__)) {
+        if (binaryExpression.key_eq(node)) {
+            if (binaryExpression.getOperator().key_eq(assignmentOperator)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a `throw` statement
+ */
+pub fn isThrowStatement(node: AstNode) -> bool {
+    if (node.getKindName() = "ThrowStatement") {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a `return` statement
+ */
+pub fn isReturnStatement(node: AstNode) -> bool {
+    if (node.getKindName() = "ReturnStatement") {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a ClassLikeDeclaration
+ */
+fn isClassLikeDeclaration(astNode: AstNode) -> bool {
+    for (classLikeDeclaration in ClassLikeDeclaration(__all_data__)) {
+        if (classLikeDeclaration.key_eq(astNode)) {
+            return true
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a `for`-`in` or `for`-`of` statement
+ */
+pub fn isEnhancedForStatement(node: AstNode) -> bool {
+    let (kind = node.getKindName()) {
+        if (kind = "ForInStatement" || kind = "ForOfStatement") {
+            return true
+        }
+    }
+}
+
+/**
+ * Determines whether a node is an equality test expression using `==`, `!=`,
+ * `===` or `!==`.
+ */
+pub fn isEqualityTestExpression(node: AstNode) -> bool {
+    for (binaryExpression in BinaryExpression(__all_data__),
+        equalityOperator in EqualityOperator(__all_data__)) {
+        if (binaryExpression.key_eq(node)) {
+            if (binaryExpression.getOperator().key_eq(equalityOperator)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a exponentiation expression using `**`.
+ */
+pub fn isExponentiationExpression(node: AstNode) -> bool {
+    for (binaryExpression in BinaryExpression(__all_data__),
+        asteriskAsteriskToken in AsteriskAsteriskToken(__all_data__)) {
+        if (binaryExpression.key_eq(node)) {
+            if (binaryExpression.getOperator().key_eq(asteriskAsteriskToken)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a multiplicative expression using `*`, `/` or `%`.
+ */
+pub fn isMultiplicativeExpression(node: AstNode) -> bool {
+    for (binaryExpression in BinaryExpression(__all_data__),
+        multiplicativeOperator in MultiplicativeOperator(__all_data__)) {
+        if (binaryExpression.key_eq(node)) {
+            if (binaryExpression.getOperator().key_eq(multiplicativeOperator)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is an additive expression using `+` or `-`.
+ */
+pub fn isAdditiveExpression(node: AstNode) -> bool {
+    for (binaryExpression in BinaryExpression(__all_data__),
+        additiveOperator in AdditiveOperator(__all_data__)) {
+        if (binaryExpression.key_eq(node)) {
+            if (binaryExpression.getOperator().key_eq(additiveOperator)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a shift expression using `<<`, `>>` or `>>>`.
+ */
+pub fn isShiftExpression(node: AstNode) -> bool {
+    for (binaryExpression in BinaryExpression(__all_data__),
+        shiftOperator in ShiftOperator(__all_data__)) {
+        if (binaryExpression.key_eq(node)) {
+            if (binaryExpression.getOperator().key_eq(shiftOperator)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a comma expression using `,`.
+ */
+pub fn isCommaExpression(node: AstNode) -> bool {
+    for (binaryExpression in BinaryExpression(__all_data__),
+        commaToken in CommaToken(__all_data__)) {
+        if (binaryExpression.key_eq(node)) {
+            if (binaryExpression.getOperator().key_eq(commaToken)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a relational expression using `<`, `<=`, `>`, `>=`, `instanceof` or `in`.
+ */
+pub fn isRelationalExpression(node: AstNode) -> bool {
+    for (binaryExpression in BinaryExpression(__all_data__),
+        relationalOperator in RelationalOperator(__all_data__)) {
+        if (binaryExpression.key_eq(node)) {
+            if (binaryExpression.getOperator().key_eq(relationalOperator)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a binary bitwise expression using
+ * `&`, `|` or `^`.
+ */
+pub fn isBinaryBitwiseExpression(node: AstNode) -> bool {
+    for (binaryExpression in BinaryExpression(__all_data__),
+        binaryBitwiseOperator in BitwiseOperator(__all_data__)) {
+        if (binaryExpression.key_eq(node)) {
+            if (binaryExpression.getOperator().key_eq(binaryBitwiseOperator)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a compound assignment expression using
+ * `+=`, `-=`, `**=`, `*=`, `/=`, `%=`, `&=`, `|=`, `^=`, `<<=`, `>>=`, `>>>=`,
+ * `&&=`, `||=` or `??=`.
+ */
+pub fn isCompoundAssignmentExpression(node: AstNode) -> bool {
+    for (binaryExpression in BinaryExpression(__all_data__),
+        compoundAssignmentOperator in CompoundAssignmentOperator(__all_data__)) {
+        if (binaryExpression.key_eq(node)) {
+            if (binaryExpression.getOperator().key_eq(compoundAssignmentOperator)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a simple assignment expression using `=`.
+ */
+pub fn isSimpleAssignmentExpression(node: AstNode) -> bool {
+    for (binaryExpression in BinaryExpression(__all_data__),
+        equalsToken in EqualsToken(__all_data__)) {
+        if (binaryExpression.key_eq(node)) {
+            if (binaryExpression.getOperator().key_eq(equalsToken)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is an update expression.
+ */
+pub fn isUpdateExpression(node: AstNode) -> bool {
+    // TODO:: judging by kind will be faster than taking the entire collection. if the execution speed slows down, modify it.
+    for (updateExpression in UpdateExpression(__all_data__)) {
+        if (updateExpression.key_eq(node)) {
+            return true
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a type assertion expression.
+ */
+pub fn isTypeAssertionExpression(node: AstNode) -> bool {
+    if (node.getKindName() = "TypeAssertionExpression") {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is an `await` expression.
+ */
+pub fn isAwaitExpression(node: AstNode) -> bool {
+    if (node.getKindName() = "AwaitExpression") {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a logical AND assignment expression using `&&=`.
+ */
+pub fn isLogicalAndAssignmentExpression(node: AstNode) -> bool {
+    for (binaryExpression in BinaryExpression(__all_data__),
+        ampersandAmpersandEqualsToken in AmpersandAmpersandEqualsToken(__all_data__)) {
+        if (binaryExpression.key_eq(node)) {
+            if (binaryExpression.getOperator().key_eq(ampersandAmpersandEqualsToken)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a logical OR assignment expression using `||=`.
+ */
+pub fn isLogicalOrAssignmentExpression(node: AstNode) -> bool {
+    for (binaryExpression in BinaryExpression(__all_data__),
+        barBarEqualsToken in BarBarEqualsToken(__all_data__)) {
+        if (binaryExpression.key_eq(node)) {
+            if (binaryExpression.getOperator().key_eq(barBarEqualsToken)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a nullish assignment expression using `??=`.
+ */
+pub fn isNullishAssignmentExpression(node: AstNode) -> bool {
+    for (binaryExpression in BinaryExpression(__all_data__),
+        questionQuestionEqualsToken in QuestionQuestionEqualsToken(__all_data__)) {
+        if (binaryExpression.key_eq(node)) {
+            if (binaryExpression.getOperator().key_eq(questionQuestionEqualsToken)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is an access expression.
+ */
+pub fn isAccessExpression(node: AstNode) -> bool {
+    // TODO:: judging by kind will be faster than taking the entire collection. if the execution speed slows down, modify it.
+    for (accessExpression in AccessExpression(__all_data__)) {
+        if (accessExpression.key_eq(node)) {
+            return true
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a prefix increment expression using `++`.
+ */
+pub fn isPrefixIncrementExpression(node: AstNode) -> bool {
+    for (prefixUnaryExpression in PrefixUnaryExpression(__all_data__),
+        plusPlusToken in PlusPlusToken(__all_data__)) {
+        if (prefixUnaryExpression.key_eq(node)) {
+            if (prefixUnaryExpression.getOperator().key_eq(plusPlusToken)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is an increment expression using `++`.
+ */
+pub fn isIncrementExpression(node: AstNode) -> bool {
+    if (isPrefixIncrementExpression(node)) {
+        return true
+    }
+    if (isPostfixIncrementExpression(node)) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a postfix increment expression using `++`.
+ */
+pub fn isPostfixIncrementExpression(node: AstNode) -> bool {
+    for (postfixUnaryExpression in PostfixUnaryExpression(__all_data__),
+        plusPlusToken in PlusPlusToken(__all_data__)) {
+        if (postfixUnaryExpression.key_eq(node)) {
+            if (postfixUnaryExpression.getOperator().key_eq(plusPlusToken)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a prefix decrement expression using `--`.
+ */
+pub fn isPrefixDecrementExpression(node: AstNode) -> bool {
+    for (prefixUnaryExpression in PrefixUnaryExpression(__all_data__),
+        minusMinusToken in MinusMinusToken(__all_data__)) {
+        if (prefixUnaryExpression.key_eq(node)) {
+            if (prefixUnaryExpression.getOperator().key_eq(minusMinusToken)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a postfix decrement expression using `--`.
+ */
+pub fn isPostfixDecrementExpression(node: AstNode) -> bool {
+    for (postfixUnaryExpression in PostfixUnaryExpression(__all_data__),
+        minusMinusToken in MinusMinusToken(__all_data__)) {
+        if (postfixUnaryExpression.key_eq(node)) {
+            if (postfixUnaryExpression.getOperator().key_eq(minusMinusToken)) {
+                return true
+            }
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a decrement expression using `--`.
+ */
+pub fn isDecrementExpression(node: AstNode) -> bool {
+    if (isPrefixDecrementExpression(node)) {
+        return true
+    }
+    if (isPostfixDecrementExpression(node)) {
+        return true
+    }
+}
+
+/**
+ * Determines whether a node is a variable declaration
+ */
+pub fn isVariableDeclaration(node: AstNode) -> bool {
+    // TODO:: judging by kind will be faster than taking the entire collection. if the execution speed slows down, modify it.
+    for (variableDeclaration in VariableDeclaration(__all_data__)) {
+        if (variableDeclaration.key_eq(node)) {
+            return true
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a functionLike Declaration
+ */
+pub fn isFunctionLikeDeclaration(node: AstNode) -> bool {
+    // TODO:: judging by kind will be faster than taking the entire collection. if the execution speed slows down, modify it.
+    for (functionLikeDeclaration in FunctionLikeDeclaration(__all_data__)) {
+        if (functionLikeDeclaration.key_eq(node)) {
+            return true
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a expression
+ */
+pub fn isExpression(node: AstNode) -> bool {
+    // TODO:: judging by kind will be faster than taking the entire collection. if the execution speed slows down, modify it.
+    for (expression in Expression(__all_data__)) {
+        if (expression.key_eq(node)) {
+            return true
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a callExpression
+ */
+pub fn isCallExpression(node: AstNode) -> bool {
+    // TODO:: judging by kind will be faster than taking the entire collection. if the execution speed slows down, modify it.
+    for (expression in CallExpression(__all_data__)) {
+        if (expression.key_eq(node)) {
+            return true
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a moduleDeclaration
+ */
+pub fn isModuleDeclaration(astNode: AstNode) -> bool {
+    for (moduleDeclaration in ModuleDeclaration(__all_data__)) {
+        if (moduleDeclaration.key_eq(astNode)) {
+            return true
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a Identifier
+ */
+pub fn isIdentifier(node: AstNode) -> bool {
+    // TODO:: judging by kind will be faster than taking the entire collection. if the execution speed slows down, modify it.
+    for (identifier in Identifier(__all_data__)) {
+        if (identifier.key_eq(node)) {
+            return true
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a PropertyAccessExpression
+ */
+pub fn isPropertyAccessExpression(node: AstNode) -> bool {
+    // TODO:: judging by kind will be faster than taking the entire collection. if the execution speed slows down, modify it.
+    for (propertyAccessExpression in PropertyAccessExpression(__all_data__)) {
+        if (propertyAccessExpression.key_eq(node)) {
+            return true
+        }
+    }
+}
+
+/**
+ * Determines whether a node is a ArrowFunction
+ */
+pub fn isArrowFunction(node: AstNode) -> bool {
+    // TODO:: judging by kind will be faster than taking the entire collection. if the execution speed slows down, modify it.
+    for (arrowFunction in ArrowFunction(__all_data__)) {
+        if (arrowFunction.key_eq(node)) {
+            return true
+        }
+    }
+}
+
+/*
+ * package name deal
+ */
+@inline
+fn packageNameDeal(tmp: string) -> string {
+    if (tmp.contains(".d.ts") || tmp.contains(".d.ets")) {
+        return tmp.get_regex_match_result("(.*)\\.d(.*)", 1)
+    }
+    if (!tmp.contains(".d.ts") && !tmp.contains(".d.ets")) {
+        return tmp.get_regex_match_result("(.*)\\.(.*)", 1)
+    }
+} 

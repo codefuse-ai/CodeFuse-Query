@@ -1,0 +1,936 @@
+/**
+ * A NullLiteral
+ */
+schema NullLiteral extends PrimaryExpression {
+}
+
+impl NullLiteral {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *NullLiteral {
+        for (fa in PrimaryExpression(db)) {
+            for (son in NullLiteralDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield NullLiteral {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A TrueLiteral
+ */
+schema TrueLiteral extends PrimaryExpression {
+}
+
+impl TrueLiteral {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *TrueLiteral {
+        for (fa in PrimaryExpression(db)) {
+            for (son in TrueLiteralDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield TrueLiteral {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A FalseLiteral
+ */
+schema FalseLiteral extends PrimaryExpression {
+}
+
+impl FalseLiteral {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *FalseLiteral {
+        for (fa in PrimaryExpression(db)) {
+            for (son in FalseLiteralDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield FalseLiteral {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A LiteralLikeNode
+ */
+schema LiteralLikeNode extends AstNode {
+    value: string
+}
+
+impl LiteralLikeNode {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *LiteralLikeNode {
+        for (fa in AstNode(db)) {
+            for (son in LiteralLikeNodeDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield LiteralLikeNode {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        value : son.value
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the value.
+     */
+    pub fn getValue(self) -> string {
+        return self.value
+    }
+    
+}
+
+/**
+ * A NumericLiteral
+ */
+schema NumericLiteral extends LiteralExpression {
+    flags: int
+}
+
+impl NumericLiteral {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *NumericLiteral {
+        for (fa in LiteralExpression(db)) {
+            for (son in NumericLiteralDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield NumericLiteral {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        value : fa.value,
+                        flags : son.flags
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the flags.
+     */
+    pub fn getFlags(self) -> int {
+        return self.flags
+    }
+    
+    /**
+     * trans to Declaration to use func.
+     */
+    pub fn toDeclaration(self) -> Declaration {
+        for (declaration in Declaration(__all_data__)) {
+            if (self.id = declaration.id) {
+                return declaration
+            }
+        }
+    }
+    
+}
+
+/**
+ * A BigIntLiteral
+ */
+schema BigIntLiteral extends LiteralExpression {
+}
+
+impl BigIntLiteral {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *BigIntLiteral {
+        for (fa in LiteralExpression(db)) {
+            for (son in BigIntLiteralDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield BigIntLiteral {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        value : fa.value,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A StringLiteral
+ */
+schema StringLiteral extends LiteralExpression {
+    single_quote: int
+}
+
+impl StringLiteral {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *StringLiteral {
+        for (fa in LiteralExpression(db)) {
+            for (son in StringLiteralDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield StringLiteral {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        value : fa.value,
+                        single_quote : son.single_quote
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the singleQuote.
+     */
+    pub fn getSingleQuote(self) -> bool {
+        return self.single_quote = 1
+    }
+    
+    /**
+     * trans to Declaration to use func.
+     */
+    pub fn toDeclaration(self) -> Declaration {
+        for (declaration in Declaration(__all_data__)) {
+            if (self.id = declaration.id) {
+                return declaration
+            }
+        }
+    }
+    
+}
+
+/**
+ * A RegularExpressionLiteral
+ */
+schema RegularExpressionLiteral extends LiteralExpression {
+}
+
+impl RegularExpressionLiteral {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *RegularExpressionLiteral {
+        for (fa in LiteralExpression(db)) {
+            for (son in RegularExpressionLiteralDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield RegularExpressionLiteral {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        value : fa.value,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+}
+
+/**
+ * A TemplateLiteralLikeNode
+ */
+schema TemplateLiteralLikeNode extends LiteralLikeNode {
+    raw_text: string
+}
+
+impl TemplateLiteralLikeNode {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *TemplateLiteralLikeNode {
+        for (fa in LiteralLikeNode(db)) {
+            for (son in TemplateLiteralLikeNodeDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield TemplateLiteralLikeNode {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        value : fa.value,
+                        raw_text : son.raw_text
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the rawText.
+     */
+    pub fn getRawText(self) -> string {
+        return self.raw_text
+    }
+    
+}
+
+/**
+ * A NoSubstitutionTemplateLiteral
+ */
+schema NoSubstitutionTemplateLiteral extends LiteralExpression {
+}
+
+impl NoSubstitutionTemplateLiteral {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *NoSubstitutionTemplateLiteral {
+        for (fa in LiteralExpression(db)) {
+            for (son in NoSubstitutionTemplateLiteralDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield NoSubstitutionTemplateLiteral {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                        value : fa.value,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * trans to TemplateLiteralLikeNode to use func.
+     */
+    pub fn toTemplateLiteralLikeNode(self) -> TemplateLiteralLikeNode {
+        for (templateLiteralLikeNode in TemplateLiteralLikeNode(__all_data__)) {
+            if (self.id = templateLiteralLikeNode.id) {
+                return templateLiteralLikeNode
+            }
+        }
+    }
+    
+    /**
+     * trans to Declaration to use func.
+     */
+    pub fn toDeclaration(self) -> Declaration {
+        for (declaration in Declaration(__all_data__)) {
+            if (self.id = declaration.id) {
+                return declaration
+            }
+        }
+    }
+    
+}
+
+/**
+ * A ObjectLiteralElement
+ */
+schema ObjectLiteralElement extends Declaration {
+}
+
+impl ObjectLiteralElement {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ObjectLiteralElement {
+        for (fa in Declaration(db)) {
+            for (son in ObjectLiteralElementDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield ObjectLiteralElement {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Get the nameNode.
+     */
+    pub fn getNameNode(self) -> PropertyName {
+        for (objectLiteralElementNameNode in ObjectLiteralElementNameNode(__all_data__)) {
+            if (objectLiteralElementNameNode.object_literal_element_id = self.id) {
+                return objectLiteralElementNameNode.getNameNode()
+            }
+        }
+    }
+    
+
+    /**
+     * Gets the name of this ObjectLiteralElement.
+     */
+    pub fn getName(self) -> string {
+        for (objectLiteralElementNameNode in ObjectLiteralElementNameNode(__all_data__)) {
+            if (self.key_eq(objectLiteralElementNameNode)) {
+                return objectLiteralElementNameNode.getNameNode().getName()
+            }
+        }
+    }
+}
+
+/**
+ * A ObjectLiteralElementNameNode
+ */
+schema ObjectLiteralElementNameNode {
+    @primary object_literal_element_id: int,
+    name_node_id: int
+}
+
+impl ObjectLiteralElementNameNode {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ObjectLiteralElementNameNode {
+        for (objectLiteralElementNameNode in ObjectLiteralElementNameNodeDO(db)) {
+            yield ObjectLiteralElementNameNode {
+                object_literal_element_id: objectLiteralElementNameNode.object_literal_element_id,
+                name_node_id : objectLiteralElementNameNode.name_node_id
+            }
+        }
+    }
+    
+    /**
+     * Gets the objectLiteralElement.
+     */
+    pub fn getObjectLiteralElement(self) -> ObjectLiteralElement {
+        for (objectLiteralElement in ObjectLiteralElement(__all_data__)) {
+            if (self.object_literal_element_id = objectLiteralElement.id) {
+                return objectLiteralElement
+            }
+        }
+    }
+    
+    /**
+     * Gets the nameNode.
+     */
+    pub fn getNameNode(self) -> PropertyName {
+        for (propertyName in PropertyName(__all_data__)) {
+            if (self.name_node_id = propertyName.id) {
+                return propertyName
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.object_literal_element_id
+    }
+    
+}
+
+/**
+ * A ObjectLiteralExpression
+ */
+schema ObjectLiteralExpression extends PrimaryExpression {
+}
+
+impl ObjectLiteralExpression {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ObjectLiteralExpression {
+        for (fa in PrimaryExpression(db)) {
+            for (son in ObjectLiteralExpressionDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield ObjectLiteralExpression {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * trans to Declaration to use func.
+     */
+    pub fn toDeclaration(self) -> Declaration {
+        for (declaration in Declaration(__all_data__)) {
+            if (self.id = declaration.id) {
+                return declaration
+            }
+        }
+    }
+    
+    /**
+     * Get the property.
+     */
+    pub fn getProperty(self) -> *ObjectLiteralElement {
+        for (objectLiteralExpressionProperty in ObjectLiteralExpressionProperty(__all_data__)) {
+            if (objectLiteralExpressionProperty.object_literal_expression_id = self.id) {
+                yield objectLiteralExpressionProperty.getProperty()
+            }
+        }
+    }
+    
+
+    /**
+     * Get the `i`th property.
+     */
+    pub fn getIthProperty(self, index: int) -> ObjectLiteralElement {
+        for (objectLiteralExpressionProperty in ObjectLiteralExpressionProperty(__all_data__)) {
+            if (objectLiteralExpressionProperty.object_literal_expression_id = self.id
+                && objectLiteralExpressionProperty.getIndex() = index) {
+                return objectLiteralExpressionProperty.getProperty()
+            }
+        }
+    }
+
+    /**
+     * Get the property of this ObjectLiteralExpression by name.
+     */
+    pub fn getPropertyByName(self, name: string) -> ObjectLiteralElement {
+        for (objectLiteralElement in self.getProperty()) {
+            if (objectLiteralElement.getName() = name) {
+                return objectLiteralElement
+            }
+        }
+    }
+}
+
+/**
+ * A ObjectLiteralExpressionProperty
+ */
+schema ObjectLiteralExpressionProperty {
+    @primary property_id: int,
+    object_literal_expression_id: int,
+    index: int
+}
+
+impl ObjectLiteralExpressionProperty {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *ObjectLiteralExpressionProperty {
+        for (objectLiteralExpressionProperty in ObjectLiteralExpressionPropertyDO(db)) {
+            yield ObjectLiteralExpressionProperty {
+                property_id: objectLiteralExpressionProperty.property_id,
+                object_literal_expression_id : objectLiteralExpressionProperty.object_literal_expression_id,
+                index : objectLiteralExpressionProperty.index
+            }
+        }
+    }
+    
+    /**
+     * Gets the property.
+     */
+    pub fn getProperty(self) -> ObjectLiteralElement {
+        for (objectLiteralElement in ObjectLiteralElement(__all_data__)) {
+            if (self.property_id = objectLiteralElement.id) {
+                return objectLiteralElement
+            }
+        }
+    }
+    
+    /**
+     * Gets the objectLiteralExpression.
+     */
+    pub fn getObjectLiteralExpression(self) -> ObjectLiteralExpression {
+        for (objectLiteralExpression in ObjectLiteralExpression(__all_data__)) {
+            if (self.object_literal_expression_id = objectLiteralExpression.id) {
+                return objectLiteralExpression
+            }
+        }
+    }
+    
+    /**
+     * Gets the index.
+     */
+    pub fn getIndex(self) -> int {
+        return self.index
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.property_id
+    }
+    
+}
+
+/**
+ * This type consists of the following types: [StringLiteral, NoSubstitutionTemplateLiteral]
+ */
+schema StringLiteralLike extends AstNode {
+}
+
+impl StringLiteralLike {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *StringLiteralLike {
+        for (stringLiteral in StringLiteral(db)) {
+            yield StringLiteralLike {
+                id : stringLiteral.id,
+                kind : stringLiteral.kind,
+                parent_id : stringLiteral.parent_id,
+                parent_kind : stringLiteral.parent_kind,
+                index : stringLiteral.index,
+                location_id : stringLiteral.location_id,
+            }
+        }
+        for (noSubstitutionTemplateLiteral in NoSubstitutionTemplateLiteral(db)) {
+            yield StringLiteralLike {
+                id : noSubstitutionTemplateLiteral.id,
+                kind : noSubstitutionTemplateLiteral.kind,
+                parent_id : noSubstitutionTemplateLiteral.parent_id,
+                parent_kind : noSubstitutionTemplateLiteral.parent_kind,
+                index : noSubstitutionTemplateLiteral.index,
+                location_id : noSubstitutionTemplateLiteral.location_id,
+            }
+        }
+    }
+
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * trans to StringLiteral
+     */
+    pub fn toStringLiteral(self) -> StringLiteral {
+        for (stringLiteral in StringLiteral(__all_data__)) {
+            if (stringLiteral.key_eq(self)) {
+                return stringLiteral
+            }
+        }
+    }
+    
+    /**
+     * trans to NoSubstitutionTemplateLiteral
+     */
+    pub fn toNoSubstitutionTemplateLiteral(self) -> NoSubstitutionTemplateLiteral {
+        for (noSubstitutionTemplateLiteral in NoSubstitutionTemplateLiteral(__all_data__)) {
+            if (noSubstitutionTemplateLiteral.key_eq(self)) {
+                return noSubstitutionTemplateLiteral
+            }
+        }
+    }
+    
+}
+
+/**
+ * This type consists of the following types: [TrueLiteral, FalseLiteral]
+ */
+schema BooleanLiteral extends AstNode {
+}
+
+impl BooleanLiteral {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *BooleanLiteral {
+        for (trueLiteral in TrueLiteral(db)) {
+            yield BooleanLiteral {
+                id : trueLiteral.id,
+                kind : trueLiteral.kind,
+                parent_id : trueLiteral.parent_id,
+                parent_kind : trueLiteral.parent_kind,
+                index : trueLiteral.index,
+                location_id : trueLiteral.location_id,
+            }
+        }
+        for (falseLiteral in FalseLiteral(db)) {
+            yield BooleanLiteral {
+                id : falseLiteral.id,
+                kind : falseLiteral.kind,
+                parent_id : falseLiteral.parent_id,
+                parent_kind : falseLiteral.parent_kind,
+                index : falseLiteral.index,
+                location_id : falseLiteral.location_id,
+            }
+        }
+    }
+
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * trans to TrueLiteral
+     */
+    pub fn toTrueLiteral(self) -> TrueLiteral {
+        for (trueLiteral in TrueLiteral(__all_data__)) {
+            if (trueLiteral.key_eq(self)) {
+                return trueLiteral
+            }
+        }
+    }
+    
+    /**
+     * trans to FalseLiteral
+     */
+    pub fn toFalseLiteral(self) -> FalseLiteral {
+        for (falseLiteral in FalseLiteral(__all_data__)) {
+            if (falseLiteral.key_eq(self)) {
+                return falseLiteral
+            }
+        }
+    }
+    
+}
+
+/**
+ * This type consists of the following types: [NullLiteral, LiteralExpression, PrefixUnaryExpression, TrueLiteral, FalseLiteral]
+ */
+schema LiteralTypeLiteralType extends AstNode {
+}
+
+impl LiteralTypeLiteralType {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *LiteralTypeLiteralType {
+        for (nullLiteral in NullLiteral(db)) {
+            yield LiteralTypeLiteralType {
+                id : nullLiteral.id,
+                kind : nullLiteral.kind,
+                parent_id : nullLiteral.parent_id,
+                parent_kind : nullLiteral.parent_kind,
+                index : nullLiteral.index,
+                location_id : nullLiteral.location_id,
+            }
+        }
+        for (literalExpression in LiteralExpression(db)) {
+            yield LiteralTypeLiteralType {
+                id : literalExpression.id,
+                kind : literalExpression.kind,
+                parent_id : literalExpression.parent_id,
+                parent_kind : literalExpression.parent_kind,
+                index : literalExpression.index,
+                location_id : literalExpression.location_id,
+            }
+        }
+        for (prefixUnaryExpression in PrefixUnaryExpression(db)) {
+            yield LiteralTypeLiteralType {
+                id : prefixUnaryExpression.id,
+                kind : prefixUnaryExpression.kind,
+                parent_id : prefixUnaryExpression.parent_id,
+                parent_kind : prefixUnaryExpression.parent_kind,
+                index : prefixUnaryExpression.index,
+                location_id : prefixUnaryExpression.location_id,
+            }
+        }
+        for (trueLiteral in TrueLiteral(db)) {
+            yield LiteralTypeLiteralType {
+                id : trueLiteral.id,
+                kind : trueLiteral.kind,
+                parent_id : trueLiteral.parent_id,
+                parent_kind : trueLiteral.parent_kind,
+                index : trueLiteral.index,
+                location_id : trueLiteral.location_id,
+            }
+        }
+        for (falseLiteral in FalseLiteral(db)) {
+            yield LiteralTypeLiteralType {
+                id : falseLiteral.id,
+                kind : falseLiteral.kind,
+                parent_id : falseLiteral.parent_id,
+                parent_kind : falseLiteral.parent_kind,
+                index : falseLiteral.index,
+                location_id : falseLiteral.location_id,
+            }
+        }
+    }
+
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * trans to NullLiteral
+     */
+    pub fn toNullLiteral(self) -> NullLiteral {
+        for (nullLiteral in NullLiteral(__all_data__)) {
+            if (nullLiteral.key_eq(self)) {
+                return nullLiteral
+            }
+        }
+    }
+    
+    /**
+     * trans to LiteralExpression
+     */
+    pub fn toLiteralExpression(self) -> LiteralExpression {
+        for (literalExpression in LiteralExpression(__all_data__)) {
+            if (literalExpression.key_eq(self)) {
+                return literalExpression
+            }
+        }
+    }
+    
+    /**
+     * trans to PrefixUnaryExpression
+     */
+    pub fn toPrefixUnaryExpression(self) -> PrefixUnaryExpression {
+        for (prefixUnaryExpression in PrefixUnaryExpression(__all_data__)) {
+            if (prefixUnaryExpression.key_eq(self)) {
+                return prefixUnaryExpression
+            }
+        }
+    }
+    
+    /**
+     * trans to TrueLiteral
+     */
+    pub fn toTrueLiteral(self) -> TrueLiteral {
+        for (trueLiteral in TrueLiteral(__all_data__)) {
+            if (trueLiteral.key_eq(self)) {
+                return trueLiteral
+            }
+        }
+    }
+    
+    /**
+     * trans to FalseLiteral
+     */
+    pub fn toFalseLiteral(self) -> FalseLiteral {
+        for (falseLiteral in FalseLiteral(__all_data__)) {
+            if (falseLiteral.key_eq(self)) {
+                return falseLiteral
+            }
+        }
+    }
+    
+}
+

@@ -1,0 +1,1664 @@
+{
+    "@kit.GameServiceKit": [
+        "sdk/hms/ets/kits/@kit.GameServiceKit.d.ts"
+    ],
+    "@kit.StoreKit": [
+        "sdk/hms/ets/kits/@kit.StoreKit.d.ts"
+    ],
+    "@kit.ScanKit": [
+        "sdk/hms/ets/kits/@kit.ScanKit.d.ts"
+    ],
+    "@kit.StatusBarExtensionKit": [
+        "sdk/hms/ets/kits/@kit.StatusBarExtensionKit.d.ts"
+    ],
+    "@kit.RemoteCommunicationKit": [
+        "sdk/hms/ets/kits/@kit.RemoteCommunicationKit.d.ts"
+    ],
+    "@kit.IAPKit": [
+        "sdk/hms/ets/kits/@kit.IAPKit.d.ts"
+    ],
+    "@kit.WalletKit": [
+        "sdk/hms/ets/kits/@kit.WalletKit.d.ts"
+    ],
+    "@kit.CarKit": [
+        "sdk/hms/ets/kits/@kit.CarKit.d.ts"
+    ],
+    "@kit.IntentsKit": [
+        "sdk/hms/ets/kits/@kit.IntentsKit.d.ts"
+    ],
+    "@kit.CoreVisionKit": [
+        "sdk/hms/ets/kits/@kit.CoreVisionKit.d.ts"
+    ],
+    "@kit.CoreSpeechKit": [
+        "sdk/hms/ets/kits/@kit.CoreSpeechKit.d.ts"
+    ],
+    "@kit.VisionKit": [
+        "sdk/hms/ets/kits/@kit.VisionKit.d.ts"
+    ],
+    "@kit.SpeechKit": [
+        "sdk/hms/ets/kits/@kit.SpeechKit.d.ts"
+    ],
+    "@kit.CallKit": [
+        "sdk/hms/ets/kits/@kit.CallKit.d.ts"
+    ],
+    "@kit.MapKit": [
+        "sdk/hms/ets/kits/@kit.MapKit.d.ts"
+    ],
+    "@kit.ShareKit": [
+        "sdk/hms/ets/kits/@kit.ShareKit.d.ts"
+    ],
+    "@kit.PreviewKit": [
+        "sdk/hms/ets/kits/@kit.PreviewKit.d.ts"
+    ],
+    "@kit.PaymentKit": [
+        "sdk/hms/ets/kits/@kit.PaymentKit.d.ts"
+    ],
+    "@kit.ServiceCollaborationKit": [
+        "sdk/hms/ets/kits/@kit.ServiceCollaborationKit.d.ts"
+    ],
+    "@kit.CloudFoundationKit": [
+        "sdk/hms/ets/kits/@kit.CloudFoundationKit.d.ts"
+    ],
+    "@kit.DeviceSecurityKit": [
+        "sdk/hms/ets/kits/@kit.DeviceSecurityKit.d.ts"
+    ],
+    "@kit.NaturalLanguageKit": [
+        "sdk/hms/ets/kits/@kit.NaturalLanguageKit.d.ts"
+    ],
+    "@kit.LiveViewKit": [
+        "sdk/hms/ets/kits/@kit.LiveViewKit.d.ts"
+    ],
+    "@kit.PushKit": [
+        "sdk/hms/ets/kits/@kit.PushKit.d.ts"
+    ],
+    "@kit.OnlineAuthenticationKit": [
+        "sdk/hms/ets/kits/@kit.OnlineAuthenticationKit.d.ts"
+    ],
+    "@kit.Penkit": [
+        "sdk/hms/ets/kits/@kit.Penkit.d.ts"
+    ],
+    "@kit.EnterpriseDataGuardKit": [
+        "sdk/hms/ets/kits/@kit.EnterpriseDataGuardKit.d.ts"
+    ],
+    "@kit.ScenarioFusionKit": [
+        "sdk/hms/ets/kits/@kit.ScenarioFusionKit.d.ts"
+    ],
+    "@kit.HealthServiceKit": [
+        "sdk/hms/ets/kits/@kit.HealthServiceKit.d.ts"
+    ],
+    "@kit.PDFKit": [
+        "sdk/hms/ets/kits/@kit.PDFKit.d.ts"
+    ],
+    "@kit.AccountKit": [
+        "sdk/hms/ets/kits/@kit.AccountKit.d.ts"
+    ],
+    "@hms.ai.face.faceDetector": [
+        "sdk/hms/ets/api/@hms.ai.face.faceDetector.d.ts"
+    ],
+    "@hms.health.store": [
+        "sdk/hms/ets/api/@hms.health.store.d.ts"
+    ],
+    "@hms.core.appgalleryservice.updateManager": [
+        "sdk/hms/ets/api/@hms.core.appgalleryservice.updateManager.d.ts"
+    ],
+    "@hms.telephony.voipCall": [
+        "sdk/hms/ets/api/@hms.telephony.voipCall.d.ts"
+    ],
+    "@hms.core.map.mapCommon": [
+        "sdk/hms/ets/api/@hms.core.map.mapCommon.d.ts"
+    ],
+    "@hms.collaboration.devicePicker": [
+        "sdk/hms/ets/api/@hms.collaboration.devicePicker.d.ts"
+    ],
+    "@hms.core.account.shippingAddress": [
+        "sdk/hms/ets/api/@hms.core.account.shippingAddress.d.ts"
+    ],
+    "@hms.security.ifaa": [
+        "sdk/hms/ets/api/@hms.security.ifaa.d.ts"
+    ],
+    "@hms.security.trustedAppService": [
+        "sdk/hms/ets/api/@hms.security.trustedAppService.d.ts"
+    ],
+    "@hms.core.map.site": [
+        "sdk/hms/ets/api/@hms.core.map.site.d.ts"
+    ],
+    "@hms.ai.textReader": [
+        "sdk/hms/ets/api/@hms.ai.textReader.d.ets"
+    ],
+    "@hms.core.map.sceneMap": [
+        "sdk/hms/ets/api/@hms.core.map.sceneMap.d.ts"
+    ],
+    "@hms.ai.textToSpeech": [
+        "sdk/hms/ets/api/@hms.ai.textToSpeech.d.ts"
+    ],
+    "@hms.pcService.statusBarManager": [
+        "sdk/hms/ets/api/@hms.pcService.statusBarManager.d.ts"
+    ],
+    "@hms.stylus.HandwriteComponent": [
+        "sdk/hms/ets/api/@hms.stylus.HandwriteComponent.d.ets"
+    ],
+    "@hms.core.account.realname": [
+        "sdk/hms/ets/api/@hms.core.account.realname.d.ts"
+    ],
+    "@hms.stylus.handwrite": [
+        "sdk/hms/ets/api/@hms.stylus.handwrite.d.ts"
+    ],
+    "@hms.core.account.LoginComponent": [
+        "sdk/hms/ets/api/@hms.core.account.LoginComponent.d.ets"
+    ],
+    "@hms.core.appgalleryservice.attributionManager": [
+        "sdk/hms/ets/api/@hms.core.appgalleryservice.attributionManager.d.ts"
+    ],
+    "@hms.core.scan.customScan": [
+        "sdk/hms/ets/api/@hms.core.scan.customScan.d.ts"
+    ],
+    "@hms.core.push.serviceNotification": [
+        "sdk/hms/ets/api/@hms.core.push.serviceNotification.d.ts"
+    ],
+    "@hms.core.iap": [
+        "sdk/hms/ets/api/@hms.core.iap.d.ts"
+    ],
+    "@hms.carService.navigationInfoMgr": [
+        "sdk/hms/ets/api/@hms.carService.navigationInfoMgr.d.ts"
+    ],
+    "@hms.core.scan.detectBarcode": [
+        "sdk/hms/ets/api/@hms.core.scan.detectBarcode.d.ts"
+    ],
+    "@hms.core.deviceCloudGateway.cloudFunction": [
+        "sdk/hms/ets/api/@hms.core.deviceCloudGateway.cloudFunction.d.ts"
+    ],
+    "@hms.collaboration.CollaborationDevicePicker": [
+        "sdk/hms/ets/api/@hms.collaboration.CollaborationDevicePicker.d.ets"
+    ],
+    "@hms.core.appgalleryservice.productViewManager": [
+        "sdk/hms/ets/api/@hms.core.appgalleryservice.productViewManager.d.ts"
+    ],
+    "@hms.core.account.minorsProtection": [
+        "sdk/hms/ets/api/@hms.core.account.minorsProtection.d.ts"
+    ],
+    "@hms.ai.CardRecognition": [
+        "sdk/hms/ets/api/@hms.ai.CardRecognition.d.ets"
+    ],
+    "@hms.core.liveview.LiveViewLockScreenExtensionAbility": [
+        "sdk/hms/ets/api/@hms.core.liveview.LiveViewLockScreenExtensionAbility.d.ts"
+    ],
+    "@hms.core.map.navi": [
+        "sdk/hms/ets/api/@hms.core.map.navi.d.ts"
+    ],
+    "@hms.pcService.StatusBarViewExtensionAbility": [
+        "sdk/hms/ets/api/@hms.pcService.StatusBarViewExtensionAbility.d.ts"
+    ],
+    "@hms.core.scan.scanBarcode": [
+        "sdk/hms/ets/api/@hms.core.scan.scanBarcode.d.ts"
+    ],
+    "@hms.core.authentication": [
+        "sdk/hms/ets/api/@hms.core.authentication.d.ts"
+    ],
+    "@hms.ai.vision.subjectSegmentation": [
+        "sdk/hms/ets/api/@hms.ai.vision.subjectSegmentation.d.ts"
+    ],
+    "@hms.core.map.map": [
+        "sdk/hms/ets/api/@hms.core.map.map.d.ts"
+    ],
+    "@hms.bundle.sceneManager": [
+        "sdk/hms/ets/api/@hms.bundle.sceneManager.d.ts"
+    ],
+    "@hms.core.payment.walletTransitCard": [
+        "sdk/hms/ets/api/@hms.core.payment.walletTransitCard.d.ts"
+    ],
+    "@hms.core.atomicserviceComponent.atomicserviceUi": [
+        "sdk/hms/ets/api/@hms.core.atomicserviceComponent.atomicserviceUi.d.ets"
+    ],
+    "@hms.core.deviceCloudGateway.cloudCommon": [
+        "sdk/hms/ets/api/@hms.core.deviceCloudGateway.cloudCommon.d.ts"
+    ],
+    "@hms.ai.face.faceComparator": [
+        "sdk/hms/ets/api/@hms.ai.face.faceComparator.d.ts"
+    ],
+    "@hms.health.service": [
+        "sdk/hms/ets/api/@hms.health.service.d.ts"
+    ],
+    "@hms.core.push.pushService": [
+        "sdk/hms/ets/api/@hms.core.push.pushService.d.ts"
+    ],
+    "@hms.core.account.invoiceAssistant": [
+        "sdk/hms/ets/api/@hms.core.account.invoiceAssistant.d.ts"
+    ],
+    "@hms.ai.insightIntent": [
+        "sdk/hms/ets/api/@hms.ai.insightIntent.d.ts"
+    ],
+    "@hms.core.payment.walletPass": [
+        "sdk/hms/ets/api/@hms.core.payment.walletPass.d.ts"
+    ],
+    "@hms.core.liveview.LiveViewLockScreenExtensionContext": [
+        "sdk/hms/ets/api/@hms.core.liveview.LiveViewLockScreenExtensionContext.d.ts"
+    ],
+    "@hms.collaboration.systemShare": [
+        "sdk/hms/ets/api/@hms.collaboration.systemShare.d.ts"
+    ],
+    "@hms.core.scan.generateBarcode": [
+        "sdk/hms/ets/api/@hms.core.scan.generateBarcode.d.ts"
+    ],
+    "@hms.core.gameservice.gameperformance": [
+        "sdk/hms/ets/api/@hms.core.gameservice.gameperformance.d.ts"
+    ],
+    "@hms.global.taboo": [
+        "sdk/hms/ets/api/@hms.global.taboo.d.ts"
+    ],
+    "@hms.ai.nlp.textProcessing": [
+        "sdk/hms/ets/api/@hms.ai.nlp.textProcessing.d.ts"
+    ],
+    "@hms.collaboration.service": [
+        "sdk/hms/ets/api/@hms.collaboration.service.d.ets"
+    ],
+    "@hms.core.push.RemoteNotificationExtensionAbility": [
+        "sdk/hms/ets/api/@hms.core.push.RemoteNotificationExtensionAbility.d.ts"
+    ],
+    "@hms.ai.interactiveLiveness": [
+        "sdk/hms/ets/api/@hms.ai.interactiveLiveness.d.ts"
+    ],
+    "@hms.ai.ocr.textRecognition": [
+        "sdk/hms/ets/api/@hms.ai.ocr.textRecognition.d.ts"
+    ],
+    "@hms.collaboration.camera": [
+        "sdk/hms/ets/api/@hms.collaboration.camera.d.ets"
+    ],
+    "@hms.core.scan.scanCore": [
+        "sdk/hms/ets/api/@hms.core.scan.scanCore.d.ts"
+    ],
+    "@hms.core.gameservice.gameplayer": [
+        "sdk/hms/ets/api/@hms.core.gameservice.gameplayer.d.ts"
+    ],
+    "@hms.security.safetyDetect": [
+        "sdk/hms/ets/api/@hms.security.safetyDetect.d.ts"
+    ],
+    "@hms.core.atomicserviceComponent.atomicservice": [
+        "sdk/hms/ets/api/@hms.core.atomicserviceComponent.atomicservice.d.ets"
+    ],
+    "@hms.core.appgalleryservice.attributionTestManager": [
+        "sdk/hms/ets/api/@hms.core.appgalleryservice.attributionTestManager.d.ts"
+    ],
+    "@hms.ai.DocumentScanner": [
+        "sdk/hms/ets/api/@hms.ai.DocumentScanner.d.ets"
+    ],
+    "@hms.core.AAID": [
+        "sdk/hms/ets/api/@hms.core.AAID.d.ts"
+    ],
+    "@hms.security.fido": [
+        "sdk/hms/ets/api/@hms.security.fido.d.ts"
+    ],
+    "@hms.core.payment.paymentService": [
+        "sdk/hms/ets/api/@hms.core.payment.paymentService.d.ts"
+    ],
+    "@hms.core.map.MapComponent": [
+        "sdk/hms/ets/api/@hms.core.map.MapComponent.d.ets"
+    ],
+    "@hms.core.push.RemoteNotificationExtensionContext": [
+        "sdk/hms/ets/api/@hms.core.push.RemoteNotificationExtensionContext.d.ts"
+    ],
+    "@hms.collaboration.rcp": [
+        "sdk/hms/ets/api/@hms.collaboration.rcp.d.ts"
+    ],
+    "@hms.pcService.fileGuard": [
+        "sdk/hms/ets/api/@hms.pcService.fileGuard.d.ts"
+    ],
+    "@hms.core.appgalleryservice.moduleInstallManager": [
+        "sdk/hms/ets/api/@hms.core.appgalleryservice.moduleInstallManager.d.ts"
+    ],
+    "@hms.core.push.VoIPExtensionContext": [
+        "sdk/hms/ets/api/@hms.core.push.VoIPExtensionContext.d.ts"
+    ],
+    "@hms.core.push.RemoteLocationExtensionAbility": [
+        "sdk/hms/ets/api/@hms.core.push.RemoteLocationExtensionAbility.d.ts"
+    ],
+    "@hms.core.deviceCloudGateway.cloudStorage": [
+        "sdk/hms/ets/api/@hms.core.deviceCloudGateway.cloudStorage.d.ts"
+    ],
+    "@hms.filemanagement.filepreview": [
+        "sdk/hms/ets/api/@hms.filemanagement.filepreview.d.ts"
+    ],
+    "@hms.core.push.PushExtensionContext": [
+        "sdk/hms/ets/api/@hms.core.push.PushExtensionContext.d.ts"
+    ],
+    "@hms.security.deviceCertificate": [
+        "sdk/hms/ets/api/@hms.security.deviceCertificate.d.ts"
+    ],
+    "@hms.ai.speechRecognizer": [
+        "sdk/hms/ets/api/@hms.ai.speechRecognizer.d.ts"
+    ],
+    "@hms.core.push.pushCommon": [
+        "sdk/hms/ets/api/@hms.core.push.pushCommon.d.ts"
+    ],
+    "@hms.officeservice.pdfservice": [
+        "sdk/hms/ets/api/@hms.officeservice.pdfservice.d.ts"
+    ],
+    "@hms.core.push.PushExtensionAbility": [
+        "sdk/hms/ets/api/@hms.core.push.PushExtensionAbility.d.ts"
+    ],
+    "@hms.core.deviceCloudGateway.cloudDatabase": [
+        "sdk/hms/ets/api/@hms.core.deviceCloudGateway.cloudDatabase.d.ts"
+    ],
+    "@hms.core.account.extendservice": [
+        "sdk/hms/ets/api/@hms.core.account.extendservice.d.ts"
+    ],
+    "@hms.core.map.staticMap": [
+        "sdk/hms/ets/api/@hms.core.map.staticMap.d.ts"
+    ],
+    "@hms.core.push.RemoteLocationExtensionContext": [
+        "sdk/hms/ets/api/@hms.core.push.RemoteLocationExtensionContext.d.ts"
+    ],
+    "@hms.core.liveview.liveViewManager": [
+        "sdk/hms/ets/api/@hms.core.liveview.liveViewManager.d.ts"
+    ],
+    "@hms.core.push.VoIPExtensionAbility": [
+        "sdk/hms/ets/api/@hms.core.push.VoIPExtensionAbility.d.ts"
+    ],
+    "@arkts.math.Decimal": [
+        "sdk/openharmony/ets/arkts/@arkts.math.Decimal.d.ets"
+    ],
+    "@arkts.lang": [
+        "sdk/openharmony/ets/arkts/@arkts.lang.d.ets"
+    ],
+    "@arkts.collections": [
+        "sdk/openharmony/ets/arkts/@arkts.collections.d.ets"
+    ],
+    "@arkts.utils": [
+        "sdk/openharmony/ets/arkts/@arkts.utils.d.ets"
+    ],
+    "@kit.AVSessionKit": [
+        "sdk/openharmony/ets/kits/@kit.AVSessionKit.d.ts"
+    ],
+    "@kit.ArkTS": [
+        "sdk/openharmony/ets/kits/@kit.ArkTS.d.ts"
+    ],
+    "@kit.ArkGraphics3D": [
+        "sdk/openharmony/ets/kits/@kit.ArkGraphics3D.d.ts"
+    ],
+    "@kit.CoreFileKit": [
+        "sdk/openharmony/ets/kits/@kit.CoreFileKit.d.ts"
+    ],
+    "@kit.ConnectivityKit": [
+        "sdk/openharmony/ets/kits/@kit.ConnectivityKit.d.ts"
+    ],
+    "@kit.ContactsKit": [
+        "sdk/openharmony/ets/kits/@kit.ContactsKit.d.ts"
+    ],
+    "@kit.CryptoArchitectureKit": [
+        "sdk/openharmony/ets/kits/@kit.CryptoArchitectureKit.d.ts"
+    ],
+    "@kit.ArkData": [
+        "sdk/openharmony/ets/kits/@kit.ArkData.d.ts"
+    ],
+    "@kit.PerformanceAnalysisKit": [
+        "sdk/openharmony/ets/kits/@kit.PerformanceAnalysisKit.d.ts"
+    ],
+    "@kit.UniversalKeystoreKit": [
+        "sdk/openharmony/ets/kits/@kit.UniversalKeystoreKit.d.ts"
+    ],
+    "@kit.MediaLibraryKit": [
+        "sdk/openharmony/ets/kits/@kit.MediaLibraryKit.d.ts"
+    ],
+    "@kit.UserAuthenticationKit": [
+        "sdk/openharmony/ets/kits/@kit.UserAuthenticationKit.d.ts"
+    ],
+    "@kit.ArkGraphics2D": [
+        "sdk/openharmony/ets/kits/@kit.ArkGraphics2D.d.ts"
+    ],
+    "@kit.DistributedServiceKit": [
+        "sdk/openharmony/ets/kits/@kit.DistributedServiceKit.d.ts"
+    ],
+    "@kit.AdsKit": [
+        "sdk/openharmony/ets/kits/@kit.AdsKit.d.ts"
+    ],
+    "@kit.LocationKit": [
+        "sdk/openharmony/ets/kits/@kit.LocationKit.d.ts"
+    ],
+    "@kit.DataLossPreventionKit": [
+        "sdk/openharmony/ets/kits/@kit.DataLossPreventionKit.d.ts"
+    ],
+    "@kit.IMEKit": [
+        "sdk/openharmony/ets/kits/@kit.IMEKit.d.ts"
+    ],
+    "@kit.DrmKit": [
+        "sdk/openharmony/ets/kits/@kit.DrmKit.d.ts"
+    ],
+    "@kit.NetworkKit": [
+        "sdk/openharmony/ets/kits/@kit.NetworkKit.d.ts"
+    ],
+    "@kit.DeviceCertificateKit": [
+        "sdk/openharmony/ets/kits/@kit.DeviceCertificateKit.d.ts"
+    ],
+    "@kit.InputKit": [
+        "sdk/openharmony/ets/kits/@kit.InputKit.d.ts"
+    ],
+    "@kit.IPCKit": [
+        "sdk/openharmony/ets/kits/@kit.IPCKit.d.ts"
+    ],
+    "@kit.ArkWeb": [
+        "sdk/openharmony/ets/kits/@kit.ArkWeb.d.ts"
+    ],
+    "@kit.CalendarKit": [
+        "sdk/openharmony/ets/kits/@kit.CalendarKit.d.ts"
+    ],
+    "@kit.MDMKit": [
+        "sdk/openharmony/ets/kits/@kit.MDMKit.d.ts"
+    ],
+    "@kit.BasicServicesKit": [
+        "sdk/openharmony/ets/kits/@kit.BasicServicesKit.d.ts"
+    ],
+    "@kit.TelephonyKit": [
+        "sdk/openharmony/ets/kits/@kit.TelephonyKit.d.ts"
+    ],
+    "@kit.MindSporeLiteKit": [
+        "sdk/openharmony/ets/kits/@kit.MindSporeLiteKit.d.ts"
+    ],
+    "@kit.MultimodalAwarenessKit": [
+        "sdk/openharmony/ets/kits/@kit.MultimodalAwarenessKit.d.ts"
+    ],
+    "@kit.BackgroundTasksKit": [
+        "sdk/openharmony/ets/kits/@kit.BackgroundTasksKit.d.ts"
+    ],
+    "@kit.FormKit": [
+        "sdk/openharmony/ets/kits/@kit.FormKit.d.ts"
+    ],
+    "@kit.NotificationKit": [
+        "sdk/openharmony/ets/kits/@kit.NotificationKit.d.ts"
+    ],
+    "@kit.SensorServiceKit": [
+        "sdk/openharmony/ets/kits/@kit.SensorServiceKit.d.ts"
+    ],
+    "@kit.ImageKit": [
+        "sdk/openharmony/ets/kits/@kit.ImageKit.d.ts"
+    ],
+    "@kit.AudioKit": [
+        "sdk/openharmony/ets/kits/@kit.AudioKit.d.ts"
+    ],
+    "@kit.TestKit": [
+        "sdk/openharmony/ets/kits/@kit.TestKit.d.ts"
+    ],
+    "@kit.ArkUI": [
+        "sdk/openharmony/ets/kits/@kit.ArkUI.d.ts"
+    ],
+    "@kit.AccessibilityKit": [
+        "sdk/openharmony/ets/kits/@kit.AccessibilityKit.d.ts"
+    ],
+    "@kit.AssetStoreKit": [
+        "sdk/openharmony/ets/kits/@kit.AssetStoreKit.d.ts"
+    ],
+    "@kit.AbilityKit": [
+        "sdk/openharmony/ets/kits/@kit.AbilityKit.d.ts"
+    ],
+    "@kit.DriverDevelopmentKit": [
+        "sdk/openharmony/ets/kits/@kit.DriverDevelopmentKit.d.ts"
+    ],
+    "@kit.MediaKit": [
+        "sdk/openharmony/ets/kits/@kit.MediaKit.d.ts"
+    ],
+    "@kit.LocalizationKit": [
+        "sdk/openharmony/ets/kits/@kit.LocalizationKit.d.ts"
+    ],
+    "@kit.CameraKit": [
+        "sdk/openharmony/ets/kits/@kit.CameraKit.d.ts"
+    ],
+    "@ohos.wifiext": [
+        "sdk/openharmony/ets/api/@ohos.wifiext.d.ts"
+    ],
+    "@ohos.arkui.advanced.SelectTitleBar": [
+        "sdk/openharmony/ets/api/@ohos.arkui.advanced.SelectTitleBar.d.ets"
+    ],
+    "@ohos.app.ability.autoFillManager": [
+        "sdk/openharmony/ets/api/@ohos.app.ability.autoFillManager.d.ts"
+    ],
+    "@ohos.multimedia.media": [
+        "sdk/openharmony/ets/api/@ohos.multimedia.media.d.ts"
+    ],
+    "@ohos.data.commonType": [
+        "sdk/openharmony/ets/api/@ohos.data.commonType.d.ts"
+    ],
+    "@ohos.arkui.observer": [
+        "sdk/openharmony/ets/api/@ohos.arkui.observer.d.ts"
+    ],
+    "@ohos.deviceInfo": [
+        "sdk/openharmony/ets/api/@ohos.deviceInfo.d.ts"
+    ],
+    "@ohos.enterprise.wifiManager": [
+        "sdk/openharmony/ets/api/@ohos.enterprise.wifiManager.d.ts"
+    ],
+    "@ohos.reminderAgent": [
+        "sdk/openharmony/ets/api/@ohos.reminderAgent.d.ts"
+    ],
+    "@ohos.web.netErrorList": [
+        "sdk/openharmony/ets/api/@ohos.web.netErrorList.d.ts"
+    ],
+    "@ohos.application.formError": [
+        "sdk/openharmony/ets/api/@ohos.application.formError.d.ts"
+    ],
+    "@ohos.data.relationalStore": [
+        "sdk/openharmony/ets/api/@ohos.data.relationalStore.d.ts"
+    ],
+    "@ohos.batteryInfo": [
+        "sdk/openharmony/ets/api/@ohos.batteryInfo.d.ts"
+    ],
+    "@ohos.nfc.cardEmulation": [
+        "sdk/openharmony/ets/api/@ohos.nfc.cardEmulation.d.ts"
+    ],
+    "@ohos.animator": [
+        "sdk/openharmony/ets/api/@ohos.animator.d.ts"
+    ],
+    "@ohos.arkui.advanced.EditableTitleBar": [
+        "sdk/openharmony/ets/api/@ohos.arkui.advanced.EditableTitleBar.d.ets"
+    ],
+    "@ohos.net.networkSecurity": [
+        "sdk/openharmony/ets/api/@ohos.net.networkSecurity.d.ts"
+    ],
+    "@system.prompt": [
+        "sdk/openharmony/ets/api/@system.prompt.d.ts"
+    ],
+    "@system.storage": [
+        "sdk/openharmony/ets/api/@system.storage.d.ts"
+    ],
+    "@ohos.connectedTag": [
+        "sdk/openharmony/ets/api/@ohos.connectedTag.d.ts"
+    ],
+    "@ohos.inputMethodEngine": [
+        "sdk/openharmony/ets/api/@ohos.inputMethodEngine.d.ts"
+    ],
+    "@ohos.enterprise.locationManager": [
+        "sdk/openharmony/ets/api/@ohos.enterprise.locationManager.d.ts"
+    ],
+    "@ohos.enterprise.usbManager": [
+        "sdk/openharmony/ets/api/@ohos.enterprise.usbManager.d.ts"
+    ],
+    "@ohos.graphics.scene": [
+        "sdk/openharmony/ets/api/@ohos.graphics.scene.d.ts"
+    ],
+    "@system.device": [
+        "sdk/openharmony/ets/api/@system.device.d.ts"
+    ],
+    "@ohos.bluetooth.map": [
+        "sdk/openharmony/ets/api/@ohos.bluetooth.map.d.ts"
+    ],
+    "@ohos.settings": [
+        "sdk/openharmony/ets/api/@ohos.settings.d.ts"
+    ],
+    "@ohos.telephony.sim": [
+        "sdk/openharmony/ets/api/@ohos.telephony.sim.d.ts"
+    ],
+    "@ohos.data.ValuesBucket": [
+        "sdk/openharmony/ets/api/@ohos.data.ValuesBucket.d.ts"
+    ],
+    "@system.notification": [
+        "sdk/openharmony/ets/api/@system.notification.d.ts"
+    ],
+    "@ohos.bundle.bundleManager": [
+        "sdk/openharmony/ets/api/@ohos.bundle.bundleManager.d.ts"
+    ],
+    "@ohos.bytrace": [
+        "sdk/openharmony/ets/api/@ohos.bytrace.d.ts"
+    ],
+    "@ohos.bluetooth.hid": [
+        "sdk/openharmony/ets/api/@ohos.bluetooth.hid.d.ts"
+    ],
+    "@ohos.arkui.advanced.GridObjectSortComponent": [
+        "sdk/openharmony/ets/api/@ohos.arkui.advanced.GridObjectSortComponent.d.ets"
+    ],
+    "@ohos.inputMethodList": [
+        "sdk/openharmony/ets/api/@ohos.inputMethodList.d.ets"
+    ],
+    "@ohos.net.mdns": [
+        "sdk/openharmony/ets/api/@ohos.net.mdns.d.ts"
+    ],
+    "@ohos.arkui.advanced.Chip": [
+        "sdk/openharmony/ets/api/@ohos.arkui.advanced.Chip.d.ets"
+    ],
+    "@ohos.telephony.radio": [
+        "sdk/openharmony/ets/api/@ohos.telephony.radio.d.ts"
+    ],
+    "@ohos.app.form.FormExtensionAbility": [
+        "sdk/openharmony/ets/api/@ohos.app.form.FormExtensionAbility.d.ts"
+    ],
+    "@ohos.enterprise.applicationManager": [
+        "sdk/openharmony/ets/api/@ohos.enterprise.applicationManager.d.ts"
+    ],
+    "@ohos.bundleState": [
+        "sdk/openharmony/ets/api/@ohos.bundleState.d.ts"
+    ],
+    "@ohos.arkui.uiExtension": [
+        "sdk/openharmony/ets/api/@ohos.arkui.uiExtension.d.ts"
+    ],
+    "@ohos.arkui.advanced.ToolBar": [
+        "sdk/openharmony/ets/api/@ohos.arkui.advanced.ToolBar.d.ets"
+    ],
+    "@ohos.net.socket": [
+        "sdk/openharmony/ets/api/@ohos.net.socket.d.ts"
+    ],
+    "@ohos.UiTest": [
+        "sdk/openharmony/ets/api/@ohos.UiTest.d.ts"
+    ],
+    "@ohos.display": [
+        "sdk/openharmony/ets/api/@ohos.display.d.ts"
+    ],
+    "@ohos.bluetooth.ble": [
+        "sdk/openharmony/ets/api/@ohos.bluetooth.ble.d.ts"
+    ],
+    "@ohos.telephony.observer": [
+        "sdk/openharmony/ets/api/@ohos.telephony.observer.d.ts"
+    ],
+    "@ohos.wifiManagerExt": [
+        "sdk/openharmony/ets/api/@ohos.wifiManagerExt.d.ts"
+    ],
+    "@ohos.app.ability.ShareExtensionAbility": [
+        "sdk/openharmony/ets/api/@ohos.app.ability.ShareExtensionAbility.d.ts"
+    ],
+    "@ohos.abilityAccessCtrl": [
+        "sdk/openharmony/ets/api/@ohos.abilityAccessCtrl.d.ts"
+    ],
+    "@ohos.ability.particleAbility": [
+        "sdk/openharmony/ets/api/@ohos.ability.particleAbility.d.ts"
+    ],
+    "@ohos.advertising.AdComponent": [
+        "sdk/openharmony/ets/api/@ohos.advertising.AdComponent.d.ets"
+    ],
+    "@ohos.telephony.data": [
+        "sdk/openharmony/ets/api/@ohos.telephony.data.d.ts"
+    ],
+    "@ohos.arkui.advanced.SegmentButton": [
+        "sdk/openharmony/ets/api/@ohos.arkui.advanced.SegmentButton.d.ets"
+    ],
+    "@ohos.app.ability.EmbeddedUIExtensionAbility": [
+        "sdk/openharmony/ets/api/@ohos.app.ability.EmbeddedUIExtensionAbility.d.ts"
+    ],
+    "@ohos.multimodalInput.touchEvent": [
+        "sdk/openharmony/ets/api/@ohos.multimodalInput.touchEvent.d.ts"
+    ],
+    "@ohos.util.Vector": [
+        "sdk/openharmony/ets/api/@ohos.util.Vector.d.ts"
+    ],
+    "@ohos.application.uriPermissionManager": [
+        "sdk/openharmony/ets/api/@ohos.application.uriPermissionManager.d.ts"
+    ],
+    "@ohos.bluetooth.pbap": [
+        "sdk/openharmony/ets/api/@ohos.bluetooth.pbap.d.ts"
+    ],
+    "@ohos.graphics.drawing": [
+        "sdk/openharmony/ets/api/@ohos.graphics.drawing.d.ts"
+    ],
+    "@ohos.router": [
+        "sdk/openharmony/ets/api/@ohos.router.d.ts"
+    ],
+    "@ohos.account.appAccount": [
+        "sdk/openharmony/ets/api/@ohos.account.appAccount.d.ts"
+    ],
+    "@ohos.ability.wantConstant": [
+        "sdk/openharmony/ets/api/@ohos.ability.wantConstant.d.ts"
+    ],
+    "@system.battery": [
+        "sdk/openharmony/ets/api/@system.battery.d.ts"
+    ],
+    "@ohos.file.fs": [
+        "sdk/openharmony/ets/api/@ohos.file.fs.d.ts"
+    ],
+    "@ohos.file.environment": [
+        "sdk/openharmony/ets/api/@ohos.file.environment.d.ts"
+    ],
+    "@ohos.app.form.formProvider": [
+        "sdk/openharmony/ets/api/@ohos.app.form.formProvider.d.ts"
+    ],
+    "@ohos.file.fileAccess": [
+        "sdk/openharmony/ets/api/@ohos.file.fileAccess.d.ts"
+    ],
+    "@ohos.multimodalInput.keyCode": [
+        "sdk/openharmony/ets/api/@ohos.multimodalInput.keyCode.d.ts"
+    ],
+    "@ohos.arkui.advanced.TabTitleBar": [
+        "sdk/openharmony/ets/api/@ohos.arkui.advanced.TabTitleBar.d.ets"
+    ],
+    "@ohos.net.webSocket": [
+        "sdk/openharmony/ets/api/@ohos.net.webSocket.d.ts"
+    ],
+    "@ohos.telephony.vcard": [
+        "sdk/openharmony/ets/api/@ohos.telephony.vcard.d.ts"
+    ],
+    "@ohos.app.form.formInfo": [
+        "sdk/openharmony/ets/api/@ohos.app.form.formInfo.d.ts"
+    ],
+    "@ohos.multimodalInput.inputEvent": [
+        "sdk/openharmony/ets/api/@ohos.multimodalInput.inputEvent.d.ts"
+    ],
+    "@ohos.data.cloudData": [
+        "sdk/openharmony/ets/api/@ohos.data.cloudData.d.ts"
+    ],
+    "@ohos.arkui.advanced.ComposeListItem": [
+        "sdk/openharmony/ets/api/@ohos.arkui.advanced.ComposeListItem.d.ets"
+    ],
+    "@ohos.arkui.advanced.ComposeTitleBar": [
+        "sdk/openharmony/ets/api/@ohos.arkui.advanced.ComposeTitleBar.d.ets"
+    ],
+    "@ohos.account.osAccount": [
+        "sdk/openharmony/ets/api/@ohos.account.osAccount.d.ts"
+    ],
+    "@ohos.net.http": [
+        "sdk/openharmony/ets/api/@ohos.net.http.d.ts"
+    ],
+    "@ohos.security.huks": [
+        "sdk/openharmony/ets/api/@ohos.security.huks.d.ts"
+    ],
+    "@ohos.arkui.dragController": [
+        "sdk/openharmony/ets/api/@ohos.arkui.dragController.d.ts"
+    ],
+    "@ohos.app.ability.contextConstant": [
+        "sdk/openharmony/ets/api/@ohos.app.ability.contextConstant.d.ts"
+    ],
+    "@ohos.multimodalInput.infraredEmitter": [
+        "sdk/openharmony/ets/api/@ohos.multimodalInput.infraredEmitter.d.ts"
+    ],
+    "@ohos.security.asset": [
+        "sdk/openharmony/ets/api/@ohos.security.asset.d.ts"
+    ],
+    "@ohos.data.preferences": [
+        "sdk/openharmony/ets/api/@ohos.data.preferences.d.ts"
+    ],
+    "@ohos.application.BackupExtensionAbility": [
+        "sdk/openharmony/ets/api/@ohos.application.BackupExtensionAbility.d.ts"
+    ],
+    "@ohos.stationary": [
+        "sdk/openharmony/ets/api/@ohos.stationary.d.ts"
+    ],
+    "@ohos.window": [
+        "sdk/openharmony/ets/api/@ohos.window.d.ts"
+    ],
+    "@ohos.bluetooth.socket": [
+        "sdk/openharmony/ets/api/@ohos.bluetooth.socket.d.ts"
+    ],
+    "@ohos.backgroundTaskManager": [
+        "sdk/openharmony/ets/api/@ohos.backgroundTaskManager.d.ts"
+    ],
+    "@ohos.multimedia.audioHaptic": [
+        "sdk/openharmony/ets/api/@ohos.multimedia.audioHaptic.d.ts"
+    ],
+    "@ohos.measure": [
+        "sdk/openharmony/ets/api/@ohos.measure.d.ts"
+    ],
+    "@ohos.file.storageStatistics": [
+        "sdk/openharmony/ets/api/@ohos.file.storageStatistics.d.ts"
+    ],
+    "@ohos.resourceschedule.systemload": [
+        "sdk/openharmony/ets/api/@ohos.resourceschedule.systemload.d.ts"
+    ],
+    "@ohos.fileshare": [
+        "sdk/openharmony/ets/api/@ohos.fileshare.d.ts"
+    ],
+    "@ohos.runningLock": [
+        "sdk/openharmony/ets/api/@ohos.runningLock.d.ts"
+    ],
+    "@ohos.application.testRunner": [
+        "sdk/openharmony/ets/api/@ohos.application.testRunner.d.ts"
+    ],
+    "@ohos.arkui.advanced.TreeView": [
+        "sdk/openharmony/ets/api/@ohos.arkui.advanced.TreeView.d.ets"
+    ],
+    "@ohos.arkui.advanced.FormMenu": [
+        "sdk/openharmony/ets/api/@ohos.arkui.advanced.FormMenu.d.ets"
+    ],
+    "@ohos.app.ability.wantAgent": [
+        "sdk/openharmony/ets/api/@ohos.app.ability.wantAgent.d.ts"
+    ],
+    "@ohos.hiviewdfx.hiAppEvent": [
+        "sdk/openharmony/ets/api/@ohos.hiviewdfx.hiAppEvent.d.ts"
+    ],
+    "@ohos.app.ability.AbilityLifecycleCallback": [
+        "sdk/openharmony/ets/api/@ohos.app.ability.AbilityLifecycleCallback.d.ts"
+    ],
+    "@ohos.privacyManager": [
+        "sdk/openharmony/ets/api/@ohos.privacyManager.d.ts"
+    ],
+    "@ohos.app.ability.UIAbility": [
+        "sdk/openharmony/ets/api/@ohos.app.ability.UIAbility.d.ts"
+    ],
+    "@ohos.enterprise.browser": [
+        "sdk/openharmony/ets/api/@ohos.enterprise.browser.d.ts"
+    ],
+    "@ohos.wifiManager": [
+        "sdk/openharmony/ets/api/@ohos.wifiManager.d.ts"
+    ],
+    "@ohos.hilog": [
+        "sdk/openharmony/ets/api/@ohos.hilog.d.ts"
+    ],
+    "@system.fetch": [
+        "sdk/openharmony/ets/api/@system.fetch.d.ts"
+    ],
+    "@ohos.bundle.defaultAppManager": [
+        "sdk/openharmony/ets/api/@ohos.bundle.defaultAppManager.d.ts"
+    ],
+    "@system.bluetooth": [
+        "sdk/openharmony/ets/api/@system.bluetooth.d.ts"
+    ],
+    "@ohos.security.cert": [
+        "sdk/openharmony/ets/api/@ohos.security.cert.d.ts"
+    ],
+    "@ohos.PiPWindow": [
+        "sdk/openharmony/ets/api/@ohos.PiPWindow.d.ts"
+    ],
+    "@ohos.uri": [
+        "sdk/openharmony/ets/api/@ohos.uri.d.ts"
+    ],
+    "@ohos.hichecker": [
+        "sdk/openharmony/ets/api/@ohos.hichecker.d.ts"
+    ],
+    "@ohos.app.ability.insightIntent": [
+        "sdk/openharmony/ets/api/@ohos.app.ability.insightIntent.d.ts"
+    ],
+    "@ohos.multimedia.movingphotoview": [
+        "sdk/openharmony/ets/api/@ohos.multimedia.movingphotoview.d.ts"
+    ],
+    "@ohos.notification": [
+        "sdk/openharmony/ets/api/@ohos.notification.d.ts"
+    ],
+    "@ohos.enterprise.bluetoothManager": [
+        "sdk/openharmony/ets/api/@ohos.enterprise.bluetoothManager.d.ts"
+    ],
+    "@ohos.accessibility.GesturePath": [
+        "sdk/openharmony/ets/api/@ohos.accessibility.GesturePath.d.ts"
+    ],
+    "@ohos.application.formProvider": [
+        "sdk/openharmony/ets/api/@ohos.application.formProvider.d.ts"
+    ],
+    "@ohos.arkui.advanced.SubHeader": [
+        "sdk/openharmony/ets/api/@ohos.arkui.advanced.SubHeader.d.ets"
+    ],
+    "@ohos.security.cryptoFramework": [
+        "sdk/openharmony/ets/api/@ohos.security.cryptoFramework.d.ts"
+    ],
+    "@ohos.multimodalInput.inputDeviceCooperate": [
+        "sdk/openharmony/ets/api/@ohos.multimodalInput.inputDeviceCooperate.d.ts"
+    ],
+    "@ohos.xml": [
+        "sdk/openharmony/ets/api/@ohos.xml.d.ts"
+    ],
+    "@ohos.multimodalInput.mouseEvent": [
+        "sdk/openharmony/ets/api/@ohos.multimodalInput.mouseEvent.d.ts"
+    ],
+    "@ohos.screenshot": [
+        "sdk/openharmony/ets/api/@ohos.screenshot.d.ts"
+    ],
+    "@ohos.arkui.advanced.SwipeRefresher": [
+        "sdk/openharmony/ets/api/@ohos.arkui.advanced.SwipeRefresher.d.ets"
+    ],
+    "@ohos.wifi": [
+        "sdk/openharmony/ets/api/@ohos.wifi.d.ts"
+    ],
+    "@system.sensor": [
+        "sdk/openharmony/ets/api/@system.sensor.d.ts"
+    ],
+    "@system.configuration": [
+        "sdk/openharmony/ets/api/@system.configuration.d.ts"
+    ],
+    "@ohos.data.distributedData": [
+        "sdk/openharmony/ets/api/@ohos.data.distributedData.d.ts"
+    ],
+    "@ohos.util.Queue": [
+        "sdk/openharmony/ets/api/@ohos.util.Queue.d.ts"
+    ],
+    "@ohos.net.policy": [
+        "sdk/openharmony/ets/api/@ohos.net.policy.d.ts"
+    ],
+    "@ohos.graphics.sendableColorSpaceManager": [
+        "sdk/openharmony/ets/api/@ohos.graphics.sendableColorSpaceManager.d.ets"
+    ],
+    "@ohos.arkui.UIContext": [
+        "sdk/openharmony/ets/api/@ohos.arkui.UIContext.d.ts"
+    ],
+    "@ohos.data.distributedKVStore": [
+        "sdk/openharmony/ets/api/@ohos.data.distributedKVStore.d.ts"
+    ],
+    "@ohos.multimedia.audio": [
+        "sdk/openharmony/ets/api/@ohos.multimedia.audio.d.ts"
+    ],
+    "@ohos.telephony.sms": [
+        "sdk/openharmony/ets/api/@ohos.telephony.sms.d.ts"
+    ],
+    "@ohos.data.cloudExtension": [
+        "sdk/openharmony/ets/api/@ohos.data.cloudExtension.d.ts"
+    ],
+    "@system.network": [
+        "sdk/openharmony/ets/api/@system.network.d.ts"
+    ],
+    "@ohos.util.HashMap": [
+        "sdk/openharmony/ets/api/@ohos.util.HashMap.d.ts"
+    ],
+    "@ohos.enterprise.systemManager": [
+        "sdk/openharmony/ets/api/@ohos.enterprise.systemManager.d.ts"
+    ],
+    "@ohos.i18n": [
+        "sdk/openharmony/ets/api/@ohos.i18n.d.ts"
+    ],
+    "@ohos.net.connection": [
+        "sdk/openharmony/ets/api/@ohos.net.connection.d.ts"
+    ],
+    "@ohos.arkui.advanced.ExceptionPrompt": [
+        "sdk/openharmony/ets/api/@ohos.arkui.advanced.ExceptionPrompt.d.ets"
+    ],
+    "@ohos.InputMethodExtensionAbility": [
+        "sdk/openharmony/ets/api/@ohos.InputMethodExtensionAbility.d.ts"
+    ],
+    "@ohos.multimodalInput.intentionCode": [
+        "sdk/openharmony/ets/api/@ohos.multimodalInput.intentionCode.d.ts"
+    ],
+    "@ohos.usb": [
+        "sdk/openharmony/ets/api/@ohos.usb.d.ts"
+    ],
+    "@ohos.sendableResourceManager": [
+        "sdk/openharmony/ets/api/@ohos.sendableResourceManager.d.ets"
+    ],
+    "@ohos.request": [
+        "sdk/openharmony/ets/api/@ohos.request.d.ts"
+    ],
+    "@ohos.app.ability.ConfigurationConstant": [
+        "sdk/openharmony/ets/api/@ohos.app.ability.ConfigurationConstant.d.ts"
+    ],
+    "@system.mediaquery": [
+        "sdk/openharmony/ets/api/@system.mediaquery.d.ts"
+    ],
+    "@ohos.resourceschedule.usageStatistics": [
+        "sdk/openharmony/ets/api/@ohos.resourceschedule.usageStatistics.d.ts"
+    ],
+    "@ohos.fileio": [
+        "sdk/openharmony/ets/api/@ohos.fileio.d.ts"
+    ],
+    "@ohos.data.uniformTypeDescriptor": [
+        "sdk/openharmony/ets/api/@ohos.data.uniformTypeDescriptor.d.ts"
+    ],
+    "@ohos.app.appstartup.StartupConfig": [
+        "sdk/openharmony/ets/api/@ohos.app.appstartup.StartupConfig.d.ts"
+    ],
+    "@ohos.arkui.advanced.FullScreenLaunchComponent": [
+        "sdk/openharmony/ets/api/@ohos.arkui.advanced.FullScreenLaunchComponent.d.ets"
+    ],
+    "@ohos.nfc.controller": [
+        "sdk/openharmony/ets/api/@ohos.nfc.controller.d.ts"
+    ],
+    "@ohos.bundle.overlay": [
+        "sdk/openharmony/ets/api/@ohos.bundle.overlay.d.ts"
+    ],
+    "@ohos.app.appstartup.startupManager": [
+        "sdk/openharmony/ets/api/@ohos.app.appstartup.startupManager.d.ts"
+    ],
+    "@ohos.net.statistics": [
+        "sdk/openharmony/ets/api/@ohos.net.statistics.d.ts"
+    ],
+    "@ohos.InputMethodExtensionContext": [
+        "sdk/openharmony/ets/api/@ohos.InputMethodExtensionContext.d.ts"
+    ],
+    "@ohos.print": [
+        "sdk/openharmony/ets/api/@ohos.print.d.ts"
+    ],
+    "@ohos.promptAction": [
+        "sdk/openharmony/ets/api/@ohos.promptAction.d.ts"
+    ],
+    "@ohos.pasteboard": [
+        "sdk/openharmony/ets/api/@ohos.pasteboard.d.ts"
+    ],
+    "@ohos.data.unifiedDataChannel": [
+        "sdk/openharmony/ets/api/@ohos.data.unifiedDataChannel.d.ts"
+    ],
+    "@ohos.resourceschedule.workScheduler": [
+        "sdk/openharmony/ets/api/@ohos.resourceschedule.workScheduler.d.ts"
+    ],
+    "@ohos.systemTime": [
+        "sdk/openharmony/ets/api/@ohos.systemTime.d.ts"
+    ],
+    "@ohos.multimedia.sendableImage": [
+        "sdk/openharmony/ets/api/@ohos.multimedia.sendableImage.d.ets"
+    ],
+    "@system.file": [
+        "sdk/openharmony/ets/api/@system.file.d.ts"
+    ],
+    "@ohos.enterprise.deviceInfo": [
+        "sdk/openharmony/ets/api/@ohos.enterprise.deviceInfo.d.ts"
+    ],
+    "@ohos.app.ability.UIExtensionAbility": [
+        "sdk/openharmony/ets/api/@ohos.app.ability.UIExtensionAbility.d.ts"
+    ],
+    "@ohos.ability.dataUriUtils": [
+        "sdk/openharmony/ets/api/@ohos.ability.dataUriUtils.d.ts"
+    ],
+    "@ohos.bluetooth": [
+        "sdk/openharmony/ets/api/@ohos.bluetooth.d.ts"
+    ],
+    "@ohos.arkui.advanced.SplitLayout": [
+        "sdk/openharmony/ets/api/@ohos.arkui.advanced.SplitLayout.d.ets"
+    ],
+    "@ohos.app.ability.appManager": [
+        "sdk/openharmony/ets/api/@ohos.app.ability.appManager.d.ts"
+    ],
+    "@system.vibrator": [
+        "sdk/openharmony/ets/api/@system.vibrator.d.ts"
+    ],
+    "@ohos.multimodalInput.pointer": [
+        "sdk/openharmony/ets/api/@ohos.multimodalInput.pointer.d.ts"
+    ],
+    "@ohos.pluginComponent": [
+        "sdk/openharmony/ets/api/@ohos.pluginComponent.d.ts"
+    ],
+    "@ohos.arkui.componentUtils": [
+        "sdk/openharmony/ets/api/@ohos.arkui.componentUtils.d.ts"
+    ],
+    "@ohos.app.ability.InsightIntentExecutor": [
+        "sdk/openharmony/ets/api/@ohos.app.ability.InsightIntentExecutor.d.ts"
+    ],
+    "@ohos.hiTraceMeter": [
+        "sdk/openharmony/ets/api/@ohos.hiTraceMeter.d.ts"
+    ],
+    "@system.package": [
+        "sdk/openharmony/ets/api/@system.package.d.ts"
+    ],
+    "@ohos.file.securityLabel": [
+        "sdk/openharmony/ets/api/@ohos.file.securityLabel.d.ts"
+    ],
+    "@ohos.ability.ability": [
+        "sdk/openharmony/ets/api/@ohos.ability.ability.d.ts"
+    ],
+    "@ohos.screenLock": [
+        "sdk/openharmony/ets/api/@ohos.screenLock.d.ts"
+    ],
+    "@ohos.usbManager": [
+        "sdk/openharmony/ets/api/@ohos.usbManager.d.ts"
+    ],
+    "@ohos.net.sharing": [
+        "sdk/openharmony/ets/api/@ohos.net.sharing.d.ts"
+    ],
+    "@ohos.multimedia.image": [
+        "sdk/openharmony/ets/api/@ohos.multimedia.image.d.ts"
+    ],
+    "@ohos.data.dataSharePredicates": [
+        "sdk/openharmony/ets/api/@ohos.data.dataSharePredicates.d.ts"
+    ],
+    "@ohos.multimedia.avCastPickerParam": [
+        "sdk/openharmony/ets/api/@ohos.multimedia.avCastPickerParam.d.ts"
+    ],
+    "@ohos.application.ConfigurationConstant": [
+        "sdk/openharmony/ets/api/@ohos.application.ConfigurationConstant.d.ts"
+    ],
+    "@ohos.util.LightWeightMap": [
+        "sdk/openharmony/ets/api/@ohos.util.LightWeightMap.d.ts"
+    ],
+    "@ohos.matrix4": [
+        "sdk/openharmony/ets/api/@ohos.matrix4.d.ts"
+    ],
+    "@ohos.util.TreeMap": [
+        "sdk/openharmony/ets/api/@ohos.util.TreeMap.d.ts"
+    ],
+    "@ohos.font": [
+        "sdk/openharmony/ets/api/@ohos.font.d.ts"
+    ],
+    "@ohos.app.ability.EnvironmentCallback": [
+        "sdk/openharmony/ets/api/@ohos.app.ability.EnvironmentCallback.d.ts"
+    ],
+    "@ohos.app.ability.ChildProcess": [
+        "sdk/openharmony/ets/api/@ohos.app.ability.ChildProcess.d.ts"
+    ],
+    "@ohos.net.vpnExtension": [
+        "sdk/openharmony/ets/api/@ohos.net.vpnExtension.d.ts"
+    ],
+    "@ohos.file.PhotoPickerComponent": [
+        "sdk/openharmony/ets/api/@ohos.file.PhotoPickerComponent.d.ets"
+    ],
+    "@ohos.app.ability.abilityDelegatorRegistry": [
+        "sdk/openharmony/ets/api/@ohos.app.ability.abilityDelegatorRegistry.d.ts"
+    ],
+    "@ohos.ai.mindSporeLite": [
+        "sdk/openharmony/ets/api/@ohos.ai.mindSporeLite.d.ts"
+    ],
+    "@ohos.application.abilityDelegatorRegistry": [
+        "sdk/openharmony/ets/api/@ohos.application.abilityDelegatorRegistry.d.ts"
+    ],
+    "@ohos.enterprise.deviceControl": [
+        "sdk/openharmony/ets/api/@ohos.enterprise.deviceControl.d.ts"
+    ],
+    "@ohos.bluetoothManager": [
+        "sdk/openharmony/ets/api/@ohos.bluetoothManager.d.ts"
+    ],
+    "@ohos.resourceschedule.deviceStandby": [
+        "sdk/openharmony/ets/api/@ohos.resourceschedule.deviceStandby.d.ts"
+    ],
+    "@ohos.advertising.AutoAdComponent": [
+        "sdk/openharmony/ets/api/@ohos.advertising.AutoAdComponent.d.ets"
+    ],
+    "@ohos.application.Configuration": [
+        "sdk/openharmony/ets/api/@ohos.application.Configuration.d.ts"
+    ],
+    "@ohos.arkui.advanced.ChipGroup": [
+        "sdk/openharmony/ets/api/@ohos.arkui.advanced.ChipGroup.d.ets"
+    ],
+    "@ohos.util.Deque": [
+        "sdk/openharmony/ets/api/@ohos.util.Deque.d.ts"
+    ],
+    "@ohos.util.LinkedList": [
+        "sdk/openharmony/ets/api/@ohos.util.LinkedList.d.ts"
+    ],
+    "@ohos.ability.errorCode": [
+        "sdk/openharmony/ets/api/@ohos.ability.errorCode.d.ts"
+    ],
+    "@ohos.app.ability.ApplicationStateChangeCallback": [
+        "sdk/openharmony/ets/api/@ohos.app.ability.ApplicationStateChangeCallback.d.ts"
+    ],
+    "@ohos.util.LightWeightSet": [
+        "sdk/openharmony/ets/api/@ohos.util.LightWeightSet.d.ts"
+    ],
+    "@ohos.app.ability.dataUriUtils": [
+        "sdk/openharmony/ets/api/@ohos.app.ability.dataUriUtils.d.ts"
+    ],
+    "@ohos.util.TreeSet": [
+        "sdk/openharmony/ets/api/@ohos.util.TreeSet.d.ts"
+    ],
+    "@ohos.advertising.AdsServiceExtensionAbility": [
+        "sdk/openharmony/ets/api/@ohos.advertising.AdsServiceExtensionAbility.d.ts"
+    ],
+    "@ohos.enterprise.EnterpriseAdminExtensionAbility": [
+        "sdk/openharmony/ets/api/@ohos.enterprise.EnterpriseAdminExtensionAbility.d.ts"
+    ],
+    "@ohos.app.appstartup.StartupListener": [
+        "sdk/openharmony/ets/api/@ohos.app.appstartup.StartupListener.d.ts"
+    ],
+    "@ohos.accessibility.GesturePoint": [
+        "sdk/openharmony/ets/api/@ohos.accessibility.GesturePoint.d.ts"
+    ],
+    "@ohos.application.formBindingData": [
+        "sdk/openharmony/ets/api/@ohos.application.formBindingData.d.ts"
+    ],
+    "@ohos.geolocation": [
+        "sdk/openharmony/ets/api/@ohos.geolocation.d.ts"
+    ],
+    "@ohos.multimedia.cameraPicker": [
+        "sdk/openharmony/ets/api/@ohos.multimedia.cameraPicker.d.ts"
+    ],
+    "@ohos.app.ability.InsightIntentContext": [
+        "sdk/openharmony/ets/api/@ohos.app.ability.InsightIntentContext.d.ts"
+    ],
+    "@ohos.app.ability.AbilityConstant": [
+        "sdk/openharmony/ets/api/@ohos.app.ability.AbilityConstant.d.ts"
+    ],
+    "@ohos.app.ability.appRecovery": [
+        "sdk/openharmony/ets/api/@ohos.app.ability.appRecovery.d.ts"
+    ],
+    "@system.router": [
+        "sdk/openharmony/ets/api/@system.router.d.ts"
+    ],
+    "@ohos.bluetooth.hfp": [
+        "sdk/openharmony/ets/api/@ohos.bluetooth.hfp.d.ts"
+    ],
+    "@ohos.multimedia.avsession": [
+        "sdk/openharmony/ets/api/@ohos.multimedia.avsession.d.ts"
+    ],
+    "@ohos.enterprise.adminManager": [
+        "sdk/openharmony/ets/api/@ohos.enterprise.adminManager.d.ts"
+    ],
+    "@ohos.worker": [
+        "sdk/openharmony/ets/api/@ohos.worker.d.ts"
+    ],
+    "@ohos.bluetooth.pan": [
+        "sdk/openharmony/ets/api/@ohos.bluetooth.pan.d.ts"
+    ],
+    "@ohos.inputMethod": [
+        "sdk/openharmony/ets/api/@ohos.inputMethod.d.ts"
+    ],
+    "@ohos.arkui.advanced.Dialog": [
+        "sdk/openharmony/ets/api/@ohos.arkui.advanced.Dialog.d.ets"
+    ],
+    "@ohos.security.certManager": [
+        "sdk/openharmony/ets/api/@ohos.security.certManager.d.ts"
+    ],
+    "@ohos.app.appstartup.StartupTask": [
+        "sdk/openharmony/ets/api/@ohos.app.appstartup.StartupTask.d.ets"
+    ],
+    "@ohos.web.webview": [
+        "sdk/openharmony/ets/api/@ohos.web.webview.d.ts"
+    ],
+    "@ohos.app.ability.dialogRequest": [
+        "sdk/openharmony/ets/api/@ohos.app.ability.dialogRequest.d.ts"
+    ],
+    "@ohos.reminderAgentManager": [
+        "sdk/openharmony/ets/api/@ohos.reminderAgentManager.d.ts"
+    ],
+    "@ohos.bluetooth.baseProfile": [
+        "sdk/openharmony/ets/api/@ohos.bluetooth.baseProfile.d.ts"
+    ],
+    "@ohos.hiAppEvent": [
+        "sdk/openharmony/ets/api/@ohos.hiAppEvent.d.ts"
+    ],
+    "@ohos.bundle": [
+        "sdk/openharmony/ets/api/@ohos.bundle.d.ts"
+    ],
+    "@ohos.app.ability.EmbeddableUIAbility": [
+        "sdk/openharmony/ets/api/@ohos.app.ability.EmbeddableUIAbility.d.ts"
+    ],
+    "@ohos.accessibility": [
+        "sdk/openharmony/ets/api/@ohos.accessibility.d.ts"
+    ],
+    "@ohos.arkui.advanced.DownloadFileButton": [
+        "sdk/openharmony/ets/api/@ohos.arkui.advanced.DownloadFileButton.d.ets"
+    ],
+    "@ohos.driver.deviceManager": [
+        "sdk/openharmony/ets/api/@ohos.driver.deviceManager.d.ts"
+    ],
+    "@ohos.arkui.advanced.Counter": [
+        "sdk/openharmony/ets/api/@ohos.arkui.advanced.Counter.d.ets"
+    ],
+    "@ohos.graphics.text": [
+        "sdk/openharmony/ets/api/@ohos.graphics.text.d.ts"
+    ],
+    "@ohos.InputMethodSubtype": [
+        "sdk/openharmony/ets/api/@ohos.InputMethodSubtype.d.ts"
+    ],
+    "@ohos.app.ability.OpenLinkOptions": [
+        "sdk/openharmony/ets/api/@ohos.app.ability.OpenLinkOptions.d.ts"
+    ],
+    "@ohos.arkui.advanced.Popup": [
+        "sdk/openharmony/ets/api/@ohos.arkui.advanced.Popup.d.ets"
+    ],
+    "@ohos.util.stream": [
+        "sdk/openharmony/ets/api/@ohos.util.stream.d.ts"
+    ],
+    "@ohos.commonEventManager": [
+        "sdk/openharmony/ets/api/@ohos.commonEventManager.d.ts"
+    ],
+    "@ohos.contact": [
+        "sdk/openharmony/ets/api/@ohos.contact.d.ts"
+    ],
+    "@ohos.file.fileuri": [
+        "sdk/openharmony/ets/api/@ohos.file.fileuri.d.ts"
+    ],
+    "@ohos.util.HashSet": [
+        "sdk/openharmony/ets/api/@ohos.util.HashSet.d.ts"
+    ],
+    "@ohos.document": [
+        "sdk/openharmony/ets/api/@ohos.document.d.ts"
+    ],
+    "@ohos.wantAgent": [
+        "sdk/openharmony/ets/api/@ohos.wantAgent.d.ts"
+    ],
+    "@ohos.multimedia.avVolumePanel": [
+        "sdk/openharmony/ets/api/@ohos.multimedia.avVolumePanel.d.ets"
+    ],
+    "@ohos.app.ability.Ability": [
+        "sdk/openharmony/ets/api/@ohos.app.ability.Ability.d.ts"
+    ],
+    "@ohos.graphics.displaySync": [
+        "sdk/openharmony/ets/api/@ohos.graphics.displaySync.d.ts"
+    ],
+    "@ohos.process": [
+        "sdk/openharmony/ets/api/@ohos.process.d.ts"
+    ],
+    "@ohos.bluetooth.a2dp": [
+        "sdk/openharmony/ets/api/@ohos.bluetooth.a2dp.d.ts"
+    ],
+    "@ohos.util.PlainArray": [
+        "sdk/openharmony/ets/api/@ohos.util.PlainArray.d.ts"
+    ],
+    "@ohos.zlib": [
+        "sdk/openharmony/ets/api/@ohos.zlib.d.ts"
+    ],
+    "@ohos.app.ability.UIExtensionContentSession": [
+        "sdk/openharmony/ets/api/@ohos.app.ability.UIExtensionContentSession.d.ts"
+    ],
+    "@ohos.app.appstartup.StartupConfigEntry": [
+        "sdk/openharmony/ets/api/@ohos.app.appstartup.StartupConfigEntry.d.ts"
+    ],
+    "@ohos.distributedHardware.deviceManager": [
+        "sdk/openharmony/ets/api/@ohos.distributedHardware.deviceManager.d.ts"
+    ],
+    "@ohos.bluetooth.connection": [
+        "sdk/openharmony/ets/api/@ohos.bluetooth.connection.d.ts"
+    ],
+    "@ohos.app.ability.errorManager": [
+        "sdk/openharmony/ets/api/@ohos.app.ability.errorManager.d.ts"
+    ],
+    "@ohos.resourceschedule.backgroundTaskManager": [
+        "sdk/openharmony/ets/api/@ohos.resourceschedule.backgroundTaskManager.d.ts"
+    ],
+    "@ohos.systemDateTime": [
+        "sdk/openharmony/ets/api/@ohos.systemDateTime.d.ts"
+    ],
+    "@ohos.deviceAttest": [
+        "sdk/openharmony/ets/api/@ohos.deviceAttest.d.ts"
+    ],
+    "@ohos.prompt": [
+        "sdk/openharmony/ets/api/@ohos.prompt.d.ts"
+    ],
+    "@ohos.app.ability.StartOptions": [
+        "sdk/openharmony/ets/api/@ohos.app.ability.StartOptions.d.ts"
+    ],
+    "@ohos.enterprise.bundleManager": [
+        "sdk/openharmony/ets/api/@ohos.enterprise.bundleManager.d.ts"
+    ],
+    "@ohos.hiTraceChain": [
+        "sdk/openharmony/ets/api/@ohos.hiTraceChain.d.ts"
+    ],
+    "@ohos.arkui.advanced.SelectionMenu": [
+        "sdk/openharmony/ets/api/@ohos.arkui.advanced.SelectionMenu.d.ets"
+    ],
+    "@ohos.identifier.oaid": [
+        "sdk/openharmony/ets/api/@ohos.identifier.oaid.d.ts"
+    ],
+    "@ohos.WorkSchedulerExtensionAbility": [
+        "sdk/openharmony/ets/api/@ohos.WorkSchedulerExtensionAbility.d.ts"
+    ],
+    "@ohos.convertxml": [
+        "sdk/openharmony/ets/api/@ohos.convertxml.d.ts"
+    ],
+    "@ohos.ability.featureAbility": [
+        "sdk/openharmony/ets/api/@ohos.ability.featureAbility.d.ts"
+    ],
+    "@ohos.multimedia.drm": [
+        "sdk/openharmony/ets/api/@ohos.multimedia.drm.d.ts"
+    ],
+    "@ohos.graphics.hdrCapability": [
+        "sdk/openharmony/ets/api/@ohos.graphics.hdrCapability.d.ts"
+    ],
+    "@ohos.arkui.advanced.Filter": [
+        "sdk/openharmony/ets/api/@ohos.arkui.advanced.Filter.d.ets"
+    ],
+    "@ohos.hidebug": [
+        "sdk/openharmony/ets/api/@ohos.hidebug.d.ts"
+    ],
+    "@ohos.thermal": [
+        "sdk/openharmony/ets/api/@ohos.thermal.d.ts"
+    ],
+    "@ohos.file.picker": [
+        "sdk/openharmony/ets/api/@ohos.file.picker.d.ts"
+    ],
+    "@ohos.app.ability.DriverExtensionAbility": [
+        "sdk/openharmony/ets/api/@ohos.app.ability.DriverExtensionAbility.d.ts"
+    ],
+    "@system.cipher": [
+        "sdk/openharmony/ets/api/@system.cipher.d.ts"
+    ],
+    "@ohos.power": [
+        "sdk/openharmony/ets/api/@ohos.power.d.ts"
+    ],
+    "@ohos.advertising": [
+        "sdk/openharmony/ets/api/@ohos.advertising.d.ts"
+    ],
+    "@ohos.application.appManager": [
+        "sdk/openharmony/ets/api/@ohos.application.appManager.d.ts"
+    ],
+    "@ohos.arkui.drawableDescriptor": [
+        "sdk/openharmony/ets/api/@ohos.arkui.drawableDescriptor.d.ts"
+    ],
+    "@ohos.app.ability.Configuration": [
+        "sdk/openharmony/ets/api/@ohos.app.ability.Configuration.d.ts"
+    ],
+    "@ohos.multimedia.avCastPicker": [
+        "sdk/openharmony/ets/api/@ohos.multimedia.avCastPicker.d.ets"
+    ],
+    "@ohos.app.ability.AbilityStage": [
+        "sdk/openharmony/ets/api/@ohos.app.ability.AbilityStage.d.ts"
+    ],
+    "@ohos.util.Stack": [
+        "sdk/openharmony/ets/api/@ohos.util.Stack.d.ts"
+    ],
+    "@ohos.faultLogger": [
+        "sdk/openharmony/ets/api/@ohos.faultLogger.d.ts"
+    ],
+    "@ohos.app.ability.ExtensionAbility": [
+        "sdk/openharmony/ets/api/@ohos.app.ability.ExtensionAbility.d.ts"
+    ],
+    "@ohos.statfs": [
+        "sdk/openharmony/ets/api/@ohos.statfs.d.ts"
+    ],
+    "@ohos.file.AlbumPickerComponent": [
+        "sdk/openharmony/ets/api/@ohos.file.AlbumPickerComponent.d.ets"
+    ],
+    "@ohos.base": [
+        "sdk/openharmony/ets/api/@ohos.base.d.ts"
+    ],
+    "@ohos.events.emitter": [
+        "sdk/openharmony/ets/api/@ohos.events.emitter.d.ts"
+    ],
+    "@ohos.multimedia.mediaLibrary": [
+        "sdk/openharmony/ets/api/@ohos.multimedia.mediaLibrary.d.ts"
+    ],
+    "@ohos.bluetooth.access": [
+        "sdk/openharmony/ets/api/@ohos.bluetooth.access.d.ts"
+    ],
+    "@ohos.app.ability.VpnExtensionAbility": [
+        "sdk/openharmony/ets/api/@ohos.app.ability.VpnExtensionAbility.d.ts"
+    ],
+    "@ohos.rpc": [
+        "sdk/openharmony/ets/api/@ohos.rpc.d.ts"
+    ],
+    "@ohos.arkui.theme": [
+        "sdk/openharmony/ets/api/@ohos.arkui.theme.d.ts"
+    ],
+    "@ohos.vibrator": [
+        "sdk/openharmony/ets/api/@ohos.vibrator.d.ts"
+    ],
+    "@ohos.dlpPermission": [
+        "sdk/openharmony/ets/api/@ohos.dlpPermission.d.ts"
+    ],
+    "@ohos.intl": [
+        "sdk/openharmony/ets/api/@ohos.intl.d.ts"
+    ],
+    "@ohos.file.BackupExtensionContext": [
+        "sdk/openharmony/ets/api/@ohos.file.BackupExtensionContext.d.ts"
+    ],
+    "@ohos.file.statvfs": [
+        "sdk/openharmony/ets/api/@ohos.file.statvfs.d.ts"
+    ],
+    "@ohos.calendarManager": [
+        "sdk/openharmony/ets/api/@ohos.calendarManager.d.ts"
+    ],
+    "@ohos.data.distributedDataObject": [
+        "sdk/openharmony/ets/api/@ohos.data.distributedDataObject.d.ts"
+    ],
+    "@ohos.data.rdb": [
+        "sdk/openharmony/ets/api/@ohos.data.rdb.d.ts"
+    ],
+    "@ohos.util": [
+        "sdk/openharmony/ets/api/@ohos.util.d.ts"
+    ],
+    "@ohos.userIAM.userAuth": [
+        "sdk/openharmony/ets/api/@ohos.userIAM.userAuth.d.ts"
+    ],
+    "@ohos.arkui.inspector": [
+        "sdk/openharmony/ets/api/@ohos.arkui.inspector.d.ts"
+    ],
+    "@ohos.bluetooth.constant": [
+        "sdk/openharmony/ets/api/@ohos.bluetooth.constant.d.ts"
+    ],
+    "@ohos.data.uniformDataStruct": [
+        "sdk/openharmony/ets/api/@ohos.data.uniformDataStruct.d.ts"
+    ],
+    "@ohos.userIAM.userAuthIcon": [
+        "sdk/openharmony/ets/api/@ohos.userIAM.userAuthIcon.d.ets"
+    ],
+    "@ohos.app.ability.childProcessManager": [
+        "sdk/openharmony/ets/api/@ohos.app.ability.childProcessManager.d.ts"
+    ],
+    "@ohos.multimedia.camera": [
+        "sdk/openharmony/ets/api/@ohos.multimedia.camera.d.ts"
+    ],
+    "@ohos.app.ability.wantConstant": [
+        "sdk/openharmony/ets/api/@ohos.app.ability.wantConstant.d.ts"
+    ],
+    "@ohos.buffer": [
+        "sdk/openharmony/ets/api/@ohos.buffer.d.ts"
+    ],
+    "@ohos.arkui.modifier": [
+        "sdk/openharmony/ets/api/@ohos.arkui.modifier.d.ts"
+    ],
+    "@ohos.enterprise.deviceSettings": [
+        "sdk/openharmony/ets/api/@ohos.enterprise.deviceSettings.d.ts"
+    ],
+    "@ohos.file.cloudSync": [
+        "sdk/openharmony/ets/api/@ohos.file.cloudSync.d.ts"
+    ],
+    "@ohos.taskpool": [
+        "sdk/openharmony/ets/api/@ohos.taskpool.d.ts"
+    ],
+    "@ohos.graphics.colorSpaceManager": [
+        "sdk/openharmony/ets/api/@ohos.graphics.colorSpaceManager.d.ts"
+    ],
+    "@ohos.application.formInfo": [
+        "sdk/openharmony/ets/api/@ohos.application.formInfo.d.ts"
+    ],
+    "@ohos.application.Want": [
+        "sdk/openharmony/ets/api/@ohos.application.Want.d.ts"
+    ],
+    "@ohos.wallpaper": [
+        "sdk/openharmony/ets/api/@ohos.wallpaper.d.ts"
+    ],
+    "@ohos.mediaquery": [
+        "sdk/openharmony/ets/api/@ohos.mediaquery.d.ts"
+    ],
+    "@ohos.continuation.continuationManager": [
+        "sdk/openharmony/ets/api/@ohos.continuation.continuationManager.d.ts"
+    ],
+    "@ohos.enterprise.networkManager": [
+        "sdk/openharmony/ets/api/@ohos.enterprise.networkManager.d.ts"
+    ],
+    "@ohos.data.storage": [
+        "sdk/openharmony/ets/api/@ohos.data.storage.d.ts"
+    ],
+    "@ohos.effectKit": [
+        "sdk/openharmony/ets/api/@ohos.effectKit.d.ts"
+    ],
+    "@ohos.sensor": [
+        "sdk/openharmony/ets/api/@ohos.sensor.d.ts"
+    ],
+    "@ohos.telephony.call": [
+        "sdk/openharmony/ets/api/@ohos.telephony.call.d.ts"
+    ],
+    "@ohos.multimodalInput.keyEvent": [
+        "sdk/openharmony/ets/api/@ohos.multimodalInput.keyEvent.d.ts"
+    ],
+    "@ohos.net.vpn": [
+        "sdk/openharmony/ets/api/@ohos.net.vpn.d.ts"
+    ],
+    "@ohos.enterprise.securityManager": [
+        "sdk/openharmony/ets/api/@ohos.enterprise.securityManager.d.ts"
+    ],
+    "@ohos.url": [
+        "sdk/openharmony/ets/api/@ohos.url.d.ts"
+    ],
+    "@ohos.file.hash": [
+        "sdk/openharmony/ets/api/@ohos.file.hash.d.ts"
+    ],
+    "@ohos.resourceManager": [
+        "sdk/openharmony/ets/api/@ohos.resourceManager.d.ts"
+    ],
+    "@system.app": [
+        "sdk/openharmony/ets/api/@system.app.d.ts"
+    ],
+    "@ohos.nfc.tag": [
+        "sdk/openharmony/ets/api/@ohos.nfc.tag.d.ts"
+    ],
+    "@ohos.multimodalInput.gestureEvent": [
+        "sdk/openharmony/ets/api/@ohos.multimodalInput.gestureEvent.d.ts"
+    ],
+    "@ohos.notificationManager": [
+        "sdk/openharmony/ets/api/@ohos.notificationManager.d.ts"
+    ],
+    "@ohos.inputMethod.Panel": [
+        "sdk/openharmony/ets/api/@ohos.inputMethod.Panel.d.ts"
+    ],
+    "@ohos.app.ability.common": [
+        "sdk/openharmony/ets/api/@ohos.app.ability.common.d.ts"
+    ],
+    "@system.brightness": [
+        "sdk/openharmony/ets/api/@system.brightness.d.ts"
+    ],
+    "@system.request": [
+        "sdk/openharmony/ets/api/@system.request.d.ts"
+    ],
+    "@ohos.net.ethernet": [
+        "sdk/openharmony/ets/api/@ohos.net.ethernet.d.ts"
+    ],
+    "@ohos.util.ArrayList": [
+        "sdk/openharmony/ets/api/@ohos.util.ArrayList.d.ts"
+    ],
+    "@ohos.file.photoAccessHelper": [
+        "sdk/openharmony/ets/api/@ohos.file.photoAccessHelper.d.ts"
+    ],
+    "@ohos.util.json": [
+        "sdk/openharmony/ets/api/@ohos.util.json.d.ts"
+    ],
+    "@ohos.enterprise.accountManager": [
+        "sdk/openharmony/ets/api/@ohos.enterprise.accountManager.d.ts"
+    ],
+    "@ohos.geoLocationManager": [
+        "sdk/openharmony/ets/api/@ohos.geoLocationManager.d.ts"
+    ],
+    "@ohos.arkui.componentSnapshot": [
+        "sdk/openharmony/ets/api/@ohos.arkui.componentSnapshot.d.ts"
+    ],
+    "@ohos.app.ability.AtomicServiceOptions": [
+        "sdk/openharmony/ets/api/@ohos.app.ability.AtomicServiceOptions.d.ts"
+    ],
+    "@ohos.bluetooth.wearDetection": [
+        "sdk/openharmony/ets/api/@ohos.bluetooth.wearDetection.d.ts"
+    ],
+    "@ohos.app.ability.Want": [
+        "sdk/openharmony/ets/api/@ohos.app.ability.Want.d.ts"
+    ],
+    "@ohos.commonEvent": [
+        "sdk/openharmony/ets/api/@ohos.commonEvent.d.ts"
+    ],
+    "@system.geolocation": [
+        "sdk/openharmony/ets/api/@system.geolocation.d.ts"
+    ],
+    "@ohos.app.ability.ActionExtensionAbility": [
+        "sdk/openharmony/ets/api/@ohos.app.ability.ActionExtensionAbility.d.ts"
+    ],
+    "@ohos.app.form.formBindingData": [
+        "sdk/openharmony/ets/api/@ohos.app.form.formBindingData.d.ts"
+    ],
+    "@ohos.graphics.common2D": [
+        "sdk/openharmony/ets/api/@ohos.graphics.common2D.d.ts"
+    ],
+    "@ohos.arkui.node": [
+        "sdk/openharmony/ets/api/@ohos.arkui.node.d.ts"
+    ],
+    "@ohos.data.dataAbility": [
+        "sdk/openharmony/ets/api/@ohos.data.dataAbility.d.ts"
+    ],
+    "@ohos.curves": [
+        "sdk/openharmony/ets/api/@ohos.curves.d.ts"
+    ],
+    "@ohos.data.sendablePreferences": [
+        "sdk/openharmony/ets/api/@ohos.data.sendablePreferences.d.ets"
+    ],
+    "@ohos.application.AccessibilityExtensionAbility": [
+        "sdk/openharmony/ets/api/@ohos.application.AccessibilityExtensionAbility.d.ts"
+    ],
+    "@ohos.file.cloudSyncManager": [
+        "sdk/openharmony/ets/api/@ohos.file.cloudSyncManager.d.ts"
+    ],
+    "@ohos.util.List": [
+        "sdk/openharmony/ets/api/@ohos.util.List.d.ts"
+    ],
+    "@ohos.enterprise.restrictions": [
+        "sdk/openharmony/ets/api/@ohos.enterprise.restrictions.d.ts"
+    ],
+    "@ohos.distributedDeviceManager": [
+        "sdk/openharmony/ets/api/@ohos.distributedDeviceManager.d.ts"
+    ],
+    "@ohos.account.distributedAccount": [
+        "sdk/openharmony/ets/api/@ohos.account.distributedAccount.d.ts"
+    ],
+    "@ohos.secureElement": [
+        "sdk/openharmony/ets/api/@ohos.secureElement.d.ts"
+    ],
+    "@ohos.multimodalInput.inputDevice": [
+        "sdk/openharmony/ets/api/@ohos.multimodalInput.inputDevice.d.ts"
+    ],
+    "@ohos.userIAM.faceAuth": [
+        "sdk/openharmony/ets/api/@ohos.userIAM.faceAuth.d.ts"
+    ],
+    "@ohos.arkui.shape": [
+        "sdk/openharmony/ets/api/@ohos.arkui.shape.d.ts"
+    ],
+    "@ohos.arkui.advanced.ProgressButton": [
+        "sdk/openharmony/ets/api/@ohos.arkui.advanced.ProgressButton.d.ets"
+    ]
+}

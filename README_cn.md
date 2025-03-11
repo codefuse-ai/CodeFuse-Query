@@ -84,28 +84,6 @@ CodeFuse-Query 包括**Sparrow CLI **和CodeFuse-Query**在线服务Query中心*
 ## 教程 (tutorial)
 - [在线教程](./tutorial/README.md)
 
-## 目录结构说明
-- `cli`：命令行工具的入口，提供统一的命令行接口，调用其他模块完成具体功能
-- `language`：各语言的数据化核心（extractor）和数据建模（lib）。关于开放度的问题，请参见《关于开源范围的一些说明》章节
-- `doc`：参考文档
-- `examples`：Gödel 查询语言示例
-- `tutorial`：CodeFuse-Query 开发容器使用教程
-
-## 关于开源范围的一些说明
-截止目前，从源码**不能**构建出可执行的程序，原因在于本次开源并没有开放所有的模块，缺少的模块会在之后的一年陆续开源。尽管如此，为保障完整的体验，我们开放了**完整的安装包**下载，请见Release页面。
-关于语言的开放程度，可以查看下表：
-
-| 语言 | 数据建模开源 | 数据化核心开源 | 成熟度 |
-| --- | --- | --- | --- |
-| Python | Y | Y | RELEASE |
-| Java | Y | Y | RELEASE |
-| JavaScript | Y | Y | RELEASE |
-| Go | Y | Y | RELEASE |
-| XML | Y | Y | RELEASE |
-| Cfamily | Y | Y | BETA |
-| SQL | Y | Y | BETA |
-| Swift | N | N | BETA |
-| Properties | Y | Y | BETA |
 
 ## 联系我们
 ![微信用户群图片](./assets/wechat_qrcode.JPG)

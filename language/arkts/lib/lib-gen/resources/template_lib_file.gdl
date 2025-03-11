@@ -1,0 +1,61 @@
+schema {{ name }} {{extends}}{
+    {%- if extends is not defined %}
+    @primary id: int,
+    {%- endif %}
+    {%- for key, value in schema.items() %}
+    {%- if not loop.last %}
+    {{ key }}: {{ value }},
+    {%- else %}
+    {{ key }}: {{ value }}
+    {%- endif %}
+    {%- endfor %}
+}
+
+impl {{ name }} {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *{{ name }} {
+        {%- if extends is not defined %}
+        for (tmp in db.{{ name }}) {
+            yield {{ name }} {
+                {{primary}}: tmp.{{primary}}
+                {%- for field in fields %}
+                {%- if not loop.last %}
+                {{ field }} : tmp.{{ field }},
+                {%- else %}
+                {{ field }} : tmp.{{ field }}
+                {%- endif %}
+                {%- endfor %}
+            }
+        }
+        {%- else %}
+        for (fa in db.{{ fa }}) {
+            for (son in db.{{name}}) {
+                if (son.key_eq(fa)) {
+                    yield {{ name }} {
+                        {%- for field in fa_fields %}
+                        {{ field }} : fa.{{ field }},
+                        {%- endfor %}
+                        {%- for field in schema %}
+                        {%- if not loop.last %}
+                        {{ field }} : son.{{ field }},
+                        {%- else %}
+                        {{ field }} : son.{{ field }}
+                        {%- endif %}
+                        {%- endfor %}
+                    }
+                }
+            }
+        }
+        {%- endif %}
+    }
+    {% for func_name, value in func.items() %}
+    pub fn {{ func_name }}(self {%- for id, type in value["params"].items() %}, {{ id }}: {{ type }}{%- endfor %}) -> {{ value["return_type"] }} {
+        for (tmp in {{value["return_type"]}}(__all_data__)) {
+            if (self.{{value["field_key"]}} == tmp.id) {
+                return tmp
+            }
+        }
+    }
+    {% endfor %}
+}

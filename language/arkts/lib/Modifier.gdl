@@ -1,0 +1,624 @@
+/**
+ * A Modifier
+ */
+schema Modifier extends AstNode {
+}
+
+impl Modifier {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *Modifier {
+        for (fa in AstNode(db)) {
+            for (son in ModifierDO(db)) {
+                if (son.key_eq(fa)) {
+                    yield Modifier {
+                        id : fa.id,
+                        kind : fa.kind,
+                        parent_id : fa.parent_id,
+                        parent_kind : fa.parent_kind,
+                        index : fa.index,
+                        location_id : fa.location_id,
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * Gets the parent.
+     */
+    pub fn getParent(self) -> HasModifiersNode {
+        for (hasModifiersNode in HasModifiersNode(__all_data__)) {
+            if (self.parent_id = hasModifiersNode.id) {
+                return hasModifiersNode
+            }
+        }
+    }
+    
+
+    /**
+     * trans to Decorator
+     */
+    pub fn toDecorator(self) -> Decorator {
+        for (decorator in Decorator(__all_data__)) {
+            if (self.key_eq(decorator)) {
+                return decorator
+            }
+        }
+    }
+}
+
+/**
+ * This type consists of the following types: [TypeParameter, Parameter, ConstructorType, PropertySignature, PropertyDeclaration, MethodSignature, MethodDeclaration, Constructor, GetAccessor, SetAccessor, IndexSignature, FunctionExpression, ArrowFunction, ClassExpression, VariableStatement, FunctionDeclaration, ClassDeclaration, StructDeclaration, InterfaceDeclaration, TypeAliasDeclaration, EnumDeclaration, ModuleDeclaration, ImportEqualsDeclaration, ImportDeclaration, ExportAssignment, ExportDeclaration]
+ */
+schema HasModifiersNode extends AstNode {
+}
+
+impl HasModifiersNode {
+    @data_constraint
+    @inline
+    pub fn __all__(db: ArkTsDB) -> *HasModifiersNode {
+        for (typeParameter in TypeParameter(db)) {
+            yield HasModifiersNode {
+                id : typeParameter.id,
+                kind : typeParameter.kind,
+                parent_id : typeParameter.parent_id,
+                parent_kind : typeParameter.parent_kind,
+                index : typeParameter.index,
+                location_id : typeParameter.location_id,
+            }
+        }
+        for (parameter in Parameter(db)) {
+            yield HasModifiersNode {
+                id : parameter.id,
+                kind : parameter.kind,
+                parent_id : parameter.parent_id,
+                parent_kind : parameter.parent_kind,
+                index : parameter.index,
+                location_id : parameter.location_id,
+            }
+        }
+        for (constructorType in ConstructorType(db)) {
+            yield HasModifiersNode {
+                id : constructorType.id,
+                kind : constructorType.kind,
+                parent_id : constructorType.parent_id,
+                parent_kind : constructorType.parent_kind,
+                index : constructorType.index,
+                location_id : constructorType.location_id,
+            }
+        }
+        for (propertySignature in PropertySignature(db)) {
+            yield HasModifiersNode {
+                id : propertySignature.id,
+                kind : propertySignature.kind,
+                parent_id : propertySignature.parent_id,
+                parent_kind : propertySignature.parent_kind,
+                index : propertySignature.index,
+                location_id : propertySignature.location_id,
+            }
+        }
+        for (propertyDeclaration in PropertyDeclaration(db)) {
+            yield HasModifiersNode {
+                id : propertyDeclaration.id,
+                kind : propertyDeclaration.kind,
+                parent_id : propertyDeclaration.parent_id,
+                parent_kind : propertyDeclaration.parent_kind,
+                index : propertyDeclaration.index,
+                location_id : propertyDeclaration.location_id,
+            }
+        }
+        for (methodSignature in MethodSignature(db)) {
+            yield HasModifiersNode {
+                id : methodSignature.id,
+                kind : methodSignature.kind,
+                parent_id : methodSignature.parent_id,
+                parent_kind : methodSignature.parent_kind,
+                index : methodSignature.index,
+                location_id : methodSignature.location_id,
+            }
+        }
+        for (methodDeclaration in MethodDeclaration(db)) {
+            yield HasModifiersNode {
+                id : methodDeclaration.id,
+                kind : methodDeclaration.kind,
+                parent_id : methodDeclaration.parent_id,
+                parent_kind : methodDeclaration.parent_kind,
+                index : methodDeclaration.index,
+                location_id : methodDeclaration.location_id,
+            }
+        }
+        for (constructor in Constructor(db)) {
+            yield HasModifiersNode {
+                id : constructor.id,
+                kind : constructor.kind,
+                parent_id : constructor.parent_id,
+                parent_kind : constructor.parent_kind,
+                index : constructor.index,
+                location_id : constructor.location_id,
+            }
+        }
+        for (getAccessor in GetAccessor(db)) {
+            yield HasModifiersNode {
+                id : getAccessor.id,
+                kind : getAccessor.kind,
+                parent_id : getAccessor.parent_id,
+                parent_kind : getAccessor.parent_kind,
+                index : getAccessor.index,
+                location_id : getAccessor.location_id,
+            }
+        }
+        for (setAccessor in SetAccessor(db)) {
+            yield HasModifiersNode {
+                id : setAccessor.id,
+                kind : setAccessor.kind,
+                parent_id : setAccessor.parent_id,
+                parent_kind : setAccessor.parent_kind,
+                index : setAccessor.index,
+                location_id : setAccessor.location_id,
+            }
+        }
+        for (indexSignature in IndexSignature(db)) {
+            yield HasModifiersNode {
+                id : indexSignature.id,
+                kind : indexSignature.kind,
+                parent_id : indexSignature.parent_id,
+                parent_kind : indexSignature.parent_kind,
+                index : indexSignature.index,
+                location_id : indexSignature.location_id,
+            }
+        }
+        for (functionExpression in FunctionExpression(db)) {
+            yield HasModifiersNode {
+                id : functionExpression.id,
+                kind : functionExpression.kind,
+                parent_id : functionExpression.parent_id,
+                parent_kind : functionExpression.parent_kind,
+                index : functionExpression.index,
+                location_id : functionExpression.location_id,
+            }
+        }
+        for (arrowFunction in ArrowFunction(db)) {
+            yield HasModifiersNode {
+                id : arrowFunction.id,
+                kind : arrowFunction.kind,
+                parent_id : arrowFunction.parent_id,
+                parent_kind : arrowFunction.parent_kind,
+                index : arrowFunction.index,
+                location_id : arrowFunction.location_id,
+            }
+        }
+        for (classExpression in ClassExpression(db)) {
+            yield HasModifiersNode {
+                id : classExpression.id,
+                kind : classExpression.kind,
+                parent_id : classExpression.parent_id,
+                parent_kind : classExpression.parent_kind,
+                index : classExpression.index,
+                location_id : classExpression.location_id,
+            }
+        }
+        for (variableStatement in VariableStatement(db)) {
+            yield HasModifiersNode {
+                id : variableStatement.id,
+                kind : variableStatement.kind,
+                parent_id : variableStatement.parent_id,
+                parent_kind : variableStatement.parent_kind,
+                index : variableStatement.index,
+                location_id : variableStatement.location_id,
+            }
+        }
+        for (functionDeclaration in FunctionDeclaration(db)) {
+            yield HasModifiersNode {
+                id : functionDeclaration.id,
+                kind : functionDeclaration.kind,
+                parent_id : functionDeclaration.parent_id,
+                parent_kind : functionDeclaration.parent_kind,
+                index : functionDeclaration.index,
+                location_id : functionDeclaration.location_id,
+            }
+        }
+        for (classDeclaration in ClassDeclaration(db)) {
+            yield HasModifiersNode {
+                id : classDeclaration.id,
+                kind : classDeclaration.kind,
+                parent_id : classDeclaration.parent_id,
+                parent_kind : classDeclaration.parent_kind,
+                index : classDeclaration.index,
+                location_id : classDeclaration.location_id,
+            }
+        }
+        for (structDeclaration in StructDeclaration(db)) {
+            yield HasModifiersNode {
+                id : structDeclaration.id,
+                kind : structDeclaration.kind,
+                parent_id : structDeclaration.parent_id,
+                parent_kind : structDeclaration.parent_kind,
+                index : structDeclaration.index,
+                location_id : structDeclaration.location_id,
+            }
+        }
+        for (interfaceDeclaration in InterfaceDeclaration(db)) {
+            yield HasModifiersNode {
+                id : interfaceDeclaration.id,
+                kind : interfaceDeclaration.kind,
+                parent_id : interfaceDeclaration.parent_id,
+                parent_kind : interfaceDeclaration.parent_kind,
+                index : interfaceDeclaration.index,
+                location_id : interfaceDeclaration.location_id,
+            }
+        }
+        for (typeAliasDeclaration in TypeAliasDeclaration(db)) {
+            yield HasModifiersNode {
+                id : typeAliasDeclaration.id,
+                kind : typeAliasDeclaration.kind,
+                parent_id : typeAliasDeclaration.parent_id,
+                parent_kind : typeAliasDeclaration.parent_kind,
+                index : typeAliasDeclaration.index,
+                location_id : typeAliasDeclaration.location_id,
+            }
+        }
+        for (enumDeclaration in EnumDeclaration(db)) {
+            yield HasModifiersNode {
+                id : enumDeclaration.id,
+                kind : enumDeclaration.kind,
+                parent_id : enumDeclaration.parent_id,
+                parent_kind : enumDeclaration.parent_kind,
+                index : enumDeclaration.index,
+                location_id : enumDeclaration.location_id,
+            }
+        }
+        for (moduleDeclaration in ModuleDeclaration(db)) {
+            yield HasModifiersNode {
+                id : moduleDeclaration.id,
+                kind : moduleDeclaration.kind,
+                parent_id : moduleDeclaration.parent_id,
+                parent_kind : moduleDeclaration.parent_kind,
+                index : moduleDeclaration.index,
+                location_id : moduleDeclaration.location_id,
+            }
+        }
+        for (importEqualsDeclaration in ImportEqualsDeclaration(db)) {
+            yield HasModifiersNode {
+                id : importEqualsDeclaration.id,
+                kind : importEqualsDeclaration.kind,
+                parent_id : importEqualsDeclaration.parent_id,
+                parent_kind : importEqualsDeclaration.parent_kind,
+                index : importEqualsDeclaration.index,
+                location_id : importEqualsDeclaration.location_id,
+            }
+        }
+        for (importDeclaration in ImportDeclaration(db)) {
+            yield HasModifiersNode {
+                id : importDeclaration.id,
+                kind : importDeclaration.kind,
+                parent_id : importDeclaration.parent_id,
+                parent_kind : importDeclaration.parent_kind,
+                index : importDeclaration.index,
+                location_id : importDeclaration.location_id,
+            }
+        }
+        for (exportAssignment in ExportAssignment(db)) {
+            yield HasModifiersNode {
+                id : exportAssignment.id,
+                kind : exportAssignment.kind,
+                parent_id : exportAssignment.parent_id,
+                parent_kind : exportAssignment.parent_kind,
+                index : exportAssignment.index,
+                location_id : exportAssignment.location_id,
+            }
+        }
+        for (exportDeclaration in ExportDeclaration(db)) {
+            yield HasModifiersNode {
+                id : exportDeclaration.id,
+                kind : exportDeclaration.kind,
+                parent_id : exportDeclaration.parent_id,
+                parent_kind : exportDeclaration.parent_kind,
+                index : exportDeclaration.index,
+                location_id : exportDeclaration.location_id,
+            }
+        }
+    }
+
+    /**
+     * Get primary key.
+     */
+    pub fn getPrimaryKey(self) -> int {
+        return self.id
+    }
+    
+    /**
+     * trans to TypeParameter
+     */
+    pub fn toTypeParameter(self) -> TypeParameter {
+        for (typeParameter in TypeParameter(__all_data__)) {
+            if (typeParameter.key_eq(self)) {
+                return typeParameter
+            }
+        }
+    }
+    
+    /**
+     * trans to Parameter
+     */
+    pub fn toParameter(self) -> Parameter {
+        for (parameter in Parameter(__all_data__)) {
+            if (parameter.key_eq(self)) {
+                return parameter
+            }
+        }
+    }
+    
+    /**
+     * trans to ConstructorType
+     */
+    pub fn toConstructorType(self) -> ConstructorType {
+        for (constructorType in ConstructorType(__all_data__)) {
+            if (constructorType.key_eq(self)) {
+                return constructorType
+            }
+        }
+    }
+    
+    /**
+     * trans to PropertySignature
+     */
+    pub fn toPropertySignature(self) -> PropertySignature {
+        for (propertySignature in PropertySignature(__all_data__)) {
+            if (propertySignature.key_eq(self)) {
+                return propertySignature
+            }
+        }
+    }
+    
+    /**
+     * trans to PropertyDeclaration
+     */
+    pub fn toPropertyDeclaration(self) -> PropertyDeclaration {
+        for (propertyDeclaration in PropertyDeclaration(__all_data__)) {
+            if (propertyDeclaration.key_eq(self)) {
+                return propertyDeclaration
+            }
+        }
+    }
+    
+    /**
+     * trans to MethodSignature
+     */
+    pub fn toMethodSignature(self) -> MethodSignature {
+        for (methodSignature in MethodSignature(__all_data__)) {
+            if (methodSignature.key_eq(self)) {
+                return methodSignature
+            }
+        }
+    }
+    
+    /**
+     * trans to MethodDeclaration
+     */
+    pub fn toMethodDeclaration(self) -> MethodDeclaration {
+        for (methodDeclaration in MethodDeclaration(__all_data__)) {
+            if (methodDeclaration.key_eq(self)) {
+                return methodDeclaration
+            }
+        }
+    }
+    
+    /**
+     * trans to Constructor
+     */
+    pub fn toConstructor(self) -> Constructor {
+        for (constructor in Constructor(__all_data__)) {
+            if (constructor.key_eq(self)) {
+                return constructor
+            }
+        }
+    }
+    
+    /**
+     * trans to GetAccessor
+     */
+    pub fn toGetAccessor(self) -> GetAccessor {
+        for (getAccessor in GetAccessor(__all_data__)) {
+            if (getAccessor.key_eq(self)) {
+                return getAccessor
+            }
+        }
+    }
+    
+    /**
+     * trans to SetAccessor
+     */
+    pub fn toSetAccessor(self) -> SetAccessor {
+        for (setAccessor in SetAccessor(__all_data__)) {
+            if (setAccessor.key_eq(self)) {
+                return setAccessor
+            }
+        }
+    }
+    
+    /**
+     * trans to IndexSignature
+     */
+    pub fn toIndexSignature(self) -> IndexSignature {
+        for (indexSignature in IndexSignature(__all_data__)) {
+            if (indexSignature.key_eq(self)) {
+                return indexSignature
+            }
+        }
+    }
+    
+    /**
+     * trans to FunctionExpression
+     */
+    pub fn toFunctionExpression(self) -> FunctionExpression {
+        for (functionExpression in FunctionExpression(__all_data__)) {
+            if (functionExpression.key_eq(self)) {
+                return functionExpression
+            }
+        }
+    }
+    
+    /**
+     * trans to ArrowFunction
+     */
+    pub fn toArrowFunction(self) -> ArrowFunction {
+        for (arrowFunction in ArrowFunction(__all_data__)) {
+            if (arrowFunction.key_eq(self)) {
+                return arrowFunction
+            }
+        }
+    }
+    
+    /**
+     * trans to ClassExpression
+     */
+    pub fn toClassExpression(self) -> ClassExpression {
+        for (classExpression in ClassExpression(__all_data__)) {
+            if (classExpression.key_eq(self)) {
+                return classExpression
+            }
+        }
+    }
+    
+    /**
+     * trans to VariableStatement
+     */
+    pub fn toVariableStatement(self) -> VariableStatement {
+        for (variableStatement in VariableStatement(__all_data__)) {
+            if (variableStatement.key_eq(self)) {
+                return variableStatement
+            }
+        }
+    }
+    
+    /**
+     * trans to FunctionDeclaration
+     */
+    pub fn toFunctionDeclaration(self) -> FunctionDeclaration {
+        for (functionDeclaration in FunctionDeclaration(__all_data__)) {
+            if (functionDeclaration.key_eq(self)) {
+                return functionDeclaration
+            }
+        }
+    }
+    
+    /**
+     * trans to ClassDeclaration
+     */
+    pub fn toClassDeclaration(self) -> ClassDeclaration {
+        for (classDeclaration in ClassDeclaration(__all_data__)) {
+            if (classDeclaration.key_eq(self)) {
+                return classDeclaration
+            }
+        }
+    }
+    
+    /**
+     * trans to StructDeclaration
+     */
+    pub fn toStructDeclaration(self) -> StructDeclaration {
+        for (structDeclaration in StructDeclaration(__all_data__)) {
+            if (structDeclaration.key_eq(self)) {
+                return structDeclaration
+            }
+        }
+    }
+    
+    /**
+     * trans to InterfaceDeclaration
+     */
+    pub fn toInterfaceDeclaration(self) -> InterfaceDeclaration {
+        for (interfaceDeclaration in InterfaceDeclaration(__all_data__)) {
+            if (interfaceDeclaration.key_eq(self)) {
+                return interfaceDeclaration
+            }
+        }
+    }
+    
+    /**
+     * trans to TypeAliasDeclaration
+     */
+    pub fn toTypeAliasDeclaration(self) -> TypeAliasDeclaration {
+        for (typeAliasDeclaration in TypeAliasDeclaration(__all_data__)) {
+            if (typeAliasDeclaration.key_eq(self)) {
+                return typeAliasDeclaration
+            }
+        }
+    }
+    
+    /**
+     * trans to EnumDeclaration
+     */
+    pub fn toEnumDeclaration(self) -> EnumDeclaration {
+        for (enumDeclaration in EnumDeclaration(__all_data__)) {
+            if (enumDeclaration.key_eq(self)) {
+                return enumDeclaration
+            }
+        }
+    }
+    
+    /**
+     * trans to ModuleDeclaration
+     */
+    pub fn toModuleDeclaration(self) -> ModuleDeclaration {
+        for (moduleDeclaration in ModuleDeclaration(__all_data__)) {
+            if (moduleDeclaration.key_eq(self)) {
+                return moduleDeclaration
+            }
+        }
+    }
+    
+    /**
+     * trans to ImportEqualsDeclaration
+     */
+    pub fn toImportEqualsDeclaration(self) -> ImportEqualsDeclaration {
+        for (importEqualsDeclaration in ImportEqualsDeclaration(__all_data__)) {
+            if (importEqualsDeclaration.key_eq(self)) {
+                return importEqualsDeclaration
+            }
+        }
+    }
+    
+    /**
+     * trans to ImportDeclaration
+     */
+    pub fn toImportDeclaration(self) -> ImportDeclaration {
+        for (importDeclaration in ImportDeclaration(__all_data__)) {
+            if (importDeclaration.key_eq(self)) {
+                return importDeclaration
+            }
+        }
+    }
+    
+    /**
+     * trans to ExportAssignment
+     */
+    pub fn toExportAssignment(self) -> ExportAssignment {
+        for (exportAssignment in ExportAssignment(__all_data__)) {
+            if (exportAssignment.key_eq(self)) {
+                return exportAssignment
+            }
+        }
+    }
+    
+    /**
+     * trans to ExportDeclaration
+     */
+    pub fn toExportDeclaration(self) -> ExportDeclaration {
+        for (exportDeclaration in ExportDeclaration(__all_data__)) {
+            if (exportDeclaration.key_eq(self)) {
+                return exportDeclaration
+            }
+        }
+    }
+    
+}
+

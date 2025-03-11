@@ -1,0 +1,9 @@
+dataBase ArkTsDB {
+    {%- for field in schema_list %}
+    {%- if not loop.last %}
+    {{ field }} : *{{ field }},
+    {%- else %}
+    {{ field }} : *{{ field }}
+    {%- endif %}
+    {%- endfor %}
+}

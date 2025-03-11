@@ -92,28 +92,28 @@ Note: The maturity level of the language status is determined based on the types
 ## Tutorial
 - [Online Tutorial](./tutorial/README.en.md)
 
-## Directory Structure Description
-- `cli`: The entry point for the command-line tool, providing a unified command-line interface, calling other modules to complete specific functions
-- `language`: Core data and data modeling (lib) for various languages. Regarding the degree of openness, please refer to the section "Some Notes on the Scope of Open Source"
-- `doc`: Reference documents
-- `examples`: Gödel query language examples
-- `tutorial`：CodeFuse-Query Development Container Usage Tutorial
 
-## Some Notes on the Scope of Open Source
-As of now, it is **not possible** to build an executable program from the source code because not all modules have been made open-source in this release, and missing modules will be released over the next year. Nevertheless, to ensure a complete experience, we have released **complete installation packages** for download, please see the Release page.
-Regarding the openness of languages, you can refer to the table below:
+## Related Paper  
 
-| Language | Data Modeling Open Source | Data Core Open Source | Maturity |
-| --- | --- | --- | --- |
-| Python | Y | Y | RELEASE |
-| Java | Y | Y | RELEASE |
-| JavaScript | Y | Y | RELEASE |
-| Go | Y | Y | RELEASE |
-| XML | Y | Y | RELEASE |
-| Cfamily | Y | Y | BETA |
-| SQL | Y | Y | BETA |
-| Swift | N | N | BETA |
-| Properties | Y | Y | BETA |
+Our work is described in the following paper:  
+
+[**CodeFuse-Query: A Data-Centric Static Code Analysis System for Large-Scale Organizations**](https://arxiv.org/abs/2401.01571)  
+
+## Citation  
+
+If you find **CodeFuse-Query** useful in your research, please cite our paper:  
+
+```bibtex
+@misc{xie2024codefusequerydatacentricstaticcode,
+      title={CodeFuse-Query: A Data-Centric Static Code Analysis System for Large-Scale Organizations}, 
+      author={Xiaoheng Xie and Gang Fan and Xiaojun Lin and Ang Zhou and Shijie Li and Xunjin Zheng and Yinan Liang and Yu Zhang and Na Yu and Haokun Li and Xinyu Chen and Yingzhuang Chen and Yi Zhen and Dejun Dong and Xianjin Fu and Jinzhou Su and Fuxiong Pan and Pengshuai Luo and Youzheng Feng and Ruoxiang Hu and Jing Fan and Jinguo Zhou and Xiao Xiao and Peng Di},
+      year={2024},
+      eprint={2401.01571},
+      archivePrefix={arXiv},
+      primaryClass={cs.SE},
+      url={https://arxiv.org/abs/2401.01571}, 
+}
+```
 
 ## Contact Us
 ![WeChat User Group Image](./assets/wechat_qrcode.JPG)
