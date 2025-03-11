@@ -1,9 +1,21 @@
 /**
- * @brief Describe an annotated relation.
+ * @brief Relationship between annotation and annotated element
+ * @corresponds Java AST: Connection between annotation node and target
+ * @example
+ * <pre>{@code
+ * @interface Entity {}
+ * 
+ * @Entity
+ * class User {
+ *     @Id
+ *     private Long id;
+ * }
+ * }</pre>
  */
 schema AnnotatedRelation extends AnnotatedRelationDO {
 
 }
+
 impl AnnotatedRelation {
     @data_constraint
     @inline
@@ -38,9 +50,16 @@ impl AnnotatedRelation {
         }
     }
 }
+
+
+/**
+ * @brief Base class for annotation data storage
+ * @corresponds Java AST: Database structure for annotation nodes
+ */
 schema AnnotationDo {
     @primary id: int
 }
+
 impl AnnotationDo {
     @data_constraint
     @inline
@@ -168,8 +187,18 @@ impl AnnotationDo {
         }
     }
 }
+
+
 /**
- * @brief An access annotation. 
+ * @brief Concrete annotation instance
+ * @corresponds Java AST: Annotation application node
+ * @example
+ * <pre>{@code
+ * @GetMapping("/users")
+ * public List<User> getUsers() {
+ *     // method implementation
+ * }
+ * }</pre>
  */
 schema Annotation extends AnnotationDo {
 
@@ -370,8 +399,16 @@ impl AnnotationAccessArgumentDO {
         }
     }
 }
+
+
 /**
- * @brief An argument that applies to an annotation.
+ * @brief Concrete annotation argument value
+ * @corresponds Java AST: Argument value specification
+ * @example
+ * <pre>{@code
+ * @Retry(maxAttempts = 3, delay = 1000L)
+ * void process() {}
+ * }</pre>
  */
 schema AnnotationAccessArgument extends AnnotationAccessArgumentDO {
 
@@ -515,8 +552,18 @@ impl AnnotationAccessArgument {
         }
     }
 }
+
+
 /**
- * @brief Represents an array used as a value of an annotation element. For example: @Endorsers({"Children", "Unscrupulous dentists"})
+ * @brief Annotation array initializer
+ * @example
+ * <pre>{@code
+ * @Authors({
+ *     @Author(name = "Alice"),
+ *     @Author(name = "Bob")
+ * })
+ * class Book {}
+ * }</pre>
  */
 schema AnnotationArrayInitializer extends AnnotationArrayInitializerDO {
 
@@ -579,8 +626,17 @@ impl AnnotationArrayInitializer {
         }
     }
 }
+
+
 /**
- * @brief An annotation that applies to a declaration.
+ * @brief Annotation type declaration
+ * @example
+ * <pre>{@code
+ * @interface Scheduled {
+ *     String cron();
+ *     boolean enableRetry() default false;
+ * }
+ * }</pre>
  */
 schema AnnotationDeclaration extends AnnotationDeclarationDO {
 
@@ -622,8 +678,19 @@ impl AnnotationDeclaration {
         }
     }
 }
+
+
 /**
- * @brief A parameter that applied to a annotation declaration.
+ * @brief Parameter definition in annotation type declarations
+ * @corresponds Java AST: AnnotationTypeElementDeclaration node
+ * @example
+ * <pre>{@code
+ * @interface TestConfig {
+ *     // Represents two parameters
+ *     int timeout() default 30;    // AnnotationDeclarationParameter 1
+ *     String[] cases();            // AnnotationDeclarationParameter 2
+ * }
+ * }</pre>
  */
 schema AnnotationDeclarationParameter extends AnnotationDeclarationParameterDO {
 
@@ -688,8 +755,20 @@ impl AnnotationDeclarationParameter {
         }
     }
 }
+
 /**
- * @brief Default value for an annotation parameter, if any.
+ * @brief Default value specification for annotation parameters
+ * @corresponds Java AST: AnnotationTypeElementDefaultValue node
+ * @example
+ * <pre>{@code
+ * @interface TimeoutConfig {
+ *     // Parameter with default value
+ *     int duration() default 30;  // ← This default clause
+ *     
+ *     // Parameter without default
+ *     String unit();
+ * }
+ * }</pre>
  */
 schema AnnotationDeclarationParameterDefaultValue extends AnnotationDeclarationParameterDefaultValueDO {
 
