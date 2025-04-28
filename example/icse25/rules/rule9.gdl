@@ -664,8 +664,8 @@ fn tmp_3(i: int, b: string, a: string) -> bool {
 @inline
 fn tmp_4(i: int, b: string, a: string) -> bool {
     let (java_db = default_java_db()) {
-        if (!a.substr(i - 1,i - 1) = "/") {
-            if (!b.substr(0,1) = "/") {
+        if (a.substr(i - 1,i - 1) != "/") {
+            if (b.substr(0,1) != "/") {
                 return true
             }
         }

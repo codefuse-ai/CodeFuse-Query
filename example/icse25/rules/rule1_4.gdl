@@ -1590,7 +1590,7 @@ pub fn real_output(nodeText: string, path: string) -> bool {
                         if (b = m.getAnAncestorCDDependsNode(__all_data__, __all_data__)) {
                             if (c = a.getAnAncestorCDDependedNode(__all_data__, __all_data__)) {
                                 if (c = b.getECGDependsNode(edgeType, direction)) {
-                                    if (!b = c) {
+                                    if (b != c) {
                                         if (nodeText = m.print()) {
                                             if (path = m.getPath()) {
                                                 return true
@@ -1601,7 +1601,7 @@ pub fn real_output(nodeText: string, path: string) -> bool {
                             }
                             if (c = a) {
                                 if (c = b.getECGDependsNode(edgeType, direction)) {
-                                    if (!b = c) {
+                                    if (b != c) {
                                         if (nodeText = m.print()) {
                                             if (path = m.getPath()) {
                                                 return true
@@ -1614,7 +1614,7 @@ pub fn real_output(nodeText: string, path: string) -> bool {
                         if (b = m) {
                             if (c = a.getAnAncestorCDDependedNode(__all_data__, __all_data__)) {
                                 if (c = b.getECGDependsNode(edgeType, direction)) {
-                                    if (!b = c) {
+                                    if (b != c) {
                                         if (nodeText = m.print()) {
                                             if (path = m.getPath()) {
                                                 return true
@@ -1625,7 +1625,7 @@ pub fn real_output(nodeText: string, path: string) -> bool {
                             }
                             if (c = a) {
                                 if (c = b.getECGDependsNode(edgeType, direction)) {
-                                    if (!b = c) {
+                                    if (b != c) {
                                         if (nodeText = m.print()) {
                                             if (path = m.getPath()) {
                                                 return true
@@ -1711,8 +1711,8 @@ fn tmp_6(a: string, i: int, b: string) -> bool {
 @inline
 fn tmp_7(a: string, i: int, b: string) -> bool {
     let (java_db = default_java_db()) {
-        if (!a.substr(i - 1,i - 1) = "/") {
-            if (!b.substr(0,1) = "/") {
+        if (a.substr(i - 1,i - 1) != "/") {
+            if (b.substr(0,1) != "/") {
                 return true
             }
         }
