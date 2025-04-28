@@ -469,6 +469,115 @@ impl ECGNode {
     }
 }
 
+schema ECGXmlNode {
+    @primary id: int
+}
+
+impl ECGXmlNode {
+    pub fn __all__(db: XmlDB) -> *ECGXmlNode {
+        for (e in XmlPomElement(db)) {
+            yield ECGXmlNode {id : e.id}
+        }
+        for (e in XmlSpringElement(db)) {
+            yield ECGXmlNode {id : e.id}
+        }
+        for (e in XmlCharacter(db)) {
+            yield ECGXmlNode {id : e.id}
+        }
+        for (e in XmlAttribute(db)) {
+            yield ECGXmlNode {id : e.id}
+        }
+    }
+    
+    pub fn getLocation(self) -> coref::xml::Location {
+        for (l in coref::xml::Location(__all_data__)) {
+            for (e in XmlElement(__all_data__)) {
+                if (self.key_eq(e)) {
+                    if (l = e.getLocation()) {
+                        return l
+                    }
+                }
+            }
+            for (e in XmlAttribute(__all_data__)) {
+                if (self.key_eq(e)) {
+                    if (l = e.getLocation()) {
+                        return l
+                    }
+                }
+            }
+            for (e in XmlCharacter(__all_data__)) {
+                if (self.key_eq(e)) {
+                    if (l = e.getLocation()) {
+                        return l
+                    }
+                }
+            }
+        }
+    }
+    
+    pub fn getType(self) -> string {
+        for (t in string::__undetermined_all__()) {
+            for (e in XmlElement(__all_data__)) {
+                if (self.key_eq(e)) {
+                    if (t = "XmlElement") {
+                        return t
+                    }
+                }
+            }
+            for (e in XmlAttribute(__all_data__)) {
+                if (self.key_eq(e)) {
+                    if (t = "XmlAttribute") {
+                        return t
+                    }
+                }
+            }
+            for (e in XmlCharacter(__all_data__)) {
+                if (self.key_eq(e)) {
+                    if (t = "XmlCharacter") {
+                        return t
+                    }
+                }
+            }
+        }
+    }
+
+    pub fn getText(self) -> string {
+        for (e in XmlElement(__all_data__)) {
+            if (self.key_eq(e)) {
+                return e.getName()
+            }
+        }
+        for (e in XmlAttribute(__all_data__)) {
+            if (self.key_eq(e)) {
+                return e.getName() + " = " + e.getValue()
+            }
+        }
+        for (e in XmlCharacter(__all_data__)) {
+            if (self.key_eq(e)) {
+                return e.getText()
+            }
+        }
+    }
+
+    pub fn getEnclosingECGXmlNode(self) -> ECGXmlNode {
+        for (e in XmlElement(__all_data__)) {
+            if (self.key_eq(e)) {
+                return e.to<ECGXmlNode>()
+            }
+        }
+        for (e in XmlAttribute(__all_data__)) {
+            if (self.key_eq(e)) {
+                return e.getXmlElement().to<ECGXmlNode>()
+            }
+        }
+        for (e in XmlCharacter(__all_data__)) {
+            if (self.key_eq(e)) {
+                return e.getBelongedElement().to<ECGXmlNode>()
+            }
+        }
+    }
+}
+
 pub fn gitdiff(filePath: string, lineNo: int) -> bool {
     //python替换
     // $gitdiff
@@ -576,7 +685,7 @@ pub fn isCodeLine(f: File, filename: string, lineNumber: int) -> bool {
                 if (f.getRelativePath() = filename) {
                     for (e in int::__undetermined_all__(),
                         s1 in int::__undetermined_all__()) {
-                        for (l in Location(java_db)) {
+                        for (l in coref::java::Location(java_db)) {
                             if (l.getFile() = f) {
                                 if (s1 = l.getStartLineNumber()) {
                                     if (e = l.getEndLineNumber()) {
@@ -656,7 +765,7 @@ pub fn getTypeInAST(filename: string, lineNumber: int, typeInAST: string) -> boo
         }
     }
 }
-pub fn getTypeInECG(filename: string, lineNumber: int, typeInAST: string, n: int) -> bool {
+pub fn getTypeInECG(filename: string, lineNumber: int, typeInAST: string, n: ECGNode) -> bool {
     let (java_db = default_java_db()) {
         let (xml_db = default_xml_db()) {
             for (f in File(java_db)) {
@@ -671,7 +780,7 @@ pub fn getTypeInECG(filename: string, lineNumber: int, typeInAST: string, n: int
                     if (!(tmp_0(filename, lineNumber))) {
                         for (e in int::__undetermined_all__(),
                             s1 in int::__undetermined_all__()) {
-                            if (n.getLocation().getFile() = f.element_hash_id) {
+                            if (n.getLocation().getFile() = f) {
                                 if (s1 = n.getLocation().getStartLineNumber()) {
                                     if (e = n.getLocation().getEndLineNumber()) {
                                         if (lineNumber > s1 - 1) {
@@ -1266,11 +1375,9 @@ fn tmp_0(filename: string, lineNumber: int) -> bool {
 }
 
 fn tmp_1() -> *string {
-    let (java_db = default_java_db()) {
-        let (xml_db = default_xml_db()) {
-            if (getBelongedCallable(filename, lineNumber, __all_data__)) {
-                yield filename
-            }
+    for (filename in string::__undetermined_all__(), lineNumber in int::__undetermined_all__()) {
+        if (getBelongedCallable(filename, lineNumber, __all_data__)) {
+            yield filename
         }
     }
 }

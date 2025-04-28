@@ -332,9 +332,6 @@ schema ECGXmlNode {
 }
 
 impl ECGXmlNode {
-
-    @data_constraint
-    @inline
     pub fn __all__(db: XmlDB) -> *ECGXmlNode {
         for (e in XmlPomElement(db)) {
             yield ECGXmlNode {id : e.id}
@@ -401,8 +398,42 @@ impl ECGXmlNode {
             }
         }
     }
-    
-    
+
+    pub fn getText(self) -> string {
+        for (e in XmlElement(__all_data__)) {
+            if (self.key_eq(e)) {
+                return e.getName()
+            }
+        }
+        for (e in XmlAttribute(__all_data__)) {
+            if (self.key_eq(e)) {
+                return e.getName() + " = " + e.getValue()
+            }
+        }
+        for (e in XmlCharacter(__all_data__)) {
+            if (self.key_eq(e)) {
+                return e.getText()
+            }
+        }
+    }
+
+    pub fn getEnclosingECGXmlNode(self) -> ECGXmlNode {
+        for (e in XmlElement(__all_data__)) {
+            if (self.key_eq(e)) {
+                return e.to<ECGXmlNode>()
+            }
+        }
+        for (e in XmlAttribute(__all_data__)) {
+            if (self.key_eq(e)) {
+                return e.getXmlElement().to<ECGXmlNode>()
+            }
+        }
+        for (e in XmlCharacter(__all_data__)) {
+            if (self.key_eq(e)) {
+                return e.getBelongedElement().to<ECGXmlNode>()
+            }
+        }
+    }
 }
 
 pub fn gitdiff(filePath: string, lineNo: int) -> bool {

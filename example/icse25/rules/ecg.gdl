@@ -1,5 +1,6 @@
 // script 
 use coref::java::*
+
 schema ECGNode extends ElementParent {}
 
 impl ECGNode {
@@ -455,6 +456,196 @@ impl ECGNode {
             if (tmp = self.getAnAncestorCDNode(__all_data__, __all_data__)) {
                 if (e = tmp.getECGNode(type, direction)) {
                     return e
+                }
+            }
+        }
+    }
+
+    pub fn getAnAncestorCDDependedNode(self, type: string, direction: string) -> ECGNode {
+        for (e in ECGNode(__all_data__), c in Callable(__all_data__), r in ReferenceExpression(__all_data__)) {
+            if (type = "CD") {
+                if (self.key_eq(c) || (self.key_eq(r.getDefinition()) && r.getEnclosingCallable() = c)) {
+                    for (e2 in Method(__all_data__), c_caller in c.getAnAncestorCaller()) {
+                        if (e2.key_eq(c_caller) && direction = "Depended" && e.key_eq(e2)) {
+                            return e
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    pub fn getECGDependsNode(self, type: string, direction: string) -> ECGNode {
+        for (e in ECGNode(__all_data__)) {
+            if (e = self.getCDDependsNode(type, direction)) {
+                return e
+            }
+            if (e = self.getDDDependsNode(type, direction)) {
+                return e
+            }
+        }
+    }
+
+    pub fn getCDDependsNode(self, type: string, direction: string) -> ECGNode {
+        for (e in ECGNode(__all_data__),
+            c in Callable(__all_data__),
+            r in ReferenceExpression(__all_data__)) {
+            if (self.key_eq(c)) {
+                if (type = "CD") {
+                    for (e1 in c.getCallee()) {
+                        if (direction = "Depends") {
+                            if (e.key_eq(e1)) {
+                                return e
+                            }
+                        }
+                    }
+                }
+            }
+            for (v in Variable(__all_data__)) {
+                if (self.key_eq(v)) {
+                    if (v.key_eq(r.getDefinition())) {
+                        if (c = r.getEnclosingCallable()) {
+                            if (type = "CD") {
+                                for (e1 in c.getCallee()) {
+                                    if (direction = "Depends") {
+                                        if (e.key_eq(e1)) {
+                                            return e
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    pub fn getDDDependsNode(self, type: string, direction: string) -> ECGNode {
+        for (e1 in ECGNode(__all_data__)) {
+            for (r in ReturnStatement(__all_data__),
+                c in Method(__all_data__),
+                e in Expression(__all_data__)) {
+                if (e.key_eq(e1)) {
+                    if (self.key_eq(c)) {
+                        if (c.key_eq(r.getEnclosingCallable())) {
+                            if (e = r.getResult()) {
+                                if (direction = "Depends") {
+                                    if (type = "DD") {
+                                        return e1
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            for (e in Callable(__all_data__),
+                c in Field(__all_data__),
+                r in ReferenceExpression(__all_data__)) {
+                if (e.key_eq(e1)) {
+                    if (self.key_eq(c)) {
+                        if (c.key_eq(r.getDefinition())) {
+                            if (e = r.getEnclosingCallable()) {
+                                if (direction = "Depends") {
+                                    if (type = "DD") {
+                                        return e1
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            for (e in Callable(__all_data__),
+                c in EnumConstant(__all_data__),
+                r in ReferenceExpression(__all_data__)) {
+                if (e.key_eq(e1)) {
+                    if (self.key_eq(c)) {
+                        if (c.key_eq(r.getDefinition())) {
+                            if (e = r.getEnclosingCallable()) {
+                                if (direction = "Depends") {
+                                    if (type = "DD") {
+                                        return e1
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            for (n in string::__undetermined_all__()) {
+                for (e in LombokField(__all_data__),
+                    c in CallExpression(__all_data__)) {
+                    if (e.key_eq(e1)) {
+                        if (self.key_eq(c)) {
+                            if (e = c.getLombokField()) {
+                                let (tmp = CallExpression(__all_data__).find(e)) {
+                                    if (!isDirectCall(tmp)) {
+                                        if (n = c.getMethodName()) {
+                                            if (!n.matches("get.*")) {
+                                                if (direction = "Depends") {
+                                                    if (type = "DD") {
+                                                        return e1
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    pub fn getAnAncestorCDDependsNode(self, type: string, direction: string) -> ECGNode {
+        for (e in ECGNode(__all_data__),
+            c in Callable(__all_data__),
+            r in ReferenceExpression(__all_data__)) {
+            if (type = "CD") {
+                if (self.key_eq(c)) {
+                    for (e1 in c.getAnAncestorCallee()) {
+                        if (direction = "Depends") {
+                            if (e.key_eq(e1)) {
+                                return e
+                            }
+                        }
+                    }
+                }
+                if (self.key_eq(r.getDefinition())) {
+                    if (c = r.getEnclosingCallable()) {
+                        for (e1 in c.getAnAncestorCallee()) {
+                            if (direction = "Depends") {
+                                if (e.key_eq(e1)) {
+                                    return e
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    pub fn getPath(self) -> string {
+        for (line in int::__undetermined_all__(),
+            t in string::__undetermined_all__(),
+            path in string::__undetermined_all__(),
+            info in string::__undetermined_all__()) {
+            for (l in coref::java::Location(__all_data__)) {
+                if (l = self.getLocation()) {
+                    if (path = l.getFile().getRelativePath()) {
+                        if (line = l.getStartLineNumber()) {
+                            if (t = line.to_string()) {
+                                if (info = path + ":" + t) {
+                                    return info
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }

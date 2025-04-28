@@ -1,6 +1,116 @@
 // script 
 use coref::java::*
 use coref::xml::*
+
+schema ECGXmlNode {
+    @primary id: int
+}
+
+impl ECGXmlNode {
+    pub fn __all__(db: XmlDB) -> *ECGXmlNode {
+        for (e in XmlPomElement(db)) {
+            yield ECGXmlNode {id : e.id}
+        }
+        for (e in XmlSpringElement(db)) {
+            yield ECGXmlNode {id : e.id}
+        }
+        for (e in XmlCharacter(db)) {
+            yield ECGXmlNode {id : e.id}
+        }
+        for (e in XmlAttribute(db)) {
+            yield ECGXmlNode {id : e.id}
+        }
+    }
+    
+    pub fn getLocation(self) -> coref::xml::Location {
+        for (l in coref::xml::Location(__all_data__)) {
+            for (e in XmlElement(__all_data__)) {
+                if (self.key_eq(e)) {
+                    if (l = e.getLocation()) {
+                        return l
+                    }
+                }
+            }
+            for (e in XmlAttribute(__all_data__)) {
+                if (self.key_eq(e)) {
+                    if (l = e.getLocation()) {
+                        return l
+                    }
+                }
+            }
+            for (e in XmlCharacter(__all_data__)) {
+                if (self.key_eq(e)) {
+                    if (l = e.getLocation()) {
+                        return l
+                    }
+                }
+            }
+        }
+    }
+    
+    pub fn getType(self) -> string {
+        for (t in string::__undetermined_all__()) {
+            for (e in XmlElement(__all_data__)) {
+                if (self.key_eq(e)) {
+                    if (t = "XmlElement") {
+                        return t
+                    }
+                }
+            }
+            for (e in XmlAttribute(__all_data__)) {
+                if (self.key_eq(e)) {
+                    if (t = "XmlAttribute") {
+                        return t
+                    }
+                }
+            }
+            for (e in XmlCharacter(__all_data__)) {
+                if (self.key_eq(e)) {
+                    if (t = "XmlCharacter") {
+                        return t
+                    }
+                }
+            }
+        }
+    }
+
+    pub fn getText(self) -> string {
+        for (e in XmlElement(__all_data__)) {
+            if (self.key_eq(e)) {
+                return e.getName()
+            }
+        }
+        for (e in XmlAttribute(__all_data__)) {
+            if (self.key_eq(e)) {
+                return e.getName() + " = " + e.getValue()
+            }
+        }
+        for (e in XmlCharacter(__all_data__)) {
+            if (self.key_eq(e)) {
+                return e.getText()
+            }
+        }
+    }
+
+    pub fn getEnclosingECGXmlNode(self) -> ECGXmlNode {
+        for (e in XmlElement(__all_data__)) {
+            if (self.key_eq(e)) {
+                return e.to<ECGXmlNode>()
+            }
+        }
+        for (e in XmlAttribute(__all_data__)) {
+            if (self.key_eq(e)) {
+                return e.getXmlElement().to<ECGXmlNode>()
+            }
+        }
+        for (e in XmlCharacter(__all_data__)) {
+            if (self.key_eq(e)) {
+                return e.getBelongedElement().to<ECGXmlNode>()
+            }
+        }
+    }
+}
+
 pub fn getXmlECGNode(i: int) -> bool {
     // #xmlecgnode
     // example
@@ -27,14 +137,14 @@ pub fn trim(n: string, m: string) -> bool {
         }
     }
 }
-pub fn real_output(r: ECGXmlNode, c: int, f: int, n: string, m: string) -> bool {
+pub fn real_output(r: ECGXmlNode, c: ClassOrInterface, f: ElementParent, n: string, m: string) -> bool {
     let (java_db = default_java_db()) {
         let (xml_db = default_xml_db()) {
-            if (getXmlECGNode(r)) {
-                if (getChangeSetByDalXmlElement(r, ClassOrInterface(java_db).find(c), Method(java_db).find(f), n, m)) {
+            if (getXmlECGNode(r.id)) {
+                if (getChangeSetByDalXmlElement(r, c, Method(java_db).find(f), n, m)) {
                     return true
                 }
-                if (getChangeSetByResultXmlElement(r, ClassOrInterface(java_db).find(c), Field(java_db).find(f), n, m)) {
+                if (getChangeSetByResultXmlElement(r, c, Field(java_db).find(f), n, m)) {
                     return true
                 }
             }
@@ -46,7 +156,7 @@ pub fn getChangeSetByResultXmlElement(r1: ECGXmlNode, c: ClassOrInterface, f: Fi
         let (xml_db = default_xml_db()) {
             for (r in ResultXmlElement(xml_db)) {
                 if (r.key_eq(r1)) {
-                    if (getXmlECGNode(r)) {
+                    if (getXmlECGNode(r.id)) {
                         if (n = r.getBelongedMapXmlElement().getMappingClassName()) {
                             if (n = c.getQualifiedName()) {
                                 if (c = f.getParent()) {
@@ -75,7 +185,7 @@ pub fn getChangeSetByDalXmlElement(d1: ECGXmlNode, c: ClassOrInterface, m: Metho
                     cc in XmlComment(xml_db),
                     l in Literal(java_db)) {
                     if (d.key_eq(d1)) {
-                        if (getXmlECGNode(d)) {
+                        if (getXmlECGNode(d.id)) {
                             if (d.getLocation().getFile() = cc.getLocation().getFile()) {
                                 if (cc.getLocation().getEndLineNumber() = i) {
                                     if (i + 1 = d.getLocation().getStartLineNumber()) {

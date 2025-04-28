@@ -536,7 +536,7 @@ pub fn facts(a: Expression, i: int, value: string) -> bool {
         }
     }
 }
-pub fn connectStrBase(ID: int, index: int, result: string) -> bool {
+pub fn connectStrBase(ID: Expression, index: int, result: string) -> bool {
     let (java_db = default_java_db()) {
         for (total in int::__undetermined_all__(),
             reStr in string::__undetermined_all__(),
@@ -564,7 +564,7 @@ pub fn connectStrBase(ID: int, index: int, result: string) -> bool {
         }
     }
 }
-pub fn connectStr(ID: int) -> string {
+pub fn connectStr(ID: Expression) -> string {
     let (java_db = default_java_db()) {
         for (c in int::__undetermined_all__(),
             result in string::__undetermined_all__()) {
@@ -651,6 +651,7 @@ fn tmp_2(a: string, b: string) -> bool {
     }
 }
 
+@inline
 fn tmp_3(i: int, b: string, a: string) -> bool {
     let (java_db = default_java_db()) {
         if (a.substr(i - 1,i - 1) = "/") {
@@ -661,6 +662,7 @@ fn tmp_3(i: int, b: string, a: string) -> bool {
     }
 }
 
+@inline
 fn tmp_4(i: int, b: string, a: string) -> bool {
     let (java_db = default_java_db()) {
         if (!a.substr(i - 1,i - 1) = "/") {
@@ -797,7 +799,7 @@ fn tmp_18(e: Expression) -> bool {
     }
 }
 
-fn tmp_19(ID: int) -> *auto_tmp_20 {
+fn tmp_19(ID: Expression) -> *auto_tmp_20 {
     let (java_db = default_java_db()) {
         for (auto_tmp_var_0 in int::__undetermined_all__(),
             auto_tmp_var_1 in string::__undetermined_all__()) {
@@ -824,7 +826,7 @@ fn tmp_21(index: int) -> bool {
     }
 }
 
-fn tmp_22(ID: int) -> *auto_tmp_23 {
+fn tmp_22(ID: Expression) -> *auto_tmp_23 {
     let (java_db = default_java_db()) {
         for (auto_tmp_var_0 in int::__undetermined_all__(),
             auto_tmp_var_1 in string::__undetermined_all__()) {

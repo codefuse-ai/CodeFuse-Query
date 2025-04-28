@@ -462,6 +462,20 @@ impl ECGNode {
         }
     }
 
+    pub fn getAnAncestorCDDependedNode(self, type: string, direction: string) -> ECGNode {
+        for (e in ECGNode(__all_data__), c in Callable(__all_data__), r in ReferenceExpression(__all_data__)) {
+            if (type = "CD") {
+                if (self.key_eq(c) || (self.key_eq(r.getDefinition()) && r.getEnclosingCallable() = c)) {
+                    for (e2 in Method(__all_data__), c_caller in c.getAnAncestorCaller()) {
+                        if (e2.key_eq(c_caller) && direction = "Depended" && e.key_eq(e2)) {
+                            return e
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     fn tmp_0(n: string) -> bool {
         if (n.matches("get.*")) {
             return true
