@@ -397,7 +397,11 @@ void engine::run_souffle(const std::string& souffle_content,
     if (config.count(option::cli_enable_souffle_profiling)) {
         argv.push_back("--profile=souffle.prof.log");
         argv.push_back("--profile-frequency");
+        argv.push_back("--index-stats");
     }
+
+    // enable souffle auto schedule, for experimental use only
+    // argv.push_back("--auto-schedule=souffle.prof.log");
 
     // null terminator
     argv.push_back(nullptr);
