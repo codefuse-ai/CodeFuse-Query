@@ -576,7 +576,7 @@ pub fn facts(a: Expression, i: int, value: string) -> bool {
         }
     }
 }
-pub fn connectStrBase(ID: int, index: int, result: string) -> bool {
+pub fn connectStrBase(ID: Expression, index: int, result: string) -> bool {
     let (xml_db = default_xml_db()) {
         let (java_db = default_java_db()) {
             for (total in int::__undetermined_all__(),
@@ -606,7 +606,7 @@ pub fn connectStrBase(ID: int, index: int, result: string) -> bool {
         }
     }
 }
-pub fn connectStr(ID: int) -> string {
+pub fn connectStr(ID: Expression) -> string {
     let (xml_db = default_xml_db()) {
         let (java_db = default_java_db()) {
             for (c in int::__undetermined_all__(),
@@ -962,6 +962,7 @@ fn tmp_6(b: string, a: string) -> bool {
     }
 }
 
+@inline
 fn tmp_7(b: string, i: int, a: string) -> bool {
     let (xml_db = default_xml_db()) {
         let (java_db = default_java_db()) {
@@ -974,6 +975,7 @@ fn tmp_7(b: string, i: int, a: string) -> bool {
     }
 }
 
+@inline
 fn tmp_8(b: string, i: int, a: string) -> bool {
     let (xml_db = default_xml_db()) {
         let (java_db = default_java_db()) {
@@ -1210,7 +1212,7 @@ fn tmp_28(e: Expression) -> bool {
     }
 }
 
-fn tmp_29(ID: int) -> *auto_tmp_30 {
+fn tmp_29(ID: Expression) -> *auto_tmp_30 {
     let (xml_db = default_xml_db()) {
         let (java_db = default_java_db()) {
             for (auto_tmp_var_0 in int::__undetermined_all__(),
@@ -1241,7 +1243,7 @@ fn tmp_31(index: int) -> bool {
     }
 }
 
-fn tmp_32(ID: int) -> *auto_tmp_33 {
+fn tmp_32(ID: Expression) -> *auto_tmp_33 {
     let (xml_db = default_xml_db()) {
         let (java_db = default_java_db()) {
             for (auto_tmp_var_0 in int::__undetermined_all__(),

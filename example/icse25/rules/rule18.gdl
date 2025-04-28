@@ -3,7 +3,11 @@ use coref::javascript::*
 pub fn getInfluencedTrAPI(interfaceName: string, methodName: string) -> bool {
     // #rule17的结果
     // example
-    // [ {"com.xxx.filtered.BlockFacade", "load"}, {"com.xxx.filtered.BlockFacade", "batchLoad"}, {"com.xxx.filtered.LayoutFacade", "getLayoutDef"} ]
+    [
+        {"com.xxx.filtered.BlockFacade", "load"},
+        {"com.xxx.filtered.BlockFacade", "batchLoad"},
+        {"com.xxx.filtered.LayoutFacade", "getLayoutDef"}
+    ]
 }
 pub fn getAppFacade(appName: string, proxyFacadeName: string, facadeQualifiedName: string) -> bool {
     let (javascript_db = default_javascript_db()) {

@@ -162,105 +162,6 @@ impl PropertyElement {
     
 }
 
-schema XmlSpringElement extends XmlElement {
-    
-}
-
-impl XmlSpringElement {
-
-    @data_constraint
-    @inline
-    pub fn __all__(db: XmlDB) -> *XmlSpringElement {
-        for (tmp in XmlElement(db)) {
-            for (e in BeanElement(db)) {
-                if (tmp.key_eq(e)) {
-                    yield XmlSpringElement {
-                        id : tmp.id,
-                        parent_id : tmp.parent_id,
-                        index_order : tmp.index_order,
-                        location_id : tmp.location_id
-                    }
-                }
-            }
-            for (e in ImportElement(db)) {
-                if (tmp.key_eq(e)) {
-                    yield XmlSpringElement {
-                        id : tmp.id,
-                        parent_id : tmp.parent_id,
-                        index_order : tmp.index_order,
-                        location_id : tmp.location_id
-                    }
-                }
-            }
-            for (e in MapElement(db)) {
-                if (tmp.key_eq(e)) {
-                    yield XmlSpringElement {
-                        id : tmp.id,
-                        parent_id : tmp.parent_id,
-                        index_order : tmp.index_order,
-                        location_id : tmp.location_id
-                    }
-                }
-            }
-            for (e in EntryElement(db)) {
-                if (tmp.key_eq(e)) {
-                    yield XmlSpringElement {
-                        id : tmp.id,
-                        parent_id : tmp.parent_id,
-                        index_order : tmp.index_order,
-                        location_id : tmp.location_id
-                    }
-                }
-            }
-            for (e in ValueElement(db)) {
-                if (tmp.key_eq(e)) {
-                    yield XmlSpringElement {
-                        id : tmp.id,
-                        parent_id : tmp.parent_id,
-                        index_order : tmp.index_order,
-                        location_id : tmp.location_id
-                    }
-                }
-            }
-            for (e in PropertyElement(db)) {
-                if (tmp.key_eq(e)) {
-                    yield XmlSpringElement {
-                        id : tmp.id,
-                        parent_id : tmp.parent_id,
-                        index_order : tmp.index_order,
-                        location_id : tmp.location_id
-                    }
-                }
-            }
-        }
-    }
-    
-    
-}
-
-schema PomFile extends XmlFile {
-    
-}
-
-impl PomFile {
-
-    @data_constraint
-    @inline
-    pub fn __all__(db: XmlDB) -> *PomFile {
-        for (tmp in XmlFile(db)) {
-            if (tmp.getFileName() = "pom.xml") {
-                yield PomFile {
-                    id : tmp.id,
-                    file_name : tmp.file_name,
-                    relative_path : tmp.relative_path
-                }
-            }
-        }
-    }
-    
-    
-}
-
 schema DependencyElement extends XmlElement {
     
 }
@@ -344,7 +245,7 @@ impl VersionElement {
             for (dependencyCharacter in XmlCharacter(__all_data__)) {
                 if (dependencyCharacter.getBelongedElement().key_eq(self)) {
                     if (dependencyCharacterText = dependencyCharacter.getText()) {
-                        if (tmp_0(dependencyCharacterText)) {
+                        if (Self::tmp_0(dependencyCharacterText)) {
                             for (propertyCharacterText in string::__undetermined_all__()) {
                                 for (property in PropertyElement(__all_data__),
                                     propertyCharacter in XmlCharacter(__all_data__)) {
@@ -360,7 +261,7 @@ impl VersionElement {
                                 }
                             }
                         }
-                        if (!(tmp_0(dependencyCharacterText))) {
+                        if (!Self::tmp_0(dependencyCharacterText)) {
                             if (version = dependencyCharacter.getText()) {
                                 return version
                             }
@@ -370,8 +271,12 @@ impl VersionElement {
             }
         }
     }
-    
-    
+
+    fn tmp_0(dependencyCharacterText: string) -> bool {
+        if (dependencyCharacterText.contains("${")) {
+            return true
+        }
+    }
 }
 
 schema PropertyInPomElement extends XmlElement {
@@ -414,72 +319,6 @@ impl ArtifactElement {
                     parent_id : tmp.parent_id,
                     index_order : tmp.index_order,
                     location_id : tmp.location_id
-                }
-            }
-        }
-    }
-    
-    
-}
-
-schema XmlPomElement extends XmlElement {
-    
-}
-
-impl XmlPomElement {
-
-    @data_constraint
-    @inline
-    pub fn __all__(db: XmlDB) -> *XmlPomElement {
-        for (tmp in XmlElement(db)) {
-            for (e in ArtifactElement(db)) {
-                if (tmp.key_eq(e)) {
-                    yield XmlPomElement {
-                        id : tmp.id,
-                        parent_id : tmp.parent_id,
-                        index_order : tmp.index_order,
-                        location_id : tmp.location_id
-                    }
-                }
-            }
-            for (e in PropertyInPomElement(db)) {
-                if (tmp.key_eq(e)) {
-                    yield XmlPomElement {
-                        id : tmp.id,
-                        parent_id : tmp.parent_id,
-                        index_order : tmp.index_order,
-                        location_id : tmp.location_id
-                    }
-                }
-            }
-            for (e in VersionElement(db)) {
-                if (tmp.key_eq(e)) {
-                    yield XmlPomElement {
-                        id : tmp.id,
-                        parent_id : tmp.parent_id,
-                        index_order : tmp.index_order,
-                        location_id : tmp.location_id
-                    }
-                }
-            }
-            for (e in GroupElement(db)) {
-                if (tmp.key_eq(e)) {
-                    yield XmlPomElement {
-                        id : tmp.id,
-                        parent_id : tmp.parent_id,
-                        index_order : tmp.index_order,
-                        location_id : tmp.location_id
-                    }
-                }
-            }
-            for (e in DependencyElement(db)) {
-                if (tmp.key_eq(e)) {
-                    yield XmlPomElement {
-                        id : tmp.id,
-                        parent_id : tmp.parent_id,
-                        index_order : tmp.index_order,
-                        location_id : tmp.location_id
-                    }
                 }
             }
         }
@@ -612,14 +451,6 @@ pub fn real_output(filename: string, lineNumber: int, c: ECGXmlNode, typeInAST: 
 
 fn default_xml_db() -> XmlDB {
     return XmlDB::load("coref_xml_src.db")
-}
-
-fn tmp_0(dependencyCharacterText: string) -> bool {
-    let (xml_db = default_xml_db()) {
-        if (dependencyCharacterText.contains("${")) {
-            return true
-        }
-    }
 }
 
 fn main() {

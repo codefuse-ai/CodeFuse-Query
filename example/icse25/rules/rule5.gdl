@@ -1,9 +1,9 @@
 // script 
 use coref::xml::*
 pub fn gitdiff(filePath: string, lineNo: int) -> bool {
-    #changeinfo
+    // #changeinfo
     // example
-    // [ {"test", 1111} ]
+    [ {"test", 1111} ]
 }
 pub fn transfertofile(f: XmlFile, filename: string, lineNumber: int) -> bool {
     let (xml_db = default_xml_db()) {

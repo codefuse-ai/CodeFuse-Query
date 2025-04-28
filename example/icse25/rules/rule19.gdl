@@ -25,13 +25,9 @@ pub fn rpcNameControllerFunctionIdentifier(rpcName: string, controllerFunctionId
                                                 for (rpcNameStringLiteral in StringLiteral(javascript_db)) {
                                                     if (rpcNameStringLiteral.key_eq(callExpression.getArgument(0))) {
                                                         if (rpcName = rpcNameStringLiteral.getValue()) {
-                                                            for (argumentCount in int::__undetermined_all__()) {
-                                                                for (auto_tmp1 in callExpression.getArgumentCount()) {
-                                                                    if (argumentCount = auto_tmp1) {
-                                                                        if (controllerFunctionIdentifier = callExpression.getArgument(argumentCount - 1)) {
-                                                                            return true
-                                                                        }
-                                                                    }
+                                                            let (argumentCount = callExpression.getArgumentCount()) {
+                                                                if (controllerFunctionIdentifier = callExpression.getArgument(argumentCount - 1)) {
+                                                                    return true
                                                                 }
                                                             }
                                                         }
@@ -42,13 +38,9 @@ pub fn rpcNameControllerFunctionIdentifier(rpcName: string, controllerFunctionId
                                                 for (rpcNameStringLiteral in StringLiteral(javascript_db)) {
                                                     if (rpcNameStringLiteral.key_eq(callExpression.getArgument(0))) {
                                                         if (rpcName = rpcNameStringLiteral.getValue()) {
-                                                            for (argumentCount in int::__undetermined_all__()) {
-                                                                for (auto_tmp1 in callExpression.getArgumentCount()) {
-                                                                    if (argumentCount = auto_tmp1) {
-                                                                        if (controllerFunctionIdentifier = callExpression.getArgument(argumentCount - 1)) {
-                                                                            return true
-                                                                        }
-                                                                    }
+                                                            let (argumentCount = callExpression.getArgumentCount()) {
+                                                                if (controllerFunctionIdentifier = callExpression.getArgument(argumentCount - 1)) {
+                                                                    return true
                                                                 }
                                                             }
                                                         }
@@ -59,13 +51,9 @@ pub fn rpcNameControllerFunctionIdentifier(rpcName: string, controllerFunctionId
                                                 for (rpcNameStringLiteral in StringLiteral(javascript_db)) {
                                                     if (rpcNameStringLiteral.key_eq(callExpression.getArgument(0))) {
                                                         if (rpcName = rpcNameStringLiteral.getValue()) {
-                                                            for (argumentCount in int::__undetermined_all__()) {
-                                                                for (auto_tmp1 in callExpression.getArgumentCount()) {
-                                                                    if (argumentCount = auto_tmp1) {
-                                                                        if (controllerFunctionIdentifier = callExpression.getArgument(argumentCount - 1)) {
-                                                                            return true
-                                                                        }
-                                                                    }
+                                                            let (argumentCount = callExpression.getArgumentCount()) {
+                                                                if (controllerFunctionIdentifier = callExpression.getArgument(argumentCount - 1)) {
+                                                                    return true
                                                                 }
                                                             }
                                                         }

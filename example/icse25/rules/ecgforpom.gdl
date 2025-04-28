@@ -5,9 +5,6 @@ schema ECGXmlNode {
 }
 
 impl ECGXmlNode {
-
-    @data_constraint
-    @inline
     pub fn __all__(db: XmlDB) -> *ECGXmlNode {
         for (e in XmlElement(db)) {
             yield ECGXmlNode {id : e.id}
@@ -70,42 +67,12 @@ impl ECGXmlNode {
                 }
             }
         }
-    }
-    
-    
+    }   
 }
 
-schema PomFile extends XmlFile {
-    
-}
-
-impl PomFile {
-
-    @data_constraint
-    @inline
-    pub fn __all__(db: XmlDB) -> *PomFile {
-        for (tmp in XmlFile(db)) {
-            if (tmp.getFileName() = "pom.xml") {
-                yield PomFile {
-                    id : tmp.id,
-                    file_name : tmp.file_name,
-                    relative_path : tmp.relative_path
-                }
-            }
-        }
-    }
-    
-    
-}
-
-schema DependencyElement extends XmlElement {
-    
-}
+schema DependencyElement extends XmlElement {}
 
 impl DependencyElement {
-
-    @data_constraint
-    @inline
     pub fn __all__(db: XmlDB) -> *DependencyElement {
         for (tmp in XmlElement(db)) {
             if (tmp.getElementName() = "dependency") {
@@ -118,18 +85,11 @@ impl DependencyElement {
             }
         }
     }
-    
-    
 }
 
-schema GroupElement extends XmlElement {
-    
-}
+schema GroupElement extends XmlElement {}
 
 impl GroupElement {
-
-    @data_constraint
-    @inline
     pub fn __all__(db: XmlDB) -> *GroupElement {
         for (tmp in XmlElement(db)) {
             if (tmp.getElementName() = "groupId") {
@@ -142,18 +102,11 @@ impl GroupElement {
             }
         }
     }
-    
-    
 }
 
-schema VersionElement extends XmlElement {
-    
-}
+schema VersionElement extends XmlElement {}
 
 impl VersionElement {
-
-    @data_constraint
-    @inline
     pub fn __all__(db: XmlDB) -> *VersionElement {
         for (tmp in XmlElement(db)) {
             if (tmp.getElementName() = "version") {
@@ -207,8 +160,6 @@ impl VersionElement {
             }
         }
     }
-    
-    
 }
 
 schema PropertyElement extends XmlElement {

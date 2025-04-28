@@ -1,9 +1,9 @@
 // script 
 use coref::java::*
 pub fn getJavaECGNode(node: int) -> bool {
-    #javaecgnode
+    // #javaecgnode
     // example
-    // [ {1111} ]
+    [ {1111} ]
 }
 @inline
 pub fn trim(n: string, m: string) -> bool {

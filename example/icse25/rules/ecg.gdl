@@ -1,13 +1,8 @@
 // script 
 use coref::java::*
-schema ECGNode extends ElementParent {
-    
-}
+schema ECGNode extends ElementParent {}
 
 impl ECGNode {
-
-    @data_constraint
-    @inline
     pub fn __all__(db: JavaDB) -> *ECGNode {
         for (tmp in ElementParent(db)) {
             for (m in Method(db)) {
@@ -221,19 +216,21 @@ impl ECGNode {
                     if (e.key_eq(e1)) {
                         if (self.key_eq(c)) {
                             if (e = c.getLombokField()) {
-                                if (!isDirectCall(CallExpression(__all_data__).find(e))) {
-                                    if (n = c.getMethodName()) {
-                                        if (tmp_0(n)) {
-                                            if (direction = "Depended") {
-                                                if (type = "DD") {
-                                                    return e1
+                                let (tmp_find = CallExpression(__all_data__).find(e)) {
+                                    if (!isDirectCall(tmp_find)) {
+                                        if (n = c.getMethodName()) {
+                                            if (Self::tmp_0(n)) {
+                                                if (direction = "Depended") {
+                                                    if (type = "DD") {
+                                                        return e1
+                                                    }
                                                 }
                                             }
-                                        }
-                                        if (!(tmp_0(n))) {
-                                            if (direction = "Depends") {
-                                                if (type = "DD") {
-                                                    return e1
+                                            if (!Self::tmp_0(n)) {
+                                                if (direction = "Depends") {
+                                                    if (type = "DD") {
+                                                        return e1
+                                                    }
                                                 }
                                             }
                                         }
@@ -312,10 +309,10 @@ impl ECGNode {
     pub fn getAnAncestorDDNode(self, type: string, direction: string) -> ECGNode {
         for (e in ECGNode(__all_data__)) {
             if (type = "DD") {
-                if (e.id = getDDNode(type, direction)) {
+                if (e = self.getDDNode(type, direction)) {
                     return e
                 }
-                if (e.id = getAnAncestorDDNode(__all_data__, __all_data__).getDDNode(type, direction)) {
+                if (e = self.getAnAncestorDDNode(__all_data__, __all_data__).getDDNode(type, direction)) {
                     return e
                 }
             }
@@ -444,330 +441,43 @@ impl ECGNode {
     
     pub fn getECGNode(self, type: string, direction: string) -> ECGNode {
         for (e in ECGNode(__all_data__)) {
-            if (e.id = getCDNode(type, direction)) {
+            if (e = self.getCDNode(type, direction)) {
                 return e
             }
-            if (e.id = getDDNode(type, direction)) {
+            if (e = self.getDDNode(type, direction)) {
                 return e
             }
         }
     }
     
     pub fn getAnAncestorECGNode(self, type: string, direction: string) -> ECGNode {
-        for (e in ECGNode(__all_data__),
-            temp in ECGNode(__all_data__)) {
-            if (temp = self.getAnAncestorCDNode(__all_data__, __all_data__)) {
-                if (e = temp.getECGNode(type, direction)) {
+        for (e in ECGNode(__all_data__), tmp in ECGNode(__all_data__)) {
+            if (tmp = self.getAnAncestorCDNode(__all_data__, __all_data__)) {
+                if (e = tmp.getECGNode(type, direction)) {
                     return e
                 }
             }
         }
     }
-    
-    
-}
 
-schema CallExpression extends Expression {
-    
-}
-
-impl CallExpression {
-
-    @data_constraint
-    @inline
-    pub fn __all__(db: JavaDB) -> *CallExpression {
-        for (tmp in Expression(db)) {
-            for (m in MethodAccessExpression(db)) {
-                if (tmp.key_eq(m)) {
-                    yield CallExpression {
-                        element_hash_id : tmp.element_hash_id,
-                        name : tmp.name,
-                        parent_hash_id : tmp.parent_hash_id,
-                        index_order : tmp.index_order,
-                        location_hash_id : tmp.location_hash_id,
-                        printable_text : tmp.printable_text
-                    }
-                }
-            }
-            for (m in MethodReferenceExpression(db)) {
-                if (tmp.key_eq(m)) {
-                    yield CallExpression {
-                        element_hash_id : tmp.element_hash_id,
-                        name : tmp.name,
-                        parent_hash_id : tmp.parent_hash_id,
-                        index_order : tmp.index_order,
-                        location_hash_id : tmp.location_hash_id,
-                        printable_text : tmp.printable_text
-                    }
-                }
-            }
-        }
-    }
-    
-    pub fn getMethod(self) -> Method {
-        for (m in Method(__all_data__)) {
-            for (e in MethodAccessExpression(__all_data__)) {
-                if (self.key_eq(e)) {
-                    if (m = e.getMethod()) {
-                        return m
-                    }
-                }
-            }
-            for (e in MethodReferenceExpression(__all_data__)) {
-                if (self.key_eq(e)) {
-                    if (m = e.getMethod()) {
-                        return m
-                    }
-                }
-            }
-        }
-    }
-    
-    pub fn getMethodName(self) -> string {
-        for (m in string::__undetermined_all__()) {
-            for (i in Identifier(__all_data__)) {
-                for (e in MethodAccessExpression(__all_data__)) {
-                    if (self.key_eq(e)) {
-                        if (e.getReference().key_eq(i.getParent())) {
-                            if (m = i.getName()) {
-                                return m
-                            }
-                        }
-                    }
-                }
-                for (e in MethodReferenceExpression(__all_data__)) {
-                    if (self.key_eq(e)) {
-                        if (e.key_eq(i.getParent())) {
-                            if (m = i.getName()) {
-                                return m
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-    
-    pub fn getCallSite(self) -> ReferenceExpression {
-        for (e in ReferenceExpression(__all_data__)) {
-            for (m in MethodAccessExpression(__all_data__)) {
-                if (self.key_eq(m)) {
-                    if (e = m.getCallSite()) {
-                        return e
-                    }
-                }
-            }
-            for (m in MethodReferenceExpression(__all_data__)) {
-                if (self.key_eq(m)) {
-                    if (e = m.getReference()) {
-                        return e
-                    }
-                }
-            }
-        }
-    }
-    
-    pub fn getReference(self) -> ReferenceExpression {
-        for (e in ReferenceExpression(__all_data__)) {
-            for (m in MethodAccessExpression(__all_data__)) {
-                if (self.key_eq(m)) {
-                    if (e = m.getReference()) {
-                        return e
-                    }
-                }
-            }
-            for (m in MethodReferenceExpression(__all_data__)) {
-                if (self.key_eq(m)) {
-                    if (e = m.getReference()) {
-                        return e
-                    }
-                }
-            }
-        }
-    }
-    
-    pub fn getCallSiteDefinition(self) -> ClassOrInterface {
-        for (c in ClassOrInterface(__all_data__),
-            r in ReferenceExpression(__all_data__)) {
-            if (r = self.getCallSite()) {
-                if (c.key_eq(r.getDefinition())) {
-                    return c
-                }
-                for (v in Variable(__all_data__)) {
-                    if (v.key_eq(r.getDefinition())) {
-                        if (v.getType().getQualifiedName() = c.getQualifiedName()) {
-                            return c
-                        }
-                    }
-                }
-            }
-        }
-    }
-    
-    pub fn getLombokField(self) -> LombokField {
-        for (f in LombokField(__all_data__)) {
-            if (self.getCallSiteDefinition() = f.getParent()) {
-                for (auto_tmp1 in f.getLombokMethodName()) {
-                    if (auto_tmp1 = self.getMethodName()) {
-                        return f
-                    }
-                }
-            }
-        }
-    }
-    
-    pub fn getArguments(self) -> *Expression {
-        for (e in Expression(__all_data__),
-            m in MethodAccessExpression(__all_data__),
-            l in ExpressionListExpressionRelation(__all_data__)) {
-            if (self.key_eq(m)) {
-                if (m.getExpressionList() = l.getExpressionList()) {
-                    if (e = l.getExpression()) {
-                        yield e
-                    }
-                    for (auto_tmp1 in e.getAnAncestor()) {
-                        if (l.getExpression().key_eq(auto_tmp1)) {
-                            yield e
-                        }
-                    }
-                }
-            }
-        }
-    }
-    
-    
-}
-
-schema LombokField extends Field {
-    
-}
-
-impl LombokField {
-
-    @data_constraint
-    @inline
-    pub fn __all__(db: JavaDB) -> *LombokField {
-        for (tmp in Field(db)) {
-            for (a in Annotation(db)) {
-                for (auto_tmp2 in tmp.getAnnotation()) {
-                    if (a = auto_tmp2) {
-                        if (a.getName() = "Data") {
-                            yield LombokField {
-                                element_hash_id : tmp.element_hash_id,
-                                name : tmp.name,
-                                parent_hash_id : tmp.parent_hash_id,
-                                printable_text : tmp.printable_text,
-                                location_hash_id : tmp.location_hash_id
-                            }
-                        }
-                        if (a.getName() = "Getter") {
-                            yield LombokField {
-                                element_hash_id : tmp.element_hash_id,
-                                name : tmp.name,
-                                parent_hash_id : tmp.parent_hash_id,
-                                printable_text : tmp.printable_text,
-                                location_hash_id : tmp.location_hash_id
-                            }
-                        }
-                        if (a.getName() = "Setter") {
-                            yield LombokField {
-                                element_hash_id : tmp.element_hash_id,
-                                name : tmp.name,
-                                parent_hash_id : tmp.parent_hash_id,
-                                printable_text : tmp.printable_text,
-                                location_hash_id : tmp.location_hash_id
-                            }
-                        }
-                    }
-                }
-                for (c in ClassOrInterface(db)) {
-                    if (c = tmp.getParent()) {
-                        for (auto_tmp3 in c.getAnnotation()) {
-                            if (a = auto_tmp3) {
-                                if (a.getName() = "Data") {
-                                    yield LombokField {
-                                        element_hash_id : tmp.element_hash_id,
-                                        name : tmp.name,
-                                        parent_hash_id : tmp.parent_hash_id,
-                                        printable_text : tmp.printable_text,
-                                        location_hash_id : tmp.location_hash_id
-                                    }
-                                }
-                                if (a.getName() = "Getter") {
-                                    yield LombokField {
-                                        element_hash_id : tmp.element_hash_id,
-                                        name : tmp.name,
-                                        parent_hash_id : tmp.parent_hash_id,
-                                        printable_text : tmp.printable_text,
-                                        location_hash_id : tmp.location_hash_id
-                                    }
-                                }
-                                if (a.getName() = "Setter") {
-                                    yield LombokField {
-                                        element_hash_id : tmp.element_hash_id,
-                                        name : tmp.name,
-                                        parent_hash_id : tmp.parent_hash_id,
-                                        printable_text : tmp.printable_text,
-                                        location_hash_id : tmp.location_hash_id
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-    
-    pub fn getLombokMethodName(self) -> *string {
-        for (name in string::__undetermined_all__()) {
-            for (l in int::__undetermined_all__(),
-                i in int::__undetermined_all__(),
-                temp in string::__undetermined_all__(),
-                p in string::__undetermined_all__(),
-                j in string::__undetermined_all__()) {
-                if (temp = self.getName()) {
-                    if (i = temp.len()) {
-                        if (l = temp.substr(0,1)) {
-                            if (p = temp.substr(1,i)) {
-                                if (lowerToUpper(l, j)) {
-                                    if (name = "set" + j + p) {
-                                        yield name
-                                    }
-                                    if (name = "get" + j + p) {
-                                        yield name
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-    
-    
-}
-
-pub fn isDirectCall(e: CallExpression) -> bool {
-    let (java_db = default_java_db()) {
-        for (s in ExpressionStatement(java_db)) {
-            if (s.key_eq(e.getParent())) {
-                return true
-            }
+    fn tmp_0(n: string) -> bool {
+        if (n.matches("get.*")) {
+            return true
         }
     }
 }
+
 pub fn getNode(node: int) -> bool {
     [
-        {-6062664004747450091},
-        {-8976777526123968441},
-        {-7423165299222302626}
+        // {-6062664004747450091},
+        // {-8976777526123968441},
+        // {-7423165299222302626}
     ]
 }
+
 pub fn temp(a: ECGNode, b: ECGNode, c: ECGNode, edgeType: string, direction: string) -> bool {
     let (java_db = default_java_db()) {
-        if (getNode(a)) {
+        if (getNode(a.id)) {
             if (b = a.getAnAncestorCDNode(__all_data__, __all_data__)) {
                 if (c = b.getECGNode(edgeType, direction)) {
                     return true
@@ -781,6 +491,7 @@ pub fn temp(a: ECGNode, b: ECGNode, c: ECGNode, edgeType: string, direction: str
         }
     }
 }
+
 pub fn real_output(m: ECGNode, nodeType1: string, nodeText1: string, n: ECGNode, nodeType2: string, nodeText2: string, edgeType: string, direction: string) -> bool {
     let (java_db = default_java_db()) {
         for (e in ECGNode(java_db)) {
@@ -802,14 +513,6 @@ pub fn real_output(m: ECGNode, nodeType1: string, nodeText1: string, n: ECGNode,
 
 fn default_java_db() -> JavaDB {
     return JavaDB::load("coref_java_src.db")
-}
-
-fn tmp_0(n: string) -> bool {
-    let (java_db = default_java_db()) {
-        if (n.matches("get.*")) {
-            return true
-        }
-    }
 }
 
 fn main() {

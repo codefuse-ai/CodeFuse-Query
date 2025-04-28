@@ -2,9 +2,9 @@
 use coref::java::*
 use coref::xml::*
 pub fn getXmlECGNode(i: int) -> bool {
-    #xmlecgnode
+    // #xmlecgnode
     // example
-    // [ {1111} ]
+    [ {1111} ]
 }
 @inline
 pub fn trim(n: string, m: string) -> bool {

@@ -120,9 +120,9 @@ pub fn real_output(facadeQualifiedName: string, trMethodName: string, outerField
                                                         }
                                                     }
                                                 }
-                                                for (rootField in Field(java_db)) {
-                                                    if (getAField(returnClass, rootField, __all_data__, __all_data__)) {
-                                                        if (getADescendantField(rootField, Field(java_db).find(outerFieldId), aField, fieldName, isList)) {
+                                                for (rootField in Field(java_db), outerField in Field(java_db)) {
+                                                    if (getAField(returnClass, rootField, __all_data__, __all_data__) && outerField.element_hash_id = outerFieldId) {
+                                                        if (getADescendantField(rootField, outerField, aField, fieldName, isList)) {
                                                             if (fieldId = aField.element_hash_id) {
                                                                 return true
                                                             }

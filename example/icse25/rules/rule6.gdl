@@ -2,14 +2,14 @@
 use coref::java::*
 use coref::xml::*
 pub fn getJavaECGNode(id: int) -> bool {
-    #javaxmlnode
+    // #javaxmlnode
     // example
-    // [ {1111} ]
+    [ {1111} ]
 }
 pub fn getXmlECGNode(id: int) -> bool {
-    #xmlecgnode
+    // #xmlecgnode
     // example
-    // [ {1111} ]
+    [ {1111} ]
 }
 schema SofaService extends Annotation {
     

@@ -1,9 +1,9 @@
 // script 
 use coref::java::*
 pub fn getNode(node: int) -> bool {
-    #javaecgnode
+    // #javaecgnode
     // example
-    // [ {1111} ]
+    [ {1111} ]
 }
 pub fn temp(a: Callable, b: Callable, c: Callable) -> bool {
     let (java_db = default_java_db()) {

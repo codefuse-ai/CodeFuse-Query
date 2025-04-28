@@ -346,11 +346,11 @@ pub fn getCallers(c: Callable) -> bool {
         }
     }
 }
-pub fn selfDefineOutput(interfaceName: string, methodName: string, fileName: string, lineNumber: int, c: int) -> bool {
+pub fn selfDefineOutput(interfaceName: string, methodName: string, fileName: string, lineNumber: int, c: Callable) -> bool {
     let (java_db = default_java_db()) {
         let (xml_db = default_xml_db()) {
             for (i in TrInterface(java_db)) {
-                if (c = i.getCallable().id) {
+                if (c = i.getCallable()) {
                     if (interfaceName = i.getQualifiedName()) {
                         if (methodName = c.getName()) {
                             if (tmp_1(c)) {
@@ -358,7 +358,7 @@ pub fn selfDefineOutput(interfaceName: string, methodName: string, fileName: str
                                     if (e = i.getCallSite(c)) {
                                         if (fileName = e.getLocation().getFile().getRelativePath()) {
                                             if (lineNumber = e.getLocation().getStartLineNumber()) {
-                                                if (c = e.getEnclosingCallable().id) {
+                                                if (c.id = e.getEnclosingCallable().id) {
                                                     return true
                                                 }
                                             }
@@ -369,7 +369,7 @@ pub fn selfDefineOutput(interfaceName: string, methodName: string, fileName: str
                             if (!(tmp_1(c))) {
                                 if (fileName = "null") {
                                     if (lineNumber = 0) {
-                                        if (c = 0) {
+                                        if (c.id = 0) {
                                             return true
                                         }
                                     }
@@ -383,9 +383,9 @@ pub fn selfDefineOutput(interfaceName: string, methodName: string, fileName: str
     }
 }
 pub fn getJavaECGNode(id: int) -> bool {
-    #javaecgnode
+    // #javaecgnode
     // example
-    // [ {1111} ]
+    [ {1111} ]
 }
 pub fn getDependsECGNode(id: int, c: int) -> bool {
     let (java_db = default_java_db()) {
@@ -445,7 +445,7 @@ fn tmp_0(className: string) -> bool {
     }
 }
 
-fn tmp_1(c: int) -> bool {
+fn tmp_1(c: Callable) -> bool {
     let (java_db = default_java_db()) {
         let (xml_db = default_xml_db()) {
             if (getCallers(Callable(java_db).find(c))) {

@@ -614,7 +614,7 @@ pub fn real_output(facadeQualifiedName: string, trMethodName: string) -> bool {
                 for (returnType in Type(java_db),
                     returnClass in Class(java_db)) {
                     for (aField in Field(java_db)) {
-                        if (getJavaECGNode(aField)) {
+                        if (getJavaECGNode(aField.element_hash_id)) {
                             if (getAField(returnClass, aField, fieldName, isList)) {
                                 if (outerFieldId = 0) {
                                     if (fieldId = aField.element_hash_id) {
@@ -639,9 +639,9 @@ pub fn real_output(facadeQualifiedName: string, trMethodName: string) -> bool {
                                     }
                                 }
                             }
-                            for (rootField in Field(java_db)) {
-                                if (getAField(returnClass, rootField, __all_data__, __all_data__)) {
-                                    if (getADescendantField(rootField, Field(java_db).find(outerFieldId), aField, fieldName, isList)) {
+                            for (rootField in Field(java_db), outerField in Field(java_db)) {
+                                if (getAField(returnClass, rootField, __all_data__, __all_data__) && outerField.element_hash_id = outerFieldId) {
+                                    if (getADescendantField(rootField, outerField, aField, fieldName, isList)) {
                                         if (fieldId = aField.element_hash_id) {
                                             for (facadeInterface in Interface(java_db),
                                                 trMethod in Method(java_db)) {

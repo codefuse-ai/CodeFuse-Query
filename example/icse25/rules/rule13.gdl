@@ -3,9 +3,9 @@ use coref::java::*
 use coref::xml::*
 pub fn gitdiff(filename: string, lineNumber: int) -> bool {
     //python替换
-    $gitdiff
+    // $gitdiff
     // example
-    // [ {"test", 1111} ]
+    [ {"test", 1111} ]
 }
 pub fn transfertofile(f: File, filename: string, lineNumber: int) -> bool {
     let (java_db = default_java_db()) {
@@ -408,17 +408,7 @@ pub fn hasCaller(a: CallableNew) -> bool {
         }
     }
 }
-pub fn isAnonymousMethod(c: CallableNew) -> bool {
-    let (java_db = default_java_db()) {
-        let (xml_db = default_xml_db()) {
-            for (a in AnonymousMethod(java_db)) {
-                if (c.key_eq(a)) {
-                    return true
-                }
-            }
-        }
-    }
-}
+
 schema CallableNew extends Callable {
     
 }
