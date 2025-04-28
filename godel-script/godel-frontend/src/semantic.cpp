@@ -2359,7 +2359,7 @@ bool semantic::check_single_argument(expr* argument, const symbol& param) {
     }
 
     // check type match
-    if (param!=expr_infer.type) {
+    if (param != expr_infer.type && !expr_infer.type.is_err()) {
         err.err(argument->get_location(),
             "expected \"" + param.full_path_name() +
             "\" but get \"" + expr_infer.type.full_path_name() + "\"."
@@ -2864,7 +2864,8 @@ void semantic::query_check(query_decl* node) {
             .is_set = false
         };
 
-        if (initial_infer.type!=from_variable_type) {
+        if (initial_infer.type != from_variable_type &&
+            !initial_infer.type.is_err()) {
             err.err(i->get_init_value()->get_location(),
                 "expected \"" + from_variable_type.full_path_name() +
                 "\" but get \"" + initial_infer.type.full_path_name() +
