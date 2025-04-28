@@ -1,0 +1,1339 @@
+// script 
+use coref::xml::*
+use coref::java::*
+@inline
+pub fn trim(n: string, m: string) -> bool {
+    let (xml_db = default_xml_db()) {
+        let (java_db = default_java_db()) {
+            for (i in int::__undetermined_all__(),
+                i1 in int::__undetermined_all__(),
+                temp in string::__undetermined_all__()) {
+                if (i = n.len()) {
+                    if (tmp_0(n)) {
+                        if (temp = n.substr(1,i - 2)) {
+                            if (i1 = temp.len()) {
+                                if (tmp_1(temp)) {
+                                    if (m = temp.substr(1,i1 - 2)) {
+                                        return true
+                                    }
+                                }
+                                if (!(tmp_1(temp))) {
+                                    if (tmp_2(temp)) {
+                                        if (m = temp.substr(2,i1 - 4)) {
+                                            return true
+                                        }
+                                    }
+                                    if (!(tmp_2(temp))) {
+                                        if (m = temp) {
+                                            return true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    if (!(tmp_0(n))) {
+                        if (tmp_3(n)) {
+                            if (m = n.substr(1,i - 2)) {
+                                return true
+                            }
+                        }
+                        if (!(tmp_3(n))) {
+                            if (tmp_4(n)) {
+                                if (m = n.substr(2,i - 4)) {
+                                    return true
+                                }
+                            }
+                            if (!(tmp_4(n))) {
+                                if (m = n) {
+                                    return true
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+@inline
+pub fn contact(a: string, b: string, c: string) -> bool {
+    let (xml_db = default_xml_db()) {
+        let (java_db = default_java_db()) {
+            for (i in int::__undetermined_all__(),
+                temp in string::__undetermined_all__()) {
+                if (i = a.len()) {
+                    if (tmp_5(i)) {
+                        if (tmp_6(b, a)) {
+                            if (c = b) {
+                                return true
+                            }
+                        }
+                        if (!(tmp_6(b, a))) {
+                            if (c = a + b) {
+                                return true
+                            }
+                        }
+                    }
+                    if (!(tmp_5(i))) {
+                        if (tmp_7(b, i, a)) {
+                            if (temp = a.substr(1,i - 1)) {
+                                if (c = a + b) {
+                                    return true
+                                }
+                            }
+                        }
+                        if (!(tmp_7(b, i, a))) {
+                            if (tmp_8(b, i, a)) {
+                                if (c = a + "/" + b) {
+                                    return true
+                                }
+                            }
+                            if (!(tmp_8(b, i, a))) {
+                                if (c = a + b) {
+                                    return true
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+schema HttpMethodType extends AnnotationAccessArgument {
+    
+}
+
+impl HttpMethodType {
+
+    @data_constraint
+    @inline
+    pub fn __all__(db: JavaDB) -> *HttpMethodType {
+        for (tmp in AnnotationAccessArgument(db)) {
+            if (tmp.getAnnotationArgumentName() = "method") {
+                yield HttpMethodType {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+    
+    pub fn getType(self) -> string {
+        for (t in string::__undetermined_all__()) {
+            for (a in AnnotationArrayInitializer(__all_data__)) {
+                if (self.getArgumentValueHashId() = a.element_hash_id) {
+                    for (i in Identifier(__all_data__),
+                        r in ReferenceExpression(__all_data__)) {
+                        if (a.key_eq(r.getParent())) {
+                            if (r.key_eq(i.getParent())) {
+                                if (t = i.getName()) {
+                                    return t
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            for (i in Identifier(__all_data__)) {
+                if (self.getArgumentValueHashId() = i.getParent().id) {
+                    if (t = i.getName()) {
+                        return t
+                    }
+                }
+            }
+        }
+    }
+    
+    
+}
+
+pub fn getMethodType(a: Annotation, t: string) -> bool {
+    let (xml_db = default_xml_db()) {
+        let (java_db = default_java_db()) {
+            for (m in Method(java_db),
+                h in HttpMethodType(java_db)) {
+                for (auto_tmp1 in m.getAnnotation()) {
+                    if (a = auto_tmp1) {
+                        if (tmp_9(a)) {
+                            if (t = "POST") {
+                                return true
+                            }
+                        }
+                        if (!(tmp_9(a))) {
+                            if (tmp_10(a)) {
+                                if (t = "GET") {
+                                    return true
+                                }
+                            }
+                            if (!(tmp_10(a))) {
+                                if (tmp_11(a)) {
+                                    if (t = "PUT") {
+                                        return true
+                                    }
+                                }
+                                if (!(tmp_11(a))) {
+                                    if (tmp_12(a)) {
+                                        if (t = "DELETE") {
+                                            return true
+                                        }
+                                    }
+                                    if (!(tmp_12(a))) {
+                                        if (tmp_13(a)) {
+                                            if (t = "PATCH") {
+                                                return true
+                                            }
+                                        }
+                                        if (!(tmp_13(a))) {
+                                            for (auto_tmp2 in a.getAnnotationArgument()) {
+                                                if (h.key_eq(auto_tmp2)) {
+                                                    if (t = h.getType()) {
+                                                        return true
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn existsValueArgument(a: Annotation) -> bool {
+    let (xml_db = default_xml_db()) {
+        let (java_db = default_java_db()) {
+            for (temp in AnnotationAccessArgument(java_db)) {
+                for (auto_tmp1 in a.getAnnotationArgument()) {
+                    if (temp = auto_tmp1) {
+                        if (temp.getAnnotationArgumentName() = "value") {
+                            return true
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn getSubUri(a: Annotation, sub: string) -> bool {
+    let (xml_db = default_xml_db()) {
+        let (java_db = default_java_db()) {
+            for (n in string::__undetermined_all__()) {
+                if (n = a.getName()) {
+                    if (n.matches(".*Mapping")) {
+                        if (tmp_14(a)) {
+                            for (s in string::__undetermined_all__()) {
+                                for (temp in AnnotationAccessArgument(java_db),
+                                    e in Expression(java_db)) {
+                                    for (auto_tmp1 in a.getAnnotationArgument()) {
+                                        if (temp = auto_tmp1) {
+                                            if (temp.getAnnotationArgumentName() = "value") {
+                                                if (tmp_15(e, temp)) {
+                                                    if (sub = connectStr(e)) {
+                                                        return true
+                                                    }
+                                                }
+                                                if (!(tmp_15(e, temp))) {
+                                                    if (s = temp.getAnnotationArgumentValue()) {
+                                                        if (trim(s, sub)) {
+                                                            return true
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        if (!(tmp_14(a))) {
+                            if (sub = "") {
+                                return true
+                            }
+                        }
+                    }
+                }
+            }
+            for (b in Annotation(java_db)) {
+                if (a.getAnnotatedMethod() = b.getAnnotatedMethod()) {
+                    if (a.getName() = "POST") {
+                        if (b.getName() = "Path") {
+                            if (tmp_16(b)) {
+                                for (s in string::__undetermined_all__()) {
+                                    for (temp in AnnotationAccessArgument(java_db),
+                                        e in Expression(java_db)) {
+                                        for (auto_tmp2 in b.getAnnotationArgument()) {
+                                            if (temp = auto_tmp2) {
+                                                if (temp.getAnnotationArgumentName() = "value") {
+                                                    if (tmp_17(e, temp)) {
+                                                        if (sub = connectStr(e)) {
+                                                            return true
+                                                        }
+                                                    }
+                                                    if (!(tmp_17(e, temp))) {
+                                                        if (s = temp.getAnnotationArgumentValue()) {
+                                                            if (trim(s, sub)) {
+                                                                return true
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            if (!(tmp_16(b))) {
+                                if (sub = "") {
+                                    return true
+                                }
+                            }
+                        }
+                    }
+                    if (a.getName() = "GET") {
+                        if (b.getName() = "Path") {
+                            if (tmp_16(b)) {
+                                for (s in string::__undetermined_all__()) {
+                                    for (temp in AnnotationAccessArgument(java_db),
+                                        e in Expression(java_db)) {
+                                        for (auto_tmp2 in b.getAnnotationArgument()) {
+                                            if (temp = auto_tmp2) {
+                                                if (temp.getAnnotationArgumentName() = "value") {
+                                                    if (tmp_17(e, temp)) {
+                                                        if (sub = connectStr(e)) {
+                                                            return true
+                                                        }
+                                                    }
+                                                    if (!(tmp_17(e, temp))) {
+                                                        if (s = temp.getAnnotationArgumentValue()) {
+                                                            if (trim(s, sub)) {
+                                                                return true
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            if (!(tmp_16(b))) {
+                                if (sub = "") {
+                                    return true
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn getSubUri1(a: Annotation, sub: string) -> bool {
+    let (xml_db = default_xml_db()) {
+        let (java_db = default_java_db()) {
+            if ("Path" = a.getName()) {
+                if (tmp_18(a)) {
+                    for (s in string::__undetermined_all__()) {
+                        for (temp in AnnotationAccessArgument(java_db),
+                            e in Expression(java_db)) {
+                            for (auto_tmp1 in a.getAnnotationArgument()) {
+                                if (temp = auto_tmp1) {
+                                    if (temp.getAnnotationArgumentName() = "value") {
+                                        if (tmp_19(e, temp)) {
+                                            if (sub = connectStr(e)) {
+                                                return true
+                                            }
+                                        }
+                                        if (!(tmp_19(e, temp))) {
+                                            if (s = temp.getAnnotationArgumentValue()) {
+                                                if (trim(s, sub)) {
+                                                    return true
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                if (!(tmp_18(a))) {
+                    if (sub = "") {
+                        return true
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn getUri(c: ClassOrInterface, m: Method, uri1: string) -> bool {
+    let (xml_db = default_xml_db()) {
+        let (java_db = default_java_db()) {
+            for (l1 in string::__undetermined_all__(),
+                l2 in string::__undetermined_all__(),
+                uri in string::__undetermined_all__(),
+                n in string::__undetermined_all__()) {
+                for (a in Annotation(java_db),
+                    a1 in Annotation(java_db)) {
+                    if (c = m.getParent()) {
+                        for (auto_tmp1 in m.getAnnotation()) {
+                            if (a = auto_tmp1) {
+                                for (auto_tmp2 in c.getAnnotation()) {
+                                    if (a1 = auto_tmp2) {
+                                        if (n = a.getName()) {
+                                            if (tmp_21(c)) {
+                                                for (temp1 in string::__undetermined_all__(),
+                                                    temp2 in string::__undetermined_all__()) {
+                                                    if (getSubUri1(a1, temp1)) {
+                                                        if (getSubUri(a, temp2)) {
+                                                            if (contact(temp1, temp2, uri)) {
+                                                                if (contactUri(uri, uri1)) {
+                                                                    return true
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                            if (!(tmp_21(c))) {
+                                                if (tmp_23(c)) {
+                                                    if (getSubUri(a, uri)) {
+                                                        if (contactUri(uri, uri1)) {
+                                                            return true
+                                                        }
+                                                    }
+                                                }
+                                                if (!(tmp_23(c))) {
+                                                    if (tmp_25(a)) {
+                                                        if (tmp_26(n)) {
+                                                            if (getSubUri(a1, uri)) {
+                                                                if (contactUri(uri, uri1)) {
+                                                                    return true
+                                                                }
+                                                            }
+                                                        }
+                                                        if (!(tmp_26(n))) {
+                                                            if (getSubUri(a, l1)) {
+                                                                if (getSubUri(a1, l2)) {
+                                                                    if (contact(l2, l1, uri)) {
+                                                                        if (contactUri(uri, uri1)) {
+                                                                            return true
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                    if (!(tmp_25(a))) {
+                                                        if (a1.getName() = "RequestMapping") {
+                                                            if (getSubUri(a, l1)) {
+                                                                if (getSubUri(a1, l2)) {
+                                                                    if (contact(l2, l1, uri)) {
+                                                                        if (contactUri(uri, uri1)) {
+                                                                            return true
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn resolve(r: ReferenceExpression, rr: string) -> bool {
+    let (xml_db = default_xml_db()) {
+        let (java_db = default_java_db()) {
+            for (temp in string::__undetermined_all__()) {
+                for (e in Expression(java_db)) {
+                    if (e.getParent() = r.getDefinition()) {
+                        if (temp = e.getPrintableText()) {
+                            if (trim(temp, rr)) {
+                                return true
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn facts(a: Expression, i: int, value: string) -> bool {
+    let (xml_db = default_xml_db()) {
+        let (java_db = default_java_db()) {
+            for (p in PolyadicExpression(java_db)) {
+                if (a.key_eq(p)) {
+                    for (temp in string::__undetermined_all__()) {
+                        for (e in Expression(java_db)) {
+                            if (tmp_27(a)) {
+                                if (resolve(ReferenceExpression(java_db).find(a), value)) {
+                                    if (i = 0) {
+                                        return true
+                                    }
+                                }
+                            }
+                            if (!(tmp_27(a))) {
+                                if (a.key_eq(e.getParent())) {
+                                    if (i = e.getIndex()) {
+                                        if (tmp_28(e)) {
+                                            if (resolve(ReferenceExpression(java_db).find(e), value)) {
+                                                return true
+                                            }
+                                        }
+                                        if (!(tmp_28(e))) {
+                                            if (temp = e.getPrintableText()) {
+                                                if (trim(temp, value)) {
+                                                    return true
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            for (p in BinaryExpression(java_db)) {
+                if (a.key_eq(p)) {
+                    for (temp in string::__undetermined_all__()) {
+                        for (e in Expression(java_db)) {
+                            if (tmp_27(a)) {
+                                if (resolve(ReferenceExpression(java_db).find(a), value)) {
+                                    if (i = 0) {
+                                        return true
+                                    }
+                                }
+                            }
+                            if (!(tmp_27(a))) {
+                                if (a.key_eq(e.getParent())) {
+                                    if (i = e.getIndex()) {
+                                        if (tmp_28(e)) {
+                                            if (resolve(ReferenceExpression(java_db).find(e), value)) {
+                                                return true
+                                            }
+                                        }
+                                        if (!(tmp_28(e))) {
+                                            if (temp = e.getPrintableText()) {
+                                                if (trim(temp, value)) {
+                                                    return true
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            for (p in ReferenceExpression(java_db)) {
+                if (a.key_eq(p)) {
+                    for (temp in string::__undetermined_all__()) {
+                        for (e in Expression(java_db)) {
+                            if (tmp_27(a)) {
+                                if (resolve(ReferenceExpression(java_db).find(a), value)) {
+                                    if (i = 0) {
+                                        return true
+                                    }
+                                }
+                            }
+                            if (!(tmp_27(a))) {
+                                if (a.key_eq(e.getParent())) {
+                                    if (i = e.getIndex()) {
+                                        if (tmp_28(e)) {
+                                            if (resolve(ReferenceExpression(java_db).find(e), value)) {
+                                                return true
+                                            }
+                                        }
+                                        if (!(tmp_28(e))) {
+                                            if (temp = e.getPrintableText()) {
+                                                if (trim(temp, value)) {
+                                                    return true
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn connectStrBase(ID: Expression, index: int, res: string) -> bool {
+    let (xml_db = default_xml_db()) {
+        let (java_db = default_java_db()) {
+            for (total in int::__undetermined_all__(),
+                reStr in string::__undetermined_all__(),
+                currStr in string::__undetermined_all__()) {
+                if (total = tmp_29(ID).len()) {
+                    if (tmp_31(index)) {
+                        if (facts(Expression(java_db).find(ID), index, currStr)) {
+                            if (res = currStr) {
+                                return true
+                            }
+                        }
+                    }
+                    if (!(tmp_31(index))) {
+                        if (index > 0) {
+                            if (connectStrBase(ID, index - 1, reStr)) {
+                                if (facts(Expression(java_db).find(ID), index, currStr)) {
+                                    if (res = reStr + currStr) {
+                                        return true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn connectStr(ID: Expression) -> string {
+    let (xml_db = default_xml_db()) {
+        let (java_db = default_java_db()) {
+            for (c in int::__undetermined_all__(),
+                res in string::__undetermined_all__()) {
+                if (c = tmp_32(ID).len()) {
+                    if (connectStrBase(ID, c - 1, res)) {
+                        return res
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn findReleasedHttpAPI(m: Method, c: ClassOrInterface, path: string, uri: string, type: string) -> bool {
+    let (xml_db = default_xml_db()) {
+        let (java_db = default_java_db()) {
+            for (temp1 in string::__undetermined_all__(),
+                temp2 in string::__undetermined_all__(),
+                uri1 in string::__undetermined_all__(),
+                temp3 in string::__undetermined_all__()) {
+                for (w in Folder(java_db),
+                    f in Folder(java_db)) {
+                    if (findReleasedHttpAPI1(m, c, uri1, type)) {
+                        if (tmp_34(w)) {
+                            for (ww in WebFolder(java_db)) {
+                                if (ww.key_eq(w)) {
+                                    if (path = ww.getRelativePath()) {
+                                        if (f = c.getLocation().getFile().getBelongedFolder()) {
+                                            if (temp1 = f.getRelativePath()) {
+                                                if (temp2 = path + "/") {
+                                                    if (temp1.contains(temp2)) {
+                                                        if (temp3 = ww.getModuleName()) {
+                                                            if (uri = temp3 + uri1) {
+                                                                return true
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        if (!(tmp_34(w))) {
+                            if (path = "null") {
+                                if (uri = uri1) {
+                                    return true
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn existsWebFolder(f: Folder) -> bool {
+    let (xml_db = default_xml_db()) {
+        let (java_db = default_java_db()) {
+            for (w in WebFolder(java_db)) {
+                if (f.key_eq(w)) {
+                    return true
+                }
+            }
+        }
+    }
+}
+pub fn findReleasedHttpAPI1(m: Method, c: ClassOrInterface, uri1: string, type: string) -> bool {
+    let (xml_db = default_xml_db()) {
+        let (java_db = default_java_db()) {
+            for (n in string::__undetermined_all__()) {
+                for (a in Annotation(java_db)) {
+                    if (getUri(c, m, uri1)) {
+                        for (auto_tmp1 in m.getAnnotation()) {
+                            if (a = auto_tmp1) {
+                                if (n = a.getName()) {
+                                    if (n.matches(".*Mapping")) {
+                                        if (tmp_37(a)) {
+                                            if (type = "PUT") {
+                                                return true
+                                            }
+                                            if (type = "POST") {
+                                                return true
+                                            }
+                                            if (type = "OPTIONS") {
+                                                return true
+                                            }
+                                            if (type = "PATCH") {
+                                                return true
+                                            }
+                                            if (type = "HEAD") {
+                                                return true
+                                            }
+                                            if (type = "DELETE") {
+                                                return true
+                                            }
+                                            if (type = "GET") {
+                                                return true
+                                            }
+                                        }
+                                        if (!(tmp_37(a))) {
+                                            if (getMethodType(a, type)) {
+                                                return true
+                                            }
+                                        }
+                                    }
+                                }
+                                if (a.getName() = "POST") {
+                                    if (type = "POST") {
+                                        return true
+                                    }
+                                }
+                                if (a.getName() = "GET") {
+                                    if (type = "GET") {
+                                        return true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+@inline
+pub fn contactUri(n: string, m: string) -> bool {
+    let (xml_db = default_xml_db()) {
+        let (java_db = default_java_db()) {
+            for (temp in string::__undetermined_all__()) {
+                if (temp = n.substr(0,1)) {
+                    if (tmp_38(temp)) {
+                        if (m = n) {
+                            return true
+                        }
+                    }
+                    if (!(tmp_38(temp))) {
+                        if (m = "/" + n) {
+                            return true
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+schema WebFolder extends Folder {
+    
+}
+
+impl WebFolder {
+
+    @data_constraint
+    @inline
+    pub fn __all__(db: JavaDB) -> *WebFolder {
+        for (tmp in Folder(db)) {
+            for (n in string::__undetermined_all__()) {
+                if (findReleasedArtifact(n, __all_data__)) {
+                    if (tmp.getRelativePath() = n) {
+                        yield WebFolder {
+                            element_hash_id : tmp.element_hash_id,
+                            qualified_name : tmp.qualified_name,
+                            name : tmp.name,
+                            parent_hash_id : tmp.parent_hash_id
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    pub fn getModuleName(self) -> string {
+        for (name in string::__undetermined_all__(),
+            temp1 in string::__undetermined_all__(),
+            temp2 in string::__undetermined_all__()) {
+            if (temp1 = self.getRelativePath()) {
+                if (tmp_39(temp1)) {
+                    if (temp2 = self.getName()) {
+                        if (name = "/" + temp2) {
+                            return name
+                        }
+                    }
+                }
+                if (!(tmp_39(temp1))) {
+                    if (name = "") {
+                        return name
+                    }
+                }
+            }
+        }
+    }
+    
+    
+}
+
+pub fn findReleasedArtifact(moduleName: string, moduleId: string) -> bool {
+    let (xml_db = default_xml_db()) {
+        let (java_db = default_java_db()) {
+            for (f in PomFile(xml_db),
+                m in ModuleXmlElement(xml_db)) {
+                if (f.key_eq(m.getLocation().getFile())) {
+                    for (auto_tmp1 in m.getCharacter()) {
+                        if (moduleName = auto_tmp1.getText()) {
+                            for (pa in string::__undetermined_all__(),
+                                id in string::__undetermined_all__()) {
+                                for (e in PomFile(xml_db),
+                                    a in ArtifactXmlElement(xml_db),
+                                    g in GroupXmlElement(xml_db),
+                                    r in RootXmlElement(xml_db)) {
+                                    if (moduleName + "/pom.xml" = e.getRelativePath()) {
+                                        if (e.key_eq(a.getLocation().getFile())) {
+                                            if (e.key_eq(g.getLocation().getFile())) {
+                                                if (r.key_eq(a.getParent())) {
+                                                    for (auto_tmp2 in a.getCharacter()) {
+                                                        if (id = auto_tmp2.getText()) {
+                                                            if (g.getParent().getName() = "parent") {
+                                                                for (auto_tmp3 in g.getCharacter()) {
+                                                                    if (pa = auto_tmp3.getText()) {
+                                                                        if (moduleId = pa + ":" + id) {
+                                                                            return true
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn real_output(className: string, methodSignature: string, uri: string, type: string, moduleName: string, moduleId: string) -> bool {
+    let (xml_db = default_xml_db()) {
+        let (java_db = default_java_db()) {
+            for (c in ClassOrInterface(java_db),
+                m in Method(java_db)) {
+                if (tmp_40()) {
+                    if (findReleasedArtifact(moduleName, moduleId)) {
+                        if (findReleasedHttpAPI(m, c, moduleName, uri, type)) {
+                            if (className = c.getName()) {
+                                if (methodSignature = m.getName()) {
+                                    return true
+                                }
+                            }
+                        }
+                    }
+                }
+                if (!(tmp_40())) {
+                    if (findReleasedHttpAPI(m, c, __all_data__, uri, type)) {
+                        if (moduleName = "null") {
+                            if (moduleId = "null") {
+                                if (className = c.getName()) {
+                                    if (methodSignature = m.getName()) {
+                                        return true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+fn default_xml_db() -> XmlDB {
+    return XmlDB::load("coref_xml_src.db")
+}
+
+fn default_java_db() -> JavaDB {
+    return JavaDB::load("coref_java_src.db")
+}
+
+fn tmp_0(n: string) -> bool {
+    let (xml_db = default_xml_db()) {
+        let (java_db = default_java_db()) {
+            if (n.substr(0,1) = "{") {
+                return true
+            }
+        }
+    }
+}
+
+fn tmp_1(temp: string) -> bool {
+    let (xml_db = default_xml_db()) {
+        let (java_db = default_java_db()) {
+            if (temp.substr(0,1) = "\"") {
+                return true
+            }
+        }
+    }
+}
+
+fn tmp_2(temp: string) -> bool {
+    let (xml_db = default_xml_db()) {
+        let (java_db = default_java_db()) {
+            if (temp.substr(1,1) = "\"") {
+                return true
+            }
+        }
+    }
+}
+
+fn tmp_3(n: string) -> bool {
+    let (xml_db = default_xml_db()) {
+        let (java_db = default_java_db()) {
+            if (n.substr(0,1) = "\"") {
+                return true
+            }
+        }
+    }
+}
+
+fn tmp_4(n: string) -> bool {
+    let (xml_db = default_xml_db()) {
+        let (java_db = default_java_db()) {
+            if (n.substr(1,1) = "\"") {
+                return true
+            }
+        }
+    }
+}
+
+fn tmp_5(i: int) -> bool {
+    let (xml_db = default_xml_db()) {
+        let (java_db = default_java_db()) {
+            if (i = 1) {
+                return true
+            }
+        }
+    }
+}
+
+fn tmp_6(b: string, a: string) -> bool {
+    let (xml_db = default_xml_db()) {
+        let (java_db = default_java_db()) {
+            if (a.substr(0,1) = "/") {
+                if (b.substr(0,1) = "/") {
+                    return true
+                }
+            }
+        }
+    }
+}
+
+@inline
+fn tmp_7(b: string, i: int, a: string) -> bool {
+    let (xml_db = default_xml_db()) {
+        let (java_db = default_java_db()) {
+            if (a.substr(i - 1,i - 1) = "/") {
+                if (b.substr(0,1) = "/") {
+                    return true
+                }
+            }
+        }
+    }
+}
+
+@inline
+fn tmp_8(b: string, i: int, a: string) -> bool {
+    let (xml_db = default_xml_db()) {
+        let (java_db = default_java_db()) {
+            if (a.substr(i - 1,i - 1) != "/") {
+                if (b.substr(0,1) != "/") {
+                    return true
+                }
+            }
+        }
+    }
+}
+
+fn tmp_9(a: Annotation) -> bool {
+    let (xml_db = default_xml_db()) {
+        let (java_db = default_java_db()) {
+            if (a.getName() = "PostMapping") {
+                return true
+            }
+        }
+    }
+}
+
+fn tmp_10(a: Annotation) -> bool {
+    let (xml_db = default_xml_db()) {
+        let (java_db = default_java_db()) {
+            if (a.getName() = "GetMapping") {
+                return true
+            }
+        }
+    }
+}
+
+fn tmp_11(a: Annotation) -> bool {
+    let (xml_db = default_xml_db()) {
+        let (java_db = default_java_db()) {
+            if (a.getName() = "PutMapping") {
+                return true
+            }
+        }
+    }
+}
+
+fn tmp_12(a: Annotation) -> bool {
+    let (xml_db = default_xml_db()) {
+        let (java_db = default_java_db()) {
+            if (a.getName() = "DeleteMapping") {
+                return true
+            }
+        }
+    }
+}
+
+fn tmp_13(a: Annotation) -> bool {
+    let (xml_db = default_xml_db()) {
+        let (java_db = default_java_db()) {
+            if (a.getName() = "PatchMapping") {
+                return true
+            }
+        }
+    }
+}
+
+fn tmp_14(a: Annotation) -> bool {
+    let (xml_db = default_xml_db()) {
+        let (java_db = default_java_db()) {
+            if (existsValueArgument(a)) {
+                return true
+            }
+        }
+    }
+}
+
+fn tmp_15(e: Expression, temp: AnnotationAccessArgument) -> bool {
+    let (xml_db = default_xml_db()) {
+        let (java_db = default_java_db()) {
+            if (temp.key_eq(e.getParent())) {
+                if (facts(e, __all_data__, __all_data__)) {
+                    return true
+                }
+            }
+        }
+    }
+}
+
+fn tmp_16(b: Annotation) -> bool {
+    let (xml_db = default_xml_db()) {
+        let (java_db = default_java_db()) {
+            if (existsValueArgument(b)) {
+                return true
+            }
+        }
+    }
+}
+
+fn tmp_17(e: Expression, temp: AnnotationAccessArgument) -> bool {
+    let (xml_db = default_xml_db()) {
+        let (java_db = default_java_db()) {
+            if (temp.key_eq(e.getParent())) {
+                if (facts(e, __all_data__, __all_data__)) {
+                    return true
+                }
+            }
+        }
+    }
+}
+
+fn tmp_18(a: Annotation) -> bool {
+    let (xml_db = default_xml_db()) {
+        let (java_db = default_java_db()) {
+            if (existsValueArgument(a)) {
+                return true
+            }
+        }
+    }
+}
+
+fn tmp_19(e: Expression, temp: AnnotationAccessArgument) -> bool {
+    let (xml_db = default_xml_db()) {
+        let (java_db = default_java_db()) {
+            if (temp.key_eq(e.getParent())) {
+                if (facts(e, __all_data__, __all_data__)) {
+                    return true
+                }
+            }
+        }
+    }
+}
+
+fn tmp_20(c: ClassOrInterface) -> *Annotation {
+    let (xml_db = default_xml_db()) {
+        let (java_db = default_java_db()) {
+            for (b in Annotation(java_db)) {
+                for (auto_tmp3 in c.getAnnotation()) {
+                    if (b = auto_tmp3) {
+                        if (b.getName() = "Path") {
+                            yield b
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+fn tmp_21(c: ClassOrInterface) -> bool {
+    let (xml_db = default_xml_db()) {
+        let (java_db = default_java_db()) {
+            if (tmp_20(c).len() = 1) {
+                return true
+            }
+        }
+    }
+}
+
+fn tmp_22(c: ClassOrInterface) -> *Annotation {
+    let (xml_db = default_xml_db()) {
+        let (java_db = default_java_db()) {
+            for (b in Annotation(java_db)) {
+                for (auto_tmp4 in c.getAnnotation()) {
+                    if (b = auto_tmp4) {
+                        if (b.getName() = "RequestMapping") {
+                            yield b
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+fn tmp_23(c: ClassOrInterface) -> bool {
+    let (xml_db = default_xml_db()) {
+        let (java_db = default_java_db()) {
+            if (tmp_22(c).len() = 0) {
+                return true
+            }
+        }
+    }
+}
+
+fn tmp_24(a: Annotation) -> *AnnotationAccessArgument {
+    let (xml_db = default_xml_db()) {
+        let (java_db = default_java_db()) {
+            for (b in AnnotationAccessArgument(java_db)) {
+                for (auto_tmp5 in a.getAnnotationArgument()) {
+                    if (b = auto_tmp5) {
+                        if (b.getAnnotationArgumentName() = "value") {
+                            yield b
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+fn tmp_25(a: Annotation) -> bool {
+    let (xml_db = default_xml_db()) {
+        let (java_db = default_java_db()) {
+            if (tmp_24(a).len() = 0) {
+                return true
+            }
+        }
+    }
+}
+
+fn tmp_26(n: string) -> bool {
+    let (xml_db = default_xml_db()) {
+        let (java_db = default_java_db()) {
+            if (n.matches(".*Mapping")) {
+                return true
+            }
+        }
+    }
+}
+
+fn tmp_27(a: Expression) -> bool {
+    let (xml_db = default_xml_db()) {
+        let (java_db = default_java_db()) {
+            if (resolve(ReferenceExpression(java_db).find(a), __all_data__)) {
+                return true
+            }
+        }
+    }
+}
+
+fn tmp_28(e: Expression) -> bool {
+    let (xml_db = default_xml_db()) {
+        let (java_db = default_java_db()) {
+            if (resolve(ReferenceExpression(java_db).find(e), __all_data__)) {
+                return true
+            }
+        }
+    }
+}
+
+fn tmp_29(ID: Expression) -> *auto_tmp_30 {
+    let (xml_db = default_xml_db()) {
+        let (java_db = default_java_db()) {
+            for (auto_tmp_var_0 in int::__undetermined_all__(),
+                auto_tmp_var_1 in string::__undetermined_all__()) {
+                if (facts(Expression(java_db).find(ID), auto_tmp_var_0, auto_tmp_var_1)) {
+                    yield auto_tmp_30 {
+                        auto_tmp_var_0 : auto_tmp_var_0,
+                        auto_tmp_var_1 : auto_tmp_var_1
+                    }
+                }
+            }
+        }
+    }
+}
+
+schema auto_tmp_30 {
+    auto_tmp_var_0 : int,
+    auto_tmp_var_1 : string
+}
+
+fn tmp_31(index: int) -> bool {
+    let (xml_db = default_xml_db()) {
+        let (java_db = default_java_db()) {
+            if (index = 0) {
+                return true
+            }
+        }
+    }
+}
+
+fn tmp_32(ID: Expression) -> *auto_tmp_33 {
+    let (xml_db = default_xml_db()) {
+        let (java_db = default_java_db()) {
+            for (auto_tmp_var_0 in int::__undetermined_all__(),
+                auto_tmp_var_1 in string::__undetermined_all__()) {
+                if (facts(Expression(java_db).find(ID), auto_tmp_var_0, auto_tmp_var_1)) {
+                    yield auto_tmp_33 {
+                        auto_tmp_var_0 : auto_tmp_var_0,
+                        auto_tmp_var_1 : auto_tmp_var_1
+                    }
+                }
+            }
+        }
+    }
+}
+
+schema auto_tmp_33 {
+    auto_tmp_var_0 : int,
+    auto_tmp_var_1 : string
+}
+
+fn tmp_34(w: Folder) -> bool {
+    let (xml_db = default_xml_db()) {
+        let (java_db = default_java_db()) {
+            if (existsWebFolder(w)) {
+                return true
+            }
+        }
+    }
+}
+
+fn tmp_35(a: Annotation) -> *auto_tmp_36 {
+    let (xml_db = default_xml_db()) {
+        let (java_db = default_java_db()) {
+            for (auto_tmp_var_0 in string::__undetermined_all__()) {
+                if (getMethodType(a, auto_tmp_var_0)) {
+                    yield auto_tmp_36 {
+                        auto_tmp_var_0 : auto_tmp_var_0
+                    }
+                }
+            }
+        }
+    }
+}
+
+schema auto_tmp_36 {
+    auto_tmp_var_0 : string
+}
+
+fn tmp_37(a: Annotation) -> bool {
+    let (xml_db = default_xml_db()) {
+        let (java_db = default_java_db()) {
+            if (tmp_35(a).len() = 0) {
+                return true
+            }
+        }
+    }
+}
+
+fn tmp_38(temp: string) -> bool {
+    let (xml_db = default_xml_db()) {
+        let (java_db = default_java_db()) {
+            if (temp = "/") {
+                return true
+            }
+        }
+    }
+}
+
+fn tmp_39(temp1: string) -> bool {
+    let (xml_db = default_xml_db()) {
+        let (java_db = default_java_db()) {
+            if (temp1.contains("app/web/")) {
+                if (temp1 != "app/web/home") {
+                    return true
+                }
+            }
+        }
+    }
+}
+
+fn tmp_40() -> bool {
+    let (xml_db = default_xml_db()) {
+        let (java_db = default_java_db()) {
+            if (findReleasedArtifact(__all_data__, __all_data__)) {
+                return true
+            }
+        }
+    }
+}
+
+fn main() {
+    output(real_output())
+}

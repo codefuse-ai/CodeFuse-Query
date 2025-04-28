@@ -1,0 +1,873 @@
+// script 
+use coref::java::*
+@inline
+pub fn trim(n: string, m: string) -> bool {
+    let (java_db = default_java_db()) {
+        for (i in int::__undetermined_all__()) {
+            if (i = n.len()) {
+                if (tmp_0(n)) {
+                    if (m = n.substr(1,i - 2)) {
+                        return true
+                    }
+                }
+                if (!(tmp_0(n))) {
+                    if (m = n) {
+                        return true
+                    }
+                }
+            }
+        }
+    }
+}
+@inline
+pub fn contact(a: string, b: string, c: string) -> bool {
+    let (java_db = default_java_db()) {
+        for (i in int::__undetermined_all__(),
+            temp in string::__undetermined_all__()) {
+            if (i = a.len()) {
+                if (tmp_1(i)) {
+                    if (tmp_2(a, b)) {
+                        if (c = b) {
+                            return true
+                        }
+                    }
+                    if (!(tmp_2(a, b))) {
+                        if (c = a + b) {
+                            return true
+                        }
+                    }
+                }
+                if (!(tmp_1(i))) {
+                    if (tmp_3(i, b, a)) {
+                        if (temp = a.substr(1,i - 1)) {
+                            if (c = a + b) {
+                                return true
+                            }
+                        }
+                    }
+                    if (!(tmp_3(i, b, a))) {
+                        if (tmp_4(i, b, a)) {
+                            if (c = a + "/" + b) {
+                                return true
+                            }
+                        }
+                        if (!(tmp_4(i, b, a))) {
+                            if (c = a + b) {
+                                return true
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+schema HttpMethodType extends AnnotationAccessArgument {
+    
+}
+
+impl HttpMethodType {
+
+    @data_constraint
+    @inline
+    pub fn __all__(db: JavaDB) -> *HttpMethodType {
+        for (tmp in AnnotationAccessArgument(db)) {
+            if (tmp.getAnnotationArgumentName() = "method") {
+                yield HttpMethodType {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+    
+    pub fn getType(self) -> string {
+        for (t in string::__undetermined_all__()) {
+            for (a in AnnotationArrayInitializer(__all_data__)) {
+                if (self.getArgumentValueHashId() = a.getParent().id) {
+                    for (i in Identifier(__all_data__)) {
+                        if (a.key_eq(i.getParent())) {
+                            if (t = i.getName()) {
+                                return t
+                            }
+                        }
+                    }
+                }
+            }
+            for (i in Identifier(__all_data__)) {
+                if (self.getArgumentValueHashId() = i.getParent().id) {
+                    if (t = i.getName()) {
+                        return t
+                    }
+                }
+            }
+        }
+    }
+    
+    
+}
+
+pub fn getMethodType(a: Annotation, t: string) -> bool {
+    let (java_db = default_java_db()) {
+        for (m in Method(java_db),
+            h in HttpMethodType(java_db)) {
+            for (auto_tmp1 in m.getAnnotation()) {
+                if (a = auto_tmp1) {
+                    if (tmp_5(a)) {
+                        if (t = "POST") {
+                            return true
+                        }
+                    }
+                    if (!(tmp_5(a))) {
+                        if (tmp_6(a)) {
+                            if (t = "GET") {
+                                return true
+                            }
+                        }
+                        if (!(tmp_6(a))) {
+                            if (tmp_7(a)) {
+                                if (t = "PUT") {
+                                    return true
+                                }
+                            }
+                            if (!(tmp_7(a))) {
+                                if (tmp_8(a)) {
+                                    if (t = "DELETE") {
+                                        return true
+                                    }
+                                }
+                                if (!(tmp_8(a))) {
+                                    if (tmp_9(a)) {
+                                        if (t = "PATCH") {
+                                            return true
+                                        }
+                                    }
+                                    if (!(tmp_9(a))) {
+                                        for (auto_tmp2 in a.getAnnotationArgument()) {
+                                            if (h.key_eq(auto_tmp2)) {
+                                                if (t = h.getType()) {
+                                                    return true
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn getSubUri(a: Annotation, sub: string) -> bool {
+    let (java_db = default_java_db()) {
+        for (s in string::__undetermined_all__(),
+            n in string::__undetermined_all__()) {
+            for (temp in AnnotationAccessArgument(java_db),
+                e in Expression(java_db)) {
+                if (n = a.getName()) {
+                    if (n.matches(".*Mapping")) {
+                        for (auto_tmp1 in a.getAnnotationArgument()) {
+                            if (temp = auto_tmp1) {
+                                if (temp.getAnnotationArgumentName() = "value") {
+                                    if (temp.key_eq(e.getParent())) {
+                                        if (tmp_10(e)) {
+                                            if (sub = connectStr(e)) {
+                                                return true
+                                            }
+                                        }
+                                        if (!(tmp_10(e))) {
+                                            if (s = temp.getAnnotationArgumentValue()) {
+                                                if (trim(s, sub)) {
+                                                    return true
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn getUri(c: Class, m: Method, uri1: string) -> bool {
+    let (java_db = default_java_db()) {
+        for (l1 in string::__undetermined_all__(),
+            l2 in string::__undetermined_all__(),
+            uri in string::__undetermined_all__(),
+            n in string::__undetermined_all__()) {
+            for (a in Annotation(java_db),
+                a1 in Annotation(java_db)) {
+                if (c = m.getBelongedClass()) {
+                    for (auto_tmp1 in m.getAnnotation()) {
+                        if (a = auto_tmp1) {
+                            for (auto_tmp2 in c.getAnnotation()) {
+                                if (a1 = auto_tmp2) {
+                                    if (n = a.getName()) {
+                                        if (tmp_12(c)) {
+                                            if (n = a.getName()) {
+                                                if (n.matches(".*Mapping")) {
+                                                    if (getSubUri(a, uri)) {
+                                                        for (tt in string::__undetermined_all__()) {
+                                                            for (w in WebFolder(java_db),
+                                                                cc in WebCarClass(java_db)) {
+                                                                if (tmp_16(w)) {
+                                                                    if (uri1 = uri) {
+                                                                        return true
+                                                                    }
+                                                                }
+                                                                if (!(tmp_16(w))) {
+                                                                    if (cc.key_eq(c)) {
+                                                                        if (tt = cc.getWebFolder().getName()) {
+                                                                            if (uri1 = "/" + tt + uri) {
+                                                                                return true
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        if (!(tmp_12(c))) {
+                                            if (tmp_14(a)) {
+                                                if (n.matches(".*Mapping")) {
+                                                    if (getSubUri(a1, uri)) {
+                                                        for (tt in string::__undetermined_all__()) {
+                                                            for (w in WebFolder(java_db),
+                                                                cc in WebCarClass(java_db)) {
+                                                                if (tmp_16(w)) {
+                                                                    if (uri1 = uri) {
+                                                                        return true
+                                                                    }
+                                                                }
+                                                                if (!(tmp_16(w))) {
+                                                                    if (cc.key_eq(c)) {
+                                                                        if (tt = cc.getWebFolder().getName()) {
+                                                                            if (uri1 = "/" + tt + uri) {
+                                                                                return true
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                            if (!(tmp_14(a))) {
+                                                if (a1.getName() = "RequestMapping") {
+                                                    if (n.matches(".*Mapping")) {
+                                                        if (getSubUri(a, l1)) {
+                                                            if (getSubUri(a1, l2)) {
+                                                                if (contact(l2, l1, uri)) {
+                                                                    for (tt in string::__undetermined_all__()) {
+                                                                        for (w in WebFolder(java_db),
+                                                                            cc in WebCarClass(java_db)) {
+                                                                            if (tmp_16(w)) {
+                                                                                if (uri1 = uri) {
+                                                                                    return true
+                                                                                }
+                                                                            }
+                                                                            if (!(tmp_16(w))) {
+                                                                                if (cc.key_eq(c)) {
+                                                                                    if (tt = cc.getWebFolder().getName()) {
+                                                                                        if (uri1 = "/" + tt + uri) {
+                                                                                            return true
+                                                                                        }
+                                                                                    }
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+schema WebFolder extends Folder {
+    
+}
+
+impl WebFolder {
+
+    @data_constraint
+    @inline
+    pub fn __all__(db: JavaDB) -> *WebFolder {
+        for (tmp in Folder(db)) {
+            yield WebFolder {
+                element_hash_id : tmp.element_hash_id,
+                qualified_name : tmp.qualified_name,
+                name : tmp.name,
+                parent_hash_id : tmp.parent_hash_id
+            }
+        }
+    }
+    
+    pub fn getChild(self) -> Folder {
+        for (f in Folder(__all_data__)) {
+            if (self.element_hash_id = f.getParentHashId()) {
+                return f
+            }
+        }
+    }
+    
+    
+}
+
+schema WebCarFolder extends Folder {
+    
+}
+
+impl WebCarFolder {
+
+    @data_constraint
+    @inline
+    pub fn __all__(db: JavaDB) -> *WebCarFolder {
+        for (tmp in Folder(db)) {
+            yield WebCarFolder {
+                element_hash_id : tmp.element_hash_id,
+                qualified_name : tmp.qualified_name,
+                name : tmp.name,
+                parent_hash_id : tmp.parent_hash_id
+            }
+        }
+    }
+    
+    pub fn getBelongedFolder(self) -> WebCarFolder {
+        for (f in WebCarFolder(__all_data__)) {
+            if (f.element_hash_id = self.getParentHashId()) {
+                return f
+            }
+        }
+    }
+    
+    pub fn getAnAncestorFolder(self) -> WebCarFolder {
+        for (f in WebCarFolder(__all_data__)) {
+            if (f = self.getBelongedFolder()) {
+                return f
+            }
+            if (f = self.getBelongedFolder().getAnAncestorFolder()) {
+                return f
+            }
+        }
+    }
+    
+    
+}
+
+schema WebCarClass extends Class {
+    
+}
+
+impl WebCarClass {
+
+    @data_constraint
+    @inline
+    pub fn __all__(db: JavaDB) -> *WebCarClass {
+        for (tmp in Class(db)) {
+            for (f in WebCarFolder(db),
+                w in WebFolder(db)) {
+                if (f.key_eq(tmp.getContainingFile().getBelongedFolder())) {
+                    if (f.getAnAncestorFolder().key_eq(w)) {
+                        yield WebCarClass {
+                            element_hash_id : tmp.element_hash_id,
+                            qualified_name : tmp.qualified_name,
+                            identifier_hash_id : tmp.identifier_hash_id,
+                            location_hash_id : tmp.location_hash_id,
+                            parent_hash_id : tmp.parent_hash_id
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    pub fn getWebFolder(self) -> WebCarFolder {
+        for (c in WebCarFolder(__all_data__)) {
+            for (f in WebCarFolder(__all_data__),
+                w in WebFolder(__all_data__)) {
+                if (f.key_eq(self.getContainingFile().getBelongedFolder())) {
+                    if (f.getAnAncestorFolder() = c) {
+                        if (c.key_eq(w.getChild())) {
+                            return c
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    
+}
+
+pub fn resolve(r: ReferenceExpression, rr: string) -> bool {
+    let (java_db = default_java_db()) {
+        for (temp in string::__undetermined_all__()) {
+            for (e in Expression(java_db)) {
+                if (e.getParent() = r.getDefinition()) {
+                    if (temp = e.getPrintableText()) {
+                        if (trim(temp, rr)) {
+                            return true
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn facts(a: Expression, i: int, value: string) -> bool {
+    let (java_db = default_java_db()) {
+        for (p in PolyadicExpression(java_db)) {
+            if (a.key_eq(p)) {
+                for (temp in string::__undetermined_all__()) {
+                    for (e in Expression(java_db)) {
+                        if (tmp_17(a)) {
+                            if (resolve(ReferenceExpression(java_db).find(a), value)) {
+                                if (i = 0) {
+                                    return true
+                                }
+                            }
+                        }
+                        if (!(tmp_17(a))) {
+                            if (a.key_eq(e.getParent())) {
+                                if (i = e.getIndex()) {
+                                    if (tmp_18(e)) {
+                                        if (resolve(ReferenceExpression(java_db).find(e), value)) {
+                                            return true
+                                        }
+                                    }
+                                    if (!(tmp_18(e))) {
+                                        if (temp = e.getPrintableText()) {
+                                            if (trim(temp, value)) {
+                                                return true
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        for (p in BinaryExpression(java_db)) {
+            if (a.key_eq(p)) {
+                for (temp in string::__undetermined_all__()) {
+                    for (e in Expression(java_db)) {
+                        if (tmp_17(a)) {
+                            if (resolve(ReferenceExpression(java_db).find(a), value)) {
+                                if (i = 0) {
+                                    return true
+                                }
+                            }
+                        }
+                        if (!(tmp_17(a))) {
+                            if (a.key_eq(e.getParent())) {
+                                if (i = e.getIndex()) {
+                                    if (tmp_18(e)) {
+                                        if (resolve(ReferenceExpression(java_db).find(e), value)) {
+                                            return true
+                                        }
+                                    }
+                                    if (!(tmp_18(e))) {
+                                        if (temp = e.getPrintableText()) {
+                                            if (trim(temp, value)) {
+                                                return true
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        for (p in ReferenceExpression(java_db)) {
+            if (a.key_eq(p)) {
+                for (temp in string::__undetermined_all__()) {
+                    for (e in Expression(java_db)) {
+                        if (tmp_17(a)) {
+                            if (resolve(ReferenceExpression(java_db).find(a), value)) {
+                                if (i = 0) {
+                                    return true
+                                }
+                            }
+                        }
+                        if (!(tmp_17(a))) {
+                            if (a.key_eq(e.getParent())) {
+                                if (i = e.getIndex()) {
+                                    if (tmp_18(e)) {
+                                        if (resolve(ReferenceExpression(java_db).find(e), value)) {
+                                            return true
+                                        }
+                                    }
+                                    if (!(tmp_18(e))) {
+                                        if (temp = e.getPrintableText()) {
+                                            if (trim(temp, value)) {
+                                                return true
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn connectStrBase(ID: Expression, index: int, res: string) -> bool {
+    let (java_db = default_java_db()) {
+        for (total in int::__undetermined_all__(),
+            reStr in string::__undetermined_all__(),
+            currStr in string::__undetermined_all__()) {
+            if (total = tmp_19(ID).len()) {
+                if (tmp_21(index)) {
+                    if (facts(Expression(java_db).find(ID), index, currStr)) {
+                        if (res = currStr) {
+                            return true
+                        }
+                    }
+                }
+                if (!(tmp_21(index))) {
+                    if (index > 0) {
+                        if (connectStrBase(ID, index - 1, reStr)) {
+                            if (facts(Expression(java_db).find(ID), index, currStr)) {
+                                if (res = reStr + currStr) {
+                                    return true
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn connectStr(ID: Expression) -> string {
+    let (java_db = default_java_db()) {
+        for (c in int::__undetermined_all__(), res in string::__undetermined_all__()) {
+            if (c = tmp_22(ID).len()) {
+                if (connectStrBase(ID, c - 1, res)) {
+                    return res
+                }
+            }
+        }
+    }
+}
+pub fn real_output(m: Method, className: string, methodSignature: string, type: string) -> bool {
+    let (java_db = default_java_db()) {
+        for (n in string::__undetermined_all__(),
+            uri in string::__undetermined_all__(),
+            path in string::__undetermined_all__()) {
+            for (c in Class(java_db),
+                a in Annotation(java_db)) {
+                if (getUri(c, m, uri)) {
+                    if (className = c.getQualifiedName()) {
+                        if (methodSignature = m.getSignature()) {
+                            for (auto_tmp1 in m.getAnnotation()) {
+                                if (a = auto_tmp1) {
+                                    if (n = a.getName()) {
+                                        if (n.matches(".*Mapping")) {
+                                            if (tmp_26(a)) {
+                                                if (type = "EMPTY") {
+                                                    if (path = m.getLocation().getFile().getRelativePath()) {
+                                                        if (!path.contains("src/test/java")) {
+                                                            return true
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                            if (!(tmp_26(a))) {
+                                                if (getMethodType(a, type)) {
+                                                    if (path = m.getLocation().getFile().getRelativePath()) {
+                                                        if (!path.contains("src/test/java")) {
+                                                            return true
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+fn default_java_db() -> JavaDB {
+    return JavaDB::load("coref_java_src.db")
+}
+
+fn tmp_0(n: string) -> bool {
+    let (java_db = default_java_db()) {
+        if (n.substr(0,1) = "\"") {
+            return true
+        }
+    }
+}
+
+fn tmp_1(i: int) -> bool {
+    let (java_db = default_java_db()) {
+        if (i = 1) {
+            return true
+        }
+    }
+}
+
+fn tmp_2(a: string, b: string) -> bool {
+    let (java_db = default_java_db()) {
+        if (a.substr(0,1) = "/") {
+            if (b.substr(0,1) = "/") {
+                return true
+            }
+        }
+    }
+}
+
+@inline
+fn tmp_3(i: int, b: string, a: string) -> bool {
+    let (java_db = default_java_db()) {
+        if (a.substr(i - 1,i - 1) = "/") {
+            if (b.substr(0,1) = "/") {
+                return true
+            }
+        }
+    }
+}
+
+@inline
+fn tmp_4(i: int, b: string, a: string) -> bool {
+    let (java_db = default_java_db()) {
+        if (a.substr(i - 1,i - 1) != "/") {
+            if (b.substr(0,1) != "/") {
+                return true
+            }
+        }
+    }
+}
+
+fn tmp_5(a: Annotation) -> bool {
+    let (java_db = default_java_db()) {
+        if (a.getName() = "PostMapping") {
+            return true
+        }
+    }
+}
+
+fn tmp_6(a: Annotation) -> bool {
+    let (java_db = default_java_db()) {
+        if (a.getName() = "GetMapping") {
+            return true
+        }
+    }
+}
+
+fn tmp_7(a: Annotation) -> bool {
+    let (java_db = default_java_db()) {
+        if (a.getName() = "PutMapping") {
+            return true
+        }
+    }
+}
+
+fn tmp_8(a: Annotation) -> bool {
+    let (java_db = default_java_db()) {
+        if (a.getName() = "DeleteMapping") {
+            return true
+        }
+    }
+}
+
+fn tmp_9(a: Annotation) -> bool {
+    let (java_db = default_java_db()) {
+        if (a.getName() = "PatchMapping") {
+            return true
+        }
+    }
+}
+
+fn tmp_10(e: Expression) -> bool {
+    let (java_db = default_java_db()) {
+        if (facts(e, __all_data__, __all_data__)) {
+            return true
+        }
+    }
+}
+
+fn tmp_11(c: Class) -> *Annotation {
+    let (java_db = default_java_db()) {
+        for (b in Annotation(java_db)) {
+            for (auto_tmp3 in c.getAnnotation()) {
+                if (b = auto_tmp3) {
+                    if (b.getName() = "RequestMapping") {
+                        yield b
+                    }
+                }
+            }
+        }
+    }
+}
+
+fn tmp_12(c: Class) -> bool {
+    let (java_db = default_java_db()) {
+        if (tmp_11(c).len() = 0) {
+            return true
+        }
+    }
+}
+
+fn tmp_13(a: Annotation) -> *AnnotationAccessArgument {
+    let (java_db = default_java_db()) {
+        for (b in AnnotationAccessArgument(java_db)) {
+            for (auto_tmp4 in a.getAnnotationArgument()) {
+                if (b = auto_tmp4) {
+                    if (b.getAnnotationArgumentName() = "value") {
+                        yield b
+                    }
+                }
+            }
+        }
+    }
+}
+
+fn tmp_14(a: Annotation) -> bool {
+    let (java_db = default_java_db()) {
+        if (tmp_13(a).len() = 0) {
+            return true
+        }
+    }
+}
+
+fn tmp_15(w: WebFolder) -> *Folder {
+    let (java_db = default_java_db()) {
+        for (f in Folder(java_db)) {
+            if (f = w.getChild()) {
+                yield f
+            }
+        }
+    }
+}
+
+fn tmp_16(w: WebFolder) -> bool {
+    let (java_db = default_java_db()) {
+        if (tmp_15(w).len() = 1) {
+            return true
+        }
+    }
+}
+
+fn tmp_17(a: Expression) -> bool {
+    let (java_db = default_java_db()) {
+        if (resolve(ReferenceExpression(java_db).find(a), __all_data__)) {
+            return true
+        }
+    }
+}
+
+fn tmp_18(e: Expression) -> bool {
+    let (java_db = default_java_db()) {
+        if (resolve(ReferenceExpression(java_db).find(e), __all_data__)) {
+            return true
+        }
+    }
+}
+
+fn tmp_19(ID: Expression) -> *auto_tmp_20 {
+    let (java_db = default_java_db()) {
+        for (auto_tmp_var_0 in int::__undetermined_all__(),
+            auto_tmp_var_1 in string::__undetermined_all__()) {
+            if (facts(Expression(java_db).find(ID), auto_tmp_var_0, auto_tmp_var_1)) {
+                yield auto_tmp_20 {
+                    auto_tmp_var_0 : auto_tmp_var_0,
+                    auto_tmp_var_1 : auto_tmp_var_1
+                }
+            }
+        }
+    }
+}
+
+schema auto_tmp_20 {
+    auto_tmp_var_0 : int,
+    auto_tmp_var_1 : string
+}
+
+fn tmp_21(index: int) -> bool {
+    let (java_db = default_java_db()) {
+        if (index = 0) {
+            return true
+        }
+    }
+}
+
+fn tmp_22(ID: Expression) -> *auto_tmp_23 {
+    let (java_db = default_java_db()) {
+        for (auto_tmp_var_0 in int::__undetermined_all__(),
+            auto_tmp_var_1 in string::__undetermined_all__()) {
+            if (facts(Expression(java_db).find(ID), auto_tmp_var_0, auto_tmp_var_1)) {
+                yield auto_tmp_23 {
+                    auto_tmp_var_0 : auto_tmp_var_0,
+                    auto_tmp_var_1 : auto_tmp_var_1
+                }
+            }
+        }
+    }
+}
+
+schema auto_tmp_23 {
+    auto_tmp_var_0 : int,
+    auto_tmp_var_1 : string
+}
+
+fn tmp_24(a: Annotation) -> *auto_tmp_25 {
+    let (java_db = default_java_db()) {
+        for (auto_tmp_var_0 in string::__undetermined_all__()) {
+            if (getMethodType(a, auto_tmp_var_0)) {
+                yield auto_tmp_25 {
+                    auto_tmp_var_0 : auto_tmp_var_0
+                }
+            }
+        }
+    }
+}
+
+schema auto_tmp_25 {
+    auto_tmp_var_0 : string
+}
+
+fn tmp_26(a: Annotation) -> bool {
+    let (java_db = default_java_db()) {
+        if (tmp_24(a).len() = 0) {
+            return true
+        }
+    }
+}
+
+fn main() {
+    output(real_output())
+}

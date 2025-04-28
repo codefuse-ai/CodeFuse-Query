@@ -1,0 +1,243 @@
+// script 
+use coref::java::*
+use coref::xml::*
+
+schema ECGXmlNode {
+    @primary id: int
+}
+
+impl ECGXmlNode {
+    pub fn __all__(db: XmlDB) -> *ECGXmlNode {
+        for (e in XmlPomElement(db)) {
+            yield ECGXmlNode {id : e.id}
+        }
+        for (e in XmlSpringElement(db)) {
+            yield ECGXmlNode {id : e.id}
+        }
+        for (e in XmlCharacter(db)) {
+            yield ECGXmlNode {id : e.id}
+        }
+        for (e in XmlAttribute(db)) {
+            yield ECGXmlNode {id : e.id}
+        }
+    }
+    
+    pub fn getLocation(self) -> coref::xml::Location {
+        for (l in coref::xml::Location(__all_data__)) {
+            for (e in XmlElement(__all_data__)) {
+                if (self.key_eq(e)) {
+                    if (l = e.getLocation()) {
+                        return l
+                    }
+                }
+            }
+            for (e in XmlAttribute(__all_data__)) {
+                if (self.key_eq(e)) {
+                    if (l = e.getLocation()) {
+                        return l
+                    }
+                }
+            }
+            for (e in XmlCharacter(__all_data__)) {
+                if (self.key_eq(e)) {
+                    if (l = e.getLocation()) {
+                        return l
+                    }
+                }
+            }
+        }
+    }
+    
+    pub fn getType(self) -> string {
+        for (t in string::__undetermined_all__()) {
+            for (e in XmlElement(__all_data__)) {
+                if (self.key_eq(e)) {
+                    if (t = "XmlElement") {
+                        return t
+                    }
+                }
+            }
+            for (e in XmlAttribute(__all_data__)) {
+                if (self.key_eq(e)) {
+                    if (t = "XmlAttribute") {
+                        return t
+                    }
+                }
+            }
+            for (e in XmlCharacter(__all_data__)) {
+                if (self.key_eq(e)) {
+                    if (t = "XmlCharacter") {
+                        return t
+                    }
+                }
+            }
+        }
+    }
+
+    pub fn getText(self) -> string {
+        for (e in XmlElement(__all_data__)) {
+            if (self.key_eq(e)) {
+                return e.getName()
+            }
+        }
+        for (e in XmlAttribute(__all_data__)) {
+            if (self.key_eq(e)) {
+                return e.getName() + " = " + e.getValue()
+            }
+        }
+        for (e in XmlCharacter(__all_data__)) {
+            if (self.key_eq(e)) {
+                return e.getText()
+            }
+        }
+    }
+
+    pub fn getEnclosingECGXmlNode(self) -> ECGXmlNode {
+        for (e in XmlElement(__all_data__)) {
+            if (self.key_eq(e)) {
+                return e.to<ECGXmlNode>()
+            }
+        }
+        for (e in XmlAttribute(__all_data__)) {
+            if (self.key_eq(e)) {
+                return e.getXmlElement().to<ECGXmlNode>()
+            }
+        }
+        for (e in XmlCharacter(__all_data__)) {
+            if (self.key_eq(e)) {
+                return e.getBelongedElement().to<ECGXmlNode>()
+            }
+        }
+    }
+}
+
+pub fn getXmlECGNode(i: int) -> bool {
+    // #xmlecgnode
+    // example
+    [ {1111} ]
+}
+@inline
+pub fn trim(n: string, m: string) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            for (i in int::__undetermined_all__()) {
+                if (i = n.len()) {
+                    if (tmp_0(n)) {
+                        if (m = n.substr(1,i - 2)) {
+                            return true
+                        }
+                    }
+                    if (!(tmp_0(n))) {
+                        if (m = n) {
+                            return true
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn real_output(r: ECGXmlNode, c: ClassOrInterface, f: ElementParent, n: string, m: string) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            if (getXmlECGNode(r.id)) {
+                if (getChangeSetByDalXmlElement(r, c, Method(java_db).find(f), n, m)) {
+                    return true
+                }
+                if (getChangeSetByResultXmlElement(r, c, Field(java_db).find(f), n, m)) {
+                    return true
+                }
+            }
+        }
+    }
+}
+pub fn getChangeSetByResultXmlElement(r1: ECGXmlNode, c: ClassOrInterface, f: Field, n: string, m: string) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            for (r in ResultXmlElement(xml_db)) {
+                if (r.key_eq(r1)) {
+                    if (getXmlECGNode(r.id)) {
+                        if (n = r.getBelongedMapXmlElement().getMappingClassName()) {
+                            if (n = c.getQualifiedName()) {
+                                if (c = f.getParent()) {
+                                    if (r.getValueByAttributeName("property") = f.getName()) {
+                                        if (m = f.getName()) {
+                                            return true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn getChangeSetByDalXmlElement(d1: ECGXmlNode, c: ClassOrInterface, m: Method, className: string, methodName: string) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            for (i in int::__undetermined_all__(),
+                temp in string::__undetermined_all__(),
+                temp1 in string::__undetermined_all__(),
+                n in string::__undetermined_all__()) {
+                for (d in DalXmlElement(xml_db),
+                    cc in XmlComment(xml_db),
+                    l in Literal(java_db)) {
+                    if (d.key_eq(d1)) {
+                        if (getXmlECGNode(d.id)) {
+                            if (d.getLocation().getFile() = cc.getLocation().getFile()) {
+                                if (cc.getLocation().getEndLineNumber() = i) {
+                                    if (i + 1 = d.getLocation().getStartLineNumber()) {
+                                        if (temp = cc.getText()) {
+                                            if (c.getName() = temp.get_regex_match_result("[\\s\\S]*mapped statement for[ \\t]+(\\w+)[\\s\\S]*", 1)) {
+                                                if (n = d.getValueByAttributeName("id")) {
+                                                    if (c.key_eq(m.getBelongedClass())) {
+                                                        if (m.key_eq(l.getEnclosingCallable())) {
+                                                            if (temp1 = l.getValue()) {
+                                                                if (trim(temp1, n)) {
+                                                                    if (className = c.getQualifiedName()) {
+                                                                        if (methodName = m.getSignature()) {
+                                                                            return true
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+fn default_java_db() -> JavaDB {
+    return JavaDB::load("coref_java_src.db")
+}
+
+fn default_xml_db() -> XmlDB {
+    return XmlDB::load("coref_xml_src.db")
+}
+
+fn tmp_0(n: string) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            if (n.substr(0,1) = "\"") {
+                return true
+            }
+        }
+    }
+}
+
+fn main() {
+    output(real_output())
+}

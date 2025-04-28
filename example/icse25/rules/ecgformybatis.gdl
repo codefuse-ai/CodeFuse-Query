@@ -1,0 +1,54 @@
+// script 
+use coref::xml::*
+
+schema SqlIncludeElement extends XmlElement {}
+
+impl SqlIncludeElement {
+    pub fn __all__(db: XmlDB) -> *SqlIncludeElement {
+        for (tmp in XmlElement(db)) {
+            if (tmp.getName() = "include") {
+                yield SqlIncludeElement {
+                    id : tmp.id,
+                    parent_id : tmp.parent_id,
+                    index_order : tmp.index_order,
+                    location_id : tmp.location_id
+                }
+            }
+        }
+    }
+}
+
+pub fn real_output(id: string, type: string, table: string, columns: string) -> bool {
+    let (xml_db = default_xml_db()) {
+        for (d in DalXmlElement(xml_db)) {
+            if (id = d.getValueByAttributeName("id")) {
+                if (type = d.getValueByAttributeName("parameterType")) {
+                    for (auto_tmp1 in d.getTableName()) {
+                        if (table = auto_tmp1) {
+                            if (columns = d.getColumnLists()) {
+                                return true
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+fn default_xml_db() -> XmlDB {
+    return XmlDB::load("coref_xml_src.db")
+}
+
+fn tmp_0(temp1: string) -> bool {
+    let (xml_db = default_xml_db()) {
+        if (temp1.len() > 0) {
+            return true
+        }
+    }
+}
+
+fn main() {
+    output(real_output())
+}
