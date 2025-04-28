@@ -1,0 +1,411 @@
+// script 
+use coref::java::*
+use coref::xml::*
+schema SofaService extends Annotation {
+    
+}
+
+impl SofaService {
+
+    @data_constraint
+    @inline
+    pub fn __all__(db: JavaDB) -> *SofaService {
+        for (tmp in Annotation(db)) {
+            for (n in string::__undetermined_all__()) {
+                if (n = tmp.getName()) {
+                    if (getTrAnnotationName1(n)) {
+                        yield SofaService {
+                            id : tmp.id
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    
+}
+
+pub fn javaOutput(classname: string, name: string) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            for (s in SofaService(java_db),
+                c in Class(java_db),
+                i in ClassOrInterface(java_db)) {
+                for (auto_tmp1 in c.getAnnotation()) {
+                    if (s.key_eq(auto_tmp1)) {
+                        if (classname = c.getQualifiedName()) {
+                            for (auto_tmp2 in c.getImplementsInterface()) {
+                                if (i.key_eq(auto_tmp2)) {
+                                    if (name = i.getQualifiedName()) {
+                                        return true
+                                    }
+                                }
+                            }
+                            if (i.key_eq(c)) {
+                                if (name = classname) {
+                                    return true
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn xmlOutput(className: string, interfaceName: string) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            for (temp in string::__undetermined_all__()) {
+                for (s in ClassOrInterface(java_db),
+                    b in BeanXmlElement(xml_db)) {
+                    if (s.getQualifiedName() = b.getClass()) {
+                        if (className = s.getQualifiedName()) {
+                            if (className = interfaceName) {
+                                if (temp = b.getLocation().getFile().getRelativePath()) {
+                                    if (!temp.contains("src/test/resources")) {
+                                        return true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn getTrAnnotationName(a: string) -> bool {
+    [
+        {"Service"},
+        {"Component"},
+        {"Scope"},
+        {"Repository"},
+        {"Controller"},
+        {"RestController"},
+        {"RequestMapping"},
+        {"PathVariable"},
+        {"ResponseBody"},
+        {"bean"}
+    ]
+}
+pub fn getTrAnnotationName1(a: string) -> bool {
+    [
+        {"Service"},
+        {"Component"},
+        {"Scope"},
+        {"Configuration"},
+        {"Repository"},
+        {"bean"}
+    ]
+}
+pub fn output1(className: string, interfaceName: string) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            if (javaOutput(className, interfaceName)) {
+                return true
+            }
+        }
+    }
+}
+pub fn isSelfDefinedInterface(name: string) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            for (i in Interface(java_db)) {
+                if (name = i.getQualifiedName()) {
+                    return true
+                }
+            }
+        }
+    }
+}
+pub fn isSelfDefinedClass(name: string) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            for (i in Class(java_db)) {
+                if (name = i.getQualifiedName()) {
+                    return true
+                }
+            }
+        }
+    }
+}
+schema PublicMethod extends Method {
+    
+}
+
+impl PublicMethod {
+
+    @data_constraint
+    @inline
+    pub fn __all__(db: JavaDB) -> *PublicMethod {
+        for (tmp in Method(db)) {
+            for (m in Modifier(db)) {
+                for (auto_tmp1 in tmp.getModifier()) {
+                    if (m = auto_tmp1) {
+                        if (m.getName() = "public") {
+                            if (!isSetOrGetMethod(tmp)) {
+                                yield PublicMethod {
+                                    element_hash_id : tmp.element_hash_id,
+                                    name : tmp.name,
+                                    signature : tmp.signature,
+                                    type_hash_id : tmp.type_hash_id,
+                                    parent_hash_id : tmp.parent_hash_id,
+                                    location_hash_id : tmp.location_hash_id,
+                                    definition_body : tmp.definition_body
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    
+}
+
+pub fn isBooleanTypeField(f: Field, p: string, q: string) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            for (i in int::__undetermined_all__(),
+                n in string::__undetermined_all__(),
+                tmp1 in string::__undetermined_all__(),
+                tmp2 in string::__undetermined_all__(),
+                l in string::__undetermined_all__(),
+                j in string::__undetermined_all__()) {
+                if (n = f.getName()) {
+                    if (i = n.len()) {
+                        if (tmp_0(n)) {
+                            if (tmp1 = n.substr(2,i)) {
+                                if (l = n.substr(2,1)) {
+                                    if (tmp2 = n.substr(3,i)) {
+                                        if (q = n) {
+                                            if (p = "set" + tmp1) {
+                                                return true
+                                            }
+                                        }
+                                        if (q = "get" + l + tmp2) {
+                                            if (p = "set" + tmp1) {
+                                                return true
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        if (!(tmp_0(n))) {
+                            if (l = n.substr(0,1)) {
+                                if (tmp2 = n.substr(1,i)) {
+                                    if (lowerToUpper(l, j)) {
+                                        if (p = "set" + j + tmp2) {
+                                            if (q = "is" + j + tmp2) {
+                                                return true
+                                            }
+                                            if (q = "get" + j + tmp2) {
+                                                return true
+                                            }
+                                        }
+                                        if (p = "set" + n) {
+                                            if (q = "is" + j + tmp2) {
+                                                return true
+                                            }
+                                            if (q = "get" + j + tmp2) {
+                                                return true
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn isSetOrGetMethod(m: Method) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            for (i in int::__undetermined_all__(),
+                p in string::__undetermined_all__(),
+                q in string::__undetermined_all__(),
+                n in string::__undetermined_all__(),
+                l in string::__undetermined_all__(),
+                j in string::__undetermined_all__(),
+                tmp in string::__undetermined_all__(),
+                t in string::__undetermined_all__()) {
+                for (f in Field(java_db)) {
+                    if (n = f.getName()) {
+                        if (i = n.len()) {
+                            if (f.getParent() = m.getParent()) {
+                                if (p = m.getName()) {
+                                    if (t = f.getTypeElement().getPrintableText()) {
+                                        if (tmp_1(t)) {
+                                            if (isBooleanTypeField(f, p, q)) {
+                                                return true
+                                            }
+                                        }
+                                        if (!(tmp_1(t))) {
+                                            if (l = n.substr(0,1)) {
+                                                if (tmp = n.substr(1,i)) {
+                                                    if (lowerToUpper(l, j)) {
+                                                        if (p = "set" + j + tmp) {
+                                                            if (q = "get" + j + tmp) {
+                                                                return true
+                                                            }
+                                                            if (q = "get" + n) {
+                                                                return true
+                                                            }
+                                                        }
+                                                        if (p = "set" + n) {
+                                                            if (q = "get" + j + tmp) {
+                                                                return true
+                                                            }
+                                                            if (q = "get" + n) {
+                                                                return true
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                if (q = m.getName()) {
+                                    if (t = f.getTypeElement().getPrintableText()) {
+                                        if (tmp_1(t)) {
+                                            if (isBooleanTypeField(f, p, q)) {
+                                                return true
+                                            }
+                                        }
+                                        if (!(tmp_1(t))) {
+                                            if (l = n.substr(0,1)) {
+                                                if (tmp = n.substr(1,i)) {
+                                                    if (lowerToUpper(l, j)) {
+                                                        if (p = "set" + j + tmp) {
+                                                            if (q = "get" + j + tmp) {
+                                                                return true
+                                                            }
+                                                            if (q = "get" + n) {
+                                                                return true
+                                                            }
+                                                        }
+                                                        if (p = "set" + n) {
+                                                            if (q = "get" + j + tmp) {
+                                                                return true
+                                                            }
+                                                            if (q = "get" + n) {
+                                                                return true
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn real_output(methodName: string, tag: string) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            for (interfaceName in string::__undetermined_all__(),
+                className in string::__undetermined_all__(),
+                path in string::__undetermined_all__()) {
+                for (i in Interface(java_db),
+                    c in Class(java_db)) {
+                    if (output1(className, interfaceName)) {
+                        if (tmp_2(interfaceName)) {
+                            if (interfaceName = i.getQualifiedName()) {
+                                for (m in Method(java_db)) {
+                                    if (i.key_eq(m.getParent())) {
+                                        if (methodName = m.getSignature()) {
+                                            if (tag = "Self") {
+                                                if (path = m.getLocation().getFile().getRelativePath()) {
+                                                    if (!path.contains("src/test/java")) {
+                                                        return true
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        if (!(tmp_2(interfaceName))) {
+                            if (className = c.getQualifiedName()) {
+                                for (n in PublicMethod(java_db)) {
+                                    if (c.key_eq(n.getParent())) {
+                                        if (methodName = n.getSignature()) {
+                                            if (tag = "External") {
+                                                if (path = n.getLocation().getFile().getRelativePath()) {
+                                                    if (!path.contains("src/test/java")) {
+                                                        return true
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+fn default_java_db() -> JavaDB {
+    return JavaDB::load("coref_java_src.db")
+}
+
+fn default_xml_db() -> XmlDB {
+    return XmlDB::load("coref_xml_src.db")
+}
+
+fn tmp_0(n: string) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            if (n.matches("is.*")) {
+                return true
+            }
+        }
+    }
+}
+
+fn tmp_1(t: string) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            if (t = "boolean") {
+                return true
+            }
+            if (t = "Boolean") {
+                return true
+            }
+        }
+    }
+}
+
+fn tmp_2(interfaceName: string) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            if (isSelfDefinedInterface(interfaceName)) {
+                return true
+            }
+        }
+    }
+}
+
+fn main() {
+    output(real_output())
+}

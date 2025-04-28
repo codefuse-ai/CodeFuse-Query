@@ -1,0 +1,460 @@
+// script 
+use coref::java::*
+use coref::xml::*
+pub fn xmlOutput(bindingType: string, interfaceName: string, uniqueId: string) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            for (s in SofaReferenceXmlElement(xml_db),
+                t in TrTagXmlElement(xml_db)) {
+                if (s.key_eq(t.getParent())) {
+                    if (interfaceName = s.getInterfaceName()) {
+                        if (uniqueId = s.getUniqueId()) {
+                            if (bindingType = "tr") {
+                                return true
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn getXMLInterfaceName(s: string) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            if (xmlOutput(__all_data__, s, __all_data__)) {
+                return true
+            }
+        }
+    }
+}
+pub fn exclude(n: string) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            for (c in Class(java_db)) {
+                if (n = c.getQualifiedName()) {
+                    return true
+                }
+            }
+            for (i in Interface(java_db)) {
+                if (n = i.getQualifiedName()) {
+                    return true
+                }
+            }
+        }
+    }
+}
+schema TrInterface1 extends Import {
+    
+}
+
+impl TrInterface1 {
+
+    @data_constraint
+    @inline
+    pub fn __all__(db: JavaDB) -> *TrInterface1 {
+        for (tmp in Import(db)) {
+            for (s in string::__undetermined_all__()) {
+                if (s = tmp.getName()) {
+                    if (getXMLInterfaceName(s)) {
+                        if (!exclude(s)) {
+                            yield TrInterface1 {
+                                element_hash_id : tmp.element_hash_id,
+                                reference_hash_id : tmp.reference_hash_id,
+                                name : tmp.name,
+                                parent_hash_id : tmp.parent_hash_id,
+                                location_hash_id : tmp.location_hash_id,
+                                is_foreign_import : tmp.is_foreign_import
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    
+}
+
+pub fn output2(n: string, m: string, i: Identifier, r: ReferenceExpression) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            for (s in int::__undetermined_all__()) {
+                for (t in TrInterface1(java_db)) {
+                    if (i.getParent() = r.getParent()) {
+                        if (s = r.getLocation().getFile().element_hash_id) {
+                            if (s = t.getContainingFile().element_hash_id) {
+                                if (n = t.getName()) {
+                                    if (t.getTargetName() = r.getPrintableText()) {
+                                        if (m = i.getName()) {
+                                            return true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn matachField(im: TrInterface1, f: Field) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            for (t in int::__undetermined_all__(),
+                s in string::__undetermined_all__()) {
+                if (t = f.getLocation().getFile().element_hash_id) {
+                    if (f.getType().getName() = s) {
+                        if (s = im.getTargetName()) {
+                            if (t = im.getContainingFile().element_hash_id) {
+                                return true
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn matchMethod(im: TrInterface1, f: Method) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            for (t in int::__undetermined_all__(),
+                s in string::__undetermined_all__()) {
+                if (t = f.getLocation().getFile().element_hash_id) {
+                    if (f.getType().getName() = s) {
+                        if (s = im.getTargetName()) {
+                            if (t = im.getContainingFile().element_hash_id) {
+                                return true
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn matchLocalVariable(im: TrInterface1, f: LocalVariable) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            for (t in int::__undetermined_all__(),
+                s in string::__undetermined_all__()) {
+                if (t = f.getLocation().getFile().element_hash_id) {
+                    if (f.getType().getName() = s) {
+                        if (s = im.getTargetName()) {
+                            if (im.getContainingFile().element_hash_id = t) {
+                                return true
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn matchParameter(im: TrInterface1, f: Parameter) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            for (t in int::__undetermined_all__(),
+                s in string::__undetermined_all__()) {
+                if (f.getType().getName() = s) {
+                    if (s = im.getTargetName()) {
+                        if (t = f.getLocation().getFile().element_hash_id) {
+                            if (im.getContainingFile().element_hash_id = t) {
+                                return true
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn output3(id: string, m: string, iden: Identifier, r1: Expression) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            for (r in ReferenceExpression(java_db),
+                im in TrInterface1(java_db)) {
+                if (r.key_eq(r1)) {
+                    if (r.getParent() = iden.getParent()) {
+                        for (f in Field(java_db)) {
+                            if (f.key_eq(r.getDefinition())) {
+                                if (matachField(im, f)) {
+                                    if (id = im.getName()) {
+                                        if (m = iden.getName()) {
+                                            return true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        for (l in LocalVariable(java_db)) {
+                            if (l.key_eq(r.getDefinition())) {
+                                if (matchLocalVariable(im, l)) {
+                                    if (id = im.getName()) {
+                                        if (m = iden.getName()) {
+                                            return true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        for (l in Parameter(java_db)) {
+                            if (l.key_eq(r.getDefinition())) {
+                                if (matchParameter(im, l)) {
+                                    if (id = im.getName()) {
+                                        if (m = iden.getName()) {
+                                            return true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            for (r in MethodAccessExpression(java_db),
+                im in TrInterface1(java_db)) {
+                if (r.key_eq(r1)) {
+                    if (r.getParent() = iden.getParent()) {
+                        for (l in Method(java_db)) {
+                            if (l = r.getMethod()) {
+                                if (matchMethod(im, l)) {
+                                    if (id = im.getName()) {
+                                        if (m = iden.getName()) {
+                                            return true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            if (output2(id, m, iden, ReferenceExpression(java_db).find(r1))) {
+                return true
+            }
+        }
+    }
+}
+pub fn importOutput(className: string, methodName: string, fileName: string, lineNumber: int, c: int) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            for (t in TrInterface1(java_db),
+                r in Expression(java_db)) {
+                if (className = t.getName()) {
+                    if (getXMLInterfaceName(className)) {
+                        if (!exclude(className)) {
+                            if (tmp_0(className)) {
+                                if (output3(className, methodName, __all_data__, r)) {
+                                    if (fileName = r.getLocation().getFile().getRelativePath()) {
+                                        if (lineNumber = r.getLocation().getStartLineNumber()) {
+                                            if (c = r.getEnclosingCallable().id) {
+                                                return true
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            if (!(tmp_0(className))) {
+                                if (methodName = "null") {
+                                    if (fileName = "null") {
+                                        if (lineNumber = 0) {
+                                            if (c = 0) {
+                                                return true
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+schema TrInterface extends Interface {
+    
+}
+
+impl TrInterface {
+
+    @data_constraint
+    @inline
+    pub fn __all__(db: JavaDB) -> *TrInterface {
+        for (tmp in Interface(db)) {
+            for (s in string::__undetermined_all__()) {
+                if (s = tmp.getQualifiedName()) {
+                    if (getXMLInterfaceName(s)) {
+                        yield TrInterface {
+                            element_hash_id : tmp.element_hash_id,
+                            qualified_name : tmp.qualified_name,
+                            identifier_hash_id : tmp.identifier_hash_id,
+                            location_hash_id : tmp.location_hash_id,
+                            parent_hash_id : tmp.parent_hash_id
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    pub fn getCallable(self) -> Callable {
+        for (m in Callable(__all_data__)) {
+            if (self.key_eq(m.getBelongedInterface())) {
+                return m
+            }
+        }
+    }
+    
+    pub fn getCallSite(self, d: Callable) -> Expression {
+        for (c1 in Expression(__all_data__)) {
+            if (d = self.getCallable()) {
+                for (c in MethodAccessExpression(__all_data__)) {
+                    if (c.key_eq(c1)) {
+                        if (d.key_eq(c.getMethod())) {
+                            return c1
+                        }
+                    }
+                }
+                for (c in MethodReferenceExpression(__all_data__)) {
+                    if (c.key_eq(c1)) {
+                        if (d.key_eq(c.getMethod())) {
+                            return c1
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    
+}
+
+pub fn getCallers(c: Callable) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            for (m in Callable(java_db)) {
+                for (auto_tmp1 in c.getCaller()) {
+                    if (m = auto_tmp1) {
+                        return true
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn selfDefineOutput(interfaceName: string, methodName: string, fileName: string, lineNumber: int, c: int) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            for (i in TrInterface(java_db)) {
+                if (c = i.getCallable().id) {
+                    if (interfaceName = i.getQualifiedName()) {
+                        if (methodName = c.getName()) {
+                            if (tmp_1(c)) {
+                                for (e in Expression(java_db)) {
+                                    if (e = i.getCallSite(c)) {
+                                        if (fileName = e.getLocation().getFile().getRelativePath()) {
+                                            if (lineNumber = e.getLocation().getStartLineNumber()) {
+                                                if (c = e.getEnclosingCallable().id) {
+                                                    return true
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            if (!(tmp_1(c))) {
+                                if (fileName = "null") {
+                                    if (lineNumber = 0) {
+                                        if (c = 0) {
+                                            return true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn getJavaECGNode(id: int) -> bool {
+    #javaecgnode
+    // example
+    // [ {1111} ]
+}
+pub fn getDependsECGNode(id: int, c: int) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            if (getJavaECGNode(c)) {
+                if (id = c.getAnAncestorCallee()) {
+                    return true
+                }
+                if (id = c) {
+                    return true
+                }
+            }
+        }
+    }
+}
+pub fn real_output(bindingType: string, uniqueId: string, interfaceName: string, methodName: string, filePath: string, lineNumber: int, ecgNodeId: int) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            for (m in Callable(java_db)) {
+                if (xmlOutput(bindingType, interfaceName, uniqueId)) {
+                    if (selfDefineOutput(interfaceName, methodName, filePath, lineNumber, m)) {
+                        if (!filePath.contains("src/test/java")) {
+                            if (getDependsECGNode(m, ecgNodeId)) {
+                                return true
+                            }
+                        }
+                    }
+                    if (importOutput(interfaceName, methodName, filePath, lineNumber, m)) {
+                        if (!filePath.contains("src/test/java")) {
+                            if (getDependsECGNode(m, ecgNodeId)) {
+                                return true
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+fn default_java_db() -> JavaDB {
+    return JavaDB::load("coref_java_src.db")
+}
+
+fn default_xml_db() -> XmlDB {
+    return XmlDB::load("coref_xml_src.db")
+}
+
+fn tmp_0(className: string) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            if (output3(className, __all_data__, __all_data__, __all_data__)) {
+                return true
+            }
+        }
+    }
+}
+
+fn tmp_1(c: int) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            if (getCallers(Callable(java_db).find(c))) {
+                return true
+            }
+        }
+    }
+}
+
+fn main() {
+    output(real_output())
+}

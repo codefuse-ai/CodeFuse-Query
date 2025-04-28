@@ -1,0 +1,57 @@
+// script 
+use coref::java::*
+pub fn getNode(node: int) -> bool {
+    #javaecgnode
+    // example
+    // [ {1111} ]
+}
+pub fn temp(a: Callable, b: Callable, c: Callable) -> bool {
+    let (java_db = default_java_db()) {
+        if (getNode(a)) {
+            for (auto_tmp1 in a.getAnAncestorCaller()) {
+                if (c = auto_tmp1) {
+                    for (auto_tmp2 in c.getCaller()) {
+                        if (b = auto_tmp2) {
+                            return true
+                        }
+                    }
+                }
+            }
+            if (c = a) {
+                for (auto_tmp2 in c.getCaller()) {
+                    if (b = auto_tmp2) {
+                        return true
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn real_output(b: ECGNode, nodeText1: string, c: ECGNode, nodeText2: string) -> bool {
+    let (java_db = default_java_db()) {
+        for (a in Callable(java_db),
+            b1 in Callable(java_db),
+            c1 in Callable(java_db)) {
+            if (b.key_eq(b1)) {
+                if (c.key_eq(c1)) {
+                    if (temp(a, b1, c1)) {
+                        if (nodeText1 = b1.getSignature()) {
+                            if (nodeText2 = c1.getSignature()) {
+                                return true
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+fn default_java_db() -> JavaDB {
+    return JavaDB::load("coref_java_src.db")
+}
+
+fn main() {
+    output(real_output())
+}

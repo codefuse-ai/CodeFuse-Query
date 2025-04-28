@@ -1,0 +1,1015 @@
+// script 
+use coref::java::*
+use coref::xml::*
+pub fn gitdiff(filePath: string, lineNo: int) -> bool {
+    #changeinfo
+    // example
+    // [ {"test", 1111} ]
+}
+pub fn transfertofile1(f: File, filename: string, lineNumber: int) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            if (gitdiff(filename, lineNumber)) {
+                if (!filename.contains("src/test/java")) {
+                    if (filename = f.getRelativePath()) {
+                        if (isCodeLine(f, filename, lineNumber)) {
+                            return true
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn transfertofile(f: File, filename: string, lineNumber: int) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            if (transfertofile1(f, filename, lineNumber)) {
+                if (!findSpecialCodeType(filename, lineNumber, __all_data__)) {
+                    return true
+                }
+            }
+        }
+    }
+}
+pub fn isComment(filename: string, lineNumber: int) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            for (f in File(java_db)) {
+                if (transfertofile1(f, filename, lineNumber)) {
+                    for (e in int::__undetermined_all__(),
+                        s1 in int::__undetermined_all__()) {
+                        for (c in Comment(java_db)) {
+                            if (c.getLocation().getFile() = f) {
+                                if (s1 = c.getLocation().getStartLineNumber()) {
+                                    if (e = c.getLocation().getEndLineNumber()) {
+                                        if (lineNumber > s1 - 1) {
+                                            if (lineNumber < e + 1) {
+                                                return true
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    for (e in int::__undetermined_all__(),
+                        s1 in int::__undetermined_all__()) {
+                        for (c in JavadocComment(java_db)) {
+                            if (c.getLocation().getFile() = f) {
+                                if (s1 = c.getLocation().getStartLineNumber()) {
+                                    if (e = c.getLocation().getEndLineNumber()) {
+                                        if (lineNumber > s1 - 1) {
+                                            if (lineNumber < e + 1) {
+                                                return true
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn isAnnotation(filename: string, lineNumber: int) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            for (f in File(java_db)) {
+                if (transfertofile1(f, filename, lineNumber)) {
+                    for (e in int::__undetermined_all__(),
+                        s1 in int::__undetermined_all__()) {
+                        for (c in Annotation(java_db)) {
+                            if (c.getLocation().getFile() = f) {
+                                if (s1 = c.getLocation().getStartLineNumber()) {
+                                    if (e = c.getLocation().getEndLineNumber()) {
+                                        if (lineNumber > s1 - 1) {
+                                            if (lineNumber < e + 1) {
+                                                return true
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn isCodeLine(f: File, filename: string, lineNumber: int) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            if (gitdiff(filename, lineNumber)) {
+                if (f.getRelativePath() = filename) {
+                    for (e in int::__undetermined_all__(),
+                        s1 in int::__undetermined_all__()) {
+                        for (l in Location(java_db)) {
+                            if (l.getFile() = f) {
+                                if (s1 = l.getStartLineNumber()) {
+                                    if (e = l.getEndLineNumber()) {
+                                        if (lineNumber > s1 - 1) {
+                                            if (lineNumber < e + 1) {
+                                                return true
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn isLog(filename: string, lineNumber: int) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            for (f in File(java_db)) {
+                if (transfertofile1(f, filename, lineNumber)) {
+                    for (e in int::__undetermined_all__(),
+                        s1 in int::__undetermined_all__(),
+                        text in string::__undetermined_all__()) {
+                        for (c in Expression(java_db)) {
+                            if (c.getLocation().getFile() = f) {
+                                if (s1 = c.getLocation().getStartLineNumber()) {
+                                    if (e = c.getLocation().getEndLineNumber()) {
+                                        if (lineNumber > s1 - 1) {
+                                            if (lineNumber < e + 1) {
+                                                if (text = c.getPrintableText()) {
+                                                    if (text.matches("^logger\\..*")) {
+                                                        return true
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn getTypeInAST(filename: string, lineNumber: int, typeInAST: string) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            for (f in File(java_db)) {
+                if (transfertofile(f, filename, lineNumber)) {
+                    for (e in int::__undetermined_all__(),
+                        s1 in int::__undetermined_all__()) {
+                        for (c in ElementParent(java_db)) {
+                            if (c.getLocation().getFile() = f) {
+                                if (s1 = c.getLocation().getStartLineNumber()) {
+                                    if (e = c.getLocation().getEndLineNumber()) {
+                                        if (s1 = e) {
+                                            if (lineNumber > s1 - 1) {
+                                                if (lineNumber < e + 1) {
+                                                    if (typeInAST = c.getType()) {
+                                                        return true
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn getTypeInECG(filename: string, lineNumber: int, typeInAST: string, n: int) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            for (f in File(java_db)) {
+                if (transfertofile(f, filename, lineNumber)) {
+                    if (tmp_0(filename, lineNumber)) {
+                        if (typeInAST = "Callable") {
+                            if (getBelongedCallable(filename, lineNumber, Callable(java_db).find(n))) {
+                                return true
+                            }
+                        }
+                    }
+                    if (!(tmp_0(filename, lineNumber))) {
+                        for (e in int::__undetermined_all__(),
+                            s1 in int::__undetermined_all__()) {
+                            if (n.getLocation().getFile() = f.element_hash_id) {
+                                if (s1 = n.getLocation().getStartLineNumber()) {
+                                    if (e = n.getLocation().getEndLineNumber()) {
+                                        if (lineNumber > s1 - 1) {
+                                            if (lineNumber < e + 1) {
+                                                if (typeInAST = n.getType()) {
+                                                    if (isFieldOrEnum(ECGNode(java_db).find(n))) {
+                                                        return true
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn isFieldOrEnum(c: ECGNode) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            for (f in Field(java_db)) {
+                if (f.key_eq(c)) {
+                    return true
+                }
+            }
+            for (e in EnumConstant(java_db)) {
+                if (e.key_eq(c)) {
+                    return true
+                }
+            }
+        }
+    }
+}
+pub fn findSpecialCodeType(filename: string, lineNumber: int, type: string) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            if (isComment(filename, lineNumber)) {
+                if (type = "comment") {
+                    return true
+                }
+            }
+            if (isAnnotation(filename, lineNumber)) {
+                if (type = "annotation") {
+                    return true
+                }
+            }
+            if (isLog(filename, lineNumber)) {
+                if (type = "log") {
+                    return true
+                }
+            }
+        }
+    }
+}
+pub fn getBelongedCallable(filename: string, lineNumber: int, c: Callable) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            for (f in File(java_db)) {
+                if (transfertofile(f, filename, lineNumber)) {
+                    for (l1 in int::__undetermined_all__(),
+                        l2 in int::__undetermined_all__()) {
+                        for (i in Identifier(java_db)) {
+                            if (f = c.getLocation().getFile()) {
+                                if (c.key_eq(i.getParent())) {
+                                    if (l1 = i.getLocation().getStartLineNumber()) {
+                                        if (l2 = c.getLocation().getEndLineNumber()) {
+                                            if (lineNumber > l1 - 1) {
+                                                if (lineNumber < l2 + 1) {
+                                                    return true
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn getBelongedCallableSignature(filename: string, lineNumber: int, belongedCallable: string) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            for (i in int::__undetermined_all__()) {
+                for (c in Callable(java_db)) {
+                    if (transfertofile(__all_data__, filename, lineNumber)) {
+                        if (i = tmp_1().len()) {
+                            if (tmp_2(i)) {
+                                if (belongedCallable = "") {
+                                    return true
+                                }
+                            }
+                            if (!(tmp_2(i))) {
+                                if (getBelongedCallable(filename, lineNumber, c)) {
+                                    if (belongedCallable = c.getSignature()) {
+                                        return true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn getJavaECGNode(n: ECGNode) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            for (lineNumber in int::__undetermined_all__(),
+                filename in string::__undetermined_all__(),
+                typeInAST in string::__undetermined_all__(),
+                belongedCallable in string::__undetermined_all__()) {
+                if (transfertofile(__all_data__, filename, lineNumber)) {
+                    if (getBelongedCallableSignature(filename, lineNumber, belongedCallable)) {
+                        if (getTypeInECG(filename, lineNumber, typeInAST, n)) {
+                            return true
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn transfertoXmlfile(f: XmlFile, filename: string, lineNumber: int) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            if (gitdiff(filename, lineNumber)) {
+                if (filename = f.getRelativePath()) {
+                    return true
+                }
+            }
+        }
+    }
+}
+pub fn getXmlECGNode1(n: ECGXmlNode) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            for (lineNumber in int::__undetermined_all__(),
+                e in int::__undetermined_all__(),
+                s1 in int::__undetermined_all__(),
+                filename in string::__undetermined_all__(),
+                typeInAST in string::__undetermined_all__(),
+                text in string::__undetermined_all__()) {
+                for (f in XmlFile(xml_db),
+                    o in ECGXmlNode(xml_db)) {
+                    if (transfertoXmlfile(f, filename, lineNumber)) {
+                        if (n.getLocation().getFile() = f) {
+                            if (s1 = n.getLocation().getStartLineNumber()) {
+                                if (e = n.getLocation().getEndLineNumber()) {
+                                    if (lineNumber > s1 - 1) {
+                                        if (lineNumber < e + 1) {
+                                            if (typeInAST = n.getType()) {
+                                                if (text = n.getText()) {
+                                                    if (o = n.getEnclosingECGXmlNode()) {
+                                                        return true
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+@inline
+pub fn trim(n: string, m: string) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            for (i in int::__undetermined_all__()) {
+                if (i = n.len()) {
+                    if (tmp_3(n)) {
+                        if (m = n.substr(1,i - 2)) {
+                            return true
+                        }
+                    }
+                    if (!(tmp_3(n))) {
+                        if (m = n) {
+                            return true
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn getXmlECGNode(f: int) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            for (c in int::__undetermined_all__(),
+                n in string::__undetermined_all__(),
+                m in string::__undetermined_all__()) {
+                for (r in ECGXmlNode(xml_db)) {
+                    if (getXmlECGNode1(r)) {
+                        if (getChangeSetByDalXmlElement(r, ClassOrInterface(java_db).find(c), Method(java_db).find(f), n, m)) {
+                            return true
+                        }
+                        if (getChangeSetByResultXmlElement(r, ClassOrInterface(java_db).find(c), Field(java_db).find(f), n, m)) {
+                            return true
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn getChangeSetByResultXmlElement(r1: ECGXmlNode, c: ClassOrInterface, f: Field, n: string, m: string) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            for (r in ResultXmlElement(xml_db)) {
+                if (r.key_eq(r1)) {
+                    if (getXmlECGNode1(ECGXmlNode(xml_db).find(r))) {
+                        if (n = r.getBelongedMapXmlElement().getMappingClassName()) {
+                            if (n = c.getQualifiedName()) {
+                                if (c = f.getParent()) {
+                                    if (r.getValueByAttributeName("property") = f.getName()) {
+                                        if (m = f.getName()) {
+                                            return true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn getChangeSetByDalXmlElement(d1: ECGXmlNode, c: ClassOrInterface, m: Method, className: string, methodName: string) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            for (i in int::__undetermined_all__(),
+                temp in string::__undetermined_all__(),
+                temp1 in string::__undetermined_all__(),
+                n in string::__undetermined_all__()) {
+                for (d in DalXmlElement(xml_db),
+                    cc in XmlComment(xml_db),
+                    l in Literal(java_db)) {
+                    if (d.key_eq(d1)) {
+                        if (getXmlECGNode1(ECGXmlNode(xml_db).find(d))) {
+                            if (d.getLocation().getFile() = cc.getLocation().getFile()) {
+                                if (cc.getLocation().getEndLineNumber() = i) {
+                                    if (i + 1 = d.getLocation().getStartLineNumber()) {
+                                        if (temp = cc.getText()) {
+                                            if (c.getName() = temp.get_regex_match_result("[\\s\\S]*mapped statement for[ \\t]+(\\w+)[\\s\\S]*", 1)) {
+                                                if (n = d.getValueByAttributeName("id")) {
+                                                    if (c.key_eq(m.getBelongedClass())) {
+                                                        if (m.key_eq(l.getEnclosingCallable())) {
+                                                            if (temp1 = l.getValue()) {
+                                                                if (trim(temp1, n)) {
+                                                                    if (className = c.getQualifiedName()) {
+                                                                        if (methodName = m.getSignature()) {
+                                                                            return true
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+schema SofaServiceBinding extends Annotation {
+    
+}
+
+impl SofaServiceBinding {
+
+    @data_constraint
+    @inline
+    pub fn __all__(db: JavaDB) -> *SofaServiceBinding {
+        for (tmp in Annotation(db)) {
+            if (tmp.getName() = "SofaServiceBinding") {
+                yield SofaServiceBinding {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+    
+    pub fn getType(self) -> string {
+        for (value in string::__undetermined_all__()) {
+            for (argus in AnnotationAccessArgument(__all_data__)) {
+                for (auto_tmp1 in self.getAnnotationArgument()) {
+                    if (argus = auto_tmp1) {
+                        if (argus.getAnnotationArgumentName() = "bindingType") {
+                            if (value = argus.getAnnotationArgumentValue()) {
+                                return value
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    
+}
+
+pub fn javaOutput(classname: string, name: string) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            for (s in SofaService(java_db),
+                c in Class(java_db),
+                i in ClassOrInterface(java_db)) {
+                for (auto_tmp1 in c.getAnnotation()) {
+                    if (s.key_eq(auto_tmp1)) {
+                        if (classname = c.getQualifiedName()) {
+                            for (auto_tmp2 in c.getImplementsInterface()) {
+                                if (i.key_eq(auto_tmp2)) {
+                                    if (name = i.getQualifiedName()) {
+                                        return true
+                                    }
+                                }
+                            }
+                            if (i = s.getService()) {
+                                if (name = i.getQualifiedName()) {
+                                    return true
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn xmlOutput(className: string, interfaceName: string) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            for (temp in string::__undetermined_all__()) {
+                for (s in SofaServiceXmlElement(xml_db),
+                    b in BeanXmlElement(xml_db)) {
+                    if (s.getRef() = b.getId()) {
+                        if (interfaceName = s.getInterfaceName()) {
+                            if (className = b.getClass()) {
+                                if (temp = b.getLocation().getFile().getRelativePath()) {
+                                    if (!temp.contains("src/test/resources")) {
+                                        return true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn annoOutput(className: string, interfaceName: string) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            for (v in string::__undetermined_all__(),
+                k in string::__undetermined_all__()) {
+                for (s in SofaServiceXmlElement(xml_db),
+                    b in Class(java_db),
+                    t in TagXmlElement(xml_db),
+                    a in Annotation(java_db)) {
+                    if (s.key_eq(t.getParent())) {
+                        if (v = s.getRef()) {
+                            if (interfaceName = s.getInterfaceName()) {
+                                for (auto_tmp1 in b.getAnnotation()) {
+                                    if (a = auto_tmp1) {
+                                        if (a.getName() = k) {
+                                            if (getTrAnnotationName(k)) {
+                                                for (auto_tmp2 in a.getAnnotationArgument()) {
+                                                    if (auto_tmp2.getAnnotationArgumentValue() = "\"" + v + "\"") {
+                                                        if (className = b.getQualifiedName()) {
+                                                            return true
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn getTrAnnotationName(a: string) -> bool {
+    [
+        {"Service"},
+        {"Component"},
+        {"Scope"},
+        {"Repository"},
+        {"Controller"},
+        {"RestController"},
+        {"RequestMapping"},
+        {"PathVariable"},
+        {"ResponseBody"},
+        {"bean"}
+    ]
+}
+pub fn getPublishTr(c: ClassOrInterface) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            for (className in string::__undetermined_all__(),
+                interfaceName in string::__undetermined_all__()) {
+                if (xmlOutput(className, interfaceName)) {
+                    if (interfaceName = c.getQualifiedName()) {
+                        return true
+                    }
+                }
+                if (javaOutput(className, interfaceName)) {
+                    if (interfaceName = c.getQualifiedName()) {
+                        return true
+                    }
+                }
+                if (annoOutput(className, interfaceName)) {
+                    if (interfaceName = c.getQualifiedName()) {
+                        return true
+                    }
+                }
+            }
+        }
+    }
+}
+schema SofaService extends Annotation {
+    
+}
+
+impl SofaService {
+
+    @data_constraint
+    @inline
+    pub fn __all__(db: JavaDB) -> *SofaService {
+        for (tmp in Annotation(db)) {
+            if (tmp.getName() = "SofaService") {
+                yield SofaService {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+    
+    pub fn getService(self) -> ClassOrInterface {
+        for (value in string::__undetermined_all__()) {
+            for (i in ClassOrInterface(__all_data__),
+                argus in AnnotationAccessArgument(__all_data__)) {
+                for (auto_tmp1 in self.getAnnotationArgument()) {
+                    if (argus = auto_tmp1) {
+                        if (argus.getAnnotationArgumentName() = "interfaceType") {
+                            if (value = argus.getAnnotationArgumentValue()) {
+                                if (i.getQualifiedName() = value) {
+                                    return i
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    @inline
+    pub fn getBinding(self) -> SofaServiceBinding {
+        for (b in SofaServiceBinding(__all_data__),
+            argus in AnnotationAccessArgument(__all_data__)) {
+            for (auto_tmp1 in self.getAnnotationArgument()) {
+                if (argus = auto_tmp1) {
+                    if (argus.getAnnotationArgumentName() = "bindings") {
+                        if (b.key_eq(argus.getArgumentAnnotation())) {
+                            return b
+                        }
+                        if (argus.key_eq(b.getParent())) {
+                            return b
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    @inline
+    pub fn getUniqueId(self) -> string {
+        for (uniqueId in string::__undetermined_all__()) {
+            for (anno in Annotation(__all_data__)) {
+                if (self.key_eq(anno)) {
+                    if (tmp_6(anno)) {
+                        for (argus in AnnotationAccessArgument(__all_data__)) {
+                            for (auto_tmp1 in anno.getAnnotationArgument()) {
+                                if (argus = auto_tmp1) {
+                                    if (argus.getAnnotationArgumentName() = "uniqueId") {
+                                        if (uniqueId = argus.getAnnotationArgumentValue()) {
+                                            return uniqueId
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    if (!(tmp_6(anno))) {
+                        if (uniqueId = "null") {
+                            return uniqueId
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    
+}
+
+pub fn uniqueArgument(anno: Annotation) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            for (argus in AnnotationAccessArgument(java_db)) {
+                for (auto_tmp1 in anno.getAnnotationArgument()) {
+                    if (argus = auto_tmp1) {
+                        if (argus.getAnnotationArgumentName() = "uniqueId") {
+                            return true
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn output1(c: ClassOrInterface, interfaceName: string, id: int) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            for (i in int::__undetermined_all__(),
+                j in int::__undetermined_all__(),
+                className in string::__undetermined_all__()) {
+                if (xmlOutput(className, interfaceName)) {
+                    for (temp in string::__undetermined_all__()) {
+                        for (e1 in ECGNode(java_db),
+                            e2 in ECGXmlNode(xml_db)) {
+                            if (getJavaECGNode(e1)) {
+                                if (getXmlECGNode1(e2)) {
+                                    if (c.key_eq(e1.getElementParent())) {
+                                        if (temp = c.getQualifiedName()) {
+                                            if (id = e1.id) {
+                                                if (temp = className) {
+                                                    return true
+                                                }
+                                                if (temp = interfaceName) {
+                                                    return true
+                                                }
+                                            }
+                                            if (e2.id = i) {
+                                                if (id = e2.id) {
+                                                    return true
+                                                }
+                                            }
+                                            if (e2.id = j) {
+                                                if (id = e2.id) {
+                                                    return true
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                if (javaOutput(className, interfaceName)) {
+                    for (temp in string::__undetermined_all__()) {
+                        for (e1 in ECGNode(java_db),
+                            e2 in ECGXmlNode(xml_db)) {
+                            if (getJavaECGNode(e1)) {
+                                if (getXmlECGNode1(e2)) {
+                                    if (c.key_eq(e1.getElementParent())) {
+                                        if (temp = c.getQualifiedName()) {
+                                            if (id = e1.id) {
+                                                if (temp = className) {
+                                                    return true
+                                                }
+                                                if (temp = interfaceName) {
+                                                    return true
+                                                }
+                                            }
+                                            if (e2.id = i) {
+                                                if (id = e2.id) {
+                                                    return true
+                                                }
+                                            }
+                                            if (e2.id = j) {
+                                                if (id = e2.id) {
+                                                    return true
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                if (annoOutput(className, interfaceName)) {
+                    for (temp in string::__undetermined_all__()) {
+                        for (e1 in ECGNode(java_db),
+                            e2 in ECGXmlNode(xml_db)) {
+                            if (getJavaECGNode(e1)) {
+                                if (getXmlECGNode1(e2)) {
+                                    if (c.key_eq(e1.getElementParent())) {
+                                        if (temp = c.getQualifiedName()) {
+                                            if (id = e1.id) {
+                                                if (temp = className) {
+                                                    return true
+                                                }
+                                                if (temp = interfaceName) {
+                                                    return true
+                                                }
+                                            }
+                                            if (e2.id = i) {
+                                                if (id = e2.id) {
+                                                    return true
+                                                }
+                                            }
+                                            if (e2.id = j) {
+                                                if (id = e2.id) {
+                                                    return true
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn output2(c: ClassOrInterface, interfaceName: string, n: ECGNode) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            for (m in ECGNode(java_db)) {
+                if (getJavaECGNode(m)) {
+                    if (getPublishTr(c)) {
+                        for (t in Method(java_db)) {
+                            if (n.key_eq(t)) {
+                                if (c = t.getParent()) {
+                                    if (n = m.getAnAncestorCDDependedNode(__all_data__, __all_data__)) {
+                                        if (interfaceName = c.getQualifiedName()) {
+                                            return true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        for (f in Field(java_db)) {
+                            if (n.key_eq(f)) {
+                                if (c = f.getParent()) {
+                                    if (n = m.getAnAncestorCDDependedNode(__all_data__, __all_data__)) {
+                                        if (interfaceName = c.getQualifiedName()) {
+                                            return true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                if (getXmlECGNode(m)) {
+                    if (getPublishTr(c)) {
+                        for (t in Method(java_db)) {
+                            if (n.key_eq(t)) {
+                                if (c = t.getParent()) {
+                                    if (n = m.getAnAncestorCDDependedNode(__all_data__, __all_data__)) {
+                                        if (interfaceName = c.getQualifiedName()) {
+                                            return true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        for (f in Field(java_db)) {
+                            if (n.key_eq(f)) {
+                                if (c = f.getParent()) {
+                                    if (n = m.getAnAncestorCDDependedNode(__all_data__, __all_data__)) {
+                                        if (interfaceName = c.getQualifiedName()) {
+                                            return true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn real_output(interfaceName: string) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            for (n in int::__undetermined_all__()) {
+                for (c in ClassOrInterface(java_db)) {
+                    if (output2(c, interfaceName, ECGNode(java_db).find(n))) {
+                        return true
+                    }
+                    if (output1(c, interfaceName, n)) {
+                        return true
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+fn default_java_db() -> JavaDB {
+    return JavaDB::load("coref_java_src.db")
+}
+
+fn default_xml_db() -> XmlDB {
+    return XmlDB::load("coref_xml_src.db")
+}
+
+fn tmp_0(filename: string, lineNumber: int) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            if (getBelongedCallable(filename, lineNumber, __all_data__)) {
+                return true
+            }
+        }
+    }
+}
+
+fn tmp_1() -> *string {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            if (getBelongedCallable(filename, lineNumber, __all_data__)) {
+                yield filename
+            }
+        }
+    }
+}
+
+fn tmp_2(i: int) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            if (i = 0) {
+                return true
+            }
+        }
+    }
+}
+
+fn tmp_3(n: string) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            if (n.substr(0,1) = "\"") {
+                return true
+            }
+        }
+    }
+}
+
+fn tmp_4(anno: Annotation) -> *auto_tmp_5 {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            if (uniqueArgument(anno)) {
+                yield auto_tmp_5 {
+                    
+                }
+            }
+        }
+    }
+}
+
+schema auto_tmp_5 {
+    
+}
+
+fn tmp_6(anno: Annotation) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            if (tmp_4(anno).len() = 1) {
+                return true
+            }
+        }
+    }
+}
+
+fn main() {
+    output(real_output())
+}

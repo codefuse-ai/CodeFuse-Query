@@ -1,0 +1,133 @@
+// script 
+use coref::java::*
+use coref::xml::*
+pub fn getXmlECGNode(i: int) -> bool {
+    #xmlecgnode
+    // example
+    // [ {1111} ]
+}
+@inline
+pub fn trim(n: string, m: string) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            for (i in int::__undetermined_all__()) {
+                if (i = n.len()) {
+                    if (tmp_0(n)) {
+                        if (m = n.substr(1,i - 2)) {
+                            return true
+                        }
+                    }
+                    if (!(tmp_0(n))) {
+                        if (m = n) {
+                            return true
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn real_output(r: ECGXmlNode, c: int, f: int, n: string, m: string) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            if (getXmlECGNode(r)) {
+                if (getChangeSetByDalXmlElement(r, ClassOrInterface(java_db).find(c), Method(java_db).find(f), n, m)) {
+                    return true
+                }
+                if (getChangeSetByResultXmlElement(r, ClassOrInterface(java_db).find(c), Field(java_db).find(f), n, m)) {
+                    return true
+                }
+            }
+        }
+    }
+}
+pub fn getChangeSetByResultXmlElement(r1: ECGXmlNode, c: ClassOrInterface, f: Field, n: string, m: string) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            for (r in ResultXmlElement(xml_db)) {
+                if (r.key_eq(r1)) {
+                    if (getXmlECGNode(r)) {
+                        if (n = r.getBelongedMapXmlElement().getMappingClassName()) {
+                            if (n = c.getQualifiedName()) {
+                                if (c = f.getParent()) {
+                                    if (r.getValueByAttributeName("property") = f.getName()) {
+                                        if (m = f.getName()) {
+                                            return true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn getChangeSetByDalXmlElement(d1: ECGXmlNode, c: ClassOrInterface, m: Method, className: string, methodName: string) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            for (i in int::__undetermined_all__(),
+                temp in string::__undetermined_all__(),
+                temp1 in string::__undetermined_all__(),
+                n in string::__undetermined_all__()) {
+                for (d in DalXmlElement(xml_db),
+                    cc in XmlComment(xml_db),
+                    l in Literal(java_db)) {
+                    if (d.key_eq(d1)) {
+                        if (getXmlECGNode(d)) {
+                            if (d.getLocation().getFile() = cc.getLocation().getFile()) {
+                                if (cc.getLocation().getEndLineNumber() = i) {
+                                    if (i + 1 = d.getLocation().getStartLineNumber()) {
+                                        if (temp = cc.getText()) {
+                                            if (c.getName() = temp.get_regex_match_result("[\\s\\S]*mapped statement for[ \\t]+(\\w+)[\\s\\S]*", 1)) {
+                                                if (n = d.getValueByAttributeName("id")) {
+                                                    if (c.key_eq(m.getBelongedClass())) {
+                                                        if (m.key_eq(l.getEnclosingCallable())) {
+                                                            if (temp1 = l.getValue()) {
+                                                                if (trim(temp1, n)) {
+                                                                    if (className = c.getQualifiedName()) {
+                                                                        if (methodName = m.getSignature()) {
+                                                                            return true
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+fn default_java_db() -> JavaDB {
+    return JavaDB::load("coref_java_src.db")
+}
+
+fn default_xml_db() -> XmlDB {
+    return XmlDB::load("coref_xml_src.db")
+}
+
+fn tmp_0(n: string) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            if (n.substr(0,1) = "\"") {
+                return true
+            }
+        }
+    }
+}
+
+fn main() {
+    output(real_output())
+}

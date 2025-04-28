@@ -1,0 +1,180 @@
+// script 
+use coref::java::*
+pub fn getJavaECGNode(node: int) -> bool {
+    #javaecgnode
+    // example
+    // [ {1111} ]
+}
+pub fn getResponseType(t: ReferenceType) -> bool {
+    let (java_db = default_java_db()) {
+        for (r in string::__undetermined_all__()) {
+            for (i in ClassOrInterface(java_db),
+                c in ClassOrInterface(java_db)) {
+                if (r = c.getImplementsList()) {
+                    if (r = "implements Response") {
+                        for (auto_tmp1 in i.getAnAscentantClassOrInterface()) {
+                            if (c = auto_tmp1) {
+                                if (t.getQualifiedName() = i.getQualifiedName()) {
+                                    return true
+                                }
+                            }
+                        }
+                        if (c = i) {
+                            if (t.getQualifiedName() = i.getQualifiedName()) {
+                                return true
+                            }
+                        }
+                    }
+                }
+                if (c.getName() = "BaseResponse") {
+                    for (auto_tmp1 in i.getAnAscentantClassOrInterface()) {
+                        if (c = auto_tmp1) {
+                            if (t.getQualifiedName() = i.getQualifiedName()) {
+                                return true
+                            }
+                        }
+                    }
+                    if (c = i) {
+                        if (t.getQualifiedName() = i.getQualifiedName()) {
+                            return true
+                        }
+                    }
+                }
+                if (c.getName() = "HttpResponse") {
+                    for (auto_tmp1 in i.getAnAscentantClassOrInterface()) {
+                        if (c = auto_tmp1) {
+                            if (t.getQualifiedName() = i.getQualifiedName()) {
+                                return true
+                            }
+                        }
+                    }
+                    if (c = i) {
+                        if (t.getQualifiedName() = i.getQualifiedName()) {
+                            return true
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn getResponseMethod(m: Method) -> bool {
+    let (java_db = default_java_db()) {
+        for (a in string::__undetermined_all__(),
+            b in string::__undetermined_all__(),
+            l in string::__undetermined_all__()) {
+            for (t in ReferenceType(java_db)) {
+                if (getResponseType(t)) {
+                    if (m.getType().key_eq(t)) {
+                        if (l = m.getLocation().getFile().getRelativePath()) {
+                            if (!l.contains("src/test/java")) {
+                                return true
+                            }
+                        }
+                    }
+                    if (b = m.getType().getName()) {
+                        if (a = t.getName()) {
+                            if (b.contains(a)) {
+                                if (l = m.getLocation().getFile().getRelativePath()) {
+                                    if (!l.contains("src/test/java")) {
+                                        return true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn temp(a: ECGNode, b: ECGNode, c: ECGNode, edgeType: string, direction: string) -> bool {
+    let (java_db = default_java_db()) {
+        if (getJavaECGNode(a)) {
+            if (b = a.getAnAncestorCDNode(__all_data__, __all_data__)) {
+                if (c = b.getECGNode(edgeType, direction)) {
+                    if (!b = c) {
+                        return true
+                    }
+                }
+            }
+            if (b = a) {
+                if (c = b.getECGNode(edgeType, direction)) {
+                    if (!b = c) {
+                        return true
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn temp1(c: Callable) -> bool {
+    let (java_db = default_java_db()) {
+        for (a in Callable(java_db)) {
+            if (getResponseMethod(Method(java_db).find(a))) {
+                for (auto_tmp1 in a.getAnAncestorCaller()) {
+                    if (c = auto_tmp1) {
+                        return true
+                    }
+                }
+                if (c = a) {
+                    return true
+                }
+            }
+        }
+    }
+}
+pub fn temp2(a: ECGNode, b: ECGNode, c: ECGNode, direction: string, edgeType: string) -> bool {
+    let (java_db = default_java_db()) {
+        if (getJavaECGNode(a)) {
+            if (b = a.getAnAncestorCDNode(__all_data__, "Depended")) {
+                if (c = b.getECGNode(edgeType, "Depended")) {
+                    if (temp1(Callable(java_db).find(c))) {
+                        if (!b = c) {
+                            if (direction = "Depended") {
+                                return true
+                            }
+                        }
+                    }
+                }
+            }
+            if (b = a) {
+                if (c = b.getECGNode(edgeType, "Depended")) {
+                    if (temp1(Callable(java_db).find(c))) {
+                        if (!b = c) {
+                            if (direction = "Depended") {
+                                return true
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn real_output(m: ECGNode, nodeType1: string, nodeText1: string, n: ECGNode, nodeType2: string, nodeText2: string, edgeType: string, direction: string) -> bool {
+    let (java_db = default_java_db()) {
+        for (e in ECGNode(java_db)) {
+            if (temp2(e, m, n, edgeType, direction)) {
+                if (nodeType1 = m.getType()) {
+                    if (nodeText1 = m.print()) {
+                        if (nodeText2 = n.print()) {
+                            if (nodeType2 = n.getType()) {
+                                return true
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+fn default_java_db() -> JavaDB {
+    return JavaDB::load("coref_java_src.db")
+}
+
+fn main() {
+    output(real_output())
+}

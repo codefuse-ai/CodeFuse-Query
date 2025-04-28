@@ -1,0 +1,168 @@
+// script 
+use coref::java::*
+pub fn getAField(aClass: Class, aField: Field, fieldName: string, isList: string) -> bool {
+    let (java_db = default_java_db()) {
+        for (fieldTypeQualifiedName in string::__undetermined_all__()) {
+            for (fieldType in Type(java_db)) {
+                for (auto_tmp1 in aClass.getAllFields()) {
+                    if (aField = auto_tmp1) {
+                        if (fieldName = aField.getName()) {
+                            if (fieldType = aField.getType()) {
+                                if (fieldTypeQualifiedName = fieldType.getQualifiedName()) {
+                                    if (tmp_0(fieldTypeQualifiedName)) {
+                                        if (isList = "Y") {
+                                            return true
+                                        }
+                                    }
+                                    if (!(tmp_0(fieldTypeQualifiedName))) {
+                                        if (isList = "N") {
+                                            return true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn getFieldClass(aField: Field, fieldClass: Class) -> bool {
+    let (java_db = default_java_db()) {
+        for (fieldTypeQualifiedName in string::__undetermined_all__(),
+            isList in string::__undetermined_all__()) {
+            for (fieldType in Type(java_db)) {
+                if (fieldType = aField.getType()) {
+                    if (fieldTypeQualifiedName = fieldType.getQualifiedName()) {
+                        if (tmp_1(fieldTypeQualifiedName)) {
+                            if (isList = "Y") {
+                                for (fieldTypeClassQualifiedName in string::__undetermined_all__()) {
+                                    if (fieldTypeClassQualifiedName = fieldTypeQualifiedName.get_regex_match_result(".*List<(.+)>", 1)) {
+                                        if (fieldClass.getQualifiedName() = fieldTypeClassQualifiedName) {
+                                            return true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        if (!(tmp_1(fieldTypeQualifiedName))) {
+                            if (isList = "N") {
+                                if (fieldClass.getQualifiedName() = fieldTypeQualifiedName) {
+                                    return true
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn getADescendantField(rootField: Field, outerField: Field, aField: Field, fieldName: string, isList: string) -> bool {
+    let (java_db = default_java_db()) {
+        for (fieldClass in Class(java_db)) {
+            if (getFieldClass(rootField, fieldClass)) {
+                if (outerField = rootField) {
+                    if (getAField(fieldClass, aField, fieldName, isList)) {
+                        return true
+                    }
+                }
+                for (childField in Field(java_db)) {
+                    if (getAField(fieldClass, childField, __all_data__, __all_data__)) {
+                        if (getADescendantField(childField, outerField, aField, fieldName, isList)) {
+                            return true
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn facadeMethod(facadeQualifiedName: string, trMethodName: string) -> bool {
+    [
+        {"com.xxx.filtered.BlockFacade", "using"},
+        {"com.xxx.filtered.BlockFacade", "batchLoad"},
+        {"com.xxx.filtered.LayoutFacade", "using"},
+        {"com.xxx.filtered.LayoutFacade", "loadLayoutData"},
+        {"com.xxx.filtered.FpcQueryFacade", "using"},
+        {"com.xxx.filtered.FpcQueryFacade", "queryGroupByProduct"},
+        {"com.xxx.filtered.FpcQueryFacade", "queryGroupByProductObject"},
+        {"com.xxx.filtered.FpcFeaturedListQueryFacade", "using"},
+        {"com.xxx.filtered.FpcFundManagerQueryFacade", "queryProfile"},
+        {"com.xxx.filtered.FpcFundManagerQueryFacade", "queryProfileExt"},
+        {"com.xxx.filtered.FpcGoldFundQueryFacade", "queryTrackDetail"},
+        {"com.xxx.filtered.FpcGoldFundQueryFacade", "queryGoldFundCurve"},
+        {"com.xxx.filtered.FpcIndexQueryFacade", "queryInfo"},
+        {"com.xxx.filtered.FpcIndustryQueryFacade", "queryInfo"},
+        {"com.xxx.filtered.FpcYieldLineQueryFacade", "queryProdTimingAbility"},
+        {"com.xxx.filtered.FpcManagerQueryFacade", "using"}
+    ]
+}
+pub fn real_output(facadeQualifiedName: string, trMethodName: string, outerFieldId: int, fieldId: int, fieldName: string, isList: string) -> bool {
+    let (java_db = default_java_db()) {
+        for (returnType in Type(java_db),
+            returnClass in Class(java_db)) {
+            for (facadeInterface in Interface(java_db),
+                trMethod in Method(java_db)) {
+                if (facadeMethod(facadeQualifiedName, trMethodName)) {
+                    if (facadeInterface.getQualifiedName() = facadeQualifiedName) {
+                        if (trMethod.getParent().key_eq(facadeInterface)) {
+                            if (trMethod.getName() = trMethodName) {
+                                if (returnType = trMethod.getType()) {
+                                    if (returnClass.getQualifiedName() = returnType.getQualifiedName()) {
+                                        if (fieldName != "serialVersionUID") {
+                                            for (aField in Field(java_db)) {
+                                                if (getAField(returnClass, aField, fieldName, isList)) {
+                                                    if (outerFieldId = 0) {
+                                                        if (fieldId = aField.element_hash_id) {
+                                                            return true
+                                                        }
+                                                    }
+                                                }
+                                                for (rootField in Field(java_db)) {
+                                                    if (getAField(returnClass, rootField, __all_data__, __all_data__)) {
+                                                        if (getADescendantField(rootField, Field(java_db).find(outerFieldId), aField, fieldName, isList)) {
+                                                            if (fieldId = aField.element_hash_id) {
+                                                                return true
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+fn default_java_db() -> JavaDB {
+    return JavaDB::load("coref_java_src.db")
+}
+
+fn tmp_0(fieldTypeQualifiedName: string) -> bool {
+    let (java_db = default_java_db()) {
+        if (fieldTypeQualifiedName.matches(".*List<.+>")) {
+            return true
+        }
+    }
+}
+
+fn tmp_1(fieldTypeQualifiedName: string) -> bool {
+    let (java_db = default_java_db()) {
+        if (fieldTypeQualifiedName.matches(".*List<.+>")) {
+            return true
+        }
+    }
+}
+
+fn main() {
+    output(real_output())
+}

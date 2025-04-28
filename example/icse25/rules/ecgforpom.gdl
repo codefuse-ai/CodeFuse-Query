@@ -1,0 +1,341 @@
+// script 
+use coref::xml::*
+schema ECGXmlNode {
+    @primary id: int
+}
+
+impl ECGXmlNode {
+
+    @data_constraint
+    @inline
+    pub fn __all__(db: XmlDB) -> *ECGXmlNode {
+        for (e in XmlElement(db)) {
+            yield ECGXmlNode {id : e.id}
+        }
+        for (e in XmlAttribute(db)) {
+            yield ECGXmlNode {id : e.id}
+        }
+        for (e in XmlCharacter(db)) {
+            yield ECGXmlNode {id : e.id}
+        }
+    }
+    
+    pub fn getLocation(self) -> Location {
+        for (l in Location(__all_data__)) {
+            for (e in XmlElement(__all_data__)) {
+                if (self.key_eq(e)) {
+                    if (l = e.getLocation()) {
+                        return l
+                    }
+                }
+            }
+            for (e in XmlAttribute(__all_data__)) {
+                if (self.key_eq(e)) {
+                    if (l = e.getLocation()) {
+                        return l
+                    }
+                }
+            }
+            for (e in XmlCharacter(__all_data__)) {
+                if (self.key_eq(e)) {
+                    if (l = e.getLocation()) {
+                        return l
+                    }
+                }
+            }
+        }
+    }
+    
+    pub fn getType(self) -> string {
+        for (t in string::__undetermined_all__()) {
+            for (e in XmlElement(__all_data__)) {
+                if (self.key_eq(e)) {
+                    if (t = "XmlElement") {
+                        return t
+                    }
+                }
+            }
+            for (e in XmlAttribute(__all_data__)) {
+                if (self.key_eq(e)) {
+                    if (t = "XmlAttribute") {
+                        return t
+                    }
+                }
+            }
+            for (e in XmlCharacter(__all_data__)) {
+                if (self.key_eq(e)) {
+                    if (t = "XmlCharacter") {
+                        return t
+                    }
+                }
+            }
+        }
+    }
+    
+    
+}
+
+schema PomFile extends XmlFile {
+    
+}
+
+impl PomFile {
+
+    @data_constraint
+    @inline
+    pub fn __all__(db: XmlDB) -> *PomFile {
+        for (tmp in XmlFile(db)) {
+            if (tmp.getFileName() = "pom.xml") {
+                yield PomFile {
+                    id : tmp.id,
+                    file_name : tmp.file_name,
+                    relative_path : tmp.relative_path
+                }
+            }
+        }
+    }
+    
+    
+}
+
+schema DependencyElement extends XmlElement {
+    
+}
+
+impl DependencyElement {
+
+    @data_constraint
+    @inline
+    pub fn __all__(db: XmlDB) -> *DependencyElement {
+        for (tmp in XmlElement(db)) {
+            if (tmp.getElementName() = "dependency") {
+                yield DependencyElement {
+                    id : tmp.id,
+                    parent_id : tmp.parent_id,
+                    index_order : tmp.index_order,
+                    location_id : tmp.location_id
+                }
+            }
+        }
+    }
+    
+    
+}
+
+schema GroupElement extends XmlElement {
+    
+}
+
+impl GroupElement {
+
+    @data_constraint
+    @inline
+    pub fn __all__(db: XmlDB) -> *GroupElement {
+        for (tmp in XmlElement(db)) {
+            if (tmp.getElementName() = "groupId") {
+                yield GroupElement {
+                    id : tmp.id,
+                    parent_id : tmp.parent_id,
+                    index_order : tmp.index_order,
+                    location_id : tmp.location_id
+                }
+            }
+        }
+    }
+    
+    
+}
+
+schema VersionElement extends XmlElement {
+    
+}
+
+impl VersionElement {
+
+    @data_constraint
+    @inline
+    pub fn __all__(db: XmlDB) -> *VersionElement {
+        for (tmp in XmlElement(db)) {
+            if (tmp.getElementName() = "version") {
+                yield VersionElement {
+                    id : tmp.id,
+                    parent_id : tmp.parent_id,
+                    index_order : tmp.index_order,
+                    location_id : tmp.location_id
+                }
+            }
+        }
+    }
+    
+    pub fn getLineNo(self) -> int {
+        for (lineNo in int::__undetermined_all__()) {
+            if (lineNo = self.getLocation().getStartLineNumber()) {
+                return lineNo
+            }
+        }
+    }
+    
+    pub fn getVersion(self) -> string {
+        for (version in string::__undetermined_all__(),
+            dependencyCharacterText in string::__undetermined_all__()) {
+            for (dependencyCharacter in XmlCharacter(__all_data__)) {
+                if (dependencyCharacter.getBelongedElement().key_eq(self)) {
+                    if (dependencyCharacterText = dependencyCharacter.getText()) {
+                        if (tmp_0(dependencyCharacterText)) {
+                            for (propertyCharacterText in string::__undetermined_all__()) {
+                                for (property in PropertyElement(__all_data__),
+                                    propertyCharacter in XmlCharacter(__all_data__)) {
+                                    if (propertyCharacter.getBelongedElement().key_eq(property)) {
+                                        if (propertyCharacterText = property.getElementName()) {
+                                            if (dependencyCharacterText.contains(propertyCharacterText)) {
+                                                if (version = propertyCharacter.getText()) {
+                                                    return version
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        if (!(tmp_0(dependencyCharacterText))) {
+                            if (version = dependencyCharacter.getText()) {
+                                return version
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    
+}
+
+schema PropertyElement extends XmlElement {
+    
+}
+
+impl PropertyElement {
+
+    @data_constraint
+    @inline
+    pub fn __all__(db: XmlDB) -> *PropertyElement {
+        for (tmp in XmlElement(db)) {
+            if (tmp.getParent().getElementName() = "properties") {
+                yield PropertyElement {
+                    id : tmp.id,
+                    parent_id : tmp.parent_id,
+                    index_order : tmp.index_order,
+                    location_id : tmp.location_id
+                }
+            }
+        }
+    }
+    
+    
+}
+
+schema ArtifactElement extends XmlElement {
+    
+}
+
+impl ArtifactElement {
+
+    @data_constraint
+    @inline
+    pub fn __all__(db: XmlDB) -> *ArtifactElement {
+        for (tmp in XmlElement(db)) {
+            if (tmp.getElementName() = "artifactId") {
+                yield ArtifactElement {
+                    id : tmp.id,
+                    parent_id : tmp.parent_id,
+                    index_order : tmp.index_order,
+                    location_id : tmp.location_id
+                }
+            }
+        }
+    }
+    
+    
+}
+
+pub fn existVersion(p: DependencyElement) -> bool {
+    let (xml_db = default_xml_db()) {
+        for (v in VersionElement(xml_db)) {
+            if (p.key_eq(v.getParent())) {
+                return true
+            }
+        }
+    }
+}
+pub fn real_output(fileName: string, groupId: string, artifactId: string, version: string) -> bool {
+    let (xml_db = default_xml_db()) {
+        for (f in PomFile(xml_db),
+            e1 in GroupElement(xml_db),
+            e2 in VersionElement(xml_db),
+            e3 in ArtifactElement(xml_db),
+            c1 in XmlCharacter(xml_db),
+            c2 in XmlCharacter(xml_db),
+            p in DependencyElement(xml_db)) {
+            if (f.key_eq(p.getLocation().getFile())) {
+                if (fileName = f.getRelativePath()) {
+                    if (p.key_eq(e1.getParent())) {
+                        if (e1.key_eq(c1.getBelongedElement())) {
+                            if (groupId = c1.getText()) {
+                                if (tmp_1(p)) {
+                                    if (p.key_eq(e2.getParent())) {
+                                        if (version = e2.getVersion()) {
+                                            if (p.key_eq(e3.getParent())) {
+                                                if (e3.key_eq(c2.getBelongedElement())) {
+                                                    if (artifactId = c2.getText()) {
+                                                        return true
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                if (!(tmp_1(p))) {
+                                    if (version = "") {
+                                        if (p.key_eq(e3.getParent())) {
+                                            if (e3.key_eq(c2.getBelongedElement())) {
+                                                if (artifactId = c2.getText()) {
+                                                    return true
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+fn default_xml_db() -> XmlDB {
+    return XmlDB::load("coref_xml_src.db")
+}
+
+fn tmp_0(dependencyCharacterText: string) -> bool {
+    let (xml_db = default_xml_db()) {
+        if (dependencyCharacterText.contains("${")) {
+            return true
+        }
+    }
+}
+
+fn tmp_1(p: DependencyElement) -> bool {
+    let (xml_db = default_xml_db()) {
+        if (existVersion(p)) {
+            return true
+        }
+    }
+}
+
+fn main() {
+    output(real_output())
+}

@@ -1,0 +1,598 @@
+// script 
+use coref::java::*
+use coref::xml::*
+pub fn gitdiff(filename: string, lineNumber: int) -> bool {
+    //python替换
+    $gitdiff
+    // example
+    // [ {"test", 1111} ]
+}
+pub fn transfertofile(f: File, filename: string, lineNumber: int) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            if (gitdiff(filename, lineNumber)) {
+                if (filename = f.getRelativePath()) {
+                    if (!filename.contains("src/test")) {
+                        return true
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn findModifiedLineInClass(f: File, filename: string, lineNumber: int) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            for (j in int::__undetermined_all__()) {
+                if (transfertofile(f, filename, lineNumber)) {
+                    for (c in Class(java_db)) {
+                        if (f = c.getLocation().getFile()) {
+                            if (j = c.getLocation().getStartLineNumber()) {
+                                if (lineNumber > j) {
+                                    return true
+                                }
+                            }
+                        }
+                    }
+                    for (c in Interface(java_db)) {
+                        if (f = c.getLocation().getFile()) {
+                            if (j = c.getLocation().getStartLineNumber()) {
+                                if (lineNumber > j) {
+                                    return true
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+schema PublicMethod extends Method {
+    
+}
+
+impl PublicMethod {
+
+    @data_constraint
+    @inline
+    pub fn __all__(db: JavaDB) -> *PublicMethod {
+        for (tmp in Method(db)) {
+            for (m in Modifier(db)) {
+                for (auto_tmp1 in tmp.getModifier()) {
+                    if (m = auto_tmp1) {
+                        if (m.getName() = "public") {
+                            if (!isSetOrGetMethod(tmp)) {
+                                yield PublicMethod {
+                                    element_hash_id : tmp.element_hash_id,
+                                    name : tmp.name,
+                                    signature : tmp.signature,
+                                    type_hash_id : tmp.type_hash_id,
+                                    parent_hash_id : tmp.parent_hash_id,
+                                    location_hash_id : tmp.location_hash_id,
+                                    definition_body : tmp.definition_body
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    
+}
+
+pub fn isBooleanTypeField(f: Field, p: string, q: string) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            for (i in int::__undetermined_all__(),
+                n in string::__undetermined_all__(),
+                tmp1 in string::__undetermined_all__(),
+                tmp2 in string::__undetermined_all__(),
+                l in string::__undetermined_all__(),
+                j in string::__undetermined_all__()) {
+                if (n = f.getName()) {
+                    if (i = n.len()) {
+                        if (tmp_0(n)) {
+                            if (tmp1 = n.substr(2,i)) {
+                                if (l = n.substr(2,1)) {
+                                    if (tmp2 = n.substr(3,i)) {
+                                        if (q = n) {
+                                            if (p = "set" + tmp1) {
+                                                return true
+                                            }
+                                        }
+                                        if (q = "get" + l + tmp2) {
+                                            if (p = "set" + tmp1) {
+                                                return true
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        if (!(tmp_0(n))) {
+                            if (l = n.substr(0,1)) {
+                                if (tmp2 = n.substr(1,i)) {
+                                    if (lowerToUpper(l, j)) {
+                                        if (p = "set" + j + tmp2) {
+                                            if (q = "is" + j + tmp2) {
+                                                return true
+                                            }
+                                            if (q = "get" + j + tmp2) {
+                                                return true
+                                            }
+                                        }
+                                        if (p = "set" + n) {
+                                            if (q = "is" + j + tmp2) {
+                                                return true
+                                            }
+                                            if (q = "get" + j + tmp2) {
+                                                return true
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn isSetOrGetMethod(m: Method) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            for (i in int::__undetermined_all__(),
+                p in string::__undetermined_all__(),
+                q in string::__undetermined_all__(),
+                n in string::__undetermined_all__(),
+                l in string::__undetermined_all__(),
+                j in string::__undetermined_all__(),
+                tmp in string::__undetermined_all__(),
+                t in string::__undetermined_all__()) {
+                for (f in Field(java_db)) {
+                    if (n = f.getName()) {
+                        if (i = n.len()) {
+                            if (f.getParent() = m.getParent()) {
+                                if (p = m.getName()) {
+                                    if (t = f.getTypeElement().getPrintableText()) {
+                                        if (tmp_1(t)) {
+                                            if (isBooleanTypeField(f, p, q)) {
+                                                return true
+                                            }
+                                        }
+                                        if (!(tmp_1(t))) {
+                                            if (l = n.substr(0,1)) {
+                                                if (tmp = n.substr(1,i)) {
+                                                    if (lowerToUpper(l, j)) {
+                                                        if (p = "set" + j + tmp) {
+                                                            if (q = "get" + j + tmp) {
+                                                                return true
+                                                            }
+                                                            if (q = "get" + n) {
+                                                                return true
+                                                            }
+                                                        }
+                                                        if (p = "set" + n) {
+                                                            if (q = "get" + j + tmp) {
+                                                                return true
+                                                            }
+                                                            if (q = "get" + n) {
+                                                                return true
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                if (q = m.getName()) {
+                                    if (t = f.getTypeElement().getPrintableText()) {
+                                        if (tmp_1(t)) {
+                                            if (isBooleanTypeField(f, p, q)) {
+                                                return true
+                                            }
+                                        }
+                                        if (!(tmp_1(t))) {
+                                            if (l = n.substr(0,1)) {
+                                                if (tmp = n.substr(1,i)) {
+                                                    if (lowerToUpper(l, j)) {
+                                                        if (p = "set" + j + tmp) {
+                                                            if (q = "get" + j + tmp) {
+                                                                return true
+                                                            }
+                                                            if (q = "get" + n) {
+                                                                return true
+                                                            }
+                                                        }
+                                                        if (p = "set" + n) {
+                                                            if (q = "get" + j + tmp) {
+                                                                return true
+                                                            }
+                                                            if (q = "get" + n) {
+                                                                return true
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn isComment(lineNumber: int, filename: string, f: File) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            if (findModifiedLineInClass(f, filename, lineNumber)) {
+                for (e in int::__undetermined_all__(),
+                    s1 in int::__undetermined_all__()) {
+                    for (c in Comment(java_db)) {
+                        if (c.getLocation().getFile() = f) {
+                            if (s1 = c.getLocation().getStartLineNumber()) {
+                                if (e = c.getLocation().getEndLineNumber()) {
+                                    if (lineNumber > s1 - 1) {
+                                        if (lineNumber < e + 1) {
+                                            return true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                for (e in int::__undetermined_all__(),
+                    s1 in int::__undetermined_all__()) {
+                    for (c in JavadocComment(java_db)) {
+                        if (c.getLocation().getFile() = f) {
+                            if (s1 = c.getLocation().getStartLineNumber()) {
+                                if (e = c.getLocation().getEndLineNumber()) {
+                                    if (lineNumber > s1 - 1) {
+                                        if (lineNumber < e + 1) {
+                                            return true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn findModifiedCallable(c: Callable) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            for (lineNumber in int::__undetermined_all__(),
+                filename in string::__undetermined_all__()) {
+                for (f in File(java_db)) {
+                    if (findModifiedLineInClass(f, filename, lineNumber)) {
+                        if (!isComment(lineNumber, filename, f)) {
+                            for (s1 in int::__undetermined_all__(),
+                                e in int::__undetermined_all__()) {
+                                if (c.getLocation().getFile() = f) {
+                                    if (s1 = c.getLocation().getStartLineNumber()) {
+                                        if (lineNumber > s1 - 1) {
+                                            if (e = c.getLocation().getEndLineNumber()) {
+                                                if (lineNumber < e + 1) {
+                                                    return true
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+schema ModifiedCallable extends Callable {
+    
+}
+
+impl ModifiedCallable {
+
+    @data_constraint
+    @inline
+    pub fn __all__(db: JavaDB) -> *ModifiedCallable {
+        for (tmp in Callable(db)) {
+            if (findModifiedCallable(tmp)) {
+                yield ModifiedCallable {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+    
+    pub fn getAnAncestorCallerByIndex(self, index: int) -> Callable {
+        for (f in Callable(__all_data__)) {
+            for (auto_tmp1 in self.getCaller()) {
+                if (f = auto_tmp1) {
+                    if (index = 1) {
+                        return f
+                    }
+                }
+            }
+            for (temp in int::__undetermined_all__(),
+                total in int::__undetermined_all__()) {
+                if (total = self.getTotalCaller()) {
+                    if (index < total + 1) {
+                        if (index = temp + 1) {
+                            if (temp > 0) {
+                                for (auto_tmp2 in self.getAnAncestorCallerByIndex(temp).getCaller()) {
+                                    if (f = auto_tmp2) {
+                                        return f
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    pub fn getTotalCaller(self) -> int {
+        for (total in int::__undetermined_all__()) {
+            for (c in Callable(__all_data__)) {
+                if (self.key_eq(c)) {
+                    if (total = tmp_2(c).len()) {
+                        return total
+                    }
+                }
+            }
+        }
+    }
+    
+    pub fn getRootCaller(self) -> CallableNew {
+        for (f in CallableNew(__all_data__)) {
+            for (auto_tmp1 in self.getAnAncestorCaller()) {
+                if (f.key_eq(auto_tmp1)) {
+                    if (!getAnyCaller(f)) {
+                        return f
+                    }
+                }
+            }
+        }
+    }
+    
+    
+}
+
+pub fn getAnyCaller(c: CallableNew) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            for (a in CallableNew(java_db)) {
+                for (auto_tmp1 in c.getCaller()) {
+                    if (a.key_eq(auto_tmp1)) {
+                        return true
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn getTotalCallerSet(s: ModifiedCallable, index: int, f: Callable) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            if (f = s.getAnAncestorCallerByIndex(index)) {
+                return true
+            }
+        }
+    }
+}
+pub fn hasCaller(a: CallableNew) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            for (b in CallableNew(java_db)) {
+                for (auto_tmp1 in a.getCaller()) {
+                    if (b.key_eq(auto_tmp1)) {
+                        return true
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn isAnonymousMethod(c: CallableNew) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            for (a in AnonymousMethod(java_db)) {
+                if (c.key_eq(a)) {
+                    return true
+                }
+            }
+        }
+    }
+}
+schema CallableNew extends Callable {
+    
+}
+
+impl CallableNew {
+
+    @data_constraint
+    @inline
+    pub fn __all__(db: JavaDB) -> *CallableNew {
+        for (tmp in Callable(db)) {
+            for (n in string::__undetermined_all__()) {
+                if (n = tmp.getLocation().getFile().getRelativePath()) {
+                    if (!n.contains("src/test/java")) {
+                        yield CallableNew {
+                            id : tmp.id
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    pub fn getEnclosingCallable(self) -> Callable {
+        for (c in Callable(__all_data__),
+            e in Expression(__all_data__)) {
+            if (e.key_eq(self.getBelongedClass().getParent())) {
+                if (c = e.getEnclosingCallable()) {
+                    return c
+                }
+            }
+        }
+    }
+    
+    pub fn getNonAnonymousEnclosingCallable(self) -> Callable {
+        for (c in Callable(__all_data__),
+            temp in Callable(__all_data__)) {
+            if (temp = self.getEnclosingCallable()) {
+                if (tmp_3(temp)) {
+                    for (m in AnonymousMethod(__all_data__)) {
+                        if (m.key_eq(temp)) {
+                            if (c = m.getEnclosingCallable()) {
+                                return c
+                            }
+                        }
+                    }
+                }
+                if (!(tmp_3(temp))) {
+                    if (c = temp) {
+                        return c
+                    }
+                }
+            }
+        }
+    }
+    
+    pub fn getRootCaller(self) -> CallableNew {
+        for (f in CallableNew(__all_data__)) {
+            for (auto_tmp1 in self.getAnAncestorCaller()) {
+                if (f.key_eq(auto_tmp1)) {
+                    if (!getAnyCaller(f)) {
+                        return f
+                    }
+                }
+            }
+        }
+    }
+    
+    
+}
+
+pub fn real_output(rootSignature: string, className: string) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            for (n in ModifiedCallable(java_db),
+                a in CallableNew(java_db),
+                b in CallableNew(java_db),
+                c in CallableNew(java_db)) {
+                for (auto_tmp1 in n.getAnAncestorCaller()) {
+                    if (a.key_eq(auto_tmp1)) {
+                        if (tmp_4(a)) {
+                            if (b.key_eq(a.getNonAnonymousEnclosingCallable())) {
+                                if (c = b.getRootCaller()) {
+                                    if (rootSignature = c.getSignature()) {
+                                        if (className = c.getBelongedClass().getQualifiedName()) {
+                                            return true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        if (!(tmp_4(a))) {
+                            if (b = a) {
+                                if (c = b.getRootCaller()) {
+                                    if (rootSignature = c.getSignature()) {
+                                        if (className = c.getBelongedClass().getQualifiedName()) {
+                                            return true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+fn default_java_db() -> JavaDB {
+    return JavaDB::load("coref_java_src.db")
+}
+
+fn default_xml_db() -> XmlDB {
+    return XmlDB::load("coref_xml_src.db")
+}
+
+fn tmp_0(n: string) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            if (n.matches("is.*")) {
+                return true
+            }
+        }
+    }
+}
+
+fn tmp_1(t: string) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            if (t = "boolean") {
+                return true
+            }
+            if (t = "Boolean") {
+                return true
+            }
+        }
+    }
+}
+
+fn tmp_2(c: Callable) -> *Callable {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            for (a in Callable(__all_data__)) {
+                for (auto_tmp1 in c.getAnAncestorCaller()) {
+                    if (a = auto_tmp1) {
+                        yield a
+                    }
+                }
+            }
+        }
+    }
+}
+
+fn tmp_3(temp: Callable) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            if (isAnonymousMethod(temp)) {
+                return true
+            }
+        }
+    }
+}
+
+fn tmp_4(a: CallableNew) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            if (isAnonymousMethod(Callable(java_db).find(a))) {
+                return true
+            }
+        }
+    }
+}
+
+fn main() {
+    output(real_output())
+}

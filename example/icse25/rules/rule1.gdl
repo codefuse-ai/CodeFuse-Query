@@ -1,0 +1,340 @@
+// script 
+use coref::java::*
+pub fn gitdiff(filePath: string, lineNo: int) -> bool {
+    //python替换
+    $gitdiff
+    // example
+    // [ {"test", 1111}]
+}
+pub fn transfertofile1(f: File, filename: string, lineNumber: int) -> bool {
+    let (java_db = default_java_db()) {
+        if (gitdiff(filename, lineNumber)) {
+            if (!filename.contains("src/test/java")) {
+                if (filename = f.getRelativePath()) {
+                    if (isCodeLine(f, filename, lineNumber)) {
+                        return true
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn transfertofile(f: File, filename: string, lineNumber: int) -> bool {
+    let (java_db = default_java_db()) {
+        if (transfertofile1(f, filename, lineNumber)) {
+            if (!findSpecialCodeType(filename, lineNumber, __all_data__)) {
+                return true
+            }
+        }
+    }
+}
+pub fn isComment(filename: string, lineNumber: int) -> bool {
+    let (java_db = default_java_db()) {
+        for (f in File(java_db)) {
+            if (transfertofile1(f, filename, lineNumber)) {
+                for (e in int::__undetermined_all__(),
+                    s1 in int::__undetermined_all__()) {
+                    for (c in Comment(java_db)) {
+                        if (c.getLocation().getFile() = f) {
+                            if (s1 = c.getLocation().getStartLineNumber()) {
+                                if (e = c.getLocation().getEndLineNumber()) {
+                                    if (lineNumber > s1 - 1) {
+                                        if (lineNumber < e + 1) {
+                                            return true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                for (e in int::__undetermined_all__(),
+                    s1 in int::__undetermined_all__()) {
+                    for (c in JavadocComment(java_db)) {
+                        if (c.getLocation().getFile() = f) {
+                            if (s1 = c.getLocation().getStartLineNumber()) {
+                                if (e = c.getLocation().getEndLineNumber()) {
+                                    if (lineNumber > s1 - 1) {
+                                        if (lineNumber < e + 1) {
+                                            return true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn isAnnotation(filename: string, lineNumber: int) -> bool {
+    let (java_db = default_java_db()) {
+        for (f in File(java_db)) {
+            if (transfertofile1(f, filename, lineNumber)) {
+                for (e in int::__undetermined_all__(),
+                    s1 in int::__undetermined_all__()) {
+                    for (c in Annotation(java_db)) {
+                        if (c.getLocation().getFile() = f) {
+                            if (s1 = c.getLocation().getStartLineNumber()) {
+                                if (e = c.getLocation().getEndLineNumber()) {
+                                    if (lineNumber > s1 - 1) {
+                                        if (lineNumber < e + 1) {
+                                            return true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn isCodeLine(f: File, filename: string, lineNumber: int) -> bool {
+    let (java_db = default_java_db()) {
+        if (gitdiff(filename, lineNumber)) {
+            if (f.getRelativePath() = filename) {
+                for (e in int::__undetermined_all__(),
+                    s1 in int::__undetermined_all__()) {
+                    for (l in Location(java_db)) {
+                        if (l.getFile() = f) {
+                            if (s1 = l.getStartLineNumber()) {
+                                if (e = l.getEndLineNumber()) {
+                                    if (lineNumber > s1 - 1) {
+                                        if (lineNumber < e + 1) {
+                                            return true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn isLog(filename: string, lineNumber: int) -> bool {
+    let (java_db = default_java_db()) {
+        for (f in File(java_db)) {
+            if (transfertofile1(f, filename, lineNumber)) {
+                for (e in int::__undetermined_all__(),
+                    s1 in int::__undetermined_all__(),
+                    text in string::__undetermined_all__()) {
+                    for (c in Expression(java_db)) {
+                        if (c.getLocation().getFile() = f) {
+                            if (s1 = c.getLocation().getStartLineNumber()) {
+                                if (e = c.getLocation().getEndLineNumber()) {
+                                    if (lineNumber > s1 - 1) {
+                                        if (lineNumber < e + 1) {
+                                            if (text = c.getPrintableText()) {
+                                                if (text.matches("^logger\\..*")) {
+                                                    return true
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn getTypeInAST(filename: string, lineNumber: int, typeInAST: string) -> bool {
+    let (java_db = default_java_db()) {
+        for (f in File(java_db)) {
+            if (transfertofile(f, filename, lineNumber)) {
+                for (e in int::__undetermined_all__(),
+                    s1 in int::__undetermined_all__()) {
+                    for (c in ElementParent(java_db)) {
+                        if (c.getLocation().getFile() = f) {
+                            if (s1 = c.getLocation().getStartLineNumber()) {
+                                if (e = c.getLocation().getEndLineNumber()) {
+                                    if (s1 = e) {
+                                        if (lineNumber > s1 - 1) {
+                                            if (lineNumber < e + 1) {
+                                                if (typeInAST = c.getType()) {
+                                                    return true
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn getTypeInECG(filename: string, lineNumber: int, typeInAST: string, n: int) -> bool {
+    let (java_db = default_java_db()) {
+        for (f in File(java_db)) {
+            if (transfertofile(f, filename, lineNumber)) {
+                if (tmp_0(filename, lineNumber)) {
+                    if (typeInAST = "Callable") {
+                        if (getBelongedCallable(filename, lineNumber, Callable(java_db).find(n))) {
+                            return true
+                        }
+                    }
+                }
+                if (!(tmp_0(filename, lineNumber))) {
+                    for (e in int::__undetermined_all__(),
+                        s1 in int::__undetermined_all__()) {
+                        if (n.getLocation().getFile() = f.element_hash_id) {
+                            if (s1 = n.getLocation().getStartLineNumber()) {
+                                if (e = n.getLocation().getEndLineNumber()) {
+                                    if (lineNumber > s1 - 1) {
+                                        if (lineNumber < e + 1) {
+                                            if (typeInAST = n.getType()) {
+                                                if (isFieldOrEnum(ECGNode(java_db).find(n))) {
+                                                    return true
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn isFieldOrEnum(c: ECGNode) -> bool {
+    let (java_db = default_java_db()) {
+        for (f in Field(java_db)) {
+            if (f.key_eq(c)) {
+                return true
+            }
+        }
+        for (e in EnumConstant(java_db)) {
+            if (e.key_eq(c)) {
+                return true
+            }
+        }
+    }
+}
+pub fn findSpecialCodeType(filename: string, lineNumber: int, type: string) -> bool {
+    let (java_db = default_java_db()) {
+        if (isComment(filename, lineNumber)) {
+            if (type = "comment") {
+                return true
+            }
+        }
+        if (isAnnotation(filename, lineNumber)) {
+            if (type = "annotation") {
+                return true
+            }
+        }
+        if (isLog(filename, lineNumber)) {
+            if (type = "log") {
+                return true
+            }
+        }
+    }
+}
+pub fn getBelongedCallable(filename: string, lineNumber: int, c: Callable) -> bool {
+    let (java_db = default_java_db()) {
+        for (f in File(java_db)) {
+            if (transfertofile(f, filename, lineNumber)) {
+                for (l1 in int::__undetermined_all__(),
+                    l2 in int::__undetermined_all__()) {
+                    for (i in Identifier(java_db)) {
+                        if (f = c.getLocation().getFile()) {
+                            if (c.key_eq(i.getParent())) {
+                                if (l1 = i.getLocation().getStartLineNumber()) {
+                                    if (l2 = c.getLocation().getEndLineNumber()) {
+                                        if (lineNumber > l1 - 1) {
+                                            if (lineNumber < l2 + 1) {
+                                                return true
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn getBelongedCallableSignature(filename: string, lineNumber: int, belongedCallable: string) -> bool {
+    let (java_db = default_java_db()) {
+        for (i in int::__undetermined_all__()) {
+            for (c in Callable(java_db)) {
+                if (transfertofile(__all_data__, filename, lineNumber)) {
+                    if (i = tmp_1().len()) {
+                        if (tmp_2(i)) {
+                            if (belongedCallable = "") {
+                                return true
+                            }
+                        }
+                        if (!(tmp_2(i))) {
+                            if (getBelongedCallable(filename, lineNumber, c)) {
+                                if (belongedCallable = c.getSignature()) {
+                                    return true
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn real_output(n: ECGNode, belongedCallable: string, typeInAST: string) -> bool {
+    let (java_db = default_java_db()) {
+        for (lineNumber in int::__undetermined_all__(),
+            filename in string::__undetermined_all__()) {
+            if (transfertofile(__all_data__, filename, lineNumber)) {
+                if (getBelongedCallableSignature(filename, lineNumber, belongedCallable)) {
+                    if (getTypeInECG(filename, lineNumber, typeInAST, n)) {
+                        return true
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+fn default_java_db() -> JavaDB {
+    return JavaDB::load("coref_java_src.db")
+}
+
+fn tmp_0(filename: string, lineNumber: int) -> bool {
+    let (java_db = default_java_db()) {
+        if (getBelongedCallable(filename, lineNumber, __all_data__)) {
+            return true
+        }
+    }
+}
+
+fn tmp_1() -> *string {
+    let (java_db = default_java_db()) {
+        if (getBelongedCallable(filename, lineNumber, __all_data__)) {
+            yield filename
+        }
+    }
+}
+
+fn tmp_2(i: int) -> bool {
+    let (java_db = default_java_db()) {
+        if (i = 0) {
+            return true
+        }
+    }
+}
+
+fn main() {
+    output(real_output())
+}

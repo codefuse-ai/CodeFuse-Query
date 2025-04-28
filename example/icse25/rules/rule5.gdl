@@ -1,0 +1,58 @@
+// script 
+use coref::xml::*
+pub fn gitdiff(filePath: string, lineNo: int) -> bool {
+    #changeinfo
+    // example
+    // [ {"test", 1111} ]
+}
+pub fn transfertofile(f: XmlFile, filename: string, lineNumber: int) -> bool {
+    let (xml_db = default_xml_db()) {
+        if (gitdiff(filename, lineNumber)) {
+            if (filename = f.getRelativePath()) {
+                return true
+            }
+        }
+    }
+}
+pub fn real_output(n: ECGXmlNode) -> bool {
+    let (xml_db = default_xml_db()) {
+        for (lineNumber in int::__undetermined_all__(),
+            e in int::__undetermined_all__(),
+            s1 in int::__undetermined_all__(),
+            filename in string::__undetermined_all__(),
+            typeInAST in string::__undetermined_all__(),
+            text in string::__undetermined_all__()) {
+            for (f in XmlFile(xml_db),
+                o in ECGXmlNode(xml_db)) {
+                if (transfertofile(f, filename, lineNumber)) {
+                    if (n.getLocation().getFile() = f) {
+                        if (s1 = n.getLocation().getStartLineNumber()) {
+                            if (e = n.getLocation().getEndLineNumber()) {
+                                if (lineNumber > s1 - 1) {
+                                    if (lineNumber < e + 1) {
+                                        if (typeInAST = n.getType()) {
+                                            if (text = n.getText()) {
+                                                if (o = n.getEnclosingECGXmlNode()) {
+                                                    return true
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+fn default_xml_db() -> XmlDB {
+    return XmlDB::load("coref_xml_src.db")
+}
+
+fn main() {
+    output(real_output())
+}
