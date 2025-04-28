@@ -2039,7 +2039,7 @@ pub fn facts(a: Expression, i: int, value: string) -> bool {
         }
     }
 }
-pub fn connectStrBase(ID: Expression, index: int, result: string) -> bool {
+pub fn connectStrBase(ID: Expression, index: int, res: string) -> bool {
     let (java_db = default_java_db()) {
         let (xml_db = default_xml_db()) {
             for (total in int::__undetermined_all__(),
@@ -2048,7 +2048,7 @@ pub fn connectStrBase(ID: Expression, index: int, result: string) -> bool {
                 if (total = tmp_22(ID).len()) {
                     if (tmp_24(index)) {
                         if (facts(Expression(java_db).find(ID), index, currStr)) {
-                            if (result = currStr) {
+                            if (res = currStr) {
                                 return true
                             }
                         }
@@ -2057,7 +2057,7 @@ pub fn connectStrBase(ID: Expression, index: int, result: string) -> bool {
                         if (index > 0) {
                             if (connectStrBase(ID, index - 1, reStr)) {
                                 if (facts(Expression(java_db).find(ID), index, currStr)) {
-                                    if (result = reStr + currStr) {
+                                    if (res = reStr + currStr) {
                                         return true
                                     }
                                 }
@@ -2072,11 +2072,10 @@ pub fn connectStrBase(ID: Expression, index: int, result: string) -> bool {
 pub fn connectStr(ID: Expression) -> string {
     let (java_db = default_java_db()) {
         let (xml_db = default_xml_db()) {
-            for (c in int::__undetermined_all__(),
-                result in string::__undetermined_all__()) {
+            for (c in int::__undetermined_all__(), res in string::__undetermined_all__()) {
                 if (c = tmp_25(ID).len()) {
-                    if (connectStrBase(ID, c - 1, result)) {
-                        return result
+                    if (connectStrBase(ID, c - 1, res)) {
+                        return res
                     }
                 }
             }
