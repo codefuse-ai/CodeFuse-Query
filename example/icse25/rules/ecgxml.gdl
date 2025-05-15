@@ -1,0 +1,489 @@
+// script 
+use coref::xml::*
+schema BeanElement extends XmlElement {
+    
+}
+
+impl BeanElement {
+
+    @data_constraint
+    @inline
+    pub fn __all__(db: XmlDB) -> *BeanElement {
+        for (tmp in XmlElement(db)) {
+            if (tmp.getName() = "bean") {
+                yield BeanElement {
+                    id : tmp.id,
+                    parent_id : tmp.parent_id,
+                    index_order : tmp.index_order,
+                    location_id : tmp.location_id
+                }
+            }
+        }
+    }
+    
+    pub fn getProperty(self) -> PropertyElement {
+        for (e in PropertyElement(__all_data__)) {
+            if (self.key_eq(e.getParent())) {
+                return e
+            }
+        }
+    }
+    
+    
+}
+
+schema ImportElement extends XmlElement {
+    
+}
+
+impl ImportElement {
+
+    @data_constraint
+    @inline
+    pub fn __all__(db: XmlDB) -> *ImportElement {
+        for (tmp in XmlElement(db)) {
+            if (tmp.getName() = "import") {
+                yield ImportElement {
+                    id : tmp.id,
+                    parent_id : tmp.parent_id,
+                    index_order : tmp.index_order,
+                    location_id : tmp.location_id
+                }
+            }
+        }
+    }
+    
+    
+}
+
+schema MapElement extends XmlElement {
+    
+}
+
+impl MapElement {
+
+    @data_constraint
+    @inline
+    pub fn __all__(db: XmlDB) -> *MapElement {
+        for (tmp in XmlElement(db)) {
+            if (tmp.getName() = "map") {
+                yield MapElement {
+                    id : tmp.id,
+                    parent_id : tmp.parent_id,
+                    index_order : tmp.index_order,
+                    location_id : tmp.location_id
+                }
+            }
+        }
+    }
+    
+    
+}
+
+schema EntryElement extends XmlElement {
+    
+}
+
+impl EntryElement {
+
+    @data_constraint
+    @inline
+    pub fn __all__(db: XmlDB) -> *EntryElement {
+        for (tmp in XmlElement(db)) {
+            if (tmp.getName() = "entry") {
+                yield EntryElement {
+                    id : tmp.id,
+                    parent_id : tmp.parent_id,
+                    index_order : tmp.index_order,
+                    location_id : tmp.location_id
+                }
+            }
+        }
+    }
+    
+    
+}
+
+schema ValueElement extends XmlElement {
+    
+}
+
+impl ValueElement {
+
+    @data_constraint
+    @inline
+    pub fn __all__(db: XmlDB) -> *ValueElement {
+        for (tmp in XmlElement(db)) {
+            if (tmp.getName() = "value") {
+                yield ValueElement {
+                    id : tmp.id,
+                    parent_id : tmp.parent_id,
+                    index_order : tmp.index_order,
+                    location_id : tmp.location_id
+                }
+            }
+        }
+    }
+    
+    
+}
+
+schema PropertyElement extends XmlElement {
+    
+}
+
+impl PropertyElement {
+
+    @data_constraint
+    @inline
+    pub fn __all__(db: XmlDB) -> *PropertyElement {
+        for (tmp in XmlElement(db)) {
+            if (tmp.getName() = "property") {
+                yield PropertyElement {
+                    id : tmp.id,
+                    parent_id : tmp.parent_id,
+                    index_order : tmp.index_order,
+                    location_id : tmp.location_id
+                }
+            }
+        }
+    }
+    
+    pub fn getValueByPropertyName(self, name: string) -> string {
+        for (value in string::__undetermined_all__()) {
+            if (name = self.getValueByAttributeName("name")) {
+                if (value = self.getValueByAttributeName("value")) {
+                    return value
+                }
+            }
+        }
+    }
+    
+    
+}
+
+schema DependencyElement extends XmlElement {
+    
+}
+
+impl DependencyElement {
+
+    @data_constraint
+    @inline
+    pub fn __all__(db: XmlDB) -> *DependencyElement {
+        for (tmp in XmlElement(db)) {
+            if (tmp.getElementName() = "dependency") {
+                yield DependencyElement {
+                    id : tmp.id,
+                    parent_id : tmp.parent_id,
+                    index_order : tmp.index_order,
+                    location_id : tmp.location_id
+                }
+            }
+        }
+    }
+    
+    
+}
+
+schema GroupElement extends XmlElement {
+    
+}
+
+impl GroupElement {
+
+    @data_constraint
+    @inline
+    pub fn __all__(db: XmlDB) -> *GroupElement {
+        for (tmp in XmlElement(db)) {
+            if (tmp.getElementName() = "groupId") {
+                yield GroupElement {
+                    id : tmp.id,
+                    parent_id : tmp.parent_id,
+                    index_order : tmp.index_order,
+                    location_id : tmp.location_id
+                }
+            }
+        }
+    }
+    
+    
+}
+
+schema VersionElement extends XmlElement {
+    
+}
+
+impl VersionElement {
+
+    @data_constraint
+    @inline
+    pub fn __all__(db: XmlDB) -> *VersionElement {
+        for (tmp in XmlElement(db)) {
+            if (tmp.getElementName() = "version") {
+                yield VersionElement {
+                    id : tmp.id,
+                    parent_id : tmp.parent_id,
+                    index_order : tmp.index_order,
+                    location_id : tmp.location_id
+                }
+            }
+        }
+    }
+    
+    pub fn getLineNo(self) -> int {
+        for (lineNo in int::__undetermined_all__()) {
+            if (lineNo = self.getLocation().getStartLineNumber()) {
+                return lineNo
+            }
+        }
+    }
+    
+    pub fn getVersion(self) -> string {
+        for (version in string::__undetermined_all__(),
+            dependencyCharacterText in string::__undetermined_all__()) {
+            for (dependencyCharacter in XmlCharacter(__all_data__)) {
+                if (dependencyCharacter.getBelongedElement().key_eq(self)) {
+                    if (dependencyCharacterText = dependencyCharacter.getText()) {
+                        if (Self::tmp_0(dependencyCharacterText)) {
+                            for (propertyCharacterText in string::__undetermined_all__()) {
+                                for (property in PropertyElement(__all_data__),
+                                    propertyCharacter in XmlCharacter(__all_data__)) {
+                                    if (propertyCharacter.getBelongedElement().key_eq(property)) {
+                                        if (propertyCharacterText = property.getElementName()) {
+                                            if (dependencyCharacterText.contains(propertyCharacterText)) {
+                                                if (version = propertyCharacter.getText()) {
+                                                    return version
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        if (!Self::tmp_0(dependencyCharacterText)) {
+                            if (version = dependencyCharacter.getText()) {
+                                return version
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    fn tmp_0(dependencyCharacterText: string) -> bool {
+        if (dependencyCharacterText.contains("${")) {
+            return true
+        }
+    }
+}
+
+schema PropertyInPomElement extends XmlElement {
+    
+}
+
+impl PropertyInPomElement {
+
+    @data_constraint
+    @inline
+    pub fn __all__(db: XmlDB) -> *PropertyInPomElement {
+        for (tmp in XmlElement(db)) {
+            if (tmp.getParent().getElementName() = "properties") {
+                yield PropertyInPomElement {
+                    id : tmp.id,
+                    parent_id : tmp.parent_id,
+                    index_order : tmp.index_order,
+                    location_id : tmp.location_id
+                }
+            }
+        }
+    }
+    
+    
+}
+
+schema ArtifactElement extends XmlElement {
+    
+}
+
+impl ArtifactElement {
+
+    @data_constraint
+    @inline
+    pub fn __all__(db: XmlDB) -> *ArtifactElement {
+        for (tmp in XmlElement(db)) {
+            if (tmp.getElementName() = "artifactId") {
+                yield ArtifactElement {
+                    id : tmp.id,
+                    parent_id : tmp.parent_id,
+                    index_order : tmp.index_order,
+                    location_id : tmp.location_id
+                }
+            }
+        }
+    }
+    
+    
+}
+
+schema ECGXmlNode {
+    @primary id: int
+}
+
+impl ECGXmlNode {
+    pub fn __all__(db: XmlDB) -> *ECGXmlNode {
+        for (e in XmlPomElement(db)) {
+            yield ECGXmlNode {id : e.id}
+        }
+        for (e in XmlSpringElement(db)) {
+            yield ECGXmlNode {id : e.id}
+        }
+        for (e in XmlCharacter(db)) {
+            yield ECGXmlNode {id : e.id}
+        }
+        for (e in XmlAttribute(db)) {
+            yield ECGXmlNode {id : e.id}
+        }
+    }
+    
+    pub fn getLocation(self) -> Location {
+        for (l in Location(__all_data__)) {
+            for (e in XmlElement(__all_data__)) {
+                if (self.key_eq(e)) {
+                    if (l = e.getLocation()) {
+                        return l
+                    }
+                }
+            }
+            for (e in XmlAttribute(__all_data__)) {
+                if (self.key_eq(e)) {
+                    if (l = e.getLocation()) {
+                        return l
+                    }
+                }
+            }
+            for (e in XmlCharacter(__all_data__)) {
+                if (self.key_eq(e)) {
+                    if (l = e.getLocation()) {
+                        return l
+                    }
+                }
+            }
+        }
+    }
+    
+    pub fn getType(self) -> string {
+        for (t in string::__undetermined_all__()) {
+            for (e in XmlElement(__all_data__)) {
+                if (self.key_eq(e)) {
+                    if (t = "XmlElement") {
+                        return t
+                    }
+                }
+            }
+            for (e in XmlAttribute(__all_data__)) {
+                if (self.key_eq(e)) {
+                    if (t = "XmlAttribute") {
+                        return t
+                    }
+                }
+            }
+            for (e in XmlCharacter(__all_data__)) {
+                if (self.key_eq(e)) {
+                    if (t = "XmlCharacter") {
+                        return t
+                    }
+                }
+            }
+        }
+    }
+
+    pub fn getText(self) -> string {
+        for (e in XmlElement(__all_data__)) {
+            if (self.key_eq(e)) {
+                return e.getName()
+            }
+        }
+        for (e in XmlAttribute(__all_data__)) {
+            if (self.key_eq(e)) {
+                return e.getName() + " = " + e.getValue()
+            }
+        }
+        for (e in XmlCharacter(__all_data__)) {
+            if (self.key_eq(e)) {
+                return e.getText()
+            }
+        }
+    }
+
+    pub fn getEnclosingECGXmlNode(self) -> ECGXmlNode {
+        for (e in XmlElement(__all_data__)) {
+            if (self.key_eq(e)) {
+                return e.to<ECGXmlNode>()
+            }
+        }
+        for (e in XmlAttribute(__all_data__)) {
+            if (self.key_eq(e)) {
+                return e.getXmlElement().to<ECGXmlNode>()
+            }
+        }
+        for (e in XmlCharacter(__all_data__)) {
+            if (self.key_eq(e)) {
+                return e.getBelongedElement().to<ECGXmlNode>()
+            }
+        }
+    }
+}
+
+pub fn gitdiff(filePath: string, lineNo: int) -> bool {
+    [
+        {"pom.xml", 27},
+        {"pom.xml", 612},
+        {"pom.xml", 613},
+        {"pom.xml", 614},
+        {"pom.xml", 615},
+        {"pom.xml", 616},
+        {"pom.xml", 617},
+        {"pom.xml", 649}
+    ]
+}
+pub fn transfertofile(f: XmlFile, filename: string, lineNumber: int) -> bool {
+    let (xml_db = default_xml_db()) {
+        if (gitdiff(filename, lineNumber)) {
+            if (filename = f.getRelativePath()) {
+                return true
+            }
+        }
+    }
+}
+pub fn real_output(filename: string, lineNumber: int, c: ECGXmlNode, typeInAST: string, e: int, s1: int) -> bool {
+    let (xml_db = default_xml_db()) {
+        for (f in XmlFile(xml_db)) {
+            if (transfertofile(f, filename, lineNumber)) {
+                if (c.getLocation().getFile() = f) {
+                    if (s1 = c.getLocation().getStartLineNumber()) {
+                        if (e = c.getLocation().getEndLineNumber()) {
+                            if (lineNumber > s1 - 1) {
+                                if (lineNumber < e + 1) {
+                                    if (typeInAST = c.getType()) {
+                                        return true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+fn default_xml_db() -> XmlDB {
+    return XmlDB::load("coref_xml_src.db")
+}
+
+fn main() {
+    output(real_output())
+}

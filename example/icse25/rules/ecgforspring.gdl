@@ -1,0 +1,184 @@
+// script 
+use coref::xml::*
+schema BeanElement extends XmlElement {
+    
+}
+
+impl BeanElement {
+
+    @data_constraint
+    @inline
+    pub fn __all__(db: XmlDB) -> *BeanElement {
+        for (tmp in XmlElement(db)) {
+            if (tmp.getName() = "bean") {
+                yield BeanElement {
+                    id : tmp.id,
+                    parent_id : tmp.parent_id,
+                    index_order : tmp.index_order,
+                    location_id : tmp.location_id
+                }
+            }
+        }
+    }
+    
+    pub fn getProperty(self) -> PropertyElement {
+        for (e in PropertyElement(__all_data__)) {
+            if (self.key_eq(e.getParent())) {
+                return e
+            }
+        }
+    }
+    
+    
+}
+
+schema ImportElement extends XmlElement {
+    
+}
+
+impl ImportElement {
+
+    @data_constraint
+    @inline
+    pub fn __all__(db: XmlDB) -> *ImportElement {
+        for (tmp in XmlElement(db)) {
+            if (tmp.getName() = "import") {
+                yield ImportElement {
+                    id : tmp.id,
+                    parent_id : tmp.parent_id,
+                    index_order : tmp.index_order,
+                    location_id : tmp.location_id
+                }
+            }
+        }
+    }
+    
+    
+}
+
+schema MapElement extends XmlElement {
+    
+}
+
+impl MapElement {
+
+    @data_constraint
+    @inline
+    pub fn __all__(db: XmlDB) -> *MapElement {
+        for (tmp in XmlElement(db)) {
+            if (tmp.getName() = "map") {
+                yield MapElement {
+                    id : tmp.id,
+                    parent_id : tmp.parent_id,
+                    index_order : tmp.index_order,
+                    location_id : tmp.location_id
+                }
+            }
+        }
+    }
+    
+    
+}
+
+schema EntryElement extends XmlElement {
+    
+}
+
+impl EntryElement {
+
+    @data_constraint
+    @inline
+    pub fn __all__(db: XmlDB) -> *EntryElement {
+        for (tmp in XmlElement(db)) {
+            if (tmp.getName() = "entry") {
+                yield EntryElement {
+                    id : tmp.id,
+                    parent_id : tmp.parent_id,
+                    index_order : tmp.index_order,
+                    location_id : tmp.location_id
+                }
+            }
+        }
+    }
+    
+    
+}
+
+schema ValueElement extends XmlElement {
+    
+}
+
+impl ValueElement {
+
+    @data_constraint
+    @inline
+    pub fn __all__(db: XmlDB) -> *ValueElement {
+        for (tmp in XmlElement(db)) {
+            if (tmp.getName() = "value") {
+                yield ValueElement {
+                    id : tmp.id,
+                    parent_id : tmp.parent_id,
+                    index_order : tmp.index_order,
+                    location_id : tmp.location_id
+                }
+            }
+        }
+    }
+    
+    
+}
+
+schema PropertyElement extends XmlElement {
+    
+}
+
+impl PropertyElement {
+
+    @data_constraint
+    @inline
+    pub fn __all__(db: XmlDB) -> *PropertyElement {
+        for (tmp in XmlElement(db)) {
+            if (tmp.getName() = "property") {
+                yield PropertyElement {
+                    id : tmp.id,
+                    parent_id : tmp.parent_id,
+                    index_order : tmp.index_order,
+                    location_id : tmp.location_id
+                }
+            }
+        }
+    }
+    
+    pub fn getValueByPropertyName(self, name: string) -> string {
+        for (value in string::__undetermined_all__()) {
+            if (name = self.getValueByAttributeName("name")) {
+                if (value = self.getValueByAttributeName("value")) {
+                    return value
+                }
+            }
+        }
+    }
+    
+    
+}
+
+pub fn real_output(id: string, pClass: string) -> bool {
+    let (xml_db = default_xml_db()) {
+        for (b in BeanElement(xml_db)) {
+            if (id = b.getValueByAttributeName("id")) {
+                if (pClass = b.getValueByAttributeName("class")) {
+                    return true
+                }
+            }
+        }
+    }
+}
+
+
+fn default_xml_db() -> XmlDB {
+    return XmlDB::load("coref_xml_src.db")
+}
+
+fn main() {
+    output(real_output())
+}

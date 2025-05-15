@@ -1,0 +1,1663 @@
+// script 
+use coref::java::*
+use coref::xml::*
+
+schema ECGNode extends ElementParent {}
+
+impl ECGNode {
+    pub fn __all__(db: JavaDB) -> *ECGNode {
+        for (tmp in ElementParent(db)) {
+            for (m in Method(db)) {
+                if (tmp.key_eq(m)) {
+                    yield ECGNode {
+                        id : tmp.id
+                    }
+                }
+            }
+            for (m in Variable(db)) {
+                if (tmp.key_eq(m)) {
+                    yield ECGNode {
+                        id : tmp.id
+                    }
+                }
+            }
+            for (m in Expression(db)) {
+                if (tmp.key_eq(m)) {
+                    yield ECGNode {
+                        id : tmp.id
+                    }
+                }
+            }
+        }
+    }
+    
+    pub fn getType(self) -> string {
+        for (t in string::__undetermined_all__()) {
+            for (m in Method(__all_data__)) {
+                if (self.key_eq(m)) {
+                    if (t = "Method") {
+                        return t
+                    }
+                }
+            }
+            for (m in LocalVariable(__all_data__)) {
+                if (self.key_eq(m)) {
+                    if (t = "LocalVariable") {
+                        return t
+                    }
+                }
+            }
+            for (m in Parameter(__all_data__)) {
+                if (self.key_eq(m)) {
+                    if (t = "Parameter") {
+                        return t
+                    }
+                }
+            }
+            for (m in Field(__all_data__)) {
+                if (self.key_eq(m)) {
+                    if (t = "Field") {
+                        return t
+                    }
+                }
+            }
+            for (m in EnumConstant(__all_data__)) {
+                if (self.key_eq(m)) {
+                    if (t = "EnumConstant") {
+                        return t
+                    }
+                }
+            }
+            for (m in Expression(__all_data__)) {
+                if (self.key_eq(m)) {
+                    if (t = m.getType()) {
+                        return t
+                    }
+                }
+            }
+        }
+    }
+    
+    pub fn getDDNode(self, type: string, direction: string) -> ECGNode {
+        for (e1 in ECGNode(__all_data__)) {
+            for (e in Parameter(__all_data__),
+                c in Method(__all_data__)) {
+                if (e.key_eq(e1)) {
+                    if (self.key_eq(c)) {
+                        for (auto_tmp1 in c.getParameter()) {
+                            if (e = auto_tmp1) {
+                                if (direction = "Depended") {
+                                    if (type = "DD") {
+                                        return e1
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            for (r in ReturnStatement(__all_data__),
+                c in Method(__all_data__),
+                e in Expression(__all_data__)) {
+                if (e.key_eq(e1)) {
+                    if (self.key_eq(c)) {
+                        if (c.key_eq(r.getEnclosingCallable())) {
+                            if (e = r.getResult()) {
+                                if (direction = "Depends") {
+                                    if (type = "DD") {
+                                        return e1
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            for (c in Callable(__all_data__),
+                e in Field(__all_data__),
+                r in ReferenceExpression(__all_data__)) {
+                if (e.key_eq(e1)) {
+                    if (self.key_eq(c)) {
+                        if (c = r.getEnclosingCallable()) {
+                            if (e.key_eq(r.getDefinition())) {
+                                if (direction = "Depended") {
+                                    if (type = "DD") {
+                                        return e1
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            for (c in Callable(__all_data__),
+                e in EnumConstant(__all_data__),
+                r in ReferenceExpression(__all_data__)) {
+                if (e.key_eq(e1)) {
+                    if (self.key_eq(c)) {
+                        if (c = r.getEnclosingCallable()) {
+                            if (e.key_eq(r.getDefinition())) {
+                                if (direction = "Depended") {
+                                    if (type = "DD") {
+                                        return e1
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            for (e in Callable(__all_data__),
+                c in Field(__all_data__),
+                r in ReferenceExpression(__all_data__)) {
+                if (e.key_eq(e1)) {
+                    if (self.key_eq(c)) {
+                        if (c.key_eq(r.getDefinition())) {
+                            if (e = r.getEnclosingCallable()) {
+                                if (direction = "Depends") {
+                                    if (type = "DD") {
+                                        return e1
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            for (e in Callable(__all_data__),
+                c in EnumConstant(__all_data__),
+                r in ReferenceExpression(__all_data__)) {
+                if (e.key_eq(e1)) {
+                    if (self.key_eq(c)) {
+                        if (c.key_eq(r.getDefinition())) {
+                            if (e = r.getEnclosingCallable()) {
+                                if (direction = "Depends") {
+                                    if (type = "DD") {
+                                        return e1
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            for (c in Callable(__all_data__),
+                e in CallExpression(__all_data__)) {
+                if (e.key_eq(e1)) {
+                    if (self.key_eq(c)) {
+                        if (c = e.getEnclosingCallable()) {
+                            for (m in Method(__all_data__)) {
+                                if (m = e.getMethod()) {
+                                    if (!isDirectCall(e)) {
+                                        if (direction = "Depended") {
+                                            if (type = "DD") {
+                                                return e1
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            for (f in LombokField(__all_data__)) {
+                                if (f = e.getLombokField()) {
+                                    if (!isDirectCall(e)) {
+                                        if (direction = "Depended") {
+                                            if (type = "DD") {
+                                                return e1
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            for (n in string::__undetermined_all__()) {
+                for (e in LombokField(__all_data__),
+                    c in CallExpression(__all_data__)) {
+                    if (e.key_eq(e1)) {
+                        if (self.key_eq(c)) {
+                            if (e = c.getLombokField()) {
+                                let (tmp_find = CallExpression(__all_data__).find(e)) {
+                                    if (!isDirectCall(tmp_find)) {
+                                        if (n = c.getMethodName()) {
+                                            if (Self::tmp_0(n)) {
+                                                if (direction = "Depended") {
+                                                    if (type = "DD") {
+                                                        return e1
+                                                    }
+                                                }
+                                            }
+                                            if (!Self::tmp_0(n)) {
+                                                if (direction = "Depends") {
+                                                    if (type = "DD") {
+                                                        return e1
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            for (e in Variable(__all_data__),
+                c in CallExpression(__all_data__),
+                r in ReferenceExpression(__all_data__)) {
+                if (e.key_eq(e1)) {
+                    if (self.key_eq(c)) {
+                        if (!isDirectCall(c)) {
+                            for (auto_tmp2 in c.getArguments()) {
+                                if (r.key_eq(auto_tmp2)) {
+                                    if (e.key_eq(r.getDefinition())) {
+                                        if (direction = "Depended") {
+                                            if (type = "DD") {
+                                                return e1
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            for (e in CallExpression(__all_data__),
+                c in CallExpression(__all_data__)) {
+                if (e.key_eq(e1)) {
+                    if (self.key_eq(c)) {
+                        if (!isDirectCall(c)) {
+                            for (auto_tmp3 in c.getArguments()) {
+                                if (e.key_eq(auto_tmp3)) {
+                                    if (direction = "Depended") {
+                                        if (type = "DD") {
+                                            return e1
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            for (e in CallExpression(__all_data__),
+                c in CallExpression(__all_data__),
+                s in CallExpression(__all_data__)) {
+                if (e.key_eq(e1)) {
+                    if (self.key_eq(c)) {
+                        if (!isDirectCall(c)) {
+                            for (auto_tmp4 in c.getAnAncestor()) {
+                                if (s.getReference().key_eq(auto_tmp4)) {
+                                    for (auto_tmp5 in s.getArguments()) {
+                                        if (auto_tmp5.key_eq(e)) {
+                                            if (direction = "Depended") {
+                                                if (type = "DD") {
+                                                    return e1
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    pub fn getAnAncestorDDNode(self, type: string, direction: string) -> ECGNode {
+        for (e in ECGNode(__all_data__)) {
+            if (type = "DD") {
+                if (e = self.getDDNode(type, direction)) {
+                    return e
+                }
+                if (e = self.getAnAncestorDDNode(__all_data__, __all_data__).getDDNode(type, direction)) {
+                    return e
+                }
+            }
+        }
+    }
+    
+    pub fn getCDNode(self, type: string, direction: string) -> ECGNode {
+        for (e in ECGNode(__all_data__),
+            c in Callable(__all_data__),
+            r in ReferenceExpression(__all_data__)) {
+            if (self.key_eq(c)) {
+                if (type = "CD") {
+                    for (e1 in Method(__all_data__)) {
+                        for (auto_tmp1 in c.getCallee()) {
+                            if (e1.key_eq(auto_tmp1)) {
+                                if (direction = "Depends") {
+                                    if (e.key_eq(e1)) {
+                                        return e
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    for (e2 in Method(__all_data__)) {
+                        for (auto_tmp2 in c.getCaller()) {
+                            if (e2.key_eq(auto_tmp2)) {
+                                if (direction = "Depended") {
+                                    if (e.key_eq(e2)) {
+                                        return e
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            if (self.key_eq(r.getDefinition())) {
+                if (c = r.getEnclosingCallable()) {
+                    if (type = "CD") {
+                        for (e1 in Method(__all_data__)) {
+                            for (auto_tmp1 in c.getCallee()) {
+                                if (e1.key_eq(auto_tmp1)) {
+                                    if (direction = "Depends") {
+                                        if (e.key_eq(e1)) {
+                                            return e
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        for (e2 in Method(__all_data__)) {
+                            for (auto_tmp2 in c.getCaller()) {
+                                if (e2.key_eq(auto_tmp2)) {
+                                    if (direction = "Depended") {
+                                        if (e.key_eq(e2)) {
+                                            return e
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    pub fn getAnAncestorCDNode(self, type: string, direction: string) -> ECGNode {
+        for (e in ECGNode(__all_data__),
+            c in Callable(__all_data__),
+            r in ReferenceExpression(__all_data__)) {
+            if (type = "CD") {
+                if (self.key_eq(c)) {
+                    for (e1 in Method(__all_data__)) {
+                        for (auto_tmp1 in c.getAnAncestorCallee()) {
+                            if (e1.key_eq(auto_tmp1)) {
+                                if (direction = "Depends") {
+                                    if (e.key_eq(e1)) {
+                                        return e
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    for (e2 in Method(__all_data__)) {
+                        for (auto_tmp2 in c.getAnAncestorCaller()) {
+                            if (e2.key_eq(auto_tmp2)) {
+                                if (direction = "Depended") {
+                                    if (e.key_eq(e2)) {
+                                        return e
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                if (self.key_eq(r.getDefinition())) {
+                    if (c = r.getEnclosingCallable()) {
+                        for (e1 in Method(__all_data__)) {
+                            for (auto_tmp1 in c.getAnAncestorCallee()) {
+                                if (e1.key_eq(auto_tmp1)) {
+                                    if (direction = "Depends") {
+                                        if (e.key_eq(e1)) {
+                                            return e
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        for (e2 in Method(__all_data__)) {
+                            for (auto_tmp2 in c.getAnAncestorCaller()) {
+                                if (e2.key_eq(auto_tmp2)) {
+                                    if (direction = "Depended") {
+                                        if (e.key_eq(e2)) {
+                                            return e
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    pub fn getECGNode(self, type: string, direction: string) -> ECGNode {
+        for (e in ECGNode(__all_data__)) {
+            if (e = self.getCDNode(type, direction)) {
+                return e
+            }
+            if (e = self.getDDNode(type, direction)) {
+                return e
+            }
+        }
+    }
+    
+    pub fn getAnAncestorECGNode(self, type: string, direction: string) -> ECGNode {
+        for (e in ECGNode(__all_data__), tmp in ECGNode(__all_data__)) {
+            if (tmp = self.getAnAncestorCDNode(__all_data__, __all_data__)) {
+                if (e = tmp.getECGNode(type, direction)) {
+                    return e
+                }
+            }
+        }
+    }
+
+    pub fn getAnAncestorCDDependedNode(self, type: string, direction: string) -> ECGNode {
+        for (e in ECGNode(__all_data__), c in Callable(__all_data__), r in ReferenceExpression(__all_data__)) {
+            if (type = "CD") {
+                if (self.key_eq(c) || (self.key_eq(r.getDefinition()) && r.getEnclosingCallable() = c)) {
+                    for (e2 in Method(__all_data__), c_caller in c.getAnAncestorCaller()) {
+                        if (e2.key_eq(c_caller) && direction = "Depended" && e.key_eq(e2)) {
+                            return e
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    pub fn getECGDependsNode(self, type: string, direction: string) -> ECGNode {
+        for (e in ECGNode(__all_data__)) {
+            if (e = self.getCDDependsNode(type, direction)) {
+                return e
+            }
+            if (e = self.getDDDependsNode(type, direction)) {
+                return e
+            }
+        }
+    }
+
+    pub fn getCDDependsNode(self, type: string, direction: string) -> ECGNode {
+        for (e in ECGNode(__all_data__),
+            c in Callable(__all_data__),
+            r in ReferenceExpression(__all_data__)) {
+            if (self.key_eq(c)) {
+                if (type = "CD") {
+                    for (e1 in c.getCallee()) {
+                        if (direction = "Depends") {
+                            if (e.key_eq(e1)) {
+                                return e
+                            }
+                        }
+                    }
+                }
+            }
+            for (v in Variable(__all_data__)) {
+                if (self.key_eq(v)) {
+                    if (v.key_eq(r.getDefinition())) {
+                        if (c = r.getEnclosingCallable()) {
+                            if (type = "CD") {
+                                for (e1 in c.getCallee()) {
+                                    if (direction = "Depends") {
+                                        if (e.key_eq(e1)) {
+                                            return e
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    pub fn getDDDependsNode(self, type: string, direction: string) -> ECGNode {
+        for (e1 in ECGNode(__all_data__)) {
+            for (r in ReturnStatement(__all_data__),
+                c in Method(__all_data__),
+                e in Expression(__all_data__)) {
+                if (e.key_eq(e1)) {
+                    if (self.key_eq(c)) {
+                        if (c.key_eq(r.getEnclosingCallable())) {
+                            if (e = r.getResult()) {
+                                if (direction = "Depends") {
+                                    if (type = "DD") {
+                                        return e1
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            for (e in Callable(__all_data__),
+                c in Field(__all_data__),
+                r in ReferenceExpression(__all_data__)) {
+                if (e.key_eq(e1)) {
+                    if (self.key_eq(c)) {
+                        if (c.key_eq(r.getDefinition())) {
+                            if (e = r.getEnclosingCallable()) {
+                                if (direction = "Depends") {
+                                    if (type = "DD") {
+                                        return e1
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            for (e in Callable(__all_data__),
+                c in EnumConstant(__all_data__),
+                r in ReferenceExpression(__all_data__)) {
+                if (e.key_eq(e1)) {
+                    if (self.key_eq(c)) {
+                        if (c.key_eq(r.getDefinition())) {
+                            if (e = r.getEnclosingCallable()) {
+                                if (direction = "Depends") {
+                                    if (type = "DD") {
+                                        return e1
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            for (n in string::__undetermined_all__()) {
+                for (e in LombokField(__all_data__),
+                    c in CallExpression(__all_data__)) {
+                    if (e.key_eq(e1)) {
+                        if (self.key_eq(c)) {
+                            if (e = c.getLombokField()) {
+                                let (tmp = CallExpression(__all_data__).find(e)) {
+                                    if (!isDirectCall(tmp)) {
+                                        if (n = c.getMethodName()) {
+                                            if (!n.matches("get.*")) {
+                                                if (direction = "Depends") {
+                                                    if (type = "DD") {
+                                                        return e1
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    pub fn getAnAncestorCDDependsNode(self, type: string, direction: string) -> ECGNode {
+        for (e in ECGNode(__all_data__),
+            c in Callable(__all_data__),
+            r in ReferenceExpression(__all_data__)) {
+            if (type = "CD") {
+                if (self.key_eq(c)) {
+                    for (e1 in c.getAnAncestorCallee()) {
+                        if (direction = "Depends") {
+                            if (e.key_eq(e1)) {
+                                return e
+                            }
+                        }
+                    }
+                }
+                if (self.key_eq(r.getDefinition())) {
+                    if (c = r.getEnclosingCallable()) {
+                        for (e1 in c.getAnAncestorCallee()) {
+                            if (direction = "Depends") {
+                                if (e.key_eq(e1)) {
+                                    return e
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    pub fn getPath(self) -> string {
+        for (line in int::__undetermined_all__(),
+            t in string::__undetermined_all__(),
+            path in string::__undetermined_all__(),
+            info in string::__undetermined_all__()) {
+            for (l in coref::java::Location(__all_data__)) {
+                if (l = self.getLocation()) {
+                    if (path = l.getFile().getRelativePath()) {
+                        if (line = l.getStartLineNumber()) {
+                            if (t = line.to_string()) {
+                                if (info = path + ":" + t) {
+                                    return info
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    fn tmp_0(n: string) -> bool {
+        if (n.matches("get.*")) {
+            return true
+        }
+    }
+}
+
+schema ECGXmlNode {
+    @primary id: int
+}
+
+impl ECGXmlNode {
+    pub fn __all__(db: XmlDB) -> *ECGXmlNode {
+        for (e in XmlPomElement(db)) {
+            yield ECGXmlNode {id : e.id}
+        }
+        for (e in XmlSpringElement(db)) {
+            yield ECGXmlNode {id : e.id}
+        }
+        for (e in XmlCharacter(db)) {
+            yield ECGXmlNode {id : e.id}
+        }
+        for (e in XmlAttribute(db)) {
+            yield ECGXmlNode {id : e.id}
+        }
+    }
+    
+    pub fn getLocation(self) -> coref::xml::Location {
+        for (l in coref::xml::Location(__all_data__)) {
+            for (e in XmlElement(__all_data__)) {
+                if (self.key_eq(e)) {
+                    if (l = e.getLocation()) {
+                        return l
+                    }
+                }
+            }
+            for (e in XmlAttribute(__all_data__)) {
+                if (self.key_eq(e)) {
+                    if (l = e.getLocation()) {
+                        return l
+                    }
+                }
+            }
+            for (e in XmlCharacter(__all_data__)) {
+                if (self.key_eq(e)) {
+                    if (l = e.getLocation()) {
+                        return l
+                    }
+                }
+            }
+        }
+    }
+    
+    pub fn getType(self) -> string {
+        for (t in string::__undetermined_all__()) {
+            for (e in XmlElement(__all_data__)) {
+                if (self.key_eq(e)) {
+                    if (t = "XmlElement") {
+                        return t
+                    }
+                }
+            }
+            for (e in XmlAttribute(__all_data__)) {
+                if (self.key_eq(e)) {
+                    if (t = "XmlAttribute") {
+                        return t
+                    }
+                }
+            }
+            for (e in XmlCharacter(__all_data__)) {
+                if (self.key_eq(e)) {
+                    if (t = "XmlCharacter") {
+                        return t
+                    }
+                }
+            }
+        }
+    }
+
+    pub fn getText(self) -> string {
+        for (e in XmlElement(__all_data__)) {
+            if (self.key_eq(e)) {
+                return e.getName()
+            }
+        }
+        for (e in XmlAttribute(__all_data__)) {
+            if (self.key_eq(e)) {
+                return e.getName() + " = " + e.getValue()
+            }
+        }
+        for (e in XmlCharacter(__all_data__)) {
+            if (self.key_eq(e)) {
+                return e.getText()
+            }
+        }
+    }
+
+    pub fn getEnclosingECGXmlNode(self) -> ECGXmlNode {
+        for (e in XmlElement(__all_data__)) {
+            if (self.key_eq(e)) {
+                return e.to<ECGXmlNode>()
+            }
+        }
+        for (e in XmlAttribute(__all_data__)) {
+            if (self.key_eq(e)) {
+                return e.getXmlElement().to<ECGXmlNode>()
+            }
+        }
+        for (e in XmlCharacter(__all_data__)) {
+            if (self.key_eq(e)) {
+                return e.getBelongedElement().to<ECGXmlNode>()
+            }
+        }
+    }
+}
+
+pub fn gitdiff(filePath: string, lineNo: int) -> bool {
+    // #changeinfo
+    // example
+    [ {"test", 1111}]
+}
+pub fn transfertofile1(f: File, filename: string, lineNumber: int) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            if (gitdiff(filename, lineNumber)) {
+                if (!filename.contains("src/test/java")) {
+                    if (filename = f.getRelativePath()) {
+                        if (isCodeLine(f, filename, lineNumber)) {
+                            return true
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn transfertofile(f: File, filename: string, lineNumber: int) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            if (transfertofile1(f, filename, lineNumber)) {
+                if (!findSpecialCodeType(filename, lineNumber, __all_data__)) {
+                    return true
+                }
+            }
+        }
+    }
+}
+pub fn isComment(filename: string, lineNumber: int) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            for (f in File(java_db)) {
+                if (transfertofile1(f, filename, lineNumber)) {
+                    for (e in int::__undetermined_all__(),
+                        s1 in int::__undetermined_all__()) {
+                        for (c in Comment(java_db)) {
+                            if (c.getLocation().getFile() = f) {
+                                if (s1 = c.getLocation().getStartLineNumber()) {
+                                    if (e = c.getLocation().getEndLineNumber()) {
+                                        if (lineNumber > s1 - 1) {
+                                            if (lineNumber < e + 1) {
+                                                return true
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    for (e in int::__undetermined_all__(),
+                        s1 in int::__undetermined_all__()) {
+                        for (c in JavadocComment(java_db)) {
+                            if (c.getLocation().getFile() = f) {
+                                if (s1 = c.getLocation().getStartLineNumber()) {
+                                    if (e = c.getLocation().getEndLineNumber()) {
+                                        if (lineNumber > s1 - 1) {
+                                            if (lineNumber < e + 1) {
+                                                return true
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn isAnnotation(filename: string, lineNumber: int) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            for (f in File(java_db)) {
+                if (transfertofile1(f, filename, lineNumber)) {
+                    for (e in int::__undetermined_all__(),
+                        s1 in int::__undetermined_all__()) {
+                        for (c in Annotation(java_db)) {
+                            if (c.getLocation().getFile() = f) {
+                                if (s1 = c.getLocation().getStartLineNumber()) {
+                                    if (e = c.getLocation().getEndLineNumber()) {
+                                        if (lineNumber > s1 - 1) {
+                                            if (lineNumber < e + 1) {
+                                                return true
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn isCodeLine(f: File, filename: string, lineNumber: int) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            if (gitdiff(filename, lineNumber)) {
+                if (f.getRelativePath() = filename) {
+                    for (e in int::__undetermined_all__(),
+                        s1 in int::__undetermined_all__()) {
+                        for (l in coref::java::Location(java_db)) {
+                            if (l.getFile() = f) {
+                                if (s1 = l.getStartLineNumber()) {
+                                    if (e = l.getEndLineNumber()) {
+                                        if (lineNumber > s1 - 1) {
+                                            if (lineNumber < e + 1) {
+                                                return true
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn isLog(filename: string, lineNumber: int) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            for (f in File(java_db)) {
+                if (transfertofile1(f, filename, lineNumber)) {
+                    for (e in int::__undetermined_all__(),
+                        s1 in int::__undetermined_all__(),
+                        text in string::__undetermined_all__()) {
+                        for (c in Expression(java_db)) {
+                            if (c.getLocation().getFile() = f) {
+                                if (s1 = c.getLocation().getStartLineNumber()) {
+                                    if (e = c.getLocation().getEndLineNumber()) {
+                                        if (lineNumber > s1 - 1) {
+                                            if (lineNumber < e + 1) {
+                                                if (text = c.getPrintableText()) {
+                                                    if (text.matches("^logger\\..*")) {
+                                                        return true
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn getTypeInAST(filename: string, lineNumber: int, typeInAST: string) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            for (f in File(java_db)) {
+                if (transfertofile(f, filename, lineNumber)) {
+                    for (e in int::__undetermined_all__(),
+                        s1 in int::__undetermined_all__()) {
+                        for (c in ElementParent(java_db)) {
+                            if (c.getLocation().getFile() = f) {
+                                if (s1 = c.getLocation().getStartLineNumber()) {
+                                    if (e = c.getLocation().getEndLineNumber()) {
+                                        if (s1 = e) {
+                                            if (lineNumber > s1 - 1) {
+                                                if (lineNumber < e + 1) {
+                                                    if (typeInAST = c.getType()) {
+                                                        return true
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn getTypeInECG(filename: string, lineNumber: int, typeInAST: string, n: ECGNode) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            for (f in File(java_db)) {
+                if (transfertofile(f, filename, lineNumber)) {
+                    if (tmp_0(filename, lineNumber)) {
+                        if (typeInAST = "Callable") {
+                            if (getBelongedCallable(filename, lineNumber, Callable(java_db).find(n))) {
+                                return true
+                            }
+                        }
+                    }
+                    if (!(tmp_0(filename, lineNumber))) {
+                        for (e in int::__undetermined_all__(),
+                            s1 in int::__undetermined_all__()) {
+                            if (n.getLocation().getFile() = f) {
+                                if (s1 = n.getLocation().getStartLineNumber()) {
+                                    if (e = n.getLocation().getEndLineNumber()) {
+                                        if (lineNumber > s1 - 1) {
+                                            if (lineNumber < e + 1) {
+                                                if (typeInAST = n.getType()) {
+                                                    if (isFieldOrEnum(ECGNode(java_db).find(n))) {
+                                                        return true
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn isFieldOrEnum(c: ECGNode) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            for (f in Field(java_db)) {
+                if (f.key_eq(c)) {
+                    return true
+                }
+            }
+            for (e in EnumConstant(java_db)) {
+                if (e.key_eq(c)) {
+                    return true
+                }
+            }
+        }
+    }
+}
+pub fn findSpecialCodeType(filename: string, lineNumber: int, type: string) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            if (isComment(filename, lineNumber)) {
+                if (type = "comment") {
+                    return true
+                }
+            }
+            if (isAnnotation(filename, lineNumber)) {
+                if (type = "annotation") {
+                    return true
+                }
+            }
+            if (isLog(filename, lineNumber)) {
+                if (type = "log") {
+                    return true
+                }
+            }
+        }
+    }
+}
+pub fn getBelongedCallable(filename: string, lineNumber: int, c: Callable) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            for (f in File(java_db)) {
+                if (transfertofile(f, filename, lineNumber)) {
+                    for (l1 in int::__undetermined_all__(),
+                        l2 in int::__undetermined_all__()) {
+                        for (i in Identifier(java_db)) {
+                            if (f = c.getLocation().getFile()) {
+                                if (c.key_eq(i.getParent())) {
+                                    if (l1 = i.getLocation().getStartLineNumber()) {
+                                        if (l2 = c.getLocation().getEndLineNumber()) {
+                                            if (lineNumber > l1 - 1) {
+                                                if (lineNumber < l2 + 1) {
+                                                    return true
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn getBelongedCallableSignature(filename: string, lineNumber: int, belongedCallable: string) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            for (i in int::__undetermined_all__()) {
+                for (c in Callable(java_db)) {
+                    if (transfertofile(__all_data__, filename, lineNumber)) {
+                        if (i = tmp_1().len()) {
+                            if (tmp_2(i)) {
+                                if (belongedCallable = "") {
+                                    return true
+                                }
+                            }
+                            if (!(tmp_2(i))) {
+                                if (getBelongedCallable(filename, lineNumber, c)) {
+                                    if (belongedCallable = c.getSignature()) {
+                                        return true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn getJavaECGNode(n: ECGNode) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            for (lineNumber in int::__undetermined_all__(),
+                filename in string::__undetermined_all__(),
+                typeInAST in string::__undetermined_all__(),
+                belongedCallable in string::__undetermined_all__()) {
+                if (transfertofile(__all_data__, filename, lineNumber)) {
+                    if (getBelongedCallableSignature(filename, lineNumber, belongedCallable)) {
+                        if (getTypeInECG(filename, lineNumber, typeInAST, n)) {
+                            return true
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn transfertoXmlfile(f: XmlFile, filename: string, lineNumber: int) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            if (gitdiff(filename, lineNumber)) {
+                if (filename = f.getRelativePath()) {
+                    return true
+                }
+            }
+        }
+    }
+}
+pub fn getXmlECGNode1(n: ECGXmlNode) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            for (lineNumber in int::__undetermined_all__(),
+                e in int::__undetermined_all__(),
+                s1 in int::__undetermined_all__(),
+                filename in string::__undetermined_all__(),
+                typeInAST in string::__undetermined_all__(),
+                text in string::__undetermined_all__()) {
+                for (f in XmlFile(xml_db),
+                    o in ECGXmlNode(xml_db)) {
+                    if (transfertoXmlfile(f, filename, lineNumber)) {
+                        if (n.getLocation().getFile() = f) {
+                            if (s1 = n.getLocation().getStartLineNumber()) {
+                                if (e = n.getLocation().getEndLineNumber()) {
+                                    if (lineNumber > s1 - 1) {
+                                        if (lineNumber < e + 1) {
+                                            if (typeInAST = n.getType()) {
+                                                if (text = n.getText()) {
+                                                    if (o = n.getEnclosingECGXmlNode()) {
+                                                        return true
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+@inline
+pub fn trim(n: string, m: string) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            for (i in int::__undetermined_all__()) {
+                if (i = n.len()) {
+                    if (tmp_3(n)) {
+                        if (m = n.substr(1,i - 2)) {
+                            return true
+                        }
+                    }
+                    if (!(tmp_3(n))) {
+                        if (m = n) {
+                            return true
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn getXmlECGNode(f: ECGNode) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            for (c in ClassOrInterface(java_db),
+                n in string::__undetermined_all__(),
+                m in string::__undetermined_all__()) {
+                for (r in ECGXmlNode(xml_db)) {
+                    if (getXmlECGNode1(r)) {
+                        if (getChangeSetByDalXmlElement(r, c, Method(java_db).find(f), n, m)) {
+                            return true
+                        }
+                        if (getChangeSetByResultXmlElement(r, c, Field(java_db).find(f), n, m)) {
+                            return true
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn getChangeSetByResultXmlElement(r1: ECGXmlNode, c: ClassOrInterface, f: Field, n: string, m: string) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            for (r in ResultXmlElement(xml_db)) {
+                if (r.key_eq(r1)) {
+                    if (getXmlECGNode1(ECGXmlNode(xml_db).find(r))) {
+                        if (n = r.getBelongedMapXmlElement().getMappingClassName()) {
+                            if (n = c.getQualifiedName()) {
+                                if (c = f.getParent()) {
+                                    if (r.getValueByAttributeName("property") = f.getName()) {
+                                        if (m = f.getName()) {
+                                            return true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn getChangeSetByDalXmlElement(d1: ECGXmlNode, c: ClassOrInterface, m: Method, className: string, methodName: string) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            for (i in int::__undetermined_all__(),
+                temp in string::__undetermined_all__(),
+                temp1 in string::__undetermined_all__(),
+                n in string::__undetermined_all__()) {
+                for (d in DalXmlElement(xml_db),
+                    cc in XmlComment(xml_db),
+                    l in Literal(java_db)) {
+                    if (d.key_eq(d1)) {
+                        if (getXmlECGNode1(ECGXmlNode(xml_db).find(d))) {
+                            if (d.getLocation().getFile() = cc.getLocation().getFile()) {
+                                if (cc.getLocation().getEndLineNumber() = i) {
+                                    if (i + 1 = d.getLocation().getStartLineNumber()) {
+                                        if (temp = cc.getText()) {
+                                            if (c.getName() = temp.get_regex_match_result("[\\s\\S]*mapped statement for[ \\t]+(\\w+)[\\s\\S]*", 1)) {
+                                                if (n = d.getValueByAttributeName("id")) {
+                                                    if (c.key_eq(m.getBelongedClass())) {
+                                                        if (m.key_eq(l.getEnclosingCallable())) {
+                                                            if (temp1 = l.getValue()) {
+                                                                if (trim(temp1, n)) {
+                                                                    if (className = c.getQualifiedName()) {
+                                                                        if (methodName = m.getSignature()) {
+                                                                            return true
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+schema SofaService extends Annotation {
+    
+}
+
+impl SofaService {
+
+    @data_constraint
+    @inline
+    pub fn __all__(db: JavaDB) -> *SofaService {
+        for (tmp in Annotation(db)) {
+            if (tmp.getName() = "SofaService") {
+                yield SofaService {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+    
+    pub fn getService(self) -> ClassOrInterface {
+        for (value in string::__undetermined_all__()) {
+            for (i in ClassOrInterface(__all_data__),
+                argus in AnnotationAccessArgument(__all_data__)) {
+                for (auto_tmp1 in self.getAnnotationArgument()) {
+                    if (argus = auto_tmp1) {
+                        if (argus.getAnnotationArgumentName() = "interfaceType") {
+                            if (value = argus.getAnnotationArgumentValue()) {
+                                if (i.getQualifiedName() = value) {
+                                    return i
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    @inline
+    pub fn getBinding(self) -> SofaServiceBinding {
+        for (b in SofaServiceBinding(__all_data__),
+            argus in AnnotationAccessArgument(__all_data__)) {
+            for (auto_tmp1 in self.getAnnotationArgument()) {
+                if (argus = auto_tmp1) {
+                    if (argus.getAnnotationArgumentName() = "bindings") {
+                        if (b.key_eq(argus.getArgumentAnnotation())) {
+                            return b
+                        }
+                        if (argus.key_eq(b.getParent())) {
+                            return b
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    @inline
+    pub fn getUniqueId(self) -> string {
+        for (uniqueId in string::__undetermined_all__()) {
+            for (anno in Annotation(__all_data__)) {
+                if (self.key_eq(anno)) {
+                    if (tmp_6(anno)) {
+                        for (argus in AnnotationAccessArgument(__all_data__)) {
+                            for (auto_tmp1 in anno.getAnnotationArgument()) {
+                                if (argus = auto_tmp1) {
+                                    if (argus.getAnnotationArgumentName() = "uniqueId") {
+                                        if (uniqueId = argus.getAnnotationArgumentValue()) {
+                                            return uniqueId
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    if (!(tmp_6(anno))) {
+                        if (uniqueId = "null") {
+                            return uniqueId
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    
+}
+
+pub fn uniqueArgument(anno: Annotation) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            for (argus in AnnotationAccessArgument(java_db)) {
+                for (auto_tmp1 in anno.getAnnotationArgument()) {
+                    if (argus = auto_tmp1) {
+                        if (argus.getAnnotationArgumentName() = "uniqueId") {
+                            return true
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+schema SofaServiceBinding extends Annotation {
+    
+}
+
+impl SofaServiceBinding {
+
+    @data_constraint
+    @inline
+    pub fn __all__(db: JavaDB) -> *SofaServiceBinding {
+        for (tmp in Annotation(db)) {
+            if (tmp.getName() = "SofaServiceBinding") {
+                yield SofaServiceBinding {
+                    id : tmp.id
+                }
+            }
+        }
+    }
+    
+    pub fn getType(self) -> string {
+        for (value in string::__undetermined_all__()) {
+            for (argus in AnnotationAccessArgument(__all_data__)) {
+                for (auto_tmp1 in self.getAnnotationArgument()) {
+                    if (argus = auto_tmp1) {
+                        if (argus.getAnnotationArgumentName() = "bindingType") {
+                            if (value = argus.getAnnotationArgumentValue()) {
+                                return value
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    
+}
+
+pub fn javaOutput(classname: string, name: string) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            for (s in SofaService(java_db),
+                c in Class(java_db),
+                i in ClassOrInterface(java_db)) {
+                for (auto_tmp1 in c.getAnnotation()) {
+                    if (s.key_eq(auto_tmp1)) {
+                        if (classname = c.getQualifiedName()) {
+                            for (auto_tmp2 in c.getImplementsInterface()) {
+                                if (i.key_eq(auto_tmp2)) {
+                                    if (name = i.getQualifiedName()) {
+                                        return true
+                                    }
+                                }
+                            }
+                            if (i = s.getService()) {
+                                if (name = i.getQualifiedName()) {
+                                    return true
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn xmlOutput(className: string, interfaceName: string) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            for (temp in string::__undetermined_all__()) {
+                for (s in SofaServiceXmlElement(xml_db),
+                    b in BeanXmlElement(xml_db)) {
+                    if (s.getRef() = b.getId()) {
+                        if (interfaceName = s.getInterfaceName()) {
+                            if (className = b.getClass()) {
+                                if (temp = b.getLocation().getFile().getRelativePath()) {
+                                    if (!temp.contains("src/test/resources")) {
+                                        return true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn annoOutput(className: string, interfaceName: string) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            for (v in string::__undetermined_all__(),
+                k in string::__undetermined_all__()) {
+                for (s in SofaServiceXmlElement(xml_db),
+                    b in Class(java_db),
+                    t in TagXmlElement(xml_db),
+                    a in Annotation(java_db)) {
+                    if (s.key_eq(t.getParent())) {
+                        if (v = s.getRef()) {
+                            if (interfaceName = s.getInterfaceName()) {
+                                for (auto_tmp1 in b.getAnnotation()) {
+                                    if (a = auto_tmp1) {
+                                        if (a.getName() = k) {
+                                            if (getTrAnnotationName(k)) {
+                                                for (auto_tmp2 in a.getAnnotationArgument()) {
+                                                    if (auto_tmp2.getAnnotationArgumentValue() = "\"" + v + "\"") {
+                                                        if (className = b.getQualifiedName()) {
+                                                            return true
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn getTrAnnotationName(a: string) -> bool {
+    [
+        {"Service"},
+        {"Component"},
+        {"Scope"},
+        {"Repository"},
+        {"Controller"},
+        {"RestController"},
+        {"RequestMapping"},
+        {"PathVariable"},
+        {"ResponseBody"},
+        {"bean"}
+    ]
+}
+pub fn getPublishTr(c: ClassOrInterface) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            for (className in string::__undetermined_all__(),
+                interfaceName in string::__undetermined_all__()) {
+                if (xmlOutput(className, interfaceName)) {
+                    if (interfaceName = c.getQualifiedName()) {
+                        return true
+                    }
+                }
+                if (javaOutput(className, interfaceName)) {
+                    if (interfaceName = c.getQualifiedName()) {
+                        return true
+                    }
+                }
+                if (annoOutput(className, interfaceName)) {
+                    if (interfaceName = c.getQualifiedName()) {
+                        return true
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn real_output(c: ClassOrInterface, n: ECGNode, interfaceName: string, nodeName: string) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            for (m in ECGNode(java_db)) {
+                if (getJavaECGNode(m)) {
+                    if (getPublishTr(c)) {
+                        for (t in Method(java_db)) {
+                            if (n.key_eq(t)) {
+                                if (c = t.getParent()) {
+                                    if (n = m.getAnAncestorCDDependedNode(__all_data__, __all_data__)) {
+                                        if (interfaceName = c.getQualifiedName()) {
+                                            if (nodeName = n.print()) {
+                                                return true
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        for (f in Field(java_db)) {
+                            if (n.key_eq(f)) {
+                                if (c = f.getParent()) {
+                                    if (n = m.getAnAncestorCDDependedNode(__all_data__, __all_data__)) {
+                                        if (interfaceName = c.getQualifiedName()) {
+                                            if (nodeName = n.print()) {
+                                                return true
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                if (getXmlECGNode(m)) {
+                    if (getPublishTr(c)) {
+                        for (t in Method(java_db)) {
+                            if (n.key_eq(t)) {
+                                if (c = t.getParent()) {
+                                    if (n = m.getAnAncestorCDDependedNode(__all_data__, __all_data__)) {
+                                        if (interfaceName = c.getQualifiedName()) {
+                                            if (nodeName = n.print()) {
+                                                return true
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        for (f in Field(java_db)) {
+                            if (n.key_eq(f)) {
+                                if (c = f.getParent()) {
+                                    if (n = m.getAnAncestorCDDependedNode(__all_data__, __all_data__)) {
+                                        if (interfaceName = c.getQualifiedName()) {
+                                            if (nodeName = n.print()) {
+                                                return true
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+fn default_java_db() -> JavaDB {
+    return JavaDB::load("coref_java_src.db")
+}
+
+fn default_xml_db() -> XmlDB {
+    return XmlDB::load("coref_xml_src.db")
+}
+
+fn tmp_0(filename: string, lineNumber: int) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            if (getBelongedCallable(filename, lineNumber, __all_data__)) {
+                return true
+            }
+        }
+    }
+}
+
+fn tmp_1() -> *string {
+    for (filename in string::__undetermined_all__(), lineNumber in int::__undetermined_all__()) {
+        if (getBelongedCallable(filename, lineNumber, __all_data__)) {
+            yield filename
+        }
+    }
+}
+
+fn tmp_2(i: int) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            if (i = 0) {
+                return true
+            }
+        }
+    }
+}
+
+fn tmp_3(n: string) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            if (n.substr(0,1) = "\"") {
+                return true
+            }
+        }
+    }
+}
+
+fn tmp_4(anno: Annotation) -> *auto_tmp_5 {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            if (uniqueArgument(anno)) {
+                yield auto_tmp_5 {
+                    
+                }
+            }
+        }
+    }
+}
+
+schema auto_tmp_5 {
+    
+}
+
+fn tmp_6(anno: Annotation) -> bool {
+    let (java_db = default_java_db()) {
+        let (xml_db = default_xml_db()) {
+            if (tmp_4(anno).len() = 1) {
+                return true
+            }
+        }
+    }
+}
+
+fn main() {
+    output(real_output())
+}

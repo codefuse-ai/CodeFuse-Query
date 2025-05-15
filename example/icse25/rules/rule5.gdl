@@ -1,0 +1,168 @@
+// script 
+use coref::xml::*
+
+schema ECGXmlNode {
+    @primary id: int
+}
+
+impl ECGXmlNode {
+    pub fn __all__(db: XmlDB) -> *ECGXmlNode {
+        for (e in XmlPomElement(db)) {
+            yield ECGXmlNode {id : e.id}
+        }
+        for (e in XmlSpringElement(db)) {
+            yield ECGXmlNode {id : e.id}
+        }
+        for (e in XmlCharacter(db)) {
+            yield ECGXmlNode {id : e.id}
+        }
+        for (e in XmlAttribute(db)) {
+            yield ECGXmlNode {id : e.id}
+        }
+    }
+    
+    pub fn getLocation(self) -> coref::xml::Location {
+        for (l in coref::xml::Location(__all_data__)) {
+            for (e in XmlElement(__all_data__)) {
+                if (self.key_eq(e)) {
+                    if (l = e.getLocation()) {
+                        return l
+                    }
+                }
+            }
+            for (e in XmlAttribute(__all_data__)) {
+                if (self.key_eq(e)) {
+                    if (l = e.getLocation()) {
+                        return l
+                    }
+                }
+            }
+            for (e in XmlCharacter(__all_data__)) {
+                if (self.key_eq(e)) {
+                    if (l = e.getLocation()) {
+                        return l
+                    }
+                }
+            }
+        }
+    }
+    
+    pub fn getType(self) -> string {
+        for (t in string::__undetermined_all__()) {
+            for (e in XmlElement(__all_data__)) {
+                if (self.key_eq(e)) {
+                    if (t = "XmlElement") {
+                        return t
+                    }
+                }
+            }
+            for (e in XmlAttribute(__all_data__)) {
+                if (self.key_eq(e)) {
+                    if (t = "XmlAttribute") {
+                        return t
+                    }
+                }
+            }
+            for (e in XmlCharacter(__all_data__)) {
+                if (self.key_eq(e)) {
+                    if (t = "XmlCharacter") {
+                        return t
+                    }
+                }
+            }
+        }
+    }
+
+    pub fn getText(self) -> string {
+        for (e in XmlElement(__all_data__)) {
+            if (self.key_eq(e)) {
+                return e.getName()
+            }
+        }
+        for (e in XmlAttribute(__all_data__)) {
+            if (self.key_eq(e)) {
+                return e.getName() + " = " + e.getValue()
+            }
+        }
+        for (e in XmlCharacter(__all_data__)) {
+            if (self.key_eq(e)) {
+                return e.getText()
+            }
+        }
+    }
+
+    pub fn getEnclosingECGXmlNode(self) -> ECGXmlNode {
+        for (e in XmlElement(__all_data__)) {
+            if (self.key_eq(e)) {
+                return e.to<ECGXmlNode>()
+            }
+        }
+        for (e in XmlAttribute(__all_data__)) {
+            if (self.key_eq(e)) {
+                return e.getXmlElement().to<ECGXmlNode>()
+            }
+        }
+        for (e in XmlCharacter(__all_data__)) {
+            if (self.key_eq(e)) {
+                return e.getBelongedElement().to<ECGXmlNode>()
+            }
+        }
+    }
+}
+
+pub fn gitdiff(filePath: string, lineNo: int) -> bool {
+    // #changeinfo
+    // example
+    [ {"test", 1111} ]
+}
+pub fn transfertofile(f: XmlFile, filename: string, lineNumber: int) -> bool {
+    let (xml_db = default_xml_db()) {
+        if (gitdiff(filename, lineNumber)) {
+            if (filename = f.getRelativePath()) {
+                return true
+            }
+        }
+    }
+}
+pub fn real_output(n: ECGXmlNode) -> bool {
+    let (xml_db = default_xml_db()) {
+        for (lineNumber in int::__undetermined_all__(),
+            e in int::__undetermined_all__(),
+            s1 in int::__undetermined_all__(),
+            filename in string::__undetermined_all__(),
+            typeInAST in string::__undetermined_all__(),
+            text in string::__undetermined_all__()) {
+            for (f in XmlFile(xml_db),
+                o in ECGXmlNode(xml_db)) {
+                if (transfertofile(f, filename, lineNumber)) {
+                    if (n.getLocation().getFile() = f) {
+                        if (s1 = n.getLocation().getStartLineNumber()) {
+                            if (e = n.getLocation().getEndLineNumber()) {
+                                if (lineNumber > s1 - 1) {
+                                    if (lineNumber < e + 1) {
+                                        if (typeInAST = n.getType()) {
+                                            if (text = n.getText()) {
+                                                if (o = n.getEnclosingECGXmlNode()) {
+                                                    return true
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+fn default_xml_db() -> XmlDB {
+    return XmlDB::load("coref_xml_src.db")
+}
+
+fn main() {
+    output(real_output())
+}

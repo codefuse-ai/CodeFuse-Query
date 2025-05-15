@@ -76,6 +76,14 @@ def parse_args():
     subparser_query_run.add_argument("--gdl", '-gdl', required=True, nargs="*", dest="godel_dir",
                                      help='The location of the godel script that needs to execute')
     subparser_query_run.add_argument('--verbose', action='store_true', help='Enable verbose mode')
+    subparser_query_run.add_argument('--sarif', action='store_true', help='Turn on the sarif report option, all '
+                                                                          'outputs will be merged into one sarif, '
+                                                                          'and the output result will be '
+                                                                          'sparrow-cli-report.sarif in the output '
+                                                                          'directory. The original godel script '
+                                                                          'output must contain information such as '
+                                                                          'filePath, startLine, ruleName, '
+                                                                          'ruleDescription, etc.')
     subparser_query_run.add_argument('--merge', '-m', action='store_true', help='Combined execution of multiple '
                                                                                 'scripts,Only one function and class '
                                                                                 'with the same name in the script '

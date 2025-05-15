@@ -1,0 +1,149 @@
+// script 
+use coref::javascript::*
+pub fn getAppFacade(appName: string, proxyFacadeName: string, facadeQualifiedName: string) -> bool {
+    let (javascript_db = default_javascript_db()) {
+        for (objectLiteralExpression in ObjectLiteralExpression(javascript_db)) {
+            for (file in File(javascript_db),
+                location in Location(javascript_db),
+                servicePropertyAssignment in PropertyAssignment(javascript_db),
+                arrayLiteralExpression in ArrayLiteralExpression(javascript_db)) {
+                if (file.getRelativePath() = "config/proxy.js") {
+                    if (location.getFile() = file) {
+                        if (servicePropertyAssignment.getLocation() = location) {
+                            if (servicePropertyAssignment.getName() = "services") {
+                                if (arrayLiteralExpression.key_eq(servicePropertyAssignment.getInitializer())) {
+                                    for (auto_tmp1 in arrayLiteralExpression.getAElement()) {
+                                        if (objectLiteralExpression.key_eq(auto_tmp1)) {
+                                            for (appNamePropertyAssignment in PropertyAssignment(javascript_db),
+                                                appNameString in StringLiteral(javascript_db)) {
+                                                if (appNamePropertyAssignment = objectLiteralExpression.getPropertyAssignmentByName("appname")) {
+                                                    if (appNameString.key_eq(appNamePropertyAssignment.getInitializer())) {
+                                                        if (appName = appNameString.getValue()) {
+                                                            for (apiPropertyAssignment in PropertyAssignment(javascript_db),
+                                                                apiObject in ObjectLiteralExpression(javascript_db),
+                                                                facadePropertyAssignment in PropertyAssignment(javascript_db)) {
+                                                                if (apiPropertyAssignment = objectLiteralExpression.getPropertyAssignmentByName("api")) {
+                                                                    if (apiObject.key_eq(apiPropertyAssignment.getInitializer())) {
+                                                                        for (auto_tmp2 in apiObject.getAProperty()) {
+                                                                            if (facadePropertyAssignment.key_eq(auto_tmp2)) {
+                                                                                if (proxyFacadeName = facadePropertyAssignment.getName()) {
+                                                                                    for (facadeStringLiteral in StringLiteral(javascript_db)) {
+                                                                                        if (facadeStringLiteral.key_eq(facadePropertyAssignment.getInitializer())) {
+                                                                                            if (facadeQualifiedName = facadeStringLiteral.getValue()) {
+                                                                                                return true
+                                                                                            }
+                                                                                        }
+                                                                                        for (facadeObject in ObjectLiteralExpression(javascript_db),
+                                                                                            interfaceNamePropertyAssignment in PropertyAssignment(javascript_db)) {
+                                                                                            if (facadeObject.key_eq(facadePropertyAssignment.getInitializer())) {
+                                                                                                if (interfaceNamePropertyAssignment = facadeObject.getPropertyAssignmentByName("interfaceName")) {
+                                                                                                    if (facadeStringLiteral.key_eq(interfaceNamePropertyAssignment.getInitializer())) {
+                                                                                                        if (facadeQualifiedName = facadeStringLiteral.getValue()) {
+                                                                                                            return true
+                                                                                                        }
+                                                                                                    }
+                                                                                                }
+                                                                                            }
+                                                                                        }
+                                                                                    }
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn proxyCallerDesc(proxyCaller: CallExpression, facadeName: string, trFuncName: string) -> bool {
+    let (javascript_db = default_javascript_db()) {
+        for (expression in PropertyAccessExpression(javascript_db)) {
+            if (expression.key_eq(proxyCaller.getExpression())) {
+                for (facadeExpressionText in string::__undetermined_all__()) {
+                    for (facadeExpression in LeftHandSideExpression(javascript_db)) {
+                        for (leftHandSideExpression in LeftHandSideExpression(javascript_db)) {
+                            if (leftHandSideExpression = expression.getExpression()) {
+                                for (callExpression in CallExpression(javascript_db)) {
+                                    if (callExpression.key_eq(leftHandSideExpression)) {
+                                        for (usingExpression in PropertyAccessExpression(javascript_db)) {
+                                            if (usingExpression.key_eq(callExpression.getExpression())) {
+                                                if (facadeExpression = usingExpression.getExpression()) {
+                                                    if (facadeExpressionText = facadeExpression.getText()) {
+                                                        if (facadeName = facadeExpressionText.get_regex_match_result("(this\\.|ctx\\.|this\\.ctx\\.)?proxy\\.(.+)", 2)) {
+                                                            if (facadeName != "") {
+                                                                for (serviceFuncIdentifier in Identifier(javascript_db)) {
+                                                                    if (serviceFuncIdentifier.key_eq(expression.getProperty())) {
+                                                                        if (trFuncName = serviceFuncIdentifier.getText()) {
+                                                                            if (trFuncName != "using") {
+                                                                                return true
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                if (isPropertyAccessExpression(Node(javascript_db).find(leftHandSideExpression))) {
+                                    if (facadeExpression = leftHandSideExpression) {
+                                        if (facadeExpressionText = facadeExpression.getText()) {
+                                            if (facadeName = facadeExpressionText.get_regex_match_result("(this\\.|ctx\\.|this\\.ctx\\.)?proxy\\.(.+)", 2)) {
+                                                if (facadeName != "") {
+                                                    for (serviceFuncIdentifier in Identifier(javascript_db)) {
+                                                        if (serviceFuncIdentifier.key_eq(expression.getProperty())) {
+                                                            if (trFuncName = serviceFuncIdentifier.getText()) {
+                                                                if (trFuncName != "using") {
+                                                                    return true
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+pub fn real_output(appName: string, facadeQualifiedName: string, trMethodName: string) -> bool {
+    let (javascript_db = default_javascript_db()) {
+        for (facadeName in string::__undetermined_all__()) {
+            if (proxyCallerDesc(__all_data__, facadeName, trMethodName)) {
+                if (getAppFacade(appName, facadeName, facadeQualifiedName)) {
+                    return true
+                }
+            }
+        }
+    }
+}
+
+
+fn default_javascript_db() -> JavascriptDB {
+    return JavascriptDB::load("coref_javascript_src.db")
+}
+
+fn main() {
+    output(real_output())
+}

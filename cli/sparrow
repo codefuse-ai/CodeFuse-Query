@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # A convenient method to return the actual path even for non symlinks
 # and multi-level symlinks.
