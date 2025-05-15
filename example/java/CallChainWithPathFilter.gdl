@@ -1,0 +1,55 @@
+// script
+use coref::java::*
+
+pub fn default_java_db() -> JavaDB {
+    return JavaDB::load("coref_java_src.db")
+}
+
+//过滤用文件夹名，可修改
+pub fn FOLDERNAMES(n: string) -> bool {
+    [
+        {"/ibatis/"},
+        {"/dao/"},
+        {"/test/"}
+    ]
+}
+
+//用文件夹名进行过滤
+pub fn filterByFolderNames(d: File) -> bool {
+    for (m in string::__undetermined_all__(),
+        n in string::__undetermined_all__()) {
+        if (n = d.getRelativePath() && FOLDERNAMES(m) && n.contains(m)) {
+            return true
+        }
+    }
+}
+
+pub fn getIndirectEdges(b: Callable, c: Callable) -> bool {
+    if (b in c.getAnAncestorCaller()) {
+        return true
+    }
+}
+
+pub fn getDirectEdges(b: Callable, c: Callable) -> bool {
+    if (c in b.getCallee()) {
+        return true
+    }
+}
+
+// 基于路径过滤的调用关系输出
+pub fn output_signature(caller: string, callee: string) -> bool {
+    for(b in Callable(default_java_db()), c in Callable(default_java_db())) {
+        let (b_file = b.getLocation().getFile(), c_file = c.getLocation().getFile()) {
+            if (!filterByFolderNames(b_file) && !filterByFolderNames(c_file)) {
+                if (getIndirectEdges(b, c) || getDirectEdges(b, c)) {
+                    return caller = b.getSignature() && callee = c.getSignature()
+                }
+            }
+        }
+    }
+}
+
+pub fn main() {
+    // 输出按路径过滤后的调用链
+    output(output_signature())
+} 
