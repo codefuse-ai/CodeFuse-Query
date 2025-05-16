@@ -26,6 +26,5 @@ jobs:
           bazelisk-cache: true
           disk-cache: ${{ github.workflow }}
           repository-cache: true
-          bazel-version: '5.2.0'
       - name: Build CLI with Bazel
         run: bazel build //cli/... 
