@@ -29,7 +29,6 @@ jobs:
           repository-cache: true
       - name: Build CLI with Bazel
         run: bazel build //cli/...
-      - name: Build All Modules
       - name: Build Java Language Module
         run: bazel build //language/java/...
       - name: Build XML Language Module
