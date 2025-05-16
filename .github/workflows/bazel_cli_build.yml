@@ -1,0 +1,30 @@
+name: Bazel CLI Build (macOS)
+
+on:
+  push:
+    paths:
+      - 'cli/**'
+      - '.github/workflows/bazel_cli_build.yml'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'cli/**'
+      - '.github/workflows/bazel_cli_build.yml'
+  workflow_dispatch:
+
+jobs:
+  build-macos:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+      - name: Set up Bazel
+        uses: bazel-contrib/setup-bazel@0.14.0
+        with:
+          bazelisk-cache: true
+          disk-cache: ${{ github.workflow }}
+          repository-cache: true
+      - name: Build CLI with Bazel
+        run: bazel build //cli/... 
