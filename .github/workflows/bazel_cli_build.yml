@@ -12,6 +12,7 @@ on:
       - '.github/workflows/bazel_cli_build.yml'
   workflow_dispatch:
 
+
 jobs:
   build-macos:
     runs-on: macos-latest
