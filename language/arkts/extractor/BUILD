@@ -52,7 +52,7 @@ genrule(
 
     cd language/arkts/extractor
     
-    $$NPM_PATH i --registry https://registry.antgroup-inc.cn
+    $$NPM_PATH i
     cp -rf $$THIRD_TYPESCIRPT_PATH ./node_modules/
     $$NPM_PATH run pkg
     mv coref-arkts-src-extractor $$OUT_PATH

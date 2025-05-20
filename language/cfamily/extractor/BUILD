@@ -107,7 +107,7 @@ genrule(
         "Storage.hpp",
     ],
     cmd = " &&".join([
-        "python3 -m pip install --user -r $$(dirname $(location //language/cfamily/extractor:generate_headers_script))/requirements.txt",
+        "python3 -m pip install --user --break-system-packages -r $$(dirname $(location //language/cfamily/extractor:generate_headers_script))/requirements.txt",
         "python3 $(location //language/cfamily/extractor:generate_headers_script)",
         "cp $$(dirname $(location //language/cfamily/extractor:generate_headers_script))/../Model/Models.hpp $(location Model/Models.hpp)",
         "cp $$(dirname $(location //language/cfamily/extractor:generate_headers_script))/../Storage/Storage.hpp $(location Storage.hpp)",
