@@ -202,6 +202,7 @@ private:
 private:
     std::unordered_set<std::string> ignored_DO_schema;
     void report_ignored_DO_schema_data_constraint();
+    void report_no_output_predicate();
 
 private:
     bool visit_number_literal(number_literal*) override;

@@ -400,6 +400,12 @@ void engine::run_souffle(const std::string& souffle_content,
         argv.push_back("--index-stats");
     }
 
+    // magic set, it's not suggested to use it on all the predicates
+    // argv.push_back("--magic-transform=*");
+
+    // need latest version of souffle to make it more efficient
+    // argv.push_back("--jobs=4");
+
     // enable souffle auto schedule, for experimental use only
     // argv.push_back("--auto-schedule=souffle.prof.log");
 
