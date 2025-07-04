@@ -1,0 +1,39 @@
+name: Bazel CLI Build (macOS)
+
+on:
+  push:
+    paths-ignore:
+      - 'doc/**'
+      - 'example/**'
+      - '**/*.md'
+  pull_request:
+    paths-ignore:
+      - 'doc/**'
+      - 'example/**'
+      - '**/*.md'
+  workflow_dispatch:
+
+
+jobs:
+  build-macos:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+      - name: Install python3
+        run: brew install python3
+      - name: Set up Bazel
+        uses: bazel-contrib/setup-bazel@0.14.0
+        with:
+          bazelisk-cache: true
+          disk-cache: ${{ github.workflow }}
+          repository-cache: true
+      - name: Build All
+        run: bazel build //...
+      - name: Upload sparrow-cli.tar.gz artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: sparrow-cli
+          path: bazel-bin/sparrow-cli.tar.gz
