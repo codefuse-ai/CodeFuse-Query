@@ -2,7 +2,7 @@ import os
 import shutil
 import sys
 
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, text
 from sqlalchemy.orm import sessionmaker, scoped_session
 
 from model.alias import Alias
@@ -124,7 +124,8 @@ class Storage:
                 sql_statements = f.read()
                 statements = sql_statements.split(";")
                 for statement in statements:
-                    session.execute(statement)
+                    if statement.strip():  # 跳过空语句
+                        session.execute(text(statement))
                 session.commit()
 
             session.close()
