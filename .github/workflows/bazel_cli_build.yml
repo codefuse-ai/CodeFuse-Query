@@ -1,4 +1,4 @@
-name: Bazel CLI Build (macOS)
+name: Bazel CLI Build
 
 on:
   push:
@@ -15,6 +15,34 @@ on:
 
 
 jobs:
+  build-linux:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+      - name: Install Software
+        run: |
+          sudo apt-get update && sudo apt-get install -y python3 nodejs clang-13 libclang-13-dev python3-pip build-essential
+          sudo python3 -m pip install pip==24.0
+          sudo ln -sf /usr/bin/python3 /usr/bin/python
+          sudo ln -sf /usr/bin/clang-13 /usr/bin/clang
+          sudo ln -sf /usr/bin/clang++-13 /usr/bin/clang++
+      - name: Set up Bazel
+        uses: bazel-contrib/setup-bazel@0.14.0
+        with:
+          bazelisk-cache: true
+          disk-cache: ${{ github.workflow }}
+          repository-cache: true
+      - name: Build All
+        run: bazel build //...
+      - name: Upload sparrow-cli.tar.gz artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: sparrow-cli-linux
+          path: bazel-bin/sparrow-cli-linux.tar.gz
+
   build-macos:
     runs-on: macos-latest
     steps:
@@ -35,5 +63,5 @@ jobs:
       - name: Upload sparrow-cli.tar.gz artifact
         uses: actions/upload-artifact@v4
         with:
-          name: sparrow-cli
-          path: bazel-bin/sparrow-cli.tar.gz
+          name: sparrow-cli-macos
+          path: bazel-bin/sparrow-cli-mac.tar.gz
