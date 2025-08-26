@@ -538,11 +538,23 @@ void ir_gen::emit_schema_get_field() {
                 );
                 call->add_arg(lir::inst_value_t::variable("self"));
                 call->add_arg(lir::inst_value_t::default_value());
+
+                // enable particular index
+                // for z in pred(_, _, z, _, _)
+                // it's better to use pred(x, y, z, _, _) to auto generate index in souffle
+                int count = 0;
+                bool reach_field = false;
                 for(const auto& f : sc.second.ordered_fields) {
-                    call->add_arg(f==field?
-                        lir::inst_value_t::variable("ret?result"):
-                        lir::inst_value_t::default_value()
+                    if (f == field) {
+                        reach_field = true;
+                    }
+                    call->add_arg(f==field
+                        ? lir::inst_value_t::variable("ret?result")
+                        : reach_field
+                            ? lir::inst_value_t::default_value()
+                            : lir::inst_value_t::variable("?" + std::to_string(count))
                     );
+                    ++count;
                 }
                 rule_impl->get_block()->add_new_content(call);
             }
@@ -1100,6 +1112,16 @@ void ir_gen::report_ignored_DO_schema_data_constraint() {
         return;
     }
     err.warn_ignored_DO_schema(ignored_DO_schema);
+}
+
+void ir_gen::report_no_output_predicate() {
+    if (irc.souffle_output.size() || irc.annotated_output.size()) {
+        return;
+    }
+    err.warn(
+        "no output predicate is found, "
+        "execution will not generate any outputs or output files."
+    );
 }
 
 bool ir_gen::visit_number_literal(number_literal* node) {
@@ -2488,6 +2510,7 @@ void ir_gen::generate(const cli::configure& config, ast_root* root) {
     root->accept(this);
 
     report_ignored_DO_schema_data_constraint();
+    report_no_output_predicate();
 }
 
 }
