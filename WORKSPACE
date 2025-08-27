@@ -445,17 +445,17 @@ aspect_bazel_lib_dependencies()
 #     name = "swift_pkgs_darwin",
 #     dependencies = [
 #         spm_pkg(
-#             "https://oauth:a12681eba8d14255a49a74cd1c2d5f8d@code.alipay.com/codeinsight_thirdparty/swift-argument-parser.git",
+#             "https://oauth:xxx@code.alipay.com/codeinsight_thirdparty/swift-argument-parser.git",
 #             from_version = "1.1.1",
 #             products = ["ArgumentParser"],
 #         ),
 #         spm_pkg(
-#             "https://oauth:d7ece9eda5bb4b438b3f5797321a5d2c@code.alipay.com/codeinsight_thirdparty/swift-log.git",
+#             "https://oauth:xxx@code.alipay.com/codeinsight_thirdparty/swift-log.git",
 #             from_version = "1.4.4",
 #             products = ["Logging"],
 #         ),
 #         spm_pkg(
-#             "https://oauth:07e4fc6a7ce14b41a4f71561208ca118@code.alipay.com/codeinsight_thirdparty/SQLite.swift.git",
+#             "https://oauth:xxx@code.alipay.com/codeinsight_thirdparty/SQLite.swift.git",
 #             from_version = "0.13.3",
 #             products = ["SQLite"],
 #         ),
@@ -466,12 +466,12 @@ aspect_bazel_lib_dependencies()
 #     name = "swift_pkgs_linux",
 #     dependencies = [
 #         spm_pkg(
-#             "https://oauth:a12681eba8d14255a49a74cd1c2d5f8d@code.alipay.com/codeinsight_thirdparty/swift-argument-parser.git",
+#             "https://oauth:xxx@code.alipay.com/codeinsight_thirdparty/swift-argument-parser.git",
 #             from_version = "1.1.1",
 #             products = ["ArgumentParser"],
 #         ),
 #         spm_pkg(
-#             "https://oauth:d7ece9eda5bb4b438b3f5797321a5d2c@code.alipay.com/codeinsight_thirdparty/swift-log.git",
+#             "https://oauth:xxx@code.alipay.com/codeinsight_thirdparty/swift-log.git",
 #             from_version = "1.4.4",
 #             products = ["Logging"],
 #         ),
@@ -479,7 +479,7 @@ aspect_bazel_lib_dependencies()
 #         # which is outdated on CentOS, therefore causing linking failure.
 #         # So I fork this project and make my own patch to make it totally compiled from SQLite3 C source code
 #         spm_pkg(
-#             "https://oauth:07e4fc6a7ce14b41a4f71561208ca118@code.alipay.com/codeinsight_thirdparty/SQLite.swift.git",
+#             "https://oauth:xxx@code.alipay.com/codeinsight_thirdparty/SQLite.swift.git",
 #             products = ["SQLite"],
 #             # Commit for 0.13.3-patch
 #             revision = "821d4cff02dfd9c0ac426bb3e4d67e40fef6c882",
@@ -488,7 +488,7 @@ aspect_bazel_lib_dependencies()
 #             name = "SwiftSyntax",
 #             exact_version = "0.50500.0",
 #             products = ["SwiftSyntax"],
-#             url = "https://oauth:e23f9a1ec4c94580a41d7fd761e7f172@code.alipay.com/codeinsight_thirdparty/swift-syntax.git",
+#             url = "https://oauth:xxx@code.alipay.com/codeinsight_thirdparty/swift-syntax.git",
 #         ),
 #     ],
 # )
