@@ -97,4 +97,4 @@ jobs:
         if: startsWith(github.ref, 'refs/tags/')
         uses: softprops/action-gh-release@v1
         with:
-          files: sparrow-cli-*-mac.tar.gz
+          files: sparrow-cli-${{ env.TAG_NAME }}-mac.tar.gz
