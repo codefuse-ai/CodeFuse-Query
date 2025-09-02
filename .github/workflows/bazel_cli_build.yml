@@ -44,16 +44,18 @@ jobs:
         run: |
           TAG_NAME=${GITHUB_REF#refs/tags/}
           cp bazel-bin/sparrow-cli.tar.gz sparrow-cli-${TAG_NAME}-linux.tar.gz
+          echo "TAG_NAME=${TAG_NAME}" >> $GITHUB_ENV
       - name: Rename artifact with commit hash for push
         if: ${{ !startsWith(github.ref, 'refs/tags/') }}
         run: |
           SHORT_COMMIT=$(echo ${{ github.sha }} | cut -c1-7)
           cp bazel-bin/sparrow-cli.tar.gz sparrow-cli-${SHORT_COMMIT}-linux.tar.gz
+          echo "ARTIFACT_NAME=sparrow-cli-${SHORT_COMMIT}-linux" >> $GITHUB_ENV
       - name: Upload sparrow-cli.tar.gz artifact
         if: ${{ !startsWith(github.ref, 'refs/tags/') }}
         uses: actions/upload-artifact@v4
         with:
-          name: sparrow-cli-linux
+          name: ${{ env.ARTIFACT_NAME }}
           path: sparrow-cli-*-linux.tar.gz
       - name: Upload to Release
         if: startsWith(github.ref, 'refs/tags/')
@@ -62,7 +64,7 @@ jobs:
           files: sparrow-cli-*-linux.tar.gz
 
   build-macos:
-    runs-on: macos-latest
+    runs-on: macos-14
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -83,16 +85,18 @@ jobs:
         run: |
           TAG_NAME=${GITHUB_REF#refs/tags/}
           cp bazel-bin/sparrow-cli.tar.gz sparrow-cli-${TAG_NAME}-mac.tar.gz
+          echo "TAG_NAME=${TAG_NAME}" >> $GITHUB_ENV
       - name: Rename artifact with commit hash for push
         if: ${{ !startsWith(github.ref, 'refs/tags/') }}
         run: |
           SHORT_COMMIT=$(echo ${{ github.sha }} | cut -c1-7)
           cp bazel-bin/sparrow-cli.tar.gz sparrow-cli-${SHORT_COMMIT}-mac.tar.gz
+          echo "ARTIFACT_NAME=sparrow-cli-${SHORT_COMMIT}-mac" >> $GITHUB_ENV
       - name: Upload sparrow-cli.tar.gz artifact
         if: ${{ !startsWith(github.ref, 'refs/tags/') }}
         uses: actions/upload-artifact@v4
         with:
-          name: sparrow-cli-macos
+          name: ${{ env.ARTIFACT_NAME }}
           path: sparrow-cli-*-mac.tar.gz
       - name: Upload to Release
         if: startsWith(github.ref, 'refs/tags/')
