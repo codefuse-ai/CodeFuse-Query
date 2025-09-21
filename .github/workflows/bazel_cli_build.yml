@@ -82,19 +82,28 @@ jobs:
           repository-cache: true
       - name: Build All
         run: bazel build //...
-      - name: Copy and rename artifact
-        uses: ./.github/actions/copy-artifact
-        with:
-          source: bazel-bin/sparrow-cli.tar.gz
-          platform: mac
+      - name: Prepare artifact name and copy
+        run: |
+          if [[ "${GITHUB_REF}" == refs/tags/* ]]; then
+            TAG_NAME="${GITHUB_REF#refs/tags/}"
+            ARTIFACT_NAME="sparrow-cli-${TAG_NAME}-mac"
+            cp bazel-bin/sparrow-cli.tar.gz "${ARTIFACT_NAME}.tar.gz"
+            echo "TAG_NAME=${TAG_NAME}" >> $GITHUB_ENV
+            echo "ARTIFACT_NAME=${ARTIFACT_NAME}" >> $GITHUB_ENV
+          else
+            SHORT_COMMIT="$(echo ${{ github.sha }} | cut -c1-7)"
+            ARTIFACT_NAME="sparrow-cli-${SHORT_COMMIT}-mac"
+            cp bazel-bin/sparrow-cli.tar.gz "${ARTIFACT_NAME}.tar.gz"
+            echo "ARTIFACT_NAME=${ARTIFACT_NAME}" >> $GITHUB_ENV
+          fi
       - name: Upload sparrow-cli.tar.gz artifact
         if: ${{ !startsWith(github.ref, 'refs/tags/') }}
         uses: actions/upload-artifact@v4
         with:
           name: ${{ env.ARTIFACT_NAME }}
-          path: sparrow-cli-*-mac.tar.gz
+          path: ${{ env.ARTIFACT_NAME }}.tar.gz
       - name: Upload to Release
         if: startsWith(github.ref, 'refs/tags/')
         uses: softprops/action-gh-release@v1
         with:
-          files: sparrow-cli-${{ env.TAG_NAME }}-mac.tar.gz
+          files: ${{ env.ARTIFACT_NAME }}.tar.gz
